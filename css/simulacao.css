@@ -1,0 +1,470 @@
+/* ============================================================
+   simulacao.css — TELA DE SIMULAÇÃO (cards de partida, painel, tabela de grupos)
+   ============================================================ */
+
+/* ====================================================================
+   TELA DE SIMULAÇÃO (#tela-simulacao) — estrutura da campanha
+   ==================================================================== */
+
+/* Mesmo padrão do #tela-jogo: cabeçalho gruda no topo, conteúdo cresce */
+#tela-simulacao {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+}
+
+
+/* ---- Rótulo "A CAMPANHA" no cabeçalho (lado direito, alinhado à base) ---- */
+.sim-label-campanha {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  padding-bottom: 2px; /* alinha visualmente com o slogan à esquerda */
+}
+
+/* ---- Controles na coluna lateral (MODO / VELOCIDADE) ---- */
+
+/* Container dos dois blocos de controle empilhados */
+.sim-controles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px; /* respiro antes do painel de stats */
+}
+
+/* Cada bloco: rótulo acima + pílulas abaixo */
+.sim-ctrl-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Rótulo da categoria (MODO, VELOCIDADE) */
+.sim-ctrl-rotulo {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--txt-soft);
+  text-transform: uppercase;
+}
+
+/* Pílulas de controle adaptadas ao fundo escuro do tema */
+.sim-pilula {
+  padding: 5px 12px;
+  border-radius: 2px;
+  border: 1px solid var(--txt-soft);
+  background: transparent;
+  color: var(--txt-soft);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.sim-pilula:hover:not(.sim-pilula-ativa) {
+  border-color: var(--txt);
+  color: var(--txt);
+}
+
+/* Ativa: fundo na cor de destaque do tema (dourado / prata) */
+.sim-pilula.sim-pilula-ativa {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+
+/* ---- Layout principal da tela de simulação ---- */
+
+/* Grade de 2 colunas: histórico (flex) + lateral fixa */
+.sim-wrapper {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Coluna principal: empilha o histórico de jogos e os botões */
+.sim-principal {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Container do histórico: começa vazio, cards entram depois.
+   Vazio, ele SOME (display:none) pra não abrir vão entre o Voltar e o botão principal —
+   assim no início os dois ficam colados; quando os cards entram, o botão desce junto. */
+.historico-jogos {
+  min-height: 0;
+}
+.historico-jogos:empty {
+  display: none;
+}
+
+/* Botões empilhados à esquerda — largura automática (não estica) */
+.sim-botoes-acoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* Botão compacto: largura pelo conteúdo, não estica no flex-column */
+.sim-btn-acao {
+  width: auto !important;   /* cancela width:100% das classes base */
+  display: block;
+  align-self: flex-start;   /* não estica horizontalmente no flex column */
+}
+
+/* Painel de estatísticas */
+.stats-campanha {
+  border: 1px solid var(--txt-soft);
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Rótulo de seção dentro da simulação (ESTATÍSTICAS) */
+.sim-rotulo {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--txt-soft);
+  margin-bottom: 10px;
+}
+
+/* Tabela de gols e assistências */
+.stats-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.stats-tabela thead th {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.56rem;
+  letter-spacing: 1.5px;
+  color: var(--txt-soft);
+  padding: 4px 6px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Coluna de nome: alinhada à esquerda */
+.stats-tabela thead th.stats-th-jogador,
+.stats-tabela tbody td:first-child {
+  text-align: left;
+}
+
+.stats-tabela tbody td {
+  padding: 5px 6px;
+  color: var(--txt);
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Linha da tabela: hover sutil */
+.stats-tabela tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+
+/* ====================================================================
+   CARDS DE PARTIDA — retráteis, ordem cronológica
+   ==================================================================== */
+
+/* Card: nasce com .expandido; perde a classe ao recolher */
+.partida-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.03);
+}
+/* Card minimizado: maior e mais legível */
+.partida-card:not(.expandido) { padding: 15px 16px; }
+
+/* Rótulo da fase: visível só quando expandido */
+.partida-fase {
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: none;
+}
+.partida-card.expandido .partida-fase { display: block; }
+
+/* Cabeçalho clicável: club/ano à esq., placar + toggle à dir. */
+.partida-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 8px;
+}
+
+/* Bloco esquerdo: nome do clube + edição */
+.partida-adversario-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.partida-card:not(.expandido) .partida-adversario-bloco {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 5px;
+}
+
+/* Nome do clube: grande quando expandido */
+.partida-adversario-nome {
+  font-family: 'Archivo Black', sans-serif;
+  color: var(--txt);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.partida-card.expandido .partida-adversario-nome         { font-size: 1.25rem; line-height: 1.1; }
+.partida-card:not(.expandido) .partida-adversario-nome   { font-size: 1.05rem; }
+
+/* Edição: sempre pequena e apagada */
+.partida-adversario-ano { color: var(--txt-soft); font-size: 0.84rem; }
+
+/* Bloco direito: placar + relógio + mini-res + toggle */
+.partida-placar-bloco {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Placar: grande quando expandido, compacto quando recolhido */
+.partida-placar {
+  font-family: 'Archivo Black', sans-serif;
+  color: var(--txt);
+  transition: color 0.3s;
+}
+.partida-card.expandido .partida-placar         { font-size: 1.75rem; line-height: 1; }
+.partida-card:not(.expandido) .partida-placar   { font-size: 1.2rem; }
+
+.partida-placar.vitoria { color: var(--accent); }
+.partida-placar.derrota { color: #E8593C; }
+
+/* Relógio: só quando expandido; some aos 90' via .escondida */
+.partida-relogio {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.62rem;
+  color: var(--txt-soft);
+}
+.partida-card:not(.expandido) .partida-relogio { display: none !important; }
+
+/* Mini resultado (✓/✕/★): só quando recolhido e partida encerrada */
+.partida-mini-res { font-size: 1.05rem; }
+.partida-card.expandido .partida-mini-res { display: none; }
+.partida-mini-res.vitoria { color: var(--accent); }
+.partida-mini-res.derrota { color: #E8593C; }
+
+/* Botão toggle: ▾ expandido / ▴ recolhido */
+.partida-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--txt-soft);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.partida-toggle-btn:hover { color: var(--txt); }
+
+/* Corpo: lista de gols + resultado; oculto quando recolhido */
+.partida-corpo {
+  margin-top: 10px;
+  display: none;
+}
+.partida-card.expandido .partida-corpo { display: block; }
+
+/* Lista vertical de eventos da partida */
+.partida-eventos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+/* Linha genérica de evento */
+.partida-evento {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+/* Gol do meu time: texto normal */
+.evento-meu { color: var(--txt); }
+
+/* Gol do adversário: vermelho para sinalizar que tomamos o gol */
+.evento-adv {
+  color: #E8593C;
+  font-style: italic;
+}
+
+/* Nome do clube ao lado do autor adversário — vermelho mais suave */
+.evento-adv-clube {
+  font-size: 0.65rem;
+  color: rgba(232, 89, 60, 0.65);
+  font-style: normal;
+}
+
+/* Disputa de pênaltis: pequeno e centralizado */
+.evento-penaltis {
+  font-size: 0.62rem;
+  color: var(--txt-soft);
+  font-style: italic;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 2px 0;
+}
+
+/* Assistência: menor e mais suave que o nome do autor */
+.evento-assist {
+  font-size: 0.65rem;
+  color: var(--txt-soft);
+  font-weight: normal;
+}
+
+/* Rótulo final: VITÓRIA ou DERROTA */
+.partida-resultado {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 2px;
+}
+
+.partida-resultado.vitoria { color: var(--accent); }
+.partida-resultado.derrota { color: #E8593C; }
+
+/* Bloco de disputa de pênaltis dentro do card */
+.penaltis-wrap {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.penaltis-titulo {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+/* Duas colunas lado a lado: meu time e adversário */
+.penaltis-colunas {
+  display: flex;
+  gap: 24px;
+}
+
+.penaltis-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.penaltis-col-nome {
+  font-size: 0.60rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Linha de cada cobrança */
+.penaltis-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: 0.76rem;
+  line-height: 1.4;
+  padding: 6px 2px;                                   /* respiro entre as cobranças */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* separador sutil */
+}
+
+.pen-nome {
+  color: var(--txt);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.pen-icone {
+  font-size: 0.80rem;
+  flex-shrink: 0;
+}
+
+.pen-ok   { color: var(--accent); }
+.pen-fail { color: #E8593C; }
+
+/* Placar corrente da disputa */
+.penaltis-placar-txt {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.88rem;
+  text-align: center;
+  color: var(--txt);
+  margin: 12px 0 0;
+}
+
+
+/* ====================================================================
+   TABELA DA FASE DE GRUPOS (aparece só no último jogo do grupo)
+   ==================================================================== */
+.grupo-tabela { margin-top: 12px; }
+.grupo-tabela-titulo {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--txt-soft);
+  margin: 0 0 8px;
+}
+.grupo-tabela table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.grupo-tabela thead th {
+  text-align: left;
+  font-size: 0.58rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--txt-soft);
+  font-weight: 700;
+  padding: 3px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.grupo-tabela thead th:nth-child(n+3) { text-align: right; }
+.grupo-tabela td {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--txt);
+}
+.grupo-pos  { width: 1.6rem; color: var(--txt-soft); }
+.grupo-num  { text-align: right; color: var(--txt-soft); }
+.grupo-pts  { text-align: right; font-family: 'Archivo Black', sans-serif; color: var(--accent); }
+.grupo-tabela tr.grupo-classifica { background: rgba(255, 255, 255, 0.035); }
+.grupo-tabela tr.grupo-classifica .grupo-pos { color: var(--accent); }
+.grupo-tabela tr.grupo-voce td { color: var(--accent); font-weight: 700; }
+
+

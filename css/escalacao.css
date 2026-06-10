@@ -1,0 +1,674 @@
+/* ============================================================
+   escalacao.css — TELA DO JOGO (skips + layout de 3 colunas: lista, campo, box)
+   ============================================================ */
+
+/* ====================================================================
+   TELA PROVISÓRIA DO JOGO (#tela-jogo)
+   Mantém o tema da competição escolhida (dourado ou prata).
+   ==================================================================== */
+
+/* Título pequeno repetido no topo das telas temáticas */
+.titulo-topo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.85rem;
+  color: var(--txt-soft);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* Título grande da seção, na cor de destaque do tema */
+.titulo-secao {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2.6rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+/* Aviso "(em construção)" */
+.jogo-em-construcao {
+  font-size: 1rem;
+  color: var(--txt-soft);
+  margin-bottom: 36px;
+}
+
+/* Botão secundário: Voltar — transparente com borda suave */
+.btn-secundario {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid var(--txt-soft);
+  color: var(--txt-soft);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 24px;
+  border-radius: 2px;          /* quadrado, consistente com os outros botões */
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+  color: var(--txt);
+  border-color: var(--txt);
+}
+
+
+/* ====================================================================
+   BLOCO DE SKIPS — orçamento + dois botões retrô escuros
+   ==================================================================== */
+
+/* Container do bloco inteiro */
+.bloco-skips {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Linha topo: rótulo "SKIPS" + número restante */
+.skip-topo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.skip-label-budget {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--txt-soft);
+}
+
+/* Contador em destaque — pisca levemente quando chega a 0 */
+.skip-contador {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  color: var(--accent);
+  transition: color 0.3s;
+}
+
+/* Linha dos dois botões */
+.skip-botoes {
+  display: flex;
+  gap: 8px;
+}
+
+/* Botão individual: estilo retrô escuro, texto + seta de re-sorteio */
+.btn-skip {
+  flex: 1;
+  padding: 12px 8px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;              /* bordas quadradas = visual retrô */
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.62rem;              /* aumentado de 0.48rem */
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1.4;
+  transition: transform 0.08s ease, box-shadow 0.08s ease,
+              border-color 0.15s ease, opacity 0.15s ease;
+}
+
+/* Seta de re-sorteio — maior que o rótulo para dar destaque visual */
+.skip-icone {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.btn-skip:not(:disabled):hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-skip:not(:disabled):active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+/* Desabilitado: desbota sem sumir totalmente */
+.btn-skip:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+/* ====================================================================
+   TELA DO JOGO (#tela-jogo) — layout em 3 colunas
+   ==================================================================== */
+
+/* Remove o padding e a centralização vertical do .tela padrão */
+#tela-jogo {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+}
+
+/* ---- Cabeçalho da tela do jogo ---- */
+.jogo-header-wrap {
+  width: 100%;
+}
+
+.jogo-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 24px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.jogo-header-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.75rem;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.jogo-header-slogan {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--txt-soft);
+}
+
+.jogo-header-info {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  color: var(--txt-soft);
+  text-align: right;
+  padding-bottom: 2px;
+}
+
+/* Linha separadora com degradê nas pontas — some suavemente nas laterais */
+.jogo-header-linha {
+  max-width: 900px;
+  margin: 0 auto;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  opacity: 0.45;
+}
+
+/* Container da grade: esquerda (220px) | centro (automático) | direita (200px) */
+.jogo-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: 220px 1fr 200px;
+  gap: 24px;
+  min-height: 100vh;
+  align-items: start;
+}
+
+/* Rótulo de seção dentro do jogo (FORMAÇÃO, ESCALAÇÃO, TIME ESCALADO) */
+.jogo-rotulo {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--txt-soft);
+  margin-bottom: 12px;
+}
+
+
+/* ====================================================================
+   COLUNA ESQUERDA — formação, rolar, lista de jogadores
+   ==================================================================== */
+
+.jogo-esquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+/* Alinha o Rolar com o campo e as médias depois que o bloco de formação some.
+   O seletor de irmão adjacente (+) funciona mesmo com display:none no predecessor. */
+#jogo-formacao-bloco.escondida + #btn-rolar {
+  margin-top: calc(0.65rem * 1.2 + 12px); /* altura do .jogo-rotulo + margin-bottom dele */
+}
+
+/* Pílulas de formação adaptadas para o fundo escuro do tema */
+#jogo-pilulas-formacao .pilula {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--txt-soft);
+  color: var(--txt);
+}
+
+#jogo-pilulas-formacao .pilula:hover:not(.pilula-ativa):not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#jogo-pilulas-formacao .pilula.pilula-ativa {
+  background-color: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Pílulas travadas após o 1º sorteio */
+#jogo-pilulas-formacao .pilula:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Botão "Rolar" — ação principal da tela do jogo */
+.btn-rolar {
+  display: block;
+  width: 100%;
+  background-color: var(--accent);
+  color: var(--bg);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.btn-rolar:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Animação de pulso suave no botão Simular — chama atenção sem distrair */
+@keyframes pulsar {
+  0%, 100% { transform: scale(1);    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5); }
+  50%       { transform: scale(1.04); box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.4); }
+}
+
+#btn-simular {
+  animation: pulsar 1.6s ease-in-out infinite;
+}
+
+#btn-simular:hover {
+  animation-play-state: paused; /* pausa no hover para não interferir com o clique */
+}
+
+/* Botão desabilitado: sem sombra nem pressão */
+.btn-rolar:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* Card do clube sorteado */
+.clube-card {
+  border: 1px solid var(--txt-soft);
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Status do sorteio — rótulo acima do nome do clube */
+.clube-status {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--txt-soft);
+  margin-bottom: 6px;
+}
+
+/* Quando o clube é revelado, o status ganha a cor de destaque do tema */
+.clube-status.revelado {
+  color: var(--accent);
+}
+
+.clube-edicao {
+  font-size: 0.68rem;
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.clube-nome {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+/* Lista de jogadores com scroll quando ultrapassar a altura */
+.lista-jogadores {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-height: 420px;
+  overflow-y: auto;
+  scrollbar-width: thin;                               /* Firefox: barra fina */
+  scrollbar-color: rgba(255,255,255,0.18) transparent; /* Firefox: cor do thumb */
+}
+
+/* Barra de rolagem fina e translúcida (Chrome, Edge, Safari) */
+.lista-jogadores::-webkit-scrollbar { width: 6px; }
+.lista-jogadores::-webkit-scrollbar-track { background: transparent; }
+.lista-jogadores::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 3px;
+}
+.lista-jogadores::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.32);
+}
+
+/* Item individual da lista */
+.item-jogador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 11px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.92rem;
+  color: var(--txt);
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.item-jogador:hover:not(.ja-escalado) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--txt-soft);
+}
+
+/* Jogador selecionado (aguardando slot) */
+.item-jogador.selecionado {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent);
+}
+
+/* Jogador já alocado em um slot: apagado e não clicável */
+.item-jogador.ja-escalado {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.jogador-nome {
+  flex: 1;
+}
+
+/* Número de força em destaque — não encolhe, sempre alinhado à direita */
+.jogador-forca {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.88rem;
+  color: var(--accent);
+  margin-left: 8px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+
+/* ====================================================================
+   COLUNA CENTRO — campo do jogo com 11 slots
+   ==================================================================== */
+
+.jogo-centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+}
+
+/* Campo do jogo — aproximadamente o dobro do original para melhor legibilidade */
+#campo-jogo {
+  position: relative;
+  width: 100%;            /* fluido: acompanha a coluna do meio */
+  max-width: 500px;       /* teto em telas grandes (igual ao tamanho antigo) */
+  aspect-ratio: 2 / 3;    /* mantém a proporção 2:3 sem altura fixa */
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  overflow: visible;   /* slots nas bordas não são cortados */
+  background: repeating-linear-gradient(
+    to bottom,
+    #2a8018 0px,
+    #2a8018 30px,
+    #309120 30px,
+    #309120 60px
+  );
+}
+
+/* Slot (vaga de jogador) — círculo tracejado até ser preenchido */
+.slot-jogo {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.45);
+  background: rgba(0, 0, 0, 0.3);
+  color: rgba(255, 255, 255, 0.65);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.62rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: left 0.45s ease, top 0.45s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+/* Slot que o jogador selecionado pode ocupar — borda sólida colorida */
+.slot-jogo.compativel {
+  border-style: solid;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Slot com jogador alocado — círculo branco opaco */
+.slot-jogo.preenchido {
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.88);
+  color: #1A1813;
+  cursor: pointer;         /* clicável para ativar o modo de mover */
+  font-size: 0.72rem;      /* código da posição — grande e legível */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Rótulo com nome do jogador — aparece abaixo do círculo */
+.slot-nome {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.72rem;   /* aumentado de 0.5rem para ficar bem legível */
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 3px 7px;
+  border-radius: 3px;
+  pointer-events: none;    /* não interfere nos cliques do slot */
+  letter-spacing: 0.2px;
+  max-width: 88px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Animação do modo de edição — anel tracejado girando devagar ao redor do slot */
+@keyframes girar-tracejado {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Slot selecionado para ser MOVIDO — borda na cor do tema */
+.slot-jogo.movendo {
+  border-style: solid;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.88);
+  color: #1A1813;
+}
+
+/* Anel externo girando que sinaliza "modo de edição" */
+.slot-jogo.movendo::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed var(--accent);
+  animation: girar-tracejado 4s linear infinite;
+  pointer-events: none;
+}
+
+/* Jogador que pode trocar de vaga com o jogador em modo de edição */
+.slot-jogo.trocavel {
+  border-style: solid;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+
+/* ====================================================================
+   COLUNA DIREITA — box score e botões
+   ==================================================================== */
+
+/* Médias de força no topo da coluna "Time Escalado" — sem caixa, integradas:
+   ATQ/DEF pequenos à esquerda, número geral GRANDE à direita */
+.forcas-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2px 6px;
+}
+
+/* Rótulo de categoria: ATQ / DEF */
+.forca-rotulo {
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--txt-soft);
+}
+
+/* Overall do time: número GRANDE à direita, sem rótulo
+   (o tamanho já diz que é a "nota do time") */
+.forca-geral-valor {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* ATAQUE e DEFESA lado a lado */
+.forca-secundarios {
+  display: flex;
+  gap: 16px;
+}
+
+/* Par rótulo + valor de cada secundário */
+.forca-sec-item {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
+
+/* Valor numérico do secundário */
+.forca-sec-valor {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.88rem;
+}
+
+/* ATAQUE: cor de destaque do tema (orange/gold) */
+.forca-ataque-valor {
+  color: var(--accent);
+}
+
+/* DEFESA: tom neutro para diferenciar visualmente do ataque */
+.forca-defesa-valor {
+  color: var(--txt-soft);
+}
+
+/* Separador dourado entre o bloco de médias e a lista de escalados */
+.forcas-separador {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  opacity: 0.5;
+}
+
+.jogo-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;   /* igualado ao respiro da coluna Escalação */
+  padding-top: 8px;
+}
+
+/* Box score: lista das 11 posições */
+.box-score {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 6px;
+}
+
+/* Linha do box score */
+.box-linha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 9px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Código da posição (GOL, LD, ZAG...) */
+.box-codigo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.70rem;
+  color: var(--accent);
+  min-width: 30px;
+}
+
+/* Nome do jogador */
+.box-nome {
+  color: var(--txt);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Slot ainda vazio: nome em itálico suave */
+.box-linha.vazio .box-nome {
+  color: var(--txt-soft);
+  font-style: italic;
+}
+
+/* Força do jogador — alinhada à direita, visível só quando o slot está preenchido */
+.box-forca {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.82rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* Posições do jogador exibidas na lista (ex: MEI/PD) */
+.jogador-posicoes {
+  font-size: 0.74rem;
+  color: var(--txt-soft);
+  margin: 0 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Quando um jogador está selecionado, apaga slots incompatíveis.
+   A classe "tem-selecao" é adicionada ao #campo-jogo pelo JS;
+   slots com "compativel" ou "preenchido" ficam de fora do escurecimento. */
+#campo-jogo.tem-selecao .slot-jogo:not(.compativel):not(.preenchido) {
+  opacity: 0.18;
+  cursor: not-allowed;
+}
+

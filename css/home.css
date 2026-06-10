@@ -1,0 +1,396 @@
+/* ============================================================
+   home.css — TELA INICIAL (manchete, modo, campo de amostra, passos, rodapé)
+   ============================================================ */
+
+/* ====================================================================
+   TELA INICIAL (#tela-inicial)
+   Sobrescreve o .tela padrão para ter layout de página completa,
+   com header, grade de dois blocos, cards e rodapé.
+   ==================================================================== */
+
+#tela-inicial {
+  /* O conteúdo começa do topo, não centralizado verticalmente */
+  justify-content: flex-start;
+  /* Estica para ocupar a largura toda (o .home-inner cuida da margem) */
+  align-items: stretch;
+  /* Remove o padding do .tela; cada seção tem o seu próprio */
+  padding: 0;
+  /* Fundo creme fixo — não muda com os temas de competição */
+  background-color: #F2ECDB;
+}
+
+/* Caixa interna com largura máxima e margens automáticas (centraliza) */
+.home-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 40px;
+}
+
+
+/* ====================================================================
+   TOPO DA HOME — rótulo dourado + linha fina
+   ==================================================================== */
+
+.home-header {
+  padding-top: 32px;
+  margin-bottom: 56px;
+}
+
+/* Rótulo pequeno em maiúsculas com cor dourada */
+.home-rotulo-topo {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #8A6A1F;  /* dourado fixo — identidade da tela inicial */
+  margin-bottom: 12px;
+}
+
+/* Linha fina que separa o topo do restante */
+.home-linha-divisor {
+  height: 1px;
+  background-color: #D4C9B0;
+}
+
+
+/* ====================================================================
+   CORPO — grade de dois blocos lado a lado
+   ==================================================================== */
+
+/* CSS Grid: duas colunas iguais com espaço entre elas */
+.home-corpo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 72px;
+}
+
+
+/* ====================================================================
+   COLUNA ESQUERDA — manchete, texto, botão e pílulas de modo
+   ==================================================================== */
+
+/* Manchete em 3 linhas — "Sorteie. / Escale. / Goleie." */
+.manchete {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 4.8rem;
+  line-height: 0.97;         /* linhas bem juntas para impacto visual */
+  color: #1A1813;
+  margin-bottom: 28px;
+  letter-spacing: -1.5px;
+
+  /* Sombra dura dourada deslocada para baixo/direita — efeito retrô */
+  text-shadow: 4px 4px 0 #D9B25A;
+}
+
+/* Parágrafo descritivo abaixo da manchete */
+.home-descricao {
+  font-size: 1rem;
+  color: #4A463E;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+/* Espaço entre o botão "Jogar agora" e o seletor de modo */
+.home-modo {
+  margin-top: 36px;
+}
+
+
+/* ====================================================================
+   BOTÃO "JOGAR AGORA" — laranja, destaque máximo
+   ==================================================================== */
+
+.btn-jogar-agora {
+  display: inline-block;
+  background-color: #E8593C;
+  color: #FFFFFF;             /* texto branco sobre laranja — contraste ok */
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 2px;         /* quase reto, estilo adesivo/retrô */
+  cursor: pointer;
+
+  /* Sombra preta dura deslocada — efeito de "adesivo" */
+  box-shadow: 4px 4px 0 #1A1813;
+
+  /* Transição rápida para a animação de pressionar ser responsiva */
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+/* Ao pressionar: botão "desce" 2px e sombra encolhe — sensação de apertar */
+.btn-jogar-agora:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #1A1813;
+}
+
+
+/* ====================================================================
+   RÓTULO DE SEÇÃO — "MODO DE JOGO", "FORMAÇÃO" etc.
+   ==================================================================== */
+
+.home-rotulo-campo {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #4A463E;
+  margin-bottom: 10px;
+}
+
+
+/* ====================================================================
+   PÍLULAS — botões no estilo "chip" (modo e formação)
+
+   REGRA DE CONTRASTE:
+   - Normal:     fundo BRANCO + borda e texto ESCUROS (#1A1813).
+   - Selecionada: fundo PRETO (#1A1813) + texto BRANCO.
+   Nunca texto claro sobre fundo creme. Preto (não laranja) porque
+   pílula = "estado/escolha"; laranja só para o botão de AÇÃO principal.
+   ==================================================================== */
+
+.area-pilulas {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;   /* em telas pequenas, quebra para a linha de baixo */
+}
+
+.pilula {
+  padding: 7px 16px;
+  border-radius: 2px;          /* quase reto — visual de "escolha/estado", diferente do botão laranja */
+  border: 1.5px solid #1A1813;
+  background-color: #FFFFFF;
+  color: #1A1813;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Hover: fundo levemente escurecido, mantém borda e cor escuras */
+.pilula:hover:not(.pilula-ativa) {
+  background-color: #EDE8DF;
+}
+
+/* Pílula SELECIONADA: fundo PRETO + texto branco.
+   Diferente do laranja do "Jogar agora": aqui é estado/escolha, não ação. */
+.pilula.pilula-ativa {
+  background-color: #1A1813;
+  color: #FFFFFF;
+  border-color: #1A1813;
+}
+
+
+/* ====================================================================
+   COLUNA DIREITA — campo de futebol + pílulas de formação
+   ==================================================================== */
+
+.home-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centraliza o campo e os controles horizontalmente */
+}
+
+
+/* ====================================================================
+   CAMPO DE FUTEBOL — gramado com listras e linhas brancas
+   ==================================================================== */
+
+#campo {
+  position: relative;    /* necessário para as fichas (position:absolute) ficarem dentro */
+  width: 230px;
+  height: 344px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  overflow: visible;     /* fichas nas bordas extremas não são cortadas */
+  margin-bottom: 20px;
+
+  /* Listras horizontais simulando a grama (dois tons de verde alternados) */
+  background: repeating-linear-gradient(
+    to bottom,
+    #2a8018 0px,
+    #2a8018 30px,
+    #309120 30px,
+    #309120 60px
+  );
+}
+
+/* Linha branca do meio-campo */
+.campo-linha-meio {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Círculo central */
+.campo-circulo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Base compartilhada pelas duas áreas (retângulos brancos) */
+.campo-area {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  height: 21%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.campo-area-ataque {
+  top: 0;
+  border-top: none;    /* o limite é a própria borda do campo */
+}
+
+.campo-area-defesa {
+  bottom: 0;
+  border-bottom: none;
+}
+
+
+/* ------------------------------------------------------------------
+   FICHAS DOS JOGADORES
+
+   Cada ficha é um círculo branco posicionado com left/top em %.
+   "transform: translate(-50%, -50%)" faz o CENTRO da ficha
+   coincidir com o ponto indicado (sem isso, seria o canto superior-
+   esquerdo que cairia no ponto, deslocando tudo).
+   "transition: left e top" anima a reposição ao trocar de formação.
+   ------------------------------------------------------------------ */
+.ficha {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #1A1813;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+
+  /* Anima a mudança de posição ao trocar de formação */
+  transition: left 0.45s ease, top 0.45s ease;
+}
+
+
+/* ====================================================================
+   PÍLULAS DE FORMAÇÃO (amostra) + LEGENDA
+   ==================================================================== */
+
+.home-formacao {
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Centraliza as pílulas de formação */
+.home-formacao .area-pilulas {
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Legenda explicativa abaixo das pílulas de formação */
+.home-legenda {
+  font-size: 0.7rem;
+  color: #4A463E;
+  font-style: italic;
+}
+
+
+/* ====================================================================
+   CARDS DE PASSOS — 01 Escolha / 02 Sorteie / 03 Escale
+   ==================================================================== */
+
+/* Grade de 3 colunas iguais */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.step-card {
+  background-color: #FFFFFF;
+  border: 1px solid #D4C9B0;
+  border-radius: 12px;
+  padding: 20px 24px;          /* reduzido de 28px — card menos alto */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;                   /* respiro entre texto e ícone */
+}
+
+/* Grupo de texto à esquerda do card */
+.step-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Ícone SVG à direita, centralizado verticalmente pelo align-items do card */
+.step-icon {
+  display: block;
+  width: 38px;                 /* ligeiramente maior que os 30px anteriores */
+  height: 38px;
+  flex-shrink: 0;              /* não encolhe se o texto for longo */
+}
+
+/* Número grande laranja em Archivo Black */
+.step-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2.2rem;
+  color: #E8593C;
+  line-height: 1;
+}
+
+.step-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  color: #1A1813;
+}
+
+.step-desc {
+  font-size: 0.85rem;
+  color: #4A463E;
+}
+
+
+/* ====================================================================
+   RODAPÉ — estatísticas do jogo
+   ==================================================================== */
+
+.home-footer {
+  border-top: 1px solid #D4C9B0;
+  padding: 20px 0 36px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #4A463E;
+}
+
+/* Pontinho separador entre as estatísticas */
+.footer-sep {
+  color: #B8AFA0;
+}
+
+

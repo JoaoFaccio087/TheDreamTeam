@@ -1,0 +1,138 @@
+/* ============================================================
+   responsivo.css — ajustes para telas menores (media queries).
+   Carregar por ÚLTIMO (sobrescreve os estilos das telas).
+   ============================================================ */
+
+/* ====================================================================
+   CELULARES E TABLETS  (≤ 768px)
+   ==================================================================== */
+@media (max-width: 768px) {
+
+  /* ---------------- TELA INICIAL (home) ---------------- */
+
+  .home-inner { padding: 0 20px; }
+
+  .home-header {
+    padding-top: 24px;
+    margin-bottom: 32px;
+  }
+
+  /* As duas colunas viram uma só (texto em cima, campo de amostra embaixo) */
+  .home-corpo {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    margin-bottom: 48px;
+  }
+
+  /* Manchete menor — e a sombra dura encolhe junto pra não pesar */
+  .manchete {
+    font-size: 3.2rem;
+    text-shadow: 3px 3px 0 #D9B25A;
+  }
+
+  .home-descricao {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+
+  /* CTA forte: ocupa a largura toda no celular */
+  .btn-jogar-agora {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .home-modo { margin-top: 28px; }
+
+  /* Cards de passos empilhados */
+  .home-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  /* Rodapé pode quebrar linha se faltar espaço */
+  .home-footer {
+    flex-wrap: wrap;
+    padding: 18px 0 28px;
+    font-size: 0.75rem;
+  }
+
+  /* ---------------- TELA DE JOGO (escalação): 3 colunas → 1 ---------------- */
+  .jogo-wrapper {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+    min-height: auto;
+  }
+  .slot-jogo {
+    width: 52px;
+    height: 52px;
+    font-size: 0.55rem;
+  }
+
+  /* ---------------- TELA DE SIMULAÇÃO: reorganizada em 1 coluna ----------------
+     Ordem no celular:
+       1. ← Voltar  (no topo)
+       2. Bloco de controles (MODO + VELOCIDADE), com cara de painel
+       3. Histórico de partidas
+       4. Botão de ação (Iniciar/Próximo)
+       5. Ver Resumo
+       6. Estatísticas (no fim, como estava)
+     Usamos display:contents para "promover" os filhos das duas colunas
+     ao .sim-wrapper, e depois ordenamos com `order`. ------------------------- */
+  .sim-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px 16px;
+  }
+  .sim-principal,
+  .sim-lateral { display: contents; }
+
+  #btn-voltar-escalacao { order: 1; }
+
+  .sim-controles {
+    order: 2;
+    margin-bottom: 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  #historico-jogos  { order: 3; }
+  #btn-iniciar-jogo { order: 4; }
+  #btn-resumo       { order: 5; }
+  #stats-campanha   { order: 6; }
+}
+
+/* ====================================================================
+   CELULARES PEQUENOS  (≤ 420px)
+   Em telas bem estreitas os slots de 52px se tocariam no campo reduzido,
+   então diminuímos um pouco mais e enxugamos alguns tamanhos.
+   ==================================================================== */
+@media (max-width: 420px) {
+
+  .manchete {
+    font-size: 2.6rem;
+    text-shadow: 2px 2px 0 #D9B25A;
+  }
+
+  /* Campo de amostra da home um pouco menor */
+  #campo {
+    width: 210px;
+    height: 314px;
+  }
+
+  .slot-jogo {
+    width: 44px;
+    height: 44px;
+    font-size: 0.5rem;
+    border-width: 1px;
+  }
+
+  /* Cards de passos mais compactos */
+  .step-card { padding: 16px 18px; }
+  .step-num  { font-size: 1.9rem; }
+}

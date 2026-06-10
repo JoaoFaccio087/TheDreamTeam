@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
+  <title>The Dream Team — sorteie, escale, goleie</title>
+
+  <!-- ===== SEO ===== -->
+  <meta name="description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título. Jogo de navegador grátis, sem instalação." />
+  <meta name="author" content="João Faccio" />
+  <meta name="theme-color" content="#D9B25A" />
+  <link rel="canonical" href="https://joaofaccio087.github.io/the-dream-team/" />
+
+  <!-- ===== Open Graph (preview no WhatsApp, redes sociais, etc.) ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Dream Team" />
+  <meta property="og:title" content="The Dream Team — sorteie, escale, goleie" />
+  <meta property="og:description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título." />
+  <meta property="og:url" content="https://joaofaccio087.github.io/the-dream-team/" />
+  <meta property="og:image" content="https://joaofaccio087.github.io/the-dream-team/assets/imagens/screenshots/home.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- ===== Twitter / X ===== -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Dream Team — sorteie, escale, goleie" />
+  <meta name="twitter:description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título." />
+  <meta name="twitter:image" content="https://joaofaccio087.github.io/the-dream-team/assets/imagens/screenshots/home.png" />
+
+  <!-- Google Fonts: Archivo Black para títulos, Archivo para o restante -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS por tela — a ordem é a CASCATA: base primeiro, responsivo por último.
+       escalacao antes de simulacao (preserva o override do botão Voltar). -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/escalacao.css" />
+  <link rel="stylesheet" href="css/simulacao.css" />
+  <link rel="stylesheet" href="css/resumo.css" />
+  <link rel="stylesheet" href="css/responsivo.css" />
+</head>
+<body>
+
+  <!-- =============================================================
+       TELA INICIAL — landing page rica em dois blocos + campo
+       Fica visível ao abrir o jogo.
+       ============================================================= -->
+  <div id="tela-inicial" class="tela">
+
+    <!-- Toda a página fica dentro deste container com largura máxima -->
+    <div class="home-inner">
+
+      <!-- ---- TOPO: rótulo dourado + linha fina ---- -->
+      <header class="home-header">
+        <p class="home-rotulo-topo">The Dream Team &middot; Libertadores &amp; Champions</p>
+        <div class="home-linha-divisor"></div>
+      </header>
+
+      <!-- ---- CORPO: coluna esquerda (texto) + coluna direita (campo) ---- -->
+      <div class="home-corpo">
+
+        <!-- COLUNA ESQUERDA -->
+        <div class="home-esquerda">
+
+          <!-- Manchete em 3 linhas, bem grande -->
+          <h1 class="manchete">Sorteie.<br>Escale.<br>Goleie.</h1>
+
+          <p class="home-descricao">
+            Escolha a competição, sorteie um clube e uma edição, e escale
+            os craques que estiveram lá. Até onde vai o seu time dos sonhos?
+          </p>
+
+          <!-- Botão de ação principal: laranja -->
+          <button id="btn-jogar" class="btn-jogar-agora">Jogar agora &rarr;</button>
+
+          <!-- Seletor de modo (competição) — pílulas -->
+          <div class="home-modo">
+            <span class="home-rotulo-campo">MODO DE JOGO</span>
+
+            <!-- id="pilulas-modo" permite ao JS pegar só estas pílulas -->
+            <div class="area-pilulas" id="pilulas-modo">
+              <!-- "pilula-ativa" = selecionada por padrão -->
+              <button class="pilula pilula-ativa" data-modo="libertadores">Libertadores</button>
+              <button class="pilula" data-modo="champions">Champions League</button>
+            </div>
+          </div>
+
+        </div><!-- /home-esquerda -->
+
+        <!-- COLUNA DIREITA -->
+        <div class="home-direita">
+
+          <!-- Campo de futebol (decorativo/amostra) -->
+          <!-- id="campo" é usado pelo JS para posicionar as fichas -->
+          <div id="campo">
+
+            <!-- Linhas brancas do gramado -->
+            <div class="campo-linha-meio"></div>
+            <div class="campo-circulo"></div>
+            <div class="campo-area campo-area-ataque"></div>
+            <div class="campo-area campo-area-defesa"></div>
+
+            <!-- 11 fichas — o JS define left, top e o texto (GOL/DEF/MEI/ATA) -->
+            <div class="ficha" data-indice="0">GOL</div>
+            <div class="ficha" data-indice="1">DEF</div>
+            <div class="ficha" data-indice="2">DEF</div>
+            <div class="ficha" data-indice="3">DEF</div>
+            <div class="ficha" data-indice="4">DEF</div>
+            <div class="ficha" data-indice="5">MEI</div>
+            <div class="ficha" data-indice="6">MEI</div>
+            <div class="ficha" data-indice="7">MEI</div>
+            <div class="ficha" data-indice="8">ATA</div>
+            <div class="ficha" data-indice="9">ATA</div>
+            <div class="ficha" data-indice="10">ATA</div>
+
+          </div><!-- /campo -->
+
+          <!-- Pílulas de formação: só visual/amostra, não entram no jogo -->
+          <div class="home-formacao">
+            <span class="home-rotulo-campo">FORMA&Ccedil;&Atilde;O</span>
+
+            <!-- data-formacao-amostra: JS lê este atributo para saber qual formação -->
+            <div class="area-pilulas" id="pilulas-formacao">
+              <button class="pilula pilula-ativa" data-formacao-amostra="4-3-3">4-3-3</button>
+              <button class="pilula" data-formacao-amostra="4-4-2">4-4-2</button>
+              <button class="pilula" data-formacao-amostra="4-2-3-1">4-2-3-1</button>
+              <button class="pilula" data-formacao-amostra="3-5-2">3-5-2</button>
+              <button class="pilula" data-formacao-amostra="4-3-2-1">4-3-2-1</button>
+              <button class="pilula" data-formacao-amostra="4-5-1">4-5-1</button>
+              <button class="pilula" data-formacao-amostra="3-4-3">3-4-3</button>
+              <button class="pilula" data-formacao-amostra="4-1-2-1-2">4-1-2-1-2</button>
+            </div>
+
+            <p class="home-legenda">Amostra &mdash; a formação você escolhe no jogo</p>
+          </div>
+
+        </div><!-- /home-direita -->
+
+      </div><!-- /home-corpo -->
+
+      <!-- ---- CARDS DE PASSOS ---- -->
+      <section class="home-cards">
+
+        <div class="step-card">
+          <!-- Texto à esquerda -->
+          <div class="step-texto">
+            <span class="step-num">01</span>
+            <span class="step-titulo">Escolha</span>
+            <span class="step-desc">A competição</span>
+          </div>
+          <!-- Troféu: símbolo da competição a escolher — ícone à direita -->
+          <svg class="step-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8593C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2h12v6a6 6 0 0 1-12 0V2z"/>
+            <path d="M6 5.5H3.5v2.5H6"/>
+            <path d="M18 5.5h2.5v2.5H18"/>
+            <line x1="12" y1="14" x2="12" y2="18"/>
+            <line x1="9"  y1="18" x2="15" y2="18"/>
+            <line x1="7"  y1="21" x2="17" y2="21"/>
+          </svg>
+        </div>
+
+        <div class="step-card">
+          <!-- Texto à esquerda -->
+          <div class="step-texto">
+            <span class="step-num">02</span>
+            <span class="step-titulo">Sorteie</span>
+            <span class="step-desc">Um clube e uma edição</span>
+          </div>
+          <!-- Dado: representa o sorteio aleatório do clube/edição — ícone à direita -->
+          <svg class="step-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8593C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="3"/>
+            <circle cx="8"  cy="8"  r="1.2" fill="#E8593C"/>
+            <circle cx="16" cy="8"  r="1.2" fill="#E8593C"/>
+            <circle cx="12" cy="12" r="1.2" fill="#E8593C"/>
+            <circle cx="8"  cy="16" r="1.2" fill="#E8593C"/>
+            <circle cx="16" cy="16" r="1.2" fill="#E8593C"/>
+          </svg>
+        </div>
+
+        <div class="step-card">
+          <!-- Texto à esquerda -->
+          <div class="step-texto">
+            <span class="step-num">03</span>
+            <span class="step-titulo">Escale</span>
+            <span class="step-desc">O XI dos sonhos</span>
+          </div>
+          <!-- Campo de futebol (vista de cima): representa a escalação — ícone à direita -->
+          <svg class="step-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#E8593C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="1.5"/>
+            <line x1="2"  y1="12" x2="22" y2="12"/>
+            <circle cx="12" cy="12" r="3.5"/>
+            <path d="M8 2v5h8V2"/>
+            <path d="M8 22v-5h8v5"/>
+          </svg>
+        </div>
+
+      </section>
+
+      <!-- ---- RODAPÉ COM ESTATÍSTICAS (preenchido pelo JS via DADOS) ---- -->
+      <footer class="home-footer">
+        <span>2 competições</span>
+        <span class="footer-sep">&middot;</span>
+        <span id="stat-edicoes">0 edições</span>
+        <span class="footer-sep">&middot;</span>
+        <span id="stat-jogadores">0 jogadores</span>
+      </footer>
+
+    </div><!-- /home-inner -->
+
+  </div><!-- /tela-inicial -->
+
+
+  <!-- =============================================================
+       TELA DO JOGO — layout em 3 colunas
+       Aparece ao clicar "Jogar agora". Mantém o tema da competição.
+       ============================================================= -->
+  <div id="tela-jogo" class="tela escondida">
+
+    <!-- Cabeçalho: título à esquerda, info da partida (formação · modo) à direita -->
+    <div class="jogo-header-wrap">
+      <header class="jogo-header">
+        <div>
+          <p class="jogo-header-titulo">THE DREAM TEAM</p>
+          <p class="jogo-header-slogan">SORTEIE &middot; ESCALE &middot; GOLEIE</p>
+        </div>
+        <p id="jogo-header-info" class="jogo-header-info"></p>
+      </header>
+      <div class="jogo-header-linha"></div>
+    </div>
+
+    <div class="jogo-wrapper">
+
+      <!-- =========================================================
+           COLUNA ESQUERDA: formação + sorteio + lista de jogadores
+           ========================================================= -->
+      <div class="jogo-esquerda">
+
+        <!-- Bloco de formação: some inteiro após o 1º sorteio -->
+        <div id="jogo-formacao-bloco">
+          <p class="jogo-rotulo">FORMA&Ccedil;&Atilde;O</p>
+
+          <!-- Pílulas de formação — travam e somem após o 1º sorteio -->
+          <div class="area-pilulas" id="jogo-pilulas-formacao">
+            <button class="pilula pilula-ativa" data-formacao-jogo="4-3-3">4-3-3</button>
+            <button class="pilula" data-formacao-jogo="4-4-2">4-4-2</button>
+            <button class="pilula" data-formacao-jogo="4-2-3-1">4-2-3-1</button>
+            <button class="pilula" data-formacao-jogo="3-5-2">3-5-2</button>
+            <button class="pilula" data-formacao-jogo="4-3-2-1">4-3-2-1</button>
+            <button class="pilula" data-formacao-jogo="4-5-1">4-5-1</button>
+            <button class="pilula" data-formacao-jogo="3-4-3">3-4-3</button>
+            <button class="pilula" data-formacao-jogo="4-1-2-1-2">4-1-2-1-2</button>
+          </div>
+        </div><!-- /jogo-formacao-bloco -->
+
+        <!-- Botão principal de sorteio -->
+        <button id="btn-rolar" class="btn-rolar">Rolar &#8635;</button>
+
+        <!-- Card do clube sorteado (aparece após o 1º Rolar) -->
+        <div id="clube-card" class="clube-card escondida">
+          <!-- Status do sorteio: "SORTEANDO…" durante a animação, "SAIU" ao revelar -->
+          <p id="clube-status" class="clube-status"></p>
+          <p id="clube-edicao" class="clube-edicao"></p>
+          <p id="clube-nome"   class="clube-nome"></p>
+        </div>
+
+        <!-- Bloco de skips: aparece com o card, some ao alocar um jogador -->
+        <div id="bloco-skips" class="bloco-skips escondida">
+          <div class="skip-topo">
+            <span class="skip-label-budget">SKIPS</span>
+            <span id="skip-contador" class="skip-contador">5</span>
+          </div>
+          <div class="skip-botoes">
+            <button id="btn-skip" class="btn-skip" disabled>
+              <span class="skip-icone">&#8635;</span><span>OUTRO<br>SORTEIO</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lista de jogadores do clube sorteado -->
+        <div id="lista-jogadores" class="lista-jogadores escondida"></div>
+
+      </div><!-- /jogo-esquerda -->
+
+
+      <!-- =========================================================
+           COLUNA CENTRO: campo de jogo com 11 slots
+           ========================================================= -->
+      <div class="jogo-centro">
+
+        <p class="jogo-rotulo">ESCALA&Ccedil;&Atilde;O</p>
+
+        <!-- Campo do jogo — mesmas listras e linhas do campo de amostra -->
+        <div id="campo-jogo">
+
+          <!-- Linhas decorativas do gramado -->
+          <div class="campo-linha-meio"></div>
+          <div class="campo-circulo"></div>
+          <div class="campo-area campo-area-ataque"></div>
+          <div class="campo-area campo-area-defesa"></div>
+
+          <!-- 11 slots — o JS define left, top e data-codigo (GOL, LD, ZAG...) -->
+          <div class="slot-jogo" data-indice="0"></div>
+          <div class="slot-jogo" data-indice="1"></div>
+          <div class="slot-jogo" data-indice="2"></div>
+          <div class="slot-jogo" data-indice="3"></div>
+          <div class="slot-jogo" data-indice="4"></div>
+          <div class="slot-jogo" data-indice="5"></div>
+          <div class="slot-jogo" data-indice="6"></div>
+          <div class="slot-jogo" data-indice="7"></div>
+          <div class="slot-jogo" data-indice="8"></div>
+          <div class="slot-jogo" data-indice="9"></div>
+          <div class="slot-jogo" data-indice="10"></div>
+
+        </div><!-- /campo-jogo -->
+
+      </div><!-- /jogo-centro -->
+
+
+      <!-- =========================================================
+           COLUNA DIREITA: box score + botões de controle
+           ========================================================= -->
+      <div class="jogo-direita">
+
+        <p class="jogo-rotulo">TIME ESCALADO</p>
+
+        <!-- Médias de força: atualizam conforme os jogadores são escalados -->
+        <div id="forcas-stats" class="forcas-stats">
+
+          <!-- ATAQUE e DEFESA: valores secundários, menores, à esquerda -->
+          <div class="forca-secundarios">
+            <div class="forca-sec-item">
+              <span class="forca-rotulo">ATQ</span>
+              <span id="forca-ataque" class="forca-sec-valor forca-ataque-valor">--</span>
+            </div>
+            <div class="forca-sec-item">
+              <span class="forca-rotulo">DEF</span>
+              <span id="forca-defesa" class="forca-sec-valor forca-defesa-valor">--</span>
+            </div>
+          </div>
+
+          <!-- GERAL: número grande à direita, sem rótulo (o tamanho já diz que é o overall) -->
+          <span id="forca-geral" class="forca-geral-valor">--</span>
+
+        </div>
+
+        <!-- Separador dourado entre as médias e a lista de escalados -->
+        <div class="forcas-separador"></div>
+
+        <!-- Lista dos 11 slots (atualizada a cada alocação) -->
+        <div id="box-score" class="box-score"></div>
+
+        <!-- Aparece quando todos os 11 slots estiverem preenchidos -->
+        <button id="btn-simular" class="btn-rolar escondida">Simular &#9654;</button>
+
+        <!-- Volta para a tela inicial e remove o tema -->
+        <button id="btn-voltar-home" class="btn-secundario">&#8592; Voltar</button>
+
+      </div><!-- /jogo-direita -->
+
+    </div><!-- /jogo-wrapper -->
+
+  </div><!-- /tela-jogo -->
+
+  <!-- =============================================================
+       TELA DE SIMULAÇÃO — estrutura da campanha (lógica vem depois).
+       Cabeçalho com controles de modo/velocidade + layout em 2 colunas.
+       ============================================================= -->
+  <div id="tela-simulacao" class="tela escondida">
+
+    <!-- Cabeçalho limpo: marca à esquerda, rótulo "A CAMPANHA" à direita -->
+    <div class="jogo-header-wrap">
+      <header class="jogo-header">
+        <div>
+          <p class="jogo-header-titulo">THE DREAM TEAM</p>
+          <p class="jogo-header-slogan">SORTEIE &middot; ESCALE &middot; GOLEIE</p>
+        </div>
+        <p class="sim-label-campanha">A CAMPANHA</p>
+      </header>
+      <div class="jogo-header-linha"></div>
+    </div>
+
+    <!-- Layout em 2 colunas: histórico de partidas (esquerda) + controles+stats (direita) -->
+    <div class="sim-wrapper">
+
+      <!-- Coluna principal: Voltar no topo, histórico no meio, botão ação no fim -->
+      <div class="sim-principal">
+        <!-- ← Voltar: sempre no topo -->
+        <button id="btn-voltar-escalacao" class="btn-secundario sim-btn-acao">&#8592; Voltar</button>
+        <!-- Histórico: ordem cronológica — oitavas no topo, final embaixo -->
+        <div id="historico-jogos" class="historico-jogos"></div>
+        <!-- Botão principal: desce conforme os cards aparecem -->
+        <button id="btn-iniciar-jogo" class="btn-rolar sim-btn-acao">Iniciar Campanha &#9654;</button>
+        <!-- Resumo da campanha: aparece só quando a campanha termina -->
+        <button id="btn-resumo" class="btn-resumo sim-btn-acao escondida">Ver Resumo da Campanha</button>
+      </div>
+
+      <!-- Coluna lateral: controles de configuração + tabela de estatísticas -->
+      <div class="sim-lateral">
+
+        <!-- Controles: MODO e VELOCIDADE empilhados com rótulo acima dos botões -->
+        <div class="sim-controles">
+          <div class="sim-ctrl-bloco">
+            <span class="sim-ctrl-rotulo">MODO</span>
+            <div class="area-pilulas">
+              <button class="sim-pilula sim-pilula-ativa" data-sim-modo="jogo-a-jogo">Jogo a jogo</button>
+              <button class="sim-pilula" data-sim-modo="automatico">Autom&aacute;tico</button>
+            </div>
+          </div>
+          <div class="sim-ctrl-bloco">
+            <span class="sim-ctrl-rotulo">VELOCIDADE</span>
+            <div class="area-pilulas">
+              <button class="sim-pilula" data-sim-vel="lento">Lento</button>
+              <button class="sim-pilula sim-pilula-ativa" data-sim-vel="normal">Normal</button>
+              <button class="sim-pilula" data-sim-vel="rapida">R&aacute;pida</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel de estatísticas: gols e assistências por jogador -->
+        <div id="stats-campanha" class="stats-campanha">
+          <p class="sim-rotulo">ESTAT&Iacute;STICAS</p>
+          <table class="stats-tabela">
+            <thead>
+              <tr>
+                <th class="stats-th-jogador">JOGADOR</th>
+                <th>G</th>
+                <th>A</th>
+              </tr>
+            </thead>
+            <tbody id="stats-campanha-corpo"></tbody>
+          </table>
+        </div>
+
+      </div><!-- /sim-lateral -->
+
+    </div><!-- /sim-wrapper -->
+
+  </div><!-- /tela-simulacao -->
+
+
+<!-- Overlay da tela de resumo da campanha (preenchido via JS) -->
+  <div id="resumo-overlay" class="resumo-overlay escondida"></div>
+
+<!-- Captura do card como imagem (carrega online; se offline, o botão avisa) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<!-- Dados: competições primeiro, depois o dados.js que junta tudo -->
+  <script src="js/dados/libertadores.js"></script>
+  <script src="js/dados/champions.js"></script>
+  <script src="js/dados/dados.js"></script>
+
+  <!-- Lógica em módulos — a ordem importa: estado/config primeiro, main por último.
+       'defer' garante a ordem e que o DOM já exista quando cada um rodar. -->
+  <script src="js/estado.js"    defer></script>
+  <script src="js/formacoes.js" defer></script>
+  <script src="js/regras.js"    defer></script>
+  <script src="js/interface.js" defer></script>
+  <script src="js/sorteio.js"   defer></script>
+  <script src="js/escalacao.js" defer></script>
+  <script src="js/home.js"      defer></script>
+  <script src="js/simulacao.js" defer></script>
+  <script src="js/campanha.js"  defer></script>
+  <script src="js/resumo.js"    defer></script>
+  <script src="js/main.js"      defer></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* ============================================================
+   base.css — variáveis, temas, reset, body, tipografia e utilitários globais
+   ============================================================ */
+
+/* ====================================================================
+   estilo.css — The Dream Team
+   Sistema de variáveis CSS: uma "gaveta" de cores por competição.
+   O JS troca as variáveis; todo o visual muda automaticamente.
+   ==================================================================== */
+
+
+/* ------------------------------------------------------------------
+   RESET — zera margens e paddings que o navegador coloca por padrão
+   ------------------------------------------------------------------ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ------------------------------------------------------------------
+   VARIÁVEIS DE TEMA
+
+   ":root" guarda os valores padrão (tela inicial, creme).
+   Quando o JS adiciona "tema-libertadores" ou "tema-champions" ao
+   <body>, os blocos abaixo sobrescrevem apenas os valores diferentes.
+   Qualquer elemento que use var(--accent), var(--bg) etc. muda
+   automaticamente — sem mexer numa linha de CSS!
+   ------------------------------------------------------------------ */
+:root {
+  --bg:       #F2ECDB;   /* fundo creme da tela inicial */
+  --txt:      #1A1813;   /* texto quase preto */
+  --txt-soft: #4A463E;   /* texto suave/secundário */
+  --accent:   #E8593C;   /* laranja — cor de ação padrão */
+}
+
+/* Tema Libertadores: preto e dourado */
+body.tema-libertadores {
+  --bg:       #0E0C0A;
+  --txt:      #F3E9CE;
+  --txt-soft: rgba(243, 233, 206, 0.55);
+  --accent:   #D9B25A;   /* dourado */
+}
+
+/* Tema Champions League: azul-escuro e prata */
+body.tema-champions {
+  --bg:       #0A1A3F;
+  --txt:      #EAF0FA;
+  --txt-soft: rgba(234, 240, 250, 0.55);
+  --accent:   #DCE6F4;   /* prata */
+}
+
+
+/* ------------------------------------------------------------------
+   BODY — aplica as variáveis de tema ao fundo e ao texto.
+   "transition" faz a mudança de cores ser suave (0.4 segundos).
+   ------------------------------------------------------------------ */
+body {
+  font-family: 'Archivo', sans-serif;
+  background-color: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+
+/* ------------------------------------------------------------------
+   UTILITÁRIOS
+   ------------------------------------------------------------------ */
+
+/* Oculta o elemento por completo — o JS adiciona/remove esta classe.
+   "!important" é necessário aqui: a classe .tela (definida abaixo no arquivo)
+   também define "display: flex", e como vem depois no CSS ela venceria
+   "display: none" sem o !important. Com ele, .escondida sempre ganha. */
+.escondida {
+  display: none !important;
+}
+
+/* Remove a animação de transição temporariamente.
+   Usado no carregamento inicial para as fichas aparecerem no lugar
+   certo sem "viajar" a partir do canto 0,0 do campo. */
+.sem-transicao {
+  transition: none !important;
+}
+
+
+/* ------------------------------------------------------------------
+   TELA — estrutura base de cada "tela" do jogo.
+   Para a tela inicial (#tela-inicial), sobrescrevemos algumas dessas
+   propriedades logo abaixo.
+   ------------------------------------------------------------------ */
+.tela {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+
+/* ------------------------------------------------------------------
+   CONTEÚDO CENTRAL — usado pela tela provisória do jogo
+   ------------------------------------------------------------------ */
+.conteudo-central {
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+}
+
+
