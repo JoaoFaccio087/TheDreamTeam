@@ -1,9 +1,7 @@
-// ============================================================
 //  resumo.js — modal de resumo da campanha
 //  Layout: 4 cards (Campanha · Gols · Artilheiro · Assistente),
 //  mapa da escalação + lista de estatísticas, e 3 ações
 //  (Baixar imagem · Compartilhar · Jogar de Novo).
-// ============================================================
 
 var resumoShareTexto = '';   // texto usado no compartilhamento
 

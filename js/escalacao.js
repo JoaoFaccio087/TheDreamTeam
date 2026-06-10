@@ -1,10 +1,6 @@
-// ============================================================
 //  escalacao.js — montar XI: lista, alocar, mover, trocar, box score
-// ============================================================
 
-// ====================================================================
 // BOX SCORE — reconstrói a lista de 11 linhas a cada alocação ou mover
-// ====================================================================
 
 function atualizarBoxScore() {
   var codigos = codigosFormacao[formacaoJogo];
@@ -33,10 +29,8 @@ function atualizarBoxScore() {
 }
 
 
-// ====================================================================
 // FORÇAS DO TIME — médias de força: geral, ataque e defesa
 // MC conta em ambas as categorias (meio-campo misto)
-// ====================================================================
 
 function atualizarForcas() {
   var codigosAtaque = ['PE', 'PD', 'ATA', 'MD', 'ME', 'MEI', 'MC'];
@@ -64,9 +58,7 @@ function atualizarForcas() {
 }
 
 
-// ====================================================================
 // INICIAR TELA DO JOGO — reseta TUDO ao entrar numa nova partida
-// ====================================================================
 
 // Atualiza o texto "formação · modo" no cabeçalho da tela do jogo
 function atualizarHeaderInfo() {
@@ -123,9 +115,7 @@ function iniciarTelaJogo() {
 }
 
 
-// ====================================================================
 // SELECIONAR FORMAÇÃO NA TELA DO JOGO (só antes do 1º sorteio)
-// ====================================================================
 
 function selecionarFormacaoJogo(nome) {
   if (formacaoTravada) return;
@@ -146,14 +136,12 @@ function selecionarFormacaoJogo(nome) {
 }
 
 
-// ====================================================================
 // CONSTRUIR LISTA DE JOGADORES
 //
 // Cada jogador aparece como DISPONÍVEL ou INDISPONÍVEL:
 //   (a) já está alocado em algum slot → indisponível
 //   (b) nenhuma vaga vazia aceita suas posições → indisponível
 //   (c) caso contrário → disponível e clicável
-// ====================================================================
 
 function construirListaJogadores(jogadores) {
   listaJogadores.innerHTML = '';
@@ -215,9 +203,7 @@ function construirListaJogadores(jogadores) {
 }
 
 
-// ====================================================================
 // CANCELAR SELEÇÃO — limpa qualquer modo ativo (lista ou mover)
-// ====================================================================
 
 function cancelarSelecao() {
   // Limpa seleção de jogador da lista
@@ -238,10 +224,8 @@ function cancelarSelecao() {
 }
 
 
-// ====================================================================
 // CLICAR EM UM JOGADOR DA LISTA
-// Destaca só as vagas VAZIAS onde ele pode jogar (2c do enunciado).
-// ====================================================================
+// Destaca só as vagas vazias onde o jogador selecionado pode jogar.
 
 function clicarJogador(jogador, elemento) {
   // Se estava no modo de mover, cancela antes de entrar no modo de lista
@@ -262,10 +246,8 @@ function clicarJogador(jogador, elemento) {
 }
 
 
-// ====================================================================
 // ALOCAR JOGADOR — coloca o jogador da lista no slot clicado
-// Esconde card e lista depois (ponto 1 do enunciado).
-// ====================================================================
+// Esconde o card e a lista após a alocação.
 
 function alocarJogador(indice) {
   var slot = slotsJogo[indice];
@@ -301,14 +283,12 @@ function alocarJogador(indice) {
 }
 
 
-// ====================================================================
 // INICIAR MOVER — seleciona um jogador já no campo para reposicioná-lo
 //
 // Lógica:
 //   - Clicou no mesmo slot que já estava em modo mover → cancela (toggle)
 //   - Jogador não tem outra vaga compatível vazia → nada acende
 //   - Caso contrário → entra no modo mover e acende os destinos possíveis
-// ====================================================================
 
 function iniciarMover(indice) {
   // Toggle: clicou no mesmo slot → sai do modo de edição
@@ -353,9 +333,7 @@ function iniciarMover(indice) {
 }
 
 
-// ====================================================================
 // CONCLUIR MOVER — move o jogador do slot de origem para o de destino
-// ====================================================================
 
 function concluirMover(destinoIndice) {
   var jogador     = escalacao[slotMovendo];
@@ -396,9 +374,7 @@ function atualizarDisponibilidadeLista() {
 }
 
 
-// ====================================================================
 // CONCLUIR TROCA — inverte as posições de P (em edição) e Q (trocável)
-// ====================================================================
 
 function concluirTroca(indiceQ) {
   var indiceP  = slotMovendo;
@@ -422,14 +398,12 @@ function concluirTroca(indiceQ) {
 }
 
 
-// ====================================================================
 // CLICAR NUM SLOT — roteia para a ação correta dependendo do estado
 //
 //   slot preenchido + sem seleção   → iniciarMover (ou cancelar se toggle)
 //   slot compatível + lista ativa   → alocarJogador (novo jogador da lista)
 //   slot compatível + mover ativo   → concluirMover (mover existente)
 //   slot vazio não-compatível       → cancela qualquer seleção
-// ====================================================================
 
 function clicarSlot(indice) {
   var slot = slotsJogo[indice];
@@ -467,9 +441,7 @@ function clicarSlot(indice) {
 }
 
 
-// ====================================================================
 // TIME COMPLETO — mostra o botão Simular
-// ====================================================================
 
 function verificarCompleto() {
   btnSimular.classList.remove('escondida');

@@ -10,22 +10,22 @@
   <meta name="description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título. Jogo de navegador grátis, sem instalação." />
   <meta name="author" content="João Faccio" />
   <meta name="theme-color" content="#D9B25A" />
-  <link rel="canonical" href="https://joaofaccio087.github.io/the-dream-team/" />
+  <link rel="canonical" href="https://joaofaccio087.github.io/TheDreamTeam/" />
 
   <!-- ===== Open Graph (preview no WhatsApp, redes sociais, etc.) ===== -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The Dream Team" />
   <meta property="og:title" content="The Dream Team — sorteie, escale, goleie" />
   <meta property="og:description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título." />
-  <meta property="og:url" content="https://joaofaccio087.github.io/the-dream-team/" />
-  <meta property="og:image" content="https://joaofaccio087.github.io/the-dream-team/assets/imagens/screenshots/home.png" />
+  <meta property="og:url" content="https://joaofaccio087.github.io/TheDreamTeam/" />
+  <meta property="og:image" content="https://joaofaccio087.github.io/TheDreamTeam/assets/imagens/screenshots/home.png" />
   <meta property="og:locale" content="pt_BR" />
 
   <!-- ===== Twitter / X ===== -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Dream Team — sorteie, escale, goleie" />
   <meta name="twitter:description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título." />
-  <meta name="twitter:image" content="https://joaofaccio087.github.io/the-dream-team/assets/imagens/screenshots/home.png" />
+  <meta name="twitter:image" content="https://joaofaccio087.github.io/TheDreamTeam/assets/imagens/screenshots/home.png" />
 
   <!-- Google Fonts: Archivo Black para títulos, Archivo para o restante -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -444,7 +444,13 @@
   <div id="resumo-overlay" class="resumo-overlay escondida"></div>
 
 <!-- Captura do card como imagem (carrega online; se offline, o botão avisa) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- html2canvas: arquivo local (funciona offline). Se faltar, recorre ao CDN. -->
+  <script src="js/libs/html2canvas.min.js"></script>
+  <script>
+    if (typeof html2canvas === 'undefined') {
+      document.write('<scr' + 'ipt src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/scr' + 'ipt>');
+    }
+  </script>
 
 <!-- Dados: competições primeiro, depois o dados.js que junta tudo -->
   <script src="js/dados/libertadores.js"></script>

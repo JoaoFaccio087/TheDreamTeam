@@ -1,10 +1,6 @@
-// ============================================================
 //  main.js — INICIALIZAÇÃO e todos os event listeners (carregar por último)
-// ============================================================
 
-// ====================================================================
 // EVENTOS
-// ====================================================================
 
 pilulasModo.forEach(function (pilula) {
   pilula.addEventListener('click', function () { selecionarModo(this.dataset.modo); });

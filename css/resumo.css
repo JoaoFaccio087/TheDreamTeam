@@ -1,7 +1,4 @@
-/* ============================================================
-   resumo.css — MODAL DE RESUMO da campanha
-   Layout: 4 cards · mapa da escalação + lista de estatísticas · 3 ações
-   ============================================================ */
+/* resumo.css — modal de resumo: 4 cards, mapa + lista de estatísticas e 3 ações. */
 
 /* Botão que abre o resumo — aparece só ao fim da campanha */
 .btn-resumo {
@@ -19,7 +16,7 @@
 }
 .btn-resumo:hover { background: var(--accent); color: var(--bg); }
 
-/* ---- Overlay em tela cheia ---- */
+/* Overlay em tela cheia */
 .resumo-overlay {
   position: fixed;
   inset: 0;
@@ -37,7 +34,7 @@
   backdrop-filter: blur(2px);
 }
 
-/* ---- Card central (landscape) ---- */
+/* Card central (landscape) */
 .resumo-card {
   position: relative;
   z-index: 1;
@@ -61,7 +58,7 @@
   to   { transform: scale(1);    opacity: 1; }
 }
 
-/* ---- Hero: troféu + título ---- */
+/* Hero: troféu + título */
 .resumo-hero { text-align: center; margin-bottom: 18px; }
 .resumo-trofeu {
   width: 50px; height: 50px;
@@ -85,7 +82,7 @@
   color: var(--txt-soft);
 }
 
-/* ---- 4 cards do topo ---- */
+/* 4 cards do topo */
 .resumo-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -132,7 +129,7 @@
 .rec-e { color: var(--txt-soft); }
 .rec-d { color: #d97a7a; }
 
-/* ---- Grid: mapa (esquerda) + lista (direita) ---- */
+/* Grid: mapa (esquerda) + lista (direita) */
 .resumo-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -150,7 +147,7 @@
 /* A label do mapa fica centralizada sobre o campo */
 .resumo-col-campo .resumo-bloco-rot { text-align: center; }
 
-/* ---- MINI-CAMPO: gramado em retrato, fluido ---- */
+/* MINI-CAMPO: gramado em retrato, fluido */
 .resumo-campo {
   position: relative;
   width: 100%;
@@ -218,7 +215,7 @@
   text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
-/* ---- Lista de estatísticas ---- */
+/* Lista de estatísticas */
 .resumo-lista {
   border: 1px solid rgba(255,255,255,0.09);
   border-radius: 6px;
@@ -264,7 +261,7 @@
 .resumo-lista-head .rl-num { color: var(--txt-soft); }
 .rl-forca { color: var(--accent); font-family: 'Archivo Black', sans-serif; font-size: 0.7rem; }
 
-/* ---- Assinatura ---- */
+/* Assinatura */
 .resumo-marca {
   text-align: center;
   margin-bottom: 16px;
@@ -275,7 +272,7 @@
   opacity: 0.85;
 }
 
-/* ---- Ações ---- */
+/* Ações */
 .resumo-acoes { display: flex; gap: 10px; }
 .resumo-ico {
   width: 16px;
@@ -306,9 +303,7 @@
 }
 .resumo-btn-destaque:hover { filter: brightness(1.08); transform: translateY(-1px); }
 
-/* ============================================================
-   RESPONSIVO — telas estreitas: cards 2x2, mapa e lista empilhados
-   ============================================================ */
+/* RESPONSIVO — telas estreitas: cards 2x2, mapa e lista empilhados */
 @media (max-width: 720px) {
   .resumo-card { padding: 20px 16px 16px; }
   .resumo-titulo { font-size: 1.7rem; }

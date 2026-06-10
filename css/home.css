@@ -1,12 +1,6 @@
-/* ============================================================
-   home.css — TELA INICIAL (manchete, modo, campo de amostra, passos, rodapé)
-   ============================================================ */
+/* home.css — tela inicial (manchete, modo, campo de amostra, passos e rodapé). */
 
-/* ====================================================================
-   TELA INICIAL (#tela-inicial)
-   Sobrescreve o .tela padrão para ter layout de página completa,
-   com header, grade de dois blocos, cards e rodapé.
-   ==================================================================== */
+/* Tela inicial: sobrescreve .tela para um layout de página completa (header, dois blocos, cards e rodapé). */
 
 #tela-inicial {
   /* O conteúdo começa do topo, não centralizado verticalmente */
@@ -28,9 +22,7 @@
 }
 
 
-/* ====================================================================
-   TOPO DA HOME — rótulo dourado + linha fina
-   ==================================================================== */
+/* TOPO DA HOME — rótulo dourado + linha fina */
 
 .home-header {
   padding-top: 32px;
@@ -54,9 +46,7 @@
 }
 
 
-/* ====================================================================
-   CORPO — grade de dois blocos lado a lado
-   ==================================================================== */
+/* CORPO — grade de dois blocos lado a lado */
 
 /* CSS Grid: duas colunas iguais com espaço entre elas */
 .home-corpo {
@@ -68,9 +58,7 @@
 }
 
 
-/* ====================================================================
-   COLUNA ESQUERDA — manchete, texto, botão e pílulas de modo
-   ==================================================================== */
+/* COLUNA ESQUERDA — manchete, texto, botão e pílulas de modo */
 
 /* Manchete em 3 linhas — "Sorteie. / Escale. / Goleie." */
 .manchete {
@@ -99,9 +87,7 @@
 }
 
 
-/* ====================================================================
-   BOTÃO "JOGAR AGORA" — laranja, destaque máximo
-   ==================================================================== */
+/* BOTÃO "JOGAR AGORA" — laranja, destaque máximo */
 
 .btn-jogar-agora {
   display: inline-block;
@@ -128,9 +114,7 @@
 }
 
 
-/* ====================================================================
-   RÓTULO DE SEÇÃO — "MODO DE JOGO", "FORMAÇÃO" etc.
-   ==================================================================== */
+/* RÓTULO DE SEÇÃO — "MODO DE JOGO", "FORMAÇÃO" etc. */
 
 .home-rotulo-campo {
   display: block;
@@ -143,15 +127,7 @@
 }
 
 
-/* ====================================================================
-   PÍLULAS — botões no estilo "chip" (modo e formação)
-
-   REGRA DE CONTRASTE:
-   - Normal:     fundo BRANCO + borda e texto ESCUROS (#1A1813).
-   - Selecionada: fundo PRETO (#1A1813) + texto BRANCO.
-   Nunca texto claro sobre fundo creme. Preto (não laranja) porque
-   pílula = "estado/escolha"; laranja só para o botão de AÇÃO principal.
-   ==================================================================== */
+/* Pílulas (modo e formação): fundo claro com texto escuro; a selecionada inverte (fundo escuro, texto branco). O laranja fica só no botão de ação. */
 
 .area-pilulas {
   display: flex;
@@ -177,8 +153,7 @@
   background-color: #EDE8DF;
 }
 
-/* Pílula SELECIONADA: fundo PRETO + texto branco.
-   Diferente do laranja do "Jogar agora": aqui é estado/escolha, não ação. */
+/* Pílula selecionada: fundo escuro e texto branco. */
 .pilula.pilula-ativa {
   background-color: #1A1813;
   color: #FFFFFF;
@@ -186,9 +161,7 @@
 }
 
 
-/* ====================================================================
-   COLUNA DIREITA — campo de futebol + pílulas de formação
-   ==================================================================== */
+/* COLUNA DIREITA — campo de futebol + pílulas de formação */
 
 .home-direita {
   display: flex;
@@ -197,9 +170,7 @@
 }
 
 
-/* ====================================================================
-   CAMPO DE FUTEBOL — gramado com listras e linhas brancas
-   ==================================================================== */
+/* CAMPO DE FUTEBOL — gramado com listras e linhas brancas */
 
 #campo {
   position: relative;    /* necessário para as fichas (position:absolute) ficarem dentro */
@@ -262,15 +233,7 @@
 }
 
 
-/* ------------------------------------------------------------------
-   FICHAS DOS JOGADORES
-
-   Cada ficha é um círculo branco posicionado com left/top em %.
-   "transform: translate(-50%, -50%)" faz o CENTRO da ficha
-   coincidir com o ponto indicado (sem isso, seria o canto superior-
-   esquerdo que cairia no ponto, deslocando tudo).
-   "transition: left e top" anima a reposição ao trocar de formação.
-   ------------------------------------------------------------------ */
+/* Fichas dos jogadores: círculos posicionados por left/top em %; translate(-50%,-50%) centraliza no ponto e a transição anima a troca de formação. */
 .ficha {
   position: absolute;
   width: 32px;
@@ -290,9 +253,7 @@
 }
 
 
-/* ====================================================================
-   PÍLULAS DE FORMAÇÃO (amostra) + LEGENDA
-   ==================================================================== */
+/* PÍLULAS DE FORMAÇÃO (amostra) + LEGENDA */
 
 .home-formacao {
   text-align: center;
@@ -314,9 +275,7 @@
 }
 
 
-/* ====================================================================
-   CARDS DE PASSOS — 01 Escolha / 02 Sorteie / 03 Escale
-   ==================================================================== */
+/* CARDS DE PASSOS — 01 Escolha / 02 Sorteie / 03 Escale */
 
 /* Grade de 3 colunas iguais */
 .home-cards {
@@ -373,9 +332,7 @@
 }
 
 
-/* ====================================================================
-   RODAPÉ — estatísticas do jogo
-   ==================================================================== */
+/* RODAPÉ — estatísticas do jogo */
 
 .home-footer {
   border-top: 1px solid #D4C9B0;

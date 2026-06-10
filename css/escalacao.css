@@ -1,11 +1,6 @@
-/* ============================================================
-   escalacao.css — TELA DO JOGO (skips + layout de 3 colunas: lista, campo, box)
-   ============================================================ */
+/* escalacao.css — TELA DO JOGO (skips + layout de 3 colunas: lista, campo, box) */
 
-/* ====================================================================
-   TELA PROVISÓRIA DO JOGO (#tela-jogo)
-   Mantém o tema da competição escolhida (dourado ou prata).
-   ==================================================================== */
+/* Tela do jogo: mantém o tema da competição (dourado ou prata). */
 
 /* Título pequeno repetido no topo das telas temáticas */
 .titulo-topo {
@@ -52,9 +47,7 @@
 }
 
 
-/* ====================================================================
-   BLOCO DE SKIPS — orçamento + dois botões retrô escuros
-   ==================================================================== */
+/* BLOCO DE SKIPS — orçamento + dois botões retrô escuros */
 
 /* Container do bloco inteiro */
 .bloco-skips {
@@ -138,9 +131,7 @@
 }
 
 
-/* ====================================================================
-   TELA DO JOGO (#tela-jogo) — layout em 3 colunas
-   ==================================================================== */
+/* Tela do jogo: layout em 3 colunas. */
 
 /* Remove o padding e a centralização vertical do .tela padrão */
 #tela-jogo {
@@ -149,7 +140,7 @@
   padding: 0;
 }
 
-/* ---- Cabeçalho da tela do jogo ---- */
+/* Cabeçalho da tela do jogo */
 .jogo-header-wrap {
   width: 100%;
 }
@@ -220,9 +211,7 @@
 }
 
 
-/* ====================================================================
-   COLUNA ESQUERDA — formação, rolar, lista de jogadores
-   ==================================================================== */
+/* COLUNA ESQUERDA — formação, rolar, lista de jogadores */
 
 .jogo-esquerda {
   display: flex;
@@ -231,8 +220,7 @@
   padding-top: 8px;
 }
 
-/* Alinha o Rolar com o campo e as médias depois que o bloco de formação some.
-   O seletor de irmão adjacente (+) funciona mesmo com display:none no predecessor. */
+/* Alinha o Rolar com o campo depois que o bloco de formação some (seletor de irmão +). */
 #jogo-formacao-bloco.escondida + #btn-rolar {
   margin-top: calc(0.65rem * 1.2 + 12px); /* altura do .jogo-rotulo + margin-bottom dele */
 }
@@ -406,9 +394,7 @@
 }
 
 
-/* ====================================================================
-   COLUNA CENTRO — campo do jogo com 11 slots
-   ==================================================================== */
+/* COLUNA CENTRO — campo do jogo com 11 slots */
 
 .jogo-centro {
   display: flex;
@@ -532,12 +518,9 @@
 }
 
 
-/* ====================================================================
-   COLUNA DIREITA — box score e botões
-   ==================================================================== */
+/* COLUNA DIREITA — box score e botões */
 
-/* Médias de força no topo da coluna "Time Escalado" — sem caixa, integradas:
-   ATQ/DEF pequenos à esquerda, número geral GRANDE à direita */
+/* Médias de força no topo da coluna "Time Escalado": ATQ/DEF à esquerda, overall à direita. */
 .forcas-stats {
   display: flex;
   justify-content: space-between;
@@ -553,8 +536,7 @@
   color: var(--txt-soft);
 }
 
-/* Overall do time: número GRANDE à direita, sem rótulo
-   (o tamanho já diz que é a "nota do time") */
+/* Overall do time: número grande à direita, sem rótulo. */
 .forca-geral-valor {
   font-family: 'Archivo Black', sans-serif;
   font-size: 3rem;
@@ -664,9 +646,7 @@
   flex-shrink: 0;
 }
 
-/* Quando um jogador está selecionado, apaga slots incompatíveis.
-   A classe "tem-selecao" é adicionada ao #campo-jogo pelo JS;
-   slots com "compativel" ou "preenchido" ficam de fora do escurecimento. */
+/* Com um jogador selecionado, escurece os slots incompatíveis (mantém os "compativel" e "preenchido"). */
 #campo-jogo.tem-selecao .slot-jogo:not(.compativel):not(.preenchido) {
   opacity: 0.18;
   cursor: not-allowed;

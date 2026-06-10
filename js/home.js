@@ -1,12 +1,4 @@
-// ============================================================
-//  home.js — ações da tela inicial e estatísticas do rodapé
-// ============================================================
-
-
-
-// ====================================================================
-// AÇÕES DA TELA INICIAL
-// ====================================================================
+// home.js — ações da tela inicial e estatísticas do rodapé.
 
 function selecionarModo(novoModo) {
   modoSelecionado = novoModo;
@@ -18,8 +10,6 @@ function selecionarModo(novoModo) {
       p.classList.remove('pilula-ativa');
     }
   });
-
-  console.log('Modo selecionado:', modoSelecionado);
 }
 
 function selecionarFormacaoAmostra(nomeFormacao) {
@@ -34,8 +24,6 @@ function selecionarFormacaoAmostra(nomeFormacao) {
   });
 
   posicionarFichas(nomeFormacao);
-
-  console.log('Formação de amostra:', formacaoAmostra);
 }
 
 function jogarAgora() {
@@ -50,10 +38,7 @@ function voltarHome() {
 }
 
 
-// ====================================================================
-// ESTATÍSTICAS DO RODAPÉ DA HOME (calculadas via DADOS)
-// ====================================================================
-
+// Conta as edições distintas e o total de jogadores em DADOS para o rodapé da home.
 function calcularEstatisticasFooter() {
   var edicoes = [];
   DADOS.forEach(function (d) {

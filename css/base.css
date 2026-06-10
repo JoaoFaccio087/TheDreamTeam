@@ -1,37 +1,19 @@
-/* ============================================================
-   base.css — variáveis, temas, reset, body, tipografia e utilitários globais
-   ============================================================ */
+/* base.css — variáveis, temas, reset, body, tipografia e utilitários globais. */
 
-/* ====================================================================
-   estilo.css — The Dream Team
-   Sistema de variáveis CSS: uma "gaveta" de cores por competição.
-   O JS troca as variáveis; todo o visual muda automaticamente.
-   ==================================================================== */
-
-
-/* ------------------------------------------------------------------
-   RESET — zera margens e paddings que o navegador coloca por padrão
-   ------------------------------------------------------------------ */
+/* Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-
-/* ------------------------------------------------------------------
-   VARIÁVEIS DE TEMA
-
-   ":root" guarda os valores padrão (tela inicial, creme).
-   Quando o JS adiciona "tema-libertadores" ou "tema-champions" ao
-   <body>, os blocos abaixo sobrescrevem apenas os valores diferentes.
-   Qualquer elemento que use var(--accent), var(--bg) etc. muda
-   automaticamente — sem mexer numa linha de CSS!
-   ------------------------------------------------------------------ */
+/* Variáveis de tema. :root traz o padrão (tela inicial). O JS adiciona a classe
+   tema-* ao <body> e os blocos abaixo sobrescrevem só o necessário, então tudo
+   que usa var(--accent), var(--bg) etc. muda junto. */
 :root {
   --bg:       #F2ECDB;   /* fundo creme da tela inicial */
   --txt:      #1A1813;   /* texto quase preto */
-  --txt-soft: #4A463E;   /* texto suave/secundário */
+  --txt-soft: #4A463E;   /* texto secundário */
   --accent:   #E8593C;   /* laranja — cor de ação padrão */
 }
 
@@ -51,11 +33,6 @@ body.tema-champions {
   --accent:   #DCE6F4;   /* prata */
 }
 
-
-/* ------------------------------------------------------------------
-   BODY — aplica as variáveis de tema ao fundo e ao texto.
-   "transition" faz a mudança de cores ser suave (0.4 segundos).
-   ------------------------------------------------------------------ */
 body {
   font-family: 'Archivo', sans-serif;
   background-color: var(--bg);
@@ -64,32 +41,21 @@ body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+/* Utilitários */
 
-/* ------------------------------------------------------------------
-   UTILITÁRIOS
-   ------------------------------------------------------------------ */
-
-/* Oculta o elemento por completo — o JS adiciona/remove esta classe.
-   "!important" é necessário aqui: a classe .tela (definida abaixo no arquivo)
-   também define "display: flex", e como vem depois no CSS ela venceria
-   "display: none" sem o !important. Com ele, .escondida sempre ganha. */
+/* Oculta o elemento. O !important garante prioridade sobre o display:flex de
+   .tela, que vem depois no arquivo. */
 .escondida {
   display: none !important;
 }
 
-/* Remove a animação de transição temporariamente.
-   Usado no carregamento inicial para as fichas aparecerem no lugar
-   certo sem "viajar" a partir do canto 0,0 do campo. */
+/* Desliga a transição na carga inicial, para as fichas surgirem já no lugar
+   em vez de "viajarem" a partir do canto 0,0. */
 .sem-transicao {
   transition: none !important;
 }
 
-
-/* ------------------------------------------------------------------
-   TELA — estrutura base de cada "tela" do jogo.
-   Para a tela inicial (#tela-inicial), sobrescrevemos algumas dessas
-   propriedades logo abaixo.
-   ------------------------------------------------------------------ */
+/* Estrutura base de cada tela (a tela inicial sobrescreve parte disto). */
 .tela {
   width: 100%;
   min-height: 100vh;
@@ -100,14 +66,9 @@ body {
   padding: 48px 20px;
 }
 
-
-/* ------------------------------------------------------------------
-   CONTEÚDO CENTRAL — usado pela tela provisória do jogo
-   ------------------------------------------------------------------ */
+/* Conteúdo central — usado pela tela provisória do jogo. */
 .conteudo-central {
   width: 100%;
   max-width: 520px;
   text-align: center;
 }
-
-

@@ -1,14 +1,9 @@
-/* ============================================================
-   responsivo.css — ajustes para telas menores (media queries).
-   Carregar por ÚLTIMO (sobrescreve os estilos das telas).
-   ============================================================ */
+/* responsivo.css — ajustes para telas menores (media queries). Carregar por ÚLTIMO (sobrescreve os estilos das telas). */
 
-/* ====================================================================
-   CELULARES E TABLETS  (≤ 768px)
-   ==================================================================== */
+/* CELULARES E TABLETS (≤ 768px) */
 @media (max-width: 768px) {
 
-  /* ---------------- TELA INICIAL (home) ---------------- */
+  /* TELA INICIAL (home) */
 
   .home-inner { padding: 0 20px; }
 
@@ -59,7 +54,7 @@
     font-size: 0.75rem;
   }
 
-  /* ---------------- TELA DE JOGO (escalação): 3 colunas → 1 ---------------- */
+  /* TELA DE JOGO (escalação): 3 colunas → 1 */
   .jogo-wrapper {
     grid-template-columns: 1fr;
     padding: 24px 16px;
@@ -71,16 +66,7 @@
     font-size: 0.55rem;
   }
 
-  /* ---------------- TELA DE SIMULAÇÃO: reorganizada em 1 coluna ----------------
-     Ordem no celular:
-       1. ← Voltar  (no topo)
-       2. Bloco de controles (MODO + VELOCIDADE), com cara de painel
-       3. Histórico de partidas
-       4. Botão de ação (Iniciar/Próximo)
-       5. Ver Resumo
-       6. Estatísticas (no fim, como estava)
-     Usamos display:contents para "promover" os filhos das duas colunas
-     ao .sim-wrapper, e depois ordenamos com `order`. ------------------------- */
+  /* Tela de simulação no celular: vira 1 coluna. display:contents "promove" os filhos das duas colunas ao .sim-wrapper, e a ordem vem do `order` (Voltar, controles, histórico, ação, resumo, stats). */
   .sim-wrapper {
     display: flex;
     flex-direction: column;
@@ -107,11 +93,7 @@
   #stats-campanha   { order: 6; }
 }
 
-/* ====================================================================
-   CELULARES PEQUENOS  (≤ 420px)
-   Em telas bem estreitas os slots de 52px se tocariam no campo reduzido,
-   então diminuímos um pouco mais e enxugamos alguns tamanhos.
-   ==================================================================== */
+/* Celulares pequenos (≤ 420px): reduz mais alguns tamanhos por causa do campo estreito. */
 @media (max-width: 420px) {
 
   .manchete {

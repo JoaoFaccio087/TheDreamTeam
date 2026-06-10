@@ -1,10 +1,6 @@
-/* ============================================================
-   simulacao.css — TELA DE SIMULAÇÃO (cards de partida, painel, tabela de grupos)
-   ============================================================ */
+/* simulacao.css — TELA DE SIMULAÇÃO (cards de partida, painel, tabela de grupos) */
 
-/* ====================================================================
-   TELA DE SIMULAÇÃO (#tela-simulacao) — estrutura da campanha
-   ==================================================================== */
+/* TELA DE SIMULAÇÃO (#tela-simulacao) — estrutura da campanha */
 
 /* Mesmo padrão do #tela-jogo: cabeçalho gruda no topo, conteúdo cresce */
 #tela-simulacao {
@@ -14,7 +10,7 @@
 }
 
 
-/* ---- Rótulo "A CAMPANHA" no cabeçalho (lado direito, alinhado à base) ---- */
+/* Rótulo "A CAMPANHA" no cabeçalho (lado direito, alinhado à base) */
 .sim-label-campanha {
   font-size: 0.52rem;
   font-weight: 700;
@@ -24,7 +20,7 @@
   padding-bottom: 2px; /* alinha visualmente com o slogan à esquerda */
 }
 
-/* ---- Controles na coluna lateral (MODO / VELOCIDADE) ---- */
+/* Controles na coluna lateral (MODO / VELOCIDADE) */
 
 /* Container dos dois blocos de controle empilhados */
 .sim-controles {
@@ -77,7 +73,7 @@
 }
 
 
-/* ---- Layout principal da tela de simulação ---- */
+/* Layout principal da tela de simulação */
 
 /* Grade de 2 colunas: histórico (flex) + lateral fixa */
 .sim-wrapper {
@@ -99,9 +95,7 @@
   gap: 12px;
 }
 
-/* Container do histórico: começa vazio, cards entram depois.
-   Vazio, ele SOME (display:none) pra não abrir vão entre o Voltar e o botão principal —
-   assim no início os dois ficam colados; quando os cards entram, o botão desce junto. */
+/* Container do histórico: vazio, some (display:none) para o Voltar e o botão de ação ficarem juntos; quando os cards entram, o botão desce. */
 .historico-jogos {
   min-height: 0;
 }
@@ -178,9 +172,7 @@
 }
 
 
-/* ====================================================================
-   CARDS DE PARTIDA — retráteis, ordem cronológica
-   ==================================================================== */
+/* CARDS DE PARTIDA — retráteis, ordem cronológica */
 
 /* Card: nasce com .expandido; perde a classe ao recolher */
 .partida-card {
@@ -431,9 +423,7 @@
 }
 
 
-/* ====================================================================
-   TABELA DA FASE DE GRUPOS (aparece só no último jogo do grupo)
-   ==================================================================== */
+/* TABELA DA FASE DE GRUPOS (aparece só no último jogo do grupo) */
 .grupo-tabela { margin-top: 12px; }
 .grupo-tabela-titulo {
   font-size: 0.62rem;

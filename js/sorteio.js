@@ -1,17 +1,9 @@
-// ============================================================
-//  sorteio.js — animação do sorteio, skips e rolagem de clube
-// ============================================================
+// sorteio.js — animação do sorteio, skips e novo sorteio de clube.
 
-
-
-// ====================================================================
-// ANIMAÇÃO DO SORTEIO — efeito "slot machine" por ~900ms
-// ====================================================================
-
+// Animação estilo "slot machine" (~900ms) até revelar o clube sorteado.
 function animarSorteio(opcoes, sorteado, onFim) {
   clubeCard.classList.remove('escondida');
 
-  // Sinaliza que o sorteio está em andamento
   clubeStatus.textContent = 'SORTEANDO…';
   clubeStatus.classList.remove('revelado');
 
@@ -30,7 +22,6 @@ function animarSorteio(opcoes, sorteado, onFim) {
       clearInterval(temporizador);
       clubeNome.textContent   = sorteado.clube;
       clubeEdicao.textContent = rotuloCompeticao(sorteado.competicao) + ' · ' + sorteado.edicao;
-      // Clube revelado: troca o status e destaca na cor do tema
       clubeStatus.textContent = 'SAIU';
       clubeStatus.classList.add('revelado');
       onFim();
@@ -38,15 +29,10 @@ function animarSorteio(opcoes, sorteado, onFim) {
   }, intervaloMs);
 }
 
-
-// ====================================================================
-// SKIPS — atualiza o estado dos botões e do contador
-// ====================================================================
-
+// Atualiza o contador e habilita o skip só se há saldo e algum candidato.
 function atualizarBotoesSkip() {
   skipContador.textContent = skipsRestantes;
 
-  // Skip único: qualquer clube e qualquer ano da competição (menos a edição atual)
   var candidatos = DADOS.filter(function (d) {
     return d.competicao === edicaoSorteada.competicao &&
            !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
@@ -54,15 +40,10 @@ function atualizarBotoesSkip() {
   btnSkip.disabled = (skipsRestantes <= 0) || candidatos.length === 0;
 }
 
-
-// ====================================================================
-// SKIPS — executa o skip e anima o novo sorteio
-// ====================================================================
-
+// Re-sorteia qualquer clube/ano da competição, menos a edição atual.
 function fazerSkip() {
   if (skipsRestantes <= 0 || !edicaoSorteada) return;
 
-  // Skip único: qualquer clube e qualquer ano da competição (menos a edição atual)
   var candidatos = DADOS.filter(function (d) {
     return d.competicao === edicaoSorteada.competicao &&
            !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
@@ -87,11 +68,7 @@ function fazerSkip() {
   });
 }
 
-
-// ====================================================================
-// ROLAR — sorteia um clube e anima o card
-// ====================================================================
-
+// Sorteia um clube da competição escolhida e dispara a animação.
 function rolar() {
   var filtro = COMPETICOES[modoSelecionado].dados;
 
@@ -99,29 +76,26 @@ function rolar() {
   if (opcoes.length === 0) return;
 
   var sorteado = opcoes[Math.floor(Math.random() * opcoes.length)];
-  clubeSorteado  = sorteado.clube;  // guarda para checar disponibilidade depois
-  edicaoSorteada = sorteado;        // guarda a entrada completa para os skips
+  clubeSorteado  = sorteado.clube;
+  edicaoSorteada = sorteado;
 
-  // Cancela qualquer seleção pendente antes de mostrar a nova lista
   cancelarSelecao();
   listaJogadores.classList.add('escondida');
 
-  // No 1º sorteio: faz SUMIR o bloco de formação
+  // No primeiro sorteio, esconde o bloco de formação.
   if (!formacaoTravada) {
     formacaoTravada = true;
     formacaoBloco.classList.add('escondida');
   }
 
-  // Esconde Rolar e os skips durante a animação
   btnRolar.classList.add('escondida');
   blocoSkips.classList.add('escondida');
 
   animarSorteio(opcoes, sorteado, function () {
     construirListaJogadores(sorteado.jogadores);
     listaJogadores.classList.remove('escondida');
-    // Zera o scroll SÓ com a lista já visível (escondida = display:none ignora o scrollTop)
+    // scrollTop só funciona com a lista já visível (display:none ignora a rolagem).
     requestAnimationFrame(function () { listaJogadores.scrollTop = 0; });
-    // Exibe skips e atualiza quais botões estão disponíveis
     blocoSkips.classList.remove('escondida');
     atualizarBotoesSkip();
   });

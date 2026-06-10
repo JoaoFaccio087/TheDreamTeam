@@ -1,12 +1,8 @@
-// ============================================================
 //  simulacao.js — motor da partida: placar, gols, pênaltis e cards
-// ============================================================
 
 
 
-// ====================================================================
 // SIMULAÇÃO DE PARTIDAS
-// ====================================================================
 
 // --- Cadência em ms por minuto de jogo, lida ao vivo em cada tick ---
 function cadenciaAtual() {

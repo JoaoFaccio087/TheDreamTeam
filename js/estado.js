@@ -1,17 +1,6 @@
-// ============================================================
-//  estado.js — referências de DOM + variáveis de estado globais
-// ============================================================
+// estado.js — referências de elementos do DOM e variáveis de estado globais.
 
-// ====================================================================
-// jogo.js — The Dream Team
-// Controla: pílulas de modo e formação, campo de amostra, navegação,
-//           e o loop principal do jogo (sorteio, escalação, box score).
-// ====================================================================
-
-
-// ------------------------------------------------------------------
-// REFERÊNCIAS AOS ELEMENTOS DO HTML
-// ------------------------------------------------------------------
+// --- Elementos do DOM ---
 
 const telaInicial    = document.getElementById('tela-inicial');
 const telaJogo       = document.getElementById('tela-jogo');
@@ -45,62 +34,49 @@ const skipContador        = document.getElementById('skip-contador');
 const btnResumo           = document.getElementById('btn-resumo');
 const resumoOverlay       = document.getElementById('resumo-overlay');
 
-// Pílulas de controle da tela de simulação
 const simPilulasModo = document.querySelectorAll('[data-sim-modo]');
 const simPilulasVel  = document.querySelectorAll('[data-sim-vel]');
 
 
-// ------------------------------------------------------------------
-// VARIÁVEIS DE ESTADO — TELA INICIAL
-// ------------------------------------------------------------------
+// --- Estado: tela inicial ---
 
-let modoSelecionado = 'libertadores';   // chave de COMPETICOES (id interno)
+let modoSelecionado = 'libertadores';   // chave em COMPETICOES
 let formacaoAmostra = '4-3-3';
 
 
-// ------------------------------------------------------------------
-// VARIÁVEIS DE ESTADO — TELA DO JOGO
-// ------------------------------------------------------------------
+// --- Estado: tela do jogo ---
 
 let formacaoJogo       = '4-3-3';
 let formacaoTravada    = false;
-let jogadorSelecionado = null;   // jogador da lista selecionado (aguardando slot)
-let escalacao          = Array(11).fill(null); // null = vazio; objeto = jogador alocado
+let jogadorSelecionado = null;                 // jogador escolhido na lista, aguardando um slot
+let escalacao          = Array(11).fill(null); // null = vaga vazia; objeto = jogador alocado
 let slotsPreenchidos   = 0;
-let slotMovendo        = null;   // índice do slot cujo jogador está sendo movido
-let clubeSorteado      = '';     // nome do clube atualmente exibido na lista
-let edicaoSorteada     = null;   // entrada completa do DADOS para o sorteio atual
-let skipsRestantes     = 5;      // orçamento de skips por partida (compartilhado)
+let slotMovendo        = null;                 // índice do slot cujo jogador está sendo movido
+let clubeSorteado      = '';
+let edicaoSorteada     = null;                 // entrada de DADOS do sorteio atual
+let skipsRestantes     = 5;                    // skips disponíveis por partida
 
 
-// ------------------------------------------------------------------
-// VARIÁVEIS DE ESTADO — TELA DE SIMULAÇÃO
-// ------------------------------------------------------------------
+// --- Estado: tela de simulação ---
 
 let modoSimulacao       = 'jogo-a-jogo'; // 'jogo-a-jogo' | 'automatico'
 let velocidadeSimulacao = 'normal';      // 'lento' | 'normal' | 'rapida'
 
-// Estatísticas acumuladas de todas as partidas: { 'Neymar': { gols:3, asis:1 }, ... }
-var statsJogadores   = {};
-// Contador de partidas para IDs únicos dos cards no histórico
-var contadorPartidas = 0;
-// Referência ao setTimeout do tick atual (null = sem partida rodando)
-var timerPartida     = null;
+var statsJogadores   = {};   // gols e assistências por jogador: { nome: { gols, asis } }
+var contadorPartidas = 0;    // gera IDs únicos para os cards de partida
+var timerPartida     = null; // setTimeout do tick atual, ou null se não há partida em andamento
 
-// Fases do mata-mata em ordem crescente
-var fasesCampanha     = [];        // preenchido por montarCampanha(): fase de grupos + mata-mata
-var faseAtual         = 0;         // índice atual em fasesCampanha
-var adversariosUsados = [];        // 'clube|edicao' já enfrentados — sem repetição na campanha
-var grupo             = null;      // estado da fase de grupos da campanha atual
+var fasesCampanha     = [];        // fase de grupos + mata-mata, definidas em montarCampanha
+var faseAtual         = 0;
+var adversariosUsados = [];        // 'clube|edicao' já enfrentados, para não repetir na campanha
+var grupo             = null;
 var acaoBotao         = 'iniciar'; // 'iniciar' | 'proximo' | 'nova-campanha' | 'novo-time'
 
-// Acumuladores da campanha atual — alimentam a TELA DE RESUMO
-var campanhaPartidas  = 0;          // total de partidas jogadas na campanha
-var campanhaGF        = 0;          // gols feitos somados (tempo normal)
-var campanhaGA        = 0;          // gols sofridos somados (tempo normal)
-var campanhaVitorias  = 0;          // V/E/D da campanha (alimentam aproveitamento)
+// Acumuladores da campanha atual — usados na tela de resumo
+var campanhaPartidas  = 0;
+var campanhaGF        = 0;
+var campanhaGA        = 0;
+var campanhaVitorias  = 0;
 var campanhaEmpates   = 0;
 var campanhaDerrotas  = 0;
-var resumoCampeao     = false;      // true se a campanha terminou com o título
-
-
+var resumoCampeao     = false;

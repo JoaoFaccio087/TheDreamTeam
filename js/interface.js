@@ -1,10 +1,4 @@
-// ============================================================
-//  interface.js — temas, navegação e posicionamento dos campos
-// ============================================================
-
-// ====================================================================
-// SISTEMA DE TEMAS
-// ====================================================================
+// interface.js — temas, navegação entre telas e posicionamento dos campos.
 
 function aplicarTema(idCompeticao) {
   document.body.classList.remove('tema-libertadores', 'tema-champions');
@@ -16,23 +10,13 @@ function removerTema() {
   document.body.classList.remove('tema-libertadores', 'tema-champions');
 }
 
-
-// ====================================================================
-// NAVEGAÇÃO ENTRE TELAS
-// ====================================================================
-
 function mostrarTela(telaParaMostrar) {
-  // Esconde todas as telas de uma vez — funciona mesmo com novas telas adicionadas
   document.querySelectorAll('.tela').forEach(function (t) { t.classList.add('escondida'); });
   telaParaMostrar.classList.remove('escondida');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// ====================================================================
-// CAMPO DE AMOSTRA (tela inicial) — posiciona as 11 fichas decorativas
-// ====================================================================
-
+// Posiciona as 11 fichas decorativas do campo de amostra (tela inicial).
 function posicionarFichas(nomeFormacao) {
   const posicoes = formacoes[nomeFormacao];
 
@@ -44,7 +28,7 @@ function posicionarFichas(nomeFormacao) {
   });
 }
 
-// Posiciona as fichas sem animação ao carregar (evita o "voo" do canto 0,0)
+// Posiciona as fichas sem animação na carga (evita o "voo" a partir do canto 0,0).
 fichas.forEach(function (f) { f.classList.add('sem-transicao'); });
 posicionarFichas('4-3-3');
 
@@ -54,11 +38,7 @@ requestAnimationFrame(function () {
   });
 });
 
-
-// ====================================================================
-// CAMPO DO JOGO — posiciona os 11 slots e define o código de cada vaga
-// ====================================================================
-
+// Posiciona os 11 slots do campo do jogo e grava o código de cada vaga.
 function posicionarSlotsJogo(nomeFormacao) {
   const posicoes = formacoes[nomeFormacao];
   const codigos  = codigosFormacao[nomeFormacao];
@@ -73,5 +53,3 @@ function posicionarSlotsJogo(nomeFormacao) {
     }
   });
 }
-
-
