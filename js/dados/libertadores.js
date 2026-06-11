@@ -1809,7 +1809,6 @@ const DADOS_LIBERTADORES = [
       { nome: "Gavilán", posicoes: ["MC","VOL"], forca: 75 },
       { nome: "Carlos Eduardo", posicoes: ["MEI","PE"], forca: 78 },
       { nome: "Tuta", posicoes: ["ATA"], forca: 77 },
-      { nome: "Teco", posicoes: ["ZAG"], forca: 76 },
       { nome: "Amoroso", posicoes: ["ATA","PE"], forca: 77 },
       { nome: "Ramón", posicoes: ["MEI","MC"], forca: 74 }
     ]
@@ -4285,6 +4284,29 @@ const DADOS_LIBERTADORES = [
     ]
   },
 
+  {
+    competicao: "Libertadores",
+    edicao: 1984,
+    clube: "Universidad de Los Andes",
+    jogadores: [
+      { nome: "Daniel Nikolac", posicoes: ["GOL"], forca: 72 },
+      { nome: "Rafael Santana", posicoes: ["GOL"], forca: 69 },
+      { nome: "Luis Mendoza", posicoes: ["MEI","MC"], forca: 77 },
+      { nome: "Pedro Acosta", posicoes: ["ZAG"], forca: 72 },
+      { nome: "Vicente Suanno", posicoes: ["ZAG","VOL"], forca: 71 },
+      { nome: "Raimundo Angulo", posicoes: ["LE","ME"], forca: 70 },
+      { nome: "Carlos Horacio Moreno", posicoes: ["ATA"], forca: 73 },
+      { nome: "Alí Cañas", posicoes: ["ATA"], forca: 71 },
+      { nome: "Richard Páez", posicoes: ["MEI","ATA"], forca: 74 },
+      { nome: "Gabriel Miranda", posicoes: ["VOL","MC"], forca: 70 },
+      { nome: "Nelson Carrero", posicoes: ["LD","MD"], forca: 70 },
+      { nome: "Carlos Maldonado", posicoes: ["VOL","MC"], forca: 72 },
+      { nome: "Luis Vallenilla", posicoes: ["ZAG"], forca: 69 },
+      { nome: "Ildemaro Fernández", posicoes: ["MC"], forca: 71 },
+      { nome: "Bernardo Añor", posicoes: ["ATA","PE"], forca: 71 }
+    ]
+  },
+
   // ===== Edição 1983 (Libertadores — histórico) =====
 
   {
@@ -4967,6 +4989,46 @@ const DADOS_LIBERTADORES = [
     ]
   },
 
+  {
+    competicao: "Libertadores",
+    edicao: 1979,
+    clube: "Guaraní",
+    jogadores: [
+      { nome: "Sinforiano García", posicoes: ["GOL"], forca: 78 },
+      { nome: "Pedro Fernández", posicoes: ["GOL"], forca: 74 },
+      { nome: "Juan Bautista Agüero", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Saturnino Arrúa", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Alberto Jara Saguier", posicoes: ["ATA"], forca: 79 },
+      { nome: "Alcides Silveira", posicoes: ["MC"], forca: 78 },
+      { nome: "Modesto Sandoval", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Víctor Hugo Sánchez", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Hugo Talavera", posicoes: ["ATA"], forca: 78 },
+      { nome: "Carlos Kiese", posicoes: ["MC"], forca: 80 },
+      { nome: "Roberto Cabañas", posicoes: ["ATA"], forca: 80 },
+      { nome: "Eugenio Morel", posicoes: ["ATA"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1979,
+    clube: "Palestino",
+    jogadores: [
+      { nome: "Óscar Wirth", posicoes: ["GOL"], forca: 78 },
+      { nome: "Elías Figueroa", posicoes: ["ZAG"], forca: 86 },
+      { nome: "Mario Soto", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Rodrigo Chavarría", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Elias Ricardo Figueroa", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Manuel Rojas", posicoes: ["MC"], forca: 78 },
+      { nome: "Carlos Caszely", posicoes: ["ATA"], forca: 85 },
+      { nome: "Oscar Fabbiani", posicoes: ["ATA"], forca: 84 },
+      { nome: "Alberto Quintano", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Leonardo Véliz", posicoes: ["PE","ATA"], forca: 80 },
+      { nome: "Sergio Messen", posicoes: ["MC"], forca: 77 },
+      { nome: "Hugo Gálvez", posicoes: ["ATA"], forca: 76 }
+    ]
+  },
+
   // ===== Edição 1978 (Libertadores — histórico) =====
 
   {
@@ -5017,6 +5079,86 @@ const DADOS_LIBERTADORES = [
     ]
   },
 
+  {
+    competicao: "Libertadores",
+    edicao: 1978,
+    clube: "Atlético-MG",
+    jogadores: [
+      { nome: "João Leite", posicoes: ["GOL"], forca: 83 },
+      { nome: "Vantuir", posicoes: ["LD"], forca: 78 },
+      { nome: "Luisinho", posicoes: ["ZAG"], forca: 84 },
+      { nome: "Silvestre", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Oldair", posicoes: ["LE"], forca: 79 },
+      { nome: "Toninho Cerezo", posicoes: ["MC","VOL"], forca: 88 },
+      { nome: "Paulo Isidoro", posicoes: ["MEI","ATA"], forca: 85 },
+      { nome: "Ângelo", posicoes: ["MC"], forca: 80 },
+      { nome: "Reinaldo", posicoes: ["ATA"], forca: 90 },
+      { nome: "Éder Aleixo", posicoes: ["PE"], forca: 85 },
+      { nome: "Marcelo Oliveira", posicoes: ["PE","ATA"], forca: 80 },
+      { nome: "Chicão", posicoes: ["VOL"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1978,
+    clube: "Deportivo Cali",
+    jogadores: [
+      { nome: "Pedro Zape", posicoes: ["GOL"], forca: 82 },
+      { nome: "Henry Caicedo", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Miguel Escobar", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Jorge Ramírez Gallego", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Willington Ortiz", posicoes: ["PD","PE","ATA"], forca: 86 },
+      { nome: "Jairo Arboleda", posicoes: ["MEI"], forca: 82 },
+      { nome: "Néstor Scotta", posicoes: ["ATA"], forca: 83 },
+      { nome: "Ángel María Torres", posicoes: ["ATA"], forca: 78 },
+      { nome: "Diego Umaña", posicoes: ["MC"], forca: 78 },
+      { nome: "Hugo Horacio Lóndero", posicoes: ["ATA"], forca: 80 },
+      { nome: "Armando Osma", posicoes: ["ATA"], forca: 78 },
+      { nome: "Carlos Bejarano", posicoes: ["LD"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1978,
+    clube: "Cerro Porteño",
+    jogadores: [
+      { nome: "Roberto Fernández", posicoes: ["GOL"], forca: 80 },
+      { nome: "Modesto Sandoval", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Carlos Báez", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Juan Bautista Torales", posicoes: ["LE"], forca: 78 },
+      { nome: "Francisco Arce", posicoes: ["LD"], forca: 76 },
+      { nome: "Saturnino Arrúa", posicoes: ["MEI"], forca: 83 },
+      { nome: "Eugenio Morel", posicoes: ["ATA"], forca: 82 },
+      { nome: "Carlos Jara Saguier", posicoes: ["MC","MEI"], forca: 80 },
+      { nome: "Alicio Solalinde", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Julio César Romero", posicoes: ["MEI"], forca: 82 },
+      { nome: "Roberto Cabañas", posicoes: ["ATA"], forca: 81 },
+      { nome: "Juan Manuel Battaglia", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1978,
+    clube: "Alianza Lima",
+    jogadores: [
+      { nome: "José González Ganoza", posicoes: ["GOL"], forca: 80 },
+      { nome: "Jaime Duarte", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "José Velásquez", posicoes: ["VOL","MC"], forca: 86 },
+      { nome: "César Cueto", posicoes: ["MEI","MC"], forca: 88 },
+      { nome: "Teófilo Cubillas", posicoes: ["MEI","ATA"], forca: 89 },
+      { nome: "Hugo Sotil", posicoes: ["ATA","MEI"], forca: 86 },
+      { nome: "Juan José Muñante", posicoes: ["PD"], forca: 82 },
+      { nome: "Guillermo La Rosa", posicoes: ["ATA"], forca: 82 },
+      { nome: "Freddy Ravello", posicoes: ["MC"], forca: 76 },
+      { nome: "Julio César Uribe", posicoes: ["MEI"], forca: 80 },
+      { nome: "Perico León", posicoes: ["ATA"], forca: 83 },
+      { nome: "Víctor Zegarra", posicoes: ["MC"], forca: 78 }
+    ]
+  },
+
   // ===== Edição 1977 (Libertadores — histórico) =====
 
   {
@@ -5040,6 +5182,48 @@ const DADOS_LIBERTADORES = [
       { nome: "Ernesto Mastrángelo", posicoes: ["ATA"], forca: 83 },
       { nome: "Carlos Veglio", posicoes: ["MEI"], forca: 81 },
       { nome: "Hugo Perotti", posicoes: ["PE","ATA"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1977,
+    clube: "Deportivo Cali",
+    jogadores: [
+      { nome: "Pedro Zape", posicoes: ["GOL"], forca: 82 },
+      { nome: "Henry Caicedo", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Miguel Escobar", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Jorge Ramírez Gallego", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Willington Ortiz", posicoes: ["PD","PE","ATA"], forca: 86 },
+      { nome: "Jairo Arboleda", posicoes: ["MEI"], forca: 82 },
+      { nome: "Néstor Scotta", posicoes: ["ATA"], forca: 83 },
+      { nome: "Ángel María Torres", posicoes: ["ATA"], forca: 78 },
+      { nome: "Diego Umaña", posicoes: ["MC"], forca: 78 },
+      { nome: "Hugo Horacio Lóndero", posicoes: ["ATA"], forca: 80 },
+      { nome: "Armando Osma", posicoes: ["ATA"], forca: 78 },
+      { nome: "Carlos Bejarano", posicoes: ["LD"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1977,
+    clube: "Cruzeiro",
+    jogadores: [
+      { nome: "Raul Plassmann", posicoes: ["GOL"], forca: 84 },
+      { nome: "Nelinho", posicoes: ["LD"], forca: 86 },
+      { nome: "Darci Menezes", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Perfumo", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Vanderlei", posicoes: ["LE","ZAG"], forca: 80 },
+      { nome: "Zé Carlos", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Piazza", posicoes: ["VOL","ZAG"], forca: 87 },
+      { nome: "Eduardo Amorim", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Dirceu Lopes", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Joãozinho", posicoes: ["PE","ATA"], forca: 86 },
+      { nome: "Palhinha", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Roberto Batata", posicoes: ["ATA"], forca: 82 },
+      { nome: "Jairzinho", posicoes: ["PD","ATA"], forca: 84 },
+      { nome: "Lívio", posicoes: ["ATA"], forca: 78 }
     ]
   },
 
@@ -5144,6 +5328,68 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1976,
+    clube: "LDU Quito",
+    jogadores: [
+      { nome: "Ramiro Tobar", posicoes: ["GOL"], forca: 76 },
+      { nome: "Polo Carrera", posicoes: ["MEI","MC"], forca: 82 },
+      { nome: "Óscar Zubía", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Patricio Maldonado", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Juan José Pérez", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Héctor Morales", posicoes: ["MC"], forca: 75 },
+      { nome: "Jorge Tapia", posicoes: ["PE","ATA"], forca: 76 },
+      { nome: "Carlos Ron", posicoes: ["ATA"], forca: 77 },
+      { nome: "Eduardo Zambrano", posicoes: ["ATA"], forca: 75 },
+      { nome: "Ramiro Aguirre", posicoes: ["LD"], forca: 74 },
+      { nome: "José Vicente Moreno", posicoes: ["MEI"], forca: 75 },
+      { nome: "Luis Granda", posicoes: ["ZAG"], forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1976,
+    clube: "Cruzeiro",
+    jogadores: [
+      { nome: "Raul Plassmann", posicoes: ["GOL"], forca: 84 },
+      { nome: "Nelinho", posicoes: ["LD"], forca: 86 },
+      { nome: "Darci Menezes", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Perfumo", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Vanderlei", posicoes: ["LE","ZAG"], forca: 80 },
+      { nome: "Zé Carlos", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Piazza", posicoes: ["VOL","ZAG"], forca: 87 },
+      { nome: "Eduardo Amorim", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Dirceu Lopes", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Joãozinho", posicoes: ["PE","ATA"], forca: 86 },
+      { nome: "Palhinha", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Roberto Batata", posicoes: ["ATA"], forca: 82 },
+      { nome: "Jairzinho", posicoes: ["PD","ATA"], forca: 84 },
+      { nome: "Lívio", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1976,
+    clube: "Alianza Lima",
+    jogadores: [
+      { nome: "José González Ganoza", posicoes: ["GOL"], forca: 80 },
+      { nome: "Jaime Duarte", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "José Velásquez", posicoes: ["VOL","MC"], forca: 86 },
+      { nome: "César Cueto", posicoes: ["MEI","MC"], forca: 88 },
+      { nome: "Teófilo Cubillas", posicoes: ["MEI","ATA"], forca: 89 },
+      { nome: "Hugo Sotil", posicoes: ["ATA","MEI"], forca: 86 },
+      { nome: "Juan José Muñante", posicoes: ["PD"], forca: 82 },
+      { nome: "Guillermo La Rosa", posicoes: ["ATA"], forca: 82 },
+      { nome: "Freddy Ravello", posicoes: ["MC"], forca: 76 },
+      { nome: "Julio César Uribe", posicoes: ["MEI"], forca: 80 },
+      { nome: "Perico León", posicoes: ["ATA"], forca: 83 },
+      { nome: "Víctor Zegarra", posicoes: ["MC"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1976,
     clube: "Internacional",
     jogadores: [
       { nome: "Manga", posicoes: ["GOL"], forca: 84 },
@@ -5170,6 +5416,68 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1975,
+    clube: "Unión Española",
+    jogadores: [
+      { nome: "Leopoldo Vallejos", posicoes: ["GOL"], forca: 80 },
+      { nome: "Mario Soto", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Elías Figueroa", posicoes: ["ZAG"], forca: 90 },
+      { nome: "Hugo Berly", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Luis Miranda", posicoes: ["MC","VOL"], forca: 77 },
+      { nome: "Juan Machuca", posicoes: ["LD"], forca: 77 },
+      { nome: "Sergio Messen", posicoes: ["MC","MEI"], forca: 78 },
+      { nome: "Leonardo Véliz", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "José Luis Sierra", posicoes: ["MEI"], forca: 76 },
+      { nome: "Juan Carlos Villalta", posicoes: ["ATA"], forca: 78 },
+      { nome: "Carlos Reinoso", posicoes: ["MEI"], forca: 82 },
+      { nome: "Honorino Landa", posicoes: ["ATA"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1975,
+    clube: "Universitario",
+    jogadores: [
+      { nome: "Luis Rubiños", posicoes: ["GOL"], forca: 80 },
+      { nome: "Héctor Chumpitaz", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Nicolás Fuentes", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Luis La Fuente", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Roberto Challe", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Teófilo Cubillas", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Percy Rojas", posicoes: ["ATA"], forca: 82 },
+      { nome: "Juan José Muñante", posicoes: ["PD","PE"], forca: 83 },
+      { nome: "Oswaldo Ramírez", posicoes: ["ATA"], forca: 83 },
+      { nome: "Hugo Sotil", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Juan Carlos Oblitas", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Rubén Correa", posicoes: ["GOL"], forca: 77 },
+      { nome: "Fernando Cuéllar", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Germán Leguía", posicoes: ["MC","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1975,
+    clube: "LDU Quito",
+    jogadores: [
+      { nome: "Ramiro Tobar", posicoes: ["GOL"], forca: 76 },
+      { nome: "Polo Carrera", posicoes: ["MEI","MC"], forca: 82 },
+      { nome: "Óscar Zubía", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Patricio Maldonado", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Juan José Pérez", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Héctor Morales", posicoes: ["MC"], forca: 75 },
+      { nome: "Jorge Tapia", posicoes: ["PE","ATA"], forca: 76 },
+      { nome: "Carlos Ron", posicoes: ["ATA"], forca: 77 },
+      { nome: "Eduardo Zambrano", posicoes: ["ATA"], forca: 75 },
+      { nome: "Ramiro Aguirre", posicoes: ["LD"], forca: 74 },
+      { nome: "José Vicente Moreno", posicoes: ["MEI"], forca: 75 },
+      { nome: "Luis Granda", posicoes: ["ZAG"], forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1975,
     clube: "Independiente",
     jogadores: [
       { nome: "Miguel Ángel Santoro", posicoes: ["GOL"], forca: 84 },
@@ -5188,6 +5496,48 @@ const DADOS_LIBERTADORES = [
       { nome: "Daniel Bertoni", posicoes: ["PD","ATA"], forca: 87 },
       { nome: "Agustín Balbuena", posicoes: ["ATA"], forca: 82 },
       { nome: "Percy Rojas", posicoes: ["ATA"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1975,
+    clube: "Rosario Central",
+    jogadores: [
+      { nome: "Carlos Biasutto", posicoes: ["GOL"], forca: 80 },
+      { nome: "Jorge Carrascosa", posicoes: ["LE","ZAG"], forca: 83 },
+      { nome: "Ángel Landucci", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Edgardo Bauza", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Mario Killer", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Aldo Poy", posicoes: ["ATA","MEI"], forca: 84 },
+      { nome: "Mario Kempes", posicoes: ["ATA","PE"], forca: 89 },
+      { nome: "Ramón Bóveda", posicoes: ["ATA"], forca: 78 },
+      { nome: "Roberto Cabral", posicoes: ["MC"], forca: 77 },
+      { nome: "Daniel Killer", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Eduardo Solari", posicoes: ["MC"], forca: 80 },
+      { nome: "Carlos Aimar", posicoes: ["VOL","MC"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1975,
+    clube: "Cruzeiro",
+    jogadores: [
+      { nome: "Raul Plassmann", posicoes: ["GOL"], forca: 84 },
+      { nome: "Nelinho", posicoes: ["LD"], forca: 86 },
+      { nome: "Darci Menezes", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Perfumo", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Vanderlei", posicoes: ["LE","ZAG"], forca: 80 },
+      { nome: "Zé Carlos", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Piazza", posicoes: ["VOL","ZAG"], forca: 87 },
+      { nome: "Eduardo Amorim", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Dirceu Lopes", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Joãozinho", posicoes: ["PE","ATA"], forca: 86 },
+      { nome: "Palhinha", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Roberto Batata", posicoes: ["ATA"], forca: 82 },
+      { nome: "Jairzinho", posicoes: ["PD","ATA"], forca: 84 },
+      { nome: "Lívio", posicoes: ["ATA"], forca: 78 }
     ]
   },
 
@@ -5241,6 +5591,88 @@ const DADOS_LIBERTADORES = [
     ]
   },
 
+  {
+    competicao: "Libertadores",
+    edicao: 1974,
+    clube: "Huracán",
+    jogadores: [
+      { nome: "Héctor Baley", posicoes: ["GOL"], forca: 80 },
+      { nome: "Alfio Basile", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Jorge Carrascosa", posicoes: ["LE","ZAG"], forca: 84 },
+      { nome: "Miguel Brindisi", posicoes: ["MEI","MC"], forca: 88 },
+      { nome: "Carlos Babington", posicoes: ["MEI","ATA"], forca: 86 },
+      { nome: "René Houseman", posicoes: ["PD","ATA"], forca: 86 },
+      { nome: "Omar Larrosa", posicoes: ["MC","MEI"], forca: 82 },
+      { nome: "Roque Avallay", posicoes: ["ATA"], forca: 81 },
+      { nome: "Alberto Fanesi", posicoes: ["MC"], forca: 78 },
+      { nome: "Nelson Chabay", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Eduardo Quiroga", posicoes: ["ATA"], forca: 77 },
+      { nome: "Jorge Larrosa", posicoes: ["MEI"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1974,
+    clube: "São Paulo",
+    jogadores: [
+      { nome: "Waldir Peres", posicoes: ["GOL"], forca: 83 },
+      { nome: "Forlán", posicoes: ["LD","ZAG"], forca: 82 },
+      { nome: "Arlindo", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Pablo Forlán", posicoes: ["LD"], forca: 82 },
+      { nome: "Bezerra", posicoes: ["LE"], forca: 76 },
+      { nome: "Pedro Rocha", posicoes: ["MEI","MC"], forca: 87 },
+      { nome: "Chicão", posicoes: ["VOL","MC"], forca: 82 },
+      { nome: "Nelsinho Baptista", posicoes: ["LD","MC"], forca: 78 },
+      { nome: "Gérson", posicoes: ["MEI","MC"], forca: 86 },
+      { nome: "Terto", posicoes: ["PD","ATA"], forca: 80 },
+      { nome: "Toninho Guerreiro", posicoes: ["ATA"], forca: 82 },
+      { nome: "Serginho Chulapa", posicoes: ["ATA"], forca: 83 },
+      { nome: "Mickey", posicoes: ["ATA"], forca: 77 },
+      { nome: "Zé Carlos", posicoes: ["MC"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1974,
+    clube: "Millonarios",
+    jogadores: [
+      { nome: "Efraín Sánchez", posicoes: ["GOL"], forca: 82 },
+      { nome: "Senén Mosquera", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Alberto González", posicoes: ["ZAG","LD"], forca: 76 },
+      { nome: "Carlos Arango", posicoes: ["MC","MEI"], forca: 80 },
+      { nome: "Delio Gamboa", posicoes: ["PE","ATA"], forca: 84 },
+      { nome: "Marino Klinger", posicoes: ["ATA","PE"], forca: 80 },
+      { nome: "Rodolfo Micheli", posicoes: ["ATA"], forca: 82 },
+      { nome: "Rubén Pizarro", posicoes: ["ATA"], forca: 80 },
+      { nome: "Alejandro Brand", posicoes: ["MEI","ATA"], forca: 79 },
+      { nome: "Jaime Morón", posicoes: ["ATA"], forca: 80 },
+      { nome: "Willington Ortiz", posicoes: ["PD","PE","ATA"], forca: 84 },
+      { nome: "Miguel Ángel Converti", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1974,
+    clube: "Defensor Lima",
+    jogadores: [
+      { nome: "Ottorino Sartor", posicoes: ["GOL"], forca: 79 },
+      { nome: "Héctor Chumpitaz", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Luis La Fuente", posicoes: ["ZAG"], forca: 80 },
+      { nome: "José Fernández", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Ramón Mifflin", posicoes: ["MC","MEI"], forca: 83 },
+      { nome: "Roberto Challe", posicoes: ["MEI"], forca: 82 },
+      { nome: "Juan José Muñante", posicoes: ["PD","PE"], forca: 82 },
+      { nome: "Gerónimo Barbadillo", posicoes: ["PE","ATA"], forca: 80 },
+      { nome: "Oswaldo Ramírez", posicoes: ["ATA"], forca: 82 },
+      { nome: "Percy Rojas", posicoes: ["ATA"], forca: 81 },
+      { nome: "Eduardo Malásquez", posicoes: ["MEI"], forca: 78 },
+      { nome: "Julio Baylón", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
   // ===== Edição 1973 (Libertadores — histórico) =====
 
   {
@@ -5267,7 +5699,131 @@ const DADOS_LIBERTADORES = [
     ]
   },
 
+  {
+    competicao: "Libertadores",
+    edicao: 1973,
+    clube: "San Lorenzo",
+    jogadores: [
+      { nome: "Agustín Irusta", posicoes: ["GOL"], forca: 78 },
+      { nome: "Oscar Calics", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Rafael Albrecht", posicoes: ["ZAG"], forca: 84 },
+      { nome: "Victorio Casa", posicoes: ["ZAG","LD"], forca: 77 },
+      { nome: "Roberto Telch", posicoes: ["MC","VOL"], forca: 85 },
+      { nome: "Alberto Rendo", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Norberto Boggio", posicoes: ["MEI","ATA"], forca: 81 },
+      { nome: "Héctor Veira", posicoes: ["ATA","MEI"], forca: 82 },
+      { nome: "Victorio Cocco", posicoes: ["ATA"], forca: 80 },
+      { nome: "Rodolfo Fischer", posicoes: ["ATA"], forca: 83 },
+      { nome: "José Sanfilippo", posicoes: ["ATA"], forca: 88 },
+      { nome: "Mario Rizzi", posicoes: ["PE","ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1973,
+    clube: "Millonarios",
+    jogadores: [
+      { nome: "Efraín Sánchez", posicoes: ["GOL"], forca: 82 },
+      { nome: "Senén Mosquera", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Alberto González", posicoes: ["ZAG","LD"], forca: 76 },
+      { nome: "Carlos Arango", posicoes: ["MC","MEI"], forca: 80 },
+      { nome: "Delio Gamboa", posicoes: ["PE","ATA"], forca: 84 },
+      { nome: "Marino Klinger", posicoes: ["ATA","PE"], forca: 80 },
+      { nome: "Rodolfo Micheli", posicoes: ["ATA"], forca: 82 },
+      { nome: "Rubén Pizarro", posicoes: ["ATA"], forca: 80 },
+      { nome: "Alejandro Brand", posicoes: ["MEI","ATA"], forca: 79 },
+      { nome: "Jaime Morón", posicoes: ["ATA"], forca: 80 },
+      { nome: "Willington Ortiz", posicoes: ["PD","PE","ATA"], forca: 84 },
+      { nome: "Miguel Ángel Converti", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1973,
+    clube: "Colo-Colo",
+    jogadores: [
+      { nome: "Adolfo Nef", posicoes: ["GOL"], forca: 80 },
+      { nome: "Mario Galindo", posicoes: ["ZAG","LD"], forca: 80 },
+      { nome: "Leonel Herrera", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Rafael González", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Guillermo Páez", posicoes: ["MC","VOL"], forca: 80 },
+      { nome: "Francisco Valdés", posicoes: ["MEI","MC"], forca: 86 },
+      { nome: "Julio Crisosto", posicoes: ["MC"], forca: 78 },
+      { nome: "Leonardo Véliz", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Carlos Caszely", posicoes: ["ATA"], forca: 87 },
+      { nome: "Sergio Ahumada", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Juan Carlos Orellana", posicoes: ["ATA"], forca: 78 },
+      { nome: "Alberto Fouillioux", posicoes: ["MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1973,
+    clube: "Cerro Porteño",
+    jogadores: [
+      { nome: "Roberto Fernández", posicoes: ["GOL"], forca: 80 },
+      { nome: "Modesto Sandoval", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Carlos Báez", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Juan Bautista Torales", posicoes: ["LE"], forca: 78 },
+      { nome: "Francisco Arce", posicoes: ["LD"], forca: 76 },
+      { nome: "Saturnino Arrúa", posicoes: ["MEI"], forca: 83 },
+      { nome: "Eugenio Morel", posicoes: ["ATA"], forca: 82 },
+      { nome: "Carlos Jara Saguier", posicoes: ["MC","MEI"], forca: 80 },
+      { nome: "Alicio Solalinde", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Julio César Romero", posicoes: ["MEI"], forca: 82 },
+      { nome: "Roberto Cabañas", posicoes: ["ATA"], forca: 81 },
+      { nome: "Juan Manuel Battaglia", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1973,
+    clube: "Botafogo",
+    jogadores: [
+      { nome: "Manga", posicoes: ["GOL"], forca: 84 },
+      { nome: "Joel Martins", posicoes: ["LD"], forca: 81 },
+      { nome: "Rildo", posicoes: ["LE"], forca: 83 },
+      { nome: "Nilton Santos", posicoes: ["LE"], forca: 90 },
+      { nome: "Aírton", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Leônidas", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Gérson", posicoes: ["MEI","MC"], forca: 90 },
+      { nome: "Zagallo", posicoes: ["PE","ME"], forca: 84 },
+      { nome: "Garrincha", posicoes: ["PD"], forca: 94 },
+      { nome: "Quarentinha", posicoes: ["ATA"], forca: 86 },
+      { nome: "Amarildo", posicoes: ["ATA"], forca: 84 },
+      { nome: "Roberto Miranda", posicoes: ["ATA"], forca: 82 },
+      { nome: "Jairzinho", posicoes: ["PD","ATA"], forca: 86 },
+      { nome: "Paulo César Caju", posicoes: ["MEI","PE"], forca: 83 }
+    ]
+  },
+
   // ===== Edição 1972 (Libertadores — histórico) =====
+
+  {
+    competicao: "Libertadores",
+    edicao: 1972,
+    clube: "Universitario",
+    jogadores: [
+      { nome: "Luis Rubiños", posicoes: ["GOL"], forca: 80 },
+      { nome: "Héctor Chumpitaz", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Nicolás Fuentes", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Luis La Fuente", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Roberto Challe", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Teófilo Cubillas", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Percy Rojas", posicoes: ["ATA"], forca: 82 },
+      { nome: "Juan José Muñante", posicoes: ["PD","PE"], forca: 83 },
+      { nome: "Oswaldo Ramírez", posicoes: ["ATA"], forca: 83 },
+      { nome: "Hugo Sotil", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Juan Carlos Oblitas", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Rubén Correa", posicoes: ["GOL"], forca: 77 },
+      { nome: "Fernando Cuéllar", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Germán Leguía", posicoes: ["MC","MEI"], forca: 80 }
+    ]
+  },
 
   {
     competicao: "Libertadores",
@@ -5338,6 +5894,48 @@ const DADOS_LIBERTADORES = [
       { nome: "Daniel Bertoni", posicoes: ["PD","ATA"], forca: 87 },
       { nome: "Agustín Balbuena", posicoes: ["ATA"], forca: 82 },
       { nome: "Percy Rojas", posicoes: ["ATA"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1972,
+    clube: "São Paulo",
+    jogadores: [
+      { nome: "Waldir Peres", posicoes: ["GOL"], forca: 83 },
+      { nome: "Forlán", posicoes: ["LD","ZAG"], forca: 82 },
+      { nome: "Arlindo", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Pablo Forlán", posicoes: ["LD"], forca: 82 },
+      { nome: "Bezerra", posicoes: ["LE"], forca: 76 },
+      { nome: "Pedro Rocha", posicoes: ["MEI","MC"], forca: 87 },
+      { nome: "Chicão", posicoes: ["VOL","MC"], forca: 82 },
+      { nome: "Nelsinho Baptista", posicoes: ["LD","MC"], forca: 78 },
+      { nome: "Gérson", posicoes: ["MEI","MC"], forca: 86 },
+      { nome: "Terto", posicoes: ["PD","ATA"], forca: 80 },
+      { nome: "Toninho Guerreiro", posicoes: ["ATA"], forca: 82 },
+      { nome: "Serginho Chulapa", posicoes: ["ATA"], forca: 83 },
+      { nome: "Mickey", posicoes: ["ATA"], forca: 77 },
+      { nome: "Zé Carlos", posicoes: ["MC"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1972,
+    clube: "Barcelona-EQU",
+    jogadores: [
+      { nome: "Pablo Ansaldo", posicoes: ["GOL"], forca: 77 },
+      { nome: "José Francisco Cevallos", posicoes: ["GOL"], forca: 75 },
+      { nome: "Luciano Macías", posicoes: ["ZAG","LD"], forca: 81 },
+      { nome: "Alberto Spencer", posicoes: ["ATA"], forca: 84 },
+      { nome: "José Paes", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Washington Muñoz", posicoes: ["ATA"], forca: 78 },
+      { nome: "Víctor Ephanor", posicoes: ["PE","ATA"], forca: 79 },
+      { nome: "Carlos Alfaro Moreno", posicoes: ["ATA"], forca: 76 },
+      { nome: "Jimmy Izquierdo", posicoes: ["MC"], forca: 75 },
+      { nome: "Jorge Bolaños", posicoes: ["MEI"], forca: 78 },
+      { nome: "Nelsinho Rosa", posicoes: ["MC"], forca: 76 },
+      { nome: "Galo Vásquez", posicoes: ["ATA"], forca: 75 }
     ]
   },
 
@@ -5394,6 +5992,28 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1971,
+    clube: "Universitario",
+    jogadores: [
+      { nome: "Luis Rubiños", posicoes: ["GOL"], forca: 80 },
+      { nome: "Héctor Chumpitaz", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Nicolás Fuentes", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Luis La Fuente", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Roberto Challe", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Teófilo Cubillas", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Percy Rojas", posicoes: ["ATA"], forca: 82 },
+      { nome: "Juan José Muñante", posicoes: ["PD","PE"], forca: 83 },
+      { nome: "Oswaldo Ramírez", posicoes: ["ATA"], forca: 83 },
+      { nome: "Hugo Sotil", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Juan Carlos Oblitas", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Rubén Correa", posicoes: ["GOL"], forca: 77 },
+      { nome: "Fernando Cuéllar", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Germán Leguía", posicoes: ["MC","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1971,
     clube: "Estudiantes",
     jogadores: [
       { nome: "Alberto Poletti", posicoes: ["GOL"], forca: 82 },
@@ -5412,6 +6032,46 @@ const DADOS_LIBERTADORES = [
       { nome: "Néstor Togneri", posicoes: ["ZAG"], forca: 80 },
       { nome: "Patricio Hernández", posicoes: ["MEI"], forca: 80 },
       { nome: "Miguel Flores", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1971,
+    clube: "Barcelona-EQU",
+    jogadores: [
+      { nome: "Pablo Ansaldo", posicoes: ["GOL"], forca: 77 },
+      { nome: "José Francisco Cevallos", posicoes: ["GOL"], forca: 75 },
+      { nome: "Luciano Macías", posicoes: ["ZAG","LD"], forca: 81 },
+      { nome: "Alberto Spencer", posicoes: ["ATA"], forca: 84 },
+      { nome: "José Paes", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Washington Muñoz", posicoes: ["ATA"], forca: 78 },
+      { nome: "Víctor Ephanor", posicoes: ["PE","ATA"], forca: 79 },
+      { nome: "Carlos Alfaro Moreno", posicoes: ["ATA"], forca: 76 },
+      { nome: "Jimmy Izquierdo", posicoes: ["MC"], forca: 75 },
+      { nome: "Jorge Bolaños", posicoes: ["MEI"], forca: 78 },
+      { nome: "Nelsinho Rosa", posicoes: ["MC"], forca: 76 },
+      { nome: "Galo Vásquez", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1971,
+    clube: "Unión Española",
+    jogadores: [
+      { nome: "Leopoldo Vallejos", posicoes: ["GOL"], forca: 80 },
+      { nome: "Mario Soto", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Elías Figueroa", posicoes: ["ZAG"], forca: 90 },
+      { nome: "Hugo Berly", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Luis Miranda", posicoes: ["MC","VOL"], forca: 77 },
+      { nome: "Juan Machuca", posicoes: ["LD"], forca: 77 },
+      { nome: "Sergio Messen", posicoes: ["MC","MEI"], forca: 78 },
+      { nome: "Leonardo Véliz", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "José Luis Sierra", posicoes: ["MEI"], forca: 76 },
+      { nome: "Juan Carlos Villalta", posicoes: ["ATA"], forca: 78 },
+      { nome: "Carlos Reinoso", posicoes: ["MEI"], forca: 82 },
+      { nome: "Honorino Landa", posicoes: ["ATA"], forca: 79 }
     ]
   },
 
@@ -5438,6 +6098,26 @@ const DADOS_LIBERTADORES = [
       { nome: "Alberto Spencer", posicoes: ["ATA"], forca: 92 },
       { nome: "Fernando Morena", posicoes: ["ATA"], forca: 88 },
       { nome: "Walter Olivera", posicoes: ["ZAG"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1970,
+    clube: "Universidad de Chile",
+    jogadores: [
+      { nome: "Adolfo Nef", posicoes: ["GOL"], forca: 78 },
+      { nome: "Juan Olivares", posicoes: ["GOL"], forca: 78 },
+      { nome: "Sergio Navarro", posicoes: ["LD"], forca: 82 },
+      { nome: "Alberto Quintano", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Humberto Donoso", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Manuel Rodríguez", posicoes: ["MC"], forca: 76 },
+      { nome: "Rubén Marcos", posicoes: ["MC","MEI"], forca: 82 },
+      { nome: "Pedro Araya", posicoes: ["ATA","PD"], forca: 80 },
+      { nome: "Leonel Sánchez", posicoes: ["PE","ATA"], forca: 86 },
+      { nome: "Carlos Campos", posicoes: ["ATA"], forca: 84 },
+      { nome: "Guillermo Yávar", posicoes: ["MC","VOL"], forca: 78 },
+      { nome: "Eduardo Bonvallet", posicoes: ["VOL"], forca: 78 }
     ]
   },
 
@@ -5518,6 +6198,26 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1969,
+    clube: "Universidad Católica",
+    jogadores: [
+      { nome: "Sergio Livingstone", posicoes: ["GOL"], forca: 82 },
+      { nome: "Alberto Fouillioux", posicoes: ["MEI","MC"], forca: 82 },
+      { nome: "Ignacio Prieto", posicoes: ["MC","ATA"], forca: 81 },
+      { nome: "Armando Tobar", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Néstor Isella", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Julio Gallardo", posicoes: ["ATA"], forca: 78 },
+      { nome: "Andrés Prieto", posicoes: ["ATA"], forca: 78 },
+      { nome: "Osvaldo Castro", posicoes: ["ATA"], forca: 79 },
+      { nome: "Juan Carlos Gangas", posicoes: ["ZAG","LD"], forca: 76 },
+      { nome: "Hugo Cicamois", posicoes: ["MC","VOL"], forca: 76 },
+      { nome: "Mario Livingstone", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Fernando Carvallo", posicoes: ["MC"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1969,
     clube: "Nacional",
     jogadores: [
       { nome: "Manga", posicoes: ["GOL"], forca: 84 },
@@ -5592,6 +6292,28 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1968,
+    clube: "Racing",
+    jogadores: [
+      { nome: "Agustín Cejas", posicoes: ["GOL"], forca: 84 },
+      { nome: "Roberto Perfumo", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Alfio Basile", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Rubén Díaz", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Oscar Martín", posicoes: ["ZAG","LD"], forca: 80 },
+      { nome: "Rubén Cardoso", posicoes: ["LD"], forca: 79 },
+      { nome: "Juan Carlos Rulli", posicoes: ["MC","VOL"], forca: 82 },
+      { nome: "Juan Carlos Cárdenas", posicoes: ["ATA","PD"], forca: 84 },
+      { nome: "Norberto Raffo", posicoes: ["ATA"], forca: 86 },
+      { nome: "Humberto Maschio", posicoes: ["MEI","ATA"], forca: 86 },
+      { nome: "Jaime Martinoli", posicoes: ["MC"], forca: 80 },
+      { nome: "Miguel Mori", posicoes: ["PE"], forca: 80 },
+      { nome: "João Cardoso", posicoes: ["ATA"], forca: 79 },
+      { nome: "Juan José Rodríguez", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1968,
     clube: "Palmeiras",
     jogadores: [
       { nome: "Valdir de Moraes", posicoes: ["GOL"], forca: 83 },
@@ -5642,6 +6364,50 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1967,
+    clube: "Racing",
+    jogadores: [
+      { nome: "Agustín Cejas", posicoes: ["GOL"], forca: 84 },
+      { nome: "Roberto Perfumo", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Alfio Basile", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Rubén Díaz", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Oscar Martín", posicoes: ["ZAG","LD"], forca: 80 },
+      { nome: "Rubén Cardoso", posicoes: ["LD"], forca: 79 },
+      { nome: "Juan Carlos Rulli", posicoes: ["MC","VOL"], forca: 82 },
+      { nome: "Juan Carlos Cárdenas", posicoes: ["ATA","PD"], forca: 84 },
+      { nome: "Norberto Raffo", posicoes: ["ATA"], forca: 86 },
+      { nome: "Humberto Maschio", posicoes: ["MEI","ATA"], forca: 86 },
+      { nome: "Jaime Martinoli", posicoes: ["MC"], forca: 80 },
+      { nome: "Miguel Mori", posicoes: ["PE"], forca: 80 },
+      { nome: "João Cardoso", posicoes: ["ATA"], forca: 79 },
+      { nome: "Juan José Rodríguez", posicoes: ["ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1967,
+    clube: "Universitario",
+    jogadores: [
+      { nome: "Luis Rubiños", posicoes: ["GOL"], forca: 80 },
+      { nome: "Héctor Chumpitaz", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Nicolás Fuentes", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Luis La Fuente", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Roberto Challe", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Teófilo Cubillas", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Percy Rojas", posicoes: ["ATA"], forca: 82 },
+      { nome: "Juan José Muñante", posicoes: ["PD","PE"], forca: 83 },
+      { nome: "Oswaldo Ramírez", posicoes: ["ATA"], forca: 83 },
+      { nome: "Hugo Sotil", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Juan Carlos Oblitas", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Rubén Correa", posicoes: ["GOL"], forca: 77 },
+      { nome: "Fernando Cuéllar", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Germán Leguía", posicoes: ["MC","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1967,
     clube: "River Plate",
     jogadores: [
       { nome: "Amadeo Carrizo", posicoes: ["GOL"], forca: 86 },
@@ -5666,6 +6432,26 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1967,
+    clube: "Colo-Colo",
+    jogadores: [
+      { nome: "Adolfo Nef", posicoes: ["GOL"], forca: 80 },
+      { nome: "Mario Galindo", posicoes: ["ZAG","LD"], forca: 80 },
+      { nome: "Leonel Herrera", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Rafael González", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Guillermo Páez", posicoes: ["MC","VOL"], forca: 80 },
+      { nome: "Francisco Valdés", posicoes: ["MEI","MC"], forca: 86 },
+      { nome: "Julio Crisosto", posicoes: ["MC"], forca: 78 },
+      { nome: "Leonardo Véliz", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Carlos Caszely", posicoes: ["ATA"], forca: 87 },
+      { nome: "Sergio Ahumada", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Juan Carlos Orellana", posicoes: ["ATA"], forca: 78 },
+      { nome: "Alberto Fouillioux", posicoes: ["MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1967,
     clube: "Nacional",
     jogadores: [
       { nome: "Manga", posicoes: ["GOL"], forca: 84 },
@@ -5684,6 +6470,28 @@ const DADOS_LIBERTADORES = [
       { nome: "Horacio Troche", posicoes: ["ZAG"], forca: 80 },
       { nome: "Waldemar Victorino", posicoes: ["ATA"], forca: 83 },
       { nome: "Arsenio Luzardo", posicoes: ["ZAG"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1967,
+    clube: "Cruzeiro",
+    jogadores: [
+      { nome: "Raul Plassmann", posicoes: ["GOL"], forca: 84 },
+      { nome: "Nelinho", posicoes: ["LD"], forca: 86 },
+      { nome: "Darci Menezes", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Perfumo", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Vanderlei", posicoes: ["LE","ZAG"], forca: 80 },
+      { nome: "Zé Carlos", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Piazza", posicoes: ["VOL","ZAG"], forca: 87 },
+      { nome: "Eduardo Amorim", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Dirceu Lopes", posicoes: ["MEI","ATA"], forca: 90 },
+      { nome: "Joãozinho", posicoes: ["PE","ATA"], forca: 86 },
+      { nome: "Palhinha", posicoes: ["ATA","MEI"], forca: 88 },
+      { nome: "Roberto Batata", posicoes: ["ATA"], forca: 82 },
+      { nome: "Jairzinho", posicoes: ["PD","ATA"], forca: 84 },
+      { nome: "Lívio", posicoes: ["ATA"], forca: 78 }
     ]
   },
 
@@ -5788,6 +6596,26 @@ const DADOS_LIBERTADORES = [
   {
     competicao: "Libertadores",
     edicao: 1966,
+    clube: "Guaraní",
+    jogadores: [
+      { nome: "Sinforiano García", posicoes: ["GOL"], forca: 78 },
+      { nome: "Pedro Fernández", posicoes: ["GOL"], forca: 74 },
+      { nome: "Juan Bautista Agüero", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Saturnino Arrúa", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Alberto Jara Saguier", posicoes: ["ATA"], forca: 79 },
+      { nome: "Alcides Silveira", posicoes: ["MC"], forca: 78 },
+      { nome: "Modesto Sandoval", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Víctor Hugo Sánchez", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Hugo Talavera", posicoes: ["ATA"], forca: 78 },
+      { nome: "Carlos Kiese", posicoes: ["MC"], forca: 80 },
+      { nome: "Roberto Cabañas", posicoes: ["ATA"], forca: 80 },
+      { nome: "Eugenio Morel", posicoes: ["ATA"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1966,
     clube: "Peñarol",
     jogadores: [
       { nome: "Luis Maidana", posicoes: ["GOL"], forca: 81 },
@@ -5806,6 +6634,26 @@ const DADOS_LIBERTADORES = [
       { nome: "Alberto Spencer", posicoes: ["ATA"], forca: 92 },
       { nome: "Fernando Morena", posicoes: ["ATA"], forca: 88 },
       { nome: "Walter Olivera", posicoes: ["ZAG"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1966,
+    clube: "Universidad Católica",
+    jogadores: [
+      { nome: "Sergio Livingstone", posicoes: ["GOL"], forca: 82 },
+      { nome: "Alberto Fouillioux", posicoes: ["MEI","MC"], forca: 82 },
+      { nome: "Ignacio Prieto", posicoes: ["MC","ATA"], forca: 81 },
+      { nome: "Armando Tobar", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Néstor Isella", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Julio Gallardo", posicoes: ["ATA"], forca: 78 },
+      { nome: "Andrés Prieto", posicoes: ["ATA"], forca: 78 },
+      { nome: "Osvaldo Castro", posicoes: ["ATA"], forca: 79 },
+      { nome: "Juan Carlos Gangas", posicoes: ["ZAG","LD"], forca: 76 },
+      { nome: "Hugo Cicamois", posicoes: ["MC","VOL"], forca: 76 },
+      { nome: "Mario Livingstone", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Fernando Carvallo", posicoes: ["MC"], forca: 75 }
     ]
   },
 
@@ -6005,6 +6853,26 @@ const DADOS_LIBERTADORES = [
     ]
   },
 
+  {
+    competicao: "Libertadores",
+    edicao: 1964,
+    clube: "Colo-Colo",
+    jogadores: [
+      { nome: "Adolfo Nef", posicoes: ["GOL"], forca: 80 },
+      { nome: "Mario Galindo", posicoes: ["ZAG","LD"], forca: 80 },
+      { nome: "Leonel Herrera", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Rafael González", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Guillermo Páez", posicoes: ["MC","VOL"], forca: 80 },
+      { nome: "Francisco Valdés", posicoes: ["MEI","MC"], forca: 86 },
+      { nome: "Julio Crisosto", posicoes: ["MC"], forca: 78 },
+      { nome: "Leonardo Véliz", posicoes: ["PE","ATA"], forca: 82 },
+      { nome: "Carlos Caszely", posicoes: ["ATA"], forca: 87 },
+      { nome: "Sergio Ahumada", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Juan Carlos Orellana", posicoes: ["ATA"], forca: 78 },
+      { nome: "Alberto Fouillioux", posicoes: ["MEI"], forca: 80 }
+    ]
+  },
+
   // ===== Edição 1963 (Libertadores — histórico) =====
 
   {
@@ -6052,6 +6920,28 @@ const DADOS_LIBERTADORES = [
       { nome: "Ernesto Mastrángelo", posicoes: ["ATA"], forca: 83 },
       { nome: "Carlos Veglio", posicoes: ["MEI"], forca: 81 },
       { nome: "Hugo Perotti", posicoes: ["PE","ATA"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1963,
+    clube: "Botafogo",
+    jogadores: [
+      { nome: "Manga", posicoes: ["GOL"], forca: 84 },
+      { nome: "Joel Martins", posicoes: ["LD"], forca: 81 },
+      { nome: "Rildo", posicoes: ["LE"], forca: 83 },
+      { nome: "Nilton Santos", posicoes: ["LE"], forca: 90 },
+      { nome: "Aírton", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Leônidas", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Gérson", posicoes: ["MEI","MC"], forca: 90 },
+      { nome: "Zagallo", posicoes: ["PE","ME"], forca: 84 },
+      { nome: "Garrincha", posicoes: ["PD"], forca: 94 },
+      { nome: "Quarentinha", posicoes: ["ATA"], forca: 86 },
+      { nome: "Amarildo", posicoes: ["ATA"], forca: 84 },
+      { nome: "Roberto Miranda", posicoes: ["ATA"], forca: 82 },
+      { nome: "Jairzinho", posicoes: ["PD","ATA"], forca: 86 },
+      { nome: "Paulo César Caju", posicoes: ["MEI","PE"], forca: 83 }
     ]
   },
 
@@ -6126,6 +7016,26 @@ const DADOS_LIBERTADORES = [
       { nome: "Alberto Spencer", posicoes: ["ATA"], forca: 92 },
       { nome: "Fernando Morena", posicoes: ["ATA"], forca: 88 },
       { nome: "Walter Olivera", posicoes: ["ZAG"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1962,
+    clube: "Universidad Católica",
+    jogadores: [
+      { nome: "Sergio Livingstone", posicoes: ["GOL"], forca: 82 },
+      { nome: "Alberto Fouillioux", posicoes: ["MEI","MC"], forca: 82 },
+      { nome: "Ignacio Prieto", posicoes: ["MC","ATA"], forca: 81 },
+      { nome: "Armando Tobar", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Néstor Isella", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Julio Gallardo", posicoes: ["ATA"], forca: 78 },
+      { nome: "Andrés Prieto", posicoes: ["ATA"], forca: 78 },
+      { nome: "Osvaldo Castro", posicoes: ["ATA"], forca: 79 },
+      { nome: "Juan Carlos Gangas", posicoes: ["ZAG","LD"], forca: 76 },
+      { nome: "Hugo Cicamois", posicoes: ["MC","VOL"], forca: 76 },
+      { nome: "Mario Livingstone", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Fernando Carvallo", posicoes: ["MC"], forca: 75 }
     ]
   },
 
@@ -6274,6 +7184,46 @@ const DADOS_LIBERTADORES = [
       { nome: "Alfredo Mendoza", posicoes: ["LD","MD"], forca: 77 },
       { nome: "Buenaventura Ferreira", posicoes: ["ATA"], forca: 76 },
       { nome: "Miguel Michelagnoli", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1960,
+    clube: "San Lorenzo",
+    jogadores: [
+      { nome: "Agustín Irusta", posicoes: ["GOL"], forca: 78 },
+      { nome: "Oscar Calics", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Rafael Albrecht", posicoes: ["ZAG"], forca: 84 },
+      { nome: "Victorio Casa", posicoes: ["ZAG","LD"], forca: 77 },
+      { nome: "Roberto Telch", posicoes: ["MC","VOL"], forca: 85 },
+      { nome: "Alberto Rendo", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Norberto Boggio", posicoes: ["MEI","ATA"], forca: 81 },
+      { nome: "Héctor Veira", posicoes: ["ATA","MEI"], forca: 82 },
+      { nome: "Victorio Cocco", posicoes: ["ATA"], forca: 80 },
+      { nome: "Rodolfo Fischer", posicoes: ["ATA"], forca: 83 },
+      { nome: "José Sanfilippo", posicoes: ["ATA"], forca: 88 },
+      { nome: "Mario Rizzi", posicoes: ["PE","ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 1960,
+    clube: "Millonarios",
+    jogadores: [
+      { nome: "Efraín Sánchez", posicoes: ["GOL"], forca: 82 },
+      { nome: "Senén Mosquera", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Alberto González", posicoes: ["ZAG","LD"], forca: 76 },
+      { nome: "Carlos Arango", posicoes: ["MC","MEI"], forca: 80 },
+      { nome: "Delio Gamboa", posicoes: ["PE","ATA"], forca: 84 },
+      { nome: "Marino Klinger", posicoes: ["ATA","PE"], forca: 80 },
+      { nome: "Rodolfo Micheli", posicoes: ["ATA"], forca: 82 },
+      { nome: "Rubén Pizarro", posicoes: ["ATA"], forca: 80 },
+      { nome: "Alejandro Brand", posicoes: ["MEI","ATA"], forca: 79 },
+      { nome: "Jaime Morón", posicoes: ["ATA"], forca: 80 },
+      { nome: "Willington Ortiz", posicoes: ["PD","PE","ATA"], forca: 84 },
+      { nome: "Miguel Ángel Converti", posicoes: ["ATA"], forca: 78 }
     ]
   }
 

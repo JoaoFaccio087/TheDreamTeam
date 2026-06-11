@@ -66,6 +66,21 @@
     font-size: 0.55rem;
   }
 
+  /* Escalação no celular: "Voltar" sobe para o topo (acima da formação) e fica
+     compacto; o "Rolar" também encolhe. display:contents promove os filhos da
+     coluna direita ao .jogo-wrapper, daí o order:-1 do Voltar funcionar. */
+  .jogo-direita { display: contents; }
+  #btn-voltar-home {
+    order: -1;
+    justify-self: start;   /* não estica: largura do conteúdo, alinhado à esquerda */
+    width: auto;
+    margin-bottom: 2px;
+  }
+  #btn-rolar {
+    align-self: start;     /* encolhe dentro da coluna esquerda (flex) */
+    width: auto;
+  }
+
   /* Tela de simulação no celular: vira 1 coluna. display:contents "promove" os filhos das duas colunas ao .sim-wrapper, e a ordem vem do `order` (Voltar, controles, histórico, ação, resumo, stats). */
   .sim-wrapper {
     display: flex;
