@@ -1176,6 +1176,202 @@ const DADOS_CHAMPIONS = [
       { nome: "Fernando Torres", posicoes: ["ATA"], forca: 78 },
       { nome: "Demba Ba", posicoes: ["ATA"], forca: 77 }
     ]
+  },
+
+  // ===== Edição 2013 (semifinalistas — Bayern campeão, 2–1 sobre o Borussia, final alemã em Wembley) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2013,
+    clube: "Bayern de Munique",
+    jogadores: [
+      { nome: "Manuel Neuer", posicoes: ["GOL"], forca: 89 },
+      { nome: "Tom Starke", posicoes: ["GOL"], forca: 67 },
+      { nome: "Philipp Lahm", posicoes: ["LD","VOL","MD"], forca: 86 },
+      { nome: "Jérôme Boateng", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Dante", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Daniel Van Buyten", posicoes: ["ZAG"], forca: 78 },
+      { nome: "David Alaba", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Bastian Schweinsteiger", posicoes: ["VOL","MC","MEI"], forca: 86 },
+      { nome: "Javi Martínez", posicoes: ["VOL","ZAG"], forca: 83 },
+      { nome: "Toni Kroos", posicoes: ["MC","MEI"], forca: 83 },
+      { nome: "Luiz Gustavo", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Thomas Müller", posicoes: ["MEI","PD","ATA"], forca: 84 },
+      { nome: "Arjen Robben", posicoes: ["PD","PE"], forca: 87 },
+      { nome: "Franck Ribéry", posicoes: ["PE","PD"], forca: 88 },
+      { nome: "Mario Mandžukić", posicoes: ["ATA"], forca: 82 },
+      { nome: "Mario Gómez", posicoes: ["ATA"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2013,
+    clube: "Borussia Dortmund",
+    jogadores: [
+      { nome: "Roman Weidenfeller", posicoes: ["GOL"], forca: 82 },
+      { nome: "Mitchell Langerak", posicoes: ["GOL"], forca: 70 },
+      { nome: "Łukasz Piszczek", posicoes: ["LD","MD"], forca: 81 },
+      { nome: "Mats Hummels", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Neven Subotić", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Marcel Schmelzer", posicoes: ["LE"], forca: 79 },
+      { nome: "Felipe Santana", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Sven Bender", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "İlkay Gündoğan", posicoes: ["VOL","MC","MEI"], forca: 81 },
+      { nome: "Sebastian Kehl", posicoes: ["VOL","MC"], forca: 76 },
+      { nome: "Nuri Şahin", posicoes: ["MC","MEI","VOL"], forca: 78 },
+      { nome: "Mario Götze", posicoes: ["MEI","ATA","PE"], forca: 84 },
+      { nome: "Marco Reus", posicoes: ["MEI","PE","ATA"], forca: 85 },
+      { nome: "Jakub Błaszczykowski", posicoes: ["PD","PE","ME"], forca: 79 },
+      { nome: "Kevin Großkreutz", posicoes: ["PE","LE","ME"], forca: 76 },
+      { nome: "Robert Lewandowski", posicoes: ["ATA"], forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2013,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 85 },
+      { nome: "Diego López", posicoes: ["GOL"], forca: 81 },
+      { nome: "Álvaro Arbeloa", posicoes: ["LD","MD"], forca: 78 },
+      { nome: "Sergio Ramos", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Pepe", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Raphaël Varane", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Marcelo", posicoes: ["LE"], forca: 84 },
+      { nome: "Xabi Alonso", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Sami Khedira", posicoes: ["VOL","MC"], forca: 82 },
+      { nome: "Luka Modrić", posicoes: ["MC","MEI"], forca: 84 },
+      { nome: "Mesut Özil", posicoes: ["MEI","PE","MC"], forca: 86 },
+      { nome: "Ángel Di María", posicoes: ["MEI","PE","PD"], forca: 84 },
+      { nome: "Kaká", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Gonzalo Higuaín", posicoes: ["ATA"], forca: 84 },
+      { nome: "Karim Benzema", posicoes: ["ATA"], forca: 84 },
+      { nome: "Cristiano Ronaldo", posicoes: ["PE","ATA"], forca: 94 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2013,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 84 },
+      { nome: "José Manuel Pinto", posicoes: ["GOL"], forca: 70 },
+      { nome: "Dani Alves", posicoes: ["LD","MD"], forca: 84 },
+      { nome: "Gerard Piqué", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Carles Puyol", posicoes: ["ZAG"], forca: 84 },
+      { nome: "Javier Mascherano", posicoes: ["ZAG","VOL"], forca: 83 },
+      { nome: "Jordi Alba", posicoes: ["LE"], forca: 82 },
+      { nome: "Adriano", posicoes: ["LE","LD"], forca: 75 },
+      { nome: "Sergio Busquets", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Xavi", posicoes: ["MC","MEI"], forca: 88 },
+      { nome: "Andrés Iniesta", posicoes: ["MC","MEI"], forca: 88 },
+      { nome: "Cesc Fàbregas", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Lionel Messi", posicoes: ["PD","MEI","ATA"], forca: 95 },
+      { nome: "Alexis Sánchez", posicoes: ["PE","PD","ATA"], forca: 80 },
+      { nome: "David Villa", posicoes: ["ATA","PE"], forca: 82 },
+      { nome: "Pedro", posicoes: ["PD","PE","ATA"], forca: 81 }
+    ]
+  },
+
+  // ===== Edição 2012 (semifinalistas — Chelsea campeão nos pênaltis sobre o Bayern, em Munique) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2012,
+    clube: "Chelsea",
+    jogadores: [
+      { nome: "Petr Čech", posicoes: ["GOL"], forca: 86 },
+      { nome: "Ross Turnbull", posicoes: ["GOL"], forca: 66 },
+      { nome: "Branislav Ivanović", posicoes: ["LD","ZAG"], forca: 83 },
+      { nome: "John Terry", posicoes: ["ZAG"], forca: 84 },
+      { nome: "David Luiz", posicoes: ["ZAG","VOL"], forca: 81 },
+      { nome: "Gary Cahill", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Ashley Cole", posicoes: ["LE"], forca: 84 },
+      { nome: "Ramires", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Frank Lampard", posicoes: ["MC","MEI"], forca: 84 },
+      { nome: "John Obi Mikel", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Raul Meireles", posicoes: ["MC","MEI"], forca: 78 },
+      { nome: "Juan Mata", posicoes: ["MEI","PE","MC"], forca: 84 },
+      { nome: "Florent Malouda", posicoes: ["PE","ME","MEI"], forca: 76 },
+      { nome: "Didier Drogba", posicoes: ["ATA"], forca: 85 },
+      { nome: "Fernando Torres", posicoes: ["ATA"], forca: 79 },
+      { nome: "Daniel Sturridge", posicoes: ["ATA","PE","PD"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2012,
+    clube: "Bayern de Munique",
+    jogadores: [
+      { nome: "Manuel Neuer", posicoes: ["GOL"], forca: 88 },
+      { nome: "Hans-Jörg Butt", posicoes: ["GOL"], forca: 67 },
+      { nome: "Philipp Lahm", posicoes: ["LD","VOL","MD"], forca: 85 },
+      { nome: "Jérôme Boateng", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Holger Badstuber", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Daniel Van Buyten", posicoes: ["ZAG"], forca: 78 },
+      { nome: "David Alaba", posicoes: ["LE","ZAG"], forca: 79 },
+      { nome: "Anatoliy Tymoshchuk", posicoes: ["VOL","ZAG","MC"], forca: 76 },
+      { nome: "Bastian Schweinsteiger", posicoes: ["VOL","MC","MEI"], forca: 86 },
+      { nome: "Luiz Gustavo", posicoes: ["VOL","MC"], forca: 78 },
+      { nome: "Toni Kroos", posicoes: ["MC","MEI"], forca: 81 },
+      { nome: "Thomas Müller", posicoes: ["MEI","PD","ATA"], forca: 83 },
+      { nome: "Arjen Robben", posicoes: ["PD","PE"], forca: 87 },
+      { nome: "Franck Ribéry", posicoes: ["PE","PD"], forca: 86 },
+      { nome: "Mario Gómez", posicoes: ["ATA"], forca: 82 },
+      { nome: "Ivica Olić", posicoes: ["ATA","PE"], forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2012,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 88 },
+      { nome: "Antonio Adán", posicoes: ["GOL"], forca: 70 },
+      { nome: "Álvaro Arbeloa", posicoes: ["LD","MD"], forca: 78 },
+      { nome: "Sergio Ramos", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Pepe", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Marcelo", posicoes: ["LE"], forca: 84 },
+      { nome: "Fábio Coentrão", posicoes: ["LE"], forca: 78 },
+      { nome: "Xabi Alonso", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Sami Khedira", posicoes: ["VOL","MC"], forca: 81 },
+      { nome: "Mesut Özil", posicoes: ["MEI","PE","MC"], forca: 85 },
+      { nome: "Ángel Di María", posicoes: ["MEI","PE","PD"], forca: 83 },
+      { nome: "Kaká", posicoes: ["MEI","MC"], forca: 81 },
+      { nome: "Cristiano Ronaldo", posicoes: ["PE","ATA"], forca: 93 },
+      { nome: "Karim Benzema", posicoes: ["ATA"], forca: 83 },
+      { nome: "Gonzalo Higuaín", posicoes: ["ATA"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2012,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 85 },
+      { nome: "José Manuel Pinto", posicoes: ["GOL"], forca: 70 },
+      { nome: "Dani Alves", posicoes: ["LD","MD"], forca: 85 },
+      { nome: "Gerard Piqué", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Carles Puyol", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Javier Mascherano", posicoes: ["ZAG","VOL"], forca: 82 },
+      { nome: "Éric Abidal", posicoes: ["LE","ZAG"], forca: 80 },
+      { nome: "Adriano", posicoes: ["LE","LD"], forca: 76 },
+      { nome: "Sergio Busquets", posicoes: ["VOL","MC"], forca: 84 },
+      { nome: "Xavi", posicoes: ["MC","MEI"], forca: 90 },
+      { nome: "Andrés Iniesta", posicoes: ["MC","MEI"], forca: 88 },
+      { nome: "Cesc Fàbregas", posicoes: ["MEI","MC"], forca: 84 },
+      { nome: "Lionel Messi", posicoes: ["PD","MEI","ATA"], forca: 95 },
+      { nome: "Alexis Sánchez", posicoes: ["PE","PD","ATA"], forca: 80 },
+      { nome: "David Villa", posicoes: ["ATA","PE"], forca: 83 },
+      { nome: "Pedro", posicoes: ["PD","PE","ATA"], forca: 82 }
+    ]
   }
 
 ];

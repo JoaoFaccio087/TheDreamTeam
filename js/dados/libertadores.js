@@ -1175,6 +1175,202 @@ const DADOS_LIBERTADORES = [
       { nome: "Nicolás Olivera", posicoes: ["ATA","MEI"], forca: 74 },
       { nome: "Robert Herrera", posicoes: ["LD","ZAG"], forca: 68 }
     ]
+  },
+
+  // ===== Edição 2013 (semifinalistas — Atlético Mineiro campeão nos pênaltis sobre o Olimpia) =====
+
+  {
+    competicao: "Libertadores",
+    edicao: 2013,
+    clube: "Atlético Mineiro",
+    jogadores: [
+      { nome: "Victor", posicoes: ["GOL"], forca: 80 },
+      { nome: "Giovanni", posicoes: ["GOL"], forca: 67 },
+      { nome: "Marcos Rocha", posicoes: ["LD","MD"], forca: 76 },
+      { nome: "Réver", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Leonardo Silva", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Júnior César", posicoes: ["LE","ME"], forca: 72 },
+      { nome: "Michel", posicoes: ["LD","VOL"], forca: 70 },
+      { nome: "Pierre", posicoes: ["VOL","MC"], forca: 74 },
+      { nome: "Josué", posicoes: ["VOL","MC"], forca: 74 },
+      { nome: "Leandro Donizete", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Gilberto Silva", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Ronaldinho", posicoes: ["MEI","PE","ATA"], forca: 84 },
+      { nome: "Bernard", posicoes: ["PE","MEI","ME"], forca: 78 },
+      { nome: "Diego Tardelli", posicoes: ["ATA","MEI"], forca: 79 },
+      { nome: "Jô", posicoes: ["ATA"], forca: 78 },
+      { nome: "Alecsandro", posicoes: ["ATA"], forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2013,
+    clube: "Olimpia",
+    jogadores: [
+      { nome: "Martín Silva", posicoes: ["GOL"], forca: 78 },
+      { nome: "Néstor Camacho", posicoes: ["LD","MD"], forca: 70 },
+      { nome: "Marcos Miranda", posicoes: ["ZAG"], forca: 71 },
+      { nome: "Julio César Manzur", posicoes: ["ZAG"], forca: 72 },
+      { nome: "Marcelo Mazacotte", posicoes: ["LD","ZAG"], forca: 70 },
+      { nome: "Pablo Candia", posicoes: ["LE","ME"], forca: 70 },
+      { nome: "Wilson Pittoni", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Sergio Aranda", posicoes: ["VOL","MC"], forca: 71 },
+      { nome: "Herminio Miranda", posicoes: ["VOL","MC","MEI"], forca: 70 },
+      { nome: "Iván Torres", posicoes: ["MC","MEI"], forca: 70 },
+      { nome: "Richart Ortiz", posicoes: ["MEI","MC"], forca: 71 },
+      { nome: "Alejandro Silva", posicoes: ["PE","PD","ME"], forca: 74 },
+      { nome: "Juan Manuel Salgueiro", posicoes: ["ATA","MEI"], forca: 73 },
+      { nome: "Fredy Bareiro", posicoes: ["ATA"], forca: 72 },
+      { nome: "Matías Giménez", posicoes: ["ATA","PE"], forca: 72 },
+      { nome: "Juan Carlos Ferreyra", posicoes: ["ATA"], forca: 71 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2013,
+    clube: "Newell's Old Boys",
+    jogadores: [
+      { nome: "Nahuel Guzmán", posicoes: ["GOL"], forca: 79 },
+      { nome: "Sebastián Peratta", posicoes: ["GOL"], forca: 68 },
+      { nome: "Marcos Cáceres", posicoes: ["LD","ZAG"], forca: 72 },
+      { nome: "Santiago Vergini", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Gabriel Heinze", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Milton Casco", posicoes: ["LE","ME","LD"], forca: 74 },
+      { nome: "Lucas Bernardi", posicoes: ["VOL","MC"], forca: 74 },
+      { nome: "Diego Mateo", posicoes: ["VOL","MC"], forca: 72 },
+      { nome: "Pablo Pérez", posicoes: ["MC","MEI"], forca: 75 },
+      { nome: "Víctor Figueroa", posicoes: ["MEI","MC","PE"], forca: 73 },
+      { nome: "Martín Tonso", posicoes: ["MEI","MC","PD"], forca: 71 },
+      { nome: "Ribair Rodríguez", posicoes: ["VOL","MC","MEI"], forca: 71 },
+      { nome: "Maxi Rodríguez", posicoes: ["MEI","PE","ATA"], forca: 80 },
+      { nome: "Ignacio Scocco", posicoes: ["ATA"], forca: 78 },
+      { nome: "David Trezeguet", posicoes: ["ATA"], forca: 76 },
+      { nome: "Maximiliano Urruti", posicoes: ["ATA","PE"], forca: 71 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2013,
+    clube: "Independiente Santa Fe",
+    jogadores: [
+      { nome: "Camilo Vargas", posicoes: ["GOL"], forca: 76 },
+      { nome: "Juan Manuel Leyton", posicoes: ["GOL"], forca: 66 },
+      { nome: "Yulián Anchico", posicoes: ["LD","VOL","MD"], forca: 71 },
+      { nome: "Carlos Valdés", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Francisco Meza", posicoes: ["ZAG"], forca: 72 },
+      { nome: "Marino García", posicoes: ["LE","ME"], forca: 69 },
+      { nome: "Daniel Torres", posicoes: ["VOL","MC"], forca: 72 },
+      { nome: "Gerardo Bedoya", posicoes: ["VOL","MC"], forca: 72 },
+      { nome: "Juan Daniel Roa", posicoes: ["VOL","MC"], forca: 70 },
+      { nome: "Jhon Valencia", posicoes: ["MC","MEI"], forca: 69 },
+      { nome: "Luis Carlos Arias", posicoes: ["MC","MEI","LD"], forca: 68 },
+      { nome: "Omar Pérez", posicoes: ["MEI","MC","PE"], forca: 75 },
+      { nome: "Jefferson Cuero", posicoes: ["PE","PD","ATA"], forca: 70 },
+      { nome: "Wilder Medina", posicoes: ["ATA"], forca: 71 },
+      { nome: "Cristian Martínez Borja", posicoes: ["ATA"], forca: 71 },
+      { nome: "Julián Quiñones", posicoes: ["ATA","PE"], forca: 68 }
+    ]
+  },
+
+  // ===== Edição 2012 (semifinalistas — Corinthians campeão invicto sobre o Boca Juniors) =====
+
+  {
+    competicao: "Libertadores",
+    edicao: 2012,
+    clube: "Corinthians",
+    jogadores: [
+      { nome: "Cássio", posicoes: ["GOL"], forca: 80 },
+      { nome: "Júlio César", posicoes: ["GOL"], forca: 67 },
+      { nome: "Alessandro", posicoes: ["LD","MD"], forca: 74 },
+      { nome: "Chicão", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Leandro Castán", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Paulo André", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Fábio Santos", posicoes: ["LE","ME"], forca: 75 },
+      { nome: "Ralf", posicoes: ["VOL","MC"], forca: 74 },
+      { nome: "Paulinho", posicoes: ["VOL","MC","MEI"], forca: 80 },
+      { nome: "Danilo", posicoes: ["MEI","MC"], forca: 76 },
+      { nome: "Alex", posicoes: ["MEI","MC"], forca: 78 },
+      { nome: "Jorge Henrique", posicoes: ["PE","PD","ME"], forca: 72 },
+      { nome: "Emerson Sheik", posicoes: ["ATA","MEI","PE"], forca: 76 },
+      { nome: "Paolo Guerrero", posicoes: ["ATA"], forca: 79 },
+      { nome: "Liedson", posicoes: ["ATA","PE"], forca: 74 },
+      { nome: "Romarinho", posicoes: ["ATA","PE","MEI"], forca: 71 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2012,
+    clube: "Boca Juniors",
+    jogadores: [
+      { nome: "Agustín Orión", posicoes: ["GOL"], forca: 78 },
+      { nome: "Sebastián Sosa", posicoes: ["GOL"], forca: 70 },
+      { nome: "Facundo Roncaglia", posicoes: ["LD","ZAG","MD"], forca: 75 },
+      { nome: "Rolando Schiavi", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Matías Caruzzo", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Clemente Rodríguez", posicoes: ["LE","ME"], forca: 72 },
+      { nome: "Juan Sánchez Miño", posicoes: ["LE","ME"], forca: 70 },
+      { nome: "Leandro Somoza", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Pablo Ledesma", posicoes: ["MC","MEI","PD"], forca: 73 },
+      { nome: "Cristian Erbes", posicoes: ["MC","MEI"], forca: 71 },
+      { nome: "Walter Erviti", posicoes: ["MEI","MC","PE"], forca: 75 },
+      { nome: "Juan Román Riquelme", posicoes: ["MEI","MC"], forca: 82 },
+      { nome: "Pablo Mouche", posicoes: ["PE","PD","ME"], forca: 72 },
+      { nome: "Juan Manuel Martínez", posicoes: ["PD","PE","ME"], forca: 73 },
+      { nome: "Santiago Silva", posicoes: ["ATA"], forca: 73 },
+      { nome: "Darío Cvitanich", posicoes: ["ATA","PE"], forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2012,
+    clube: "Santos",
+    jogadores: [
+      { nome: "Rafael Cabral", posicoes: ["GOL"], forca: 77 },
+      { nome: "Aranha", posicoes: ["GOL"], forca: 70 },
+      { nome: "Juan", posicoes: ["LD","MD"], forca: 71 },
+      { nome: "Edu Dracena", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Durval", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Bruno Rodrigo", posicoes: ["ZAG"], forca: 71 },
+      { nome: "Léo", posicoes: ["LE"], forca: 74 },
+      { nome: "Henrique", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Arouca", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Ibson", posicoes: ["MC","MEI"], forca: 72 },
+      { nome: "Paulo Henrique Ganso", posicoes: ["MEI","MC"], forca: 80 },
+      { nome: "Elano", posicoes: ["MEI","MC","PD"], forca: 76 },
+      { nome: "Neymar", posicoes: ["PE","MEI","ATA"], forca: 87 },
+      { nome: "Felipe Anderson", posicoes: ["MEI","PE","PD"], forca: 71 },
+      { nome: "Borges", posicoes: ["ATA"], forca: 76 },
+      { nome: "Alan Kardec", posicoes: ["ATA"], forca: 72 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2012,
+    clube: "Universidad de Chile",
+    jogadores: [
+      { nome: "Johnny Herrera", posicoes: ["GOL"], forca: 76 },
+      { nome: "Matías Rodríguez", posicoes: ["LD","MD"], forca: 73 },
+      { nome: "Paulo Magalhães", posicoes: ["ZAG"], forca: 71 },
+      { nome: "José Rojas", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Osvaldo González", posicoes: ["ZAG"], forca: 72 },
+      { nome: "Eugenio Mena", posicoes: ["LE","ME"], forca: 75 },
+      { nome: "Roberto Cereceda", posicoes: ["LE","ME","LD"], forca: 70 },
+      { nome: "Albert Acevedo", posicoes: ["ZAG","LD"], forca: 70 },
+      { nome: "Marcelo Díaz", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Charles Aránguiz", posicoes: ["VOL","MC","MEI"], forca: 78 },
+      { nome: "Guillermo Marino", posicoes: ["MC","MEI"], forca: 72 },
+      { nome: "Pedro Morales", posicoes: ["MEI","MC"], forca: 72 },
+      { nome: "Gustavo Lorenzetti", posicoes: ["MEI","PE","ME"], forca: 74 },
+      { nome: "Junior Fernandes", posicoes: ["PD","PE","ATA"], forca: 72 },
+      { nome: "Ángelo Henríquez", posicoes: ["ATA"], forca: 73 },
+      { nome: "Sebastián Ubilla", posicoes: ["ATA","PE"], forca: 71 }
+    ]
   }
 
 ];
