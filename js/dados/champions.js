@@ -1372,6 +1372,1232 @@ const DADOS_CHAMPIONS = [
       { nome: "David Villa", posicoes: ["ATA","PE"], forca: 83 },
       { nome: "Pedro", posicoes: ["PD","PE","ATA"], forca: 82 }
     ]
+  },
+
+  // ===== Edição 2011 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2011,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 84 },
+      { nome: "Dani Alves", posicoes: ["LD"], forca: 89 },
+      { nome: "Carles Puyol", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Gerard Piqué", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Javier Mascherano", posicoes: ["ZAG","VOL"], forca: 83 },
+      { nome: "Eric Abidal", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Maxwell", posicoes: ["LE"], forca: 79 },
+      { nome: "Sergio Busquets", posicoes: ["VOL"], forca: 88 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 94 },
+      { nome: "Andrés Iniesta", posicoes: ["MC"], forca: 93 },
+      { nome: "Seydou Keita", posicoes: ["VOL","MC"], forca: 81 },
+      { nome: "Thiago Alcântara", posicoes: ["MC"], forca: 77 },
+      { nome: "Pedro", posicoes: ["PD"], forca: 84 },
+      { nome: "Lionel Messi", posicoes: ["ATA","PD"], forca: 96 },
+      { nome: "David Villa", posicoes: ["ATA","PD"], forca: 88 },
+      { nome: "Bojan Krkić", posicoes: ["ATA"], forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2011,
+    clube: "Manchester United",
+    jogadores: [
+      { nome: "Edwin van der Sar", posicoes: ["GOL"], forca: 88 },
+      { nome: "Rafael", posicoes: ["LD"], forca: 75 },
+      { nome: "Fábio", posicoes: ["LD","MC"], forca: 73 },
+      { nome: "Rio Ferdinand", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Nemanja Vidić", posicoes: ["ZAG"], forca: 89 },
+      { nome: "Patrice Evra", posicoes: ["LE"], forca: 85 },
+      { nome: "Michael Carrick", posicoes: ["VOL","MC"], forca: 83 },
+      { nome: "Paul Scholes", posicoes: ["MC"], forca: 88 },
+      { nome: "Ryan Giggs", posicoes: ["MC","PD"], forca: 83 },
+      { nome: "Darren Fletcher", posicoes: ["VOL","MC"], forca: 79 },
+      { nome: "Park Ji-sung", posicoes: ["MC","PD"], forca: 81 },
+      { nome: "Nani", posicoes: ["PD"], forca: 84 },
+      { nome: "Antonio Valencia", posicoes: ["PD"], forca: 80 },
+      { nome: "Wayne Rooney", posicoes: ["ATA"], forca: 88 },
+      { nome: "Javier Hernández", posicoes: ["ATA"], forca: 82 },
+      { nome: "Dimitar Berbatov", posicoes: ["ATA"], forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2011,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 87 },
+      { nome: "Sergio Ramos", posicoes: ["LD","ZAG"], forca: 87 },
+      { nome: "Pepe", posicoes: ["ZAG","VOL"], forca: 84 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Marcelo", posicoes: ["LE"], forca: 84 },
+      { nome: "Álvaro Arbeloa", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "Xabi Alonso", posicoes: ["VOL","MC"], forca: 87 },
+      { nome: "Sami Khedira", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Lassana Diarra", posicoes: ["VOL"], forca: 80 },
+      { nome: "Mesut Özil", posicoes: ["MEI"], forca: 85 },
+      { nome: "Ángel Di María", posicoes: ["MC","PD"], forca: 84 },
+      { nome: "Kaká", posicoes: ["MEI"], forca: 80 },
+      { nome: "Cristiano Ronaldo", posicoes: ["PD","ATA"], forca: 93 },
+      { nome: "Karim Benzema", posicoes: ["ATA"], forca: 83 },
+      { nome: "Gonzalo Higuaín", posicoes: ["ATA"], forca: 84 },
+      { nome: "Emmanuel Adebayor", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2011,
+    clube: "Schalke 04",
+    jogadores: [
+      { nome: "Manuel Neuer", posicoes: ["GOL"], forca: 88 },
+      { nome: "Atsuto Uchida", posicoes: ["LD"], forca: 75 },
+      { nome: "Benedikt Höwedes", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Christoph Metzelder", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Kyriakos Papadopoulos", posicoes: ["ZAG","VOL"], forca: 75 },
+      { nome: "Hans Sarpei", posicoes: ["LE"], forca: 72 },
+      { nome: "Joel Matip", posicoes: ["ZAG","VOL"], forca: 75 },
+      { nome: "Peer Kluge", posicoes: ["VOL"], forca: 73 },
+      { nome: "Ivan Rakitić", posicoes: ["MC","VOL"], forca: 79 },
+      { nome: "José Manuel Jurado", posicoes: ["MEI"], forca: 77 },
+      { nome: "Jefferson Farfán", posicoes: ["MC","PD"], forca: 81 },
+      { nome: "Julian Draxler", posicoes: ["MC","PD"], forca: 71 },
+      { nome: "Christoph Moritz", posicoes: ["VOL","MC"], forca: 72 },
+      { nome: "Raúl", posicoes: ["ATA"], forca: 84 },
+      { nome: "Klaas-Jan Huntelaar", posicoes: ["ATA"], forca: 82 },
+      { nome: "Edu", posicoes: ["ATA"], forca: 73 }
+    ]
+  },
+
+  // ===== Edição 2010 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2010,
+    clube: "Internazionale",
+    jogadores: [
+      { nome: "Júlio César", posicoes: ["GOL"], forca: 89 },
+      { nome: "Maicon", posicoes: ["LD"], forca: 89 },
+      { nome: "Lúcio", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Walter Samuel", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Cristian Chivu", posicoes: ["LE","ZAG"], forca: 82 },
+      { nome: "Javier Zanetti", posicoes: ["LD","VOL"], forca: 88 },
+      { nome: "Marco Materazzi", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Esteban Cambiasso", posicoes: ["VOL"], forca: 85 },
+      { nome: "Thiago Motta", posicoes: ["VOL"], forca: 82 },
+      { nome: "Wesley Sneijder", posicoes: ["MEI"], forca: 91 },
+      { nome: "Dejan Stanković", posicoes: ["MC"], forca: 83 },
+      { nome: "Sulley Muntari", posicoes: ["VOL","MC"], forca: 79 },
+      { nome: "Goran Pandev", posicoes: ["ATA","PD"], forca: 81 },
+      { nome: "Samuel Eto'o", posicoes: ["ATA","PD"], forca: 88 },
+      { nome: "Diego Milito", posicoes: ["ATA"], forca: 91 },
+      { nome: "Mario Balotelli", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2010,
+    clube: "Bayern München",
+    jogadores: [
+      { nome: "Hans-Jörg Butt", posicoes: ["GOL"], forca: 81 },
+      { nome: "Philipp Lahm", posicoes: ["LD"], forca: 87 },
+      { nome: "Holger Badstuber", posicoes: ["ZAG","LD"], forca: 75 },
+      { nome: "Daniel Van Buyten", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Martín Demichelis", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Diego Contento", posicoes: ["LE"], forca: 72 },
+      { nome: "Mark van Bommel", posicoes: ["VOL","MC"], forca: 84 },
+      { nome: "Bastian Schweinsteiger", posicoes: ["VOL","MC"], forca: 87 },
+      { nome: "Hamit Altıntop", posicoes: ["MC","PD"], forca: 76 },
+      { nome: "Thomas Müller", posicoes: ["MC","ATA"], forca: 82 },
+      { nome: "Franck Ribéry", posicoes: ["PE"], forca: 87 },
+      { nome: "Arjen Robben", posicoes: ["PD"], forca: 90 },
+      { nome: "Ivica Olić", posicoes: ["ATA"], forca: 83 },
+      { nome: "Mario Gómez", posicoes: ["ATA"], forca: 81 },
+      { nome: "Miroslav Klose", posicoes: ["ATA"], forca: 82 },
+      { nome: "Anatoliy Tymoshchuk", posicoes: ["VOL","ZAG"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2010,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 84 },
+      { nome: "Dani Alves", posicoes: ["LD"], forca: 89 },
+      { nome: "Carles Puyol", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Gerard Piqué", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Gabriel Milito", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Eric Abidal", posicoes: ["LE"], forca: 82 },
+      { nome: "Maxwell", posicoes: ["LE"], forca: 77 },
+      { nome: "Sergio Busquets", posicoes: ["VOL"], forca: 87 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 93 },
+      { nome: "Andrés Iniesta", posicoes: ["MC"], forca: 89 },
+      { nome: "Seydou Keita", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Yaya Touré", posicoes: ["VOL"], forca: 84 },
+      { nome: "Lionel Messi", posicoes: ["ATA","PD"], forca: 94 },
+      { nome: "Pedro", posicoes: ["PD"], forca: 81 },
+      { nome: "Zlatan Ibrahimović", posicoes: ["ATA"], forca: 88 },
+      { nome: "Bojan Krkić", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2010,
+    clube: "Lyon",
+    jogadores: [
+      { nome: "Hugo Lloris", posicoes: ["GOL"], forca: 84 },
+      { nome: "Anthony Réveillère", posicoes: ["LD"], forca: 77 },
+      { nome: "Cris", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Jean-Alain Boumsong", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Aly Cissokho", posicoes: ["LE"], forca: 76 },
+      { nome: "François Clerc", posicoes: ["LD"], forca: 74 },
+      { nome: "Jérémy Toulalan", posicoes: ["VOL"], forca: 82 },
+      { nome: "Kim Källström", posicoes: ["MC"], forca: 79 },
+      { nome: "Miralem Pjanić", posicoes: ["MEI"], forca: 79 },
+      { nome: "Jean II Makoun", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Maxime Gonalons", posicoes: ["VOL"], forca: 74 },
+      { nome: "Michel Bastos", posicoes: ["MC","LE"], forca: 80 },
+      { nome: "Sidney Govou", posicoes: ["MC","PD"], forca: 79 },
+      { nome: "César Delgado", posicoes: ["ATA","PD"], forca: 77 },
+      { nome: "Lisandro López", posicoes: ["ATA"], forca: 83 },
+      { nome: "Bafétimbi Gomis", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  // ===== Edição 2009 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2009,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 84 },
+      { nome: "Dani Alves", posicoes: ["LD"], forca: 89 },
+      { nome: "Carles Puyol", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Gerard Piqué", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Rafael Márquez", posicoes: ["ZAG","VOL"], forca: 84 },
+      { nome: "Eric Abidal", posicoes: ["LE"], forca: 82 },
+      { nome: "Sylvinho", posicoes: ["LE"], forca: 79 },
+      { nome: "Yaya Touré", posicoes: ["VOL"], forca: 84 },
+      { nome: "Sergio Busquets", posicoes: ["VOL"], forca: 80 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 94 },
+      { nome: "Andrés Iniesta", posicoes: ["MC"], forca: 93 },
+      { nome: "Seydou Keita", posicoes: ["VOL","MC"], forca: 81 },
+      { nome: "Lionel Messi", posicoes: ["ATA","PD"], forca: 95 },
+      { nome: "Thierry Henry", posicoes: ["ATA","PD"], forca: 87 },
+      { nome: "Samuel Eto'o", posicoes: ["ATA"], forca: 90 },
+      { nome: "Bojan Krkić", posicoes: ["ATA"], forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2009,
+    clube: "Manchester United",
+    jogadores: [
+      { nome: "Edwin van der Sar", posicoes: ["GOL"], forca: 88 },
+      { nome: "John O'Shea", posicoes: ["LD","ZAG"], forca: 76 },
+      { nome: "Rio Ferdinand", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Nemanja Vidić", posicoes: ["ZAG"], forca: 89 },
+      { nome: "Patrice Evra", posicoes: ["LE"], forca: 85 },
+      { nome: "Jonny Evans", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Michael Carrick", posicoes: ["VOL","MC"], forca: 83 },
+      { nome: "Paul Scholes", posicoes: ["MC"], forca: 88 },
+      { nome: "Ryan Giggs", posicoes: ["MC","PD"], forca: 88 },
+      { nome: "Anderson", posicoes: ["MC"], forca: 77 },
+      { nome: "Darren Fletcher", posicoes: ["VOL","MC"], forca: 79 },
+      { nome: "Park Ji-sung", posicoes: ["MC","PD"], forca: 80 },
+      { nome: "Cristiano Ronaldo", posicoes: ["PD","ATA"], forca: 91 },
+      { nome: "Wayne Rooney", posicoes: ["ATA"], forca: 88 },
+      { nome: "Carlos Tévez", posicoes: ["ATA"], forca: 87 },
+      { nome: "Dimitar Berbatov", posicoes: ["ATA"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2009,
+    clube: "Chelsea",
+    jogadores: [
+      { nome: "Petr Čech", posicoes: ["GOL"], forca: 89 },
+      { nome: "José Bosingwa", posicoes: ["LD"], forca: 79 },
+      { nome: "Branislav Ivanović", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 87 },
+      { nome: "John Terry", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Alex", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Ashley Cole", posicoes: ["LE"], forca: 87 },
+      { nome: "Juliano Belletti", posicoes: ["LD","MC"], forca: 77 },
+      { nome: "Michael Essien", posicoes: ["VOL","MC"], forca: 87 },
+      { nome: "Frank Lampard", posicoes: ["MC"], forca: 89 },
+      { nome: "Michael Ballack", posicoes: ["MC"], forca: 87 },
+      { nome: "John Obi Mikel", posicoes: ["VOL"], forca: 77 },
+      { nome: "Florent Malouda", posicoes: ["PE"], forca: 80 },
+      { nome: "Joe Cole", posicoes: ["MEI"], forca: 82 },
+      { nome: "Didier Drogba", posicoes: ["ATA"], forca: 87 },
+      { nome: "Nicolas Anelka", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2009,
+    clube: "Arsenal",
+    jogadores: [
+      { nome: "Manuel Almunia", posicoes: ["GOL"], forca: 76 },
+      { nome: "Bacary Sagna", posicoes: ["LD"], forca: 80 },
+      { nome: "Kolo Touré", posicoes: ["ZAG"], forca: 84 },
+      { nome: "William Gallas", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Mikaël Silvestre", posicoes: ["ZAG","LD"], forca: 77 },
+      { nome: "Gaël Clichy", posicoes: ["LE"], forca: 80 },
+      { nome: "Alex Song", posicoes: ["VOL","ZAG"], forca: 77 },
+      { nome: "Denílson", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Cesc Fàbregas", posicoes: ["MC"], forca: 87 },
+      { nome: "Samir Nasri", posicoes: ["MC","PD"], forca: 80 },
+      { nome: "Theo Walcott", posicoes: ["PD"], forca: 77 },
+      { nome: "Abou Diaby", posicoes: ["MC","PD"], forca: 75 },
+      { nome: "Robin van Persie", posicoes: ["ATA","PD"], forca: 83 },
+      { nome: "Emmanuel Adebayor", posicoes: ["ATA"], forca: 82 },
+      { nome: "Nicklas Bendtner", posicoes: ["ATA"], forca: 75 },
+      { nome: "Eduardo da Silva", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  // ===== Edição 2008 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2008,
+    clube: "Manchester United",
+    jogadores: [
+      { nome: "Edwin van der Sar", posicoes: ["GOL"], forca: 88 },
+      { nome: "Wes Brown", posicoes: ["LD","ZAG"], forca: 80 },
+      { nome: "Rio Ferdinand", posicoes: ["ZAG"], forca: 89 },
+      { nome: "Nemanja Vidić", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Patrice Evra", posicoes: ["LE"], forca: 87 },
+      { nome: "Owen Hargreaves", posicoes: ["VOL","LD"], forca: 81 },
+      { nome: "Michael Carrick", posicoes: ["VOL","MC"], forca: 83 },
+      { nome: "Paul Scholes", posicoes: ["MC"], forca: 87 },
+      { nome: "Anderson", posicoes: ["MC"], forca: 79 },
+      { nome: "Ryan Giggs", posicoes: ["MC","PD"], forca: 88 },
+      { nome: "Park Ji-sung", posicoes: ["MC","PD"], forca: 80 },
+      { nome: "Cristiano Ronaldo", posicoes: ["PD","ATA"], forca: 95 },
+      { nome: "Nani", posicoes: ["PD"], forca: 81 },
+      { nome: "Carlos Tévez", posicoes: ["ATA"], forca: 87 },
+      { nome: "Wayne Rooney", posicoes: ["ATA"], forca: 89 },
+      { nome: "Darren Fletcher", posicoes: ["VOL","MC"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2008,
+    clube: "Chelsea",
+    jogadores: [
+      { nome: "Petr Čech", posicoes: ["GOL"], forca: 88 },
+      { nome: "Carlo Cudicini", posicoes: ["GOL"], forca: 81 },
+      { nome: "Juliano Belletti", posicoes: ["LD"], forca: 77 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 87 },
+      { nome: "John Terry", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Alex", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Ashley Cole", posicoes: ["LE"], forca: 87 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 88 },
+      { nome: "Michael Essien", posicoes: ["VOL","MC","LD"], forca: 87 },
+      { nome: "Frank Lampard", posicoes: ["MC"], forca: 89 },
+      { nome: "Michael Ballack", posicoes: ["MC"], forca: 88 },
+      { nome: "Joe Cole", posicoes: ["MEI"], forca: 82 },
+      { nome: "Florent Malouda", posicoes: ["PE"], forca: 80 },
+      { nome: "Salomon Kalou", posicoes: ["ATA","PD"], forca: 77 },
+      { nome: "Didier Drogba", posicoes: ["ATA"], forca: 88 },
+      { nome: "Nicolas Anelka", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2008,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 84 },
+      { nome: "Gianluca Zambrotta", posicoes: ["LD"], forca: 87 },
+      { nome: "Carles Puyol", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Gabriel Milito", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Rafael Márquez", posicoes: ["ZAG","VOL"], forca: 84 },
+      { nome: "Eric Abidal", posicoes: ["LE"], forca: 82 },
+      { nome: "Yaya Touré", posicoes: ["VOL"], forca: 84 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 88 },
+      { nome: "Andrés Iniesta", posicoes: ["MC"], forca: 87 },
+      { nome: "Deco", posicoes: ["MC"], forca: 89 },
+      { nome: "Lionel Messi", posicoes: ["ATA","PD"], forca: 89 },
+      { nome: "Ronaldinho", posicoes: ["MEI","PD"], forca: 83 },
+      { nome: "Thierry Henry", posicoes: ["ATA","PD"], forca: 84 },
+      { nome: "Samuel Eto'o", posicoes: ["ATA"], forca: 87 },
+      { nome: "Bojan Krkić", posicoes: ["ATA"], forca: 75 },
+      { nome: "Eidur Gudjohnsen", posicoes: ["ATA","MC"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2008,
+    clube: "Liverpool",
+    jogadores: [
+      { nome: "Pepe Reina", posicoes: ["GOL"], forca: 84 },
+      { nome: "Steve Finnan", posicoes: ["LD"], forca: 80 },
+      { nome: "Álvaro Arbeloa", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "Jamie Carragher", posicoes: ["ZAG","LD"], forca: 85 },
+      { nome: "Martin Škrtel", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Sami Hyypiä", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Fábio Aurélio", posicoes: ["LE"], forca: 77 },
+      { nome: "Xabi Alonso", posicoes: ["VOL","MC"], forca: 87 },
+      { nome: "Javier Mascherano", posicoes: ["VOL"], forca: 85 },
+      { nome: "Steven Gerrard", posicoes: ["MC"], forca: 90 },
+      { nome: "Lucas Leiva", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Yossi Benayoun", posicoes: ["MC","PD"], forca: 77 },
+      { nome: "Ryan Babel", posicoes: ["PD"], forca: 75 },
+      { nome: "Dirk Kuyt", posicoes: ["ATA"], forca: 81 },
+      { nome: "Fernando Torres", posicoes: ["ATA"], forca: 90 },
+      { nome: "Peter Crouch", posicoes: ["ATA"], forca: 80 }
+    ]
+  },
+
+  // ===== Edição 2007 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2007,
+    clube: "Milan",
+    jogadores: [
+      { nome: "Dida", posicoes: ["GOL"], forca: 84 },
+      { nome: "Cafu", posicoes: ["LD"], forca: 87 },
+      { nome: "Massimo Oddo", posicoes: ["LD"], forca: 81 },
+      { nome: "Alessandro Nesta", posicoes: ["ZAG"], forca: 89 },
+      { nome: "Paolo Maldini", posicoes: ["ZAG","LD"], forca: 85 },
+      { nome: "Marek Jankulovski", posicoes: ["LE"], forca: 81 },
+      { nome: "Kakha Kaladze", posicoes: ["ZAG","LD"], forca: 82 },
+      { nome: "Gennaro Gattuso", posicoes: ["VOL"], forca: 85 },
+      { nome: "Andrea Pirlo", posicoes: ["VOL","MC"], forca: 90 },
+      { nome: "Massimo Ambrosini", posicoes: ["VOL","MC"], forca: 82 },
+      { nome: "Clarence Seedorf", posicoes: ["MC"], forca: 88 },
+      { nome: "Kaká", posicoes: ["MEI"], forca: 95 },
+      { nome: "Yoann Gourcuff", posicoes: ["MEI"], forca: 75 },
+      { nome: "Serginho", posicoes: ["MC","LE"], forca: 81 },
+      { nome: "Filippo Inzaghi", posicoes: ["ATA"], forca: 85 },
+      { nome: "Alberto Gilardino", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2007,
+    clube: "Liverpool",
+    jogadores: [
+      { nome: "Pepe Reina", posicoes: ["GOL"], forca: 84 },
+      { nome: "Steve Finnan", posicoes: ["LD"], forca: 80 },
+      { nome: "Jamie Carragher", posicoes: ["ZAG","LD"], forca: 85 },
+      { nome: "Sami Hyypiä", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Daniel Agger", posicoes: ["ZAG"], forca: 80 },
+      { nome: "John Arne Riise", posicoes: ["LD","ME"], forca: 82 },
+      { nome: "Álvaro Arbeloa", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "Xabi Alonso", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Javier Mascherano", posicoes: ["VOL"], forca: 84 },
+      { nome: "Steven Gerrard", posicoes: ["MC"], forca: 90 },
+      { nome: "Mohamed Sissoko", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Jermaine Pennant", posicoes: ["PD"], forca: 75 },
+      { nome: "Bolo Zenden", posicoes: ["MC","PE"], forca: 75 },
+      { nome: "Peter Crouch", posicoes: ["ATA"], forca: 80 },
+      { nome: "Dirk Kuyt", posicoes: ["ATA"], forca: 81 },
+      { nome: "Craig Bellamy", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2007,
+    clube: "Manchester United",
+    jogadores: [
+      { nome: "Edwin van der Sar", posicoes: ["GOL"], forca: 88 },
+      { nome: "Gary Neville", posicoes: ["LD"], forca: 83 },
+      { nome: "Wes Brown", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "Rio Ferdinand", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Nemanja Vidić", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Patrice Evra", posicoes: ["LE"], forca: 85 },
+      { nome: "Mikaël Silvestre", posicoes: ["LD","ZAG"], forca: 77 },
+      { nome: "Michael Carrick", posicoes: ["VOL","MC"], forca: 83 },
+      { nome: "Paul Scholes", posicoes: ["MC"], forca: 88 },
+      { nome: "Ryan Giggs", posicoes: ["MC","PD"], forca: 85 },
+      { nome: "Cristiano Ronaldo", posicoes: ["PD","ATA"], forca: 91 },
+      { nome: "Park Ji-sung", posicoes: ["MC","PD"], forca: 81 },
+      { nome: "Wayne Rooney", posicoes: ["ATA"], forca: 88 },
+      { nome: "Louis Saha", posicoes: ["ATA"], forca: 80 },
+      { nome: "Ole Gunnar Solskjær", posicoes: ["ATA"], forca: 81 },
+      { nome: "Alan Smith", posicoes: ["ATA"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2007,
+    clube: "Chelsea",
+    jogadores: [
+      { nome: "Petr Čech", posicoes: ["GOL"], forca: 89 },
+      { nome: "Carlo Cudicini", posicoes: ["GOL"], forca: 81 },
+      { nome: "Paulo Ferreira", posicoes: ["LD"], forca: 82 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 87 },
+      { nome: "John Terry", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Ashley Cole", posicoes: ["LE"], forca: 87 },
+      { nome: "Wayne Bridge", posicoes: ["LE"], forca: 80 },
+      { nome: "Michael Essien", posicoes: ["VOL","MC","LD"], forca: 87 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 88 },
+      { nome: "Frank Lampard", posicoes: ["MC"], forca: 89 },
+      { nome: "Michael Ballack", posicoes: ["MC"], forca: 84 },
+      { nome: "Joe Cole", posicoes: ["MEI"], forca: 82 },
+      { nome: "Arjen Robben", posicoes: ["PD"], forca: 84 },
+      { nome: "Didier Drogba", posicoes: ["ATA"], forca: 89 },
+      { nome: "Andriy Shevchenko", posicoes: ["ATA"], forca: 82 },
+      { nome: "Salomon Kalou", posicoes: ["ATA","PD"], forca: 77 }
+    ]
+  },
+
+  // ===== Edição 2006 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2006,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Víctor Valdés", posicoes: ["GOL"], forca: 84 },
+      { nome: "Oleguer", posicoes: ["LD","ZAG"], forca: 76 },
+      { nome: "Carles Puyol", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Rafael Márquez", posicoes: ["ZAG","VOL"], forca: 84 },
+      { nome: "Giovanni van Bronckhorst", posicoes: ["LE"], forca: 81 },
+      { nome: "Juliano Belletti", posicoes: ["LD"], forca: 79 },
+      { nome: "Sylvinho", posicoes: ["LE"], forca: 79 },
+      { nome: "Edmílson", posicoes: ["VOL","ZAG"], forca: 81 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 85 },
+      { nome: "Deco", posicoes: ["MC"], forca: 88 },
+      { nome: "Andrés Iniesta", posicoes: ["MC"], forca: 80 },
+      { nome: "Ludovic Giuly", posicoes: ["MC","PD"], forca: 84 },
+      { nome: "Ronaldinho", posicoes: ["MEI","PD"], forca: 95 },
+      { nome: "Lionel Messi", posicoes: ["ATA","PD"], forca: 82 },
+      { nome: "Samuel Eto'o", posicoes: ["ATA"], forca: 91 },
+      { nome: "Henrik Larsson", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2006,
+    clube: "Arsenal",
+    jogadores: [
+      { nome: "Jens Lehmann", posicoes: ["GOL"], forca: 85 },
+      { nome: "Emmanuel Eboué", posicoes: ["LD"], forca: 77 },
+      { nome: "Kolo Touré", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Philippe Senderos", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Sol Campbell", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Ashley Cole", posicoes: ["LE"], forca: 87 },
+      { nome: "Mathieu Flamini", posicoes: ["VOL","LD"], forca: 77 },
+      { nome: "Gilberto Silva", posicoes: ["VOL"], forca: 83 },
+      { nome: "Cesc Fàbregas", posicoes: ["MC"], forca: 84 },
+      { nome: "Robert Pirès", posicoes: ["MC","PD"], forca: 82 },
+      { nome: "Freddie Ljungberg", posicoes: ["MC","PD"], forca: 81 },
+      { nome: "Aleksandr Hleb", posicoes: ["MC","PD"], forca: 80 },
+      { nome: "José Antonio Reyes", posicoes: ["ATA","PD"], forca: 79 },
+      { nome: "Dennis Bergkamp", posicoes: ["ATA"], forca: 80 },
+      { nome: "Robin van Persie", posicoes: ["ATA","PD"], forca: 79 },
+      { nome: "Thierry Henry", posicoes: ["ATA"], forca: 93 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2006,
+    clube: "Milan",
+    jogadores: [
+      { nome: "Dida", posicoes: ["GOL"], forca: 84 },
+      { nome: "Cafu", posicoes: ["LD"], forca: 87 },
+      { nome: "Alessandro Nesta", posicoes: ["ZAG"], forca: 90 },
+      { nome: "Jaap Stam", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Paolo Maldini", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Kakha Kaladze", posicoes: ["ZAG","LD"], forca: 81 },
+      { nome: "Andrea Pirlo", posicoes: ["VOL","MC"], forca: 89 },
+      { nome: "Gennaro Gattuso", posicoes: ["VOL"], forca: 85 },
+      { nome: "Clarence Seedorf", posicoes: ["MC"], forca: 88 },
+      { nome: "Kaká", posicoes: ["MEI"], forca: 90 },
+      { nome: "Massimo Ambrosini", posicoes: ["VOL","MC"], forca: 82 },
+      { nome: "Rui Costa", posicoes: ["MEI"], forca: 85 },
+      { nome: "Serginho", posicoes: ["MC","LE"], forca: 80 },
+      { nome: "Alberto Gilardino", posicoes: ["ATA"], forca: 81 },
+      { nome: "Filippo Inzaghi", posicoes: ["ATA"], forca: 88 },
+      { nome: "Andriy Shevchenko", posicoes: ["ATA"], forca: 91 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2006,
+    clube: "Villarreal",
+    jogadores: [
+      { nome: "Sebastián Viera", posicoes: ["GOL"], forca: 75 },
+      { nome: "Mariano Barbosa", posicoes: ["GOL"], forca: 72 },
+      { nome: "Javi Venta", posicoes: ["LD"], forca: 75 },
+      { nome: "Gonzalo Rodríguez", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Juan Manuel Peña", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Rodolfo Arruabarrena", posicoes: ["LE"], forca: 76 },
+      { nome: "Quique Álvarez", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Marcos Senna", posicoes: ["VOL"], forca: 84 },
+      { nome: "Josico", posicoes: ["VOL"], forca: 75 },
+      { nome: "Alessio Tacchinardi", posicoes: ["VOL"], forca: 80 },
+      { nome: "Juan Román Riquelme", posicoes: ["MEI"], forca: 89 },
+      { nome: "Santi Cazorla", posicoes: ["MC","PD"], forca: 77 },
+      { nome: "Juan Pablo Sorín", posicoes: ["LD","ME"], forca: 81 },
+      { nome: "Diego Forlán", posicoes: ["ATA"], forca: 84 },
+      { nome: "José Mari", posicoes: ["ATA"], forca: 75 },
+      { nome: "Guillermo Franco", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  // ===== Edição 2005 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2005,
+    clube: "Liverpool",
+    jogadores: [
+      { nome: "Jerzy Dudek", posicoes: ["GOL"], forca: 82 },
+      { nome: "Steve Finnan", posicoes: ["LD"], forca: 81 },
+      { nome: "Jamie Carragher", posicoes: ["ZAG","LD"], forca: 87 },
+      { nome: "Sami Hyypiä", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Djimi Traoré", posicoes: ["LE"], forca: 73 },
+      { nome: "John Arne Riise", posicoes: ["LD","ME"], forca: 82 },
+      { nome: "Xabi Alonso", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Steven Gerrard", posicoes: ["MC"], forca: 91 },
+      { nome: "Dietmar Hamann", posicoes: ["VOL"], forca: 81 },
+      { nome: "Igor Bišćan", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Luis García", posicoes: ["MEI","PD"], forca: 83 },
+      { nome: "Harry Kewell", posicoes: ["MC","PE"], forca: 80 },
+      { nome: "Vladimír Šmicer", posicoes: ["MC","PD"], forca: 79 },
+      { nome: "Milan Baroš", posicoes: ["ATA"], forca: 81 },
+      { nome: "Djibril Cissé", posicoes: ["ATA"], forca: 79 },
+      { nome: "Florent Sinama Pongolle", posicoes: ["ATA"], forca: 72 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2005,
+    clube: "Milan",
+    jogadores: [
+      { nome: "Dida", posicoes: ["GOL"], forca: 84 },
+      { nome: "Cafu", posicoes: ["LD"], forca: 87 },
+      { nome: "Alessandro Nesta", posicoes: ["ZAG"], forca: 90 },
+      { nome: "Jaap Stam", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Paolo Maldini", posicoes: ["ZAG","LD"], forca: 89 },
+      { nome: "Kakha Kaladze", posicoes: ["ZAG","LD"], forca: 81 },
+      { nome: "Alessandro Costacurta", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Gennaro Gattuso", posicoes: ["VOL"], forca: 85 },
+      { nome: "Andrea Pirlo", posicoes: ["VOL","MC"], forca: 89 },
+      { nome: "Clarence Seedorf", posicoes: ["MC"], forca: 88 },
+      { nome: "Kaká", posicoes: ["MEI"], forca: 89 },
+      { nome: "Rui Costa", posicoes: ["MEI"], forca: 85 },
+      { nome: "Serginho", posicoes: ["MC","LE"], forca: 80 },
+      { nome: "Hernán Crespo", posicoes: ["ATA"], forca: 87 },
+      { nome: "Andriy Shevchenko", posicoes: ["ATA"], forca: 91 },
+      { nome: "Jon Dahl Tomasson", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2005,
+    clube: "Chelsea",
+    jogadores: [
+      { nome: "Petr Čech", posicoes: ["GOL"], forca: 88 },
+      { nome: "Paulo Ferreira", posicoes: ["LD"], forca: 82 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 87 },
+      { nome: "John Terry", posicoes: ["ZAG"], forca: 88 },
+      { nome: "William Gallas", posicoes: ["ZAG","LD"], forca: 85 },
+      { nome: "Wayne Bridge", posicoes: ["LE"], forca: 80 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 88 },
+      { nome: "Frank Lampard", posicoes: ["MC"], forca: 90 },
+      { nome: "Tiago", posicoes: ["VOL","MC"], forca: 79 },
+      { nome: "Geremi", posicoes: ["MC","LD"], forca: 79 },
+      { nome: "Joe Cole", posicoes: ["MEI"], forca: 82 },
+      { nome: "Damien Duff", posicoes: ["PE"], forca: 83 },
+      { nome: "Arjen Robben", posicoes: ["PD"], forca: 84 },
+      { nome: "Eidur Gudjohnsen", posicoes: ["ATA","MC"], forca: 80 },
+      { nome: "Didier Drogba", posicoes: ["ATA"], forca: 82 },
+      { nome: "Mateja Kežman", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2005,
+    clube: "PSV Eindhoven",
+    jogadores: [
+      { nome: "Heurelho Gomes", posicoes: ["GOL"], forca: 80 },
+      { nome: "André Ooijer", posicoes: ["LD","ZAG"], forca: 79 },
+      { nome: "Alex", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Wilfred Bouma", posicoes: ["ZAG","LD"], forca: 77 },
+      { nome: "Lee Young-pyo", posicoes: ["LE"], forca: 79 },
+      { nome: "Theo Lucius", posicoes: ["LD","MC"], forca: 75 },
+      { nome: "Phillip Cocu", posicoes: ["VOL","MC"], forca: 84 },
+      { nome: "Mark van Bommel", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Johann Vogel", posicoes: ["VOL"], forca: 79 },
+      { nome: "Park Ji-sung", posicoes: ["MC","PD"], forca: 81 },
+      { nome: "DaMarcus Beasley", posicoes: ["PD"], forca: 75 },
+      { nome: "John de Jong", posicoes: ["MEI"], forca: 75 },
+      { nome: "Jefferson Farfán", posicoes: ["ATA","PD"], forca: 80 },
+      { nome: "Jan Vennegoor of Hesselink", posicoes: ["ATA"], forca: 77 },
+      { nome: "Robert", posicoes: ["ATA"], forca: 75 },
+      { nome: "Gerald Sibon", posicoes: ["ATA"], forca: 73 }
+    ]
+  },
+
+  // ===== Edição 2004 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2004,
+    clube: "Porto",
+    jogadores: [
+      { nome: "Vítor Baía", posicoes: ["GOL"], forca: 82 },
+      { nome: "Paulo Ferreira", posicoes: ["LD"], forca: 82 },
+      { nome: "Nuno Valente", posicoes: ["LE"], forca: 81 },
+      { nome: "Jorge Costa", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Ricardo Carvalho", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Pedro Emanuel", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Ricardo Costa", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Costinha", posicoes: ["VOL"], forca: 82 },
+      { nome: "Maniche", posicoes: ["VOL","MC"], forca: 87 },
+      { nome: "Deco", posicoes: ["MEI"], forca: 90 },
+      { nome: "Pedro Mendes", posicoes: ["MC"], forca: 80 },
+      { nome: "Dmitri Alenichev", posicoes: ["MC","ATA"], forca: 81 },
+      { nome: "Carlos Alberto", posicoes: ["MEI","ATA"], forca: 80 },
+      { nome: "Derlei", posicoes: ["ATA"], forca: 82 },
+      { nome: "Benni McCarthy", posicoes: ["ATA"], forca: 82 },
+      { nome: "Edgaras Jankauskas", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2004,
+    clube: "Monaco",
+    jogadores: [
+      { nome: "Flavio Roma", posicoes: ["GOL"], forca: 77 },
+      { nome: "Patrice Evra", posicoes: ["LE"], forca: 85 },
+      { nome: "Gaël Givet", posicoes: ["ZAG","LD"], forca: 79 },
+      { nome: "Julien Rodriguez", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Sébastien Squillaci", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Hugo Ibarra", posicoes: ["LD"], forca: 80 },
+      { nome: "Lucas Bernardi", posicoes: ["VOL"], forca: 79 },
+      { nome: "Akis Zikos", posicoes: ["VOL"], forca: 77 },
+      { nome: "Édouard Cissé", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Ludovic Giuly", posicoes: ["MC","PD"], forca: 87 },
+      { nome: "Jérôme Rothen", posicoes: ["MC","PE"], forca: 84 },
+      { nome: "Jaroslav Plašil", posicoes: ["MC","PD"], forca: 77 },
+      { nome: "Dado Pršo", posicoes: ["ATA"], forca: 82 },
+      { nome: "Fernando Morientes", posicoes: ["ATA"], forca: 88 },
+      { nome: "Shabani Nonda", posicoes: ["ATA"], forca: 77 },
+      { nome: "Emmanuel Adebayor", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2004,
+    clube: "Chelsea",
+    jogadores: [
+      { nome: "Carlo Cudicini", posicoes: ["GOL"], forca: 81 },
+      { nome: "Wayne Bridge", posicoes: ["LE"], forca: 80 },
+      { nome: "William Gallas", posicoes: ["ZAG","LD"], forca: 85 },
+      { nome: "John Terry", posicoes: ["ZAG"], forca: 85 },
+      { nome: "Marcel Desailly", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 87 },
+      { nome: "Frank Lampard", posicoes: ["MC"], forca: 88 },
+      { nome: "Geremi", posicoes: ["MC","LD"], forca: 79 },
+      { nome: "Joe Cole", posicoes: ["MEI"], forca: 82 },
+      { nome: "Damien Duff", posicoes: ["PD"], forca: 83 },
+      { nome: "Juan Sebastián Verón", posicoes: ["MC"], forca: 80 },
+      { nome: "Jesper Grønkjær", posicoes: ["PD"], forca: 77 },
+      { nome: "Eidur Gudjohnsen", posicoes: ["ATA","MC"], forca: 80 },
+      { nome: "Adrian Mutu", posicoes: ["ATA","PD"], forca: 80 },
+      { nome: "Jimmy Floyd Hasselbaink", posicoes: ["ATA"], forca: 82 },
+      { nome: "Hernán Crespo", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2004,
+    clube: "Deportivo La Coruña",
+    jogadores: [
+      { nome: "José Molina", posicoes: ["GOL"], forca: 80 },
+      { nome: "Manuel Pablo", posicoes: ["LD"], forca: 79 },
+      { nome: "Héctor", posicoes: ["LD","ZAG"], forca: 75 },
+      { nome: "Jorge Andrade", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Noureddine Naybet", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Enrique Romero", posicoes: ["LE"], forca: 77 },
+      { nome: "Lionel Scaloni", posicoes: ["LD","MC"], forca: 76 },
+      { nome: "Mauro Silva", posicoes: ["VOL"], forca: 82 },
+      { nome: "Aldo Duscher", posicoes: ["VOL"], forca: 79 },
+      { nome: "Sergio González", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Víctor Sánchez", posicoes: ["MC","PD"], forca: 79 },
+      { nome: "Fran", posicoes: ["MC","PE"], forca: 80 },
+      { nome: "Juan Carlos Valerón", posicoes: ["MEI"], forca: 87 },
+      { nome: "Albert Luque", posicoes: ["ATA","PD"], forca: 81 },
+      { nome: "Walter Pandiani", posicoes: ["ATA"], forca: 81 },
+      { nome: "Diego Tristán", posicoes: ["ATA"], forca: 82 }
+    ]
+  },
+
+  // ===== Edição 2003 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2003,
+    clube: "Milan",
+    jogadores: [
+      { nome: "Dida", posicoes: ["GOL"], forca: 84 },
+      { nome: "Paolo Maldini", posicoes: ["ZAG","LD"], forca: 90 },
+      { nome: "Alessandro Nesta", posicoes: ["ZAG"], forca: 91 },
+      { nome: "Alessandro Costacurta", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Kakha Kaladze", posicoes: ["ZAG","LD"], forca: 82 },
+      { nome: "Dario Šimić", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Roque Júnior", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Gennaro Gattuso", posicoes: ["VOL"], forca: 85 },
+      { nome: "Andrea Pirlo", posicoes: ["VOL","MC"], forca: 87 },
+      { nome: "Clarence Seedorf", posicoes: ["MC"], forca: 87 },
+      { nome: "Massimo Ambrosini", posicoes: ["VOL","MC"], forca: 82 },
+      { nome: "Rui Costa", posicoes: ["MEI"], forca: 85 },
+      { nome: "Serginho", posicoes: ["MC","LE"], forca: 81 },
+      { nome: "Rivaldo", posicoes: ["MEI","ATA"], forca: 82 },
+      { nome: "Filippo Inzaghi", posicoes: ["ATA"], forca: 88 },
+      { nome: "Andriy Shevchenko", posicoes: ["ATA"], forca: 90 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2003,
+    clube: "Juventus",
+    jogadores: [
+      { nome: "Gianluigi Buffon", posicoes: ["GOL"], forca: 91 },
+      { nome: "Lilian Thuram", posicoes: ["LD","ZAG"], forca: 89 },
+      { nome: "Ciro Ferrara", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Paolo Montero", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Mark Iuliano", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Gianluca Zambrotta", posicoes: ["LD"], forca: 87 },
+      { nome: "Igor Tudor", posicoes: ["VOL","ZAG"], forca: 79 },
+      { nome: "Edgar Davids", posicoes: ["VOL"], forca: 87 },
+      { nome: "Alessio Tacchinardi", posicoes: ["VOL"], forca: 80 },
+      { nome: "Pavel Nedvěd", posicoes: ["MEI"], forca: 94 },
+      { nome: "Mauro Camoranesi", posicoes: ["MC","PD"], forca: 84 },
+      { nome: "Antonio Conte", posicoes: ["MC"], forca: 81 },
+      { nome: "Alessandro Del Piero", posicoes: ["ATA"], forca: 88 },
+      { nome: "David Trezeguet", posicoes: ["ATA"], forca: 87 },
+      { nome: "Marco Di Vaio", posicoes: ["ATA"], forca: 80 },
+      { nome: "Marcelo Salas", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2003,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 87 },
+      { nome: "Míchel Salgado", posicoes: ["LD"], forca: 83 },
+      { nome: "Roberto Carlos", posicoes: ["LE","LD"], forca: 90 },
+      { nome: "Fernando Hierro", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Iván Helguera", posicoes: ["ZAG","VOL"], forca: 83 },
+      { nome: "Francisco Pavón", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 88 },
+      { nome: "Esteban Cambiasso", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Luís Figo", posicoes: ["MC","PD"], forca: 90 },
+      { nome: "Zinedine Zidane", posicoes: ["MEI"], forca: 94 },
+      { nome: "Santiago Solari", posicoes: ["MC","PE"], forca: 80 },
+      { nome: "Steve McManaman", posicoes: ["MC","PD"], forca: 82 },
+      { nome: "Guti", posicoes: ["MEI","ATA"], forca: 82 },
+      { nome: "Raúl", posicoes: ["ATA"], forca: 89 },
+      { nome: "Ronaldo", posicoes: ["ATA"], forca: 91 },
+      { nome: "Fernando Morientes", posicoes: ["ATA"], forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2003,
+    clube: "Internazionale",
+    jogadores: [
+      { nome: "Francesco Toldo", posicoes: ["GOL"], forca: 84 },
+      { nome: "Javier Zanetti", posicoes: ["LD","ZAG"], forca: 89 },
+      { nome: "Fabio Cannavaro", posicoes: ["ZAG"], forca: 89 },
+      { nome: "Marco Materazzi", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Iván Córdoba", posicoes: ["ZAG","LD"], forca: 84 },
+      { nome: "Francesco Coco", posicoes: ["LE"], forca: 77 },
+      { nome: "Luigi Di Biagio", posicoes: ["VOL"], forca: 80 },
+      { nome: "Cristiano Zanetti", posicoes: ["VOL"], forca: 80 },
+      { nome: "Matías Almeyda", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Emre Belözoğlu", posicoes: ["MC"], forca: 80 },
+      { nome: "Sérgio Conceição", posicoes: ["MC","PD"], forca: 80 },
+      { nome: "Álvaro Recoba", posicoes: ["MEI","ATA"], forca: 83 },
+      { nome: "Hernán Crespo", posicoes: ["ATA"], forca: 87 },
+      { nome: "Christian Vieri", posicoes: ["ATA"], forca: 89 },
+      { nome: "Gabriel Batistuta", posicoes: ["ATA"], forca: 80 },
+      { nome: "Obafemi Martins", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  // ===== Edição 2002 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2002,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 84 },
+      { nome: "César Sánchez", posicoes: ["GOL"], forca: 79 },
+      { nome: "Míchel Salgado", posicoes: ["LD"], forca: 83 },
+      { nome: "Roberto Carlos", posicoes: ["LE","LD"], forca: 91 },
+      { nome: "Fernando Hierro", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Iván Helguera", posicoes: ["ZAG","VOL"], forca: 83 },
+      { nome: "Francisco Pavón", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 88 },
+      { nome: "Flávio Conceição", posicoes: ["VOL"], forca: 81 },
+      { nome: "Luís Figo", posicoes: ["MC","PD"], forca: 91 },
+      { nome: "Zinedine Zidane", posicoes: ["MEI"], forca: 94 },
+      { nome: "Santiago Solari", posicoes: ["MC","PE"], forca: 81 },
+      { nome: "Steve McManaman", posicoes: ["MC","PD"], forca: 82 },
+      { nome: "Guti", posicoes: ["MEI","ATA"], forca: 82 },
+      { nome: "Raúl", posicoes: ["ATA"], forca: 90 },
+      { nome: "Fernando Morientes", posicoes: ["ATA"], forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2002,
+    clube: "Bayer Leverkusen",
+    jogadores: [
+      { nome: "Hans-Jörg Butt", posicoes: ["GOL"], forca: 81 },
+      { nome: "Lúcio", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Jens Nowotny", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Boris Živković", posicoes: ["ZAG","LD"], forca: 77 },
+      { nome: "Diego Placente", posicoes: ["LE"], forca: 79 },
+      { nome: "Zoltán Sebescen", posicoes: ["LD"], forca: 74 },
+      { nome: "Carsten Ramelow", posicoes: ["VOL","ZAG"], forca: 81 },
+      { nome: "Michael Ballack", posicoes: ["VOL","MC"], forca: 91 },
+      { nome: "Yıldıray Baştürk", posicoes: ["MEI"], forca: 84 },
+      { nome: "Bernd Schneider", posicoes: ["MC","LD"], forca: 84 },
+      { nome: "Zé Roberto", posicoes: ["MC","PE"], forca: 87 },
+      { nome: "Marko Babić", posicoes: ["MC","PD"], forca: 75 },
+      { nome: "Robson Ponte", posicoes: ["MEI"], forca: 74 },
+      { nome: "Oliver Neuville", posicoes: ["ATA","PD"], forca: 82 },
+      { nome: "Ulf Kirsten", posicoes: ["ATA"], forca: 80 },
+      { nome: "Dimitar Berbatov", posicoes: ["ATA"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2002,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Roberto Bonano", posicoes: ["GOL"], forca: 76 },
+      { nome: "Carles Puyol", posicoes: ["LD","ZAG"], forca: 89 },
+      { nome: "Michael Reiziger", posicoes: ["LD","ZAG"], forca: 80 },
+      { nome: "Frank de Boer", posicoes: ["ZAG","VOL"], forca: 84 },
+      { nome: "Abelardo", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Sergi Barjuán", posicoes: ["LE"], forca: 82 },
+      { nome: "Philippe Christanval", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Phillip Cocu", posicoes: ["VOL","MC"], forca: 84 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 81 },
+      { nome: "Gabri", posicoes: ["MC","LD"], forca: 76 },
+      { nome: "Luis Enrique", posicoes: ["MC","PD"], forca: 87 },
+      { nome: "Rivaldo", posicoes: ["MEI","PD"], forca: 90 },
+      { nome: "Marc Overmars", posicoes: ["PD"], forca: 84 },
+      { nome: "Patrick Kluivert", posicoes: ["ATA"], forca: 87 },
+      { nome: "Javier Saviola", posicoes: ["ATA"], forca: 82 },
+      { nome: "Dani García", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2002,
+    clube: "Manchester United",
+    jogadores: [
+      { nome: "Fabien Barthez", posicoes: ["GOL"], forca: 84 },
+      { nome: "Gary Neville", posicoes: ["LD"], forca: 83 },
+      { nome: "Phil Neville", posicoes: ["LD","ZAG"], forca: 77 },
+      { nome: "Wes Brown", posicoes: ["ZAG"], forca: 79 },
+      { nome: "Laurent Blanc", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Mikaël Silvestre", posicoes: ["LE","ZAG"], forca: 77 },
+      { nome: "Denis Irwin", posicoes: ["LE"], forca: 80 },
+      { nome: "Roy Keane", posicoes: ["VOL","MC"], forca: 89 },
+      { nome: "Paul Scholes", posicoes: ["MC"], forca: 88 },
+      { nome: "Nicky Butt", posicoes: ["VOL"], forca: 80 },
+      { nome: "Ryan Giggs", posicoes: ["PE"], forca: 88 },
+      { nome: "David Beckham", posicoes: ["MC","PD"], forca: 90 },
+      { nome: "Juan Sebastián Verón", posicoes: ["MC"], forca: 83 },
+      { nome: "Ole Gunnar Solskjær", posicoes: ["ATA","PD"], forca: 81 },
+      { nome: "Ruud van Nistelrooy", posicoes: ["ATA"], forca: 90 },
+      { nome: "Diego Forlán", posicoes: ["ATA"], forca: 84 }
+    ]
+  },
+
+  // ===== Edição 2001 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2001,
+    clube: "Bayern München",
+    jogadores: [
+      { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 93 },
+      { nome: "Willy Sagnol", posicoes: ["LD"], forca: 84 },
+      { nome: "Bixente Lizarazu", posicoes: ["LE","LD"], forca: 87 },
+      { nome: "Samuel Kuffour", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Thomas Linke", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Patrik Andersson", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Michael Tarnat", posicoes: ["LE"], forca: 80 },
+      { nome: "Stefan Effenberg", posicoes: ["VOL","MC"], forca: 90 },
+      { nome: "Jens Jeremies", posicoes: ["VOL"], forca: 82 },
+      { nome: "Owen Hargreaves", posicoes: ["VOL","MC"], forca: 81 },
+      { nome: "Thorsten Fink", posicoes: ["VOL","MC"], forca: 79 },
+      { nome: "Mehmet Scholl", posicoes: ["MEI"], forca: 84 },
+      { nome: "Hasan Salihamidžić", posicoes: ["MC","PD"], forca: 82 },
+      { nome: "Alexander Zickler", posicoes: ["ATA"], forca: 77 },
+      { nome: "Carsten Jancker", posicoes: ["ATA"], forca: 81 },
+      { nome: "Giovane Élber", posicoes: ["ATA"], forca: 87 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2001,
+    clube: "Valencia",
+    jogadores: [
+      { nome: "Santiago Cañizares", posicoes: ["GOL"], forca: 84 },
+      { nome: "Jocelyn Angloma", posicoes: ["LD"], forca: 81 },
+      { nome: "Amedeo Carboni", posicoes: ["LE"], forca: 81 },
+      { nome: "Mauricio Pellegrino", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Roberto Ayala", posicoes: ["ZAG"], forca: 87 },
+      { nome: "Miroslav Djukić", posicoes: ["ZAG"], forca: 81 },
+      { nome: "David Albelda", posicoes: ["VOL"], forca: 82 },
+      { nome: "Rubén Baraja", posicoes: ["VOL","MC"], forca: 84 },
+      { nome: "Gaizka Mendieta", posicoes: ["MC","LD"], forca: 90 },
+      { nome: "Kily González", posicoes: ["MC","PE"], forca: 84 },
+      { nome: "Pablo Aimar", posicoes: ["MEI"], forca: 84 },
+      { nome: "Vicente", posicoes: ["PD","MC"], forca: 81 },
+      { nome: "Miguel Ángel Angulo", posicoes: ["MC","ATA"], forca: 80 },
+      { nome: "John Carew", posicoes: ["ATA"], forca: 79 },
+      { nome: "Juan Sánchez", posicoes: ["ATA"], forca: 77 },
+      { nome: "Diego Alonso", posicoes: ["ATA"], forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2001,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 87 },
+      { nome: "César Sánchez", posicoes: ["GOL"], forca: 77 },
+      { nome: "Míchel Salgado", posicoes: ["LD"], forca: 83 },
+      { nome: "Roberto Carlos", posicoes: ["LE","LD"], forca: 91 },
+      { nome: "Fernando Hierro", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Iván Helguera", posicoes: ["ZAG","VOL"], forca: 83 },
+      { nome: "Aitor Karanka", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Claude Makélélé", posicoes: ["VOL"], forca: 88 },
+      { nome: "Flávio Conceição", posicoes: ["VOL"], forca: 80 },
+      { nome: "Luís Figo", posicoes: ["MC","PD"], forca: 93 },
+      { nome: "Steve McManaman", posicoes: ["MC","PD"], forca: 82 },
+      { nome: "Santiago Solari", posicoes: ["MC","PE"], forca: 80 },
+      { nome: "Guti", posicoes: ["MEI","ATA"], forca: 82 },
+      { nome: "Sávio", posicoes: ["MC","PE"], forca: 80 },
+      { nome: "Raúl", posicoes: ["ATA"], forca: 91 },
+      { nome: "Fernando Morientes", posicoes: ["ATA"], forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2001,
+    clube: "Leeds United",
+    jogadores: [
+      { nome: "Nigel Martyn", posicoes: ["GOL"], forca: 80 },
+      { nome: "Gary Kelly", posicoes: ["LD"], forca: 77 },
+      { nome: "Danny Mills", posicoes: ["LD"], forca: 76 },
+      { nome: "Ian Harte", posicoes: ["LE"], forca: 79 },
+      { nome: "Rio Ferdinand", posicoes: ["ZAG"], forca: 84 },
+      { nome: "Lucas Radebe", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Jonathan Woodgate", posicoes: ["ZAG"], forca: 80 },
+      { nome: "Dominic Matteo", posicoes: ["ZAG","LD"], forca: 77 },
+      { nome: "David Batty", posicoes: ["VOL"], forca: 79 },
+      { nome: "Olivier Dacourt", posicoes: ["VOL","MC"], forca: 80 },
+      { nome: "Eirik Bakke", posicoes: ["MC"], forca: 75 },
+      { nome: "Lee Bowyer", posicoes: ["MC","LD"], forca: 81 },
+      { nome: "Harry Kewell", posicoes: ["MC","PE"], forca: 84 },
+      { nome: "Alan Smith", posicoes: ["ATA"], forca: 80 },
+      { nome: "Mark Viduka", posicoes: ["ATA"], forca: 84 },
+      { nome: "Robbie Keane", posicoes: ["ATA"], forca: 80 }
+    ]
+  },
+
+  // ===== Edição 2000 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 2000,
+    clube: "Real Madrid",
+    jogadores: [
+      { nome: "Iker Casillas", posicoes: ["GOL"], forca: 82 },
+      { nome: "Míchel Salgado", posicoes: ["LD"], forca: 83 },
+      { nome: "Iván Helguera", posicoes: ["ZAG","VOL"], forca: 83 },
+      { nome: "Fernando Hierro", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Aitor Karanka", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Roberto Carlos", posicoes: ["LE","LD"], forca: 91 },
+      { nome: "Fernando Redondo", posicoes: ["VOL"], forca: 93 },
+      { nome: "Christian Karembeu", posicoes: ["VOL"], forca: 81 },
+      { nome: "Clarence Seedorf", posicoes: ["VOL","MC"], forca: 88 },
+      { nome: "Steve McManaman", posicoes: ["MC","LD"], forca: 82 },
+      { nome: "Guti", posicoes: ["MEI","PD"], forca: 82 },
+      { nome: "Sávio", posicoes: ["MC","PE"], forca: 81 },
+      { nome: "Geremi", posicoes: ["MC","LD"], forca: 80 },
+      { nome: "Raúl", posicoes: ["ATA"], forca: 91 },
+      { nome: "Fernando Morientes", posicoes: ["ATA"], forca: 85 },
+      { nome: "Nicolas Anelka", posicoes: ["ATA"], forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2000,
+    clube: "Valencia",
+    jogadores: [
+      { nome: "Santiago Cañizares", posicoes: ["GOL"], forca: 84 },
+      { nome: "Jocelyn Angloma", posicoes: ["LD"], forca: 81 },
+      { nome: "Amedeo Carboni", posicoes: ["LE"], forca: 81 },
+      { nome: "Miroslav Djukić", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Mauricio Pellegrino", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Joachim Björklund", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Gerardo", posicoes: ["LD","MC"], forca: 74 },
+      { nome: "David Albelda", posicoes: ["VOL"], forca: 82 },
+      { nome: "Javier Farinós", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Gerard López", posicoes: ["MC"], forca: 80 },
+      { nome: "Gaizka Mendieta", posicoes: ["MC","LD"], forca: 89 },
+      { nome: "Kily González", posicoes: ["MC","PE"], forca: 84 },
+      { nome: "Miguel Ángel Angulo", posicoes: ["MC","ATA"], forca: 80 },
+      { nome: "Claudio López", posicoes: ["ATA","PD"], forca: 87 },
+      { nome: "Adrian Ilie", posicoes: ["ATA"], forca: 80 },
+      { nome: "Juan Sánchez", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2000,
+    clube: "Bayern München",
+    jogadores: [
+      { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 90 },
+      { nome: "Samuel Kuffour", posicoes: ["ZAG"], forca: 83 },
+      { nome: "Thomas Linke", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Patrik Andersson", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Bixente Lizarazu", posicoes: ["LE","LD"], forca: 87 },
+      { nome: "Markus Babbel", posicoes: ["LD","ZAG"], forca: 81 },
+      { nome: "Michael Tarnat", posicoes: ["LE"], forca: 79 },
+      { nome: "Stefan Effenberg", posicoes: ["VOL","MC"], forca: 88 },
+      { nome: "Jens Jeremies", posicoes: ["VOL"], forca: 82 },
+      { nome: "Thorsten Fink", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Mehmet Scholl", posicoes: ["MEI"], forca: 84 },
+      { nome: "Hasan Salihamidžić", posicoes: ["MC","PD"], forca: 82 },
+      { nome: "Paulo Sérgio", posicoes: ["MC","ATA"], forca: 79 },
+      { nome: "Alexander Zickler", posicoes: ["ATA"], forca: 76 },
+      { nome: "Carsten Jancker", posicoes: ["ATA"], forca: 80 },
+      { nome: "Giovane Élber", posicoes: ["ATA"], forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 2000,
+    clube: "Barcelona",
+    jogadores: [
+      { nome: "Ruud Hesp", posicoes: ["GOL"], forca: 77 },
+      { nome: "Carles Puyol", posicoes: ["LD","ZAG"], forca: 76 },
+      { nome: "Michael Reiziger", posicoes: ["LD","ZAG"], forca: 80 },
+      { nome: "Abelardo", posicoes: ["ZAG"], forca: 81 },
+      { nome: "Frank de Boer", posicoes: ["ZAG","VOL"], forca: 84 },
+      { nome: "Sergi Barjuán", posicoes: ["LE"], forca: 82 },
+      { nome: "Winston Bogarde", posicoes: ["LD","ZAG"], forca: 77 },
+      { nome: "Pep Guardiola", posicoes: ["VOL","MC"], forca: 85 },
+      { nome: "Phillip Cocu", posicoes: ["VOL","MC"], forca: 84 },
+      { nome: "Xavi", posicoes: ["MC"], forca: 77 },
+      { nome: "Luis Enrique", posicoes: ["MC","PD"], forca: 87 },
+      { nome: "Luís Figo", posicoes: ["PD","MC"], forca: 94 },
+      { nome: "Rivaldo", posicoes: ["MEI","PD"], forca: 94 },
+      { nome: "Patrick Kluivert", posicoes: ["ATA"], forca: 87 },
+      { nome: "Dani García", posicoes: ["ATA"], forca: 75 },
+      { nome: "Jari Litmanen", posicoes: ["MEI","ATA"], forca: 83 }
+    ]
+  },
+
+  // ===== Edição 1999 (Champions — histórico) =====
+
+  {
+    competicao: "Champions",
+    edicao: 1999,
+    clube: "Manchester United",
+    jogadores: [
+      { nome: "Peter Schmeichel", posicoes: ["GOL"], forca: 90 },
+      { nome: "Gary Neville", posicoes: ["LD"], forca: 83 },
+      { nome: "Denis Irwin", posicoes: ["LE"], forca: 84 },
+      { nome: "Jaap Stam", posicoes: ["ZAG"], forca: 88 },
+      { nome: "Ronny Johnsen", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Roy Keane", posicoes: ["MC"], forca: 90 },
+      { nome: "David Beckham", posicoes: ["MC","MD"], forca: 89 },
+      { nome: "Paul Scholes", posicoes: ["MC"], forca: 86 },
+      { nome: "Ryan Giggs", posicoes: ["ME"], forca: 88 },
+      { nome: "Nicky Butt", posicoes: ["MC"], forca: 82 },
+      { nome: "Dwight Yorke", posicoes: ["ATA"], forca: 88 },
+      { nome: "Andy Cole", posicoes: ["ATA"], forca: 86 },
+      { nome: "Ole Gunnar Solskjær", posicoes: ["ATA"], forca: 84 },
+      { nome: "Teddy Sheringham", posicoes: ["ATA"], forca: 83 },
+      { nome: "Jesper Blomqvist", posicoes: ["ME"], forca: 79 },
+      { nome: "David May", posicoes: ["ZAG"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Champions",
+    edicao: 1999,
+    clube: "Bayern München",
+    jogadores: [
+      { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 90 },
+      { nome: "Markus Babbel", posicoes: ["LD","ZAG"], forca: 83 },
+      { nome: "Samuel Kuffour", posicoes: ["ZAG"], forca: 84 },
+      { nome: "Thomas Linke", posicoes: ["ZAG"], forca: 82 },
+      { nome: "Lothar Matthäus", posicoes: ["ZAG"], forca: 86 },
+      { nome: "Michael Tarnat", posicoes: ["LE"], forca: 80 },
+      { nome: "Bixente Lizarazu", posicoes: ["LE"], forca: 86 },
+      { nome: "Stefan Effenberg", posicoes: ["MC"], forca: 88 },
+      { nome: "Jens Jeremies", posicoes: ["VOL"], forca: 83 },
+      { nome: "Mehmet Scholl", posicoes: ["MEI"], forca: 84 },
+      { nome: "Hasan Salihamidžić", posicoes: ["MD","ME"], forca: 82 },
+      { nome: "Mario Basler", posicoes: ["PD","MEI"], forca: 84 },
+      { nome: "Carsten Jancker", posicoes: ["ATA"], forca: 82 },
+      { nome: "Alexander Zickler", posicoes: ["ATA"], forca: 80 },
+      { nome: "Giovane Élber", posicoes: ["ATA"], forca: 85 },
+      { nome: "Thomas Helmer", posicoes: ["ZAG"], forca: 80 }
+    ]
   }
 
 ];

@@ -19,7 +19,7 @@ The Dream Team é um jogo de navegador no qual você sorteia clubes lendários, 
 
 O jogo roda inteiramente no navegador, sem instalação e sem servidor — feito em HTML, CSS e JavaScript puro, sem frameworks nem dependências de build.
 
-A base de dados reúne os quatro semifinalistas reais de cada temporada da Copa Libertadores e da UEFA Champions League. Atualmente são catorze edições de cada competição (2012 a 2025), totalizando 112 elencos e 1.792 jogadores, com a força de cada atleta calibrada individualmente.
+A base de dados reúne os semifinalistas reais de cada temporada. A Copa Libertadores cobre de 1960 a 2025 e a UEFA Champions League, de 1999 a 2025 — a expansão para as edições mais antigas da Champions e a conclusão de alguns elencos históricos seguem em andamento. No total são 362 elencos e 5.792 jogadores, com a força de cada atleta calibrada individualmente.
 
 ## Demonstração
 

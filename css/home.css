@@ -9,8 +9,8 @@
   align-items: stretch;
   /* Remove o padding do .tela; cada seção tem o seu próprio */
   padding: 0;
-  /* Fundo creme fixo — não muda com os temas de competição */
-  background-color: #F2ECDB;
+  /* Fundo escuro fixo — base da identidade da tela inicial */
+  background-color: var(--bg);
 }
 
 /* Caixa interna com largura máxima e margens automáticas (centraliza) */
@@ -22,27 +22,27 @@
 }
 
 
-/* TOPO DA HOME — rótulo dourado + linha fina */
+/* TOPO DA HOME — rótulo verde + linha fina */
 
 .home-header {
   padding-top: 32px;
   margin-bottom: 56px;
 }
 
-/* Rótulo pequeno em maiúsculas com cor dourada */
+/* Rótulo pequeno em maiúsculas no verde de acento */
 .home-rotulo-topo {
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: #8A6A1F;  /* dourado fixo — identidade da tela inicial */
+  color: var(--accent);  /* verde — acento da identidade */
   margin-bottom: 12px;
 }
 
 /* Linha fina que separa o topo do restante */
 .home-linha-divisor {
   height: 1px;
-  background-color: #D4C9B0;
+  background-color: var(--linha);
 }
 
 
@@ -65,18 +65,18 @@
   font-family: 'Archivo Black', sans-serif;
   font-size: 4.8rem;
   line-height: 0.97;         /* linhas bem juntas para impacto visual */
-  color: #1A1813;
+  color: var(--txt);
   margin-bottom: 28px;
   letter-spacing: -1.5px;
 
-  /* Sombra dura dourada deslocada para baixo/direita — efeito retrô */
-  text-shadow: 4px 4px 0 #D9B25A;
+  /* Sombra dura cinza deslocada para baixo/direita — efeito retrô, leitura suave */
+  text-shadow: 4px 4px 0 var(--titulo-sombra);
 }
 
 /* Parágrafo descritivo abaixo da manchete */
 .home-descricao {
   font-size: 1rem;
-  color: #4A463E;
+  color: var(--txt-soft);
   line-height: 1.7;
   margin-bottom: 36px;
 }
@@ -87,12 +87,12 @@
 }
 
 
-/* BOTÃO "JOGAR AGORA" — laranja, destaque máximo */
+/* BOTÃO "JOGAR AGORA" — verde, destaque máximo */
 
 .btn-jogar-agora {
   display: inline-block;
-  background-color: #E8593C;
-  color: #FFFFFF;             /* texto branco sobre laranja — contraste ok */
+  background-color: var(--accent);
+  color: var(--btn-txt);      /* texto escuro sobre o verde — contraste alto */
   font-family: 'Archivo Black', sans-serif;
   font-size: 1rem;
   padding: 15px 32px;
@@ -100,8 +100,8 @@
   border-radius: 2px;         /* quase reto, estilo adesivo/retrô */
   cursor: pointer;
 
-  /* Sombra preta dura deslocada — efeito de "adesivo" */
-  box-shadow: 4px 4px 0 #1A1813;
+  /* Sombra verde-escura dura deslocada — efeito de "adesivo" */
+  box-shadow: 4px 4px 0 var(--accent-sombra);
 
   /* Transição rápida para a animação de pressionar ser responsiva */
   transition: transform 0.08s ease, box-shadow 0.08s ease;
@@ -110,7 +110,7 @@
 /* Ao pressionar: botão "desce" 2px e sombra encolhe — sensação de apertar */
 .btn-jogar-agora:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 #1A1813;
+  box-shadow: 2px 2px 0 var(--accent-sombra);
 }
 
 
@@ -122,12 +122,12 @@
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: #4A463E;
+  color: var(--txt-soft);
   margin-bottom: 10px;
 }
 
 
-/* Pílulas (modo e formação): fundo claro com texto escuro; a selecionada inverte (fundo escuro, texto branco). O laranja fica só no botão de ação. */
+/* Pílulas (modo e formação): superfície escura translúcida com texto claro; a selecionada inverte (fundo branco, texto escuro). O verde fica só no botão de ação. */
 
 .area-pilulas {
   display: flex;
@@ -137,10 +137,10 @@
 
 .pilula {
   padding: 7px 16px;
-  border-radius: 2px;          /* quase reto — visual de "escolha/estado", diferente do botão laranja */
-  border: 1.5px solid #1A1813;
-  background-color: #FFFFFF;
-  color: #1A1813;
+  border-radius: 2px;          /* quase reto — visual de "escolha/estado", diferente do botão verde */
+  border: 1.5px solid var(--linha);
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--txt);
   font-family: 'Archivo', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
@@ -148,16 +148,16 @@
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
-/* Hover: fundo levemente escurecido, mantém borda e cor escuras */
+/* Hover: superfície levemente mais clara, mantém texto e borda */
 .pilula:hover:not(.pilula-ativa) {
-  background-color: #EDE8DF;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Pílula selecionada: fundo escuro e texto branco. */
+/* Pílula selecionada: inverte para fundo branco e texto escuro. */
 .pilula.pilula-ativa {
-  background-color: #1A1813;
-  color: #FFFFFF;
-  border-color: #1A1813;
+  background-color: var(--txt);
+  color: var(--bg);
+  border-color: var(--txt);
 }
 
 
@@ -270,7 +270,7 @@
 /* Legenda explicativa abaixo das pílulas de formação */
 .home-legenda {
   font-size: 0.7rem;
-  color: #4A463E;
+  color: var(--txt-soft);
   font-style: italic;
 }
 
@@ -286,8 +286,8 @@
 }
 
 .step-card {
-  background-color: #FFFFFF;
-  border: 1px solid #D4C9B0;
+  background-color: var(--surface);
+  border: 1px solid var(--linha);
   border-radius: 12px;
   padding: 20px 24px;          /* reduzido de 28px — card menos alto */
   display: flex;
@@ -310,44 +310,43 @@
   width: 38px;                 /* ligeiramente maior que os 30px anteriores */
   height: 38px;
   flex-shrink: 0;              /* não encolhe se o texto for longo */
+  color: var(--accent);        /* verde — herdado pelo currentColor do SVG */
 }
 
-/* Número grande laranja em Archivo Black */
+/* Número grande verde em Archivo Black */
 .step-num {
   font-family: 'Archivo Black', sans-serif;
   font-size: 2.2rem;
-  color: #E8593C;
+  color: var(--accent);
   line-height: 1;
 }
 
 .step-titulo {
   font-family: 'Archivo Black', sans-serif;
   font-size: 1rem;
-  color: #1A1813;
+  color: var(--txt);
 }
 
 .step-desc {
   font-size: 0.85rem;
-  color: #4A463E;
+  color: var(--txt-soft);
 }
 
 
 /* RODAPÉ — estatísticas do jogo */
 
 .home-footer {
-  border-top: 1px solid #D4C9B0;
+  border-top: 1px solid var(--linha);
   padding: 20px 0 36px;
   display: flex;
   gap: 12px;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
-  color: #4A463E;
+  color: var(--txt-soft);
 }
 
 /* Pontinho separador entre as estatísticas */
 .footer-sep {
-  color: #B8AFA0;
+  color: rgba(255, 255, 255, 0.25);
 }
-
-

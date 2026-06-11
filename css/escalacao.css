@@ -381,6 +381,10 @@
 
 .jogador-nome {
   flex: 1;
+  min-width: 0;               /* permite encolher abaixo do nome (senão nomes longos transbordam) */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;    /* nomes longos viram "Bastian Schwein…" em vez de quebrar linha */
 }
 
 /* Número de força em destaque — não encolhe, sempre alinhado à direita */

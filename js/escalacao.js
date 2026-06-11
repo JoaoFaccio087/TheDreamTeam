@@ -191,7 +191,7 @@ function construirListaJogadores(jogadores) {
     var posStr = jogador.posicoes.join('/');
 
     item.innerHTML =
-      '<span class="jogador-nome">'     + jogador.nome  + '</span>' +
+      '<span class="jogador-nome" title="' + jogador.nome + '">' + jogador.nome + '</span>' +
       '<span class="jogador-posicoes">' + posStr        + '</span>' +
       '<span class="jogador-forca">'    + jogador.forca + '</span>';
 
@@ -243,6 +243,12 @@ function clicarJogador(jogador, elemento) {
 
   // Ativa escurecimento dos slots incompatíveis via CSS
   campoJogo.classList.add('tem-selecao');
+
+  // No celular, leva o usuário direto ao mapa para escolher a posição
+  // (no desktop a lista e o campo já aparecem lado a lado, não precisa rolar).
+  if (window.innerWidth <= 768) {
+    campoJogo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 
