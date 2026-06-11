@@ -979,6 +979,202 @@ const DADOS_LIBERTADORES = [
       { nome: "Andrés Chávez", posicoes: ["ATA","PE"], forca: 73 },
       { nome: "Carlos Tévez", posicoes: ["ATA","MEI"], forca: 82 }
     ]
+  },
+
+  // ===== Edição 2015 (semifinalistas — River Plate campeão, 3–0 sobre o Tigres) =====
+
+  {
+    competicao: "Libertadores",
+    edicao: 2015,
+    clube: "River Plate",
+    jogadores: [
+      { nome: "Marcelo Barovero", posicoes: ["GOL"], forca: 82 },
+      { nome: "Julio Chiarini", posicoes: ["GOL"], forca: 70 },
+      { nome: "Gabriel Mercado", posicoes: ["LD","ZAG"], forca: 78 },
+      { nome: "Jonatan Maidana", posicoes: ["ZAG"], forca: 77 },
+      { nome: "Ramiro Funes Mori", posicoes: ["ZAG"], forca: 78 },
+      { nome: "Emanuel Mammana", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Leonel Vangioni", posicoes: ["LE","ME"], forca: 75 },
+      { nome: "Matías Kranevitter", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Leonardo Ponzio", posicoes: ["VOL","MC"], forca: 77 },
+      { nome: "Carlos Sánchez", posicoes: ["MC","MEI"], forca: 77 },
+      { nome: "Lucho González", posicoes: ["MC","MEI"], forca: 76 },
+      { nome: "Leonardo Pisculichi", posicoes: ["MEI","MC"], forca: 78 },
+      { nome: "Gonzalo Martínez", posicoes: ["MEI","PE","ME"], forca: 78 },
+      { nome: "Rodrigo Mora", posicoes: ["ATA","PE"], forca: 75 },
+      { nome: "Sebastián Driussi", posicoes: ["PE","ATA"], forca: 74 },
+      { nome: "Lucas Alario", posicoes: ["ATA"], forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2015,
+    clube: "Tigres UANL",
+    jogadores: [
+      { nome: "Nahuel Guzmán", posicoes: ["GOL"], forca: 82 },
+      { nome: "Enrique Palos", posicoes: ["GOL"], forca: 67 },
+      { nome: "Israel Jiménez", posicoes: ["LD","MD"], forca: 72 },
+      { nome: "Juninho", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Hugo Ayala", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Juan Carlos Medina", posicoes: ["ZAG","VOL"], forca: 71 },
+      { nome: "Jorge Torres Nilo", posicoes: ["LE","ME"], forca: 73 },
+      { nome: "Guido Pizarro", posicoes: ["VOL","MC"], forca: 76 },
+      { nome: "Jesús Dueñas", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Egidio Arévalo Ríos", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Lucas Lobos", posicoes: ["MEI","MC"], forca: 74 },
+      { nome: "Damián Álvarez", posicoes: ["MD","MEI","PD"], forca: 73 },
+      { nome: "Joffre Guerrón", posicoes: ["PD","PE","ME"], forca: 78 },
+      { nome: "Rafael Sóbis", posicoes: ["ATA","MEI"], forca: 76 },
+      { nome: "Aldo de Nigris", posicoes: ["ATA"], forca: 72 },
+      { nome: "Jürgen Damm", posicoes: ["PD","ME"], forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2015,
+    clube: "Internacional",
+    jogadores: [
+      { nome: "Alisson", posicoes: ["GOL"], forca: 80 },
+      { nome: "Muriel", posicoes: ["GOL"], forca: 70 },
+      { nome: "Fabrício", posicoes: ["LD","MD"], forca: 71 },
+      { nome: "Juan", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Paulão", posicoes: ["ZAG"], forca: 72 },
+      { nome: "Ernando", posicoes: ["ZAG"], forca: 71 },
+      { nome: "Alan Ruschel", posicoes: ["LE","ME"], forca: 72 },
+      { nome: "Rodrigo Dourado", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Nilton", posicoes: ["VOL","MC"], forca: 73 },
+      { nome: "Anderson", posicoes: ["MC","MEI"], forca: 74 },
+      { nome: "Andrigo", posicoes: ["MEI","MC"], forca: 69 },
+      { nome: "Valdívia", posicoes: ["MEI","MC"], forca: 73 },
+      { nome: "Jorge Henrique", posicoes: ["MD","PD","MEI"], forca: 71 },
+      { nome: "Lisandro López", posicoes: ["ATA","MEI"], forca: 78 },
+      { nome: "Rafael Moura", posicoes: ["ATA"], forca: 73 },
+      { nome: "Eduardo Sasha", posicoes: ["ATA","PE"], forca: 70 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2015,
+    clube: "Guaraní",
+    jogadores: [
+      { nome: "Alfredo Aguilar", posicoes: ["GOL"], forca: 72 },
+      { nome: "Rubén Maldonado", posicoes: ["ZAG","LD"], forca: 70 },
+      { nome: "Julio César Cáceres", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Luis Cabral", posicoes: ["ZAG"], forca: 68 },
+      { nome: "Juan Patiño", posicoes: ["LD","ZAG"], forca: 69 },
+      { nome: "Tomás Bartomeus", posicoes: ["LE","ME","LD"], forca: 69 },
+      { nome: "Manuel Filippini", posicoes: ["VOL","ZAG"], forca: 68 },
+      { nome: "Luis de la Cruz", posicoes: ["LE","ME","VOL"], forca: 69 },
+      { nome: "Jorge Mendoza", posicoes: ["VOL","MC"], forca: 70 },
+      { nome: "Marcelo Palau", posicoes: ["MC","MEI"], forca: 71 },
+      { nome: "Juan Aguilar", posicoes: ["MC","MEI","PD"], forca: 69 },
+      { nome: "Alberto Contrera", posicoes: ["MEI","PE","MC"], forca: 71 },
+      { nome: "Julián Benítez", posicoes: ["PE","ATA","PD"], forca: 71 },
+      { nome: "Fernando Fernández", posicoes: ["ATA","PE"], forca: 70 },
+      { nome: "Hernán Rodrigo López", posicoes: ["ATA","MEI"], forca: 72 },
+      { nome: "Federico Santander", posicoes: ["ATA"], forca: 75 }
+    ]
+  },
+
+  // ===== Edição 2014 (semifinalistas — San Lorenzo campeão, 1º título, sobre o Nacional-PAR) =====
+
+  {
+    competicao: "Libertadores",
+    edicao: 2014,
+    clube: "San Lorenzo",
+    jogadores: [
+      { nome: "Sebastián Torrico", posicoes: ["GOL"], forca: 76 },
+      { nome: "Cristian Álvarez", posicoes: ["GOL"], forca: 72 },
+      { nome: "Julio Buffarini", posicoes: ["LD","MD"], forca: 74 },
+      { nome: "Walter Kannemann", posicoes: ["ZAG"], forca: 75 },
+      { nome: "Santiago Gentiletti", posicoes: ["ZAG"], forca: 74 },
+      { nome: "Mario Yepes", posicoes: ["ZAG"], forca: 76 },
+      { nome: "Emmanuel Mas", posicoes: ["LE","ME"], forca: 75 },
+      { nome: "Juan Mercier", posicoes: ["VOL","MC"], forca: 75 },
+      { nome: "Néstor Ortigoza", posicoes: ["VOL","MC","MEI"], forca: 77 },
+      { nome: "Enzo Kalinski", posicoes: ["MC","MEI"], forca: 71 },
+      { nome: "Pablo Barrientos", posicoes: ["MEI","MC"], forca: 73 },
+      { nome: "Leandro Romagnoli", posicoes: ["MEI","PE"], forca: 76 },
+      { nome: "Ignacio Piatti", posicoes: ["PE","MEI","ME"], forca: 77 },
+      { nome: "Héctor Villalba", posicoes: ["PD","PE","ME"], forca: 73 },
+      { nome: "Ángel Correa", posicoes: ["ATA","MEI","PE"], forca: 76 },
+      { nome: "Mauro Matos", posicoes: ["ATA"], forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2014,
+    clube: "Nacional-PAR",
+    jogadores: [
+      { nome: "Ignacio Don", posicoes: ["GOL"], forca: 73 },
+      { nome: "Ramón Coronel", posicoes: ["LD","ZAG"], forca: 70 },
+      { nome: "David Mendoza", posicoes: ["ZAG","LE"], forca: 70 },
+      { nome: "José Cáceres", posicoes: ["ZAG"], forca: 70 },
+      { nome: "Raúl Piris", posicoes: ["LE","ZAG"], forca: 69 },
+      { nome: "Silvio Torales", posicoes: ["VOL","MC"], forca: 71 },
+      { nome: "Marcos Riveros", posicoes: ["VOL","MC"], forca: 72 },
+      { nome: "Marcos Melgarejo", posicoes: ["VOL","MC"], forca: 70 },
+      { nome: "Víctor Ayala", posicoes: ["MC","MEI","VOL"], forca: 71 },
+      { nome: "Hugo Lusardi", posicoes: ["MC","MEI"], forca: 68 },
+      { nome: "Derlis Orué", posicoes: ["PD","PE","ME"], forca: 73 },
+      { nome: "Cecilio Domínguez", posicoes: ["PE","MEI","PD"], forca: 73 },
+      { nome: "Brian Montenegro", posicoes: ["ATA","PE"], forca: 73 },
+      { nome: "Julián Benítez", posicoes: ["ATA","PE"], forca: 71 },
+      { nome: "Fredy Bareiro", posicoes: ["ATA"], forca: 72 },
+      { nome: "Julio Santa Cruz", posicoes: ["ATA","MEI"], forca: 69 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2014,
+    clube: "Bolívar",
+    jogadores: [
+      { nome: "Rómel Quiñónez", posicoes: ["GOL"], forca: 72 },
+      { nome: "Ronald Eguino", posicoes: ["LD","ZAG"], forca: 69 },
+      { nome: "Nelson Cabrera", posicoes: ["ZAG"], forca: 71 },
+      { nome: "Luis Gutiérrez", posicoes: ["ZAG","LE"], forca: 69 },
+      { nome: "Lorgio Álvarez", posicoes: ["ZAG","LD"], forca: 68 },
+      { nome: "Gerardo Yecerotte", posicoes: ["LD","MD","PD"], forca: 70 },
+      { nome: "Walter Flores", posicoes: ["VOL","MC"], forca: 71 },
+      { nome: "Damir Miranda", posicoes: ["VOL","MC"], forca: 68 },
+      { nome: "José Luis Sánchez Capdevila", posicoes: ["MC","MEI"], forca: 70 },
+      { nome: "José Luis Chávez", posicoes: ["VOL","MC"], forca: 67 },
+      { nome: "Víctor Córdoba", posicoes: ["MC","MEI"], forca: 67 },
+      { nome: "Rudy Cardozo", posicoes: ["MEI","PE","MC"], forca: 71 },
+      { nome: "Juan Miguel Callejón", posicoes: ["PE","PD","ME"], forca: 71 },
+      { nome: "Juan Carlos Arce", posicoes: ["PD","PE","ATA"], forca: 73 },
+      { nome: "William Ferreira", posicoes: ["ATA"], forca: 71 },
+      { nome: "Carlos Tenorio", posicoes: ["ATA"], forca: 71 }
+    ]
+  },
+
+  {
+    competicao: "Libertadores",
+    edicao: 2014,
+    clube: "Defensor Sporting",
+    jogadores: [
+      { nome: "Martín Campaña", posicoes: ["GOL"], forca: 75 },
+      { nome: "Gastón Rodríguez", posicoes: ["GOL"], forca: 65 },
+      { nome: "Ramón Arias", posicoes: ["ZAG"], forca: 73 },
+      { nome: "Matías Malvino", posicoes: ["ZAG"], forca: 70 },
+      { nome: "Mathías Suárez", posicoes: ["ZAG","LD"], forca: 68 },
+      { nome: "Gastón Silva", posicoes: ["LE","ZAG"], forca: 73 },
+      { nome: "Nicolás Correa", posicoes: ["ZAG","LD"], forca: 69 },
+      { nome: "Mathías Cardacio", posicoes: ["VOL","MC"], forca: 71 },
+      { nome: "Federico Gino", posicoes: ["VOL","MC"], forca: 70 },
+      { nome: "Juan Carlos Amado", posicoes: ["MC","MEI"], forca: 70 },
+      { nome: "Adrián Luna", posicoes: ["MEI","MC","PE"], forca: 73 },
+      { nome: "Giorgian De Arrascaeta", posicoes: ["MEI","PE","ME"], forca: 76 },
+      { nome: "Felipe Gedoz", posicoes: ["MEI","PD","PE"], forca: 72 },
+      { nome: "Leonardo Pais", posicoes: ["PE","MEI","ME"], forca: 71 },
+      { nome: "Nicolás Olivera", posicoes: ["ATA","MEI"], forca: 74 },
+      { nome: "Robert Herrera", posicoes: ["LD","ZAG"], forca: 68 }
+    ]
   }
 
 ];
