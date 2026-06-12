@@ -69,10 +69,15 @@ function fazerSkip() {
 }
 
 // Sorteia um clube da competição escolhida e dispara a animação.
+// Evita repetir o clube+edição que acabou de sair (igual ao "Outro sorteio").
 function rolar() {
   var filtro = COMPETICOES[modoSelecionado].dados;
 
-  var opcoes = DADOS.filter(function (d) { return d.competicao === filtro; });
+  var opcoes = DADOS.filter(function (d) {
+    if (d.competicao !== filtro) return false;
+    if (edicaoSorteada && d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao) return false;
+    return true;
+  });
   if (opcoes.length === 0) return;
 
   var sorteado = opcoes[Math.floor(Math.random() * opcoes.length)];

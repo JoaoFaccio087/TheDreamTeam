@@ -41,7 +41,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 - **Sorteio de clubes** lendários da Libertadores e da Champions, por edição.
 - **Outro sorteio**, que re-sorteia qualquer clube ou ano da competição, com orçamento de skips por partida.
-- **Dois estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados.
+- **Dois estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados — sem jogadores repetidos.
 - **Escalação livre**: alocar, mover e trocar jogadores no campo, com a lista indicando quem pode ocupar cada posição.
 - **Oito formações**: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-3-2-1, 4-5-1, 3-4-3 e 4-1-2-1-2.
 - **Campanha completa**, com fase de grupos e classificação seguidas de mata-mata até a final.

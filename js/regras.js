@@ -15,12 +15,14 @@ function rotuloCompeticao(valorDados) {
   return valorDados;
 }
 
-// Códigos de posição que uma vaga aceita. As alas ME/MD não existem nos dados dos
-// jogadores, então também aceitam os equivalentes (PE/PD/MC/MEI).
+// Códigos de posição que uma vaga aceita. As alas ME e MD aceitam também os
+// pontas do mesmo lado (PE para ME, PD para MD) — alas naturais —, mas NÃO os
+// meias centrais (MC/MEI), que não jogam abertos. As demais vagas só aceitam
+// jogadores que tenham exatamente aquela posição.
 function codigosAceitos(codigoVaga) {
   var mapa = {
-    'ME': ['ME', 'PE', 'MC', 'MEI'],
-    'MD': ['MD', 'PD', 'MC', 'MEI']
+    'ME': ['ME', 'PE'],
+    'MD': ['MD', 'PD']
   };
   return mapa[codigoVaga] || [codigoVaga];
 }

@@ -12,6 +12,7 @@ const fichas          = document.querySelectorAll('.ficha');
 const botaoJogar      = document.getElementById('btn-jogar');
 
 const botaoVoltarHome     = document.getElementById('btn-voltar-home');
+const btnVoltarMobile     = document.getElementById('btn-voltar-mobile');
 const pilulasFormacaoJogo = document.querySelectorAll('#jogo-pilulas-formacao .pilula');
 const slotsJogo           = document.querySelectorAll('.slot-jogo');
 const btnRolar            = document.getElementById('btn-rolar');

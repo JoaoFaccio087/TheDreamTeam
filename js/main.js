@@ -14,6 +14,7 @@ pilulasFormacao.forEach(function (pilula) {
 
 botaoJogar.addEventListener('click', jogarAgora);
 botaoVoltarHome.addEventListener('click', voltarHome);
+if (btnVoltarMobile) btnVoltarMobile.addEventListener('click', voltarHome);
 
 pilulasFormacaoJogo.forEach(function (pilula) {
   pilula.addEventListener('click', function () {

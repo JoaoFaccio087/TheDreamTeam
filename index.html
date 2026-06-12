@@ -264,11 +264,17 @@
           </div>
         </div><!-- /jogo-formacao-bloco -->
 
-        <!-- Botão principal de sorteio (modo Clássico) -->
-        <button id="btn-rolar" class="btn-rolar">Rolar &#8635;</button>
+        <!-- Linha de ação: botão principal (Rolar/Começar) + Voltar compacto (celular) -->
+        <div class="jogo-acao">
+          <!-- Botão principal de sorteio (modo Clássico) -->
+          <button id="btn-rolar" class="btn-rolar">Rolar &#8635;</button>
 
-        <!-- Botão de início do Draft (modo Draft) — substitui o Rolar -->
-        <button id="btn-comecar-draft" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
+          <!-- Botão de início do Draft (modo Draft) — substitui o Rolar -->
+          <button id="btn-comecar-draft" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
+
+          <!-- Voltar compacto ao lado da ação (visível apenas no celular) -->
+          <button id="btn-voltar-mobile" class="btn-secundario btn-voltar-mobile">&#8592; Voltar</button>
+        </div>
 
         <!-- Card do clube sorteado (aparece após o 1º Rolar) -->
         <div id="clube-card" class="clube-card escondida">
@@ -365,7 +371,7 @@
         <div id="box-score" class="box-score"></div>
 
         <!-- Aparece quando todos os 11 slots estiverem preenchidos -->
-        <button id="btn-simular" class="btn-rolar escondida">Simular &#9654;</button>
+        <button id="btn-simular" class="btn-rolar escondida">Simular <svg class="icone-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
 
         <!-- Volta para a tela inicial e remove o tema -->
         <button id="btn-voltar-home" class="btn-secundario">&#8592; Voltar</button>

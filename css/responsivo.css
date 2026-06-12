@@ -78,25 +78,47 @@
     font-size: 0.55rem;
   }
 
-  /* Escalação no celular: "Voltar" sobe para o topo (acima da formação) e fica
-     compacto; o "Rolar" também encolhe. display:contents promove os filhos da
-     coluna direita ao .jogo-wrapper, daí o order:-1 do Voltar funcionar. */
+  /* Escalação no celular: o Voltar fica COMPACTO ao lado do botão de ação
+     (Rolar/Começar), que ocupa o resto da largura. display:contents promove os
+     filhos da coluna direita ao .jogo-wrapper. */
   .jogo-direita { display: contents; }
-  #btn-voltar-home {
+
+  /* Linha de ação em fila: ação preenche, Voltar encolhe ao lado */
+  .jogo-acao {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+  }
+  .jogo-acao .btn-rolar {
+    flex: 1;
+    width: auto;
+  }
+  .btn-voltar-mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    padding: 10px 16px;
+  }
+
+  /* O Voltar da coluna direita some no celular (substituído pelo da linha de ação)... */
+  #btn-voltar-home { display: none; }
+
+  /* ...mas reaparece no topo quando o Draft começa e a coluna esquerda some. */
+  .jogo-wrapper.draft-ativo #btn-voltar-home {
+    display: inline-block;
     order: -1;
-    justify-self: start;   /* não estica: largura do conteúdo, alinhado à esquerda */
+    justify-self: start;
     width: auto;
     margin-bottom: 2px;
-  }
-  #btn-rolar {
-    align-self: start;     /* encolhe dentro da coluna esquerda (flex) */
-    width: auto;
   }
 
   /* Tela de simulação no celular: vira 1 coluna. display:contents "promove" os filhos das duas colunas ao .sim-wrapper, e a ordem vem do `order` (Voltar, controles, histórico, ação, resumo, stats). */
   .sim-wrapper {
     display: flex;
     flex-direction: column;
+    align-items: stretch;   /* cards/controles/stats ocupam toda a largura (botões usam align-self) */
     gap: 14px;
     padding: 20px 16px;
   }
@@ -105,6 +127,7 @@
 
   #btn-voltar-escalacao { order: 1; }
 
+  /* Bloco de controles em largura cheia com MODO e VELOCIDADE lado a lado */
   .sim-controles {
     order: 2;
     margin-bottom: 0;
@@ -112,6 +135,12 @@
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.04);
+    flex-direction: row;
+    gap: 16px;
+  }
+  .sim-ctrl-bloco {
+    flex: 1;
+    min-width: 0;
   }
 
   #historico-jogos  { order: 3; }

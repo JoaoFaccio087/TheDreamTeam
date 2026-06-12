@@ -43,10 +43,40 @@ function obterPoolDraft() {
   return pool;
 }
 
-// Já está em campo? (compara nome + clube + edição para distinguir homônimos)
-function jogadorJaEscalado(j) {
-  return escalacao.some(function (e) {
-    return e && e.nome === j.nome && e.clube === j.clube && e.edicao === j.edicao;
+// Já está em campo pelo NOME? (o mesmo jogador pode existir em várias edições,
+// mas só pode entrar uma vez na escalação)
+function nomeJaEscalado(nome) {
+  return escalacao.some(function (e) { return e && e.nome === nome; });
+}
+
+// Sorteia até 5 cartas elegíveis para a vaga, com NOMES distintos entre si e
+// sem jogadores que já estão na escalação. Se um mesmo nome existir em várias
+// edições, escolhe uma edição ao acaso para representá-lo.
+function sortearCartas(indice) {
+  var codigo = slotsJogo[indice].dataset.codigo;
+  var pool   = obterPoolDraft();
+
+  var elegiveis = pool.filter(function (j) {
+    return podeOcupar(j, codigo) && !nomeJaEscalado(j.nome);
+  });
+
+  // Agrupa as edições por nome de jogador
+  var porNome = {};
+  var nomes = [];
+  elegiveis.forEach(function (j) {
+    if (!porNome[j.nome]) { porNome[j.nome] = []; nomes.push(j.nome); }
+    porNome[j.nome].push(j);
+  });
+
+  // Embaralha os nomes (Fisher–Yates) e pega até 5 distintos
+  for (var i = nomes.length - 1; i > 0; i--) {
+    var k = Math.floor(Math.random() * (i + 1));
+    var t = nomes[i]; nomes[i] = nomes[k]; nomes[k] = t;
+  }
+
+  return nomes.slice(0, 5).map(function (nome) {
+    var opcoes = porNome[nome];
+    return opcoes[Math.floor(Math.random() * opcoes.length)];
   });
 }
 
@@ -64,23 +94,6 @@ function tierDaForca(forca) {
   if (forca >= 82) return 'ouro';
   if (forca >= 78) return 'prata';
   return 'bronze';
-}
-
-// Sorteia até 5 cartas elegíveis para a vaga (embaralhamento Fisher–Yates).
-function sortearCartas(indice) {
-  var codigo = slotsJogo[indice].dataset.codigo;
-  var pool   = obterPoolDraft();
-
-  var elegiveis = pool.filter(function (j) {
-    return podeOcupar(j, codigo) && !jogadorJaEscalado(j);
-  });
-
-  for (var i = elegiveis.length - 1; i > 0; i--) {
-    var k = Math.floor(Math.random() * (i + 1));
-    var t = elegiveis[i]; elegiveis[i] = elegiveis[k]; elegiveis[k] = t;
-  }
-
-  return elegiveis.slice(0, 5);
 }
 
 

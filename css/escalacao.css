@@ -221,9 +221,14 @@
   padding-top: 8px;
 }
 
-/* Alinha o Rolar com o campo depois que o bloco de formação some (seletor de irmão +). */
-#jogo-formacao-bloco.escondida + #btn-rolar {
+/* Alinha a ação com o campo depois que o bloco de formação some (seletor de irmão +). */
+#jogo-formacao-bloco.escondida + .jogo-acao {
   margin-top: calc(0.65rem * 1.2 + 12px); /* altura do .jogo-rotulo + margin-bottom dele */
+}
+
+/* Voltar compacto da linha de ação: existe só no celular (escondido no desktop). */
+.btn-voltar-mobile {
+  display: none;
 }
 
 /* Pílulas de formação adaptadas para o fundo escuro do tema */
@@ -282,6 +287,15 @@
 
 #btn-simular:hover {
   animation-play-state: paused; /* pausa no hover para não interferir com o clique */
+}
+
+/* Ícone de play do botão Simular — segue a cor do texto do botão */
+.icone-play {
+  width: 0.82em;
+  height: 0.82em;
+  vertical-align: -1px;
+  margin-left: 5px;
+  fill: currentColor;
 }
 
 /* Botão desabilitado: sem sombra nem pressão */

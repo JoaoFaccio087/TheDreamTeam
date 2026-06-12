@@ -164,9 +164,10 @@ function construirListaJogadores(jogadores) {
     var item = document.createElement('div');
     item.className = 'item-jogador';
 
-    // (a) Já foi alocado (verifica no estado vivo da escalação)
+    // (a) Já foi alocado: indisponível se o MESMO jogador (pelo nome) já está em
+    //     campo, mesmo que venha de outra edição/clube.
     var jaAlocado = escalacao.some(function (e) {
-      return e && e.clube === clubeSorteado && e.nome === jogador.nome;
+      return e && e.nome === jogador.nome;
     });
 
     // (b) Sem nenhuma vaga vazia compatível com este jogador
