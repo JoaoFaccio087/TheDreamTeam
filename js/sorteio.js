@@ -87,10 +87,11 @@ function rolar() {
   cancelarSelecao();
   listaJogadores.classList.add('escondida');
 
-  // No primeiro sorteio, esconde o bloco de formação.
+  // No primeiro sorteio, esconde os blocos de formação e de estilo (já escolhidos).
   if (!formacaoTravada) {
     formacaoTravada = true;
     formacaoBloco.classList.add('escondida');
+    if (estiloBloco) estiloBloco.classList.add('escondida');
   }
 
   btnRolar.classList.add('escondida');

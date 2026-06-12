@@ -62,6 +62,7 @@ btnSimular.addEventListener('click', function () {
   acaoBotao = 'iniciar';            // garante o estado inicial do botão
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.textContent = 'Iniciar Campanha \u25BA';
+  configurarTelaSimulacao();        // mostra/esconde a tabela e o "Pular tudo" do Brasileirão
   mostrarTela(telaSimulacao);
 });
 
@@ -114,6 +115,15 @@ document.getElementById('btn-voltar-escalacao').addEventListener('click', functi
 
 // Skip: re-sorteia qualquer clube e qualquer ano da competição, sem gastar rolagem
 btnSkip.addEventListener('click', fazerSkip);
+
+// "Pular tudo" (Brasileirão): abre o modal de confirmação
+if (btnPularTudo) btnPularTudo.addEventListener('click', abrirConfirmPularTudo);
+if (btnConfirmConfirmar) btnConfirmConfirmar.addEventListener('click', function () {
+  fecharConfirmPularTudo();
+  pularTudoBrasileirao();
+});
+if (btnConfirmCancelar) btnConfirmCancelar.addEventListener('click', fecharConfirmPularTudo);
+if (btnConfirmBackdrop) btnConfirmBackdrop.addEventListener('click', fecharConfirmPularTudo);
 
 // Abre a tela de resumo da campanha (botão aparece ao fim de cada campanha)
 if (btnResumo) btnResumo.addEventListener('click', mostrarResumo);

@@ -85,6 +85,7 @@
               <!-- "pilula-ativa" = selecionada por padrão -->
               <button class="pilula pilula-ativa" data-modo="libertadores">Libertadores</button>
               <button class="pilula" data-modo="champions">Champions League</button>
+              <button class="pilula" data-modo="brasileirao">Brasileir&atilde;o</button>
             </div>
           </div>
 
@@ -424,6 +425,24 @@
       <div class="sim-principal">
         <!-- ← Voltar: sempre no topo -->
         <button id="btn-voltar-escalacao" class="btn-secundario sim-btn-acao">&#8592; Voltar</button>
+
+        <!-- Tabela do Brasileirão: aparece só no modo Brasileirão, atualiza a cada rodada -->
+        <div id="tabela-brasileirao" class="tabela-brasileirao escondida">
+          <p class="sim-rotulo">TABELA DO BRASILEIR&Atilde;O</p>
+          <div class="tb-scroll">
+            <table class="tb-tabela">
+              <thead>
+                <tr>
+                  <th class="tb-pos">#</th>
+                  <th class="tb-th-time">Time</th>
+                  <th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GF</th><th>GS</th><th>SG</th>
+                </tr>
+              </thead>
+              <tbody id="tabela-brasileirao-corpo"></tbody>
+            </table>
+          </div>
+        </div>
+
         <!-- Histórico: ordem cronológica — oitavas no topo, final embaixo -->
         <div id="historico-jogos" class="historico-jogos"></div>
         <!-- Botão principal: desce conforme os cards aparecem -->
@@ -442,6 +461,7 @@
             <div class="area-pilulas">
               <button class="sim-pilula sim-pilula-ativa" data-sim-modo="jogo-a-jogo">Jogo a jogo</button>
               <button class="sim-pilula" data-sim-modo="automatico">Autom&aacute;tico</button>
+              <button id="btn-pular-tudo" class="sim-pilula sim-pular-tudo escondida" type="button">Pular tudo</button>
             </div>
           </div>
           <div class="sim-ctrl-bloco">
@@ -479,6 +499,19 @@
 <!-- Overlay da tela de resumo da campanha (preenchido via JS) -->
   <div id="resumo-overlay" class="resumo-overlay escondida"></div>
 
+<!-- Modal de confirmação do "Pular tudo" (Brasileirão) -->
+  <div id="confirm-overlay" class="confirm-overlay escondida">
+    <div class="confirm-backdrop" id="confirm-backdrop"></div>
+    <div class="confirm-card" role="dialog" aria-modal="true">
+      <p class="confirm-titulo">Pular tudo?</p>
+      <p class="confirm-texto">Todas as rodadas restantes ser&atilde;o simuladas de uma vez e voc&ecirc; ir&aacute; direto para o resultado final do campeonato.</p>
+      <div class="confirm-acoes">
+        <button id="confirm-cancelar" class="btn-secundario" type="button">Cancelar</button>
+        <button id="confirm-confirmar" class="btn-rolar" type="button">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
 <!-- Captura do card como imagem (carrega online; se offline, o botão avisa) -->
   <!-- html2canvas: arquivo local (funciona offline). Se faltar, recorre ao CDN. -->
   <script src="js/libs/html2canvas.min.js"></script>
@@ -491,6 +524,7 @@
 <!-- Dados: competições primeiro, depois o dados.js que junta tudo -->
   <script src="js/dados/libertadores.js"></script>
   <script src="js/dados/champions.js"></script>
+  <script src="js/dados/brasileirao.js"></script>
   <script src="js/dados/dados.js"></script>
 
   <!-- Lógica em módulos — a ordem importa: estado/config primeiro, main por último.
@@ -505,6 +539,7 @@
   <script src="js/home.js"      defer></script>
   <script src="js/simulacao.js" defer></script>
   <script src="js/campanha.js"  defer></script>
+  <script src="js/brasileirao.js" defer></script>
   <script src="js/resumo.js"    defer></script>
   <script src="js/main.js"      defer></script>
 </body>

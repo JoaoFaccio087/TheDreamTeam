@@ -2,7 +2,7 @@
 
 # The Dream Team
 
-Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título.
+Monte o time dos sonhos com craques da Libertadores, da Champions League e do Brasileirão e leve-o ao título.
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
@@ -39,29 +39,31 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 ## Funcionalidades
 
-- **Sorteio de clubes** lendários da Libertadores e da Champions, por edição.
+- **Sorteio de clubes** lendários da Libertadores, da Champions e do Brasileirão, por edição.
 - **Outro sorteio**, que re-sorteia qualquer clube ou ano da competição, com orçamento de skips por partida.
 - **Dois estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados — sem jogadores repetidos.
 - **Escalação livre**: alocar, mover e trocar jogadores no campo, com a lista indicando quem pode ocupar cada posição.
 - **Oito formações**: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-3-2-1, 4-5-1, 3-4-3 e 4-1-2-1-2.
-- **Campanha completa**, com fase de grupos e classificação seguidas de mata-mata até a final.
+- **Campanha completa** na Libertadores e na Champions, com fase de grupos e classificação seguidas de mata-mata até a final.
+- **Modo Brasileirão (liga)**: pontos corridos com 20 times e 38 rodadas, **Tabela do Brasileirão** completa (P, J, V, E, D, GF, GS e SG) atualizada a cada rodada e botão **Pular tudo** para simular o restante da temporada de uma vez.
 - **Disputa de pênaltis** quando o mata-mata termina empatado.
 - **Simulação jogo a jogo ou automática**, em três velocidades.
 - **Estatísticas por jogador** (gols e assistências) atualizadas ao vivo.
 - **Resumo da campanha** ao final, com opção de baixar como imagem e compartilhar.
-- **Dois temas** que acompanham a competição escolhida.
+- **Três temas** que acompanham a competição escolhida.
 - **Layout responsivo** para celular e tablet.
 
 ## Como jogar
 
-1. Escolha a competição (Libertadores ou Champions) e uma formação de amostra na tela inicial.
+1. Escolha a competição (Libertadores, Champions ou Brasileirão) e uma formação de amostra na tela inicial.
 2. Clique em **Jogar agora**.
-3. Escolha o **estilo de jogo**: Clássico ou Draft.
+3. Escolha o **estilo de jogo**: Clássico ou Draft. Após rolar ou começar, o estilo e a formação ficam travados.
 4. No **Clássico**: sorteie um clube (use **Outro sorteio** para trocar) e monte seu XI selecionando um jogador da lista e uma vaga compatível no campo. É possível misturar clubes.
 5. No **Draft**: escolha a formação e clique em **Começar**. Clique em cada vaga do campo para abrir cinco cartas aleatórias e selecione o jogador desejado; você tem três re-sorteios por draft.
 6. Com o time completo, clique em **Simular**.
-7. Avance pela fase de grupos e pelo mata-mata. Vença a final para conquistar o título.
-8. Ao final, abra o resumo da campanha.
+7. Na Libertadores e na Champions, avance pela fase de grupos e pelo mata-mata e vença a final para conquistar o título.
+8. No **Brasileirão**, dispute as 38 rodadas acompanhando a tabela; use **Pular tudo** para ir direto ao resultado final. Ser **1º colocado** é o título.
+9. Ao final, abra o resumo da campanha.
 
 ## Estrutura de pastas
 
@@ -87,6 +89,7 @@ TheDreamTeam/
     ├── dados/
     │   ├── libertadores.js
     │   ├── champions.js
+    │   ├── brasileirao.js
     │   └── dados.js
     │
     ├── estado.js
@@ -99,6 +102,7 @@ TheDreamTeam/
     ├── home.js
     ├── simulacao.js
     ├── campanha.js
+    ├── brasileirao.js
     ├── resumo.js
     └── main.js
 ```

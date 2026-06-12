@@ -458,3 +458,129 @@
 .grupo-tabela tr.grupo-voce td { color: var(--accent); font-weight: 700; }
 
 
+
+
+/* ============================================================
+   MODO BRASILEIRÃO (liga): tabela, botão "Pular tudo" e modal
+   ============================================================ */
+
+/* Painel da Tabela do Brasileirão (coluna da esquerda) */
+.tabela-brasileirao {
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Rolagem horizontal no celular (a tabela tem 10 colunas) */
+.tb-scroll { overflow-x: auto; }
+
+.tb-tabela {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 0.74rem;
+}
+
+.tb-tabela thead th {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.54rem;
+  letter-spacing: 0.5px;
+  color: var(--txt-soft);
+  text-align: center;
+  padding: 5px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  white-space: nowrap;
+}
+.tb-tabela thead th.tb-th-time { text-align: left; }
+
+.tb-tabela td {
+  padding: 5px 4px;
+  text-align: center;
+  color: var(--txt);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+}
+.tb-tabela td.tb-time {
+  text-align: left;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tb-pos { color: var(--txt-soft); width: 1.6rem; }
+.tb-pts { font-family: 'Archivo Black', sans-serif; color: var(--accent); }
+
+/* Faixas de classificação: G4 (topo) e Z4 (rebaixamento) pela posição */
+.tb-tabela tr.tb-g4 .tb-pos { color: var(--accent); }
+.tb-tabela tr.tb-z4 .tb-pos { color: #E8593C; }
+
+/* Sua linha em destaque */
+.tb-tabela tr.tb-voce td { color: var(--accent); font-weight: 700; background: rgba(255, 255, 255, 0.05); }
+.tb-tabela tr.tb-voce .tb-time { font-weight: 700; }
+
+
+/* Botão "Pular tudo": mais baixo que as pílulas, visual de ação tracejada */
+.sim-pular-tudo {
+  align-self: center;          /* não estica: fica mais baixo que as pílulas */
+  padding: 3px 10px;
+  font-size: 0.58rem;
+  border-style: dashed;
+}
+.sim-pular-tudo:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* Modal de confirmação do "Pular tudo" */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.confirm-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.confirm-card {
+  position: relative;
+  background: #181B21;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 22px 24px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
+}
+.confirm-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.1rem;
+  color: var(--txt);
+  margin-bottom: 8px;
+}
+.confirm-texto {
+  font-size: 0.85rem;
+  color: var(--txt-soft);
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+.confirm-acoes {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.confirm-acoes .btn-secundario,
+.confirm-acoes .btn-rolar {
+  width: auto;
+}
+
+/* Linha "Sem gols" nos cards de rodada simulada instantaneamente (Pular tudo) */
+.partida-sem-gols { opacity: 0.55; font-style: italic; }

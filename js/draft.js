@@ -97,9 +97,9 @@ function tierDaForca(forca) {
 }
 
 
-// SELETOR DE ESTILO — alterna Clássico ↔ Draft (só antes de "Começar").
+// SELETOR DE ESTILO — alterna Clássico ↔ Draft (só antes de "Começar"/"Rolar").
 function selecionarEstilo(novoEstilo) {
-  if (draftIniciado) return;          // já começou: não troca de estilo
+  if (draftIniciado || formacaoTravada) return;  // já começou/rolou: estilo travado
   estiloJogo = novoEstilo;
 
   pilulasEstilo.forEach(function (p) {
@@ -324,6 +324,7 @@ function resetEstiloDraft() {
   if (draftOverlay)  { draftOverlay.classList.add('escondida'); }
   if (draftCartasEl) { draftCartasEl.innerHTML = ''; }
   if (btnComecarDraft) btnComecarDraft.classList.add('escondida');
+  if (estiloBloco) estiloBloco.classList.remove('escondida');  // volta a permitir trocar o estilo
 
   if (pilulasEstilo) {
     pilulasEstilo.forEach(function (p) {

@@ -4,7 +4,8 @@
 // dela saem o valor de "competicao" em DADOS (para filtrar), o rótulo exibido e o tema de cor.
 const COMPETICOES = {
   libertadores: { dados: 'Libertadores', label: 'Libertadores',    tema: 'tema-libertadores' },
-  champions:    { dados: 'Champions',    label: 'Champions League', tema: 'tema-champions' }
+  champions:    { dados: 'Champions',    label: 'Champions League', tema: 'tema-champions' },
+  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão',      tema: 'tema-brasileirao' }
 };
 
 // Converte o valor de "competicao" dos dados no rótulo exibido (ex.: "Champions" → "Champions League").

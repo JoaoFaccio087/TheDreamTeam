@@ -37,6 +37,7 @@ const resumoOverlay       = document.getElementById('resumo-overlay');
 
 // Elementos do modo Draft
 const pilulasEstilo      = document.querySelectorAll('#jogo-pilulas-estilo .pilula');
+const estiloBloco        = document.getElementById('jogo-estilo-bloco');
 const btnComecarDraft    = document.getElementById('btn-comecar-draft');
 const draftOverlay       = document.getElementById('draft-overlay');
 const draftCartasEl      = document.getElementById('draft-cartas');
@@ -47,6 +48,15 @@ const draftTitulo        = document.getElementById('draft-titulo');
 
 const simPilulasModo = document.querySelectorAll('[data-sim-modo]');
 const simPilulasVel  = document.querySelectorAll('[data-sim-vel]');
+
+// Elementos do modo Brasileirão (liga)
+const tabelaBrasileirao      = document.getElementById('tabela-brasileirao');
+const tabelaBrasileiraoCorpo = document.getElementById('tabela-brasileirao-corpo');
+const btnPularTudo           = document.getElementById('btn-pular-tudo');
+const confirmOverlay         = document.getElementById('confirm-overlay');
+const btnConfirmCancelar     = document.getElementById('confirm-cancelar');
+const btnConfirmConfirmar    = document.getElementById('confirm-confirmar');
+const btnConfirmBackdrop     = document.getElementById('confirm-backdrop');
 
 
 // --- Estado: tela inicial ---
@@ -86,6 +96,7 @@ var fasesCampanha     = [];        // fase de grupos + mata-mata, definidas em m
 var faseAtual         = 0;
 var adversariosUsados = [];        // 'clube|edicao' já enfrentados, para não repetir na campanha
 var grupo             = null;
+var liga              = null;      // estado da liga (Brasileirão): tabela 20 times + rodadas
 var acaoBotao         = 'iniciar'; // 'iniciar' | 'proximo' | 'nova-campanha' | 'novo-time'
 
 // Acumuladores da campanha atual — usados na tela de resumo

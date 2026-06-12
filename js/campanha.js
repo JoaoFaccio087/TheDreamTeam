@@ -7,6 +7,7 @@ function reiniciarCampanha() {
   faseAtual         = 0;
   adversariosUsados = [];
   grupo             = null;
+  liga              = null;
   statsJogadores    = {};
   campanhaPartidas  = 0;
   campanhaGF        = 0;
@@ -20,12 +21,26 @@ function reiniciarCampanha() {
   if (corpo) corpo.innerHTML = '';
   var hist  = document.getElementById('historico-jogos');
   if (hist)  hist.innerHTML  = '';
+  if (tabelaBrasileiraoCorpo) tabelaBrasileiraoCorpo.innerHTML = ''; // limpa a tabela da liga
 }
 
-// --- Monta a campanha: fase de grupos (3 jogos na Liberta, 4 na Champions) + mata-mata ---
+// --- Monta a campanha: liga (Brasileirão) OU grupos + mata-mata (Liberta/Champions) ---
 function montarCampanha() {
   faseAtual         = 0;
   adversariosUsados = [];
+
+  // Brasileirão: liga de 20 times em 38 rodadas (sem fase de grupos/mata-mata)
+  if (modoSelecionado === 'brasileirao') {
+    if (!liga) montarLigaBrasileirao();   // monta uma vez por campanha (tabela + calendário)
+    if (tabelaBrasileirao) tabelaBrasileirao.classList.remove('escondida');
+    if (btnPularTudo)      btnPularTudo.classList.remove('escondida');
+    fasesCampanha = [];
+    for (var rd = 1; rd <= 38; rd++) {
+      fasesCampanha.push({ nome: 'Rodada ' + rd, tipo: 'liga', rodada: rd });
+    }
+    faseAtual = liga.rodadaAtual;
+    return;
+  }
 
   var comp        = COMPETICOES[modoSelecionado].dados;
   var isChampions = (modoSelecionado === 'champions');
@@ -203,7 +218,12 @@ function iniciarPartida() {
   var fase = fasesCampanha[faseAtual];
   var adversario, faseLabel;
 
-  if (fase && fase.tipo === 'grupo' && grupo) {
+  if (fase && fase.tipo === 'liga' && liga) {
+    // Brasileirão: adversário vem do calendário da rodada atual
+    var confL = confrontoSeu(liga.rodadaAtual);
+    adversario = liga.tabela[confL.advIdx].clubeRef;
+    faseLabel  = 'Rodada ' + (liga.rodadaAtual + 1) + ' \u00B7 Brasileir\u00E3o';
+  } else if (fase && fase.tipo === 'grupo' && grupo) {
     // Adversário vem da tabela do grupo (jogo agendado, não aleatório)
     var advIdx = grupo.jogosVoce[grupo.idxJogo];
     adversario = grupo.tabela[advIdx].clubeRef;

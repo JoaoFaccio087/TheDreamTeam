@@ -408,7 +408,10 @@ function encerrarPartida(est) {
   if (elRel) elRel.classList.add('escondida');
 
   var fase = fasesCampanha[faseAtual];
-  if (fase && fase.tipo === 'grupo') {
+  if (fase && fase.tipo === 'liga') {
+    // Brasileirão: registra na tabela, resolve os outros jogos e avança a rodada
+    concluirRodadaBrasileirao(est);
+  } else if (fase && fase.tipo === 'grupo') {
     // Fase de grupos: empate vale empate (sem pênaltis), perder não elimina
     concluirJogoGrupo(est);
   } else if (est.gMeus > est.gAdv) {
