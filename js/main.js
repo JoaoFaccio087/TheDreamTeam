@@ -23,6 +23,27 @@ pilulasFormacaoJogo.forEach(function (pilula) {
 
 btnRolar.addEventListener('click', rolar);
 
+// --- Modo Draft: estilo, começar, seleção de carta, fechar overlay ---
+pilulasEstilo.forEach(function (pilula) {
+  pilula.addEventListener('click', function () { selecionarEstilo(this.dataset.estilo); });
+});
+
+btnComecarDraft.addEventListener('click', comecarDraft);
+btnSelecionarDraft.addEventListener('click', confirmarSelecaoDraft);
+btnResortearDraft.addEventListener('click', resortearCartas);
+
+// Clicar no fundo do overlay (fora das cartas e do botão) fecha sem selecionar
+draftOverlay.addEventListener('click', function (ev) {
+  if (ev.target === draftOverlay) fecharCartasDraft();
+});
+
+// Esc também fecha o overlay de cartas
+document.addEventListener('keydown', function (ev) {
+  if (ev.key === 'Escape' && !draftOverlay.classList.contains('escondida')) {
+    fecharCartasDraft();
+  }
+});
+
 // Delegação: um único ouvinte no campo captura cliques em qualquer slot,
 // inclusive jogadores já alocados (evita problemas de escopo de closure)
 campoJogo.addEventListener('click', function (ev) {

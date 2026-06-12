@@ -41,6 +41,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 - **Sorteio de clubes** lendários da Libertadores e da Champions, por edição.
 - **Outro sorteio**, que re-sorteia qualquer clube ou ano da competição, com orçamento de skips por partida.
+- **Dois estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados.
 - **Escalação livre**: alocar, mover e trocar jogadores no campo, com a lista indicando quem pode ocupar cada posição.
 - **Oito formações**: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-3-2-1, 4-5-1, 3-4-3 e 4-1-2-1-2.
 - **Campanha completa**, com fase de grupos e classificação seguidas de mata-mata até a final.
@@ -55,48 +56,51 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 1. Escolha a competição (Libertadores ou Champions) e uma formação de amostra na tela inicial.
 2. Clique em **Jogar agora**.
-3. Sorteie um clube. Use **Outro sorteio** para trocar, se quiser.
-4. Monte seu XI: selecione um jogador da lista e uma vaga compatível no campo. É possível sortear outros clubes e misturar os melhores.
-5. Com o time completo, clique em **Simular**.
-6. Avance pela fase de grupos e pelo mata-mata. Vença a final para conquistar o título.
-7. Ao final, abra o resumo da campanha.
+3. Escolha o **estilo de jogo**: Clássico ou Draft.
+4. No **Clássico**: sorteie um clube (use **Outro sorteio** para trocar) e monte seu XI selecionando um jogador da lista e uma vaga compatível no campo. É possível misturar clubes.
+5. No **Draft**: escolha a formação e clique em **Começar**. Clique em cada vaga do campo para abrir cinco cartas aleatórias e selecione o jogador desejado; você tem três re-sorteios por draft.
+6. Com o time completo, clique em **Simular**.
+7. Avance pela fase de grupos e pelo mata-mata. Vença a final para conquistar o título.
+8. Ao final, abra o resumo da campanha.
 
 ## Estrutura de pastas
 
 ```text
 TheDreamTeam/
-├── index.html              # estrutura das telas + ordem de carga dos scripts/estilos
+├── index.html
 │
 ├── assets/
 │   └── imagens/
 │       ├── favicon.svg
 │       └── screenshots/
 │
-├── css/                     # estilos separados por tela (a ordem dos <link> é a cascata)
-│   ├── base.css             # variáveis, temas, reset, tipografia, utilitários
-│   ├── home.css             # tela inicial
-│   ├── escalacao.css        # tela do jogo (lista, campo, box score, skips)
-│   ├── simulacao.css        # cards de partida, painel e tabela de grupos
-│   ├── resumo.css           # tela de resumo da campanha
-│   └── responsivo.css       # media queries (carregado por último)
+├── css/
+│   ├── base.css
+│   ├── home.css
+│   ├── escalacao.css
+│   ├── draft.css
+│   ├── simulacao.css
+│   ├── resumo.css
+│   └── responsivo.css
 │
-└── js/                      # lógica em módulos (carregados na ordem abaixo)
-    ├── dados/                 # elencos, isolados da lógica
-    │   ├── libertadores.js     # clubes/elencos da Libertadores
-    │   ├── champions.js        # clubes/elencos da Champions
-    │   └── dados.js            # junta tudo no array DADOS
+└── js/
+    ├── dados/
+    │   ├── libertadores.js
+    │   ├── champions.js
+    │   └── dados.js
     │
-    ├── estado.js            # referências de DOM + variáveis de estado globais
-    ├── formacoes.js         # coordenadas e códigos de cada formação
-    ├── regras.js            # competições (fonte única) + elegibilidade de posições
-    ├── interface.js         # temas, navegação e posicionamento dos campos
-    ├── sorteio.js           # animação do sorteio, skips e rolagem
-    ├── escalacao.js         # montar o XI: lista, alocar, mover, trocar, box score
-    ├── home.js              # ações da tela inicial e estatísticas do rodapé
-    ├── simulacao.js         # motor da partida: placar, gols, pênaltis, cards
-    ├── campanha.js          # fluxo: grupos, tabela e mata-mata
-    ├── resumo.js            # tela final de resumo
-    └── main.js              # inicialização e event listeners (carregado por último)
+    ├── estado.js
+    ├── formacoes.js
+    ├── regras.js
+    ├── interface.js
+    ├── sorteio.js
+    ├── escalacao.js
+    ├── draft.js
+    ├── home.js
+    ├── simulacao.js
+    ├── campanha.js
+    ├── resumo.js
+    └── main.js
 ```
 
 Os arquivos compartilham um escopo global e são carregados em ordem (com `defer`): dados e configuração primeiro, `main.js` por último. A ordem está definida no final do `index.html`.

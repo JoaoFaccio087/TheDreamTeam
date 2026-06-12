@@ -37,6 +37,7 @@
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/escalacao.css" />
+  <link rel="stylesheet" href="css/draft.css" />
   <link rel="stylesheet" href="css/simulacao.css" />
   <link rel="stylesheet" href="css/resumo.css" />
   <link rel="stylesheet" href="css/responsivo.css" />
@@ -237,6 +238,15 @@
            ========================================================= -->
       <div class="jogo-esquerda">
 
+        <!-- Bloco de estilo de jogo: Clássico (sorteio) ou Draft (cartas) -->
+        <div id="jogo-estilo-bloco">
+          <p class="jogo-rotulo">ESTILO DE JOGO</p>
+          <div class="area-pilulas" id="jogo-pilulas-estilo">
+            <button class="pilula pilula-ativa" data-estilo="classico">Cl&aacute;ssico</button>
+            <button class="pilula" data-estilo="draft">Draft</button>
+          </div>
+        </div><!-- /jogo-estilo-bloco -->
+
         <!-- Bloco de formação: some inteiro após o 1º sorteio -->
         <div id="jogo-formacao-bloco">
           <p class="jogo-rotulo">FORMA&Ccedil;&Atilde;O</p>
@@ -254,8 +264,11 @@
           </div>
         </div><!-- /jogo-formacao-bloco -->
 
-        <!-- Botão principal de sorteio -->
+        <!-- Botão principal de sorteio (modo Clássico) -->
         <button id="btn-rolar" class="btn-rolar">Rolar &#8635;</button>
+
+        <!-- Botão de início do Draft (modo Draft) — substitui o Rolar -->
+        <button id="btn-comecar-draft" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
 
         <!-- Card do clube sorteado (aparece após o 1º Rolar) -->
         <div id="clube-card" class="clube-card escondida">
@@ -361,6 +374,23 @@
 
     </div><!-- /jogo-wrapper -->
 
+    <!-- =========================================================
+         OVERLAY DO DRAFT — cartas de jogadores para a posição clicada
+         Fica oculto até o usuário clicar numa vaga no modo Draft.
+         ========================================================= -->
+    <div id="draft-overlay" class="draft-overlay escondida">
+      <p id="draft-titulo" class="draft-titulo"></p>
+      <div id="draft-cartas" class="draft-cartas"></div>
+      <div class="draft-acoes">
+        <button id="btn-resortear-draft" class="btn-resortear-draft">
+          <span class="resortear-icone">&#8635;</span>
+          <span>Re-sortear</span>
+          <span class="resortear-contador" id="resortear-contador">3</span>
+        </button>
+        <button id="btn-selecionar-draft" class="btn-rolar" disabled>Selecionar</button>
+      </div>
+    </div><!-- /draft-overlay -->
+
   </div><!-- /tela-jogo -->
 
   <!-- =============================================================
@@ -465,6 +495,7 @@
   <script src="js/interface.js" defer></script>
   <script src="js/sorteio.js"   defer></script>
   <script src="js/escalacao.js" defer></script>
+  <script src="js/draft.js"     defer></script>
   <script src="js/home.js"      defer></script>
   <script src="js/simulacao.js" defer></script>
   <script src="js/campanha.js"  defer></script>

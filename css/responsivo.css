@@ -60,6 +60,18 @@
     padding: 24px 16px;
     min-height: auto;
   }
+
+  /* Cabeçalho das telas do jogo/simulação: empilha (título em cima, info embaixo)
+     para "The Dream Team" caber sempre em uma única linha. */
+  .jogo-header {
+    padding: 18px 16px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .jogo-header-titulo { font-size: 1.5rem; }
+  .jogo-header-info,
+  .sim-label-campanha { text-align: left; }
   .slot-jogo {
     width: 52px;
     height: 52px;

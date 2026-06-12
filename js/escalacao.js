@@ -63,7 +63,8 @@ function atualizarForcas() {
 // Atualiza o texto "formação · modo" no cabeçalho da tela do jogo
 function atualizarHeaderInfo() {
   if (jogoHeaderInfo) {
-    jogoHeaderInfo.textContent = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase();
+    var estiloTxt = (typeof estiloJogo !== 'undefined' && estiloJogo === 'draft') ? ' · DRAFT' : '';
+    jogoHeaderInfo.textContent = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + estiloTxt;
   }
 }
 
@@ -95,6 +96,9 @@ function iniciarTelaJogo() {
   blocoSkips.classList.add('escondida');
   btnSimular.classList.add('escondida');
   skipContador.textContent = '5'; // restaura o contador visual
+
+  // Volta ao estilo Clássico e desfaz qualquer estado de Draft
+  if (typeof resetEstiloDraft === 'function') resetEstiloDraft();
 
   campoJogo.classList.remove('tem-selecao');
 
@@ -412,6 +416,12 @@ function concluirTroca(indiceQ) {
 //   slot vazio não-compatível       → cancela qualquer seleção
 
 function clicarSlot(indice) {
+  // No modo Draft já iniciado, o roteamento dos cliques é próprio (cartas + mover)
+  if (typeof estiloJogo !== 'undefined' && estiloJogo === 'draft' && draftIniciado) {
+    clicarSlotDraft(indice);
+    return;
+  }
+
   var slot = slotsJogo[indice];
 
   // 1. Jogador em modo de edição (P): clicou de novo → sai

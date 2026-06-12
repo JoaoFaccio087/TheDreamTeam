@@ -1,0 +1,375 @@
+/* draft.css — estilo de jogo "Draft": seletor, layout em 2 colunas e cartas. */
+
+/* Bloco "Estilo de Jogo" no topo da coluna esquerda */
+#jogo-estilo-bloco {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pílulas de estilo: mesmo visual escuro das pílulas de formação do jogo */
+#jogo-pilulas-estilo .pilula {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--txt-soft);
+  color: var(--txt);
+}
+
+#jogo-pilulas-estilo .pilula:hover:not(.pilula-ativa):not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+#jogo-pilulas-estilo .pilula.pilula-ativa {
+  background-color: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+
+/* LAYOUT DO DRAFT ATIVO — remove a coluna esquerda, deixa 2 colunas
+   e amplia o campo de escalação para melhor leitura. */
+.jogo-wrapper.draft-ativo {
+  grid-template-columns: 1fr 220px;
+}
+
+.jogo-wrapper.draft-ativo .jogo-esquerda {
+  display: none;
+}
+
+.jogo-wrapper.draft-ativo #campo-jogo {
+  max-width: 560px;
+}
+
+
+/* VAGA-ALVO — posição escolhida pelo usuário, preenchida na cor do tema */
+.slot-jogo.draft-alvo {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
+}
+
+
+/* OVERLAY DAS CARTAS — cobre a tela, escurece o fundo e centraliza */
+.draft-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.62);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: draft-overlay-surge 0.28s ease both;
+}
+
+/* Surgimento do overlay (fade + leve zoom do fundo) */
+@keyframes draft-overlay-surge {
+  from { opacity: 0; -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); }
+  to   { opacity: 1; }
+}
+
+/* Título: qual posição está sendo montada */
+.draft-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--txt);
+  text-align: center;
+  animation: draft-titulo-in 0.4s ease both;
+}
+
+@keyframes draft-titulo-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fileira de cartas — perspectiva para o efeito 3D do "deal" */
+.draft-cartas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  max-width: 880px;
+  perspective: 1100px;
+}
+
+/* Aviso quando não há jogadores elegíveis */
+.draft-vazio {
+  color: var(--txt);
+  font-size: 0.95rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+/* Carta individual — estilo "card de jogador" escuro */
+.draft-carta {
+  position: relative;
+  overflow: hidden;
+  width: 124px;
+  min-height: 172px;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+  /* Entrada escalonada (deal). 'backwards' segura o estado inicial durante o
+     atraso e devolve o controle ao CSS (hover/escolhida) ao terminar. */
+  animation: carta-deal 0.46s cubic-bezier(0.2, 0.85, 0.3, 1.25) backwards;
+}
+
+/* "Deal" — a carta sobe, escala e endireita a rotação 3D */
+@keyframes carta-deal {
+  0%   { opacity: 0; transform: translateY(28px) scale(0.7) rotateX(-22deg); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotateX(0); }
+}
+
+/* Brilho diagonal que cruza a carta logo após ela aparecer */
+.carta-brilho {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.16) 44%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.16) 56%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  opacity: 0;
+  animation: carta-glare 0.7s ease-out backwards;
+}
+
+@keyframes carta-glare {
+  0%   { background-position: 150% 0; opacity: 0; }
+  18%  { opacity: 1; }
+  100% { background-position: -60% 0; opacity: 0; }
+}
+
+.draft-carta:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Carta escolhida — levemente maior e destacada na cor do tema */
+.draft-carta.escolhida {
+  transform: scale(1.12);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent), 6px 9px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* RARIDADE POR FORÇA — borda e glow coloridos (o corpo segue escuro) */
+.draft-carta.tier-bronze { border-color: #b07a45; box-shadow: 0 0 14px rgba(176, 122, 69, 0.35), 5px 5px 0 rgba(0,0,0,0.5); }
+.draft-carta.tier-prata  { border-color: #c2cad6; box-shadow: 0 0 14px rgba(194, 202, 214, 0.32), 5px 5px 0 rgba(0,0,0,0.5); }
+.draft-carta.tier-ouro   { border-color: #e0b24b; box-shadow: 0 0 16px rgba(224, 178, 75, 0.45), 5px 5px 0 rgba(0,0,0,0.5); }
+.draft-carta.tier-elite  { border-color: #ffd86b; box-shadow: 0 0 22px rgba(255, 216, 107, 0.6), 5px 5px 0 rgba(0,0,0,0.5); }
+
+/* Força ganha a cor da raridade */
+.draft-carta.tier-bronze .carta-forca { color: #d29a63; }
+.draft-carta.tier-prata  .carta-forca { color: #e3e9f2; }
+.draft-carta.tier-ouro   .carta-forca { color: #f0c768; }
+.draft-carta.tier-elite  .carta-forca { color: #ffe08a; text-shadow: 0 0 12px rgba(255, 216, 107, 0.7); }
+
+/* Elite pulsa de leve para chamar atenção (pausa no hover) */
+.draft-carta.tier-elite { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
+.draft-carta.tier-elite:hover { animation-play-state: paused; }
+
+@keyframes carta-elite-pulso {
+  0%, 100% { box-shadow: 0 0 22px rgba(255, 216, 107, 0.55), 5px 5px 0 rgba(0,0,0,0.5); }
+  50%      { box-shadow: 0 0 30px rgba(255, 216, 107, 0.85), 5px 5px 0 rgba(0,0,0,0.5); }
+}
+
+/* A carta escolhida mantém o destaque de seleção acima da raridade */
+.draft-carta.tier-elite.escolhida,
+.draft-carta.tier-ouro.escolhida,
+.draft-carta.tier-prata.escolhida,
+.draft-carta.tier-bronze.escolhida {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent), 6px 9px 0 rgba(0, 0, 0, 0.55);
+  animation: none; /* congela o pulso da elite ao selecionar */
+}
+
+/* Nome do jogador — ocupa até duas linhas */
+.carta-nome {
+  position: relative;
+  z-index: 1;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.12;
+  margin-bottom: 10px;
+  min-height: 2.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.carta-time {
+  font-size: 0.62rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.carta-ano {
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 8px;
+}
+
+.carta-posicoes {
+  font-size: 0.58rem;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+/* Força em destaque no rodapé da carta */
+.carta-forca {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: #fff;
+  margin-top: auto;
+}
+
+/* Ações do overlay: Re-sortear (secundário) + Selecionar (principal) */
+.draft-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: draft-titulo-in 0.4s ease 0.15s both;
+}
+
+/* Botão Re-sortear — secundário, retrô escuro */
+.btn-resortear-draft {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  padding: 12px 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.resortear-icone {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+/* Contador de re-sorteios restantes — pílula na cor do tema */
+.resortear-contador {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.68rem;
+  line-height: 1;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: var(--bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-resortear-draft:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-resortear-draft:active:not(:disabled) {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.btn-resortear-draft:disabled {
+  opacity: 0.32;
+  cursor: default;
+  box-shadow: none;
+}
+
+#btn-selecionar-draft {
+  min-width: 200px;
+}
+
+#btn-selecionar-draft:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+}
+
+
+/* CELULARES E TABLETS (≤ 768px) — 1 coluna e cartas menores.
+   Vem depois da regra base do .draft-ativo, então prevalece quando o media casa. */
+@media (max-width: 768px) {
+  .jogo-wrapper.draft-ativo {
+    grid-template-columns: 1fr;
+  }
+
+  .draft-overlay {
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .draft-titulo {
+    font-size: 0.9rem;
+  }
+
+  .draft-cartas {
+    gap: 10px;
+  }
+
+  .draft-carta {
+    width: 104px;
+    min-height: 152px;
+    padding: 11px 9px;
+  }
+
+  .carta-nome {
+    font-size: 0.78rem;
+    margin-bottom: 8px;
+  }
+
+  .carta-forca {
+    font-size: 1.6rem;
+  }
+
+  .draft-acoes {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #btn-selecionar-draft {
+    min-width: 150px;
+  }
+}

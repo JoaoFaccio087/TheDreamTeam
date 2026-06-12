@@ -34,6 +34,16 @@ const skipContador        = document.getElementById('skip-contador');
 const btnResumo           = document.getElementById('btn-resumo');
 const resumoOverlay       = document.getElementById('resumo-overlay');
 
+// Elementos do modo Draft
+const pilulasEstilo      = document.querySelectorAll('#jogo-pilulas-estilo .pilula');
+const btnComecarDraft    = document.getElementById('btn-comecar-draft');
+const draftOverlay       = document.getElementById('draft-overlay');
+const draftCartasEl      = document.getElementById('draft-cartas');
+const btnSelecionarDraft = document.getElementById('btn-selecionar-draft');
+const btnResortearDraft  = document.getElementById('btn-resortear-draft');
+const resortearContador  = document.getElementById('resortear-contador');
+const draftTitulo        = document.getElementById('draft-titulo');
+
 const simPilulasModo = document.querySelectorAll('[data-sim-modo]');
 const simPilulasVel  = document.querySelectorAll('[data-sim-vel]');
 
@@ -55,6 +65,11 @@ let slotMovendo        = null;                 // índice do slot cujo jogador e
 let clubeSorteado      = '';
 let edicaoSorteada     = null;                 // entrada de DADOS do sorteio atual
 let skipsRestantes     = 5;                    // skips disponíveis por partida
+
+// --- Estado: modo Draft ---
+let estiloJogo        = 'classico';  // 'classico' | 'draft'
+let draftIniciado     = false;       // true após clicar em "Começar" no modo Draft
+let draftSkipsRestantes = 3;         // re-sorteios disponíveis por draft
 
 
 // --- Estado: tela de simulação ---
