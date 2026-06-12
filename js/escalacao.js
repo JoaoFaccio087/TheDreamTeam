@@ -63,8 +63,8 @@ function atualizarForcas() {
 // Atualiza o texto "formação · modo" no cabeçalho da tela do jogo
 function atualizarHeaderInfo() {
   if (jogoHeaderInfo) {
-    var estiloTxt = (typeof estiloJogo !== 'undefined' && estiloJogo === 'draft') ? ' · DRAFT' : '';
-    jogoHeaderInfo.textContent = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + estiloTxt;
+    var estilo = (typeof estiloJogo !== 'undefined' && estiloJogo === 'draft') ? 'DRAFT' : 'CLÁSSICO';
+    jogoHeaderInfo.textContent = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + ' · ' + estilo;
   }
 }
 

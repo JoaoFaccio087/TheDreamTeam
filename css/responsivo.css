@@ -83,17 +83,19 @@
      filhos da coluna direita ao .jogo-wrapper. */
   .jogo-direita { display: contents; }
 
-  /* Linha de ação em fila: ação preenche, Voltar encolhe ao lado */
+  /* Linha de ação em fila: Voltar (esquerda, compacto) + ação preenchendo o resto */
   .jogo-acao {
     display: flex;
     gap: 8px;
     align-items: stretch;
   }
   .jogo-acao .btn-rolar {
-    flex: 1;
+    flex: 1 1 0;       /* Rolar e Começar ocupam exatamente a mesma largura */
     width: auto;
+    min-width: 0;      /* ignora o piso de largura do texto (padroniza os dois) */
   }
   .btn-voltar-mobile {
+    order: -1;          /* à esquerda da ação, dando a sensação de "voltar" */
     display: inline-flex;
     align-items: center;
     justify-content: center;
