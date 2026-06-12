@@ -15,11 +15,11 @@ Monte o time dos sonhos com craques da Libertadores, da Champions League e do Br
 
 ## Sobre o projeto
 
-The Dream Team é um jogo de navegador no qual você sorteia clubes lendários, monta uma escalação misturando craques de diferentes times e épocas, e conduz uma campanha completa: fase de grupos, mata-mata, pênaltis e, com estratégia, o título.
+The Dream Team é um jogo de navegador no qual você sorteia clubes lendários, monta uma escalação misturando craques de diferentes times e épocas, e conduz uma campanha completa até o título — mata-mata com fase de grupos e pênaltis nas competições continentais, ou pontos corridos (20 times, 38 rodadas) no Brasileirão.
 
 O jogo roda inteiramente no navegador, sem instalação e sem servidor — feito em HTML, CSS e JavaScript puro, sem frameworks nem dependências de build.
 
-A base de dados reúne os semifinalistas reais de cada temporada da Copa Libertadores (1960 a 2025) e da UEFA Champions League (1956 a 2025). São 582 elencos e 8.751 jogadores, com a força de cada atleta calibrada individualmente. Os elencos históricos mais antigos refletem o plantel registrado da época e podem ter menos de 16 nomes.
+A base de dados reúne elencos reais de cada temporada da Copa Libertadores (1960 a 2025), da UEFA Champions League (1956 a 2025) e do Campeonato Brasileiro (1959 a 2025). São 984 elencos e mais de 14,5 mil jogadores, com a força de cada atleta calibrada individualmente. Os elencos históricos mais antigos refletem o plantel registrado da época e podem ter menos de 16 nomes.
 
 ## Demonstração
 
@@ -95,6 +95,7 @@ TheDreamTeam/
     ├── estado.js
     ├── formacoes.js
     ├── regras.js
+    ├── api.js
     ├── interface.js
     ├── sorteio.js
     ├── escalacao.js

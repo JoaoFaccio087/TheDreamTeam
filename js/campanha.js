@@ -63,14 +63,14 @@ function montarCampanha() {
   });
 
   // Sorteia os clubes do grupo (você + (tamGrupo-1) adversários distintos)
-  var pool = DADOS.filter(function (d) { return d.competicao === comp; }).slice();
+  var pool = API.getClubesPorCompeticao(comp).slice();
   for (var i = pool.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
     var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
   }
   var outros = pool.slice(0, tamGrupo - 1);
 
-  var tabela = [{ nome: 'Seu time', voce: true, forca: forcaDoTime(), pts: 0, gf: 0, ga: 0, clubeRef: null }];
+  var tabela = [{ nome: nomeDoTime, voce: true, forca: forcaDoTime(), pts: 0, gf: 0, ga: 0, clubeRef: null }];
   outros.forEach(function (c) {
     tabela.push({ nome: c.clube + ' ' + c.edicao, voce: false, forca: forcaDoClube(c), pts: 0, gf: 0, ga: 0, clubeRef: c });
   });
@@ -232,12 +232,11 @@ function iniciarPartida() {
     adversariosUsados.push(adversario.clube + '|' + adversario.edicao);
   } else {
     // Mata-mata: sorteia adversário da competição, sem repetir os já enfrentados
-    var candidatos = DADOS.filter(function (d) {
-      return d.competicao === filtroComp &&
-             adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
+    var candidatos = API.getClubesPorCompeticao(filtroComp).filter(function (d) {
+      return adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
     });
     if (candidatos.length === 0) {
-      candidatos = DADOS.filter(function (d) { return d.competicao === filtroComp; });
+      candidatos = API.getClubesPorCompeticao(filtroComp);
     }
     if (candidatos.length === 0) { console.warn('Sem adversários para', filtroComp); return; }
     adversario = candidatos[Math.floor(Math.random() * candidatos.length)];

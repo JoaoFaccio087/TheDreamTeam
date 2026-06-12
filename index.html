@@ -7,7 +7,7 @@
   <title>The Dream Team — sorteie, escale, goleie</title>
 
   <!-- ===== SEO ===== -->
-  <meta name="description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título. Jogo de navegador grátis, sem instalação." />
+  <meta name="description" content="Monte o time dos sonhos com craques da Libertadores, da Champions e do Brasileirão e leve-o ao título. Jogo de navegador grátis, sem instalação." />
   <meta name="author" content="João Faccio" />
   <meta name="theme-color" content="#D9B25A" />
   <link rel="canonical" href="https://joaofaccio087.github.io/TheDreamTeam/" />
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The Dream Team" />
   <meta property="og:title" content="The Dream Team — sorteie, escale, goleie" />
-  <meta property="og:description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título." />
+  <meta property="og:description" content="Monte o time dos sonhos com craques da Libertadores, da Champions e do Brasileirão e leve-o ao título." />
   <meta property="og:url" content="https://joaofaccio087.github.io/TheDreamTeam/" />
   <meta property="og:image" content="https://joaofaccio087.github.io/TheDreamTeam/assets/imagens/screenshots/home.png" />
   <meta property="og:locale" content="pt_BR" />
@@ -24,7 +24,7 @@
   <!-- ===== Twitter / X ===== -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Dream Team — sorteie, escale, goleie" />
-  <meta name="twitter:description" content="Monte o time dos sonhos com craques da Libertadores e da Champions League e leve-o ao título." />
+  <meta name="twitter:description" content="Monte o time dos sonhos com craques da Libertadores, da Champions e do Brasileirão e leve-o ao título." />
   <meta name="twitter:image" content="https://joaofaccio087.github.io/TheDreamTeam/assets/imagens/screenshots/home.png" />
 
   <!-- Google Fonts: Archivo Black para títulos, Archivo para o restante -->
@@ -55,7 +55,7 @@
 
       <!-- ---- TOPO: rótulo dourado + linha fina ---- -->
       <header class="home-header">
-        <p class="home-rotulo-topo">The Dream Team &middot; Libertadores &amp; Champions</p>
+        <p class="home-rotulo-topo">The Dream Team &middot; Monte o time dos sonhos</p>
         <div class="home-linha-divisor"></div>
       </header>
 
@@ -86,6 +86,8 @@
               <button class="pilula pilula-ativa" data-modo="libertadores">Libertadores</button>
               <button class="pilula" data-modo="champions">Champions League</button>
               <button class="pilula" data-modo="brasileirao">Brasileir&atilde;o</button>
+              <!-- Abre o modal de sala (maquete do modo online — ainda não funcional) -->
+              <button id="btn-modo-online" class="pilula pilula-online" type="button">Brasileir&atilde;o - Online</button>
             </div>
           </div>
 
@@ -238,6 +240,13 @@
            COLUNA ESQUERDA: formação + sorteio + lista de jogadores
            ========================================================= -->
       <div class="jogo-esquerda">
+
+        <!-- Nome do time: usado na tabela, nos cards e no resumo -->
+        <div id="jogo-nome-bloco">
+          <p class="jogo-rotulo">NOME DO TIME</p>
+          <input id="input-nome-time" class="jogo-nome-input" type="text"
+                 maxlength="28" placeholder="Seu time" autocomplete="off" />
+        </div>
 
         <!-- Bloco de estilo de jogo: Clássico (sorteio) ou Draft (cartas) -->
         <div id="jogo-estilo-bloco">
@@ -512,6 +521,54 @@
     </div>
   </div>
 
+<!-- Modal de SALA (maquete do modo online — ainda não funcional) -->
+  <div id="sala-overlay" class="sala-overlay escondida">
+    <div class="sala-backdrop" id="sala-backdrop"></div>
+    <div class="sala-card" role="dialog" aria-modal="true">
+      <span class="sala-badge">Em breve</span>
+      <button id="sala-fechar" class="sala-fechar" type="button" aria-label="Fechar">&#10005;</button>
+
+      <div class="sala-colunas">
+        <!-- Criar sala -->
+        <div class="sala-col">
+          <h3 class="sala-col-titulo">Crie sua sala</h3>
+
+          <label class="sala-rotulo" for="sala-nome">Nome da Sala</label>
+          <input id="sala-nome" class="sala-input" type="text" placeholder="Digite o nome da sala" maxlength="28" autocomplete="off" />
+
+          <label class="sala-rotulo">C&oacute;digo da sala</label>
+          <div class="sala-codigo-wrap">
+            <input id="sala-codigo" class="sala-input sala-codigo" type="text" value="DREAM-7F3A" readonly />
+            <button id="btn-copiar-codigo" class="sala-copiar" type="button" title="Copiar c&oacute;digo" aria-label="Copiar c&oacute;digo"><svg class="sala-copiar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+          </div>
+
+          <label class="sala-rotulo">Velocidade</label>
+          <div class="area-pilulas sala-velocidade" id="sala-velocidade">
+            <button class="pilula" type="button" data-vel="lento">Lento</button>
+            <button class="pilula pilula-ativa" type="button" data-vel="normal">Normal</button>
+            <button class="pilula" type="button" data-vel="rapida">R&aacute;pida</button>
+          </div>
+
+          <button class="btn-rolar sala-acao" type="button" data-mock>Criar sala</button>
+        </div>
+
+        <div class="sala-divisor"></div>
+
+        <!-- Entrar em sala -->
+        <div class="sala-col">
+          <h3 class="sala-col-titulo">Entre em uma sala</h3>
+
+          <label class="sala-rotulo" for="sala-entrar-codigo">C&oacute;digo da Sala</label>
+          <input id="sala-entrar-codigo" class="sala-input" type="text" placeholder="Insira aqui o c&oacute;digo" maxlength="16" autocomplete="off" />
+
+          <button class="btn-rolar sala-acao" type="button" data-mock>Entrar</button>
+        </div>
+      </div>
+
+      <p id="sala-aviso" class="sala-aviso escondida">&#128679; Modo online em breve — esta tela &eacute; s&oacute; uma pr&eacute;via do visual.</p>
+    </div>
+  </div>
+
 <!-- Captura do card como imagem (carrega online; se offline, o botão avisa) -->
   <!-- html2canvas: arquivo local (funciona offline). Se faltar, recorre ao CDN. -->
   <script src="js/libs/html2canvas.min.js"></script>
@@ -532,6 +589,7 @@
   <script src="js/estado.js"    defer></script>
   <script src="js/formacoes.js" defer></script>
   <script src="js/regras.js"    defer></script>
+  <script src="js/api.js"       defer></script>
   <script src="js/interface.js" defer></script>
   <script src="js/sorteio.js"   defer></script>
   <script src="js/escalacao.js" defer></script>

@@ -80,6 +80,7 @@ function iniciarTelaJogo() {
   skipsRestantes     = 5;
 
   formacaoBloco.classList.remove('escondida');
+  if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 
   pilulasFormacaoJogo.forEach(function (p) {
     p.disabled = false;

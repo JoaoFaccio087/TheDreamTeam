@@ -1,5 +1,37 @@
 // sorteio.js — animação do sorteio, skips e novo sorteio de clube.
 
+// --- Evita travar o usuário: o sorteio/skip só caem em clubes que conseguem
+//     preencher ao menos uma das vagas ainda vazias (ex.: se só falta LE, só
+//     entram clubes com um lateral-esquerdo elegível). ---
+
+// Códigos das vagas ainda vazias no time (sem repetir).
+function codigosVagasVazias() {
+  var faltam = [];
+  for (var i = 0; i < slotsJogo.length; i++) {
+    if (!escalacao[i]) {
+      var cod = slotsJogo[i].dataset.codigo;
+      if (faltam.indexOf(cod) < 0) faltam.push(cod);
+    }
+  }
+  return faltam;
+}
+
+// Um clube "serve" se tem ao menos um jogador elegível para alguma vaga vazia.
+function clubeServeVagas(clube, codigos) {
+  if (!codigos.length) return true; // nada faltando → qualquer clube serve
+  return clube.jogadores.some(function (j) {
+    return codigos.some(function (cod) { return podeOcupar(j, cod); });
+  });
+}
+
+// Reduz a lista de candidatos aos clubes úteis. Se NENHUM servir (praticamente
+// impossível com centenas de clubes), devolve a lista original — nunca trava.
+function filtrarClubesUteis(candidatos) {
+  var faltam = codigosVagasVazias();
+  var uteis = candidatos.filter(function (c) { return clubeServeVagas(c, faltam); });
+  return uteis.length > 0 ? uteis : candidatos;
+}
+
 // Animação estilo "slot machine" (~900ms) até revelar o clube sorteado.
 function animarSorteio(opcoes, sorteado, onFim) {
   clubeCard.classList.remove('escondida');
@@ -33,9 +65,8 @@ function animarSorteio(opcoes, sorteado, onFim) {
 function atualizarBotoesSkip() {
   skipContador.textContent = skipsRestantes;
 
-  var candidatos = DADOS.filter(function (d) {
-    return d.competicao === edicaoSorteada.competicao &&
-           !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
+  var candidatos = API.getClubesPorCompeticao(edicaoSorteada.competicao).filter(function (d) {
+    return !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
   });
   btnSkip.disabled = (skipsRestantes <= 0) || candidatos.length === 0;
 }
@@ -44,10 +75,10 @@ function atualizarBotoesSkip() {
 function fazerSkip() {
   if (skipsRestantes <= 0 || !edicaoSorteada) return;
 
-  var candidatos = DADOS.filter(function (d) {
-    return d.competicao === edicaoSorteada.competicao &&
-           !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
+  var candidatos = API.getClubesPorCompeticao(edicaoSorteada.competicao).filter(function (d) {
+    return !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
   });
+  candidatos = filtrarClubesUteis(candidatos);   // só clubes que preenchem uma vaga vazia
   if (candidatos.length === 0) return;
 
   skipsRestantes--;
@@ -73,11 +104,11 @@ function fazerSkip() {
 function rolar() {
   var filtro = COMPETICOES[modoSelecionado].dados;
 
-  var opcoes = DADOS.filter(function (d) {
-    if (d.competicao !== filtro) return false;
+  var opcoes = API.getClubesPorCompeticao(filtro).filter(function (d) {
     if (edicaoSorteada && d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao) return false;
     return true;
   });
+  opcoes = filtrarClubesUteis(opcoes);   // só clubes que ajudam a preencher uma vaga vazia
   if (opcoes.length === 0) return;
 
   var sorteado = opcoes[Math.floor(Math.random() * opcoes.length)];
@@ -87,11 +118,12 @@ function rolar() {
   cancelarSelecao();
   listaJogadores.classList.add('escondida');
 
-  // No primeiro sorteio, esconde os blocos de formação e de estilo (já escolhidos).
+  // No primeiro sorteio, esconde os blocos de formação, estilo e nome (já escolhidos).
   if (!formacaoTravada) {
     formacaoTravada = true;
     formacaoBloco.classList.add('escondida');
     if (estiloBloco) estiloBloco.classList.add('escondida');
+    if (jogoNomeBloco) jogoNomeBloco.classList.add('escondida');
   }
 
   btnRolar.classList.add('escondida');

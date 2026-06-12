@@ -22,11 +22,9 @@ function obterPoolDraft() {
   var chave = modoSelecionado;
   if (_draftPoolCache[chave]) return _draftPoolCache[chave];
 
-  var filtro = COMPETICOES[modoSelecionado].dados;
   var pool = [];
 
-  DADOS.forEach(function (entrada) {
-    if (entrada.competicao !== filtro) return;
+  API.getClubesDoModo(modoSelecionado).forEach(function (entrada) {
     entrada.jogadores.forEach(function (j) {
       pool.push({
         nome:       j.nome,

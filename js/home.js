@@ -40,14 +40,15 @@ function voltarHome() {
 
 // Conta as edições distintas e o total de jogadores em DADOS para o rodapé da home.
 function calcularEstatisticasFooter() {
+  var todos = API.getTodosClubes();
   var edicoes = [];
-  DADOS.forEach(function (d) {
+  todos.forEach(function (d) {
     if (edicoes.indexOf(d.edicao) < 0) {
       edicoes.push(d.edicao);
     }
   });
 
-  var totalJogadores = DADOS.reduce(function (soma, d) {
+  var totalJogadores = todos.reduce(function (soma, d) {
     return soma + d.jogadores.length;
   }, 0);
 

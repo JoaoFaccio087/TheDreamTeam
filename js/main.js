@@ -3,8 +3,88 @@
 // EVENTOS
 
 pilulasModo.forEach(function (pilula) {
-  pilula.addEventListener('click', function () { selecionarModo(this.dataset.modo); });
+  pilula.addEventListener('click', function () {
+    // Modos reais (têm data-modo): selecionam a competição e desmarcam o online.
+    if (this.dataset.modo) {
+      modoOnlineSelecionado = false;
+      selecionarModo(this.dataset.modo);
+    }
+  });
 });
+
+// Pílula "Brasileirão - Online": seleciona como modo (igual às outras). O modal de
+// sala só abre quando o usuário clica em "Jogar agora".
+var btnModoOnline = document.getElementById('btn-modo-online');
+if (btnModoOnline) {
+  btnModoOnline.addEventListener('click', function () {
+    modoOnlineSelecionado = true;
+    pilulasModo.forEach(function (p) { p.classList.remove('pilula-ativa'); });
+    btnModoOnline.classList.add('pilula-ativa');
+  });
+}
+
+// --- Modal de sala (MAQUETE do modo online) ---
+var salaOverlayEl = document.getElementById('sala-overlay');
+
+function abrirSalaModal() {
+  if (salaOverlayEl) salaOverlayEl.classList.remove('escondida');
+}
+function fecharSalaModal() {
+  if (!salaOverlayEl) return;
+  salaOverlayEl.classList.add('escondida');
+  var aviso = document.getElementById('sala-aviso');
+  if (aviso) aviso.classList.add('escondida');
+}
+
+(function () {
+  if (!salaOverlayEl) return;
+
+  var fechar   = document.getElementById('sala-fechar');
+  var backdrop = document.getElementById('sala-backdrop');
+  if (fechar)   fechar.addEventListener('click', fecharSalaModal);
+  if (backdrop) backdrop.addEventListener('click', fecharSalaModal);
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !salaOverlayEl.classList.contains('escondida')) fecharSalaModal();
+  });
+
+  // Copiar o código da sala (maquete: copia o código de exemplo)
+  var btnCopiar = document.getElementById('btn-copiar-codigo');
+  var inputCod  = document.getElementById('sala-codigo');
+  if (btnCopiar && inputCod) {
+    btnCopiar.addEventListener('click', function () {
+      var iconeOriginal = btnCopiar.innerHTML;
+      var ok = function () {
+        btnCopiar.innerHTML = '\u2713';           // mostra um "✓" por um instante
+        setTimeout(function () { btnCopiar.innerHTML = iconeOriginal; }, 1200);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(inputCod.value).then(ok).catch(function () {
+          inputCod.select(); document.execCommand('copy'); ok();
+        });
+      } else {
+        inputCod.select(); document.execCommand('copy'); ok();
+      }
+    });
+  }
+
+  // Velocidade (maquete): alterna a pílula ativa, só visual
+  document.querySelectorAll('#sala-velocidade .pilula').forEach(function (p) {
+    p.addEventListener('click', function () {
+      document.querySelectorAll('#sala-velocidade .pilula').forEach(function (b) {
+        b.classList.remove('pilula-ativa');
+      });
+      this.classList.add('pilula-ativa');
+    });
+  });
+
+  // Botões "Criar sala" / "Entrar" (maquete): mostram o aviso de "em breve"
+  document.querySelectorAll('#sala-overlay [data-mock]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var aviso = document.getElementById('sala-aviso');
+      if (aviso) aviso.classList.remove('escondida');
+    });
+  });
+})();
 
 pilulasFormacao.forEach(function (pilula) {
   pilula.addEventListener('click', function () {
@@ -12,7 +92,11 @@ pilulasFormacao.forEach(function (pilula) {
   });
 });
 
-botaoJogar.addEventListener('click', jogarAgora);
+botaoJogar.addEventListener('click', function () {
+  // Modo online selecionado → abre o modal de sala (maquete). Senão, joga normal.
+  if (modoOnlineSelecionado) { abrirSalaModal(); return; }
+  jogarAgora();
+});
 botaoVoltarHome.addEventListener('click', voltarHome);
 if (btnVoltarMobile) btnVoltarMobile.addEventListener('click', voltarHome);
 
@@ -33,17 +117,9 @@ btnComecarDraft.addEventListener('click', comecarDraft);
 btnSelecionarDraft.addEventListener('click', confirmarSelecaoDraft);
 btnResortearDraft.addEventListener('click', resortearCartas);
 
-// Clicar no fundo do overlay (fora das cartas e do botão) fecha sem selecionar
-draftOverlay.addEventListener('click', function (ev) {
-  if (ev.target === draftOverlay) fecharCartasDraft();
-});
-
-// Esc também fecha o overlay de cartas
-document.addEventListener('keydown', function (ev) {
-  if (ev.key === 'Escape' && !draftOverlay.classList.contains('escondida')) {
-    fecharCartasDraft();
-  }
-});
+// No Draft, abrir as cartas obriga a escolher: clicar fora ou apertar Esc NÃO fecha
+// (senão dava pra reabrir e ganhar cartas novas sem gastar re-sorteio). Para sair da
+// seleção, o usuário escolhe uma carta e clica em "Selecionar" — ou usa "Re-sortear".
 
 // Delegação: um único ouvinte no campo captura cliques em qualquer slot,
 // inclusive jogadores já alocados (evita problemas de escopo de closure)
@@ -69,12 +145,12 @@ btnSimular.addEventListener('click', function () {
 // Tela de simulação: comportamento do botão muda conforme o estado da campanha
 document.getElementById('btn-iniciar-jogo').addEventListener('click', function () {
   if (acaoBotao === 'nova-campanha') {
-    // Venceu a Final → reinicia e começa nova campanha imediatamente
+    // Terminou (campeão/temporada) → volta para montar um time NOVO
+    // (formação, estilo e mapa de escalação), na mesma competição.
     reiniciarCampanha();
-    montarCampanha();
     acaoBotao = 'iniciar';
-    this.textContent = 'Iniciar Campanha ►';
-    iniciarPartida();
+    this.textContent = 'Iniciar Campanha \u25BA';
+    jogarAgora();   // reaplica o tema, zera a escalação e abre a tela de escalação
   } else if (acaoBotao === 'novo-time') {
     // Derrota/eliminação → zera tudo e volta pra tela inicial
     reiniciarCampanha();
@@ -127,4 +203,19 @@ if (btnConfirmBackdrop) btnConfirmBackdrop.addEventListener('click', fecharConfi
 
 // Abre a tela de resumo da campanha (botão aparece ao fim de cada campanha)
 if (btnResumo) btnResumo.addEventListener('click', mostrarResumo);
+
+// Nome do time: atualiza a variável global conforme o usuário digita
+if (inputNomeTime) {
+  inputNomeTime.addEventListener('input', function () {
+    nomeDoTime = this.value.trim() || 'Seu time';
+  });
+}
+
+// Clicar no título "THE DREAM TEAM" do cabeçalho volta para a tela inicial
+titulosCabecalho.forEach(function (titulo) {
+  titulo.addEventListener('click', function () {
+    if (timerPartida !== null) { clearTimeout(timerPartida); timerPartida = null; }
+    voltarHome();
+  });
+});
 

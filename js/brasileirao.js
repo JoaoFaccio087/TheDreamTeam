@@ -43,7 +43,7 @@ function gerarCalendarioLiga(n) {
 // Monta a liga: você + 19 clubes sorteados do Brasileirão, tabela zerada.
 function montarLigaBrasileirao() {
   var comp = COMPETICOES.brasileirao.dados;
-  var pool = DADOS.filter(function (d) { return d.competicao === comp; }).slice();
+  var pool = API.getClubesPorCompeticao(comp).slice();
 
   for (var i = pool.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * (i + 1));
@@ -52,7 +52,7 @@ function montarLigaBrasileirao() {
   var outros = pool.slice(0, 19);
 
   var tabela = [{
-    nome: 'Seu time', voce: true, forca: forcaDoTime(), clubeRef: null,
+    nome: nomeDoTime, voce: true, forca: forcaDoTime(), clubeRef: null,
     pts: 0, j: 0, v: 0, e: 0, d: 0, gf: 0, ga: 0
   }];
   outros.forEach(function (c) {

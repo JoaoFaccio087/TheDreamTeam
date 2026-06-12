@@ -29,6 +29,9 @@ const forcaDefesa         = document.getElementById('forca-defesa');
 const campoJogo           = document.getElementById('campo-jogo');
 const formacaoBloco       = document.getElementById('jogo-formacao-bloco');
 const jogoHeaderInfo      = document.getElementById('jogo-header-info');
+const inputNomeTime       = document.getElementById('input-nome-time');
+const jogoNomeBloco       = document.getElementById('jogo-nome-bloco');
+const titulosCabecalho    = document.querySelectorAll('.jogo-header-titulo');
 const blocoSkips          = document.getElementById('bloco-skips');
 const btnSkip             = document.getElementById('btn-skip');
 const skipContador        = document.getElementById('skip-contador');
@@ -62,6 +65,7 @@ const btnConfirmBackdrop     = document.getElementById('confirm-backdrop');
 // --- Estado: tela inicial ---
 
 let modoSelecionado = 'libertadores';   // chave em COMPETICOES
+let modoOnlineSelecionado = false;       // true quando a pílula "Brasileirão - Online" está escolhida
 let formacaoAmostra = '4-3-3';
 
 
@@ -69,6 +73,7 @@ let formacaoAmostra = '4-3-3';
 
 let formacaoJogo       = '4-3-3';
 let formacaoTravada    = false;
+let nomeDoTime         = 'Seu time';           // nome do time do jogador (editável na escalação)
 let jogadorSelecionado = null;                 // jogador escolhido na lista, aguardando um slot
 let escalacao          = Array(11).fill(null); // null = vaga vazia; objeto = jogador alocado
 let slotsPreenchidos   = 0;

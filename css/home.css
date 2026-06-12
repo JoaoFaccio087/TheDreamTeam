@@ -350,3 +350,167 @@
 .footer-sep {
   color: rgba(255, 255, 255, 0.25);
 }
+
+
+/* ============================================================
+   Modo online (MAQUETE): botão "Brasileirão - Online" + modal de sala
+   ============================================================ */
+
+/* Pílula do modo online — visual de pílula, com leve destaque de "novo" */
+.pilula-online {
+  border-style: dashed;
+  position: relative;
+}
+.pilula-online::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.pilula-online:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Overlay do modal de sala */
+.sala-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.sala-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.66);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.sala-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background: #14161C;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 26px 28px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+}
+
+.sala-badge {
+  position: absolute;
+  top: 16px;
+  left: 28px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--btn-txt);
+  background: var(--accent);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+.sala-fechar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--txt-soft);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.sala-fechar:hover { color: var(--txt); background: rgba(255, 255, 255, 0.06); }
+
+.sala-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 22px;
+  margin-top: 18px;
+}
+.sala-divisor { background: var(--linha); }
+
+.sala-col-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.05rem;
+  color: var(--txt);
+  margin-bottom: 14px;
+}
+
+.sala-rotulo {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--txt-soft);
+  margin: 12px 0 6px;
+}
+
+.sala-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  color: var(--txt);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.9rem;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.sala-input::placeholder { color: var(--txt-soft); }
+.sala-input:focus { border-color: var(--accent); }
+
+.sala-codigo-wrap { display: flex; gap: 8px; }
+.sala-codigo {
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 1px;
+  flex: 1;
+}
+.sala-copiar {
+  flex: 0 0 auto;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--txt);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.sala-copiar:hover { border-color: var(--accent); color: var(--accent); }
+.sala-copiar-ico { width: 17px; height: 17px; }
+
+.sala-velocidade { margin-bottom: 4px; }
+
+.sala-acao {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.sala-aviso {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+/* Celular: empilha as duas colunas e esconde o divisor vertical */
+@media (max-width: 560px) {
+  .sala-colunas { grid-template-columns: 1fr; gap: 8px; }
+  .sala-divisor { display: none; }
+}
