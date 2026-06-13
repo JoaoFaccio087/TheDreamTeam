@@ -143,7 +143,8 @@
     if (socket && socket.connected) { if (callback) callback(); return; }
     if (socket) socket.disconnect();
 
-    socket = io({ auth: { token: token }, transports: ['websocket', 'polling'] });
+    var _bk = (typeof BACKEND_URL !== 'undefined') ? BACKEND_URL : '';
+    socket = io(_bk, { auth: { token: token }, transports: ['websocket', 'polling'] });
     setupEventos();
     socket.on('connect',       function () { if (callback) callback(); });
     socket.on('connect_error', function (err) {

@@ -32,7 +32,10 @@ const API = {
 
 // ===== BACKEND HTTP (autenticação + multiplayer) ============================
 
-var API_BASE = '/api';
+// Local (Docker): usa o proxy /api do nginx. Publicado: fala direto com o backend no Render.
+var _ehLocal    = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+var BACKEND_URL = _ehLocal ? '' : 'https://thedreamteam.onrender.com';
+var API_BASE    = _ehLocal ? '/api' : BACKEND_URL;
 
 function _req(method, path, body) {
   var token   = localStorage.getItem('dreamteam_token');
