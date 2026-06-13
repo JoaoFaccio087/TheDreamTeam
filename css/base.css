@@ -40,12 +40,12 @@ body.tema-champions {
   --accent:   #DCE6F4;   /* prata */
 }
 
-/* Tema Brasileirão: azul-royal e verde-limão */
+/* Tema Brasileirão: usa a MESMA paleta da tela inicial (fundo quase-preto + verde-campo) */
 body.tema-brasileirao {
-  --bg:       #15186B;
-  --txt:      #EEF6E1;
-  --txt-soft: rgba(238, 246, 225, 0.58);
-  --accent:   #A3E635;   /* verde-limão */
+  --bg:       #0E0F13;
+  --txt:      #F4F6F8;
+  --txt-soft: #99A0AA;
+  --accent:   #2BD46A;   /* verde-campo (igual à home) */
 }
 
 body {
