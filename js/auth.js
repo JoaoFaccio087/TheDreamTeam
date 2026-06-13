@@ -1,0 +1,260 @@
+// auth.js — ícone de perfil com dropdown + modal de login/cadastro
+
+var modalAuth      = document.getElementById('modal-auth');
+var modalBackdrop  = document.querySelector('#modal-auth .modal-auth-backdrop');
+var modalFechar    = document.getElementById('modal-auth-fechar');
+var formLogin      = document.getElementById('form-login');
+var formCadastro   = document.getElementById('form-cadastro');
+var tabLoginBtn    = document.getElementById('tab-login');
+var tabCadastroBtn = document.getElementById('tab-cadastro');
+var authErro       = document.getElementById('auth-erro');
+
+var btnPerfil      = document.getElementById('btn-perfil');
+var dropdownPerfil = document.getElementById('dropdown-perfil');
+var menuConvidado  = document.getElementById('menu-convidado');
+var menuLogado     = document.getElementById('menu-logado');
+var dropdownNome   = document.getElementById('dropdown-usuario-nome');
+var ddLogin        = document.getElementById('dd-login');
+var ddCadastro     = document.getElementById('dd-cadastro');
+var ddLogout       = document.getElementById('dd-logout');
+
+// ── Sessão ────────────────────────────────────────────────────────────────
+
+function salvarSessao(token, user) {
+  localStorage.setItem('dreamteam_token', token);
+  localStorage.setItem('dreamteam_user', JSON.stringify(user));
+}
+
+function limparSessao() {
+  localStorage.removeItem('dreamteam_token');
+  localStorage.removeItem('dreamteam_user');
+}
+
+function getToken() { return localStorage.getItem('dreamteam_token'); }
+
+function getUser() {
+  try { return JSON.parse(localStorage.getItem('dreamteam_user')); } catch (e) { return null; }
+}
+
+// ── Dropdown ──────────────────────────────────────────────────────────────
+
+function abrirDropdown() {
+  dropdownPerfil.classList.remove('escondida');
+  btnPerfil.setAttribute('aria-expanded', 'true');
+}
+
+function fecharDropdown() {
+  dropdownPerfil.classList.add('escondida');
+  btnPerfil.setAttribute('aria-expanded', 'false');
+}
+
+function toggleDropdown() {
+  if (dropdownPerfil.classList.contains('escondida')) abrirDropdown();
+  else fecharDropdown();
+}
+
+btnPerfil.addEventListener('click', function (e) {
+  e.stopPropagation();
+  toggleDropdown();
+});
+
+document.addEventListener('click', function (e) {
+  if (!dropdownPerfil.classList.contains('escondida') &&
+      !dropdownPerfil.contains(e.target) &&
+      e.target !== btnPerfil) {
+    fecharDropdown();
+  }
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    fecharDropdown();
+    fecharModal();
+  }
+});
+
+// ── Estado do header ──────────────────────────────────────────────────────
+
+function atualizarDropdown(user) {
+  if (user) {
+    menuConvidado.classList.add('escondida');
+    menuLogado.classList.remove('escondida');
+    if (dropdownNome) dropdownNome.textContent = user.username;
+  } else {
+    menuLogado.classList.add('escondida');
+    menuConvidado.classList.remove('escondida');
+    if (dropdownNome) dropdownNome.textContent = '';
+  }
+}
+
+// ── Modal ─────────────────────────────────────────────────────────────────
+
+function mostrarErro(msg) {
+  authErro.textContent = msg;
+  authErro.classList.remove('escondida');
+}
+
+function limparErro() {
+  authErro.classList.add('escondida');
+  authErro.textContent = '';
+}
+
+function abrirModal() {
+  if (!modalAuth) return;
+  modalAuth.classList.remove('escondida');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModal() {
+  if (!modalAuth) return;
+  modalAuth.classList.add('escondida');
+  document.body.style.overflow = '';
+  limparErro();
+}
+
+if (modalFechar)   modalFechar.addEventListener('click', fecharModal);
+if (modalBackdrop) modalBackdrop.addEventListener('click', fecharModal);
+
+// ── Dropdown ações ────────────────────────────────────────────────────────
+
+if (ddLogin) {
+  ddLogin.addEventListener('click', function () {
+    fecharDropdown();
+    tabLoginBtn.click();
+    abrirModal();
+  });
+}
+
+if (ddCadastro) {
+  ddCadastro.addEventListener('click', function () {
+    fecharDropdown();
+    tabCadastroBtn.click();
+    abrirModal();
+  });
+}
+
+if (ddLogout) {
+  ddLogout.addEventListener('click', function () {
+    fecharDropdown();
+    limparSessao();
+    atualizarDropdown(null);
+  });
+}
+
+// ── Abas ──────────────────────────────────────────────────────────────────
+
+tabLoginBtn.addEventListener('click', function () {
+  tabLoginBtn.classList.add('auth-tab-ativa');
+  tabCadastroBtn.classList.remove('auth-tab-ativa');
+  formLogin.classList.remove('escondida');
+  formCadastro.classList.add('escondida');
+  limparErro();
+});
+
+tabCadastroBtn.addEventListener('click', function () {
+  tabCadastroBtn.classList.add('auth-tab-ativa');
+  tabLoginBtn.classList.remove('auth-tab-ativa');
+  formCadastro.classList.remove('escondida');
+  formLogin.classList.add('escondida');
+  limparErro();
+});
+
+// ── Formulário de Login ───────────────────────────────────────────────────
+
+formLogin.addEventListener('submit', function (ev) {
+  ev.preventDefault();
+  limparErro();
+
+  var username = document.getElementById('login-username').value.trim();
+  var senha    = document.getElementById('login-senha').value;
+  if (!username || !senha) { mostrarErro('Preencha todos os campos'); return; }
+
+  var btn = formLogin.querySelector('button[type=submit]');
+  btn.disabled = true;
+
+  apiPost('/auth/login', { username: username, password: senha })
+    .then(function (data) {
+      salvarSessao(data.token, data.user);
+      atualizarDropdown(data.user);
+      fecharModal();
+    })
+    .catch(function (err) {
+      mostrarErro(err.message);
+      btn.disabled = false;
+    });
+});
+
+// ── Formulário de Cadastro ────────────────────────────────────────────────
+
+formCadastro.addEventListener('submit', function (ev) {
+  ev.preventDefault();
+  limparErro();
+
+  var username = document.getElementById('cad-username').value.trim();
+  var senha    = document.getElementById('cad-senha').value;
+  var email    = document.getElementById('cad-email').value.trim();
+  var nomeTime = document.getElementById('cad-nome-time').value.trim();
+
+  if (!username || !senha || !email) { mostrarErro('Preencha todos os campos'); return; }
+
+  var btn = formCadastro.querySelector('button[type=submit]');
+  btn.disabled = true;
+
+  apiPost('/auth/register', { username: username, email: email, password: senha, nomeTime: nomeTime })
+    .then(function (data) {
+      salvarSessao(data.token, data.user);
+      atualizarDropdown(data.user);
+      fecharModal();
+    })
+    .catch(function (err) {
+      mostrarErro(err.message);
+      btn.disabled = false;
+    });
+});
+
+// ── Notificação estilo iPhone ─────────────────────────────────────────────
+
+var notifPill        = document.getElementById('notif-cadastro');
+var notifTimerAbrir  = null;
+var notifTimerFechar = null;
+
+function fecharNotif() {
+  if (!notifPill) return;
+  clearTimeout(notifTimerFechar);
+  notifPill.classList.add('notif-saindo');
+  notifPill.classList.remove('notif-aberta');
+}
+
+function mostrarNotif() {
+  if (!notifPill) return;
+  notifPill.classList.remove('notif-saindo');
+  notifPill.classList.add('notif-aberta');
+  notifTimerFechar = setTimeout(fecharNotif, 5000);
+}
+
+if (notifPill) {
+  notifPill.addEventListener('click', function () {
+    fecharNotif();
+    tabCadastroBtn.click();
+    abrirModal();
+  });
+}
+
+function agendarNotif() {
+  if (getUser()) return;
+  clearTimeout(notifTimerAbrir);
+  notifTimerAbrir = setTimeout(mostrarNotif, 2000);
+}
+
+// ── Inicialização ─────────────────────────────────────────────────────────
+
+(function init() {
+  var user = getUser();
+  atualizarDropdown(user);
+
+  if (typeof calcularEstatisticasFooter === 'function') {
+    calcularEstatisticasFooter();
+  }
+
+  agendarNotif();
+}());

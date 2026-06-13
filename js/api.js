@@ -1,50 +1,125 @@
-// api.js — CAMADA ÚNICA DE ACESSO A DADOS.
-//
-// Hoje todas as funções devolvem os dados LOCAIS (a constante DADOS e stubs).
-// Quando o backend existir, basta trocar o corpo destas funções para chamar o
-// servidor (fetch) — o resto do jogo continua chamando API.* e não muda nada.
-//
-// Carregue DEPOIS de dados.js e regras.js, e ANTES dos módulos que usam dados.
+// api.js — camada única de acesso a dados
+
+// ===== DADOS LOCAIS (jogo offline) =========================================
 
 const API = {
 
-  // ===== Clubes / elencos (dados estáticos do jogo) =====
-
-  // Todos os clubes de todas as competições (ex.: rodapé da home).
   getTodosClubes: function () {
     return DADOS;
   },
 
-  // Clubes de uma competição pelo valor de "competicao" nos dados (ex.: 'Brasileirão').
   getClubesPorCompeticao: function (comp) {
     return DADOS.filter(function (d) { return d.competicao === comp; });
   },
 
-  // Clubes pelo id do modo (chave em COMPETICOES, ex.: 'brasileirao').
   getClubesDoModo: function (modoId) {
     var cfg = COMPETICOES[modoId];
     return cfg ? API.getClubesPorCompeticao(cfg.dados) : [];
   },
 
-
-  // ===== Dados do usuário (FUTURO: virão do backend) =====
-  //
-  // Hoje são stubs locais, mas já devolvem Promise — o mesmo formato que o
-  // backend usará. Assim, quando ligarmos o servidor, quem chama não muda.
-
-  // Salva o resultado de uma campanha. FUTURO: POST /matches
   salvarPartida: function (resultado) {
-    if (window.console && console.debug) console.debug('[api] salvarPartida (stub local):', resultado);
-    return Promise.resolve({ ok: true, local: true });
+    return api.salvarPartida(resultado);
   },
 
-  // Histórico de partidas do usuário. FUTURO: GET /matches
   getHistorico: function () {
-    return Promise.resolve([]);
+    return api.getHistorico();
   },
 
-  // Ranking geral. FUTURO: GET /ranking
   getRanking: function () {
-    return Promise.resolve([]);
-  }
+    return api.getRanking();
+  },
+};
+
+// ===== BACKEND HTTP (autenticação + multiplayer) ============================
+
+var API_BASE = '/api';
+
+function _req(method, path, body) {
+  var token   = localStorage.getItem('dreamteam_token');
+  var headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+
+  return fetch(API_BASE + path, {
+    method:  method,
+    headers: headers,
+    body:    body !== undefined ? JSON.stringify(body) : undefined,
+  }).then(function (r) {
+    return r.json().then(function (d) {
+      if (!r.ok) throw new Error(d.error || 'Erro ' + r.status);
+      return d;
+    });
+  });
+}
+
+function apiGet(rota, token) {
+  var headers = {};
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  return fetch(API_BASE + rota, { headers: headers }).then(function (r) {
+    return r.json().then(function (d) {
+      if (!r.ok) throw new Error(d.error || 'Erro ' + r.status);
+      return d;
+    });
+  });
+}
+
+function apiPost(rota, corpo) {
+  return _req('POST', rota, corpo);
+}
+
+var api = {
+
+  register: function (username, email, password, nomeTime) {
+    return _req('POST', '/auth/register', {
+      username: username, email: email, password: password, nomeTime: nomeTime,
+    });
+  },
+  login: function (username, password) {
+    return _req('POST', '/auth/login', { username: username, password: password });
+  },
+
+  getMe: function () {
+    if (!localStorage.getItem('dreamteam_token')) return Promise.resolve(null);
+    return _req('GET', '/me');
+  },
+  patchMe: function (dados) {
+    if (!localStorage.getItem('dreamteam_token')) return Promise.resolve(null);
+    return _req('PATCH', '/me', dados);
+  },
+
+  salvarPartida: function (partida) {
+    if (!localStorage.getItem('dreamteam_token')) {
+      try {
+        var hist = JSON.parse(localStorage.getItem('dreamteam_historico') || '[]');
+        partida.played_at = new Date().toISOString();
+        hist.unshift(partida);
+        if (hist.length > 20) hist = hist.slice(0, 20);
+        localStorage.setItem('dreamteam_historico', JSON.stringify(hist));
+      } catch (e) { /* silent */ }
+      return Promise.resolve({ ok: true, local: true });
+    }
+    return _req('POST', '/matches', partida);
+  },
+  getHistorico: function () {
+    if (!localStorage.getItem('dreamteam_token')) {
+      try {
+        return Promise.resolve(
+          JSON.parse(localStorage.getItem('dreamteam_historico') || '[]')
+        );
+      } catch (e) { return Promise.resolve([]); }
+    }
+    return _req('GET', '/matches');
+  },
+  getRanking: function () {
+    return _req('GET', '/ranking');
+  },
+
+  criarSala: function (opcoes) {
+    return _req('POST', '/rooms', opcoes);
+  },
+  entrarSala: function (codigo) {
+    return _req('POST', '/rooms/' + codigo + '/join', {});
+  },
+  getEstadoSala: function (codigo) {
+    return _req('GET', '/rooms/' + codigo);
+  },
 };

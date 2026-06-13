@@ -12,8 +12,8 @@ pilulasModo.forEach(function (pilula) {
   });
 });
 
-// Pílula "Brasileirão - Online": seleciona como modo (igual às outras). O modal de
-// sala só abre quando o usuário clica em "Jogar agora".
+// Pílula "Brasileirão - Online": seleciona o modo online (igual às outras pílulas).
+// O modal de login/sala só abre quando o usuário clica em "Jogar agora".
 var btnModoOnline = document.getElementById('btn-modo-online');
 if (btnModoOnline) {
   btnModoOnline.addEventListener('click', function () {
@@ -23,69 +23,6 @@ if (btnModoOnline) {
   });
 }
 
-// --- Modal de sala (MAQUETE do modo online) ---
-var salaOverlayEl = document.getElementById('sala-overlay');
-
-function abrirSalaModal() {
-  if (salaOverlayEl) salaOverlayEl.classList.remove('escondida');
-}
-function fecharSalaModal() {
-  if (!salaOverlayEl) return;
-  salaOverlayEl.classList.add('escondida');
-  var aviso = document.getElementById('sala-aviso');
-  if (aviso) aviso.classList.add('escondida');
-}
-
-(function () {
-  if (!salaOverlayEl) return;
-
-  var fechar   = document.getElementById('sala-fechar');
-  var backdrop = document.getElementById('sala-backdrop');
-  if (fechar)   fechar.addEventListener('click', fecharSalaModal);
-  if (backdrop) backdrop.addEventListener('click', fecharSalaModal);
-  document.addEventListener('keydown', function (ev) {
-    if (ev.key === 'Escape' && !salaOverlayEl.classList.contains('escondida')) fecharSalaModal();
-  });
-
-  // Copiar o código da sala (maquete: copia o código de exemplo)
-  var btnCopiar = document.getElementById('btn-copiar-codigo');
-  var inputCod  = document.getElementById('sala-codigo');
-  if (btnCopiar && inputCod) {
-    btnCopiar.addEventListener('click', function () {
-      var iconeOriginal = btnCopiar.innerHTML;
-      var ok = function () {
-        btnCopiar.innerHTML = '\u2713';           // mostra um "✓" por um instante
-        setTimeout(function () { btnCopiar.innerHTML = iconeOriginal; }, 1200);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(inputCod.value).then(ok).catch(function () {
-          inputCod.select(); document.execCommand('copy'); ok();
-        });
-      } else {
-        inputCod.select(); document.execCommand('copy'); ok();
-      }
-    });
-  }
-
-  // Velocidade (maquete): alterna a pílula ativa, só visual
-  document.querySelectorAll('#sala-velocidade .pilula').forEach(function (p) {
-    p.addEventListener('click', function () {
-      document.querySelectorAll('#sala-velocidade .pilula').forEach(function (b) {
-        b.classList.remove('pilula-ativa');
-      });
-      this.classList.add('pilula-ativa');
-    });
-  });
-
-  // Botões "Criar sala" / "Entrar" (maquete): mostram o aviso de "em breve"
-  document.querySelectorAll('#sala-overlay [data-mock]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var aviso = document.getElementById('sala-aviso');
-      if (aviso) aviso.classList.remove('escondida');
-    });
-  });
-})();
-
 pilulasFormacao.forEach(function (pilula) {
   pilula.addEventListener('click', function () {
     selecionarFormacaoAmostra(this.dataset.formacaoAmostra);
@@ -93,8 +30,11 @@ pilulasFormacao.forEach(function (pilula) {
 });
 
 botaoJogar.addEventListener('click', function () {
-  // Modo online selecionado → abre o modal de sala (maquete). Senão, joga normal.
-  if (modoOnlineSelecionado) { abrirSalaModal(); return; }
+  // Modo online selecionado → abre o fluxo online (login + sala). Senão, joga normal.
+  if (modoOnlineSelecionado) {
+    if (typeof window.abrirModalOnline === 'function') window.abrirModalOnline();
+    return;
+  }
   jogarAgora();
 });
 botaoVoltarHome.addEventListener('click', voltarHome);
@@ -137,7 +77,7 @@ btnSimular.addEventListener('click', function () {
   reiniciarCampanha();              // zera histórico, stats e contadores
   acaoBotao = 'iniciar';            // garante o estado inicial do botão
   var btn = document.getElementById('btn-iniciar-jogo');
-  if (btn) btn.textContent = 'Iniciar Campanha \u25BA';
+  if (btn) btn.textContent = 'Iniciar Campanha ►';
   configurarTelaSimulacao();        // mostra/esconde a tabela e o "Pular tudo" do Brasileirão
   mostrarTela(telaSimulacao);
 });
@@ -149,7 +89,7 @@ document.getElementById('btn-iniciar-jogo').addEventListener('click', function (
     // (formação, estilo e mapa de escalação), na mesma competição.
     reiniciarCampanha();
     acaoBotao = 'iniciar';
-    this.textContent = 'Iniciar Campanha \u25BA';
+    this.textContent = 'Iniciar Campanha ►';
     jogarAgora();   // reaplica o tema, zera a escalação e abre a tela de escalação
   } else if (acaoBotao === 'novo-time') {
     // Derrota/eliminação → zera tudo e volta pra tela inicial
@@ -218,4 +158,3 @@ titulosCabecalho.forEach(function (titulo) {
     voltarHome();
   });
 });
-
