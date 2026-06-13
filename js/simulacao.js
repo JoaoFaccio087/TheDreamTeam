@@ -185,7 +185,11 @@ function criarCardPartida(id, adversario, fase) {
   });
 
   var hist = document.getElementById('historico-jogos');
-  hist.appendChild(div); // Cronológico: oitavas no topo, final embaixo
+  if (modoSelecionado === 'brasileirao') {
+    hist.insertBefore(div, hist.firstChild); // Brasileirão: mais recente no topo
+  } else {
+    hist.appendChild(div);                   // mata-mata: cronológico (mais recente embaixo)
+  }
 }
 
 // --- Adiciona uma linha de evento (gol, pênaltis) ao card ---

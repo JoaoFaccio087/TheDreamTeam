@@ -118,6 +118,12 @@
   align-self: flex-start;   /* não estica horizontalmente no flex column */
 }
 
+/* Respiro padrão (16px) acima dos botões de ação na coluna lateral —
+   mesmo espaçamento dos demais blocos (controles → estatísticas). */
+.sim-lateral .sim-btn-acao {
+  margin-top: 16px;
+}
+
 /* Painel de estatísticas */
 .stats-campanha {
   border: 1px solid var(--txt-soft);
