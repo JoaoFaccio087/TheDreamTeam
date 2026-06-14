@@ -17,7 +17,7 @@ function gerarCodigo() {
 
 const criarSchema = z.object({
   nome:       z.string().min(1).max(100).optional(),
-  competicao: z.enum(['libertadores', 'champions']).default('libertadores'),
+  competicao: z.enum(['Brasileirão', 'libertadores', 'champions']).default('Brasileirão'),
   velocidade: z.enum(['lento', 'normal', 'rapida']).default('normal'),
 });
 
