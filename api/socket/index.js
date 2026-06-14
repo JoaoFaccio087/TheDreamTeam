@@ -156,9 +156,18 @@ function avancarTurno(io, sala) {
 // ── Setup principal ─────────────────────────────────────────────────────────────
 
 function setupSocket(server, frontendUrl) {
+  // Mesma lógica de CORS do HTTP: lista separada por vírgula, ou '*' em dev.
+  const origens = (frontendUrl || '*').split(',').map(s => s.trim()).filter(Boolean);
+  const corsOrigin = frontendUrl === '*'
+    ? true
+    : function (origin, cb) {
+        if (!origin || origens.includes(origin)) return cb(null, true);
+        return cb(new Error('Origem não permitida'));
+      };
+
   const io = new Server(server, {
     cors: {
-      origin:      frontendUrl === '*' ? true : frontendUrl,
+      origin:      corsOrigin,
       credentials: true,
     },
   });
@@ -198,6 +207,10 @@ function setupSocket(server, frontendUrl) {
 
         let jogador = sala.jogadores.find(j => j.userId === userId);
         if (!jogador) {
+          // Novo entrante: só entra se a sala está no lobby e não está cheia.
+          // (Reconexão de quem já está na sala cai no 'else' e é sempre permitida.)
+          if (sala.status !== 'lobby') return socket.emit('erro', 'A partida já começou');
+          if (sala.jogadores.length >= 4) return socket.emit('erro', 'Sala cheia (máx. 4)');
           jogador = {
             userId,
             username,

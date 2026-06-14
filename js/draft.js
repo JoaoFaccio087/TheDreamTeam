@@ -218,7 +218,7 @@ function renderizarCartas() {
     var atraso = idx * 0.09; // escalonamento do "deal" entre as cartas
 
     var carta = document.createElement('div');
-    carta.className = 'draft-carta tier-' + tierDaForca(j.forca);
+    carta.className = 'draft-carta carta-entrando tier-' + tierDaForca(j.forca);
     carta.dataset.idx = idx;
     carta.style.animationDelay = atraso + 's';
 
@@ -231,6 +231,11 @@ function renderizarCartas() {
       '<span class="carta-forca">' + j.forca + '</span>';
 
     carta.addEventListener('click', function () { selecionarCarta(idx, carta); });
+    // Tira a classe de entrada quando o "deal" acaba: a partir daí, selecionar/
+    // desselecionar só mexe em borda/escala (transição), nunca re-anima a entrada.
+    carta.addEventListener('animationend', function (e) {
+      if (e.animationName === 'carta-deal') carta.classList.remove('carta-entrando');
+    });
     draftCartasEl.appendChild(carta);
   });
 

@@ -8,13 +8,31 @@ const app    = express();
 const server = http.createServer(app);
 const PORT   = parseInt(process.env.PORT || '3000', 10);
 
+// Trava de segurança: não sobe sem um JWT_SECRET forte (evita rodar com
+// segredo vazio/fraco, o que tornaria os tokens forjáveis).
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 16) {
+  console.error('FATAL: defina JWT_SECRET (mínimo 16 caracteres) nas variáveis de ambiente.');
+  process.exit(1);
+}
+
+// Origens permitidas (CORS). Aceita uma lista separada por vírgula em FRONTEND_URL,
+// ex.: "https://thedreamteam.com.br,https://joaofaccio087.github.io".
+// '*' libera qualquer origem (use só em desenvolvimento).
 const FRONTEND_URL = process.env.FRONTEND_URL || '*';
+const ORIGENS = FRONTEND_URL.split(',').map(s => s.trim()).filter(Boolean);
+const corsOrigin = FRONTEND_URL === '*'
+  ? true
+  : function (origin, cb) {
+      // Sem header Origin (curl, health checks do Render) é liberado.
+      if (!origin || ORIGENS.includes(origin)) return cb(null, true);
+      return cb(new Error('Origem não permitida pelo CORS'));
+    };
 
 app.use(cors({
-  origin:      FRONTEND_URL === '*' ? true : FRONTEND_URL,
+  origin:      corsOrigin,
   credentials: true,
 }));
-app.use(express.json());
+app.use(express.json({ limit: '64kb' }));
 
 // Socket.IO
 const { setupSocket } = require('./socket');

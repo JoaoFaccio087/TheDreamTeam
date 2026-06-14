@@ -125,8 +125,12 @@
   color: #fff;
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
   transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
-  /* Entrada escalonada (deal). 'backwards' segura o estado inicial durante o
-     atraso e devolve o controle ao CSS (hover/escolhida) ao terminar. */
+}
+
+/* Entrada escalonada (deal) — aplicada SÓ na renderização, via .carta-entrando,
+   e removida assim que termina (o JS tira a classe). Assim a seleção nunca
+   re-dispara o "deal" — era isso que fazia a carta sumir por um instante. */
+.draft-carta.carta-entrando {
   animation: carta-deal 0.46s cubic-bezier(0.2, 0.85, 0.3, 1.25) backwards;
 }
 
@@ -188,8 +192,10 @@
 .draft-carta.tier-ouro   .carta-forca { color: #f0c768; }
 .draft-carta.tier-elite  .carta-forca { color: #ffe08a; text-shadow: 0 0 12px rgba(255, 216, 107, 0.7); }
 
-/* Elite pulsa de leve para chamar atenção (pausa no hover) */
-.draft-carta.tier-elite { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
+/* Elite pulsa de leve para chamar atenção (pausa no hover). O "deal" de entrada
+   vem da .carta-entrando; aqui fica só o pulso infinito (que não some). */
+.draft-carta.tier-elite { animation: carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
+.draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
 .draft-carta.tier-elite:hover { animation-play-state: paused; }
 
 @keyframes carta-elite-pulso {
@@ -204,8 +210,11 @@
 .draft-carta.tier-bronze.escolhida {
   border-color: var(--accent);
   box-shadow: 0 0 0 2px var(--accent), 6px 9px 0 rgba(0, 0, 0, 0.55);
-  animation: none; /* congela o pulso da elite ao selecionar */
 }
+
+/* Só a elite tem pulso infinito; ao escolher, congela apenas o pulso. Como o
+   "deal" não está mais aqui, desselecionar não re-dispara animação de entrada. */
+.draft-carta.tier-elite.escolhida { animation: none; }
 
 /* Nome do jogador — ocupa até duas linhas */
 .carta-nome {
