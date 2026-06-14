@@ -74,12 +74,6 @@
           <label class="sala-rotulo" for="input-nome-sala">Nome da Sala</label>
           <input id="input-nome-sala" class="sala-input" type="text" placeholder="Digite o nome da sala" maxlength="40" autocomplete="off" />
 
-          <label class="sala-rotulo">C&oacute;digo da sala</label>
-          <div class="sala-codigo-wrap" id="modal-codigo-wrap">
-            <input id="modal-codigo-display" class="sala-input sala-codigo" type="text" value="----" readonly />
-            <button id="btn-copiar-codigo" class="sala-copiar" type="button" title="Copiar c&oacute;digo" aria-label="Copiar c&oacute;digo"><svg class="sala-copiar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
-          </div>
-
           <label class="sala-rotulo">Velocidade</label>
           <div class="area-pilulas sala-velocidade" id="sala-velocidade">
             <button class="pilula" type="button" data-vel="lento">Lento</button>
@@ -610,6 +604,14 @@
       <div class="lobby-wrapper">
 
         <div class="lobby-esq">
+          <div class="lobby-codigo-box">
+            <span class="lobby-codigo-rotulo">C&Oacute;DIGO DA SALA</span>
+            <div class="lobby-codigo-linha">
+              <span id="lobby-codigo" class="lobby-codigo">----</span>
+              <button id="btn-copiar-codigo" class="lobby-codigo-copiar" type="button" title="Copiar c&oacute;digo" aria-label="Copiar c&oacute;digo"><svg class="sala-copiar-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button>
+            </div>
+          </div>
+
           <p class="jogo-rotulo">NOME DO TIME</p>
           <input id="lobby-nome-time" class="lobby-input" type="text"
                  placeholder="Nome do seu time" maxlength="30" autocomplete="off" />

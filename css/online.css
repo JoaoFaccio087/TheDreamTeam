@@ -5,6 +5,20 @@
 .online-subview           { display: block; }
 .online-subview.escondida { display: none; }
 
+/* O modo online ocupa a página inteira. O .tela base (mobile-first) centraliza
+   vertical e horizontalmente e encolhe o conteúdo — por isso o lobby ficava
+   "pequenininho" no meio da tela. Aqui alinhamos ao topo e damos uma largura
+   confortável pro layout de 3 colunas respirar. */
+#tela-online {
+  justify-content: flex-start;
+  padding: 28px 16px 48px;
+}
+.online-subview {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 /* ── Campo de futebol (compartilhado por lobby / draft / elencos) ────────── */
 .campo-jogo {
   position: relative;
@@ -199,9 +213,10 @@
 /* ── LOBBY ──────────────────────────────────────────────────────────────── */
 .lobby-wrapper {
   display: grid;
-  grid-template-columns: 240px 1fr 232px;
-  gap: 1rem;
-  padding: 0 1.2rem 2rem;
+  grid-template-columns: 240px minmax(0, 340px) 232px;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 0 0 2rem;
   align-items: start;
 }
 
@@ -232,6 +247,47 @@
   transition: border-color 0.15s;
 }
 .lobby-input:focus { border-color: #D9B25A; }
+
+/* Código da sala — bem visível, com cara de "somente leitura" + botão copiar */
+.lobby-codigo-box {
+  background: rgba(217,178,90,0.08);
+  border: 1px solid rgba(217,178,90,0.3);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.lobby-codigo-rotulo {
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  color: #b89a52;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+}
+.lobby-codigo-linha { display: flex; align-items: center; gap: 0.5rem; }
+.lobby-codigo {
+  flex: 1;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.22em;
+  color: #D9B25A;
+  line-height: 1;
+  user-select: all;
+}
+.lobby-codigo-copiar {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(217,178,90,0.14);
+  border: 1px solid rgba(217,178,90,0.3);
+  border-radius: 7px;
+  color: #D9B25A;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.lobby-codigo-copiar:hover { background: rgba(217,178,90,0.25); }
+.lobby-codigo-copiar .sala-copiar-ico { width: 15px; height: 15px; }
 
 /* Botões de ação ocupam a largura do card */
 .lobby-esq .btn-rolar,

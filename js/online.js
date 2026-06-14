@@ -27,7 +27,7 @@
   var telaOnline, modalOnline, modalAuth;
 
   // Modal online
-  var modalOnlineFechar, modalCodigoWrap, modalCodigoDisplay, btnCopiarCodigo;
+  var modalOnlineFechar, btnCopiarCodigo, lobbyCodigo;
   var btnCriarSala, inputCodigoSala, btnEntrarSala, modalOnlineErro;
 
   // Lobby
@@ -98,7 +98,6 @@
       return;
     }
     modalOnlineErro.classList.add('escondida');
-    modalCodigoDisplay.value = '----';
     var _nomeEl = document.getElementById('input-nome-sala');
     if (_nomeEl) _nomeEl.value = '';
     btnCriarSala.disabled    = false;
@@ -202,6 +201,7 @@
   // room:state — lobby
   function onRoomState(sala) {
     codigoSala = sala.codigo;
+    if (lobbyCodigo) lobbyCodigo.textContent = codigoSala || '----';
     hostUserId = sala.hostUserId;
     ehHost     = String(meuUserId) === String(hostUserId);
 
@@ -672,8 +672,6 @@
     api.criarSala({ competicao: 'libertadores', nome: nome || undefined, velocidade: velocidade })
       .then(function (res) {
         codigoSala = res.codigo;
-        modalCodigoDisplay.value = res.codigo;
-        modalCodigoWrap.classList.remove('escondida');
 
         conectar(function () {
           socket.emit('room:join', { codigo: res.codigo });
@@ -729,9 +727,8 @@
 
     // Modal online
     modalOnlineFechar  = document.getElementById('modal-online-fechar');
-    modalCodigoWrap    = document.getElementById('modal-codigo-wrap');
-    modalCodigoDisplay = document.getElementById('modal-codigo-display');
     btnCopiarCodigo    = document.getElementById('btn-copiar-codigo');
+    lobbyCodigo        = document.getElementById('lobby-codigo');
     btnCriarSala       = document.getElementById('btn-criar-sala');
     inputCodigoSala    = document.getElementById('input-codigo-sala');
     btnEntrarSala      = document.getElementById('btn-entrar-sala');
@@ -792,8 +789,8 @@
     if (backdrop) backdrop.addEventListener('click', fecharModalOnline);
 
     btnCopiarCodigo.addEventListener('click', function () {
-      var cod = (modalCodigoDisplay.value || '').trim();
-      if (!cod) return;
+      var cod = (lobbyCodigo.textContent || '').trim();
+      if (!cod || cod === '----') return;
       var orig = btnCopiarCodigo.innerHTML;
       (navigator.clipboard
         ? navigator.clipboard.writeText(cod)
