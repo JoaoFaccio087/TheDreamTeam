@@ -624,8 +624,6 @@
             <button class="pilula" data-fl="3-4-3">3-4-3</button>
           </div>
 
-          <p id="lobby-prontos-count" class="lobby-prontos">0/0 Jogadores Prontos</p>
-
           <button id="btn-lobby-pronto"  class="btn-rolar">Pronto &#10003;</button>
           <button id="btn-lobby-comecar" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
           <button id="btn-lobby-voltar"  class="btn-secundario" style="margin-top:.6rem">&larr; Voltar</button>
@@ -653,7 +651,10 @@
         </div>
 
         <div class="lobby-dir">
-          <p class="jogo-rotulo">TIME ESCALADO</p>
+          <div class="lobby-dir-head">
+            <p class="jogo-rotulo" style="margin:0">JOGADORES</p>
+            <p id="lobby-prontos-count" class="lobby-prontos">0/0 prontos</p>
+          </div>
           <div id="lobby-box-score" class="lobby-box-score"></div>
         </div>
 

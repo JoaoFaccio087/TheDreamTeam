@@ -159,6 +159,29 @@ tabCadastroBtn.addEventListener('click', function () {
   limparErro();
 });
 
+// ── Estado de carregamento do botão (+ dica de "cold start" do Render grátis) ─
+
+function comBotaoCarregando(btn, textoCarregando, promessa) {
+  var original = btn.textContent;
+  btn.textContent = textoCarregando;
+  btn.disabled = true;
+  btn.classList.add('btn-carregando');
+
+  // Se demorar (servidor "dormindo" no plano grátis), avisa que está acordando.
+  var dicaTimer = setTimeout(function () { btn.textContent = 'Acordando servidor…'; }, 3500);
+
+  function restaurar() {
+    clearTimeout(dicaTimer);
+    btn.textContent = original;
+    btn.disabled = false;
+    btn.classList.remove('btn-carregando');
+  }
+
+  return promessa
+    .then(function (data) { clearTimeout(dicaTimer); return data; })
+    .catch(function (err) { restaurar(); throw err; });
+}
+
 // ── Formulário de Login ───────────────────────────────────────────────────
 
 formLogin.addEventListener('submit', function (ev) {
@@ -170,9 +193,8 @@ formLogin.addEventListener('submit', function (ev) {
   if (!username || !senha) { mostrarErro('Preencha todos os campos'); return; }
 
   var btn = formLogin.querySelector('button[type=submit]');
-  btn.disabled = true;
 
-  apiPost('/auth/login', { username: username, password: senha })
+  comBotaoCarregando(btn, 'Entrando…', apiPost('/auth/login', { username: username, password: senha }))
     .then(function (data) {
       salvarSessao(data.token, data.user);
       atualizarDropdown(data.user);
@@ -180,7 +202,6 @@ formLogin.addEventListener('submit', function (ev) {
     })
     .catch(function (err) {
       mostrarErro(err.message);
-      btn.disabled = false;
     });
 });
 
@@ -198,9 +219,8 @@ formCadastro.addEventListener('submit', function (ev) {
   if (!username || !senha || !email) { mostrarErro('Preencha todos os campos'); return; }
 
   var btn = formCadastro.querySelector('button[type=submit]');
-  btn.disabled = true;
 
-  apiPost('/auth/register', { username: username, email: email, password: senha, nomeTime: nomeTime })
+  comBotaoCarregando(btn, 'Cadastrando…', apiPost('/auth/register', { username: username, email: email, password: senha, nomeTime: nomeTime }))
     .then(function (data) {
       salvarSessao(data.token, data.user);
       atualizarDropdown(data.user);
@@ -208,7 +228,6 @@ formCadastro.addEventListener('submit', function (ev) {
     })
     .catch(function (err) {
       mostrarErro(err.message);
-      btn.disabled = false;
     });
 });
 

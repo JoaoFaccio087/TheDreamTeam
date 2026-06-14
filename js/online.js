@@ -214,7 +214,7 @@
     var prontos = sala.prontos || 0;
     var total   = sala.total   || 0;
 
-    lobbyProntosCount.textContent = prontos + '/' + total + ' Jogadores Prontos';
+    lobbyProntosCount.textContent = prontos + '/' + total + ' prontos';
 
     // Renderiza lista de jogadores no lobby (box-score à direita)
     renderLobbyJogadores(sala.jogadores || []);
@@ -571,7 +571,9 @@
       row.className = 'lobby-jogador-row' + (sou ? ' ativo' : '') + (j.pronto ? ' pronto' : '');
 
       var inicial = (j.username || '?').charAt(0).toUpperCase();
-      var badge   = j.pronto ? '<span class="lobby-jog-badge">Pronto</span>' : '';
+      var badge   = j.pronto
+        ? '<span class="lobby-jog-badge pronto">Pronto</span>'
+        : '<span class="lobby-jog-badge aguardando">Aguardando</span>';
       row.innerHTML =
         '<div class="lobby-jog-avatar">' + htmlEsc(inicial) + '</div>' +
         '<div class="lobby-jog-info">' +
@@ -827,6 +829,8 @@
       p.addEventListener('click', function () {
         lobbyPilulasFormacao.forEach(function (x) { x.classList.remove('pilula-ativa'); });
         p.classList.add('pilula-ativa');
+        // Atualiza o campo na hora pra refletir a formação escolhida (slots vazios).
+        if (lobbyCampo) renderCampoOnline(lobbyCampo, [], p.dataset.fl || '4-3-3');
       });
     });
 
