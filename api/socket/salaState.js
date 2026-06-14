@@ -6,7 +6,7 @@ function criarSala(codigo, hostUserId, competicao) {
   const state = {
     codigo,
     hostUserId,
-    competicao:            competicao || 'libertadores',
+    competicao:            competicao || 'Brasileirão',
     jogadores:             [],   // { userId, username, nomeDoTime, formacao, socketId, conectado, picks[], pronto }
     poolDisponivel:        [],   // players individuais: { id, nome, posicoes, forca, clube, edicao, competicao }
     ordemDraft:            [],   // snake order completo (userId[] × 11 rounds)

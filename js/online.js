@@ -224,14 +224,17 @@
     if (eu) renderCampoOnline(lobbyCampo, eu.picks || [], eu.formacao || '4-3-3');
 
     // Botões host
-    if (ehHost && prontos >= total && total >= 2) {
+    // O "Começar" é do host e aparece quando todos os humanos estão prontos
+    // (mínimo 1 — as vagas restantes da liga viram bots no início).
+    if (ehHost && prontos >= total && total >= 1) {
       btnLobbyComecar.classList.remove('escondida');
       btnLobbyPronto.classList.add('escondida');
     } else {
       btnLobbyComecar.classList.add('escondida');
       btnLobbyPronto.classList.remove('escondida');
-      btnLobbyPronto.disabled    = prontos > 0 && eu && eu.pronto;
-      btnLobbyPronto.textContent = (eu && eu.pronto) ? 'Aguardando...' : 'Pronto ✓';
+      var jaPronto = !!(eu && eu.pronto);
+      btnLobbyPronto.disabled = jaPronto;
+      btnLobbyPronto.textContent = jaPronto ? 'Aguardando...' : 'Pronto ✓';
     }
 
     if (sala.status === 'lobby') subview('online-lobby');
@@ -669,7 +672,7 @@
     var velEl = document.querySelector('#sala-velocidade .pilula-ativa');
     var velocidade = velEl ? velEl.dataset.vel : 'normal';
 
-    api.criarSala({ competicao: 'libertadores', nome: nome || undefined, velocidade: velocidade })
+    api.criarSala({ competicao: 'Brasileirão', nome: nome || undefined, velocidade: velocidade })
       .then(function (res) {
         codigoSala = res.codigo;
 

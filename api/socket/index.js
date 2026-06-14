@@ -28,6 +28,70 @@ function gerarOrdemSnake(ids, rounds) {
   return ordem;
 }
 
+// ── Bots (times da máquina que completam a liga até 20) ────────────────────────
+
+const TOTAL_TIMES    = 20;
+const BOT_PICK_DELAY = 130;   // ms entre escolhas de bot no draft (dá sensação de "vivo")
+const NOMES_BOTS = [
+  'Tigres FC','Albatroz EC','Furacão Azul','Leões do Vale','Raio Verde',
+  'Inter Estelar','Dragões FC','Cometa SC','Falcões Real','União Atlética',
+  'Trovão EC','Pantera Negra','Águias Douradas','Vendaval FC','Lobo Cinza',
+  'Corsário SC','Meteoro FC','Bisões FC','Titãs do Norte','Cobras Reais',
+  'Sentinela FC','Vulcano EC','Nova Aurora','Imperial SC','Bravos FC',
+];
+const FORMACOES_BOT = ['4-3-3','4-4-2','3-5-2','4-2-3-1','4-5-1','3-4-3'];
+
+function gerarBots(qtd, nomesUsados) {
+  const disp = shuffle(NOMES_BOTS.filter(n => !nomesUsados.includes(n)));
+  const bots = [];
+  for (let i = 0; i < qtd; i++) {
+    const nome = disp[i] || ('Bot FC ' + (i + 1));
+    bots.push({
+      userId:     -(i + 1),               // ids negativos nunca colidem com humanos
+      username:   nome,
+      nomeDoTime: nome,
+      formacao:   FORMACOES_BOT[Math.floor(Math.random() * FORMACOES_BOT.length)],
+      socketId:   null,
+      conectado:  false,
+      picks:      [],
+      pronto:     true,
+      ehBot:      true,
+    });
+  }
+  return bots;
+}
+
+// Escolha "equilibrada": bons jogadores, mas com variação (não sempre o melhor).
+// O pool já chega ordenado por força, então olhamos só o topo disponível.
+function escolherPickBot(sala) {
+  const pool = sala.poolDisponivel;
+  if (!pool.length) return null;
+  const topo  = pool.slice(0, Math.min(50, pool.length));
+  let total = 0;
+  const pesos = topo.map(p => { const f = (p.forca || 70); const w = f * f; total += w; return w; });
+  let r = Math.random() * total, acum = 0;
+  for (let i = 0; i < topo.length; i++) { acum += pesos[i]; if (r <= acum) return topo[i]; }
+  return topo[topo.length - 1];
+}
+
+function botEscolhe(io, sala, jogador) {
+  const picked = escolherPickBot(sala);
+  if (!picked) return;
+  const idx = sala.poolDisponivel.indexOf(picked);
+  if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
+  jogador.picks = jogador.picks || [];
+  jogador.picks.push(picked);
+  io.to(sala.codigo).emit('draft:pick', {
+    userId:     jogador.userId,
+    username:   jogador.username,
+    nomeDoTime: jogador.nomeDoTime,
+    jogador:    picked,
+    numPicks:   jogador.picks.length,
+    timeout:    false,
+    ehBot:      true,
+  });
+}
+
 function buildRoomState(sala) {
   const prontos = sala.jogadores.filter(j => j.pronto).length;
   return {
@@ -44,6 +108,7 @@ function buildRoomState(sala) {
       formacao:  j.formacao  || '4-3-3',
       conectado: j.conectado,
       pronto:    j.pronto,
+      ehBot:     !!j.ehBot,
       picks:     j.picks     || [],
       numPicks:  (j.picks    || []).length,
     })),
@@ -91,6 +156,16 @@ function iniciarTurno(io, sala) {
   if (sala.indiceTurno >= sala.ordemDraft.length) return;
   const userId  = sala.ordemDraft[sala.indiceTurno];
   const jogador = sala.jogadores.find(j => j.userId === userId);
+
+  // Vez de um BOT: escolhe sozinho após um instante e avança (sem timer de 30s).
+  if (jogador && jogador.ehBot) {
+    sala.timerDraft = setTimeout(() => {
+      botEscolhe(io, sala, jogador);
+      avancarTurno(io, sala);
+    }, BOT_PICK_DELAY);
+    return;
+  }
+
   const pool50  = sala.poolDisponivel.slice(0, 50);
 
   io.to(sala.codigo).emit('draft:turno', {
@@ -137,7 +212,7 @@ function avancarTurno(io, sala) {
 
   if (!semPick.length) {
     sala.status = 'ready';
-    sala.jogadores.forEach(j => { j.pronto = false; });
+    sala.jogadores.forEach(j => { j.pronto = !!j.ehBot; });
     io.to(sala.codigo).emit('draft:complete', {
       jogadores: sala.jogadores.map(j => ({
         userId:    j.userId,
@@ -263,8 +338,8 @@ function setupSocket(server, frontendUrl) {
       if (sala.hostUserId !== userId) return socket.emit('erro', 'Apenas o host pode iniciar');
       if (sala.status !== 'lobby')   return socket.emit('erro', 'Draft já iniciado');
 
-      const todosProntos = sala.jogadores.length >= 2 && sala.jogadores.every(j => j.pronto);
-      if (!todosProntos) return socket.emit('erro', 'Todos os jogadores precisam estar prontos (mínimo 2)');
+      const todosProntos = sala.jogadores.length >= 1 && sala.jogadores.every(j => j.pronto);
+      if (!todosProntos) return socket.emit('erro', 'Todos os jogadores precisam estar prontos');
 
       // Carrega pool de jogadores a partir dos arquivos estáticos (sem DB)
       const todosJogadores = loader.getPoolPorCompeticao(sala.competicao);
@@ -272,13 +347,23 @@ function setupSocket(server, frontendUrl) {
         return socket.emit('erro', `Sem jogadores para a competição: ${sala.competicao}`);
       }
 
-      const pool = shuffle(todosJogadores).slice(0, 600);
+      // Completa a liga até 20 times com bots (máquina) — 1 humano → 19 bots, etc.
+      const faltam = Math.max(0, TOTAL_TIMES - sala.jogadores.length);
+      if (faltam > 0) {
+        const usados = sala.jogadores.map(j => j.nomeDoTime).filter(Boolean);
+        sala.jogadores.push(...gerarBots(faltam, usados));
+      }
+      io.to(code).emit('room:state', buildRoomState(sala));
 
-      // Reinicia picks de cada jogador
-      sala.jogadores.forEach(j => { j.picks = []; j.pronto = false; });
+      // Pool: amostra de 600 da competição, ordenada por força (melhores primeiro).
+      const pool = shuffle(todosJogadores).slice(0, 600)
+                     .sort((a, b) => (b.forca || 70) - (a.forca || 70));
+
+      // Reinicia picks; humanos voltam a "não pronto", bots seguem prontos.
+      sala.jogadores.forEach(j => { j.picks = []; j.pronto = !!j.ehBot; });
 
       const baseOrder      = shuffle(sala.jogadores.map(j => j.userId));
-      sala.poolDisponivel  = shuffle(pool);
+      sala.poolDisponivel  = pool;
       sala.ordemDraft      = gerarOrdemSnake(baseOrder, sala.totalPicksNecessarios);
       sala.indiceTurno     = 0;
       sala.status          = 'draft';
@@ -458,6 +543,7 @@ function setupSocket(server, frontendUrl) {
           // Persiste resultados assincronamente
           (async () => {
             for (const jogador of sala.jogadores) {
+              if (jogador.ehBot) continue;            // bots não têm linha em users
               const s = sala.resultados[jogador.userId];
               if (!s) continue;
               try {

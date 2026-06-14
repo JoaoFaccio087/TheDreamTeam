@@ -19,6 +19,9 @@
   margin: 0 auto;
 }
 
+/* Respiro entre a linha do header e o conteúdo (vale pra todas as telas online) */
+#tela-online .jogo-header-linha { margin-bottom: 1.9rem; }
+
 /* ── Campo de futebol (compartilhado por lobby / draft / elencos) ────────── */
 .campo-jogo {
   position: relative;
