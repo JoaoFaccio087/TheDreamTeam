@@ -300,7 +300,7 @@
     poolLocal        = dados.pool || [];
     indiceTurnoAtual = dados.turnoNum ? dados.turnoNum - 1 : indiceTurnoAtual;
 
-    var nomeVez  = dados.nomeDoTime || dados.username || '—';
+    var nomeVez  = nomeUsuario(allPlayers[dados.userId]) || dados.nomeDoTime || dados.username || '—';
     var ehBotVez = !!(allPlayers[dados.userId] && allPlayers[dados.userId].ehBot);
     var tagBot   = ehBotVez ? ' <span class="draft-bot-tag">BOT</span>' : '';
     draftTituloEl.innerHTML      = (minhaVez ? '⚡ Sua vez — ' : 'Vez de: ') + htmlEsc(nomeVez) + tagBot;
@@ -309,7 +309,8 @@
     if (minhaVez) tocarAvisoVez();
 
     renderOrdemLista();
-    iniciarTimer(dados.segundos || 30);
+    if (minhaVez) iniciarTimer(dados.segundos || 30);
+    else          pararTimer();
 
     if (minhaVez && poolLocal.length) {
       selectedPlayer = null;
@@ -681,9 +682,19 @@
     if (i === repositionFrom) { cancelarReposicionar(); return; }  // clicou na origem → cancela
     var jogMov = meu.picks[repositionFrom];
     if (!jogMov) { cancelarReposicionar(); return; }
-    // destino vazio → precisa ser válido p/ o jogador movido;
-    // destino ocupado → troca (o servidor valida as duas posições).
-    if (!ocupado && !podeOcupar(jogMov, codigos[i])) return;
+    var destino = meu.picks[i];
+    // destino vazio → válido p/ o jogador movido; destino ocupado → troca (ambos cabem).
+    if (!destino) {
+      if (!podeOcupar(jogMov, codigos[i])) return;
+      meu.picks[i] = jogMov;
+      meu.picks[repositionFrom] = undefined;
+    } else {
+      if (!podeOcupar(jogMov, codigos[i]) || !podeOcupar(destino, codigos[repositionFrom])) return;
+      meu.picks[i] = jogMov;
+      meu.picks[repositionFrom] = destino;
+    }
+    // Aplica já no campo (instantâneo); o servidor confirma via draft:moved.
+    renderCampoOnline(draftCampo, meu.picks, meu.formacao || '4-3-3');
     socket.emit('draft:move', { fromSlot: repositionFrom, toSlot: i });
     cancelarReposicionar();
   }
@@ -761,6 +772,13 @@
 
   // ── Lobby: lista de jogadores ─────────────────────────────────────────────
 
+  // Nome a exibir: com login → username; convidado → nome do time (nunca "Convidado-XXXX").
+  function nomeUsuario(jog) {
+    if (!jog) return 'Jogador';
+    if (jog.guest || !jog.username) return jog.nomeDoTime || 'Jogador';
+    return jog.username;
+  }
+
   function renderLobbyJogadores(jogadores) {
     lobbyBoxScore.innerHTML = '';
     if (!jogadores.length) {
@@ -772,15 +790,17 @@
       var row = document.createElement('div');
       row.className = 'lobby-jogador-row' + (sou ? ' ativo' : '') + (j.pronto ? ' pronto' : '');
 
-      var inicial = (j.username || '?').charAt(0).toUpperCase();
+      var titulo  = nomeUsuario(j);
+      var inicial = titulo.charAt(0).toUpperCase();
+      var detalhe = (j.guest ? '' : (j.nomeDoTime ? j.nomeDoTime + ' · ' : '')) + (j.formacao || '4-3-3');
       var badge   = j.pronto
         ? '<span class="lobby-jog-badge pronto">Pronto</span>'
         : '<span class="lobby-jog-badge aguardando">Aguardando</span>';
       row.innerHTML =
         '<div class="lobby-jog-avatar">' + htmlEsc(inicial) + '</div>' +
         '<div class="lobby-jog-info">' +
-          '<div class="lobby-jog-nome">' + htmlEsc(j.username || 'Jogador') + '</div>' +
-          '<div class="lobby-jog-detalhe">' + htmlEsc(j.nomeDoTime || '') + ' · ' + (j.formacao || '4-3-3') + '</div>' +
+          '<div class="lobby-jog-nome">' + htmlEsc(titulo) + '</div>' +
+          '<div class="lobby-jog-detalhe">' + htmlEsc(detalhe) + '</div>' +
         '</div>' +
         badge;
       lobbyBoxScore.appendChild(row);
@@ -804,12 +824,13 @@
       row.dataset.uid = uid;
       row.style.cursor = 'pointer';
 
-      var sou = String(uid) === String(meuUserId);
+      var titulo  = nomeUsuario(jog);
+      var detalhe = jog.guest ? '' : (jog.nomeDoTime || '');
       row.innerHTML =
-        '<div class="lobby-jog-avatar">' + htmlEsc((jog.username || '?').charAt(0).toUpperCase()) + '</div>' +
+        '<div class="lobby-jog-avatar">' + htmlEsc(titulo.charAt(0).toUpperCase()) + '</div>' +
         '<div class="lobby-jog-info">' +
-          '<div class="lobby-jog-nome">' + htmlEsc(jog.username || 'Jogador') + '</div>' +
-          '<div class="lobby-jog-detalhe">' + htmlEsc(jog.nomeDoTime || '') + '</div>' +
+          '<div class="lobby-jog-nome">' + htmlEsc(titulo) + '</div>' +
+          '<div class="lobby-jog-detalhe">' + htmlEsc(detalhe) + '</div>' +
         '</div>';
 
       row.addEventListener('click', function () {
@@ -828,13 +849,14 @@
     var jog = allPlayers[uid];
     if (!jog) return;
 
-    elencosCampoLabel.textContent = htmlEsc((jog.username || 'Jogador') + (jog.nomeDoTime ? ' — ' + jog.nomeDoTime : ''));
+    // Cabeçalho = nome do time; força pequena logo abaixo (via CSS de ordem).
+    elencosCampoLabel.textContent = jog.nomeDoTime || nomeUsuario(jog);
     renderCampoOnline(elencosCampo, jog.picks || [], jog.formacao || '4-3-3');
 
-    var picks    = jog.picks || [];
-    var forcaTot = picks.reduce(function (s, p) { return s + (p.forca || 70); }, 0);
-    var forcaMed = picks.length ? Math.round(forcaTot / picks.length) : 0;
-    elencosForca.textContent = 'Força do Elenco: ' + (picks.length ? forcaMed : '—');
+    var titulares = (jog.picks || []).filter(Boolean);
+    var forcaTot  = titulares.reduce(function (s, p) { return s + (p.forca || 70); }, 0);
+    var forcaMed  = titulares.length ? Math.round(forcaTot / titulares.length) : 0;
+    elencosForca.textContent = titulares.length ? ('Força ' + forcaMed) : 'Força —';
   }
 
   // ── Ordem do Draft ────────────────────────────────────────────────────────
@@ -846,11 +868,11 @@
       var jog = allPlayers[uid];
       var ativo = String(uid) === String(draftTurnoUid);
       var sou   = String(uid) === String(meuUserId);
-      var picks = jog ? (jog.picks || []).length : 0;
+      var picks = jog ? (jog.picks || []).filter(Boolean).length : 0;
 
       var row = document.createElement('div');
       row.className = 'draft-ordem-item' + (ativo ? ' ativo' : '') + (sou ? ' eu' : '');
-      var nomeTime = jog ? (jog.nomeDoTime || jog.username) : String(uid);
+      var nomeTime = jog ? nomeUsuario(jog) : String(uid);
       var tagBot   = (jog && jog.ehBot) ? ' <span class="draft-bot-tag">BOT</span>' : '';
       row.innerHTML =
         '<span class="draft-ordem-num">' + (i + 1) + '</span>' +

@@ -536,20 +536,6 @@
   font-size: 1rem;
   color: #fff;
 }
-.draft-arrow {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  width: 34px; height: 34px;
-  color: #ccc;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-  flex-shrink: 0;
-}
-.draft-arrow:hover    { background: rgba(255,255,255,0.12); }
-.draft-arrow:disabled { opacity: 0.3; cursor: default; }
 
 /* ── ELENCOS ────────────────────────────────────────────────────────────── */
 .elencos-wrapper {
@@ -581,6 +567,10 @@
   text-align: center;
   margin: 0;
 }
+/* Mapa de elencos menor + força pequena logo abaixo do nome do time */
+.elencos-campo-col #elencos-campo-label { order: 1; margin-bottom: 0.15rem; }
+.elencos-campo-col .elencos-forca        { order: 2; margin: 0 0 0.5rem; font-size: 0.72rem; color: #8a8a8a; }
+.elencos-campo-col #elencos-campo        { order: 3; max-width: 320px; }
 
 /* ── RODADA ─────────────────────────────────────────────────────────────── */
 .rodada-wrapper {

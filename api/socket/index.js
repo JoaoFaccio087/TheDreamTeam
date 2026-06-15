@@ -31,7 +31,7 @@ function gerarOrdemSnake(ids, rounds) {
 // ── Bots (times da máquina que completam a liga até 20) ────────────────────────
 
 const TOTAL_TIMES    = 20;
-const BOT_PICK_DELAY = 130;   // ms entre escolhas de bot no draft (dá sensação de "vivo")
+const BOT_PICK_DELAY = 400;   // ms entre escolhas de bot (visível: a vez passa 1 a 1)
 const NOMES_BOTS = [
   'Tigres FC','Albatroz EC','Furacão Azul','Leões do Vale','Raio Verde',
   'Inter Estelar','Dragões FC','Cometa SC','Falcões Real','União Atlética',
@@ -135,6 +135,7 @@ function buildRoomState(sala) {
       conectado: j.conectado,
       pronto:    j.pronto,
       ehBot:     !!j.ehBot,
+      guest:     !!j.guest,
       picks:     j.picks     || [],
       numPicks:  (j.picks    || []).filter(Boolean).length,
     })),
@@ -183,8 +184,19 @@ function iniciarTurno(io, sala) {
   const userId  = sala.ordemDraft[sala.indiceTurno];
   const jogador = sala.jogadores.find(j => j.userId === userId);
 
-  // Vez de um BOT: escolhe sozinho após um instante e avança (sem timer de 30s).
+  // Vez de um BOT: anuncia a vez (para o marcador andar 1 a 1) e escolhe após um instante.
   if (jogador && jogador.ehBot) {
+    io.to(sala.codigo).emit('draft:turno', {
+      userId:      jogador.userId,
+      username:    jogador.username,
+      nomeDoTime:  jogador.nomeDoTime,
+      ehBot:       true,
+      segundos:    0,
+      pool:        [],
+      turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
+      totalTurnos: sala.totalPicksNecessarios,
+      numPicks:    (jogador.picks || []).filter(Boolean).length,
+    });
     sala.timerDraft = setTimeout(() => {
       botEscolhe(io, sala, jogador);
       avancarTurno(io, sala);
