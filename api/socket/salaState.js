@@ -15,7 +15,8 @@ function criarSala(codigo, hostUserId, competicao) {
     totalPicksNecessarios: 11,
     status:                'lobby',   // lobby | draft | ready | playing | fim
     rodadaAtual:           0,
-    totalRodadas:          5,
+    totalRodadas:          38,       // Brasileirão: todos contra todos, ida e volta (20 times)
+    calendario:            [],       // [rodada][ [casaUid, foraUid], ... ] — gerado ao iniciar
     resultados:            {},        // userId → { vitorias, empates, derrotas, gf, ga, campeao }
     statsGols:             {},        // nome → count (acumula entre rodadas)
     statsAssists:          {},        // nome → count

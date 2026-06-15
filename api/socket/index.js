@@ -83,21 +83,22 @@ function podeOcupar(jogador, cod) {
 function escolherPickBotDe(fonte) {
   if (!fonte.length) return null;
   const ord  = fonte.slice().sort((a, b) => (b.forca || 70) - (a.forca || 70));
-  const topo = ord.slice(0, Math.min(50, ord.length));
+  const topo = ord.slice(0, Math.min(12, ord.length));   // só o topo da posição → times fortes
   let total = 0;
-  const pesos = topo.map(p => { const f = (p.forca || 70); const w = f * f; total += w; return w; });
+  const pesos = topo.map(p => { const f = (p.forca || 70); const w = f * f * f; total += w; return w; });
   let r = Math.random() * total, acum = 0;
   for (let i = 0; i < topo.length; i++) { acum += pesos[i]; if (r <= acum) return topo[i]; }
-  return topo[topo.length - 1];
+  return topo[0];
 }
 
-// Coloca um jogador na 1ª vaga ABERTA e VÁLIDA da formação (bots e auto-pick por timeout).
+// Coloca um jogador numa vaga ABERTA e VÁLIDA. Bot: vaga aleatória; timeout: 1ª aberta.
 function colocarEmVagaAberta(io, sala, jogador, ehBot) {
   const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
   jogador.picks = jogador.picks || [];
-  let slotIdx = -1;
-  for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) { slotIdx = i; break; } }
-  if (slotIdx === -1) return;
+  const abertas = [];
+  for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) abertas.push(i); }
+  if (!abertas.length) return;
+  const slotIdx   = ehBot ? abertas[Math.floor(Math.random() * abertas.length)] : abertas[0];
   const cod       = codigos[slotIdx];
   const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, cod));
   const picked    = escolherPickBotDe(elegiveis.length ? elegiveis : sala.poolDisponivel);
@@ -549,6 +550,7 @@ function setupSocket(server, frontendUrl) {
 
       const sala = getSala(code);
       if (!sala || sala.status !== 'playing') return;
+      if (sala.hostUserId !== userId) return;   // só o host avança as rodadas
       if (sala.rodadaEmAndamento) return;
 
       sala.rodadaEmAndamento = true;
@@ -597,6 +599,7 @@ function setupSocket(server, frontendUrl) {
             homeUid: home.userId, homeNome: home.nomeDoTime, homeUser: home.username, homeBot: !!home.ehBot,
             awayUid: away.userId, awayNome: away.nomeDoTime, awayUser: away.username, awayBot: !!away.ehBot,
             gHome, gAway,
+            fila: resultado.fila,
           });
         }
 
@@ -615,13 +618,34 @@ function setupSocket(server, frontendUrl) {
           .sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
 
         // Artilharia e assistências top-18
+        // Mapa nome do jogador → nome do time (cada nome pertence a um único time)
+        const timeDoJogador = {};
+        sala.jogadores.forEach(j => {
+          (j.picks || []).forEach(p => { if (p && p.nome) timeDoJogador[p.nome] = j.nomeDoTime; });
+        });
+
         const artilharia = Object.entries(sala.statsGols)
           .sort((a, b) => b[1] - a[1]).slice(0, 18)
-          .map(([nome, gols]) => ({ nome, gols }));
+          .map(([nome, gols]) => ({ nome, gols, time: timeDoJogador[nome] || '' }));
 
         const assistencias = Object.entries(sala.statsAssists)
           .sort((a, b) => b[1] - a[1]).slice(0, 18)
-          .map(([nome, assists]) => ({ nome, assists }));
+          .map(([nome, assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
+
+        // Próxima rodada (para a coluna "Próximos jogos")
+        const mapaNome = {};
+        sala.jogadores.forEach(j => { mapaNome[j.userId] = j; });
+        const proxFix = sala.calendario[rodada] || [];   // rodada é 1-based → [rodada] = próxima
+        const proxima = {
+          rodada: rodada + 1,
+          jogos: proxFix.map(par => {
+            const h = mapaNome[par[0]] || {}, a = mapaNome[par[1]] || {};
+            return {
+              homeUid: par[0], homeNome: h.nomeDoTime, homeBot: !!h.ehBot,
+              awayUid: par[1], awayNome: a.nomeDoTime, awayBot: !!a.ehBot,
+            };
+          }),
+        };
 
         io.to(code).emit('round:results', {
           rodada,
@@ -630,6 +654,7 @@ function setupSocket(server, frontendUrl) {
           classificacao,
           artilharia,
           assistencias,
+          proxima,
         });
 
         if (isUltima) {
@@ -658,9 +683,8 @@ function setupSocket(server, frontendUrl) {
             }
             deleteSala(code);
           })();
-        } else {
-          io.to(code).emit('round:start', { rodada: rodada + 1, total: sala.totalRodadas });
         }
+        // Rodadas seguintes são disparadas pelo HOST (botão/auto) via round:simulate.
       } catch (err) {
         console.error('[socket round:simulate]', err);
         socket.emit('erro', 'Erro na simulação');

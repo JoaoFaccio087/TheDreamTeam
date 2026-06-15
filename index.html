@@ -801,31 +801,58 @@
         <div class="jogo-header-linha"></div>
       </div>
 
-      <div class="rodada-wrapper">
+      <!-- Abas -->
+      <div class="rodada-tabs">
+        <button id="tab-partidas" class="rodada-tab ativa">Partidas</button>
+        <button id="tab-classif"  class="rodada-tab">Classifica&ccedil;&atilde;o</button>
+      </div>
 
-        <div class="rodada-partidas-col">
-          <div id="rodada-partidas" class="rodada-partidas"></div>
-          <div class="rodada-acoes">
-            <button id="btn-rodada-proxima" class="btn-rolar escondida">Pr&oacute;xima &rarr;</button>
-            <button id="btn-rodada-tudo"    class="btn-rolar escondida">&#9197; Simular tudo</button>
-            <button id="btn-rodada-fim"     class="btn-rolar escondida">Ver Resultado Final &rarr;</button>
+      <!-- ABA PARTIDAS -->
+      <div id="aba-partidas" class="rodada-aba">
+        <div class="partidas-wrapper">
+          <div class="partidas-col">
+            <div id="rodada-partidas" class="rodada-partidas"></div>
+          </div>
+          <div class="proximos-col">
+            <p class="jogo-rotulo" id="proximos-titulo">PR&Oacute;XIMA RODADA</p>
+            <div id="rodada-proximos" class="rodada-proximos"></div>
+            <div class="rodada-acoes">
+              <button id="btn-rodada-proxima" class="btn-rolar escondida">Pr&oacute;ximo jogo &rarr;</button>
+              <button id="btn-rodada-tudo"    class="btn-rolar escondida">&#9197; Simular tudo</button>
+              <button id="btn-rodada-fim"     class="btn-rolar escondida">Ver Resultado Final &rarr;</button>
+              <p id="rodada-aguardando-host" class="rodada-aguardando escondida">Aguardando o host avan&ccedil;ar&hellip;</p>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="rodada-classif-col">
-          <p class="jogo-rotulo">CLASSIFICA&Ccedil;&Atilde;O DOS TIMES</p>
-          <div id="rodada-classif" class="rodada-classif"></div>
+      <!-- ABA CLASSIFICAÇÃO -->
+      <div id="aba-classif" class="rodada-aba escondida">
+        <div class="classif-wrapper">
+          <div class="classif-tabela-col">
+            <p class="jogo-rotulo">CLASSIFICA&Ccedil;&Atilde;O</p>
+            <div class="classif-tabela-head">
+              <span class="ct-pos">#</span>
+              <span class="ct-time">Time</span>
+              <span class="ct-num">P</span>
+              <span class="ct-num">J</span>
+              <span class="ct-num">V</span>
+              <span class="ct-num">E</span>
+              <span class="ct-num">D</span>
+              <span class="ct-num">SG</span>
+            </div>
+            <div id="rodada-classif" class="rodada-classif"></div>
+          </div>
+          <div class="classif-stats-col">
+            <p class="jogo-rotulo">ARTILHARIA &middot; TOP 10</p>
+            <div id="rodada-artilharia" class="rodada-stats-lista"></div>
+            <p class="jogo-rotulo" style="margin-top:1rem">ASSIST&Ecirc;NCIAS &middot; TOP 10</p>
+            <div id="rodada-assistencias" class="rodada-stats-lista"></div>
+          </div>
         </div>
+      </div>
 
-        <div class="rodada-stats-col">
-          <p class="jogo-rotulo">TABELA DE ARTILHARIA</p>
-          <div id="rodada-artilharia" class="rodada-stats-lista"></div>
-
-          <p class="jogo-rotulo" style="margin-top:1.2rem">TABELA DE ASSIST&Ecirc;NCIAS</p>
-          <div id="rodada-assistencias" class="rodada-stats-lista"></div>
-        </div>
-
-      </div><!-- /rodada-wrapper -->
+    </div><!-- /online-rodada -->
     </div><!-- /online-rodada -->
 
 

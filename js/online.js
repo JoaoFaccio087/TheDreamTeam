@@ -51,6 +51,8 @@
   var rodadaTituloEl, rodadaPartidas, btnRodadaProxima, btnRodadaFim, btnRodadaTudo;
   var autoSimular = false;
   var rodadaClassif, rodadaArtilharia, rodadaAssistencias;
+  var rodadaProximos, proximosTitulo, rodadaAguardandoHost;
+  var tabPartidas, tabClassif, abaPartidas, abaClassif;
 
   // Fim
   var onlineRankingFinal, btnNovaSala;
@@ -302,10 +304,6 @@
     poolLocal        = dados.pool || [];
     indiceTurnoAtual = dados.turnoNum ? dados.turnoNum - 1 : indiceTurnoAtual;
 
-    var nomeVez  = nomeUsuario(allPlayers[dados.userId]) || dados.nomeDoTime || dados.username || '—';
-    var ehBotVez = !!(allPlayers[dados.userId] && allPlayers[dados.userId].ehBot);
-    var tagBot   = ehBotVez ? ' <span class="draft-bot-tag">BOT</span>' : '';
-    draftTituloEl.innerHTML      = (minhaVez ? '⚡ Sua vez — ' : 'Vez de: ') + htmlEsc(nomeVez) + tagBot;
     draftSubtituloEl.textContent = 'Pick ' + (dados.turnoNum || '?') + ' / ' + (dados.totalTurnos || '?');
 
     if (minhaVez) tocarAvisoVez();
@@ -431,14 +429,143 @@
     btnRodadaProxima.classList.add('escondida');
     btnRodadaTudo.classList.add('escondida');
     btnRodadaFim.classList.add('escondida');
+    selecionarAbaRodada('partidas');
 
     subview('online-rodada');
 
-    // Emite simulação automaticamente
-    if (!simulandoRodada && socket && socket.connected) {
+    // Só o host dispara a simulação; os demais recebem o resultado por broadcast.
+    if (ehHost && socket && socket.connected) {
       simulandoRodada = true;
       socket.emit('round:simulate');
     }
+  }
+
+  // Alterna entre as abas "Partidas" e "Classificação"
+  function selecionarAbaRodada(qual) {
+    var p = qual === 'partidas';
+    if (abaPartidas) abaPartidas.classList.toggle('escondida', !p);
+    if (abaClassif)  abaClassif.classList.toggle('escondida', p);
+    if (tabPartidas) tabPartidas.classList.toggle('ativa', p);
+    if (tabClassif)  tabClassif.classList.toggle('ativa', !p);
+  }
+
+  // Card grande da partida do usuário (com placar e timeline de gols)
+  function cardPartidaGrande(m) {
+    var euCasa = String(m.homeUid) === String(meuUserId);
+    var euFora = String(m.awayUid) === String(meuUserId);
+    var res = (m.gHome === m.gAway) ? 'empate'
+            : (((euCasa && m.gHome > m.gAway) || (euFora && m.gAway > m.gHome)) ? 'vitoria' : 'derrota');
+
+    var golsHtml = '';
+    (m.fila || []).slice().sort(function (a, b) { return a.minuto - b.minuto; }).forEach(function (ev) {
+      var ladoCasa = ev.lado === 'meu';
+      var autor  = ladoCasa ? (ev.autor && ev.autor.nome)  : (ev.autorAdv && ev.autorAdv.nome);
+      var assist = ladoCasa ? (ev.assist && ev.assist.nome) : (ev.assistAdv && ev.assistAdv.nome);
+      if (!autor) return;
+      golsHtml +=
+        '<div class="pg-gol ' + (ladoCasa ? 'esq' : 'dir') + '">' +
+          '<span class="pg-min">' + ev.minuto + "'</span> " +
+          '<span class="pg-autor">⚽ ' + htmlEsc(autor) + '</span>' +
+          (assist ? '<span class="pg-assist"> (' + htmlEsc(assist) + ')</span>' : '') +
+        '</div>';
+    });
+
+    var card = document.createElement('div');
+    card.className = 'partida-grande ' + res;
+    card.innerHTML =
+      '<div class="pg-topo">' +
+        '<div class="pg-time' + (euCasa ? ' eu' : '') + '">' + htmlEsc(m.homeNome || 'Time') + (m.homeBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</div>' +
+        '<div class="pg-placar">' + m.gHome + '<span class="placar-sep"> × </span>' + m.gAway + '</div>' +
+        '<div class="pg-time dir' + (euFora ? ' eu' : '') + '">' + htmlEsc(m.awayNome || 'Time') + (m.awayBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</div>' +
+      '</div>' +
+      (golsHtml ? '<div class="pg-gols">' + golsHtml + '</div>' : '<div class="pg-gols pg-sem">Sem gols na partida</div>');
+    return card;
+  }
+
+  // Card pequeno das outras partidas
+  function cardPartidaPequena(m) {
+    var card = document.createElement('div');
+    card.className = 'partida-mini';
+    card.innerHTML =
+      '<span class="pm-time">' + htmlEsc(m.homeNome || 'Time') + (m.homeBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</span>' +
+      '<span class="pm-placar">' + m.gHome + ' × ' + m.gAway + '</span>' +
+      '<span class="pm-time dir">' + htmlEsc(m.awayNome || 'Time') + (m.awayBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</span>';
+    return card;
+  }
+
+  // Lista de próximos jogos (rodada seguinte), destacando o meu confronto
+  function renderProximos(proxima) {
+    if (!rodadaProximos) return;
+    rodadaProximos.innerHTML = '';
+    if (!proxima || !proxima.jogos || !proxima.jogos.length) {
+      if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA RODADA';
+      rodadaProximos.innerHTML = '<p style="color:#666;font-size:0.75rem;text-align:center;padding:0.6rem">Última rodada.</p>';
+      return;
+    }
+    if (proximosTitulo) proximosTitulo.textContent = 'RODADA ' + proxima.rodada;
+    proxima.jogos.forEach(function (j) {
+      var sou = String(j.homeUid) === String(meuUserId) || String(j.awayUid) === String(meuUserId);
+      var row = document.createElement('div');
+      row.className = 'prox-jogo' + (sou ? ' eu' : '');
+      row.innerHTML =
+        '<span class="pj-time">' + htmlEsc(j.homeNome || 'Time') + '</span>' +
+        '<span class="pj-x">×</span>' +
+        '<span class="pj-time dir">' + htmlEsc(j.awayNome || 'Time') + '</span>';
+      rodadaProximos.appendChild(row);
+    });
+  }
+
+  // Lista de estatística (artilharia/assistências) — nome + time abaixo
+  function renderStatsLista(el, lista, campo, sufixo) {
+    if (!el) return;
+    el.innerHTML = '';
+    (lista || []).slice(0, 10).forEach(function (p, i) {
+      var row = document.createElement('div');
+      row.className = 'stats-linha';
+      row.innerHTML =
+        '<span class="stats-pos">' + (i + 1) + '</span>' +
+        '<span class="stats-jog">' +
+          '<span class="stats-nome">' + htmlEsc(p.nome) + '</span>' +
+          '<span class="stats-time">' + htmlEsc(p.time || '') + '</span>' +
+        '</span>' +
+        '<span class="stats-valor">' + (p[campo] || 0) + sufixo + '</span>';
+      el.appendChild(row);
+    });
+  }
+
+  // Ações da rodada — só o HOST avança; os demais aguardam.
+  function atualizarAcoesRodada() {
+    btnRodadaProxima.classList.add('escondida');
+    btnRodadaTudo.classList.add('escondida');
+    btnRodadaFim.classList.add('escondida');
+    if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
+
+    if (rodadaAtual >= totalRodadas) {
+      autoSimular = false;
+      if (ehHost) {
+        btnRodadaFim.classList.remove('escondida');
+      } else if (rodadaAguardandoHost) {
+        rodadaAguardandoHost.textContent = 'Campeonato encerrado!';
+        rodadaAguardandoHost.classList.remove('escondida');
+      }
+      return;
+    }
+    if (!ehHost) {
+      if (rodadaAguardandoHost) {
+        rodadaAguardandoHost.textContent = 'Aguardando o host avançar…';
+        rodadaAguardandoHost.classList.remove('escondida');
+      }
+      return;
+    }
+    if (autoSimular) {
+      simulandoRodada = true;
+      setTimeout(function () { if (socket && socket.connected) socket.emit('round:simulate'); }, 400);
+      return;
+    }
+    btnRodadaProxima.disabled    = false;
+    btnRodadaProxima.textContent = 'Próximo jogo ▶';
+    btnRodadaProxima.classList.remove('escondida');
+    btnRodadaTudo.classList.remove('escondida');
   }
 
   // round:results — resultados da rodada
@@ -447,42 +574,19 @@
     rodadaAtual     = dados.rodada || rodadaAtual;
     rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
 
-    // Partidas
-    // Partidas (confrontos diretos) — minha partida em primeiro
-    rodadaPartidas.innerHTML = '';
+    // Partidas: card grande (usuário) + cards menores (outros) + próximos jogos
     var matches = (dados.resultados || []).slice();
-    matches.sort(function (a, b) {
-      var am = (String(a.homeUid) === String(meuUserId) || String(a.awayUid) === String(meuUserId)) ? 0 : 1;
-      var bm = (String(b.homeUid) === String(meuUserId) || String(b.awayUid) === String(meuUserId)) ? 0 : 1;
-      return am - bm;
-    });
+    var minha = null, outras = [];
     matches.forEach(function (m) {
-      var euCasa = String(m.homeUid) === String(meuUserId);
-      var euFora = String(m.awayUid) === String(meuUserId);
-      var sou = euCasa || euFora;
-      var res = '';
-      if (m.gHome === m.gAway) res = 'empate';
-      else if ((euCasa && m.gHome > m.gAway) || (euFora && m.gAway > m.gHome)) res = 'vitoria';
-      else if (sou) res = 'derrota';
-
-      var tagCasa = (m.homeBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + (euCasa ? ' <span class="draft-eu-tag">VOCÊ</span>' : '');
-      var tagFora = (m.awayBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + (euFora ? ' <span class="draft-eu-tag">VOCÊ</span>' : '');
-
-      var card = document.createElement('div');
-      card.className = 'resultado-card ' + res + (sou ? ' eu' : '');
-      card.innerHTML =
-        '<div class="resultado-lado-esq">' +
-          '<div class="resultado-jogador-nome' + (euCasa ? ' eu' : '') + '">' + htmlEsc(m.homeNome || m.homeUser || 'Time') + tagCasa + '</div>' +
-        '</div>' +
-        '<div class="resultado-placar">' + m.gHome + '<span class="placar-sep"> × </span>' + m.gAway + '</div>' +
-        '<div class="resultado-lado-dir">' +
-          '<div class="resultado-jogador-nome' + (euFora ? ' eu' : '') + '">' + htmlEsc(m.awayNome || m.awayUser || 'Time') + tagFora + '</div>' +
-        '</div>';
-      rodadaPartidas.appendChild(card);
+      if (String(m.homeUid) === String(meuUserId) || String(m.awayUid) === String(meuUserId)) minha = m;
+      else outras.push(m);
     });
+    rodadaPartidas.innerHTML = '';
+    if (minha) rodadaPartidas.appendChild(cardPartidaGrande(minha));
+    outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
+    renderProximos(dados.proxima);
 
-    // Classificação
-    // Classificação (tabela: J, SG, P)
+    // Classificação (tabela completa: P J V E D SG)
     rodadaClassif.innerHTML = '';
     (dados.classificacao || []).forEach(function (p, i) {
       var sou = String(p.userId) === String(meuUserId);
@@ -492,62 +596,25 @@
       var tagBot = p.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
       var tagEu  = sou ? ' <span class="draft-eu-tag">VOCÊ</span>' : '';
       var row = document.createElement('div');
-      row.className = 'classif-linha' + (sou ? ' eu' : '') + (i === 0 ? ' primeiro' : '');
+      row.className = 'ct-linha' + (sou ? ' eu' : '') + (i === 0 ? ' primeiro' : '');
       row.innerHTML =
-        '<span class="classif-pos">' + (i + 1) + '</span>' +
-        '<span class="classif-nome" style="flex:1">' + htmlEsc(p.nomeDoTime || p.username || '?') + tagEu + tagBot + '</span>' +
-        '<span class="classif-sg">' + jogos + 'J</span>' +
-        '<span class="classif-sg">' + (sg >= 0 ? '+' : '') + sg + '</span>' +
-        '<span class="classif-pts">' + pts + '</span>';
+        '<span class="ct-pos">' + (i + 1) + '</span>' +
+        '<span class="ct-time">' + htmlEsc(p.nomeDoTime || p.username || '?') + tagEu + tagBot + '</span>' +
+        '<span class="ct-num ct-pts">' + pts + '</span>' +
+        '<span class="ct-num">' + jogos + '</span>' +
+        '<span class="ct-num">' + (p.vitorias || 0) + '</span>' +
+        '<span class="ct-num">' + (p.empates || 0) + '</span>' +
+        '<span class="ct-num">' + (p.derrotas || 0) + '</span>' +
+        '<span class="ct-num">' + (sg >= 0 ? '+' : '') + sg + '</span>';
       rodadaClassif.appendChild(row);
     });
 
-    // Artilharia
-    rodadaArtilharia.innerHTML = '';
-    (dados.artilharia || []).slice(0, 10).forEach(function (p, i) {
-      var row = document.createElement('div');
-      row.className = 'stats-linha';
-      row.innerHTML =
-        '<span class="stats-pos">' + (i + 1) + '</span>' +
-        '<span class="stats-nome">' + htmlEsc(p.nome) + '</span>' +
-        '<span class="stats-valor">' + p.gols + 'G</span>';
-      rodadaArtilharia.appendChild(row);
-    });
+    // Artilharia / Assistências (nome do jogador + time abaixo)
+    renderStatsLista(rodadaArtilharia, dados.artilharia, 'gols', 'G');
+    renderStatsLista(rodadaAssistencias, dados.assistencias, 'assists', 'A');
 
-    // Assistências
-    rodadaAssistencias.innerHTML = '';
-    (dados.assistencias || []).slice(0, 10).forEach(function (p, i) {
-      var row = document.createElement('div');
-      row.className = 'stats-linha';
-      row.innerHTML =
-        '<span class="stats-pos">' + (i + 1) + '</span>' +
-        '<span class="stats-nome">' + htmlEsc(p.nome) + '</span>' +
-        '<span class="stats-valor">' + p.assists + 'A</span>';
-      rodadaAssistencias.appendChild(row);
-    });
-
-    // Botões de navegação
-    if (rodadaAtual >= totalRodadas) {
-      autoSimular = false;
-      btnRodadaFim.classList.remove('escondida');
-      btnRodadaProxima.classList.add('escondida');
-      btnRodadaTudo.classList.add('escondida');
-    } else if (autoSimular) {
-      // Auto-simulação: encadeia a próxima rodada sozinho.
-      btnRodadaProxima.classList.add('escondida');
-      btnRodadaTudo.classList.add('escondida');
-      btnRodadaFim.classList.add('escondida');
-      simulandoRodada = true;
-      setTimeout(function () {
-        if (socket && socket.connected) socket.emit('round:simulate');
-      }, 400);
-    } else {
-      btnRodadaProxima.disabled    = false;
-      btnRodadaProxima.textContent = 'Próxima Rodada ▶';
-      btnRodadaProxima.classList.remove('escondida');
-      btnRodadaTudo.classList.remove('escondida');
-      btnRodadaFim.classList.add('escondida');
-    }
+    // Ações da rodada (somente host avança)
+    atualizarAcoesRodada();
   }
 
   // game:end — ranking final
@@ -810,11 +877,17 @@
     });
   }
 
-  // Mostra no campo o time do jogador da vez (segue o turno, inclusive bots).
+  // Mostra no campo o time do jogador da vez (segue o turno, inclusive bots) e
+  // atualiza o HEADER "É a vez de:" — roda em todo pick, então nunca fica preso.
   function mostrarCampoDaVez(uid) {
     if (!draftCampo) return;
-    var jog = allPlayers[uid] || {};
-    var sou = String(uid) === String(meuUserId);
+    var jog   = allPlayers[uid] || {};
+    var sou   = String(uid) === String(meuUserId);
+    var ehBot = !!jog.ehBot;
+    if (draftTituloEl) {
+      var tag = ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
+      draftTituloEl.innerHTML = (sou ? '⚡ Sua vez' : 'Vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
+    }
     if (draftCampoLabel) {
       draftCampoLabel.textContent = sou ? 'Sua escalação' : ('Time de: ' + nomeUsuario(jog));
     }
@@ -1080,6 +1153,13 @@
     rodadaClassif      = document.getElementById('rodada-classif');
     rodadaArtilharia   = document.getElementById('rodada-artilharia');
     rodadaAssistencias = document.getElementById('rodada-assistencias');
+    rodadaProximos       = document.getElementById('rodada-proximos');
+    proximosTitulo       = document.getElementById('proximos-titulo');
+    rodadaAguardandoHost = document.getElementById('rodada-aguardando-host');
+    tabPartidas = document.getElementById('tab-partidas');
+    tabClassif  = document.getElementById('tab-classif');
+    abaPartidas = document.getElementById('aba-partidas');
+    abaClassif  = document.getElementById('aba-classif');
 
     // Fim
     onlineRankingFinal = document.getElementById('online-ranking-final');
@@ -1215,6 +1295,9 @@
       rodadaPartidas.innerHTML = '<p style="color:#888;text-align:center;padding:2rem">Simulando todas as rodadas…</p>';
       if (socket && socket.connected) socket.emit('round:simulate');
     });
+
+    if (tabPartidas) tabPartidas.addEventListener('click', function () { selecionarAbaRodada('partidas'); });
+    if (tabClassif)  tabClassif.addEventListener('click', function () { selecionarAbaRodada('classif'); });
 
     btnRodadaFim.addEventListener('click', function () {
       subview('online-fim');
