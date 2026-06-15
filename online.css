@@ -1,0 +1,812 @@
+/* online.css — Modo multiplayer online */
+
+/* ── Subviews ───────────────────────────────────────────────────────────── */
+#tela-online { padding: 0; }
+.online-subview           { display: block; }
+.online-subview.escondida { display: none; }
+
+/* O modo online ocupa a página inteira. O .tela base (mobile-first) centraliza
+   vertical e horizontalmente e encolhe o conteúdo — por isso o lobby ficava
+   "pequenininho" no meio da tela. Aqui alinhamos ao topo e damos uma largura
+   confortável pro layout de 3 colunas respirar. */
+#tela-online {
+  justify-content: flex-start;
+  padding: 28px 16px 48px;
+}
+.online-subview {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Respiro entre a linha do header e o conteúdo (vale pra todas as telas online) */
+#tela-online .jogo-header-linha { margin-bottom: 1.9rem; }
+
+/* ── Campo de futebol (compartilhado por lobby / draft / elencos) ────────── */
+.campo-jogo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px;
+  border: 2px solid rgba(255,255,255,0.28);
+  overflow: visible;
+  background: repeating-linear-gradient(
+    to bottom,
+    #2a8018 0px, #2a8018 30px,
+    #309120 30px, #309120 60px
+  );
+}
+
+.campo-linha-meio {
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 2px;
+  background: rgba(255,255,255,0.25);
+}
+.campo-circulo {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 28%; aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  transform: translate(-50%,-50%);
+}
+.campo-area {
+  position: absolute;
+  left: 50%;
+  width: 55%; height: 20%;
+  border: 2px solid rgba(255,255,255,0.2);
+  transform: translateX(-50%);
+}
+.campo-area-ataque  { top: 0;    border-top: none; }
+.campo-area-defesa  { bottom: 0; border-bottom: none; }
+
+/* Slot no campo online */
+.slot-ol {
+  position: absolute;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,255,255,0.4);
+  background: rgba(0,0,0,0.28);
+  color: rgba(255,255,255,0.6);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.55rem;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  transform: translate(-50%,-50%);
+  transition: left 0.4s ease, top 0.4s ease;
+}
+.slot-ol.preenchido {
+  border-style: solid;
+  border-color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.9);
+  color: #1A1813;
+  font-size: 0.6rem;
+  font-weight: 700;
+  flex-direction: column;
+  gap: 1px;
+}
+.slot-ol .slot-ol-forca {
+  font-size: 0.6rem;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  color: #444;
+  line-height: 1;
+}
+.slot-ol .slot-nome {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 3px;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Vaga ABERTA e VÁLIDA para o jogador selecionado (clicável e pulsando) */
+.slot-ol.vaga-valida {
+  border-style: solid;
+  border-color: #D9B25A;
+  background: rgba(217,178,90,0.18);
+  color: #f4e6c5;
+  cursor: pointer;
+  animation: vagaPulsa 1.1s ease-in-out infinite;
+}
+.slot-ol.vaga-valida:hover { background: rgba(217,178,90,0.32); }
+.slot-ol.vaga-selecionada {
+  border-style: solid;
+  border-color: #2BD46A;
+  background: rgba(43,212,106,0.55);
+  color: #06210F;
+  cursor: pointer;
+  animation: none;
+  box-shadow: 0 0 0 3px rgba(43,212,106,0.45), 0 0 18px rgba(43,212,106,0.6);
+}
+@keyframes vagaPulsa {
+  0%,100% { box-shadow: 0 0 0 3px rgba(217,178,90,0.22), 0 0 10px rgba(217,178,90,0.35); }
+  50%     { box-shadow: 0 0 0 4px rgba(217,178,90,0.38), 0 0 16px rgba(217,178,90,0.55); }
+}
+/* Jogador já escalado que está sendo remanejado (vaga de origem) */
+#draft-campo .slot-ol.preenchido { cursor: pointer; }
+.slot-ol.vaga-origem {
+  cursor: pointer;
+  box-shadow: 0 0 0 3px #2BD46A, 0 0 16px rgba(43,212,106,0.75);
+  filter: brightness(1.12);
+}
+/* Slot recém-adicionado */
+.slot-ol.novo {
+  animation: slotNovo 0.35s ease;
+}
+@keyframes slotNovo {
+  from { transform: translate(-50%,-50%) scale(0.5); opacity: 0; }
+  to   { transform: translate(-50%,-50%) scale(1);   opacity: 1; }
+}
+
+/* ── Botão "Jogar Online" (home) ────────────────────────────────────────── */
+.btn-jogar-online {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.6rem 1.4rem;
+  border: 1.5px solid rgba(217,178,90,0.45);
+  border-radius: 8px;
+  background: transparent;
+  color: #D9B25A;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+.btn-jogar-online:hover {
+  background: rgba(217,178,90,0.1);
+  border-color: #D9B25A;
+}
+
+/* ── Modal Online (criar/entrar) ────────────────────────────────────────── */
+.modal-online-card {
+  background: #1c1c1c;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 2rem 1.8rem 1.6rem;
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-online-cols {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  margin: 1.2rem 0 0.8rem;
+  align-items: start;
+}
+.modal-online-lado {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.modal-online-h3 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.88rem;
+  color: #ccc;
+  margin: 0;
+}
+.modal-online-rotulo {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: #666;
+  text-transform: uppercase;
+}
+.modal-online-codigo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.modal-codigo-display-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.modal-codigo-display {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  color: #D9B25A;
+  letter-spacing: 0.35em;
+  line-height: 1;
+}
+.btn-copiar {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+.btn-copiar:hover { color: #D9B25A; border-color: #D9B25A; }
+.modal-online-divisor {
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  min-height: 80px;
+  align-self: stretch;
+}
+
+/* ── LOBBY ──────────────────────────────────────────────────────────────── */
+.lobby-wrapper {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 480px) 260px;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: 0 0 2rem;
+  align-items: start;
+}
+
+/* Colunas esquerda e direita viram "cards" escuros */
+.lobby-esq,
+.lobby-dir {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.lobby-centro { display: flex; flex-direction: column; gap: 0.55rem; }
+
+.lobby-input {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: #f4f6f8;
+  font-size: 0.9rem;
+  font-family: 'Archivo', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.lobby-input:focus { border-color: #D9B25A; }
+
+/* Rótulos do lobby colados no campo/seleções (o gap da coluna já dá o respiro) */
+.lobby-esq .jogo-rotulo { margin-bottom: 0; }
+
+/* Código da sala — bem visível, com cara de "somente leitura" + botão copiar */
+.lobby-codigo-box {
+  background: rgba(217,178,90,0.08);
+  border: 1px solid rgba(217,178,90,0.3);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.lobby-codigo-rotulo {
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  color: #b89a52;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+}
+.lobby-codigo-linha { display: flex; align-items: center; gap: 0.5rem; }
+.lobby-codigo {
+  flex: 1;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.22em;
+  color: #D9B25A;
+  line-height: 1;
+  user-select: all;
+}
+.lobby-codigo-copiar {
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(217,178,90,0.14);
+  border: 1px solid rgba(217,178,90,0.3);
+  border-radius: 7px;
+  color: #D9B25A;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.lobby-codigo-copiar:hover { background: rgba(217,178,90,0.25); }
+.lobby-codigo-copiar .sala-copiar-ico { width: 15px; height: 15px; }
+
+/* Botões de ação ocupam a largura do card */
+.lobby-esq .btn-rolar,
+.lobby-esq .btn-secundario { width: 100%; }
+.lobby-esq #btn-lobby-pronto { margin-top: 0.5rem; }
+
+/* Cabeçalho da coluna de jogadores: rótulo + contador "X/N prontos" */
+.lobby-dir-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.lobby-prontos {
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  color: #D9B25A;
+  background: rgba(217,178,90,0.12);
+  border-radius: 20px;
+  padding: 0.22rem 0.6rem;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.lobby-box-score { display: flex; flex-direction: column; gap: 0.45rem; }
+.lobby-jogador-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.6rem;
+  background: rgba(0,0,0,0.22);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 9px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.lobby-jogador-row.pronto { border-color: rgba(93,190,122,0.45); }
+.lobby-jogador-row.ativo  { background: rgba(217,178,90,0.06); border-color: rgba(217,178,90,0.4); }
+.lobby-jog-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(217,178,90,0.16);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.72rem; color: #D9B25A;
+  flex-shrink: 0;
+}
+.lobby-jog-info { flex: 1; min-width: 0; }
+.lobby-jog-nome {
+  font-size: 0.8rem; font-weight: 600; color: #eaeef2;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.lobby-jog-detalhe { font-size: 0.62rem; color: #8a909a; }
+.lobby-jog-badge {
+  font-size: 0.54rem; letter-spacing: 0.07em; font-weight: 700;
+  border-radius: 20px; padding: 0.2rem 0.5rem; flex-shrink: 0;
+}
+.lobby-jog-badge.pronto     { color: #5dbe7a; background: rgba(93,190,122,0.14); }
+.lobby-jog-badge.aguardando { color: #8a909a; background: rgba(255,255,255,0.06); }
+
+/* ── DRAFT ──────────────────────────────────────────────────────────────── */
+.draft-wrapper {
+  display: grid;
+  grid-template-columns: 420px 300px;
+  justify-content: center;
+  gap: 1.6rem;
+  padding: 0 0 0.8rem;
+  align-items: start;
+}
+.draft-campo-col { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
+.draft-info-col  { display: flex; flex-direction: column; gap: 0.8rem; padding-top: 0.2rem; }
+
+.draft-ordem-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 470px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.16) transparent;
+}
+.draft-ordem-lista::-webkit-scrollbar { width: 6px; }
+.draft-ordem-lista::-webkit-scrollbar-track { background: transparent; }
+.draft-ordem-lista::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+.draft-ordem-lista::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+
+/* Tag "BOT" pequena depois do nome do time */
+.draft-bot-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #8a8f98;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 1px 4px;
+  margin-left: 5px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+#draft-titulo .draft-bot-tag { font-size: 0.8rem; }
+.draft-ordem-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.8rem;
+  color: #888;
+}
+.draft-ordem-item.ativo {
+  border-color: rgba(217,178,90,0.4);
+  color: #D9B25A;
+  font-weight: 700;
+  background: rgba(217,178,90,0.07);
+}
+.draft-ordem-item.eu { color: #ccc; }
+.draft-ordem-picks {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+.draft-timer-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+.draft-timer-bar-bg {
+  flex: 1;
+  height: 5px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.draft-timer-bar {
+  height: 100%;
+  width: 100%;
+  background: #D9B25A;
+  border-radius: 3px;
+  transition: width 1s linear, background 0.3s;
+}
+.draft-timer-bar.urgente { background: #e87070; }
+.draft-timer-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.9rem;
+  color: #D9B25A;
+  min-width: 22px;
+  text-align: right;
+}
+
+/* Carousel */
+.draft-carousel-wrap {
+  max-width: 950px;
+  margin: 0.4rem auto 0;
+  padding: 1rem 1.2rem 1.4rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.draft-carousel-label {
+  font-weight: 700;
+  color: #D9B25A;
+  font-size: 0.82rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+.draft-carousel-outer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+.draft-carousel {
+  display: flex;
+  gap: 0.6rem;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+/* Setas removidas: mostramos 6 cards sorteados, sem rolagem */
+.draft-arrow { display: none; }
+.draft-card {
+  flex: 0 0 140px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 0.75rem 0.65rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+  min-height: 100px;
+  display: flex; flex-direction: column; gap: 0.25rem; align-items: center; justify-content: center;
+}
+.draft-card:hover      { border-color: rgba(217,178,90,0.3); background: rgba(217,178,90,0.05); }
+.draft-card.selecionado {
+  border-color: #D9B25A;
+  background: rgba(217,178,90,0.1);
+}
+.draft-card-nome  { font-weight: 700; font-size: 0.82rem; color: #e0e0e0; }
+.draft-card-clube { font-size: 0.65rem; color: #888; }
+.draft-card-pos   { font-size: 0.65rem; color: #D9B25A; }
+.draft-card-forca {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* ── ELENCOS ────────────────────────────────────────────────────────────── */
+.elencos-wrapper {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.2rem;
+  padding: 0 1.2rem 2rem;
+  align-items: start;
+}
+.elencos-esq  { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.2rem; }
+.elencos-campo-col { display: flex; flex-direction: column; gap: 0.6rem; align-items: center; }
+.elencos-users-lista { display: flex; flex-direction: column; gap: 0.4rem; }
+.elencos-user-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.elencos-user-row:hover,
+.elencos-user-row.ativo { border-color: rgba(217,178,90,0.35); }
+.elencos-forca {
+  font-size: 0.8rem;
+  color: #aaa;
+  text-align: center;
+  margin: 0;
+}
+/* Mapa de elencos menor + força pequena logo abaixo do nome do time */
+.elencos-campo-col #elencos-campo-label { order: 1; margin-bottom: 0.15rem; }
+.elencos-campo-col .elencos-forca        { order: 2; margin: 0 0 0.5rem; font-size: 0.72rem; color: #8a8a8a; }
+.elencos-campo-col #elencos-campo        { order: 3; max-width: 320px; }
+
+/* ── RODADA ─────────────────────────────────────────────────────────────── */
+.rodada-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 220px 220px;
+  gap: 1.2rem;
+  padding: 0 1.2rem 2rem;
+  align-items: start;
+}
+.rodada-partidas-col { display: flex; flex-direction: column; gap: 0.7rem; }
+.rodada-acoes        { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.rodada-classif-col  { display: flex; flex-direction: column; gap: 0.5rem; }
+.rodada-stats-col    { display: flex; flex-direction: column; gap: 0.5rem; }
+
+/* Card de partida */
+.resultado-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.8rem;
+}
+.resultado-card.eu      { border-color: rgba(217,178,90,0.28); }
+.resultado-card.vitoria .resultado-placar { color: #5dbe7a; }
+.resultado-card.derrota .resultado-placar { color: #e87070; }
+.resultado-card.empate  .resultado-placar { color: #D9B25A; }
+
+.resultado-lado-esq { display: flex; flex-direction: column; gap: 0.12rem; }
+.resultado-lado-dir { display: flex; flex-direction: column; gap: 0.12rem; text-align: right; }
+.resultado-jogador-nome { font-weight: 700; font-size: 0.8rem; color: #ccc; }
+.resultado-jogador-nome.eu { color: #D9B25A; }
+.resultado-clube-nome   { font-size: 0.66rem; color: #666; }
+.resultado-placar {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.4rem; color: #ddd;
+  text-align: center; white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.placar-sep { font-size: 0.9rem; color: #555; margin: 0 0.18rem; }
+
+/* Classificação */
+.rodada-classif {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.classif-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.75rem;
+  color: #bbb;
+}
+.classif-linha.eu      { border-color: rgba(217,178,90,0.25); color: #D9B25A; }
+.classif-linha.primeiro { background: rgba(217,178,90,0.07); }
+.classif-pos  { font-family: 'Archivo Black', sans-serif; min-width: 18px; color: #666; font-size: 0.75rem; }
+.classif-nome { flex: 1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.classif-pts  { font-family: 'Archivo Black', sans-serif; font-size: 0.8rem; color: #D9B25A; }
+.classif-sg   { font-size: 0.65rem; color: #666; min-width: 28px; text-align: right; }
+
+/* Tabela de stats */
+.rodada-stats-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.stats-linha {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.025);
+  font-size: 0.72rem;
+}
+.stats-pos   { font-size: 0.65rem; color: #555; min-width: 16px; }
+.stats-nome  { flex: 1; color: #ccc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stats-valor { font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; color: #D9B25A; }
+
+/* ── FIM ────────────────────────────────────────────────────────────────── */
+.online-ranking-final { margin: 1rem 1.2rem 1.5rem; }
+.ranking-final-linha {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.75rem 1rem; border-radius: 10px; margin-bottom: 0.45rem;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+}
+.ranking-final-linha.primeiro {
+  background: rgba(217,178,90,0.07); border-color: rgba(217,178,90,0.2);
+}
+.ranking-pos          { font-family: 'Archivo Black', sans-serif; font-size: 1rem; color: #666; min-width: 26px; }
+.ranking-pos.primeiro { color: #D9B25A; }
+.ranking-nome         { font-weight: 600; color: #e0e0e0; flex: 1; font-size: 0.88rem; }
+.ranking-nome.eu      { color: #D9B25A; }
+.ranking-time         { font-size: 0.7rem; color: #777; }
+.ranking-pts          { font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; color: #D9B25A; min-width: 44px; text-align: right; }
+.ranking-stats        { font-size: 0.68rem; color: #666; white-space: nowrap; }
+
+/* ── Responsivo ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .lobby-wrapper  { grid-template-columns: 200px 1fr 190px; gap: 0.8rem; }
+  .rodada-wrapper { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .lobby-wrapper   { grid-template-columns: 1fr; padding: 0 0.8rem 2rem; }
+  .lobby-centro    { order: -1; }
+  .draft-wrapper   { grid-template-columns: 1fr; }
+  .elencos-wrapper { grid-template-columns: 1fr; }
+  .modal-online-cols { grid-template-columns: 1fr; }
+  .modal-online-divisor { width: 100%; height: 1px; min-height: 0; }
+  .resultado-card  { grid-template-columns: 1fr; text-align: center; }
+  .resultado-lado-dir { text-align: left; }
+}
+
+/* ============================================================
+   Modal de sala online — visual da maquete (igual ao da home antiga)
+   ============================================================ */
+.sala-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.sala-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.66);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.sala-card {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background: #14161C;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  padding: 26px 28px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+}
+.sala-fechar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--txt-soft);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.sala-fechar:hover { color: var(--txt); background: rgba(255, 255, 255, 0.06); }
+
+.sala-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 22px;
+  margin-top: 8px;
+}
+.sala-divisor { background: var(--linha); }
+
+.sala-col-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.05rem;
+  color: var(--txt);
+  margin-bottom: 14px;
+}
+
+.sala-rotulo {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--txt-soft);
+  margin: 12px 0 6px;
+}
+
+.sala-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  color: var(--txt);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.9rem;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.sala-input::placeholder { color: var(--txt-soft); }
+.sala-input:focus { border-color: var(--accent); }
+
+.sala-codigo-wrap { display: flex; gap: 8px; }
+.sala-codigo {
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 1px;
+  flex: 1;
+}
+.sala-copiar {
+  flex: 0 0 auto;
+  width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--linha);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--txt);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.sala-copiar:hover { border-color: var(--accent); color: var(--accent); }
+.sala-copiar-ico { width: 17px; height: 17px; }
+
+.sala-velocidade { margin-bottom: 4px; }
+
+.sala-acao {
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* Celular: empilha as duas colunas e esconde o divisor vertical */
+@media (max-width: 560px) {
+  .sala-colunas { grid-template-columns: 1fr; gap: 8px; }
+  .sala-divisor { display: none; }
+}

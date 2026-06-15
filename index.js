@@ -1,0 +1,672 @@
+// socket/index.js — servidor Socket.IO completo
+
+const { Server }   = require('socket.io');
+const jwt          = require('jsonwebtoken');
+const db           = require('../db');
+const loader       = require('../dados/loader');
+const { criarSala, getSala, deleteSala } = require('./salaState');
+const { simularPartida } = require('./simulacao');
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Gera a ordem snake para N jogadores × rounds de picks
+function gerarOrdemSnake(ids, rounds) {
+  const ordem = [];
+  const base  = [...ids];
+  for (let r = 0; r < rounds; r++) {
+    ordem.push(...(r % 2 === 0 ? base : [...base].reverse()));
+  }
+  return ordem;
+}
+
+// ── Bots (times da máquina que completam a liga até 20) ────────────────────────
+
+const TOTAL_TIMES    = 20;
+const BOT_PICK_DELAY = 400;   // ms entre escolhas de bot (visível: a vez passa 1 a 1)
+const NOMES_BOTS = [
+  'Tigres FC','Albatroz EC','Furacão Azul','Leões do Vale','Raio Verde',
+  'Inter Estelar','Dragões FC','Cometa SC','Falcões Real','União Atlética',
+  'Trovão EC','Pantera Negra','Águias Douradas','Vendaval FC','Lobo Cinza',
+  'Corsário SC','Meteoro FC','Bisões FC','Titãs do Norte','Cobras Reais',
+  'Sentinela FC','Vulcano EC','Nova Aurora','Imperial SC','Bravos FC',
+];
+const FORMACOES_BOT = ['4-3-3','4-4-2','3-5-2','4-2-3-1','4-3-2-1','4-5-1','3-4-3','4-1-2-1-2'];
+
+function gerarBots(qtd, nomesUsados) {
+  const disp = shuffle(NOMES_BOTS.filter(n => !nomesUsados.includes(n)));
+  const bots = [];
+  for (let i = 0; i < qtd; i++) {
+    const nome = disp[i] || ('Bot FC ' + (i + 1));
+    bots.push({
+      userId:     -(i + 1),               // ids negativos nunca colidem com humanos
+      username:   nome,
+      nomeDoTime: nome,
+      formacao:   FORMACOES_BOT[Math.floor(Math.random() * FORMACOES_BOT.length)],
+      socketId:   null,
+      conectado:  false,
+      picks:      [],
+      pronto:     true,
+      ehBot:      true,
+    });
+  }
+  return bots;
+}
+
+// ── Posições: códigos por vaga (mesma fonte do front) + elegibilidade ─────────
+const CODIGOS_FORMACAO = {
+  '4-3-3':    ['GOL','LE','ZAG','ZAG','LD','MC','MEI','MC','PE','ATA','PD'],
+  '4-4-2':    ['GOL','LE','ZAG','ZAG','LD','ME','MC','MC','MD','ATA','ATA'],
+  '4-2-3-1':  ['GOL','LE','ZAG','ZAG','LD','VOL','VOL','PE','MEI','PD','ATA'],
+  '3-5-2':    ['GOL','ZAG','ZAG','ZAG','ME','MC','MEI','MC','MD','ATA','ATA'],
+  '4-3-2-1':  ['GOL','LE','ZAG','ZAG','LD','VOL','MC','MC','MEI','MEI','ATA'],
+  '4-5-1':    ['GOL','LE','ZAG','ZAG','LD','VOL','MC','MC','ME','MD','ATA'],
+  '3-4-3':    ['GOL','ZAG','ZAG','ZAG','VOL','MC','MC','MEI','PE','ATA','PD'],
+  '4-1-2-1-2':['GOL','LE','ZAG','ZAG','LD','VOL','ME','MD','MEI','ATA','ATA'],
+};
+function codigosDaFormacao(formacao) { return CODIGOS_FORMACAO[formacao] || CODIGOS_FORMACAO['4-3-3']; }
+function codigosAceitos(cod) { const m = { ME: ['ME','PE'], MD: ['MD','PD'] }; return m[cod] || [cod]; }
+function podeOcupar(jogador, cod) {
+  const ok = codigosAceitos(cod);
+  return (jogador.posicoes || []).some(p => ok.indexOf(p) >= 0);
+}
+
+// Escolha "equilibrada" a partir de uma lista: bons jogadores, mas com variação.
+function escolherPickBotDe(fonte) {
+  if (!fonte.length) return null;
+  const ord  = fonte.slice().sort((a, b) => (b.forca || 70) - (a.forca || 70));
+  const topo = ord.slice(0, Math.min(50, ord.length));
+  let total = 0;
+  const pesos = topo.map(p => { const f = (p.forca || 70); const w = f * f; total += w; return w; });
+  let r = Math.random() * total, acum = 0;
+  for (let i = 0; i < topo.length; i++) { acum += pesos[i]; if (r <= acum) return topo[i]; }
+  return topo[topo.length - 1];
+}
+
+// Coloca um jogador na 1ª vaga ABERTA e VÁLIDA da formação (bots e auto-pick por timeout).
+function colocarEmVagaAberta(io, sala, jogador, ehBot) {
+  const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
+  jogador.picks = jogador.picks || [];
+  let slotIdx = -1;
+  for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) { slotIdx = i; break; } }
+  if (slotIdx === -1) return;
+  const cod       = codigos[slotIdx];
+  const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, cod));
+  const picked    = escolherPickBotDe(elegiveis.length ? elegiveis : sala.poolDisponivel);
+  if (!picked) return;
+  const idx = sala.poolDisponivel.indexOf(picked);
+  if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
+  jogador.picks[slotIdx] = picked;
+  io.to(sala.codigo).emit('draft:pick', {
+    userId:     jogador.userId,
+    username:   jogador.username,
+    nomeDoTime: jogador.nomeDoTime,
+    jogador:    picked,
+    slotIndex:  slotIdx,
+    numPicks:   jogador.picks.filter(Boolean).length,
+    timeout:    !ehBot,
+    ehBot:      !!ehBot,
+  });
+}
+function botEscolhe(io, sala, jogador) { colocarEmVagaAberta(io, sala, jogador, true); }
+
+function buildRoomState(sala) {
+  const prontos = sala.jogadores.filter(j => j.pronto).length;
+  return {
+    codigo:     sala.codigo,
+    status:     sala.status,
+    hostUserId: sala.hostUserId,
+    competicao: sala.competicao,
+    prontos,
+    total:      sala.jogadores.length,
+    jogadores:  sala.jogadores.map(j => ({
+      userId:    j.userId,
+      username:  j.username,
+      nomeDoTime: j.nomeDoTime,
+      formacao:  j.formacao  || '4-3-3',
+      conectado: j.conectado,
+      pronto:    j.pronto,
+      ehBot:     !!j.ehBot,
+      guest:     !!j.guest,
+      picks:     j.picks     || [],
+      numPicks:  (j.picks    || []).filter(Boolean).length,
+    })),
+  };
+}
+
+function buildRanking(sala) {
+  return sala.jogadores
+    .map(j => ({
+      userId:    j.userId,
+      username:  j.username,
+      nomeDoTime: j.nomeDoTime,
+      formacao:  j.formacao  || '4-3-3',
+      picks:     j.picks     || [],
+      ...(sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0, campeao:false }),
+    }))
+    .sort((a, b) => {
+      const ptA = a.vitorias * 3 + a.empates;
+      const ptB = b.vitorias * 3 + b.empates;
+      if (ptA !== ptB) return ptB - ptA;
+      return (b.gf - b.ga) - (a.gf - a.ga);
+    });
+}
+
+function determinarCampeao(sala) {
+  return sala.jogadores.reduce((melhor, j) => {
+    const s  = sala.resultados[j.userId];
+    if (!s) return melhor;
+    const pts = s.vitorias * 3 + s.empates;
+    const sg  = s.gf - s.ga;
+    if (!melhor) return { j, pts, sg };
+    if (pts > melhor.pts || (pts === melhor.pts && sg > melhor.sg)) return { j, pts, sg };
+    return melhor;
+  }, null)?.j || null;
+}
+
+function codigosAceitosServidor(codigo) {
+  const mapa = { 'ME': ['ME','PE','MC','MEI'], 'MD': ['MD','PD','MC','MEI'] };
+  return mapa[codigo] || [codigo];
+}
+
+// ── Turno de Draft ─────────────────────────────────────────────────────────────
+
+function iniciarTurno(io, sala) {
+  if (sala.indiceTurno >= sala.ordemDraft.length) return;
+  const userId  = sala.ordemDraft[sala.indiceTurno];
+  const jogador = sala.jogadores.find(j => j.userId === userId);
+
+  // Vez de um BOT: anuncia a vez (para o marcador andar 1 a 1) e escolhe após um instante.
+  if (jogador && jogador.ehBot) {
+    io.to(sala.codigo).emit('draft:turno', {
+      userId:      jogador.userId,
+      username:    jogador.username,
+      nomeDoTime:  jogador.nomeDoTime,
+      ehBot:       true,
+      segundos:    0,
+      pool:        [],
+      turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
+      totalTurnos: sala.totalPicksNecessarios,
+      numPicks:    (jogador.picks || []).filter(Boolean).length,
+    });
+    sala.timerDraft = setTimeout(() => {
+      botEscolhe(io, sala, jogador);
+      avancarTurno(io, sala);
+    }, BOT_PICK_DELAY);
+    return;
+  }
+
+  const pool50  = sala.poolDisponivel.slice(0, 120);  // janela ampla → cobre todas as posições
+
+  io.to(sala.codigo).emit('draft:turno', {
+    userId,
+    username:    jogador?.username,
+    nomeDoTime:  jogador?.nomeDoTime,
+    segundos:    30,
+    pool:        pool50,
+    turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
+    totalTurnos: sala.totalPicksNecessarios,
+    numPicks:    (jogador?.picks || []).filter(Boolean).length,
+  });
+
+  if (jogador?.socketId) {
+    io.to(jogador.socketId).emit('draft:yourTurn', { pool: pool50 });
+  }
+
+  sala.timerDraft = setTimeout(() => {
+    if (jogador) colocarEmVagaAberta(io, sala, jogador, false);  // auto-aloca em vaga válida
+    avancarTurno(io, sala);
+  }, 30_000);
+}
+
+function avancarTurno(io, sala) {
+  if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+  sala.indiceTurno++;
+
+  const total  = sala.totalPicksNecessarios || 11;
+  const semPick = sala.jogadores.filter(j => (j.picks || []).filter(Boolean).length < total);
+
+  if (!semPick.length) {
+    sala.status = 'ready';
+    sala.jogadores.forEach(j => { j.pronto = !!j.ehBot; });
+    io.to(sala.codigo).emit('draft:complete', {
+      jogadores: sala.jogadores.map(j => ({
+        userId:    j.userId,
+        username:  j.username,
+        nomeDoTime: j.nomeDoTime,
+        formacao:  j.formacao || '4-3-3',
+        picks:     j.picks    || [],
+      })),
+    });
+    return;
+  }
+
+  iniciarTurno(io, sala);
+}
+
+// ── Setup principal ─────────────────────────────────────────────────────────────
+
+function setupSocket(server, frontendUrl) {
+  // Mesma lógica de CORS do HTTP: lista separada por vírgula, ou '*' em dev.
+  const origens = (frontendUrl || '*').split(',').map(s => s.trim()).filter(Boolean);
+  const corsOrigin = frontendUrl === '*'
+    ? true
+    : function (origin, cb) {
+        if (!origin || origens.includes(origin)) return cb(null, true);
+        return cb(new Error('Origem não permitida'));
+      };
+
+  const io = new Server(server, {
+    cors: {
+      origin:      corsOrigin,
+      credentials: true,
+    },
+  });
+
+  // Autenticação JWT no handshake
+  io.use((socket, next) => {
+    const token = socket.handshake.auth?.token;
+    if (!token) return next(new Error('Token requerido'));
+    try {
+      socket.user = jwt.verify(token, process.env.JWT_SECRET);
+      next();
+    } catch {
+      next(new Error('Token inválido'));
+    }
+  });
+
+  io.on('connection', socket => {
+    const { id: userId, username } = socket.user;
+
+    // ── room:join ─────────────────────────────────────────────────────────────
+    socket.on('room:join', async ({ codigo }) => {
+      if (!codigo) return socket.emit('erro', 'Código inválido');
+      const code = codigo.toUpperCase();
+
+      try {
+        const { rows: [roomDB] } = await db.query(
+          'SELECT * FROM rooms WHERE codigo = $1', [code]
+        );
+        if (!roomDB) return socket.emit('erro', 'Sala não encontrada');
+
+        const { rows: [user] } = await db.query(
+          'SELECT nome_do_time FROM users WHERE id = $1', [userId]
+        );
+
+        let sala = getSala(code);
+        if (!sala) sala = criarSala(code, roomDB.host_user_id || userId, roomDB.competicao);
+
+        let jogador = sala.jogadores.find(j => j.userId === userId);
+        if (!jogador) {
+          // Novo entrante: só entra se a sala está no lobby e não está cheia.
+          // (Reconexão de quem já está na sala cai no 'else' e é sempre permitida.)
+          if (sala.status !== 'lobby') return socket.emit('erro', 'A partida já começou');
+          if (sala.jogadores.length >= 20) return socket.emit('erro', 'Sala cheia (máx. 20)');
+          jogador = {
+            userId,
+            username,
+            nomeDoTime: user?.nome_do_time || 'Seu time',
+            formacao:   '4-3-3',
+            socketId:   socket.id,
+            conectado:  true,
+            picks:      [],
+            pronto:     false,
+            guest:      !!socket.user.guest,
+          };
+          sala.jogadores.push(jogador);
+        } else {
+          jogador.socketId  = socket.id;
+          jogador.conectado = true;
+        }
+
+        socket.join(code);
+        socket.salaAtual = code;
+        io.to(code).emit('room:state', buildRoomState(sala));
+      } catch (err) {
+        console.error('[socket room:join]', err);
+        socket.emit('erro', 'Erro ao entrar na sala');
+      }
+    });
+
+    // ── lobby:config — jogador configura time e vota pronto ───────────────────
+    socket.on('lobby:config', ({ nomeDoTime, formacao }) => {
+      const code = socket.salaAtual;
+      if (!code) return;
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'lobby') return;
+
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog) return;
+
+      jog.nomeDoTime = (nomeDoTime || jog.nomeDoTime || 'Meu Time').trim().slice(0, 30);
+      jog.formacao   = formacao   || '4-3-3';
+      jog.pronto     = true;
+
+      io.to(code).emit('room:state', buildRoomState(sala));
+    });
+
+    // ── room:start — host inicia o draft (todos devem estar prontos) ──────────
+    socket.on('room:start', () => {
+      const code = socket.salaAtual;
+      if (!code) return socket.emit('erro', 'Não está em nenhuma sala');
+
+      const sala = getSala(code);
+      if (!sala)                     return socket.emit('erro', 'Sala não encontrada');
+      if (sala.hostUserId !== userId) return socket.emit('erro', 'Apenas o host pode iniciar');
+      if (sala.status !== 'lobby')   return socket.emit('erro', 'Draft já iniciado');
+
+      const todosProntos = sala.jogadores.length >= 1 && sala.jogadores.every(j => j.pronto);
+      if (!todosProntos) return socket.emit('erro', 'Todos os jogadores precisam estar prontos');
+
+      try {
+      // Carrega pool de jogadores a partir dos arquivos estáticos (sem DB)
+      const todosJogadores = loader.getPoolPorCompeticao(sala.competicao);
+      if (!todosJogadores.length) {
+        return socket.emit('erro', `Sem jogadores para a competição: ${sala.competicao}`);
+      }
+
+      // Completa a liga até 20 times com bots (máquina) — 1 humano → 19 bots, etc.
+      const faltam = Math.max(0, TOTAL_TIMES - sala.jogadores.length);
+      if (faltam > 0) {
+        const usados = sala.jogadores.map(j => j.nomeDoTime).filter(Boolean);
+        sala.jogadores.push(...gerarBots(faltam, usados));
+      }
+      io.to(code).emit('room:state', buildRoomState(sala));
+
+      // Remove nomes repetidos do pool (mantém a melhor edição de cada jogador),
+      // como no draft padrão — nada de "Pelé 1962" e "Pelé 1964" na mesma lista.
+      const porNome = new Map();
+      for (const j of todosJogadores) {
+        const ex = porNome.get(j.nome);
+        if (!ex || (j.forca || 70) > (ex.forca || 70)) porNome.set(j.nome, j);
+      }
+      const unicos = [...porNome.values()];
+
+      // Pool: amostra de 600 (nomes únicos), ordenada por força (melhores primeiro).
+      const pool = shuffle(unicos).slice(0, 600)
+                     .sort((a, b) => (b.forca || 70) - (a.forca || 70));
+
+      // Reinicia picks; humanos voltam a "não pronto", bots seguem prontos.
+      sala.jogadores.forEach(j => { j.picks = []; j.pronto = !!j.ehBot; });
+
+      const baseOrder      = shuffle(sala.jogadores.map(j => j.userId));
+      sala.poolDisponivel  = pool;
+      sala.ordemDraft      = gerarOrdemSnake(baseOrder, sala.totalPicksNecessarios);
+      sala.indiceTurno     = 0;
+      sala.status          = 'draft';
+
+      io.to(code).emit('room:playerOrder', {
+        ordem:       baseOrder,
+        nomes:       baseOrder.map(id => sala.jogadores.find(j => j.userId === id)?.username),
+        totalTurnos: sala.totalPicksNecessarios,
+      });
+      iniciarTurno(io, sala);
+      } catch (err) {
+        console.error('Erro em room:start:', err);
+        socket.emit('erro', 'Erro ao iniciar o draft. Tente novamente.');
+      }
+    });
+
+    // ── draft:pick — jogador escolhe um player individual ─────────────────────
+    socket.on('draft:pick', ({ playerId, slotIndex }) => {
+      const code = socket.salaAtual;
+      if (!code) return;
+
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'draft') return;
+      if (sala.ordemDraft[sala.indiceTurno] !== userId)
+        return socket.emit('erro', 'Não é sua vez');
+
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog) return;
+      jog.picks = jog.picks || [];
+
+      const codigos = codigosDaFormacao(jog.formacao || '4-3-3');
+      const slot    = Number(slotIndex);
+      if (!(slot >= 0 && slot < codigos.length))
+        return socket.emit('erro', 'Posição inválida');
+      if (jog.picks[slot])
+        return socket.emit('erro', 'Posição já preenchida');
+
+      const idx = sala.poolDisponivel.findIndex(p => p.id === playerId);
+      if (idx === -1) return socket.emit('erro', 'Jogador não disponível');
+      if (!podeOcupar(sala.poolDisponivel[idx], codigos[slot]))
+        return socket.emit('erro', 'Jogador não joga nessa posição');
+
+      const [picked] = sala.poolDisponivel.splice(idx, 1);
+      jog.picks[slot] = picked;
+
+      io.to(code).emit('draft:pick', {
+        userId,
+        username:   jog.username,
+        nomeDoTime: jog.nomeDoTime,
+        jogador:    picked,
+        slotIndex:  slot,
+        numPicks:   jog.picks.filter(Boolean).length,
+        timeout:    false,
+      });
+      avancarTurno(io, sala);
+    });
+
+    // ── draft:move — reposiciona/troca um jogador já escalado (durante a vez) ──
+    socket.on('draft:move', ({ fromSlot, toSlot }) => {
+      const code = socket.salaAtual;
+      if (!code) return;
+
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'draft') return;
+      if (sala.ordemDraft[sala.indiceTurno] !== userId)
+        return socket.emit('erro', 'Não é sua vez');
+
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog || !jog.picks) return;
+
+      const codigos = codigosDaFormacao(jog.formacao || '4-3-3');
+      const from = Number(fromSlot), to = Number(toSlot);
+      if (!(from >= 0 && from < codigos.length && to >= 0 && to < codigos.length) || from === to) return;
+
+      const jogFrom = jog.picks[from];
+      if (!jogFrom) return;                       // origem precisa ter jogador
+      const jogTo = jog.picks[to];
+
+      if (!jogTo) {                               // mover para vaga vazia
+        if (!podeOcupar(jogFrom, codigos[to])) return socket.emit('erro', 'Jogador não joga nessa posição');
+        jog.picks[to]   = jogFrom;
+        jog.picks[from] = undefined;
+      } else {                                    // trocar dois jogadores
+        if (!podeOcupar(jogFrom, codigos[to]) || !podeOcupar(jogTo, codigos[from]))
+          return socket.emit('erro', 'Troca inválida para essas posições');
+        jog.picks[to]   = jogFrom;
+        jog.picks[from] = jogTo;
+      }
+
+      io.to(code).emit('draft:moved', { userId, fromSlot: from, toSlot: to, picks: jog.picks });
+    });
+
+    // ── ready:vote — voto para iniciar as rodadas (na tela de elencos) ────────
+    socket.on('ready:vote', () => {
+      const code = socket.salaAtual;
+      if (!code) return;
+
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'ready') return;
+
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (jog) jog.pronto = true;
+
+      const prontos = sala.jogadores.filter(j => j.pronto).length;
+      const total   = sala.jogadores.length;
+      io.to(code).emit('ready:count', { prontos, total });
+
+      if (prontos >= total) {
+        sala.status      = 'playing';
+        sala.rodadaAtual = 0;
+        sala.jogadores.forEach(j => {
+          sala.resultados[j.userId] = { vitorias:0, empates:0, derrotas:0, gf:0, ga:0, campeao:false };
+        });
+        io.to(code).emit('round:start', { rodada: 1, total: sala.totalRodadas });
+      }
+    });
+
+    // ── round:simulate — simula uma rodada (servidor deduplica) ───────────────
+    socket.on('round:simulate', async () => {
+      const code = socket.salaAtual;
+      if (!code) return;
+
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'playing') return;
+      if (sala.rodadaEmAndamento) return;
+
+      sala.rodadaEmAndamento = true;
+      sala.rodadaAtual++;
+      const rodada   = sala.rodadaAtual;
+      const isUltima = rodada >= sala.totalRodadas;
+
+      try {
+        const resultadosRodada = [];
+
+        // Obtém lista de clubes para sorteio de bots (dados estáticos)
+        const clubesDisponiveis = loader.getClubesPorCompeticao(sala.competicao);
+
+        for (const jogador of sala.jogadores) {
+          const meuElenco = jogador.picks || [];
+          if (!meuElenco.length) continue;
+
+          // Bot: time aleatório da competição (via loader)
+          const botRef = clubesDisponiveis[Math.floor(Math.random() * clubesDisponiveis.length)]
+                      || { clube: 'Bot FC', edicao: 2024, competicao: sala.competicao };
+
+          const botElenco = loader.getElencoDoClube(sala.competicao, botRef.clube, botRef.edicao);
+
+          const adversario = {
+            clube:      botRef.clube,
+            edicao:     botRef.edicao,
+            competicao: sala.competicao,
+            jogadores:  botElenco,
+          };
+
+          const resultado = simularPartida(meuElenco, adversario, true);
+
+          const stats = sala.resultados[jogador.userId];
+          stats.gf += resultado.gMeus;
+          stats.ga += resultado.gAdv;
+          if      (resultado.gMeus > resultado.gAdv)  stats.vitorias++;
+          else if (resultado.gMeus === resultado.gAdv) stats.empates++;
+          else                                          stats.derrotas++;
+
+          // Acumula artilharia e assistências
+          resultado.fila.forEach(ev => {
+            if (ev.lado === 'meu') {
+              if (ev.autor?.nome) {
+                sala.statsGols[ev.autor.nome] = (sala.statsGols[ev.autor.nome] || 0) + 1;
+              }
+              if (ev.assist?.nome) {
+                sala.statsAssists[ev.assist.nome] = (sala.statsAssists[ev.assist.nome] || 0) + 1;
+              }
+            }
+          });
+
+          resultadosRodada.push({
+            userId:    jogador.userId,
+            username:  jogador.username,
+            nomeDoTime: jogador.nomeDoTime,
+            adversario: { clube: botRef.clube, edicao: botRef.edicao },
+            gMeus:     resultado.gMeus,
+            gAdv:      resultado.gAdv,
+            fila:      resultado.fila,
+          });
+        }
+
+        // Classificação
+        const classificacao = sala.jogadores
+          .map(j => ({
+            userId:    j.userId,
+            username:  j.username,
+            nomeDoTime: j.nomeDoTime,
+            ...(sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 }),
+          }))
+          .sort((a, b) => {
+            const ptA = a.vitorias * 3 + a.empates;
+            const ptB = b.vitorias * 3 + b.empates;
+            if (ptA !== ptB) return ptB - ptA;
+            return (b.gf - b.ga) - (a.gf - a.ga);
+          });
+
+        // Artilharia e assistências top-18
+        const artilharia = Object.entries(sala.statsGols)
+          .sort((a, b) => b[1] - a[1]).slice(0, 18)
+          .map(([nome, gols]) => ({ nome, gols }));
+
+        const assistencias = Object.entries(sala.statsAssists)
+          .sort((a, b) => b[1] - a[1]).slice(0, 18)
+          .map(([nome, assists]) => ({ nome, assists }));
+
+        io.to(code).emit('round:results', {
+          rodada,
+          resultados: resultadosRodada,
+          classificacao,
+          artilharia,
+          assistencias,
+        });
+
+        if (isUltima) {
+          const campeao = determinarCampeao(sala);
+          if (campeao) sala.resultados[campeao.userId].campeao = true;
+
+          sala.status = 'fim';
+          io.to(code).emit('game:end', { ranking: buildRanking(sala) });
+
+          // Persiste resultados assincronamente
+          (async () => {
+            for (const jogador of sala.jogadores) {
+              if (jogador.ehBot || jogador.guest) continue;   // bots e convidados não salvam histórico
+              const s = sala.resultados[jogador.userId];
+              if (!s) continue;
+              try {
+                await db.query(
+                  `INSERT INTO matches
+                     (user_id, competicao, modo, vitorias, empates, derrotas, gf, ga, campeao, detalhes)
+                   VALUES ($1,$2,'online',$3,$4,$5,$6,$7,$8,$9)`,
+                  [jogador.userId, sala.competicao,
+                   s.vitorias, s.empates, s.derrotas, s.gf, s.ga, s.campeao,
+                   JSON.stringify({ sala: code, rodadas: sala.totalRodadas, numPicks: (jogador.picks || []).length })]
+                );
+              } catch (e) { console.error('[socket] Erro ao salvar partida:', e); }
+            }
+            deleteSala(code);
+          })();
+        } else {
+          io.to(code).emit('round:start', { rodada: rodada + 1, total: sala.totalRodadas });
+        }
+      } catch (err) {
+        console.error('[socket round:simulate]', err);
+        socket.emit('erro', 'Erro na simulação');
+      } finally {
+        sala.rodadaEmAndamento = false;
+      }
+    });
+
+    // ── disconnect ────────────────────────────────────────────────────────────
+    socket.on('disconnect', () => {
+      const code = socket.salaAtual;
+      if (!code) return;
+      const sala = getSala(code);
+      if (!sala) return;
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (jog) { jog.conectado = false; jog.socketId = null; }
+      io.to(code).emit('room:state', buildRoomState(sala));
+    });
+  });
+
+  return io;
+}
+
+module.exports = { setupSocket };
