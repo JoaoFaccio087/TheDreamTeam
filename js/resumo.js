@@ -187,7 +187,9 @@ function gerarCanvasResumo(callback) {
     card.style.maxHeight = prevMax;
     card.style.overflowY = prevOv;
   }
-  html2canvas(card, { backgroundColor: null, scale: 2 }).then(function (canvas) {
+  // Fundo SÓLIDO (resolve var(--bg) para rgb) — evita PNG "lavado"/transparente.
+  var fundo = getComputedStyle(document.body).backgroundColor || '#0E0F13';
+  html2canvas(card, { backgroundColor: fundo, scale: 2 }).then(function (canvas) {
     restaurar();
     callback(canvas);
   }).catch(function () {

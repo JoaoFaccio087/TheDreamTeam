@@ -20,6 +20,7 @@
   var carouselIndex    = 0;    // offset do carousel
   var selectedPlayer   = null; // objeto do jogador selecionado no carousel
   var selectedSlot     = null; // vaga (índice de slot) escolhida no campo
+  var repositionFrom   = null; // vaga de origem ao remanejar um jogador já escalado
   var allPlayers       = {};   // { userId: { username, nomeDoTime, formacao, picks, pronto } }
   var ordemDraftIds    = [];   // ordem dos userId no draft
   var indiceTurnoAtual = 0;    // índice na ordemDraft
@@ -208,6 +209,7 @@
     indiceTurnoAtual = 0;
     selectedPlayer   = null;
     selectedSlot     = null;
+    repositionFrom   = null;
   }
 
   // ── Eventos Socket ────────────────────────────────────────────────────────
@@ -218,6 +220,7 @@
     socket.on('draft:turno',      onDraftTurno);
     socket.on('draft:yourTurn',   onDraftYourTurn);
     socket.on('draft:pick',       onDraftPickEvt);
+    socket.on('draft:moved',      onDraftMoved);
     socket.on('draft:complete',   onDraftComplete);
     socket.on('ready:count',      onReadyCount);
     socket.on('round:start',      onRoundStart);
@@ -367,6 +370,18 @@
 
     indiceTurnoAtual++;
     renderOrdemLista();
+  }
+
+  // draft:moved — alguém remanejou/trocou jogadores já escalados (broadcast)
+  function onDraftMoved(dados) {
+    if (!dados || dados.picks == null) return;
+    allPlayers[dados.userId] = allPlayers[dados.userId] || {};
+    allPlayers[dados.userId].picks = dados.picks;
+    if (String(dados.userId) === String(meuUserId)) {
+      var eu = allPlayers[dados.userId];
+      renderCampoOnline(draftCampo, eu.picks || [], eu.formacao || '4-3-3');
+      limparDestaquesVaga();
+    }
   }
 
   // draft:complete — todos escolheram
@@ -604,6 +619,7 @@
 
   // Clicou num card: marca o card e ACENDE só as vagas abertas onde ele pode jogar.
   function selecionarCardOnline(jogador, cardEl) {
+    repositionFrom = null;               // escolher um card cancela um remanejamento em curso
     selectedPlayer = jogador;
     selectedSlot   = null;
     draftCarousel.querySelectorAll('.draft-card').forEach(function (c) { c.classList.remove('selecionado'); });
@@ -618,7 +634,7 @@
     var meu     = allPlayers[meuUserId] || {};
     var codigos = codigosOnline(meu.formacao || '4-3-3');
     draftCampo.querySelectorAll('.slot-ol').forEach(function (slot, i) {
-      slot.classList.remove('vaga-valida', 'vaga-selecionada');
+      slot.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
       var ocupado = meu.picks && meu.picks[i];
       if (jogador && !ocupado && podeOcupar(jogador, codigos[i])) {
         slot.classList.add('vaga-valida');
@@ -627,24 +643,80 @@
   }
 
   function limparDestaquesVaga() {
+    repositionFrom = null;
     if (!draftCampo) return;
     draftCampo.querySelectorAll('.slot-ol').forEach(function (s) {
-      s.classList.remove('vaga-valida', 'vaga-selecionada');
+      s.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
     });
   }
 
   // Clicou numa vaga do campo: se for válida e estiver com card selecionado, escolhe-a.
   function clicarSlotDraftOnline(i) {
-    if (!minhaVez || !selectedPlayer) return;
-    var meu = allPlayers[meuUserId] || {};
-    if (meu.picks && meu.picks[i]) return;          // ocupada (reposicionar = Parte 2)
+    if (!minhaVez) return;
+    var meu     = allPlayers[meuUserId] || {};
     var codigos = codigosOnline(meu.formacao || '4-3-3');
-    if (!podeOcupar(selectedPlayer, codigos[i])) return;
-    selectedSlot = i;
+    var ocupado = meu.picks && meu.picks[i];
+
+    // MODO COLOCAR — há um card selecionado: clicar numa vaga vazia e válida a escolhe.
+    if (selectedPlayer) {
+      if (ocupado) return;
+      if (!podeOcupar(selectedPlayer, codigos[i])) return;
+      selectedSlot = i;
+      marcarVagaSelecionada(i);
+      btnDraftSelecionar.disabled = false;
+      return;
+    }
+
+    // MODO REMANEJAR — sem card selecionado.
+    if (repositionFrom === null) {
+      // Clicou num jogador já escalado → começa a mover (acende vagas válidas).
+      if (ocupado) {
+        repositionFrom = i;
+        destacarVagasValidasParaMover(meu.picks[i], i);
+      }
+      return;
+    }
+
+    // Já está movendo:
+    if (i === repositionFrom) { cancelarReposicionar(); return; }  // clicou na origem → cancela
+    var jogMov = meu.picks[repositionFrom];
+    if (!jogMov) { cancelarReposicionar(); return; }
+    // destino vazio → precisa ser válido p/ o jogador movido;
+    // destino ocupado → troca (o servidor valida as duas posições).
+    if (!ocupado && !podeOcupar(jogMov, codigos[i])) return;
+    socket.emit('draft:move', { fromSlot: repositionFrom, toSlot: i });
+    cancelarReposicionar();
+  }
+
+  function marcarVagaSelecionada(i) {
     draftCampo.querySelectorAll('.slot-ol').forEach(function (s, k) {
       s.classList.toggle('vaga-selecionada', k === i);
     });
-    btnDraftSelecionar.disabled = false;
+  }
+
+  // Remanejar: acende as vagas onde o jogador movido pode ir (vazias válidas +
+  // ocupadas onde caberia uma troca) e marca a vaga de origem.
+  function destacarVagasValidasParaMover(jogador, fromIdx) {
+    if (!draftCampo) return;
+    var meu     = allPlayers[meuUserId] || {};
+    var codigos = codigosOnline(meu.formacao || '4-3-3');
+    draftCampo.querySelectorAll('.slot-ol').forEach(function (slot, i) {
+      slot.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
+      if (i === fromIdx) { slot.classList.add('vaga-origem'); return; }
+      var ocup = meu.picks && meu.picks[i];
+      var podeIr = podeOcupar(jogador, codigos[i]);
+      // vaga vazia válida, ou troca válida (o outro jogador caberia na origem)
+      var trocaOk = ocup && podeIr && podeOcupar(meu.picks[i], codigos[fromIdx]);
+      if ((!ocup && podeIr) || trocaOk) slot.classList.add('vaga-valida');
+    });
+  }
+
+  function cancelarReposicionar() {
+    repositionFrom = null;
+    if (!draftCampo) return;
+    draftCampo.querySelectorAll('.slot-ol').forEach(function (s) {
+      s.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
+    });
   }
 
   function atualizarCarouselPos() { /* faixa agora rola nativamente; sem transform */ }
@@ -677,7 +749,7 @@
         var pos  = (jog.posicoes && jog.posicoes[0]) ? jog.posicoes[0] : (posis ? posis[i] : '?');
         var nome = jog.nome ? jog.nome.split(' ').slice(-1)[0] : '?';
         slot.innerHTML =
-          '<span style="font-size:0.5rem;color:#D9B25A;line-height:1">' + htmlEsc(pos) + '</span>' +
+          '<span style="font-size:0.64rem;font-weight:800;color:#D9B25A;line-height:1">' + htmlEsc(pos) + '</span>' +
           '<span class="slot-nome">' + htmlEsc(nome) + '</span>' +
           (jog.forca ? '<span class="slot-ol-forca">' + jog.forca + '</span>' : '');
       } else {

@@ -76,7 +76,6 @@
   text-align: center;
   transform: translate(-50%,-50%);
   transition: left 0.4s ease, top 0.4s ease;
-  overflow: hidden;
 }
 .slot-ol.preenchido {
   border-style: solid;
@@ -89,10 +88,10 @@
   gap: 1px;
 }
 .slot-ol .slot-ol-forca {
-  font-size: 0.52rem;
+  font-size: 0.6rem;
   font-family: 'Archivo', sans-serif;
-  font-weight: 400;
-  color: #555;
+  font-weight: 700;
+  color: #444;
   line-height: 1;
 }
 .slot-ol .slot-nome {
@@ -124,15 +123,23 @@
 .slot-ol.vaga-valida:hover { background: rgba(217,178,90,0.32); }
 .slot-ol.vaga-selecionada {
   border-style: solid;
-  border-color: #D9B25A;
-  background: rgba(217,178,90,0.45);
-  color: #fff;
+  border-color: #2BD46A;
+  background: rgba(43,212,106,0.55);
+  color: #06210F;
   cursor: pointer;
-  box-shadow: 0 0 0 3px rgba(217,178,90,0.5), 0 0 16px rgba(217,178,90,0.6);
+  animation: none;
+  box-shadow: 0 0 0 3px rgba(43,212,106,0.45), 0 0 18px rgba(43,212,106,0.6);
 }
 @keyframes vagaPulsa {
   0%,100% { box-shadow: 0 0 0 3px rgba(217,178,90,0.22), 0 0 10px rgba(217,178,90,0.35); }
   50%     { box-shadow: 0 0 0 4px rgba(217,178,90,0.38), 0 0 16px rgba(217,178,90,0.55); }
+}
+/* Jogador já escalado que está sendo remanejado (vaga de origem) */
+#draft-campo .slot-ol.preenchido { cursor: pointer; }
+.slot-ol.vaga-origem {
+  cursor: pointer;
+  box-shadow: 0 0 0 3px #2BD46A, 0 0 16px rgba(43,212,106,0.75);
+  filter: brightness(1.12);
 }
 /* Slot recém-adicionado */
 .slot-ol.novo {

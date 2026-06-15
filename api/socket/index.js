@@ -444,6 +444,41 @@ function setupSocket(server, frontendUrl) {
       avancarTurno(io, sala);
     });
 
+    // ── draft:move — reposiciona/troca um jogador já escalado (durante a vez) ──
+    socket.on('draft:move', ({ fromSlot, toSlot }) => {
+      const code = socket.salaAtual;
+      if (!code) return;
+
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'draft') return;
+      if (sala.ordemDraft[sala.indiceTurno] !== userId)
+        return socket.emit('erro', 'Não é sua vez');
+
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog || !jog.picks) return;
+
+      const codigos = codigosDaFormacao(jog.formacao || '4-3-3');
+      const from = Number(fromSlot), to = Number(toSlot);
+      if (!(from >= 0 && from < codigos.length && to >= 0 && to < codigos.length) || from === to) return;
+
+      const jogFrom = jog.picks[from];
+      if (!jogFrom) return;                       // origem precisa ter jogador
+      const jogTo = jog.picks[to];
+
+      if (!jogTo) {                               // mover para vaga vazia
+        if (!podeOcupar(jogFrom, codigos[to])) return socket.emit('erro', 'Jogador não joga nessa posição');
+        jog.picks[to]   = jogFrom;
+        jog.picks[from] = undefined;
+      } else {                                    // trocar dois jogadores
+        if (!podeOcupar(jogFrom, codigos[to]) || !podeOcupar(jogTo, codigos[from]))
+          return socket.emit('erro', 'Troca inválida para essas posições');
+        jog.picks[to]   = jogFrom;
+        jog.picks[from] = jogTo;
+      }
+
+      io.to(code).emit('draft:moved', { userId, fromSlot: from, toSlot: to, picks: jog.picks });
+    });
+
     // ── ready:vote — voto para iniciar as rodadas (na tela de elencos) ────────
     socket.on('ready:vote', () => {
       const code = socket.salaAtual;
