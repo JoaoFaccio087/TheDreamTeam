@@ -689,17 +689,38 @@
 .stats-nome  { flex: 1; color: #ccc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .stats-valor { font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; color: #D9B25A; }
 
-/* ── RODADA: abas Partidas / Classificação ───────────────────────────────── */
-.rodada-tabs { display: flex; gap: 0.5rem; justify-content: center; margin: 0 0 1.2rem; padding: 0 1.2rem; }
+/* ── RODADA: barra (rodada atual + abas) ──────────────────────────────────── */
+.rodada-barra {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.4rem; margin: 0.2rem 0 1.4rem; flex-wrap: wrap; gap: 0.6rem;
+}
+.rodada-barra-titulo {
+  font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; color: #fff;
+  letter-spacing: 0.04em; margin: 0;
+}
+.rodada-tabs { display: flex; gap: 0.5rem; }
 .rodada-tab {
   background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #aaa;
-  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.5px;
-  padding: 0.5rem 1.4rem; border-radius: 8px; cursor: pointer;
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.5px;
+  padding: 0.45rem 1.2rem; border-radius: 8px; cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .rodada-tab:hover { background: rgba(255,255,255,0.08); }
 .rodada-tab.ativa { background: #D9B25A; border-color: #D9B25A; color: #1a1206; }
 .rodada-aba { padding: 0 1.2rem 2rem; }
+
+/* Animação do card grande */
+.pg-centro  { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+.pg-relogio { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.72rem; color: #2BD46A; letter-spacing: 0.05em; min-height: 0.9rem; }
+.partida-grande.anim { border-color: rgba(43,212,106,0.45); }
+.pg-gol-novo { animation: golPop 0.4s ease; }
+@keyframes golPop { 0% { opacity: 0; transform: translateY(-5px) scale(0.92); } 100% { opacity: 1; transform: none; } }
+
+/* Alinhamento das colunas da aba Classificação */
+.classif-tabela-col > .jogo-rotulo:first-child,
+.classif-stats-col  > .jogo-rotulo:first-child { margin-top: 0; }
+
+
 
 .partidas-wrapper { display: grid; grid-template-columns: 1fr 260px; gap: 1.4rem; align-items: start; }
 .partidas-col { display: flex; flex-direction: column; gap: 0.6rem; }

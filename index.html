@@ -793,18 +793,21 @@
       <div class="jogo-header-wrap">
         <header class="jogo-header">
           <div>
-            <p id="rodada-titulo" class="jogo-header-titulo">RODADA 1</p>
-            <p class="jogo-header-slogan">THE DREAM TEAM</p>
+            <p class="jogo-header-titulo">THE DREAM TEAM</p>
+            <p class="jogo-header-slogan" id="rodada-comp">BRASILEIR&Atilde;O</p>
           </div>
           <p id="rodada-header-info" class="jogo-header-info"></p>
         </header>
         <div class="jogo-header-linha"></div>
       </div>
 
-      <!-- Abas -->
-      <div class="rodada-tabs">
-        <button id="tab-partidas" class="rodada-tab ativa">Partidas</button>
-        <button id="tab-classif"  class="rodada-tab">Classifica&ccedil;&atilde;o</button>
+      <!-- Barra: rodada atual (esq) + abas (dir) -->
+      <div class="rodada-barra">
+        <p id="rodada-titulo" class="rodada-barra-titulo">RODADA 1</p>
+        <div class="rodada-tabs">
+          <button id="tab-partidas" class="rodada-tab ativa">Partidas</button>
+          <button id="tab-classif"  class="rodada-tab">Classifica&ccedil;&atilde;o</button>
+        </div>
       </div>
 
       <!-- ABA PARTIDAS -->
@@ -818,7 +821,6 @@
             <div id="rodada-proximos" class="rodada-proximos"></div>
             <div class="rodada-acoes">
               <button id="btn-rodada-proxima" class="btn-rolar escondida">Pr&oacute;ximo jogo &rarr;</button>
-              <button id="btn-rodada-tudo"    class="btn-rolar escondida">&#9197; Simular tudo</button>
               <button id="btn-rodada-fim"     class="btn-rolar escondida">Ver Resultado Final &rarr;</button>
               <p id="rodada-aguardando-host" class="rodada-aguardando escondida">Aguardando o host avan&ccedil;ar&hellip;</p>
             </div>

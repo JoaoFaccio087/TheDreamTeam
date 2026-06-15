@@ -229,21 +229,41 @@ function iniciarTurno(io, sala) {
     return;
   }
 
-  const pool50  = sala.poolDisponivel.slice(0, 120);  // janela ampla → cobre todas as posições
+  // Vagas abertas do jogador (códigos de posição da formação)
+  const codigosForm = codigosDaFormacao(jogador?.formacao || '4-3-3');
+  const picksJog    = (jogador && jogador.picks) || [];
+  const abertos     = [];
+  for (let i = 0; i < codigosForm.length; i++) { if (!picksJog[i]) abertos.push(codigosForm[i]); }
+
+  // Elegíveis para QUALQUER vaga aberta — podeOcupar considera TODAS as posições do jogador
+  // (ex.: vaga MEI aberta também traz ATAs que podem jogar de MEI).
+  const elegiveis = sala.poolDisponivel.filter(p => abertos.some(cod => podeOcupar(p, cod)));
+  const fonte     = elegiveis.length ? elegiveis : sala.poolDisponivel.slice();
+
+  // 6 cartas aleatórias; evita repetir as já mostradas a ESTE jogador, completando até 6.
+  if (jogador) jogador.cartasVistas = jogador.cartasVistas || {};
+  const vistos = (jogador && jogador.cartasVistas) || {};
+  let cards = shuffle(fonte.filter(p => !vistos[p.id])).slice(0, 6);
+  if (cards.length < 6) {
+    const resto = shuffle(fonte.filter(p => cards.indexOf(p) === -1));
+    cards = cards.concat(resto.slice(0, 6 - cards.length));
+  }
+  if (jogador) cards.forEach(p => { jogador.cartasVistas[p.id] = true; });
 
   io.to(sala.codigo).emit('draft:turno', {
     userId,
     username:    jogador?.username,
     nomeDoTime:  jogador?.nomeDoTime,
     segundos:    30,
-    pool:        pool50,
+    pool:        cards,    // 6 cartas já prontas (elegíveis + aleatórias)
+    cards,
     turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
     totalTurnos: sala.totalPicksNecessarios,
     numPicks:    (jogador?.picks || []).filter(Boolean).length,
   });
 
   if (jogador?.socketId) {
-    io.to(jogador.socketId).emit('draft:yourTurn', { pool: pool50 });
+    io.to(jogador.socketId).emit('draft:yourTurn', { pool: cards });
   }
 
   sala.timerDraft = setTimeout(() => {
@@ -420,7 +440,7 @@ function setupSocket(server, frontendUrl) {
                      .sort((a, b) => (b.forca || 70) - (a.forca || 70));
 
       // Reinicia picks; humanos voltam a "não pronto", bots seguem prontos.
-      sala.jogadores.forEach(j => { j.picks = []; j.pronto = !!j.ehBot; });
+      sala.jogadores.forEach(j => { j.picks = []; j.pronto = !!j.ehBot; j.cartasVistas = {}; });
 
       const baseOrder      = shuffle(sala.jogadores.map(j => j.userId));
       sala.poolDisponivel  = pool;

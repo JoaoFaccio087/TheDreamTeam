@@ -48,11 +48,11 @@
   var elencosProntosCount, btnElencosPronto, btnElencosComecar;
 
   // Rodada
-  var rodadaTituloEl, rodadaPartidas, btnRodadaProxima, btnRodadaFim, btnRodadaTudo;
-  var autoSimular = false;
+  var rodadaTituloEl, rodadaPartidas, btnRodadaProxima, btnRodadaFim;
   var rodadaClassif, rodadaArtilharia, rodadaAssistencias;
   var rodadaProximos, proximosTitulo, rodadaAguardandoHost;
   var tabPartidas, tabClassif, abaPartidas, abaClassif;
+  var animTimer = null;   // timer da animação da partida do usuário
 
   // Fim
   var onlineRankingFinal, btnNovaSala;
@@ -423,11 +423,13 @@
     rodadaAtual     = dados.rodada || 1;
     totalRodadas    = dados.total  || 38;
     simulandoRodada = false;
+    pararAnimacaoPartida();
 
     rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
+    var infoEl = document.getElementById('rodada-header-info');
+    if (infoEl) infoEl.textContent = '20 TIMES · ' + totalRodadas + ' RODADAS';
     rodadaPartidas.innerHTML   = '<p style="color:#888;text-align:center;padding:2rem">Simulando rodada ' + rodadaAtual + '…</p>';
     btnRodadaProxima.classList.add('escondida');
-    btnRodadaTudo.classList.add('escondida');
     btnRodadaFim.classList.add('escondida');
     selecionarAbaRodada('partidas');
 
@@ -449,36 +451,81 @@
     if (tabClassif)  tabClassif.classList.toggle('ativa', !p);
   }
 
-  // Card grande da partida do usuário (com placar e timeline de gols)
+  function pararAnimacaoPartida() { if (animTimer) { clearTimeout(animTimer); animTimer = null; } }
+
+  // Card grande da partida do usuário — ANIMA o jogo (relógio + gols + placar ao vivo).
   function cardPartidaGrande(m) {
+    pararAnimacaoPartida();
     var euCasa = String(m.homeUid) === String(meuUserId);
     var euFora = String(m.awayUid) === String(meuUserId);
     var res = (m.gHome === m.gAway) ? 'empate'
             : (((euCasa && m.gHome > m.gAway) || (euFora && m.gAway > m.gHome)) ? 'vitoria' : 'derrota');
 
-    var golsHtml = '';
-    (m.fila || []).slice().sort(function (a, b) { return a.minuto - b.minuto; }).forEach(function (ev) {
-      var ladoCasa = ev.lado === 'meu';
-      var autor  = ladoCasa ? (ev.autor && ev.autor.nome)  : (ev.autorAdv && ev.autorAdv.nome);
-      var assist = ladoCasa ? (ev.assist && ev.assist.nome) : (ev.assistAdv && ev.assistAdv.nome);
-      if (!autor) return;
-      golsHtml +=
-        '<div class="pg-gol ' + (ladoCasa ? 'esq' : 'dir') + '">' +
-          '<span class="pg-min">' + ev.minuto + "'</span> " +
-          '<span class="pg-autor">⚽ ' + htmlEsc(autor) + '</span>' +
-          (assist ? '<span class="pg-assist"> (' + htmlEsc(assist) + ')</span>' : '') +
-        '</div>';
-    });
-
     var card = document.createElement('div');
-    card.className = 'partida-grande ' + res;
+    card.className = 'partida-grande anim';
     card.innerHTML =
       '<div class="pg-topo">' +
         '<div class="pg-time' + (euCasa ? ' eu' : '') + '">' + htmlEsc(m.homeNome || 'Time') + (m.homeBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</div>' +
-        '<div class="pg-placar">' + m.gHome + '<span class="placar-sep"> × </span>' + m.gAway + '</div>' +
+        '<div class="pg-centro">' +
+          '<div class="pg-relogio">0\'</div>' +
+          '<div class="pg-placar"><span class="pg-gh">0</span><span class="placar-sep"> × </span><span class="pg-ga">0</span></div>' +
+        '</div>' +
         '<div class="pg-time dir' + (euFora ? ' eu' : '') + '">' + htmlEsc(m.awayNome || 'Time') + (m.awayBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</div>' +
       '</div>' +
-      (golsHtml ? '<div class="pg-gols">' + golsHtml + '</div>' : '<div class="pg-gols pg-sem">Sem gols na partida</div>');
+      '<div class="pg-gols"></div>';
+
+    var eventos = (m.fila || []).slice().filter(function (ev) {
+      return ev.lado === 'meu' ? (ev.autor && ev.autor.nome) : (ev.autorAdv && ev.autorAdv.nome);
+    }).sort(function (a, b) { return a.minuto - b.minuto; });
+
+    var relEl  = card.querySelector('.pg-relogio');
+    var ghEl   = card.querySelector('.pg-gh');
+    var gaEl   = card.querySelector('.pg-ga');
+    var golsEl = card.querySelector('.pg-gols');
+    var gh = 0, ga = 0, idx = 0, minuto = 0;
+    var CADENCIA = 55;   // ms por minuto de jogo (~5s no total)
+
+    function linhaGol(ev, nova) {
+      var ladoCasa = ev.lado === 'meu';
+      var autor  = ladoCasa ? ev.autor.nome  : ev.autorAdv.nome;
+      var assist = ladoCasa ? (ev.assist && ev.assist.nome) : (ev.assistAdv && ev.assistAdv.nome);
+      var d = document.createElement('div');
+      d.className = 'pg-gol ' + (ladoCasa ? 'esq' : 'dir') + (nova ? ' pg-gol-novo' : '');
+      d.innerHTML = '<span class="pg-min">' + ev.minuto + "'</span> " +
+                    '<span class="pg-autor">⚽ ' + htmlEsc(autor) + '</span>' +
+                    (assist ? '<span class="pg-assist"> (' + htmlEsc(assist) + ')</span>' : '');
+      return d;
+    }
+    function finalizar() {
+      pararAnimacaoPartida();
+      if (relEl) relEl.textContent = 'ENC';
+      if (ghEl) ghEl.textContent = m.gHome;
+      if (gaEl) gaEl.textContent = m.gAway;
+      card.classList.remove('anim');
+      card.classList.add(res);
+      golsEl.innerHTML = '';
+      if (eventos.length) {
+        eventos.forEach(function (ev) { golsEl.appendChild(linhaGol(ev, false)); });
+      } else {
+        golsEl.className = 'pg-gols pg-sem';
+        golsEl.textContent = 'Sem gols na partida';
+      }
+    }
+    function tick() {
+      minuto++;
+      if (relEl) relEl.textContent = minuto + "'";
+      while (idx < eventos.length && eventos[idx].minuto <= minuto) {
+        var ev = eventos[idx++];
+        if (ev.lado === 'meu') { gh++; if (ghEl) ghEl.textContent = gh; }
+        else                   { ga++; if (gaEl) gaEl.textContent = ga; }
+        golsEl.appendChild(linhaGol(ev, true));
+      }
+      if (minuto >= 90) { finalizar(); return; }
+      animTimer = setTimeout(tick, CADENCIA);
+    }
+
+    card.addEventListener('click', finalizar);   // clique para pular a animação
+    animTimer = setTimeout(tick, 350);            // começa após o card entrar no DOM
     return card;
   }
 
@@ -536,12 +583,10 @@
   // Ações da rodada — só o HOST avança; os demais aguardam.
   function atualizarAcoesRodada() {
     btnRodadaProxima.classList.add('escondida');
-    btnRodadaTudo.classList.add('escondida');
     btnRodadaFim.classList.add('escondida');
     if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
 
     if (rodadaAtual >= totalRodadas) {
-      autoSimular = false;
       if (ehHost) {
         btnRodadaFim.classList.remove('escondida');
       } else if (rodadaAguardandoHost) {
@@ -557,20 +602,15 @@
       }
       return;
     }
-    if (autoSimular) {
-      simulandoRodada = true;
-      setTimeout(function () { if (socket && socket.connected) socket.emit('round:simulate'); }, 400);
-      return;
-    }
     btnRodadaProxima.disabled    = false;
     btnRodadaProxima.textContent = 'Próximo jogo ▶';
     btnRodadaProxima.classList.remove('escondida');
-    btnRodadaTudo.classList.remove('escondida');
   }
 
   // round:results — resultados da rodada
   function onRoundResults(dados) {
     simulandoRodada = false;
+    pararAnimacaoPartida();
     rodadaAtual     = dados.rodada || rodadaAtual;
     rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
 
@@ -685,25 +725,8 @@
   function renderCarousel() {
     draftCarousel.innerHTML = '';
 
-    // Vagas ainda abertas da minha formação (e seus códigos de posição).
-    var meu     = allPlayers[meuUserId] || {};
-    var codigos = codigosOnline(meu.formacao || '4-3-3');
-    var abertas = [];
-    for (var s = 0; s < codigos.length; s++) {
-      if (!(meu.picks && meu.picks[s])) abertas.push(codigos[s]);
-    }
-
-    // Sorteia 6 jogadores ELEGÍVEIS para alguma vaga aberta e mostra só esses 6.
-    var elegiveis = poolLocal.filter(function (p) {
-      return abertas.some(function (cod) { return podeOcupar(p, cod); });
-    });
-    var fonte   = elegiveis.length ? elegiveis : poolLocal;
-    var baralho = fonte.slice();
-    for (var k = baralho.length - 1; k > 0; k--) {
-      var r = Math.floor(Math.random() * (k + 1));
-      var t = baralho[k]; baralho[k] = baralho[r]; baralho[r] = t;
-    }
-    var pool = baralho.slice(0, 6);
+    // O servidor já envia 6 cartas elegíveis e aleatórias (sem repetir as já vistas por mim).
+    var pool = (poolLocal || []).slice(0, 6);
 
     pool.forEach(function (jogador) {
       var card = document.createElement('div');
@@ -880,14 +903,15 @@
   // Mostra no campo o time do jogador da vez (segue o turno, inclusive bots) e
   // atualiza o HEADER "É a vez de:" — roda em todo pick, então nunca fica preso.
   function mostrarCampoDaVez(uid) {
-    if (!draftCampo) return;
     var jog   = allPlayers[uid] || {};
     var sou   = String(uid) === String(meuUserId);
     var ehBot = !!jog.ehBot;
+    // HEADER primeiro, sem depender do campo — assim nunca fica preso em "—".
     if (draftTituloEl) {
       var tag = ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
-      draftTituloEl.innerHTML = (sou ? '⚡ Sua vez' : 'Vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
+      draftTituloEl.innerHTML = (sou ? '⚡ É a SUA vez!' : 'É a vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
     }
+    if (!draftCampo) return;
     if (draftCampoLabel) {
       draftCampoLabel.textContent = sou ? 'Sua escalação' : ('Time de: ' + nomeUsuario(jog));
     }
@@ -1148,7 +1172,6 @@
     rodadaTituloEl     = document.getElementById('rodada-titulo');
     rodadaPartidas     = document.getElementById('rodada-partidas');
     btnRodadaProxima   = document.getElementById('btn-rodada-proxima');
-    btnRodadaTudo      = document.getElementById('btn-rodada-tudo');
     btnRodadaFim       = document.getElementById('btn-rodada-fim');
     rodadaClassif      = document.getElementById('rodada-classif');
     rodadaArtilharia   = document.getElementById('rodada-artilharia');
@@ -1283,16 +1306,6 @@
       btnRodadaProxima.disabled    = true;
       btnRodadaProxima.textContent = 'Simulando...';
       rodadaPartidas.innerHTML     = '<p style="color:#888;text-align:center;padding:2rem">Simulando…</p>';
-      if (socket && socket.connected) socket.emit('round:simulate');
-    });
-
-    btnRodadaTudo.addEventListener('click', function () {
-      if (simulandoRodada) return;
-      autoSimular     = true;          // encadeia até a última rodada
-      simulandoRodada = true;
-      btnRodadaProxima.classList.add('escondida');
-      btnRodadaTudo.classList.add('escondida');
-      rodadaPartidas.innerHTML = '<p style="color:#888;text-align:center;padding:2rem">Simulando todas as rodadas…</p>';
       if (socket && socket.connected) socket.emit('round:simulate');
     });
 
