@@ -22,6 +22,7 @@
   var allPlayers       = {};   // { userId: { username, nomeDoTime, formacao, picks, pronto } }
   var ordemDraftIds    = [];   // ordem dos userId no draft
   var indiceTurnoAtual = 0;    // índice na ordemDraft
+  var draftTurnoUid    = null; // userId de quem está escolhendo agora (destaque)
 
   // ── Referências DOM ───────────────────────────────────────────────────────
   var telaOnline, modalOnline, modalAuth;
@@ -88,15 +89,7 @@
     setTimeout(function () { modalOnlineErro.classList.add('escondida'); }, 4000);
   }
 
-  function abrirModalOnline() {
-    var token = localStorage.getItem('dreamteam_token');
-    if (!token) {
-      if (modalAuth) {
-        modalAuth.classList.remove('escondida');
-        document.body.style.overflow = 'hidden';
-      }
-      return;
-    }
+  function _mostrarModalOnline() {
     modalOnlineErro.classList.add('escondida');
     var _nomeEl = document.getElementById('input-nome-sala');
     if (_nomeEl) _nomeEl.value = '';
@@ -106,6 +99,25 @@
     btnEntrarSala.textContent = 'Entrar';
     modalOnline.classList.remove('escondida');
     document.body.style.overflow = 'hidden';
+  }
+
+  // Garante uma identidade (login real OU convidado) antes de uma ação online.
+  function garantirToken() {
+    var token = localStorage.getItem('dreamteam_token');
+    if (token) return Promise.resolve(token);
+    return api.tokenConvidado().then(function (r) {
+      if (r && r.token) { localStorage.setItem('dreamteam_token', r.token); return r.token; }
+      return null;
+    });
+  }
+
+  function abrirModalOnline() {
+    // Login NÃO é obrigatório: abre direto. Sem token, busca uma identidade de
+    // convidado em segundo plano (login serve só para salvar histórico).
+    _mostrarModalOnline();
+    if (!localStorage.getItem('dreamteam_token')) {
+      garantirToken().catch(function () { /* tentará de novo na ação */ });
+    }
   }
 
   function fecharModalOnline() {
@@ -223,6 +235,12 @@
     var eu = (sala.jogadores || []).find(function (j) { return String(j.userId) === String(meuUserId); });
     if (eu) renderCampoOnline(lobbyCampo, eu.picks || [], eu.formacao || '4-3-3');
 
+    // Pré-preenche o nome do time (logado → nome do cadastro; convidado → "Seu time"),
+    // sem sobrescrever o que o usuário já tiver digitado.
+    if (lobbyNomeTime && !lobbyNomeTime.value && eu && eu.nomeDoTime) {
+      lobbyNomeTime.value = eu.nomeDoTime;
+    }
+
     // Botões host
     // O "Começar" é do host e aparece quando todos os humanos estão prontos
     // (mínimo 1 — as vagas restantes da liga viram bots no início).
@@ -246,15 +264,20 @@
     indiceTurnoAtual = 0;
     subview('online-draft');
     renderOrdemLista();
+    // Desenha o campo já com as posições da minha formação (vazio), desde o início.
+    var minhaForm = (allPlayers[meuUserId] && allPlayers[meuUserId].formacao) || '4-3-3';
+    if (draftCampo) renderCampoOnline(draftCampo, [], minhaForm);
   }
 
   // draft:turno — vez de alguém
   function onDraftTurno(dados) {
     minhaVez         = String(dados.userId) === String(meuUserId);
+    draftTurnoUid    = dados.userId;
     poolLocal        = dados.pool || [];
     indiceTurnoAtual = dados.turnoNum ? dados.turnoNum - 1 : indiceTurnoAtual;
 
-    draftTituloEl.textContent    = minhaVez ? '⚡ É A SUA VEZ!' : 'Vez de: ' + htmlEsc(dados.username || '—');
+    var nomeVez = dados.nomeDoTime || dados.username || '—';
+    draftTituloEl.textContent    = minhaVez ? ('⚡ Sua vez — ' + nomeVez) : ('Vez de: ' + nomeVez);
     draftSubtituloEl.textContent = 'Pick ' + (dados.turnoNum || '?') + ' / ' + (dados.totalTurnos || '?');
 
     renderOrdemLista();
@@ -645,7 +668,7 @@
     draftOrdemLista.innerHTML = '';
     ordemDraftIds.forEach(function (uid, i) {
       var jog = allPlayers[uid];
-      var ativo = i === indiceTurnoAtual;
+      var ativo = String(uid) === String(draftTurnoUid);
       var sou   = String(uid) === String(meuUserId);
       var picks = jog ? (jog.picks || []).length : 0;
 
@@ -653,7 +676,7 @@
       row.className = 'draft-ordem-item' + (ativo ? ' ativo' : '') + (sou ? ' eu' : '');
       row.innerHTML =
         '<span class="draft-ordem-num">' + (i + 1) + '</span>' +
-        '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + htmlEsc(jog ? jog.username : String(uid)) + '</span>' +
+        '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + htmlEsc(jog ? (jog.nomeDoTime || jog.username) : String(uid)) + '</span>' +
         '<span class="draft-ordem-picks">' + picks + ' picks</span>';
       draftOrdemLista.appendChild(row);
     });
@@ -662,9 +685,6 @@
   // ── Ações UI ──────────────────────────────────────────────────────────────
 
   function criarSala() {
-    var token = localStorage.getItem('dreamteam_token');
-    if (!token) { erroOnline('Faça login para criar uma sala.'); return; }
-
     btnCriarSala.disabled    = true;
     btnCriarSala.textContent = 'Criando...';
 
@@ -672,7 +692,10 @@
     var velEl = document.querySelector('#sala-velocidade .pilula-ativa');
     var velocidade = velEl ? velEl.dataset.vel : 'normal';
 
-    api.criarSala({ competicao: 'Brasileirão', nome: nome || undefined, velocidade: velocidade })
+    garantirToken()
+      .then(function () {
+        return api.criarSala({ competicao: 'Brasileirão', nome: nome || undefined, velocidade: velocidade });
+      })
       .then(function (res) {
         codigoSala = res.codigo;
 
@@ -695,13 +718,13 @@
     var codigo = (inputCodigoSala.value || '').trim().toUpperCase();
     if (codigo.length < 4) { erroOnline('Digite o código de 4 caracteres.'); return; }
 
-    var token = localStorage.getItem('dreamteam_token');
-    if (!token) { erroOnline('Faça login para entrar em uma sala.'); return; }
-
     btnEntrarSala.disabled    = true;
     btnEntrarSala.textContent = '...';
 
-    api.entrarSala(codigo)
+    garantirToken()
+      .then(function () {
+        return api.entrarSala(codigo);
+      })
       .then(function () {
         codigoSala = codigo;
         conectar(function () {
@@ -835,7 +858,7 @@
     });
 
     btnLobbyPronto.addEventListener('click', function () {
-      var nomeTime = (lobbyNomeTime.value || '').trim() || 'Meu Time';
+      var nomeTime = (lobbyNomeTime.value || '').trim() || 'Seu time';
       var fl       = document.querySelector('#lobby-pilulas-formacao .pilula-ativa');
       var formacao = fl ? fl.dataset.fl : '4-3-3';
 

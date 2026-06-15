@@ -85,6 +85,12 @@ function atualizarDropdown(user) {
     menuConvidado.classList.remove('escondida');
     if (dropdownNome) dropdownNome.textContent = '';
   }
+  // Nome do time nos modos: logado → nome do cadastro; senão → "Seu time".
+  var temNome = !!(user && user.nomeDoTime);
+  if (typeof nomeDoTime !== 'undefined') nomeDoTime = temNome ? user.nomeDoTime : 'Seu time';
+  if (typeof inputNomeTime !== 'undefined' && inputNomeTime) {
+    inputNomeTime.value = temNome ? user.nomeDoTime : '';
+  }
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────

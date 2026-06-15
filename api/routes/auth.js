@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt  = require('bcryptjs');
 const jwt     = require('jsonwebtoken');
+const crypto  = require('crypto');
 const { z }   = require('zod');
 const pool    = require('../db');
 
@@ -85,6 +86,17 @@ router.post('/login', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
+});
+
+// POST /auth/guest — identidade temporária para jogar online SEM login.
+// (Login/cadastro continua opcional, só pra salvar histórico.)
+router.post('/guest', (req, res) => {
+  // id negativo alto: não colide com usuários (positivos) nem com bots (-1..-19),
+  // e por ser inteiro não quebra nenhuma query que filtre por id.
+  const id = -(1000000 + crypto.randomInt(8000000));
+  const username = 'Convidado-' + (Math.abs(id) % 10000);
+  const token = jwt.sign({ id, username, guest: true }, process.env.JWT_SECRET, { expiresIn: '2d' });
+  res.json({ token, user: { id, username, guest: true } });
 });
 
 module.exports = router;

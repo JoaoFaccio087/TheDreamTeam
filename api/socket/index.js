@@ -39,7 +39,7 @@ const NOMES_BOTS = [
   'Corsário SC','Meteoro FC','Bisões FC','Titãs do Norte','Cobras Reais',
   'Sentinela FC','Vulcano EC','Nova Aurora','Imperial SC','Bravos FC',
 ];
-const FORMACOES_BOT = ['4-3-3','4-4-2','3-5-2','4-2-3-1','4-5-1','3-4-3'];
+const FORMACOES_BOT = ['4-3-3','4-4-2','3-5-2','4-2-3-1','4-3-2-1','4-5-1','3-4-3','4-1-2-1-2'];
 
 function gerarBots(qtd, nomesUsados) {
   const disp = shuffle(NOMES_BOTS.filter(n => !nomesUsados.includes(n)));
@@ -278,23 +278,24 @@ function setupSocket(server, frontendUrl) {
         );
 
         let sala = getSala(code);
-        if (!sala) sala = criarSala(code, roomDB.host_user_id, roomDB.competicao);
+        if (!sala) sala = criarSala(code, roomDB.host_user_id || userId, roomDB.competicao);
 
         let jogador = sala.jogadores.find(j => j.userId === userId);
         if (!jogador) {
           // Novo entrante: só entra se a sala está no lobby e não está cheia.
           // (Reconexão de quem já está na sala cai no 'else' e é sempre permitida.)
           if (sala.status !== 'lobby') return socket.emit('erro', 'A partida já começou');
-          if (sala.jogadores.length >= 4) return socket.emit('erro', 'Sala cheia (máx. 4)');
+          if (sala.jogadores.length >= 20) return socket.emit('erro', 'Sala cheia (máx. 20)');
           jogador = {
             userId,
             username,
-            nomeDoTime: user?.nome_do_time || 'Meu Time',
+            nomeDoTime: user?.nome_do_time || 'Seu time',
             formacao:   '4-3-3',
             socketId:   socket.id,
             conectado:  true,
             picks:      [],
             pronto:     false,
+            guest:      !!socket.user.guest,
           };
           sala.jogadores.push(jogador);
         } else {
@@ -355,8 +356,17 @@ function setupSocket(server, frontendUrl) {
       }
       io.to(code).emit('room:state', buildRoomState(sala));
 
-      // Pool: amostra de 600 da competição, ordenada por força (melhores primeiro).
-      const pool = shuffle(todosJogadores).slice(0, 600)
+      // Remove nomes repetidos do pool (mantém a melhor edição de cada jogador),
+      // como no draft padrão — nada de "Pelé 1962" e "Pelé 1964" na mesma lista.
+      const porNome = new Map();
+      for (const j of todosJogadores) {
+        const ex = porNome.get(j.nome);
+        if (!ex || (j.forca || 70) > (ex.forca || 70)) porNome.set(j.nome, j);
+      }
+      const unicos = [...porNome.values()];
+
+      // Pool: amostra de 600 (nomes únicos), ordenada por força (melhores primeiro).
+      const pool = shuffle(unicos).slice(0, 600)
                      .sort((a, b) => (b.forca || 70) - (a.forca || 70));
 
       // Reinicia picks; humanos voltam a "não pronto", bots seguem prontos.
@@ -543,7 +553,7 @@ function setupSocket(server, frontendUrl) {
           // Persiste resultados assincronamente
           (async () => {
             for (const jogador of sala.jogadores) {
-              if (jogador.ehBot) continue;            // bots não têm linha em users
+              if (jogador.ehBot || jogador.guest) continue;   // bots e convidados não salvam histórico
               const s = sala.resultados[jogador.userId];
               if (!s) continue;
               try {

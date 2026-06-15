@@ -36,10 +36,11 @@ router.post('/', async (req, res) => {
     for (let tentativa = 0; tentativa < 10 && !sala; tentativa++) {
       const codigo = gerarCodigo();
       try {
+        const hostId = req.user.guest ? null : req.user.id;
         const { rows } = await pool.query(
           `INSERT INTO rooms (codigo, nome, host_user_id, competicao, velocidade, status)
            VALUES ($1,$2,$3,$4,$5,'lobby') RETURNING *`,
-          [codigo, nome || `Sala ${codigo}`, req.user.id, competicao, velocidade]
+          [codigo, nome || `Sala ${codigo}`, hostId, competicao, velocidade]
         );
         sala = rows[0];
       } catch (err) {
@@ -49,10 +50,13 @@ router.post('/', async (req, res) => {
     }
     if (!sala) return res.status(500).json({ error: 'Não foi possível gerar um código único' });
 
-    await pool.query(
-      'INSERT INTO room_players (room_id, user_id, ordem) VALUES ($1,$2,1)',
-      [sala.id, req.user.id]
-    );
+    // Convidados não têm usuário no banco — só registramos jogadores logados.
+    if (!req.user.guest) {
+      await pool.query(
+        'INSERT INTO room_players (room_id, user_id, ordem) VALUES ($1,$2,1) ON CONFLICT DO NOTHING',
+        [sala.id, req.user.id]
+      );
+    }
     res.status(201).json(sala);
   } catch (err) {
     console.error(err);
@@ -70,19 +74,12 @@ router.post('/:code/join', async (req, res) => {
     if (!sala) return res.status(404).json({ error: 'Sala não encontrada' });
     if (sala.status !== 'lobby') return res.status(409).json({ error: 'Sala não está no lobby' });
 
-    const { rows: [{ count }] } = await pool.query(
-      'SELECT COUNT(*) AS count FROM room_players WHERE room_id = $1', [sala.id]
-    );
-    if (parseInt(count) >= 4) return res.status(409).json({ error: 'Sala cheia (máx. 4)' });
-
-    const { rows: existing } = await pool.query(
-      'SELECT 1 FROM room_players WHERE room_id = $1 AND user_id = $2',
-      [sala.id, req.user.id]
-    );
-    if (!existing.length) {
+    // A capacidade real (até 20, completada com bots no início) é garantida pelo
+    // socket. Aqui só registramos jogadores logados, de forma idempotente.
+    if (!req.user.guest) {
       await pool.query(
-        'INSERT INTO room_players (room_id, user_id, ordem) VALUES ($1,$2,$3)',
-        [sala.id, req.user.id, parseInt(count) + 1]
+        'INSERT INTO room_players (room_id, user_id) VALUES ($1,$2) ON CONFLICT DO NOTHING',
+        [sala.id, req.user.id]
       );
     }
     res.json(sala);

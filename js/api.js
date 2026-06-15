@@ -69,6 +69,20 @@ function apiPost(rota, corpo) {
   return _req('POST', rota, corpo);
 }
 
+// Decodifica o payload do JWT salvo (login real OU convidado).
+function _decodificarToken() {
+  var token = localStorage.getItem('dreamteam_token');
+  if (!token) return null;
+  try {
+    return JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+  } catch (e) { return null; }
+}
+// "Login de verdade" = tem token E não é convidado. Convidado não salva no banco.
+function _temLoginReal() {
+  var p = _decodificarToken();
+  return !!(p && !p.guest);
+}
+
 var api = {
 
   register: function (username, email, password, nomeTime) {
@@ -81,16 +95,21 @@ var api = {
   },
 
   getMe: function () {
-    if (!localStorage.getItem('dreamteam_token')) return Promise.resolve(null);
+    if (!_temLoginReal()) return Promise.resolve(null);
     return _req('GET', '/me');
   },
   patchMe: function (dados) {
-    if (!localStorage.getItem('dreamteam_token')) return Promise.resolve(null);
+    if (!_temLoginReal()) return Promise.resolve(null);
     return _req('PATCH', '/me', dados);
   },
 
+  // Identidade temporária pra jogar online sem login.
+  tokenConvidado: function () {
+    return _req('POST', '/auth/guest', {});
+  },
+
   salvarPartida: function (partida) {
-    if (!localStorage.getItem('dreamteam_token')) {
+    if (!_temLoginReal()) {
       try {
         var hist = JSON.parse(localStorage.getItem('dreamteam_historico') || '[]');
         partida.played_at = new Date().toISOString();
@@ -103,7 +122,7 @@ var api = {
     return _req('POST', '/matches', partida);
   },
   getHistorico: function () {
-    if (!localStorage.getItem('dreamteam_token')) {
+    if (!_temLoginReal()) {
       try {
         return Promise.resolve(
           JSON.parse(localStorage.getItem('dreamteam_historico') || '[]')
