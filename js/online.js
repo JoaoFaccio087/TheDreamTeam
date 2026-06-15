@@ -53,14 +53,8 @@
   var onlineRankingFinal, btnNovaSala;
 
   // ── Formações (posições por slot) ─────────────────────────────────────────
-  var FORMACOES_POS = {
-    '4-3-3':    ['GOL','LD','ZAG','ZAG','LE','MC','VOL','MC','PE','ATA','PD'],
-    '4-4-2':    ['GOL','LD','ZAG','ZAG','LE','MD','MC','MC','ME','ATA','ATA'],
-    '4-2-3-1':  ['GOL','LD','ZAG','ZAG','LE','VOL','VOL','ME','MC','MD','ATA'],
-    '3-5-2':    ['GOL','ZAG','ZAG','ZAG','LD','MC','VOL','MC','LE','ATA','ATA'],
-    '4-5-1':    ['GOL','LD','ZAG','ZAG','LE','MD','MC','VOL','MC','ME','ATA'],
-    '3-4-3':    ['GOL','ZAG','ZAG','ZAG','LD','MC','MC','LE','PE','ATA','PD'],
-  };
+  // (Os rótulos de posição vêm de `codigosFormacao` do formacoes.js — a mesma
+  //  fonte do offline. Não duplicamos a lista aqui para não haver divergência.)
 
   // ── Subviews ──────────────────────────────────────────────────────────────
 
@@ -145,6 +139,27 @@
       var payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
       return payload.id;
     } catch (e) { return null; }
+  }
+
+  // Aviso sonoro leve quando chega a vez do jogador (gerado, sem arquivo de áudio).
+  var _audioCtx = null;
+  function tocarAvisoVez() {
+    try {
+      if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var ctx = _audioCtx;
+      if (ctx.state === 'suspended') ctx.resume();
+      var t = ctx.currentTime;
+      var o = ctx.createOscillator();
+      var g = ctx.createGain();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(880, t);
+      o.frequency.exponentialRampToValueAtTime(1320, t + 0.12);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.13, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.34);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(t); o.stop(t + 0.35);
+    } catch (e) { /* sem áudio, tudo bem */ }
   }
 
   // ── Conexão ───────────────────────────────────────────────────────────────
@@ -276,9 +291,13 @@
     poolLocal        = dados.pool || [];
     indiceTurnoAtual = dados.turnoNum ? dados.turnoNum - 1 : indiceTurnoAtual;
 
-    var nomeVez = dados.nomeDoTime || dados.username || '—';
-    draftTituloEl.textContent    = minhaVez ? ('⚡ Sua vez — ' + nomeVez) : ('Vez de: ' + nomeVez);
+    var nomeVez  = dados.nomeDoTime || dados.username || '—';
+    var ehBotVez = !!(allPlayers[dados.userId] && allPlayers[dados.userId].ehBot);
+    var tagBot   = ehBotVez ? ' <span class="draft-bot-tag">BOT</span>' : '';
+    draftTituloEl.innerHTML      = (minhaVez ? '⚡ Sua vez — ' : 'Vez de: ') + htmlEsc(nomeVez) + tagBot;
     draftSubtituloEl.textContent = 'Pick ' + (dados.turnoNum || '?') + ' / ' + (dados.totalTurnos || '?');
+
+    if (minhaVez) tocarAvisoVez();
 
     renderOrdemLista();
     iniciarTimer(dados.segundos || 30);
@@ -541,20 +560,21 @@
       draftCarousel.appendChild(card);
     });
 
-    atualizarCarouselPos();
+    draftCarousel.scrollLeft = 0;   // faixa rolável nativa (sem setas/translate)
   }
 
-  function atualizarCarouselPos() {
-    var cardWidth = 146; // 140px + 6px gap
-    draftCarousel.style.transform = 'translateX(-' + (carouselIndex * cardWidth) + 'px)';
-  }
+  function atualizarCarouselPos() { /* faixa agora rola nativamente; sem transform */ }
 
   // ── Campo online ──────────────────────────────────────────────────────────
 
   function renderCampoOnline(campoEl, picks, formacao) {
     var slots    = campoEl.querySelectorAll('.slot-ol');
-    var posis    = FORMACOES_POS[formacao] || FORMACOES_POS['4-3-3'];
-    // Use coordinates from formacoes.js (global const) for slot placement
+    // Rótulos das posições: usa a MESMA fonte do offline (codigosFormacao, global
+    // do formacoes.js), na mesma ordem das coordenadas — nada de lista paralela.
+    var posis    = (typeof codigosFormacao !== 'undefined' && codigosFormacao[formacao])
+                 ? codigosFormacao[formacao]
+                 : (typeof codigosFormacao !== 'undefined' ? codigosFormacao['4-3-3'] : null);
+    // Coordenadas dos slots, também do formacoes.js (mesma ordem).
     var coords   = (typeof formacoes !== 'undefined' && formacoes[formacao])
                  ? formacoes[formacao]
                  : (typeof formacoes !== 'undefined' ? formacoes['4-3-3'] : null);
@@ -674,9 +694,11 @@
 
       var row = document.createElement('div');
       row.className = 'draft-ordem-item' + (ativo ? ' ativo' : '') + (sou ? ' eu' : '');
+      var nomeTime = jog ? (jog.nomeDoTime || jog.username) : String(uid);
+      var tagBot   = (jog && jog.ehBot) ? ' <span class="draft-bot-tag">BOT</span>' : '';
       row.innerHTML =
         '<span class="draft-ordem-num">' + (i + 1) + '</span>' +
-        '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + htmlEsc(jog ? (jog.nomeDoTime || jog.username) : String(uid)) + '</span>' +
+        '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + htmlEsc(nomeTime) + tagBot + '</span>' +
         '<span class="draft-ordem-picks">' + picks + ' picks</span>';
       draftOrdemLista.appendChild(row);
     });
