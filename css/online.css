@@ -101,15 +101,38 @@
   left: 50%;
   transform: translateX(-50%);
   margin-top: 3px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.72);
   color: #fff;
   font-family: 'Archivo', sans-serif;
-  font-size: 0.6rem;
-  font-weight: 600;
+  font-size: 0.74rem;
+  font-weight: 700;
   white-space: nowrap;
-  padding: 2px 5px;
-  border-radius: 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
   pointer-events: none;
+}
+
+/* Vaga ABERTA e VÁLIDA para o jogador selecionado (clicável e pulsando) */
+.slot-ol.vaga-valida {
+  border-style: solid;
+  border-color: #D9B25A;
+  background: rgba(217,178,90,0.18);
+  color: #f4e6c5;
+  cursor: pointer;
+  animation: vagaPulsa 1.1s ease-in-out infinite;
+}
+.slot-ol.vaga-valida:hover { background: rgba(217,178,90,0.32); }
+.slot-ol.vaga-selecionada {
+  border-style: solid;
+  border-color: #D9B25A;
+  background: rgba(217,178,90,0.45);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(217,178,90,0.5), 0 0 16px rgba(217,178,90,0.6);
+}
+@keyframes vagaPulsa {
+  0%,100% { box-shadow: 0 0 0 3px rgba(217,178,90,0.22), 0 0 10px rgba(217,178,90,0.35); }
+  50%     { box-shadow: 0 0 0 4px rgba(217,178,90,0.38), 0 0 16px rgba(217,178,90,0.55); }
 }
 /* Slot recém-adicionado */
 .slot-ol.novo {
@@ -452,7 +475,7 @@
 
 /* Carousel */
 .draft-carousel-wrap {
-  max-width: 920px;
+  max-width: 950px;
   margin: 0.4rem auto 0;
   padding: 1rem 1.2rem 1.4rem;
   border-top: 1px solid rgba(255,255,255,0.07);
@@ -473,20 +496,12 @@
 .draft-carousel {
   display: flex;
   gap: 0.6rem;
-  overflow-x: auto;
-  overflow-y: hidden;
   flex: 1;
-  padding-bottom: 6px;
-  scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.16) transparent;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
-.draft-carousel::-webkit-scrollbar { height: 6px; }
-.draft-carousel::-webkit-scrollbar-track { background: transparent; }
-.draft-carousel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
-.draft-carousel::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
 
-/* Setas removidas: a faixa de cards rola sozinha */
+/* Setas removidas: mostramos 6 cards sorteados, sem rolagem */
 .draft-arrow { display: none; }
 .draft-card {
   flex: 0 0 140px;

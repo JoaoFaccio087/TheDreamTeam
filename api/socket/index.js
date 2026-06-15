@@ -61,12 +61,29 @@ function gerarBots(qtd, nomesUsados) {
   return bots;
 }
 
-// Escolha "equilibrada": bons jogadores, mas com variação (não sempre o melhor).
-// O pool já chega ordenado por força, então olhamos só o topo disponível.
-function escolherPickBot(sala) {
-  const pool = sala.poolDisponivel;
-  if (!pool.length) return null;
-  const topo  = pool.slice(0, Math.min(50, pool.length));
+// ── Posições: códigos por vaga (mesma fonte do front) + elegibilidade ─────────
+const CODIGOS_FORMACAO = {
+  '4-3-3':    ['GOL','LE','ZAG','ZAG','LD','MC','MEI','MC','PE','ATA','PD'],
+  '4-4-2':    ['GOL','LE','ZAG','ZAG','LD','ME','MC','MC','MD','ATA','ATA'],
+  '4-2-3-1':  ['GOL','LE','ZAG','ZAG','LD','VOL','VOL','PE','MEI','PD','ATA'],
+  '3-5-2':    ['GOL','ZAG','ZAG','ZAG','ME','MC','MEI','MC','MD','ATA','ATA'],
+  '4-3-2-1':  ['GOL','LE','ZAG','ZAG','LD','VOL','MC','MC','MEI','MEI','ATA'],
+  '4-5-1':    ['GOL','LE','ZAG','ZAG','LD','VOL','MC','MC','ME','MD','ATA'],
+  '3-4-3':    ['GOL','ZAG','ZAG','ZAG','VOL','MC','MC','MEI','PE','ATA','PD'],
+  '4-1-2-1-2':['GOL','LE','ZAG','ZAG','LD','VOL','ME','MD','MEI','ATA','ATA'],
+};
+function codigosDaFormacao(formacao) { return CODIGOS_FORMACAO[formacao] || CODIGOS_FORMACAO['4-3-3']; }
+function codigosAceitos(cod) { const m = { ME: ['ME','PE'], MD: ['MD','PD'] }; return m[cod] || [cod]; }
+function podeOcupar(jogador, cod) {
+  const ok = codigosAceitos(cod);
+  return (jogador.posicoes || []).some(p => ok.indexOf(p) >= 0);
+}
+
+// Escolha "equilibrada" a partir de uma lista: bons jogadores, mas com variação.
+function escolherPickBotDe(fonte) {
+  if (!fonte.length) return null;
+  const ord  = fonte.slice().sort((a, b) => (b.forca || 70) - (a.forca || 70));
+  const topo = ord.slice(0, Math.min(50, ord.length));
   let total = 0;
   const pesos = topo.map(p => { const f = (p.forca || 70); const w = f * f; total += w; return w; });
   let r = Math.random() * total, acum = 0;
@@ -74,23 +91,32 @@ function escolherPickBot(sala) {
   return topo[topo.length - 1];
 }
 
-function botEscolhe(io, sala, jogador) {
-  const picked = escolherPickBot(sala);
+// Coloca um jogador na 1ª vaga ABERTA e VÁLIDA da formação (bots e auto-pick por timeout).
+function colocarEmVagaAberta(io, sala, jogador, ehBot) {
+  const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
+  jogador.picks = jogador.picks || [];
+  let slotIdx = -1;
+  for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) { slotIdx = i; break; } }
+  if (slotIdx === -1) return;
+  const cod       = codigos[slotIdx];
+  const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, cod));
+  const picked    = escolherPickBotDe(elegiveis.length ? elegiveis : sala.poolDisponivel);
   if (!picked) return;
   const idx = sala.poolDisponivel.indexOf(picked);
   if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
-  jogador.picks = jogador.picks || [];
-  jogador.picks.push(picked);
+  jogador.picks[slotIdx] = picked;
   io.to(sala.codigo).emit('draft:pick', {
     userId:     jogador.userId,
     username:   jogador.username,
     nomeDoTime: jogador.nomeDoTime,
     jogador:    picked,
-    numPicks:   jogador.picks.length,
-    timeout:    false,
-    ehBot:      true,
+    slotIndex:  slotIdx,
+    numPicks:   jogador.picks.filter(Boolean).length,
+    timeout:    !ehBot,
+    ehBot:      !!ehBot,
   });
 }
+function botEscolhe(io, sala, jogador) { colocarEmVagaAberta(io, sala, jogador, true); }
 
 function buildRoomState(sala) {
   const prontos = sala.jogadores.filter(j => j.pronto).length;
@@ -110,7 +136,7 @@ function buildRoomState(sala) {
       pronto:    j.pronto,
       ehBot:     !!j.ehBot,
       picks:     j.picks     || [],
-      numPicks:  (j.picks    || []).length,
+      numPicks:  (j.picks    || []).filter(Boolean).length,
     })),
   };
 }
@@ -166,7 +192,7 @@ function iniciarTurno(io, sala) {
     return;
   }
 
-  const pool50  = sala.poolDisponivel.slice(0, 50);
+  const pool50  = sala.poolDisponivel.slice(0, 120);  // janela ampla → cobre todas as posições
 
   io.to(sala.codigo).emit('draft:turno', {
     userId,
@@ -176,7 +202,7 @@ function iniciarTurno(io, sala) {
     pool:        pool50,
     turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
     totalTurnos: sala.totalPicksNecessarios,
-    numPicks:    (jogador?.picks || []).length,
+    numPicks:    (jogador?.picks || []).filter(Boolean).length,
   });
 
   if (jogador?.socketId) {
@@ -184,21 +210,7 @@ function iniciarTurno(io, sala) {
   }
 
   sala.timerDraft = setTimeout(() => {
-    if (!sala.poolDisponivel.length) return;
-    const idx    = Math.floor(Math.random() * Math.min(sala.poolDisponivel.length, 50));
-    const picked = sala.poolDisponivel.splice(idx, 1)[0];
-    if (jogador) {
-      jogador.picks = jogador.picks || [];
-      jogador.picks.push(picked);
-    }
-    io.to(sala.codigo).emit('draft:pick', {
-      userId,
-      username:   jogador?.username,
-      nomeDoTime: jogador?.nomeDoTime,
-      jogador:    picked,
-      numPicks:   (jogador?.picks || []).length,
-      timeout:    true,
-    });
+    if (jogador) colocarEmVagaAberta(io, sala, jogador, false);  // auto-aloca em vaga válida
     avancarTurno(io, sala);
   }, 30_000);
 }
@@ -208,7 +220,7 @@ function avancarTurno(io, sala) {
   sala.indiceTurno++;
 
   const total  = sala.totalPicksNecessarios || 11;
-  const semPick = sala.jogadores.filter(j => (j.picks || []).length < total);
+  const semPick = sala.jogadores.filter(j => (j.picks || []).filter(Boolean).length < total);
 
   if (!semPick.length) {
     sala.status = 'ready';
@@ -342,6 +354,7 @@ function setupSocket(server, frontendUrl) {
       const todosProntos = sala.jogadores.length >= 1 && sala.jogadores.every(j => j.pronto);
       if (!todosProntos) return socket.emit('erro', 'Todos os jogadores precisam estar prontos');
 
+      try {
       // Carrega pool de jogadores a partir dos arquivos estáticos (sem DB)
       const todosJogadores = loader.getPoolPorCompeticao(sala.competicao);
       if (!todosJogadores.length) {
@@ -384,10 +397,14 @@ function setupSocket(server, frontendUrl) {
         totalTurnos: sala.totalPicksNecessarios,
       });
       iniciarTurno(io, sala);
+      } catch (err) {
+        console.error('Erro em room:start:', err);
+        socket.emit('erro', 'Erro ao iniciar o draft. Tente novamente.');
+      }
     });
 
     // ── draft:pick — jogador escolhe um player individual ─────────────────────
-    socket.on('draft:pick', ({ playerId }) => {
+    socket.on('draft:pick', ({ playerId, slotIndex }) => {
       const code = socket.salaAtual;
       if (!code) return;
 
@@ -396,22 +413,32 @@ function setupSocket(server, frontendUrl) {
       if (sala.ordemDraft[sala.indiceTurno] !== userId)
         return socket.emit('erro', 'Não é sua vez');
 
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog) return;
+      jog.picks = jog.picks || [];
+
+      const codigos = codigosDaFormacao(jog.formacao || '4-3-3');
+      const slot    = Number(slotIndex);
+      if (!(slot >= 0 && slot < codigos.length))
+        return socket.emit('erro', 'Posição inválida');
+      if (jog.picks[slot])
+        return socket.emit('erro', 'Posição já preenchida');
+
       const idx = sala.poolDisponivel.findIndex(p => p.id === playerId);
       if (idx === -1) return socket.emit('erro', 'Jogador não disponível');
+      if (!podeOcupar(sala.poolDisponivel[idx], codigos[slot]))
+        return socket.emit('erro', 'Jogador não joga nessa posição');
 
       const [picked] = sala.poolDisponivel.splice(idx, 1);
-      const jog      = sala.jogadores.find(j => j.userId === userId);
-      if (jog) {
-        jog.picks = jog.picks || [];
-        jog.picks.push(picked);
-      }
+      jog.picks[slot] = picked;
 
       io.to(code).emit('draft:pick', {
         userId,
-        username:   jog?.username,
-        nomeDoTime: jog?.nomeDoTime,
+        username:   jog.username,
+        nomeDoTime: jog.nomeDoTime,
         jogador:    picked,
-        numPicks:   (jog?.picks || []).length,
+        slotIndex:  slot,
+        numPicks:   jog.picks.filter(Boolean).length,
         timeout:    false,
       });
       avancarTurno(io, sala);
