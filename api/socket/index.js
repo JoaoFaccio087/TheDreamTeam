@@ -197,6 +197,107 @@ function gerarCalendario(uids) {
   return turno1.concat(turno2);
 }
 
+// Simula UMA rodada da liga (confrontos diretos) e devolve o payload do round:results.
+function simularUmaRodada(sala) {
+  sala.rodadaAtual++;
+  const rodada   = sala.rodadaAtual;
+  const isUltima = rodada >= sala.totalRodadas;
+
+  const resultadosRodada = [];
+  const fixtures = sala.calendario[rodada - 1] || [];
+  const mapaJog  = {};
+  sala.jogadores.forEach(j => { mapaJog[j.userId] = j; });
+
+  for (const par of fixtures) {
+    const home = mapaJog[par[0]];
+    const away = mapaJog[par[1]];
+    if (!home || !away) continue;
+
+    const homeElenco = (home.picks || []).filter(Boolean);
+    const awayElenco = (away.picks || []).filter(Boolean);
+    const resultado  = simularPartida(homeElenco, { jogadores: awayElenco }, true);
+    const gHome = resultado.gMeus, gAway = resultado.gAdv;
+
+    const sh = sala.resultados[home.userId];
+    const sa = sala.resultados[away.userId];
+    sh.gf += gHome; sh.ga += gAway;
+    sa.gf += gAway; sa.ga += gHome;
+    if      (gHome > gAway) { sh.vitorias++; sa.derrotas++; }
+    else if (gHome < gAway) { sa.vitorias++; sh.derrotas++; }
+    else                    { sh.empates++;  sa.empates++;  }
+
+    resultado.fila.forEach(ev => {
+      if (ev.lado === 'meu') {
+        if (ev.autor?.nome)   sala.statsGols[ev.autor.nome]     = (sala.statsGols[ev.autor.nome]     || 0) + 1;
+        if (ev.assist?.nome)  sala.statsAssists[ev.assist.nome] = (sala.statsAssists[ev.assist.nome] || 0) + 1;
+      } else {
+        if (ev.autorAdv?.nome)  sala.statsGols[ev.autorAdv.nome]     = (sala.statsGols[ev.autorAdv.nome]     || 0) + 1;
+        if (ev.assistAdv?.nome) sala.statsAssists[ev.assistAdv.nome] = (sala.statsAssists[ev.assistAdv.nome] || 0) + 1;
+      }
+    });
+
+    resultadosRodada.push({
+      homeUid: home.userId, homeNome: home.nomeDoTime, homeUser: home.username, homeBot: !!home.ehBot,
+      awayUid: away.userId, awayNome: away.nomeDoTime, awayUser: away.username, awayBot: !!away.ehBot,
+      gHome, gAway, fila: resultado.fila,
+    });
+  }
+
+  const classificacao = sala.jogadores.map(j => {
+    const s = sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 };
+    return {
+      userId: j.userId, username: j.username, nomeDoTime: j.nomeDoTime, ehBot: !!j.ehBot,
+      vitorias: s.vitorias, empates: s.empates, derrotas: s.derrotas, gf: s.gf, ga: s.ga,
+      jogos:  s.vitorias + s.empates + s.derrotas,
+      pontos: s.vitorias * 3 + s.empates,
+      saldo:  s.gf - s.ga,
+    };
+  }).sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
+
+  const timeDoJogador = {};
+  sala.jogadores.forEach(j => { (j.picks || []).forEach(p => { if (p && p.nome) timeDoJogador[p.nome] = j.nomeDoTime; }); });
+  const artilharia   = Object.entries(sala.statsGols).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
+  const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
+
+  const proxFix = sala.calendario[rodada] || [];
+  const proxima = {
+    rodada: rodada + 1,
+    jogos: proxFix.map(par => {
+      const h = mapaJog[par[0]] || {}, a = mapaJog[par[1]] || {};
+      return { homeUid: par[0], homeNome: h.nomeDoTime, homeBot: !!h.ehBot, awayUid: par[1], awayNome: a.nomeDoTime, awayBot: !!a.ehBot };
+    }),
+  };
+
+  return {
+    rodada, isUltima,
+    payload: { rodada, total: sala.totalRodadas, resultados: resultadosRodada, classificacao, artilharia, assistencias, proxima },
+  };
+}
+
+// Encerra o campeonato: define campeão, emite game:end, persiste e limpa a sala.
+function emitirFimDeJogo(io, sala, code) {
+  const campeao = determinarCampeao(sala);
+  if (campeao) sala.resultados[campeao.userId].campeao = true;
+  sala.status = 'fim';
+  io.to(code).emit('game:end', { ranking: buildRanking(sala) });
+  (async () => {
+    for (const jogador of sala.jogadores) {
+      if (jogador.ehBot || jogador.guest) continue;
+      const s = sala.resultados[jogador.userId];
+      if (!s) continue;
+      try {
+        await db.query(
+          `INSERT INTO matches (user_id, competicao, modo, vitorias, empates, derrotas, gf, ga, campeao, detalhes)
+           VALUES ($1,$2,'online',$3,$4,$5,$6,$7,$8,$9)`,
+          [jogador.userId, sala.competicao, s.vitorias, s.empates, s.derrotas, s.gf, s.ga, s.campeao,
+           JSON.stringify({ sala: code, rodadas: sala.totalRodadas, numPicks: (jogador.picks || []).length })]
+        );
+      } catch (e) { console.error('[socket] Erro ao salvar partida:', e); }
+    }
+    deleteSala(code);
+  })();
+}
+
 function codigosAceitosServidor(codigo) {
   const mapa = { 'ME': ['ME','PE','MC','MEI'], 'MD': ['MD','PD','MC','MEI'] };
   return mapa[codigo] || [codigo];
@@ -559,157 +660,58 @@ function setupSocket(server, frontendUrl) {
         });
         sala.calendario   = gerarCalendario(sala.jogadores.map(j => j.userId));
         sala.totalRodadas = sala.calendario.length || sala.totalRodadas;   // 38 com 20 times
+        sala.votosPular   = [];
         io.to(code).emit('round:start', { rodada: 1, total: sala.totalRodadas });
       }
     });
 
-    // ── round:simulate — simula uma rodada (servidor deduplica) ───────────────
+    // ── round:simulate — host avança UMA rodada ───────────────────────────────
     socket.on('round:simulate', async () => {
       const code = socket.salaAtual;
       if (!code) return;
-
       const sala = getSala(code);
       if (!sala || sala.status !== 'playing') return;
-      if (sala.hostUserId !== userId) return;   // só o host avança as rodadas
+      if (sala.hostUserId !== userId) return;   // só o host avança
       if (sala.rodadaEmAndamento) return;
 
       sala.rodadaEmAndamento = true;
-      sala.rodadaAtual++;
-      const rodada   = sala.rodadaAtual;
-      const isUltima = rodada >= sala.totalRodadas;
-
       try {
-        const resultadosRodada = [];
-        const fixtures = sala.calendario[rodada - 1] || [];
-        const mapaJog  = {};
-        sala.jogadores.forEach(j => { mapaJog[j.userId] = j; });
-
-        for (const par of fixtures) {
-          const home = mapaJog[par[0]];
-          const away = mapaJog[par[1]];
-          if (!home || !away) continue;
-
-          const homeElenco = (home.picks || []).filter(Boolean);
-          const awayElenco = (away.picks || []).filter(Boolean);
-
-          // Confronto direto: mando para o time da casa.
-          const resultado = simularPartida(homeElenco, { jogadores: awayElenco }, true);
-          const gHome = resultado.gMeus, gAway = resultado.gAdv;
-
-          const sh = sala.resultados[home.userId];
-          const sa = sala.resultados[away.userId];
-          sh.gf += gHome; sh.ga += gAway;
-          sa.gf += gAway; sa.ga += gHome;
-          if      (gHome > gAway) { sh.vitorias++; sa.derrotas++; }
-          else if (gHome < gAway) { sa.vitorias++; sh.derrotas++; }
-          else                    { sh.empates++;  sa.empates++;  }
-
-          // Artilharia e assistências — dos DOIS lados
-          resultado.fila.forEach(ev => {
-            if (ev.lado === 'meu') {
-              if (ev.autor?.nome)   sala.statsGols[ev.autor.nome]     = (sala.statsGols[ev.autor.nome]     || 0) + 1;
-              if (ev.assist?.nome)  sala.statsAssists[ev.assist.nome] = (sala.statsAssists[ev.assist.nome] || 0) + 1;
-            } else {
-              if (ev.autorAdv?.nome)  sala.statsGols[ev.autorAdv.nome]     = (sala.statsGols[ev.autorAdv.nome]     || 0) + 1;
-              if (ev.assistAdv?.nome) sala.statsAssists[ev.assistAdv.nome] = (sala.statsAssists[ev.assistAdv.nome] || 0) + 1;
-            }
-          });
-
-          resultadosRodada.push({
-            homeUid: home.userId, homeNome: home.nomeDoTime, homeUser: home.username, homeBot: !!home.ehBot,
-            awayUid: away.userId, awayNome: away.nomeDoTime, awayUser: away.username, awayBot: !!away.ehBot,
-            gHome, gAway,
-            fila: resultado.fila,
-          });
-        }
-
-        // Classificação (20 times)
-        const classificacao = sala.jogadores
-          .map(j => {
-            const s = sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 };
-            return {
-              userId: j.userId, username: j.username, nomeDoTime: j.nomeDoTime, ehBot: !!j.ehBot,
-              vitorias: s.vitorias, empates: s.empates, derrotas: s.derrotas, gf: s.gf, ga: s.ga,
-              jogos:  s.vitorias + s.empates + s.derrotas,
-              pontos: s.vitorias * 3 + s.empates,
-              saldo:  s.gf - s.ga,
-            };
-          })
-          .sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
-
-        // Artilharia e assistências top-18
-        // Mapa nome do jogador → nome do time (cada nome pertence a um único time)
-        const timeDoJogador = {};
-        sala.jogadores.forEach(j => {
-          (j.picks || []).forEach(p => { if (p && p.nome) timeDoJogador[p.nome] = j.nomeDoTime; });
-        });
-
-        const artilharia = Object.entries(sala.statsGols)
-          .sort((a, b) => b[1] - a[1]).slice(0, 18)
-          .map(([nome, gols]) => ({ nome, gols, time: timeDoJogador[nome] || '' }));
-
-        const assistencias = Object.entries(sala.statsAssists)
-          .sort((a, b) => b[1] - a[1]).slice(0, 18)
-          .map(([nome, assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
-
-        // Próxima rodada (para a coluna "Próximos jogos")
-        const mapaNome = {};
-        sala.jogadores.forEach(j => { mapaNome[j.userId] = j; });
-        const proxFix = sala.calendario[rodada] || [];   // rodada é 1-based → [rodada] = próxima
-        const proxima = {
-          rodada: rodada + 1,
-          jogos: proxFix.map(par => {
-            const h = mapaNome[par[0]] || {}, a = mapaNome[par[1]] || {};
-            return {
-              homeUid: par[0], homeNome: h.nomeDoTime, homeBot: !!h.ehBot,
-              awayUid: par[1], awayNome: a.nomeDoTime, awayBot: !!a.ehBot,
-            };
-          }),
-        };
-
-        io.to(code).emit('round:results', {
-          rodada,
-          total: sala.totalRodadas,
-          resultados: resultadosRodada,
-          classificacao,
-          artilharia,
-          assistencias,
-          proxima,
-        });
-
-        if (isUltima) {
-          const campeao = determinarCampeao(sala);
-          if (campeao) sala.resultados[campeao.userId].campeao = true;
-
-          sala.status = 'fim';
-          io.to(code).emit('game:end', { ranking: buildRanking(sala) });
-
-          // Persiste resultados assincronamente
-          (async () => {
-            for (const jogador of sala.jogadores) {
-              if (jogador.ehBot || jogador.guest) continue;   // bots e convidados não salvam histórico
-              const s = sala.resultados[jogador.userId];
-              if (!s) continue;
-              try {
-                await db.query(
-                  `INSERT INTO matches
-                     (user_id, competicao, modo, vitorias, empates, derrotas, gf, ga, campeao, detalhes)
-                   VALUES ($1,$2,'online',$3,$4,$5,$6,$7,$8,$9)`,
-                  [jogador.userId, sala.competicao,
-                   s.vitorias, s.empates, s.derrotas, s.gf, s.ga, s.campeao,
-                   JSON.stringify({ sala: code, rodadas: sala.totalRodadas, numPicks: (jogador.picks || []).length })]
-                );
-              } catch (e) { console.error('[socket] Erro ao salvar partida:', e); }
-            }
-            deleteSala(code);
-          })();
-        }
-        // Rodadas seguintes são disparadas pelo HOST (botão/auto) via round:simulate.
+        const { isUltima, payload } = simularUmaRodada(sala);
+        io.to(code).emit('round:results', payload);
+        if (isUltima) emitirFimDeJogo(io, sala, code);
       } catch (err) {
         console.error('[socket round:simulate]', err);
         socket.emit('erro', 'Erro na simulação');
       } finally {
         sala.rodadaEmAndamento = false;
+      }
+    });
+
+    // ── round:skipAll — voto p/ pular tudo; com TODOS os humanos, simula o resto ─
+    socket.on('round:skipAll', () => {
+      const code = socket.salaAtual;
+      if (!code) return;
+      const sala = getSala(code);
+      if (!sala || sala.status !== 'playing') return;
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog || jog.ehBot) return;            // só humanos votam
+
+      sala.votosPular = sala.votosPular || [];
+      if (!sala.votosPular.includes(userId)) sala.votosPular.push(userId);
+      const humanos = sala.jogadores.filter(j => !j.ehBot).length;
+      io.to(code).emit('round:skipVotes', { votos: sala.votosPular.length, total: humanos });
+
+      if (humanos > 0 && sala.votosPular.length >= humanos && !sala.rodadaEmAndamento) {
+        sala.rodadaEmAndamento = true;
+        try {
+          let res;
+          do { res = simularUmaRodada(sala); } while (!res.isUltima);
+          emitirFimDeJogo(io, sala, code);
+        } catch (err) {
+          console.error('[socket round:skipAll]', err);
+        } finally {
+          sala.rodadaEmAndamento = false;
+        }
       }
     });
 
@@ -721,6 +723,16 @@ function setupSocket(server, frontendUrl) {
       if (!sala) return;
       const jog = sala.jogadores.find(j => j.userId === userId);
       if (jog) { jog.conectado = false; jog.socketId = null; }
+
+      // Se não há mais nenhum HUMANO conectado, descarta a sala (evita vazamento de
+      // memória e timers órfãos). Salas só de bots não fazem sentido sozinhas.
+      const humanosConectados = sala.jogadores.filter(j => !j.ehBot && j.conectado).length;
+      if (humanosConectados === 0) {
+        if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+        deleteSala(code);
+        return;
+      }
+
       io.to(code).emit('room:state', buildRoomState(sala));
     });
   });

@@ -804,6 +804,7 @@
       <!-- Barra: rodada atual (esq) + abas (dir) -->
       <div class="rodada-barra">
         <p id="rodada-titulo" class="rodada-barra-titulo">RODADA 1</p>
+        <span id="online-skip-cont" class="online-skip-cont escondida"></span>
         <div class="rodada-tabs">
           <button id="tab-partidas" class="rodada-tab ativa">Partidas</button>
           <button id="tab-classif"  class="rodada-tab">Classifica&ccedil;&atilde;o</button>
@@ -823,6 +824,7 @@
               <button id="btn-rodada-proxima" class="btn-rolar escondida">Pr&oacute;ximo jogo &rarr;</button>
               <button id="btn-rodada-fim"     class="btn-rolar escondida">Ver Resultado Final &rarr;</button>
               <p id="rodada-aguardando-host" class="rodada-aguardando escondida">Aguardando o host avan&ccedil;ar&hellip;</p>
+              <button id="online-btn-pular" class="btn-pular-tudo escondida">&#9197; Pular tudo</button>
             </div>
           </div>
         </div>
@@ -854,7 +856,18 @@
         </div>
       </div>
 
-    </div><!-- /online-rodada -->
+      <!-- Modal: confirmar "pular tudo" -->
+      <div id="modal-pular" class="modal-confirm escondida">
+        <div class="modal-confirm-box">
+          <p class="modal-confirm-titulo">&#9197; Pular todos os jogos?</p>
+          <p class="modal-confirm-texto">Isso simula o restante da temporada de uma vez. <strong>Todos os jogadores</strong> da sala precisam aceitar para pular.</p>
+          <div class="modal-confirm-acoes">
+            <button id="modal-pular-cancelar" class="btn-rolar btn-sec">Cancelar</button>
+            <button id="modal-pular-confirmar" class="btn-rolar">Confirmar</button>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /online-rodada -->
 
 
@@ -873,8 +886,39 @@
 
       <div id="online-ranking-final" class="online-ranking-final"></div>
 
-      <div style="text-align:center;margin-top:1.5rem">
-        <button id="btn-nova-sala" class="btn-rolar">Nova Sala</button>
+      <div id="fim-acoes" class="fim-acoes escondida">
+        <button id="btn-ver-resumo"   class="btn-rolar">Ver Resumo da Campanha</button>
+        <button id="btn-voltar-inicio" class="btn-rolar btn-sec">Voltar para o In&iacute;cio</button>
+      </div>
+
+      <!-- Modal de premiação (abre automaticamente no fim) -->
+      <div id="modal-premiacao" class="modal-premiacao escondida">
+        <div class="modal-prem-box">
+          <button id="modal-prem-fechar" class="modal-prem-x" aria-label="Fechar">&times;</button>
+          <p class="modal-prem-titulo">&#127942; Premia&ccedil;&atilde;o da Temporada</p>
+          <div class="modal-prem-cards">
+            <div class="prem-card prem-campeao">
+              <span class="prem-label">&#128081; O Campe&atilde;o</span>
+              <span class="prem-time" id="prem-campeao-time">&mdash;</span>
+              <span class="prem-stat" id="prem-campeao-stat">&mdash;</span>
+            </div>
+            <div class="prem-card prem-pato">
+              <span class="prem-label">&#129414; O Pato</span>
+              <span class="prem-time" id="prem-pato-time">&mdash;</span>
+              <span class="prem-stat" id="prem-pato-stat">&mdash;</span>
+            </div>
+            <div class="prem-card prem-goleador">
+              <span class="prem-label">&#9917; O Goleador</span>
+              <span class="prem-time" id="prem-goleador-time">&mdash;</span>
+              <span class="prem-stat" id="prem-goleador-stat">&mdash;</span>
+            </div>
+            <div class="prem-card prem-peneira">
+              <span class="prem-label">&#129349; O Peneira</span>
+              <span class="prem-time" id="prem-peneira-time">&mdash;</span>
+              <span class="prem-stat" id="prem-peneira-stat">&mdash;</span>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div><!-- /online-fim -->

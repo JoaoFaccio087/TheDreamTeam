@@ -8,6 +8,11 @@ const app    = express();
 const server = http.createServer(app);
 const PORT   = parseInt(process.env.PORT || '3000', 10);
 
+// Handlers globais: logam e MANTÊM o processo de pé. Um erro solto em uma sala não
+// deve derrubar o servidor inteiro (e, com ele, todas as outras salas em andamento).
+process.on('uncaughtException',  (err)    => console.error('[uncaughtException]', err));
+process.on('unhandledRejection', (reason) => console.error('[unhandledRejection]', reason));
+
 // Trava de segurança: não sobe sem um JWT_SECRET forte (evita rodar com
 // segredo vazio/fraco, o que tornaria os tokens forjáveis).
 if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 16) {

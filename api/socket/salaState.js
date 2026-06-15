@@ -21,6 +21,7 @@ function criarSala(codigo, hostUserId, competicao) {
     statsGols:             {},        // nome → count (acumula entre rodadas)
     statsAssists:          {},        // nome → count
     rodadaEmAndamento:     false,
+    votosPular:            [],       // userIds (humanos) que aceitaram pular tudo
   };
   salas.set(codigo, state);
   return state;

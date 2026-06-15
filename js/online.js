@@ -53,9 +53,14 @@
   var rodadaProximos, proximosTitulo, rodadaAguardandoHost;
   var tabPartidas, tabClassif, abaPartidas, abaClassif;
   var animTimer = null;   // timer da animação da partida do usuário
+  var animacaoAtiva = false;   // true enquanto a partida do usuário está sendo animada
+  var btnPularTudo, modalPular, modalPularConfirmar, modalPularCancelar, skipContador;
+  var euVoteiPular = false, skipVotos = 0, skipTotal = 0;
 
   // Fim
-  var onlineRankingFinal, btnNovaSala;
+  var onlineRankingFinal;
+  var btnVerResumo, btnVoltarInicio, fimAcoes, modalPremiacao, modalPremFechar;
+  var meuRankingFinal = null, ultimaArtilharia = [], ultimaAssistencia = [], rankingFinalCache = [];
 
   // ── Formações (posições por slot) ─────────────────────────────────────────
   // (Os rótulos de posição vêm de `codigosFormacao` do formacoes.js — a mesma
@@ -213,6 +218,11 @@
     selectedPlayer   = null;
     selectedSlot     = null;
     repositionFrom   = null;
+    euVoteiPular     = false;
+    skipVotos        = 0;
+    skipTotal        = 0;
+    animacaoAtiva    = false;
+    pararAnimacaoPartida();
   }
 
   // ── Eventos Socket ────────────────────────────────────────────────────────
@@ -228,6 +238,7 @@
     socket.on('ready:count',      onReadyCount);
     socket.on('round:start',      onRoundStart);
     socket.on('round:results',    onRoundResults);
+    socket.on('round:skipVotes',  onSkipVotes);
     socket.on('game:end',         onGameEnd);
     socket.on('erro',             function (msg) {
       erroOnline(msg);
@@ -424,6 +435,10 @@
     totalRodadas    = dados.total  || 38;
     simulandoRodada = false;
     pararAnimacaoPartida();
+    euVoteiPular    = false;
+    skipVotos       = 0;
+    skipTotal       = 0;
+    renderSkipContador();
 
     rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
     var infoEl = document.getElementById('rodada-header-info');
@@ -451,11 +466,12 @@
     if (tabClassif)  tabClassif.classList.toggle('ativa', !p);
   }
 
-  function pararAnimacaoPartida() { if (animTimer) { clearTimeout(animTimer); animTimer = null; } }
+  function pararAnimacaoPartida() { if (animTimer) { clearTimeout(animTimer); animTimer = null; } animacaoAtiva = false; }
 
   // Card grande da partida do usuário — ANIMA o jogo (relógio + gols + placar ao vivo).
   function cardPartidaGrande(m) {
     pararAnimacaoPartida();
+    animacaoAtiva = true;
     var euCasa = String(m.homeUid) === String(meuUserId);
     var euFora = String(m.awayUid) === String(meuUserId);
     var res = (m.gHome === m.gAway) ? 'empate'
@@ -498,6 +514,7 @@
     }
     function finalizar() {
       pararAnimacaoPartida();
+      animacaoAtiva = false;
       if (relEl) relEl.textContent = 'ENC';
       if (ghEl) ghEl.textContent = m.gHome;
       if (gaEl) gaEl.textContent = m.gAway;
@@ -510,6 +527,7 @@
         golsEl.className = 'pg-gols pg-sem';
         golsEl.textContent = 'Sem gols na partida';
       }
+      atualizarAcoesRodada();   // libera os botões só após o fim/pulo da animação
     }
     function tick() {
       minuto++;
@@ -580,12 +598,31 @@
     });
   }
 
-  // Ações da rodada — só o HOST avança; os demais aguardam.
+  // round:skipVotes — contador de votos para pular tudo
+  function onSkipVotes(dados) {
+    skipVotos = dados.votos || 0;
+    skipTotal = dados.total || 0;
+    renderSkipContador();
+    atualizarAcoesRodada();
+  }
+  function renderSkipContador() {
+    if (!skipContador) return;
+    if (skipVotos > 0 && skipVotos < skipTotal) {
+      skipContador.textContent = '⏩ Pular tudo: ' + skipVotos + '/' + skipTotal;
+      skipContador.classList.remove('escondida');
+    } else {
+      skipContador.classList.add('escondida');
+    }
+  }
+
+  // Ações da rodada — host avança; todos os humanos podem votar "pular tudo".
   function atualizarAcoesRodada() {
     btnRodadaProxima.classList.add('escondida');
     btnRodadaFim.classList.add('escondida');
+    if (btnPularTudo) btnPularTudo.classList.add('escondida');
     if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
 
+    // Última rodada → encerrar
     if (rodadaAtual >= totalRodadas) {
       if (ehHost) {
         btnRodadaFim.classList.remove('escondida');
@@ -595,16 +632,31 @@
       }
       return;
     }
-    if (!ehHost) {
-      if (rodadaAguardandoHost) {
-        rodadaAguardandoHost.textContent = 'Aguardando o host avançar…';
-        rodadaAguardandoHost.classList.remove('escondida');
-      }
-      return;
+
+    // Durante a animação da partida ninguém avança (corrige o "Próximo jogo" precoce).
+    if (animacaoAtiva) return;
+
+    // Próximo jogo: só o host
+    if (ehHost) {
+      btnRodadaProxima.disabled    = false;
+      btnRodadaProxima.textContent = 'Próximo jogo ▶';
+      btnRodadaProxima.classList.remove('escondida');
+    } else if (rodadaAguardandoHost) {
+      rodadaAguardandoHost.textContent = 'Aguardando o host avançar…';
+      rodadaAguardandoHost.classList.remove('escondida');
     }
-    btnRodadaProxima.disabled    = false;
-    btnRodadaProxima.textContent = 'Próximo jogo ▶';
-    btnRodadaProxima.classList.remove('escondida');
+
+    // Pular tudo: todos os humanos votam
+    if (btnPularTudo) {
+      btnPularTudo.classList.remove('escondida');
+      if (euVoteiPular) {
+        btnPularTudo.disabled    = true;
+        btnPularTudo.textContent = 'Aguardando todos' + (skipTotal ? ' (' + skipVotos + '/' + skipTotal + ')' : '') + '…';
+      } else {
+        btnPularTudo.disabled    = false;
+        btnPularTudo.textContent = '⏩ Pular tudo';
+      }
+    }
   }
 
   // round:results — resultados da rodada
@@ -612,6 +664,8 @@
     simulandoRodada = false;
     pararAnimacaoPartida();
     rodadaAtual     = dados.rodada || rodadaAtual;
+    ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
+    ultimaAssistencia = dados.assistencias || ultimaAssistencia;
     rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
 
     // Partidas: card grande (usuário) + cards menores (outros) + próximos jogos
@@ -680,6 +734,146 @@
         '<div class="ranking-stats">' + (p.vitorias || 0) + 'V ' + (p.empates || 0) + 'E ' + (p.derrotas || 0) + 'D</div>' +
         '<span class="ranking-pts">' + pts + ' pts</span>';
       onlineRankingFinal.appendChild(div);
+    });
+
+    // ── Premiação ──────────────────────────────────────────────────────────
+    var ranking = dados.ranking || [];
+    rankingFinalCache = ranking;
+    meuRankingFinal = ranking.find(function (p) { return String(p.userId) === String(meuUserId); }) || null;
+
+    var campeao  = ranking[0] || null;
+    var pato     = ranking.length ? ranking[ranking.length - 1] : null;
+    var goleador = null, peneira = null;
+    ranking.forEach(function (p) {
+      if (!goleador || (p.gf || 0) > (goleador.gf || 0)) goleador = p;
+      if (!peneira  || (p.ga || 0) > (peneira.ga  || 0)) peneira  = p;
+    });
+
+    function nomeTimePrem(p) { return p ? (p.nomeDoTime || nomeUsuario(p)) : '—'; }
+    function vedPrem(p) {
+      return '<b class="rec-v">' + (p.vitorias || 0) + 'V</b> · ' +
+             '<b class="rec-e">' + (p.empates  || 0) + 'E</b> · ' +
+             '<b class="rec-d">' + (p.derrotas || 0) + 'D</b>';
+    }
+    function setPrem(idTime, idStat, time, statHtml) {
+      var et = document.getElementById(idTime), es = document.getElementById(idStat);
+      if (et) et.textContent = time;
+      if (es) es.innerHTML  = statHtml;
+    }
+    if (campeao)  setPrem('prem-campeao-time',  'prem-campeao-stat',  nomeTimePrem(campeao),  vedPrem(campeao));
+    if (pato)     setPrem('prem-pato-time',     'prem-pato-stat',     nomeTimePrem(pato),     vedPrem(pato));
+    if (goleador) setPrem('prem-goleador-time', 'prem-goleador-stat', nomeTimePrem(goleador), (goleador.gf || 0) + ' gols feitos');
+    if (peneira)  setPrem('prem-peneira-time',  'prem-peneira-stat',  nomeTimePrem(peneira),  (peneira.ga  || 0) + ' gols sofridos');
+
+    // Abre o modal automaticamente; os botões só aparecem ao fechar.
+    if (fimAcoes) fimAcoes.classList.add('escondida');
+    if (modalPremiacao) modalPremiacao.classList.remove('escondida');
+  }
+
+  // Resumo da campanha do MEU time (estilo do resumo offline do Brasileirão)
+  function curtoNome(nome) {
+    if (!nome) return '';
+    var p = String(nome).trim().split(/\s+/);
+    return p.length === 1 ? p[0] : (p[0].charAt(0) + '. ' + p[p.length - 1]);
+  }
+
+  function abrirResumoOnline() {
+    var overlay = document.getElementById('resumo-overlay');
+    if (!overlay || !meuRankingFinal) return;
+    var me = meuRankingFinal;
+    var v = me.vitorias || 0, e = me.empates || 0, d = me.derrotas || 0;
+    var gf = me.gf || 0, ga = me.ga || 0, saldo = gf - ga;
+    var pts = v * 3 + e, jogos = v + e + d;
+    var aprov = jogos > 0 ? Math.round(pts / (jogos * 3) * 100) : 0;
+    var form   = me.formacao || '4-3-3';
+    var coords = (typeof formacoes !== 'undefined' ? formacoes : {})[form] || [];
+    var cods   = (typeof codigosFormacao !== 'undefined' ? codigosFormacao : {})[form] || [];
+    var picks  = me.picks || [];
+
+    var idx = (rankingFinalCache || []).findIndex(function (p) { return String(p.userId) === String(me.userId); });
+    var pos = idx >= 0 ? (idx + 1) : null;
+    var ehCampeao = !!me.campeao || pos === 1;
+
+    var golMap = {}, asiMap = {};
+    (ultimaArtilharia  || []).forEach(function (a) { golMap[a.nome] = a.gols; });
+    (ultimaAssistencia || []).forEach(function (a) { asiMap[a.nome] = a.assists; });
+
+    var trofeu = '<svg class="resumo-trofeu" viewBox="0 0 64 64" aria-hidden="true">' +
+      '<path d="M20 6h24v10a12 12 0 0 1-24 0V6z" fill="currentColor"/>' +
+      '<path d="M20 9H9v5a8 8 0 0 0 9 8" fill="none" stroke="currentColor" stroke-width="3"/>' +
+      '<path d="M44 9h11v5a8 8 0 0 1-9 8" fill="none" stroke="currentColor" stroke-width="3"/>' +
+      '<rect x="29" y="28" width="6" height="9" fill="currentColor"/>' +
+      '<rect x="21" y="37" width="22" height="5" rx="1" fill="currentColor"/>' +
+      '<rect x="25" y="42" width="14" height="6" rx="1" fill="currentColor"/></svg>';
+
+    function card(rot, val, sub) {
+      return '<div class="resumo-card-item"><span class="rci-rot">' + rot + '</span>' +
+             '<span class="rci-val">' + val + '</span><span class="rci-sub">' + sub + '</span></div>';
+    }
+    var cardsHtml =
+      card('Campanha', '<b class="rec-v">' + v + '</b><i>·</i><b class="rec-e">' + e + '</b><i>·</i><b class="rec-d">' + d + '</b>', 'V · E · D') +
+      card('Gols', '<b>' + gf + '</b><i>:</i><b>' + ga + '</b>', 'Feitos · Sofridos (' + (saldo >= 0 ? '+' : '') + saldo + ')') +
+      card('Posição', (pos ? pos + 'º' : '—'), 'na tabela') +
+      card('Pontos', pts, aprov + '% aproveitamento');
+
+    var campoHtml = '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
+      '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
+    for (var i = 0; i < 11; i++) {
+      var pc = coords[i]; if (!pc) continue;
+      var jg = picks[i];
+      campoHtml += '<div class="resumo-jogador" style="left:' + pc.left + '%;top:' + pc.top + '%">' +
+        '<span class="resumo-jogador-marca">' + (cods[i] || '') + '</span>' +
+        '<span class="resumo-jogador-nome">' + (jg ? htmlEsc(curtoNome(jg.nome)) : '') + '</span></div>';
+    }
+
+    var listaHtml = '<div class="resumo-lista-head"><span class="rl-nome">Jogador</span>' +
+      '<span class="rl-num">Fça</span><span class="rl-num">G</span><span class="rl-num">A</span></div>';
+    for (var k = 0; k < 11; k++) {
+      var j = picks[k]; if (!j) continue;
+      listaHtml += '<div class="resumo-lista-linha">' +
+        '<span class="rl-nome"><i class="rl-cod">' + (cods[k] || '') + '</i>' + htmlEsc(curtoNome(j.nome)) + '</span>' +
+        '<span class="rl-num rl-forca">' + (j.forca || '') + '</span>' +
+        '<span class="rl-num">' + (golMap[j.nome] || 0) + '</span>' +
+        '<span class="rl-num">' + (asiMap[j.nome] || 0) + '</span></div>';
+    }
+
+    var titulo = ehCampeao ? 'CAMPEÃO' : (pos ? pos + 'º LUGAR' : 'FIM DE TEMPORADA');
+
+    overlay.innerHTML =
+      '<div class="resumo-backdrop"></div>' +
+      '<div class="resumo-card" id="resumo-card">' +
+        '<div class="resumo-conteudo">' +
+          '<div class="resumo-hero">' + (ehCampeao ? trofeu : '') +
+            '<h2 class="resumo-titulo">' + titulo + '</h2>' +
+            '<p class="resumo-sub">BRASILEIRÃO · ' + htmlEsc(me.nomeDoTime || nomeUsuario(me)) + ' · ' + form + '</p>' +
+          '</div>' +
+          '<div class="resumo-cards">' + cardsHtml + '</div>' +
+          '<div class="resumo-grid">' +
+            '<div class="resumo-col-campo"><p class="resumo-bloco-rot">Mapa de Escalação</p><div class="resumo-campo">' + campoHtml + '</div></div>' +
+            '<div class="resumo-col-lista"><p class="resumo-bloco-rot">Jogadores &amp; Estatísticas</p><div class="resumo-lista">' + listaHtml + '</div></div>' +
+          '</div>' +
+          '<div class="resumo-marca">THE DREAM TEAM</div>' +
+        '</div>' +
+        '<div class="resumo-acoes">' +
+          '<button id="resumo-online-baixar" class="resumo-btn">Baixar imagem</button>' +
+          '<button id="resumo-online-fechar" class="resumo-btn-destaque">Fechar</button>' +
+        '</div>' +
+      '</div>';
+
+    overlay.classList.remove('escondida');
+    function fechar() { overlay.classList.add('escondida'); }
+    overlay.querySelector('.resumo-backdrop').addEventListener('click', fechar);
+    document.getElementById('resumo-online-fechar').addEventListener('click', fechar);
+    document.getElementById('resumo-online-baixar').addEventListener('click', function () {
+      var alvo = document.getElementById('resumo-card');
+      if (typeof html2canvas === 'undefined' || !alvo) return;
+      var fundo = getComputedStyle(document.body).backgroundColor;
+      html2canvas(alvo, { backgroundColor: fundo, scale: 2 }).then(function (canvas) {
+        var link = document.createElement('a');
+        link.download = 'the-dream-team-resumo.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
     });
   }
 
@@ -1183,10 +1377,19 @@
     tabClassif  = document.getElementById('tab-classif');
     abaPartidas = document.getElementById('aba-partidas');
     abaClassif  = document.getElementById('aba-classif');
+    btnPularTudo        = document.getElementById('online-btn-pular');
+    modalPular          = document.getElementById('modal-pular');
+    modalPularConfirmar = document.getElementById('modal-pular-confirmar');
+    modalPularCancelar  = document.getElementById('modal-pular-cancelar');
+    skipContador        = document.getElementById('online-skip-cont');
 
     // Fim
     onlineRankingFinal = document.getElementById('online-ranking-final');
-    btnNovaSala        = document.getElementById('btn-nova-sala');
+    btnVerResumo    = document.getElementById('btn-ver-resumo');
+    btnVoltarInicio = document.getElementById('btn-voltar-inicio');
+    fimAcoes        = document.getElementById('fim-acoes');
+    modalPremiacao  = document.getElementById('modal-premiacao');
+    modalPremFechar = document.getElementById('modal-prem-fechar');
 
     // ── Eventos ────────────────────────────────────────────────────────────
 
@@ -1312,15 +1515,33 @@
     if (tabPartidas) tabPartidas.addEventListener('click', function () { selecionarAbaRodada('partidas'); });
     if (tabClassif)  tabClassif.addEventListener('click', function () { selecionarAbaRodada('classif'); });
 
+    if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
+      if (euVoteiPular) return;
+      if (modalPular) modalPular.classList.remove('escondida');
+    });
+    if (modalPularCancelar) modalPularCancelar.addEventListener('click', function () {
+      if (modalPular) modalPular.classList.add('escondida');
+    });
+    if (modalPularConfirmar) modalPularConfirmar.addEventListener('click', function () {
+      if (modalPular) modalPular.classList.add('escondida');
+      euVoteiPular = true;
+      if (socket && socket.connected) socket.emit('round:skipAll');
+      atualizarAcoesRodada();
+    });
+
     btnRodadaFim.addEventListener('click', function () {
       subview('online-fim');
     });
 
     // Fim
-    btnNovaSala.addEventListener('click', function () {
+    if (modalPremFechar) modalPremFechar.addEventListener('click', function () {
+      if (modalPremiacao) modalPremiacao.classList.add('escondida');
+      if (fimAcoes) fimAcoes.classList.remove('escondida');   // libera os botões ao fechar
+    });
+    if (btnVerResumo) btnVerResumo.addEventListener('click', abrirResumoOnline);
+    if (btnVoltarInicio) btnVoltarInicio.addEventListener('click', function () {
       desconectar();
       mostrarTelaInicial();
-      abrirModalOnline();
     });
 
     // Esc

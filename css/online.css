@@ -706,7 +706,7 @@
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .rodada-tab:hover { background: rgba(255,255,255,0.08); }
-.rodada-tab.ativa { background: #D9B25A; border-color: #D9B25A; color: #1a1206; }
+.rodada-tab.ativa { background: #2BD46A; border-color: #2BD46A; color: #0E0F13; }
 .rodada-aba { padding: 0 1.2rem 2rem; }
 
 /* Animação do card grande */
@@ -767,6 +767,77 @@
 .pj-time.dir { text-align: right; }
 .pj-x { color: #666; }
 .rodada-aguardando { color: #888; font-size: 0.78rem; text-align: center; font-style: italic; margin-top: 0.5rem; }
+
+/* Botão "Pular tudo" (pequeno, centralizado) + contador + modal de confirmação */
+.btn-pular-tudo {
+  align-self: center; margin-top: 0.5rem;
+  background: transparent; border: 1px solid rgba(43,212,106,0.5); color: #2BD46A;
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.4px;
+  padding: 0.35rem 0.95rem; border-radius: 7px; cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.btn-pular-tudo:hover:not(:disabled) { background: rgba(43,212,106,0.12); }
+.btn-pular-tudo:disabled { opacity: 0.7; cursor: default; color: #888; border-color: rgba(255,255,255,0.15); }
+
+.online-skip-cont {
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.3px;
+  color: #2BD46A; background: rgba(43,212,106,0.12);
+  border: 1px solid rgba(43,212,106,0.4); border-radius: 20px; padding: 0.2rem 0.7rem;
+}
+
+.modal-confirm {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-confirm-box {
+  background: #16181f; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px;
+  padding: 1.5rem 1.6rem; max-width: 380px; width: 100%; text-align: center;
+}
+.modal-confirm-titulo { font-family: 'Archivo Black', sans-serif; font-size: 1.05rem; color: #fff; margin: 0 0 0.6rem; }
+.modal-confirm-texto  { font-size: 0.82rem; color: #aaa; line-height: 1.5; margin: 0 0 1.2rem; }
+.modal-confirm-acoes  { display: flex; gap: 0.6rem; justify-content: center; }
+.modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
+
+/* Fim de jogo: botões de ação + modal de premiação */
+.fim-acoes { text-align: center; margin-top: 1.5rem; display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
+
+.modal-premiacao {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.66);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-prem-box {
+  position: relative;
+  background: #16181f; border: 1px solid rgba(217,178,90,0.3); border-radius: 16px;
+  padding: 1.8rem 1.6rem 1.6rem; max-width: 560px; width: 100%;
+}
+.modal-prem-x {
+  position: absolute; top: 0.6rem; right: 0.85rem;
+  background: none; border: none; color: #888; font-size: 1.7rem; line-height: 1;
+  cursor: pointer; padding: 0.2rem;
+}
+.modal-prem-x:hover { color: #fff; }
+.modal-prem-titulo {
+  font-family: 'Archivo Black', sans-serif; font-size: 1.2rem; color: #D9B25A;
+  text-align: center; margin: 0 0 1.3rem;
+}
+.modal-prem-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.prem-card {
+  display: flex; flex-direction: column; gap: 0.3rem; align-items: center; text-align: center;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 1rem 0.8rem;
+}
+.prem-label { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.4px; color: #aaa; }
+.prem-time  { font-family: 'Archivo Black', sans-serif; font-size: 1rem; color: #fff; word-break: break-word; }
+.prem-stat  { font-size: 0.78rem; color: #bbb; }
+.prem-campeao  { border-color: rgba(217,178,90,0.5); background: rgba(217,178,90,0.08); }
+.prem-campeao  .prem-time { color: #D9B25A; }
+.prem-goleador { border-color: rgba(43,212,106,0.4); }
+.prem-goleador .prem-time { color: #2BD46A; }
+.prem-peneira  { border-color: rgba(232,112,112,0.4); }
+.prem-peneira  .prem-time { color: #e87070; }
+@media (max-width: 460px) { .modal-prem-cards { grid-template-columns: 1fr; } }
 
 .classif-wrapper { display: grid; grid-template-columns: 1fr 300px; gap: 1.4rem; align-items: start; }
 .classif-tabela-col { display: flex; flex-direction: column; gap: 0.4rem; }
