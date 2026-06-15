@@ -148,6 +148,8 @@ function buildRanking(sala) {
       userId:    j.userId,
       username:  j.username,
       nomeDoTime: j.nomeDoTime,
+      ehBot:     !!j.ehBot,
+      guest:     !!j.guest,
       formacao:  j.formacao  || '4-3-3',
       picks:     j.picks     || [],
       ...(sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0, campeao:false }),
@@ -170,6 +172,28 @@ function determinarCampeao(sala) {
     if (pts > melhor.pts || (pts === melhor.pts && sg > melhor.sg)) return { j, pts, sg };
     return melhor;
   }, null)?.j || null;
+}
+
+// Calendário todos-contra-todos ida e volta (método do círculo).
+// Para n times (par) gera (n-1) rodadas no 1º turno e espelha no 2º → 2(n-1) rodadas.
+function gerarCalendario(uids) {
+  const n = uids.length;
+  if (n < 2) return [];
+  const metade = Math.floor(n / 2);
+  let rot = uids.slice();
+  const turno1 = [];
+  for (let r = 0; r < n - 1; r++) {
+    const rodada = [];
+    for (let i = 0; i < metade; i++) {
+      const a = rot[i], b = rot[n - 1 - i];
+      // alterna mando por rodada para equilibrar casa/fora
+      rodada.push(r % 2 === 0 ? [a, b] : [b, a]);
+    }
+    turno1.push(rodada);
+    rot = [rot[0], rot[n - 1], ...rot.slice(1, n - 1)];   // rotaciona, fixando rot[0]
+  }
+  const turno2 = turno1.map(rod => rod.map(([c, f]) => [f, c]));  // returno: inverte mando
+  return turno1.concat(turno2);
 }
 
 function codigosAceitosServidor(codigo) {
@@ -512,6 +536,8 @@ function setupSocket(server, frontendUrl) {
         sala.jogadores.forEach(j => {
           sala.resultados[j.userId] = { vitorias:0, empates:0, derrotas:0, gf:0, ga:0, campeao:false };
         });
+        sala.calendario   = gerarCalendario(sala.jogadores.map(j => j.userId));
+        sala.totalRodadas = sala.calendario.length || sala.totalRodadas;   // 38 com 20 times
         io.to(code).emit('round:start', { rodada: 1, total: sala.totalRodadas });
       }
     });
@@ -532,73 +558,61 @@ function setupSocket(server, frontendUrl) {
 
       try {
         const resultadosRodada = [];
+        const fixtures = sala.calendario[rodada - 1] || [];
+        const mapaJog  = {};
+        sala.jogadores.forEach(j => { mapaJog[j.userId] = j; });
 
-        // Obtém lista de clubes para sorteio de bots (dados estáticos)
-        const clubesDisponiveis = loader.getClubesPorCompeticao(sala.competicao);
+        for (const par of fixtures) {
+          const home = mapaJog[par[0]];
+          const away = mapaJog[par[1]];
+          if (!home || !away) continue;
 
-        for (const jogador of sala.jogadores) {
-          const meuElenco = jogador.picks || [];
-          if (!meuElenco.length) continue;
+          const homeElenco = (home.picks || []).filter(Boolean);
+          const awayElenco = (away.picks || []).filter(Boolean);
 
-          // Bot: time aleatório da competição (via loader)
-          const botRef = clubesDisponiveis[Math.floor(Math.random() * clubesDisponiveis.length)]
-                      || { clube: 'Bot FC', edicao: 2024, competicao: sala.competicao };
+          // Confronto direto: mando para o time da casa.
+          const resultado = simularPartida(homeElenco, { jogadores: awayElenco }, true);
+          const gHome = resultado.gMeus, gAway = resultado.gAdv;
 
-          const botElenco = loader.getElencoDoClube(sala.competicao, botRef.clube, botRef.edicao);
+          const sh = sala.resultados[home.userId];
+          const sa = sala.resultados[away.userId];
+          sh.gf += gHome; sh.ga += gAway;
+          sa.gf += gAway; sa.ga += gHome;
+          if      (gHome > gAway) { sh.vitorias++; sa.derrotas++; }
+          else if (gHome < gAway) { sa.vitorias++; sh.derrotas++; }
+          else                    { sh.empates++;  sa.empates++;  }
 
-          const adversario = {
-            clube:      botRef.clube,
-            edicao:     botRef.edicao,
-            competicao: sala.competicao,
-            jogadores:  botElenco,
-          };
-
-          const resultado = simularPartida(meuElenco, adversario, true);
-
-          const stats = sala.resultados[jogador.userId];
-          stats.gf += resultado.gMeus;
-          stats.ga += resultado.gAdv;
-          if      (resultado.gMeus > resultado.gAdv)  stats.vitorias++;
-          else if (resultado.gMeus === resultado.gAdv) stats.empates++;
-          else                                          stats.derrotas++;
-
-          // Acumula artilharia e assistências
+          // Artilharia e assistências — dos DOIS lados
           resultado.fila.forEach(ev => {
             if (ev.lado === 'meu') {
-              if (ev.autor?.nome) {
-                sala.statsGols[ev.autor.nome] = (sala.statsGols[ev.autor.nome] || 0) + 1;
-              }
-              if (ev.assist?.nome) {
-                sala.statsAssists[ev.assist.nome] = (sala.statsAssists[ev.assist.nome] || 0) + 1;
-              }
+              if (ev.autor?.nome)   sala.statsGols[ev.autor.nome]     = (sala.statsGols[ev.autor.nome]     || 0) + 1;
+              if (ev.assist?.nome)  sala.statsAssists[ev.assist.nome] = (sala.statsAssists[ev.assist.nome] || 0) + 1;
+            } else {
+              if (ev.autorAdv?.nome)  sala.statsGols[ev.autorAdv.nome]     = (sala.statsGols[ev.autorAdv.nome]     || 0) + 1;
+              if (ev.assistAdv?.nome) sala.statsAssists[ev.assistAdv.nome] = (sala.statsAssists[ev.assistAdv.nome] || 0) + 1;
             }
           });
 
           resultadosRodada.push({
-            userId:    jogador.userId,
-            username:  jogador.username,
-            nomeDoTime: jogador.nomeDoTime,
-            adversario: { clube: botRef.clube, edicao: botRef.edicao },
-            gMeus:     resultado.gMeus,
-            gAdv:      resultado.gAdv,
-            fila:      resultado.fila,
+            homeUid: home.userId, homeNome: home.nomeDoTime, homeUser: home.username, homeBot: !!home.ehBot,
+            awayUid: away.userId, awayNome: away.nomeDoTime, awayUser: away.username, awayBot: !!away.ehBot,
+            gHome, gAway,
           });
         }
 
-        // Classificação
+        // Classificação (20 times)
         const classificacao = sala.jogadores
-          .map(j => ({
-            userId:    j.userId,
-            username:  j.username,
-            nomeDoTime: j.nomeDoTime,
-            ...(sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 }),
-          }))
-          .sort((a, b) => {
-            const ptA = a.vitorias * 3 + a.empates;
-            const ptB = b.vitorias * 3 + b.empates;
-            if (ptA !== ptB) return ptB - ptA;
-            return (b.gf - b.ga) - (a.gf - a.ga);
-          });
+          .map(j => {
+            const s = sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 };
+            return {
+              userId: j.userId, username: j.username, nomeDoTime: j.nomeDoTime, ehBot: !!j.ehBot,
+              vitorias: s.vitorias, empates: s.empates, derrotas: s.derrotas, gf: s.gf, ga: s.ga,
+              jogos:  s.vitorias + s.empates + s.derrotas,
+              pontos: s.vitorias * 3 + s.empates,
+              saldo:  s.gf - s.ga,
+            };
+          })
+          .sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
 
         // Artilharia e assistências top-18
         const artilharia = Object.entries(sala.statsGols)
@@ -611,6 +625,7 @@ function setupSocket(server, frontendUrl) {
 
         io.to(code).emit('round:results', {
           rodada,
+          total: sala.totalRodadas,
           resultados: resultadosRodada,
           classificacao,
           artilharia,

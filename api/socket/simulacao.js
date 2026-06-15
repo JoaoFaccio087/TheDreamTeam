@@ -80,11 +80,13 @@ function simularPartida(meuElenco, adversario, vantagem = true) {
 
   const jogAdv = adversario.jogadores || [];
   distribuirMinutos(gAdv).forEach(minuto => {
-    const autorAdv = sortearPorPeso(jogAdv, pesoGol, null);
+    const autorAdv  = sortearPorPeso(jogAdv, pesoGol, null);
+    const assistAdv = Math.random() < 0.70 ? sortearPorPeso(jogAdv, pesoAssist, autorAdv) : null;
     fila.push({
       minuto,
       lado:      'adv',
-      autorAdv:  autorAdv ? { nome: autorAdv.nome } : null,
+      autorAdv:  autorAdv  ? { nome: autorAdv.nome,  posicoes: autorAdv.posicoes || [], forca: autorAdv.forca || 70 } : null,
+      assistAdv: assistAdv ? { nome: assistAdv.nome } : null,
       adversario: { clube: adversario.clube, edicao: adversario.edicao, competicao: adversario.competicao },
     });
   });
