@@ -875,11 +875,16 @@
     </div><!-- /online-rodada -->
 
 
-    <!-- Modal de escolha de jogador no draft (fundo opaco, 6 opções da posição clicada) -->
+    <!-- Modal de escolha de jogador no draft (fundo opaco, 6 opções aleatórias da posição) -->
     <div id="modal-draft-pick" class="draft-overlay escondida">
       <p id="modal-draft-pick-titulo" class="draft-titulo">Escolha um jogador</p>
       <div id="modal-draft-pick-cartas" class="draft-cartas"></div>
       <div class="draft-acoes">
+        <button id="modal-draft-pick-resortear" class="btn-resortear-draft">
+          <span class="resortear-icone">&#8635;</span>
+          <span>Re-sortear</span>
+          <span class="resortear-contador" id="modal-draft-pick-contador">3</span>
+        </button>
         <button id="modal-draft-pick-selecionar" class="btn-rolar" disabled>Selecionar</button>
       </div>
     </div>

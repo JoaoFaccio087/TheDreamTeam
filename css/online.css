@@ -799,6 +799,9 @@
 .modal-confirm-acoes  { display: flex; gap: 0.6rem; justify-content: center; }
 .modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
 
+/* Modal de escolha do draft online: bem opaco (o campo verde não deve vazar). */
+#modal-draft-pick { background: rgba(8,9,12,0.97); -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); }
+
 /* Fim de jogo: botões de ação (abaixo das estatísticas) + modal de premiação */
 .fim-acoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.2rem; }
 .fim-btn {

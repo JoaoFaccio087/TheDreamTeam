@@ -45,6 +45,10 @@
   var draftTimerBar, draftTimerNum, draftCampo, draftCampoLabel, draftMeuTime;
   var draftCarouselWrap, draftCarousel, draftArrowEsq, draftArrowDir, btnDraftSelecionar, draftCarouselLabel;
   var modalDraftPick, modalDraftPickCartas, modalDraftPickTitulo, modalDraftPickSelecionar;
+  var modalDraftPickResortear, modalDraftPickContador;
+  var draftResortsRestantes = 3;   // orçamento de re-sorteios para o draft (igual ao offline)
+  var modalPoolPos = [];           // elegíveis (embaralhados) da posição aberta no modal
+  var modalPosPage = 0;            // página atual (6 por página) no modal
 
   // Elencos
   var elencosUsersLista, elencosCampoLabel, elencosCampo, elencosForca;
@@ -316,6 +320,7 @@
   function onPlayerOrder(dados) {
     ordemDraftIds    = dados.ordem || [];
     indiceTurnoAtual = 0;
+    draftResortsRestantes = 3;   // 3 re-sorteios para todo o draft (igual ao offline)
     subview('online-draft');
     renderOrdemLista();
     // Desenha o campo já com as posições da minha formação (vazio), desde o início.
@@ -1061,43 +1066,83 @@
     abrirModalDraftPick(codigos[i]);
   }
 
-  // Abre o modal de escolha com as 6 melhores opções da posição clicada.
+  function embaralhar(arr) {
+    var a = (arr || []).slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  // Abre o modal de escolha com cartas ALEATÓRIAS da posição clicada (estilo do draft offline).
   function abrirModalDraftPick(cod) {
     if (!modalDraftPick) return;
-    var elegiveis = (poolLocal || [])
-      .filter(function (p) { return podeOcupar(p, cod); })
-      .sort(function (a, b) { return (b.forca || 0) - (a.forca || 0); })
-      .slice(0, 6);
-
+    modalPoolPos = embaralhar((poolLocal || []).filter(function (p) { return podeOcupar(p, cod); }));
+    modalPosPage = 0;
     if (modalDraftPickTitulo) modalDraftPickTitulo.textContent = 'Escolha um jogador para ' + (cod || '?');
+    renderModalCartas();
+    modalDraftPick.classList.remove('escondida');
+  }
+
+  // Renderiza 6 cartas da página atual (mesma estrutura/visual do draft offline).
+  function renderModalCartas() {
+    selectedPlayer = null;
+    if (modalDraftPickSelecionar) { modalDraftPickSelecionar.disabled = true; modalDraftPickSelecionar.textContent = 'Selecionar'; }
+    if (!modalDraftPickCartas) return;
     modalDraftPickCartas.innerHTML = '';
 
-    if (!elegiveis.length) {
-      modalDraftPickCartas.innerHTML = '<p style="color:#888;font-size:0.85rem">Nenhum jogador disponível para esta posição.</p>';
+    var inicio = modalPosPage * 6;
+    var cartas = modalPoolPos.slice(inicio, inicio + 6);
+    if (!cartas.length && modalPoolPos.length) { modalPosPage = 0; cartas = modalPoolPos.slice(0, 6); }
+
+    if (!cartas.length) {
+      modalDraftPickCartas.innerHTML = '<p class="draft-vazio">Nenhum jogador disponível para esta posição.</p>';
+      atualizarBotaoResortearOnline();
+      return;
     }
-    elegiveis.forEach(function (jogador) {
-      var card = document.createElement('div');
-      card.className  = 'draft-card';
-      card.dataset.id = jogador.id;
-      card.innerHTML =
-        '<div class="draft-card-pos">' + htmlEsc((jogador.posicoes || []).join('/') || '—') + '</div>' +
-        '<div class="draft-card-nome">' + htmlEsc(jogador.nome || '—') + '</div>' +
-        '<div class="draft-card-forca">' + (jogador.forca || '—') + '</div>' +
-        '<div class="draft-card-clube">' + htmlEsc(jogador.clube || '') + (jogador.edicao ? ' ' + jogador.edicao : '') + '</div>';
-      card.addEventListener('click', function () {
-        modalDraftPickCartas.querySelectorAll('.draft-card').forEach(function (c) { c.classList.remove('selecionado'); });
-        card.classList.add('selecionado');
-        selectedPlayer = jogador;
+
+    cartas.forEach(function (j, idx) {
+      var atraso = idx * 0.09;
+      var carta = document.createElement('div');
+      carta.className = 'draft-carta carta-entrando tier-' + (typeof tierDaForca === 'function' ? tierDaForca(j.forca) : 'bronze');
+      carta.style.animationDelay = atraso + 's';
+      carta.innerHTML =
+        '<span class="carta-brilho" style="animation-delay:' + (atraso + 0.26).toFixed(2) + 's"></span>' +
+        '<span class="carta-nome" title="' + htmlEsc(j.nome || '') + '">' + htmlEsc(j.nome || '—') + '</span>' +
+        '<span class="carta-time">' + htmlEsc(j.clube || '') + '</span>' +
+        '<span class="carta-ano">' + htmlEsc(j.edicao || '') + '</span>' +
+        '<span class="carta-posicoes">' + htmlEsc((j.posicoes || []).join('/')) + '</span>' +
+        '<span class="carta-forca">' + (j.forca || '—') + '</span>';
+      carta.addEventListener('click', function () {
+        modalDraftPickCartas.querySelectorAll('.draft-carta').forEach(function (c) { c.classList.remove('escolhida'); });
+        carta.classList.add('escolhida');
+        selectedPlayer = j;
         if (modalDraftPickSelecionar) modalDraftPickSelecionar.disabled = false;
       });
-      modalDraftPickCartas.appendChild(card);
+      carta.addEventListener('animationend', function (e) {
+        if (e.animationName === 'carta-deal') carta.classList.remove('carta-entrando');
+      });
+      modalDraftPickCartas.appendChild(carta);
     });
+    atualizarBotaoResortearOnline();
+  }
 
-    if (modalDraftPickSelecionar) {
-      modalDraftPickSelecionar.disabled    = true;
-      modalDraftPickSelecionar.textContent = 'Selecionar';
+  function atualizarBotaoResortearOnline() {
+    if (modalDraftPickContador) modalDraftPickContador.textContent = draftResortsRestantes;
+    if (modalDraftPickResortear) {
+      var temMais = modalPoolPos.length > 6;   // só vale re-sortear se há mais de 6 opções
+      modalDraftPickResortear.disabled = (draftResortsRestantes <= 0) || !temMais;
     }
-    modalDraftPick.classList.remove('escondida');
+  }
+
+  // Re-sortear: gasta 1 do orçamento e mostra outras 6 cartas (próxima página embaralhada).
+  function resortearModalDraftPick() {
+    if (draftResortsRestantes <= 0 || modalPoolPos.length <= 6) return;
+    draftResortsRestantes--;
+    var totalPaginas = Math.ceil(modalPoolPos.length / 6);
+    modalPosPage = (modalPosPage + 1) % totalPaginas;
+    renderModalCartas();
   }
 
   function fecharModalDraftPick() {
@@ -1441,6 +1486,8 @@
     modalDraftPickCartas    = document.getElementById('modal-draft-pick-cartas');
     modalDraftPickTitulo    = document.getElementById('modal-draft-pick-titulo');
     modalDraftPickSelecionar = document.getElementById('modal-draft-pick-selecionar');
+    modalDraftPickResortear  = document.getElementById('modal-draft-pick-resortear');
+    modalDraftPickContador   = document.getElementById('modal-draft-pick-contador');
     draftArrowEsq      = document.getElementById('draft-arrow-esq');
     draftArrowDir      = document.getElementById('draft-arrow-dir');
     btnDraftSelecionar = document.getElementById('btn-draft-selecionar');
@@ -1589,6 +1636,7 @@
     });
 
     // Modal de escolha (fundo opaco): confirmar pick. Clicar no fundo NÃO fecha — só o botão.
+    if (modalDraftPickResortear) modalDraftPickResortear.addEventListener('click', resortearModalDraftPick);
     if (modalDraftPickSelecionar) modalDraftPickSelecionar.addEventListener('click', function () {
       if (!selectedPlayer || selectedSlot === null) return;
       if (String(draftTurnoUid) !== String(meuUserId)) return;

@@ -98,10 +98,15 @@ function colocarEmVagaAberta(io, sala, jogador, ehBot) {
   const abertas = [];
   for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) abertas.push(i); }
   if (!abertas.length) return;
-  const slotIdx   = ehBot ? abertas[Math.floor(Math.random() * abertas.length)] : abertas[0];
+  // Posição SEMPRE aleatória (vale para bot e para humano que perdeu o tempo) — nunca em ordem.
+  const slotIdx   = abertas[Math.floor(Math.random() * abertas.length)];
   const cod       = codigos[slotIdx];
   const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, cod));
-  const picked    = escolherPickBotDe(elegiveis.length ? elegiveis : sala.poolDisponivel);
+  const fonte     = elegiveis.length ? elegiveis : sala.poolDisponivel;
+  // Bot: escolha ponderada por força. Humano (timeout): jogador totalmente ALEATÓRIO.
+  const picked    = ehBot
+    ? escolherPickBotDe(fonte)
+    : fonte[Math.floor(Math.random() * fonte.length)];
   if (!picked) return;
   const idx = sala.poolDisponivel.indexOf(picked);
   if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
@@ -350,15 +355,13 @@ function iniciarTurno(io, sala) {
   const abertos     = [];
   for (let i = 0; i < codigosForm.length; i++) { if (!picksJog[i]) abertos.push(codigosForm[i]); }
 
-  // Seleção por POSIÇÃO: para cada vaga aberta, manda os melhores elegíveis daquela
-  // posição (deduplicados). Determinístico (ordenado por força) — sem "resorteio".
-  const PER_POS = 14;
+  // Seleção por POSIÇÃO: para cada vaga aberta, manda uma amostra ALEATÓRIA de elegíveis
+  // daquela posição (deduplicados) — variedade suficiente para 6 cartas + re-sorteios.
+  const PER_POS = 30;
   const vistosIds = new Set();
   let cards = [];
   abertos.forEach(cod => {
-    sala.poolDisponivel
-      .filter(p => podeOcupar(p, cod))
-      .sort((a, b) => (b.forca || 0) - (a.forca || 0))
+    shuffle(sala.poolDisponivel.filter(p => podeOcupar(p, cod)))
       .slice(0, PER_POS)
       .forEach(p => { if (!vistosIds.has(p.id)) { vistosIds.add(p.id); cards.push(p); } });
   });
