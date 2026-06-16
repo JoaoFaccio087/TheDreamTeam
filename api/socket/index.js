@@ -279,7 +279,14 @@ function emitirFimDeJogo(io, sala, code) {
   const campeao = determinarCampeao(sala);
   if (campeao) sala.resultados[campeao.userId].campeao = true;
   sala.status = 'fim';
-  io.to(code).emit('game:end', { ranking: buildRanking(sala) });
+
+  // Artilharia/assistências FINAIS (importante p/ "Pular tudo", que não emite as rodadas).
+  const timeDoJogador = {};
+  sala.jogadores.forEach(j => { (j.picks || []).forEach(p => { if (p && p.nome) timeDoJogador[p.nome] = j.nomeDoTime; }); });
+  const artilharia   = Object.entries(sala.statsGols).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
+  const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
+
+  io.to(code).emit('game:end', { ranking: buildRanking(sala), artilharia, assistencias });
   (async () => {
     for (const jogador of sala.jogadores) {
       if (jogador.ehBot || jogador.guest) continue;

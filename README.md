@@ -69,7 +69,8 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 - **Campeonato de 38 rodadas**: todos contra todos, ida e volta, com **confrontos diretos** entre os times da sala.
 - **Simulação animada da sua partida**: placar e relógio correndo ao vivo, com os gols (e quem marcou/assistiu) surgindo no minuto certo — clique para pular.
 - **Tela em abas**: *Partidas* (seu jogo em destaque + os demais resultados + próximos confrontos) e *Classificação* (tabela completa do Brasileirão + artilharia e assistências, com o time de cada jogador).
-- **Ranking final** com o campeão ao fim da temporada.
+- **Pular tudo (votação)**: qualquer jogador pode propor pular o restante da temporada; o pulo só acontece quando **todos os humanos** confirmam, com um contador de votos.
+- **Premiação da temporada**: ao fim das 38 rodadas, abre um resumo com **O Campeão**, **O Pato** (último colocado), **O Goleador** (mais gols feitos) e **O Peneira** (mais gols sofridos), seguido do **resumo da sua campanha** (escalação, estatísticas e imagem para baixar).
 
 ### Geral
 
@@ -97,7 +98,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 3. Quando todos estiverem prontos, o **host** inicia o **draft**. Na sua vez, escolha uma das 6 cartas e posicione-a numa vaga válida; remaneje o time como quiser.
 4. As vagas que faltarem são completadas por bots, e o campeonato de 38 rodadas começa.
 5. A cada rodada, assista à **animação da sua partida** e acompanhe a tabela na aba **Classificação**. O **host** avança para a próxima rodada.
-6. Ao fim das 38 rodadas, veja o **ranking final** e o campeão.
+6. Ao fim das 38 rodadas, a **premiação da temporada** abre sobre a classificação (campeão, pato, goleador e peneira). Fechando-a, você pode **ver o resumo da sua campanha** ou **voltar ao início**.
 
 ## Arquitetura e deploy
 

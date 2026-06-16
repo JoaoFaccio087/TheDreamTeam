@@ -771,13 +771,13 @@
 /* Botão "Pular tudo" (pequeno, centralizado) + contador + modal de confirmação */
 .btn-pular-tudo {
   align-self: center; margin-top: 0.5rem;
-  background: transparent; border: 1px solid rgba(43,212,106,0.5); color: #2BD46A;
-  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.4px;
-  padding: 0.35rem 0.95rem; border-radius: 7px; cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  padding: 4px 12px; border-radius: 2px;
+  background: transparent; border: 1px dashed var(--txt-soft); color: var(--txt-soft);
+  font-family: 'Archivo Black', sans-serif; font-size: 0.58rem; letter-spacing: 0.5px;
+  cursor: pointer; transition: border-color 0.12s ease, color 0.12s ease;
 }
-.btn-pular-tudo:hover:not(:disabled) { background: rgba(43,212,106,0.12); }
-.btn-pular-tudo:disabled { opacity: 0.7; cursor: default; color: #888; border-color: rgba(255,255,255,0.15); }
+.btn-pular-tudo:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.btn-pular-tudo:disabled { opacity: 0.6; cursor: default; }
 
 .online-skip-cont {
   font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.3px;
@@ -799,9 +799,17 @@
 .modal-confirm-acoes  { display: flex; gap: 0.6rem; justify-content: center; }
 .modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
 
-/* Fim de jogo: botões de ação (coluna direita) + modal de premiação */
-.fim-acoes { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
-.fim-acoes .btn-rolar { width: 100%; }
+/* Fim de jogo: botões de ação (abaixo das estatísticas) + modal de premiação */
+.fim-acoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.2rem; }
+.fim-btn {
+  width: 100%; padding: 11px 14px; border-radius: 3px;
+  background: transparent; color: var(--accent); border: 1px solid var(--accent);
+  font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; letter-spacing: 0.5px;
+  cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+}
+.fim-btn:hover { background: var(--accent); color: var(--bg); }
+.fim-btn-sec { color: var(--txt-soft); border-color: var(--txt-soft); }
+.fim-btn-sec:hover { background: var(--txt-soft); color: var(--bg); }
 
 .modal-premiacao {
   position: fixed; inset: 0; z-index: 1000;

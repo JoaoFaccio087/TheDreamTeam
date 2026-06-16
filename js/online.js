@@ -608,7 +608,7 @@
   function renderSkipContador() {
     if (!skipContador) return;
     if (skipVotos > 0 && skipVotos < skipTotal) {
-      skipContador.textContent = '⏩ Pular tudo: ' + skipVotos + '/' + skipTotal;
+      skipContador.textContent = 'Pular tudo: ' + skipVotos + '/' + skipTotal;
       skipContador.classList.remove('escondida');
     } else {
       skipContador.classList.add('escondida');
@@ -654,7 +654,7 @@
         btnPularTudo.textContent = 'Aguardando todos' + (skipTotal ? ' (' + skipVotos + '/' + skipTotal + ')' : '') + '…';
       } else {
         btnPularTudo.disabled    = false;
-        btnPularTudo.textContent = '⏩ Pular tudo';
+        btnPularTudo.textContent = 'Pular tudo';
       }
     }
   }
@@ -726,6 +726,8 @@
     // Fica na tela da liga, na aba Classificação, com a tabela FINAL.
     subview('online-rodada');
     rodadaAtual = totalRodadas;
+    ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
+    ultimaAssistencia = dados.assistencias || ultimaAssistencia;
     renderClassifLista(ranking);
     renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
     renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
