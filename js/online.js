@@ -719,6 +719,8 @@
         '<span class="ct-num">' + (p.vitorias || 0) + '</span>' +
         '<span class="ct-num">' + (p.empates || 0) + '</span>' +
         '<span class="ct-num">' + (p.derrotas || 0) + '</span>' +
+        '<span class="ct-num">' + (p.gf || 0) + '</span>' +
+        '<span class="ct-num">' + (p.ga || 0) + '</span>' +
         '<span class="ct-num">' + (sg >= 0 ? '+' : '') + sg + '</span>';
       rodadaClassif.appendChild(row);
     });
