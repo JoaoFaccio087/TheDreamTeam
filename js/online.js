@@ -44,6 +44,7 @@
   var draftTituloEl, draftSubtituloEl, draftOrdemLista;
   var draftTimerBar, draftTimerNum, draftCampo, draftCampoLabel, draftMeuTime;
   var draftCarouselWrap, draftCarousel, draftArrowEsq, draftArrowDir, btnDraftSelecionar, draftCarouselLabel;
+  var modalDraftPick, modalDraftPickCartas, modalDraftPickTitulo, modalDraftPickSelecionar;
 
   // Elencos
   var elencosUsersLista, elencosCampoLabel, elencosCampo, elencosForca;
@@ -348,20 +349,19 @@
     } else {
       limparDestaquesVaga();
       draftCarouselWrap.classList.add('escondida');
+      fecharModalDraftPick();
     }
   }
 
-  // Prepara a MINHA vez: acende as vagas abertas (clicáveis) e pede para escolher a posição.
+  // Prepara a MINHA vez: acende as vagas abertas (clicáveis). A escolha do jogador
+  // acontece no MODAL (fundo opaco) ao clicar numa posição — não há carousel inline.
   function iniciarMinhaVez() {
     selectedPlayer = null;
     selectedSlot   = null;
     limparDestaquesVaga();
     destacarVagasAbertas();
-    if (draftCarousel) draftCarousel.innerHTML = '';
-    btnDraftSelecionar.disabled    = true;
-    btnDraftSelecionar.textContent = 'Selecionar';
-    if (draftCarouselLabel) draftCarouselLabel.textContent = '⚡ SUA VEZ! Clique numa posição aberta no campo';
-    draftCarouselWrap.classList.remove('escondida');
+    if (draftCarouselWrap) draftCarouselWrap.classList.add('escondida');
+    if (modalDraftPick)    modalDraftPick.classList.add('escondida');
   }
 
   // Acende todas as vagas ABERTAS do meu time (clicáveis para escolher a posição).
@@ -390,6 +390,7 @@
     pararTimer();
     minhaVez = false;
     draftCarouselWrap.classList.add('escondida');
+    fecharModalDraftPick();
 
     if (dados.jogador) {
       if (!allPlayers[dados.userId]) allPlayers[dados.userId] = {};
@@ -442,6 +443,7 @@
         allPlayers[j.userId] = Object.assign(allPlayers[j.userId] || {}, j);
       });
     }
+    fecharModalDraftPick();
 
     subview('online-elencos');
     renderElencos();
@@ -1050,18 +1052,56 @@
       return;
     }
 
-    // VAGA ABERTA → escolhe a posição e lista os jogadores elegíveis para ela.
+    // VAGA ABERTA → abre o MODAL (fundo opaco) com as 6 opções da posição.
     selectedSlot   = i;
     selectedPlayer = null;
     destacarVagasAbertas();
     var slotEl = draftCampo.querySelectorAll('.slot-ol')[i];
     if (slotEl) slotEl.classList.add('vaga-selecionada');
-    btnDraftSelecionar.disabled = true;
-    var cod = codigos[i];
-    var elegiveis = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
-    if (draftCarouselLabel) draftCarouselLabel.textContent = 'Escolha um jogador para ' + (cod || '?');
-    renderCarousel(elegiveis);
-    draftCarouselWrap.classList.remove('escondida');
+    abrirModalDraftPick(codigos[i]);
+  }
+
+  // Abre o modal de escolha com as 6 melhores opções da posição clicada.
+  function abrirModalDraftPick(cod) {
+    if (!modalDraftPick) return;
+    var elegiveis = (poolLocal || [])
+      .filter(function (p) { return podeOcupar(p, cod); })
+      .sort(function (a, b) { return (b.forca || 0) - (a.forca || 0); })
+      .slice(0, 6);
+
+    if (modalDraftPickTitulo) modalDraftPickTitulo.textContent = 'Escolha um jogador para ' + (cod || '?');
+    modalDraftPickCartas.innerHTML = '';
+
+    if (!elegiveis.length) {
+      modalDraftPickCartas.innerHTML = '<p style="color:#888;font-size:0.85rem">Nenhum jogador disponível para esta posição.</p>';
+    }
+    elegiveis.forEach(function (jogador) {
+      var card = document.createElement('div');
+      card.className  = 'draft-card';
+      card.dataset.id = jogador.id;
+      card.innerHTML =
+        '<div class="draft-card-pos">' + htmlEsc((jogador.posicoes || []).join('/') || '—') + '</div>' +
+        '<div class="draft-card-nome">' + htmlEsc(jogador.nome || '—') + '</div>' +
+        '<div class="draft-card-forca">' + (jogador.forca || '—') + '</div>' +
+        '<div class="draft-card-clube">' + htmlEsc(jogador.clube || '') + (jogador.edicao ? ' ' + jogador.edicao : '') + '</div>';
+      card.addEventListener('click', function () {
+        modalDraftPickCartas.querySelectorAll('.draft-card').forEach(function (c) { c.classList.remove('selecionado'); });
+        card.classList.add('selecionado');
+        selectedPlayer = jogador;
+        if (modalDraftPickSelecionar) modalDraftPickSelecionar.disabled = false;
+      });
+      modalDraftPickCartas.appendChild(card);
+    });
+
+    if (modalDraftPickSelecionar) {
+      modalDraftPickSelecionar.disabled    = true;
+      modalDraftPickSelecionar.textContent = 'Selecionar';
+    }
+    modalDraftPick.classList.remove('escondida');
+  }
+
+  function fecharModalDraftPick() {
+    if (modalDraftPick) modalDraftPick.classList.add('escondida');
   }
 
   function marcarVagaSelecionada(i) {
@@ -1148,7 +1188,7 @@
     }
     if (!draftCampo) return;
     if (draftCampoLabel) {
-      draftCampoLabel.textContent = sou ? 'Sua escalação' : ('Time de: ' + nomeUsuario(jog));
+      draftCampoLabel.textContent = sou ? 'Sua escalação — clique numa posição aberta' : ('Time de: ' + nomeUsuario(jog));
     }
     renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
   }
@@ -1397,6 +1437,10 @@
     draftCarouselWrap  = document.getElementById('draft-carousel-wrap');
     draftCarousel      = document.getElementById('draft-carousel');
     draftCarouselLabel = document.getElementById('draft-carousel-label');
+    modalDraftPick          = document.getElementById('modal-draft-pick');
+    modalDraftPickCartas    = document.getElementById('modal-draft-pick-cartas');
+    modalDraftPickTitulo    = document.getElementById('modal-draft-pick-titulo');
+    modalDraftPickSelecionar = document.getElementById('modal-draft-pick-selecionar');
     draftArrowEsq      = document.getElementById('draft-arrow-esq');
     draftArrowDir      = document.getElementById('draft-arrow-dir');
     btnDraftSelecionar = document.getElementById('btn-draft-selecionar');
@@ -1539,6 +1583,19 @@
       btnDraftSelecionar.disabled    = true;
       btnDraftSelecionar.textContent = 'Escolhendo...';
       socket.emit('draft:pick', { playerId: selectedPlayer.id, slotIndex: selectedSlot });
+      selectedPlayer = null;
+      selectedSlot   = null;
+      minhaVez       = false;
+    });
+
+    // Modal de escolha (fundo opaco): confirmar pick. Clicar no fundo NÃO fecha — só o botão.
+    if (modalDraftPickSelecionar) modalDraftPickSelecionar.addEventListener('click', function () {
+      if (!selectedPlayer || selectedSlot === null) return;
+      if (String(draftTurnoUid) !== String(meuUserId)) return;
+      modalDraftPickSelecionar.disabled    = true;
+      modalDraftPickSelecionar.textContent = 'Escolhendo...';
+      socket.emit('draft:pick', { playerId: selectedPlayer.id, slotIndex: selectedSlot });
+      fecharModalDraftPick();
       selectedPlayer = null;
       selectedSlot   = null;
       minhaVez       = false;
