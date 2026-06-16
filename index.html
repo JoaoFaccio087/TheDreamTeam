@@ -724,7 +724,7 @@
 
       <!-- Carousel -->
       <div id="draft-carousel-wrap" class="draft-carousel-wrap escondida">
-        <p class="draft-carousel-label">&#9889; SUA VEZ! Escolha um jogador</p>
+        <p class="draft-carousel-label" id="draft-carousel-label">&#9889; SUA VEZ! Escolha um jogador</p>
         <div class="draft-carousel-outer">
           <button class="draft-arrow" id="draft-arrow-esq">&#8249;</button>
           <div id="draft-carousel" class="draft-carousel"></div>
@@ -874,6 +874,18 @@
 
     </div><!-- /online-rodada -->
 
+
+    <!-- Modal: confirmar saída do online (lobby) -->
+    <div id="modal-sair-online" class="modal-confirm escondida">
+      <div class="modal-confirm-box">
+        <p class="modal-confirm-titulo">Sair da sala?</p>
+        <p class="modal-confirm-texto">Voc&ecirc; vai deixar a sala e voltar ao in&iacute;cio. Se voc&ecirc; for o anfitri&atilde;o e a sala ficar vazia, ela ser&aacute; encerrada.</p>
+        <div class="modal-confirm-acoes">
+          <button id="modal-sair-cancelar"  class="btn-rolar btn-sec">Cancelar</button>
+          <button id="modal-sair-confirmar" class="btn-rolar">Sair</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Modal de premiação — abre SOBRE a aba Classificação ao fim do campeonato -->
     <div id="modal-premiacao" class="modal-premiacao escondida">

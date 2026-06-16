@@ -23,6 +23,7 @@
   var repositionFrom   = null; // vaga de origem ao remanejar um jogador já escalado
   var allPlayers       = {};   // { userId: { username, nomeDoTime, formacao, picks, pronto } }
   var ordemDraftIds    = [];   // ordem dos userId no draft
+  var picksSnapshot    = {};   // { userId: nº de picks } autoritativo do servidor (mesma lista p/ todos)
   var indiceTurnoAtual = 0;    // índice na ordemDraft
   var draftTurnoUid    = null; // userId de quem está escolhendo agora (destaque)
 
@@ -36,12 +37,13 @@
   // Lobby
   var lobbyNomeTime, lobbyPilulasFormacao, lobbyProntosCount;
   var btnLobbyPronto, btnLobbyComecar, btnLobbyVoltar;
+  var modalSairOnline, modalSairCancelar, modalSairConfirmar;
   var lobbyCampo, lobbyBoxScore;
 
   // Draft
   var draftTituloEl, draftSubtituloEl, draftOrdemLista;
   var draftTimerBar, draftTimerNum, draftCampo, draftCampoLabel, draftMeuTime;
-  var draftCarouselWrap, draftCarousel, draftArrowEsq, draftArrowDir, btnDraftSelecionar;
+  var draftCarouselWrap, draftCarousel, draftArrowEsq, draftArrowDir, btnDraftSelecionar, draftCarouselLabel;
 
   // Elencos
   var elencosUsersLista, elencosCampoLabel, elencosCampo, elencosForca;
@@ -54,6 +56,7 @@
   var tabPartidas, tabClassif, abaPartidas, abaClassif;
   var animTimer = null;   // timer da animação da partida do usuário
   var animacaoAtiva = false;   // true enquanto a partida do usuário está sendo animada
+  var aoFimDaAnimacao = null;  // callback rodado quando a animação termina (atualiza a classificação só então)
   var btnPularTudo, modalPular, modalPularConfirmar, modalPularCancelar, skipContador;
   var euVoteiPular = false, skipVotos = 0, skipTotal = 0;
 
@@ -228,6 +231,7 @@
   // ── Eventos Socket ────────────────────────────────────────────────────────
 
   function setupEventos() {
+    socket.on('session:me',       onSessionMe);
     socket.on('room:state',       onRoomState);
     socket.on('room:playerOrder', onPlayerOrder);
     socket.on('draft:turno',      onDraftTurno);
@@ -246,6 +250,11 @@
       if (btnLobbyComecar) { btnLobbyComecar.disabled = false; btnLobbyComecar.textContent = 'Começar →'; }
       if (btnLobbyPronto)  { btnLobbyPronto.disabled  = false; }
     });
+  }
+
+  // session:me — o servidor diz qual é o MEU userId (fonte da verdade da identidade)
+  function onSessionMe(dados) {
+    if (dados && dados.userId != null) meuUserId = dados.userId;
   }
 
   // room:state — lobby
@@ -320,6 +329,8 @@
     draftTurnoUid    = dados.userId;
     poolLocal        = dados.pool || [];
     indiceTurnoAtual = dados.turnoNum ? dados.turnoNum - 1 : indiceTurnoAtual;
+    if (dados.picks) picksSnapshot = dados.picks;   // contagem autoritativa p/ a lista de ordem
+    if (dados.ordemBase && dados.ordemBase.length) ordemDraftIds = dados.ordemBase;  // ordem idêntica p/ todos
 
     draftSubtituloEl.textContent = 'Pick ' + (dados.turnoNum || '?') + ' / ' + (dados.totalTurnos || '?');
 
@@ -328,36 +339,50 @@
     renderOrdemLista();
     mostrarCampoDaVez(dados.userId);   // o campo segue o time do jogador da vez
     renderMeuTime();
-    if (minhaVez) iniciarTimer(dados.segundos || 30);
-    else          pararTimer();
+    // Timer visível para TODOS: mostra a contagem do jogador da vez (só humanos têm relógio).
+    if (dados.segundos > 0) iniciarTimer(dados.segundos);
+    else                    pararTimer();
 
-    if (minhaVez && poolLocal.length) {
-      selectedPlayer = null;
-      selectedSlot   = null;
-      limparDestaquesVaga();
-      btnDraftSelecionar.disabled    = true;
-      btnDraftSelecionar.textContent = 'Selecionar';
-      renderCarousel();
-      draftCarouselWrap.classList.remove('escondida');
+    if (minhaVez) {
+      iniciarMinhaVez();
     } else {
       limparDestaquesVaga();
       draftCarouselWrap.classList.add('escondida');
     }
   }
 
+  // Prepara a MINHA vez: acende as vagas abertas (clicáveis) e pede para escolher a posição.
+  function iniciarMinhaVez() {
+    selectedPlayer = null;
+    selectedSlot   = null;
+    limparDestaquesVaga();
+    destacarVagasAbertas();
+    if (draftCarousel) draftCarousel.innerHTML = '';
+    btnDraftSelecionar.disabled    = true;
+    btnDraftSelecionar.textContent = 'Selecionar';
+    if (draftCarouselLabel) draftCarouselLabel.textContent = '⚡ SUA VEZ! Clique numa posição aberta no campo';
+    draftCarouselWrap.classList.remove('escondida');
+  }
+
+  // Acende todas as vagas ABERTAS do meu time (clicáveis para escolher a posição).
+  function destacarVagasAbertas() {
+    if (!draftCampo) return;
+    var meu = allPlayers[meuUserId] || {};
+    draftCampo.querySelectorAll('.slot-ol').forEach(function (slot, i) {
+      slot.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
+      var ocupado = meu.picks && meu.picks[i];
+      if (!ocupado) slot.classList.add('vaga-valida');
+    });
+  }
+
   // draft:yourTurn — confirmação ao jogador da vez
   function onDraftYourTurn(dados) {
+    // O broadcast draft:turno é a fonte da verdade da vez. Só age se for REALMENTE
+    // a minha vez — assim um socketId velho/compartilhado não "vira a vez" de quem não é.
+    if (String(draftTurnoUid) !== String(meuUserId)) return;
     minhaVez = true;
     if (dados && dados.pool && dados.pool.length) poolLocal = dados.pool;
-    if (poolLocal.length) {
-      selectedPlayer = null;
-      selectedSlot   = null;
-      limparDestaquesVaga();
-      btnDraftSelecionar.disabled    = true;
-      btnDraftSelecionar.textContent = 'Selecionar';
-      renderCarousel();
-      draftCarouselWrap.classList.remove('escondida');
-    }
+    iniciarMinhaVez();
   }
 
   // draft:pick — alguém escolheu (broadcast)
@@ -414,7 +439,7 @@
 
     if (dados && dados.jogadores) {
       dados.jogadores.forEach(function (j) {
-        allPlayers[j.userId] = j;
+        allPlayers[j.userId] = Object.assign(allPlayers[j.userId] || {}, j);
       });
     }
 
@@ -534,6 +559,7 @@
         golsEl.textContent = 'Sem gols na partida';
       }
       atualizarAcoesRodada();   // libera os botões só após o fim/pulo da animação
+      if (typeof aoFimDaAnimacao === 'function') { var cb = aoFimDaAnimacao; aoFimDaAnimacao = null; cb(); }
     }
     function tick() {
       minuto++;
@@ -712,12 +738,15 @@
     outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
     renderProximos(dados.proxima);
 
-    // Classificação (tabela completa: P J V E D SG)
-    renderClassifLista(dados.classificacao || []);
-
-    // Artilharia / Assistências (nome do jogador + time abaixo)
-    renderStatsLista(rodadaArtilharia, dados.artilharia, 'gols', 'G');
-    renderStatsLista(rodadaAssistencias, dados.assistencias, 'assists', 'A');
+    // A classificação, a artilharia e as assistências só atualizam QUANDO A PARTIDA
+    // (animação) TERMINA — para não revelar o resultado antes da hora na aba Classificação.
+    function aplicarClassifEStats() {
+      renderClassifLista(dados.classificacao || []);
+      renderStatsLista(rodadaArtilharia,   dados.artilharia,   'gols',    'G');
+      renderStatsLista(rodadaAssistencias, dados.assistencias, 'assists', 'A');
+    }
+    if (minha) aoFimDaAnimacao = aplicarClassifEStats;   // espera a animação da minha partida
+    else       aplicarClassifEStats();                   // sem animação → aplica direto
 
     // Ações da rodada (somente host avança)
     atualizarAcoesRodada();
@@ -923,11 +952,13 @@
     return (allPlayers[meuUserId] && allPlayers[meuUserId].formacao) || '4-3-3';
   }
 
-  function renderCarousel() {
+  function renderCarousel(lista) {
     draftCarousel.innerHTML = '';
-
-    // O servidor já envia 6 cartas elegíveis e aleatórias (sem repetir as já vistas por mim).
-    var pool = (poolLocal || []).slice(0, 6);
+    var pool = (lista || poolLocal || []).slice();
+    if (!pool.length) {
+      draftCarousel.innerHTML = '<p style="color:#888;font-size:0.8rem;padding:0.6rem">Nenhum jogador disponível para esta posição.</p>';
+      return;
+    }
 
     pool.forEach(function (jogador) {
       var card = document.createElement('div');
@@ -949,14 +980,13 @@
   }
 
   // Clicou num card: marca o card e ACENDE só as vagas abertas onde ele pode jogar.
+  // Clicou num jogador da lista: a POSIÇÃO já foi escolhida (selectedSlot) → libera confirmar.
   function selecionarCardOnline(jogador, cardEl) {
-    repositionFrom = null;               // escolher um card cancela um remanejamento em curso
+    if (selectedSlot === null) return;   // precisa clicar numa posição aberta antes
     selectedPlayer = jogador;
-    selectedSlot   = null;
     draftCarousel.querySelectorAll('.draft-card').forEach(function (c) { c.classList.remove('selecionado'); });
     if (cardEl) cardEl.classList.add('selecionado');
-    destacarVagasValidas(jogador);
-    btnDraftSelecionar.disabled = true;  // só libera depois de escolher a vaga
+    btnDraftSelecionar.disabled = false;
   }
 
   // Acende as vagas ABERTAS e VÁLIDAS para um jogador (e apaga as demais).
@@ -981,53 +1011,57 @@
     });
   }
 
-  // Clicou numa vaga do campo: se for válida e estiver com card selecionado, escolhe-a.
+  // Clique numa vaga do campo (só na minha vez):
+  //  • remanejo em curso → completa o movimento;
+  //  • vaga OCUPADA → começa a remanejar;
+  //  • vaga ABERTA → escolhe a POSIÇÃO e lista os jogadores elegíveis do draft (slot-first).
   function clicarSlotDraftOnline(i) {
-    if (!minhaVez) return;
+    if (String(draftTurnoUid) !== String(meuUserId)) return;   // autoritativo: só na minha vez
     var meu     = allPlayers[meuUserId] || {};
     var codigos = codigosOnline(meu.formacao || '4-3-3');
     var ocupado = meu.picks && meu.picks[i];
 
-    // MODO COLOCAR — há um card selecionado: clicar numa vaga vazia e válida a escolhe.
-    if (selectedPlayer) {
-      if (ocupado) return;
-      if (!podeOcupar(selectedPlayer, codigos[i])) return;
-      selectedSlot = i;
-      marcarVagaSelecionada(i);
-      btnDraftSelecionar.disabled = false;
-      return;
-    }
-
-    // MODO REMANEJAR — sem card selecionado.
-    if (repositionFrom === null) {
-      // Clicou num jogador já escalado → começa a mover (acende vagas válidas).
-      if (ocupado) {
-        repositionFrom = i;
-        destacarVagasValidasParaMover(meu.picks[i], i);
+    // MODO REMANEJAR em curso → completa o movimento (destino vazio = move; ocupado = troca).
+    if (repositionFrom !== null) {
+      if (i === repositionFrom) { cancelarReposicionar(); return; }
+      var jogMov = meu.picks[repositionFrom];
+      if (!jogMov) { cancelarReposicionar(); return; }
+      var destino = meu.picks[i];
+      if (!destino) {
+        if (!podeOcupar(jogMov, codigos[i])) return;
+        meu.picks[i] = jogMov;
+        meu.picks[repositionFrom] = undefined;
+      } else {
+        if (!podeOcupar(jogMov, codigos[i]) || !podeOcupar(destino, codigos[repositionFrom])) return;
+        meu.picks[i] = jogMov;
+        meu.picks[repositionFrom] = destino;
       }
+      renderCampoOnline(draftCampo, meu.picks, meu.formacao || '4-3-3');
+      renderMeuTime();
+      socket.emit('draft:move', { fromSlot: repositionFrom, toSlot: i });
+      cancelarReposicionar();
       return;
     }
 
-    // Já está movendo:
-    if (i === repositionFrom) { cancelarReposicionar(); return; }  // clicou na origem → cancela
-    var jogMov = meu.picks[repositionFrom];
-    if (!jogMov) { cancelarReposicionar(); return; }
-    var destino = meu.picks[i];
-    // destino vazio → válido p/ o jogador movido; destino ocupado → troca (ambos cabem).
-    if (!destino) {
-      if (!podeOcupar(jogMov, codigos[i])) return;
-      meu.picks[i] = jogMov;
-      meu.picks[repositionFrom] = undefined;
-    } else {
-      if (!podeOcupar(jogMov, codigos[i]) || !podeOcupar(destino, codigos[repositionFrom])) return;
-      meu.picks[i] = jogMov;
-      meu.picks[repositionFrom] = destino;
+    // VAGA OCUPADA → começa a remanejar (acende destinos válidos).
+    if (ocupado) {
+      repositionFrom = i;
+      destacarVagasValidasParaMover(meu.picks[i], i);
+      return;
     }
-    // Aplica já no campo (instantâneo); o servidor confirma via draft:moved.
-    renderCampoOnline(draftCampo, meu.picks, meu.formacao || '4-3-3');
-    renderMeuTime();
-    socket.emit('draft:move', { fromSlot: repositionFrom, toSlot: i });
-    cancelarReposicionar();
+
+    // VAGA ABERTA → escolhe a posição e lista os jogadores elegíveis para ela.
+    selectedSlot   = i;
+    selectedPlayer = null;
+    destacarVagasAbertas();
+    var slotEl = draftCampo.querySelectorAll('.slot-ol')[i];
+    if (slotEl) slotEl.classList.add('vaga-selecionada');
+    btnDraftSelecionar.disabled = true;
+    var cod = codigos[i];
+    var elegiveis = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
+    if (draftCarouselLabel) draftCarouselLabel.textContent = 'Escolha um jogador para ' + (cod || '?');
+    renderCarousel(elegiveis);
+    draftCarouselWrap.classList.remove('escondida');
   }
 
   function marcarVagaSelecionada(i) {
@@ -1237,7 +1271,10 @@
       var jog = allPlayers[uid];
       var ativo = String(uid) === String(draftTurnoUid);
       var sou   = String(uid) === String(meuUserId);
-      var picks = jog ? (jog.picks || []).filter(Boolean).length : 0;
+      // Contagem autoritativa do servidor (mesma p/ todos); cai para o local só se faltar.
+      var picks = (picksSnapshot && picksSnapshot[uid] != null)
+        ? picksSnapshot[uid]
+        : (jog ? (jog.picks || []).filter(Boolean).length : 0);
 
       var row = document.createElement('div');
       row.className = 'draft-ordem-item' + (ativo ? ' ativo' : '') + (sou ? ' eu' : '');
@@ -1337,6 +1374,9 @@
     btnLobbyPronto       = document.getElementById('btn-lobby-pronto');
     btnLobbyComecar      = document.getElementById('btn-lobby-comecar');
     btnLobbyVoltar       = document.getElementById('btn-lobby-voltar');
+    modalSairOnline      = document.getElementById('modal-sair-online');
+    modalSairCancelar    = document.getElementById('modal-sair-cancelar');
+    modalSairConfirmar   = document.getElementById('modal-sair-confirmar');
     lobbyCampo           = document.getElementById('lobby-campo');
     lobbyBoxScore        = document.getElementById('lobby-box-score');
 
@@ -1356,6 +1396,7 @@
     }
     draftCarouselWrap  = document.getElementById('draft-carousel-wrap');
     draftCarousel      = document.getElementById('draft-carousel');
+    draftCarouselLabel = document.getElementById('draft-carousel-label');
     draftArrowEsq      = document.getElementById('draft-arrow-esq');
     draftArrowDir      = document.getElementById('draft-arrow-dir');
     btnDraftSelecionar = document.getElementById('btn-draft-selecionar');
@@ -1471,25 +1512,30 @@
     });
 
     btnLobbyVoltar.addEventListener('click', function () {
+      if (modalSairOnline) modalSairOnline.classList.remove('escondida');
+    });
+    if (modalSairCancelar) modalSairCancelar.addEventListener('click', function () {
+      if (modalSairOnline) modalSairOnline.classList.add('escondida');
+    });
+    if (modalSairConfirmar) modalSairConfirmar.addEventListener('click', function () {
+      if (modalSairOnline) modalSairOnline.classList.add('escondida');
       if (socket && socket.connected) socket.emit('room:leave');
       desconectar();
       mostrarTelaInicial();
     });
 
-    // Draft: arrows
+    // Draft: setas rolam a lista de jogadores (scroll nativo).
     draftArrowEsq.addEventListener('click', function () {
-      carouselIndex = Math.max(0, carouselIndex - 1);
-      atualizarCarouselPos();
+      if (draftCarousel) draftCarousel.scrollBy({ left: -220, behavior: 'smooth' });
     });
 
     draftArrowDir.addEventListener('click', function () {
-      var max = Math.max(0, Math.min(poolLocal.length, 60) - 4);
-      carouselIndex = Math.min(max, carouselIndex + 1);
-      atualizarCarouselPos();
+      if (draftCarousel) draftCarousel.scrollBy({ left: 220, behavior: 'smooth' });
     });
 
     btnDraftSelecionar.addEventListener('click', function () {
-      if (!selectedPlayer || selectedSlot === null || !minhaVez) return;
+      if (!selectedPlayer || selectedSlot === null) return;
+      if (String(draftTurnoUid) !== String(meuUserId)) return;   // só na MINHA vez (autoritativo)
       btnDraftSelecionar.disabled    = true;
       btnDraftSelecionar.textContent = 'Escolhendo...';
       socket.emit('draft:pick', { playerId: selectedPlayer.id, slotIndex: selectedSlot });

@@ -317,6 +317,11 @@ function iniciarTurno(io, sala) {
   const userId  = sala.ordemDraft[sala.indiceTurno];
   const jogador = sala.jogadores.find(j => j.userId === userId);
 
+  // Snapshot autoritativo do nº de picks de CADA jogador — vai junto do turno para
+  // que a lista de ordem fique idêntica em todos os clientes (sem drift por evento perdido).
+  const picksSnapshot = {};
+  sala.jogadores.forEach(j => { picksSnapshot[j.userId] = (j.picks || []).filter(Boolean).length; });
+
   // Vez de um BOT: anuncia a vez (para o marcador andar 1 a 1) e escolhe após um instante.
   if (jogador && jogador.ehBot) {
     io.to(sala.codigo).emit('draft:turno', {
@@ -329,6 +334,8 @@ function iniciarTurno(io, sala) {
       turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
       totalTurnos: sala.totalPicksNecessarios,
       numPicks:    (jogador.picks || []).filter(Boolean).length,
+      picks:       picksSnapshot,
+      ordemBase:   sala.ordemBase,
     });
     sala.timerDraft = setTimeout(() => {
       botEscolhe(io, sala, jogador);
@@ -343,31 +350,31 @@ function iniciarTurno(io, sala) {
   const abertos     = [];
   for (let i = 0; i < codigosForm.length; i++) { if (!picksJog[i]) abertos.push(codigosForm[i]); }
 
-  // Elegíveis para QUALQUER vaga aberta — podeOcupar considera TODAS as posições do jogador
-  // (ex.: vaga MEI aberta também traz ATAs que podem jogar de MEI).
-  const elegiveis = sala.poolDisponivel.filter(p => abertos.some(cod => podeOcupar(p, cod)));
-  const fonte     = elegiveis.length ? elegiveis : sala.poolDisponivel.slice();
-
-  // 6 cartas aleatórias; evita repetir as já mostradas a ESTE jogador, completando até 6.
-  if (jogador) jogador.cartasVistas = jogador.cartasVistas || {};
-  const vistos = (jogador && jogador.cartasVistas) || {};
-  let cards = shuffle(fonte.filter(p => !vistos[p.id])).slice(0, 6);
-  if (cards.length < 6) {
-    const resto = shuffle(fonte.filter(p => cards.indexOf(p) === -1));
-    cards = cards.concat(resto.slice(0, 6 - cards.length));
-  }
-  if (jogador) cards.forEach(p => { jogador.cartasVistas[p.id] = true; });
+  // Seleção por POSIÇÃO: para cada vaga aberta, manda os melhores elegíveis daquela
+  // posição (deduplicados). Determinístico (ordenado por força) — sem "resorteio".
+  const PER_POS = 14;
+  const vistosIds = new Set();
+  let cards = [];
+  abertos.forEach(cod => {
+    sala.poolDisponivel
+      .filter(p => podeOcupar(p, cod))
+      .sort((a, b) => (b.forca || 0) - (a.forca || 0))
+      .slice(0, PER_POS)
+      .forEach(p => { if (!vistosIds.has(p.id)) { vistosIds.add(p.id); cards.push(p); } });
+  });
 
   io.to(sala.codigo).emit('draft:turno', {
     userId,
     username:    jogador?.username,
     nomeDoTime:  jogador?.nomeDoTime,
     segundos:    30,
-    pool:        cards,    // 6 cartas já prontas (elegíveis + aleatórias)
+    pool:        cards,    // candidatos elegíveis (melhores por posição aberta)
     cards,
     turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
     totalTurnos: sala.totalPicksNecessarios,
     numPicks:    (jogador?.picks || []).filter(Boolean).length,
+    picks:       picksSnapshot,
+    ordemBase:   sala.ordemBase,
   });
 
   if (jogador?.socketId) {
@@ -395,6 +402,8 @@ function avancarTurno(io, sala) {
         userId:    j.userId,
         username:  j.username,
         nomeDoTime: j.nomeDoTime,
+        ehBot:     !!j.ehBot,
+        guest:     !!j.guest,
         formacao:  j.formacao || '4-3-3',
         picks:     j.picks    || [],
       })),
@@ -438,6 +447,11 @@ function setupSocket(server, frontendUrl) {
 
   io.on('connection', socket => {
     const { id: userId, username } = socket.user;
+
+    // Informa ao cliente o SEU userId autoritativo (o mesmo que o servidor usa para
+    // checar a vez). Evita divergência com o decode do token no navegador, que era a
+    // causa de "achar que é a vez dele" para o jogador errado.
+    socket.emit('session:me', { userId, username });
 
     // ── room:join ─────────────────────────────────────────────────────────────
     socket.on('room:join', async ({ codigo }) => {
@@ -570,6 +584,7 @@ function setupSocket(server, frontendUrl) {
       sala.jogadores.forEach(j => { j.picks = []; j.pronto = !!j.ehBot; j.cartasVistas = {}; });
 
       const baseOrder      = shuffle(sala.jogadores.map(j => j.userId));
+      sala.ordemBase       = baseOrder;
       sala.poolDisponivel  = pool;
       sala.ordemDraft      = gerarOrdemSnake(baseOrder, sala.totalPicksNecessarios);
       sala.indiceTurno     = 0;

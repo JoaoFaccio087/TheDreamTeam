@@ -64,7 +64,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 - **Contas e convidados**: jogue com login (e-mail/senha) ou entre como **convidado**, sem cadastro.
 - **Salas em tempo real**: crie uma sala (recebe um código) ou entre em uma existente; o **host** comanda o início e o avanço das partidas.
 - **Liga do Brasileirão com 20 times**: as vagas que sobram são preenchidas por **bots** com nomes de clubes, montando seus elencos sozinhos.
-- **Draft por posição (snake)**: cada jogador recebe **6 cartas aleatórias** por vez, elegíveis para suas vagas abertas — considerando **todas as posições** que cada atleta pode jogar (um ATA que também atua de MEI pode aparecer para uma vaga de MEI). As cartas não se repetem para o mesmo jogador, e ninguém pega o mesmo nome duas vezes.
+- **Draft por posição (snake)**: na sua vez, você **clica numa posição aberta** do campo e vê os **melhores jogadores disponíveis** para ela (considerando **todas as posições** que cada atleta pode jogar — um ATA que também atua de MEI aparece para uma vaga de MEI), e então escolhe quem entra. A **ordem dos jogadores** e o **número de picks** são idênticos para todos na sala, e ninguém pega o mesmo nome duas vezes.
 - **Posicionamento e remanejamento**: aloque a carta numa vaga válida e reorganize o time movendo ou trocando jogadores no campo.
 - **Campeonato de 38 rodadas**: todos contra todos, ida e volta, com **confrontos diretos** entre os times da sala.
 - **Simulação animada da sua partida**: placar e relógio correndo ao vivo, com os gols (e quem marcou/assistiu) surgindo no minuto certo — clique para pular.
@@ -95,7 +95,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 1. Na tela inicial, entre no **modo online** (faça login ou entre como convidado).
 2. **Crie uma sala** (compartilhe o código) ou **entre** com o código de uma sala existente.
-3. Quando todos estiverem prontos, o **host** inicia o **draft**. Na sua vez, escolha uma das 6 cartas e posicione-a numa vaga válida; remaneje o time como quiser.
+3. Quando todos estiverem prontos, o **host** inicia o **draft**. Na sua vez, **clique numa posição aberta** do campo, escolha um dos jogadores disponíveis para ela e confirme; remaneje o time como quiser.
 4. As vagas que faltarem são completadas por bots, e o campeonato de 38 rodadas começa.
 5. A cada rodada, assista à **animação da sua partida** e acompanhe a tabela na aba **Classificação**. O **host** avança para a próxima rodada.
 6. Ao fim das 38 rodadas, a **premiação da temporada** abre sobre a classificação (campeão, pato, goleador e peneira). Fechando-a, você pode **ver o resumo da sua campanha** ou **voltar ao início**.
