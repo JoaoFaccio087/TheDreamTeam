@@ -659,6 +659,32 @@
     }
   }
 
+  // Renderiza a tabela de classificação (usada na rodada e no fim do campeonato)
+  function renderClassifLista(lista) {
+    if (!rodadaClassif) return;
+    rodadaClassif.innerHTML = '';
+    (lista || []).forEach(function (p, i) {
+      var sou = String(p.userId) === String(meuUserId);
+      var pts   = (typeof p.pontos === 'number') ? p.pontos : ((p.vitorias || 0) * 3 + (p.empates || 0));
+      var jogos = (typeof p.jogos  === 'number') ? p.jogos  : ((p.vitorias || 0) + (p.empates || 0) + (p.derrotas || 0));
+      var sg    = (typeof p.saldo  === 'number') ? p.saldo  : ((p.gf || 0) - (p.ga || 0));
+      var tagBot = p.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
+      var tagEu  = sou ? ' <span class="draft-eu-tag">VOCÊ</span>' : '';
+      var row = document.createElement('div');
+      row.className = 'ct-linha' + (sou ? ' eu' : '') + (i === 0 ? ' primeiro' : '');
+      row.innerHTML =
+        '<span class="ct-pos">' + (i + 1) + '</span>' +
+        '<span class="ct-time">' + htmlEsc(p.nomeDoTime || p.username || '?') + tagEu + tagBot + '</span>' +
+        '<span class="ct-num ct-pts">' + pts + '</span>' +
+        '<span class="ct-num">' + jogos + '</span>' +
+        '<span class="ct-num">' + (p.vitorias || 0) + '</span>' +
+        '<span class="ct-num">' + (p.empates || 0) + '</span>' +
+        '<span class="ct-num">' + (p.derrotas || 0) + '</span>' +
+        '<span class="ct-num">' + (sg >= 0 ? '+' : '') + sg + '</span>';
+      rodadaClassif.appendChild(row);
+    });
+  }
+
   // round:results — resultados da rodada
   function onRoundResults(dados) {
     simulandoRodada = false;
@@ -681,27 +707,7 @@
     renderProximos(dados.proxima);
 
     // Classificação (tabela completa: P J V E D SG)
-    rodadaClassif.innerHTML = '';
-    (dados.classificacao || []).forEach(function (p, i) {
-      var sou = String(p.userId) === String(meuUserId);
-      var pts   = (typeof p.pontos === 'number') ? p.pontos : ((p.vitorias || 0) * 3 + (p.empates || 0));
-      var jogos = (typeof p.jogos  === 'number') ? p.jogos  : ((p.vitorias || 0) + (p.empates || 0) + (p.derrotas || 0));
-      var sg    = (typeof p.saldo  === 'number') ? p.saldo  : ((p.gf || 0) - (p.ga || 0));
-      var tagBot = p.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
-      var tagEu  = sou ? ' <span class="draft-eu-tag">VOCÊ</span>' : '';
-      var row = document.createElement('div');
-      row.className = 'ct-linha' + (sou ? ' eu' : '') + (i === 0 ? ' primeiro' : '');
-      row.innerHTML =
-        '<span class="ct-pos">' + (i + 1) + '</span>' +
-        '<span class="ct-time">' + htmlEsc(p.nomeDoTime || p.username || '?') + tagEu + tagBot + '</span>' +
-        '<span class="ct-num ct-pts">' + pts + '</span>' +
-        '<span class="ct-num">' + jogos + '</span>' +
-        '<span class="ct-num">' + (p.vitorias || 0) + '</span>' +
-        '<span class="ct-num">' + (p.empates || 0) + '</span>' +
-        '<span class="ct-num">' + (p.derrotas || 0) + '</span>' +
-        '<span class="ct-num">' + (sg >= 0 ? '+' : '') + sg + '</span>';
-      rodadaClassif.appendChild(row);
-    });
+    renderClassifLista(dados.classificacao || []);
 
     // Artilharia / Assistências (nome do jogador + time abaixo)
     renderStatsLista(rodadaArtilharia, dados.artilharia, 'gols', 'G');
@@ -713,34 +719,27 @@
 
   // game:end — ranking final
   function onGameEnd(dados) {
-    subview('online-fim');
-    onlineRankingFinal.innerHTML = '';
-
-    (dados.ranking || []).forEach(function (p, i) {
-      var sou = String(p.userId) === String(meuUserId);
-      var pts = (p.vitorias || 0) * 3 + (p.empates || 0);
-      var titulo = nomeUsuario(p);
-      var tagBot = p.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
-      var tagEu  = sou ? ' <span class="draft-eu-tag">VOCÊ</span>' : '';
-
-      var div = document.createElement('div');
-      div.className = 'ranking-final-linha' + (i === 0 ? ' primeiro' : '');
-      div.innerHTML =
-        '<span class="ranking-pos' + (i === 0 ? ' primeiro' : '') + '">' + (i + 1) + 'º</span>' +
-        '<div style="flex:1;min-width:0">' +
-          '<div class="ranking-nome' + (sou ? ' eu' : '') + '">' + (i === 0 ? '★ ' : '') + htmlEsc(titulo) + tagEu + tagBot + '</div>' +
-          '<div class="ranking-time">' + (p.guest ? '' : htmlEsc(p.nomeDoTime || '')) + '</div>' +
-        '</div>' +
-        '<div class="ranking-stats">' + (p.vitorias || 0) + 'V ' + (p.empates || 0) + 'E ' + (p.derrotas || 0) + 'D</div>' +
-        '<span class="ranking-pts">' + pts + ' pts</span>';
-      onlineRankingFinal.appendChild(div);
-    });
-
-    // ── Premiação ──────────────────────────────────────────────────────────
     var ranking = dados.ranking || [];
     rankingFinalCache = ranking;
     meuRankingFinal = ranking.find(function (p) { return String(p.userId) === String(meuUserId); }) || null;
 
+    // Fica na tela da liga, na aba Classificação, com a tabela FINAL.
+    subview('online-rodada');
+    rodadaAtual = totalRodadas;
+    renderClassifLista(ranking);
+    renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
+    renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+    selecionarAbaRodada('classif');
+
+    // Acabou: nada de avançar rodada.
+    pararAnimacaoPartida();
+    if (btnRodadaProxima)     btnRodadaProxima.classList.add('escondida');
+    if (btnRodadaFim)         btnRodadaFim.classList.add('escondida');
+    if (btnPularTudo)         btnPularTudo.classList.add('escondida');
+    if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
+    if (skipContador)         skipContador.classList.add('escondida');
+
+    // ── Premiação ──────────────────────────────────────────────────────────
     var campeao  = ranking[0] || null;
     var pato     = ranking.length ? ranking[ranking.length - 1] : null;
     var goleador = null, peneira = null;
@@ -765,7 +764,7 @@
     if (goleador) setPrem('prem-goleador-time', 'prem-goleador-stat', nomeTimePrem(goleador), (goleador.gf || 0) + ' gols feitos');
     if (peneira)  setPrem('prem-peneira-time',  'prem-peneira-stat',  nomeTimePrem(peneira),  (peneira.ga  || 0) + ' gols sofridos');
 
-    // Abre o modal automaticamente; os botões só aparecem ao fechar.
+    // Abre o modal automaticamente; os botões (coluna direita) só aparecem ao fechar.
     if (fimAcoes) fimAcoes.classList.add('escondida');
     if (modalPremiacao) modalPremiacao.classList.remove('escondida');
   }
@@ -1530,7 +1529,7 @@
     });
 
     btnRodadaFim.addEventListener('click', function () {
-      subview('online-fim');
+      if (modalPremiacao) modalPremiacao.classList.remove('escondida');
     });
 
     // Fim
