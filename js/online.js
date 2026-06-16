@@ -261,6 +261,10 @@
       Object.assign(allPlayers[j.userId], j);
     });
 
+    // Só mexe na UI do lobby enquanto a sala estiver no lobby (evita "Iniciando..."
+    // preso e flicker depois que o draft começa).
+    if (sala.status && sala.status !== 'lobby') return;
+
     var prontos = sala.prontos || 0;
     var total   = sala.total   || 0;
 
@@ -284,6 +288,8 @@
     // (mínimo 1 — as vagas restantes da liga viram bots no início).
     if (ehHost && prontos >= total && total >= 1) {
       btnLobbyComecar.classList.remove('escondida');
+      btnLobbyComecar.disabled    = false;
+      btnLobbyComecar.textContent = 'Começar →';
       btnLobbyPronto.classList.add('escondida');
     } else {
       btnLobbyComecar.classList.add('escondida');
@@ -1335,7 +1341,7 @@
     lobbyBoxScore        = document.getElementById('lobby-box-score');
 
     // Draft
-    draftTituloEl      = document.getElementById('draft-titulo');
+    draftTituloEl      = document.getElementById('online-draft-titulo');
     draftSubtituloEl   = document.getElementById('draft-subtitulo');
     draftOrdemLista    = document.getElementById('draft-ordem-lista');
     draftTimerBar      = document.getElementById('draft-timer-bar');
@@ -1465,6 +1471,7 @@
     });
 
     btnLobbyVoltar.addEventListener('click', function () {
+      if (socket && socket.connected) socket.emit('room:leave');
       desconectar();
       mostrarTelaInicial();
     });

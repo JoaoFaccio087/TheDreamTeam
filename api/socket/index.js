@@ -489,6 +489,25 @@ function setupSocket(server, frontendUrl) {
       }
     });
 
+    // ── room:leave — jogador sai da sala explicitamente (botão "Voltar") ───────
+    socket.on('room:leave', () => {
+      const code = socket.salaAtual;
+      if (!code) return;
+      const sala = getSala(code);
+      if (sala) {
+        sala.jogadores = sala.jogadores.filter(j => j.userId !== userId);
+        const humanos = sala.jogadores.filter(j => !j.ehBot);
+        if (humanos.length === 0) {
+          if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+          deleteSala(code);
+        } else {
+          io.to(code).emit('room:state', buildRoomState(sala));
+        }
+      }
+      socket.leave(code);
+      socket.salaAtual = null;
+    });
+
     // ── lobby:config — jogador configura time e vota pronto ───────────────────
     socket.on('lobby:config', ({ nomeDoTime, formacao }) => {
       const code = socket.salaAtual;
@@ -728,13 +747,22 @@ function setupSocket(server, frontendUrl) {
       if (!code) return;
       const sala = getSala(code);
       if (!sala) return;
-      const jog = sala.jogadores.find(j => j.userId === userId);
-      if (jog) { jog.conectado = false; jog.socketId = null; }
 
-      // Se não há mais nenhum HUMANO conectado, descarta a sala (evita vazamento de
-      // memória e timers órfãos). Salas só de bots não fazem sentido sozinhas.
-      const humanosConectados = sala.jogadores.filter(j => !j.ehBot && j.conectado).length;
-      if (humanosConectados === 0) {
+      if (sala.status === 'lobby') {
+        // No lobby, desconectar = SAIR da sala (remove o jogador, não deixa fantasma).
+        sala.jogadores = sala.jogadores.filter(j => j.userId !== userId);
+      } else {
+        // Em draft/jogo, mantém a vaga para permitir reconexão.
+        const jog = sala.jogadores.find(j => j.userId === userId);
+        if (jog) { jog.conectado = false; jog.socketId = null; }
+      }
+
+      // Se a sala ficou sem humano (presente/conectado), descarta — evita salas órfãs.
+      const humanos = sala.jogadores.filter(j => !j.ehBot);
+      const algumPresente = sala.status === 'lobby'
+        ? humanos.length > 0
+        : humanos.some(j => j.conectado);
+      if (!algumPresente) {
         if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
         deleteSala(code);
         return;
