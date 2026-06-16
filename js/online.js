@@ -1379,16 +1379,23 @@
   // ── Ações UI ──────────────────────────────────────────────────────────────
 
   function criarSala() {
+    var nome = (document.getElementById('input-nome-sala').value || '').trim();
+    if (!nome) {
+      erroOnline('Dê um nome à sala para continuar.');
+      var _campoNome = document.getElementById('input-nome-sala');
+      if (_campoNome) _campoNome.focus();
+      return;
+    }
+
     btnCriarSala.disabled    = true;
     btnCriarSala.textContent = 'Criando...';
 
-    var nome  = (document.getElementById('input-nome-sala').value || '').trim();
     var velEl = document.querySelector('#sala-velocidade .pilula-ativa');
     var velocidade = velEl ? velEl.dataset.vel : 'normal';
 
     garantirToken()
       .then(function () {
-        return api.criarSala({ competicao: 'Brasileirão', nome: nome || undefined, velocidade: velocidade });
+        return api.criarSala({ competicao: 'Brasileirão', nome: nome, velocidade: velocidade });
       })
       .then(function (res) {
         codigoSala = res.codigo;

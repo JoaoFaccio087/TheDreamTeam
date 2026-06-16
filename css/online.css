@@ -804,6 +804,45 @@
    reblur a cada repaint da seleção/hover dos cards — removido para a seleção ficar fluida. */
 #modal-draft-pick { background: rgba(8,9,12,0.97); }
 
+/* ===== Fluidez do modal de cards (online) — animações 100% compositadas =====
+   Escopo só em #modal-draft-pick; o draft offline permanece intacto.
+   Trocamos box-shadow/background-position (que causam repaint a cada frame)
+   por transform/opacity (compositadas pela GPU). */
+
+/* Contexto 3D + isolamento de repaint do container das cartas. */
+#modal-draft-pick-cartas { perspective: 800px; }
+
+/* 1) Não transicionar box-shadow; cada carta vira a própria camada de composição. */
+#modal-draft-pick .draft-carta {
+  transition: transform 0.12s ease, border-color 0.12s ease;
+  will-change: transform;
+}
+
+/* 2) Brilho de entrada via transform translateX (em vez de background-position). */
+#modal-draft-pick .carta-brilho {
+  background-size: 100% 100%;
+  background-position: 0 0;
+  transform: translateX(-100%);
+  animation-name: carta-glare-x;
+  will-change: transform, opacity;
+}
+@keyframes carta-glare-x {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  18%  { opacity: 1; }
+  100% { transform: translateX(100%);  opacity: 0; }
+}
+
+/* 3) Pulso elite via scale compositado (em vez de animar box-shadow com blur grande).
+      O glow estático (box-shadow) escala junto, dando o mesmo efeito de "respiro". */
+#modal-draft-pick .draft-carta.tier-elite                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
+#modal-draft-pick .draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
+#modal-draft-pick .draft-carta.tier-elite.escolhida      { animation: none; }
+@keyframes carta-elite-scale {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.03); }
+}
+
+
 /* Fim de jogo: botões de ação (abaixo das estatísticas) + modal de premiação */
 .fim-acoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.2rem; }
 .fim-btn {
