@@ -69,6 +69,7 @@
   var onlineRankingFinal;
   var btnVerResumo, btnVoltarInicio, fimAcoes, modalPremiacao, modalPremFechar;
   var meuRankingFinal = null, ultimaArtilharia = [], ultimaAssistencia = [], rankingFinalCache = [];
+  var _campanhaOnlineSalva = false;
 
   // ── Formações (posições por slot) ─────────────────────────────────────────
   // (Os rótulos de posição vêm de `codigosFormacao` do formacoes.js — a mesma
@@ -321,6 +322,7 @@
     ordemDraftIds    = dados.ordem || [];
     indiceTurnoAtual = 0;
     draftResortsRestantes = 3;   // 3 re-sorteios para todo o draft (igual ao offline)
+    _campanhaOnlineSalva  = false;
     subview('online-draft');
     renderOrdemLista();
     // Desenha o campo já com as posições da minha formação (vazio), desde o início.
@@ -766,6 +768,27 @@
     var ranking = dados.ranking || [];
     rankingFinalCache = ranking;
     meuRankingFinal = ranking.find(function (p) { return String(p.userId) === String(meuUserId); }) || null;
+
+    // Grava a campanha online no histórico (logado → backend; convidado → local).
+    if (meuRankingFinal && !_campanhaOnlineSalva && typeof API !== 'undefined' && API.salvarPartida) {
+      _campanhaOnlineSalva = true;
+      try {
+        var _idx = ranking.findIndex(function (p) { return String(p.userId) === String(meuUserId); });
+        var r = meuRankingFinal;
+        API.salvarPartida({
+          competicao: 'Brasileirão',
+          modo:       'online',
+          vitorias:   r.vitorias | 0,
+          empates:    r.empates  | 0,
+          derrotas:   r.derrotas | 0,
+          gf:         r.gf | 0,
+          ga:         r.ga | 0,
+          posicao:    _idx >= 0 ? _idx + 1 : null,
+          campeao:    _idx === 0,
+          detalhes:   { online: true }
+        });
+      } catch (e) {}
+    }
 
     // Fica na tela da liga, na aba Classificação, com a tabela FINAL.
     subview('online-rodada');

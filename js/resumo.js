@@ -22,9 +22,58 @@ var ICONE_COMPARTILHAR =
 
 function mostrarBotaoResumo(campeao) {
   resumoCampeao = campeao;
+  try { salvarCampanhaNoHistorico(campeao); } catch (e) {}
   if (!btnResumo) return;
   btnResumo.textContent = campeao ? '\u2605 Ver Resumo da Campanha' : 'Ver Resumo da Campanha';
   btnResumo.classList.remove('escondida');
+}
+
+// Grava a campanha encerrada no histórico do usuário (logado → backend via /matches;
+// convidado/offline → localStorage, tudo tratado dentro de api.js). Roda uma vez por campanha.
+var _campanhaHistKey = null;
+function salvarCampanhaNoHistorico(campeao) {
+  if (typeof API === 'undefined' || !API.salvarPartida) return;
+  if (typeof campanhaPartidas !== 'undefined' && campanhaPartidas <= 0) return;
+
+  var comp = (typeof COMPETICOES !== 'undefined' && typeof modoSelecionado !== 'undefined' && COMPETICOES[modoSelecionado])
+    ? COMPETICOES[modoSelecionado].label
+    : 'Campanha';
+
+  var pos = null;
+  if (typeof modoSelecionado !== 'undefined' && modoSelecionado === 'brasileirao' &&
+      typeof posicaoNaTabela === 'function') {
+    try { pos = posicaoNaTabela(); } catch (e) {}
+  }
+
+  var v  = campanhaVitorias | 0, e = campanhaEmpates | 0, d = campanhaDerrotas | 0;
+  var gf = campanhaGF | 0, ga = campanhaGA | 0;
+
+  // Evita gravar a MESMA campanha duas vezes (ex.: jogo-a-jogo vs. pular tudo).
+  var chave = comp + '|' + v + '|' + e + '|' + d + '|' + gf + '|' + ga + '|' + (campeao ? 1 : 0);
+  if (chave === _campanhaHistKey) return;
+  _campanhaHistKey = chave;
+
+  var art = null, asi = null;
+  if (statsJogadores && typeof statsJogadores === 'object') {
+    Object.keys(statsJogadores).forEach(function (n) {
+      var s = statsJogadores[n];
+      if (s.gols > 0 && (!art || s.gols > art.gols)) art = { nome: n, gols: s.gols };
+      if (s.asis > 0 && (!asi || s.asis > asi.assistencias)) asi = { nome: n, assistencias: s.asis };
+    });
+  }
+
+  API.salvarPartida({
+    competicao: comp,
+    modo:       'solo',
+    vitorias:   v,
+    empates:    e,
+    derrotas:   d,
+    gf:         gf,
+    ga:         ga,
+    posicao:    pos,
+    campeao:    !!campeao,
+    detalhes:   { artilheiro: art, assistente: asi }
+  });
 }
 
 // Abrevia "Marcos Acuña" → "Acuña"; nomes de uma palavra ficam iguais

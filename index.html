@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="css/resumo.css" />
   <link rel="stylesheet" href="css/auth.css" />
   <link rel="stylesheet" href="css/online.css" />
+  <link rel="stylesheet" href="css/perfil.css" />
   <link rel="stylesheet" href="css/responsivo.css" />
 </head>
 <body>
@@ -145,6 +146,49 @@
   </div>
 
 
+  <!-- Modal de Perfil -->
+  <div id="modal-perfil" class="modal-auth escondida">
+    <div class="modal-auth-backdrop" id="modal-perfil-backdrop"></div>
+    <div class="auth-card modal-auth-card perfil-card">
+      <button id="modal-perfil-fechar" class="modal-auth-fechar" type="button" aria-label="Fechar">&times;</button>
+
+      <p class="auth-logo-titulo">MEU PERFIL</p>
+      <hr class="auth-divisor" />
+
+      <div class="perfil-topo">
+        <span id="perfil-avatar" class="perfil-avatar">?</span>
+        <div class="perfil-id">
+          <span id="perfil-username" class="perfil-username">&mdash;</span>
+          <span id="perfil-email" class="perfil-email"></span>
+        </div>
+      </div>
+
+      <label class="auth-label" for="perfil-nome-time">Nome do Time</label>
+      <div class="perfil-nome-linha">
+        <input id="perfil-nome-time" class="auth-input" type="text" maxlength="50" autocomplete="off" placeholder="Nome do seu time" />
+        <button id="perfil-salvar-nome" class="btn-rolar" type="button">Salvar</button>
+      </div>
+      <p id="perfil-msg" class="perfil-msg escondida"></p>
+
+      <p class="perfil-secao-titulo">ESTAT&Iacute;STICAS</p>
+      <div id="perfil-stats" class="perfil-stats"></div>
+    </div>
+  </div>
+
+  <!-- Modal de Histórico -->
+  <div id="modal-historico" class="modal-auth escondida">
+    <div class="modal-auth-backdrop" id="modal-historico-backdrop"></div>
+    <div class="auth-card modal-auth-card historico-card">
+      <button id="modal-historico-fechar" class="modal-auth-fechar" type="button" aria-label="Fechar">&times;</button>
+
+      <p class="auth-logo-titulo">MEU HIST&Oacute;RICO</p>
+      <hr class="auth-divisor" />
+
+      <div id="historico-lista" class="historico-lista"></div>
+    </div>
+  </div>
+
+
   <!-- =============================================================
        TELA INICIAL
        ============================================================= -->
@@ -176,6 +220,9 @@
             <!-- Usuário logado -->
             <div id="menu-logado" class="escondida">
               <span class="dropdown-nome" id="dropdown-usuario-nome"></span>
+              <hr class="dropdown-divisor" />
+              <button class="dropdown-item" id="dd-perfil"    role="menuitem">Perfil</button>
+              <button class="dropdown-item" id="dd-historico" role="menuitem">Hist&oacute;rico</button>
               <hr class="dropdown-divisor" />
               <button class="dropdown-item" id="dd-logout" role="menuitem" class="dropdown-item-logout">Logout</button>
             </div>
@@ -970,5 +1017,6 @@
   <script src="js/main.js"        defer></script>
   <script src="js/auth.js"        defer></script>
   <script src="js/online.js"      defer></script>
+  <script src="js/perfil.js"      defer></script>
 </body>
 </html>
