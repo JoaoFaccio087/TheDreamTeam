@@ -83,7 +83,8 @@
      filhos da coluna direita ao .jogo-wrapper. */
   .jogo-direita { display: contents; }
 
-  /* Linha de ação em fila: Voltar (esquerda, compacto) + ação preenchendo o resto */
+  /* Linha de ação em fila: ação preenchendo a largura (o Voltar agora fica
+     no topo à esquerda do cabeçalho, válido para Clássico e Draft). */
   .jogo-acao {
     display: flex;
     gap: 8px;
@@ -94,27 +95,10 @@
     width: auto;
     min-width: 0;      /* ignora o piso de largura do texto (padroniza os dois) */
   }
-  .btn-voltar-mobile {
-    order: -1;          /* à esquerda da ação, dando a sensação de "voltar" */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-    width: auto;
-    padding: 10px 16px;
-  }
 
-  /* O Voltar da coluna direita some no celular (substituído pelo da linha de ação)... */
-  #btn-voltar-home { display: none; }
-
-  /* ...mas reaparece no topo quando o Draft começa e a coluna esquerda some. */
-  .jogo-wrapper.draft-ativo #btn-voltar-home {
-    display: inline-block;
-    order: -1;
-    justify-self: start;
-    width: auto;
-    margin-bottom: 2px;
-  }
+  /* Voltar do topo: mais compacto no celular */
+  .jogo-header-esq { gap: 12px; align-items: center; }
+  .jogo-voltar-topo { padding: 6px 11px; font-size: 0.76rem; margin-bottom: 0; }
 
   /* Tela de simulação no celular: vira 1 coluna. display:contents "promove" os filhos das duas colunas ao .sim-wrapper, e a ordem vem do `order` (Voltar, controles, histórico, ação, resumo, stats). */
   .sim-wrapper {

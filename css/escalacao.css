@@ -154,6 +154,26 @@
   align-items: flex-end;
 }
 
+/* Grupo da esquerda do cabeçalho: botão Voltar + bloco do título */
+.jogo-header-esq { display: flex; align-items: flex-end; gap: 16px; }
+.jogo-voltar-topo {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--txt-soft);
+  color: var(--txt-soft);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.8rem;
+  padding: 7px 13px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.jogo-voltar-topo svg { width: 15px; height: 15px; }
+.jogo-voltar-topo:hover { color: var(--txt); border-color: var(--txt); }
+
 .jogo-header-titulo {
   font-family: 'Archivo Black', sans-serif;
   font-size: 1.75rem;
