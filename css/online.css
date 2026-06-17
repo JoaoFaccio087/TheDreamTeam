@@ -578,6 +578,20 @@
   align-items: start;
 }
 .elencos-esq  { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.2rem; }
+/* Bloco de ação (Prontos + botão) ancorado no topo da coluna, sem precisar rolar */
+.elencos-acoes-top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: sticky;
+  top: 0.6rem;
+  z-index: 2;
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg);
+}
+.elencos-acoes-top .lobby-prontos { margin: 0; text-align: center; }
 .elencos-campo-col { display: flex; flex-direction: column; gap: 0.6rem; align-items: center; }
 .elencos-users-lista { display: flex; flex-direction: column; gap: 0.4rem; }
 .elencos-user-row {
@@ -837,6 +851,9 @@
 #modal-draft-pick .draft-carta.tier-elite                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
 #modal-draft-pick .draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
 #modal-draft-pick .draft-carta.tier-elite.escolhida      { animation: none; }
+#modal-draft-pick .draft-carta.tier-diamante                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
+#modal-draft-pick .draft-carta.tier-diamante.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
+#modal-draft-pick .draft-carta.tier-diamante.escolhida      { animation: none; }
 @keyframes carta-elite-scale {
   0%, 100% { transform: scale(1);    }
   50%      { transform: scale(1.03); }

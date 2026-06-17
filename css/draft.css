@@ -185,25 +185,40 @@
 .draft-carta.tier-prata  { border-color: #c2cad6; box-shadow: 0 0 14px rgba(194, 202, 214, 0.32), 5px 5px 0 rgba(0,0,0,0.5); }
 .draft-carta.tier-ouro   { border-color: #e0b24b; box-shadow: 0 0 16px rgba(224, 178, 75, 0.45), 5px 5px 0 rgba(0,0,0,0.5); }
 .draft-carta.tier-elite  { border-color: #ffd86b; box-shadow: 0 0 22px rgba(255, 216, 107, 0.6), 5px 5px 0 rgba(0,0,0,0.5); }
+.draft-carta.tier-diamante { border-color: #8ef0ff; box-shadow: 0 0 26px rgba(120, 230, 255, 0.7), 5px 5px 0 rgba(0,0,0,0.5); }
+/* Carta com força oculta ("Mostrar Força" desligado): visual neutro, sem revelar raridade */
+.draft-carta.tier-oculto { border-color: #555a63; box-shadow: 0 0 12px rgba(120,128,140,0.25), 5px 5px 0 rgba(0,0,0,0.5); }
 
 /* Força ganha a cor da raridade */
 .draft-carta.tier-bronze .carta-forca { color: #d29a63; }
 .draft-carta.tier-prata  .carta-forca { color: #e3e9f2; }
 .draft-carta.tier-ouro   .carta-forca { color: #f0c768; }
 .draft-carta.tier-elite  .carta-forca { color: #ffe08a; text-shadow: 0 0 12px rgba(255, 216, 107, 0.7); }
+.draft-carta.tier-diamante .carta-forca { color: #b6f4ff; text-shadow: 0 0 14px rgba(120, 230, 255, 0.85); }
+.draft-carta.tier-oculto .carta-forca { color: #8b929c; text-shadow: none; }
 
-/* Elite pulsa de leve para chamar atenção (pausa no hover). O "deal" de entrada
-   vem da .carta-entrando; aqui fica só o pulso infinito (que não some). */
+/* Elite e Diamante pulsam de leve para chamar atenção (pausa no hover). O "deal"
+   de entrada vem da .carta-entrando; aqui fica só o pulso infinito (que não some). */
 .draft-carta.tier-elite { animation: carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
 .draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
 .draft-carta.tier-elite:hover { animation-play-state: paused; }
+
+.draft-carta.tier-diamante { animation: carta-diamante-pulso 1.8s ease-in-out 0.9s infinite; }
+.draft-carta.tier-diamante.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-diamante-pulso 1.8s ease-in-out 0.9s infinite; }
+.draft-carta.tier-diamante:hover { animation-play-state: paused; }
 
 @keyframes carta-elite-pulso {
   0%, 100% { box-shadow: 0 0 22px rgba(255, 216, 107, 0.55), 5px 5px 0 rgba(0,0,0,0.5); }
   50%      { box-shadow: 0 0 30px rgba(255, 216, 107, 0.85), 5px 5px 0 rgba(0,0,0,0.5); }
 }
+@keyframes carta-diamante-pulso {
+  0%, 100% { box-shadow: 0 0 24px rgba(120, 230, 255, 0.6), 5px 5px 0 rgba(0,0,0,0.5); }
+  50%      { box-shadow: 0 0 36px rgba(150, 240, 255, 0.95), 5px 5px 0 rgba(0,0,0,0.5); }
+}
 
 /* A carta escolhida mantém o destaque de seleção acima da raridade */
+.draft-carta.tier-diamante.escolhida,
+.draft-carta.tier-oculto.escolhida,
 .draft-carta.tier-elite.escolhida,
 .draft-carta.tier-ouro.escolhida,
 .draft-carta.tier-prata.escolhida,
@@ -212,9 +227,10 @@
   box-shadow: 0 0 0 2px var(--accent), 6px 9px 0 rgba(0, 0, 0, 0.55);
 }
 
-/* Só a elite tem pulso infinito; ao escolher, congela apenas o pulso. Como o
+/* Elite e Diamante têm pulso infinito; ao escolher, congela apenas o pulso. Como o
    "deal" não está mais aqui, desselecionar não re-dispara animação de entrada. */
-.draft-carta.tier-elite.escolhida { animation: none; }
+.draft-carta.tier-elite.escolhida,
+.draft-carta.tier-diamante.escolhida { animation: none; }
 
 /* Nome do jogador — ocupa até duas linhas */
 .carta-nome {

@@ -79,8 +79,21 @@
   color: var(--txt-soft, #9aa6b2); font-size: 0.74rem; margin-top: 0.35rem;
 }
 .editar-sep-senha::before, .editar-sep-senha::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
-.editar-acoes { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.15rem; }
-.editar-acoes .btn-rolar, .editar-acoes .btn-secundario { padding: 0 1.4rem; }
+.editar-acoes { display: flex; gap: 0.8rem; margin-top: 1.3rem; }
+/* Anula o width:100%/display:block herdado do .btn-rolar para os dois dividirem
+   o espaço igualmente, com altura confortável (antes ficavam espremidos). */
+.editar-acoes .btn-rolar,
+.editar-acoes .btn-secundario {
+  flex: 1 1 0;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 1.2rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
 
 /* ── Histórico ── */
 .historico-lista {
@@ -110,6 +123,27 @@
 .hist-gols i { color: var(--txt-soft, #9aa6b2); font-style: normal; }
 .hist-campeao { color: #D9B25A; font-family: 'Archivo Black', sans-serif; font-size: 0.82rem; margin-left: auto; }
 .hist-pos { color: var(--txt-soft, #c2ccd6); font-size: 0.82rem; margin-left: auto; }
+
+/* Botão "Ver resumo" da campanha (dentro de cada item do histórico) */
+.hist-resumo-btn {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+  background: transparent;
+  border: 1px solid var(--accent, #2BD46A);
+  color: var(--accent, #2BD46A);
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.32rem 0.8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.hist-resumo-btn:hover { background: var(--accent, #2BD46A); color: var(--bg, #0E0F13); }
+.hist-resumo-btn svg { width: 13px; height: 13px; }
 
 /* ── Responsivo ── */
 @media (max-width: 600px) {

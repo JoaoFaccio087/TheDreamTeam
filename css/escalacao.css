@@ -656,6 +656,9 @@
   flex-shrink: 0;
 }
 
+/* Força ocultada pelo switch "Mostrar Força" (some o destaque, fica em cinza) */
+.forca-oculta { color: var(--txt-soft) !important; opacity: 0.7; }
+
 /* Posições do jogador exibidas na lista (ex: MEI/PD) */
 .jogador-posicoes {
   font-size: 0.74rem;

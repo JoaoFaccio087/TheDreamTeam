@@ -207,6 +207,7 @@
   function esconderMsg(id) { var el = $(id); if (el) el.classList.add('escondida'); }
 
   // ──────────────────────── MEU HISTÓRICO ────────────────────────
+  var _histCache = [];
   function abrirHistorico() {
     if (!modalHistorico) return;
     var lista = $('historico-lista');
@@ -218,12 +219,24 @@
         if (lista) lista.innerHTML = '<p class="historico-vazio">Você ainda não terminou nenhuma campanha. Jogue uma temporada e ela aparece aqui!</p>';
         return;
       }
-      if (lista) lista.innerHTML = arr.map(itemHistorico).join('');
+      // Mostra no máximo as 20 partidas mais recentes.
+      _histCache = arr.slice(0, 20);
+      if (lista) {
+        lista.innerHTML = _histCache.map(itemHistorico).join('');
+        // Liga os botões "Ver resumo" pelo índice no cache.
+        lista.querySelectorAll('.hist-resumo-btn').forEach(function (b) {
+          b.addEventListener('click', function () {
+            var idx = +b.dataset.idx;
+            var item = _histCache[idx];
+            if (item && typeof mostrarResumoHistorico === 'function') mostrarResumoHistorico(item);
+          });
+        });
+      }
     }).catch(function () {
       if (lista) lista.innerHTML = '<p class="historico-vazio">Não foi possível carregar o histórico.</p>';
     });
   }
-  function itemHistorico(m) {
+  function itemHistorico(m, idx) {
     var gf = +m.gf || 0, ga = +m.ga || 0, saldo = gf - ga;
     var modo = (m.modo === 'online') ? 'Online' : 'Solo';
     var data = '';
@@ -231,6 +244,10 @@
     var coloc = m.campeao
       ? '<span class="hist-campeao">★ Campeão</span>'
       : (m.posicao ? '<span class="hist-pos">' + (+m.posicao) + 'º lugar</span>' : '');
+    var icoResumo =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h10"/>' +
+      '</svg>';
     return '' +
       '<div class="hist-item' + (m.campeao ? ' hist-item-campeao' : '') + '">' +
         '<div class="hist-topo">' +
@@ -247,6 +264,7 @@
           '<span class="hist-gols">' + gf + ':' + ga + ' <i>(' + (saldo >= 0 ? '+' : '') + saldo + ')</i></span>' +
           coloc +
         '</div>' +
+        '<button class="hist-resumo-btn" type="button" data-idx="' + idx + '">' + icoResumo + 'Ver resumo</button>' +
       '</div>';
   }
 

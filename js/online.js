@@ -998,10 +998,11 @@
       card.dataset.id  = jogador.id;
 
       var posStr = (jogador.posicoes || []).join('/') || '—';
+      var revelaF = (typeof mostrarForca === 'undefined') ? true : mostrarForca;
       card.innerHTML =
         '<div class="draft-card-pos">' + htmlEsc(posStr) + '</div>' +
         '<div class="draft-card-nome">' + htmlEsc(jogador.nome || '—') + '</div>' +
-        '<div class="draft-card-forca">' + (jogador.forca || '—') + '</div>' +
+        '<div class="draft-card-forca">' + (revelaF ? (jogador.forca || '—') : '?') + '</div>' +
         '<div class="draft-card-clube">' + htmlEsc(jogador.clube || '') + (jogador.edicao ? ' ' + jogador.edicao : '') + '</div>';
 
       card.addEventListener('click', function () { selecionarCardOnline(jogador, card); });
@@ -1129,8 +1130,10 @@
 
     cartas.forEach(function (j, idx) {
       var atraso = idx * 0.09;
+      var revelaF = (typeof mostrarForca === 'undefined') ? true : mostrarForca;
+      var tierC   = revelaF ? (typeof tierDaForca === 'function' ? tierDaForca(j.forca) : 'bronze') : 'oculto';
       var carta = document.createElement('div');
-      carta.className = 'draft-carta carta-entrando tier-' + (typeof tierDaForca === 'function' ? tierDaForca(j.forca) : 'bronze');
+      carta.className = 'draft-carta carta-entrando tier-' + tierC;
       carta.style.animationDelay = atraso + 's';
       carta.innerHTML =
         '<span class="carta-brilho" style="animation-delay:' + (atraso + 0.26).toFixed(2) + 's"></span>' +
@@ -1138,7 +1141,7 @@
         '<span class="carta-time">' + htmlEsc(j.clube || '') + '</span>' +
         '<span class="carta-ano">' + htmlEsc(j.edicao || '') + '</span>' +
         '<span class="carta-posicoes">' + htmlEsc((j.posicoes || []).join('/')) + '</span>' +
-        '<span class="carta-forca">' + (j.forca || '—') + '</span>';
+        '<span class="carta-forca">' + (revelaF ? (j.forca || '—') : '?') + '</span>';
       carta.addEventListener('click', function () {
         modalDraftPickCartas.querySelectorAll('.draft-carta').forEach(function (c) { c.classList.remove('escolhida'); });
         carta.classList.add('escolhida');
@@ -1209,8 +1212,11 @@
 
   // ── Campo online ──────────────────────────────────────────────────────────
 
-  function renderCampoOnline(campoEl, picks, formacao) {
+  function renderCampoOnline(campoEl, picks, formacao, forcaSempre) {
     var slots    = campoEl.querySelectorAll('.slot-ol');
+    // "Mostrar Força" desligado esconde a força no lobby/draft; em Elencos
+    // (forcaSempre = true) ela sempre aparece.
+    var revela   = !!forcaSempre || (typeof mostrarForca === 'undefined' ? true : mostrarForca);
     // Rótulos das posições: usa a MESMA fonte do offline (codigosFormacao, global
     // do formacoes.js), na mesma ordem das coordenadas — nada de lista paralela.
     var posis    = (typeof codigosFormacao !== 'undefined' && codigosFormacao[formacao])
@@ -1237,7 +1243,7 @@
         slot.innerHTML =
           '<span style="font-size:0.64rem;font-weight:800;color:#D9B25A;line-height:1">' + htmlEsc(pos) + '</span>' +
           '<span class="slot-nome">' + htmlEsc(nome) + '</span>' +
-          (jog.forca ? '<span class="slot-ol-forca">' + jog.forca + '</span>' : '');
+          (jog.forca ? '<span class="slot-ol-forca">' + (revela ? jog.forca : '?') + '</span>' : '');
       } else {
         slot.classList.remove('preenchido');
         slot.textContent = posis ? (posis[i] || '?') : '?';
@@ -1364,7 +1370,7 @@
 
     // Cabeçalho = nome do time; força pequena logo abaixo (via CSS de ordem).
     elencosCampoLabel.textContent = jog.nomeDoTime || nomeUsuario(jog);
-    renderCampoOnline(elencosCampo, jog.picks || [], jog.formacao || '4-3-3');
+    renderCampoOnline(elencosCampo, jog.picks || [], jog.formacao || '4-3-3', true);
 
     var titulares = (jog.picks || []).filter(Boolean);
     var forcaTot  = titulares.reduce(function (s, p) { return s + (p.forca || 70); }, 0);
@@ -1613,6 +1619,19 @@
         if (lobbyCampo) renderCampoOnline(lobbyCampo, [], p.dataset.fl || '4-3-3');
       });
     });
+
+    // Switch "Mostrar Força" do lobby — reflete e altera a preferência global.
+    var switchForcaOnline = document.getElementById('switch-forca-online');
+    if (switchForcaOnline) {
+      if (typeof mostrarForca !== 'undefined') switchForcaOnline.checked = mostrarForca;
+      switchForcaOnline.addEventListener('change', function () {
+        if (typeof setMostrarForca === 'function') setMostrarForca(this.checked);
+        else if (typeof mostrarForca !== 'undefined') mostrarForca = this.checked;
+        // Re-renderiza o campo do lobby com a nova preferência.
+        var fl = document.querySelector('#lobby-pilulas-formacao .pilula-ativa');
+        if (lobbyCampo) renderCampoOnline(lobbyCampo, [], fl ? fl.dataset.fl : '4-3-3');
+      });
+    }
 
     btnLobbyPronto.addEventListener('click', function () {
       var nomeTime = (lobbyNomeTime.value || '').trim() || 'Seu time';

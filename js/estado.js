@@ -87,6 +87,17 @@ let estiloJogo        = 'classico';  // 'classico' | 'draft'
 let draftIniciado     = false;       // true após clicar em "Começar" no modo Draft
 let draftSkipsRestantes = 3;         // re-sorteios disponíveis por draft
 
+// --- Preferência: "Mostrar Força" (vale para offline e online) ---
+// ON (padrão) → força sempre visível. OFF → força escondida até completar o XI.
+let mostrarForca = (function () {
+  try { return localStorage.getItem('dreamteam_mostrar_forca') !== '0'; }
+  catch (e) { return true; }
+})();
+function setMostrarForca(v) {
+  mostrarForca = !!v;
+  try { localStorage.setItem('dreamteam_mostrar_forca', mostrarForca ? '1' : '0'); } catch (e) {}
+}
+
 
 // --- Estado: tela de simulação ---
 

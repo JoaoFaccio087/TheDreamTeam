@@ -88,6 +88,7 @@ var ROTULOS_POSICAO = {
 
 // Faixa de raridade pela força — define a cor da borda/glow da carta.
 function tierDaForca(forca) {
+  if (forca >= 90) return 'diamante';
   if (forca >= 86) return 'elite';
   if (forca >= 82) return 'ouro';
   if (forca >= 78) return 'prata';
@@ -217,8 +218,13 @@ function renderizarCartas() {
   draftPoolCartas.forEach(function (j, idx) {
     var atraso = idx * 0.09; // escalonamento do "deal" entre as cartas
 
+    // "Mostrar Força" desligado: oculta a força ("?") e neutraliza o tier
+    // (a raridade pela cor revelaria a força, então fica escondida também).
+    var revela = (typeof forcaVisivel === 'function') ? forcaVisivel() : true;
+    var tier   = revela ? tierDaForca(j.forca) : 'oculto';
+
     var carta = document.createElement('div');
-    carta.className = 'draft-carta carta-entrando tier-' + tierDaForca(j.forca);
+    carta.className = 'draft-carta carta-entrando tier-' + tier;
     carta.dataset.idx = idx;
     carta.style.animationDelay = atraso + 's';
 
@@ -228,7 +234,7 @@ function renderizarCartas() {
       '<span class="carta-time">' + j.clube + '</span>' +
       '<span class="carta-ano">' + j.edicao + '</span>' +
       '<span class="carta-posicoes">' + j.posicoes.join('/') + '</span>' +
-      '<span class="carta-forca">' + j.forca + '</span>';
+      '<span class="carta-forca">' + (revela ? j.forca : '?') + '</span>';
 
     carta.addEventListener('click', function () { selecionarCarta(idx, carta); });
     // Tira a classe de entrada quando o "deal" acaba: a partir daí, selecionar/

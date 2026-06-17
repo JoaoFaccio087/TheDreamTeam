@@ -1,10 +1,16 @@
 //  escalacao.js — montar XI: lista, alocar, mover, trocar, box score
 
+// Força deve aparecer? ON sempre mostra; OFF só revela com o XI completo (11/11).
+function forcaVisivel() {
+  return (typeof mostrarForca === 'undefined') ? true : (mostrarForca || slotsPreenchidos >= 11);
+}
+
 // BOX SCORE — reconstrói a lista de 11 linhas a cada alocação ou mover
 
 function atualizarBoxScore() {
   var codigos = codigosFormacao[formacaoJogo];
   boxScore.innerHTML = '';
+  var revela = forcaVisivel();
 
   for (var i = 0; i < 11; i++) {
     var div    = document.createElement('div');
@@ -12,9 +18,10 @@ function atualizarBoxScore() {
     var nome   = escalacao[i] ? escalacao[i].nome   : '---';
     div.className = 'box-linha' + (escalacao[i] ? '' : ' vazio');
 
-    // Força aparece só nos slots preenchidos, alinhada à direita
+    // Força aparece só nos slots preenchidos, alinhada à direita.
+    // Com "Mostrar Força" desligado, fica oculta ("?") até o time ficar completo.
     var forcaHtml = escalacao[i]
-      ? '<span class="box-forca">' + escalacao[i].forca + '</span>'
+      ? '<span class="box-forca' + (revela ? '' : ' forca-oculta') + '">' + (revela ? escalacao[i].forca : '?') + '</span>'
       : '';
 
     div.innerHTML =
@@ -50,6 +57,14 @@ function atualizarForcas() {
   function media(arr) {
     if (arr.length === 0) return '--';
     return Math.round(arr.reduce(function (s, v) { return s + v; }, 0) / arr.length);
+  }
+
+  // "Mostrar Força" desligado → médias só aparecem com o time completo.
+  if (!forcaVisivel()) {
+    if (forcaGeral)  forcaGeral.textContent  = '?';
+    if (forcaAtaque) forcaAtaque.textContent = '?';
+    if (forcaDefesa) forcaDefesa.textContent = '?';
+    return;
   }
 
   if (forcaGeral)  forcaGeral.textContent  = media(todos);
@@ -195,11 +210,12 @@ function construirListaJogadores(jogadores) {
     }
 
     var posStr = jogador.posicoes.join('/');
+    var revela = forcaVisivel();
 
     item.innerHTML =
       '<span class="jogador-nome" title="' + jogador.nome + '">' + jogador.nome + '</span>' +
       '<span class="jogador-posicoes">' + posStr        + '</span>' +
-      '<span class="jogador-forca">'    + jogador.forca + '</span>';
+      '<span class="jogador-forca' + (revela ? '' : ' forca-oculta') + '">' + (revela ? jogador.forca : '?') + '</span>';
 
     listaJogadores.appendChild(item);
   });

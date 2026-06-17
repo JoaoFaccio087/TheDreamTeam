@@ -471,6 +471,19 @@
           </div>
         </div><!-- /jogo-formacao-bloco -->
 
+        <!-- Switch: Mostrar Força -->
+        <div id="jogo-forca-bloco" class="dt-switch-bloco">
+          <div class="dt-switch-texto">
+            <span class="dt-switch-rotulo">MOSTRAR FOR&Ccedil;A</span>
+            <span class="dt-switch-dica">Oculta a for&ccedil;a at&eacute; o time ficar completo</span>
+          </div>
+          <label class="dt-switch">
+            <input id="switch-forca" type="checkbox" checked />
+            <span class="dt-switch-trilho"></span>
+            <span class="dt-switch-pino"></span>
+          </label>
+        </div>
+
         <!-- Linha de ação -->
         <div class="jogo-acao">
           <button id="btn-rolar" class="btn-rolar">Rolar &#8635;</button>
@@ -725,6 +738,18 @@
             <button class="pilula" data-fl="4-1-2-1-2">4-1-2-1-2</button>
           </div>
 
+          <div id="lobby-forca-bloco" class="dt-switch-bloco" style="margin-top:1rem">
+            <div class="dt-switch-texto">
+              <span class="dt-switch-rotulo">MOSTRAR FOR&Ccedil;A</span>
+              <span class="dt-switch-dica">For&ccedil;a vis&iacute;vel s&oacute; em "Visualizar Elencos"</span>
+            </div>
+            <label class="dt-switch">
+              <input id="switch-forca-online" type="checkbox" checked />
+              <span class="dt-switch-trilho"></span>
+              <span class="dt-switch-pino"></span>
+            </label>
+          </div>
+
           <button id="btn-lobby-pronto"  class="btn-rolar">Pronto &#10003;</button>
           <button id="btn-lobby-comecar" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
           <button id="btn-lobby-voltar"  class="btn-secundario" style="margin-top:.6rem">&larr; Voltar</button>
@@ -850,12 +875,13 @@
       <div class="elencos-wrapper">
 
         <div class="elencos-esq">
+          <div class="elencos-acoes-top">
+            <p id="elencos-prontos-count" class="lobby-prontos">0/0 Jogadores Prontos</p>
+            <button id="btn-elencos-pronto"  class="btn-rolar">Pronto &#10003;</button>
+            <button id="btn-elencos-comecar" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
+          </div>
           <p class="jogo-rotulo">LISTA DE USU&Aacute;RIOS</p>
           <div id="elencos-users-lista" class="elencos-users-lista"></div>
-
-          <p id="elencos-prontos-count" class="lobby-prontos" style="margin-top:1.2rem">0/0 Jogadores Prontos</p>
-          <button id="btn-elencos-pronto"  class="btn-rolar">Pronto &#10003;</button>
-          <button id="btn-elencos-comecar" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
         </div>
 
         <div class="elencos-campo-col">

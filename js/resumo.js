@@ -62,6 +62,24 @@ function salvarCampanhaNoHistorico(campeao) {
     });
   }
 
+  // Snapshot completo (formação + 11 titulares com força/gols/assist.) para
+  // reabrir o resumo desta campanha lá no histórico. Mantém os índices das vagas
+  // (com null nas vazias) para reconstruir o mapa de escalação na ordem certa.
+  var picks = [];
+  for (var pi = 0; pi < 11; pi++) {
+    var jp = (typeof escalacao !== 'undefined') ? escalacao[pi] : null;
+    if (!jp) { picks.push(null); continue; }
+    var sp = (statsJogadores && statsJogadores[jp.nome]) || { gols: 0, asis: 0 };
+    picks.push({ codigo: jp.codigo, nome: jp.nome, forca: jp.forca, gols: sp.gols | 0, asis: sp.asis | 0 });
+  }
+  var aprovCalc = (typeof campanhaPartidas !== 'undefined' && campanhaPartidas > 0)
+    ? Math.round((v * 3 + e) / (campanhaPartidas * 3) * 100) : 0;
+  var snapshot = {
+    formacao: (typeof formacaoJogo !== 'undefined') ? formacaoJogo : '4-3-3',
+    aprov:    aprovCalc,
+    picks:    picks
+  };
+
   API.salvarPartida({
     competicao: comp,
     modo:       'solo',
@@ -72,7 +90,7 @@ function salvarCampanhaNoHistorico(campeao) {
     ga:         ga,
     posicao:    pos,
     campeao:    !!campeao,
-    detalhes:   { artilheiro: art, assistente: asi }
+    detalhes:   { artilheiro: art, assistente: asi, snapshot: snapshot }
   });
 }
 
@@ -286,4 +304,135 @@ function jogarDeNovo() {
   var b = document.getElementById('btn-iniciar-jogo');
   if (b) b.textContent = 'Iniciar Campanha \u25BA';
   voltarHome();
+}
+
+
+// ─────────────────────── RESUMO A PARTIR DO HISTÓRICO ───────────────────────
+// Reabre o card de resumo de uma campanha já encerrada (item do histórico).
+// Campanhas offline trazem o snapshot completo (mapa + lista). As do backend
+// (que não devolve "detalhes") caem numa versão compacta, só com os números.
+function mostrarResumoHistorico(item) {
+  if (!resumoOverlay || !item) return;
+
+  var snap   = (item.detalhes && item.detalhes.snapshot) || null;
+  var comp   = String(item.competicao || 'Campanha').toUpperCase();
+  var v      = +item.vitorias || 0, e = +item.empates || 0, d = +item.derrotas || 0;
+  var gf     = +item.gf || 0, ga = +item.ga || 0, saldo = gf - ga;
+  var jogos  = v + e + d;
+  var aprov  = (snap && snap.aprov != null) ? snap.aprov
+             : (jogos ? Math.round((v * 3 + e) / (jogos * 3) * 100) : 0);
+  var formac = snap ? snap.formacao : null;
+  var campeao = !!item.campeao;
+  var titulo  = campeao ? 'CAMPE\u00C3O' : (item.posicao ? (+item.posicao) + '\u00BA LUGAR' : 'FIM DE CAMPANHA');
+
+  // Artilheiro / assistente: do snapshot (picks) ou do resumo salvo em "detalhes".
+  var artilheiro = null, assistente = null;
+  if (snap && snap.picks) {
+    snap.picks.forEach(function (p) {
+      if (!p) return;
+      if (p.gols > 0 && (!artilheiro || p.gols > artilheiro.v)) artilheiro = { nome: p.nome, v: p.gols };
+      if (p.asis > 0 && (!assistente || p.asis > assistente.v)) assistente = { nome: p.nome, v: p.asis };
+    });
+  } else if (item.detalhes) {
+    if (item.detalhes.artilheiro) artilheiro = { nome: item.detalhes.artilheiro.nome, v: item.detalhes.artilheiro.gols };
+    if (item.detalhes.assistente) assistente = { nome: item.detalhes.assistente.nome, v: item.detalhes.assistente.assistencias };
+  }
+
+  var trofeu =
+    '<svg class="resumo-trofeu" viewBox="0 0 64 64" aria-hidden="true">' +
+      '<path d="M20 6h24v10a12 12 0 0 1-24 0V6z" fill="currentColor"/>' +
+      '<path d="M20 9H9v5a8 8 0 0 0 9 8" fill="none" stroke="currentColor" stroke-width="3"/>' +
+      '<path d="M44 9h11v5a8 8 0 0 1-9 8" fill="none" stroke="currentColor" stroke-width="3"/>' +
+      '<rect x="29" y="28" width="6" height="9" fill="currentColor"/>' +
+      '<rect x="21" y="37" width="22" height="5" rx="1" fill="currentColor"/>' +
+      '<rect x="25" y="42" width="14" height="6" rx="1" fill="currentColor"/>' +
+    '</svg>';
+
+  function card(rot, val, sub) {
+    return '<div class="resumo-card-item"><span class="rci-rot">' + rot + '</span>' +
+           '<span class="rci-val">' + val + '</span><span class="rci-sub">' + sub + '</span></div>';
+  }
+  var cardsHtml =
+    card('Campanha',
+         '<b class="rec-v">' + v + '</b><i>\u00B7</i><b class="rec-e">' + e + '</b><i>\u00B7</i><b class="rec-d">' + d + '</b>',
+         'V \u00B7 E \u00B7 D') +
+    card('Gols', '<b>' + gf + '</b><i>:</i><b>' + ga + '</b>',
+         'Feitos \u00B7 Sofridos  (' + (saldo >= 0 ? '+' : '') + saldo + ')') +
+    card('Artilheiro', artilheiro ? nomeCurto(artilheiro.nome) : '\u2014', artilheiro ? (artilheiro.v + ' gols') : 'sem gols') +
+    card('Assistente', assistente ? nomeCurto(assistente.nome) : '\u2014', assistente ? (assistente.v + ' assist\u00EAncias') : 'sem assist\u00EAncias');
+
+  // Mapa de escalação + lista (só quando há snapshot)
+  var gridHtml;
+  if (snap && snap.picks && typeof formacoes !== 'undefined' && formacoes[formac]) {
+    var coords = formacoes[formac] || [];
+    var campoHtml =
+      '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
+      '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
+    for (var i = 0; i < 11; i++) {
+      var c = coords[i]; if (!c) continue;
+      var jog = snap.picks[i];
+      campoHtml +=
+        '<div class="resumo-jogador" style="left:' + c.left + '%;top:' + c.top + '%">' +
+          '<span class="resumo-jogador-marca">' + (jog ? jog.codigo : '') + '</span>' +
+          '<span class="resumo-jogador-nome">' + (jog ? nomeCurto(jog.nome) : '') + '</span>' +
+        '</div>';
+    }
+    var listaHtml =
+      '<div class="resumo-lista-head"><span class="rl-nome">Jogador</span>' +
+      '<span class="rl-num">F\u00E7a</span><span class="rl-num">G</span><span class="rl-num">A</span></div>';
+    snap.picks.forEach(function (j) {
+      if (!j) return;
+      listaHtml +=
+        '<div class="resumo-lista-linha">' +
+          '<span class="rl-nome"><i class="rl-cod">' + j.codigo + '</i>' + nomeCurto(j.nome) + '</span>' +
+          '<span class="rl-num rl-forca">' + j.forca + '</span>' +
+          '<span class="rl-num">' + (j.gols | 0) + '</span>' +
+          '<span class="rl-num">' + (j.asis | 0) + '</span>' +
+        '</div>';
+    });
+    gridHtml =
+      '<div class="resumo-grid">' +
+        '<div class="resumo-col-campo"><p class="resumo-bloco-rot">Mapa de Escala\u00E7\u00E3o</p>' +
+          '<div class="resumo-campo">' + campoHtml + '</div></div>' +
+        '<div class="resumo-col-lista"><p class="resumo-bloco-rot">Jogadores &amp; Estat\u00EDsticas</p>' +
+          '<div class="resumo-lista">' + listaHtml + '</div></div>' +
+      '</div>';
+  } else {
+    gridHtml = '<p class="resumo-bloco-rot" style="text-align:center;opacity:0.75">' +
+               'Mapa detalhado dispon\u00EDvel para campanhas jogadas offline neste dispositivo.</p>';
+  }
+
+  var subPartes = [comp];
+  if (formac) subPartes.push(formac);
+  subPartes.push(aprov + '% APROVEITAMENTO');
+
+  resumoOverlay.innerHTML =
+    '<div class="resumo-backdrop"></div>' +
+    '<div class="resumo-card" id="resumo-card">' +
+      '<div class="resumo-conteudo" id="resumo-conteudo">' +
+        '<div class="resumo-hero">' + (campeao ? trofeu : '') +
+          '<h2 class="resumo-titulo">' + titulo + '</h2>' +
+          '<p class="resumo-sub">' + subPartes.join(' \u00B7 ') + '</p>' +
+        '</div>' +
+        '<div class="resumo-cards">' + cardsHtml + '</div>' +
+        gridHtml +
+        '<div class="resumo-marca">THE DREAM TEAM</div>' +
+      '</div>' +
+      '<div class="resumo-acoes">' +
+        '<button id="resumo-baixar" class="resumo-btn">' + ICONE_BAIXAR + 'Baixar imagem</button>' +
+        '<button id="resumo-compartilhar" class="resumo-btn">' + ICONE_COMPARTILHAR + 'Compartilhar</button>' +
+        '<button id="resumo-hist-fechar" class="resumo-btn-destaque">Fechar</button>' +
+      '</div>' +
+    '</div>';
+
+  resumoShareTexto =
+    (campeao ? 'Fui CAMPE\u00C3O' : 'Terminei minha campanha') +
+    ' no The Dream Team \u2014 ' + (item.competicao || '') +
+    ', com ' + aprov + '% de aproveitamento e ' + gf + ' gols! \u26BD\uD83C\uDFC6';
+
+  resumoOverlay.classList.remove('escondida');
+  resumoOverlay.querySelector('.resumo-backdrop').addEventListener('click', fecharResumo);
+  document.getElementById('resumo-baixar').addEventListener('click', baixarResumo);
+  document.getElementById('resumo-compartilhar').addEventListener('click', compartilharResumo);
+  document.getElementById('resumo-hist-fechar').addEventListener('click', fecharResumo);
 }

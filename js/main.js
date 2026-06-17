@@ -158,3 +158,23 @@ titulosCabecalho.forEach(function (titulo) {
     voltarHome();
   });
 });
+
+// Switch "Mostrar Força" (offline) — reflete a preferência salva e re-renderiza
+// o box score / médias / lista do pool ao alternar.
+var switchForca = document.getElementById('switch-forca');
+if (switchForca) {
+  if (typeof mostrarForca !== 'undefined') switchForca.checked = mostrarForca;
+  switchForca.addEventListener('change', function () {
+    if (typeof setMostrarForca === 'function') setMostrarForca(this.checked);
+    else mostrarForca = this.checked;
+    if (typeof atualizarBoxScore === 'function') atualizarBoxScore();
+    // Atualiza a lista do pool (clássico) se estiver visível.
+    if (typeof atualizarDisponibilidadeLista === 'function') atualizarDisponibilidadeLista();
+    // Atualiza as cartas do draft, se um pacote estiver aberto.
+    if (typeof estiloJogo !== 'undefined' && estiloJogo === 'draft' &&
+        typeof draftSlotAtual !== 'undefined' && draftSlotAtual !== null &&
+        typeof renderizarCartas === 'function') {
+      renderizarCartas();
+    }
+  });
+}

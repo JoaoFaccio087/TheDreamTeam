@@ -121,15 +121,38 @@ var api = {
     }
     return _req('POST', '/matches', partida);
   },
+  // Lê as partidas guardadas localmente (jogadas offline / como convidado).
+  _historicoLocal: function () {
+    try {
+      var arr = JSON.parse(localStorage.getItem('dreamteam_historico') || '[]');
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  },
+
   getHistorico: function () {
+    var locais = api._historicoLocal();
+
     if (!_temLoginReal()) {
-      try {
-        return Promise.resolve(
-          JSON.parse(localStorage.getItem('dreamteam_historico') || '[]')
-        );
-      } catch (e) { return Promise.resolve([]); }
+      return Promise.resolve(locais);
     }
-    return _req('GET', '/matches');
+
+    // Logado: junta o histórico do backend com as partidas offline salvas
+    // localmente (quando o usuário jogou sem estar logado). São conjuntos
+    // distintos — offline fica no localStorage, online/logado vai pro backend —
+    // então não há duplicação. Ordena por data (mais recentes primeiro).
+    return _req('GET', '/matches').then(function (remotas) {
+      remotas = Array.isArray(remotas) ? remotas : [];
+      var tudo = remotas.concat(locais);
+      tudo.sort(function (a, b) {
+        var ta = a && a.played_at ? new Date(a.played_at).getTime() : 0;
+        var tb = b && b.played_at ? new Date(b.played_at).getTime() : 0;
+        return tb - ta;
+      });
+      return tudo;
+    }).catch(function () {
+      // Backend indisponível: ao menos mostra o que está salvo localmente.
+      return locais;
+    });
   },
   getRanking: function () {
     return _req('GET', '/ranking');
