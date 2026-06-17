@@ -97,6 +97,12 @@ function iniciarTelaJogo() {
   formacaoBloco.classList.remove('escondida');
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 
+  // Reexibe o switch "Mostrar Força" (fica oculto durante o jogo) e sincroniza
+  // o estado do toggle com a preferência atual.
+  if (jogoForcaBloco) jogoForcaBloco.classList.remove('escondida');
+  var _swForca = document.getElementById('switch-forca');
+  if (_swForca && typeof mostrarForca !== 'undefined') _swForca.checked = mostrarForca;
+
   pilulasFormacaoJogo.forEach(function (p) {
     p.disabled = false;
     if (p.dataset.formacaoJogo === '4-3-3') {

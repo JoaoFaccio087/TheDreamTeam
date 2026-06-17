@@ -28,6 +28,7 @@ const forcaAtaque         = document.getElementById('forca-ataque');
 const forcaDefesa         = document.getElementById('forca-defesa');
 const campoJogo           = document.getElementById('campo-jogo');
 const formacaoBloco       = document.getElementById('jogo-formacao-bloco');
+const jogoForcaBloco      = document.getElementById('jogo-forca-bloco');
 const jogoHeaderInfo      = document.getElementById('jogo-header-info');
 const inputNomeTime       = document.getElementById('input-nome-time');
 const jogoNomeBloco       = document.getElementById('jogo-nome-bloco');

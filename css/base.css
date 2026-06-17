@@ -95,14 +95,9 @@ body {
   justify-content: space-between;
   gap: 0.7rem;
 }
-.dt-switch-texto { display: flex; flex-direction: column; gap: 1px; }
-.dt-switch-rotulo {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: var(--txt);
-}
-.dt-switch-dica { font-size: 0.66rem; color: var(--txt-soft); }
+/* Rótulo do switch usa a MESMA tipografia dos demais rótulos (.jogo-rotulo);
+   aqui só zeramos a margem inferior para alinhar com o toggle na mesma linha. */
+.dt-switch-rotulo { margin-bottom: 0; }
 
 .dt-switch {
   position: relative;

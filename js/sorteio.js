@@ -124,6 +124,7 @@ function rolar() {
     formacaoBloco.classList.add('escondida');
     if (estiloBloco) estiloBloco.classList.add('escondida');
     if (jogoNomeBloco) jogoNomeBloco.classList.add('escondida');
+    if (jogoForcaBloco) jogoForcaBloco.classList.add('escondida'); // trava o "Mostrar Força" durante o jogo
   }
 
   btnRolar.classList.add('escondida');
