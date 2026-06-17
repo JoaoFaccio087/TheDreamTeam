@@ -95,10 +95,11 @@ body {
   justify-content: space-between;
   gap: 0.7rem;
 }
-/* Rótulo do switch usa a MESMA tipografia dos demais rótulos (.jogo-rotulo);
-   aqui zeramos a margem e travamos a altura de linha para centralizar
-   perfeitamente com o toggle (antes o texto ficava um pouco acima do centro). */
-.dt-switch-rotulo { margin: 0; line-height: 1; }
+/* Rótulo do switch usa a MESMA tipografia dos demais rótulos (.jogo-rotulo).
+   O seletor descendente (.dt-switch-bloco .dt-switch-rotulo) tem especificidade
+   maior que .jogo-rotulo, então o margin:0 vence a margem inferior padrão
+   (que vinha do escalacao.css e empurrava o texto pra cima da linha). */
+.dt-switch-bloco .dt-switch-rotulo { margin: 0; line-height: 1; }
 
 .dt-switch {
   position: relative;
