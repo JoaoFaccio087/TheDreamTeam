@@ -1,45 +1,86 @@
-/* perfil.css — modais de Perfil e Histórico.
-   Reaproveitam .modal-auth / .modal-auth-backdrop / .auth-card / .modal-auth-fechar
-   / .auth-logo-titulo / .auth-divisor / .auth-label / .auth-input (de auth.css). */
+/* perfil.css — modais "Meu Perfil", "Alterar Informações" e "Meu Histórico".
+   Reaproveitam .modal-auth / .auth-card / .modal-auth-fechar / .auth-logo-titulo
+   / .auth-divisor / .auth-label / .auth-input (de auth.css). */
 
-.perfil-card,
-.historico-card { max-width: 460px; text-align: left; }
+.perfil-card    { max-width: 560px; text-align: left; padding: 32px 38px 30px; }
+.editar-card    { max-width: 600px; text-align: left; padding: 30px 36px 26px; }
+.historico-card { max-width: 620px; text-align: left; padding: 30px 38px 28px; }
 
-/* ── Topo: avatar + identidade ── */
-.perfil-topo { display: flex; align-items: center; gap: 0.8rem; margin: 0.3rem 0 1.1rem; }
+/* ── Topo: avatar + identidade + lápis ── */
+.perfil-topo { display: flex; align-items: center; gap: 0.85rem; margin: 0.3rem 0 0.4rem; }
 .perfil-avatar {
-  width: 48px; height: 48px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  width: 50px; height: 50px; border-radius: 50%; flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
   background: var(--accent, #2BD46A); color: #06210f;
-  font-family: 'Archivo Black', sans-serif; font-size: 1.3rem;
+  font-family: 'Archivo Black', sans-serif; font-size: 1.35rem;
 }
-.perfil-id { display: flex; flex-direction: column; min-width: 0; }
-.perfil-username { font-family: 'Archivo Black', sans-serif; font-size: 1.05rem; color: #fff; }
+.perfil-id { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.perfil-nome-topo { display: flex; align-items: center; gap: 0.5rem; }
+.perfil-username { font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; color: #fff; }
+.perfil-editar-btn {
+  background: none; border: none; cursor: pointer; padding: 2px;
+  display: inline-flex; color: var(--txt-soft, #9aa6b2); transition: color 0.15s ease;
+}
+.perfil-editar-btn svg { width: 16px; height: 16px; }
+.perfil-editar-btn:hover { color: var(--accent, #2BD46A); }
 .perfil-email { font-size: 0.82rem; color: var(--txt-soft, #9aa6b2); word-break: break-all; }
+.perfil-nome-time-txt { font-size: 0.85rem; color: #cdd3da; }
 
-/* ── Nome do time + salvar ── */
-.perfil-nome-linha { display: flex; gap: 0.5rem; align-items: stretch; }
-.perfil-nome-linha .auth-input { flex: 1; margin: 0; }
-.perfil-nome-linha .btn-rolar { flex: 0 0 auto; padding: 0 1.1rem; white-space: nowrap; }
-.perfil-msg { font-size: 0.82rem; margin: 0.55rem 0 0; color: var(--accent, #2BD46A); }
-.perfil-msg-erro { color: #ff6b6b; }
-
-/* ── Estatísticas ── */
-.perfil-secao-titulo {
-  font-family: 'Archivo Black', sans-serif; font-size: 0.72rem; letter-spacing: 0.08em;
-  color: var(--txt-soft, #9aa6b2); margin: 1.25rem 0 0.6rem;
+/* ── Divisor "Estatísticas" (linha com rótulo centralizado) ── */
+.perfil-sep {
+  display: flex; align-items: center; gap: 0.7rem;
+  margin: 1.1rem 0 0.75rem; color: var(--txt-soft, #9aa6b2);
 }
-.perfil-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.perfil-sep::before, .perfil-sep::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
+.perfil-sep span { font-family: 'Archivo Black', sans-serif; font-size: 0.78rem; letter-spacing: 0.05em; }
+
+/* ── Acordeões ── */
+.perfil-acordeoes {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  max-height: 48vh; overflow-y: auto; padding-right: 0.2rem;
+}
+.acord { border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; background: rgba(255, 255, 255, 0.04); overflow: hidden; }
+.acord-head {
+  width: 100%; display: flex; align-items: center; gap: 0.6rem;
+  background: none; border: none; cursor: pointer; padding: 0.7rem 0.85rem;
+  color: #fff; font-family: 'Archivo Black', sans-serif; font-size: 0.92rem; text-align: left;
+}
+.acord-head:hover { background: rgba(255, 255, 255, 0.03); }
+.acord-nome { flex: 1; }
+.acord-tag { font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 0.7rem; color: var(--txt-soft, #9aa6b2); }
+.acord-chevron { display: inline-flex; color: var(--txt-soft, #9aa6b2); transition: transform 0.18s ease; }
+.acord-chevron svg { width: 16px; height: 16px; }
+.acord-aberto .acord-chevron { transform: rotate(180deg); }
+.acord-body { padding: 0 0.85rem 0.85rem; }
+.acord-body.escondida { display: none; }
+.acord-vazio { color: var(--txt-soft, #9aa6b2); font-size: 0.82rem; padding: 0.1rem 0 0.3rem; }
+.acord-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.45rem; }
+
 .perfil-stat {
   background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px; padding: 0.6rem 0.3rem;
+  border-radius: 9px; padding: 0.55rem 0.3rem;
   display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
 }
-.perfil-stat-num { font-family: 'Archivo Black', sans-serif; font-size: 1.05rem; color: #fff; }
-.perfil-stat-lbl { font-size: 0.66rem; color: var(--txt-soft, #9aa6b2); text-align: center; }
+.perfil-stat-num { font-family: 'Archivo Black', sans-serif; font-size: 1rem; color: #fff; }
+.perfil-stat-lbl { font-size: 0.64rem; color: var(--txt-soft, #9aa6b2); text-align: center; }
 
-.perfil-carregando,
-.perfil-vazio { color: var(--txt-soft, #9aa6b2); font-size: 0.85rem; text-align: center; padding: 0.9rem 0; }
+.perfil-carregando, .perfil-vazio { color: var(--txt-soft, #9aa6b2); font-size: 0.85rem; text-align: center; padding: 0.9rem 0; }
+.perfil-msg { font-size: 0.82rem; margin: 0.6rem 0 0; color: var(--accent, #2BD46A); }
+.perfil-msg-erro { color: #ff6b6b; }
+
+/* ── Modal Alterar Informações ── */
+.editar-topo { display: flex; justify-content: center; margin: 0.2rem 0 0.9rem; }
+.editar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem 0.9rem; }
+.editar-full { grid-column: 1 / -1; }
+.editar-campo { display: flex; flex-direction: column; gap: 0.3rem; }
+.editar-campo .auth-input { margin: 0; }
+.editar-sep-senha {
+  display: flex; align-items: center; gap: 0.7rem;
+  color: var(--txt-soft, #9aa6b2); font-size: 0.74rem; margin-top: 0.35rem;
+}
+.editar-sep-senha::before, .editar-sep-senha::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
+.editar-acoes { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.15rem; }
+.editar-acoes .btn-rolar, .editar-acoes .btn-secundario { padding: 0 1.4rem; }
 
 /* ── Histórico ── */
 .historico-lista {
@@ -47,14 +88,11 @@
   max-height: 60vh; overflow-y: auto; padding-right: 0.25rem; margin-top: 0.3rem;
 }
 .historico-vazio { color: var(--txt-soft, #9aa6b2); font-size: 0.88rem; text-align: center; padding: 1.5rem 0.5rem; }
-
 .hist-item {
   background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px; padding: 0.6rem 0.7rem;
-  display: flex; flex-direction: column; gap: 0.4rem;
+  border-radius: 10px; padding: 0.6rem 0.7rem; display: flex; flex-direction: column; gap: 0.4rem;
 }
 .hist-item-campeao { border-color: rgba(217, 178, 90, 0.55); background: rgba(217, 178, 90, 0.08); }
-
 .hist-topo { display: flex; align-items: center; gap: 0.5rem; }
 .hist-comp { font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; color: #fff; flex: 1; }
 .hist-modo {
@@ -63,7 +101,6 @@
   border-radius: 999px; padding: 0.12rem 0.55rem;
 }
 .hist-data { font-size: 0.72rem; color: var(--txt-soft, #9aa6b2); }
-
 .hist-linha { display: flex; align-items: center; gap: 0.85rem; font-size: 0.85rem; flex-wrap: wrap; }
 .hist-record b { font-family: 'Archivo Black', sans-serif; }
 .hist-v { color: #2BD46A; }
@@ -73,3 +110,10 @@
 .hist-gols i { color: var(--txt-soft, #9aa6b2); font-style: normal; }
 .hist-campeao { color: #D9B25A; font-family: 'Archivo Black', sans-serif; font-size: 0.82rem; margin-left: auto; }
 .hist-pos { color: var(--txt-soft, #c2ccd6); font-size: 0.82rem; margin-left: auto; }
+
+/* ── Responsivo ── */
+@media (max-width: 600px) {
+  .perfil-card, .editar-card, .historico-card { padding: 28px 20px 24px; }
+  .acord-stats   { grid-template-columns: repeat(2, 1fr); }
+  .editar-grid   { grid-template-columns: 1fr; }
+}
