@@ -203,6 +203,14 @@ function concluirJogoGrupo(est) {
   if (posVoce <= grupo.avancam) {
     if (elRes) { elRes.textContent = '✓ CLASSIFICADO — ' + posVoce + 'º no grupo'; elRes.className = 'partida-resultado vitoria'; }
     faseAtual++; // entra no mata-mata (oitavas)
+
+    // Copa: monta a chave AGORA (fim dos grupos) para a aba Mata-a-Mata já exibir,
+    // sem precisar iniciar o primeiro jogo do mata-mata.
+    if (modoSelecionado === 'copa') {
+      if (!chaveCopa) montarChaveCopa();
+      if (typeof renderChaveCopa === 'function') renderChaveCopa();
+    }
+
     btn.textContent = 'Próximo Jogo ►';
     acaoBotao = 'proximo';
     btn.disabled = false;
@@ -441,6 +449,7 @@ function renderChaveCopa() {
   chaveCopa.rounds.forEach(function (jogos, idx) {
     html += '<div class="ck-col">';
     html += '<div class="ck-fase">' + nomesFase[idx] + '</div>';
+    html += '<div class="ck-jogos">';   // só os jogos entram no espaçamento (alinha entre as fases)
     jogos.forEach(function (j) {
       var resolvido = !!j.winner;
       var aVenc = resolvido && j.winner === j.a;
@@ -451,15 +460,15 @@ function renderChaveCopa() {
                 celula(j.b, bVenc, resolvido) +
               '</div>';
     });
-    html += '</div>';
+    html += '</div></div>';
   });
 
   // Coluna do campeão
   var ultima = chaveCopa.rounds[chaveCopa.rounds.length - 1][0];
   var campeao = ultima ? ultima.winner : null;
   html += '<div class="ck-col ck-col-campeao"><div class="ck-fase">CAMPEÃO</div>' +
-          '<div class="ck-campeao' + (campeao && campeao.voce ? ' ck-voce' : '') + '">' +
-          '<span class="ck-trofeu">\u2605</span>' + (campeao ? campeao.nome : 'A definir') + '</div></div>';
+          '<div class="ck-jogos ck-jogos-campeao"><div class="ck-campeao' + (campeao && campeao.voce ? ' ck-voce' : '') + '">' +
+          '<span class="ck-trofeu">\u2605</span>' + (campeao ? campeao.nome : 'A definir') + '</div></div></div>';
 
   alvo.innerHTML = html;
 }

@@ -47,11 +47,18 @@ router.post('/', requireAuth, async (req, res) => {
 router.get('/', requireAuth, async (req, res) => {
   try {
     const { rows } = await pool.query(
-      `SELECT id, competicao, modo, vitorias, empates, derrotas, gf, ga, posicao, campeao, played_at
+      `SELECT id, competicao, modo, vitorias, empates, derrotas, gf, ga, posicao, campeao, detalhes, played_at
        FROM matches WHERE user_id = $1 ORDER BY played_at DESC LIMIT 50`,
       [req.user.id]
     );
-    res.json(rows);
+    // Garante que "detalhes" volte como objeto (a coluna pode vir como texto JSON).
+    const out = rows.map((r) => {
+      if (r.detalhes && typeof r.detalhes === 'string') {
+        try { r.detalhes = JSON.parse(r.detalhes); } catch (e) { r.detalhes = null; }
+      }
+      return r;
+    });
+    res.json(out);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erro interno' });
