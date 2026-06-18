@@ -377,6 +377,34 @@ function configurarTelaSimulacao() {
     montarCampanha();          // já monta a liga e mostra a tabela (20 times, zerada)
     renderTabelaBrasileirao();
   }
+
+  // Copa do Mundo: mostra as abas "Simulação" / "Mata-a-Mata"
+  var ehCopa  = (modoSelecionado === 'copa');
+  var simTabs = document.getElementById('sim-tabs');
+  if (simTabs) simTabs.classList.toggle('escondida', !ehCopa);
+  selecionarAbaSim('jogos');   // sempre começa na aba de jogos
+}
+
+// Alterna entre a aba de Simulação (jogos) e a de Mata-a-Mata (chave)
+function selecionarAbaSim(qual) {
+  var painelJogos = document.getElementById('sim-painel-jogos');
+  var painelChave = document.getElementById('chave-copa');
+  var tabJogos    = document.getElementById('sim-tab-jogos');
+  var tabChave    = document.getElementById('sim-tab-chave');
+  var ehChave = (qual === 'chave');
+
+  if (painelJogos) painelJogos.classList.toggle('escondida', ehChave);
+  if (painelChave) painelChave.classList.toggle('escondida', !ehChave);
+  if (tabJogos) tabJogos.classList.toggle('sim-tab-ativa', !ehChave);
+  if (tabChave) tabChave.classList.toggle('sim-tab-ativa', ehChave);
+
+  if (ehChave) {
+    if (typeof chaveCopa !== 'undefined' && chaveCopa && typeof renderChaveCopa === 'function') {
+      renderChaveCopa();
+    } else if (painelChave) {
+      painelChave.innerHTML = '<p class="chave-aviso">A chave do mata-mata aparece aqui quando a fase de grupos terminar.</p>';
+    }
+  }
 }
 
 function abrirConfirmPularTudo() {

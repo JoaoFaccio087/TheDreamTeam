@@ -439,6 +439,12 @@ function aplicarResultado(est, ganhador) {
   // V/D do mata-mata (empate já foi resolvido nos pênaltis antes de chegar aqui)
   if (ganhador === 'meu') campanhaVitorias++; else campanhaDerrotas++;
 
+  // Copa: avança a chave (seu resultado + simula os outros confrontos da fase)
+  if (modoSelecionado === 'copa' && typeof avancarChaveCopa === 'function') {
+    avancarChaveCopa(ganhador === 'meu');
+    if (typeof renderChaveCopa === 'function') renderChaveCopa();
+  }
+
   if (ganhador === 'meu') {
     if (elPlacar) elPlacar.classList.add('vitoria');
 

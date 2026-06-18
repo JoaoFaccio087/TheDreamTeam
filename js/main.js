@@ -73,6 +73,12 @@ botaoJogar.addEventListener('click', function () {
 botaoVoltarHome.addEventListener('click', voltarHome);
 if (btnVoltarMobile) btnVoltarMobile.addEventListener('click', voltarHome);
 
+// Abas da tela de simulação (Copa): Simulação / Mata-a-Mata
+var simTabJogos = document.getElementById('sim-tab-jogos');
+var simTabChave = document.getElementById('sim-tab-chave');
+if (simTabJogos) simTabJogos.addEventListener('click', function () { selecionarAbaSim('jogos'); });
+if (simTabChave) simTabChave.addEventListener('click', function () { selecionarAbaSim('chave'); });
+
 pilulasFormacaoJogo.forEach(function (pilula) {
   pilula.addEventListener('click', function () {
     selecionarFormacaoJogo(this.dataset.formacaoJogo);

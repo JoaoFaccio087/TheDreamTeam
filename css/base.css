@@ -48,12 +48,12 @@ body.tema-brasileirao {
   --accent:   #2BD46A;   /* verde-campo (igual à home) */
 }
 
-/* Tema Copa do Mundo: fundo escuro (padrão) + azul internacional */
+/* Tema Copa do Mundo: paleta PADRÃO do jogo (fundo quase-preto, cinza e verde-campo) */
 body.tema-copa {
-  --bg:       #0B0F16;
-  --txt:      #EAF1FA;
-  --txt-soft: rgba(234, 241, 250, 0.55);
-  --accent:   #3E8EDF;   /* azul */
+  --bg:       #0E0F13;
+  --txt:      #F4F6F8;
+  --txt-soft: #99A0AA;
+  --accent:   #2BD46A;   /* verde-campo (igual à home) */
 }
 
 body {

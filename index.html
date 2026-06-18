@@ -624,23 +624,34 @@
       <div class="sim-principal">
         <button id="btn-voltar-escalacao" class="btn-secundario sim-btn-acao">&#8592; Voltar</button>
 
-        <div id="tabela-brasileirao" class="tabela-brasileirao escondida">
-          <p class="sim-rotulo">TABELA DO BRASILEIR&Atilde;O</p>
-          <div class="tb-scroll">
-            <table class="tb-tabela">
-              <thead>
-                <tr>
-                  <th class="tb-pos">#</th>
-                  <th class="tb-th-time">Time</th>
-                  <th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GF</th><th>GS</th><th>SG</th>
-                </tr>
-              </thead>
-              <tbody id="tabela-brasileirao-corpo"></tbody>
-            </table>
-          </div>
+        <!-- Abas (só aparecem no modo Copa do Mundo) -->
+        <div id="sim-tabs" class="sim-tabs escondida">
+          <button id="sim-tab-jogos" class="sim-tab sim-tab-ativa" type="button">Simula&ccedil;&atilde;o</button>
+          <button id="sim-tab-chave" class="sim-tab" type="button">Mata-a-Mata</button>
         </div>
 
-        <div id="historico-jogos" class="historico-jogos"></div>
+        <div id="sim-painel-jogos">
+          <div id="tabela-brasileirao" class="tabela-brasileirao escondida">
+            <p class="sim-rotulo">TABELA DO BRASILEIR&Atilde;O</p>
+            <div class="tb-scroll">
+              <table class="tb-tabela">
+                <thead>
+                  <tr>
+                    <th class="tb-pos">#</th>
+                    <th class="tb-th-time">Time</th>
+                    <th>P</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GF</th><th>GS</th><th>SG</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-brasileirao-corpo"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="historico-jogos" class="historico-jogos"></div>
+        </div>
+
+        <!-- Painel da chave (organograma) — modo Copa -->
+        <div id="chave-copa" class="chave-copa escondida"></div>
       </div>
 
       <div class="sim-lateral">

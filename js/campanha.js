@@ -1,5 +1,7 @@
 //  campanha.js — fluxo da campanha: grupos, tabela e mata-mata
 
+var chaveCopa = null;   // chave (organograma) do mata-mata da Copa do Mundo
+
 
 
 // --- Zera a campanha: fases, adversários usados, estatísticas e histórico visual ---
@@ -8,6 +10,7 @@ function reiniciarCampanha() {
   adversariosUsados = [];
   grupo             = null;
   liga              = null;
+  chaveCopa         = null;   // chave do mata-mata da Copa
   statsJogadores    = {};
   campanhaPartidas  = 0;
   campanhaGF        = 0;
@@ -28,6 +31,7 @@ function reiniciarCampanha() {
 function montarCampanha() {
   faseAtual         = 0;
   adversariosUsados = [];
+  chaveCopa         = null;
 
   // Brasileirão: liga de 20 times em 38 rodadas (sem fase de grupos/mata-mata)
   if (modoSelecionado === 'brasileirao') {
@@ -237,17 +241,26 @@ function iniciarPartida() {
     // Marca como usado pra não reencontrá-lo no mata-mata
     adversariosUsados.push(adversario.clube + '|' + adversario.edicao);
   } else {
-    // Mata-mata: sorteia adversário da competição, sem repetir os já enfrentados
-    var candidatos = API.getClubesPorCompeticao(filtroComp).filter(function (d) {
-      return adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
-    });
-    if (candidatos.length === 0) {
-      candidatos = API.getClubesPorCompeticao(filtroComp);
+    // Mata-mata.
+    if (modoSelecionado === 'copa') {
+      // Copa: chave real de 32. Monta na 1ª fase do mata e o adversário vem dela.
+      if (!chaveCopa) montarChaveCopa();
+      adversario = getAdversarioChave();
+      faseLabel  = fase ? fase.nome : '';
+      if (adversario) adversariosUsados.push(adversario.clube + '|' + adversario.edicao);
+    } else {
+      // Liberta/Champions: sorteia adversário da competição, sem repetir os já enfrentados
+      var candidatos = API.getClubesPorCompeticao(filtroComp).filter(function (d) {
+        return adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
+      });
+      if (candidatos.length === 0) {
+        candidatos = API.getClubesPorCompeticao(filtroComp);
+      }
+      if (candidatos.length === 0) { console.warn('Sem adversários para', filtroComp); return; }
+      adversario = candidatos[Math.floor(Math.random() * candidatos.length)];
+      adversariosUsados.push(adversario.clube + '|' + adversario.edicao);
+      faseLabel = fase ? fase.nome : '';
     }
-    if (candidatos.length === 0) { console.warn('Sem adversários para', filtroComp); return; }
-    adversario = candidatos[Math.floor(Math.random() * candidatos.length)];
-    adversariosUsados.push(adversario.clube + '|' + adversario.edicao);
-    faseLabel = fase ? fase.nome : '';
   }
 
   contadorPartidas++;
@@ -317,3 +330,136 @@ function iniciarPartida() {
 }
 
 
+
+
+// ─────────────────────── CHAVE DO MATA-MATA (COPA) ───────────────────────
+// Monta a chave de 32: você (sempre na ponta de cima) + 31 seleções sorteadas.
+// Cada rodada, seu jogo é o match[0]; os demais são resolvidos nos bastidores.
+function montarChaveCopa() {
+  var comp = COMPETICOES['copa'].dados;
+  var pool = API.getClubesPorCompeticao(comp).filter(function (d) {
+    return adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
+  });
+  for (var i = pool.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+  }
+
+  var times = [{ nome: nomeDoTime, voce: true, forca: forcaDoTime(), clubeRef: null }];
+  for (var k = 0; k < 31; k++) {
+    var c = pool[k] || API.getClubesPorCompeticao(comp)[k % API.getClubesPorCompeticao(comp).length];
+    times.push({ nome: c.clube + ' ' + c.edicao, voce: false, forca: forcaDoClube(c), clubeRef: c });
+  }
+
+  // Embaralha só os adversários (você fica no índice 0)
+  var resto = times.slice(1);
+  for (var m = resto.length - 1; m > 0; m--) {
+    var n = Math.floor(Math.random() * (m + 1));
+    var tt = resto[m]; resto[m] = resto[n]; resto[n] = tt;
+  }
+  times = [times[0]].concat(resto);
+
+  // Rodadas: 16 → 8 → 4 → 2 → 1 confrontos
+  var rounds = [];
+  var r0 = [];
+  for (var p = 0; p < 32; p += 2) r0.push({ a: times[p], b: times[p + 1], winner: null });
+  rounds.push(r0);
+  var qtd = 8;
+  for (var rr = 0; rr < 4; rr++) {
+    var arr = [];
+    for (var q = 0; q < qtd; q++) arr.push({ a: null, b: null, winner: null });
+    rounds.push(arr);
+    qtd = qtd / 2;
+  }
+  chaveCopa = { rounds: rounds, rodadaAtual: 0 };
+}
+
+// Adversário do seu jogo na rodada atual (match[0].b)
+function getAdversarioChave() {
+  if (!chaveCopa) return null;
+  var jogo = chaveCopa.rounds[chaveCopa.rodadaAtual][0];
+  return jogo && jogo.b ? jogo.b.clubeRef : null;
+}
+
+// Resolve a rodada atual: seu jogo pelo seu resultado; os outros simulados.
+function avancarChaveCopa(meuGanhou) {
+  if (!chaveCopa) return;
+  var r = chaveCopa.rodadaAtual;
+  var jogos = chaveCopa.rounds[r];
+  jogos[0].winner = meuGanhou ? jogos[0].a : jogos[0].b;
+  for (var i = 1; i < jogos.length; i++) resolverJogoChave(jogos[i]);
+
+  if (r + 1 < chaveCopa.rounds.length) {
+    var prox = chaveCopa.rounds[r + 1];
+    for (var k = 0; k < prox.length; k++) {
+      prox[k].a = jogos[2 * k].winner;
+      prox[k].b = jogos[2 * k + 1].winner;
+    }
+  }
+  chaveCopa.rodadaAtual = r + 1;
+  if (!meuGanhou) simularRestoChave();   // você caiu → completa a chave p/ mostrar o campeão
+}
+
+// Resolve um confronto neutro por força + sorte (empate vai nos pênaltis = aleatório)
+function resolverJogoChave(jogo) {
+  if (!jogo || !jogo.a || !jogo.b) return;
+  var pl = gerarPlacar(jogo.a.forca, jogo.b.forca);
+  if (pl.meus > pl.adversario)      jogo.winner = jogo.a;
+  else if (pl.adversario > pl.meus) jogo.winner = jogo.b;
+  else                              jogo.winner = (Math.random() < 0.5 ? jogo.a : jogo.b);
+}
+
+// Após sua eliminação, simula as rodadas que faltam só para a chave ficar completa.
+function simularRestoChave() {
+  for (var r = chaveCopa.rodadaAtual; r < chaveCopa.rounds.length; r++) {
+    var jogos = chaveCopa.rounds[r];
+    jogos.forEach(resolverJogoChave);
+    if (r + 1 < chaveCopa.rounds.length) {
+      var prox = chaveCopa.rounds[r + 1];
+      for (var k = 0; k < prox.length; k++) {
+        prox[k].a = jogos[2 * k].winner;
+        prox[k].b = jogos[2 * k + 1].winner;
+      }
+    }
+  }
+  chaveCopa.rodadaAtual = chaveCopa.rounds.length;
+}
+
+// Renderiza a chave no painel #chave-copa (colunas por fase, da esquerda p/ direita).
+function renderChaveCopa() {
+  var alvo = document.getElementById('chave-copa');
+  if (!alvo || !chaveCopa) return;
+  var nomesFase = ['16-AVOS', 'OITAVAS', 'QUARTAS', 'SEMI', 'FINAL'];
+
+  function celula(time, ehVenc, jogoResolvido) {
+    if (!time) return '<div class="ck-time ck-vazio">A definir</div>';
+    var cls = 'ck-time' + (time.voce ? ' ck-voce' : '') + (jogoResolvido && ehVenc ? ' ck-venc' : '') + (jogoResolvido && !ehVenc ? ' ck-perd' : '');
+    return '<div class="' + cls + '">' + time.nome + '</div>';
+  }
+
+  var html = '';
+  chaveCopa.rounds.forEach(function (jogos, idx) {
+    html += '<div class="ck-col">';
+    html += '<div class="ck-fase">' + nomesFase[idx] + '</div>';
+    jogos.forEach(function (j) {
+      var resolvido = !!j.winner;
+      var aVenc = resolvido && j.winner === j.a;
+      var bVenc = resolvido && j.winner === j.b;
+      var meu = (j.a && j.a.voce) || (j.b && j.b.voce);
+      html += '<div class="ck-jogo' + (meu ? ' ck-jogo-meu' : '') + '">' +
+                celula(j.a, aVenc, resolvido) +
+                celula(j.b, bVenc, resolvido) +
+              '</div>';
+    });
+    html += '</div>';
+  });
+
+  // Coluna do campeão
+  var ultima = chaveCopa.rounds[chaveCopa.rounds.length - 1][0];
+  var campeao = ultima ? ultima.winner : null;
+  html += '<div class="ck-col ck-col-campeao"><div class="ck-fase">CAMPEÃO</div>' +
+          '<div class="ck-campeao' + (campeao && campeao.voce ? ' ck-voce' : '') + '">' +
+          '<span class="ck-trofeu">\u2605</span>' + (campeao ? campeao.nome : 'A definir') + '</div></div>';
+
+  alvo.innerHTML = html;
+}
