@@ -23,6 +23,39 @@ if (btnModoOnline) {
   });
 }
 
+// Seletor Um Jogador / Multijogador — alterna as abas de competições.
+(function () {
+  var seletor  = document.getElementById('modo-seletor');
+  var abaSolo  = document.getElementById('modo-aba-solo');
+  var abaMulti = document.getElementById('modo-aba-multi');
+  if (!seletor || !abaSolo || !abaMulti) return;
+
+  function ativarAba(aba) {
+    var multi = (aba === 'multi');
+    abaSolo.classList.toggle('escondida', multi);
+    abaMulti.classList.toggle('escondida', !multi);
+    seletor.querySelectorAll('.modo-seg').forEach(function (s) {
+      s.classList.toggle('modo-seg-ativa', s.dataset.aba === aba);
+    });
+
+    if (multi) {
+      // Multijogador: a única opção ativa hoje é o Brasileirão online.
+      modoOnlineSelecionado = true;
+      pilulasModo.forEach(function (p) { p.classList.remove('pilula-ativa'); });
+      if (btnModoOnline) btnModoOnline.classList.add('pilula-ativa');
+    } else {
+      // Um Jogador: volta a valer a competição já selecionada.
+      modoOnlineSelecionado = false;
+      if (btnModoOnline) btnModoOnline.classList.remove('pilula-ativa');
+      selecionarModo(modoSelecionado);
+    }
+  }
+
+  seletor.querySelectorAll('.modo-seg').forEach(function (seg) {
+    seg.addEventListener('click', function () { ativarAba(seg.dataset.aba); });
+  });
+})();
+
 pilulasFormacao.forEach(function (pilula) {
   pilula.addEventListener('click', function () {
     selecionarFormacaoAmostra(this.dataset.formacaoAmostra);

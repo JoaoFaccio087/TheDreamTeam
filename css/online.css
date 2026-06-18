@@ -15,7 +15,7 @@
 }
 .online-subview {
   width: 100%;
-  max-width: 1100px;
+  max-width: min(1500px, 96vw);   /* adapta à tela: usa mais espaço em monitores grandes */
   margin: 0 auto;
 }
 
@@ -27,6 +27,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 2 / 3;
+  container-type: inline-size;   /* permite dimensionar os slots em função da largura do campo */
   border-radius: 6px;
   border: 2px solid rgba(255,255,255,0.28);
   overflow: visible;
@@ -65,13 +66,16 @@
 /* Slot no campo online */
 .slot-ol {
   position: absolute;
-  width: 48px; height: 48px;
+  /* Tamanho proporcional à largura do campo (cqw): cresce em telas maiores e
+     encolhe nas menores, sempre legível. Antes era fixo em 48px. */
+  width: clamp(48px, 12.5cqw, 82px);
+  height: clamp(48px, 12.5cqw, 82px);
   border-radius: 50%;
   border: 2px dashed rgba(255,255,255,0.4);
   background: rgba(0,0,0,0.28);
   color: rgba(255,255,255,0.6);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.55rem;
+  font-size: clamp(0.6rem, 2.8cqw, 0.95rem);
   display: flex; align-items: center; justify-content: center;
   text-align: center;
   transform: translate(-50%,-50%);
@@ -88,7 +92,7 @@
   gap: 1px;
 }
 .slot-ol .slot-ol-forca {
-  font-size: 0.6rem;
+  font-size: clamp(0.6rem, 2.5cqw, 0.82rem);
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
   color: #444;
@@ -103,7 +107,7 @@
   background: rgba(0,0,0,0.72);
   color: #fff;
   font-family: 'Archivo', sans-serif;
-  font-size: 0.74rem;
+  font-size: clamp(0.74rem, 2.4cqw, 0.92rem);
   font-weight: 700;
   white-space: nowrap;
   padding: 2px 6px;
@@ -246,7 +250,7 @@
 /* ── LOBBY ──────────────────────────────────────────────────────────────── */
 .lobby-wrapper {
   display: grid;
-  grid-template-columns: 270px minmax(0, 480px) 260px;
+  grid-template-columns: clamp(250px, 19vw, 330px) minmax(0, clamp(440px, 42vw, 680px)) clamp(238px, 18vw, 310px);
   justify-content: center;
   gap: 1.4rem;
   padding: 0 0 2rem;
@@ -387,7 +391,7 @@
 /* ── DRAFT ──────────────────────────────────────────────────────────────── */
 .draft-wrapper {
   display: grid;
-  grid-template-columns: 420px 300px;
+  grid-template-columns: minmax(0, clamp(380px, 36vw, 600px)) clamp(280px, 24vw, 400px);
   justify-content: center;
   gap: 1.6rem;
   padding: 0 0 0.8rem;
@@ -572,7 +576,7 @@
 /* ── ELENCOS ────────────────────────────────────────────────────────────── */
 .elencos-wrapper {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: clamp(230px, 19vw, 320px) 1fr;
   gap: 1.2rem;
   padding: 0 1.2rem 2rem;
   align-items: start;
@@ -616,7 +620,7 @@
 /* Mapa de elencos menor + força pequena logo abaixo do nome do time */
 .elencos-campo-col #elencos-campo-label { order: 1; margin-bottom: 0.15rem; }
 .elencos-campo-col .elencos-forca        { order: 2; margin: 0 0 0.5rem; font-size: 0.72rem; color: #8a8a8a; }
-.elencos-campo-col #elencos-campo        { order: 3; max-width: 400px; }
+.elencos-campo-col #elencos-campo        { order: 3; max-width: clamp(360px, 32vw, 540px); }
 
 /* ── RODADA ─────────────────────────────────────────────────────────────── */
 .rodada-wrapper {
@@ -847,13 +851,14 @@
 }
 
 /* 3) Pulso elite via scale compositado (em vez de animar box-shadow com blur grande).
-      O glow estático (box-shadow) escala junto, dando o mesmo efeito de "respiro". */
+      O glow estático (box-shadow) escala junto, dando o mesmo efeito de "respiro".
+      OBS.: ao selecionar (.escolhida) NÃO cortamos a animação — antes o
+      `animation:none` matava o "deal"/pulso no meio e causava um salto quando o
+      jogador trocava de carta. A seleção é indicada só pela borda/brilho. */
 #modal-draft-pick .draft-carta.tier-elite                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
 #modal-draft-pick .draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
-#modal-draft-pick .draft-carta.tier-elite.escolhida      { animation: none; }
 #modal-draft-pick .draft-carta.tier-diamante                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
 #modal-draft-pick .draft-carta.tier-diamante.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
-#modal-draft-pick .draft-carta.tier-diamante.escolhida      { animation: none; }
 @keyframes carta-elite-scale {
   0%, 100% { transform: scale(1);    }
   50%      { transform: scale(1.03); }

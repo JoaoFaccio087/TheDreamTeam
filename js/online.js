@@ -793,6 +793,9 @@
     // Fica na tela da liga, na aba Classificação, com a tabela FINAL.
     subview('online-rodada');
     rodadaAtual = totalRodadas;
+    // Atualiza o cabeçalho para o estado final (antes ficava parado na rodada
+    // em que o "pular tudo" foi acionado).
+    if (rodadaTituloEl) rodadaTituloEl.textContent = 'RODADA ' + totalRodadas + ' DE ' + totalRodadas;
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
     renderClassifLista(ranking);
@@ -1107,8 +1110,12 @@
     modalPoolPos = embaralhar((poolLocal || []).filter(function (p) { return podeOcupar(p, cod); }));
     modalPosPage = 0;
     if (modalDraftPickTitulo) modalDraftPickTitulo.textContent = 'Escolha um jogador para ' + (cod || '?');
-    renderModalCartas();
+    // Limpa antes de exibir para não "piscar" as cartas da abertura anterior, e
+    // só renderiza as novas no PRÓXIMO frame — assim o paint do modal (abrir) não
+    // disputa com a animação de entrada das cartas (deal 3D), evitando a travada.
+    if (modalDraftPickCartas) modalDraftPickCartas.innerHTML = '';
     modalDraftPick.classList.remove('escondida');
+    requestAnimationFrame(function () { renderModalCartas(); });
   }
 
   // Renderiza 6 cartas da página atual (mesma estrutura/visual do draft offline).
@@ -1206,6 +1213,9 @@
     draftCampo.querySelectorAll('.slot-ol').forEach(function (s) {
       s.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
     });
+    // Se ainda é a minha vez, reacende as vagas abertas (dourado) — antes elas
+    // ficavam sem destaque ao sair do modo "remanejar" ou após concluir um move.
+    if (String(draftTurnoUid) === String(meuUserId)) destacarVagasAbertas();
   }
 
   function atualizarCarouselPos() { /* faixa agora rola nativamente; sem transform */ }

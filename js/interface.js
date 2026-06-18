@@ -1,13 +1,13 @@
 // interface.js — temas, navegação entre telas e posicionamento dos campos.
 
 function aplicarTema(idCompeticao) {
-  document.body.classList.remove('tema-libertadores', 'tema-champions', 'tema-brasileirao');
+  document.body.classList.remove('tema-libertadores', 'tema-champions', 'tema-brasileirao', 'tema-copa');
   var cfg = COMPETICOES[idCompeticao];
   if (cfg) document.body.classList.add(cfg.tema);
 }
 
 function removerTema() {
-  document.body.classList.remove('tema-libertadores', 'tema-champions', 'tema-brasileirao');
+  document.body.classList.remove('tema-libertadores', 'tema-champions', 'tema-brasileirao', 'tema-copa');
 }
 
 function mostrarTela(telaParaMostrar) {

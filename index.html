@@ -303,11 +303,24 @@
           <div class="home-modo">
             <span class="home-rotulo-campo">MODO DE JOGO</span>
 
-            <div class="area-pilulas" id="pilulas-modo">
+            <!-- Seletor: Um Jogador / Multijogador -->
+            <div class="modo-seletor" id="modo-seletor">
+              <button class="modo-seg modo-seg-ativa" type="button" data-aba="solo">Um Jogador</button>
+              <button class="modo-seg" type="button" data-aba="multi">Multijogador</button>
+            </div>
+
+            <!-- Competições — Um Jogador -->
+            <div class="area-pilulas modo-aba" id="modo-aba-solo">
               <button class="pilula pilula-ativa" data-modo="libertadores">Libertadores</button>
               <button class="pilula" data-modo="champions">Champions League</button>
               <button class="pilula" data-modo="brasileirao">Brasileir&atilde;o</button>
-              <button id="btn-modo-online" class="pilula">Brasileir&atilde;o - Online</button>
+              <button class="pilula" data-modo="copa">Copa do Mundo</button>
+            </div>
+
+            <!-- Competições — Multijogador -->
+            <div class="area-pilulas modo-aba escondida" id="modo-aba-multi">
+              <button id="btn-modo-online" class="pilula">Brasileir&atilde;o</button>
+              <button class="pilula pilula-soon" type="button" disabled>Copa do Mundo <span class="pilula-tag">em breve</span></button>
             </div>
           </div>
 
@@ -407,7 +420,7 @@
 
       <!-- RODAPÉ -->
       <footer class="home-footer">
-        <span>3 competições</span>
+        <span>4 competições</span>
         <span class="footer-sep">&middot;</span>
         <span id="stat-edicoes">0 edições</span>
         <span class="footer-sep">&middot;</span>
@@ -1068,6 +1081,7 @@
   <script src="js/dados/libertadores.js"></script>
   <script src="js/dados/champions.js"></script>
   <script src="js/dados/brasileirao.js"></script>
+  <script src="js/dados/copa.js"></script>
   <script src="js/dados/dados.js"></script>
 
   <!-- Socket.IO — servido pelo backend via nginx proxy -->

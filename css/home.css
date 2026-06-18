@@ -94,6 +94,49 @@
   margin-top: 36px;
 }
 
+/* Seletor segmentado: Um Jogador / Multijogador */
+.modo-seletor {
+  display: inline-flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--linha);
+  border-radius: 9px;
+  padding: 4px;
+  margin-bottom: 12px;
+}
+.modo-seg {
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  background: transparent;
+  color: var(--txt-soft);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.modo-seg-ativa { background: var(--accent); color: var(--btn-txt); }
+
+.modo-aba.escondida { display: none; }
+
+/* Pílula "em breve" (competição online ainda não disponível) */
+.pilula-soon {
+  cursor: default;
+  border-style: dashed !important;
+  color: var(--txt-soft) !important;
+  opacity: 0.75;
+}
+.pilula-soon:hover { background-color: rgba(255, 255, 255, 0.06) !important; }
+.pilula-tag {
+  margin-left: 7px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--txt-soft);
+}
+
 
 /* BOTÃO "JOGAR AGORA" — verde, destaque máximo */
 

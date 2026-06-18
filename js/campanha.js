@@ -44,21 +44,27 @@ function montarCampanha() {
 
   var comp        = COMPETICOES[modoSelecionado].dados;
   var isChampions = (modoSelecionado === 'champions');
+  var isCopa      = (modoSelecionado === 'copa');
   var nGrupoJogos = isChampions ? 4  : 3;    // jogos SEUS na fase de grupos
   var tamGrupo    = isChampions ? 10 : 4;    // total de times no grupo
   var avancam     = isChampions ? 6  : 2;    // quantos avançam
 
-  // Nome do grupo: Liberta sorteia uma letra; Champions é liga única
+  // Nome do grupo: Champions é liga única; Copa sorteia A–L (12 grupos); demais A–H
   var nomeGrupo = isChampions
     ? 'FASE DE LIGA'
-    : 'GRUPO ' + 'ABCDEFGH'.charAt(Math.floor(Math.random() * 8));
+    : 'GRUPO ' + (isCopa ? 'ABCDEFGHIJKL'.charAt(Math.floor(Math.random() * 12))
+                         : 'ABCDEFGH'.charAt(Math.floor(Math.random() * 8)));
 
-  // Fases: N rodadas de grupo + mata-mata
+  // Fases: N rodadas de grupo + mata-mata.
+  // Copa entra com 16-avos (chave de 32); as demais começam nas oitavas.
   fasesCampanha = [];
   for (var r = 1; r <= nGrupoJogos; r++) {
     fasesCampanha.push({ nome: nomeGrupo, tipo: 'grupo', rodada: r });
   }
-  ['OITAVAS DE FINAL', 'QUARTAS DE FINAL', 'SEMIFINAL', 'FINAL'].forEach(function (n) {
+  var mataFases = isCopa
+    ? ['16-AVOS DE FINAL', 'OITAVAS DE FINAL', 'QUARTAS DE FINAL', 'SEMIFINAL', 'FINAL']
+    : ['OITAVAS DE FINAL', 'QUARTAS DE FINAL', 'SEMIFINAL', 'FINAL'];
+  mataFases.forEach(function (n) {
     fasesCampanha.push({ nome: n, tipo: 'mata' });
   });
 

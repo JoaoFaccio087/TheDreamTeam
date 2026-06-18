@@ -6,7 +6,7 @@ const telaInicial    = document.getElementById('tela-inicial');
 const telaJogo       = document.getElementById('tela-jogo');
 const telaSimulacao  = document.getElementById('tela-simulacao');
 
-const pilulasModo     = document.querySelectorAll('#pilulas-modo .pilula');
+const pilulasModo     = document.querySelectorAll('.pilula[data-modo]');
 const pilulasFormacao = document.querySelectorAll('#pilulas-formacao .pilula');
 const fichas          = document.querySelectorAll('.ficha');
 const botaoJogar      = document.getElementById('btn-jogar');

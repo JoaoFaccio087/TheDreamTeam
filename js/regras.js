@@ -5,7 +5,8 @@
 const COMPETICOES = {
   libertadores: { dados: 'Libertadores', label: 'Libertadores',    tema: 'tema-libertadores' },
   champions:    { dados: 'Champions',    label: 'Champions League', tema: 'tema-champions' },
-  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão',      tema: 'tema-brasileirao' }
+  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão',      tema: 'tema-brasileirao' },
+  copa:         { dados: 'Copa do Mundo', label: 'Copa do Mundo',   tema: 'tema-copa' }
 };
 
 // Converte o valor de "competicao" dos dados no rótulo exibido (ex.: "Champions" → "Champions League").
