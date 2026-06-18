@@ -240,6 +240,9 @@
     socket.on('session:me',       onSessionMe);
     socket.on('room:state',       onRoomState);
     socket.on('room:playerOrder', onPlayerOrder);
+    socket.on('grupos:sorteio',   onGruposSorteio);
+    socket.on('grupos:pular',     onGruposPular);
+    socket.on('gdraft:start',     onGdraftStart);
     socket.on('draft:turno',      onDraftTurno);
     socket.on('draft:yourTurn',   onDraftYourTurn);
     socket.on('draft:pick',       onDraftPickEvt);
@@ -315,6 +318,123 @@
     }
 
     if (sala.status === 'lobby') subview('online-lobby');
+  }
+
+  // ── Sorteio de Grupos (Copa/Libertadores) ─────────────────────────────────
+  var sorteioTimer    = null;
+  var sorteioSeq      = [];
+  var sorteioIdx      = 0;
+  var sorteioPorGrupo = 4;
+  var sorteioLetras   = [];
+
+  // grupos:sorteio — servidor manda a sequência pronta; o cliente anima.
+  function onGruposSorteio(dados) {
+    if (sorteioTimer) { clearInterval(sorteioTimer); sorteioTimer = null; }
+    sorteioSeq      = dados.sequencia  || [];
+    sorteioLetras   = dados.gruposNomes || [];
+    sorteioPorGrupo = dados.porGrupo   || 4;
+    sorteioIdx      = 0;
+
+    var comp = document.getElementById('sorteio-comp');
+    if (comp) comp.textContent = (dados.competicao || '').toUpperCase();
+    var info = document.getElementById('sorteio-header-info');
+    if (info) info.textContent = sorteioLetras.length + ' grupos · ' + sorteioSeq.length + ' seleções';
+
+    renderSorteioGrade();
+    resetSorteioBotoes(false);
+
+    var btnPular = document.getElementById('btn-sorteio-pular');
+    if (btnPular) btnPular.classList.toggle('escondida', !ehHost);
+
+    subview('online-sorteio');
+    sorteioTimer = setInterval(passoSorteio, 420);
+  }
+
+  function renderSorteioGrade() {
+    var grade = document.getElementById('sorteio-grade');
+    if (!grade) return;
+    var html = '';
+    sorteioLetras.forEach(function (L) {
+      html += '<div class="sorteio-grupo" id="sgrupo-' + L + '">' +
+                '<div class="sorteio-grupo-tit">Grupo ' + L + '</div>' +
+                '<div class="sorteio-grupo-slots" id="sslots-' + L + '">';
+      for (var i = 0; i < sorteioPorGrupo; i++) {
+        html += '<div class="sorteio-slot">&mdash;</div>';
+      }
+      html += '</div></div>';
+    });
+    grade.innerHTML = html;
+  }
+
+  function passoSorteio() {
+    if (sorteioIdx >= sorteioSeq.length) { finalizarSorteio(); return; }
+    colocarNoSorteio(sorteioSeq[sorteioIdx], true);
+    sorteioIdx++;
+    if (sorteioIdx >= sorteioSeq.length) finalizarSorteio();
+  }
+
+  function colocarNoSorteio(item, animar) {
+    var slotsEl = document.getElementById('sslots-' + item.grupo);
+    var grupoEl = document.getElementById('sgrupo-' + item.grupo);
+    if (!slotsEl || !grupoEl) return;
+    var slots = slotsEl.querySelectorAll('.sorteio-slot');
+    var idx = 0;
+    while (idx < slots.length && slots[idx].dataset.preenchido === '1') idx++;
+    if (idx >= slots.length) return;
+
+    var slot = slots[idx];
+    slot.dataset.preenchido = '1';
+    slot.textContent = item.nomeDoTime;
+
+    if (String(item.uid) === String(meuUserId)) {
+      slot.classList.add('sorteio-slot-meu');
+      grupoEl.classList.add('sorteio-grupo-meu');
+    }
+    if (animar) {
+      var a = document.getElementById('sorteio-atual');
+      var d = document.getElementById('sorteio-destino');
+      if (a) a.textContent = item.nomeDoTime;
+      if (d) d.textContent = '→ Grupo ' + item.grupo;
+      slot.classList.add('sorteio-slot-novo');
+      grupoEl.classList.add('sorteio-grupo-pulse');
+      setTimeout(function () { grupoEl.classList.remove('sorteio-grupo-pulse'); }, 460);
+    }
+  }
+
+  function finalizarSorteio() {
+    if (sorteioTimer) { clearInterval(sorteioTimer); sorteioTimer = null; }
+    var a = document.getElementById('sorteio-atual');
+    var d = document.getElementById('sorteio-destino');
+    if (a) a.textContent = 'Grupos definidos!';
+    if (d) d.textContent = '';
+    resetSorteioBotoes(true);
+  }
+
+  function resetSorteioBotoes(terminou) {
+    var btnAvancar = document.getElementById('btn-sorteio-avancar');
+    var aguardando = document.getElementById('sorteio-aguardando');
+    if (ehHost) {
+      if (btnAvancar) { btnAvancar.classList.toggle('escondida', !terminou); btnAvancar.disabled = !terminou; }
+      if (aguardando) aguardando.classList.add('escondida');
+    } else {
+      if (btnAvancar) btnAvancar.classList.add('escondida');
+      if (aguardando) aguardando.classList.toggle('escondida', !terminou);
+    }
+  }
+
+  // grupos:pular — todos pulam a animação e veem os grupos já preenchidos.
+  function onGruposPular() {
+    if (sorteioTimer) { clearInterval(sorteioTimer); sorteioTimer = null; }
+    for (; sorteioIdx < sorteioSeq.length; sorteioIdx++) {
+      colocarNoSorteio(sorteioSeq[sorteioIdx], false);
+    }
+    finalizarSorteio();
+  }
+
+  // gdraft:start — Bloco B (draft por grupo). Placeholder por enquanto.
+  function onGdraftStart() {
+    var info = document.getElementById('sorteio-header-info');
+    if (info) info.textContent = 'Draft por grupo — chega no próximo passo (Bloco B)';
   }
 
   // room:playerOrder — início do draft
@@ -1661,6 +1781,29 @@
       btnLobbyComecar.disabled    = true;
       btnLobbyComecar.textContent = 'Iniciando...';
       socket.emit('room:start');
+    });
+
+    // ── Botões do Sorteio de Grupos ──
+    var btnSorteioPular    = document.getElementById('btn-sorteio-pular');
+    var btnSorteioAvancar  = document.getElementById('btn-sorteio-avancar');
+    var modalSorteioPular  = document.getElementById('modal-sorteio-pular');
+    var sorteioPularCancel = document.getElementById('sorteio-pular-cancelar');
+    var sorteioPularConfir = document.getElementById('sorteio-pular-confirmar');
+
+    if (btnSorteioPular) btnSorteioPular.addEventListener('click', function () {
+      if (modalSorteioPular) modalSorteioPular.classList.remove('escondida');
+    });
+    if (sorteioPularCancel) sorteioPularCancel.addEventListener('click', function () {
+      if (modalSorteioPular) modalSorteioPular.classList.add('escondida');
+    });
+    if (sorteioPularConfir) sorteioPularConfir.addEventListener('click', function () {
+      if (modalSorteioPular) modalSorteioPular.classList.add('escondida');
+      if (socket && socket.connected) socket.emit('grupos:pular');
+    });
+    if (btnSorteioAvancar) btnSorteioAvancar.addEventListener('click', function () {
+      if (!socket || !socket.connected) return;
+      btnSorteioAvancar.disabled = true;
+      socket.emit('grupos:avancar');
     });
 
     btnLobbyVoltar.addEventListener('click', function () {

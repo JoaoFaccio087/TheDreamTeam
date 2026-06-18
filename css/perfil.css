@@ -2,9 +2,9 @@
    Reaproveitam .modal-auth / .auth-card / .modal-auth-fechar / .auth-logo-titulo
    / .auth-divisor / .auth-label / .auth-input (de auth.css). */
 
-.perfil-card    { max-width: 560px; text-align: left; padding: 32px 38px 30px; }
-.editar-card    { max-width: 600px; text-align: left; padding: 30px 36px 26px; }
-.historico-card { max-width: 620px; text-align: left; padding: 30px 38px 28px; }
+.perfil-card    { max-width: 560px; text-align: left; padding: 32px 38px 30px; max-height: 90vh; }
+.editar-card    { max-width: 600px; text-align: left; padding: 30px 36px 26px; max-height: 90vh; }
+.historico-card { max-width: 620px; text-align: left; padding: 30px 38px 28px; max-height: 90vh; }
 
 /* ── Topo: avatar + identidade + lápis ── */
 .perfil-topo { display: flex; align-items: center; gap: 0.85rem; margin: 0.3rem 0 0.4rem; }
@@ -37,8 +37,23 @@
 /* ── Acordeões ── */
 .perfil-acordeoes {
   display: flex; flex-direction: column; gap: 0.5rem;
-  max-height: 48vh; overflow-y: auto; padding-right: 0.2rem;
+  flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent;
 }
+/* Scrollbar discreto e semi-transparente (padrão do app) */
+.perfil-acordeoes::-webkit-scrollbar,
+.historico-lista::-webkit-scrollbar { width: 8px; }
+.perfil-acordeoes::-webkit-scrollbar-track,
+.historico-lista::-webkit-scrollbar-track { background: transparent; }
+.perfil-acordeoes::-webkit-scrollbar-thumb,
+.historico-lista::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.16);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.perfil-acordeoes::-webkit-scrollbar-thumb:hover,
+.historico-lista::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.30); background-clip: padding-box; }
 .acord { border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; background: rgba(255, 255, 255, 0.04); overflow: hidden; }
 .acord-head {
   width: 100%; display: flex; align-items: center; gap: 0.6rem;
@@ -98,7 +113,8 @@
 /* ── Histórico ── */
 .historico-lista {
   display: flex; flex-direction: column; gap: 0.55rem;
-  max-height: 60vh; overflow-y: auto; padding-right: 0.25rem; margin-top: 0.3rem;
+  flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem; margin-top: 0.3rem;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent;
 }
 .historico-vazio { color: var(--txt-soft, #9aa6b2); font-size: 0.88rem; text-align: center; padding: 1.5rem 0.5rem; }
 .hist-item {

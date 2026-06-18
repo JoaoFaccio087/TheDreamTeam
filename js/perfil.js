@@ -57,10 +57,11 @@
 
   // Grupos do acordeão: Geral + cada competição (match por palavra-chave no nome salvo).
   var GRUPOS = [
-    { nome: 'Geral',        chave: null },
-    { nome: 'Libertadores', chave: 'libertadores' },
-    { nome: 'Champions',    chave: 'champions' },
-    { nome: 'Brasileirão',  chave: 'brasileir' }
+    { nome: 'Geral',         chave: null },
+    { nome: 'Libertadores',  chave: 'libertadores' },
+    { nome: 'Champions',     chave: 'champions' },
+    { nome: 'Brasileirão',   chave: 'brasileir' },
+    { nome: 'Copa do Mundo', chave: 'copa' }
   ];
 
   function carregarAcordeoes() {

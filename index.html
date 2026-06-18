@@ -809,6 +809,55 @@
     </div><!-- /online-lobby -->
 
 
+    <!-- ── SORTEIO DE GRUPOS ──────────────────────────────────────── -->
+    <div id="online-sorteio" class="online-subview escondida">
+
+      <div class="jogo-header-wrap">
+        <header class="jogo-header">
+          <div>
+            <p class="jogo-header-titulo">SORTEIO DOS GRUPOS</p>
+            <p class="jogo-header-slogan" id="sorteio-comp">COPA DO MUNDO</p>
+          </div>
+          <p id="sorteio-header-info" class="jogo-header-info"></p>
+        </header>
+        <div class="jogo-header-linha"></div>
+      </div>
+
+      <div class="sorteio-wrap">
+
+        <!-- "Bola" da vez: clube sendo sorteado -->
+        <div class="sorteio-bola">
+          <span class="sorteio-bola-rotulo">SORTEANDO</span>
+          <span id="sorteio-atual" class="sorteio-atual">&mdash;</span>
+          <span id="sorteio-destino" class="sorteio-destino"></span>
+        </div>
+
+        <!-- Grade de grupos -->
+        <div id="sorteio-grade" class="sorteio-grade"></div>
+
+        <div class="sorteio-acoes">
+          <button id="btn-sorteio-pular"   class="btn-secundario escondida" type="button">Pular</button>
+          <button id="btn-sorteio-avancar" class="btn-rolar escondida" type="button" disabled>Avan&ccedil;ar &rarr;</button>
+          <p id="sorteio-aguardando" class="rodada-aguardando escondida">Aguardando o host avan&ccedil;ar&hellip;</p>
+        </div>
+
+      </div><!-- /sorteio-wrap -->
+
+      <!-- Modal: confirmar pular -->
+      <div id="modal-sorteio-pular" class="modal-confirm escondida">
+        <div class="modal-confirm-box">
+          <p class="modal-confirm-titulo">Pular o sorteio?</p>
+          <p class="modal-confirm-texto">A anima&ccedil;&atilde;o ser&aacute; pulada e os grupos aparecem j&aacute; preenchidos para todos.</p>
+          <div class="modal-confirm-acoes">
+            <button id="sorteio-pular-cancelar"  class="btn-rolar btn-sec" type="button">Cancelar</button>
+            <button id="sorteio-pular-confirmar" class="btn-rolar" type="button">Pular</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /online-sorteio -->
+
+
     <!-- ── DRAFT ──────────────────────────────────────────────────── -->
     <div id="online-draft" class="online-subview escondida">
 

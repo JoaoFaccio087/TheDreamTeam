@@ -419,6 +419,231 @@ function avancarTurno(io, sala) {
 
 // ── Setup principal ─────────────────────────────────────────────────────────────
 
+// ── Formato 'mata' (Copa/Libertadores): grupos + sorteio ─────────────────────
+function configGrupos(competicao) {
+  if (competicao === 'Copa do Mundo') return { letras: 'ABCDEFGHIJKL'.split(''), porGrupo: 4 };
+  return { letras: 'ABCDEFGH'.split(''), porGrupo: 4 };   // Libertadores/Champions
+}
+
+// Máximo de participantes (humanos+bots) por formato: liga=20, Copa=48, Liberta=32.
+function maxParticipantes(sala) {
+  if (sala.formato !== 'mata') return TOTAL_TIMES;
+  const cfg = configGrupos(sala.competicao);
+  return cfg.letras.length * cfg.porGrupo;
+}
+
+// Monta o pool de jogadores únicos (melhor edição de cada nome), como no snake draft.
+function montarPool(competicao, limite) {
+  const todos = loader.getPoolPorCompeticao(competicao);
+  const porNome = new Map();
+  for (const j of todos) {
+    const ex = porNome.get(j.nome);
+    if (!ex || (j.forca || 70) > (ex.forca || 70)) porNome.set(j.nome, j);
+  }
+  return shuffle([...porNome.values()]).slice(0, limite || 800)
+           .sort((a, b) => (b.forca || 70) - (a.forca || 70));
+}
+
+// Sorteia os participantes nos grupos (round-robin) e dispara a animação no cliente.
+function iniciarSorteioGrupos(io, sala) {
+  const cfg   = configGrupos(sala.competicao);
+  const total = cfg.letras.length * cfg.porGrupo;
+
+  if (!loader.getPoolPorCompeticao(sala.competicao).length) {
+    return io.to(sala.codigo).emit('erro', `Sem jogadores para a competição: ${sala.competicao}`);
+  }
+
+  // Completa com bots até o total e trava no total (caso raro de excesso de humanos).
+  const faltam = Math.max(0, total - sala.jogadores.length);
+  if (faltam > 0) {
+    const usados = sala.jogadores.map(j => j.nomeDoTime).filter(Boolean);
+    sala.jogadores.push(...gerarBots(faltam, usados));
+  }
+  if (sala.jogadores.length > total) sala.jogadores = sala.jogadores.slice(0, total);
+
+  // Zera picks (humanos voltam a "não pronto", bots seguem prontos).
+  sala.jogadores.forEach(j => { j.picks = []; j.pronto = !!j.ehBot; j.cartasVistas = {}; });
+
+  // Round-robin: i % nGrupos → cada grupo recebe exatamente porGrupo participantes.
+  const participantes = shuffle(sala.jogadores.map(j => j.userId));
+  const grupos = {};
+  cfg.letras.forEach(L => { grupos[L] = []; });
+  const sequencia = [];
+  participantes.forEach((uid, i) => {
+    const L = cfg.letras[i % cfg.letras.length];
+    grupos[L].push(uid);
+    const j = sala.jogadores.find(x => x.userId === uid);
+    sequencia.push({
+      uid,
+      grupo:      L,
+      username:   j ? j.username   : '',
+      nomeDoTime: j ? j.nomeDoTime : 'Time',
+      ehBot:      !!(j && j.ehBot),
+    });
+  });
+
+  sala.grupos       = grupos;
+  sala.ordemSorteio = sequencia;
+  sala.status       = 'sorteio';
+
+  io.to(sala.codigo).emit('room:state', buildRoomState(sala));
+  io.to(sala.codigo).emit('grupos:sorteio', {
+    competicao:  sala.competicao,
+    gruposNomes: cfg.letras,
+    porGrupo:    cfg.porGrupo,
+    sequencia,                       // o cliente acha o próprio uid e destaca o grupo dele
+  });
+}
+
+// Avança do sorteio para o draft por grupo.
+function iniciarDraftGrupos(io, sala) {
+  sala.poolDisponivel = montarPool(sala.competicao, 800);
+  sala.grupoDraftIdx  = 0;
+  sala.pickRodada     = 0;
+  sala.status         = 'gdraft';
+  io.to(sala.codigo).emit('gdraft:start', {
+    grupos:           sala.grupos,
+    ordemGrupos:      configGrupos(sala.competicao).letras,
+    picksNecessarios: sala.totalPicksNecessarios,
+  });
+  iniciarTurnoGrupo(io, sala);
+}
+
+function grupoDoUid(sala, uid) {
+  for (const L in sala.grupos) { if ((sala.grupos[L] || []).indexOf(uid) >= 0) return L; }
+  return null;
+}
+
+function picksSnapshotDe(sala) {
+  const snap = {};
+  sala.jogadores.forEach(j => { snap[j.userId] = (j.picks || []).filter(Boolean).length; });
+  return snap;
+}
+
+// Cartas para um jogador: amostra por posição aberta (igual ao snake draft).
+function cartasParaJogador(sala, jogador) {
+  const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
+  const picks   = jogador.picks || [];
+  const abertos = [];
+  for (let i = 0; i < codigos.length; i++) { if (!picks[i]) abertos.push(codigos[i]); }
+  const PER_POS = 30;
+  const vistos = new Set();
+  const cards  = [];
+  abertos.forEach(cod => {
+    shuffle(sala.poolDisponivel.filter(p => podeOcupar(p, cod)))
+      .slice(0, PER_POS)
+      .forEach(p => { if (!vistos.has(p.id)) { vistos.add(p.id); cards.push(p); } });
+  });
+  return cards;
+}
+
+function emitGdraftPicked(io, sala, jogador, picked, slotIdx, timeout, ehBot) {
+  io.to(sala.codigo).emit('gdraft:picked', {
+    userId:     jogador.userId,
+    username:   jogador.username,
+    nomeDoTime: jogador.nomeDoTime,
+    grupo:      grupoDoUid(sala, jogador.userId),
+    jogador:    picked,
+    slotIndex:  slotIdx,
+    numPicks:   (jogador.picks || []).filter(Boolean).length,
+    timeout:    !!timeout,
+    ehBot:      !!ehBot,
+  });
+}
+
+// Coloca um jogador numa vaga aberta válida e emite no canal do draft por grupo.
+function colocarEmVagaGrupo(io, sala, jogador, ehBot) {
+  const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
+  jogador.picks = jogador.picks || [];
+  const abertas = [];
+  for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) abertas.push(i); }
+  if (!abertas.length) return;
+  const slotIdx   = abertas[Math.floor(Math.random() * abertas.length)];
+  const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, codigos[slotIdx]));
+  const fonte     = elegiveis.length ? elegiveis : sala.poolDisponivel;
+  const picked    = ehBot ? escolherPickBotDe(fonte) : fonte[Math.floor(Math.random() * fonte.length)];
+  if (!picked) return;
+  const idx = sala.poolDisponivel.indexOf(picked);
+  if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
+  jogador.picks[slotIdx] = picked;
+  emitGdraftPicked(io, sala, jogador, picked, slotIdx, !ehBot, !!ehBot);
+}
+
+// Inicia o turno do grupo da vez: todos do grupo escolhem EM PARALELO.
+function iniciarTurnoGrupo(io, sala) {
+  const cfg   = configGrupos(sala.competicao);
+  const grupo = cfg.letras[sala.grupoDraftIdx];
+  const uids  = sala.grupos[grupo] || [];
+  sala.pickedThisTurn = [];
+
+  io.to(sala.codigo).emit('gdraft:turnoGrupo', {
+    grupo,
+    pickNumero: sala.pickRodada + 1,
+    totalPicks: sala.totalPicksNecessarios,
+    uids,
+    segundos:   30,
+    picks:      picksSnapshotDe(sala),
+  });
+
+  uids.forEach(uid => {
+    const jog = sala.jogadores.find(j => j.userId === uid);
+    if (!jog) { sala.pickedThisTurn.push(uid); return; }
+    if (jog.ehBot) {
+      colocarEmVagaGrupo(io, sala, jog, true);
+      sala.pickedThisTurn.push(uid);
+    } else if (jog.socketId) {
+      io.to(jog.socketId).emit('gdraft:yourPick', { grupo, pool: cartasParaJogador(sala, jog) });
+    } else {
+      colocarEmVagaGrupo(io, sala, jog, false);   // humano desconectado: auto
+      sala.pickedThisTurn.push(uid);
+    }
+  });
+
+  if (sala.pickedThisTurn.length >= uids.length) return avancarGrupoDraft(io, sala);
+
+  sala.timerDraft = setTimeout(() => {
+    uids.forEach(uid => {
+      if (sala.pickedThisTurn.indexOf(uid) >= 0) return;
+      const jog = sala.jogadores.find(j => j.userId === uid);
+      if (jog) colocarEmVagaGrupo(io, sala, jog, false);
+      sala.pickedThisTurn.push(uid);
+    });
+    avancarGrupoDraft(io, sala);
+  }, 30_000);
+}
+
+// Passa pro próximo grupo; ao fechar a volta, vai pra próxima rodada de pick.
+function avancarGrupoDraft(io, sala) {
+  if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+  const cfg = configGrupos(sala.competicao);
+
+  sala.grupoDraftIdx++;
+  if (sala.grupoDraftIdx >= cfg.letras.length) {
+    sala.grupoDraftIdx = 0;
+    sala.pickRodada++;
+  }
+
+  if (sala.pickRodada >= sala.totalPicksNecessarios) {
+    sala.status = 'ready';
+    sala.jogadores.forEach(j => { j.pronto = !!j.ehBot; });
+    io.to(sala.codigo).emit('gdraft:complete', {
+      grupos: sala.grupos,
+      jogadores: sala.jogadores.map(j => ({
+        userId:    j.userId,
+        username:  j.username,
+        nomeDoTime: j.nomeDoTime,
+        ehBot:     !!j.ehBot,
+        guest:     !!j.guest,
+        formacao:  j.formacao || '4-3-3',
+        picks:     j.picks    || [],
+        grupo:     grupoDoUid(sala, j.userId),
+      })),
+    });
+    return;
+  }
+  iniciarTurnoGrupo(io, sala);
+}
+
 function setupSocket(server, frontendUrl) {
   // Mesma lógica de CORS do HTTP: lista separada por vírgula, ou '*' em dev.
   const origens = (frontendUrl || '*').split(',').map(s => s.trim()).filter(Boolean);
@@ -479,7 +704,8 @@ function setupSocket(server, frontendUrl) {
           // Novo entrante: só entra se a sala está no lobby e não está cheia.
           // (Reconexão de quem já está na sala cai no 'else' e é sempre permitida.)
           if (sala.status !== 'lobby') return socket.emit('erro', 'A partida já começou');
-          if (sala.jogadores.length >= 20) return socket.emit('erro', 'Sala cheia (máx. 20)');
+          const capacidade = maxParticipantes(sala);
+          if (sala.jogadores.length >= capacidade) return socket.emit('erro', `Sala cheia (máx. ${capacidade})`);
           jogador = {
             userId,
             username,
@@ -555,6 +781,13 @@ function setupSocket(server, frontendUrl) {
       const todosProntos = sala.jogadores.length >= 1 && sala.jogadores.every(j => j.pronto);
       if (!todosProntos) return socket.emit('erro', 'Todos os jogadores precisam estar prontos');
 
+      // Copa/Libertadores: sorteio de grupos em vez do snake draft do Brasileirão.
+      if (sala.formato === 'mata') {
+        try { iniciarSorteioGrupos(io, sala); }
+        catch (err) { console.error('Erro no sorteio de grupos:', err); socket.emit('erro', 'Erro ao iniciar o sorteio.'); }
+        return;
+      }
+
       try {
       // Carrega pool de jogadores a partir dos arquivos estáticos (sem DB)
       const todosJogadores = loader.getPoolPorCompeticao(sala.competicao);
@@ -603,6 +836,57 @@ function setupSocket(server, frontendUrl) {
         console.error('Erro em room:start:', err);
         socket.emit('erro', 'Erro ao iniciar o draft. Tente novamente.');
       }
+    });
+
+    // ── grupos:pular / grupos:avancar — controles do host no sorteio ─────────
+    socket.on('grupos:pular', () => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala) return;
+      if (sala.hostUserId !== userId) return socket.emit('erro', 'Apenas o host pode pular o sorteio');
+      if (sala.status !== 'sorteio')  return;
+      io.to(code).emit('grupos:pular');   // todos os clientes pulam a animação para o estado final
+    });
+
+    socket.on('grupos:avancar', () => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala) return;
+      if (sala.hostUserId !== userId) return socket.emit('erro', 'Apenas o host pode avançar');
+      if (sala.status !== 'sorteio')  return;
+      try { iniciarDraftGrupos(io, sala); }
+      catch (err) { console.error('Erro ao iniciar o draft por grupo:', err); socket.emit('erro', 'Erro ao iniciar o draft.'); }
+    });
+
+    // ── gdraft:pick — escolha de um humano no draft por grupo (paralelo) ──────
+    socket.on('gdraft:pick', ({ playerId, slotIndex }) => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala || sala.status !== 'gdraft') return;
+
+      const cfg   = configGrupos(sala.competicao);
+      const grupo = cfg.letras[sala.grupoDraftIdx];
+      const uids  = sala.grupos[grupo] || [];
+      if (uids.indexOf(userId) < 0)                  return socket.emit('erro', 'Não é a vez do seu grupo');
+      if ((sala.pickedThisTurn || []).indexOf(userId) >= 0) return socket.emit('erro', 'Você já escolheu nesta rodada');
+
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog) return;
+      jog.picks = jog.picks || [];
+
+      const codigos = codigosDaFormacao(jog.formacao || '4-3-3');
+      const slot    = Number(slotIndex);
+      if (!(slot >= 0 && slot < codigos.length)) return socket.emit('erro', 'Posição inválida');
+      if (jog.picks[slot])                       return socket.emit('erro', 'Posição já preenchida');
+
+      const idx = sala.poolDisponivel.findIndex(p => p.id === playerId);
+      if (idx === -1)                                          return socket.emit('erro', 'Jogador não disponível');
+      if (!podeOcupar(sala.poolDisponivel[idx], codigos[slot])) return socket.emit('erro', 'Jogador não joga nessa posição');
+
+      const [picked] = sala.poolDisponivel.splice(idx, 1);
+      jog.picks[slot] = picked;
+      sala.pickedThisTurn.push(userId);
+      emitGdraftPicked(io, sala, jog, picked, slot, false, false);
+
+      // Todos do grupo escolheram → próximo grupo/rodada.
+      if (sala.pickedThisTurn.length >= uids.length) avancarGrupoDraft(io, sala);
     });
 
     // ── draft:pick — jogador escolhe um player individual ─────────────────────

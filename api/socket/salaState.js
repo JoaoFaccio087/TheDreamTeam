@@ -2,18 +2,30 @@
 
 const salas = new Map();
 
+// Formato da competição: 'liga' (pontos corridos) ou 'mata' (grupos + mata-mata)
+const FORMATO_POR_COMP = {
+  'Brasileirão':   'liga',
+  'Copa do Mundo': 'mata',
+  'Libertadores':  'mata',
+  'Champions':     'mata',
+};
+
 function criarSala(codigo, hostUserId, competicao) {
+  const comp    = competicao || 'Brasileirão';
+  const formato = FORMATO_POR_COMP[comp] || 'liga';
+
   const state = {
     codigo,
     hostUserId,
-    competicao:            competicao || 'Brasileirão',
+    competicao:            comp,
+    formato,                          // 'liga' | 'mata'
     jogadores:             [],   // { userId, username, nomeDoTime, formacao, socketId, conectado, picks[], pronto }
     poolDisponivel:        [],   // players individuais: { id, nome, posicoes, forca, clube, edicao, competicao }
-    ordemDraft:            [],   // snake order completo (userId[] × 11 rounds)
+    ordemDraft:            [],   // snake order completo (userId[] × 11 rounds) — formato 'liga'
     indiceTurno:           0,
     timerDraft:            null,
     totalPicksNecessarios: 11,
-    status:                'lobby',   // lobby | draft | ready | playing | fim
+    status:                'lobby',   // lobby | sorteio | gdraft | draft | ready | playing | fim
     rodadaAtual:           0,
     totalRodadas:          38,       // Brasileirão: todos contra todos, ida e volta (20 times)
     calendario:            [],       // [rodada][ [casaUid, foraUid], ... ] — gerado ao iniciar
@@ -22,6 +34,14 @@ function criarSala(codigo, hostUserId, competicao) {
     statsAssists:          {},        // nome → count
     rodadaEmAndamento:     false,
     votosPular:            [],       // userIds (humanos) que aceitaram pular tudo
+
+    // ── Formato 'mata' (Copa/Libertadores): grupos + draft por grupo + chave ──
+    grupos:                {},        // { 'A': [userId,...], 'B': [...], ... }
+    ordemSorteio:          [],        // sequência do sorteio: [{ uid, grupo, nomeDoTime, ehBot }]
+    grupoDraftIdx:         0,         // índice do grupo da vez no draft por grupo
+    pickRodada:            0,         // rodada de pick atual (0..10)
+    pickedThisTurn:        [],        // userIds que já escolheram no turno de grupo atual
+    chave:                 null,      // bracket do mata-mata
   };
   salas.set(codigo, state);
   return state;
