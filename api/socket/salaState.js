@@ -42,6 +42,7 @@ function criarSala(codigo, hostUserId, competicao) {
     pickRodada:            0,         // rodada de pick atual (0..10)
     pickedThisTurn:        [],        // userIds que já escolheram no turno de grupo atual
     chave:                 null,      // bracket do mata-mata
+    classificados:         [],        // apurados da fase de grupos (entram no mata-mata)
   };
   salas.set(codigo, state);
   return state;

@@ -202,6 +202,61 @@ function gerarCalendario(uids) {
   return turno1.concat(turno2);
 }
 
+// ── Fase de grupos (formato 'mata') ──────────────────────────────────────────
+// Calendário: round-robin SIMPLES dentro de cada grupo; a rodada r junta a rodada r
+// de TODOS os grupos (jogos em paralelo). Grupo de 4 → 3 rodadas.
+function gerarCalendarioGrupos(sala) {
+  const cfg      = configGrupos(sala.competicao);
+  const nRodadas = cfg.porGrupo - 1;            // 4 times → 3 rodadas
+  const calendario = [];
+  for (let r = 0; r < nRodadas; r++) calendario.push([]);
+  cfg.letras.forEach(L => {
+    const uids = sala.grupos[L] || [];
+    const rr   = gerarCalendario(uids).slice(0, nRodadas);   // só o turno único
+    rr.forEach((rodada, r) => { calendario[r].push(...rodada); });
+  });
+  return calendario;
+}
+
+// Classificação ordenada de um grupo.
+function classificacaoDoGrupo(sala, uids) {
+  return uids.map(uid => {
+    const j = sala.jogadores.find(x => x.userId === uid) || {};
+    const s = sala.resultados[uid] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 };
+    return {
+      userId: uid, nomeDoTime: j.nomeDoTime, username: j.username, ehBot: !!j.ehBot,
+      vitorias: s.vitorias, empates: s.empates, derrotas: s.derrotas, gf: s.gf, ga: s.ga,
+      jogos: s.vitorias + s.empates + s.derrotas, pontos: s.vitorias * 3 + s.empates, saldo: s.gf - s.ga,
+    };
+  }).sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
+}
+
+function classificacaoTodosGrupos(sala) {
+  const cfg = configGrupos(sala.competicao);
+  const out = {};
+  cfg.letras.forEach(L => { out[L] = classificacaoDoGrupo(sala, sala.grupos[L] || []); });
+  return out;
+}
+
+// Apura os classificados: 2 primeiros de cada grupo + melhores terceiros até a chave.
+// Copa → 32 (24 diretos + 8 melhores 3os). Libertadores → 16 (só os 2 primeiros).
+function apurarClassificados(sala) {
+  const cfg     = configGrupos(sala.competicao);
+  const classif = classificacaoTodosGrupos(sala);
+  const ALVO    = (sala.competicao === 'Copa do Mundo') ? 32 : 16;
+
+  const diretos = [], terceiros = [];
+  cfg.letras.forEach(L => {
+    (classif[L] || []).forEach((t, idx) => {
+      if (idx < 2)        diretos.push(Object.assign({ grupo: L, pos: idx + 1 }, t));
+      else if (idx === 2) terceiros.push(Object.assign({ grupo: L, pos: 3 }, t));
+    });
+  });
+  terceiros.sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
+  const faltam = Math.max(0, ALVO - diretos.length);
+  return { classificacao: classif, classificados: diretos.concat(terceiros.slice(0, faltam)) };
+}
+
 // Simula UMA rodada da liga (confrontos diretos) e devolve o payload do round:results.
 function simularUmaRodada(sala) {
   sala.rodadaAtual++;
@@ -986,10 +1041,12 @@ function setupSocket(server, frontendUrl) {
         sala.jogadores.forEach(j => {
           sala.resultados[j.userId] = { vitorias:0, empates:0, derrotas:0, gf:0, ga:0, campeao:false };
         });
-        sala.calendario   = gerarCalendario(sala.jogadores.map(j => j.userId));
-        sala.totalRodadas = sala.calendario.length || sala.totalRodadas;   // 38 com 20 times
+        sala.calendario   = (sala.formato === 'mata')
+          ? gerarCalendarioGrupos(sala)
+          : gerarCalendario(sala.jogadores.map(j => j.userId));
+        sala.totalRodadas = sala.calendario.length || sala.totalRodadas;   // 38 (liga) ou 3 (grupos)
         sala.votosPular   = [];
-        io.to(code).emit('round:start', { rodada: 1, total: sala.totalRodadas });
+        io.to(code).emit('round:start', { rodada: 1, total: sala.totalRodadas, formato: sala.formato });
       }
     });
 
@@ -1005,8 +1062,20 @@ function setupSocket(server, frontendUrl) {
       sala.rodadaEmAndamento = true;
       try {
         const { isUltima, payload } = simularUmaRodada(sala);
+        if (sala.formato === 'mata') payload.grupos = classificacaoTodosGrupos(sala);
         io.to(code).emit('round:results', payload);
-        if (isUltima) emitirFimDeJogo(io, sala, code);
+
+        if (isUltima) {
+          if (sala.formato === 'mata') {
+            // Fim da fase de grupos → apura classificados. C2 (mata-mata) entra aqui.
+            const apur = apurarClassificados(sala);
+            sala.classificados = apur.classificados;
+            sala.status = 'mata';
+            io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
+          } else {
+            emitirFimDeJogo(io, sala, code);
+          }
+        }
       } catch (err) {
         console.error('[socket round:simulate]', err);
         socket.emit('erro', 'Erro na simulação');
@@ -1034,7 +1103,15 @@ function setupSocket(server, frontendUrl) {
         try {
           let res;
           do { res = simularUmaRodada(sala); } while (!res.isUltima);
-          emitirFimDeJogo(io, sala, code);
+          if (sala.formato === 'mata') {
+            if (res && res.payload) { res.payload.grupos = classificacaoTodosGrupos(sala); io.to(code).emit('round:results', res.payload); }
+            const apur = apurarClassificados(sala);
+            sala.classificados = apur.classificados;
+            sala.status = 'mata';
+            io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
+          } else {
+            emitirFimDeJogo(io, sala, code);
+          }
         } catch (err) {
           console.error('[socket round:skipAll]', err);
         } finally {

@@ -115,9 +115,21 @@
   }
 
   // Garante uma identidade (login real OU convidado) antes de uma ação online.
-  function garantirToken() {
+  // Verifica se um JWT ainda é válido pela expiração (com 30s de margem).
+  function tokenValido(token) {
+    if (!token) return false;
+    try {
+      var payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+      if (payload && payload.exp) return (payload.exp * 1000) > (Date.now() + 30000);
+      return true;   // sem exp: assume válido
+    } catch (e) { return false; }
+  }
+
+  function garantirToken(forcar) {
     var token = localStorage.getItem('dreamteam_token');
-    if (token) return Promise.resolve(token);
+    if (!forcar && tokenValido(token)) return Promise.resolve(token);
+    // ausente/expirado/inválido (ou forçado) → pega um novo token de convidado
+    localStorage.removeItem('dreamteam_token');
     return api.tokenConvidado().then(function (r) {
       if (r && r.token) { localStorage.setItem('dreamteam_token', r.token); return r.token; }
       return null;
@@ -1720,9 +1732,17 @@
     var velocidade = velEl ? velEl.dataset.vel : 'normal';
     var competicao = window.__compOnline || 'Brasileirão';
 
-    garantirToken()
-      .then(function () {
+    function pedirCriar(forcarToken) {
+      return garantirToken(forcarToken).then(function () {
         return api.criarSala({ competicao: competicao, nome: nome, velocidade: velocidade });
+      });
+    }
+
+    pedirCriar(false)
+      .catch(function (err) {
+        // Token recusado pelo backend → renova e tenta UMA vez mais.
+        if (/token/i.test(err && err.message || '')) return pedirCriar(true);
+        throw err;
       })
       .then(function (res) {
         codigoSala = res.codigo;
@@ -1749,9 +1769,14 @@
     btnEntrarSala.disabled    = true;
     btnEntrarSala.textContent = '...';
 
-    garantirToken()
-      .then(function () {
-        return api.entrarSala(codigo);
+    function pedirEntrar(forcarToken) {
+      return garantirToken(forcarToken).then(function () { return api.entrarSala(codigo); });
+    }
+
+    pedirEntrar(false)
+      .catch(function (err) {
+        if (/token/i.test(err && err.message || '')) return pedirEntrar(true);
+        throw err;
       })
       .then(function () {
         codigoSala = codigo;
