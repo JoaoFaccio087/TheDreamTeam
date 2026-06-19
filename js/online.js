@@ -14,6 +14,7 @@
   var timerSeg         = 30;
   var rodadaAtual      = 0;
   var totalRodadas     = 5;
+  var formatoOnline    = 'liga';   // 'liga' (Brasileirão) ou 'mata' (Copa/Liberta: grupos+mata-mata)
   var simulandoRodada  = false;
 
   var poolLocal        = [];   // pool de jogadores disponíveis no turno atual
@@ -784,6 +785,7 @@
   function onRoundStart(dados) {
     rodadaAtual     = dados.rodada || 1;
     totalRodadas    = dados.total  || 38;
+    formatoOnline   = dados.formato || formatoOnline;
     simulandoRodada = false;
     pararAnimacaoPartida();
     euVoteiPular    = false;
@@ -791,9 +793,12 @@
     skipTotal       = 0;
     renderSkipContador();
 
-    rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
+    var ehGrupos = formatoOnline === 'mata';
+    rodadaTituloEl.textContent = (ehGrupos ? 'FASE DE GRUPOS · RODADA ' : 'RODADA ') + rodadaAtual + ' DE ' + totalRodadas;
     var infoEl = document.getElementById('rodada-header-info');
-    if (infoEl) infoEl.textContent = '20 TIMES · ' + totalRodadas + ' RODADAS';
+    if (infoEl) infoEl.textContent = ehGrupos
+      ? 'FASE DE GRUPOS · ' + totalRodadas + ' RODADAS'
+      : '20 TIMES · ' + totalRodadas + ' RODADAS';
     rodadaPartidas.innerHTML   = '<p style="color:#888;text-align:center;padding:2rem">Simulando rodada ' + rodadaAtual + '…</p>';
     btnRodadaProxima.classList.add('escondida');
     btnRodadaFim.classList.add('escondida');
@@ -1012,8 +1017,41 @@
   }
 
   // Renderiza a tabela de classificação (usada na rodada e no fim do campeonato)
+  // Tabelas por grupo (fase de grupos da Copa/Liberta). Top-2 destacado = classifica.
+  function renderGruposClassif(grupos) {
+    if (!rodadaClassif) return;
+    var head = document.querySelector('.classif-tabela-head');
+    if (head) head.style.display = 'none';   // cada card tem seu próprio cabeçalho
+    var letras = Object.keys(grupos || {}).sort();
+    var html = '<div class="grupos-classif-grade">';
+    letras.forEach(function (L) {
+      var times = grupos[L] || [];
+      html += '<div class="grupo-classif-card">' +
+        '<div class="grupo-classif-tit">Grupo ' + htmlEsc(L) + '</div>' +
+        '<div class="gc-head"><span class="gc-pos">#</span><span class="gc-time">Time</span>' +
+          '<span>P</span><span>J</span><span>SG</span></div>';
+      times.forEach(function (t, i) {
+        var meu = String(t.userId) === String(meuUserId);
+        var sg  = (t.saldo >= 0 ? '+' : '') + (t.saldo || 0);
+        html += '<div class="gc-linha' + (i < 2 ? ' gc-classifica' : '') + (meu ? ' gc-meu' : '') + '">' +
+          '<span class="gc-pos">' + (i + 1) + '</span>' +
+          '<span class="gc-time">' + htmlEsc(t.nomeDoTime || t.username || '?') +
+            (t.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</span>' +
+          '<span>' + (t.pontos || 0) + '</span>' +
+          '<span>' + (t.jogos  || 0) + '</span>' +
+          '<span>' + sg + '</span>' +
+        '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+    rodadaClassif.innerHTML = html;
+  }
+
   function renderClassifLista(lista) {
     if (!rodadaClassif) return;
+    var head = document.querySelector('.classif-tabela-head');
+    if (head) head.style.display = '';        // restaura o cabeçalho da liga
     rodadaClassif.innerHTML = '';
     (lista || []).forEach(function (p, i) {
       var sou = String(p.userId) === String(meuUserId);
@@ -1063,7 +1101,8 @@
     // A classificação, a artilharia e as assistências só atualizam QUANDO A PARTIDA
     // (animação) TERMINA — para não revelar o resultado antes da hora na aba Classificação.
     function aplicarClassifEStats() {
-      renderClassifLista(dados.classificacao || []);
+      if (dados.grupos) renderGruposClassif(dados.grupos);     // fase de grupos (Copa/Liberta)
+      else              renderClassifLista(dados.classificacao || []);
       renderStatsLista(rodadaArtilharia,   dados.artilharia,   'gols',    'G');
       renderStatsLista(rodadaAssistencias, dados.assistencias, 'assists', 'A');
     }

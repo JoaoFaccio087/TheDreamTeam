@@ -1220,3 +1220,38 @@
 .gdraft-membro-status.ok         { color: var(--accent); }
 .gdraft-membro-status.escolhendo { color: #E7C77A; }
 
+
+/* ── Fase de grupos: 12 tabelas por grupo (Copa/Liberta online) ───────────── */
+.grupos-classif-grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.7rem;
+}
+.grupo-classif-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+}
+.grupo-classif-tit {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 0.72rem; letter-spacing: .04em;
+  color: var(--accent); margin-bottom: 0.35rem;
+}
+.gc-head, .gc-linha {
+  display: grid;
+  grid-template-columns: 1.4em 1fr 1.7em 1.7em 2.3em;
+  gap: 4px; align-items: center;
+  font-size: 0.72rem; padding: 2px 0;
+}
+.gc-head {
+  color: var(--txt-soft); font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.gc-head span:not(.gc-time):not(.gc-pos),
+.gc-linha span:not(.gc-time):not(.gc-pos) { text-align: center; }
+.gc-time { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gc-classifica { box-shadow: inset 2px 0 0 var(--accent); }
+.gc-classifica .gc-pos { color: var(--accent); font-weight: 700; }
+.gc-meu { background: rgba(231,199,122,0.12); border-radius: 4px; }
+.gc-meu .gc-time { color: #E7C77A; font-weight: 700; }
