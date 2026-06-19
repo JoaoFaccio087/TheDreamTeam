@@ -14,13 +14,24 @@ pilulasModo.forEach(function (pilula) {
 
 // Pílula "Brasileirão - Online": seleciona o modo online (igual às outras pílulas).
 // O modal de login/sala só abre quando o usuário clica em "Jogar agora".
-var btnModoOnline = document.getElementById('btn-modo-online');
+var btnModoOnline     = document.getElementById('btn-modo-online');
+var btnModoOnlineCopa = document.getElementById('btn-modo-online-copa');
+
+// Define a competição do online e destaca a pílula escolhida.
+function escolherOnline(comp, pilula) {
+  modoOnlineSelecionado = true;
+  window.__compOnline = comp;
+  pilulasModo.forEach(function (p) { p.classList.remove('pilula-ativa'); });
+  if (btnModoOnline)     btnModoOnline.classList.remove('pilula-ativa');
+  if (btnModoOnlineCopa) btnModoOnlineCopa.classList.remove('pilula-ativa');
+  if (pilula) pilula.classList.add('pilula-ativa');
+}
+
 if (btnModoOnline) {
-  btnModoOnline.addEventListener('click', function () {
-    modoOnlineSelecionado = true;
-    pilulasModo.forEach(function (p) { p.classList.remove('pilula-ativa'); });
-    btnModoOnline.classList.add('pilula-ativa');
-  });
+  btnModoOnline.addEventListener('click', function () { escolherOnline('Brasileirão', btnModoOnline); });
+}
+if (btnModoOnlineCopa) {
+  btnModoOnlineCopa.addEventListener('click', function () { escolherOnline('Copa do Mundo', btnModoOnlineCopa); });
 }
 
 // Seletor Um Jogador / Multijogador — alterna as abas de competições.
@@ -39,14 +50,13 @@ if (btnModoOnline) {
     });
 
     if (multi) {
-      // Multijogador: a única opção ativa hoje é o Brasileirão online.
-      modoOnlineSelecionado = true;
-      pilulasModo.forEach(function (p) { p.classList.remove('pilula-ativa'); });
-      if (btnModoOnline) btnModoOnline.classList.add('pilula-ativa');
+      // Multijogador: por padrão, seleciona o Brasileirão online.
+      escolherOnline('Brasileirão', btnModoOnline);
     } else {
       // Um Jogador: volta a valer a competição já selecionada.
       modoOnlineSelecionado = false;
-      if (btnModoOnline) btnModoOnline.classList.remove('pilula-ativa');
+      if (btnModoOnline)     btnModoOnline.classList.remove('pilula-ativa');
+      if (btnModoOnlineCopa) btnModoOnlineCopa.classList.remove('pilula-ativa');
       selecionarModo(modoSelecionado);
     }
   }
