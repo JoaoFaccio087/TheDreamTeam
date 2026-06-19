@@ -32,6 +32,7 @@ function gerarOrdemSnake(ids, rounds) {
 
 const TOTAL_TIMES    = 20;
 const BOT_PICK_DELAY = 400;   // ms entre escolhas de bot (visível: a vez passa 1 a 1)
+const GRUPO_PACE     = 650;   // ms de pausa entre turnos de grupo (não passar instantâneo)
 const NOMES_BOTS = [
   'Tigres FC','Albatroz EC','Furacão Azul','Leões do Vale','Raio Verde',
   'Inter Estelar','Dragões FC','Cometa SC','Falcões Real','União Atlética',
@@ -654,7 +655,11 @@ function iniciarTurnoGrupo(io, sala) {
     }
   });
 
-  if (sala.pickedThisTurn.length >= uids.length) return avancarGrupoDraft(io, sala);
+  if (sala.pickedThisTurn.length >= uids.length) {
+    // grupo resolvido na hora (só bots/desconectados) → pausa pra ficar visível
+    sala.timerDraft = setTimeout(() => avancarGrupoDraft(io, sala), GRUPO_PACE);
+    return;
+  }
 
   sala.timerDraft = setTimeout(() => {
     uids.forEach(uid => {

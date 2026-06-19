@@ -359,9 +359,6 @@
     renderSorteioGrade();
     resetSorteioBotoes(false);
 
-    var btnPular = document.getElementById('btn-sorteio-pular');
-    if (btnPular) btnPular.classList.toggle('escondida', !ehHost);
-
     subview('online-sorteio');
     sorteioTimer = setInterval(passoSorteio, 420);
   }
@@ -369,6 +366,12 @@
   function renderSorteioGrade() {
     var grade = document.getElementById('sorteio-grade');
     if (!grade) return;
+    // Máx. 6 por linha, sempre em 2 linhas: Copa(12)=6+6, Liberta(8)=4+4.
+    var nGrupos = sorteioLetras.length;
+    var colunas = Math.min(6, Math.ceil(nGrupos / 2));
+    grade.style.gridTemplateColumns = 'repeat(' + colunas + ', minmax(0, 1fr))';
+    grade.style.maxWidth = (colunas * 200) + 'px';
+    grade.style.margin   = '0 auto';
     var html = '';
     sorteioLetras.forEach(function (L) {
       html += '<div class="sorteio-grupo" id="sgrupo-' + L + '">' +
@@ -427,12 +430,16 @@
   }
 
   function resetSorteioBotoes(terminou) {
+    var btnPular   = document.getElementById('btn-sorteio-pular');
     var btnAvancar = document.getElementById('btn-sorteio-avancar');
     var aguardando = document.getElementById('sorteio-aguardando');
     if (ehHost) {
-      if (btnAvancar) { btnAvancar.classList.toggle('escondida', !terminou); btnAvancar.disabled = !terminou; }
+      // Pular some ao terminar; Avançar fica sempre visível ao lado, clicável só no fim.
+      if (btnPular)   btnPular.classList.toggle('escondida', terminou);
+      if (btnAvancar) { btnAvancar.classList.remove('escondida'); btnAvancar.disabled = !terminou; }
       if (aguardando) aguardando.classList.add('escondida');
     } else {
+      if (btnPular)   btnPular.classList.add('escondida');
       if (btnAvancar) btnAvancar.classList.add('escondida');
       if (aguardando) aguardando.classList.toggle('escondida', !terminou);
     }
@@ -456,6 +463,7 @@
   var gGrupoAtivo       = null;
   var gPickNum          = 1;
   var gPicksSnap        = {};
+  var gVisualizandoUid  = null;   // uid do time que estou olhando no campo (null = o meu)
 
   function onGdraftStart(dados) {
     draftEhGrupo      = true;
@@ -496,16 +504,16 @@
     var euNoGrupo = membros.indexOf(String(meuUserId)) >= 0;
     var jaEscolhi = (gPicksSnap[meuUserId] || 0) >= gPickNum;
 
-    mostrarCampoDaVez(meuUserId);   // sempre mostro o MEU time no draft por grupo
-
     if (euNoGrupo && !jaEscolhi) {
-      gPodeEscolher = true;          // posso clicar nas vagas; as cartas chegam em gdraft:yourPick
+      gPodeEscolher    = true;          // posso clicar nas vagas; as cartas chegam em gdraft:yourPick
+      gVisualizandoUid = null;          // na minha vez, sempre volto pro MEU time
       selectedPlayer = null; selectedSlot = null;
-      destacarVagasAbertas();
+      verTimeDoUsuario(meuUserId);      // mostra meu campo e destaca as vagas
       if (dados.segundos > 0) iniciarTimer(dados.segundos); else pararTimer();
       tocarAvisoVez();
     } else {
       gPodeEscolher = false;
+      verTimeDoUsuario(gVisualizandoUid || meuUserId);   // mantém o time que estou olhando
       limparDestaquesVaga();
       if (draftCarouselWrap) draftCarouselWrap.classList.add('escondida');
       fecharModalDraftPick();
@@ -517,9 +525,9 @@
   function onGdraftYourPick(dados) {
     if (dados && dados.pool && dados.pool.length) poolLocal = dados.pool;
     gPodeEscolher  = true;
+    gVisualizandoUid = null;
     selectedPlayer = null; selectedSlot = null;
-    mostrarCampoDaVez(meuUserId);
-    destacarVagasAbertas();
+    verTimeDoUsuario(meuUserId);
   }
 
   // gdraft:picked — alguém escolheu (broadcast).
@@ -541,7 +549,7 @@
         fecharModalDraftPick();
         pararTimer();
       }
-      mostrarCampoDaVez(meuUserId);
+      mostrarCampoDaVez(gVisualizandoUid || meuUserId);
       renderMeuTime();
     }
     renderPainelGrupos();
@@ -578,15 +586,19 @@
       html += '<div class="gdraft-grupo' + (ativo ? ' gdraft-grupo-ativo' : '') + (temMeu ? ' gdraft-grupo-meu' : '') + '">';
       html += '<div class="gdraft-grupo-cab">Grupo ' + L + (ativo ? ' · escolhendo' : '') + '</div>';
       membros.forEach(function (uid) {
-        var p     = allPlayers[uid] || {};
-        var nome  = p.nomeDoTime || p.username || 'Time';
-        var picks = (gPicksSnap && gPicksSnap[uid]) || 0;
+        var p      = allPlayers[uid] || {};
+        var nome   = p.nomeDoTime || p.username || 'Time';
+        var picks  = (gPicksSnap && gPicksSnap[uid]) || 0;
         var pronto = picks >= gPickNum;
-        var status = pronto ? '✓' : (ativo ? '…' : '·');
         var ehMeu  = String(uid) === String(meuUserId);
-        html += '<div class="gdraft-membro' + (ehMeu ? ' gdraft-membro-meu' : '') + '">' +
+        var vendo  = String(uid) === String(gVisualizandoUid);
+        var statusTxt, statusCls;
+        if (ativo) { statusTxt = pronto ? 'Pronto' : 'Escolhendo…'; statusCls = pronto ? ' ok' : ' escolhendo'; }
+        else       { statusTxt = pronto ? '✓' : '·';                statusCls = pronto ? ' ok' : ''; }
+        html += '<div class="gdraft-membro' + (ehMeu ? ' gdraft-membro-meu' : '') + (vendo ? ' gdraft-membro-vendo' : '') +
+                  '" data-uid="' + htmlEsc(String(uid)) + '" title="Ver o time de ' + htmlEsc(nome) + '">' +
                   '<span class="gdraft-membro-nome">' + htmlEsc(nome) + '</span>' +
-                  '<span class="gdraft-membro-status' + (pronto ? ' ok' : '') + '">' + status + '</span>' +
+                  '<span class="gdraft-membro-status' + statusCls + '">' + statusTxt + '</span>' +
                 '</div>';
       });
       html += '</div>';
@@ -1578,6 +1590,29 @@
     renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
   }
 
+  // Visualiza o time de qualquer participante (somente leitura). null/meu = volta pro meu.
+  function verTimeDoUsuario(uid) {
+    var sou = !uid || String(uid) === String(meuUserId);
+    gVisualizandoUid = sou ? null : uid;
+    var jog = allPlayers[uid] || {};
+    if (draftTituloEl) {
+      if (sou) {
+        draftTituloEl.innerHTML = gPodeEscolher ? '⚡ É a SUA vez!' : 'Seu time';
+      } else {
+        var tag = jog.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
+        draftTituloEl.innerHTML = '👁 Time de: ' + htmlEsc(nomeUsuario(jog)) + tag;
+      }
+    }
+    if (draftCampoLabel) {
+      draftCampoLabel.textContent = sou
+        ? (gPodeEscolher ? 'Sua escalação — clique numa posição aberta' : 'Sua escalação')
+        : ('Time de: ' + nomeUsuario(jog) + ' (somente leitura)');
+    }
+    if (draftCampo) renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
+    if (sou && gPodeEscolher) destacarVagasAbertas();
+    renderPainelGrupos();
+  }
+
   // Faixa "MEU TIME": minhas 11 vagas com o jogador alocado ou marcação de vaga faltando.
   function renderMeuTime() {
     if (!draftMeuTime) return;
@@ -1830,6 +1865,15 @@
     draftTituloEl      = document.getElementById('online-draft-titulo');
     draftSubtituloEl   = document.getElementById('draft-subtitulo');
     draftOrdemLista    = document.getElementById('draft-ordem-lista');
+    // Clique em qualquer participante do painel → visualiza o time dele (somente leitura).
+    if (draftOrdemLista) {
+      draftOrdemLista.addEventListener('click', function (ev) {
+        if (!draftEhGrupo) return;
+        var alvo = ev.target.closest ? ev.target.closest('.gdraft-membro') : null;
+        if (!alvo || !alvo.dataset || !alvo.dataset.uid) return;
+        verTimeDoUsuario(alvo.dataset.uid);
+      });
+    }
     draftTimerBar      = document.getElementById('draft-timer-bar');
     draftTimerNum      = document.getElementById('draft-timer-num');
     draftCampo         = document.getElementById('draft-campo');
