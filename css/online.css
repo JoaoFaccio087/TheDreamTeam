@@ -26,6 +26,8 @@
 .campo-jogo {
   position: relative;
   width: 100%;
+  max-width: 500px;             /* teto igual ao modo Um Jogador (evita o campo gigante) */
+  margin: 0 auto;
   aspect-ratio: 2 / 3;
   container-type: inline-size;   /* permite dimensionar os slots em função da largura do campo */
   border-radius: 6px;

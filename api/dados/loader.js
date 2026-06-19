@@ -11,7 +11,7 @@ let _jogadores = null;   // jogadores individuais com id numérico único
 function carregarEntradas() {
   if (_entradas) return _entradas;
 
-  const arquivos = ['libertadores.js', 'champions.js', 'brasileirao.js'];
+  const arquivos = ['libertadores.js', 'champions.js', 'brasileirao.js', 'copa.js'];
   const dadosDir = __dirname;
 
   _entradas = [];
