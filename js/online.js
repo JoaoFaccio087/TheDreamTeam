@@ -59,7 +59,7 @@
   var rodadaTituloEl, rodadaPartidas, btnRodadaProxima, btnRodadaFim;
   var rodadaClassif, rodadaArtilharia, rodadaAssistencias;
   var rodadaProximos, proximosTitulo, rodadaAguardandoHost;
-  var tabPartidas, tabClassif, abaPartidas, abaClassif;
+  var tabPartidas, tabClassif, abaPartidas, abaClassif, tabChave, abaChave;
   var animTimer = null;   // timer da animação da partida do usuário
   var animacaoAtiva = false;   // true enquanto a partida do usuário está sendo animada
   var aoFimDaAnimacao = null;  // callback rodado quando a animação termina (atualiza a classificação só então)
@@ -794,6 +794,7 @@
     renderSkipContador();
 
     var ehGrupos = formatoOnline === 'mata';
+    configurarAbasRodada();
     rodadaTituloEl.textContent = (ehGrupos ? 'FASE DE GRUPOS · RODADA ' : 'RODADA ') + rodadaAtual + ' DE ' + totalRodadas;
     var infoEl = document.getElementById('rodada-header-info');
     if (infoEl) infoEl.textContent = ehGrupos
@@ -813,13 +814,21 @@
     }
   }
 
-  // Alterna entre as abas "Partidas" e "Classificação"
+  // Alterna entre as abas "Partidas", "Classificação/Grupos" e "Mata-a-Mata"
   function selecionarAbaRodada(qual) {
-    var p = qual === 'partidas';
-    if (abaPartidas) abaPartidas.classList.toggle('escondida', !p);
-    if (abaClassif)  abaClassif.classList.toggle('escondida', p);
-    if (tabPartidas) tabPartidas.classList.toggle('ativa', p);
-    if (tabClassif)  tabClassif.classList.toggle('ativa', !p);
+    var abas = { partidas: abaPartidas, classif: abaClassif, chave: abaChave };
+    var tabs = { partidas: tabPartidas, classif: tabClassif, chave: tabChave };
+    Object.keys(abas).forEach(function (k) {
+      if (abas[k]) abas[k].classList.toggle('escondida', k !== qual);
+      if (tabs[k]) tabs[k].classList.toggle('ativa', k === qual);
+    });
+  }
+
+  // Configura os rótulos/visibilidade das abas conforme o formato (liga x grupos+mata).
+  function configurarAbasRodada() {
+    var mata = formatoOnline === 'mata';
+    if (tabClassif) tabClassif.textContent = mata ? 'Grupos' : 'Classificação';
+    if (tabChave)   tabChave.classList.toggle('escondida', !mata);
   }
 
   function pararAnimacaoPartida() { if (animTimer) { clearTimeout(animTimer); animTimer = null; } animacaoAtiva = false; }
@@ -2012,6 +2021,8 @@
     tabClassif  = document.getElementById('tab-classif');
     abaPartidas = document.getElementById('aba-partidas');
     abaClassif  = document.getElementById('aba-classif');
+    tabChave    = document.getElementById('tab-chave');
+    abaChave    = document.getElementById('aba-chave');
     btnPularTudo        = document.getElementById('online-btn-pular');
     modalPular          = document.getElementById('modal-pular');
     modalPularConfirmar = document.getElementById('modal-pular-confirmar');
@@ -2197,6 +2208,7 @@
 
     if (tabPartidas) tabPartidas.addEventListener('click', function () { selecionarAbaRodada('partidas'); });
     if (tabClassif)  tabClassif.addEventListener('click', function () { selecionarAbaRodada('classif'); });
+    if (tabChave)    tabChave.addEventListener('click', function () { selecionarAbaRodada('chave'); });
 
     if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
       if (euVoteiPular) return;

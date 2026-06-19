@@ -344,6 +344,131 @@ function simularUmaRodada(sala) {
   };
 }
 
+// ── C2: Mata-mata online ─────────────────────────────────────────────────────
+function forcaDoElenco(picks) {
+  const fs = (picks || []).filter(Boolean).map(p => p.forca || 70);
+  return fs.length ? fs.reduce((s, f) => s + f, 0) / fs.length : 70;
+}
+function picksDe(sala, uid) {
+  const j = sala.jogadores.find(x => String(x.userId) === String(uid)) || {};
+  return (j.picks || []).filter(Boolean);
+}
+function refTime(sala, uid) {
+  const j = sala.jogadores.find(x => String(x.userId) === String(uid)) || {};
+  return { userId: uid, nome: j.nomeDoTime || j.username || 'Time', ehBot: !!j.ehBot };
+}
+function nomesFasesMata(n) {
+  const todos = ['16-AVOS', 'OITAVAS', 'QUARTAS', 'SEMIFINAL', 'FINAL'];
+  const nr = Math.round(Math.log2(n));   // 32→5, 16→4
+  return todos.slice(todos.length - nr);
+}
+
+// Monta a chave a partir dos classificados (seed: melhor x pior).
+function montarChaveOnline(sala) {
+  const cls = (sala.classificados || []).slice()
+    .sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
+  const n = cls.length;                   // 32 (Copa) ou 16 (Liberta)
+  const r0 = [];
+  for (let i = 0; i < n / 2; i++) {
+    r0.push({ a: refTime(sala, cls[i].userId), b: refTime(sala, cls[n - 1 - i].userId), winner: null, gA: null, gB: null, pen: null });
+  }
+  const rounds = [r0];
+  let qtd = r0.length / 2;
+  while (qtd >= 1) {
+    const arr = [];
+    for (let q = 0; q < qtd; q++) arr.push({ a: null, b: null, winner: null, gA: null, gB: null, pen: null });
+    rounds.push(arr);
+    if (qtd === 1) break;
+    qtd = qtd / 2;
+  }
+  sala.chave = { rounds, rodadaAtual: 0, fases: nomesFasesMata(n) };
+  return sala.chave;
+}
+
+function acumularStats(sala, fila) {
+  (fila || []).forEach(ev => {
+    if (ev.lado === 'meu') {
+      if (ev.autor && ev.autor.nome)   sala.statsGols[ev.autor.nome]     = (sala.statsGols[ev.autor.nome]     || 0) + 1;
+      if (ev.assist && ev.assist.nome) sala.statsAssists[ev.assist.nome] = (sala.statsAssists[ev.assist.nome] || 0) + 1;
+    } else {
+      if (ev.autorAdv && ev.autorAdv.nome)   sala.statsGols[ev.autorAdv.nome]     = (sala.statsGols[ev.autorAdv.nome]     || 0) + 1;
+      if (ev.assistAdv && ev.assistAdv.nome) sala.statsAssists[ev.assistAdv.nome] = (sala.statsAssists[ev.assistAdv.nome] || 0) + 1;
+    }
+  });
+}
+
+// Resolve um confronto eliminatório (sempre define vencedor; empate → pênaltis).
+function resolverConfronto(sala, node) {
+  const aEl = picksDe(sala, node.a.userId);
+  const bEl = picksDe(sala, node.b.userId);
+  const res = simularPartida(aEl, { jogadores: bEl }, false);   // campo neutro
+  let gA = res.gMeus, gB = res.gAdv, pen = null, vencedor;
+  if (gA === gB) {
+    const fa = forcaDoElenco(aEl), fb = forcaDoElenco(bEl);
+    const pa = fa / (fa + fb);
+    const aVence = Math.random() < (0.5 + (pa - 0.5) * 0.6);    // leve vantagem ao mais forte
+    pen = aVence ? [5, 4] : [4, 5];
+    vencedor = aVence ? node.a : node.b;
+  } else {
+    vencedor = gA > gB ? node.a : node.b;
+  }
+  node.gA = gA; node.gB = gB; node.pen = pen; node.winner = vencedor;
+  acumularStats(sala, res.fila);
+  return { fila: res.fila, gA, gB, pen };
+}
+
+// Simula a rodada atual do mata-mata; preenche vencedores e avança a chave.
+function simularRodadaMata(sala) {
+  const chave = sala.chave;
+  const r     = chave.rodadaAtual;
+  const jogos = chave.rounds[r] || [];
+  const resultados = [];
+  jogos.forEach(node => {
+    if (!node.a || !node.b || node.winner) return;
+    const { fila, gA, gB, pen } = resolverConfronto(sala, node);
+    resultados.push({
+      homeUid: node.a.userId, homeNome: node.a.nome, homeBot: !!node.a.ehBot,
+      awayUid: node.b.userId, awayNome: node.b.nome, awayBot: !!node.b.ehBot,
+      gHome: gA, gAway: gB, pen, fila,
+    });
+  });
+  const ehFinal = (r === chave.rounds.length - 1);
+  if (!ehFinal) {
+    const prox = chave.rounds[r + 1];
+    for (let i = 0; i < jogos.length; i += 2) {
+      const slot = prox[i / 2];
+      if (slot) { slot.a = (jogos[i] && jogos[i].winner) || null; slot.b = (jogos[i + 1] && jogos[i + 1].winner) || null; }
+    }
+  }
+  chave.rodadaAtual = r + 1;
+  const campeao = ehFinal ? (jogos[0] && jogos[0].winner) : null;
+  return { resultados, ehFinal, campeao, faseNome: chave.fases[r] };
+}
+
+// Ranking final do mata-mata (campeão primeiro; depois por rodada de eliminação).
+function rankingMata(sala) {
+  const chave = sala.chave;
+  const elim = {};
+  chave.rounds.forEach((jogos, r) => {
+    jogos.forEach(node => {
+      if (node.a && node.b && node.winner) {
+        const perdedor = String(node.winner.userId) === String(node.a.userId) ? node.b : node.a;
+        elim[perdedor.userId] = r;
+      }
+    });
+  });
+  const final = chave.rounds[chave.rounds.length - 1][0];
+  if (final && final.winner) elim[final.winner.userId] = chave.rounds.length;
+  return Object.keys(elim).sort((a, b) => elim[b] - elim[a]).map(uid => {
+    const j = sala.jogadores.find(x => String(x.userId) === String(uid)) || {};
+    const s = sala.resultados[uid] || {};
+    return {
+      userId: j.userId, nomeDoTime: j.nomeDoTime, username: j.username, ehBot: !!j.ehBot,
+      vitorias: s.vitorias || 0, empates: s.empates || 0, derrotas: s.derrotas || 0, gf: s.gf || 0, ga: s.ga || 0,
+    };
+  });
+}
+
 // Encerra o campeonato: define campeão, emite game:end, persiste e limpa a sala.
 function emitirFimDeJogo(io, sala, code) {
   const campeao = determinarCampeao(sala);
@@ -1095,11 +1220,13 @@ function setupSocket(server, frontendUrl) {
 
         if (isUltima) {
           if (sala.formato === 'mata') {
-            // Fim da fase de grupos → apura classificados. C2 (mata-mata) entra aqui.
+            // Fim da fase de grupos → apura classificados e monta a chave do mata-mata.
             const apur = apurarClassificados(sala);
             sala.classificados = apur.classificados;
             sala.status = 'mata';
             io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
+            montarChaveOnline(sala);
+            io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
           } else {
             emitirFimDeJogo(io, sala, code);
           }
@@ -1112,10 +1239,49 @@ function setupSocket(server, frontendUrl) {
       }
     });
 
+    // ── chave:advance — host avança UMA fase do mata-mata (Copa/Liberta) ───────
+    socket.on('chave:advance', () => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala || sala.status !== 'mata' || !sala.chave) return;
+      if (sala.hostUserId !== userId) return;            // só o host avança
+      if (sala.rodadaEmAndamento) return;
+      if (sala.chave.rodadaAtual >= sala.chave.rounds.length) return;   // já acabou
+
+      sala.rodadaEmAndamento = true;
+      try {
+        const { resultados, ehFinal, campeao, faseNome } = simularRodadaMata(sala);
+        // Estatísticas atualizadas (artilharia/assistências da campanha inteira).
+        const timeDoJogador = {};
+        sala.jogadores.forEach(j => (j.picks || []).forEach(p => { if (p && p.nome) timeDoJogador[p.nome] = j.nomeDoTime; }));
+        const artilharia   = Object.entries(sala.statsGols).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
+        const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
+
+        io.to(code).emit('chave:results', {
+          fase: faseNome, resultados, artilharia, assistencias,
+          rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
+        });
+
+        if (ehFinal) {
+          sala.status = 'fim';
+          io.to(code).emit('game:end', {
+            campeao: campeao ? { userId: campeao.userId, nome: campeao.nome, ehBot: !!campeao.ehBot } : null,
+            ranking: rankingMata(sala),
+            artilharia, assistencias, mata: true,
+          });
+        }
+      } catch (err) {
+        console.error('[socket chave:advance]', err);
+        socket.emit('erro', 'Erro no mata-mata');
+      } finally {
+        sala.rodadaEmAndamento = false;
+      }
+    });
+
     // ── round:skipAll — voto p/ pular tudo; com TODOS os humanos, simula o resto ─
     socket.on('round:skipAll', () => {
       const code = socket.salaAtual;
       if (!code) return;
+
       const sala = getSala(code);
       if (!sala || sala.status !== 'playing') return;
       const jog = sala.jogadores.find(j => j.userId === userId);
@@ -1137,6 +1303,8 @@ function setupSocket(server, frontendUrl) {
             sala.classificados = apur.classificados;
             sala.status = 'mata';
             io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
+            montarChaveOnline(sala);
+            io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
           } else {
             emitirFimDeJogo(io, sala, code);
           }
