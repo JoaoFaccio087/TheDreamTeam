@@ -33,20 +33,29 @@ function gerarOrdemSnake(ids, rounds) {
 const TOTAL_TIMES    = 20;
 const BOT_PICK_DELAY = 400;   // ms entre escolhas de bot (visível: a vez passa 1 a 1)
 const GRUPO_PACE     = 650;   // ms de pausa entre turnos de grupo (não passar instantâneo)
-const NOMES_BOTS = [
-  'Tigres FC','Albatroz EC','Furacão Azul','Leões do Vale','Raio Verde',
-  'Inter Estelar','Dragões FC','Cometa SC','Falcões Real','União Atlética',
-  'Trovão EC','Pantera Negra','Águias Douradas','Vendaval FC','Lobo Cinza',
-  'Corsário SC','Meteoro FC','Bisões FC','Titãs do Norte','Cobras Reais',
-  'Sentinela FC','Vulcano EC','Nova Aurora','Imperial SC','Bravos FC',
+const BOT_PREFIXOS = [
+  'Tigres','Albatroz','Furacão','Leões','Raio','Inter','Dragões','Cometa','Falcões','União',
+  'Trovão','Pantera','Águias','Vendaval','Lobo','Corsário','Meteoro','Bisões','Titãs','Cobras',
+  'Sentinela','Vulcano','Aurora','Imperial','Bravos','Tubarões','Gaviões','Centauros','Fênix','Lince',
+  'Javali','Cervos','Andorinhas','Gralhas','Olímpico','Sparta','Cosmos','Galácticos','Nômades','Bandeirantes',
+  'Guará','Onça','Jaguar','Tatu','Saci','Curupira','Boitatá','Iara','Muriqui','Sabiá',
+  'Tucano','Arara','Capivara','Sucuri','Estrela','Relâmpago','Tornado','Avalanche','Pampa','Serra',
 ];
+const BOT_SUFIXOS = ['FC','EC','SC','AC','United','City','Atlético','Real','Sporting','Athletic'];
 const FORMACOES_BOT = ['4-3-3','4-4-2','3-5-2','4-2-3-1','4-3-2-1','4-5-1','3-4-3','4-1-2-1-2'];
 
 function gerarBots(qtd, nomesUsados) {
-  const disp = shuffle(NOMES_BOTS.filter(n => !nomesUsados.includes(n)));
+  const usados = new Set(nomesUsados || []);
   const bots = [];
   for (let i = 0; i < qtd; i++) {
-    const nome = disp[i] || ('Bot FC ' + (i + 1));
+    let nome, tent = 0;
+    do {
+      const pre = BOT_PREFIXOS[Math.floor(Math.random() * BOT_PREFIXOS.length)];
+      const suf = BOT_SUFIXOS[Math.floor(Math.random() * BOT_SUFIXOS.length)];
+      nome = pre + ' ' + suf;
+    } while (usados.has(nome) && ++tent < 60);
+    if (usados.has(nome)) nome = nome + ' ' + (i + 1);   // garante unicidade no caso raro
+    usados.add(nome);
     bots.push({
       userId:     -(i + 1),               // ids negativos nunca colidem com humanos
       username:   nome,
@@ -554,6 +563,7 @@ function iniciarSorteioGrupos(io, sala) {
 // Avança do sorteio para o draft por grupo.
 function iniciarDraftGrupos(io, sala) {
   sala.poolDisponivel = montarPool(sala.competicao, 800);
+  sala.poolCompleto   = montarPool(sala.competicao, 2500);  // não-esvaziante: cartas do draft por grupo
   sala.grupoDraftIdx  = 0;
   sala.pickRodada     = 0;
   sala.status         = 'gdraft';
@@ -577,19 +587,30 @@ function picksSnapshotDe(sala) {
 }
 
 // Cartas para um jogador: amostra por posição aberta (igual ao snake draft).
+// IDs que o jogador já tem no time (para não oferecer repetidos a ELE).
+function idsPicados(jogador) {
+  const set = new Set();
+  (jogador.picks || []).forEach(p => { if (p && p.id != null) set.add(p.id); });
+  return set;
+}
+
 function cartasParaJogador(sala, jogador) {
   const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
   const picks   = jogador.picks || [];
-  const abertos = [];
-  for (let i = 0; i < codigos.length; i++) { if (!picks[i]) abertos.push(codigos[i]); }
-  const PER_POS = 30;
-  const vistos = new Set();
-  const cards  = [];
-  abertos.forEach(cod => {
-    shuffle(sala.poolDisponivel.filter(p => podeOcupar(p, cod)))
+  const jaTenho = idsPicados(jogador);
+  const pool    = sala.poolCompleto || sala.poolDisponivel || [];
+  const PER_POS = 8;                       // por posição aberta (cliente mostra 6 no modal)
+  const posFeitas = new Set();
+  const cards = [];
+  for (let i = 0; i < codigos.length; i++) {
+    if (picks[i]) continue;                // vaga já preenchida
+    var cod = codigos[i];
+    if (posFeitas.has(cod)) continue;      // mesma posição repetida na formação: uma vez só
+    posFeitas.add(cod);
+    shuffle(pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id)))
       .slice(0, PER_POS)
-      .forEach(p => { if (!vistos.has(p.id)) { vistos.add(p.id); cards.push(p); } });
-  });
+      .forEach(p => cards.push(p));         // sem dedup global → posições não se esvaziam
+  }
   return cards;
 }
 
@@ -615,13 +636,13 @@ function colocarEmVagaGrupo(io, sala, jogador, ehBot) {
   for (let i = 0; i < codigos.length; i++) { if (!jogador.picks[i]) abertas.push(i); }
   if (!abertas.length) return;
   const slotIdx   = abertas[Math.floor(Math.random() * abertas.length)];
-  const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, codigos[slotIdx]));
-  const fonte     = elegiveis.length ? elegiveis : sala.poolDisponivel;
+  const jaTenho   = idsPicados(jogador);
+  const pool      = sala.poolCompleto || sala.poolDisponivel || [];
+  const elegiveis = pool.filter(p => podeOcupar(p, codigos[slotIdx]) && !jaTenho.has(p.id));
+  const fonte     = elegiveis.length ? elegiveis : pool.filter(p => !jaTenho.has(p.id));
   const picked    = ehBot ? escolherPickBotDe(fonte) : fonte[Math.floor(Math.random() * fonte.length)];
   if (!picked) return;
-  const idx = sala.poolDisponivel.indexOf(picked);
-  if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
-  jogador.picks[slotIdx] = picked;
+  jogador.picks[slotIdx] = picked;   // sem splice — jogadores podem repetir entre usuários
   emitGdraftPicked(io, sala, jogador, picked, slotIdx, !ehBot, !!ehBot);
 }
 
@@ -936,12 +957,14 @@ function setupSocket(server, frontendUrl) {
       if (!(slot >= 0 && slot < codigos.length)) return socket.emit('erro', 'Posição inválida');
       if (jog.picks[slot])                       return socket.emit('erro', 'Posição já preenchida');
 
-      const idx = sala.poolDisponivel.findIndex(p => p.id === playerId);
-      if (idx === -1)                                          return socket.emit('erro', 'Jogador não disponível');
-      if (!podeOcupar(sala.poolDisponivel[idx], codigos[slot])) return socket.emit('erro', 'Jogador não joga nessa posição');
+      const jaTenho = idsPicados(jog);
+      if (jaTenho.has(playerId)) return socket.emit('erro', 'Você já tem esse jogador no time');
+      const pool   = sala.poolCompleto || sala.poolDisponivel || [];
+      const picked = pool.find(p => p.id === playerId);
+      if (!picked)                         return socket.emit('erro', 'Jogador não disponível');
+      if (!podeOcupar(picked, codigos[slot])) return socket.emit('erro', 'Jogador não joga nessa posição');
 
-      const [picked] = sala.poolDisponivel.splice(idx, 1);
-      jog.picks[slot] = picked;
+      jog.picks[slot] = picked;   // sem splice — pode repetir entre usuários
       sala.pickedThisTurn.push(userId);
       emitGdraftPicked(io, sala, jog, picked, slot, false, false);
 

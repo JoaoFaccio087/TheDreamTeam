@@ -267,6 +267,7 @@
     socket.on('ready:count',      onReadyCount);
     socket.on('round:start',      onRoundStart);
     socket.on('round:results',    onRoundResults);
+    socket.on('grupos:fim',       onGruposFim);
     socket.on('round:skipVotes',  onSkipVotes);
     socket.on('game:end',         onGameEnd);
     socket.on('erro',             function (msg) {
@@ -555,10 +556,11 @@
     renderPainelGrupos();
   }
 
-  // gdraft:complete — elencos completos. Bloco C (grupos+mata-mata) vem depois.
+  // gdraft:complete — elencos completos → tela de elencos/pronto (fase de grupos a seguir).
   function onGdraftComplete(dados) {
     draftEhGrupo  = false;
     gPodeEscolher = false;
+    gVisualizandoUid = null;
     pararTimer();
     fecharModalDraftPick();
     if (dados && dados.jogadores) {
@@ -566,12 +568,15 @@
         allPlayers[j.userId] = Object.assign(allPlayers[j.userId] || {}, j);
       });
     }
-    var titulo = document.getElementById('online-draft-titulo');
-    if (titulo) titulo.textContent = 'Elencos completos!';
-    if (draftSubtituloEl) draftSubtituloEl.textContent = 'Fase de grupos e mata-mata: próxima etapa';
     if (draftCarouselWrap) draftCarouselWrap.classList.add('escondida');
     limparDestaquesVaga();
-    renderPainelGrupos();
+
+    // Vai para a tela de elencos: cada um confirma "Pronto" e o host inicia a fase de grupos.
+    subview('online-elencos');
+    renderElencos();
+    if (elencosProntosCount) elencosProntosCount.textContent = '0/? Prontos';
+    if (btnElencosPronto)  { btnElencosPronto.disabled = false; btnElencosPronto.textContent = 'Pronto ✓'; }
+    if (btnElencosComecar) btnElencosComecar.classList.add('escondida');
   }
 
   // Painel lateral: grupos com status de cada participante na rodada atual.
@@ -1070,6 +1075,47 @@
   }
 
   // game:end — ranking final
+  // grupos:fim — fim da fase de grupos (Copa/Liberta). Lista os classificados.
+  // O mata-mata (próxima etapa) reaproveitará estes classificados.
+  function onGruposFim(dados) {
+    var classificados = (dados && dados.classificados) || [];
+    subview('online-rodada');
+    var compEl = document.getElementById('rodada-comp');
+    if (compEl) compEl.textContent = 'FASE DE GRUPOS ENCERRADA';
+    if (rodadaTituloEl) rodadaTituloEl.textContent = classificados.length + ' CLASSIFICADOS';
+
+    // Troca para a aba Classificação.
+    var abaPart = document.getElementById('aba-partidas');
+    var tabPart = document.getElementById('tab-partidas');
+    if (abaPart)    abaPart.classList.add('escondida');
+    if (abaClassif) abaClassif.classList.remove('escondida');
+    if (tabPart)    tabPart.classList.remove('ativa');
+    if (tabClassif) tabClassif.classList.add('ativa');
+
+    if (rodadaClassif) {
+      var html = '';
+      classificados.forEach(function (t, i) {
+        var meu = String(t.userId) === String(meuUserId);
+        var saldo = (t.saldo >= 0 ? '+' : '') + (t.saldo || 0);
+        html += '<div class="classif-linha' + (meu ? ' classif-meu' : '') + '">' +
+          '<span class="ct-pos">' + (i + 1) + '</span>' +
+          '<span class="ct-time">' + htmlEsc(t.nomeDoTime || t.username || 'Time') +
+            ' <span style="color:var(--txt-soft);font-size:.8em">· Grupo ' + htmlEsc(t.grupo || '?') + '</span></span>' +
+          '<span class="ct-num">' + (t.pontos || 0) + '</span>' +
+          '<span class="ct-num">' + saldo + '</span>' +
+        '</div>';
+      });
+      rodadaClassif.innerHTML = html;
+    }
+
+    // Nota da próxima etapa + libera ações para não travar.
+    var stats = document.getElementById('rodada-artilharia');
+    if (stats) stats.innerHTML = '<p style="color:var(--txt-soft);font-size:.82rem">Mata-mata: próxima etapa.</p>';
+    var assist = document.getElementById('rodada-assistencias');
+    if (assist) assist.innerHTML = '';
+    if (fimAcoes) fimAcoes.classList.remove('escondida');
+  }
+
   function onGameEnd(dados) {
     var ranking = dados.ranking || [];
     rankingFinalCache = ranking;
@@ -1358,6 +1404,8 @@
   //  • vaga OCUPADA → começa a remanejar;
   //  • vaga ABERTA → escolhe a POSIÇÃO e lista os jogadores elegíveis do draft (slot-first).
   function clicarSlotDraftOnline(i) {
+    // Vendo o time de OUTRO usuário → somente leitura, nenhuma ação no campo.
+    if (draftEhGrupo && gVisualizandoUid && String(gVisualizandoUid) !== String(meuUserId)) return;
     // Autoritativo: no draft por grupo, só quando posso escolher; no snake, só na minha vez.
     if (draftEhGrupo) { if (!gPodeEscolher) return; }
     else if (String(draftTurnoUid) !== String(meuUserId)) return;
@@ -1418,7 +1466,11 @@
   // Abre o modal de escolha com cartas ALEATÓRIAS da posição clicada (estilo do draft offline).
   function abrirModalDraftPick(cod) {
     if (!modalDraftPick) return;
-    modalPoolPos = embaralhar((poolLocal || []).filter(function (p) { return podeOcupar(p, cod); }));
+    var filtrados = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
+    // Dedup por id: o servidor pode mandar o mesmo jogador para posições diferentes.
+    var vistos = {}, unicos = [];
+    filtrados.forEach(function (p) { if (p && !vistos[p.id]) { vistos[p.id] = 1; unicos.push(p); } });
+    modalPoolPos = embaralhar(unicos);
     modalPosPage = 0;
     if (modalDraftPickTitulo) modalDraftPickTitulo.textContent = 'Escolha um jogador para ' + (cod || '?');
     // Limpa antes de exibir para não "piscar" as cartas da abertura anterior, e
