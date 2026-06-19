@@ -1,5 +1,8 @@
 //  main.js — INICIALIZAÇÃO e todos os event listeners (carregar por último)
 
+// Competição do multiplayer (definida ao escolher a pílula). Default: Brasileirão.
+window.__compOnline = window.__compOnline || 'Brasileirão';
+
 // EVENTOS
 
 pilulasModo.forEach(function (pilula) {
