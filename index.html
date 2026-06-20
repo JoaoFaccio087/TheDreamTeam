@@ -724,16 +724,7 @@
     <!-- ── LOBBY ─────────────────────────────────────────────────── -->
     <div id="online-lobby" class="online-subview">
 
-      <div class="jogo-header-wrap">
-        <header class="jogo-header">
-          <div>
-            <p class="jogo-header-titulo">THE DREAM TEAM</p>
-            <p class="jogo-header-slogan">SORTEIE &middot; ESCALE &middot; GOLEIE</p>
-          </div>
-          <p id="lobby-header-info" class="jogo-header-info"></p>
-        </header>
-        <div class="jogo-header-linha"></div>
-      </div>
+      <div id="hdr-lobby"></div>
 
       <div class="lobby-wrapper">
 
@@ -812,16 +803,7 @@
     <!-- ── SORTEIO DE GRUPOS ──────────────────────────────────────── -->
     <div id="online-sorteio" class="online-subview escondida">
 
-      <div class="jogo-header-wrap">
-        <header class="jogo-header">
-          <div>
-            <p class="jogo-header-titulo">SORTEIO DOS GRUPOS</p>
-            <p class="jogo-header-slogan" id="sorteio-comp">COPA DO MUNDO</p>
-          </div>
-          <p id="sorteio-header-info" class="jogo-header-info"></p>
-        </header>
-        <div class="jogo-header-linha"></div>
-      </div>
+      <div id="hdr-sorteio"></div>
 
       <div class="sorteio-wrap">
 
@@ -861,19 +843,7 @@
     <!-- ── DRAFT ──────────────────────────────────────────────────── -->
     <div id="online-draft" class="online-subview escondida">
 
-      <div class="jogo-header-wrap">
-        <header class="jogo-header">
-          <div>
-            <p id="online-draft-titulo" class="jogo-header-titulo">THE DREAM TEAM</p>
-            <p id="draft-subtitulo-marca" class="jogo-header-slogan">SORTEIE &middot; ESCALE &middot; GOLEIE</p>
-          </div>
-          <p id="draft-header-info" class="jogo-header-info">
-            <span id="draft-ctx" class="draft-ctx"></span>
-            <span id="draft-subtitulo" class="draft-pick-num"></span>
-          </p>
-        </header>
-        <div class="jogo-header-linha"></div>
-      </div>
+      <div id="hdr-draft"></div>
 
       <div class="draft-wrapper">
 
@@ -934,16 +904,7 @@
     <!-- ── ELENCOS ───────────────────────────────────────────────── -->
     <div id="online-elencos" class="online-subview escondida">
 
-      <div class="jogo-header-wrap">
-        <header class="jogo-header">
-          <div>
-            <p class="jogo-header-titulo">VISUALIZAR ELENCOS</p>
-            <p class="jogo-header-slogan">THE DREAM TEAM</p>
-          </div>
-          <p id="elencos-header-info" class="jogo-header-info"></p>
-        </header>
-        <div class="jogo-header-linha"></div>
-      </div>
+      <div id="hdr-elencos"></div>
 
       <div class="elencos-wrapper">
 
@@ -986,16 +947,7 @@
     <!-- ── RODADA ────────────────────────────────────────────────── -->
     <div id="online-rodada" class="online-subview escondida">
 
-      <div class="jogo-header-wrap">
-        <header class="jogo-header">
-          <div>
-            <p class="jogo-header-titulo">THE DREAM TEAM</p>
-            <p class="jogo-header-slogan" id="rodada-comp">BRASILEIR&Atilde;O</p>
-          </div>
-          <p id="rodada-header-info" class="jogo-header-info"></p>
-        </header>
-        <div class="jogo-header-linha"></div>
-      </div>
+      <div id="hdr-rodada"></div>
 
       <!-- Barra: rodada atual (esq) + abas (dir) -->
       <div class="rodada-barra">
@@ -1168,6 +1120,7 @@
   <script src="https://thedreamteam.onrender.com/socket.io/socket.io.js" defer></script>
 
   <!-- Lógica em módulos — ordem importa -->
+  <script src="js/ui.js"          defer></script>
   <script src="js/estado.js"      defer></script>
   <script src="js/formacoes.js"   defer></script>
   <script src="js/regras.js"      defer></script>

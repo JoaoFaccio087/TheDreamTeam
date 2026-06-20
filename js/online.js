@@ -1861,7 +1861,7 @@
         draftTituloEl.innerHTML = gPodeEscolher ? 'É a SUA vez!' : 'Seu time';
       } else {
         var tag = jog.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
-        draftTituloEl.innerHTML = '👁 Time de: ' + htmlEsc(nomeUsuario(jog)) + tag;
+        draftTituloEl.innerHTML = 'Time de: ' + htmlEsc(nomeUsuario(jog)) + tag;
       }
     }
     if (draftCampoLabel) {
@@ -2130,6 +2130,16 @@
   function init() {
     telaOnline = document.getElementById('tela-online');
     if (!telaOnline) return;
+
+    // Cabeçalhos padronizados (lib UI) — montados ANTES de ler os ids internos.
+    if (window.UI) {
+      UI.setHeader('hdr-lobby',   { infoId: 'lobby-header-info' });
+      UI.setHeader('hdr-sorteio', { slogan: 'COPA DO MUNDO', sloganId: 'sorteio-comp', infoId: 'sorteio-header-info' });
+      UI.setHeader('hdr-draft',   { tituloId: 'online-draft-titulo', sloganId: 'draft-subtitulo-marca',
+        infoId: 'draft-header-info', infoHtml: '<span id="draft-ctx" class="draft-ctx"></span><span id="draft-subtitulo" class="draft-pick-num"></span>' });
+      UI.setHeader('hdr-elencos', { slogan: 'VISUALIZAR ELENCOS', infoId: 'elencos-header-info' });
+      UI.setHeader('hdr-rodada',  { slogan: 'BRASILEIRÃO', sloganId: 'rodada-comp', infoId: 'rodada-header-info' });
+    }
 
     modalOnline = document.getElementById('modal-online');
     modalAuth   = document.getElementById('modal-auth');
