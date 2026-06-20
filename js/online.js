@@ -16,6 +16,7 @@
   var totalRodadas     = 5;
   var formatoOnline    = 'liga';   // 'liga' (Brasileirão) ou 'mata' (Copa/Liberta: grupos+mata-mata)
   var chaveOnline      = null;     // chave do mata-mata online {rounds, rodadaAtual, fases}
+  var gruposEncerrados = false;    // fase de grupos terminou (aguardando host iniciar o mata-mata)
   var simulandoRodada  = false;
 
   var poolLocal        = [];   // pool de jogadores disponíveis no turno atual
@@ -804,6 +805,9 @@
     renderSkipContador();
 
     var ehGrupos = formatoOnline === 'mata';
+    gruposEncerrados = false;
+    var bannerMataEl = document.getElementById('grupos-mata-banner');
+    if (bannerMataEl) bannerMataEl.classList.add('escondida');
     configurarAbasRodada();
     rodadaTituloEl.textContent = (ehGrupos ? 'FASE DE GRUPOS · RODADA ' : 'RODADA ') + rodadaAtual + ' DE ' + totalRodadas;
     var infoEl = document.getElementById('rodada-header-info');
@@ -839,6 +843,8 @@
     var mata = formatoOnline === 'mata';
     if (tabClassif) tabClassif.textContent = mata ? 'Grupos' : 'Classificação';
     if (tabChave)   tabChave.classList.toggle('escondida', !mata);
+    var compEl = document.getElementById('rodada-comp');
+    if (compEl) compEl.textContent = (window.__compOnline || (mata ? 'Copa do Mundo' : 'Brasileirão')).toUpperCase();
   }
 
   function pararAnimacaoPartida() { if (animTimer) { clearTimeout(animTimer); animTimer = null; } animacaoAtiva = false; }
@@ -1000,6 +1006,9 @@
 
     // Última rodada → encerrar
     if (rodadaAtual >= totalRodadas) {
+      // Copa/Liberta: o fim dos grupos NÃO encerra o jogo — o mata-mata vem em seguida
+      // (transição pelo banner na aba Grupos). Não mostra "Ver Resultado Final".
+      if (formatoOnline === 'mata') return;
       if (ehHost) {
         btnRodadaFim.classList.remove('escondida');
       } else if (rodadaAguardandoHost) {
@@ -1015,7 +1024,7 @@
     // Próximo jogo: só o host
     if (ehHost) {
       btnRodadaProxima.disabled    = false;
-      btnRodadaProxima.textContent = 'Próximo jogo ▶';
+      btnRodadaProxima.textContent = 'Próximo jogo →';
       btnRodadaProxima.classList.remove('escondida');
     } else if (rodadaAguardandoHost) {
       rodadaAguardandoHost.textContent = 'Aguardando o host avançar…';
@@ -1137,10 +1146,31 @@
   }
 
   // game:end — ranking final
-  // grupos:fim — fim da fase de grupos. NÃO mostra tela de classificados:
-  // a chave do mata-mata chega em seguida (chave:state) e assume a aba Mata-a-Mata.
+  // grupos:fim — fim da fase de grupos. Espera a animação do último jogo terminar e
+  // então leva o usuário à aba GRUPOS (pra ver se classificou) com o banner do mata-mata.
+  // NÃO pula direto pro mata-mata (isso cortava a animação).
   function onGruposFim(dados) {
-    // As tabelas finais já estão na aba Grupos (último round:results). Nada a renderizar aqui.
+    gruposEncerrados = true;
+
+    function finalizarGrupos() {
+      subview('online-rodada');
+      selecionarAbaRodada('classif');                 // aba "Grupos"
+      if (rodadaTituloEl) rodadaTituloEl.textContent = 'FASE DE GRUPOS ENCERRADA';
+      var banner = document.getElementById('grupos-mata-banner');
+      var btnIni = document.getElementById('btn-iniciar-mata');
+      var aguard = document.getElementById('gmb-aguardando');
+      if (banner) banner.classList.remove('escondida');
+      if (btnIni) { btnIni.classList.toggle('escondida', !ehHost); btnIni.disabled = false; }
+      if (aguard) aguard.classList.toggle('escondida', ehHost);
+    }
+
+    // Se a partida ainda está animando, encadeia para DEPOIS dela; senão, aplica já.
+    if (animacaoAtiva) {
+      var prev = aoFimDaAnimacao;
+      aoFimDaAnimacao = function () { if (typeof prev === 'function') prev(); finalizarGrupos(); };
+    } else {
+      finalizarGrupos();
+    }
   }
 
   function _onGruposFimAntigo(dados) {
@@ -1220,7 +1250,7 @@
     var campeao = ultima ? ultima.winner : null;
     html += '<div class="ck-col ck-col-campeao"><div class="ck-fase">CAMPEÃO</div>' +
             '<div class="ck-jogos ck-jogos-campeao"><div class="ck-campeao' + (ehMeu(campeao) ? ' ck-voce' : '') + '">' +
-            '<span class="ck-trofeu">\u2605</span>' + (campeao ? htmlEsc(campeao.nome) : 'A definir') + '</div></div></div>';
+            '<span class="ck-trofeu"></span>' + (campeao ? htmlEsc(campeao.nome) : 'A definir') + '</div></div></div>';
     alvo.innerHTML = html;
   }
 
@@ -1238,17 +1268,14 @@
     if (aviso) aviso.classList.toggle('escondida', ehHost || acabou);
   }
 
-  // chave:state — chave montada (fim dos grupos). Assume a aba Mata-a-Mata.
+  // chave:state — chave montada/atualizada. Apenas PREPARA (não troca de aba aqui:
+  // a animação do último jogo de grupos precisa terminar antes). A ida pro mata-mata
+  // acontece quando o host clica em "Iniciar Mata-mata" (→ chave:results).
   function onChaveState(dados) {
     chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual || 0, fases: dados.fases || [] };
     if (tabChave) tabChave.classList.remove('escondida');
     renderChaveOnline();
     atualizarBotaoChave();
-    subview('online-rodada');
-    selecionarAbaRodada('chave');
-    var compEl = document.getElementById('rodada-comp');
-    if (compEl) compEl.textContent = 'MATA-A-MATA';
-    if (rodadaTituloEl) rodadaTituloEl.textContent = 'MATA-A-MATA';
   }
 
   // chave:results — uma fase do mata-mata foi simulada.
@@ -1276,6 +1303,13 @@
     if (rodadaProximos) rodadaProximos.innerHTML = '';
     renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
     renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+    var bannerMata = document.getElementById('grupos-mata-banner');
+    if (bannerMata) bannerMata.classList.add('escondida');
+    var compEl = document.getElementById('rodada-comp');
+    if (compEl) compEl.textContent = 'MATA-A-MATA';
+    if (rodadaTituloEl) rodadaTituloEl.textContent = 'MATA-A-MATA';
+    var infoEl = document.getElementById('rodada-header-info');
+    if (infoEl) infoEl.textContent = htmlEsc((chaveOnline.fases[chaveOnline.rodadaAtual - 1] || 'MATA-A-MATA'));
     selecionarAbaRodada('chave');
   }
 
@@ -1808,7 +1842,7 @@
     // HEADER primeiro, sem depender do campo — assim nunca fica preso em "—".
     if (draftTituloEl) {
       var tag = ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
-      draftTituloEl.innerHTML = (sou ? '⚡ É a SUA vez!' : 'É a vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
+      draftTituloEl.innerHTML = (sou ? 'É a SUA vez!' : 'É a vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
     }
     if (!draftCampo) return;
     if (draftCampoLabel) {
@@ -1824,7 +1858,7 @@
     var jog = allPlayers[uid] || {};
     if (draftTituloEl) {
       if (sou) {
-        draftTituloEl.innerHTML = gPodeEscolher ? '⚡ É a SUA vez!' : 'Seu time';
+        draftTituloEl.innerHTML = gPodeEscolher ? 'É a SUA vez!' : 'Seu time';
       } else {
         var tag = jog.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
         draftTituloEl.innerHTML = '👁 Time de: ' + htmlEsc(nomeUsuario(jog)) + tag;
@@ -2180,6 +2214,11 @@
     var btnChaveAvancar  = document.getElementById('btn-chave-avancar');
     if (btnChaveAvancar) btnChaveAvancar.addEventListener('click', function () {
       btnChaveAvancar.disabled = true;
+      if (socket && socket.connected) socket.emit('chave:advance');
+    });
+    var btnIniciarMata = document.getElementById('btn-iniciar-mata');
+    if (btnIniciarMata) btnIniciarMata.addEventListener('click', function () {
+      btnIniciarMata.disabled = true;
       if (socket && socket.connected) socket.emit('chave:advance');
     });
     rodadaAguardandoHost = document.getElementById('rodada-aguardando-host');

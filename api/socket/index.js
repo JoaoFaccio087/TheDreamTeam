@@ -90,15 +90,39 @@ function podeOcupar(jogador, cod) {
 }
 
 // Escolha "equilibrada" a partir de uma lista: bons jogadores, mas com variação.
+// Amostra "justa" de uma posição: mistura faixas de força garantindo uma CHANCE de
+// craques (88+) sem encher o time inteiro deles. Usada pelo humano (cartas), pelo bot
+// e pelo timeout — assim todos sorteiam da MESMA distribuição (balanceado).
+function amostraPosicao(fonte, n) {
+  n = n || 12;
+  if (!fonte || !fonte.length) return [];
+  if (fonte.length <= n) return shuffle(fonte.slice());
+  const F     = p => (p.forca || 70);
+  const elite = fonte.filter(p => F(p) >= 88);
+  const bom   = fonte.filter(p => F(p) >= 82 && F(p) < 88);
+  const medio = fonte.filter(p => F(p) >= 76 && F(p) < 82);
+  const resto = fonte.filter(p => F(p) <  76);
+  const pega  = (arr, k) => shuffle(arr.slice()).slice(0, k);
+  // ~3 craques + 4 bons + 3 médios + 2 resto → ofertas variadas, com craque possível
+  let amostra = [].concat(pega(elite, 3), pega(bom, 4), pega(medio, 3), pega(resto, 2));
+  if (amostra.length < n) {                       // completa se alguma faixa for curta
+    const ids = new Set(amostra.map(p => p.id));
+    const ord = fonte.slice().sort((a, b) => F(b) - F(a));
+    for (const p of ord) { if (amostra.length >= n) break; if (!ids.has(p.id)) { amostra.push(p); ids.add(p.id); } }
+  }
+  return shuffle(amostra).slice(0, n);
+}
+
+// Bot/timeout escolhem de uma amostra justa, ponderado LINEARMENTE pela força
+// (favorece os melhores, mas NÃO pega sempre o máximo → times variados, não todos 90+).
 function escolherPickBotDe(fonte) {
-  if (!fonte.length) return null;
-  const ord  = fonte.slice().sort((a, b) => (b.forca || 70) - (a.forca || 70));
-  const topo = ord.slice(0, Math.min(12, ord.length));   // só o topo da posição → times fortes
+  if (!fonte || !fonte.length) return null;
+  const amostra = amostraPosicao(fonte, 12);
   let total = 0;
-  const pesos = topo.map(p => { const f = (p.forca || 70); const w = f * f * f; total += w; return w; });
+  const pesos = amostra.map(p => { const w = Math.max(1, (p.forca || 70) - 60); total += w; return w; });
   let r = Math.random() * total, acum = 0;
-  for (let i = 0; i < topo.length; i++) { acum += pesos[i]; if (r <= acum) return topo[i]; }
-  return topo[0];
+  for (let i = 0; i < amostra.length; i++) { acum += pesos[i]; if (r <= acum) return amostra[i]; }
+  return amostra[0];
 }
 
 // Coloca um jogador numa vaga ABERTA e VÁLIDA. Bot: vaga aleatória; timeout: 1ª aberta.
@@ -113,10 +137,8 @@ function colocarEmVagaAberta(io, sala, jogador, ehBot) {
   const cod       = codigos[slotIdx];
   const elegiveis = sala.poolDisponivel.filter(p => podeOcupar(p, cod));
   const fonte     = elegiveis.length ? elegiveis : sala.poolDisponivel;
-  // Bot: escolha ponderada por força. Humano (timeout): jogador totalmente ALEATÓRIO.
-  const picked    = ehBot
-    ? escolherPickBotDe(fonte)
-    : fonte[Math.floor(Math.random() * fonte.length)];
+  // Bot e timeout: pick justo ponderado pela amostra de faixas (decente, não o mais fraco).
+  const picked    = escolherPickBotDe(fonte);
   if (!picked) return;
   const idx = sala.poolDisponivel.indexOf(picked);
   if (idx !== -1) sala.poolDisponivel.splice(idx, 1);
@@ -732,7 +754,8 @@ function cartasParaJogador(sala, jogador) {
     if (feitas.has(cod)) continue;          // posição repetida na formação: uma vez
     feitas.add(cod);
     // elegíveis = jogam na posição e o usuário ainda NÃO tem (pode repetir entre usuários)
-    porPosicao[cod] = shuffle(pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id))).slice(0, 12);
+    const eleg = pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id));
+    porPosicao[cod] = amostraPosicao(eleg, 12);   // mistura de faixas: oferta craques também
   }
   return porPosicao;   // { 'ZAG': [..6-12..], 'LE': [...], ... } — cliente usa direto
 }
@@ -763,7 +786,7 @@ function colocarEmVagaGrupo(io, sala, jogador, ehBot) {
   const pool      = sala.poolCompleto || sala.poolDisponivel || [];
   const elegiveis = pool.filter(p => podeOcupar(p, codigos[slotIdx]) && !jaTenho.has(p.id));
   const fonte     = elegiveis.length ? elegiveis : pool.filter(p => !jaTenho.has(p.id));
-  const picked    = ehBot ? escolherPickBotDe(fonte) : fonte[Math.floor(Math.random() * fonte.length)];
+  const picked    = escolherPickBotDe(fonte);   // bot e timeout: pick justo (não o mais fraco)
   if (!picked) return;
   jogador.picks[slotIdx] = picked;   // sem splice — jogadores podem repetir entre usuários
   emitGdraftPicked(io, sala, jogador, picked, slotIdx, !ehBot, !!ehBot);

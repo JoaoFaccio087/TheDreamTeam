@@ -1289,10 +1289,22 @@
   letter-spacing: 0.01em;
 }
 
-/* ── Grupos (aba): largura total quando é a fase de grupos (sem sobrepor) ──── */
-.classif-wrapper.modo-grupos .classif-stats-col { display: none; }
+/* ── Grupos (aba): grade 4×3 em cima, ARTILHARIA + ASSISTÊNCIAS embaixo ──────── */
+.classif-wrapper.modo-grupos { grid-template-columns: 1fr; }
 .classif-wrapper.modo-grupos .classif-tabela-col { width: 100%; flex: 1 1 100%; }
-.grupos-classif-grade { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.classif-wrapper.modo-grupos .grupos-classif-grade {
+  grid-template-columns: repeat(4, minmax(0, 1fr));   /* 4 grupos por linha → 3 linhas (12 grupos) */
+}
+.classif-wrapper.modo-grupos .classif-stats-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+  width: 100%;
+}
+@media (max-width: 900px) {
+  .classif-wrapper.modo-grupos .grupos-classif-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .gc-head, .gc-linha { grid-template-columns: 1.3em minmax(0,1fr) 1.5em 1.5em 2.1em; overflow: hidden; }
 .gc-time { min-width: 0; }
 
@@ -1317,3 +1329,13 @@
 .partida-linha .pl-dir  { text-align: right; }
 .partida-linha .pl-placar { font-weight: 800; color: var(--accent); white-space: nowrap; }
 .ck-gols { margin-left: 6px; font-weight: 800; color: var(--accent); }
+
+/* ── Banner de transição: fim dos grupos → mata-mata (aba Grupos) ──────────── */
+.grupos-mata-banner {
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  background: rgba(43,212,106,0.08);
+  border: 1px solid rgba(43,212,106,0.35);
+  border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.2rem;
+}
+.gmb-texto { margin: 0; font-weight: 700; color: var(--txt); text-align: center; }
+.grupos-mata-banner .btn-rolar { width: auto; min-width: 240px; }
