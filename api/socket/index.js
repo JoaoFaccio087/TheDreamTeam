@@ -724,19 +724,17 @@ function cartasParaJogador(sala, jogador) {
   const picks   = jogador.picks || [];
   const jaTenho = idsPicados(jogador);
   const pool    = sala.poolCompleto || sala.poolDisponivel || [];
-  const PER_POS = 8;                       // por posição aberta (cliente mostra 6 no modal)
-  const posFeitas = new Set();
-  const cards = [];
+  const porPosicao = {};
+  const feitas = new Set();
   for (let i = 0; i < codigos.length; i++) {
-    if (picks[i]) continue;                // vaga já preenchida
-    var cod = codigos[i];
-    if (posFeitas.has(cod)) continue;      // mesma posição repetida na formação: uma vez só
-    posFeitas.add(cod);
-    shuffle(pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id)))
-      .slice(0, PER_POS)
-      .forEach(p => cards.push(p));         // sem dedup global → posições não se esvaziam
+    if (picks[i]) continue;                 // vaga já preenchida
+    const cod = codigos[i];
+    if (feitas.has(cod)) continue;          // posição repetida na formação: uma vez
+    feitas.add(cod);
+    // elegíveis = jogam na posição e o usuário ainda NÃO tem (pode repetir entre usuários)
+    porPosicao[cod] = shuffle(pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id))).slice(0, 12);
   }
-  return cards;
+  return porPosicao;   // { 'ZAG': [..6-12..], 'LE': [...], ... } — cliente usa direto
 }
 
 function emitGdraftPicked(io, sala, jogador, picked, slotIdx, timeout, ehBot) {
@@ -794,7 +792,7 @@ function iniciarTurnoGrupo(io, sala) {
       colocarEmVagaGrupo(io, sala, jog, true);
       sala.pickedThisTurn.push(uid);
     } else if (jog.socketId) {
-      io.to(jog.socketId).emit('gdraft:yourPick', { grupo, pool: cartasParaJogador(sala, jog) });
+      io.to(jog.socketId).emit('gdraft:yourPick', { grupo, porPosicao: cartasParaJogador(sala, jog) });
     } else {
       colocarEmVagaGrupo(io, sala, jog, false);   // humano desconectado: auto
       sala.pickedThisTurn.push(uid);
@@ -1170,6 +1168,29 @@ function setupSocket(server, frontendUrl) {
         jog.picks[from] = jogTo;
       }
 
+      io.to(code).emit('draft:moved', { userId, fromSlot: from, toSlot: to, picks: jog.picks });
+    });
+
+    // ── gdraft:move — reposiciona/troca no draft POR GRUPO (durante a vez do grupo) ─
+    socket.on('gdraft:move', ({ fromSlot, toSlot }) => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala || sala.status !== 'gdraft') return;
+      const jog = sala.jogadores.find(j => j.userId === userId);
+      if (!jog || !jog.picks) return;
+      const codigos = codigosDaFormacao(jog.formacao || '4-3-3');
+      const from = Number(fromSlot), to = Number(toSlot);
+      if (!(from >= 0 && from < codigos.length && to >= 0 && to < codigos.length) || from === to) return;
+      const jogFrom = jog.picks[from];
+      if (!jogFrom) return;
+      const jogTo = jog.picks[to];
+      if (!jogTo) {
+        if (!podeOcupar(jogFrom, codigos[to])) return socket.emit('erro', 'Jogador não joga nessa posição');
+        jog.picks[to] = jogFrom; jog.picks[from] = undefined;
+      } else {
+        if (!podeOcupar(jogFrom, codigos[to]) || !podeOcupar(jogTo, codigos[from]))
+          return socket.emit('erro', 'Troca inválida para essas posições');
+        jog.picks[to] = jogFrom; jog.picks[from] = jogTo;
+      }
       io.to(code).emit('draft:moved', { userId, fromSlot: from, toSlot: to, picks: jog.picks });
     });
 

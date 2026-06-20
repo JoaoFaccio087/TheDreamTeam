@@ -1267,3 +1267,28 @@
   padding: 2.5rem 1rem;
   font-size: 0.9rem;
 }
+
+/* Campo somente-leitura (ao visualizar o time de outro usuário no draft) */
+.campo-readonly .slot-ol { pointer-events: none !important; cursor: default !important; }
+
+/* ── Cabeçalho do draft: contexto (vez/pick) na info da direita ───────────── */
+.jogo-header-info .draft-ctx      { display: block; font-weight: 800; color: var(--txt); }
+.jogo-header-info .draft-pick-num { display: block; font-size: 0.8em; color: var(--txt-soft); margin-top: 2px; }
+
+/* ── Força do elenco (Visualizar Elencos): grande e abaixo do campo ───────── */
+.elencos-campo-col .elencos-forca {
+  order: 99;                 /* sempre depois do campo */
+  margin: 1rem auto 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+/* ── Grupos (aba): largura total quando é a fase de grupos (sem sobrepor) ──── */
+.classif-wrapper.modo-grupos .classif-stats-col { display: none; }
+.classif-wrapper.modo-grupos .classif-tabela-col { width: 100%; flex: 1 1 100%; }
+.grupos-classif-grade { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.gc-head, .gc-linha { grid-template-columns: 1.3em minmax(0,1fr) 1.5em 1.5em 2.1em; overflow: hidden; }
+.gc-time { min-width: 0; }

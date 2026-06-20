@@ -18,6 +18,7 @@
   var simulandoRodada  = false;
 
   var poolLocal        = [];   // pool de jogadores disponíveis no turno atual
+  var poolPorPosicao   = {};   // draft em grupo: cartas já validadas por posição (servidor)
   var carouselIndex    = 0;    // offset do carousel
   var selectedPlayer   = null; // objeto do jogador selecionado no carousel
   var selectedSlot     = null; // vaga (índice de slot) escolhida no campo
@@ -523,9 +524,9 @@
     }
   }
 
-  // gdraft:yourPick — minhas cartas para o pick atual.
+  // gdraft:yourPick — minhas cartas para o pick atual (mapa por posição, já validado).
   function onGdraftYourPick(dados) {
-    if (dados && dados.pool && dados.pool.length) poolLocal = dados.pool;
+    poolPorPosicao = (dados && dados.porPosicao) || {};
     gPodeEscolher  = true;
     gVisualizandoUid = null;
     selectedPlayer = null; selectedSlot = null;
@@ -1029,6 +1030,8 @@
   // Tabelas por grupo (fase de grupos da Copa/Liberta). Top-2 destacado = classifica.
   function renderGruposClassif(grupos) {
     if (!rodadaClassif) return;
+    var wrap = rodadaClassif.closest ? rodadaClassif.closest('.classif-wrapper') : null;
+    if (wrap) wrap.classList.add('modo-grupos');
     var head = document.querySelector('.classif-tabela-head');
     if (head) head.style.display = 'none';   // cada card tem seu próprio cabeçalho
     var letras = Object.keys(grupos || {}).sort();
@@ -1059,6 +1062,8 @@
 
   function renderClassifLista(lista) {
     if (!rodadaClassif) return;
+    var wrap = rodadaClassif.closest ? rodadaClassif.closest('.classif-wrapper') : null;
+    if (wrap) wrap.classList.remove('modo-grupos');
     var head = document.querySelector('.classif-tabela-head');
     if (head) head.style.display = '';        // restaura o cabeçalho da liga
     rodadaClassif.innerHTML = '';
@@ -1453,16 +1458,13 @@
   //  • vaga ABERTA → escolhe a POSIÇÃO e lista os jogadores elegíveis do draft (slot-first).
   function clicarSlotDraftOnline(i) {
     // Vendo o time de OUTRO usuário → somente leitura, nenhuma ação no campo.
-    if (draftEhGrupo && gVisualizandoUid && String(gVisualizandoUid) !== String(meuUserId)) return;
+    if (gVisualizandoUid && String(gVisualizandoUid) !== String(meuUserId)) return;
     // Autoritativo: no draft por grupo, só quando posso escolher; no snake, só na minha vez.
     if (draftEhGrupo) { if (!gPodeEscolher) return; }
     else if (String(draftTurnoUid) !== String(meuUserId)) return;
     var meu     = allPlayers[meuUserId] || {};
     var codigos = codigosOnline(meu.formacao || '4-3-3');
     var ocupado = meu.picks && meu.picks[i];
-
-    // No draft por grupo não há remanejo durante a escolha (só preenche vagas abertas).
-    if (draftEhGrupo && ocupado) return;
 
     // MODO REMANEJAR em curso → completa o movimento (destino vazio = move; ocupado = troca).
     if (repositionFrom !== null) {
@@ -1481,7 +1483,7 @@
       }
       renderCampoOnline(draftCampo, meu.picks, meu.formacao || '4-3-3');
       renderMeuTime();
-      socket.emit('draft:move', { fromSlot: repositionFrom, toSlot: i });
+      socket.emit(draftEhGrupo ? 'gdraft:move' : 'draft:move', { fromSlot: repositionFrom, toSlot: i });
       cancelarReposicionar();
       return;
     }
@@ -1514,11 +1516,17 @@
   // Abre o modal de escolha com cartas ALEATÓRIAS da posição clicada (estilo do draft offline).
   function abrirModalDraftPick(cod) {
     if (!modalDraftPick) return;
-    var filtrados = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
-    // Dedup por id: o servidor pode mandar o mesmo jogador para posições diferentes.
-    var vistos = {}, unicos = [];
-    filtrados.forEach(function (p) { if (p && !vistos[p.id]) { vistos[p.id] = 1; unicos.push(p); } });
-    modalPoolPos = embaralhar(unicos);
+    var lista;
+    if (draftEhGrupo) {
+      // Draft em grupo: o servidor já manda 6+ cartas validadas por posição. Usa direto.
+      lista = (poolPorPosicao && poolPorPosicao[cod]) ? poolPorPosicao[cod].slice() : [];
+    } else {
+      // Snake: filtra o pool do turno pela posição e remove repetidos.
+      var filtrados = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
+      var vistos = {}; lista = [];
+      filtrados.forEach(function (p) { if (p && !vistos[p.id]) { vistos[p.id] = 1; lista.push(p); } });
+    }
+    modalPoolPos = embaralhar(lista);
     modalPosPage = 0;
     if (modalDraftPickTitulo) modalDraftPickTitulo.textContent = 'Escolha um jogador para ' + (cod || '?');
     // Limpa antes de exibir para não "piscar" as cartas da abertura anterior, e
@@ -1708,7 +1716,17 @@
         ? (gPodeEscolher ? 'Sua escalação — clique numa posição aberta' : 'Sua escalação')
         : ('Time de: ' + nomeUsuario(jog) + ' (somente leitura)');
     }
-    if (draftCampo) renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
+    if (draftCampo) {
+      renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
+      // Somente leitura ao ver o time de OUTRO: limpa destaques e bloqueia cliques.
+      draftCampo.classList.toggle('campo-readonly', !sou);
+      if (!sou) {
+        cancelarReposicionar();
+        draftCampo.querySelectorAll('.slot-ol').forEach(function (s) {
+          s.classList.remove('vaga-aberta', 'vaga-valida', 'vaga-selecionada', 'vaga-origem');
+        });
+      }
+    }
     if (sou && gPodeEscolher) destacarVagasAbertas();
     renderPainelGrupos();
   }
@@ -1962,7 +1980,7 @@
     lobbyBoxScore        = document.getElementById('lobby-box-score');
 
     // Draft
-    draftTituloEl      = document.getElementById('online-draft-titulo');
+    draftTituloEl      = document.getElementById('draft-ctx');
     draftSubtituloEl   = document.getElementById('draft-subtitulo');
     draftOrdemLista    = document.getElementById('draft-ordem-lista');
     // Clique em qualquer participante do painel → visualiza o time dele (somente leitura).
