@@ -15,6 +15,7 @@
   var rodadaAtual      = 0;
   var totalRodadas     = 5;
   var formatoOnline    = 'liga';   // 'liga' (Brasileirão) ou 'mata' (Copa/Liberta: grupos+mata-mata)
+  var chaveOnline      = null;     // chave do mata-mata online {rounds, rodadaAtual, fases}
   var simulandoRodada  = false;
 
   var poolLocal        = [];   // pool de jogadores disponíveis no turno atual
@@ -83,6 +84,7 @@
     document.querySelectorAll('.online-subview').forEach(function (el) {
       el.classList.toggle('escondida', el.id !== id);
     });
+    if (_btnTopo) _btnTopo.classList.remove('visivel');   // troca de tela → some o botão flutuante
   }
 
   function mostrarTelaOnline() {
@@ -270,6 +272,8 @@
     socket.on('round:start',      onRoundStart);
     socket.on('round:results',    onRoundResults);
     socket.on('grupos:fim',       onGruposFim);
+    socket.on('chave:state',      onChaveState);
+    socket.on('chave:results',    onChaveResults);
     socket.on('round:skipVotes',  onSkipVotes);
     socket.on('game:end',         onGameEnd);
     socket.on('erro',             function (msg) {
@@ -369,11 +373,15 @@
   function renderSorteioGrade() {
     var grade = document.getElementById('sorteio-grade');
     if (!grade) return;
-    // Máx. 6 por linha, sempre em 2 linhas: Copa(12)=6+6, Liberta(8)=4+4.
     var nGrupos = sorteioLetras.length;
-    var colunas = Math.min(6, Math.ceil(nGrupos / 2));
+    // Desktop: máx. 6 por linha (2 linhas). Celular: 2 colunas (nomes inteiros).
+    var larg = window.innerWidth || 1024;
+    var colunas;
+    if (larg <= 600)      colunas = 2;
+    else if (larg <= 900) colunas = 3;
+    else                  colunas = Math.min(6, Math.ceil(nGrupos / 2));
     grade.style.gridTemplateColumns = 'repeat(' + colunas + ', minmax(0, 1fr))';
-    grade.style.maxWidth = (colunas * 200) + 'px';
+    grade.style.maxWidth = (larg <= 900) ? '100%' : (colunas * 200) + 'px';
     grade.style.margin   = '0 auto';
     var html = '';
     sorteioLetras.forEach(function (L) {
@@ -514,6 +522,7 @@
       verTimeDoUsuario(meuUserId);      // mostra meu campo e destaca as vagas
       if (dados.segundos > 0) iniciarTimer(dados.segundos); else pararTimer();
       tocarAvisoVez();
+      if (ehCelular()) setTimeout(function () { scrollParaEl(document.getElementById('draft-campo')); }, 120);
     } else {
       gPodeEscolher = false;
       verTimeDoUsuario(gVisualizandoUid || meuUserId);   // mantém o time que estou olhando
@@ -1128,9 +1137,13 @@
   }
 
   // game:end — ranking final
-  // grupos:fim — fim da fase de grupos (Copa/Liberta). Lista os classificados.
-  // O mata-mata (próxima etapa) reaproveitará estes classificados.
+  // grupos:fim — fim da fase de grupos. NÃO mostra tela de classificados:
+  // a chave do mata-mata chega em seguida (chave:state) e assume a aba Mata-a-Mata.
   function onGruposFim(dados) {
+    // As tabelas finais já estão na aba Grupos (último round:results). Nada a renderizar aqui.
+  }
+
+  function _onGruposFimAntigo(dados) {
     var classificados = (dados && dados.classificados) || [];
     subview('online-rodada');
     var compEl = document.getElementById('rodada-comp');
@@ -1169,6 +1182,103 @@
     if (fimAcoes) fimAcoes.classList.remove('escondida');
   }
 
+  // ── Mata-mata online (C2) ──────────────────────────────────────────────────
+  function renderChaveOnline() {
+    var alvo = document.getElementById('chave-online');
+    if (!alvo) return;
+    if (!chaveOnline || !chaveOnline.rounds) {
+      alvo.innerHTML = '<p class="chave-online-aguardando">O mata-mata começa após a fase de grupos.</p>';
+      return;
+    }
+    var fases = chaveOnline.fases || [];
+    function ehMeu(t) { return t && String(t.userId) === String(meuUserId); }
+    function celula(time, ehVenc, resolvido, gols, pen) {
+      if (!time) return '<div class="ck-time ck-vazio">A definir</div>';
+      var cls = 'ck-time' + (ehMeu(time) ? ' ck-voce' : '') +
+                (resolvido && ehVenc ? ' ck-venc' : '') + (resolvido && !ehVenc ? ' ck-perd' : '');
+      var placar = (gols != null) ? '<span class="ck-gols">' + gols + (pen != null ? ' (' + pen + ')' : '') + '</span>' : '';
+      return '<div class="' + cls + '">' + htmlEsc(time.nome) + placar + '</div>';
+    }
+    var html = '';
+    chaveOnline.rounds.forEach(function (jogos, idx) {
+      html += '<div class="ck-col"><div class="ck-fase">' + htmlEsc(fases[idx] || '') + '</div><div class="ck-jogos">';
+      jogos.forEach(function (j) {
+        var resolvido = !!j.winner;
+        var aVenc = resolvido && j.a && String(j.winner.userId) === String(j.a.userId);
+        var bVenc = resolvido && j.b && String(j.winner.userId) === String(j.b.userId);
+        var meu = ehMeu(j.a) || ehMeu(j.b);
+        var penA = (j.pen && j.pen.length === 2) ? j.pen[0] : null;
+        var penB = (j.pen && j.pen.length === 2) ? j.pen[1] : null;
+        html += '<div class="ck-jogo' + (meu ? ' ck-jogo-meu' : '') + '">' +
+                  celula(j.a, aVenc, resolvido, resolvido ? j.gA : null, penA) +
+                  celula(j.b, bVenc, resolvido, resolvido ? j.gB : null, penB) +
+                '</div>';
+      });
+      html += '</div></div>';
+    });
+    var ultima  = chaveOnline.rounds[chaveOnline.rounds.length - 1][0];
+    var campeao = ultima ? ultima.winner : null;
+    html += '<div class="ck-col ck-col-campeao"><div class="ck-fase">CAMPEÃO</div>' +
+            '<div class="ck-jogos ck-jogos-campeao"><div class="ck-campeao' + (ehMeu(campeao) ? ' ck-voce' : '') + '">' +
+            '<span class="ck-trofeu">\u2605</span>' + (campeao ? htmlEsc(campeao.nome) : 'A definir') + '</div></div></div>';
+    alvo.innerHTML = html;
+  }
+
+  // Mostra/atualiza o botão de avançar fase (só host) ou o aviso (demais).
+  function atualizarBotaoChave() {
+    var btn = document.getElementById('btn-chave-avancar');
+    var aviso = document.getElementById('chave-aguardando');
+    var acabou = chaveOnline && chaveOnline.rodadaAtual >= chaveOnline.rounds.length;
+    var primeira = chaveOnline && chaveOnline.rodadaAtual === 0;
+    if (btn) {
+      btn.classList.toggle('escondida', !ehHost || acabou);
+      btn.textContent = primeira ? 'Iniciar Mata-mata →' : 'Próxima fase →';
+      btn.disabled = false;
+    }
+    if (aviso) aviso.classList.toggle('escondida', ehHost || acabou);
+  }
+
+  // chave:state — chave montada (fim dos grupos). Assume a aba Mata-a-Mata.
+  function onChaveState(dados) {
+    chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual || 0, fases: dados.fases || [] };
+    if (tabChave) tabChave.classList.remove('escondida');
+    renderChaveOnline();
+    atualizarBotaoChave();
+    subview('online-rodada');
+    selecionarAbaRodada('chave');
+    var compEl = document.getElementById('rodada-comp');
+    if (compEl) compEl.textContent = 'MATA-A-MATA';
+    if (rodadaTituloEl) rodadaTituloEl.textContent = 'MATA-A-MATA';
+  }
+
+  // chave:results — uma fase do mata-mata foi simulada.
+  function onChaveResults(dados) {
+    chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases || (chaveOnline && chaveOnline.fases) || [] };
+    ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
+    ultimaAssistencia = dados.assistencias || ultimaAssistencia;
+    renderChaveOnline();
+    atualizarBotaoChave();
+    // Mostra os jogos da fase na aba Partidas.
+    if (rodadaPartidas && dados.resultados) {
+      var fase = dados.fase || '';
+      var h = '<p class="rodada-fase-tit">' + htmlEsc(fase) + '</p>';
+      dados.resultados.forEach(function (r) {
+        var pen = (r.pen && r.pen.length === 2) ? ' (pên. ' + r.pen[0] + '–' + r.pen[1] + ')' : '';
+        h += '<div class="partida-linha">' +
+               '<span class="pl-time">' + htmlEsc(r.homeNome) + '</span>' +
+               '<span class="pl-placar">' + r.gHome + ' – ' + r.gAway + pen + '</span>' +
+               '<span class="pl-time pl-dir">' + htmlEsc(r.awayNome) + '</span>' +
+             '</div>';
+      });
+      rodadaPartidas.innerHTML = h;
+    }
+    if (proximosTitulo) proximosTitulo.textContent = 'CHAVE';
+    if (rodadaProximos) rodadaProximos.innerHTML = '';
+    renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
+    renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+    selecionarAbaRodada('chave');
+  }
+
   function onGameEnd(dados) {
     var ranking = dados.ranking || [];
     rankingFinalCache = ranking;
@@ -1181,7 +1291,7 @@
         var _idx = ranking.findIndex(function (p) { return String(p.userId) === String(meuUserId); });
         var r = meuRankingFinal;
         API.salvarPartida({
-          competicao: 'Brasileirão',
+          competicao: (formatoOnline === 'mata') ? (window.__compOnline || 'Copa do Mundo') : 'Brasileirão',
           modo:       'online',
           vitorias:   r.vitorias | 0,
           empates:    r.empates  | 0,
@@ -1203,10 +1313,19 @@
     if (rodadaTituloEl) rodadaTituloEl.textContent = 'RODADA ' + totalRodadas + ' DE ' + totalRodadas;
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
-    renderClassifLista(ranking);
-    renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
-    renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
-    selecionarAbaRodada('classif');
+    if (formatoOnline === 'mata') {
+      // Copa/Liberta: mostra a CHAVE completa (com o campeão) na aba Mata-a-Mata.
+      renderChaveOnline();
+      atualizarBotaoChave();
+      renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
+      renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+      selecionarAbaRodada('chave');
+    } else {
+      renderClassifLista(ranking);
+      renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
+      renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+      selecionarAbaRodada('classif');
+    }
 
     // Acabou: nada de avançar rodada.
     pararAnimacaoPartida();
@@ -1788,6 +1907,29 @@
 
   // ── Elencos ───────────────────────────────────────────────────────────────
 
+  // ── Helpers de responsividade (scroll no celular) ──────────────────────────
+  function ehCelular() { return (window.innerWidth || 1024) <= 768; }
+  function scrollParaEl(el) {
+    if (!el) return;
+    try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    catch (e) { el.scrollIntoView(); }
+  }
+  var _btnTopo = null;
+  function botaoVoltarTopo() {
+    if (_btnTopo) return _btnTopo;
+    _btnTopo = document.createElement('button');
+    _btnTopo.className = 'btn-voltar-topo';
+    _btnTopo.type = 'button';
+    _btnTopo.textContent = '↑ Voltar à lista';
+    _btnTopo.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      _btnTopo.classList.remove('visivel');
+    });
+    document.body.appendChild(_btnTopo);
+    return _btnTopo;
+  }
+  function mostrarBotaoTopo(v) { botaoVoltarTopo().classList.toggle('visivel', !!v && ehCelular()); }
+
   function renderElencos() {
     elencosUsersLista.innerHTML = '';
     var uids = Object.keys(allPlayers);
@@ -1818,6 +1960,7 @@
         elencosUsersLista.querySelectorAll('.elencos-user-row').forEach(function (r) { r.classList.remove('ativo'); });
         row.classList.add('ativo');
         mostrarElencoUsuario(uid);
+        if (ehCelular()) { scrollParaEl(elencosCampo); mostrarBotaoTopo(true); }
       });
 
       elencosUsersLista.appendChild(row);
@@ -2034,6 +2177,11 @@
     rodadaAssistencias = document.getElementById('rodada-assistencias');
     rodadaProximos       = document.getElementById('rodada-proximos');
     proximosTitulo       = document.getElementById('proximos-titulo');
+    var btnChaveAvancar  = document.getElementById('btn-chave-avancar');
+    if (btnChaveAvancar) btnChaveAvancar.addEventListener('click', function () {
+      btnChaveAvancar.disabled = true;
+      if (socket && socket.connected) socket.emit('chave:advance');
+    });
     rodadaAguardandoHost = document.getElementById('rodada-aguardando-host');
     tabPartidas = document.getElementById('tab-partidas');
     tabClassif  = document.getElementById('tab-classif');
@@ -2104,6 +2252,7 @@
         p.classList.add('pilula-ativa');
         // Atualiza o campo na hora pra refletir a formação escolhida (slots vazios).
         if (lobbyCampo) renderCampoOnline(lobbyCampo, [], p.dataset.fl || '4-3-3');
+        if (ehCelular()) scrollParaEl(lobbyCampo);   // mostra o "mapinha" da formação escolhida
       });
     });
 
