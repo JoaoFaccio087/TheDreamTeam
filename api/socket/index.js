@@ -749,11 +749,11 @@ function cartasParaJogador(sala, jogador) {
   const porPosicao = {};
   const feitas = new Set();
   for (let i = 0; i < codigos.length; i++) {
-    if (picks[i]) continue;                 // vaga já preenchida
     const cod = codigos[i];
-    if (feitas.has(cod)) continue;          // posição repetida na formação: uma vez
+    if (feitas.has(cod)) continue;          // posição repetida na formação: uma vez só
     feitas.add(cod);
-    // elegíveis = jogam na posição e o usuário ainda NÃO tem (pode repetir entre usuários)
+    // Cartas para TODA posição da formação (mesmo as já preenchidas): se o usuário
+    // remanejar e reabrir uma vaga no próprio turno, ela continua tendo opções.
     const eleg = pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id));
     porPosicao[cod] = amostraPosicao(eleg, 12);   // mistura de faixas: oferta craques também
   }

@@ -1787,7 +1787,8 @@
     });
     // Se ainda é a minha vez, reacende as vagas abertas (dourado) — antes elas
     // ficavam sem destaque ao sair do modo "remanejar" ou após concluir um move.
-    if (String(draftTurnoUid) === String(meuUserId)) destacarVagasAbertas();
+    var minhaVez = draftEhGrupo ? gPodeEscolher : (String(draftTurnoUid) === String(meuUserId));
+    if (minhaVez) destacarVagasAbertas();
   }
 
   function atualizarCarouselPos() { /* faixa agora rola nativamente; sem transform */ }
