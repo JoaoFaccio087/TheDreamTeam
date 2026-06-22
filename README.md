@@ -31,6 +31,8 @@ A base de dados reúne elencos reais de cada temporada da Copa Libertadores (196
 
 As capturas de tela ficam em `assets/imagens/screenshots/`.
 
+**Um jogador**
+
 <div align="center">
 
 | Tela inicial | Escalação |
@@ -42,6 +44,22 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 | ![Simulação](assets/imagens/screenshots/simulacao.png) | ![Resumo](assets/imagens/screenshots/resumo.png) |
 
 </div>
+
+**Online — Copa do Mundo** (grupos + mata-mata)
+
+<div align="center">
+
+| Sorteio dos grupos | Draft por grupo |
+|:---:|:---:|
+| ![Sorteio dos grupos](assets/imagens/screenshots/online-sorteio.png) | ![Draft por grupo](assets/imagens/screenshots/online-draft.png) |
+
+| Fase de grupos | Mata-mata |
+|:---:|:---:|
+| ![Fase de grupos](assets/imagens/screenshots/online-grupos.png) | ![Mata-mata](assets/imagens/screenshots/online-mata.png) |
+
+</div>
+
+> As imagens do modo online (`online-sorteio.png`, `online-draft.png`, `online-grupos.png`, `online-mata.png`) ainda precisam ser geradas e adicionadas em `assets/imagens/screenshots/`.
 
 ## Funcionalidades
 

@@ -592,10 +592,38 @@
   }
 
   // Painel lateral: grupos com status de cada participante na rodada atual.
+  // Letra do MEU grupo (procura nos membros de cada grupo).
+  function meuGrupoLetra() {
+    for (var i = 0; i < gOrdemGrupos.length; i++) {
+      var membros = gGrupos[gOrdemGrupos[i]] || [];
+      if (membros.some(function (u) { return String(u) === String(meuUserId); })) return gOrdemGrupos[i];
+    }
+    return null;
+  }
+
+  // Texto de status: de quem é a vez agora e quanto falta pra minha.
+  function textoStatusDraft() {
+    var meuG = meuGrupoLetra();
+    if (!meuG || !gGrupoAtivo) return '';
+    if (gGrupoAtivo === meuG) {
+      var jaEscolhi = (gPicksSnap[meuUserId] || 0) >= gPickNum;
+      return jaEscolhi ? 'Você já escolheu — aguardando os outros grupos…' : 'É a sua vez! Escolha um jogador.';
+    }
+    var iAtivo = gOrdemGrupos.indexOf(gGrupoAtivo);
+    var iMeu   = gOrdemGrupos.indexOf(meuG);
+    if (iMeu > iAtivo) {
+      var faltam = iMeu - iAtivo;
+      return 'Escolhendo: Grupo ' + gGrupoAtivo + ' · sua vez em ' + faltam + (faltam === 1 ? ' grupo' : ' grupos');
+    }
+    return 'Escolhendo: Grupo ' + gGrupoAtivo + ' · você já escolheu nesta rodada';
+  }
+
   function renderPainelGrupos() {
     var cont = document.getElementById('draft-ordem-lista');
     if (!cont) return;
-    var html = '';
+    var status = textoStatusDraft();
+    var minhaVez = (gGrupoAtivo && gGrupoAtivo === meuGrupoLetra() && (gPicksSnap[meuUserId] || 0) < gPickNum);
+    var html = status ? '<div class="gdraft-status' + (minhaVez ? ' gdraft-status-vez' : '') + '">' + htmlEsc(status) + '</div>' : '';
     gOrdemGrupos.forEach(function (L) {
       var ativo   = (L === gGrupoAtivo);
       var membros = gGrupos[L] || [];
@@ -1171,45 +1199,6 @@
     } else {
       finalizarGrupos();
     }
-  }
-
-  function _onGruposFimAntigo(dados) {
-    var classificados = (dados && dados.classificados) || [];
-    subview('online-rodada');
-    var compEl = document.getElementById('rodada-comp');
-    if (compEl) compEl.textContent = 'FASE DE GRUPOS ENCERRADA';
-    if (rodadaTituloEl) rodadaTituloEl.textContent = classificados.length + ' CLASSIFICADOS';
-
-    // Troca para a aba Classificação.
-    var abaPart = document.getElementById('aba-partidas');
-    var tabPart = document.getElementById('tab-partidas');
-    if (abaPart)    abaPart.classList.add('escondida');
-    if (abaClassif) abaClassif.classList.remove('escondida');
-    if (tabPart)    tabPart.classList.remove('ativa');
-    if (tabClassif) tabClassif.classList.add('ativa');
-
-    if (rodadaClassif) {
-      var html = '';
-      classificados.forEach(function (t, i) {
-        var meu = String(t.userId) === String(meuUserId);
-        var saldo = (t.saldo >= 0 ? '+' : '') + (t.saldo || 0);
-        html += '<div class="classif-linha' + (meu ? ' classif-meu' : '') + '">' +
-          '<span class="ct-pos">' + (i + 1) + '</span>' +
-          '<span class="ct-time">' + htmlEsc(t.nomeDoTime || t.username || 'Time') +
-            ' <span style="color:var(--txt-soft);font-size:.8em">· Grupo ' + htmlEsc(t.grupo || '?') + '</span></span>' +
-          '<span class="ct-num">' + (t.pontos || 0) + '</span>' +
-          '<span class="ct-num">' + saldo + '</span>' +
-        '</div>';
-      });
-      rodadaClassif.innerHTML = html;
-    }
-
-    // Nota da próxima etapa + libera ações para não travar.
-    var stats = document.getElementById('rodada-artilharia');
-    if (stats) stats.innerHTML = '<p style="color:var(--txt-soft);font-size:.82rem">Mata-mata: próxima etapa.</p>';
-    var assist = document.getElementById('rodada-assistencias');
-    if (assist) assist.innerHTML = '';
-    if (fimAcoes) fimAcoes.classList.remove('escondida');
   }
 
   // ── Mata-mata online (C2) ──────────────────────────────────────────────────
