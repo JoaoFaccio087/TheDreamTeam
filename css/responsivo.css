@@ -212,6 +212,23 @@
   .sorteio-acoes .btn-rolar,
   .sorteio-acoes .btn-secundario { flex: 1 1 0; min-width: 0; }
 
+  /* — Campo de escalação no celular: ocupa a largura toda e as fichas ficam
+       PROPORCIONAIS ao campo (escalam por cqw, sem o piso de 48px que as deixava
+       grandes demais num campo estreito). Vale p/ lobby, draft e elencos. — */
+  .campo-jogo { max-width: 100%; }
+  .lobby-wrapper, .draft-wrapper, .elencos-wrapper { padding-left: 10px; padding-right: 10px; }
+  .lobby-centro, .draft-campo-col, .elencos-campo-col { width: 100%; }
+  .slot-ol {
+    width:  clamp(36px, 13.5cqw, 70px);
+    height: clamp(36px, 13.5cqw, 70px);
+    font-size: clamp(0.48rem, 3.1cqw, 0.85rem);
+  }
+  .slot-ol .slot-ol-forca { font-size: clamp(0.5rem, 2.8cqw, 0.78rem); }
+  .slot-ol .slot-nome {
+    font-size: clamp(0.56rem, 2.6cqw, 0.82rem);
+    padding: 1px 4px; max-width: 84px; overflow: hidden; text-overflow: ellipsis;
+  }
+
   /* — Abas da rodada quebram linha se faltar espaço — */
   .rodada-tabs { flex-wrap: wrap; }
   .rodada-barra { flex-wrap: wrap; gap: 8px; }
