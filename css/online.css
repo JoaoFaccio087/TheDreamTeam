@@ -68,16 +68,12 @@
 /* Slot no campo online */
 .slot-ol {
   position: absolute;
-  /* Tamanho proporcional à largura do campo (cqw): cresce em telas maiores e
-     encolhe nas menores, sempre legível. Antes era fixo em 48px. */
-  width: clamp(48px, 12.5cqw, 82px);
-  height: clamp(48px, 12.5cqw, 82px);
+  /* Tamanho/fonte agora vêm do modelo único em campo.css (cqw). */
   border-radius: 50%;
   border: 2px dashed rgba(255,255,255,0.4);
   background: rgba(0,0,0,0.28);
   color: rgba(255,255,255,0.6);
   font-family: 'Archivo Black', sans-serif;
-  font-size: clamp(0.6rem, 2.8cqw, 0.95rem);
   display: flex; align-items: center; justify-content: center;
   text-align: center;
   transform: translate(-50%,-50%);

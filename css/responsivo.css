@@ -72,11 +72,6 @@
   .jogo-header-titulo { font-size: 1.5rem; }
   .jogo-header-info,
   .sim-label-campanha { text-align: left; }
-  .slot-jogo {
-    width: 52px;
-    height: 52px;
-    font-size: 0.55rem;
-  }
 
   /* Escalação no celular: o Voltar fica COMPACTO ao lado do botão de ação
      (Rolar/Começar), que ocupa o resto da largura. display:contents promove os
@@ -154,9 +149,6 @@
   }
 
   .slot-jogo {
-    width: 44px;
-    height: 44px;
-    font-size: 0.5rem;
     border-width: 1px;
   }
 
@@ -218,11 +210,6 @@
   .campo-jogo { max-width: 100%; }
   .lobby-wrapper, .draft-wrapper, .elencos-wrapper { padding-left: 10px; padding-right: 10px; }
   .lobby-centro, .draft-campo-col, .elencos-campo-col { width: 100%; }
-  .slot-ol {
-    width:  clamp(36px, 13.5cqw, 70px);
-    height: clamp(36px, 13.5cqw, 70px);
-    font-size: clamp(0.48rem, 3.1cqw, 0.85rem);
-  }
   .slot-ol .slot-ol-forca { font-size: clamp(0.5rem, 2.8cqw, 0.78rem); }
   .slot-ol .slot-nome {
     font-size: clamp(0.56rem, 2.6cqw, 0.82rem);

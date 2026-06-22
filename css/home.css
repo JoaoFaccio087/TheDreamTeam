@@ -287,13 +287,11 @@
 /* Fichas dos jogadores: círculos posicionados por left/top em %; translate(-50%,-50%) centraliza no ponto e a transição anima a troca de formação. */
 .ficha {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  /* Tamanho/fonte agora vêm do modelo único em campo.css (cqw). */
   border-radius: 50%;
   background-color: #ffffff;
   color: #1A1813;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

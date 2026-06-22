@@ -465,14 +465,12 @@
 /* Slot (vaga de jogador) — círculo tracejado até ser preenchido */
 .slot-jogo {
   position: absolute;
-  width: 68px;
-  height: 68px;
+  /* Tamanho/fonte agora vêm do modelo único em campo.css (cqw). */
   border-radius: 50%;
   border: 2px dashed rgba(255, 255, 255, 0.45);
   background: rgba(0, 0, 0, 0.3);
   color: rgba(255, 255, 255, 0.65);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.62rem;
   display: flex;
   align-items: center;
   justify-content: center;
