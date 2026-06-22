@@ -1,13 +1,11 @@
-/* ui.js — biblioteca de componentes de interface compartilhados entre os modos.
-   Objetivo: UMA fonte de verdade para pedaços repetidos (cabeçalho, etc.), pra não
-   reescrever/ajustar o mesmo HTML em cada tela. Carregar ANTES dos módulos de tela. */
+/* ui.js — UIKit: componentes de interface reutilizados entre os modos.
+   Carregar antes dos módulos de tela. */
 (function () {
   'use strict';
 
   var UI = {};
 
-  // Escapa texto para HTML (cobre & < > " ' — superset seguro). Use em TODO
-  // lugar que injeta texto do usuário em innerHTML.
+  // Escape de HTML (& < > " '). Usar ao injetar texto em innerHTML.
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -15,7 +13,7 @@
   }
   UI.esc = esc;
 
-  // Embaralha (Fisher-Yates) retornando uma CÓPIA (não altera o array original).
+  // Fisher-Yates; retorna uma cópia (não altera o original).
   UI.shuffle = function (arr) {
     var a = (arr || []).slice();
     for (var i = a.length - 1; i > 0; i--) {
@@ -29,15 +27,8 @@
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
 
-  // ── Cabeçalho padrão de tela ────────────────────────────────────────────────
-  // Gera SEMPRE a mesma estrutura (.jogo-header-wrap). Os *Id permitem que o código
-  // de cada tela continue atualizando os textos via getElementById(...).textContent.
-  //
-  // opts:
-  //   titulo   (def. 'THE DREAM TEAM')   tituloId?
-  //   slogan   (def. 'SORTEIE · ESCALE · GOLEIE')   sloganId?
-  //   info     (texto da direita)   infoId?   infoHtml? (HTML cru, ignora `info`)
-  //   voltarId (se definido, mostra um botão Voltar à esquerda com esse id)
+  // Cabeçalho padrão. opts: titulo, tituloId, slogan, sloganId, info|infoHtml,
+  // infoId, voltarId. Os *Id permitem que cada tela atualize os textos depois.
   UI.renderHeader = function (slot, opts) {
     if (!slot) return;
     opts = opts || {};
@@ -80,10 +71,8 @@
 
   window.UI = UI;
 
-  // Cabeçalhos ESTÁTICOS do single-player: renderizados JÁ no load deste script.
-  // ui.js é carregado com `defer` ANTES de estado.js, e `defer` garante o DOM
-  // parseado — então #btn-voltar-home / #jogo-header-info passam a existir antes
-  // de estado.js cacheá-los. (As telas online montam seus cabeçalhos no init delas.)
+  // Cabeçalhos estáticos do single-player. Renderizados aqui (defer garante o DOM
+  // pronto e ui.js roda antes de estado.js, que cacheia #btn-voltar-home).
   UI.setHeader('hdr-jogo',      { voltarId: 'btn-voltar-home', infoId: 'jogo-header-info' });
   UI.setHeader('hdr-simulacao', { infoHtml: '<span class="sim-label-campanha">A CAMPANHA</span>' });
 })();

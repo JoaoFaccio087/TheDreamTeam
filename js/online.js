@@ -1172,9 +1172,8 @@
   }
 
   // game:end — ranking final
-  // grupos:fim — fim da fase de grupos. Espera a animação do último jogo terminar e
-  // então leva o usuário à aba GRUPOS (pra ver se classificou) com o banner do mata-mata.
-  // NÃO pula direto pro mata-mata (isso cortava a animação).
+  // grupos:fim — após a animação do último jogo, leva à aba Grupos com o banner
+  // do mata-mata. Não pula direto para o mata-mata.
   function onGruposFim(dados) {
     gruposEncerrados = true;
 
@@ -1255,9 +1254,8 @@
     if (aviso) aviso.classList.toggle('escondida', ehHost || acabou);
   }
 
-  // chave:state — chave montada/atualizada. Apenas PREPARA (não troca de aba aqui:
-  // a animação do último jogo de grupos precisa terminar antes). A ida pro mata-mata
-  // acontece quando o host clica em "Iniciar Mata-mata" (→ chave:results).
+  // chave:state — prepara a chave sem trocar de aba. A ida ao mata-mata ocorre
+  // quando o host clica em "Iniciar Mata-mata".
   function onChaveState(dados) {
     chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual || 0, fases: dados.fases || [] };
     if (tabChave) tabChave.classList.remove('escondida');
@@ -1773,8 +1771,7 @@
     draftCampo.querySelectorAll('.slot-ol').forEach(function (s) {
       s.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
     });
-    // Se ainda é a minha vez, reacende as vagas abertas (dourado) — antes elas
-    // ficavam sem destaque ao sair do modo "remanejar" ou após concluir um move.
+    // Se ainda é a minha vez, reacende as vagas abertas.
     var minhaVez = draftEhGrupo ? gPodeEscolher : (String(draftTurnoUid) === String(meuUserId));
     if (minhaVez) destacarVagasAbertas();
   }

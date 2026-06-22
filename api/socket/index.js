@@ -90,9 +90,8 @@ function podeOcupar(jogador, cod) {
 }
 
 // Escolha "equilibrada" a partir de uma lista: bons jogadores, mas com variação.
-// Amostra "justa" de uma posição: mistura faixas de força garantindo uma CHANCE de
-// craques (88+) sem encher o time inteiro deles. Usada pelo humano (cartas), pelo bot
-// e pelo timeout — assim todos sorteiam da MESMA distribuição (balanceado).
+// Amostra balanceada de uma posição por faixas de força (humano, bot e timeout
+// usam a mesma distribuição). Dá chance de craques sem encher o time deles.
 function amostraPosicao(fonte, n) {
   n = n || 12;
   if (!fonte || !fonte.length) return [];
@@ -113,8 +112,8 @@ function amostraPosicao(fonte, n) {
   return shuffle(amostra).slice(0, n);
 }
 
-// Bot/timeout escolhem de uma amostra justa, ponderado LINEARMENTE pela força
-// (favorece os melhores, mas NÃO pega sempre o máximo → times variados, não todos 90+).
+// Bot/timeout: escolha ponderada (linear) na amostra — favorece os melhores sem
+// pegar sempre o máximo.
 function escolherPickBotDe(fonte) {
   if (!fonte || !fonte.length) return null;
   const amostra = amostraPosicao(fonte, 12);
@@ -750,12 +749,11 @@ function cartasParaJogador(sala, jogador) {
   const feitas = new Set();
   for (let i = 0; i < codigos.length; i++) {
     const cod = codigos[i];
-    if (feitas.has(cod)) continue;          // posição repetida na formação: uma vez só
+    if (feitas.has(cod)) continue;
     feitas.add(cod);
-    // Cartas para TODA posição da formação (mesmo as já preenchidas): se o usuário
-    // remanejar e reabrir uma vaga no próprio turno, ela continua tendo opções.
+    // Cartas para toda posição (mesmo preenchidas): permite remanejar e reabrir vaga no turno.
     const eleg = pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id));
-    porPosicao[cod] = amostraPosicao(eleg, 12);   // mistura de faixas: oferta craques também
+    porPosicao[cod] = amostraPosicao(eleg, 12);
   }
   return porPosicao;   // { 'ZAG': [..6-12..], 'LE': [...], ... } — cliente usa direto
 }

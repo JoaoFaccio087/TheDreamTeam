@@ -152,30 +152,24 @@ O frontend é estático: qualquer push na branch publicada atualiza o GitHub Pag
 ```text
 TheDreamTeam/
 ├── index.html
-│
-├── assets/imagens/            # favicon e screenshots
-│
+├── assets/imagens/
 ├── css/
-│   ├── base.css   home.css   escalacao.css   draft.css
-│   ├── simulacao.css   resumo.css   auth.css   online.css
+│   ├── base.css   home.css   escalacao.css   draft.css   simulacao.css
+│   ├── resumo.css   auth.css   perfil.css   online.css
+│   ├── campo.css            # modelo único do campo de escalação
 │   └── responsivo.css
-│
 ├── js/
-│   ├── dados/                 # libertadores.js, champions.js, brasileirao.js, copa.js, dados.js
+│   ├── ui.js               # componentes compartilhados (UIKit)
+│   ├── dados/              # libertadores, champions, brasileirao, copa, dados
 │   ├── estado.js   formacoes.js   regras.js   interface.js
 │   ├── sorteio.js   escalacao.js   draft.js   simulacao.js
 │   ├── campanha.js   brasileirao.js   resumo.js   home.js
-│   ├── api.js   auth.js   online.js          # contas + modo online
+│   ├── api.js   auth.js   perfil.js   online.js
 │   └── main.js
-│
-└── api/                       # backend (Node + Express + Socket.IO)
-    ├── server.js              # bootstrap HTTP + Socket.IO
-    ├── db.js   migrate.js   seed.js
-    ├── middleware/auth.js     # JWT
-    ├── routes/                # auth, users, rooms, matches, ranking
-    ├── socket/                # index.js (liga + grupos/mata-mata), salaState.js, simulacao.js
-    ├── dados/                 # loader.js + cópias dos elencos (inclui copa.js) p/ o servidor
-    ├── Dockerfile   package.json
+└── api/                    # backend (Node + Express + Socket.IO)
+    ├── server.js   db.js   migrate.js   seed.js
+    ├── middleware/   routes/   socket/   dados/
+    └── Dockerfile   package.json
 ```
 
 Os arquivos do **frontend** compartilham um escopo global e são carregados em ordem (com `defer`) no final do `index.html` — dados e configuração primeiro, `main.js` por último.

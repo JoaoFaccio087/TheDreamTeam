@@ -1,22 +1,15 @@
-/* campo.css — MODELO ÚNICO do campo de escalação (lib de UI).
-   Antes havia 3 sistemas de tamanho diferentes:
-     • home      #campo      + .ficha     (fixo 32px)
-     • 1 jogador #campo-jogo + .slot-jogo (fixo 68px)
-     • online    .campo-jogo + .slot-ol   (cqw)
-   Agora todos usam o MESMO modelo: o contêiner declara container-type e as fichas
-   escalam por cqw (proporção da largura do campo). Isso conserta a proporção no
-   celular EM UM LUGAR SÓ e elimina a duplicação. As cores/conteúdo de cada ficha
-   continuam nos CSS de cada tela; aqui fica só o DIMENSIONAMENTO compartilhado. */
+/* campo.css — modelo único do campo de escalação (home, single-player e online).
+   Os contêineres declaram container-type e as fichas escalam por cqw (proporção da
+   largura do campo). Cores/conteúdo de cada ficha ficam nos CSS de cada tela. */
 
-/* Contêineres do campo: permitem dimensionar as fichas em função da largura. */
+/* Contêineres do campo. */
 #campo,
 #campo-jogo,
 .campo-jogo {
   container-type: inline-size;
 }
 
-/* Fichas/slots: tamanho proporcional ao campo (cqw), com piso pequeno só para
-   continuarem clicáveis em telas muito estreitas, e teto para telas grandes. */
+/* Fichas/slots: tamanho proporcional ao campo, com piso e teto. */
 .ficha,
 .slot-jogo,
 .slot-ol {
