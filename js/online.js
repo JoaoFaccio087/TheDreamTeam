@@ -17,6 +17,7 @@
   var formatoOnline    = 'liga';   // 'liga' (Brasileirão) ou 'mata' (Copa/Liberta: grupos+mata-mata)
   var chaveOnline      = null;     // chave do mata-mata online {rounds, rodadaAtual, fases}
   var gruposEncerrados = false;    // fase de grupos terminou (aguardando host iniciar o mata-mata)
+  var emMataMata       = false;    // estamos no mata-mata (avançar = chave:advance, não round:simulate)
   var simulandoRodada  = false;
 
   var poolLocal        = [];   // pool de jogadores disponíveis no turno atual
@@ -832,6 +833,7 @@
 
     var ehGrupos = formatoOnline === 'mata';
     gruposEncerrados = false;
+    emMataMata = false;
     var bannerMataEl = document.getElementById('grupos-mata-banner');
     if (bannerMataEl) bannerMataEl.classList.add('escondida');
     configurarAbasRodada();
@@ -1240,62 +1242,86 @@
     alvo.innerHTML = html;
   }
 
-  // Mostra/atualiza o botão de avançar fase (só host) ou o aviso (demais).
-  function atualizarBotaoChave() {
-    var btn = document.getElementById('btn-chave-avancar');
-    var aviso = document.getElementById('chave-aguardando');
-    var acabou = chaveOnline && chaveOnline.rodadaAtual >= chaveOnline.rounds.length;
-    var primeira = chaveOnline && chaveOnline.rodadaAtual === 0;
-    if (btn) {
-      btn.classList.toggle('escondida', !ehHost || acabou);
-      btn.textContent = primeira ? 'Iniciar Mata-mata →' : 'Próxima fase →';
-      btn.disabled = false;
-    }
-    if (aviso) aviso.classList.toggle('escondida', ehHost || acabou);
-  }
-
   // chave:state — prepara a chave sem trocar de aba. A ida ao mata-mata ocorre
   // quando o host clica em "Iniciar Mata-mata".
   function onChaveState(dados) {
     chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual || 0, fases: dados.fases || [] };
+    emMataMata = true;
     if (tabChave) tabChave.classList.remove('escondida');
     renderChaveOnline();
-    atualizarBotaoChave();
+    var btnAv = document.getElementById('btn-chave-avancar');
+    if (btnAv) btnAv.classList.add('escondida');
   }
 
-  // chave:results — uma fase do mata-mata foi simulada.
+  // Ações da rodada no mata-mata (host avança a fase pela aba Partidas).
+  function atualizarAcoesMata() {
+    if (btnRodadaProxima)     btnRodadaProxima.classList.add('escondida');
+    if (btnRodadaFim)         btnRodadaFim.classList.add('escondida');
+    if (btnPularTudo)         btnPularTudo.classList.add('escondida');
+    if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
+    if (chaveOnline && chaveOnline.rodadaAtual >= chaveOnline.rounds.length) return;  // game:end encerra
+    if (ehHost) {
+      btnRodadaProxima.disabled    = false;
+      btnRodadaProxima.textContent = 'Próxima fase →';
+      btnRodadaProxima.classList.remove('escondida');
+    } else if (rodadaAguardandoHost) {
+      rodadaAguardandoHost.textContent = 'Aguardando o host avançar…';
+      rodadaAguardandoHost.classList.remove('escondida');
+    }
+  }
+
+  // chave:results — uma fase do mata-mata foi simulada. Anima a minha partida na aba
+  // Partidas (como nos grupos) e atualiza a chave só ao fim da animação.
   function onChaveResults(dados) {
+    simulandoRodada = false;
+    emMataMata = true;
     chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases || (chaveOnline && chaveOnline.fases) || [] };
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
-    renderChaveOnline();
-    atualizarBotaoChave();
-    // Mostra os jogos da fase na aba Partidas.
-    if (rodadaPartidas && dados.resultados) {
-      var fase = dados.fase || '';
-      var h = '<p class="rodada-fase-tit">' + htmlEsc(fase) + '</p>';
-      dados.resultados.forEach(function (r) {
-        var pen = (r.pen && r.pen.length === 2) ? ' (pên. ' + r.pen[0] + '–' + r.pen[1] + ')' : '';
-        h += '<div class="partida-linha">' +
-               '<span class="pl-time">' + htmlEsc(r.homeNome) + '</span>' +
-               '<span class="pl-placar">' + r.gHome + ' – ' + r.gAway + pen + '</span>' +
-               '<span class="pl-time pl-dir">' + htmlEsc(r.awayNome) + '</span>' +
-             '</div>';
-      });
-      rodadaPartidas.innerHTML = h;
-    }
-    if (proximosTitulo) proximosTitulo.textContent = 'CHAVE';
-    if (rodadaProximos) rodadaProximos.innerHTML = '';
-    renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
-    renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
-    var bannerMata = document.getElementById('grupos-mata-banner');
-    if (bannerMata) bannerMata.classList.add('escondida');
+
+    var fase = dados.fase || chaveOnline.fases[chaveOnline.rodadaAtual - 1] || 'MATA-A-MATA';
     var compEl = document.getElementById('rodada-comp');
     if (compEl) compEl.textContent = 'MATA-A-MATA';
-    if (rodadaTituloEl) rodadaTituloEl.textContent = 'MATA-A-MATA';
+    if (rodadaTituloEl) rodadaTituloEl.textContent = htmlEsc(fase);
     var infoEl = document.getElementById('rodada-header-info');
-    if (infoEl) infoEl.textContent = htmlEsc((chaveOnline.fases[chaveOnline.rodadaAtual - 1] || 'MATA-A-MATA'));
-    selecionarAbaRodada('chave');
+    if (infoEl) infoEl.textContent = htmlEsc(fase);
+    var bannerMata = document.getElementById('grupos-mata-banner');
+    if (bannerMata) bannerMata.classList.add('escondida');
+
+    var minha = null, outras = [];
+    (dados.resultados || []).forEach(function (m) {
+      if (String(m.homeUid) === String(meuUserId) || String(m.awayUid) === String(meuUserId)) minha = m;
+      else outras.push(m);
+    });
+
+    function aplicarPosAnim() {
+      renderChaveOnline();
+      renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
+      renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+      atualizarAcoesMata();
+    }
+
+    if (minha) {
+      // Tenho jogo nesta fase → anima na aba Partidas.
+      pararAnimacaoPartida();
+      rodadaPartidas.innerHTML = '';
+      rodadaPartidas.appendChild(cardPartidaGrande(minha));
+      outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
+      if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA FASE';
+      if (rodadaProximos) rodadaProximos.innerHTML = '';
+      aoFimDaAnimacao = aplicarPosAnim;
+      selecionarAbaRodada('partidas');
+    } else if (!animacaoAtiva) {
+      // Sem jogo (eliminado): mostra os resultados e o organograma, sem animação.
+      rodadaPartidas.innerHTML = '<p class="rodada-fase-tit">' + htmlEsc(fase) + '</p>';
+      outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
+      if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA FASE';
+      if (rodadaProximos) rodadaProximos.innerHTML = '';
+      aplicarPosAnim();
+      selecionarAbaRodada('chave');
+    }
+    // Se houver animação ativa (auto-finish chegando durante minha última partida),
+    // só atualizamos a chave; o render acontece ao fim da animação.
   }
 
   function onGameEnd(dados) {
@@ -1332,10 +1358,15 @@
     if (rodadaTituloEl) rodadaTituloEl.textContent = 'RODADA ' + totalRodadas + ' DE ' + totalRodadas;
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
+    // Atualiza a chave com o estado final (necessário no auto-finish do mata-mata).
+    if (formatoOnline === 'mata' && dados.rounds) {
+      chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases || (chaveOnline && chaveOnline.fases) || [] };
+    }
+    emMataMata = false;
+
+    function revelarFinal() {
     if (formatoOnline === 'mata') {
-      // Copa/Liberta: mostra a CHAVE completa (com o campeão) na aba Mata-a-Mata.
       renderChaveOnline();
-      atualizarBotaoChave();
       renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
       renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
       selecionarAbaRodada('chave');
@@ -1382,6 +1413,11 @@
     // Abre o modal automaticamente; os botões (coluna direita) só aparecem ao fechar.
     if (fimAcoes) fimAcoes.classList.add('escondida');
     if (modalPremiacao) modalPremiacao.classList.remove('escondida');
+    }   // fim revelarFinal
+
+    // No auto-finish do mata-mata, espera a animação da minha última partida terminar.
+    if (formatoOnline === 'mata' && animacaoAtiva) aoFimDaAnimacao = revelarFinal;
+    else revelarFinal();
   }
 
   // Resumo da campanha do MEU time (estilo do resumo offline do Brasileirão)
@@ -2405,7 +2441,7 @@
       btnRodadaProxima.disabled    = true;
       btnRodadaProxima.textContent = 'Simulando...';
       rodadaPartidas.innerHTML     = '<p style="color:#888;text-align:center;padding:2rem">Simulando…</p>';
-      if (socket && socket.connected) socket.emit('round:simulate');
+      if (socket && socket.connected) socket.emit(emMataMata ? 'chave:advance' : 'round:simulate');
     });
 
     if (tabPartidas) tabPartidas.addEventListener('click', function () { selecionarAbaRodada('partidas'); });

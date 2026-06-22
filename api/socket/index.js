@@ -1303,12 +1303,25 @@ function setupSocket(server, frontendUrl) {
           rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
         });
 
-        if (ehFinal) {
+        // Se nenhum humano segue vivo na próxima fase, simula o resto direto.
+        let finalCampeao = campeao, acabou = ehFinal;
+        if (!ehFinal) {
+          const prox = sala.chave.rounds[sala.chave.rodadaAtual] || [];
+          const temHumano = prox.some(n => [n.a, n.b].some(t => t && !t.ehBot));
+          if (!temHumano) {
+            let r2; do { r2 = simularRodadaMata(sala); } while (!r2.ehFinal);
+            finalCampeao = r2.campeao; acabou = true;
+          }
+        }
+
+        if (acabou) {
           sala.status = 'fim';
+          const art2 = Object.entries(sala.statsGols).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
+          const ass2 = Object.entries(sala.statsAssists).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
           io.to(code).emit('game:end', {
-            campeao: campeao ? { userId: campeao.userId, nome: campeao.nome, ehBot: !!campeao.ehBot } : null,
-            ranking: rankingMata(sala),
-            artilharia, assistencias, mata: true,
+            campeao: finalCampeao ? { userId: finalCampeao.userId, nome: finalCampeao.nome, ehBot: !!finalCampeao.ehBot } : null,
+            ranking: rankingMata(sala), artilharia: art2, assistencias: ass2, mata: true,
+            rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
           });
         }
       } catch (err) {
