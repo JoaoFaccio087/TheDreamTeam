@@ -161,11 +161,9 @@
   // ── Helpers ───────────────────────────────────────────────────────────────
 
   function htmlEsc(str) {
+    if (window.UI && UI.esc) return UI.esc(str);
     return String(str == null ? '' : str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
   function getMeuId() {
@@ -1647,6 +1645,7 @@
   }
 
   function embaralhar(arr) {
+    if (window.UI && UI.shuffle) return UI.shuffle(arr);
     var a = (arr || []).slice();
     for (var i = a.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));

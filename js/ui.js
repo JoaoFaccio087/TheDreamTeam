@@ -6,10 +6,24 @@
 
   var UI = {};
 
+  // Escapa texto para HTML (cobre & < > " ' — superset seguro). Use em TODO
+  // lugar que injeta texto do usuário em innerHTML.
   function esc(s) {
-    return String(s == null ? '' : s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
   }
+  UI.esc = esc;
+
+  // Embaralha (Fisher-Yates) retornando uma CÓPIA (não altera o array original).
+  UI.shuffle = function (arr) {
+    var a = (arr || []).slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  };
 
   var SVG_VOLTAR =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
