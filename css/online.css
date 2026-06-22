@@ -628,7 +628,7 @@
   align-items: start;
 }
 .rodada-partidas-col { display: flex; flex-direction: column; gap: 0.7rem; }
-.rodada-acoes        { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+.rodada-acoes        { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.5rem; }
 .rodada-classif-col  { display: flex; flex-direction: column; gap: 0.5rem; }
 .rodada-stats-col    { display: flex; flex-direction: column; gap: 0.5rem; }
 
@@ -1284,21 +1284,15 @@
   letter-spacing: 0.01em;
 }
 
-/* ── Grupos (aba): grade 4×3 em cima, ARTILHARIA + ASSISTÊNCIAS embaixo ──────── */
-.classif-wrapper.modo-grupos { grid-template-columns: 1fr; }
-.classif-wrapper.modo-grupos .classif-tabela-col { width: 100%; flex: 1 1 100%; }
+/* ── Grupos (aba): grade à esquerda (3 col), ARTILHARIA + ASSISTÊNCIAS na direita ── */
 .classif-wrapper.modo-grupos .grupos-classif-grade {
-  grid-template-columns: repeat(4, minmax(0, 1fr));   /* 4 grupos por linha → 3 linhas (12 grupos) */
+  grid-template-columns: repeat(3, minmax(0, 1fr));   /* 3 grupos por linha → 4 linhas (12 grupos) */
 }
-.classif-wrapper.modo-grupos .classif-stats-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin-top: 1.4rem;
-  width: 100%;
-}
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .classif-wrapper.modo-grupos .grupos-classif-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .classif-wrapper.modo-grupos .grupos-classif-grade { grid-template-columns: 1fr; }
 }
 .gc-head, .gc-linha { grid-template-columns: 1.3em minmax(0,1fr) 1.5em 1.5em 2.1em; overflow: hidden; }
 .gc-time { min-width: 0; }
