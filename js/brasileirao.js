@@ -38,12 +38,7 @@ function gerarCalendarioLiga(n) {
 // Monta a liga: você + 19 clubes sorteados do Brasileirão, tabela zerada.
 function montarLigaBrasileirao() {
   var comp = COMPETICOES.brasileirao.dados;
-  var pool = API.getClubesPorCompeticao(comp).slice();
-
-  for (var i = pool.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
-  }
+  var pool = UI.shuffle(API.getClubesPorCompeticao(comp));
   var outros = pool.slice(0, 19);
 
   var tabela = [{
@@ -282,10 +277,7 @@ function criarCardLigaInstantaneo(rodadaNum, adversario, gMeus, gAdv, golsTime, 
   golsTime.forEach(function (e) { eventos.push({ lado: 'meu', autor: e.autor, assist: e.assist }); });
   golsAdv.forEach(function (e) { eventos.push({ lado: 'adv', autor: e.autor }); });
   var mins = distribuirMinutos(eventos.length);
-  for (var x = eventos.length - 1; x > 0; x--) {
-    var y = Math.floor(Math.random() * (x + 1));
-    var t = eventos[x]; eventos[x] = eventos[y]; eventos[y] = t;
-  }
+  eventos = UI.shuffle(eventos);
   eventos.forEach(function (e, i) { e.minuto = mins[i]; });
   eventos.sort(function (a, b) { return a.minuto - b.minuto; });
 

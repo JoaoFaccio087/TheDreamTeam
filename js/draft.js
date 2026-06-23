@@ -57,13 +57,8 @@ function sortearCartas(indice) {
     porNome[j.nome].push(j);
   });
 
-  // Embaralha os nomes (Fisher–Yates) e pega até 5 distintos
-  for (var i = nomes.length - 1; i > 0; i--) {
-    var k = Math.floor(Math.random() * (i + 1));
-    var t = nomes[i]; nomes[i] = nomes[k]; nomes[k] = t;
-  }
-
-  return nomes.slice(0, 5).map(function (nome) {
+  // Embaralha os nomes e pega até 5 distintos
+  return UI.shuffle(nomes).slice(0, 5).map(function (nome) {
     var opcoes = porNome[nome];
     return opcoes[Math.floor(Math.random() * opcoes.length)];
   });

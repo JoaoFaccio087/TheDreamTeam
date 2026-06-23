@@ -251,12 +251,7 @@ function montarCobradores(lista) {
   var onze = lista.slice()
     .sort(function(a, b) { return b.forca - a.forca; })
     .slice(0, 11);
-  // Fisher-Yates: embaralha a ordem de cobrança
-  for (var i = onze.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = onze[i]; onze[i] = onze[j]; onze[j] = tmp;
-  }
-  return onze;
+  return UI.shuffle(onze);   // ordem de cobrança aleatória
 }
 
 // --- Disputa de pênaltis: best-of-5 + morte súbita; chama onFim('meu'|'adv') ---

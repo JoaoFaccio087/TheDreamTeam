@@ -71,11 +71,7 @@ function montarCampanha() {
   });
 
   // Sorteia os clubes do grupo (você + (tamGrupo-1) adversários distintos)
-  var pool = API.getClubesPorCompeticao(comp).slice();
-  for (var i = pool.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
-  }
+  var pool = UI.shuffle(API.getClubesPorCompeticao(comp));
   var outros = pool.slice(0, tamGrupo - 1);
 
   var tabela = [{ nome: nomeDoTime, voce: true, forca: forcaDoTime(), pts: 0, gf: 0, ga: 0, clubeRef: null }];
@@ -298,14 +294,11 @@ function iniciarPartida() {
     golsAdv.push({ autor: autorAdv });
   }
 
-  // Embaralha a atribuição meu/adv mantendo os minutos ordenados (Fisher-Yates)
+  // Embaralha a atribuição meu/adv mantendo os minutos ordenados
   var attrs = [];
   for (var a = 0; a < placar.meus; a++)       attrs.push('meu');
   for (var a = 0; a < placar.adversario; a++) attrs.push('adv');
-  for (var x = attrs.length - 1; x > 0; x--) {
-    var y = Math.floor(Math.random() * (x + 1));
-    var tmp = attrs[x]; attrs[x] = attrs[y]; attrs[y] = tmp;
-  }
+  attrs = UI.shuffle(attrs);
 
   var fila = [];
   var iMeu = 0, iAdv = 0;
@@ -343,13 +336,9 @@ function iniciarPartida() {
 // Cada rodada, seu jogo é o match[0]; os demais são resolvidos nos bastidores.
 function montarChaveCopa() {
   var comp = COMPETICOES['copa'].dados;
-  var pool = API.getClubesPorCompeticao(comp).filter(function (d) {
+  var pool = UI.shuffle(API.getClubesPorCompeticao(comp).filter(function (d) {
     return adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
-  });
-  for (var i = pool.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var t = pool[i]; pool[i] = pool[j]; pool[j] = t;
-  }
+  }));
 
   var times = [{ nome: nomeDoTime, voce: true, forca: forcaDoTime(), clubeRef: null }];
   for (var k = 0; k < 31; k++) {
@@ -358,12 +347,7 @@ function montarChaveCopa() {
   }
 
   // Embaralha só os adversários (você fica no índice 0)
-  var resto = times.slice(1);
-  for (var m = resto.length - 1; m > 0; m--) {
-    var n = Math.floor(Math.random() * (m + 1));
-    var tt = resto[m]; resto[m] = resto[n]; resto[n] = tt;
-  }
-  times = [times[0]].concat(resto);
+  times = [times[0]].concat(UI.shuffle(times.slice(1)));
 
   // Rodadas: 16 → 8 → 4 → 2 → 1 confrontos
   var rounds = [];
