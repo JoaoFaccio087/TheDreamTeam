@@ -1818,26 +1818,16 @@
 
   function renderCampoOnline(campoEl, picks, formacao, forcaSempre) {
     var slots    = campoEl.querySelectorAll('.slot-ol');
-    // "Mostrar Força" desligado esconde a força no lobby/draft; em Elencos
-    // (forcaSempre = true) ela sempre aparece.
+    // "Mostrar Força" desligado esconde a força no lobby/draft; em Elencos sempre aparece.
     var revela   = !!forcaSempre || (typeof mostrarForca === 'undefined' ? true : mostrarForca);
-    // Rótulos das posições: usa a MESMA fonte do offline (codigosFormacao, global
-    // do formacoes.js), na mesma ordem das coordenadas — nada de lista paralela.
+    // Rótulos das posições: mesma fonte do offline (codigosFormacao), mesma ordem.
     var posis    = (typeof codigosFormacao !== 'undefined' && codigosFormacao[formacao])
                  ? codigosFormacao[formacao]
                  : (typeof codigosFormacao !== 'undefined' ? codigosFormacao['4-3-3'] : null);
-    // Coordenadas dos slots, também do formacoes.js (mesma ordem).
-    var coords   = (typeof formacoes !== 'undefined' && formacoes[formacao])
-                 ? formacoes[formacao]
-                 : (typeof formacoes !== 'undefined' ? formacoes['4-3-3'] : null);
+
+    UI.posicionarCampo(slots, formacao);
 
     slots.forEach(function (slot, i) {
-      // Apply position from formation coordinates
-      if (coords && coords[i]) {
-        slot.style.left = coords[i].left + '%';
-        slot.style.top  = coords[i].top  + '%';
-      }
-
       var jog = picks[i];
       slot.innerHTML = '';
       if (jog) {

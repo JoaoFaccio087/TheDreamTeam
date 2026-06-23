@@ -298,6 +298,7 @@ Hoje a `api.js` devolve dados locais. Quando o backend existir, troca-se **só o
 |---|---|---|
 | `UI.esc` | `esc(s) → string` | Escapa `& < > " '` antes de injetar texto em `innerHTML`. |
 | `UI.shuffle` | `shuffle(arr) → arr` | Fisher-Yates; devolve uma **cópia** (não altera o original). |
+| `UI.posicionarCampo` | `posicionarCampo(marcadores, formacao) → coords` | Posiciona os marcadores (`.ficha`/`.slot-jogo`/`.slot-ol`) pelas coordenadas da formação. Só posiciona; o conteúdo fica a cargo de quem chama. |
 | `UI.renderHeader` | `renderHeader(slot, opts)` | Monta o cabeçalho padrão `.jogo-header-wrap` dentro de `slot`. |
 | `UI.setHeader` | `setHeader(slotId, opts)` | Igual ao anterior, recebendo o `id` do slot. |
 
@@ -325,15 +326,19 @@ Modelo compartilhado pelos três campos (home, single-player, online):
 | Recurso | Consumidores |
 |---|---|
 | `UI.esc` | `online.js`, `perfil.js` (ambos com fallback local) |
-| `UI.shuffle` | `online.js` |
+| `UI.shuffle` | `brasileirao.js`, `campanha.js`, `draft.js`, `simulacao.js`, `online.js` |
+| `UI.posicionarCampo` | `interface.js` (home + single-player), `online.js` (lobby/draft/elencos) |
 | `UI.renderHeader` / `setHeader` | `ui.js`, `online.js` (7 cabeçalhos) |
 | `campo.css` | home, single-player e online (todos os campos) |
 
-### 5.5 Pendente de consolidação
+### 5.5 Consolidação
 
-Duplicação já mapeada, ainda **não** migrada (muda comportamento → fazer com teste):
+Toda a duplicação mapeada já foi migrada para o UIKit:
 
-| Item | Onde está hoje | Alvo |
+| Item | Antes | Agora |
 |---|---|---|
 | Fisher-Yates inline | `brasileirao.js`, `campanha.js`, `draft.js`, `simulacao.js` | `UI.shuffle` |
-| Render do campo (fichas + posições) | `escalacao.js` e `online.js` (`renderCampoOnline`) | futuro `UI.renderCampo` |
+| Posicionamento do campo | `interface.js` e `online.js` (laços `style.left/top` repetidos) | `UI.posicionarCampo` |
+
+O **conteúdo** de cada ficha continua por tela (códigos/escalação no single-player,
+nome/força/pick no online) — só o posicionamento é compartilhado.

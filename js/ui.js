@@ -23,6 +23,22 @@
     return a;
   };
 
+  // Posiciona os marcadores (NodeList/array) pelas coordenadas da formação. Só
+  // posiciona; o conteúdo de cada marcador fica a cargo de quem chama. Devolve as
+  // coordenadas resolvidas (ou null se `formacoes` ainda não existir).
+  UI.posicionarCampo = function (marcadores, formacao) {
+    var fs = (typeof formacoes !== 'undefined') ? formacoes : null;
+    var coords = (fs && fs[formacao]) ? fs[formacao] : (fs ? fs['4-3-3'] : null);
+    if (!coords) return null;
+    Array.prototype.forEach.call(marcadores || [], function (el, i) {
+      if (el && coords[i]) {
+        el.style.left = coords[i].left + '%';
+        el.style.top  = coords[i].top  + '%';
+      }
+    });
+    return coords;
+  };
+
   var SVG_VOLTAR =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
