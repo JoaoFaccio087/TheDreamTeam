@@ -12,7 +12,7 @@
 
 /* Rótulo "A CAMPANHA" no cabeçalho (lado direito, alinhado à base) */
 .sim-label-campanha {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--txt-soft);
@@ -101,7 +101,7 @@
 }
 /* Respiro acima do histórico (separa da tabela do Brasileirão). */
 .tabela-brasileirao:not(.escondida) + .historico-jogos {
-  margin-top: 14px;
+  margin-top: 18px;
 }
 .historico-jogos:empty {
   display: none;
