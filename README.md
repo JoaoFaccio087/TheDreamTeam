@@ -152,24 +152,33 @@ O frontend é estático: qualquer push na branch publicada atualiza o GitHub Pag
 ```text
 TheDreamTeam/
 ├── index.html
+├── CNAME                    # domínio do GitHub Pages
+├── README.md   CONTRATOS.md   LICENSE
+├── docker-compose.yml   .env.example   .dockerignore
 ├── assets/imagens/
 ├── css/
 │   ├── base.css   home.css   escalacao.css   draft.css   simulacao.css
 │   ├── resumo.css   auth.css   perfil.css   online.css
-│   ├── campo.css            # modelo único do campo de escalação
+│   ├── campo.css           # modelo único do campo de escalação
 │   └── responsivo.css
 ├── js/
 │   ├── ui.js               # componentes compartilhados (UIKit)
 │   ├── dados/              # libertadores, champions, brasileirao, copa, dados
+│   ├── libs/               # html2canvas
 │   ├── estado.js   formacoes.js   regras.js   interface.js
 │   ├── sorteio.js   escalacao.js   draft.js   simulacao.js
 │   ├── campanha.js   brasileirao.js   resumo.js   home.js
 │   ├── api.js   auth.js   perfil.js   online.js
 │   └── main.js
-└── api/                    # backend (Node + Express + Socket.IO)
-    ├── server.js   db.js   migrate.js   seed.js
-    ├── middleware/   routes/   socket/   dados/
-    └── Dockerfile   package.json
+├── api/                    # backend (Node + Express + Socket.IO)
+│   ├── server.js   db.js   migrate.js   seed.js
+│   ├── routes/             # auth, users, rooms, matches, ranking
+│   ├── socket/             # index.js (liga + grupos/mata-mata), salaState.js, simulacao.js
+│   ├── middleware/auth.js  # JWT
+│   ├── dados/              # loader.js + cópia dos elencos p/ o servidor
+│   └── Dockerfile   package.json
+├── db/                     # PostgreSQL: init.sql + migrations/
+└── nginx/nginx.conf        # proxy do stack local (docker-compose)
 ```
 
 Os arquivos do **frontend** compartilham um escopo global e são carregados em ordem (com `defer`) no final do `index.html` — dados e configuração primeiro, `main.js` por último.
