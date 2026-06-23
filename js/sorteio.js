@@ -1,8 +1,7 @@
 // sorteio.js — animação do sorteio, skips e novo sorteio de clube.
 
-// --- Evita travar o usuário: o sorteio/skip só caem em clubes que conseguem
-//     preencher ao menos uma das vagas ainda vazias (ex.: se só falta LE, só
-//     entram clubes com um lateral-esquerdo elegível). ---
+// O sorteio/skip só caem em clubes que conseguem preencher alguma vaga ainda vazia
+// (se só falta LE, só entram clubes com um lateral-esquerdo elegível).
 
 // Códigos das vagas ainda vazias no time (sem repetir).
 function codigosVagasVazias() {
@@ -24,8 +23,7 @@ function clubeServeVagas(clube, codigos) {
   });
 }
 
-// Reduz a lista de candidatos aos clubes úteis. Se NENHUM servir (praticamente
-// impossível com centenas de clubes), devolve a lista original — nunca trava.
+// Reduz aos clubes úteis; se nenhum servir, devolve a lista original (nunca trava).
 function filtrarClubesUteis(candidatos) {
   var faltam = codigosVagasVazias();
   var uteis = candidatos.filter(function (c) { return clubeServeVagas(c, faltam); });

@@ -136,10 +136,8 @@ var api = {
       return Promise.resolve(locais);
     }
 
-    // Logado: junta o histórico do backend com as partidas offline salvas
-    // localmente (quando o usuário jogou sem estar logado). São conjuntos
-    // distintos — offline fica no localStorage, online/logado vai pro backend —
-    // então não há duplicação. Ordena por data (mais recentes primeiro).
+    // Logado: junta o histórico do backend com as partidas offline (conjuntos
+    // distintos, sem duplicação) e ordena por data (mais recentes primeiro).
     return _req('GET', '/matches').then(function (remotas) {
       remotas = Array.isArray(remotas) ? remotas : [];
       var tudo = remotas.concat(locais);

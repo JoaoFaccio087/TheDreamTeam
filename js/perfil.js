@@ -1,7 +1,5 @@
-// perfil.js — modais "Meu Perfil" (com acordeões de estatísticas + lápis),
-// "Alterar Informações" (usuário/time/e-mail/senha) e "Meu Histórico".
-// Só para usuários logados (itens ficam em #menu-logado). A camada api.js cuida
-// de logado (backend) vs convidado/offline (localStorage).
+// perfil.js — modais "Meu Perfil", "Alterar Informações" e "Meu Histórico".
+// Só para usuários logados; api.js cuida de backend vs offline.
 (function () {
   'use strict';
 

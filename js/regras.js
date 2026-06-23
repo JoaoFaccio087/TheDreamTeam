@@ -1,7 +1,7 @@
 // regras.js — competições (fonte única) e regras de elegibilidade de posições.
 
-// Fonte única das competições. A chave é o id usado no código (ex.: modoSelecionado);
-// dela saem o valor de "competicao" em DADOS (para filtrar), o rótulo exibido e o tema de cor.
+// Fonte única das competições. A chave é o id usado no código; dela saem o valor de
+// "competicao" no DADOS, o rótulo exibido e o tema de cor.
 const COMPETICOES = {
   libertadores: { dados: 'Libertadores', label: 'Libertadores',    tema: 'tema-libertadores' },
   champions:    { dados: 'Champions',    label: 'Champions League', tema: 'tema-champions' },
@@ -17,10 +17,8 @@ function rotuloCompeticao(valorDados) {
   return valorDados;
 }
 
-// Códigos de posição que uma vaga aceita. As alas ME e MD aceitam também os
-// pontas do mesmo lado (PE para ME, PD para MD) — alas naturais —, mas NÃO os
-// meias centrais (MC/MEI), que não jogam abertos. As demais vagas só aceitam
-// jogadores que tenham exatamente aquela posição.
+// Códigos de posição que uma vaga aceita. As alas ME/MD também aceitam o ponta do
+// mesmo lado (PE→ME, PD→MD); as demais vagas só aceitam a posição exata.
 function codigosAceitos(codigoVaga) {
   var mapa = {
     'ME': ['ME', 'PE'],
