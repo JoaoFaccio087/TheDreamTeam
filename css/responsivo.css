@@ -1,4 +1,4 @@
-/* responsivo.css — ajustes para telas menores (media queries). Carregar por ÚLTIMO (sobrescreve os estilos das telas). */
+/* responsivo.css — ajustes para telas menores (media queries). Carregar por último. */
 
 /* CELULARES E TABLETS (≤ 768px) */
 @media (max-width: 768px) {
@@ -61,8 +61,7 @@
     min-height: auto;
   }
 
-  /* Cabeçalho das telas do jogo/simulação: empilha (título em cima, info embaixo)
-     para "The Dream Team" caber sempre em uma única linha. */
+  /* Cabeçalho do jogo/simulação: empilha (título sempre em uma linha). */
   .jogo-header {
     padding: 18px 16px 14px;
     flex-direction: column;
@@ -73,13 +72,11 @@
   .jogo-header-info,
   .sim-label-campanha { text-align: left; }
 
-  /* Escalação no celular: o Voltar fica COMPACTO ao lado do botão de ação
-     (Rolar/Começar), que ocupa o resto da largura. display:contents promove os
-     filhos da coluna direita ao .jogo-wrapper. */
+  /* No celular o Voltar fica ao lado da ação; display:contents promove os filhos
+     da coluna direita ao .jogo-wrapper. */
   .jogo-direita { display: contents; }
 
-  /* Linha de ação em fila: ação preenchendo a largura (o Voltar agora fica
-     no topo à esquerda do cabeçalho, válido para Clássico e Draft). */
+  /* Linha de ação: a ação preenche a largura (o Voltar fica no topo do cabeçalho). */
   .jogo-acao {
     display: flex;
     gap: 8px;
@@ -95,7 +92,8 @@
   .jogo-header-esq { gap: 12px; align-items: center; }
   .jogo-voltar-topo { padding: 6px 11px; font-size: 0.76rem; margin-bottom: 0; }
 
-  /* Tela de simulação no celular: vira 1 coluna. display:contents "promove" os filhos das duas colunas ao .sim-wrapper, e a ordem vem do `order` (Voltar, controles, histórico, ação, resumo, stats). */
+  /* Simulação no celular: 1 coluna. display:contents promove os filhos das duas
+     colunas ao .sim-wrapper; a sequência vem do `order`. */
   .sim-wrapper {
     display: flex;
     flex-direction: column;
@@ -204,9 +202,8 @@
   .sorteio-acoes .btn-rolar,
   .sorteio-acoes .btn-secundario { flex: 1 1 0; min-width: 0; }
 
-  /* — Campo de escalação no celular: ocupa a largura toda e as fichas ficam
-       PROPORCIONAIS ao campo (escalam por cqw, sem o piso de 48px que as deixava
-       grandes demais num campo estreito). Vale p/ lobby, draft e elencos. — */
+  /* Campo no celular: largura cheia e fichas proporcionais (cqw). Vale p/ lobby,
+     draft e elencos. */
   .campo-jogo { max-width: 100%; }
   .lobby-wrapper, .draft-wrapper, .elencos-wrapper { padding-left: 10px; padding-right: 10px; }
   .lobby-centro, .draft-campo-col, .elencos-campo-col { width: 100%; }

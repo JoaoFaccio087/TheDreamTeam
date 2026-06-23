@@ -95,7 +95,7 @@
   gap: 12px;
 }
 
-/* Container do histórico: vazio, some (display:none) para o Voltar e o botão de ação ficarem juntos; quando os cards entram, o botão desce. */
+/* Container do histórico: vazio, some (display:none) p/ Voltar e ação ficarem juntos. */
 .historico-jogos {
   min-height: 0;
 }
@@ -118,8 +118,7 @@
   align-self: flex-start;   /* não estica horizontalmente no flex column */
 }
 
-/* Respiro padrão (16px) acima dos botões de ação na coluna lateral —
-   mesmo espaçamento dos demais blocos (controles → estatísticas). */
+/* Respiro (16px) acima dos botões de ação, igual aos demais blocos da coluna. */
 .sim-lateral .sim-btn-acao {
   margin-top: 16px;
 }

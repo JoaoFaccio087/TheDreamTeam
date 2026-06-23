@@ -5,10 +5,8 @@
 .online-subview           { display: block; }
 .online-subview.escondida { display: none; }
 
-/* O modo online ocupa a página inteira. O .tela base (mobile-first) centraliza
-   vertical e horizontalmente e encolhe o conteúdo — por isso o lobby ficava
-   "pequenininho" no meio da tela. Aqui alinhamos ao topo e damos uma largura
-   confortável pro layout de 3 colunas respirar. */
+/* O modo online ocupa a página inteira: alinha ao topo e usa uma largura confortável
+   para o layout de 3 colunas (o .tela base centralizaria e encolheria o conteúdo). */
 #tela-online {
   justify-content: flex-start;
   padding: 28px 16px 48px;
@@ -814,15 +812,13 @@
 .modal-confirm-acoes  { display: flex; gap: 0.6rem; justify-content: center; }
 .modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
 
-/* Modal de escolha do draft online: bem opaco (o campo verde não deve vazar). */
-/* Fundo quase opaco (0.97): o backdrop-filter seria invisível mas custaria um
-   reblur a cada repaint da seleção/hover dos cards — removido para a seleção ficar fluida. */
+/* Modal de escolha do draft online: fundo quase opaco (o campo verde não vaza).
+   Sem backdrop-filter de propósito — o reblur a cada repaint travaria a seleção. */
 #modal-draft-pick { background: rgba(8,9,12,0.97); }
 
-/* ===== Fluidez do modal de cards (online) — animações 100% compositadas =====
-   Escopo só em #modal-draft-pick; o draft offline permanece intacto.
-   Trocamos box-shadow/background-position (que causam repaint a cada frame)
-   por transform/opacity (compositadas pela GPU). */
+/* ===== Fluidez do modal de cards (online) — animações compositadas =====
+   Escopo só em #modal-draft-pick: usa transform/opacity (GPU) no lugar de
+   box-shadow/background-position. O draft offline fica intacto. */
 
 /* Contexto 3D + isolamento de repaint do container das cartas. */
 #modal-draft-pick-cartas { perspective: 800px; }
@@ -847,11 +843,8 @@
   100% { transform: translateX(100%);  opacity: 0; }
 }
 
-/* 3) Pulso elite via scale compositado (em vez de animar box-shadow com blur grande).
-      O glow estático (box-shadow) escala junto, dando o mesmo efeito de "respiro".
-      OBS.: ao selecionar (.escolhida) NÃO cortamos a animação — antes o
-      `animation:none` matava o "deal"/pulso no meio e causava um salto quando o
-      jogador trocava de carta. A seleção é indicada só pela borda/brilho. */
+/* 3) Pulso elite via scale compositado (o glow estático escala junto). Ao selecionar
+      não cortamos a animação — a escolha é indicada só pela borda/brilho. */
 #modal-draft-pick .draft-carta.tier-elite                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
 #modal-draft-pick .draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
 #modal-draft-pick .draft-carta.tier-diamante                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }

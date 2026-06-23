@@ -95,8 +95,7 @@
 }
 .editar-sep-senha::before, .editar-sep-senha::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
 .editar-acoes { display: flex; gap: 0.8rem; margin-top: 1.3rem; }
-/* Anula o width:100%/display:block herdado do .btn-rolar para os dois dividirem
-   o espaço igualmente, com altura confortável (antes ficavam espremidos). */
+/* Anula o width:100%/display:block do .btn-rolar para os dois dividirem o espaço. */
 .editar-acoes .btn-rolar,
 .editar-acoes .btn-secundario {
   flex: 1 1 0;

@@ -1,6 +1,6 @@
 /* home.css — tela inicial (manchete, modo, campo de amostra, passos e rodapé). */
 
-/* Tela inicial: sobrescreve .tela para um layout de página completa (header, dois blocos, cards e rodapé). */
+/* Tela inicial: sobrescreve .tela para um layout de página completa. */
 
 #tela-inicial {
   /* O conteúdo começa do topo, não centralizado verticalmente */

@@ -24,8 +24,7 @@
 }
 
 
-/* LAYOUT DO DRAFT ATIVO — remove a coluna esquerda, deixa 2 colunas
-   e amplia o campo de escalação para melhor leitura. */
+/* LAYOUT DO DRAFT ATIVO — remove a coluna esquerda e amplia o campo (2 colunas). */
 .jogo-wrapper.draft-ativo {
   grid-template-columns: 1fr 220px;
 }
@@ -127,9 +126,8 @@
   transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
 }
 
-/* Entrada escalonada (deal) — aplicada SÓ na renderização, via .carta-entrando,
-   e removida assim que termina (o JS tira a classe). Assim a seleção nunca
-   re-dispara o "deal" — era isso que fazia a carta sumir por um instante. */
+/* Entrada escalonada (deal): só na renderização, via .carta-entrando (o JS remove a
+   classe ao fim, para a seleção não re-disparar a animação). */
 .draft-carta.carta-entrando {
   animation: carta-deal 0.46s cubic-bezier(0.2, 0.85, 0.3, 1.25) backwards;
 }
