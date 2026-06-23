@@ -1,4 +1,4 @@
-//  escalacao.js — montar XI: lista, alocar, mover, trocar, box score
+// escalacao.js — montar XI: lista, alocar, mover, trocar, box score.
 
 // Força deve aparecer? ON sempre mostra; OFF só revela com o XI completo (11/11).
 function forcaVisivel() {
@@ -18,8 +18,7 @@ function atualizarBoxScore() {
     var nome   = escalacao[i] ? escalacao[i].nome   : '---';
     div.className = 'box-linha' + (escalacao[i] ? '' : ' vazio');
 
-    // Força aparece só nos slots preenchidos, alinhada à direita.
-    // Com "Mostrar Força" desligado, fica oculta ("?") até o time ficar completo.
+    // Força só nos slots preenchidos; oculta ("?") se "Mostrar Força" estiver off.
     var forcaHtml = escalacao[i]
       ? '<span class="box-forca' + (revela ? '' : ' forca-oculta') + '">' + (revela ? escalacao[i].forca : '?') + '</span>'
       : '';
@@ -97,8 +96,7 @@ function iniciarTelaJogo() {
   formacaoBloco.classList.remove('escondida');
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 
-  // Reexibe o switch "Mostrar Força" (fica oculto durante o jogo) e sincroniza
-  // o estado do toggle com a preferência atual.
+  // Reexibe o switch "Mostrar Força" e sincroniza com a preferência atual.
   if (jogoForcaBloco) jogoForcaBloco.classList.remove('escondida');
   var _swForca = document.getElementById('switch-forca');
   if (_swForca && typeof mostrarForca !== 'undefined') _swForca.checked = mostrarForca;
@@ -162,12 +160,8 @@ function selecionarFormacaoJogo(nome) {
 }
 
 
-// CONSTRUIR LISTA DE JOGADORES
-//
-// Cada jogador aparece como DISPONÍVEL ou INDISPONÍVEL:
-//   (a) já está alocado em algum slot → indisponível
-//   (b) nenhuma vaga vazia aceita suas posições → indisponível
-//   (c) caso contrário → disponível e clicável
+// CONSTRUIR LISTA DE JOGADORES — cada jogador entra disponível ou indisponível
+// (já alocado, ou sem vaga vazia compatível).
 
 function construirListaJogadores(jogadores) {
   listaJogadores.innerHTML = '';
@@ -317,12 +311,8 @@ function alocarJogador(indice) {
 }
 
 
-// INICIAR MOVER — seleciona um jogador já no campo para reposicioná-lo
-//
-// Lógica:
-//   - Clicou no mesmo slot que já estava em modo mover → cancela (toggle)
-//   - Jogador não tem outra vaga compatível vazia → nada acende
-//   - Caso contrário → entra no modo mover e acende os destinos possíveis
+// INICIAR MOVER — seleciona um jogador já no campo e acende os destinos possíveis
+// (vagas vazias compatíveis e jogadores com quem pode trocar).
 
 function iniciarMover(indice) {
   // Toggle: clicou no mesmo slot → sai do modo de edição
@@ -398,8 +388,7 @@ function concluirMover(destinoIndice) {
   atualizarDisponibilidadeLista();  // libera quem virou elegível com a vaga aberta
 }
 
-// --- Reconstrói a lista do time sorteado (se visível) para atualizar os disponíveis
-//     depois de mover/trocar no campo (uma vaga pode ter sido liberada/ocupada). ---
+// --- Reconstrói a lista do time sorteado (se visível) após mover/trocar no campo ---
 function atualizarDisponibilidadeLista() {
   if (!edicaoSorteada || listaJogadores.classList.contains('escondida')) return;
   var scroll = listaJogadores.scrollTop;
@@ -432,12 +421,7 @@ function concluirTroca(indiceQ) {
 }
 
 
-// CLICAR NUM SLOT — roteia para a ação correta dependendo do estado
-//
-//   slot preenchido + sem seleção   → iniciarMover (ou cancelar se toggle)
-//   slot compatível + lista ativa   → alocarJogador (novo jogador da lista)
-//   slot compatível + mover ativo   → concluirMover (mover existente)
-//   slot vazio não-compatível       → cancela qualquer seleção
+// CLICAR NUM SLOT — roteia para a ação correta conforme o estado da vaga.
 
 function clicarSlot(indice) {
   // No modo Draft já iniciado, o roteamento dos cliques é próprio (cartas + mover)

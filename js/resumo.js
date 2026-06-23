@@ -1,7 +1,5 @@
-//  resumo.js — modal de resumo da campanha
-//  Layout: 4 cards (Campanha · Gols · Artilheiro · Assistente),
-//  mapa da escalação + lista de estatísticas, e 3 ações
-//  (Baixar imagem · Compartilhar · Jogar de Novo).
+// resumo.js — modal de resumo da campanha: 4 cards, mapa da escalação, lista de
+// estatísticas e ações (baixar imagem · compartilhar · jogar de novo).
 
 var resumoShareTexto = '';   // texto usado no compartilhamento
 
@@ -62,9 +60,8 @@ function salvarCampanhaNoHistorico(campeao) {
     });
   }
 
-  // Snapshot completo (formação + 11 titulares com força/gols/assist.) para
-  // reabrir o resumo desta campanha lá no histórico. Mantém os índices das vagas
-  // (com null nas vazias) para reconstruir o mapa de escalação na ordem certa.
+  // Snapshot (formação + 11 titulares com força/gols/assist.) para reabrir o resumo
+  // no histórico. Mantém os índices das vagas (null nas vazias) p/ remontar o mapa.
   var picks = [];
   for (var pi = 0; pi < 11; pi++) {
     var jp = (typeof escalacao !== 'undefined') ? escalacao[pi] : null;
@@ -176,8 +173,7 @@ function mostrarResumo() {
       '</div>';
   }
 
-  // ---- Lista de estatísticas (em ordem de posição — GOL primeiro, igual à
-  //      tela de escalação: segue a ordem das vagas da formação) ----
+  // ---- Lista de estatísticas, na ordem das vagas da formação (GOL primeiro) ----
   var titulares = [];
   for (var k = 0; k < 11; k++) { if (escalacao[k]) titulares.push(escalacao[k]); }
 
@@ -308,9 +304,8 @@ function jogarDeNovo() {
 
 
 // ─────────────────────── RESUMO A PARTIR DO HISTÓRICO ───────────────────────
-// Reabre o card de resumo de uma campanha já encerrada (item do histórico).
-// Campanhas offline trazem o snapshot completo (mapa + lista). As do backend
-// (que não devolve "detalhes") caem numa versão compacta, só com os números.
+// Reabre o resumo de uma campanha encerrada. Campanhas offline trazem o snapshot
+// completo (mapa + lista); as do backend caem numa versão compacta (só números).
 function mostrarResumoHistorico(item) {
   if (!resumoOverlay || !item) return;
 
