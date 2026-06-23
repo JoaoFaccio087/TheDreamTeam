@@ -1,0 +1,101 @@
+/* =====================================================================
+   PÊNALTIS — modal de animação da disputa (single-player; reusável)
+   ===================================================================== */
+
+.pen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 9, 7, 0.74);
+  opacity: 0;
+  transition: opacity 0.35s;
+  padding: 16px;
+}
+.pen-overlay.aberto { opacity: 1; }
+
+.pen-modal {
+  width: 100%;
+  max-width: 520px;
+  font-family: 'Archivo', sans-serif;
+  transform: translateY(10px);
+  transition: transform 0.35s;
+}
+.pen-overlay.aberto .pen-modal { transform: none; }
+
+/* ── Placar ─────────────────────────────────────────────────────────── */
+.pen-board {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  background: #0c130f;
+  border-radius: 14px 14px 0 0;
+  padding: 13px 16px;
+}
+.pen-side { flex: 1; min-width: 0; }
+.pen-side.r { text-align: right; }
+.pen-tnome {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pen-dots { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; max-width: 120px; }
+.pen-side.r .pen-dots { margin-left: auto; justify-content: flex-end; }
+.pen-score {
+  font-family: 'Archivo Black', sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  color: #fff;
+  white-space: nowrap;
+  padding-top: 6px;
+}
+
+/* ── Palco ──────────────────────────────────────────────────────────── */
+.pen-stage { display: block; width: 100%; }
+
+/* ── Rodapé ─────────────────────────────────────────────────────────── */
+.pen-foot {
+  background: #0c130f;
+  border-radius: 0 0 14px 14px;
+  padding: 10px 16px 15px;
+  text-align: center;
+}
+.pen-status { color: #cfe0d4; font-size: 13px; margin: 0 0 10px; min-height: 18px; }
+.pen-status b { color: #fff; }
+.pen-pular {
+  background: transparent;
+  color: #cfe0d4;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 9px;
+  padding: 10px 18px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.pen-pular:disabled { opacity: 0.4; cursor: default; }
+
+/* ── Animações da cena ──────────────────────────────────────────────── */
+#pen-kp     { transition: transform 0.42s cubic-bezier(0.3, 0.7, 0.4, 1); }
+#pen-kpIdle { animation: penbob 1.8s ease-in-out infinite; transform-box: fill-box; transition: opacity 0.1s; }
+#pen-kpDive { opacity: 0; transition: opacity 0.1s; transform-box: fill-box; transform-origin: 50% 60%; }
+@keyframes penbob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.4px); } }
+
+#pen-bl { transition: transform 0.46s cubic-bezier(0.22, 0.6, 0.3, 1); }
+#pen-fl { transition: opacity 0.16s; }
+
+.pen-cH, .pen-cR { transition: opacity 0.3s; transform-box: fill-box; }
+.pen-cheer { opacity: 1 !important; animation: penpop 0.5s ease; }
+.pen-boo   { opacity: 0.5; }
+@keyframes penpop { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-3px); } }
+
+@media (max-width: 540px) {
+  .pen-score { font-size: 24px; }
+  .pen-tnome { font-size: 12px; }
+}
