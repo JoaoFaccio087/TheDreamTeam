@@ -19,6 +19,23 @@
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
   function el(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
 
+  // Bola clássica preto e branco (pentágono central + 5 na borda + costuras).
+  function bolaFutebol() {
+    var g = el('g', {});
+    g.appendChild(el('circle', { cx: 0, cy: 0, r: 11, fill: '#fbfbfb', stroke: '#bdbdbd', 'stroke-width': 0.7 }));
+    function pent(cx, cy, R, rotDeg) {
+      var p = '';
+      for (var i = 0; i < 5; i++) { var a = (rotDeg + i * 72) * Math.PI / 180; p += (cx + R * Math.cos(a)).toFixed(2) + ',' + (cy + R * Math.sin(a)).toFixed(2) + ' '; }
+      return p.trim();
+    }
+    var rim = [];
+    for (var k = 0; k < 5; k++) { var ad = -54 + k * 72, ar = ad * Math.PI / 180; rim.push([8.4 * Math.cos(ar), 8.4 * Math.sin(ar), ad]); }
+    rim.forEach(function (r) { g.appendChild(el('line', { x1: 0, y1: 0, x2: (r[0] * 0.62).toFixed(2), y2: (r[1] * 0.62).toFixed(2), stroke: '#d2d2d2', 'stroke-width': 0.7 })); });
+    g.appendChild(el('polygon', { points: pent(0, 0, 4.4, -90), fill: '#161616' }));
+    rim.forEach(function (r) { g.appendChild(el('polygon', { points: pent(r[0], r[1], 2.7, r[2]), fill: '#161616' })); });
+    return g;
+  }
+
   function cadencia(vel) {
     if (vel === 'lento')  return 1500;
     if (vel === 'rapida') return 650;
@@ -89,17 +106,17 @@
             '<circle cx="0" cy="-40" r="8" fill="#f1c9a0"/><path d="M-8 -41 A8 8 0 0 1 8 -41 Q3 -45 0 -45 Q-3 -45 -8 -41 Z" fill="#3a2a1a"/>' +
           '</g>' +
           '<g id="pen-kpDive">' +
-            '<ellipse cx="6" cy="25" rx="16" ry="3" fill="#000" opacity="0.18"/>' +
-            '<path d="M-2 4 Q-12 12 -19 20" stroke="#f1c9a0" stroke-width="6.5" fill="none" stroke-linecap="round"/><ellipse cx="-20" cy="21" rx="5" ry="2.4" fill="#161616"/>' +
-            '<path d="M6 4 Q15 11 16 21" stroke="#f1c9a0" stroke-width="6.5" fill="none" stroke-linecap="round"/><ellipse cx="16" cy="23" rx="5" ry="2.4" fill="#161616"/>' +
-            '<rect x="-8" y="-4" width="18" height="13" rx="3" fill="#14424b"/>' +
-            '<path d="M-9 8 L-12 -22 Q-13 -27 -8 -28 L5 -30 Q10 -31 11 -26 L13 2 Z" fill="#1fb6c9"/>' +
-            // braços sobem PELA DIREITA, luvas acima/à direita da cabeça (não cruzam o rosto)
-            '<path d="M6 -28 Q20 -40 30 -50" stroke="#1fb6c9" stroke-width="7" fill="none" stroke-linecap="round"/>' +
-            '<circle cx="32" cy="-52" r="5.4" fill="#f4f4f4" stroke="#178a99" stroke-width="1.3"/>' +
-            '<path d="M4 -29 Q16 -42 24 -53" stroke="#1fb6c9" stroke-width="6.5" fill="none" stroke-linecap="round"/>' +
-            '<circle cx="26" cy="-55" r="5.2" fill="#f4f4f4" stroke="#178a99" stroke-width="1.3"/>' +
-            '<circle cx="2" cy="-38" r="8" fill="#f1c9a0"/><path d="M-6 -39 A8 8 0 0 1 10 -39 Q5 -43 2 -43 Q-1 -43 -6 -39 Z" fill="#3a2a1a"/>' +
+            '<path d="M-4 2 Q-9 13 -13 23" stroke="#f4f4f4" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="-14" cy="24" rx="5" ry="2.4" fill="#161616"/>' +
+            '<path d="M4 2 Q9 13 13 23" stroke="#f4f4f4" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="14" cy="24" rx="5" ry="2.4" fill="#161616"/>' +
+            '<rect x="-10" y="-6" width="20" height="13" rx="3" fill="#14424b"/>' +
+            '<path d="M-11 -4 L-11 -30 Q-11 -34 -6 -34 L6 -34 Q11 -34 11 -30 L11 -4 Z" fill="#1fb6c9"/>' +
+            '<path d="M-6 -34 L6 -34 L4 -29 L-4 -29 Z" fill="#178a99"/>' +
+            // braços sobem retos; ao tombar o corpo, viram em direção ao canto
+            '<path d="M-9 -30 Q-9 -45 -6 -54" stroke="#1fb6c9" stroke-width="6.5" fill="none" stroke-linecap="round"/>' +
+            '<circle cx="-6" cy="-56" r="5.2" fill="#f4f4f4" stroke="#178a99" stroke-width="1.3"/>' +
+            '<path d="M9 -30 Q9 -45 6 -54" stroke="#1fb6c9" stroke-width="6.5" fill="none" stroke-linecap="round"/>' +
+            '<circle cx="6" cy="-56" r="5.2" fill="#f4f4f4" stroke="#178a99" stroke-width="1.3"/>' +
+            '<circle cx="0" cy="-42" r="8" fill="#f1c9a0"/><path d="M-8 -43 A8 8 0 0 1 8 -43 Q3 -47 0 -47 Q-3 -47 -8 -43 Z" fill="#3a2a1a"/>' +
           '</g>' +
         '</g>' +
 
@@ -142,12 +159,7 @@
     crowd(root.querySelector('#pen-cH'), 4, 238, palH);
     crowd(root.querySelector('#pen-cR'), 242, 476, palR);
 
-    var b = el('g', {});
-    b.appendChild(el('circle', { cx: 0, cy: 0, r: 11, fill: '#fbfbfb', stroke: '#c8c8c8', 'stroke-width': 0.6 }));
-    b.appendChild(el('polygon', { points: '0,-5 4.8,-1.5 2.9,4 -2.9,4 -4.8,-1.5', fill: '#1c1c1c' }));
-    [[0, -5, 0, -11], [4.8, -1.5, 10, -3.5], [2.9, 4, 6.5, 9], [-2.9, 4, -6.5, 9], [-4.8, -1.5, -10, -3.5]]
-      .forEach(function (s) { b.appendChild(el('line', { x1: s[0], y1: s[1], x2: s[2], y2: s[3], stroke: '#1c1c1c', 'stroke-width': 1 })); });
-    root.querySelector('#pen-bl').appendChild(b);
+    root.querySelector('#pen-bl').appendChild(bolaFutebol());
   }
 
   // --- Disputa principal ---
@@ -204,15 +216,15 @@
       status.innerHTML = (k.lado === 'meu' ? esc(meuNome) : esc(advNome)) + ' &middot; bate: <b>' + esc(k.nome) + '</b>';
       var o = k.ok ? 'GOL' : (Math.random() < 0.65 ? 'DEFENDEU' : 'FORA');
       var lado = pick([-1, 0, 1]), alto = Math.random() < 0.5;
-      var bx = lado * 108, by = alto ? -152 : -104, kx = lado * 88, ky = alto ? -20 : 6;
-      if (o === 'FORA') { if (Math.random() < 0.5) { bx = pick([-1, 1]) * 158; by = -120; } else { by = -210; bx = lado * 64; } kx = pick([-1, 0, 1]) * 88; }
-      else if (o === 'DEFENDEU') { bx = lado * 86; by = alto ? -128 : -92; kx = lado * 88; ky = alto ? -20 : 6; }
-      else { kx = pick([-1, 0, 1].filter(function (z) { return z !== lado; })) * 88; }
+      var bx = lado * 108, by = alto ? -152 : -104, kx = lado * 72, ky = alto ? -14 : 8, rot = lado * (alto ? 46 : 30);
+      if (o === 'FORA') { if (Math.random() < 0.5) { bx = pick([-1, 1]) * 158; by = -120; } else { by = -210; bx = lado * 64; } kx = pick([-1, 0, 1]) * 72; rot = (kx < 0 ? -1 : kx > 0 ? 1 : 0) * 38; }
+      else if (o === 'DEFENDEU') { bx = lado * 86; by = alto ? -128 : -92; kx = lado * 72; ky = alto ? -14 : 8; rot = lado * (alto ? 46 : 30); }
+      else { kx = pick([-1, 0, 1].filter(function (z) { return z !== lado; })) * 72; rot = (kx < 0 ? -1 : kx > 0 ? 1 : 0) * (alto ? 46 : 30); }
 
       bl.style.transform = 'translate(' + (240 + bx) + 'px,' + (288 + by) + 'px) scale(.56)';
       setTimeout(function () {
-        if (lado !== 0 || o === 'DEFENDEU') { kpI.style.opacity = '0'; kpD.style.opacity = '1'; kpD.style.transform = (kx < 0 ? 'scaleX(-1)' : 'none'); }
-        kp.style.transform = 'translate(' + (240 + kx) + 'px,' + (180 + ky) + 'px)';
+        if (lado !== 0 || o === 'DEFENDEU') { kpI.style.opacity = '0'; kpD.style.opacity = '1'; }
+        kp.style.transform = 'translate(' + (240 + kx) + 'px,' + (180 + ky) + 'px) rotate(' + rot + 'deg)';
       }, 110);
       setTimeout(function () {
         fl.textContent = o + '!';

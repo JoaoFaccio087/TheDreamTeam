@@ -82,9 +82,9 @@
 .pen-pular:disabled { opacity: 0.4; cursor: default; }
 
 /* ── Animações da cena ──────────────────────────────────────────────── */
-#pen-kp     { transition: transform 0.42s cubic-bezier(0.3, 0.7, 0.4, 1); }
+#pen-kp     { transition: transform 0.42s cubic-bezier(0.3, 0.7, 0.4, 1); transform-box: fill-box; transform-origin: 50% 80%; }
 #pen-kpIdle { animation: penbob 1.8s ease-in-out infinite; transform-box: fill-box; transition: opacity 0.1s; }
-#pen-kpDive { opacity: 0; transition: opacity 0.1s; transform-box: fill-box; transform-origin: 50% 60%; }
+#pen-kpDive { opacity: 0; transition: opacity 0.1s; }
 @keyframes penbob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.4px); } }
 
 #pen-bl { transition: transform 0.46s cubic-bezier(0.22, 0.6, 0.3, 1); }
