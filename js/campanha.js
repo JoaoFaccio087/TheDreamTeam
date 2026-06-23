@@ -1,8 +1,6 @@
-//  campanha.js — fluxo da campanha: grupos, tabela e mata-mata
+// campanha.js — fluxo da campanha: grupos, tabela e mata-mata.
 
 var chaveCopa = null;   // chave (organograma) do mata-mata da Copa do Mundo
-
-
 
 // --- Zera a campanha: fases, adversários usados, estatísticas e histórico visual ---
 function reiniciarCampanha() {

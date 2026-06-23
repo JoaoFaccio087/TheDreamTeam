@@ -1,12 +1,7 @@
 // brasileirao.js — campanha em formato de LIGA (pontos corridos).
-//
-// Diferente do mata-mata: 20 times (você + 19 sorteados do Brasileirão), 38
-// rodadas (returno duplo), tabela completa atualizada a cada rodada. Sem
-// eliminação: a temporada vai até a rodada 38 e o título é o 1º lugar.
-//
-// Reaproveita o motor de partida (gerarPlacar, criarCardPartida, tickPartida,
-// encerrarPartida) — aqui ficam só a montagem da liga, a resolução dos jogos
-// de bastidores, a tabela e o "Pular tudo".
+// 20 times (você + 19 sorteados), 38 rodadas (returno duplo), sem eliminação; o
+// título é o 1º lugar. Reaproveita o motor de partida; aqui ficam a montagem da
+// liga, a resolução dos jogos de bastidores, a tabela e o "Pular tudo".
 
 
 // MONTAGEM DA LIGA -------------------------------------------------------------
@@ -205,9 +200,8 @@ function posicaoNaTabela() {
 
 // PULAR TUDO -------------------------------------------------------------------
 
-// Simula instantaneamente todas as rodadas restantes e vai para o resultado final.
-// Agora ATRIBUI os gols aos jogadores (artilheiro/assistente corretos) e cria um
-// card de histórico por rodada — antes só somava o placar ao total do time.
+// Simula todas as rodadas restantes (com gols atribuídos aos jogadores e card por
+// rodada) e vai para o resultado final.
 function pularTudoBrasileirao() {
   if (modoSelecionado !== 'brasileirao') return;
 
