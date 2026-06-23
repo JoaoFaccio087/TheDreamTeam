@@ -1,13 +1,6 @@
-// draft.js — modo de jogo "Draft": escolha do XI por cartas aleatórias.
-//
-// Fluxo: o usuário escolhe o estilo "Draft" e a formação, clica em "Começar"
-// (a coluna esquerda some, o campo cresce), depois clica em cada vaga do campo.
-// A cada vaga aparecem 5 cartas de jogadores aleatórios e ELEGÍVEIS para aquela
-// posição, respeitando a competição selecionada (Libertadores ou Champions).
-// Escolhida a carta e confirmado o "Selecionar", o jogador ocupa a vaga.
-//
-// Reaproveita a lógica existente de mover/trocar (iniciarMover, concluirMover,
-// concluirTroca) e o box score/forças (atualizarBoxScore), além de podeOcupar.
+// draft.js — modo "Draft": escolha do XI por cartas aleatórias.
+// O usuário clica em cada vaga do campo e escolhe entre 5 cartas elegíveis para a
+// posição (da competição selecionada). Reaproveita mover/trocar e o box score.
 
 // --- Estado transitório do draft (estiloJogo/draftIniciado ficam em estado.js) ---
 var draftSlotAtual  = null;   // índice da vaga sendo preenchida
@@ -16,8 +9,7 @@ var draftPoolCartas = [];     // as 5 cartas atualmente na tela
 var _draftPoolCache = {};     // pool achatado por competição (memoizado)
 
 
-// POOL DE JOGADORES — achata DADOS da competição atual em jogadores com clube/edição.
-// Só inclui a competição selecionada: nunca mistura Libertadores com Champions.
+// POOL DE JOGADORES — achata o DADOS da competição atual (nunca mistura competições).
 function obterPoolDraft() {
   var chave = modoSelecionado;
   if (_draftPoolCache[chave]) return _draftPoolCache[chave];
@@ -47,9 +39,8 @@ function nomeJaEscalado(nome) {
   return escalacao.some(function (e) { return e && e.nome === nome; });
 }
 
-// Sorteia até 5 cartas elegíveis para a vaga, com NOMES distintos entre si e
-// sem jogadores que já estão na escalação. Se um mesmo nome existir em várias
-// edições, escolhe uma edição ao acaso para representá-lo.
+// Sorteia até 5 cartas elegíveis (nomes distintos, fora da escalação). Para um nome
+// presente em várias edições, escolhe uma edição ao acaso.
 function sortearCartas(indice) {
   var codigo = slotsJogo[indice].dataset.codigo;
   var pool   = obterPoolDraft();
@@ -201,8 +192,7 @@ function abrirCartasDraft(indice) {
   draftOverlay.classList.remove('escondida');
 }
 
-// Renderiza as cartas no overlay com animação de "abertura de pacote":
-// entrada escalonada (deal), brilho diagonal e glow de raridade por força.
+// Renderiza as cartas com animação de "abertura de pacote" e glow de raridade.
 function renderizarCartas() {
   draftCartasEl.innerHTML = '';
 
@@ -218,8 +208,7 @@ function renderizarCartas() {
   draftPoolCartas.forEach(function (j, idx) {
     var atraso = idx * 0.09; // escalonamento do "deal" entre as cartas
 
-    // "Mostrar Força" desligado: oculta a força ("?") e neutraliza o tier
-    // (a raridade pela cor revelaria a força, então fica escondida também).
+    // "Mostrar Força" desligado: oculta a força e o tier (a cor revelaria a força).
     var revela = (typeof forcaVisivel === 'function') ? forcaVisivel() : true;
     var tier   = revela ? tierDaForca(j.forca) : 'oculto';
 
@@ -237,8 +226,7 @@ function renderizarCartas() {
       '<span class="carta-forca">' + (revela ? j.forca : '?') + '</span>';
 
     carta.addEventListener('click', function () { selecionarCarta(idx, carta); });
-    // Tira a classe de entrada quando o "deal" acaba: a partir daí, selecionar/
-    // desselecionar só mexe em borda/escala (transição), nunca re-anima a entrada.
+    // Ao fim do "deal", remove a classe de entrada (selecionar não re-anima).
     carta.addEventListener('animationend', function (e) {
       if (e.animationName === 'carta-deal') carta.classList.remove('carta-entrando');
     });

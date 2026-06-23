@@ -1,8 +1,4 @@
-//  simulacao.js — motor da partida: placar, gols, pênaltis e cards
-
-
-
-// SIMULAÇÃO DE PARTIDAS
+// simulacao.js — motor da partida: placar, gols, pênaltis e cards.
 
 // --- Cadência em ms por minuto de jogo, lida ao vivo em cada tick ---
 function cadenciaAtual() {
@@ -11,9 +7,8 @@ function cadenciaAtual() {
   return 80; // normal
 }
 
-// Cadência das COBRANÇAS DE PÊNALTI: bem mais lenta que o relógio do jogo, pra dar
-// suspense (uma cobrança a cada ~1s no normal). Segue a velocidade escolhida e é lida
-// a cada cobrança — trocar a velocidade no meio da disputa já vale na cobrança seguinte.
+// Cadência das cobranças de pênalti (mais lenta que o relógio, p/ suspense). Lida a
+// cada cobrança, então mudar a velocidade no meio já vale na cobrança seguinte.
 function cadenciaPenalti() {
   if (velocidadeSimulacao === 'lento')  return 1500;
   if (velocidadeSimulacao === 'rapida') return 650;
@@ -203,10 +198,8 @@ function adicionarEventoCard(id, html, classeExtra) {
 }
 
 // --- Tick da partida: avança 1 minuto, processa gols e agenda o próximo tick ---
-//
-// Usa setTimeout recursivo (não setInterval) para que a cadência seja lida
-// de cadenciaAtual() a cada chamada — trocar a velocidade no meio do jogo
-// tem efeito imediato no próximo tick, sem reiniciar a partida.
+// setTimeout recursivo (não setInterval) p/ ler a cadência a cada chamada — mudar a
+// velocidade no meio do jogo vale já no próximo tick.
 function tickPartida(est) {
   est.minuto++;
 
@@ -253,8 +246,7 @@ function tickPartida(est) {
   timerPartida = setTimeout(function() { tickPartida(est); }, cadenciaAtual());
 }
 
-// --- Monta os cobradores: os 11 do "time em campo" (incluindo o goleiro), em ordem
-//     embaralhada. Como o chute usa índice % tamanho, ninguém repete até os 11 baterem. ---
+// --- Cobradores: os 11 mais fortes em ordem embaralhada (índice % tamanho não repete) ---
 function montarCobradores(lista) {
   var onze = lista.slice()
     .sort(function(a, b) { return b.forca - a.forca; })
