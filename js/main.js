@@ -1,4 +1,4 @@
-//  main.js — INICIALIZAÇÃO e todos os event listeners (carregar por último)
+// main.js — inicialização e event listeners (carregar por último).
 
 // Competição do multiplayer (definida ao escolher a pílula). Default: Brasileirão.
 window.__compOnline = window.__compOnline || 'Brasileirão';
@@ -109,12 +109,10 @@ btnComecarDraft.addEventListener('click', comecarDraft);
 btnSelecionarDraft.addEventListener('click', confirmarSelecaoDraft);
 btnResortearDraft.addEventListener('click', resortearCartas);
 
-// No Draft, abrir as cartas obriga a escolher: clicar fora ou apertar Esc NÃO fecha
-// (senão dava pra reabrir e ganhar cartas novas sem gastar re-sorteio). Para sair da
-// seleção, o usuário escolhe uma carta e clica em "Selecionar" — ou usa "Re-sortear".
+// No Draft, o overlay de cartas não fecha por clique fora/Esc: só saindo via
+// "Selecionar" ou "Re-sortear" (evita reabrir e ganhar cartas sem gastar skip).
 
-// Delegação: um único ouvinte no campo captura cliques em qualquer slot,
-// inclusive jogadores já alocados (evita problemas de escopo de closure)
+// Delegação: um único ouvinte no campo captura cliques em qualquer slot.
 campoJogo.addEventListener('click', function (ev) {
   var slotAlvo = ev.target.closest('.slot-jogo');
   if (!slotAlvo) return;
@@ -122,9 +120,8 @@ campoJogo.addEventListener('click', function (ev) {
   if (indice >= 0) clicarSlot(indice);
 });
 
-// Simular: entra na tela de simulação SEMPRE começando uma campanha limpa
-// com o time atual (evita herdar histórico/stats de uma campanha anterior
-// quando o usuário volta pra escalação e simula de novo).
+// Simular: entra na tela de simulação sempre com uma campanha limpa (não herda
+// histórico/stats de uma campanha anterior).
 btnSimular.addEventListener('click', function () {
   reiniciarCampanha();              // zera histórico, stats e contadores
   acaoBotao = 'iniciar';            // garante o estado inicial do botão
