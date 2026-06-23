@@ -883,8 +883,12 @@
     animacaoAtiva = true;
     var euCasa = String(m.homeUid) === String(meuUserId);
     var euFora = String(m.awayUid) === String(meuUserId);
-    var res = (m.gHome === m.gAway) ? 'empate'
-            : (((euCasa && m.gHome > m.gAway) || (euFora && m.gAway > m.gHome)) ? 'vitoria' : 'derrota');
+    // Vencedor: tempo normal e, se empatou, a disputa de pênaltis (m.pen).
+    var venceMandante = (m.gHome !== m.gAway) ? (m.gHome > m.gAway)
+                      : (m.pen && m.pen.length === 2) ? (m.pen[0] > m.pen[1])
+                      : null;
+    var res = (venceMandante === null) ? 'empate'
+            : (((euCasa && venceMandante) || (euFora && !venceMandante)) ? 'vitoria' : 'derrota');
 
     var card = document.createElement('div');
     card.className = 'partida-grande anim';
@@ -894,6 +898,7 @@
         '<div class="pg-centro">' +
           '<div class="pg-relogio">0\'</div>' +
           '<div class="pg-placar"><span class="pg-gh">0</span><span class="placar-sep"> × </span><span class="pg-ga">0</span></div>' +
+          '<div class="pg-pen"></div>' +
         '</div>' +
         '<div class="pg-time dir' + (euFora ? ' eu' : '') + '">' + htmlEsc(m.awayNome || 'Time') + (m.awayBot ? ' <span class="draft-bot-tag">BOT</span>' : '') + '</div>' +
       '</div>' +
@@ -927,6 +932,11 @@
       if (relEl) relEl.textContent = 'ENC';
       if (ghEl) ghEl.textContent = m.gHome;
       if (gaEl) gaEl.textContent = m.gAway;
+      if (m.pen && m.pen.length === 2) {
+        if (relEl) relEl.textContent = 'PÊN';
+        var penEl = card.querySelector('.pg-pen');
+        if (penEl) penEl.textContent = 'pênaltis ' + m.pen[0] + ' × ' + m.pen[1];
+      }
       card.classList.remove('anim');
       card.classList.add(res);
       golsEl.innerHTML = '';

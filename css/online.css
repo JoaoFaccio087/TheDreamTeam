@@ -752,6 +752,8 @@
 .pg-placar { font-family: 'Archivo Black', sans-serif; font-size: 1.9rem; color: #fff; white-space: nowrap; text-align: center; }
 .partida-grande.vitoria .pg-placar { color: #5dbe7a; }
 .partida-grande.derrota .pg-placar { color: #e87070; }
+.pg-pen { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.62rem; color: var(--txt-soft); letter-spacing: 0.04em; }
+.pg-pen:empty { display: none; }
 .pg-gols { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 0.3rem; }
 .pg-gols.pg-sem { color: #666; font-size: 0.78rem; text-align: center; }
 .pg-gol { font-size: 0.78rem; color: #ccc; }
