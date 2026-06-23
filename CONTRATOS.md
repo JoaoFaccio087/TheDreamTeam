@@ -283,3 +283,57 @@ Hoje a `api.js` devolve dados locais. Quando o backend existir, troca-se **só o
 > Os clubes (dados estáticos) podem ficar no front; o que vai pro backend é o que é
 > **por usuário** (partidas, histórico, ranking) e o estado das **salas** em tempo real
 > (já implementado via Socket.IO — ver seção 3).
+
+---
+
+## 5. UIKit do frontend (`js/ui.js` + `css/campo.css`)
+
+> Fonte única dos pedaços de interface repetidos entre os modos. Carregado com
+> `defer` **antes** dos módulos de tela (`ui.js` roda antes de `estado.js`), para
+> não reescrever o mesmo HTML/CSS em cada tela.
+
+### 5.1 API (`window.UI`)
+
+| Função | Assinatura | Para quê |
+|---|---|---|
+| `UI.esc` | `esc(s) → string` | Escapa `& < > " '` antes de injetar texto em `innerHTML`. |
+| `UI.shuffle` | `shuffle(arr) → arr` | Fisher-Yates; devolve uma **cópia** (não altera o original). |
+| `UI.renderHeader` | `renderHeader(slot, opts)` | Monta o cabeçalho padrão `.jogo-header-wrap` dentro de `slot`. |
+| `UI.setHeader` | `setHeader(slotId, opts)` | Igual ao anterior, recebendo o `id` do slot. |
+
+`opts` do header: `titulo` (def. `THE DREAM TEAM`), `tituloId`, `slogan` (def.
+`SORTEIE · ESCALE · GOLEIE`), `sloganId`, `info` | `infoHtml`, `infoId`, `voltarId`.
+Os `*Id` permitem que cada tela atualize os textos depois via `getElementById(...)`.
+
+### 5.2 Slots de cabeçalho (todos saem do UIKit)
+
+| Slot | Tela | Renderizado em |
+|---|---|---|
+| `hdr-jogo` | Escalação (single-player) | `ui.js` (no load) |
+| `hdr-simulacao` | Simulação (single-player) | `ui.js` (no load) |
+| `hdr-lobby` `hdr-sorteio` `hdr-draft` `hdr-elencos` `hdr-rodada` | Online | `online.js` (no `init`) |
+
+### 5.3 `campo.css` — dimensionamento único do campo
+
+Modelo compartilhado pelos três campos (home, single-player, online):
+- Contêineres `#campo`, `#campo-jogo`, `.campo-jogo` declaram `container-type: inline-size`.
+- Fichas/slots `.ficha`, `.slot-jogo`, `.slot-ol` escalam por `cqw`: `width/height: clamp(32px, 14cqw, 80px)`.
+- Cor e conteúdo de cada ficha continuam nos CSS de cada tela; aqui fica só o **tamanho**.
+
+### 5.4 Quem consome hoje
+
+| Recurso | Consumidores |
+|---|---|
+| `UI.esc` | `online.js`, `perfil.js` (ambos com fallback local) |
+| `UI.shuffle` | `online.js` |
+| `UI.renderHeader` / `setHeader` | `ui.js`, `online.js` (7 cabeçalhos) |
+| `campo.css` | home, single-player e online (todos os campos) |
+
+### 5.5 Pendente de consolidação
+
+Duplicação já mapeada, ainda **não** migrada (muda comportamento → fazer com teste):
+
+| Item | Onde está hoje | Alvo |
+|---|---|---|
+| Fisher-Yates inline | `brasileirao.js`, `campanha.js`, `draft.js`, `simulacao.js` | `UI.shuffle` |
+| Render do campo (fichas + posições) | `escalacao.js` e `online.js` (`renderCampoOnline`) | futuro `UI.renderCampo` |
