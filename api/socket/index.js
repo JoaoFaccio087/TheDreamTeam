@@ -419,23 +419,58 @@ function acumularStats(sala, fila) {
 }
 
 // Resolve um confronto eliminatório (sempre define vencedor; empate → pênaltis).
+// Cobradores: os 11 mais fortes do elenco, em ordem embaralhada.
+function cobradoresSrv(el) {
+  const ord = (el || []).filter(Boolean).slice().sort((x, y) => (y.forca || 70) - (x.forca || 70)).slice(0, 11);
+  for (let i = ord.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = ord[i]; ord[i] = ord[j]; ord[j] = t; }
+  return ord.length ? ord : [{ nome: 'Cobrador', forca: 72 }];
+}
+
+// Disputa de pênaltis cobrança a cobrança (best-of-5 + morte súbita), ponderada
+// pela força. Devolve placar + sequência [{lado:'a'|'b', nome, ok}] + vencedor.
+function simularPenaltisOnline(aEl, bEl) {
+  const cobA = cobradoresSrv(aEl), cobB = cobradoresSrv(bEl);
+  const diff = forcaDoElenco(aEl) - forcaDoElenco(bEl);
+  const probA = Math.max(0.60, Math.min(0.88, 0.75 + diff / 400));
+  const probB = Math.max(0.60, Math.min(0.88, 0.75 - diff / 400));
+  const seq = []; let pA = 0, pB = 0, iA = 0, iB = 0, morte = false, lado = 'a', guard = 0;
+  function decidiu() {
+    if (!morte) {
+      const rA = Math.max(0, 5 - iA), rB = Math.max(0, 5 - iB);
+      if (pA > pB + rB) return 'a';
+      if (pB > pA + rA) return 'b';
+      if (iA >= 5 && iB >= 5) { if (pA > pB) return 'a'; if (pB > pA) return 'b'; morte = true; }
+    } else if (iA === iB) { if (pA > pB) return 'a'; if (pB > pA) return 'b'; }
+    return null;
+  }
+  while (guard++ < 60) {
+    let ok, nome;
+    if (lado === 'a') { nome = cobA[iA % cobA.length].nome; ok = Math.random() < probA; if (ok) pA++; iA++; }
+    else { nome = cobB[iB % cobB.length].nome; ok = Math.random() < probB; if (ok) pB++; iB++; }
+    seq.push({ lado, nome, ok });
+    const d = decidiu();
+    if (d) return { penA: pA, penB: pB, seq, vence: d };
+    lado = lado === 'a' ? 'b' : 'a';
+  }
+  return { penA: pA, penB: pB, seq, vence: pA >= pB ? 'a' : 'b' };
+}
+
 function resolverConfronto(sala, node) {
   const aEl = picksDe(sala, node.a.userId);
   const bEl = picksDe(sala, node.b.userId);
   const res = simularPartida(aEl, { jogadores: bEl }, false);   // campo neutro
-  let gA = res.gMeus, gB = res.gAdv, pen = null, vencedor;
+  let gA = res.gMeus, gB = res.gAdv, pen = null, penSeq = null, vencedor;
   if (gA === gB) {
-    const fa = forcaDoElenco(aEl), fb = forcaDoElenco(bEl);
-    const pa = fa / (fa + fb);
-    const aVence = Math.random() < (0.5 + (pa - 0.5) * 0.6);    // leve vantagem ao mais forte
-    pen = aVence ? [5, 4] : [4, 5];
-    vencedor = aVence ? node.a : node.b;
+    const d = simularPenaltisOnline(aEl, bEl);
+    pen = [d.penA, d.penB];
+    penSeq = d.seq;
+    vencedor = d.vence === 'a' ? node.a : node.b;
   } else {
     vencedor = gA > gB ? node.a : node.b;
   }
-  node.gA = gA; node.gB = gB; node.pen = pen; node.winner = vencedor;
+  node.gA = gA; node.gB = gB; node.pen = pen; node.penSeq = penSeq; node.winner = vencedor;
   acumularStats(sala, res.fila);
-  return { fila: res.fila, gA, gB, pen };
+  return { fila: res.fila, gA, gB, pen, penSeq };
 }
 
 // Simula a rodada atual do mata-mata; preenche vencedores e avança a chave.
@@ -446,11 +481,11 @@ function simularRodadaMata(sala) {
   const resultados = [];
   jogos.forEach(node => {
     if (!node.a || !node.b || node.winner) return;
-    const { fila, gA, gB, pen } = resolverConfronto(sala, node);
+    const { fila, gA, gB, pen, penSeq } = resolverConfronto(sala, node);
     resultados.push({
       homeUid: node.a.userId, homeNome: node.a.nome, homeBot: !!node.a.ehBot,
       awayUid: node.b.userId, awayNome: node.b.nome, awayBot: !!node.b.ehBot,
-      gHome: gA, gAway: gB, pen, fila,
+      gHome: gA, gAway: gB, pen, penSeq, fila,
     });
   });
   const ehFinal = (r === chave.rounds.length - 1);
