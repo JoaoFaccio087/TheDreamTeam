@@ -81,6 +81,31 @@ XI dos craques que estiveram lá e **simula** a campanha. Dev: João Faccio.
 - Mesma lógica nos dois modos: single em `js/simulacao.js` (animação em
   `js/penaltis.js`), online em `api/socket/index.js`.
 
+### Modo espectador (online) — decidido, a implementar
+
+Cada jogador **segue um time**. Começa seguindo o próprio; quando o time seguido é
+eliminado, ele re-aponta para **quem venceu** (cascata recursiva), e assim segue
+sempre um time vivo até a final. A partida que o cliente anima é a do **time
+seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
+
+- **Derivável no cliente** a partir dos resultados que o servidor já envia. O único
+  acréscimo do servidor é o `penSeq` (já feito; falta deploy).
+- **Perspectiva dos pênaltis:** o modal roda do ponto de vista do time seguido —
+  mapear `lado a/b` do `penSeq` → `meu/adv` conforme o seguido seja mandante/visitante,
+  passando o nome dele como `meuNome`. Assim você só vê a disputa de um time se
+  estiver seguindo-o.
+- **Ao ser eliminado** (grupos OU mata-mata): abre um **painel "assistir"** com os
+  times vivos, com um **sugerido em destaque** (mata-mata: quem te venceu; grupos:
+  amigo / melhor do grupo). Escolha livre + botão **🏠 voltar ao início** (sai da
+  sala). Quem não escolhe, fica no sugerido (fluxo automático). O painel/troca e o 🏠
+  ficam sempre acessíveis.
+- **Sincronia:** cada cliente anima a sua localmente (durações diferentes por causa
+  dos pênaltis); o **host avança** quando termina; quem estiver no pênalti ao avançar,
+  finaliza/pula pro resultado. Estado da chave é autoritativo no servidor → sem
+  dessincronia. Aviso **não-bloqueante** "X/Y prontos" só como referência pro host.
+- **Bots:** humano segue um time vivo (humano ou bot) até a final; bot nunca é
+  espectador. Na final, todos convergem para a mesma partida.
+
 ---
 
 ## 5. Estado atual (feito)
@@ -91,19 +116,26 @@ XI dos craques que estiveram lá e **simula** a campanha. Dev: João Faccio.
 - **Pênaltis online (servidor)** — simulação real + sequência (`penSeq`) enviada no
   resultado da rodada. Card do online mostra o **placar real** de pênaltis.
   ⚠️ precisa de **deploy no Render** para valer.
+- **Modo espectador + pênaltis online (cliente)** — `online.js`: "time seguido"
+  (começa no próprio, re-aponta para quem venceu), animação da partida do seguido,
+  barra "Assistindo: <time>" com **Trocar** + **🏠 voltar ao início**, e a disputa de
+  pênaltis animada na sala (consome `penSeq` na perspectiva do seguido). CSS em
+  `css/online.css`. ⚠️ os pênaltis só aparecem com o **servidor no Render** (o resto
+  funciona com os resultados que já chegam).
 
 ---
 
 ## 6. Backlog (próximos passos)
 
-1. **Pênaltis online — parte 2 (cliente):** quando chegar um resultado de mata-mata
-   com `penSeq`, abrir o `Penaltis.disputar(...)` na sala mapeando `lado a/b` →
-   `meu/adv` conforme o usuário local, sincronizado entre todos os clientes,
-   skippable, com o host avançando. (Depende do servidor já no Render.)
+1. **Aviso "X/Y prontos" (não-bloqueante) no host:** pequeno indicador de quantos já
+   terminaram de assistir a fase, só como referência (o host avança quando quiser).
+   Precisa de um evento de socket (cliente avisa "assisti" → servidor conta). Opcional.
 2. **Champions condensada (single-player):** não mostrar o grupão; simular só parte
    dos jogos da fase de grupos. (Próxima feature grande.)
 3. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
+4. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
+   para o UIKit, se forem reaproveitados em outra tela.
 
 ---
 

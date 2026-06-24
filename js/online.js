@@ -19,6 +19,7 @@
   var gruposEncerrados = false;    // fase de grupos terminou (aguardando host iniciar o mata-mata)
   var emMataMata       = false;    // estamos no mata-mata (avançar = chave:advance, não round:simulate)
   var simulandoRodada  = false;
+  var seguidoKey       = null;     // time assistido no mata-mata (chave 'u:'/'n:'); começa no próprio time
 
   var poolLocal        = [];   // pool de jogadores disponíveis no turno atual
   var poolPorPosicao   = {};   // draft em grupo: cartas já validadas por posição (servidor)
@@ -34,6 +35,7 @@
 
   // ── Referências DOM ───────────────────────────────────────────────────────
   var telaOnline, modalOnline, modalAuth;
+  var barraEspectador = null;   // barra "Assistindo: <time>" (criada sob demanda)
 
   // Modal online
   var modalOnlineFechar, btnCopiarCodigo, lobbyCodigo;
@@ -236,6 +238,8 @@
     minhaVez         = false;
     rodadaAtual      = 0;
     simulandoRodada  = false;
+    seguidoKey       = null;
+    if (barraEspectador) barraEspectador.classList.add('escondida');
     poolLocal        = [];
     allPlayers       = {};
     ordemDraftIds    = [];
@@ -881,8 +885,9 @@
   function cardPartidaGrande(m) {
     pararAnimacaoPartida();
     animacaoAtiva = true;
-    var euCasa = String(m.homeUid) === String(meuUserId);
-    var euFora = String(m.awayUid) === String(meuUserId);
+    var persp  = seguidoKey || minhaKey();   // perspectiva = time que estou seguindo
+    var euCasa = homeKey(m) === persp;
+    var euFora = awayKey(m) === persp;
     // Vencedor: tempo normal e, se empatou, a disputa de pênaltis (m.pen).
     var venceMandante = (m.gHome !== m.gAway) ? (m.gHome > m.gAway)
                       : (m.pen && m.pen.length === 2) ? (m.pen[0] > m.pen[1])
@@ -928,15 +933,9 @@
     }
     function finalizar() {
       pararAnimacaoPartida();
-      animacaoAtiva = false;
       if (relEl) relEl.textContent = 'ENC';
       if (ghEl) ghEl.textContent = m.gHome;
       if (gaEl) gaEl.textContent = m.gAway;
-      if (m.pen && m.pen.length === 2) {
-        if (relEl) relEl.textContent = 'PÊN';
-        var penEl = card.querySelector('.pg-pen');
-        if (penEl) penEl.textContent = 'pênaltis ' + m.pen[0] + ' × ' + m.pen[1];
-      }
       card.classList.remove('anim');
       card.classList.add(res);
       golsEl.innerHTML = '';
@@ -946,8 +945,38 @@
         golsEl.className = 'pg-gols pg-sem';
         golsEl.textContent = 'Sem gols na partida';
       }
-      atualizarAcoesRodada();   // libera os botões só após o fim/pulo da animação
-      if (typeof aoFimDaAnimacao === 'function') { var cb = aoFimDaAnimacao; aoFimDaAnimacao = null; cb(); }
+
+      var temPen = m.pen && m.pen.length === 2;
+      if (temPen && relEl) relEl.textContent = 'PÊN';
+
+      function concluir() {
+        animacaoAtiva = false;
+        if (temPen) {
+          var penEl = card.querySelector('.pg-pen');
+          if (penEl) penEl.textContent = 'pênaltis ' + m.pen[0] + ' × ' + m.pen[1];
+        }
+        atualizarAcoesRodada();   // libera os botões só após o fim/pulo da animação
+        if (typeof aoFimDaAnimacao === 'function') { var cb = aoFimDaAnimacao; aoFimDaAnimacao = null; cb(); }
+      }
+
+      // Disputa de pênaltis animada, na perspectiva do time seguido.
+      if (temPen && m.penSeq && m.penSeq.length && window.Penaltis && Penaltis.disputar) {
+        var sequencia = m.penSeq.map(function (k) {
+          var lado = (k.lado === 'a') ? (euCasa ? 'meu' : 'adv') : (euCasa ? 'adv' : 'meu');
+          return { lado: lado, nome: k.nome, resultado: k.resultado };
+        });
+        var venceMand = m.pen[0] > m.pen[1];
+        Penaltis.disputar({
+          meuNome:    euCasa ? (m.homeNome || 'Mandante') : (m.awayNome || 'Visitante'),
+          advNome:    euCasa ? (m.awayNome || 'Visitante') : (m.homeNome || 'Mandante'),
+          sequencia:  sequencia,
+          vencedor:   (euCasa === venceMand) ? 'meu' : 'adv',
+          velocidade: 'normal',
+          onFim:      concluir
+        });
+      } else {
+        concluir();
+      }
     }
     function tick() {
       minuto++;
@@ -1280,8 +1309,113 @@
     }
   }
 
-  // chave:results — uma fase do mata-mata foi simulada. Anima a minha partida na aba
-  // Partidas (como nos grupos) e atualiza a chave só ao fim da animação.
+  // ── Espectador do mata-mata ───────────────────────────────────────────────
+  // Cada jogador segue um time: começa no próprio e, ao ser eliminado, passa a
+  // seguir quem o venceu (ou um time escolhido). A partida animada é a do seguido.
+
+  function timeKey(uid, nome) { return (uid != null && uid !== '') ? 'u:' + uid : 'n:' + (nome || ''); }
+  function homeKey(m) { return timeKey(m.homeUid, m.homeNome); }
+  function awayKey(m) { return timeKey(m.awayUid, m.awayNome); }
+  function minhaKey()  { return timeKey(meuUserId, null); }
+
+  // Chave do vencedor do confronto (tempo normal e, se empatou, os pênaltis).
+  function vencedorConfronto(m) {
+    var venceMand = (m.gHome !== m.gAway) ? (m.gHome > m.gAway)
+                  : (m.pen && m.pen.length === 2) ? (m.pen[0] > m.pen[1]) : null;
+    if (venceMand === null) return null;
+    return venceMand ? homeKey(m) : awayKey(m);
+  }
+
+  function confrontoDoSeguido(resultados) {
+    for (var i = 0; i < (resultados || []).length; i++) {
+      if (homeKey(resultados[i]) === seguidoKey || awayKey(resultados[i]) === seguidoKey) return resultados[i];
+    }
+    return null;
+  }
+
+  // Nome do time seguido, buscado na chave (rounds).
+  function nomeTimePorKey(key) {
+    if (!key || !chaveOnline || !chaveOnline.rounds) return '';
+    var achou = '';
+    chaveOnline.rounds.forEach(function (jogos) {
+      jogos.forEach(function (j) {
+        if (j.a && timeKey(j.a.userId, j.a.nome) === key) achou = j.a.nome;
+        if (j.b && timeKey(j.b.userId, j.b.nome) === key) achou = j.b.nome;
+      });
+    });
+    return achou;
+  }
+
+  // Times ainda vivos (jogam a próxima fase); se a final acabou, o campeão.
+  function timesVivos() {
+    var vivos = [], vistos = {};
+    if (!chaveOnline || !chaveOnline.rounds) return vivos;
+    function add(t) {
+      if (!t) return;
+      var k = timeKey(t.userId, t.nome);
+      if (!vistos[k]) { vistos[k] = 1; vivos.push({ key: k, nome: t.nome }); }
+    }
+    var prox = chaveOnline.rounds[chaveOnline.rodadaAtual];
+    if (prox) prox.forEach(function (j) { add(j.a); add(j.b); });
+    if (!vivos.length) {
+      var ult = chaveOnline.rounds[chaveOnline.rounds.length - 1][0];
+      if (ult && ult.winner) add(ult.winner);
+    }
+    return vivos;
+  }
+
+  function garantirBarraEspectador() {
+    if (barraEspectador) return;
+    var ref = document.querySelector('#online-rodada .rodada-barra');
+    if (!ref || !ref.parentNode) return;
+    barraEspectador = document.createElement('div');
+    barraEspectador.id = 'online-espectador';
+    barraEspectador.className = 'online-espectador escondida';
+    barraEspectador.innerHTML =
+      '<span class="esp-rotulo">Assistindo</span>' +
+      '<span class="esp-time" id="esp-time">—</span>' +
+      '<button type="button" class="esp-btn" id="esp-trocar">Trocar</button>' +
+      '<button type="button" class="esp-casa" id="esp-casa" title="Voltar ao início" aria-label="Voltar ao início">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h14v-9"/></svg>' +
+      '</button>' +
+      '<div class="esp-lista escondida" id="esp-lista"></div>';
+    ref.parentNode.insertBefore(barraEspectador, ref.nextSibling);
+    barraEspectador.querySelector('#esp-trocar').addEventListener('click', function () {
+      var lista = barraEspectador.querySelector('#esp-lista');
+      if (lista) lista.classList.toggle('escondida');
+    });
+    barraEspectador.querySelector('#esp-casa').addEventListener('click', function () {
+      if (modalSairOnline) modalSairOnline.classList.remove('escondida');
+    });
+  }
+
+  // Mostra/atualiza a barra quando estou assistindo a um time que não é o meu.
+  function atualizarBarraEspectador() {
+    var souEspectador = seguidoKey && seguidoKey !== minhaKey();
+    if (!souEspectador) { if (barraEspectador) barraEspectador.classList.add('escondida'); return; }
+    garantirBarraEspectador();
+    if (!barraEspectador) return;
+    barraEspectador.classList.remove('escondida');
+    barraEspectador.querySelector('#esp-time').textContent = nomeTimePorKey(seguidoKey) || '—';
+
+    var lista = barraEspectador.querySelector('#esp-lista');
+    lista.innerHTML = '';
+    timesVivos().forEach(function (t) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'esp-opcao' + (t.key === seguidoKey ? ' esp-opcao-ativa' : '');
+      b.textContent = t.nome;
+      b.addEventListener('click', function () {
+        seguidoKey = t.key;
+        lista.classList.add('escondida');
+        atualizarBarraEspectador();
+      });
+      lista.appendChild(b);
+    });
+  }
+
+  // chave:results — uma fase do mata-mata foi simulada. Anima a partida do time
+  // seguido na aba Partidas (com pênaltis, se houver) e atualiza a chave ao fim.
   function onChaveResults(dados) {
     simulandoRodada = false;
     emMataMata = true;
@@ -1298,31 +1432,43 @@
     var bannerMata = document.getElementById('grupos-mata-banner');
     if (bannerMata) bannerMata.classList.add('escondida');
 
-    var minha = null, outras = [];
-    (dados.resultados || []).forEach(function (m) {
-      if (String(m.homeUid) === String(meuUserId) || String(m.awayUid) === String(meuUserId)) minha = m;
-      else outras.push(m);
-    });
+    if (seguidoKey == null) seguidoKey = minhaKey();
+    var alvo = confrontoDoSeguido(dados.resultados), outras = [];
+    if (!alvo) {
+      // Não tenho/sigo ninguém vivo nesta fase → viro espectador de um jogo
+      // (de preferência um com humano) e passo a seguir o vencedor dele.
+      var cands = dados.resultados || [], escolha = null;
+      for (var ci = 0; ci < cands.length; ci++) { if (!(cands[ci].homeBot && cands[ci].awayBot)) { escolha = cands[ci]; break; } }
+      if (!escolha) escolha = cands[0] || null;
+      if (escolha) { seguidoKey = vencedorConfronto(escolha) || homeKey(escolha); alvo = escolha; }
+    }
+    (dados.resultados || []).forEach(function (m) { if (m !== alvo) outras.push(m); });
 
     function aplicarPosAnim() {
+      // Re-aponta: se o time que eu seguia perdeu, passo a seguir quem o venceu.
+      if (alvo) {
+        var vk = vencedorConfronto(alvo);
+        if ((seguidoKey === homeKey(alvo) || seguidoKey === awayKey(alvo)) && vk && vk !== seguidoKey) seguidoKey = vk;
+      }
       renderChaveOnline();
       renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
       renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
       atualizarAcoesMata();
+      atualizarBarraEspectador();
     }
 
-    if (minha) {
-      // Tenho jogo nesta fase → anima na aba Partidas.
+    if (alvo) {
+      // Anima a partida do time seguido na aba Partidas (com pênaltis, se houver).
       pararAnimacaoPartida();
       rodadaPartidas.innerHTML = '';
-      rodadaPartidas.appendChild(cardPartidaGrande(minha));
+      rodadaPartidas.appendChild(cardPartidaGrande(alvo));
       outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
       if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA FASE';
       if (rodadaProximos) rodadaProximos.innerHTML = '';
       aoFimDaAnimacao = aplicarPosAnim;
       selecionarAbaRodada('partidas');
     } else if (!animacaoAtiva) {
-      // Sem jogo (eliminado): mostra os resultados e o organograma, sem animação.
+      // Sem confrontos para animar: mostra os resultados e o organograma.
       rodadaPartidas.innerHTML = '<p class="rodada-fase-tit">' + htmlEsc(fase) + '</p>';
       outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
       if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA FASE';
