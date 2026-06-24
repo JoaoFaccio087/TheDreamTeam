@@ -422,17 +422,31 @@ function acumularStats(sala, fila) {
 // Cobradores: os 11 mais fortes do elenco, em ordem embaralhada.
 function cobradoresSrv(el) {
   const ord = (el || []).filter(Boolean).slice().sort((x, y) => (y.forca || 70) - (x.forca || 70)).slice(0, 11);
-  for (let i = ord.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = ord[i]; ord[i] = ord[j]; ord[j] = t; }
   return ord.length ? ord : [{ nome: 'Cobrador', forca: 72 }];
+}
+
+function limitaSrv(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+// Força do goleiro do elenco (por código 'GOL' ou por posição); 72 se não achar.
+function forcaGoleiroSrv(el) {
+  const g = (el || []).filter(Boolean).filter(p => p.codigo === 'GOL' || (p.posicoes && p.posicoes.indexOf('GOL') >= 0));
+  if (g.length) return g.sort((a, b) => (b.forca || 70) - (a.forca || 70))[0].forca;
+  return 72;
+}
+
+// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora' (atacante x goleiro).
+function resultadoCobrancaSrv(fAtacante, fGoleiro) {
+  const pGol = limitaSrv(0.74 + (fAtacante - fGoleiro) * 0.006, 0.50, 0.92);
+  if (Math.random() < pGol) return 'gol';
+  const pDefesa = limitaSrv(0.45 + (fGoleiro - fAtacante) * 0.006, 0.25, 0.78);
+  return Math.random() < pDefesa ? 'defesa' : 'fora';
 }
 
 // Disputa de pênaltis cobrança a cobrança (best-of-5 + morte súbita), ponderada
 // pela força. Devolve placar + sequência [{lado:'a'|'b', nome, ok}] + vencedor.
 function simularPenaltisOnline(aEl, bEl) {
   const cobA = cobradoresSrv(aEl), cobB = cobradoresSrv(bEl);
-  const diff = forcaDoElenco(aEl) - forcaDoElenco(bEl);
-  const probA = Math.max(0.60, Math.min(0.88, 0.75 + diff / 400));
-  const probB = Math.max(0.60, Math.min(0.88, 0.75 - diff / 400));
+  const golA = forcaGoleiroSrv(aEl), golB = forcaGoleiroSrv(bEl);
   const seq = []; let pA = 0, pB = 0, iA = 0, iB = 0, morte = false, lado = 'a', guard = 0;
   function decidiu() {
     if (!morte) {
@@ -444,10 +458,10 @@ function simularPenaltisOnline(aEl, bEl) {
     return null;
   }
   while (guard++ < 60) {
-    let ok, nome;
-    if (lado === 'a') { nome = cobA[iA % cobA.length].nome; ok = Math.random() < probA; if (ok) pA++; iA++; }
-    else { nome = cobB[iB % cobB.length].nome; ok = Math.random() < probB; if (ok) pB++; iB++; }
-    seq.push({ lado, nome, ok });
+    let cob, res;
+    if (lado === 'a') { cob = cobA[iA % cobA.length]; res = resultadoCobrancaSrv(cob.forca || 72, golB); if (res === 'gol') pA++; iA++; }
+    else { cob = cobB[iB % cobB.length]; res = resultadoCobrancaSrv(cob.forca || 72, golA); if (res === 'gol') pB++; iB++; }
+    seq.push({ lado, nome: cob.nome, resultado: res });
     const d = decidiu();
     if (d) return { penA: pA, penB: pB, seq, vence: d };
     lado = lado === 'a' ? 'b' : 'a';

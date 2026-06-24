@@ -342,3 +342,30 @@ Toda a duplicação mapeada já foi migrada para o UIKit:
 
 O **conteúdo** de cada ficha continua por tela (códigos/escalação no single-player,
 nome/força/pick no online) — só o posicionamento é compartilhado.
+
+---
+
+## 6. Pênaltis (disputa de mata-mata)
+
+Mesma lógica nos dois modos. Single-player: `simularDisputa` (`js/simulacao.js`),
+animação em `js/penaltis.js`. Online: `simularPenaltisOnline` (`api/socket/index.js`),
+sequência enviada no resultado da rodada.
+
+**Quando ocorre:** só em fase de mata-mata empatada no tempo normal. Liga
+(Brasileirão) e fase de grupos nunca vão para pênaltis.
+
+**Ordem das cobranças:** os 11 mais fortes de cada time cobram em ordem
+**decrescente de força** (o mais forte primeiro). Vale para todos — usuário, bots
+e jogadores da sala.
+
+**Resultado por cobrança** (atacante x goleiro adversário), `'gol' | 'defesa' | 'fora'`:
+
+- `pGol     = limita(0,74 + (Fatacante − Fgoleiro) × 0,006, 0,50 .. 0,92)`
+- se não for gol: `pDefesa = limita(0,45 + (Fgoleiro − Fatacante) × 0,006, 0,25 .. 0,78)` (senão, `fora`)
+
+Goleiro identificado por vaga `'GOL'` (escalação) ou pela posição do jogador;
+72 como padrão se não houver. Formato: melhor-de-5 + morte súbita.
+
+**Sequência (contrato da animação):** `[{ lado, nome, resultado }]` + `vencedor`.
+No single-player `lado` é `'meu'|'adv'`; no online é `'a'|'b'` (mandante/visitante),
+enviado em `penSeq` junto do resultado, e o cliente mapeia para o seu lado.

@@ -214,7 +214,11 @@
 
     function animarChute(k, done) {
       status.innerHTML = (k.lado === 'meu' ? esc(meuNome) : esc(advNome)) + ' &middot; bate: <b>' + esc(k.nome) + '</b>';
-      var o = k.ok ? 'GOL' : (Math.random() < 0.65 ? 'DEFENDEU' : 'FORA');
+      var ok = (k.resultado != null) ? (k.resultado === 'gol') : !!k.ok;
+      k.ok = ok; // normaliza para placar/torcida
+      var o = k.resultado
+            ? ({ gol: 'GOL', defesa: 'DEFENDEU', fora: 'FORA' }[k.resultado] || (ok ? 'GOL' : 'FORA'))
+            : (ok ? 'GOL' : (Math.random() < 0.65 ? 'DEFENDEU' : 'FORA'));
       var lado = pick([-1, 0, 1]), alto = Math.random() < 0.5;
       var bx = lado * 108, by = alto ? -152 : -104, kx = lado * 72, ky = alto ? -14 : 8, rot = lado * (alto ? 46 : 30);
       if (o === 'FORA') { if (Math.random() < 0.55) { bx = pick([-1, 1]) * 195; by = -126; } else { by = -242; bx = lado * 90; } kx = pick([-1, 0, 1]) * 72; rot = (kx < 0 ? -1 : kx > 0 ? 1 : 0) * 38; }

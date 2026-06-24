@@ -246,18 +246,38 @@ function tickPartida(est) {
   timerPartida = setTimeout(function() { tickPartida(est); }, cadenciaAtual());
 }
 
-// --- Cobradores: os 11 mais fortes em ordem embaralhada (índice % tamanho não repete) ---
+// --- Cobradores: os 11 mais fortes, em ordem decrescente de força (o mais forte bate primeiro) ---
 function montarCobradores(lista) {
-  var onze = lista.slice()
+  return lista.slice()
     .sort(function(a, b) { return b.forca - a.forca; })
     .slice(0, 11);
-  return UI.shuffle(onze);   // ordem de cobrança aleatória
+}
+
+function limita(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+// Força do goleiro do elenco (por código de vaga 'GOL' ou por posição); 72 se não achar.
+function forcaGoleiro(lista) {
+  var arr = (lista || []).filter(Boolean);
+  var g = arr.filter(function(p) {
+    return p.codigo === 'GOL' || (p.posicoes && p.posicoes.indexOf('GOL') >= 0);
+  });
+  if (g.length) return g.sort(function(a, b) { return b.forca - a.forca; })[0].forca;
+  return 72;
+}
+
+// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora', em função da força do
+// atacante x a do goleiro adversário.
+function resultadoCobranca(fAtacante, fGoleiro) {
+  var pGol = limita(0.74 + (fAtacante - fGoleiro) * 0.006, 0.50, 0.92);
+  if (Math.random() < pGol) return 'gol';
+  var pDefesa = limita(0.45 + (fGoleiro - fAtacante) * 0.006, 0.25, 0.78);
+  return Math.random() < pDefesa ? 'defesa' : 'fora';
 }
 
 // --- Disputa de pênaltis: best-of-5 + morte súbita; chama onFim('meu'|'adv') ---
-// Pré-simula a disputa inteira (mesma lógica de decisão do jogo) e devolve a
-// sequência de cobranças já resolvida + o vencedor, para a animação consumir.
-function simularDisputa(cobMeus, cobAdv, probMeu, probAdv) {
+// Pré-simula a disputa inteira (atacante x goleiro por cobrança) e devolve a
+// sequência [{lado, nome, resultado}] + o vencedor, para a animação consumir.
+function simularDisputa(cobMeus, cobAdv, golMeu, golAdv) {
   var seq = [], pMeus = 0, pAdv = 0, iMeu = 0, iAdv = 0, morte = false, lado = 'meu', guard = 0;
   function decidiu() {
     if (!morte) {
@@ -276,10 +296,10 @@ function simularDisputa(cobMeus, cobAdv, probMeu, probAdv) {
     return null;
   }
   while (guard++ < 60) {
-    var ok, nome;
-    if (lado === 'meu') { nome = cobMeus[iMeu % cobMeus.length].nome; ok = Math.random() < probMeu; if (ok) pMeus++; iMeu++; }
-    else { nome = cobAdv[iAdv % cobAdv.length].nome; ok = Math.random() < probAdv; if (ok) pAdv++; iAdv++; }
-    seq.push({ lado: lado, nome: nome, ok: ok });
+    var cob, res;
+    if (lado === 'meu') { cob = cobMeus[iMeu % cobMeus.length]; res = resultadoCobranca(cob.forca || 72, golAdv); if (res === 'gol') pMeus++; iMeu++; }
+    else { cob = cobAdv[iAdv % cobAdv.length]; res = resultadoCobranca(cob.forca || 72, golMeu); if (res === 'gol') pAdv++; iAdv++; }
+    seq.push({ lado: lado, nome: cob.nome, resultado: res });
     var d = decidiu();
     if (d) return { sequencia: seq, vencedor: d };
     lado = (lado === 'meu') ? 'adv' : 'meu';
@@ -308,7 +328,8 @@ function disputarPenaltis(est, onFim) {
 
   // Animação: pré-simula a disputa e delega o visual ao módulo Penaltis.
   if (window.Penaltis && Penaltis.disputar) {
-    var sim = simularDisputa(cobradoresMeus, cobradoresAdv, probMeu, probAdv);
+    var golMeu = forcaGoleiro(jogadores), golAdv = forcaGoleiro(jogadoresAdv);
+    var sim = simularDisputa(cobradoresMeus, cobradoresAdv, golMeu, golAdv);
     Penaltis.disputar({
       meuNome:    (typeof nomeDoTime !== 'undefined' ? nomeDoTime : 'Seu time'),
       advNome:    est.adversario.clube,
