@@ -255,6 +255,38 @@ function montarCobradores(lista) {
 }
 
 // --- Disputa de pênaltis: best-of-5 + morte súbita; chama onFim('meu'|'adv') ---
+// Pré-simula a disputa inteira (mesma lógica de decisão do jogo) e devolve a
+// sequência de cobranças já resolvida + o vencedor, para a animação consumir.
+function simularDisputa(cobMeus, cobAdv, probMeu, probAdv) {
+  var seq = [], pMeus = 0, pAdv = 0, iMeu = 0, iAdv = 0, morte = false, lado = 'meu', guard = 0;
+  function decidiu() {
+    if (!morte) {
+      var rM = Math.max(0, 5 - iMeu), rA = Math.max(0, 5 - iAdv);
+      if (pMeus > pAdv + rA) return 'meu';
+      if (pAdv > pMeus + rM) return 'adv';
+      if (iMeu >= 5 && iAdv >= 5) {
+        if (pMeus > pAdv) return 'meu';
+        if (pAdv > pMeus) return 'adv';
+        morte = true;
+      }
+    } else if (iMeu === iAdv) {
+      if (pMeus > pAdv) return 'meu';
+      if (pAdv > pMeus) return 'adv';
+    }
+    return null;
+  }
+  while (guard++ < 60) {
+    var ok, nome;
+    if (lado === 'meu') { nome = cobMeus[iMeu % cobMeus.length].nome; ok = Math.random() < probMeu; if (ok) pMeus++; iMeu++; }
+    else { nome = cobAdv[iAdv % cobAdv.length].nome; ok = Math.random() < probAdv; if (ok) pAdv++; iAdv++; }
+    seq.push({ lado: lado, nome: nome, ok: ok });
+    var d = decidiu();
+    if (d) return { sequencia: seq, vencedor: d };
+    lado = (lado === 'meu') ? 'adv' : 'meu';
+  }
+  return { sequencia: seq, vencedor: pMeus >= pAdv ? 'meu' : 'adv' };
+}
+
 function disputarPenaltis(est, onFim) {
   // Cobradores: os 11 em campo de cada lado (com goleiro), ordem embaralhada
   var jogadores = escalacao.filter(function(j) { return j !== null; });
@@ -268,6 +300,25 @@ function disputarPenaltis(est, onFim) {
     }
   }
   var cobradoresAdv = montarCobradores(jogadoresAdv);
+
+  // Probabilidade de conversão: ~75% base, leve vantagem pro time mais forte
+  var diff    = est.forcaMinha - est.forcaAdv;
+  var probMeu = Math.max(0.60, Math.min(0.88, 0.75 + diff / 400));
+  var probAdv = Math.max(0.60, Math.min(0.88, 0.75 - diff / 400));
+
+  // Animação: pré-simula a disputa e delega o visual ao módulo Penaltis.
+  if (window.Penaltis && Penaltis.disputar) {
+    var sim = simularDisputa(cobradoresMeus, cobradoresAdv, probMeu, probAdv);
+    Penaltis.disputar({
+      meuNome:    (typeof nomeDoTime !== 'undefined' ? nomeDoTime : 'Seu time'),
+      advNome:    est.adversario.clube,
+      sequencia:  sim.sequencia,
+      vencedor:   sim.vencedor,
+      velocidade: velocidadeSimulacao,
+      onFim:      onFim
+    });
+    return;
+  }
 
   // Cria o bloco visual dentro do .partida-corpo, antes do .partida-resultado
   var cardEl      = document.getElementById('partida-' + est.id);
@@ -295,11 +346,6 @@ function disputarPenaltis(est, onFim) {
   } else if (corpo) {
     corpo.appendChild(wrapPen);
   }
-
-  // Probabilidade de conversão: ~75% base, leve vantagem pro time mais forte
-  var diff    = est.forcaMinha - est.forcaAdv;
-  var probMeu = Math.max(0.60, Math.min(0.88, 0.75 + diff / 400));
-  var probAdv = Math.max(0.60, Math.min(0.88, 0.75 - diff / 400));
 
   var pMeus = 0, pAdv = 0; // gols marcados nos pênaltis
   var iMeu  = 0, iAdv = 0; // cobranças já realizadas por cada lado
