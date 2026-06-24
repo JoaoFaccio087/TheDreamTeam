@@ -160,9 +160,11 @@ TheDreamTeam/
 │   ├── base.css   home.css   escalacao.css   draft.css   simulacao.css
 │   ├── resumo.css   auth.css   perfil.css   online.css
 │   ├── campo.css           # modelo único do campo de escalação
+│   ├── penaltis.css        # modal da disputa de pênaltis
 │   └── responsivo.css
 ├── js/
 │   ├── ui.js               # componentes compartilhados (UIKit)
+│   ├── penaltis.js         # animação da disputa de pênaltis (modal)
 │   ├── dados/              # libertadores, champions, brasileirao, copa, dados
 │   ├── libs/               # html2canvas
 │   ├── estado.js   formacoes.js   regras.js   interface.js

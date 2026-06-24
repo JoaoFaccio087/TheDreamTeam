@@ -360,8 +360,23 @@ e jogadores da sala.
 
 **Resultado por cobrança** (atacante x goleiro adversário), `'gol' | 'defesa' | 'fora'`:
 
-- `pGol     = limita(0,74 + (Fatacante − Fgoleiro) × 0,006, 0,50 .. 0,92)`
+- `pGol     = limita(0,74 + (Fatacante − Fgoleiro) × 0,006 + bonusPosição, 0,45 .. 0,90)`
 - se não for gol: `pDefesa = limita(0,45 + (Fgoleiro − Fatacante) × 0,006, 0,25 .. 0,78)` (senão, `fora`)
+
+**Bônus de posição** (cobrador): atacantes batem melhor, defensores pior. Lê o
+código da vaga (`codigo`) ou a posição do jogador (`posicoes[0]`):
+
+| Posição | Bônus |
+|---|---|
+| ATA, PE, PD | +0,06 |
+| MEI, SA | +0,04 |
+| MC, VOL, ME, MD | 0 |
+| LD, LE | −0,02 |
+| ZAG | −0,05 |
+| GOL | −0,08 |
+
+**Zebra:** os limites do `pGol` (teto 0,90 / piso 0,45) garantem o imprevisível —
+mesmo o craque erra ~10% das vezes, e o goleiro fraco às vezes pega.
 
 Goleiro identificado por vaga `'GOL'` (escalação) ou pela posição do jogador;
 72 como padrão se não houver. Formato: melhor-de-5 + morte súbita.

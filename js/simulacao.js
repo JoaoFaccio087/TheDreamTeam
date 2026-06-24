@@ -265,12 +265,26 @@ function forcaGoleiro(lista) {
   return 72;
 }
 
-// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora', em função da força do
-// atacante x a do goleiro adversário.
-function resultadoCobranca(fAtacante, fGoleiro) {
-  var pGol = limita(0.74 + (fAtacante - fGoleiro) * 0.006, 0.50, 0.92);
+// Bônus de conversão por posição do cobrador (atacantes/meias ofensivos batem
+// melhor; defensores e goleiro batem pior). Usa o código da vaga ou a posição.
+function bonusPosicao(jog) {
+  var p = jog.codigo || (jog.posicoes && jog.posicoes[0]) || '';
+  if (p === 'ATA' || p === 'PE' || p === 'PD') return 0.06;
+  if (p === 'MEI' || p === 'SA') return 0.04;
+  if (p === 'ZAG') return -0.05;
+  if (p === 'GOL') return -0.08;
+  if (p === 'LD' || p === 'LE') return -0.02;
+  return 0;   // MC, VOL, ME, MD…
+}
+
+// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora'. Combina força do atacante
+// x goleiro + bônus de posição. Os limites do pGol são a "zebra": mesmo o craque
+// erra de vez em quando, e o goleiro fraco às vezes pega.
+function resultadoCobranca(cob, fGoleiro) {
+  var fAt = cob.forca || 72;
+  var pGol = limita(0.74 + (fAt - fGoleiro) * 0.006 + bonusPosicao(cob), 0.45, 0.90);
   if (Math.random() < pGol) return 'gol';
-  var pDefesa = limita(0.45 + (fGoleiro - fAtacante) * 0.006, 0.25, 0.78);
+  var pDefesa = limita(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.78);
   return Math.random() < pDefesa ? 'defesa' : 'fora';
 }
 
@@ -297,8 +311,8 @@ function simularDisputa(cobMeus, cobAdv, golMeu, golAdv) {
   }
   while (guard++ < 60) {
     var cob, res;
-    if (lado === 'meu') { cob = cobMeus[iMeu % cobMeus.length]; res = resultadoCobranca(cob.forca || 72, golAdv); if (res === 'gol') pMeus++; iMeu++; }
-    else { cob = cobAdv[iAdv % cobAdv.length]; res = resultadoCobranca(cob.forca || 72, golMeu); if (res === 'gol') pAdv++; iAdv++; }
+    if (lado === 'meu') { cob = cobMeus[iMeu % cobMeus.length]; res = resultadoCobranca(cob, golAdv); if (res === 'gol') pMeus++; iMeu++; }
+    else { cob = cobAdv[iAdv % cobAdv.length]; res = resultadoCobranca(cob, golMeu); if (res === 'gol') pAdv++; iAdv++; }
     seq.push({ lado: lado, nome: cob.nome, resultado: res });
     var d = decidiu();
     if (d) return { sequencia: seq, vencedor: d };

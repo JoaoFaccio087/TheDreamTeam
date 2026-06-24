@@ -434,11 +434,24 @@ function forcaGoleiroSrv(el) {
   return 72;
 }
 
-// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora' (atacante x goleiro).
-function resultadoCobrancaSrv(fAtacante, fGoleiro) {
-  const pGol = limitaSrv(0.74 + (fAtacante - fGoleiro) * 0.006, 0.50, 0.92);
+// Bônus de conversão por posição (atacantes/meias ofensivos melhores; defesa/goleiro piores).
+function bonusPosicaoSrv(jog) {
+  const p = jog.codigo || (jog.posicoes && jog.posicoes[0]) || '';
+  if (p === 'ATA' || p === 'PE' || p === 'PD') return 0.06;
+  if (p === 'MEI' || p === 'SA') return 0.04;
+  if (p === 'ZAG') return -0.05;
+  if (p === 'GOL') return -0.08;
+  if (p === 'LD' || p === 'LE') return -0.02;
+  return 0;
+}
+
+// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora' (atacante x goleiro + posição).
+// Os limites do pGol são a "zebra" (até o craque erra; goleiro fraco às vezes pega).
+function resultadoCobrancaSrv(cob, fGoleiro) {
+  const fAt = cob.forca || 72;
+  const pGol = limitaSrv(0.74 + (fAt - fGoleiro) * 0.006 + bonusPosicaoSrv(cob), 0.45, 0.90);
   if (Math.random() < pGol) return 'gol';
-  const pDefesa = limitaSrv(0.45 + (fGoleiro - fAtacante) * 0.006, 0.25, 0.78);
+  const pDefesa = limitaSrv(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.78);
   return Math.random() < pDefesa ? 'defesa' : 'fora';
 }
 
@@ -459,8 +472,8 @@ function simularPenaltisOnline(aEl, bEl) {
   }
   while (guard++ < 60) {
     let cob, res;
-    if (lado === 'a') { cob = cobA[iA % cobA.length]; res = resultadoCobrancaSrv(cob.forca || 72, golB); if (res === 'gol') pA++; iA++; }
-    else { cob = cobB[iB % cobB.length]; res = resultadoCobrancaSrv(cob.forca || 72, golA); if (res === 'gol') pB++; iB++; }
+    if (lado === 'a') { cob = cobA[iA % cobA.length]; res = resultadoCobrancaSrv(cob, golB); if (res === 'gol') pA++; iA++; }
+    else { cob = cobB[iB % cobB.length]; res = resultadoCobrancaSrv(cob, golA); if (res === 'gol') pB++; iB++; }
     seq.push({ lado, nome: cob.nome, resultado: res });
     const d = decidiu();
     if (d) return { penA: pA, penB: pB, seq, vence: d };
