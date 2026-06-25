@@ -161,13 +161,25 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
      `rodadasCirculo` (fallback garantido) e `montarFaseLigaChampions(times)` →
      `{ potes, rodadas:[ [{home,away}×18] ×8 ] }`. Validado: 200/200 trials, 0
      fallbacks, ~15ms (roda 1× no início da fase). Ainda **não fiado** no ciclo. ⚠️ deploy.
-   - **Parte 3:** tornar a Champions selecionável; ciclo lobby → draft → emitir as 8
-     rodadas (simular cada uma via `simularPartida`/`picksDe`, atualizar a tabela) →
-     aplicar os cortes. Reusa o espectador (cada cliente assiste seu jogo da rodada).
+   - **Parte 3:** tornar a Champions selecionável + fiar no ciclo. **Descoberta-chave:**
+     `sala.formato` é só LIDO, nunca atribuído → hoje todo online é Brasileirão (liga, 20);
+     os ramos `'mata'` estão dormentes. E `simularUmaRodada` já monta a **classificação
+     ordenada de todos os times** → a Champions reusa o motor de rodadas inteiro (é "liga
+     de 36, 8 rodadas, com mata-mata no fim").
+     - **3a (FEITO):** seam de config — `sala.formato='champions'` ao entrar em sala de
+       Champions (cirúrgico, não toca os outros modos); `maxParticipantes`→36;
+       `montarCalendarioChampions(sala)` (elencos → 8 rodadas no shape `[casa,fora]`,
+       consumível pelo `simularUmaRodada`; guarda `sala.ligaPotes`). Validado (8 asserts,
+       sala fictícia de 36). Ainda **não selecionável** (zero risco). ⚠️ deploy.
+     - **3b:** encher de bots até 36 no lobby + draft (snake, igual à liga, só que 36) +
+       no ready→playing usar `montarCalendarioChampions` e `totalRodadas=8` + emitir as 8
+       rodadas reusando `simularUmaRodada` (espectador: cada cliente assiste seu jogo).
+     - **3c:** fim da fase → aplicar `cortesChampions` (8/16/12) e transicionar p/ playoff.
    - **Parte 4:** playoff 9–24 (ida/volta) + chave a partir das oitavas (reusa
      mata-mata, espectador e "X/Y prontos"). Temperos: mando na volta pro melhor
      classificado; quem elimina um time melhor herda a posição.
-   - **Parte 5:** UI do cliente — tabela de 36 com cortes destacados, playoff e chave.
+   - **Parte 5:** UI do cliente — entrada (escolher Champions no online), tabela de 36
+     com cortes destacados, playoff e chave.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
@@ -179,3 +191,32 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
 
 O modal de pênaltis **roda sozinho** com cadência + botão "Pular Pênaltis" (não é
 "Próxima Cobrança" manual a cada chute). Dá para trocar para manual se preferir.
+
+---
+
+## 8. Ideias futuras — novos modos (anotações, sem prazo)
+
+Ideias já conversadas para expandir o jogo com novos modos. Transversal a todas:
+**exigem ampliar bastante a base de dados** — provavelmente o maior custo de cada uma.
+Vale, ao começar qualquer uma, procurar **sites de referência** (já existem exemplos
+prontos, ex.: um do tipo para a NBA) para inspirar formato e dados.
+
+### 8.1 Futebol — ligas por rodadas (mais fáceis)
+Seguem a **mesma lógica do Brasileirão** (campeonato por rodadas, mesmo esporte), então
+reaproveitam quase tudo do que já temos; o trabalho é majoritariamente de dados:
+- **Premier League**
+- **Serie A (Itália)**
+- **LaLiga (Espanha)**
+
+### 8.2 Outros esportes / formatos (estrutura nova)
+Fogem da lógica atual e pedem motor próprio (regras, simulação e UI específicas):
+- **NBA** — basquete (já existe site de referência para se inspirar).
+- **F1** — corrida: pontuação por GP, grid, temporada de etapas (nada de "confronto").
+- **CS2** — e-sport: formato de partidas/mapas, possivelmente chaves/ligas.
+- **Kings League** — futebol 7 com regras especiais (cartas, armas, gol de ouro etc.).
+- **Vôlei Masculino** e **Vôlei Feminino** — placar por sets, lógica própria.
+  - **Decidir:** dois modos separados (M e F) **ou** um "geralzão" misto. Avaliar quando
+    for a vez (separar dá fidelidade; unificar reduz duplicação de código e dados).
+
+> Nota: por ordem de esforço, o caminho natural é fazer primeiro os **3 de futebol**
+> (8.1, baratos, reusam o Brasileirão) e só depois encarar os de esporte/formato novo.

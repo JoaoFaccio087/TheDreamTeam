@@ -534,6 +534,15 @@ function montarFaseLigaChampions(times) {
   return { potes, rodadas: rodadasCirculo(times.map(t => t.userId)) };
 }
 
+// Ponte sala → fase de liga: usa os elencos (força média) p/ montar as 8 rodadas no
+// MESMO shape do calendário da liga ([ [casa,fora], … ]), consumível por simularUmaRodada.
+function montarCalendarioChampions(sala) {
+  const times = sala.jogadores.map(j => ({ userId: j.userId, forca: forcaDoElenco(j.picks) }));
+  const { potes, rodadas } = montarFaseLigaChampions(times);
+  sala.ligaPotes = potes;
+  return rodadas.map(rod => rod.map(g => [g.home, g.away]));
+}
+
 function acumularStats(sala, fila) {
   (fila || []).forEach(ev => {
     if (ev.lado === 'meu') {
@@ -826,8 +835,9 @@ function configGrupos(competicao) {
   return { letras: 'ABCDEFGH'.split(''), porGrupo: 4 };   // Libertadores/Champions
 }
 
-// Máximo de participantes (humanos+bots) por formato: liga=20, Copa=48, Liberta=32.
+// Máximo de participantes (humanos+bots) por formato: liga=20, champions=36, Copa=48.
 function maxParticipantes(sala) {
+  if (sala.formato === 'champions') return 36;
   if (sala.formato !== 'mata') return TOTAL_TIMES;
   const cfg = configGrupos(sala.competicao);
   return cfg.letras.length * cfg.porGrupo;
@@ -1113,6 +1123,8 @@ function setupSocket(server, frontendUrl) {
 
         let sala = getSala(code);
         if (!sala) sala = criarSala(code, roomDB.host_user_id || userId, roomDB.competicao);
+        // Formato derivado da competição (só 'champions' é novo; demais seguem como liga).
+        if (sala.competicao === 'Champions League') sala.formato = 'champions';
 
         let jogador = sala.jogadores.find(j => j.userId === userId);
         if (!jogador) {
