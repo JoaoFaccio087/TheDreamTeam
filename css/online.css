@@ -1383,3 +1383,10 @@
 }
 .esp-opcao:hover { background: rgba(255,255,255,0.08); color: #fff; }
 .esp-opcao-ativa { color: #D9B25A; font-weight: 700; }
+
+/* Indicador não-bloqueante "X/Y prontos" (mata-mata) */
+.online-prontos {
+  margin: 0 0 8px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  color: #8aa093;
+}

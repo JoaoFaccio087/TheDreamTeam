@@ -406,6 +406,64 @@ function montarChaveOnline(sala) {
   return sala.chave;
 }
 
+// ── Champions: FASE DE LIGA (formato fiel 25/26) ─────────────────────────────
+// 36 times, tabela única, 8 jogos por time (2 de cada um dos 4 potes, 4 casa /
+// 4 fora). Cortes: 1–8 oitavas diretas, 9–24 playoff, 25–36 eliminados.
+// Núcleo puro (sem efeitos na sala); a fiação no ciclo da sala vem depois.
+
+// Distribui os times em 4 potes por força e monta os jogos da fase de liga.
+// times: [{ userId, forca }]. Devolve { potes:[[uid…]x4], jogos:[{home,away}] }.
+function montarLigaChampions(times) {
+  const N = times.length;
+  const porPote = Math.floor(N / 4);
+  const ordenados = times.slice().sort((a, b) => (b.forca || 70) - (a.forca || 70));
+  const potes = [];
+  for (let p = 0; p < 4; p++) potes.push(shuffle(ordenados.slice(p * porPote, (p + 1) * porPote)));
+
+  const jogos = [];
+  // Mesmo pote: ciclo direcionado (1 casa vs próximo, 1 fora vs anterior).
+  for (let p = 0; p < 4; p++) {
+    const T = potes[p], n = T.length;
+    for (let k = 0; k < n; k++) jogos.push({ home: T[k].userId, away: T[(k + 1) % n].userId });
+  }
+  // Potes distintos (i<j): 2 jogos com o outro pote — 1 casa, 1 fora.
+  for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) {
+    const A = potes[i], B = potes[j], n = A.length;
+    for (let k = 0; k < n; k++) {
+      jogos.push({ home: A[k].userId,           away: B[k].userId });
+      jogos.push({ home: B[(k + 1) % n].userId, away: A[k].userId });
+    }
+  }
+  return { potes: potes.map(pt => pt.map(t => t.userId)), jogos };
+}
+
+// Tabela única da fase de liga (acumulação de resultados).
+function tabelaLigaVazia(times) {
+  const t = {};
+  times.forEach(x => { t[x.userId] = { userId: x.userId, pts: 0, j: 0, v: 0, e: 0, d: 0, gf: 0, ga: 0 }; });
+  return t;
+}
+function registrarLiga(tab, home, away, gh, ga) {
+  const H = tab[home], A = tab[away];
+  H.j++; A.j++; H.gf += gh; H.ga += ga; A.gf += ga; A.ga += gh;
+  if (gh > ga) { H.v++; A.d++; H.pts += 3; }
+  else if (ga > gh) { A.v++; H.d++; A.pts += 3; }
+  else { H.e++; A.e++; H.pts++; A.pts++; }
+}
+function ordenarTabelaLiga(tab) {
+  return Object.values(tab)
+    .map(r => Object.assign({ sg: r.gf - r.ga }, r))
+    .sort((a, b) => (b.pts - a.pts) || (b.sg - a.sg) || (b.gf - a.gf));
+}
+// Cortes da fase de liga: 1–8 oitavas diretas, 9–24 playoff, 25–36 eliminados.
+function cortesChampions(tabelaOrdenada) {
+  return {
+    direto:     tabelaOrdenada.slice(0, 8),
+    playoff:    tabelaOrdenada.slice(8, 24),
+    eliminados: tabelaOrdenada.slice(24, 36),
+  };
+}
+
 function acumularStats(sala, fila) {
   (fila || []).forEach(ev => {
     if (ev.lado === 'meu') {
@@ -1365,6 +1423,10 @@ function setupSocket(server, frontendUrl) {
           rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
         });
 
+        // Contador "X/Y prontos" (não-bloqueante): zera ao começar a fase.
+        sala.prontosRodada = new Set();
+        io.to(code).emit('chave:prontos', { x: 0, y: sala.jogadores.filter(j => !j.ehBot).length });
+
         // Se nenhum humano segue vivo na próxima fase, simula o resto direto.
         let finalCampeao = campeao, acabou = ehFinal;
         if (!ehFinal) {
@@ -1392,6 +1454,20 @@ function setupSocket(server, frontendUrl) {
       } finally {
         sala.rodadaEmAndamento = false;
       }
+    });
+
+    // ── chave:assisti — um humano terminou de ver a fase (indicador não-bloqueante) ──
+    socket.on('chave:assisti', () => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala || sala.status !== 'mata') return;
+      const eu = sala.jogadores.find(j => String(j.userId) === String(userId) && !j.ehBot);
+      if (!eu) return;
+      sala.prontosRodada = sala.prontosRodada || new Set();
+      sala.prontosRodada.add(String(userId));
+      io.to(code).emit('chave:prontos', {
+        x: sala.prontosRodada.size,
+        y: sala.jogadores.filter(j => !j.ehBot).length,
+      });
     });
 
     // ── round:skipAll — voto p/ pular tudo; com TODOS os humanos, simula o resto ─

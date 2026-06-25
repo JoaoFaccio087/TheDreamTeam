@@ -224,6 +224,8 @@ Formato usado em `escalacao[i]` (cada uma das 11 vagas):
 | S→C | `chave:state` | chave montada/atualizada (ver payload) |
 | C→S | `chave:advance` | host avança a fase do mata-mata |
 | S→C | `chave:results` | resultado de uma fase `{ rounds, rodadaAtual, fase, resultados, artilharia, assistencias }` |
+| C→S | `chave:assisti` | um humano terminou de assistir à fase (indicador não-bloqueante) |
+| S→C | `chave:prontos` | contador "X/Y prontos" da fase `{ x, y }` (y = humanos da sala) |
 | S→C | `game:end` | fim da Copa, com campeão (ver abaixo) |
 
 #### `gdraft:yourPick` (cartas da sua vez no draft por grupo)

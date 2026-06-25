@@ -69,7 +69,7 @@
   var animTimer = null;   // timer da animação da partida do usuário
   var animacaoAtiva = false;   // true enquanto a partida do usuário está sendo animada
   var aoFimDaAnimacao = null;  // callback rodado quando a animação termina (atualiza a classificação só então)
-  var btnPularTudo, modalPular, modalPularConfirmar, modalPularCancelar, skipContador;
+  var btnPularTudo, modalPular, modalPularConfirmar, modalPularCancelar, skipContador, prontosLabel;
   var euVoteiPular = false, skipVotos = 0, skipTotal = 0;
 
   // Fim
@@ -278,6 +278,7 @@
     socket.on('grupos:fim',       onGruposFim);
     socket.on('chave:state',      onChaveState);
     socket.on('chave:results',    onChaveResults);
+    socket.on('chave:prontos',    onProntos);
     socket.on('round:skipVotes',  onSkipVotes);
     socket.on('game:end',         onGameEnd);
     socket.on('erro',             function (msg) {
@@ -1309,6 +1310,19 @@
     }
   }
 
+  // Indicador não-bloqueante "X/Y prontos" — quantos humanos já assistiram à fase.
+  function onProntos(d) {
+    if (!prontosLabel) return;
+    var x = (d && d.x) || 0, y = (d && d.y) || 0;
+    var acabou = chaveOnline && chaveOnline.rounds && chaveOnline.rodadaAtual >= chaveOnline.rounds.length;
+    if (y >= 2 && !acabou) {
+      prontosLabel.textContent = x + '/' + y + ' prontos';
+      prontosLabel.classList.remove('escondida');
+    } else {
+      prontosLabel.classList.add('escondida');
+    }
+  }
+
   // ── Espectador do mata-mata ───────────────────────────────────────────────
   // Cada jogador segue um time: começa no próprio e, ao ser eliminado, passa a
   // seguir quem o venceu (ou um time escolhido). A partida animada é a do seguido.
@@ -1455,6 +1469,7 @@
       renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
       atualizarAcoesMata();
       atualizarBarraEspectador();
+      if (socket && socket.connected) socket.emit('chave:assisti'); // "X/Y prontos"
     }
 
     if (alvo) {
@@ -1481,6 +1496,7 @@
   }
 
   function onGameEnd(dados) {
+    if (prontosLabel) prontosLabel.classList.add('escondida');
     var ranking = dados.ranking || [];
     rankingFinalCache = ranking;
     meuRankingFinal = ranking.find(function (p) { return String(p.userId) === String(meuUserId); }) || null;
@@ -2413,6 +2429,7 @@
     modalPularConfirmar = document.getElementById('modal-pular-confirmar');
     modalPularCancelar  = document.getElementById('modal-pular-cancelar');
     skipContador        = document.getElementById('online-skip-cont');
+    prontosLabel        = document.getElementById('online-prontos');
 
     // Fim
     onlineRankingFinal = document.getElementById('online-ranking-final');

@@ -139,23 +139,31 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
   e simulação). Na simulação mobile, a ordem ficou: voltar → abas → controles →
   partida → botões → estatísticas, e a tabela de **estatísticas só aparece após a 1ª
   partida** (escondida no reinício, revelada no `iniciarPartida`).
+- **"X/Y prontos" (online)** — indicador não-bloqueante no mata-mata: cada humano
+  emite `chave:assisti` ao terminar de ver a fase; o servidor conta e devolve
+  `chave:prontos {x,y}`; o cliente mostra "X/Y prontos" perto do botão de avançar
+  (só com 2+ humanos). O host avança quando quiser. ⚠️ servidor precisa de **deploy no
+  Render**.
 
 ---
 
 ## 6. Backlog (próximos passos)
 
-1. **Aviso "X/Y prontos" (não-bloqueante) no host** (APROVADO): pequeno indicador de
-   quantos já terminaram de assistir a fase, só como referência (o host avança quando
-   quiser). Precisa de um evento de socket (cliente avisa "assisti" → servidor conta).
-2. **Champions online (formato FIEL)** — o próximo marco grande. Tabela única de 36,
-   8 jogos por time (2 de cada um dos 4 potes, 4 casa / 4 fora), top 8 direto às
-   oitavas, 9º–24º playoff de ida/volta, 25º–36º eliminados; melhor classificado joga
-   a volta em casa, e quem elimina um time melhor herda a posição. Reaproveita draft,
-   mata-mata e espectador. (Definir antes: nº de jogos por sala vs bots, semeadura por
-   potes, e como exibir a tabela de 36 sem pesar.)
-3. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
+1. **Champions online (formato FIEL)** — marco grande, em partes:
+   - **Parte 1 (FEITO):** núcleo da fase de liga no servidor (`api/socket/index.js`) —
+     `montarLigaChampions` (4 potes por força + 8 jogos/time: 2 por pote, 4 casa/4
+     fora = 144 jogos), `tabelaLigaVazia`/`registrarLiga`/`ordenarTabelaLiga` (tabela
+     única) e `cortesChampions` (1–8 direto / 9–24 playoff / 25–36 fora). Funções
+     puras, validadas (17 asserts), **ainda não fiadas** no ciclo (zero risco). ⚠️ deploy.
+   - **Parte 2:** tornar a Champions selecionável; ciclo lobby → draft → fase de liga
+     em rodadas (matchdays, p/ o espectador funcionar) → aplicar os cortes.
+   - **Parte 3:** playoff 9–24 (ida/volta) + chave a partir das oitavas (reusa
+     mata-mata, espectador e "X/Y prontos"). Temperos: mando na volta pro melhor
+     classificado; quem elimina um time melhor herda a posição.
+   - **Parte 4:** UI do cliente — tabela de 36 com cortes destacados, playoff e chave.
+2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
-4. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
+3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
    para o UIKit, se forem reaproveitados em outra tela.
 
 ---
