@@ -88,9 +88,10 @@
     min-width: 0;      /* ignora o piso de largura do texto (padroniza os dois) */
   }
 
-  /* Voltar do topo: mais compacto no celular */
+  /* Voltar do topo: link bem clicável no celular (sem caixa) */
   .jogo-header-esq { gap: 12px; align-items: center; }
-  .jogo-voltar-topo { padding: 6px 11px; font-size: 0.76rem; margin-bottom: 0; }
+  .jogo-voltar-topo { padding: 8px 4px; font-size: 0.95rem; }
+  .jogo-voltar-linha { padding: 10px 16px 0; }
 
   /* Simulação no celular: 1 coluna. display:contents promove os filhos das duas
      colunas ao .sim-wrapper; a sequência vem do `order`. */
@@ -105,6 +106,7 @@
   .sim-lateral { display: contents; }
 
   #btn-voltar-escalacao { order: 1; }
+  #sim-tabs             { order: 2; }
 
   /* Bloco de controles em largura cheia com MODO e VELOCIDADE lado a lado */
   .sim-controles {
@@ -122,11 +124,13 @@
     min-width: 0;
   }
 
-  #tabela-brasileirao { order: 2; }
-  #stats-campanha   { order: 4; }
+  /* A partida (tabela + histórico / chave) fica logo abaixo dos controles;
+     as estatísticas vão por último e só aparecem após a 1ª partida. */
+  #sim-painel-jogos { order: 4; }
+  #chave-copa       { order: 4; }
   #btn-iniciar-jogo { order: 5; }
-  #btn-resumo       { order: 6; }
-  #historico-jogos  { order: 7; }
+  #btn-resumo       { order: 5; }
+  #stats-campanha   { order: 6; }
 
   /* No mobile o respiro vem do gap do wrapper; remove a margem extra dos botões */
   .sim-lateral .sim-btn-acao { margin-top: 0; }

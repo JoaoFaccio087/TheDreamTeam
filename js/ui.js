@@ -87,8 +87,8 @@
 
   window.UI = UI;
 
-  // Cabeçalhos estáticos do single-player. Renderizados aqui (defer garante o DOM
-  // pronto e ui.js roda antes de estado.js, que cacheia #btn-voltar-home).
-  UI.setHeader('hdr-jogo',      { voltarId: 'btn-voltar-home', infoId: 'jogo-header-info' });
+  // Cabeçalhos estáticos do single-player. O Voltar de cada tela é um link no corpo
+  // (abaixo do cabeçalho), não mais dentro do header.
+  UI.setHeader('hdr-jogo',      { infoId: 'jogo-header-info' });
   UI.setHeader('hdr-simulacao', { infoHtml: '<span class="sim-label-campanha">A CAMPANHA</span>' });
 })();

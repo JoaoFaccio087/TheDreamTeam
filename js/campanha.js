@@ -18,6 +18,8 @@ function reiniciarCampanha() {
   campanhaDerrotas  = 0;
   resumoCampeao     = false;
   if (btnResumo) btnResumo.classList.add('escondida'); // some até a próxima campanha terminar
+  var stats = document.getElementById('stats-campanha');
+  if (stats) stats.classList.add('escondida');          // só reaparece ao iniciar a 1ª partida
   var corpo = document.getElementById('stats-campanha-corpo');
   if (corpo) corpo.innerHTML = '';
   var hist  = document.getElementById('historico-jogos');
@@ -271,6 +273,9 @@ function concluirJogoGrupo(est) {
 // --- Ponto de entrada: sorteia adversário e dispara a simulação ---
 function iniciarPartida() {
   if (timerPartida !== null) return; // já tem uma partida rodando
+
+  var stats = document.getElementById('stats-campanha');
+  if (stats) stats.classList.remove('escondida'); // a 1ª partida revela as estatísticas
 
   var filtroComp = COMPETICOES[modoSelecionado].dados;
   var fase = fasesCampanha[faseAtual];

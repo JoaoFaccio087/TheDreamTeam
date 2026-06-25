@@ -132,8 +132,13 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
   funciona com os resultados que já chegam).
 - **Champions condensada (single-player)** — `campanha.js` (`renderResumoFaseLiga`) +
   `css/simulacao.css`: ao fim da fase de liga, em vez do tabelão de 10, mostra
-  "Xº de 10 · classificado/eliminado" + uma janela em torno da linha de corte. Copa
-  segue com a tabela de 4.
+  "Xº de 10 · classificado/eliminado" + uma janela em torno da linha de corte (com
+  coluna J). Copa segue com a tabela de 4.
+- **Polimento de UI/responsivo** — "Voltar" virou um link com seta (`.jogo-voltar-topo`,
+  sem caixa) e saiu do header para o corpo, abaixo da linha, nas duas telas (tela-jogo
+  e simulação). Na simulação mobile, a ordem ficou: voltar → abas → controles →
+  partida → botões → estatísticas, e a tabela de **estatísticas só aparece após a 1ª
+  partida** (escondida no reinício, revelada no `iniciarPartida`).
 
 ---
 
