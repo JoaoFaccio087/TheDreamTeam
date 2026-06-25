@@ -74,9 +74,9 @@ function montarCampanha() {
   var pool = UI.shuffle(API.getClubesPorCompeticao(comp));
   var outros = pool.slice(0, tamGrupo - 1);
 
-  var tabela = [{ nome: nomeDoTime, voce: true, forca: forcaDoTime(), pts: 0, gf: 0, ga: 0, clubeRef: null }];
+  var tabela = [{ nome: nomeDoTime, voce: true, forca: forcaDoTime(), pts: 0, jogos: 0, gf: 0, ga: 0, clubeRef: null }];
   outros.forEach(function (c) {
-    tabela.push({ nome: c.clube + ' ' + c.edicao, voce: false, forca: forcaDoClube(c), pts: 0, gf: 0, ga: 0, clubeRef: c });
+    tabela.push({ nome: c.clube + ' ' + c.edicao, voce: false, forca: forcaDoClube(c), pts: 0, jogos: 0, gf: 0, ga: 0, clubeRef: c });
   });
 
   // Tabela de jogos (você = índice 0)
@@ -112,6 +112,7 @@ function montarCampanha() {
 
 // --- Atualiza pontos/gols de dois times da tabela após um jogo ---
 function registrarResultadoTabela(A, B, golsA, golsB) {
+  A.jogos = (A.jogos || 0) + 1; B.jogos = (B.jogos || 0) + 1;
   A.gf += golsA; A.ga += golsB;
   B.gf += golsB; B.ga += golsA;
   if (golsA > golsB)      A.pts += 3;
@@ -176,7 +177,7 @@ function renderResumoFaseLiga(id, ordenada, posVoce) {
 
   var linhas = '';
   posicoes.forEach(function (p, idx) {
-    if (idx > 0 && p > posicoes[idx - 1] + 1) linhas += '<tr class="fl-gap"><td colspan="4">&middot;&middot;&middot;</td></tr>';
+    if (idx > 0 && p > posicoes[idx - 1] + 1) linhas += '<tr class="fl-gap"><td colspan="5">&middot;&middot;&middot;</td></tr>';
     var t = ordenada[p - 1];
     var sg = (t.gf - t.ga >= 0 ? '+' : '') + (t.gf - t.ga);
     var cls = (t.voce ? 'fl-voce ' : '') + (p <= corte ? 'fl-classifica' : 'fl-fora') + (p === corte + 1 ? ' fl-corte' : '');
@@ -184,6 +185,7 @@ function renderResumoFaseLiga(id, ordenada, posVoce) {
       '<tr class="' + cls + '">' +
         '<td class="fl-pos">' + p + '</td>' +
         '<td class="fl-time">' + UI.esc(t.nome) + '</td>' +
+        '<td class="fl-num">' + (t.jogos || 0) + '</td>' +
         '<td class="fl-num">' + sg + '</td>' +
         '<td class="fl-pts">' + t.pts + '</td>' +
       '</tr>';
@@ -196,7 +198,8 @@ function renderResumoFaseLiga(id, ordenada, posVoce) {
     '<p class="fl-titulo">Fase de Liga &middot; sua campanha</p>' +
     '<p class="fl-status ' + (ok ? 'ok' : 'out') + '">' + posVoce + 'º de ' + total + ' &middot; ' +
       (ok ? '&#10003; Classificado' : '&#10005; Eliminado') + '</p>' +
-    '<table class="fl-tabela"><tbody>' + linhas + '</tbody></table>' +
+    '<table class="fl-tabela"><thead><tr><th></th><th>Time</th><th>J</th><th>SG</th><th>Pts</th></tr></thead>' +
+      '<tbody>' + linhas + '</tbody></table>' +
     '<p class="fl-legenda">Top ' + corte + ' avançam ao mata-mata</p>';
   if (elRes) corpo.insertBefore(wrap, elRes); else corpo.appendChild(wrap);
 }
