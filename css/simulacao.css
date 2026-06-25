@@ -466,6 +466,36 @@
 .grupo-tabela tr.grupo-classifica .grupo-pos { color: var(--accent); }
 .grupo-tabela tr.grupo-voce td { color: var(--accent); font-weight: 700; }
 
+/* Resumo condensado da Champions (fase de liga) — sem o tabelão de 10 */
+.fase-liga-resumo { margin-top: 12px; }
+.fl-titulo {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--txt-soft); margin: 0 0 6px;
+}
+.fl-status {
+  font-family: 'Archivo Black', sans-serif; font-size: 0.95rem;
+  margin: 0 0 8px; letter-spacing: 0.3px;
+}
+.fl-status.ok  { color: #2BD46A; }
+.fl-status.out { color: #E0644C; }
+.fl-tabela { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.fl-tabela td {
+  padding: 5px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: var(--txt);
+}
+.fl-pos  { width: 1.6rem; color: var(--txt-soft); }
+.fl-time { width: 100%; }
+.fl-num  { text-align: right; color: var(--txt-soft); }
+.fl-pts  { text-align: right; font-family: 'Archivo Black', sans-serif; color: var(--accent); }
+.fl-tabela tr.fl-classifica .fl-pos { color: var(--accent); }
+.fl-tabela tr.fl-voce td { color: var(--accent); font-weight: 700; }
+.fl-tabela tr.fl-fora td { color: var(--txt-soft); }
+.fl-tabela tr.fl-corte td { border-top: 2px solid rgba(224, 100, 76, 0.5); }
+.fl-tabela tr.fl-gap td { text-align: center; color: var(--txt-soft); letter-spacing: 2px; padding: 2px; border: none; }
+.fl-legenda {
+  font-size: 0.6rem; letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--txt-soft); margin: 7px 0 0;
+}
+
 
 
 

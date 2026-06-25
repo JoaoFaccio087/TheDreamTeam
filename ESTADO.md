@@ -18,9 +18,17 @@ XI dos craques que estiveram lá e **simula** a campanha. Dev: João Faccio.
   tabelões. É o modo de "montar e jogar rápido".
 - **Online = a experiência completa**: fase de grupos, draft, mata-mata, tabelas,
   premiação. É onde mora a profundidade.
-- **Champions no single-player deve ser "condensada"**: não mostrar o grupão numa
-  tabela gigante e simular só parte dos jogos da fase de grupos. (Feature futura,
-  ver backlog.)
+- **Champions no single-player é "condensada"** (FEITO): em vez do tabelão de 10,
+  mostra um resumo da sua campanha + uma janela em torno da linha de corte. A liga
+  de 10 continua rodando por baixo (jogos de bastidores instantâneos); só a
+  apresentação ficou enxuta. A Copa mantém a tabelinha de 4 (pequena, tudo bem).
+- **Champions online = formato FIEL** (a implementar): reproduz a "fase de liga" real
+  da Champions 25/26 — tabela única de 36, cada um joga 8 (4 casa / 4 fora) contra 2
+  times de cada um dos 4 potes; top 8 vão direto às oitavas, 9º–24º disputam playoff
+  de ida/volta, 25º–36º eliminados. Tempero do formato: melhor classificado joga a
+  volta em casa nas eliminatórias, e quem elimina um time melhor herda a posição dele
+  no chaveamento. Reaproveita draft, mata-mata e o modo espectador. Campanha completa,
+  na pegada da Copa/Brasileirão online.
 - Decisão **arquivada**: não generalizar abas para o single-player; a ideia de aba
   "Classificação" foi descartada (o respiro no `simulacao.css` já resolveu o
   espaçamento que motivou aquilo).
@@ -122,16 +130,24 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
   pênaltis animada na sala (consome `penSeq` na perspectiva do seguido). CSS em
   `css/online.css`. ⚠️ os pênaltis só aparecem com o **servidor no Render** (o resto
   funciona com os resultados que já chegam).
+- **Champions condensada (single-player)** — `campanha.js` (`renderResumoFaseLiga`) +
+  `css/simulacao.css`: ao fim da fase de liga, em vez do tabelão de 10, mostra
+  "Xº de 10 · classificado/eliminado" + uma janela em torno da linha de corte. Copa
+  segue com a tabela de 4.
 
 ---
 
 ## 6. Backlog (próximos passos)
 
-1. **Aviso "X/Y prontos" (não-bloqueante) no host:** pequeno indicador de quantos já
-   terminaram de assistir a fase, só como referência (o host avança quando quiser).
-   Precisa de um evento de socket (cliente avisa "assisti" → servidor conta). Opcional.
-2. **Champions condensada (single-player):** não mostrar o grupão; simular só parte
-   dos jogos da fase de grupos. (Próxima feature grande.)
+1. **Aviso "X/Y prontos" (não-bloqueante) no host** (APROVADO): pequeno indicador de
+   quantos já terminaram de assistir a fase, só como referência (o host avança quando
+   quiser). Precisa de um evento de socket (cliente avisa "assisti" → servidor conta).
+2. **Champions online (formato FIEL)** — o próximo marco grande. Tabela única de 36,
+   8 jogos por time (2 de cada um dos 4 potes, 4 casa / 4 fora), top 8 direto às
+   oitavas, 9º–24º playoff de ida/volta, 25º–36º eliminados; melhor classificado joga
+   a volta em casa, e quem elimina um time melhor herda a posição. Reaproveita draft,
+   mata-mata e espectador. (Definir antes: nº de jogos por sala vs bots, semeadura por
+   potes, e como exibir a tabela de 36 sem pesar.)
 3. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 4. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador

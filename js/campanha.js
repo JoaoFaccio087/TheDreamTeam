@@ -158,7 +158,48 @@ function renderTabelaGrupo(id, ordenada) {
   if (elRes) corpo.insertBefore(wrap, elRes); else corpo.appendChild(wrap);
 }
 
-// --- Conclui um jogo da fase de grupos (sem pênaltis; empate é empate; não elimina) ---
+// --- Versão condensada (Champions): em vez do tabelão de 10, mostra um resumo da
+//     SUA campanha + uma janela em torno da linha de corte (no máx. ~5 linhas) ---
+function renderResumoFaseLiga(id, ordenada, posVoce) {
+  var cardEl = document.getElementById('partida-' + id);
+  var corpo  = cardEl ? cardEl.querySelector('.partida-corpo') : null;
+  var elRes  = document.getElementById('presultado-' + id);
+  if (!corpo) return;
+
+  var corte = grupo.avancam, total = ordenada.length;
+
+  // Linhas em foco: vizinhança da linha de corte + a sua posição (se ficar de fora).
+  var foco = {};
+  [corte - 2, corte - 1, corte, corte + 1].forEach(function (p) { if (p >= 1 && p <= total) foco[p] = true; });
+  foco[posVoce] = true;
+  var posicoes = Object.keys(foco).map(Number).sort(function (a, b) { return a - b; });
+
+  var linhas = '';
+  posicoes.forEach(function (p, idx) {
+    if (idx > 0 && p > posicoes[idx - 1] + 1) linhas += '<tr class="fl-gap"><td colspan="4">&middot;&middot;&middot;</td></tr>';
+    var t = ordenada[p - 1];
+    var sg = (t.gf - t.ga >= 0 ? '+' : '') + (t.gf - t.ga);
+    var cls = (t.voce ? 'fl-voce ' : '') + (p <= corte ? 'fl-classifica' : 'fl-fora') + (p === corte + 1 ? ' fl-corte' : '');
+    linhas +=
+      '<tr class="' + cls + '">' +
+        '<td class="fl-pos">' + p + '</td>' +
+        '<td class="fl-time">' + UI.esc(t.nome) + '</td>' +
+        '<td class="fl-num">' + sg + '</td>' +
+        '<td class="fl-pts">' + t.pts + '</td>' +
+      '</tr>';
+  });
+
+  var ok = posVoce <= corte;
+  var wrap = document.createElement('div');
+  wrap.className = 'fase-liga-resumo';
+  wrap.innerHTML =
+    '<p class="fl-titulo">Fase de Liga &middot; sua campanha</p>' +
+    '<p class="fl-status ' + (ok ? 'ok' : 'out') + '">' + posVoce + 'º de ' + total + ' &middot; ' +
+      (ok ? '&#10003; Classificado' : '&#10005; Eliminado') + '</p>' +
+    '<table class="fl-tabela"><tbody>' + linhas + '</tbody></table>' +
+    '<p class="fl-legenda">Top ' + corte + ' avançam ao mata-mata</p>';
+  if (elRes) corpo.insertBefore(wrap, elRes); else corpo.appendChild(wrap);
+}
 function concluirJogoGrupo(est) {
   var advIdx = grupo.jogosVoce[grupo.idxJogo];
   registrarResultadoTabela(grupo.tabela[0], grupo.tabela[advIdx], est.gMeus, est.gAdv);
@@ -191,11 +232,13 @@ function concluirJogoGrupo(est) {
   var ordenada = grupo.tabela.slice().sort(ordenarTabela);
   var posVoce = 1;
   for (var i = 0; i < ordenada.length; i++) { if (ordenada[i].voce) { posVoce = i + 1; break; } }
-  renderTabelaGrupo(est.id, ordenada);
+  if (modoSelecionado === 'champions') renderResumoFaseLiga(est.id, ordenada, posVoce);
+  else renderTabelaGrupo(est.id, ordenada);
 
+  var ondeTxt = (modoSelecionado === 'champions') ? 'na fase de liga' : 'no grupo';
   var elRes = document.getElementById('presultado-' + est.id);
   if (posVoce <= grupo.avancam) {
-    if (elRes) { elRes.textContent = '✓ CLASSIFICADO — ' + posVoce + 'º no grupo'; elRes.className = 'partida-resultado vitoria'; }
+    if (elRes) { elRes.textContent = '✓ CLASSIFICADO — ' + posVoce + 'º ' + ondeTxt; elRes.className = 'partida-resultado vitoria'; }
     faseAtual++; // entra no mata-mata (oitavas)
 
     // Copa: monta a chave AGORA (fim dos grupos) para a aba Mata-a-Mata já exibir,
@@ -213,7 +256,7 @@ function concluirJogoGrupo(est) {
       setTimeout(function () { btn.disabled = false; iniciarPartida(); }, 1500);
     }
   } else {
-    if (elRes) { elRes.textContent = '✕ ELIMINADO NA FASE DE GRUPOS — ' + posVoce + 'º'; elRes.className = 'partida-resultado derrota'; }
+    if (elRes) { elRes.textContent = '✕ ELIMINADO ' + ((modoSelecionado === 'champions') ? 'NA FASE DE LIGA' : 'NA FASE DE GRUPOS') + ' — ' + posVoce + 'º'; elRes.className = 'partida-resultado derrota'; }
     btn.textContent = 'Montar Novo Time ►';
     acaoBotao = 'novo-time';
     btn.disabled = false;
