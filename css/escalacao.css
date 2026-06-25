@@ -160,6 +160,7 @@
 .jogo-header-esq { display: flex; align-items: flex-end; gap: 16px; }
 .jogo-voltar-topo {
   display: inline-flex;
+  align-self: flex-start;   /* nunca estica/centraliza: fica colado à esquerda */
   align-items: center;
   gap: 6px;
   background: transparent;

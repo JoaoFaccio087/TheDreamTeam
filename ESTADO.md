@@ -155,12 +155,19 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
      fora = 144 jogos), `tabelaLigaVazia`/`registrarLiga`/`ordenarTabelaLiga` (tabela
      única) e `cortesChampions` (1–8 direto / 9–24 playoff / 25–36 fora). Funções
      puras, validadas (17 asserts), **ainda não fiadas** no ciclo (zero risco). ⚠️ deploy.
-   - **Parte 2:** tornar a Champions selecionável; ciclo lobby → draft → fase de liga
-     em rodadas (matchdays, p/ o espectador funcionar) → aplicar os cortes.
-   - **Parte 3:** playoff 9–24 (ida/volta) + chave a partir das oitavas (reusa
+   - **Parte 2 (FEITO):** decisão = **rodada a rodada** (8 matchdays, igual aos outros
+     modos). Escalonador no servidor: `dividirLigaEmRodadas` (backtracking c/ guarda
+     de passos divide os 144 jogos em 8 rodadas de 18, cada time 1x/rodada),
+     `rodadasCirculo` (fallback garantido) e `montarFaseLigaChampions(times)` →
+     `{ potes, rodadas:[ [{home,away}×18] ×8 ] }`. Validado: 200/200 trials, 0
+     fallbacks, ~15ms (roda 1× no início da fase). Ainda **não fiado** no ciclo. ⚠️ deploy.
+   - **Parte 3:** tornar a Champions selecionável; ciclo lobby → draft → emitir as 8
+     rodadas (simular cada uma via `simularPartida`/`picksDe`, atualizar a tabela) →
+     aplicar os cortes. Reusa o espectador (cada cliente assiste seu jogo da rodada).
+   - **Parte 4:** playoff 9–24 (ida/volta) + chave a partir das oitavas (reusa
      mata-mata, espectador e "X/Y prontos"). Temperos: mando na volta pro melhor
      classificado; quem elimina um time melhor herda a posição.
-   - **Parte 4:** UI do cliente — tabela de 36 com cortes destacados, playoff e chave.
+   - **Parte 5:** UI do cliente — tabela de 36 com cortes destacados, playoff e chave.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador

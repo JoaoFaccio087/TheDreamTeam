@@ -464,6 +464,76 @@ function cortesChampions(tabelaOrdenada) {
   };
 }
 
+// Distribui os 144 jogos em 8 rodadas (cada time joga 1x por rodada). Como os jogos
+// já respeitam a regra dos potes, usamos backtracking p/ achar 8 emparelhamentos
+// perfeitos; se o arranjo travar, o chamador re-sorteia os potes.
+function chaveJogo(a, b) { return a < b ? a + '-' + b : b + '-' + a; }
+
+function emparelhamentoPerfeito(nodes, adj, maxPassos) {
+  const matched = new Set(), pairs = []; let passos = 0;
+  function dfs() {
+    if (++passos > maxPassos) return false;
+    let u = null;
+    for (const x of nodes) if (!matched.has(x)) { u = x; break; }
+    if (u == null) return true;
+    matched.add(u);
+    const parts = shuffle([...adj.get(u)].filter(v => !matched.has(v)));
+    for (const v of parts) {
+      matched.add(v); pairs.push([u, v]);
+      if (dfs()) return true;
+      pairs.pop(); matched.delete(v);
+    }
+    matched.delete(u);
+    return false;
+  }
+  return dfs() ? pairs : null;
+}
+
+function dividirLigaEmRodadas(times, jogos) {
+  const nodes = times.map(t => t.userId);
+  const adj = new Map(nodes.map(n => [n, new Set()]));
+  const orient = new Map();
+  jogos.forEach(g => {
+    adj.get(g.home).add(g.away); adj.get(g.away).add(g.home);
+    orient.set(chaveJogo(g.home, g.away), { home: g.home, away: g.away });
+  });
+  const rodadas = [];
+  for (let r = 0; r < 8; r++) {
+    const m = emparelhamentoPerfeito(nodes, adj, 20000);
+    if (!m) return null;
+    rodadas.push(m.map(([a, b]) => { adj.get(a).delete(b); adj.get(b).delete(a); return orient.get(chaveJogo(a, b)); }));
+  }
+  return rodadas;
+}
+
+// Fallback garantido (método do círculo): 8 rodadas, adversários distintos, mando
+// alternado. Só é usado no caso raríssimo de a divisão com potes não fechar.
+function rodadasCirculo(ids) {
+  const n = ids.length, fixo = ids[0]; let resto = ids.slice(1);
+  const rodadas = [];
+  for (let r = 0; r < 8; r++) {
+    const linha = [fixo, ...resto], rod = [];
+    for (let i = 0; i < n / 2; i++) {
+      const a = linha[i], b = linha[n - 1 - i];
+      rod.push((r + i) % 2 === 0 ? { home: a, away: b } : { home: b, away: a });
+    }
+    rodadas.push(rod);
+    resto = [resto[resto.length - 1], ...resto.slice(0, resto.length - 1)];
+  }
+  return rodadas;
+}
+
+// Monta a fase de liga completa: { potes, rodadas:[ [ {home,away} x18 ] x8 ] }.
+function montarFaseLigaChampions(times) {
+  for (let tent = 0; tent < 60; tent++) {
+    const { potes, jogos } = montarLigaChampions(times);
+    const rodadas = dividirLigaEmRodadas(times, jogos);
+    if (rodadas) return { potes, rodadas };
+  }
+  const { potes } = montarLigaChampions(times);
+  return { potes, rodadas: rodadasCirculo(times.map(t => t.userId)) };
+}
+
 function acumularStats(sala, fila) {
   (fila || []).forEach(ev => {
     if (ev.lado === 'meu') {
