@@ -38,8 +38,8 @@
 .pen-side { flex: 1; min-width: 0; }
 .pen-side.r { text-align: right; }
 .pen-tnome {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -66,8 +66,8 @@
   padding: 10px 16px 15px;
   text-align: center;
 }
-.pen-status { color: #cfe0d4; font-size: 13px; margin: 0 0 10px; min-height: 18px; }
-.pen-status b { color: #fff; }
+.pen-status { color: #eaf2ec; font-size: 15px; font-weight: 600; margin: 0 0 10px; min-height: 20px; letter-spacing: 0.2px; }
+.pen-status b { color: #D9B25A; font-weight: 800; }
 .pen-pular {
   background: transparent;
   color: #cfe0d4;

@@ -1232,7 +1232,7 @@
   display: grid;
   grid-template-columns: 1.4em 1fr 1.7em 1.7em 2.3em;
   gap: 4px; align-items: center;
-  font-size: 0.72rem; padding: 2px 0;
+  font-size: 0.72rem; padding: 2px 2px 2px 8px;
 }
 .gc-head {
   color: var(--txt-soft); font-weight: 700;

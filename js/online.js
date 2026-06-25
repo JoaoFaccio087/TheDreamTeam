@@ -2017,9 +2017,11 @@
       draftCampoLabel.textContent = sou ? 'Sua escalação — clique numa posição aberta' : ('Time de: ' + nomeUsuario(jog));
     }
     renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
+    // Reacende as vagas abertas quando este é o MEU campo e ainda posso agir
+    // (ex.: um colega de grupo escolheu e disparou um re-render no meio da minha vez).
+    var podeAgora = draftEhGrupo ? gPodeEscolher : (String(draftTurnoUid) === String(meuUserId));
+    if (sou && podeAgora && repositionFrom === null) destacarVagasAbertas();
   }
-
-  // Visualiza o time de qualquer participante (somente leitura). null/meu = volta pro meu.
   function verTimeDoUsuario(uid) {
     var sou = !uid || String(uid) === String(meuUserId);
     gVisualizandoUid = sou ? null : uid;
