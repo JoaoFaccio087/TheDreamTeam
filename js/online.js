@@ -1661,8 +1661,9 @@
     if (modalPremiacao) modalPremiacao.classList.remove('escondida');
     }   // fim revelarFinal
 
-    // No auto-finish do mata-mata, espera a animação da minha última partida terminar.
-    if (formatoOnline === 'mata' && animacaoAtiva) aoFimDaAnimacao = revelarFinal;
+    // No auto-finish do mata-mata (Copa/Liberta/Champions), espera a animação da minha
+    // última partida terminar antes de revelar a premiação.
+    if (ehChaveFinal && animacaoAtiva) aoFimDaAnimacao = revelarFinal;
     else revelarFinal();
   }
 

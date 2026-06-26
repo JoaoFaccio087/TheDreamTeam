@@ -217,7 +217,14 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
        **Fluxo completo no cliente:** sala → draft → 8 rodadas (tabela 36 + cortes) →
        "Ir ao playoff" → playoff ida/volta → oitavas→final (mata-mata + espectador) → fim.
    - **Validação geral:** servidor com `node -c` + harness do motor real; cliente com
-     `node -c` + chaves CSS. Falta o teste AO VIVO (2+ pessoas) após deploy.
+     `node -c` + chaves CSS. **Revisão de consistência (FEITA):** varridos todos os ramos
+     por formato (cliente e servidor). Corrigido: no `onGameEnd`, o `revelarFinal` só
+     esperava a animação no `'mata'` — agora usa `ehChaveFinal` (Champions também espera a
+     final). Conferidos OK: lobby (contagens dinâmicas, sem fixo), abas (tabClassif=
+     'Classificação', tabChave revelada só após o playoff), guards de status (liga='playing',
+     chave/playoff='mata'/'fimLiga'), "pular tudo" (trata champions), rótulo salvo no
+     histórico ('Champions'), e o draft (base tem ~4073 jogadores ≫ 396 necessários).
+     Falta o teste AO VIVO (2+ pessoas) após deploy.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
