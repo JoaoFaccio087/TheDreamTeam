@@ -927,6 +927,24 @@
 .ct-linha.ct-eliminado { box-shadow: inset 3px 0 0 #c0564a; opacity: 0.82; }
 .ct-linha.ct-direto  .ct-pos { color: #5dbe7a; font-weight: 700; }
 .ct-linha.ct-playoff .ct-pos { color: #D9B25A; font-weight: 700; }
+
+/* Cards do playoff da Champions (ida e volta) */
+.po-card {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 9px; padding: 0.7rem 0.85rem; margin-bottom: 0.55rem;
+}
+.po-card-meu { border-color: rgba(217,178,90,0.4); background: rgba(217,178,90,0.06); }
+.po-times { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.9rem; color: #ddd; }
+.po-times .po-time { flex: 1; }
+.po-times .po-time:last-child { text-align: right; }
+.po-times .po-venc { color: #5dbe7a; }
+.po-times .po-x { color: #777; font-size: 0.8rem; }
+.po-maos { display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.4rem; font-size: 0.72rem; color: #9a9a9a; }
+.po-agg { margin-top: 0.35rem; font-size: 0.74rem; color: #cfcfcf; font-weight: 600; }
+.po-venc-badge {
+  margin-top: 0.45rem; display: inline-block; font-size: 0.68rem; font-weight: 700;
+  color: #5dbe7a; background: rgba(93,190,122,0.12); border-radius: 5px; padding: 0.18rem 0.5rem;
+}
 .ct-pos  { font-family: 'Archivo Black', sans-serif; color: #888; font-size: 0.72rem; text-align: center; }
 .ct-time { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ct-num  { text-align: center; font-size: 0.72rem; color: #aaa; }

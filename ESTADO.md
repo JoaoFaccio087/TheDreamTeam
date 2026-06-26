@@ -204,11 +204,18 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
        `champions:advancePlayoff`); não-host vê "aguardando o host". Rótulo do cabeçalho
        passou a "36 TIMES" na Champions. Tudo guardado por `formatoOnline==='champions'`
        (liga/mata intactos). Valida `node -c` + chaves CSS.
-     - **5c:** tela do playoff (`champions:playoff`) — 8 confrontos ida/volta com agregado,
-       pênaltis e vencedores. (Hoje o clique "Ir ao playoff" emite o evento, mas a tela do
-       playoff e a chave ainda não renderizam — vêm na 5c/5d.)
-     - **5d:** chave das oitavas→final reusando `renderChaveOnline` (hoje gated em `'mata'`;
-       liberar p/ `'champions'`) + espectador + "X/Y prontos" (já existentes).
+     - **5c (FEITO):** tela do playoff. Listener `champions:playoff` → `onChampionsPlayoff`
+       renderiza os 8 confrontos (1ª/2ª mão, agregado, pênaltis, classificado) em cards na
+       aba Partidas (`cardPlayoff` + CSS `.po-card`). Reseta `championsFimLiga`.
+     - **5d (FEITO):** chave reaproveitada. `onChaveState`/`onChaveResults` já são genéricos
+       (espectador + "X/Y prontos") — só faltava liberar o avanço: `onChaveState` agora chama
+       `atualizarAcoesMata()` na Champions (host vê "Próxima fase →" → `chave:advance`). E o
+       `onGameEnd` trata champions como chave (flag `ehChaveFinal`): render da chave, rótulo
+       de competição correto ('Champions') e atualização do `chaveOnline` no auto-finish.
+       **Fluxo completo no cliente:** sala → draft → 8 rodadas (tabela 36 + cortes) →
+       "Ir ao playoff" → playoff ida/volta → oitavas→final (mata-mata + espectador) → fim.
+   - **Validação geral:** servidor com `node -c` + harness do motor real; cliente com
+     `node -c` + chaves CSS. Falta o teste AO VIVO (2+ pessoas) após deploy.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador

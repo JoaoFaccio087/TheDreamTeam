@@ -284,6 +284,7 @@
     socket.on('round:skipVotes',  onSkipVotes);
     socket.on('game:end',         onGameEnd);
     socket.on('champions:faseLigaFim', onChampionsFaseLigaFim);
+    socket.on('champions:playoff',     onChampionsPlayoff);
     socket.on('erro',             function (msg) {
       erroOnline(msg);
       // Destrava os botões do lobby caso uma ação (ex.: Começar) tenha falhado.
@@ -1242,6 +1243,46 @@
     atualizarAcoesRodada();
   }
 
+  // champions:playoff — resultado do playoff (9–24, ida e volta). Exibe os 8 confrontos
+  // na aba Partidas; em seguida o onChaveState (que chega logo depois) abre as oitavas.
+  function onChampionsPlayoff(dados) {
+    championsFimLiga = false;
+    var confrontos = dados.confrontos || [];
+    if (rodadaTituloEl) rodadaTituloEl.textContent = 'PLAYOFF · IDA E VOLTA';
+    if (rodadaPartidas) {
+      rodadaPartidas.innerHTML = '';
+      confrontos.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+    }
+    if (rodadaProximos) rodadaProximos.innerHTML = '';
+    var proxTit = document.getElementById('proximos-titulo');
+    if (proxTit) proxTit.textContent = 'OITAVAS A SEGUIR';
+    selecionarAbaRodada('partidas');
+    subview('online-rodada');
+  }
+
+  // Card de um confronto do playoff (ida/volta + agregado + classificado).
+  function cardPlayoff(c) {
+    var div = document.createElement('div');
+    var altoNome = htmlEsc(c.alto.nome), baixoNome = htmlEsc(c.baixo.nome);
+    var altoVence = c.vencedor && String(c.vencedor.userId) === String(c.alto.userId);
+    var meu = String(c.alto.userId) === String(meuUserId) || String(c.baixo.userId) === String(meuUserId);
+    var penTxt = (c.pen && c.pen.length === 2) ? ' · pênaltis ' + c.pen[0] + '–' + c.pen[1] : '';
+    div.className = 'po-card' + (meu ? ' po-card-meu' : '');
+    div.innerHTML =
+      '<div class="po-times">' +
+        '<span class="po-time' + (altoVence ? ' po-venc' : '') + '">' + altoNome + '</span>' +
+        '<span class="po-x">×</span>' +
+        '<span class="po-time' + (!altoVence ? ' po-venc' : '') + '">' + baixoNome + '</span>' +
+      '</div>' +
+      '<div class="po-maos">' +
+        '<span>1ª mão: ' + baixoNome + ' ' + (c.ida.gMandante | 0) + '–' + (c.ida.gVisitante | 0) + ' ' + altoNome + '</span>' +
+        '<span>2ª mão: ' + altoNome + ' ' + (c.volta.gMandante | 0) + '–' + (c.volta.gVisitante | 0) + ' ' + baixoNome + '</span>' +
+      '</div>' +
+      '<div class="po-agg">Agregado ' + (c.aggAlto | 0) + '–' + (c.aggBaixo | 0) + penTxt + '</div>' +
+      '<div class="po-venc-badge">Classificado: ' + htmlEsc(c.vencedor ? c.vencedor.nome : '?') + '</div>';
+    return div;
+  }
+
   // game:end — ranking final
   // grupos:fim — após a animação do último jogo, leva à aba Grupos com o banner
   // do mata-mata. Não pula direto para o mata-mata.
@@ -1320,6 +1361,8 @@
     renderChaveOnline();
     var btnAv = document.getElementById('btn-chave-avancar');
     if (btnAv) btnAv.classList.add('escondida');
+    // Champions: não há banner "Iniciar Mata-mata" — o host avança pelas próprias ações.
+    if (formatoOnline === 'champions') atualizarAcoesMata();
   }
 
   // Ações da rodada no mata-mata (host avança a fase pela aba Partidas).
@@ -1527,6 +1570,8 @@
   function onGameEnd(dados) {
     if (prontosLabel) prontosLabel.classList.add('escondida');
     var ranking = dados.ranking || [];
+    // Champions termina no mata-mata, igual à Copa/Liberta (chave + chaveOnline + rótulo).
+    var ehChaveFinal = (formatoOnline === 'mata' || formatoOnline === 'champions');
     rankingFinalCache = ranking;
     meuRankingFinal = ranking.find(function (p) { return String(p.userId) === String(meuUserId); }) || null;
 
@@ -1537,7 +1582,7 @@
         var _idx = ranking.findIndex(function (p) { return String(p.userId) === String(meuUserId); });
         var r = meuRankingFinal;
         API.salvarPartida({
-          competicao: (formatoOnline === 'mata') ? (window.__compOnline || 'Copa do Mundo') : 'Brasileirão',
+          competicao: ehChaveFinal ? (window.__compOnline || 'Copa do Mundo') : 'Brasileirão',
           modo:       'online',
           vitorias:   r.vitorias | 0,
           empates:    r.empates  | 0,
@@ -1560,13 +1605,13 @@
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
     // Atualiza a chave com o estado final (necessário no auto-finish do mata-mata).
-    if (formatoOnline === 'mata' && dados.rounds) {
+    if (ehChaveFinal && dados.rounds) {
       chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases || (chaveOnline && chaveOnline.fases) || [] };
     }
     emMataMata = false;
 
     function revelarFinal() {
-    if (formatoOnline === 'mata') {
+    if (ehChaveFinal) {
       renderChaveOnline();
       renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
       renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
