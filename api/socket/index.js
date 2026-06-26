@@ -689,6 +689,21 @@ function rankingMata(sala) {
   });
 }
 
+// Fim da fase de liga da Champions: aplica os cortes (1–8 / 9–24 / 25–36) e emite o
+// checkpoint. O playoff (9–24) e a chave a partir das oitavas entram na próxima etapa.
+function finalizarFaseLigaChampions(io, sala, code, payload) {
+  const classificacao = (payload && payload.classificacao) || [];
+  const cortes = cortesChampions(classificacao);
+  sala.cortesLiga = cortes;
+  sala.status = 'fimLiga';
+  io.to(code).emit('champions:faseLigaFim', {
+    classificacao,
+    direto:     cortes.direto.map(r => r.userId),
+    playoff:    cortes.playoff.map(r => r.userId),
+    eliminados: cortes.eliminados.map(r => r.userId),
+  });
+}
+
 // Encerra o campeonato: define campeão, emite game:end, persiste e limpa a sala.
 function emitirFimDeJogo(io, sala, code) {
   const campeao = determinarCampeao(sala);
@@ -1123,8 +1138,6 @@ function setupSocket(server, frontendUrl) {
 
         let sala = getSala(code);
         if (!sala) sala = criarSala(code, roomDB.host_user_id || userId, roomDB.competicao);
-        // Formato derivado da competição (só 'champions' é novo; demais seguem como liga).
-        if (sala.competicao === 'Champions League') sala.formato = 'champions';
 
         let jogador = sala.jogadores.find(j => j.userId === userId);
         if (!jogador) {
@@ -1222,8 +1235,8 @@ function setupSocket(server, frontendUrl) {
         return socket.emit('erro', `Sem jogadores para a competição: ${sala.competicao}`);
       }
 
-      // Completa a liga até 20 times com bots (máquina) — 1 humano → 19 bots, etc.
-      const faltam = Math.max(0, TOTAL_TIMES - sala.jogadores.length);
+      // Completa a competição com bots até a capacidade do formato (liga=20, champions=36).
+      const faltam = Math.max(0, maxParticipantes(sala) - sala.jogadores.length);
       if (faltam > 0) {
         const usados = sala.jogadores.map(j => j.nomeDoTime).filter(Boolean);
         sala.jogadores.push(...gerarBots(faltam, usados));
@@ -1440,7 +1453,9 @@ function setupSocket(server, frontendUrl) {
         });
         sala.calendario   = (sala.formato === 'mata')
           ? gerarCalendarioGrupos(sala)
-          : gerarCalendario(sala.jogadores.map(j => j.userId));
+          : (sala.formato === 'champions')
+            ? montarCalendarioChampions(sala)
+            : gerarCalendario(sala.jogadores.map(j => j.userId));
         sala.totalRodadas = sala.calendario.length || sala.totalRodadas;   // 38 (liga) ou 3 (grupos)
         sala.votosPular   = [];
         io.to(code).emit('round:start', { rodada: 1, total: sala.totalRodadas, formato: sala.formato });
@@ -1471,6 +1486,8 @@ function setupSocket(server, frontendUrl) {
             io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
             montarChaveOnline(sala);
             io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
+          } else if (sala.formato === 'champions') {
+            finalizarFaseLigaChampions(io, sala, code, payload);
           } else {
             emitirFimDeJogo(io, sala, code);
           }
@@ -1580,6 +1597,9 @@ function setupSocket(server, frontendUrl) {
             io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
             montarChaveOnline(sala);
             io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
+          } else if (sala.formato === 'champions') {
+            if (res && res.payload) io.to(code).emit('round:results', res.payload);
+            finalizarFaseLigaChampions(io, sala, code, res && res.payload);
           } else {
             emitirFimDeJogo(io, sala, code);
           }

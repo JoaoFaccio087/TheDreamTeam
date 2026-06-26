@@ -161,25 +161,29 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
      `rodadasCirculo` (fallback garantido) e `montarFaseLigaChampions(times)` →
      `{ potes, rodadas:[ [{home,away}×18] ×8 ] }`. Validado: 200/200 trials, 0
      fallbacks, ~15ms (roda 1× no início da fase). Ainda **não fiado** no ciclo. ⚠️ deploy.
-   - **Parte 3:** tornar a Champions selecionável + fiar no ciclo. **Descoberta-chave:**
-     `sala.formato` é só LIDO, nunca atribuído → hoje todo online é Brasileirão (liga, 20);
-     os ramos `'mata'` estão dormentes. E `simularUmaRodada` já monta a **classificação
-     ordenada de todos os times** → a Champions reusa o motor de rodadas inteiro (é "liga
-     de 36, 8 rodadas, com mata-mata no fim").
-     - **3a (FEITO):** seam de config — `sala.formato='champions'` ao entrar em sala de
-       Champions (cirúrgico, não toca os outros modos); `maxParticipantes`→36;
-       `montarCalendarioChampions(sala)` (elencos → 8 rodadas no shape `[casa,fora]`,
-       consumível pelo `simularUmaRodada`; guarda `sala.ligaPotes`). Validado (8 asserts,
-       sala fictícia de 36). Ainda **não selecionável** (zero risco). ⚠️ deploy.
-     - **3b:** encher de bots até 36 no lobby + draft (snake, igual à liga, só que 36) +
-       no ready→playing usar `montarCalendarioChampions` e `totalRodadas=8` + emitir as 8
-       rodadas reusando `simularUmaRodada` (espectador: cada cliente assiste seu jogo).
-     - **3c:** fim da fase → aplicar `cortesChampions` (8/16/12) e transicionar p/ playoff.
-   - **Parte 4:** playoff 9–24 (ida/volta) + chave a partir das oitavas (reusa
-     mata-mata, espectador e "X/Y prontos"). Temperos: mando na volta pro melhor
-     classificado; quem elimina um time melhor herda a posição.
-   - **Parte 5:** UI do cliente — entrada (escolher Champions no online), tabela de 36
-     com cortes destacados, playoff e chave.
+   - **Parte 3:** Champions selecionável + fiada no ciclo. **Correção importante (reconcílio
+     com o repo real):** a competição se chama `'Champions'` (rótulo "Champions League"); o
+     `salaState.js` JÁ define `formato` via `FORMATO_POR_COMP` e a Champions estava como
+     `'mata'` (placeholder de grupos). Trocamos para um formato próprio **`'champions'`**.
+     E `simularUmaRodada` já monta a **classificação ordenada de todos os times** → a
+     Champions reusa o motor de rodadas (é "liga de 36, 8 rodadas, com mata-mata no fim").
+     - **3a (FEITO):** núcleo + `maxParticipantes`→36 + `montarCalendarioChampions(sala)`
+       (elencos → 8 rodadas no shape `[casa,fora]`, consumível pelo `simularUmaRodada`).
+     - **3b (FEITO):** `salaState`: `'Champions'→'champions'` (era `'mata'`); removido o seam
+       morto no `room:join` (que checava `'Champions League'`); `room:start` enche bots até
+       `maxParticipantes` (36) e faz o snake draft normal (36×11); ready→playing usa
+       `montarCalendarioChampions` + `totalRodadas=8`; as 8 rodadas reusam `simularUmaRodada`.
+       Fim da fase → `finalizarFaseLigaChampions` aplica `cortesChampions` e emite
+       `champions:faseLigaFim` `{classificacao, direto[8], playoff[16], eliminados[12]}`
+       (status→`fimLiga`), tanto no `round:simulate` quanto no `round:skipAll`. Validado com
+       o **motor real** (36 times, 8 jogos, tabela ordenada, cortes 8/16/12, fortes ao topo)
+       e `criarSala('Champions')→formato 'champions'`. ⚠️ deploy.
+     - **3c (PRÓXIMA):** do checkpoint `fimLiga` → playoff 9–24 (ida/volta) → início da chave.
+   - **Parte 4:** chave a partir das oitavas (16 = 8 diretos + 8 do playoff), reusando
+     mata-mata, espectador e "X/Y prontos". Temperos: mando na volta pro melhor classificado;
+     quem elimina um time melhor herda a posição.
+   - **Parte 5:** UI do cliente — entrada (escolher Champions no online), tabela de 36 com
+     cortes destacados, playoff e chave.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador

@@ -2,12 +2,13 @@
 
 const salas = new Map();
 
-// Formato da competição: 'liga' (pontos corridos) ou 'mata' (grupos + mata-mata)
+// Formato da competição: 'liga' (pontos corridos), 'mata' (grupos + mata-mata)
+// ou 'champions' (fase de liga fiel de 36 + playoff + chave).
 const FORMATO_POR_COMP = {
   'Brasileirão':   'liga',
   'Copa do Mundo': 'mata',
   'Libertadores':  'mata',
-  'Champions':     'mata',
+  'Champions':     'champions',
 };
 
 function criarSala(codigo, hostUserId, competicao) {
@@ -18,7 +19,7 @@ function criarSala(codigo, hostUserId, competicao) {
     codigo,
     hostUserId,
     competicao:            comp,
-    formato,                          // 'liga' | 'mata'
+    formato,                          // 'liga' | 'mata' | 'champions'
     jogadores:             [],   // { userId, username, nomeDoTime, formacao, socketId, conectado, picks[], pronto }
     poolDisponivel:        [],   // players individuais: { id, nome, posicoes, forca, clube, edicao, competicao }
     ordemDraft:            [],   // snake order completo (userId[] × 11 rounds) — formato 'liga'

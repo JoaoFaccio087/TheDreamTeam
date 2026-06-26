@@ -228,6 +228,16 @@ Formato usado em `escalacao[i]` (cada uma das 11 vagas):
 | S→C | `chave:prontos` | contador "X/Y prontos" da fase `{ x, y }` (y = humanos da sala) |
 | S→C | `game:end` | fim da Copa, com campeão (ver abaixo) |
 
+**Champions (`formato: 'champions'`, fase de liga fiel 25/26).** Definido no `salaState`
+(`FORMATO_POR_COMP['Champions'] = 'champions'`). Reaproveita o draft em turnos e o motor de
+rodadas da liga (`room:start`, `draft:*`, `round:start`, `round:results`), só que com
+**36 times** e **8 rodadas**; a `classificacao` do `round:results` já é a **tabela única**
+da fase de liga.
+
+| dir | evento | o que é |
+|-----|--------|---------|
+| S→C | `champions:faseLigaFim` | fim da fase de liga: `{ classificacao, direto[8], playoff[16], eliminados[12] }` (cortes por `userId`). Emitido no `round:simulate` e no `round:skipAll`. Playoff e chave a partir das oitavas entram na sequência. |
+
 #### `gdraft:yourPick` (cartas da sua vez no draft por grupo)
 ```json
 {
