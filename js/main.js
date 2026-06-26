@@ -19,6 +19,7 @@ pilulasModo.forEach(function (pilula) {
 // O modal de login/sala só abre quando o usuário clica em "Jogar agora".
 var btnModoOnline     = document.getElementById('btn-modo-online');
 var btnModoOnlineCopa = document.getElementById('btn-modo-online-copa');
+var btnModoOnlineChampions = document.getElementById('btn-modo-online-champions');
 
 // Define a competição do online e destaca a pílula escolhida.
 function escolherOnline(comp, pilula) {
@@ -27,11 +28,15 @@ function escolherOnline(comp, pilula) {
   pilulasModo.forEach(function (p) { p.classList.remove('pilula-ativa'); });
   if (btnModoOnline)     btnModoOnline.classList.remove('pilula-ativa');
   if (btnModoOnlineCopa) btnModoOnlineCopa.classList.remove('pilula-ativa');
+  if (btnModoOnlineChampions) btnModoOnlineChampions.classList.remove('pilula-ativa');
   if (pilula) pilula.classList.add('pilula-ativa');
 }
 
 if (btnModoOnline) {
   btnModoOnline.addEventListener('click', function () { escolherOnline('Brasileirão', btnModoOnline); });
+}
+if (btnModoOnlineChampions) {
+  btnModoOnlineChampions.addEventListener('click', function () { escolherOnline('Champions', btnModoOnlineChampions); });
 }
 if (btnModoOnlineCopa) {
   btnModoOnlineCopa.addEventListener('click', function () { escolherOnline('Copa do Mundo', btnModoOnlineCopa); });

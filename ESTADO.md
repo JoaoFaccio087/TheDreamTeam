@@ -190,8 +190,22 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
    - **Parte 4 (semeadura/temperos, opcional):** hoje a chave das oitavas é semeada pelos
      pontos da fase de liga (melhor × pior). Refinar p/ a estrutura fixa da UEFA e a regra
      "quem elimina um time melhor herda a posição", se quisermos fidelidade total.
-   - **Parte 5:** UI do cliente — entrada (escolher Champions no online), tabela de 36 com
-     cortes destacados, tela do playoff (ida/volta) e a chave.
+   - **Parte 5:** UI do cliente. A via liga do cliente já renderiza a fase de liga (a
+     `classificacao` de qualquer tamanho vira a tabela; `totalRodadas` vem do servidor).
+     - **5a (FEITO):** entrada — pílula **"Champions League"** no multijogador
+       (`index.html` #btn-modo-online-champions) + wiring no `main.js`
+       (`escolherOnline('Champions', …)`). `criarSala` já envia `__compOnline='Champions'`
+       → servidor vira formato `'champions'`. Cria sala e roda a fase de liga pela via liga.
+     - **5b:** fim da fase + cortes. `online.js`: tratar `champions:faseLigaFim` (mostrar
+       tabela final com cortes 1–8/9–24/25–36 destacados + botão do host "Ir ao playoff"
+       → emit `champions:advancePlayoff`). Ajustes: rótulo fixo **"20 TIMES"** (linha ~849)
+       p/ 36; `rodadaAtual >= totalRodadas` (linha ~1076) não deve esperar `game:end` na
+       Champions; rótulo de competição salvo no `game:end` (linha ~1511) e o gate da chave
+       (linha ~1534) hoje são `=== 'mata'` — incluir `'champions'`.
+     - **5c:** tela do playoff (`champions:playoff`) — 8 confrontos ida/volta com agregado,
+       pênaltis e vencedores.
+     - **5d:** chave das oitavas→final reusando `renderChaveOnline` (hoje gated em `'mata'`;
+       liberar p/ `'champions'`) + espectador + "X/Y prontos" (já existentes).
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
