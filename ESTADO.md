@@ -229,9 +229,11 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
      `montarChaveOnline` (Copa/Liberta) e `montarChaveChampions`, removendo o laço duplicado.
      Regressão validada: a chave de 16/32 sai idêntica ao comportamento anterior.
    - **Teste de regressão (FEITO):** `api/socket/index.js` expõe `module.exports._champions`
-     (núcleo PURO da fase de liga, sem mudar lógica) e há `api/socket/champions.test.js` —
-     importa o código REAL (sem duplicar) e valida fixture/rodadas/tabela/cortes. Rodar antes
-     de deploys: `node api/socket/champions.test.js`. Provado passando contra o index real.
+     (núcleo da fase de liga + playoff + chave, sem mudar lógica) e há
+     `api/socket/champions.test.js` — importa o código REAL (sem duplicar) e valida, em 24
+     checks: fixture/rodadas/tabela/cortes, o playoff (pareamento 9×24…16×17, mando ida/volta,
+     agregado, pênaltis no empate, 8 vencedores distintos) e a semeadura fiel das oitavas.
+     Rodar antes de deploys: `node api/socket/champions.test.js`. Provado passando.
    - **Promoção espectador/pênaltis → UIKit: DESCARTADA** (avaliada). Pênaltis já são módulo
      (`js/penaltis.js`); o espectador (🏠 + seletor) é uso ÚNICO e acoplado ao estado do
      mata-mata online — promover só adicionaria indireção sem reuso. Não fazer.

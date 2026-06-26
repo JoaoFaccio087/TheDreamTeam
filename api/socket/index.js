@@ -1743,5 +1743,9 @@ module.exports = {
     registrarLiga,
     ordenarTabelaLiga,
     cortesChampions,
+    montarPlayoffChampions,
+    resolverConfrontoDuasMaos,
+    simularPlayoffChampions,
+    montarChaveChampions,
   },
 };
