@@ -196,14 +196,17 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
        (`index.html` #btn-modo-online-champions) + wiring no `main.js`
        (`escolherOnline('Champions', …)`). `criarSala` já envia `__compOnline='Champions'`
        → servidor vira formato `'champions'`. Cria sala e roda a fase de liga pela via liga.
-     - **5b:** fim da fase + cortes. `online.js`: tratar `champions:faseLigaFim` (mostrar
-       tabela final com cortes 1–8/9–24/25–36 destacados + botão do host "Ir ao playoff"
-       → emit `champions:advancePlayoff`). Ajustes: rótulo fixo **"20 TIMES"** (linha ~849)
-       p/ 36; `rodadaAtual >= totalRodadas` (linha ~1076) não deve esperar `game:end` na
-       Champions; rótulo de competição salvo no `game:end` (linha ~1511) e o gate da chave
-       (linha ~1534) hoje são `=== 'mata'` — incluir `'champions'`.
+     - **5b (FEITO):** fim da fase + cortes no cliente (`online.js`). Listener
+       `champions:faseLigaFim` → `onChampionsFaseLigaFim` (marca fim, fixa a tabela final,
+       libera o host). `renderClassifLista` destaca os cortes por posição na Champions
+       (1–8 verde / 9–24 âmbar / 25–36 vermelho — `css/online.css`). `atualizarAcoesRodada`:
+       no fim da fase o host vê **"Ir ao playoff →"** (reusa `btn-rodada-proxima`, que emite
+       `champions:advancePlayoff`); não-host vê "aguardando o host". Rótulo do cabeçalho
+       passou a "36 TIMES" na Champions. Tudo guardado por `formatoOnline==='champions'`
+       (liga/mata intactos). Valida `node -c` + chaves CSS.
      - **5c:** tela do playoff (`champions:playoff`) — 8 confrontos ida/volta com agregado,
-       pênaltis e vencedores.
+       pênaltis e vencedores. (Hoje o clique "Ir ao playoff" emite o evento, mas a tela do
+       playoff e a chave ainda não renderizam — vêm na 5c/5d.)
      - **5d:** chave das oitavas→final reusando `renderChaveOnline` (hoje gated em `'mata'`;
        liberar p/ `'champions'`) + espectador + "X/Y prontos" (já existentes).
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de

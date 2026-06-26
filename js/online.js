@@ -14,8 +14,10 @@
   var timerSeg         = 30;
   var rodadaAtual      = 0;
   var totalRodadas     = 5;
-  var formatoOnline    = 'liga';   // 'liga' (Brasileirão) ou 'mata' (Copa/Liberta: grupos+mata-mata)
+  var formatoOnline    = 'liga';   // 'liga' (Brasileirão), 'mata' (Copa/Liberta) ou 'champions'
   var chaveOnline      = null;     // chave do mata-mata online {rounds, rodadaAtual, fases}
+  var championsFimLiga = false;    // fase de liga da Champions encerrada (host vai ao playoff)
+  var championsClassifFinal = null;// tabela final da fase de liga (p/ re-render com cortes)
   var gruposEncerrados = false;    // fase de grupos terminou (aguardando host iniciar o mata-mata)
   var emMataMata       = false;    // estamos no mata-mata (avançar = chave:advance, não round:simulate)
   var simulandoRodada  = false;
@@ -281,6 +283,7 @@
     socket.on('chave:prontos',    onProntos);
     socket.on('round:skipVotes',  onSkipVotes);
     socket.on('game:end',         onGameEnd);
+    socket.on('champions:faseLigaFim', onChampionsFaseLigaFim);
     socket.on('erro',             function (msg) {
       erroOnline(msg);
       // Destrava os botões do lobby caso uma ação (ex.: Começar) tenha falhado.
@@ -830,6 +833,7 @@
     totalRodadas    = dados.total  || 38;
     formatoOnline   = dados.formato || formatoOnline;
     simulandoRodada = false;
+    championsFimLiga = false;
     pararAnimacaoPartida();
     euVoteiPular    = false;
     skipVotos       = 0;
@@ -846,7 +850,7 @@
     var infoEl = document.getElementById('rodada-header-info');
     if (infoEl) infoEl.textContent = ehGrupos
       ? 'FASE DE GRUPOS · ' + totalRodadas + ' RODADAS'
-      : '20 TIMES · ' + totalRodadas + ' RODADAS';
+      : ((formatoOnline === 'champions' ? '36 TIMES · ' : '20 TIMES · ') + totalRodadas + ' RODADAS');
     rodadaPartidas.innerHTML   = '<p style="color:#888;text-align:center;padding:2rem">Simulando rodada ' + rodadaAtual + '…</p>';
     btnRodadaProxima.classList.add('escondida');
     btnRodadaFim.classList.add('escondida');
@@ -1077,6 +1081,18 @@
       // Copa/Liberta: o fim dos grupos NÃO encerra o jogo — o mata-mata vem em seguida
       // (transição pelo banner na aba Grupos). Não mostra "Ver Resultado Final".
       if (formatoOnline === 'mata') return;
+      // Champions: fim da fase de liga → host vai ao playoff (não há premiação aqui).
+      if (formatoOnline === 'champions') {
+        if (championsFimLiga && ehHost) {
+          btnRodadaProxima.disabled    = false;
+          btnRodadaProxima.textContent = 'Ir ao playoff →';
+          btnRodadaProxima.classList.remove('escondida');
+        } else if (!ehHost && rodadaAguardandoHost) {
+          rodadaAguardandoHost.textContent = 'Fase de liga encerrada! Aguardando o host…';
+          rodadaAguardandoHost.classList.remove('escondida');
+        }
+        return;
+      }
       if (ehHost) {
         btnRodadaFim.classList.remove('escondida');
       } else if (rodadaAguardandoHost) {
@@ -1161,7 +1177,11 @@
       var tagBot = p.ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
       var tagEu  = sou ? ' <span class="draft-eu-tag">VOCÊ</span>' : '';
       var row = document.createElement('div');
-      row.className = 'ct-linha' + (sou ? ' eu' : '') + (i === 0 ? ' primeiro' : '');
+      var corte = '';
+      if (formatoOnline === 'champions') {
+        corte = (i < 8) ? ' ct-direto' : (i < 24) ? ' ct-playoff' : ' ct-eliminado';
+      }
+      row.className = 'ct-linha' + (sou ? ' eu' : '') + (i === 0 ? ' primeiro' : '') + corte;
       row.innerHTML =
         '<span class="ct-pos">' + (i + 1) + '</span>' +
         '<span class="ct-time">' + htmlEsc(p.nomeDoTime || p.username || '?') + tagEu + tagBot + '</span>' +
@@ -1210,6 +1230,15 @@
     else       aplicarClassifEStats();                   // sem animação → aplica direto
 
     // Ações da rodada (somente host avança)
+    atualizarAcoesRodada();
+  }
+
+  // champions:faseLigaFim — fim da fase de liga: marca o fim, fixa a tabela final com os
+  // cortes destacados (1–8 / 9–24 / 25–36) e libera o host a "Ir ao playoff".
+  function onChampionsFaseLigaFim(dados) {
+    championsFimLiga = true;
+    championsClassifFinal = dados.classificacao || championsClassifFinal;
+    if (!animacaoAtiva && championsClassifFinal) renderClassifLista(championsClassifFinal);
     atualizarAcoesRodada();
   }
 
@@ -2602,6 +2631,13 @@
     // Rodada
     btnRodadaProxima.addEventListener('click', function () {
       if (simulandoRodada) return;
+      // Champions: fim da fase de liga → host dispara o playoff (9–24, ida e volta).
+      if (championsFimLiga) {
+        btnRodadaProxima.disabled    = true;
+        btnRodadaProxima.textContent = 'Carregando playoff…';
+        if (socket && socket.connected) socket.emit('champions:advancePlayoff');
+        return;
+      }
       simulandoRodada              = true;
       btnRodadaProxima.disabled    = true;
       btnRodadaProxima.textContent = 'Simulando...';
