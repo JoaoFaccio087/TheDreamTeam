@@ -145,7 +145,7 @@
   width: 100%;
 }
 
-.jogo-voltar-linha { max-width: min(1500px, 96vw); margin: 0 auto; padding: 14px 24px 0; }
+.jogo-voltar-linha { width: 100%; max-width: min(1500px, 96vw); margin: 0 auto; padding: 14px 24px 0; text-align: left; }
 
 .jogo-header {
   max-width: min(1500px, 96vw);

@@ -406,6 +406,31 @@ function montarChaveOnline(sala) {
   return sala.chave;
 }
 
+// Monta as oitavas da Champions com semeadura fiel: 1–8 diretos + 9–16 os vencedores
+// do playoff (cada um HERDA a posição do melhor do seu confronto). Pareia 1×16, 2×15,
+// … 8×9 — sem reordenar por pontos (a ordem das sementes é dada).
+function montarChaveChampions(sala, vencedores) {
+  const direto = ((sala.cortesLiga && sala.cortesLiga.direto) || []).slice(0, 8);
+  const seeds = direto.map(r => refTime(sala, r.userId))
+    .concat((vencedores || []).map(v => refTime(sala, v.userId)));
+  const n = seeds.length;                 // 16
+  const r0 = [];
+  for (let i = 0; i < n / 2; i++) {
+    r0.push({ a: seeds[i], b: seeds[n - 1 - i], winner: null, gA: null, gB: null, pen: null });
+  }
+  const rounds = [r0];
+  let qtd = r0.length / 2;
+  while (qtd >= 1) {
+    const arr = [];
+    for (let q = 0; q < qtd; q++) arr.push({ a: null, b: null, winner: null, gA: null, gB: null, pen: null });
+    rounds.push(arr);
+    if (qtd === 1) break;
+    qtd = qtd / 2;
+  }
+  sala.chave = { rounds, rodadaAtual: 0, fases: nomesFasesMata(n) };
+  return sala.chave;
+}
+
 // ── Champions: FASE DE LIGA (formato fiel 25/26) ─────────────────────────────
 // 36 times, tabela única, 8 jogos por time (2 de cada um dos 4 potes, 4 casa /
 // 4 fora). Cortes: 1–8 oitavas diretas, 9–24 playoff, 25–36 eliminados.
@@ -1566,7 +1591,7 @@ function setupSocket(server, frontendUrl) {
         sala.classificados = (sala.cortesLiga.direto || []).concat(vencedoresLinhas);
 
         sala.status = 'mata';
-        montarChaveOnline(sala);
+        montarChaveChampions(sala, vencedores);   // semeadura fiel (herda a posição do par)
         io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
       } catch (err) {
         console.error('[socket champions:advancePlayoff]', err);

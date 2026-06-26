@@ -187,9 +187,11 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
        `chave:state` — daí pra frente reaproveita o mata-mata existente (`chave:advance`,
        espectador, "X/Y prontos"). Validado (emparelhamento, agregado, pênaltis, montagem
        dos 16). Documentado no CONTRATOS. ⚠️ deploy.
-   - **Parte 4 (semeadura/temperos, opcional):** hoje a chave das oitavas é semeada pelos
-     pontos da fase de liga (melhor × pior). Refinar p/ a estrutura fixa da UEFA e a regra
-     "quem elimina um time melhor herda a posição", se quisermos fidelidade total.
+   - **Parte 4 (FEITO):** semeadura fiel das oitavas. `montarChaveChampions(sala, vencedores)`
+     monta a chave com 1–8 diretos + 9–16 = vencedores do playoff **na ordem dos confrontos**
+     (cada vencedor HERDA a posição do melhor do seu par), pareando 1×16, 2×15, … 8×9, sem
+     reordenar por pontos. Usado no handler `champions:advancePlayoff`. Validado (8 asserts:
+     1º × vencedor do 16×17, 8º × vencedor do 9×24, fases 8/4/2/1). ⚠️ deploy.
    - **Parte 5:** UI do cliente. A via liga do cliente já renderiza a fase de liga (a
      `classificacao` de qualquer tamanho vira a tabela; `totalRodadas` vem do servidor).
      - **5a (FEITO):** entrada — pílula **"Champions League"** no multijogador
