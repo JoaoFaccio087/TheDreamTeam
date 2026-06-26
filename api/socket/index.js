@@ -384,36 +384,10 @@ function nomesFasesMata(n) {
   return todos.slice(todos.length - nr);
 }
 
-// Monta a chave a partir dos classificados (seed: melhor x pior).
-function montarChaveOnline(sala) {
-  const cls = (sala.classificados || []).slice()
-    .sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
-  const n = cls.length;                   // 32 (Copa) ou 16 (Liberta)
-  const r0 = [];
-  for (let i = 0; i < n / 2; i++) {
-    r0.push({ a: refTime(sala, cls[i].userId), b: refTime(sala, cls[n - 1 - i].userId), winner: null, gA: null, gB: null, pen: null });
-  }
-  const rounds = [r0];
-  let qtd = r0.length / 2;
-  while (qtd >= 1) {
-    const arr = [];
-    for (let q = 0; q < qtd; q++) arr.push({ a: null, b: null, winner: null, gA: null, gB: null, pen: null });
-    rounds.push(arr);
-    if (qtd === 1) break;
-    qtd = qtd / 2;
-  }
-  sala.chave = { rounds, rodadaAtual: 0, fases: nomesFasesMata(n) };
-  return sala.chave;
-}
-
-// Monta as oitavas da Champions com semeadura fiel: 1–8 diretos + 9–16 os vencedores
-// do playoff (cada um HERDA a posição do melhor do seu confronto). Pareia 1×16, 2×15,
-// … 8×9 — sem reordenar por pontos (a ordem das sementes é dada).
-function montarChaveChampions(sala, vencedores) {
-  const direto = ((sala.cortesLiga && sala.cortesLiga.direto) || []).slice(0, 8);
-  const seeds = direto.map(r => refTime(sala, r.userId))
-    .concat((vencedores || []).map(v => refTime(sala, v.userId)));
-  const n = seeds.length;                 // 16
+// Constrói a chave a partir de uma lista ORDENADA de sementes (refTimes): pareia
+// 1×n, 2×(n-1), … e cria as fases seguintes vazias. Base comum dos dois formatos.
+function montarChaveDeSementes(sala, seeds) {
+  const n = seeds.length;
   const r0 = [];
   for (let i = 0; i < n / 2; i++) {
     r0.push({ a: seeds[i], b: seeds[n - 1 - i], winner: null, gA: null, gB: null, pen: null });
@@ -429,6 +403,22 @@ function montarChaveChampions(sala, vencedores) {
   }
   sala.chave = { rounds, rodadaAtual: 0, fases: nomesFasesMata(n) };
   return sala.chave;
+}
+
+// Copa/Liberta: semeia por desempenho (melhor × pior) e monta a chave.
+function montarChaveOnline(sala) {
+  const cls = (sala.classificados || []).slice()
+    .sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
+  return montarChaveDeSementes(sala, cls.map(c => refTime(sala, c.userId)));
+}
+
+// Champions: 1–8 diretos + 9–16 vencedores do playoff (cada um HERDA a posição do
+// melhor do seu confronto). Ordem das sementes é dada — sem reordenar por pontos.
+function montarChaveChampions(sala, vencedores) {
+  const direto = ((sala.cortesLiga && sala.cortesLiga.direto) || []).slice(0, 8);
+  const seeds = direto.map(r => refTime(sala, r.userId))
+    .concat((vencedores || []).map(v => refTime(sala, v.userId)));
+  return montarChaveDeSementes(sala, seeds);
 }
 
 // ── Champions: FASE DE LIGA (formato fiel 25/26) ─────────────────────────────

@@ -225,6 +225,9 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
      chave/playoff='mata'/'fimLiga'), "pular tudo" (trata champions), rótulo salvo no
      histórico ('Champions'), e o draft (base tem ~4073 jogadores ≫ 396 necessários).
      Falta o teste AO VIVO (2+ pessoas) após deploy.
+   - **Refactor (FEITO):** extraído `montarChaveDeSementes(sala, seeds)` — base comum de
+     `montarChaveOnline` (Copa/Liberta) e `montarChaveChampions`, removendo o laço duplicado.
+     Regressão validada: a chave de 16/32 sai idêntica ao comportamento anterior.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
