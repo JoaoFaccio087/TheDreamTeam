@@ -1734,4 +1734,17 @@ function setupSocket(server, frontendUrl) {
   return io;
 }
 
-module.exports = { setupSocket };
+// `_champions` expõe o núcleo PURO da fase de liga (sem efeitos de sala/io) para
+// testes de regressão. Não altera o comportamento do servidor.
+module.exports = {
+  setupSocket,
+  _champions: {
+    montarLigaChampions,
+    dividirLigaEmRodadas,
+    montarFaseLigaChampions,
+    tabelaLigaVazia,
+    registrarLiga,
+    ordenarTabelaLiga,
+    cortesChampions,
+  },
+};

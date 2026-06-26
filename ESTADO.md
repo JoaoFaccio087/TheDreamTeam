@@ -228,6 +228,13 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
    - **Refactor (FEITO):** extraído `montarChaveDeSementes(sala, seeds)` — base comum de
      `montarChaveOnline` (Copa/Liberta) e `montarChaveChampions`, removendo o laço duplicado.
      Regressão validada: a chave de 16/32 sai idêntica ao comportamento anterior.
+   - **Teste de regressão (FEITO):** `api/socket/index.js` expõe `module.exports._champions`
+     (núcleo PURO da fase de liga, sem mudar lógica) e há `api/socket/champions.test.js` —
+     importa o código REAL (sem duplicar) e valida fixture/rodadas/tabela/cortes. Rodar antes
+     de deploys: `node api/socket/champions.test.js`. Provado passando contra o index real.
+   - **Promoção espectador/pênaltis → UIKit: DESCARTADA** (avaliada). Pênaltis já são módulo
+     (`js/penaltis.js`); o espectador (🏠 + seletor) é uso ÚNICO e acoplado ao estado do
+     mata-mata online — promover só adicionaria indireção sem reuso. Não fazer.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador
