@@ -452,7 +452,6 @@ function montarLigaChampions(times) {
   return { potes: potes.map(pt => pt.map(t => t.userId)), jogos };
 }
 
-// Tabela única da fase de liga (acumulação de resultados).
 function tabelaLigaVazia(times) {
   const t = {};
   times.forEach(x => { t[x.userId] = { userId: x.userId, pts: 0, j: 0, v: 0, e: 0, d: 0, gf: 0, ga: 0 }; });
@@ -470,7 +469,6 @@ function ordenarTabelaLiga(tab) {
     .map(r => Object.assign({ sg: r.gf - r.ga }, r))
     .sort((a, b) => (b.pts - a.pts) || (b.sg - a.sg) || (b.gf - a.gf));
 }
-// Cortes da fase de liga: 1–8 oitavas diretas, 9–24 playoff, 25–36 eliminados.
 function cortesChampions(tabelaOrdenada) {
   return {
     direto:     tabelaOrdenada.slice(0, 8),
@@ -479,9 +477,8 @@ function cortesChampions(tabelaOrdenada) {
   };
 }
 
-// Distribui os 144 jogos em 8 rodadas (cada time joga 1x por rodada). Como os jogos
-// já respeitam a regra dos potes, usamos backtracking p/ achar 8 emparelhamentos
-// perfeitos; se o arranjo travar, o chamador re-sorteia os potes.
+// Distribui os 144 jogos em 8 rodadas (1 jogo/time por rodada) via emparelhamento
+// perfeito; se um arranjo de potes travar, o chamador re-sorteia.
 function chaveJogo(a, b) { return a < b ? a + '-' + b : b + '-' + a; }
 
 function emparelhamentoPerfeito(nodes, adj, maxPassos) {
@@ -1573,8 +1570,8 @@ function setupSocket(server, frontendUrl) {
         const { confrontos, vencedores } = simularPlayoffChampions(sala);
         io.to(code).emit('champions:playoff', { confrontos, vencedores });
 
-        // Oitavas = 8 diretos (1–8) + 8 vencedores do playoff (linhas da fase de liga,
-        // p/ semear a chave por pontos). Reaproveita o mata-mata existente daqui pra frente.
+        // Oitavas = 8 diretos (1–8) + 8 vencedores do playoff. Daqui pra frente
+        // reaproveita o mata-mata existente.
         const linhaPorUid = {};
         (sala.cortesLiga.playoff || []).forEach(r => { linhaPorUid[r.userId] = r; });
         const vencedoresLinhas = vencedores.map(v => linhaPorUid[v.userId]).filter(Boolean);

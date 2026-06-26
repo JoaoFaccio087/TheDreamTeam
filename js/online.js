@@ -1234,8 +1234,7 @@
     atualizarAcoesRodada();
   }
 
-  // champions:faseLigaFim — fim da fase de liga: marca o fim, fixa a tabela final com os
-  // cortes destacados (1–8 / 9–24 / 25–36) e libera o host a "Ir ao playoff".
+  // Fim da fase de liga: fixa a tabela final (com os cortes) e libera o host ao playoff.
   function onChampionsFaseLigaFim(dados) {
     championsFimLiga = true;
     championsClassifFinal = dados.classificacao || championsClassifFinal;
@@ -1243,8 +1242,7 @@
     atualizarAcoesRodada();
   }
 
-  // champions:playoff — resultado do playoff (9–24, ida e volta). Exibe os 8 confrontos
-  // na aba Partidas; em seguida o onChaveState (que chega logo depois) abre as oitavas.
+  // Playoff (9–24): mostra os 8 confrontos na aba Partidas; as oitavas vêm logo via onChaveState.
   function onChampionsPlayoff(dados) {
     championsFimLiga = false;
     var confrontos = dados.confrontos || [];
