@@ -178,12 +178,20 @@ seguido** (hoje o critério é `meuUserId`; passa a ser `uidSeguido`).
        (status→`fimLiga`), tanto no `round:simulate` quanto no `round:skipAll`. Validado com
        o **motor real** (36 times, 8 jogos, tabela ordenada, cortes 8/16/12, fortes ao topo)
        e `criarSala('Champions')→formato 'champions'`. ⚠️ deploy.
-     - **3c (PRÓXIMA):** do checkpoint `fimLiga` → playoff 9–24 (ida/volta) → início da chave.
-   - **Parte 4:** chave a partir das oitavas (16 = 8 diretos + 8 do playoff), reusando
-     mata-mata, espectador e "X/Y prontos". Temperos: mando na volta pro melhor classificado;
-     quem elimina um time melhor herda a posição.
+     - **3c (FEITO):** playoff dos 9º–24º (ida e volta). `resolverConfrontoDuasMaos`
+       (soma dos 2 jogos, mando da volta pro melhor classificado, empate no agregado →
+       pênaltis), `montarPlayoffChampions` (8 confrontos 9×24…16×17) e
+       `simularPlayoffChampions`. Handler `champions:advancePlayoff` (host, a partir de
+       `fimLiga`): emite `champions:playoff` `{confrontos, vencedores}` e já monta as
+       **oitavas** (8 diretos + 8 vencedores) via `montarChaveOnline`, emitindo
+       `chave:state` — daí pra frente reaproveita o mata-mata existente (`chave:advance`,
+       espectador, "X/Y prontos"). Validado (emparelhamento, agregado, pênaltis, montagem
+       dos 16). Documentado no CONTRATOS. ⚠️ deploy.
+   - **Parte 4 (semeadura/temperos, opcional):** hoje a chave das oitavas é semeada pelos
+     pontos da fase de liga (melhor × pior). Refinar p/ a estrutura fixa da UEFA e a regra
+     "quem elimina um time melhor herda a posição", se quisermos fidelidade total.
    - **Parte 5:** UI do cliente — entrada (escolher Champions no online), tabela de 36 com
-     cortes destacados, playoff e chave.
+     cortes destacados, tela do playoff (ida/volta) e a chave.
 2. **Pendência do usuário:** confirmar, após deploy, o respiro / tamanho de
    "A CAMPANHA" no `simulacao.css`.
 3. **Refactor opcional:** promover o **🏠 / seletor de times** da barra de espectador

@@ -236,7 +236,9 @@ da fase de liga.
 
 | dir | evento | o que é |
 |-----|--------|---------|
-| S→C | `champions:faseLigaFim` | fim da fase de liga: `{ classificacao, direto[8], playoff[16], eliminados[12] }` (cortes por `userId`). Emitido no `round:simulate` e no `round:skipAll`. Playoff e chave a partir das oitavas entram na sequência. |
+| S→C | `champions:faseLigaFim` | fim da fase de liga: `{ classificacao, direto[8], playoff[16], eliminados[12] }` (cortes por `userId`). Emitido no `round:simulate` e no `round:skipAll`. Status→`fimLiga`. |
+| C→S | `champions:advancePlayoff` | host roda o playoff (9–24, ida/volta) a partir do checkpoint `fimLiga`. |
+| S→C | `champions:playoff` | resultado do playoff: `{ confrontos:[{ alto, baixo, ida, volta, aggAlto, aggBaixo, pen, penSeq, vencedor }], vencedores[8] }`. Em seguida o servidor monta as oitavas (8 diretos + 8 vencedores) e emite `chave:state` — daí pra frente reaproveita o mata-mata (`chave:advance`, espectador, "X/Y prontos"). |
 
 #### `gdraft:yourPick` (cartas da sua vez no draft por grupo)
 ```json

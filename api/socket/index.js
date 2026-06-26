@@ -543,6 +543,55 @@ function montarCalendarioChampions(sala) {
   return rodadas.map(rod => rod.map(g => [g.home, g.away]));
 }
 
+// ── Champions: PLAYOFF (9º–24º, ida e volta) ─────────────────────────────────
+// 16 times (posições 9–24) → 8 confrontos (9×24, 10×23, … 16×17). O melhor
+// classificado de cada par decide a VOLTA em casa. Soma dos dois jogos; empate
+// no agregado → pênaltis. Vencedores avançam às oitavas.
+
+// Resolve um confronto de ida e volta. alto = melhor seed (manda na volta).
+function resolverConfrontoDuasMaos(sala, alto, baixo) {
+  const altoEl  = picksDe(sala, alto.userId);
+  const baixoEl = picksDe(sala, baixo.userId);
+  const ida   = simularPartida(baixoEl, { jogadores: altoEl }, true);   // ida: casa do pior
+  const volta = simularPartida(altoEl,  { jogadores: baixoEl }, true);  // volta: casa do melhor
+  acumularStats(sala, ida.fila); acumularStats(sala, volta.fila);
+  const aggAlto  = ida.gAdv  + volta.gMeus;
+  const aggBaixo = ida.gMeus + volta.gAdv;
+  let vencedor, pen = null, penSeq = null;
+  if (aggAlto > aggBaixo)      vencedor = alto;
+  else if (aggBaixo > aggAlto) vencedor = baixo;
+  else {
+    const d = simularPenaltisOnline(altoEl, baixoEl);
+    pen = [d.penA, d.penB]; penSeq = d.seq;
+    vencedor = d.vence === 'a' ? alto : baixo;
+  }
+  return {
+    alto, baixo, aggAlto, aggBaixo, pen, penSeq, vencedor,
+    ida:   { mandante: baixo.userId, gMandante: ida.gMeus,   gVisitante: ida.gAdv,   fila: ida.fila },
+    volta: { mandante: alto.userId,  gMandante: volta.gMeus, gVisitante: volta.gAdv, fila: volta.fila },
+  };
+}
+
+// Monta os 8 confrontos do playoff a partir das posições 9–24 (cortesLiga.playoff).
+function montarPlayoffChampions(sala) {
+  const p = (sala.cortesLiga && sala.cortesLiga.playoff) || [];   // 16 linhas, ordem 9..24
+  const confrontos = [];
+  for (let i = 0; i < Math.floor(p.length / 2); i++) {
+    confrontos.push({
+      alto:  refTime(sala, p[i].userId),                 // 9..16 (melhor — manda na volta)
+      baixo: refTime(sala, p[p.length - 1 - i].userId),  // 24..17 (pior)
+    });
+  }
+  sala.playoffConfrontos = confrontos;
+  return confrontos;
+}
+
+// Simula o playoff inteiro; devolve confrontos resolvidos + os 8 vencedores.
+function simularPlayoffChampions(sala) {
+  const confrontos = montarPlayoffChampions(sala).map(c => resolverConfrontoDuasMaos(sala, c.alto, c.baixo));
+  return { confrontos, vencedores: confrontos.map(r => r.vencedor) };
+}
+
 function acumularStats(sala, fila) {
   (fila || []).forEach(ev => {
     if (ev.lado === 'meu') {
@@ -1497,6 +1546,31 @@ function setupSocket(server, frontendUrl) {
         socket.emit('erro', 'Erro na simulação');
       } finally {
         sala.rodadaEmAndamento = false;
+      }
+    });
+
+    // ── champions:advancePlayoff — host roda o playoff (9–24) e abre as oitavas ─
+    socket.on('champions:advancePlayoff', () => {
+      const code = socket.salaAtual; const sala = code && getSala(code);
+      if (!sala || sala.status !== 'fimLiga' || !sala.cortesLiga) return;
+      if (sala.hostUserId !== userId) return;            // só o host avança
+      try {
+        const { confrontos, vencedores } = simularPlayoffChampions(sala);
+        io.to(code).emit('champions:playoff', { confrontos, vencedores });
+
+        // Oitavas = 8 diretos (1–8) + 8 vencedores do playoff (linhas da fase de liga,
+        // p/ semear a chave por pontos). Reaproveita o mata-mata existente daqui pra frente.
+        const linhaPorUid = {};
+        (sala.cortesLiga.playoff || []).forEach(r => { linhaPorUid[r.userId] = r; });
+        const vencedoresLinhas = vencedores.map(v => linhaPorUid[v.userId]).filter(Boolean);
+        sala.classificados = (sala.cortesLiga.direto || []).concat(vencedoresLinhas);
+
+        sala.status = 'mata';
+        montarChaveOnline(sala);
+        io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
+      } catch (err) {
+        console.error('[socket champions:advancePlayoff]', err);
+        socket.emit('erro', 'Erro ao processar o playoff');
       }
     });
 
