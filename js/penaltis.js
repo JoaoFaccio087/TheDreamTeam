@@ -223,7 +223,7 @@
       var bx = lado * 108, by = alto ? -152 : -104, kx = lado * 72, ky = alto ? -14 : 8, rot = lado * (alto ? 46 : 30);
       if (o === 'FORA') { if (Math.random() < 0.55) { bx = pick([-1, 1]) * 195; by = -126; } else { by = -242; bx = lado * 90; } kx = pick([-1, 0, 1]) * 72; rot = (kx < 0 ? -1 : kx > 0 ? 1 : 0) * 38; }
       else if (o === 'DEFENDEU') { bx = lado * 86; by = alto ? -128 : -92; kx = lado * 72; ky = alto ? -14 : 8; rot = lado * (alto ? 46 : 30); }
-      else { kx = pick([-1, 0, 1].filter(function (z) { return z !== lado; })) * 72; rot = (kx < 0 ? -1 : kx > 0 ? 1 : 0) * (alto ? 46 : 30); }
+      else { by = alto ? -152 : -124; kx = pick([-1, 0, 1].filter(function (z) { return z !== lado; })) * 72; rot = (kx < 0 ? -1 : kx > 0 ? 1 : 0) * (alto ? 46 : 30); }
 
       bl.style.transform = 'translate(' + (240 + bx) + 'px,' + (288 + by) + 'px) scale(.56)';
       setTimeout(function () {
