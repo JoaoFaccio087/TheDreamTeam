@@ -244,6 +244,8 @@ da fase de liga.
 ```json
 {
   "grupo": "C",
+  "picksTurno": 2,
+  "picksFeitosTurno": 0,
   "porPosicao": {
     "ATA": [ { "nome": "Ronaldo", "forca": 95, "posicoes": ["ATA"] } ],
     "MEI": [ { "nome": "Zidane",  "forca": 94, "posicoes": ["MEI"] } ]
@@ -251,6 +253,7 @@ da fase de liga.
 }
 ```
 - `porPosicao`: jogadores **já validados pelo servidor** por código de vaga (≥6 por posição). O cliente exibe direto, sem refiltrar. O pool **não esgota** (pode repetir entre usuários, nunca para você mesmo).
+- **2 picks por turno (igual ao snake):** o draft de grupos roda em **6 turnos** com `[2,2,2,2,2,1]` = 11 picks. Em um turno de 2, você escolhe **1 de cada vez**: após o 1º pick o servidor reabre sua vez reenviando `gdraft:yourPick` com `picksFeitosTurno` atualizado, até completar o turno. `gdraft:turnoGrupo` carrega `picksTurno` (2 ou 1), `turnoNum`/`totalTurnos` (6) e `pickNumero` = nº do turno; `gdraft:picked` carrega `picks` (snapshot do total por uid) e, no seu próprio pick, `picksTurno`/`picksFeitosTurno`. O cliente deriva "fechou o turno" pelo total acumulado `[2,4,6,8,10,11]`.
 
 #### `chave:state` (a chave do mata-mata)
 ```json

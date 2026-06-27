@@ -485,6 +485,9 @@
   var gGrupoAtivo       = null;
   var gPickNum          = 1;
   var gPicksSnap        = {};
+  var gPicksTurno       = 1;      // picks que o turno de grupo concede (2, ou 1 no último)
+  var gPicksFeitosTurno = 0;      // picks que EU já fiz no turno atual
+  var gTotalTurnos      = 6;
   var gVisualizandoUid  = null;   // uid do time que estou olhando no campo (null = o meu)
 
   function onGdraftStart(dados) {
@@ -495,12 +498,14 @@
     gGrupoAtivo       = null;
     gPickNum          = 1;
     gPicksSnap        = {};
+    gPicksTurno       = 1;
+    gPicksFeitosTurno = 0;
     gPodeEscolher     = false;
 
     subview('online-draft');
     var titulo = document.getElementById('online-draft-titulo');
     if (titulo) titulo.textContent = 'Draft por Grupo';
-    if (draftSubtituloEl) draftSubtituloEl.textContent = 'Pick 1 / ' + gPicksNecessarios;
+    if (draftSubtituloEl) draftSubtituloEl.textContent = 'Turno 1 / ' + gTotalTurnos;
 
     var minhaForm = (allPlayers[meuUserId] && allPlayers[meuUserId].formacao) || '4-3-3';
     if (draftCampo) renderCampoOnline(draftCampo, [], minhaForm);
@@ -513,20 +518,22 @@
   // gdraft:turnoGrupo — é a vez de um grupo (todos dele escolhem em paralelo).
   function onGdraftTurnoGrupo(dados) {
     gGrupoAtivo = dados.grupo;
-    gPickNum    = dados.pickNumero || 1;
+    gPickNum    = dados.pickNumero || 1;     // nº do TURNO (1..6)
+    gPicksTurno = dados.picksTurno || 1;     // picks deste turno (2, ou 1 no último)
+    gTotalTurnos = dados.totalTurnos || gTotalTurnos;
+    gPicksFeitosTurno = 0;                   // novo turno: ainda não escolhi nada
     if (dados.picks) gPicksSnap = dados.picks;
 
     var titulo = document.getElementById('online-draft-titulo');
     if (titulo) titulo.textContent = 'Grupo ' + dados.grupo;
-    if (draftSubtituloEl) draftSubtituloEl.textContent = 'Pick ' + gPickNum + ' / ' + (dados.totalPicks || gPicksNecessarios);
+    atualizarSubtituloGrupo();
 
     renderPainelGrupos();
 
     var membros   = (gGrupos[dados.grupo] || []).map(String);
     var euNoGrupo = membros.indexOf(String(meuUserId)) >= 0;
-    var jaEscolhi = (gPicksSnap[meuUserId] || 0) >= gPickNum;
 
-    if (euNoGrupo && !jaEscolhi) {
+    if (euNoGrupo) {
       gPodeEscolher    = true;          // posso clicar nas vagas; as cartas chegam em gdraft:yourPick
       gVisualizandoUid = null;          // na minha vez, sempre volto pro MEU time
       selectedPlayer = null; selectedSlot = null;
@@ -544,12 +551,23 @@
     }
   }
 
+  // Subtítulo do draft de grupos: "Turno X / 6" (+ "· pick Y/2" quando o turno dá 2 picks).
+  function atualizarSubtituloGrupo() {
+    if (!draftSubtituloEl) return;
+    var txt = 'Turno ' + gPickNum + ' / ' + gTotalTurnos;
+    if (gPicksTurno > 1) txt += ' \u00b7 pick ' + Math.min(gPicksFeitosTurno + 1, gPicksTurno) + '/' + gPicksTurno;
+    draftSubtituloEl.textContent = txt;
+  }
+
   // gdraft:yourPick — minhas cartas para o pick atual (mapa por posição, já validado).
   function onGdraftYourPick(dados) {
     poolPorPosicao = (dados && dados.porPosicao) || {};
+    if (dados && typeof dados.picksTurno === 'number')       gPicksTurno = dados.picksTurno;
+    if (dados && typeof dados.picksFeitosTurno === 'number') gPicksFeitosTurno = dados.picksFeitosTurno;
     gPodeEscolher  = true;
     gVisualizandoUid = null;
     selectedPlayer = null; selectedSlot = null;
+    atualizarSubtituloGrupo();
     verTimeDoUsuario(meuUserId);
   }
 
@@ -566,11 +584,19 @@
       poolLocal = poolLocal.filter(function (p) { return p.id !== dados.jogador.id; });
 
       if (String(dados.userId) === String(meuUserId)) {
-        gPodeEscolher  = false;
+        // Contabiliza minha pick no turno. Se ainda falta (1/2), o servidor reabre minha
+        // vez via gdraft:yourPick; senão, fecho o turno e fico aguardando o grupo.
+        if (typeof dados.picksFeitosTurno === 'number') gPicksFeitosTurno = dados.picksFeitosTurno;
+        else gPicksFeitosTurno++;
+        var fecheiTurno = gPicksFeitosTurno >= gPicksTurno;
+        if (fecheiTurno) {
+          gPodeEscolher = false;
+          limparDestaquesVaga();
+          fecharModalDraftPick();
+          pararTimer();
+        }
         selectedPlayer = null; selectedSlot = null;
-        limparDestaquesVaga();
-        fecharModalDraftPick();
-        pararTimer();
+        atualizarSubtituloGrupo();
       }
       mostrarCampoDaVez(gVisualizandoUid || meuUserId);
       renderMeuTime();
@@ -611,13 +637,23 @@
     return null;
   }
 
+  // Total de picks que um jogador deve ter ao FECHAR o turno T (1-based): [2,4,6,8,10,11].
+  function picksAlvoAteTurno(turno) {
+    var seq = [2, 2, 2, 2, 2, 1], acc = 0;
+    for (var i = 0; i < turno && i < seq.length; i++) acc += seq[i];
+    return acc;
+  }
+  // Um uid já fechou o turno atual? (total de picks atingiu o alvo acumulado do turno).
+  function fechouTurno(uid) {
+    return ((gPicksSnap && gPicksSnap[uid]) || 0) >= picksAlvoAteTurno(gPickNum);
+  }
+
   // Texto de status: de quem é a vez agora e quanto falta pra minha.
   function textoStatusDraft() {
     var meuG = meuGrupoLetra();
     if (!meuG || !gGrupoAtivo) return '';
     if (gGrupoAtivo === meuG) {
-      var jaEscolhi = (gPicksSnap[meuUserId] || 0) >= gPickNum;
-      return jaEscolhi ? 'Você já escolheu — aguardando os outros grupos…' : 'É a sua vez! Escolha um jogador.';
+      return fechouTurno(meuUserId) ? 'Você já escolheu — aguardando os outros grupos…' : 'É a sua vez! Escolha um jogador.';
     }
     var iAtivo = gOrdemGrupos.indexOf(gGrupoAtivo);
     var iMeu   = gOrdemGrupos.indexOf(meuG);
@@ -632,7 +668,7 @@
     var cont = document.getElementById('draft-ordem-lista');
     if (!cont) return;
     var status = textoStatusDraft();
-    var minhaVez = (gGrupoAtivo && gGrupoAtivo === meuGrupoLetra() && (gPicksSnap[meuUserId] || 0) < gPickNum);
+    var minhaVez = (gGrupoAtivo && gGrupoAtivo === meuGrupoLetra() && !fechouTurno(meuUserId));
     var html = status ? '<div class="gdraft-status' + (minhaVez ? ' gdraft-status-vez' : '') + '">' + htmlEsc(status) + '</div>' : '';
     gOrdemGrupos.forEach(function (L) {
       var ativo   = (L === gGrupoAtivo);
@@ -643,17 +679,21 @@
       membros.forEach(function (uid) {
         var p      = allPlayers[uid] || {};
         var nome   = p.nomeDoTime || p.username || 'Time';
-        var picks  = (gPicksSnap && gPicksSnap[uid]) || 0;
-        var pronto = picks >= gPickNum;
+        var pronto = fechouTurno(uid);
         var ehMeu  = String(uid) === String(meuUserId);
         var vendo  = String(uid) === String(gVisualizandoUid);
+        // Badge "1/2" só no membro ativo que ainda não fechou um turno de 2 picks.
+        var badge  = '';
+        if (ativo && !pronto && gPicksTurno > 1 && ehMeu) {
+          badge = ' <span class="gdraft-membro-badge">' + Math.min(gPicksFeitosTurno + 1, gPicksTurno) + '/' + gPicksTurno + '</span>';
+        }
         var statusTxt, statusCls;
         if (ativo) { statusTxt = pronto ? 'Pronto' : 'Escolhendo…'; statusCls = pronto ? ' ok' : ' escolhendo'; }
         else       { statusTxt = pronto ? '✓' : '·';                statusCls = pronto ? ' ok' : ''; }
         html += '<div class="gdraft-membro' + (ehMeu ? ' gdraft-membro-meu' : '') + (vendo ? ' gdraft-membro-vendo' : '') +
                   '" data-uid="' + htmlEsc(String(uid)) + '" title="Ver o time de ' + htmlEsc(nome) + '">' +
                   '<span class="gdraft-membro-nome">' + htmlEsc(nome) + '</span>' +
-                  '<span class="gdraft-membro-status' + statusCls + '">' + statusTxt + '</span>' +
+                  '<span class="gdraft-membro-status' + statusCls + '">' + statusTxt + badge + '</span>' +
                 '</div>';
       });
       html += '</div>';

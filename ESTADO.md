@@ -39,8 +39,9 @@ XI dos craques que estiveram lá e **simula** a campanha. Dev: João Faccio.
 
 - **Idioma:** responder em PT-BR. Tom direto e caloroso, sem agradecer demais, sem
   emoji em botão.
-- **Entrega arquivo-a-arquivo:** cada arquivo alterado vai **separado**, com o
-  **caminho exato do repo**. Nada de zip do projeto inteiro.
+- **Entrega arquivo-a-arquivo:** cada arquivo alterado vai **separado e completo**, sempre
+  com o **caminho exato do repo** onde o João deve colar/substituir (ex.: "substitua
+  `js/online.js`"). Nada de zip do projeto inteiro, nada de diff/trecho solto sem o caminho.
 - **Repo correto:** `/home/claude/projeto/TheDreamTeam`. Ignorar `/mnt/project`
   (cópia velha).
 - **Validação:** JS com `node -c`; CSS conferindo contagem de chaves `{` vs `}`.
@@ -310,5 +311,24 @@ PENDENTE:
   (`draft-ordem-turno`); o cabeçalho mostra "Turno X / 6 · pick Y/2". Fluxo: clica vaga →
   escolhe carta → vaga preenche, vez continua → clica outra vaga → escolhe → passa a vez.
   (Pode reposicionar jogadores entre os picks via draft:move, como antes.)
-- DRAFT DE GRUPOS (Copa/Liberta online): aplicar o mesmo "2 por rodada". ← PRÓXIMO
+- DRAFT DE GRUPOS (Copa/Liberta online) — **FEITO e testado**: mesmo "2 por rodada" do snake,
+  mas adaptado à estrutura por grupo (todos do grupo escolhem em paralelo).
+  - SERVIDOR (`api/socket/index.js`): `picksDoTurnoGrupo(t)` (reusa `[2,2,2,2,2,1]`, indexado
+    pelo turno 0..5); `iniciarDraftGrupos` zera `pickRodada` como índice de **turno**;
+    `iniciarTurnoGrupo` conta picks por uid (`sala.picksTurnoPorUid`) e só fecha o jogador
+    quando atinge o alvo do turno (ou 11 no total) — bots/timeout completam o turno de uma vez;
+    `gdraft:pick` faz **1 de cada vez**, reabrindo a vez via `gdraft:yourPick` até completar;
+    `avancarGrupoDraft` termina o draft em `pickRodada >= TURNOS_DRAFT` (6). `emitGdraftPicked`
+    agora carrega `picks` (snapshot) + `picksTurno`/`picksFeitosTurno`.
+  - CLIENTE (`online.js`): novos estados `gPicksTurno`/`gPicksFeitosTurno`/`gTotalTurnos`;
+    `onGdraftTurnoGrupo`/`onGdraftYourPick`/`onGdraftPicked` usam os campos do servidor;
+    subtítulo "Turno X / 6 · pick Y/2"; badge "1/2" no membro ativo (`.gdraft-membro-badge`
+    em `css/online.css`). O "fechou o turno" é derivado pelo total acumulado `[2,4,6,8,10,11]`
+    (`picksAlvoAteTurno`/`fechouTurno`) — robusto a eventos perdidos.
+  - TESTE: `api/socket/gdraft.test.js` dirige o draft de grupos só com bots e valida 11
+    picks/jogador para Copa (48) e Liberta (32), status→ready e sem repetição no time
+    (13 checks). Rodar antes de deploys: `node api/socket/gdraft.test.js`. Snake intacto
+    (regressão `draft.test.js` segue verde).
 - ⚠️ DEPLOY: servidor + cliente JUNTOS (a mudança do turno é casada; subir só um trava o draft).
+  Arquivos desta tarefa: `api/socket/index.js`, `api/socket/gdraft.test.js`,
+  `js/online.js`, `css/online.css` (+ docs `CONTRATOS.md`/`ESTADO.md`).

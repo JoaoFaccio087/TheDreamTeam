@@ -86,8 +86,8 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
   - **Copa do Mundo (grupos + mata-mata)**: 48 participantes em 12 grupos de 4, fase de grupos e depois a chave eliminatória até a final.
 - **Vagas completadas por bots**: as que sobram são preenchidas por bots com nomes próprios (únicos na sala), que montam seus elencos sozinhos.
 - **Draft por posição**: na sua vez, você **clica numa posição aberta** do campo e vê os **melhores jogadores disponíveis** para ela (considerando **todas as posições** que cada atleta pode jogar — um ATA que também atua de MEI aparece para uma vaga de MEI), e então escolhe quem entra. Você também pode remanejar quem já colocou.
-  - No **Brasileirão**, o draft é **snake** (a ordem espelha a cada rodada) e ninguém pega o mesmo nome duas vezes.
-  - Na **Copa**, o draft acontece **por grupo, rodada a rodada** (todos os grupos escolhem em paralelo, com um ritmo cadenciado); jogadores podem repetir entre usuários diferentes, mas nunca para você mesmo.
+  - No **Brasileirão**, o draft é **snake** (a ordem espelha a cada rodada) e ninguém pega o mesmo nome duas vezes. São **6 turnos** (2 picks por turno, 1 só no último = 11 jogadores).
+  - Na **Copa**, o draft acontece **por grupo, rodada a rodada** (todos os grupos escolhem em paralelo, com um ritmo cadenciado), também em **6 turnos de 2 picks** (1 de cada vez); jogadores podem repetir entre usuários diferentes, mas nunca para você mesmo.
 - **Sorteio dos grupos** (Copa): uma animação distribui os 48 participantes nos grupos A–L, com **o seu grupo destacado em dourado**.
 - **Fase de grupos** (Copa): cada grupo joga turno único (3 rodadas); a aba **Grupos** mostra as **12 tabelas** simultâneas, com os 2 primeiros em verde e o seu time em dourado. Classificam-se os **2 primeiros de cada grupo + os 8 melhores terceiros** (por pontos, saldo e gols).
 - **Mata-mata** (Copa): a aba **Mata-a-Mata** desenha a chave inteira (16-avos → final), com placares, vencedores destacados, **pênaltis** nos empates e o **campeão** coroado ao fim. O host avança fase por fase.

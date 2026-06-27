@@ -38,6 +38,11 @@ function picksDoTurno(sala, indiceTurno) {
   return PICKS_POR_RODADA[Math.floor(indiceTurno / n)] || 1;
 }
 
+// Picks do turno no draft POR GRUPO: indexado direto pelo turno (0..5) → [2,2,2,2,2,1].
+function picksDoTurnoGrupo(indiceTurno) {
+  return PICKS_POR_RODADA[indiceTurno] || 1;
+}
+
 // ── Bots (times da máquina que completam a liga até 20) ────────────────────────
 
 const TOTAL_TIMES    = 20;
@@ -1010,7 +1015,7 @@ function iniciarDraftGrupos(io, sala) {
   sala.poolDisponivel = montarPool(sala.competicao, 800);
   sala.poolCompleto   = montarPool(sala.competicao, 2500);  // não-esvaziante: cartas do draft por grupo
   sala.grupoDraftIdx  = 0;
-  sala.pickRodada     = 0;
+  sala.pickRodada     = 0;   // índice do TURNO (0..5); cada turno vale picksDoTurnoGrupo() picks
   sala.status         = 'gdraft';
   io.to(sala.codigo).emit('gdraft:start', {
     grupos:           sala.grupos,
@@ -1057,7 +1062,7 @@ function cartasParaJogador(sala, jogador) {
   return porPosicao;   // { 'ZAG': [..6-12..], 'LE': [...], ... } — cliente usa direto
 }
 
-function emitGdraftPicked(io, sala, jogador, picked, slotIdx, timeout, ehBot) {
+function emitGdraftPicked(io, sala, jogador, picked, slotIdx, timeout, ehBot, picksTurno, picksFeitosTurno) {
   io.to(sala.codigo).emit('gdraft:picked', {
     userId:     jogador.userId,
     username:   jogador.username,
@@ -1066,6 +1071,9 @@ function emitGdraftPicked(io, sala, jogador, picked, slotIdx, timeout, ehBot) {
     jogador:    picked,
     slotIndex:  slotIdx,
     numPicks:   (jogador.picks || []).filter(Boolean).length,
+    picks:      picksSnapshotDe(sala),
+    picksTurno:       (typeof picksTurno === 'number') ? picksTurno : undefined,
+    picksFeitosTurno: (typeof picksFeitosTurno === 'number') ? picksFeitosTurno : undefined,
     timeout:    !!timeout,
     ehBot:      !!ehBot,
   });
@@ -1090,31 +1098,54 @@ function colocarEmVagaGrupo(io, sala, jogador, ehBot) {
 }
 
 // Inicia o turno do grupo da vez: todos do grupo escolhem EM PARALELO.
+// Cada jogador faz picksDoTurnoGrupo() escolhas (2, ou 1 no último turno) antes de fechar.
 function iniciarTurnoGrupo(io, sala) {
   const cfg   = configGrupos(sala.competicao);
   const grupo = cfg.letras[sala.grupoDraftIdx];
   const uids  = sala.grupos[grupo] || [];
-  sala.pickedThisTurn = [];
+  const total = sala.totalPicksNecessarios || 11;
+  const alvo  = picksDoTurnoGrupo(sala.pickRodada);   // picks que cada um faz neste turno
+
+  sala.pickedThisTurn   = [];   // uids que JÁ FECHARAM o turno (atingiram o alvo ou já têm 11)
+  sala.picksTurnoPorUid = {};   // contador de picks feitos no turno, por uid
+
+  // Quantas picks faltam pro jogador neste turno (limitado pelas vagas restantes até 11).
+  const faltaNoTurno = (jog) => {
+    const jaTem = (jog.picks || []).filter(Boolean).length;
+    return Math.max(0, Math.min(alvo - (sala.picksTurnoPorUid[jog.userId] || 0), total - jaTem));
+  };
 
   io.to(sala.codigo).emit('gdraft:turnoGrupo', {
     grupo,
-    pickNumero: sala.pickRodada + 1,
-    totalPicks: sala.totalPicksNecessarios,
+    pickNumero:  sala.pickRodada + 1,      // nº do TURNO (1..6)
+    totalPicks:  sala.totalPicksNecessarios,
+    picksTurno:  alvo,                     // picks deste turno (2 ou 1)
+    turnoNum:    sala.pickRodada + 1,
+    totalTurnos: TURNOS_DRAFT,
     uids,
-    segundos:   30,
-    picks:      picksSnapshotDe(sala),
+    segundos:    30,
+    picks:       picksSnapshotDe(sala),
   });
 
   uids.forEach(uid => {
     const jog = sala.jogadores.find(j => j.userId === uid);
     if (!jog) { sala.pickedThisTurn.push(uid); return; }
     if (jog.ehBot) {
-      colocarEmVagaGrupo(io, sala, jog, true);
+      let faltam = faltaNoTurno(jog);
+      for (let p = 0; p < faltam; p++) colocarEmVagaGrupo(io, sala, jog, true);
+      sala.picksTurnoPorUid[uid] = alvo;
       sala.pickedThisTurn.push(uid);
     } else if (jog.socketId) {
-      io.to(jog.socketId).emit('gdraft:yourPick', { grupo, porPosicao: cartasParaJogador(sala, jog) });
+      io.to(jog.socketId).emit('gdraft:yourPick', {
+        grupo,
+        porPosicao:       cartasParaJogador(sala, jog),
+        picksTurno:       alvo,
+        picksFeitosTurno: 0,
+      });
     } else {
-      colocarEmVagaGrupo(io, sala, jog, false);   // humano desconectado: auto
+      let faltam = faltaNoTurno(jog);   // humano desconectado: auto
+      for (let p = 0; p < faltam; p++) colocarEmVagaGrupo(io, sala, jog, false);
+      sala.picksTurnoPorUid[uid] = alvo;
       sala.pickedThisTurn.push(uid);
     }
   });
@@ -1129,7 +1160,10 @@ function iniciarTurnoGrupo(io, sala) {
     uids.forEach(uid => {
       if (sala.pickedThisTurn.indexOf(uid) >= 0) return;
       const jog = sala.jogadores.find(j => j.userId === uid);
-      if (jog) colocarEmVagaGrupo(io, sala, jog, false);
+      if (jog) {
+        let faltam = faltaNoTurno(jog);
+        for (let p = 0; p < faltam; p++) colocarEmVagaGrupo(io, sala, jog, false);
+      }
       sala.pickedThisTurn.push(uid);
     });
     avancarGrupoDraft(io, sala);
@@ -1147,7 +1181,7 @@ function avancarGrupoDraft(io, sala) {
     sala.pickRodada++;
   }
 
-  if (sala.pickRodada >= sala.totalPicksNecessarios) {
+  if (sala.pickRodada >= TURNOS_DRAFT) {
     sala.status = 'ready';
     sala.jogadores.forEach(j => { j.pronto = !!j.ehBot; });
     io.to(sala.codigo).emit('gdraft:complete', {
@@ -1389,8 +1423,10 @@ function setupSocket(server, frontendUrl) {
       const cfg   = configGrupos(sala.competicao);
       const grupo = cfg.letras[sala.grupoDraftIdx];
       const uids  = sala.grupos[grupo] || [];
-      if (uids.indexOf(userId) < 0)                  return socket.emit('erro', 'Não é a vez do seu grupo');
-      if ((sala.pickedThisTurn || []).indexOf(userId) >= 0) return socket.emit('erro', 'Você já escolheu nesta rodada');
+      const total = sala.totalPicksNecessarios || 11;
+      const alvo  = picksDoTurnoGrupo(sala.pickRodada);
+      if (uids.indexOf(userId) < 0)                         return socket.emit('erro', 'Não é a vez do seu grupo');
+      if ((sala.pickedThisTurn || []).indexOf(userId) >= 0) return socket.emit('erro', 'Você já completou as escolhas desta rodada');
 
       const jog = sala.jogadores.find(j => j.userId === userId);
       if (!jog) return;
@@ -1405,14 +1441,30 @@ function setupSocket(server, frontendUrl) {
       if (jaTenho.has(playerId)) return socket.emit('erro', 'Você já tem esse jogador no time');
       const pool   = sala.poolCompleto || sala.poolDisponivel || [];
       const picked = pool.find(p => p.id === playerId);
-      if (!picked)                         return socket.emit('erro', 'Jogador não disponível');
+      if (!picked)                            return socket.emit('erro', 'Jogador não disponível');
       if (!podeOcupar(picked, codigos[slot])) return socket.emit('erro', 'Jogador não joga nessa posição');
 
       jog.picks[slot] = picked;   // sem splice — pode repetir entre usuários
-      sala.pickedThisTurn.push(userId);
-      emitGdraftPicked(io, sala, jog, picked, slot, false, false);
+      sala.picksTurnoPorUid = sala.picksTurnoPorUid || {};
+      sala.picksTurnoPorUid[userId] = (sala.picksTurnoPorUid[userId] || 0) + 1;
+      const feitosTurno = sala.picksTurnoPorUid[userId];
+      emitGdraftPicked(io, sala, jog, picked, slot, false, false, alvo, feitosTurno);
 
-      // Todos do grupo escolheram → próximo grupo/rodada.
+      // Turno incompleto e ainda há vaga (até 11)? Reabre a vez deste jogador (status 1/2).
+      const jaTem        = jog.picks.filter(Boolean).length;
+      const aindaTemVaga = jaTem < total;
+      if (feitosTurno < alvo && aindaTemVaga) {
+        io.to(socket.id).emit('gdraft:yourPick', {
+          grupo,
+          porPosicao:       cartasParaJogador(sala, jog),
+          picksTurno:       alvo,
+          picksFeitosTurno: feitosTurno,
+        });
+        return;
+      }
+
+      // Jogador fechou o turno.
+      sala.pickedThisTurn.push(userId);
       if (sala.pickedThisTurn.length >= uids.length) avancarGrupoDraft(io, sala);
     });
 
@@ -1788,6 +1840,14 @@ module.exports = {
     gerarOrdemSnake,
     picksDoTurno,
     iniciarTurno,
+    TURNOS_DRAFT,
+    PICKS_POR_RODADA,
+  },
+  _gdraft: {
+    picksDoTurnoGrupo,
+    iniciarTurnoGrupo,
+    avancarGrupoDraft,
+    configGrupos,
     TURNOS_DRAFT,
     PICKS_POR_RODADA,
   },

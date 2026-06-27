@@ -1244,6 +1244,14 @@
 }
 .gdraft-membro-status.ok         { color: var(--accent); }
 .gdraft-membro-status.escolhendo { color: #E7C77A; }
+.gdraft-membro-badge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.03rem 0.34rem;
+  font-size: 0.6rem; font-weight: 800;
+  color: #2a1a00; background: #D9B25A;
+  border-radius: 999px; white-space: nowrap;
+}
 
 
 /* ── Fase de grupos: 12 tabelas por grupo (Copa/Liberta online) ───────────── */
