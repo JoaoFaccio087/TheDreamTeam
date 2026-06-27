@@ -23,7 +23,7 @@ The Dream Team é um jogo de futebol de navegador. Você sorteia clubes lendári
 O jogo tem dois grandes modos:
 
 - **Um jogador (offline):** roda inteiramente no navegador, sem instalação e sem servidor — HTML, CSS e JavaScript puro, sem frameworks nem etapa de build.
-- **Online (multiplayer):** salas em tempo real onde vários jogadores fazem um **draft** disputado e jogam um campeonato juntos — **liga de pontos corridos** (Brasileirão) ou **grupos + mata-mata** (Copa do Mundo). Esse modo usa um backend leve (Node + Socket.IO + PostgreSQL).
+- **Online (multiplayer):** salas em tempo real onde vários jogadores fazem um **draft** disputado e jogam um campeonato juntos — **liga de pontos corridos** (Brasileirão), **grupos + mata-mata** (Libertadores e Copa do Mundo) ou a **fase de liga fiel** da Champions League. Esse modo usa um backend leve (Node + Socket.IO + PostgreSQL).
 
 A base de dados reúne elencos reais de cada temporada da Copa Libertadores (1960 a 2025), da UEFA Champions League (1956 a 2025), do Campeonato Brasileiro (1959 a 2025) e da Copa do Mundo (1930 a 2026). São **1.521 elencos** e mais de **23 mil jogadores**, com a força de cada atleta calibrada individualmente. Os elencos históricos mais antigos refletem o plantel registrado da época e podem ter menos de 16 nomes.
 
@@ -81,13 +81,15 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 - **Contas e convidados**: jogue com login (e-mail/senha) ou entre como **convidado**, sem cadastro.
 - **Salas em tempo real**: crie uma sala (recebe um código) ou entre em uma existente; o **host** comanda o início e o avanço das partidas.
-- **Dois formatos**, escolhidos pela competição da sala:
+- **Formatos**, escolhidos pela competição da sala:
   - **Brasileirão (liga)**: 20 times, pontos corridos, 38 rodadas, todos contra todos (ida e volta).
+  - **Libertadores (grupos + mata-mata)**: 32 participantes em 8 grupos de 4, fase de grupos e depois a chave eliminatória até a final.
   - **Copa do Mundo (grupos + mata-mata)**: 48 participantes em 12 grupos de 4, fase de grupos e depois a chave eliminatória até a final.
+  - **Champions League (fase de liga fiel 25/26)**: 36 participantes numa tabela única, 8 rodadas; top 8 às oitavas, 9º–24º ao playoff e 25º–36º eliminados.
 - **Vagas completadas por bots**: as que sobram são preenchidas por bots com nomes próprios (únicos na sala), que montam seus elencos sozinhos.
 - **Draft por posição**: na sua vez, você **clica numa posição aberta** do campo e vê os **melhores jogadores disponíveis** para ela (considerando **todas as posições** que cada atleta pode jogar — um ATA que também atua de MEI aparece para uma vaga de MEI), e então escolhe quem entra. Você também pode remanejar quem já colocou.
-  - No **Brasileirão**, o draft é **snake** (a ordem espelha a cada rodada) e ninguém pega o mesmo nome duas vezes. São **6 turnos** (2 picks por turno, 1 só no último = 11 jogadores).
-  - Na **Copa**, o draft acontece **por grupo, rodada a rodada** (todos os grupos escolhem em paralelo, com um ritmo cadenciado), também em **6 turnos de 2 picks** (1 de cada vez); jogadores podem repetir entre usuários diferentes, mas nunca para você mesmo.
+  - No **Brasileirão** e na **Champions**, o draft é **snake** (a ordem espelha a cada rodada) e ninguém pega o mesmo nome duas vezes. São **6 turnos** (2 picks por turno, 1 só no último = 11 jogadores).
+  - Na **Libertadores** e na **Copa**, o draft acontece **por grupo, rodada a rodada** (todos os grupos escolhem em paralelo, com um ritmo cadenciado), também em **6 turnos de 2 picks** (1 de cada vez); jogadores podem repetir entre usuários diferentes, mas nunca para você mesmo.
 - **Sorteio dos grupos** (Copa): uma animação distribui os 48 participantes nos grupos A–L, com **o seu grupo destacado em dourado**.
 - **Fase de grupos** (Copa): cada grupo joga turno único (3 rodadas); a aba **Grupos** mostra as **12 tabelas** simultâneas, com os 2 primeiros em verde e o seu time em dourado. Classificam-se os **2 primeiros de cada grupo + os 8 melhores terceiros** (por pontos, saldo e gols).
 - **Mata-mata** (Copa): a aba **Mata-a-Mata** desenha a chave inteira (16-avos → final), com placares, vencedores destacados, **pênaltis** nos empates e o **campeão** coroado ao fim. O host avança fase por fase.

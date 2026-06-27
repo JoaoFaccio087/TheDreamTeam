@@ -1,7 +1,7 @@
 // main.js — inicialização e event listeners (carregar por último).
 
-// Competição do multiplayer (definida ao escolher a pílula). Default: Brasileirão.
-window.__compOnline = window.__compOnline || 'Brasileirão';
+// Competição do multiplayer (definida ao escolher a pílula). Default: Libertadores (1º da lista).
+window.__compOnline = window.__compOnline || 'Libertadores';
 
 // EVENTOS
 
@@ -20,6 +20,7 @@ pilulasModo.forEach(function (pilula) {
 var btnModoOnline     = document.getElementById('btn-modo-online');
 var btnModoOnlineCopa = document.getElementById('btn-modo-online-copa');
 var btnModoOnlineChampions = document.getElementById('btn-modo-online-champions');
+var btnModoOnlineLibertadores = document.getElementById('btn-modo-online-libertadores');
 
 // Define a competição do online e destaca a pílula escolhida.
 function escolherOnline(comp, pilula) {
@@ -29,11 +30,15 @@ function escolherOnline(comp, pilula) {
   if (btnModoOnline)     btnModoOnline.classList.remove('pilula-ativa');
   if (btnModoOnlineCopa) btnModoOnlineCopa.classList.remove('pilula-ativa');
   if (btnModoOnlineChampions) btnModoOnlineChampions.classList.remove('pilula-ativa');
+  if (btnModoOnlineLibertadores) btnModoOnlineLibertadores.classList.remove('pilula-ativa');
   if (pilula) pilula.classList.add('pilula-ativa');
 }
 
 if (btnModoOnline) {
   btnModoOnline.addEventListener('click', function () { escolherOnline('Brasileirão', btnModoOnline); });
+}
+if (btnModoOnlineLibertadores) {
+  btnModoOnlineLibertadores.addEventListener('click', function () { escolherOnline('Libertadores', btnModoOnlineLibertadores); });
 }
 if (btnModoOnlineChampions) {
   btnModoOnlineChampions.addEventListener('click', function () { escolherOnline('Champions', btnModoOnlineChampions); });
@@ -58,13 +63,15 @@ if (btnModoOnlineCopa) {
     });
 
     if (multi) {
-      // Multijogador: por padrão, seleciona o Brasileirão online.
-      escolherOnline('Brasileirão', btnModoOnline);
+      // Multijogador: por padrão, seleciona a Libertadores online (1º da lista).
+      escolherOnline('Libertadores', btnModoOnlineLibertadores);
     } else {
       // Um Jogador: volta a valer a competição já selecionada.
       modoOnlineSelecionado = false;
       if (btnModoOnline)     btnModoOnline.classList.remove('pilula-ativa');
       if (btnModoOnlineCopa) btnModoOnlineCopa.classList.remove('pilula-ativa');
+      if (btnModoOnlineChampions) btnModoOnlineChampions.classList.remove('pilula-ativa');
+      if (btnModoOnlineLibertadores) btnModoOnlineLibertadores.classList.remove('pilula-ativa');
       selecionarModo(modoSelecionado);
     }
   }

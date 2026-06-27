@@ -332,3 +332,22 @@ PENDENTE:
 - ⚠️ DEPLOY: servidor + cliente JUNTOS (a mudança do turno é casada; subir só um trava o draft).
   Arquivos desta tarefa: `api/socket/index.js`, `api/socket/gdraft.test.js`,
   `js/online.js`, `css/online.css` (+ docs `CONTRATOS.md`/`ESTADO.md`).
+
+## Libertadores Online + padronização dos modos (FEITO)
+Dois ajustes de frontend (o backend já suportava tudo):
+- **Libertadores Online** — só faltava o botão. O servidor já mapeia `'Libertadores'→'mata'`
+  (`salaState.FORMATO_POR_COMP`), o enum do Zod em `api/routes/rooms.js` já aceita, o loader
+  já carrega `libertadores.js` (pool 4678 ≫ 352 necessários p/ 32×11) e o cliente já trata
+  grupos+mata genericamente (sorteio/rótulo/nº de grupos vêm do servidor). Reaproveita 100%
+  o caminho da Copa (sorteio → gdraft → grupos → chave), com 8 grupos de 4 em vez de 12.
+  Adicionado: botão `#btn-modo-online-libertadores` no `index.html` + ref/listener no
+  `main.js` (`escolherOnline('Libertadores', …)`). Validado: `criarSala('Libertadores')` →
+  formato `mata`. **Sem mudança de servidor.**
+- **Ordem canônica dos modos** (igual nas duas abas, decidida com o João):
+  **Libertadores · Champions · Brasileirão · Copa**, com o **1º da lista pré-selecionado**.
+  - Solo (`#modo-aba-solo`) já estava nessa ordem e abre com Libertadores (`modoSelecionado`
+    default já era `'libertadores'`). Sem mudança.
+  - Multi (`#modo-aba-multi`) reordenado para a mesma sequência; a aba agora abre com
+    `escolherOnline('Libertadores', …)` (era Brasileirão); `__compOnline` default → 'Libertadores'.
+  - Arquivos: `index.html` (HTML das pílulas) e `js/main.js` (refs, listeners, reset e default).
+    Sem deploy de servidor — só GitHub Pages.
