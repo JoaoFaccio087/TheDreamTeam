@@ -277,3 +277,15 @@ Fogem da lógica atual e pedem motor próprio (regras, simulação e UI específ
 
 > Nota: por ordem de esforço, o caminho natural é fazer primeiro os **3 de futebol**
 > (8.1, baratos, reusam o Brasileirão) e só depois encarar os de esporte/formato novo.
+
+## Bug do teste ao vivo — criar sala Champions online (RESOLVIDO)
+Sintoma: "Invalid enum value. Expected … received 'Champions'" ao criar sala.
+Duas causas, ambas corrigidas:
+1. `api/routes/rooms.js` — o enum do Zod tinha `'champions'`/`'libertadores'` minúsculos;
+   o cliente e o `salaState` usam as chaves capitalizadas. Corrigido para
+   `['Brasileirão','Copa do Mundo','Libertadores','Champions']`.
+2. `api/dados/` só tinha `copa.js`. O loader também precisa de `champions.js`,
+   `brasileirao.js` e `libertadores.js` (cópias idênticas às de `js/dados/`), senão o
+   pool vem vazio e a sala é recusada. Copiados os três. Provado: loader resolve as 4
+   competições (Brasileirão 5820, Copa 8590, Libertadores 4678, Champions 4073 jogadores).
+ATENÇÃO: o Brasileirão online tinha o mesmo problema 2 (pool vazio) — agora resolvido.
