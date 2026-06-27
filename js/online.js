@@ -33,6 +33,8 @@
   var ordemDraftIds    = [];   // ordem dos userId no draft
   var picksSnapshot    = {};   // { userId: nº de picks } autoritativo do servidor (mesma lista p/ todos)
   var indiceTurnoAtual = 0;    // índice na ordemDraft
+  var draftPicksTurno  = 1;    // picks que o turno atual concede (2, ou 1 no último)
+  var draftPicksFeitos = 0;    // picks já feitos neste turno (para o status 1/2)
   var draftTurnoUid    = null; // userId de quem está escolhendo agora (destaque)
 
   // ── Referências DOM ───────────────────────────────────────────────────────
@@ -696,12 +698,16 @@
     draftTurnoUid    = dados.userId;
     poolLocal        = dados.pool || [];
     indiceTurnoAtual = dados.turnoNum ? dados.turnoNum - 1 : indiceTurnoAtual;
+    draftPicksTurno  = dados.picksTurno || 1;
+    draftPicksFeitos = dados.picksFeitosTurno || 0;
     if (dados.picks) picksSnapshot = dados.picks;   // contagem autoritativa p/ a lista de ordem
     if (dados.ordemBase && dados.ordemBase.length) ordemDraftIds = dados.ordemBase;  // ordem idêntica p/ todos
 
-    draftSubtituloEl.textContent = 'Pick ' + (dados.turnoNum || '?') + ' / ' + (dados.totalTurnos || '?');
+    draftSubtituloEl.textContent = 'Turno ' + (dados.turnoNum || '?') + ' / ' + (dados.totalTurnos || '?')
+      + (draftPicksTurno > 1 ? ' \u00b7 pick ' + (draftPicksFeitos + 1) + '/' + draftPicksTurno : '');
 
-    if (minhaVez) tocarAvisoVez();
+    // Som só no INÍCIO do turno — não repete no 2º pick (re-emit da mesma vez).
+    if (minhaVez && draftPicksFeitos === 0) tocarAvisoVez();
 
     renderOrdemLista();
     mostrarCampoDaVez(dados.userId);   // o campo segue o time do jogador da vez
@@ -2295,9 +2301,13 @@
       var nomeTime = jog ? nomeUsuario(jog) : String(uid);
       var tagBot   = (jog && jog.ehBot) ? ' <span class="draft-bot-tag">BOT</span>' : '';
       var tagEu    = sou ? ' <span class="draft-eu-tag">VOCÊ</span>' : '';
+      var badge12  = (ativo && draftPicksTurno > 1)
+        ? '<span class="draft-ordem-turno">' + draftPicksFeitos + '/' + draftPicksTurno + '</span>'
+        : '';
       row.innerHTML =
         '<span class="draft-ordem-num">' + (i + 1) + '</span>' +
         '<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + htmlEsc(nomeTime) + tagEu + tagBot + '</span>' +
+        badge12 +
         '<span class="draft-ordem-picks">' + picks + ' picks</span>';
       draftOrdemLista.appendChild(row);
     });

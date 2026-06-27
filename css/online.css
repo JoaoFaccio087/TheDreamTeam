@@ -482,6 +482,17 @@
   white-space: nowrap;
 }
 
+.draft-ordem-turno {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #2a1a00;
+  background: #D9B25A;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
 .draft-timer-box {
   display: flex;
   align-items: center;

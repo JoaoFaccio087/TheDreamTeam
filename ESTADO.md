@@ -305,7 +305,10 @@ SERVIDOR (snake — Brasileirão + Champions) — FEITO e testado:
 - Teste: `api/socket/draft.test.js` (dirige draft de bots; 11 picks/usuário p/ N=4,20,36).
 
 PENDENTE:
-- CLIENTE: após o 1º pick, reabrir o carousel na mesma vez; mostrar "1/2" no cabeçalho e
-  na lista de ordem; ajustar a lista de ordem para 6 turnos (era 11).
-- DRAFT DE GRUPOS (Copa/Liberta online): aplicar o mesmo "2 por rodada".
+- CLIENTE (snake) — FEITO: o re-emit do servidor mantém a vez ativa; o som de "sua vez"
+  toca só no início do turno; a lista de ordem mostra o badge "1/2" no usuário ativo
+  (`draft-ordem-turno`); o cabeçalho mostra "Turno X / 6 · pick Y/2". Fluxo: clica vaga →
+  escolhe carta → vaga preenche, vez continua → clica outra vaga → escolhe → passa a vez.
+  (Pode reposicionar jogadores entre os picks via draft:move, como antes.)
+- DRAFT DE GRUPOS (Copa/Liberta online): aplicar o mesmo "2 por rodada". ← PRÓXIMO
 - ⚠️ DEPLOY: servidor + cliente JUNTOS (a mudança do turno é casada; subir só um trava o draft).
