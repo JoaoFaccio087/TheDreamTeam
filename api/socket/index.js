@@ -28,6 +28,16 @@ function gerarOrdemSnake(ids, rounds) {
   return ordem;
 }
 
+// Draft em turnos: 5 turnos de 2 picks + 1 turno final de 1 pick = 11 jogadores.
+// A vez só passa quando o usuário completa os picks do turno.
+const PICKS_POR_RODADA = [2, 2, 2, 2, 2, 1];
+const TURNOS_DRAFT     = PICKS_POR_RODADA.length;   // 6
+
+function picksDoTurno(sala, indiceTurno) {
+  const n = sala.jogadores.length || 1;
+  return PICKS_POR_RODADA[Math.floor(indiceTurno / n)] || 1;
+}
+
 // ── Bots (times da máquina que completam a liga até 20) ────────────────────────
 
 const TOTAL_TIMES    = 20;
@@ -804,16 +814,20 @@ function codigosAceitosServidor(codigo) {
 // ── Turno de Draft ─────────────────────────────────────────────────────────────
 
 function iniciarTurno(io, sala) {
+  if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
   if (sala.indiceTurno >= sala.ordemDraft.length) return;
   const userId  = sala.ordemDraft[sala.indiceTurno];
   const jogador = sala.jogadores.find(j => j.userId === userId);
+  const picksTurno = picksDoTurno(sala, sala.indiceTurno);   // 2 (ou 1 no último)
 
   // Snapshot autoritativo do nº de picks de CADA jogador — vai junto do turno para
   // que a lista de ordem fique idêntica em todos os clientes (sem drift por evento perdido).
   const picksSnapshot = {};
   sala.jogadores.forEach(j => { picksSnapshot[j.userId] = (j.picks || []).filter(Boolean).length; });
 
-  // Vez de um BOT: anuncia a vez (para o marcador andar 1 a 1) e escolhe após um instante.
+  const turnoNum = Math.floor(sala.indiceTurno / sala.jogadores.length) + 1;
+
+  // Vez de um BOT: anuncia a vez e completa os picks do turno após um instante.
   if (jogador && jogador.ehBot) {
     io.to(sala.codigo).emit('draft:turno', {
       userId:      jogador.userId,
@@ -822,14 +836,18 @@ function iniciarTurno(io, sala) {
       ehBot:       true,
       segundos:    0,
       pool:        [],
-      turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
-      totalTurnos: sala.totalPicksNecessarios,
+      turnoNum,
+      totalTurnos: TURNOS_DRAFT,
+      picksTurno,
+      picksFeitosTurno: sala.picksNoTurno,
       numPicks:    (jogador.picks || []).filter(Boolean).length,
       picks:       picksSnapshot,
       ordemBase:   sala.ordemBase,
     });
     sala.timerDraft = setTimeout(() => {
-      botEscolhe(io, sala, jogador);
+      const faltam = picksTurno - sala.picksNoTurno;
+      for (let p = 0; p < faltam; p++) botEscolhe(io, sala, jogador);
+      sala.picksNoTurno = 0;
       avancarTurno(io, sala);
     }, BOT_PICK_DELAY);
     return;
@@ -859,25 +877,30 @@ function iniciarTurno(io, sala) {
     segundos:    30,
     pool:        cards,    // candidatos elegíveis (melhores por posição aberta)
     cards,
-    turnoNum:    Math.floor(sala.indiceTurno / sala.jogadores.length) + 1,
-    totalTurnos: sala.totalPicksNecessarios,
+    turnoNum,
+    totalTurnos: TURNOS_DRAFT,
+    picksTurno,
+    picksFeitosTurno: sala.picksNoTurno,
     numPicks:    (jogador?.picks || []).filter(Boolean).length,
     picks:       picksSnapshot,
     ordemBase:   sala.ordemBase,
   });
 
   if (jogador?.socketId) {
-    io.to(jogador.socketId).emit('draft:yourTurn', { pool: cards });
+    io.to(jogador.socketId).emit('draft:yourTurn', { pool: cards, picksTurno, picksFeitosTurno: sala.picksNoTurno });
   }
 
   sala.timerDraft = setTimeout(() => {
-    if (jogador) colocarEmVagaAberta(io, sala, jogador, false);  // auto-aloca em vaga válida
+    const faltam = picksTurno - sala.picksNoTurno;
+    for (let p = 0; p < faltam && jogador; p++) colocarEmVagaAberta(io, sala, jogador, false);
+    sala.picksNoTurno = 0;
     avancarTurno(io, sala);
   }, 30_000);
 }
 
 function avancarTurno(io, sala) {
   if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+  sala.picksNoTurno = 0;
   sala.indiceTurno++;
 
   const total  = sala.totalPicksNecessarios || 11;
@@ -1323,14 +1346,15 @@ function setupSocket(server, frontendUrl) {
       const baseOrder      = shuffle(sala.jogadores.map(j => j.userId));
       sala.ordemBase       = baseOrder;
       sala.poolDisponivel  = pool;
-      sala.ordemDraft      = gerarOrdemSnake(baseOrder, sala.totalPicksNecessarios);
+      sala.ordemDraft      = gerarOrdemSnake(baseOrder, TURNOS_DRAFT);
       sala.indiceTurno     = 0;
+      sala.picksNoTurno    = 0;
       sala.status          = 'draft';
 
       io.to(code).emit('room:playerOrder', {
         ordem:       baseOrder,
         nomes:       baseOrder.map(id => sala.jogadores.find(j => j.userId === id)?.username),
-        totalTurnos: sala.totalPicksNecessarios,
+        totalTurnos: TURNOS_DRAFT,
       });
       iniciarTurno(io, sala);
       } catch (err) {
@@ -1420,7 +1444,9 @@ function setupSocket(server, frontendUrl) {
 
       const [picked] = sala.poolDisponivel.splice(idx, 1);
       jog.picks[slot] = picked;
+      sala.picksNoTurno = (sala.picksNoTurno || 0) + 1;
 
+      const picksTurno = picksDoTurno(sala, sala.indiceTurno);
       io.to(code).emit('draft:pick', {
         userId,
         username:   jog.username,
@@ -1428,9 +1454,19 @@ function setupSocket(server, frontendUrl) {
         jogador:    picked,
         slotIndex:  slot,
         numPicks:   jog.picks.filter(Boolean).length,
+        picksTurno,
+        picksFeitosTurno: sala.picksNoTurno,
         timeout:    false,
       });
-      avancarTurno(io, sala);
+
+      // Turno incompleto e ainda há vaga? Reabre a vez para o próximo pick (status 1/2).
+      const aindaTemVaga = jog.picks.filter(Boolean).length < (sala.totalPicksNecessarios || 11);
+      if (sala.picksNoTurno < picksTurno && aindaTemVaga) {
+        iniciarTurno(io, sala);
+      } else {
+        sala.picksNoTurno = 0;
+        avancarTurno(io, sala);
+      }
     });
 
     // ── draft:move — reposiciona/troca um jogador já escalado (durante a vez) ──
@@ -1747,5 +1783,12 @@ module.exports = {
     resolverConfrontoDuasMaos,
     simularPlayoffChampions,
     montarChaveChampions,
+  },
+  _draft: {
+    gerarOrdemSnake,
+    picksDoTurno,
+    iniciarTurno,
+    TURNOS_DRAFT,
+    PICKS_POR_RODADA,
   },
 };

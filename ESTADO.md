@@ -289,3 +289,23 @@ Duas causas, ambas corrigidas:
    pool vem vazio e a sala é recusada. Copiados os três. Provado: loader resolve as 4
    competições (Brasileirão 5820, Copa 8590, Libertadores 4678, Champions 4073 jogadores).
 ATENÇÃO: o Brasileirão online tinha o mesmo problema 2 (pool vazio) — agora resolvido.
+
+## Draft online — 2 picks por turno (EM ANDAMENTO)
+Objetivo: dar dinamismo ao online — cada usuário escolhe 2 jogadores por turno (5 turnos
+de 2 + 1 turno final de 1 = 11), em vez de 1 por turno. Status "1/2" no usuário ativo.
+Single-player NÃO muda (não tem turnos; já é livre).
+
+SERVIDOR (snake — Brasileirão + Champions) — FEITO e testado:
+- `PICKS_POR_RODADA=[2,2,2,2,2,1]`, `TURNOS_DRAFT=6`, `picksDoTurno(sala,indice)`.
+- `ordemDraft = gerarOrdemSnake(base, 6)`; `sala.picksNoTurno` conta picks no turno.
+- `iniciarTurno`: manda `picksTurno`/`picksFeitosTurno`; bot completa os picks do turno;
+  timeout preenche o que falta. `avancarTurno` zera `picksNoTurno`.
+- Pick do humano: conta no turno; se incompleto → reabre a vez (status 1/2); senão avança.
+- Eventos draft:turno / draft:pick / draft:yourTurn ganharam `picksTurno` e `picksFeitosTurno`.
+- Teste: `api/socket/draft.test.js` (dirige draft de bots; 11 picks/usuário p/ N=4,20,36).
+
+PENDENTE:
+- CLIENTE: após o 1º pick, reabrir o carousel na mesma vez; mostrar "1/2" no cabeçalho e
+  na lista de ordem; ajustar a lista de ordem para 6 turnos (era 11).
+- DRAFT DE GRUPOS (Copa/Liberta online): aplicar o mesmo "2 por rodada".
+- ⚠️ DEPLOY: servidor + cliente JUNTOS (a mudança do turno é casada; subir só um trava o draft).
