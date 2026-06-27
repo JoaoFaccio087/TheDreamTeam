@@ -7,6 +7,13 @@
   padding: 0;
 }
 
+/* Escala tipográfica global: raiz em 112.5% = 18px (padrão 16px). Como ~95% dos
+   tamanhos do projeto usam rem, isto aumenta toda a tipografia em +12% de uma vez,
+   mantendo as proporções entre títulos, textos e números. Para reverter, volte a 100%. */
+html {
+  font-size: 112.5%;
+}
+
 /* Variáveis de tema. :root é o padrão; o JS adiciona a classe tema-* ao <body> e os
    blocos abaixo sobrescrevem só o necessário (tudo que usa var(--*) muda junto). */
 :root {
