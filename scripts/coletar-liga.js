@@ -114,12 +114,15 @@ async function main() {
 }
 
 // Coleta o elenco de um time (paginado), convertendo cada jogador.
+// O plano GRÁTIS da API-Football limita o parâmetro Page a no máximo 3 — então
+// lemos até 3 páginas por time (~60 jogadores, de sobra para os 23 melhores).
+const MAX_PAGINAS_FREE = 3;
 async function coletarElenco(teamId) {
   const jogadores = [];
   let page = 1, totalPages = 1;
   do {
     const data = await apiGet('/players', { team: teamId, season: SEASON, league: LIGA, page });
-    totalPages = data.paging?.total || 1;
+    totalPages = Math.min(data.paging?.total || 1, MAX_PAGINAS_FREE);
     for (const item of data.response || []) {
       const j = converterJogador(item);
       if (j) jogadores.push(j);
