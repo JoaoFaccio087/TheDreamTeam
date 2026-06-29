@@ -882,6 +882,23 @@
 
 /* Fim de jogo: botões de ação (abaixo das estatísticas) + modal de premiação */
 .fim-acoes { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.2rem; }
+
+/* Barra de fim FIXA — fora das abas, visível em qualquer aba ao terminar o campeonato. */
+.fim-acoes-fixo {
+  display: flex;
+  gap: 0.7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0.4rem 0 1rem;
+  padding: 0.9rem 1rem;
+  background: rgba(217,178,90,0.08);
+  border: 1px solid rgba(217,178,90,0.35);
+  border-radius: 8px;
+}
+.fim-acoes-fixo .fim-btn { width: auto; min-width: 220px; }
+@media (max-width: 640px) {
+  .fim-acoes-fixo .fim-btn { width: 100%; min-width: 0; }
+}
 .fim-btn {
   width: 100%; padding: 11px 14px; border-radius: 3px;
   background: transparent; color: var(--accent); border: 1px solid var(--accent);

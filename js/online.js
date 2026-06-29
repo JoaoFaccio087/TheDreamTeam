@@ -80,6 +80,7 @@
   // Fim
   var onlineRankingFinal;
   var btnVerResumo, btnVoltarInicio, fimAcoes, modalPremiacao, modalPremFechar;
+  var fimAcoesFixo;
   var meuRankingFinal = null, ultimaArtilharia = [], ultimaAssistencia = [], rankingFinalCache = [];
   var _campanhaOnlineSalva = false;
 
@@ -1129,15 +1130,28 @@
   // Ações da rodada — host avança; todos os humanos podem votar "pular tudo".
   function atualizarAcoesRodada() {
     btnRodadaProxima.classList.add('escondida');
+    delete btnRodadaProxima.dataset.acao;   // limpa ação especial (iniciar-mata) entre estados
     btnRodadaFim.classList.add('escondida');
     if (btnPularTudo) btnPularTudo.classList.add('escondida');
     if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
 
     // Última rodada → encerrar
     if (rodadaAtual >= totalRodadas) {
-      // Copa/Liberta: o fim dos grupos NÃO encerra o jogo — o mata-mata vem em seguida
-      // (transição pelo banner na aba Grupos). Não mostra "Ver Resultado Final".
-      if (formatoOnline === 'mata') return;
+      // Copa/Liberta: o fim dos grupos NÃO encerra o jogo — o mata-mata vem em
+      // seguida. Antes a transição só existia no banner da aba Grupos, prendendo
+      // quem estava na aba Partidas. Agora a própria aba Partidas oferece o avanço.
+      if (formatoOnline === 'mata') {
+        if (ehHost) {
+          btnRodadaProxima.disabled    = false;
+          btnRodadaProxima.textContent = 'Ir para o Mata-mata →';
+          btnRodadaProxima.dataset.acao = 'iniciar-mata';
+          btnRodadaProxima.classList.remove('escondida');
+        } else if (rodadaAguardandoHost) {
+          rodadaAguardandoHost.textContent = 'Fase de grupos encerrada! Aguardando o host…';
+          rodadaAguardandoHost.classList.remove('escondida');
+        }
+        return;
+      }
       // Champions: fim da fase de liga → host vai ao playoff (não há premiação aqui).
       if (formatoOnline === 'champions') {
         if (championsFimLiga && ehHost) {
@@ -1708,6 +1722,7 @@
 
     // Abre o modal automaticamente; os botões (coluna direita) só aparecem ao fechar.
     if (fimAcoes) fimAcoes.classList.add('escondida');
+    if (fimAcoesFixo) fimAcoesFixo.classList.add('escondida');
     if (modalPremiacao) modalPremiacao.classList.remove('escondida');
     }   // fim revelarFinal
 
@@ -2567,6 +2582,7 @@
     btnVerResumo    = document.getElementById('btn-ver-resumo');
     btnVoltarInicio = document.getElementById('btn-voltar-inicio');
     fimAcoes        = document.getElementById('fim-acoes');
+    fimAcoesFixo    = document.getElementById('fim-acoes-fixo');
     modalPremiacao  = document.getElementById('modal-premiacao');
     modalPremFechar = document.getElementById('modal-prem-fechar');
 
@@ -2733,6 +2749,13 @@
     // Rodada
     btnRodadaProxima.addEventListener('click', function () {
       if (simulandoRodada) return;
+      // Transição grupos → mata-mata (Copa/Liberta) disparada pela aba Partidas.
+      if (btnRodadaProxima.dataset.acao === 'iniciar-mata') {
+        btnRodadaProxima.disabled    = true;
+        btnRodadaProxima.textContent = 'Carregando mata-mata…';
+        if (socket && socket.connected) socket.emit('chave:advance');
+        return;
+      }
       // Champions: fim da fase de liga → host dispara o playoff (9–24, ida e volta).
       if (championsFimLiga) {
         btnRodadaProxima.disabled    = true;
@@ -2773,8 +2796,16 @@
     if (modalPremFechar) modalPremFechar.addEventListener('click', function () {
       if (modalPremiacao) modalPremiacao.classList.add('escondida');
       if (fimAcoes) fimAcoes.classList.remove('escondida');   // libera os botões ao fechar
+      if (fimAcoesFixo) fimAcoesFixo.classList.remove('escondida');
     });
     if (btnVerResumo) btnVerResumo.addEventListener('click', abrirResumoOnline);
+    var btnVerResumoFixo = document.getElementById('btn-ver-resumo-fixo');
+    if (btnVerResumoFixo) btnVerResumoFixo.addEventListener('click', abrirResumoOnline);
+    var btnVoltarInicioFixo = document.getElementById('btn-voltar-inicio-fixo');
+    if (btnVoltarInicioFixo) btnVoltarInicioFixo.addEventListener('click', function () {
+      desconectar();
+      mostrarTelaInicial();
+    });
     if (btnVoltarInicio) btnVoltarInicio.addEventListener('click', function () {
       desconectar();
       mostrarTelaInicial();
