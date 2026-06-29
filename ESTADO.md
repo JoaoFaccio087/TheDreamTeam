@@ -279,6 +279,17 @@ Fogem da lógica atual e pedem motor próprio (regras, simulação e UI específ
 > Nota: por ordem de esforço, o caminho natural é fazer primeiro os **3 de futebol**
 > (8.1, baratos, reusam o Brasileirão) e só depois encarar os de esporte/formato novo.
 
+> **Fontes de dados já mapeadas → ver `RECURSOS.md`.** Levantamento de jun/2026 das APIs
+> esportivas (grátis/limites/cobertura) para alimentar todos estes modos, mais ferramentas
+> de infra (Search Console, R2, Redis) e sites úteis. Resumo do que serve a cada item:
+> - **8.1 (Premier/Serie A/LaLiga):** elencos via **API-Football** (`/players`, free 100/dia)
+>   ou **BALLDONTLIE**; tabelas/scorers via **football-data.org**.
+> - **NBA / NFL / MLB / NHL / tênis / golfe / e-sports:** **BALLDONTLIE** (multi-esporte numa
+>   API só, free tier) — primeiro lugar a olhar para qualquer esporte novo.
+> - **F1:** **Jolpica-F1** (aberto, sem chave, histórico 1950–presente; sucessor do Ergast).
+> - **Imagens/escudos:** **TheSportsDB**. **Força** dos jogadores: proxy via valor de
+>   mercado (Transfermarkt). Coleta é script local → salvar em `js/dados/<x>.js`.
+
 ## Bug do teste ao vivo — criar sala Champions online (RESOLVIDO)
 Sintoma: "Invalid enum value. Expected … received 'Champions'" ao criar sala.
 Duas causas, ambas corrigidas:
