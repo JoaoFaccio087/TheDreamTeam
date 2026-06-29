@@ -72,11 +72,10 @@ uma **camada extra barata e valiosa**:
 Coletamos dados pessoais (e-mail, usuário, senha) → a LGPD se aplica. Não é um bicho de
 sete cabeças para um projeto deste tamanho. Pontos práticos:
 
-- [ ] **Política de Privacidade** simples e visível (link no rodapé / no cadastro):
-      o que coletamos (e-mail, usuário, nome do time), por quê (criar conta, salvar
-      progresso), por quanto tempo, e como pedir exclusão.
-- [ ] **Base legal:** consentimento no cadastro (um checkbox "li e aceito a Política de
-      Privacidade" já ajuda).
+- [x] **Política de Privacidade** ✅ FEITO — página `privacidade.html` (o que coletamos,
+      por quê, base legal, direitos, retenção, contato), linkada no cadastro e no rodapé.
+- [x] **Base legal:** ✅ consentimento no cadastro — checkbox "Li e aceito a Política de
+      Privacidade" (`#cad-aceite`); o cadastro é bloqueado sem o aceite.
 - [x] **Direito à exclusão:** ✅ FEITO — rota `DELETE /me` (exige senha, `bcrypt.compare`)
       + botão "Excluir minha conta" na zona de perigo do modal de editar perfil, com
       confirmação por senha. O `ON DELETE CASCADE` do schema remove matches e room_players;
@@ -141,6 +140,9 @@ Pacote da comunidade (817 skills de SOC corporativo) que avaliamos. Conclusões:
 
 1. ✅ `.gitignore` criado → conferir rastreio (§4) e commitar.
 2. ✅ Exclusão de conta (LGPD, §3) — FEITO: rota `DELETE /me` + botão com confirmação por senha.
-3. Política de Privacidade + aceite no cadastro (LGPD, §3) — próximo.
-4. Ativar RLS no Supabase (§2) — camada extra.
+3. ✅ Política de Privacidade + aceite no cadastro (LGPD, §3) — FEITO.
+4. Ativar RLS no Supabase (§2) — camada extra. ← PRÓXIMO
 5. Conferir env vars no Render e robustez do `JWT_SECRET` (§1).
+
+> Pendência do João: trocar o e-mail de contato placeholder em `privacidade.html`
+> (`thedreamteam.contato@gmail.com`) pelo e-mail real do projeto.

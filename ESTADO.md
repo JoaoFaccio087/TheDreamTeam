@@ -383,3 +383,34 @@ Revisão de segurança do backend (jun/2026), motivada por dúvidas do João (LG
 - **Próximos passos (ordem):** exclusão de conta + política de privacidade (LGPD) →
   ativar RLS → conferir env vars/robustez do JWT_SECRET no Render. Sem deploy desta tarefa
   (só documentação + `.gitignore`).
+
+## LGPD — exclusão de conta (FEITO)
+Primeiro item de LGPD implementado (direito à eliminação). Confirmação por **senha**.
+- **Backend** (`api/routes/users.js`): rota `DELETE /me` — valida `{senha}` com Zod (strict),
+  confere com `bcrypt.compare`, e `DELETE FROM users`. O schema já tinha as FKs certas:
+  `matches`/`room_players` com `ON DELETE CASCADE`, `rooms.host_user_id` com `ON DELETE SET NULL`
+  — então a cascata limpa tudo sozinha. ⚠️ deploy no Render.
+- **Frontend**: `api.js` ganhou `excluirConta(senha)` (DELETE /me); `index.html` ganhou a
+  "zona de perigo" no modal de editar perfil + um modal de confirmação `#modal-excluir-conta`
+  (pede a senha); `perfil.js` abre/confirma e, ao sucesso, encerra a sessão via
+  `limparSessao()` + `atualizarDropdown(null)`; `css/perfil.css` ganhou o estilo da zona de
+  perigo (botão vermelho). Deploy: GitHub Pages.
+- Testado: validação rejeita body vazio/campo extra; bcrypt aceita só a senha certa (4/4).
+- **Próximo LGPD:** Política de Privacidade + aceite no cadastro; depois RLS.
+- Arquivos: `api/routes/users.js`, `js/api.js`, `js/perfil.js`, `index.html`, `css/perfil.css`
+  (+ `SEGURANCA.md`/`ESTADO.md`).
+
+## LGPD — Política de Privacidade + consentimento (FEITO)
+Segundo item de LGPD. Transparência + base legal (consentimento).
+- **`privacidade.html`** (novo): página estática estilizada como o jogo (tema escuro,
+  fontes Archivo), com o que coletamos, finalidade/base legal, segurança (bcrypt/HTTPS),
+  não-compartilhamento, direitos do titular (inclui a exclusão de conta já implementada),
+  retenção, menores, contato. ⚠️ e-mail de contato é placeholder — João troca pelo real.
+- **Aceite no cadastro**: checkbox `#cad-aceite` ("Li e aceito a Política…") no
+  `index.html`; `auth.js` bloqueia o cadastro sem o aceite e desmarca ao fechar o modal.
+  CSS em `css/auth.css` (`.auth-aceite`).
+- **Link no rodapé** da home (`.footer-link`, `css/home.css`) p/ quem quiser ler sem cadastrar.
+- Sem mudança de backend — tudo frontend. Deploy: GitHub Pages.
+- Arquivos: `privacidade.html` (novo), `index.html`, `js/auth.js`, `css/auth.css`,
+  `css/home.css` (+ `SEGURANCA.md`/`ESTADO.md`/`README.md`).
+- **Próximo LGPD/segurança:** ativar RLS no Supabase.

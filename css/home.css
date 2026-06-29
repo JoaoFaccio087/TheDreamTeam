@@ -400,6 +400,17 @@
   color: rgba(255, 255, 255, 0.25);
 }
 
+/* Link da Política de Privacidade no rodapé */
+.footer-link {
+  color: var(--txt-soft);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.footer-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 
 /* ============================================================
    Modo online (MAQUETE): botão "Brasileirão - Online" + modal de sala

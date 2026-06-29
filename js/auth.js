@@ -116,6 +116,8 @@ function fecharModal() {
   modalAuth.classList.add('escondida');
   document.body.style.overflow = '';
   limparErro();
+  var aceite = document.getElementById('cad-aceite');
+  if (aceite) aceite.checked = false;
 }
 
 if (modalFechar)   modalFechar.addEventListener('click', fecharModal);
@@ -223,6 +225,9 @@ formCadastro.addEventListener('submit', function (ev) {
   var nomeTime = document.getElementById('cad-nome-time').value.trim();
 
   if (!username || !senha || !email) { mostrarErro('Preencha todos os campos'); return; }
+
+  var aceite = document.getElementById('cad-aceite');
+  if (aceite && !aceite.checked) { mostrarErro('É preciso aceitar a Política de Privacidade para se cadastrar.'); return; }
 
   var btn = formCadastro.querySelector('button[type=submit]');
 

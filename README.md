@@ -156,7 +156,7 @@ TheDreamTeam/
 ├── index.html
 ├── CNAME
 ├── README.md   CONTRATOS.md   ESTADO.md   RECURSOS.md   SEGURANCA.md   LICENSE
-├── .gitignore
+├── .gitignore   privacidade.html
 ├── docker-compose.yml   .env.example   .dockerignore
 ├── assets/imagens/
 ├── css/
