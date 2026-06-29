@@ -414,3 +414,16 @@ Segundo item de LGPD. Transparência + base legal (consentimento).
 - Arquivos: `privacidade.html` (novo), `index.html`, `js/auth.js`, `css/auth.css`,
   `css/home.css` (+ `SEGURANCA.md`/`ESTADO.md`/`README.md`).
 - **Próximo LGPD/segurança:** ativar RLS no Supabase.
+
+## Bug — nomes longos cortados nos cards de draft no celular (CORRIGIDO)
+Nomes longos (até 29 chars, ex. "Juan de Dios Ramírez Perales"; maior palavra única 18,
+"Milinković-Savić") eram cortados nos cards de draft no mobile (card de só 104px de largura).
+Causa: `.carta-nome` (`css/draft.css`) tinha `overflow:hidden` + `min-height` fixo, sem
+quebra de palavra nem reticências → cortava no meio da letra.
+- Correção em `.carta-nome`: `overflow-wrap:anywhere` + `word-break:break-word` + `hyphens:auto`
+  e `display:-webkit-box` com `-webkit-line-clamp:3` (centralizado via `-webkit-box-pack`).
+  Nome agora usa até 3 linhas e só recorre a reticências em casos extremos. (Trocou o
+  `display:flex` pelo `-webkit-box`, necessário para o line-clamp.)
+- Mobile (`@media`): fonte do nome 0.78rem→0.72rem, `min-height` 2.4em, line-height 1.1.
+- Vale para os DOIS lugares: draft solo e modal de escolha online (`#modal-draft-pick`
+  herda `.carta-nome`, sem override). Chaves de `draft.css` OK (81/81). Deploy: GitHub Pages.

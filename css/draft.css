@@ -239,10 +239,18 @@
   line-height: 1.12;
   margin-bottom: 10px;
   min-height: 2.3em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  /* Nomes longos: quebram a palavra e usam até 3 linhas com reticências,
+     em vez de serem cortados no meio de uma letra. line-clamp exige
+     display:-webkit-box (não pode coexistir com flex). */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-line-clamp: 3;
 }
 
 .carta-time {
@@ -379,8 +387,10 @@
   }
 
   .carta-nome {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
+    line-height: 1.1;
     margin-bottom: 8px;
+    min-height: 2.4em;
   }
 
   .carta-forca {
