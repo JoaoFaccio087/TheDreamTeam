@@ -57,3 +57,17 @@ desktop.ini
 tmp/
 temp/
 *.tmp
+
+# ── Documentos internos / notas de trabalho (NÃO publicar em repo público) ──
+# O jogo NÃO precisa deles para rodar; são só nossas anotações.
+# SEGURANCA.md é o mais sensível (descreve proteções e fragilidades).
+ESTADO.md
+RECURSOS.md
+SEGURANCA.md
+CONTRATOS.md
+
+# ── Scripts de manutenção (rodados localmente, fora do jogo) ────
+scripts/
+
+# ── Testes (úteis no dev, irrelevantes para o público) ──────────
+*.test.js

@@ -447,3 +447,32 @@ Para destravar os modos novos (8.1: Premier/Serie A/LaLiga). Decidido: fonte = *
   força é **estimada** do rating médio (ratingParaForca, calibrável). Detalhes no RECURSOS.md §6.
 - Próximo: João roda p/ a Premier (liga 39), revisamos a amostra juntos, calibramos força e
   refinamos posições; depois replica p/ Serie A/LaLiga.
+
+## Re-calibração da força (FEITO)
+O João achava os times/jogadores fracos demais (teto 97, nenhum 99, escala espremida).
+Decidido: **curva C** (craques→99, média sobe) + **ajuste casado da engine** p/ não virar goleada.
+- **Dados** (`scripts/recalibrar-forca.js`): aplicou `nova = round(62 + t^0.78*(99-62))`,
+  `t=(f-65)/(97-65)`, aos 23.161 jogadores dos 4 arquivos (preserva os 2 formatos
+  `forca:NN` e `"forca":NN`). Resultado real: min 65→62, max 97→**99** (Pelé/CR7 99),
+  média 79,1→**81,3**, mediana 80→81; craques 90+ de 459→1830. Contagem por arquivo
+  conferida vs backup (nada perdido). Backup em /home/claude/backup_dados (fora do repo).
+- **Engine** (`js/simulacao.js` E `api/socket/simulacao.js` — backend tem cópia própria):
+  âncora `forca/80`→`/81`; `POR_PONTO 0.05`→**0.0447** (compensa o esticamento do
+  desvio-padrão 5.32→5.95, fator 1.118); fallbacks de time 70→81, de jogador 72→73 / 75→77.
+  Teste de equilíbrio: **2.85 gols/jogo antes e depois** (mantido). Regressão Champions OK.
+- ⚠️ DEPLOY: `api/socket/simulacao.js` no Render; dados + `js/simulacao.js` no GitHub Pages.
+  (Idealmente juntos, p/ solo e online ficarem com o mesmo equilíbrio.)
+- Arquivos: `js/dados/{libertadores,champions,brasileirao,copa}.js`, `js/simulacao.js`,
+  `api/socket/simulacao.js`, `scripts/recalibrar-forca.js` (novo).
+
+## Privacidade do repositório público (FEITO — ação pendente do João)
+O repo é PÚBLICO. Decidido tirar os docs internos da visibilidade.
+- `.gitignore` atualizado: ignora ESTADO/RECURSOS/SEGURANCA/CONTRATOS .md, pasta scripts/,
+  e *.test.js. (README.md fica — é a cara do repo.)
+- ⚠️ `.gitignore` só afeta arquivos NOVOS. Os já commitados precisam de `git rm --cached`
+  — passo a passo em REMOVER-DO-GITHUB.md.
+- ⚠️ SEGURANCA.md era o mais sensível (mapa de proteções/fragilidades) — sai do público.
+- ⚠️ API key (api-football) apareceu em prints do João → ele vai RESETAR no site.
+- Alternativa sugerida: tornar o repo PRIVADO (Pages funciona igual no grátis).
+- Lembrete dos 2 simulacao.js: `js/simulacao.js` (frontend, 552 linhas, com DOM/pênaltis)
+  vs `api/socket/simulacao.js` (backend, 98 linhas, server-side). Caminhos diferentes.
