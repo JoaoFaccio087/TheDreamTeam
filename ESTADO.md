@@ -427,3 +427,23 @@ quebra de palavra nem reticências → cortava no meio da letra.
 - Mobile (`@media`): fonte do nome 0.78rem→0.72rem, `min-height` 2.4em, line-height 1.1.
 - Vale para os DOIS lugares: draft solo e modal de escolha online (`#modal-draft-pick`
   herda `.carta-nome`, sem override). Chaves de `draft.css` OK (81/81). Deploy: GitHub Pages.
+
+## Política — remoção do e-mail de contato (FEITO)
+A pedido do João (não havia e-mail real), a seção "9. Contato" da `privacidade.html` foi
+removida. Para a política não ficar incompleta perante a LGPD, ela virou "9. Como exercer
+seus direitos" — aponta para o autoatendimento que já existe no jogo (acesso/correção no
+Perfil; exclusão de conta em "Alterar Informações"). Sem e-mail por ora. `SEGURANCA.md`
+atualizado. Deploy: GitHub Pages.
+
+## Coleta de dados — pipeline pronto (script entregue)
+Para destravar os modos novos (8.1: Premier/Serie A/LaLiga). Decidido: fonte = **API real**
+(API-Football), **posições traduzidas p/ PT**.
+- Descoberta: o ambiente do Claude **não acessa APIs de futebol** (`host_not_allowed`; só
+  GitHub/npm/PyPI). Logo, a coleta **roda na máquina do João** com a chave dele.
+- Entregue `scripts/coletar-liga.js`: classificação → elencos paginados → converte p/
+  `{nome, posicoes, forca}` → gera `js/dados/<liga>.js` no padrão atual. Testado com dados
+  simulados (Haaland 7.8→86 ATA; fallback sem rating→74). Respeita rate limit (~9/min).
+- Limitações (revisar à mão): API só dá 4 grupos de posição (sem lados/funções finas);
+  força é **estimada** do rating médio (ratingParaForca, calibrável). Detalhes no RECURSOS.md §6.
+- Próximo: João roda p/ a Premier (liga 39), revisamos a amostra juntos, calibramos força e
+  refinamos posições; depois replica p/ Serie A/LaLiga.

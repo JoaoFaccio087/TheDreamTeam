@@ -154,3 +154,37 @@ respeitando o limite diário, e salvar em `js/dados/<liga>.js` no nosso formato
 - publicapis.dev · devdocs.io · quickref.me · stackshare.io
 - football-data.org · api-football.com · balldontlie.io · thesportsdb.com/free_sports_api
 - Jolpica-F1: https://github.com/jolpica/jolpica-f1 · OpenF1: https://openf1.org
+
+---
+
+## 6. Coletor de elencos (scripts/coletar-liga.js)
+
+Pipeline pronto para puxar elencos de uma liga via **API-Football** e gerar um arquivo
+no formato do jogo (`js/dados/<liga>.js`). **Roda na máquina do João** — o ambiente do
+Claude não tem acesso de rede às APIs (`host_not_allowed`); só GitHub/npm/PyPI.
+
+**Uso:**
+```
+export API_FOOTBALL_KEY="sua_chave"      # conta grátis em api-football.com (100 req/dia)
+node scripts/coletar-liga.js --liga 39 --season 2023 --saida premierleague
+```
+IDs úteis: 39 Premier · 135 Serie A · 140 LaLiga · 78 Bundesliga · 61 Ligue 1 · 71 Brasileirão.
+
+**O que o script faz:** pega a classificação (ordem dos times) → para cada time, baixa o
+elenco paginado → converte cada jogador para `{ nome, posicoes, forca }` → escreve o `.js`
+com `const DADOS_<SAIDA>` no mesmo padrão dos arquivos atuais. Respeita o rate limit
+(~9 req/min) com esperas.
+
+**Limitações conhecidas (REVISAR à mão depois):**
+- **Posições**: a API classifica só em 4 grupos amplos (GK/DEF/MID/ATT). O script traduz
+  para PT genérico (GOL/ZAG/MC/ATA) — **lados (LD/LE/PD/PE) e funções (VOL/MEI/MD/ME) não
+  vêm da API** e precisam de refino manual onde importar.
+- **Força**: a API **não dá overall pronto**. O script estima a partir do `rating` médio da
+  temporada (~6.0–8.0) mapeado p/ a faixa do jogo (~70–88), via `ratingParaForca()` — é um
+  PONTO DE CALIBRAÇÃO ajustável. Jogador sem rating cai numa força-base por posição.
+- **Cota**: 100 req/dia no free tier. Uma liga de 20 times gasta ~40–60 req (standings +
+  elencos paginados). Dá p/ ~1–2 ligas por dia no grátis.
+
+**Passos manuais após gerar:** (1) `<script src="js/dados/<liga>.js">` no index.html antes
+do dados.js; (2) somar `...DADOS_<LIGA>` no array `DADOS` de `js/dados/dados.js`;
+(3) revisar posições e força.
