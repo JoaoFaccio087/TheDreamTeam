@@ -1,0 +1,403 @@
+# Contratos de Dados — The Dream Team
+
+> Formatos (JSON) que o **frontend** e o **backend** vão trocar. Hoje a maior parte
+> já existe no jogo; este documento serve para o front e o back falarem a **mesma
+> língua** quando a API entrar. A "porta única" no frontend é o arquivo `js/api.js`.
+>
+> Convenção: `?` = campo opcional. Datas em ISO 8601 (`"2025-01-30T18:00:00Z"`).
+
+---
+
+## 1. Dados estáticos do jogo (já existem hoje)
+
+### 1.1 Jogador (dentro de um clube)
+```json
+{
+  "nome": "Giorgian de Arrascaeta",
+  "posicoes": ["MEI", "PE"],
+  "forca": 87
+}
+```
+- `posicoes`: lista de códigos do projeto — `GOL, ZAG, LD, LE, VOL, MC, MEI, MD, ME, PD, PE, ATA`.
+- `forca`: inteiro 0–99.
+
+### 1.2 Clube / edição (entrada de `DADOS`)
+```json
+{
+  "competicao": "Brasileirão",
+  "edicao": 2025,
+  "clube": "Flamengo",
+  "jogadores": [ /* lista de Jogador (1.1) */ ]
+}
+```
+- `competicao`: `"Libertadores" | "Champions" | "Brasileirão" | "Copa do Mundo"`.
+- Esses dados são **iguais para todo mundo** → podem continuar no frontend (não precisam ir pro Postgres).
+
+### 1.3 Jogador escalado (slot do time montado)
+Formato usado em `escalacao[i]` (cada uma das 11 vagas):
+```json
+{
+  "nome": "Pedro",
+  "forca": 84,
+  "posicoes": ["ATA"],
+  "codigo": "ATA",
+  "clube": "Flamengo",
+  "edicao": 2025
+}
+```
+- `codigo`: a vaga da formação que ele ocupa (ex.: `"ATA"`).
+
+---
+
+## 2. Dados do usuário (vão para o backend / Postgres)
+
+### 2.1 Usuario
+```json
+{
+  "id": "u_123",
+  "username": "joaofaccio",
+  "email": "joao@exemplo.com",
+  "nomeDoTime": "Faccio FC",
+  "criadoEm": "2025-01-30T18:00:00Z"
+}
+```
+- **Nunca** trafega a senha; no banco fica só o `password_hash`.
+- `nomeDoTime` substitui o `'Seu time'` padrão do jogo (já existe a variável `nomeDoTime` no front).
+
+### 2.2 Time (escalação salva)
+```json
+{
+  "id": "t_456",
+  "userId": "u_123",
+  "nome": "Faccio FC",
+  "competicao": "Brasileirão",
+  "formacao": "4-3-3",
+  "estilo": "classico",
+  "jogadores": [ /* 11x Jogador escalado (1.3) */ ],
+  "forca": 85
+}
+```
+- `estilo`: `"classico" | "draft"`.
+- `forca`: média do time (o jogo já calcula em `forcaDoTime()`).
+
+### 2.3 ResultadoPartida (o que salvamos ao fim de uma campanha)
+```json
+{
+  "userId": "u_123",
+  "competicao": "Brasileirão",
+  "modo": "liga",
+  "vitorias": 24,
+  "empates": 8,
+  "derrotas": 6,
+  "gf": 70,
+  "ga": 35,
+  "posicao": 1,
+  "campeao": true,
+  "detalhes": {
+    "formacao": "4-3-3",
+    "estilo": "classico",
+    "artilheiro": { "nome": "Pedro", "gols": 18 },
+    "assistente": { "nome": "Arrascaeta", "assistencias": 14 }
+  },
+  "jogadoEm": "2025-01-30T18:40:00Z"
+}
+```
+- `modo`: `"liga"` (Brasileirão) | `"mata-mata"` (Libertadores/Champions/Copa do Mundo).
+- `posicao`: colocação final (liga) ou rodada alcançada (mata-mata); `campeao` resume o "ganhou ou não".
+- `detalhes` (JSONB no Postgres): campo flexível para o que não precisa de coluna própria.
+- O jogo **já produz** quase tudo isso (acumuladores `campanhaVitorias`, `campanhaGF`, `statsJogadores`, etc.).
+
+### 2.4 EntradaRanking (item da lista de ranking)
+```json
+{
+  "posicao": 1,
+  "username": "joaofaccio",
+  "nomeDoTime": "Faccio FC",
+  "titulos": 5,
+  "jogos": 42,
+  "aproveitamento": 78
+}
+```
+- Pode ser calculado por consulta agregada sobre `ResultadoPartida` (não precisa de tabela própria no começo).
+
+---
+
+## 3. Modo Online (IMPLEMENTADO)
+
+> Formatos de tempo real que viajam por WebSocket (Socket.IO). A sala suporta dois
+> **formatos**: `liga` (Brasileirão, pontos corridos) e `mata` (Copa do Mundo /
+> Libertadores: sorteio de grupos → draft por grupo → fase de grupos → mata-mata).
+
+### 3.1 Sala
+```json
+{
+  "codigo": "7F3A",
+  "hostUserId": "u_123",
+  "competicao": "Copa do Mundo",
+  "formato": "mata",
+  "velocidade": "normal",
+  "status": "grupos",
+  "jogadores": [
+    { "userId": "u_123", "username": "joaofaccio", "ordem": 1, "pronto": false }
+  ],
+  "grupos": { "A": ["u_123", "bot_1", "..."], "B": ["..."] },
+  "classificados": ["u_123", "..."]
+}
+```
+- `formato`: `"liga"` (Brasileirão) | `"mata"` (Copa do Mundo / Libertadores).
+- `velocidade`: `"lento" | "normal" | "rapida"` (escolhida na criação da sala).
+- `status`: `"aguardando" | "draft" | "sorteio" | "gdraft" | "visualizar" | "grupos" | "mata" | "simulando" | "encerrada"`.
+- `grupos` e `classificados`: só no formato `mata`. Grupos A–L (Copa: 12 grupos de 4; Liberta: 8 grupos de 4).
+- Vagas não preenchidas por humanos viram **bots** (com nomes próprios únicos na sala).
+
+### 3.2 EscolhaDraft (uma jogada do draft em turnos)
+```json
+{
+  "codigo": "DREAM-7F3A",
+  "userId": "u_123",
+  "slot": "ATA",
+  "jogador": { "nome": "Pedro", "forca": 84, "posicoes": ["ATA"] },
+  "automatica": false
+}
+```
+- `automatica`: `true` quando o servidor escolheu por estouro dos 30s.
+
+### 3.3 ResultadoRodada (uma rodada simulada no servidor)
+```json
+{
+  "codigo": "DREAM-7F3A",
+  "rodada": 1,
+  "jogos": [
+    {
+      "mandante": "Faccio FC",
+      "visitante": "Time B",
+      "golsMandante": 2,
+      "golsVisitante": 1,
+      "eventos": [
+        { "minuto": 23, "lado": "mandante", "autor": "Pedro", "assistente": "Arrascaeta" }
+      ]
+    }
+  ]
+}
+```
+- **Importante:** o servidor calcula e envia a **linha do tempo pronta** (placar + `eventos`);
+  o navegador só **reproduz** na velocidade da sala. Assim todos veem o mesmo resultado.
+
+### 3.4 Catálogo de eventos Socket.IO (nomes reais em uso)
+
+**Sala / handshake (ambos os formatos)**
+
+| Direção | Evento | Para quê |
+|---|---|---|
+| C→S | `room:join` `room:leave` `room:start` | entrar/sair da sala; host inicia |
+| C→S | `lobby:config` | nome do time / formação no lobby |
+| C→S | `ready:vote` | marcar pronto / votar avançar |
+| S→C | `session:me` | id do próprio usuário na sessão |
+| S→C | `room:state` `room:playerOrder` | estado da sala e ordem dos jogadores |
+| S→C | `ready:count` | quantos já estão prontos |
+| S→C | `erro` | mensagem de erro para exibir |
+
+**Brasileirão (formato `liga`)**
+
+| Direção | Evento | Para quê |
+|---|---|---|
+| C→S | `draft:pick` | escolher/remanejar jogador (draft snake) |
+| C→S | `round:simulate` `round:skipAll` | simular rodada / pular tudo |
+| S→C | `draft:yourTurn` `draft:turno` | é a sua vez / de quem é a vez |
+| S→C | `draft:pick` `draft:moved` `draft:complete` | pick feito / time remanejado / draft encerrado |
+| S→C | `round:start` `round:results` `round:skipVotes` | início/resultado da rodada e votos de pular |
+| S→C | `game:end` | fim do campeonato (ver abaixo) |
+
+**Copa do Mundo / Libertadores (formato `mata`)**
+
+| Direção | Evento | Para quê |
+|---|---|---|
+| S→C | `grupos:sorteio` | animação do sorteio dos grupos |
+| C→S | `grupos:pular` `grupos:avancar` | pular a animação / host avança para o draft |
+| S→C | `gdraft:start` `gdraft:turnoGrupo` | início do draft por grupo / qual grupo escolhe |
+| S→C | `gdraft:yourPick` | suas cartas da vez (ver payload) |
+| C→S | `gdraft:pick` | escolher/remanejar jogador no draft por grupo |
+| S→C | `gdraft:picked` `gdraft:complete` | pick registrado / draft de grupos encerrado |
+| C→S | `round:simulate` `round:skipAll` | simular/pular a fase de grupos (reaproveitado da liga) |
+| S→C | `round:start` `round:results` | rodada da fase de grupos (com classificação por grupo) |
+| S→C | `grupos:fim` | fim da fase de grupos `{ classificacao, classificados }` |
+| S→C | `chave:state` | chave montada/atualizada (ver payload) |
+| C→S | `chave:advance` | host avança a fase do mata-mata |
+| S→C | `chave:results` | resultado de uma fase `{ rounds, rodadaAtual, fase, resultados, artilharia, assistencias }` |
+| C→S | `chave:assisti` | um humano terminou de assistir à fase (indicador não-bloqueante) |
+| S→C | `chave:prontos` | contador "X/Y prontos" da fase `{ x, y }` (y = humanos da sala) |
+| S→C | `game:end` | fim da Copa, com campeão (ver abaixo) |
+
+**Champions (`formato: 'champions'`, fase de liga fiel 25/26).** Definido no `salaState`
+(`FORMATO_POR_COMP['Champions'] = 'champions'`). Reaproveita o draft em turnos e o motor de
+rodadas da liga (`room:start`, `draft:*`, `round:start`, `round:results`), só que com
+**36 times** e **8 rodadas**; a `classificacao` do `round:results` já é a **tabela única**
+da fase de liga.
+
+| dir | evento | o que é |
+|-----|--------|---------|
+| S→C | `champions:faseLigaFim` | fim da fase de liga: `{ classificacao, direto[8], playoff[16], eliminados[12] }` (cortes por `userId`). Emitido no `round:simulate` e no `round:skipAll`. Status→`fimLiga`. |
+| C→S | `champions:advancePlayoff` | host roda o playoff (9–24, ida/volta) a partir do checkpoint `fimLiga`. |
+| S→C | `champions:playoff` | resultado do playoff: `{ confrontos:[{ alto, baixo, ida, volta, aggAlto, aggBaixo, pen, penSeq, vencedor }], vencedores[8] }`. Em seguida o servidor monta as oitavas com **semeadura fiel** (1–8 diretos + 9–16 = vencedores na ordem dos confrontos, herdando a posição do par; pareia 1×16…8×9) e emite `chave:state` — daí pra frente reaproveita o mata-mata (`chave:advance`, espectador, "X/Y prontos"). |
+
+#### `gdraft:yourPick` (cartas da sua vez no draft por grupo)
+```json
+{
+  "grupo": "C",
+  "picksTurno": 2,
+  "picksFeitosTurno": 0,
+  "porPosicao": {
+    "ATA": [ { "nome": "Ronaldo", "forca": 95, "posicoes": ["ATA"] } ],
+    "MEI": [ { "nome": "Zidane",  "forca": 94, "posicoes": ["MEI"] } ]
+  }
+}
+```
+- `porPosicao`: jogadores **já validados pelo servidor** por código de vaga (≥6 por posição). O cliente exibe direto, sem refiltrar. O pool **não esgota** (pode repetir entre usuários, nunca para você mesmo).
+- **2 picks por turno (igual ao snake):** o draft de grupos roda em **6 turnos** com `[2,2,2,2,2,1]` = 11 picks. Em um turno de 2, você escolhe **1 de cada vez**: após o 1º pick o servidor reabre sua vez reenviando `gdraft:yourPick` com `picksFeitosTurno` atualizado, até completar o turno. `gdraft:turnoGrupo` carrega `picksTurno` (2 ou 1), `turnoNum`/`totalTurnos` (6) e `pickNumero` = nº do turno; `gdraft:picked` carrega `picks` (snapshot do total por uid) e, no seu próprio pick, `picksTurno`/`picksFeitosTurno`. O cliente deriva "fechou o turno" pelo total acumulado `[2,4,6,8,10,11]`.
+
+#### `chave:state` (a chave do mata-mata)
+```json
+{
+  "fases": ["16-AVOS", "OITAVAS", "QUARTAS", "SEMI", "FINAL"],
+  "rodadaAtual": 0,
+  "rounds": [
+    [ { "a": {"userId":"u_123","nome":"Faccio FC"},
+        "b": {"userId":"bot_4","nome":"Bot United"},
+        "winner": null, "gA": null, "gB": null, "pen": null } ]
+  ]
+}
+```
+- `rounds[i]` = confrontos da fase `i`. Quando resolvido: `winner`, `gA`/`gB` e, em empate, `pen: [penA, penB]`.
+- Copa: 32 classificados → 5 fases. Libertadores: 16 → 4 fases.
+
+#### `game:end` (fim do campeonato)
+```json
+{
+  "campeao": { "userId": "u_123", "nome": "Faccio FC" },
+  "mata": true,
+  "ranking": [ /* times ordenados (campeão em 1º) */ ],
+  "artilharia": [ { "nome": "Ronaldo", "gols": 7, "time": "Faccio FC" } ],
+  "assistencias": [ { "nome": "Zidane", "assists": 5, "time": "Faccio FC" } ]
+}
+```
+- `mata: true` na Copa/Liberta (o cliente mostra a chave completa); ausente/`false` na liga.
+- A **premiação** (Campeão, Pato, Goleador, Peneira) é derivada de `ranking` + `artilharia` no cliente.
+
+---
+
+## 4. Onde isso encaixa no frontend (`js/api.js`)
+
+Hoje a `api.js` devolve dados locais. Quando o backend existir, troca-se **só o corpo** destas funções:
+
+| Função (front)                | Hoje                | Futuro (backend)        |
+|-------------------------------|---------------------|-------------------------|
+| `API.getTodosClubes()`        | `DADOS`             | (continua local)        |
+| `API.getClubesPorCompeticao()`| filtra `DADOS`      | (continua local)        |
+| `API.salvarPartida(r)`        | stub (Promise)      | `POST /matches`         |
+| `API.getHistorico()`          | `[]`                | `GET /matches`          |
+| `API.getRanking()`            | `[]`                | `GET /ranking`          |
+
+> Os clubes (dados estáticos) podem ficar no front; o que vai pro backend é o que é
+> **por usuário** (partidas, histórico, ranking) e o estado das **salas** em tempo real
+> (já implementado via Socket.IO — ver seção 3).
+
+---
+
+## 5. UIKit do frontend (`js/ui.js` + `css/campo.css`)
+
+> Fonte única dos pedaços de interface repetidos entre os modos. Carregado com
+> `defer` **antes** dos módulos de tela (`ui.js` roda antes de `estado.js`), para
+> não reescrever o mesmo HTML/CSS em cada tela.
+
+### 5.1 API (`window.UI`)
+
+| Função | Assinatura | Para quê |
+|---|---|---|
+| `UI.esc` | `esc(s) → string` | Escapa `& < > " '` antes de injetar texto em `innerHTML`. |
+| `UI.shuffle` | `shuffle(arr) → arr` | Fisher-Yates; devolve uma **cópia** (não altera o original). |
+| `UI.posicionarCampo` | `posicionarCampo(marcadores, formacao) → coords` | Posiciona os marcadores (`.ficha`/`.slot-jogo`/`.slot-ol`) pelas coordenadas da formação. Só posiciona; o conteúdo fica a cargo de quem chama. |
+| `UI.renderHeader` | `renderHeader(slot, opts)` | Monta o cabeçalho padrão `.jogo-header-wrap` dentro de `slot`. |
+| `UI.setHeader` | `setHeader(slotId, opts)` | Igual ao anterior, recebendo o `id` do slot. |
+
+`opts` do header: `titulo` (def. `THE DREAM TEAM`), `tituloId`, `slogan` (def.
+`SORTEIE · ESCALE · GOLEIE`), `sloganId`, `info` | `infoHtml`, `infoId`, `voltarId`.
+Os `*Id` permitem que cada tela atualize os textos depois via `getElementById(...)`.
+
+### 5.2 Slots de cabeçalho (todos saem do UIKit)
+
+| Slot | Tela | Renderizado em |
+|---|---|---|
+| `hdr-jogo` | Escalação (single-player) | `ui.js` (no load) |
+| `hdr-simulacao` | Simulação (single-player) | `ui.js` (no load) |
+| `hdr-lobby` `hdr-sorteio` `hdr-draft` `hdr-elencos` `hdr-rodada` | Online | `online.js` (no `init`) |
+
+### 5.3 `campo.css` — dimensionamento único do campo
+
+Modelo compartilhado pelos três campos (home, single-player, online):
+- Contêineres `#campo`, `#campo-jogo`, `.campo-jogo` declaram `container-type: inline-size`.
+- Fichas/slots `.ficha`, `.slot-jogo`, `.slot-ol` escalam por `cqw`: `width/height: clamp(32px, 14cqw, 80px)`.
+- Cor e conteúdo de cada ficha continuam nos CSS de cada tela; aqui fica só o **tamanho**.
+
+### 5.4 Quem consome hoje
+
+| Recurso | Consumidores |
+|---|---|
+| `UI.esc` | `online.js`, `perfil.js` (ambos com fallback local) |
+| `UI.shuffle` | `brasileirao.js`, `campanha.js`, `draft.js`, `simulacao.js`, `online.js` |
+| `UI.posicionarCampo` | `interface.js` (home + single-player), `online.js` (lobby/draft/elencos) |
+| `UI.renderHeader` / `setHeader` | `ui.js`, `online.js` (7 cabeçalhos) |
+| `campo.css` | home, single-player e online (todos os campos) |
+
+### 5.5 Consolidação
+
+Toda a duplicação mapeada já foi migrada para o UIKit:
+
+| Item | Antes | Agora |
+|---|---|---|
+| Fisher-Yates inline | `brasileirao.js`, `campanha.js`, `draft.js`, `simulacao.js` | `UI.shuffle` |
+| Posicionamento do campo | `interface.js` e `online.js` (laços `style.left/top` repetidos) | `UI.posicionarCampo` |
+
+O **conteúdo** de cada ficha continua por tela (códigos/escalação no single-player,
+nome/força/pick no online) — só o posicionamento é compartilhado.
+
+---
+
+## 6. Pênaltis (disputa de mata-mata)
+
+Mesma lógica nos dois modos. Single-player: `simularDisputa` (`js/simulacao.js`),
+animação em `js/penaltis.js`. Online: `simularPenaltisOnline` (`api/socket/index.js`),
+sequência enviada no resultado da rodada.
+
+**Quando ocorre:** só em fase de mata-mata empatada no tempo normal. Liga
+(Brasileirão) e fase de grupos nunca vão para pênaltis.
+
+**Ordem das cobranças:** os 11 mais fortes de cada time cobram em ordem
+**decrescente de força** (o mais forte primeiro). Vale para todos — usuário, bots
+e jogadores da sala.
+
+**Resultado por cobrança** (atacante x goleiro adversário), `'gol' | 'defesa' | 'fora'`:
+
+- `pGol     = limita(0,74 + (Fatacante − Fgoleiro) × 0,006 + bonusPosição, 0,45 .. 0,90)`
+- se não for gol: `pDefesa = limita(0,45 + (Fgoleiro − Fatacante) × 0,006, 0,25 .. 0,78)` (senão, `fora`)
+
+**Bônus de posição** (cobrador): atacantes batem melhor, defensores pior. Lê o
+código da vaga (`codigo`) ou a posição do jogador (`posicoes[0]`):
+
+| Posição | Bônus |
+|---|---|
+| ATA, PE, PD | +0,06 |
+| MEI, SA | +0,04 |
+| MC, VOL, ME, MD | 0 |
+| LD, LE | −0,02 |
+| ZAG | −0,05 |
+| GOL | −0,08 |
+
+**Zebra:** os limites do `pGol` (teto 0,90 / piso 0,45) garantem o imprevisível —
+mesmo o craque erra ~10% das vezes, e o goleiro fraco às vezes pega.
+
+Goleiro identificado por vaga `'GOL'` (escalação) ou pela posição do jogador;
+72 como padrão se não houver. Formato: melhor-de-5 + morte súbita.
+
+**Sequência (contrato da animação):** `[{ lado, nome, resultado }]` + `vencedor`.
+No single-player `lado` é `'meu'|'adv'`; no online é `'a'|'b'` (mandante/visitante),
+enviado em `penSeq` junto do resultado, e o cliente mapeia para o seu lado.
