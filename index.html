@@ -1039,12 +1039,22 @@
 
       <!-- ABA MATA-A-MATA (Copa/Liberta) -->
       <div id="aba-chave" class="rodada-aba escondida">
-        <div id="chave-online" class="chave-online">
-          <p class="chave-online-aguardando">O mata-mata come&ccedil;a ap&oacute;s a fase de grupos.</p>
-        </div>
-        <div class="chave-acoes">
-          <button id="btn-chave-avancar" class="btn-rolar escondida" type="button">Iniciar Mata-mata &rarr;</button>
-          <p id="chave-aguardando" class="rodada-aguardando escondida">Aguardando o host avan&ccedil;ar&hellip;</p>
+        <div class="chave-wrapper">
+          <div class="chave-principal-col">
+            <div id="chave-online" class="chave-online">
+              <p class="chave-online-aguardando">O mata-mata come&ccedil;a ap&oacute;s a fase de grupos.</p>
+            </div>
+            <div class="chave-acoes">
+              <button id="btn-chave-avancar" class="btn-rolar escondida" type="button">Iniciar Mata-mata &rarr;</button>
+              <p id="chave-aguardando" class="rodada-aguardando escondida">Aguardando o host avan&ccedil;ar&hellip;</p>
+            </div>
+          </div>
+          <div class="chave-stats-col">
+            <p class="jogo-rotulo">ARTILHARIA &middot; TOP 10</p>
+            <div id="chave-artilharia" class="rodada-stats-lista"></div>
+            <p class="jogo-rotulo" style="margin-top:1rem">ASSIST&Ecirc;NCIAS &middot; TOP 10</p>
+            <div id="chave-assistencias" class="rodada-stats-lista"></div>
+          </div>
         </div>
       </div>
 

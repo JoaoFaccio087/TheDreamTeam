@@ -68,6 +68,7 @@
   // Rodada
   var rodadaTituloEl, rodadaPartidas, btnRodadaProxima, btnRodadaFim;
   var rodadaClassif, rodadaArtilharia, rodadaAssistencias;
+  var chaveArtilharia, chaveAssistencias;
   var rodadaProximos, proximosTitulo, rodadaAguardandoHost;
   var tabPartidas, tabClassif, abaPartidas, abaClassif, tabChave, abaChave;
   var animTimer = null;   // timer da animação da partida do usuário
@@ -1099,6 +1100,15 @@
     });
   }
 
+  // Renderiza artilharia + assistências nas DUAS cópias de uma vez: a da aba
+  // Classificação e a da aba Mata-a-Mata (assim a pessoa acompanha sem trocar de aba).
+  function renderStatsTodas(artilharia, assistencias) {
+    renderStatsLista(rodadaArtilharia,   artilharia,   'gols',    'G');
+    renderStatsLista(rodadaAssistencias, assistencias, 'assists', 'A');
+    renderStatsLista(chaveArtilharia,    artilharia,   'gols',    'G');
+    renderStatsLista(chaveAssistencias,  assistencias, 'assists', 'A');
+  }
+
   // round:skipVotes — contador de votos para pular tudo
   function onSkipVotes(dados) {
     skipVotos = dados.votos || 0;
@@ -1270,8 +1280,7 @@
     function aplicarClassifEStats() {
       if (dados.grupos) renderGruposClassif(dados.grupos);     // fase de grupos (Copa/Liberta)
       else              renderClassifLista(dados.classificacao || []);
-      renderStatsLista(rodadaArtilharia,   dados.artilharia,   'gols',    'G');
-      renderStatsLista(rodadaAssistencias, dados.assistencias, 'assists', 'A');
+      renderStatsTodas(dados.artilharia, dados.assistencias);
     }
     if (minha) aoFimDaAnimacao = aplicarClassifEStats;   // espera a animação da minha partida
     else       aplicarClassifEStats();                   // sem animação → aplica direto
@@ -1581,8 +1590,7 @@
         if ((seguidoKey === homeKey(alvo) || seguidoKey === awayKey(alvo)) && vk && vk !== seguidoKey) seguidoKey = vk;
       }
       renderChaveOnline();
-      renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
-      renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+      renderStatsTodas(ultimaArtilharia, ultimaAssistencia);
       atualizarAcoesMata();
       atualizarBarraEspectador();
       if (socket && socket.connected) socket.emit('chave:assisti'); // "X/Y prontos"
@@ -1657,13 +1665,11 @@
     function revelarFinal() {
     if (ehChaveFinal) {
       renderChaveOnline();
-      renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
-      renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+      renderStatsTodas(ultimaArtilharia, ultimaAssistencia);
       selecionarAbaRodada('chave');
     } else {
       renderClassifLista(ranking);
-      renderStatsLista(rodadaArtilharia,   ultimaArtilharia,  'gols',    'G');
-      renderStatsLista(rodadaAssistencias, ultimaAssistencia, 'assists', 'A');
+      renderStatsTodas(ultimaArtilharia, ultimaAssistencia);
       selecionarAbaRodada('classif');
     }
 
@@ -2528,6 +2534,8 @@
     rodadaClassif      = document.getElementById('rodada-classif');
     rodadaArtilharia   = document.getElementById('rodada-artilharia');
     rodadaAssistencias = document.getElementById('rodada-assistencias');
+    chaveArtilharia    = document.getElementById('chave-artilharia');
+    chaveAssistencias  = document.getElementById('chave-assistencias');
     rodadaProximos       = document.getElementById('rodada-proximos');
     proximosTitulo       = document.getElementById('proximos-titulo');
     var btnChaveAvancar  = document.getElementById('btn-chave-avancar');

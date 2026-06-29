@@ -85,7 +85,10 @@
   font-weight: 700;
   flex-direction: column;
   gap: 1px;
+  z-index: 2;
 }
+/* Ficha com nome em cima fica acima das vizinhas, p/ a etiqueta nunca sumir atrás. */
+.slot-ol.nome-acima { z-index: 3; }
 .slot-ol .slot-ol-forca {
   font-size: clamp(0.6rem, 2.5cqw, 0.82rem);
   font-family: 'Archivo', sans-serif;
@@ -108,6 +111,15 @@
   padding: 2px 6px;
   border-radius: 4px;
   pointer-events: none;
+  z-index: 5;
+}
+
+/* Quando há uma ficha logo abaixo, a etiqueta sobe para cima da bolinha. */
+.slot-ol.nome-acima .slot-nome {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 3px;
 }
 
 /* Vaga ABERTA e VÁLIDA para o jogador selecionado (clicável e pulsando) */
@@ -1290,8 +1302,19 @@
 .gc-meu .gc-time { color: #E7C77A; font-weight: 700; }
 
 /* ── Aba Mata-a-Mata (online) ─────────────────────────────────────────────── */
-.chave-online {
-  display: flex;
+/* Chaveamento à esquerda + coluna de estatísticas à direita (como na Classificação). */
+.chave-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.4rem;
+  align-items: start;
+}
+.chave-principal-col { min-width: 0; }
+.chave-stats-col { min-width: 0; }
+@media (max-width: 900px) {
+  .chave-wrapper { grid-template-columns: 1fr; }
+}
+.chave-online {  display: flex;
   gap: 14px;
   align-items: stretch;
   overflow-x: auto;

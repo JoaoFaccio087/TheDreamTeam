@@ -30,10 +30,27 @@
     var fs = (typeof formacoes !== 'undefined') ? formacoes : null;
     var coords = (fs && fs[formacao]) ? fs[formacao] : (fs ? fs['4-3-3'] : null);
     if (!coords) return null;
+    // Para cada slot, decide se a etiqueta do nome (que fica embaixo) colidiria
+    // com alguma ficha logo abaixo. Se sim, joga o nome para CIMA. A decisão usa
+    // as coordenadas reais → vale p/ todas as formações, sem mexer no desenho.
+    function temFichaAbaixo(idx) {
+      var c = coords[idx];
+      for (var j = 0; j < coords.length; j++) {
+        if (j === idx) continue;
+        var o = coords[j];
+        var dTop = o.top - c.top;          // o está abaixo de c?
+        var dLeft = Math.abs(o.left - c.left);
+        // "logo abaixo": entre 8% e 20% mais baixo e horizontalmente próximo (<28%).
+        if (dTop > 8 && dTop < 20 && dLeft < 28) return true;
+      }
+      return false;
+    }
     Array.prototype.forEach.call(marcadores || [], function (el, i) {
       if (el && coords[i]) {
         el.style.left = coords[i].left + '%';
         el.style.top  = coords[i].top  + '%';
+        if (temFichaAbaixo(i)) el.classList.add('nome-acima');
+        else                   el.classList.remove('nome-acima');
       }
     });
     return coords;
