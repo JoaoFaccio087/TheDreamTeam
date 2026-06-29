@@ -29,7 +29,7 @@ function pesoGol(j) {
   else if (pos.includes('VOL'))                                      base = 2;
   else if (['LD','LE','ZAG'].some(p => pos.includes(p)))            base = 1;
   else                                                               base = 0.1;
-  return base * ((j.forca || 70) / 80);
+  return base * ((j.forca || 71) / 81);
 }
 
 function pesoAssist(j) {
@@ -43,7 +43,7 @@ function pesoAssist(j) {
 
 function forcaDoClube(jogadores) {
   if (!jogadores || !jogadores.length) return 70;
-  return jogadores.reduce((s, j) => s + (j.forca || 70), 0) / jogadores.length;
+  return jogadores.reduce((s, j) => s + (j.forca || 81), 0) / jogadores.length;
 }
 
 function distribuirMinutos(total) {
@@ -57,7 +57,7 @@ function distribuirMinutos(total) {
  * @returns {{ gMeus, gAdv, fila }}
  */
 function simularPartida(meuElenco, adversario, vantagem = true) {
-  const BASE = 1.30, POR_PONTO = 0.05, MANDO = 0.25;
+  const BASE = 1.30, POR_PONTO = 0.0447, MANDO = 0.25;
   const mForca = forcaDoClube(meuElenco);
   const aForca = forcaDoClube(adversario.jogadores || []);
   const swing  = (mForca - aForca) * POR_PONTO;

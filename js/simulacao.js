@@ -24,7 +24,7 @@ function pesoGol(jogador) {
   else if (pos.some(function(p) { return ['VOL'].indexOf(p) >= 0; }))                 base = 2;
   else if (pos.some(function(p) { return ['LD','LE','ZAG'].indexOf(p) >= 0; }))       base = 1;
   else                                                                                  base = 0.1; // GOL
-  return base * (jogador.forca / 80); // mais forte → mais provável
+  return base * (jogador.forca / 81); // mais forte → mais provável (âncora = média da escala)
 }
 
 // --- Peso de assistência: meias têm prioridade, depois atacantes ---
@@ -63,13 +63,13 @@ function forcaDoTime() {
   for (var i = 0; i < 11; i++) {
     if (escalacao[i]) { soma += escalacao[i].forca; n++; }
   }
-  return n > 0 ? soma / n : 70;
+  return n > 0 ? soma / n : 81;
 }
 
 // --- Força média de um clube vindo do DADOS ---
 function forcaDoClube(entrada) {
   var jj = entrada.jogadores;
-  if (!jj || jj.length === 0) return 70;
+  if (!jj || jj.length === 0) return 81;
   return jj.reduce(function(s, j) { return s + j.forca; }, 0) / jj.length;
 }
 
@@ -77,7 +77,7 @@ function forcaDoClube(entrada) {
 function gerarPlacar(forcaMinha, forcaAdv, ehMeuJogo) {
   // --- Ajustes de equilíbrio (mexa nestes 3 números para calibrar a dificuldade) ---
   var BASE      = 1.30;  // gols esperados num jogo equilibrado (cada lado)
-  var POR_PONTO = 0.05;  // quanto cada ponto de diferença de força vale em gols
+  var POR_PONTO = 0.0447; // quanto cada ponto de diferença de força vale em gols (ajustado p/ escala recalibrada)
   var MANDO     = 0.25;  // vantagem fixa do SEU time (protagonista / mando de campo)
 
   // A vantagem de mando vale só nos jogos do jogador (não nos jogos de bastidores)
@@ -281,7 +281,7 @@ function bonusPosicao(jog) {
 // x goleiro + bônus de posição. Os limites do pGol são a "zebra": mesmo o craque
 // erra de vez em quando, e o goleiro fraco às vezes pega.
 function resultadoCobranca(cob, fGoleiro) {
-  var fAt = cob.forca || 72;
+  var fAt = cob.forca || 73;
   var pGol = limita(0.74 + (fAt - fGoleiro) * 0.006 + bonusPosicao(cob), 0.45, 0.90);
   if (Math.random() < pGol) return 'gol';
   var pDefesa = limita(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.78);
@@ -330,7 +330,7 @@ function disputarPenaltis(est, onFim) {
   // Fallback: clube sem elenco no DADOS → cria 5 cobradores genéricos
   if (jogadoresAdv.length === 0) {
     for (var fb = 0; fb < 5; fb++) {
-      jogadoresAdv.push({ nome: est.adversario.clube + ' ' + (fb + 1), forca: 75 });
+      jogadoresAdv.push({ nome: est.adversario.clube + ' ' + (fb + 1), forca: 77 });
     }
   }
   var cobradoresAdv = montarCobradores(jogadoresAdv);
