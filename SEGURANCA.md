@@ -77,8 +77,10 @@ sete cabeças para um projeto deste tamanho. Pontos práticos:
       progresso), por quanto tempo, e como pedir exclusão.
 - [ ] **Base legal:** consentimento no cadastro (um checkbox "li e aceito a Política de
       Privacidade" já ajuda).
-- [ ] **Direito à exclusão:** permitir que a pessoa **apague a conta e os dados**
-      (uma rota `DELETE /users/me` ou um pedido por e-mail já cumpre o essencial).
+- [x] **Direito à exclusão:** ✅ FEITO — rota `DELETE /me` (exige senha, `bcrypt.compare`)
+      + botão "Excluir minha conta" na zona de perigo do modal de editar perfil, com
+      confirmação por senha. O `ON DELETE CASCADE` do schema remove matches e room_players;
+      salas onde era host ficam com `host_user_id = NULL`. Ao excluir, encerra a sessão.
 - [ ] **Minimização:** só pedir o necessário. ✅ já fazemos (não pedimos CPF, telefone etc.).
 - [ ] **Segurança dos dados:** senha com bcrypt ✅; tráfego em HTTPS ✅ (GitHub Pages/Render).
 - [ ] **Contato:** um e-mail de contato para titulares exercerem direitos.
@@ -138,6 +140,7 @@ Pacote da comunidade (817 skills de SOC corporativo) que avaliamos. Conclusões:
 ## 6. Próximos passos sugeridos (ordem)
 
 1. ✅ `.gitignore` criado → conferir rastreio (§4) e commitar.
-2. Implementar exclusão de conta + Política de Privacidade (LGPD, §3) — maior retorno legal.
-3. Ativar RLS no Supabase (§2) — camada extra.
-4. Conferir env vars no Render e robustez do `JWT_SECRET` (§1).
+2. ✅ Exclusão de conta (LGPD, §3) — FEITO: rota `DELETE /me` + botão com confirmação por senha.
+3. Política de Privacidade + aceite no cadastro (LGPD, §3) — próximo.
+4. Ativar RLS no Supabase (§2) — camada extra.
+5. Conferir env vars no Render e robustez do `JWT_SECRET` (§1).

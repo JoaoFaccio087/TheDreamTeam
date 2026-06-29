@@ -224,6 +224,36 @@
         <button id="editar-cancelar" class="btn-secundario" type="button">Cancelar</button>
         <button id="editar-salvar"   class="btn-rolar"      type="button">Salvar</button>
       </div>
+
+      <div class="editar-zona-perigo">
+        <hr class="auth-divisor" />
+        <p class="zona-perigo-titulo">Zona de perigo</p>
+        <p class="zona-perigo-texto">Excluir sua conta remove permanentemente seu cadastro, hist&oacute;rico de campanhas e estat&iacute;sticas. Esta a&ccedil;&atilde;o n&atilde;o pode ser desfeita.</p>
+        <button id="editar-excluir-conta" class="btn-excluir-conta" type="button">Excluir minha conta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de confirmação de exclusão de conta (LGPD) -->
+  <div id="modal-excluir-conta" class="modal-auth escondida">
+    <div class="modal-auth-backdrop" id="modal-excluir-backdrop"></div>
+    <div class="auth-card modal-auth-card excluir-card">
+      <button id="modal-excluir-fechar" class="modal-auth-fechar" type="button" aria-label="Fechar">&times;</button>
+
+      <p class="auth-logo-titulo">EXCLUIR CONTA</p>
+      <hr class="auth-divisor" />
+
+      <p class="excluir-aviso">Tem certeza? Esta a&ccedil;&atilde;o &eacute; <strong>permanente</strong> e apaga todos os seus dados. Para confirmar, digite sua senha.</p>
+
+      <label class="auth-label" for="excluir-senha">Sua senha</label>
+      <input id="excluir-senha" class="auth-input" type="password" autocomplete="current-password" placeholder="Digite sua senha" />
+
+      <p id="excluir-msg" class="perfil-msg escondida"></p>
+
+      <div class="editar-acoes">
+        <button id="excluir-cancelar" class="btn-secundario" type="button">Cancelar</button>
+        <button id="excluir-confirmar" class="btn-excluir-conta" type="button">Excluir permanentemente</button>
+      </div>
     </div>
   </div>
 

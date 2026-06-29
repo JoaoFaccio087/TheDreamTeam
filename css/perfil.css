@@ -166,3 +166,23 @@
   .acord-stats   { grid-template-columns: repeat(2, 1fr); }
   .editar-grid   { grid-template-columns: 1fr; }
 }
+
+/* ── Zona de perigo: excluir conta (LGPD) ── */
+.editar-zona-perigo { margin-top: 1.6rem; }
+.zona-perigo-titulo {
+  font-family: 'Archivo', sans-serif; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: #ff6b6b; margin: 0.4rem 0 0.4rem;
+}
+.zona-perigo-texto { font-size: 0.76rem; color: var(--txt-soft, #9aa6b2); margin: 0 0 0.8rem; line-height: 1.45; }
+.btn-excluir-conta {
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 0.86rem;
+  padding: 0.6rem 1.1rem; border-radius: 10px; cursor: pointer;
+  color: #ff6b6b; background: transparent;
+  border: 1.5px solid rgba(255, 107, 107, 0.55);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-excluir-conta:hover { background: #ff6b6b; color: #1a0606; border-color: #ff6b6b; }
+.btn-excluir-conta:disabled { opacity: 0.6; cursor: default; }
+.excluir-aviso { font-size: 0.84rem; color: #cdd3da; line-height: 1.5; margin: 0 0 1rem; }
+.excluir-card .editar-acoes { margin-top: 1.2rem; }

@@ -9,11 +9,12 @@
   var modalPerfil    = $('modal-perfil');
   var modalEditar    = $('modal-editar-perfil');
   var modalHistorico = $('modal-historico');
+  var modalExcluir   = $('modal-excluir-conta');
 
   var _meCache = null;
 
   function algumAberto() {
-    return [modalPerfil, modalEditar, modalHistorico].some(function (m) {
+    return [modalPerfil, modalEditar, modalHistorico, modalExcluir].some(function (m) {
       return m && !m.classList.contains('escondida');
     });
   }
@@ -206,6 +207,52 @@
   }
   function esconderMsg(id) { var el = $(id); if (el) el.classList.add('escondida'); }
 
+  // ──────────────────── EXCLUIR CONTA (LGPD) ────────────────────
+  function abrirExcluir() {
+    if (!modalExcluir) return;
+    setVal('excluir-senha', '');
+    esconderMsg('excluir-msg');
+    fechar(modalEditar);
+    abrir(modalExcluir);
+  }
+
+  function msgExcluir(t, erro) {
+    var el = $('excluir-msg'); if (!el) return;
+    el.textContent = t;
+    el.classList.remove('escondida');
+    el.classList.toggle('perfil-msg-erro', !!erro);
+  }
+
+  function confirmarExcluir() {
+    var senha = val('excluir-senha');
+    if (!senha) { msgExcluir('Digite sua senha para confirmar.', true); return; }
+    if (!api || !api.excluirConta) { msgExcluir('Indisponível.', true); return; }
+
+    var btn = $('excluir-confirmar');
+    if (btn) { btn.disabled = true; btn.textContent = 'Excluindo…'; }
+
+    api.excluirConta(senha).then(function () {
+      // Conta apagada: encerra a sessão e atualiza a UI para o estado deslogado.
+      fechar(modalExcluir);
+      if (typeof limparSessao === 'function') {
+        limparSessao();
+        try { localStorage.removeItem('dreamteam_historico'); } catch (e) {}
+        if (typeof atualizarDropdown === 'function') atualizarDropdown(null);
+      } else {
+        try {
+          localStorage.removeItem('dreamteam_token');
+          localStorage.removeItem('dreamteam_user');
+          localStorage.removeItem('dreamteam_historico');
+        } catch (e) {}
+        location.reload();
+      }
+    }).catch(function (err) {
+      msgExcluir((err && err.message) || 'Não foi possível excluir a conta.', true);
+    }).then(function () {
+      if (btn) { btn.disabled = false; btn.textContent = 'Excluir permanentemente'; }
+    });
+  }
+
   // ──────────────────────── MEU HISTÓRICO ────────────────────────
   var _histCache = [];
   function abrirHistorico() {
@@ -294,12 +341,21 @@
     var btnCancelar = $('editar-cancelar');
     if (btnCancelar) btnCancelar.addEventListener('click', function () { fechar(modalEditar); abrirPerfil(); });
 
+    // Excluir conta (LGPD)
+    var btnAbrirExcluir = $('editar-excluir-conta');
+    if (btnAbrirExcluir) btnAbrirExcluir.addEventListener('click', abrirExcluir);
+    var btnExcluirConfirmar = $('excluir-confirmar');
+    if (btnExcluirConfirmar) btnExcluirConfirmar.addEventListener('click', confirmarExcluir);
+    var btnExcluirCancelar = $('excluir-cancelar');
+    if (btnExcluirCancelar) btnExcluirCancelar.addEventListener('click', function () { fechar(modalExcluir); abrirEditar(); });
+    bindFechar('modal-excluir-fechar', 'modal-excluir-backdrop', modalExcluir);
+
     bindFechar('modal-perfil-fechar',    'modal-perfil-backdrop',    modalPerfil);
     bindFechar('modal-editar-fechar',    'modal-editar-backdrop',    modalEditar);
     bindFechar('modal-historico-fechar', 'modal-historico-backdrop', modalHistorico);
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { fechar(modalEditar); fechar(modalPerfil); fechar(modalHistorico); }
+      if (e.key === 'Escape') { fechar(modalExcluir); fechar(modalEditar); fechar(modalPerfil); fechar(modalHistorico); }
     });
   }());
 })();

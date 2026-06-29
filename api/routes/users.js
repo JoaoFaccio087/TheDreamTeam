@@ -83,4 +83,33 @@ router.patch('/', async (req, res) => {
   }
 });
 
+// DELETE /me — exclui a própria conta (LGPD: direito à eliminação).
+// Exige a senha atual. O ON DELETE CASCADE do schema remove em cascata as
+// partidas (matches) e a participação em salas (room_players); salas em que o
+// usuário era host ficam com host_user_id = NULL (ON DELETE SET NULL).
+const deleteSchema = z.object({
+  senha: z.string().min(1, 'Informe sua senha para confirmar'),
+}).strict();
+
+router.delete('/', async (req, res) => {
+  const parsed = deleteSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: parsed.error.errors[0].message });
+  }
+
+  try {
+    const { rows } = await pool.query('SELECT password_hash FROM users WHERE id = $1', [req.user.id]);
+    if (!rows.length) return res.status(404).json({ error: 'Usuário não encontrado' });
+
+    const ok = await bcrypt.compare(parsed.data.senha, rows[0].password_hash);
+    if (!ok) return res.status(400).json({ error: 'Senha incorreta' });
+
+    await pool.query('DELETE FROM users WHERE id = $1', [req.user.id]);
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro interno' });
+  }
+});
+
 module.exports = router;

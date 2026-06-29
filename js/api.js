@@ -103,6 +103,12 @@ var api = {
     return _req('PATCH', '/me', dados);
   },
 
+  // Exclui a própria conta (LGPD). Exige a senha atual para confirmar.
+  excluirConta: function (senha) {
+    if (!_temLoginReal()) return Promise.resolve(null);
+    return _req('DELETE', '/me', { senha: senha });
+  },
+
   // Identidade temporária pra jogar online sem login.
   tokenConvidado: function () {
     return _req('POST', '/auth/guest', {});
