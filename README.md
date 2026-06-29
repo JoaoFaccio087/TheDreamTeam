@@ -155,7 +155,8 @@ O frontend é estático: qualquer push na branch publicada atualiza o GitHub Pag
 TheDreamTeam/
 ├── index.html
 ├── CNAME
-├── README.md   CONTRATOS.md   ESTADO.md   RECURSOS.md   LICENSE
+├── README.md   CONTRATOS.md   ESTADO.md   RECURSOS.md   SEGURANCA.md   LICENSE
+├── .gitignore
 ├── docker-compose.yml   .env.example   .dockerignore
 ├── assets/imagens/
 ├── css/

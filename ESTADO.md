@@ -362,3 +362,24 @@ Dois ajustes de frontend (o backend já suportava tudo):
     `escolherOnline('Libertadores', …)` (era Brasileirão); `__compOnline` default → 'Libertadores'.
   - Arquivos: `index.html` (HTML das pílulas) e `js/main.js` (refs, listeners, reset e default).
     Sem deploy de servidor — só GitHub Pages.
+
+## Auditoria de segurança + .gitignore (FEITO — ver SEGURANCA.md)
+Revisão de segurança do backend (jun/2026), motivada por dúvidas do João (LGPD/RLS/chaves).
+- **Já estava certo:** senha com **bcrypt** (`api/routes/auth.js`, `users.js`); validação de
+  entrada com **Zod** em todas as rotas; segredos via `process.env` (`DATABASE_URL`,
+  `JWT_SECRET`) — **nada hardcoded**; JWT p/ sessão; SSL automático no Supabase.
+- **Criado `.gitignore`** (não existia): cobre `.env*` (segredos), `node_modules/`,
+  `.DS_Store`, logs, build, temporários. ⚠️ só afeta arquivos novos — conferir rastreio
+  antigo com `git ls-files | grep -E "node_modules|\.env$|\.DS_Store"` e, se preciso,
+  `git rm --cached`. Nenhum `.env` real foi encontrado no projeto.
+- **Criado `SEGURANCA.md`** com diagnóstico + plano: RLS no Supabase (defesa em
+  profundidade — hoje o acesso é via backend, não direto do browser), checklist LGPD
+  (política de privacidade, exclusão de conta, consentimento no cadastro), e conferência
+  das env vars no Render.
+- **Pacote "Anthropic-Cybersecurity-Skills" avaliado e DESCARTADO:** é projeto da
+  comunidade (não é da Anthropic, apesar do nome), 817 skills de SOC corporativo — sem
+  malware aparente, mas irrelevante p/ um jogo com login. Lição: verificar dono real de
+  repositórios que usam nome de empresa conhecida.
+- **Próximos passos (ordem):** exclusão de conta + política de privacidade (LGPD) →
+  ativar RLS → conferir env vars/robustez do JWT_SECRET no Render. Sem deploy desta tarefa
+  (só documentação + `.gitignore`).
