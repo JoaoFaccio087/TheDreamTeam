@@ -1575,6 +1575,10 @@
     chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases || (chaveOnline && chaveOnline.fases) || [] };
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
+    // Os resultados já chegaram → a simulação acabou. Restaura o botão de avançar
+    // imediatamente (sem esperar a animação visual da partida terminar), senão ele
+    // fica preso em "Simulando..." entre as fases do mata-mata.
+    atualizarAcoesMata();
 
     var fase = dados.fase || chaveOnline.fases[chaveOnline.rodadaAtual - 1] || 'MATA-A-MATA';
     var compEl = document.getElementById('rodada-comp');
@@ -1743,14 +1747,18 @@
     var overlay = document.getElementById('resumo-overlay');
     if (!overlay || !meuRankingFinal) return;
     var me = meuRankingFinal;
+    // O ranking final do servidor pode não incluir o elenco (picks) nem a formação —
+    // nesse caso o mapa de escalação e a lista sairiam vazios. Buscamos o elenco que
+    // ficou guardado em allPlayers (populado durante o draft) como fonte confiável.
+    var meuElenco = allPlayers[meuUserId] || {};
     var v = me.vitorias || 0, e = me.empates || 0, d = me.derrotas || 0;
     var gf = me.gf || 0, ga = me.ga || 0, saldo = gf - ga;
     var pts = v * 3 + e, jogos = v + e + d;
     var aprov = jogos > 0 ? Math.round(pts / (jogos * 3) * 100) : 0;
-    var form   = me.formacao || '4-3-3';
+    var form   = me.formacao || meuElenco.formacao || '4-3-3';
     var coords = (typeof formacoes !== 'undefined' ? formacoes : {})[form] || [];
     var cods   = (typeof codigosFormacao !== 'undefined' ? codigosFormacao : {})[form] || [];
-    var picks  = me.picks || [];
+    var picks  = (me.picks && me.picks.length ? me.picks : meuElenco.picks) || [];
 
     var idx = (rankingFinalCache || []).findIndex(function (p) { return String(p.userId) === String(me.userId); });
     var pos = idx >= 0 ? (idx + 1) : null;
