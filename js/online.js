@@ -1065,11 +1065,47 @@
     return card;
   }
 
+  // Monta o card do meu primeiro adversário no mata-mata (após o fim dos grupos).
+  // Retorna null se o mata-mata ainda não foi sorteado ou se eu não me classifiquei.
+  function cardProximoAdversarioMata() {
+    if (!gruposEncerrados) return null;
+    if (!chaveOnline || !chaveOnline.rounds || !chaveOnline.rounds.length) return null;
+    var primeira = chaveOnline.rounds[0] || [];
+    var meuJogo = null;
+    for (var i = 0; i < primeira.length; i++) {
+      var j = primeira[i];
+      if ((j.a && String(j.a.userId) === String(meuUserId)) ||
+          (j.b && String(j.b.userId) === String(meuUserId))) { meuJogo = j; break; }
+    }
+    if (!meuJogo) return null;  // não me classifiquei
+    var euA = meuJogo.a && String(meuJogo.a.userId) === String(meuUserId);
+    var adversario = euA ? meuJogo.b : meuJogo.a;
+    var card = document.createElement('div');
+    card.className = 'proximo-card proximo-card-meu';
+    var faseNome = (chaveOnline.fases && chaveOnline.fases[0]) || 'MATA-A-MATA';
+    card.innerHTML =
+      '<span class="proximo-fase-tag">' + htmlEsc(faseNome) + '</span>' +
+      '<div class="proximo-confronto">' +
+        '<span class="proximo-eu">' + htmlEsc(nomeUsuario(allPlayers[meuUserId] || {})) + '</span>' +
+        '<span class="proximo-vs">x</span>' +
+        '<span class="proximo-adv">' + (adversario ? htmlEsc(adversario.nome) : 'A definir') + '</span>' +
+      '</div>';
+    return card;
+  }
+
   // Lista de próximos jogos (rodada seguinte), destacando o meu confronto
   function renderProximos(proxima) {
     if (!rodadaProximos) return;
     rodadaProximos.innerHTML = '';
     if (!proxima || !proxima.jogos || !proxima.jogos.length) {
+      // Fim dos grupos: se o mata-mata já foi sorteado (chaveOnline existe) e eu me
+      // classifiquei, mostro meu primeiro adversário do mata-mata aqui. Senão, aviso.
+      var card = cardProximoAdversarioMata();
+      if (card) {
+        if (proximosTitulo) proximosTitulo.textContent = 'SEU PRÓXIMO JOGO';
+        rodadaProximos.appendChild(card);
+        return;
+      }
       if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA RODADA';
       rodadaProximos.innerHTML = '<p style="color:#666;font-size:0.75rem;text-align:center;padding:0.6rem">Última rodada.</p>';
       return;
@@ -1434,6 +1470,9 @@
     emMataMata = true;
     if (tabChave) tabChave.classList.remove('escondida');
     renderChaveOnline();
+    // Os grupos acabaram de encerrar e a chave chegou: atualiza a coluna lateral
+    // para mostrar meu primeiro adversário do mata-mata (em vez de "Última rodada.").
+    if (gruposEncerrados) renderProximos(null);
     var btnAv = document.getElementById('btn-chave-avancar');
     if (btnAv) btnAv.classList.add('escondida');
     // Champions: não há banner "Iniciar Mata-mata" — o host avança pelas próprias ações.
@@ -1447,12 +1486,15 @@
     if (btnPularTudo)         btnPularTudo.classList.add('escondida');
     if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
     if (chaveOnline && chaveOnline.rodadaAtual >= chaveOnline.rounds.length) return;  // game:end encerra
+    // Durante a animação da partida, o botão aparece mas fica BLOQUEADO (sem deixar
+    // pular o jogo em andamento). Só vira clicável quando a animação termina.
+    var animando = animacaoAtiva || simulandoRodada;
     if (ehHost) {
-      btnRodadaProxima.disabled    = false;
-      btnRodadaProxima.textContent = 'Próxima fase →';
+      btnRodadaProxima.disabled    = animando;
+      btnRodadaProxima.textContent = animando ? 'Simulando…' : 'Próxima fase →';
       btnRodadaProxima.classList.remove('escondida');
     } else if (rodadaAguardandoHost) {
-      rodadaAguardandoHost.textContent = 'Aguardando o host avançar…';
+      rodadaAguardandoHost.textContent = animando ? 'Simulando…' : 'Aguardando o host avançar…';
       rodadaAguardandoHost.classList.remove('escondida');
     }
   }
