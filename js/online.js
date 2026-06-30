@@ -526,8 +526,12 @@
     gPicksFeitosTurno = 0;                   // novo turno: ainda não escolhi nada
     if (dados.picks) gPicksSnap = dados.picks;
 
+    // O título do header continua "THE DREAM TEAM"; o grupo vai para o slogan
+    // (antes o grupo sobrescrevia o título, apagando o nome do jogo).
     var titulo = document.getElementById('online-draft-titulo');
-    if (titulo) titulo.textContent = 'Grupo ' + dados.grupo;
+    if (titulo) titulo.textContent = 'THE DREAM TEAM';
+    var subMarca = document.getElementById('draft-subtitulo-marca');
+    if (subMarca) subMarca.textContent = 'GRUPO ' + dados.grupo;
     atualizarSubtituloGrupo();
 
     renderPainelGrupos();
@@ -1137,6 +1141,10 @@
 
     // Última rodada → encerrar
     if (rodadaAtual >= totalRodadas) {
+      // Mas só libera o avanço DEPOIS que a partida da última rodada terminou de
+      // animar. Sem isto, o botão "Ir para o Mata-mata"/"Ver Resultado" aparecia
+      // assim que a 3ª rodada começava, deixando pular a partida em andamento.
+      if (animacaoAtiva || simulandoRodada) return;
       // Copa/Liberta: o fim dos grupos NÃO encerra o jogo — o mata-mata vem em
       // seguida. Antes a transição só existia no banner da aba Grupos, prendendo
       // quem estava na aba Partidas. Agora a própria aba Partidas oferece o avanço.
