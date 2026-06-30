@@ -847,6 +847,10 @@
       mostrarCampoDaVez(dados.userId);
       renderMeuTime();
       limparDestaquesVaga();
+      // Reacende as vagas abertas (douradas) que ainda preciso preencher — senão o
+      // re-render disparado pelo servidor deixava o campo "apagado" após mover.
+      var podeAgora = draftEhGrupo ? gPodeEscolher : (String(draftTurnoUid) === String(meuUserId));
+      if (podeAgora && repositionFrom === null) destacarVagasAbertas();
     }
   }
 
@@ -1065,32 +1069,29 @@
     return card;
   }
 
-  // Monta o card do meu primeiro adversário no mata-mata (após o fim dos grupos).
-  // Retorna null se o mata-mata ainda não foi sorteado ou se eu não me classifiquei.
+  // Monta a lista de confrontos da 1ª fase do mata-mata (após o fim dos grupos),
+  // destacando o meu. Retorna null se o mata-mata ainda não foi sorteado.
   function cardProximoAdversarioMata() {
     if (!gruposEncerrados) return null;
     if (!chaveOnline || !chaveOnline.rounds || !chaveOnline.rounds.length) return null;
     var primeira = chaveOnline.rounds[0] || [];
-    var meuJogo = null;
-    for (var i = 0; i < primeira.length; i++) {
-      var j = primeira[i];
-      if ((j.a && String(j.a.userId) === String(meuUserId)) ||
-          (j.b && String(j.b.userId) === String(meuUserId))) { meuJogo = j; break; }
-    }
-    if (!meuJogo) return null;  // não me classifiquei
-    var euA = meuJogo.a && String(meuJogo.a.userId) === String(meuUserId);
-    var adversario = euA ? meuJogo.b : meuJogo.a;
-    var card = document.createElement('div');
-    card.className = 'proximo-card proximo-card-meu';
+    if (!primeira.length) return null;
     var faseNome = (chaveOnline.fases && chaveOnline.fases[0]) || 'MATA-A-MATA';
-    card.innerHTML =
-      '<span class="proximo-fase-tag">' + htmlEsc(faseNome) + '</span>' +
-      '<div class="proximo-confronto">' +
-        '<span class="proximo-eu">' + htmlEsc(nomeUsuario(allPlayers[meuUserId] || {})) + '</span>' +
-        '<span class="proximo-vs">x</span>' +
-        '<span class="proximo-adv">' + (adversario ? htmlEsc(adversario.nome) : 'A definir') + '</span>' +
-      '</div>';
-    return card;
+    var wrap = document.createElement('div');
+    wrap.className = 'proximo-mata-lista';
+    wrap.innerHTML = '<span class="proximo-fase-tag">' + htmlEsc(faseNome) + '</span>';
+    primeira.forEach(function (j) {
+      var sou = (j.a && String(j.a.userId) === String(meuUserId)) ||
+                (j.b && String(j.b.userId) === String(meuUserId));
+      var linha = document.createElement('div');
+      linha.className = 'proximo-mata-jogo' + (sou ? ' proximo-mata-meu' : '');
+      linha.innerHTML =
+        '<span class="pmj-time">' + (j.a ? htmlEsc(j.a.nome) : 'A definir') + '</span>' +
+        '<span class="pmj-vs">x</span>' +
+        '<span class="pmj-time pmj-time-dir">' + (j.b ? htmlEsc(j.b.nome) : 'A definir') + '</span>';
+      wrap.appendChild(linha);
+    });
+    return wrap;
   }
 
   // Lista de próximos jogos (rodada seguinte), destacando o meu confronto
@@ -1102,7 +1103,7 @@
       // classifiquei, mostro meu primeiro adversário do mata-mata aqui. Senão, aviso.
       var card = cardProximoAdversarioMata();
       if (card) {
-        if (proximosTitulo) proximosTitulo.textContent = 'SEU PRÓXIMO JOGO';
+        if (proximosTitulo) proximosTitulo.textContent = 'CONFRONTOS DO MATA-MATA';
         rodadaProximos.appendChild(card);
         return;
       }
@@ -1720,8 +1721,9 @@
     subview('online-rodada');
     rodadaAtual = totalRodadas;
     // Atualiza o cabeçalho para o estado final (antes ficava parado na rodada
-    // em que o "pular tudo" foi acionado).
-    if (rodadaTituloEl) rodadaTituloEl.textContent = 'RODADA ' + totalRodadas + ' DE ' + totalRodadas;
+    // em que o "pular tudo" foi acionado). No mata-mata o título reflete a FASE
+    // (OITAVAS, QUARTAS…), não "RODADA X DE Y" — então só ajusta fora dele.
+    if (rodadaTituloEl && !emMataMata) rodadaTituloEl.textContent = 'RODADA ' + totalRodadas + ' DE ' + totalRodadas;
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
     // Atualiza a chave com o estado final (necessário no auto-finish do mata-mata).
