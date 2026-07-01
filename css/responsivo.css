@@ -234,3 +234,11 @@
   border: none; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }
 .btn-voltar-topo.visivel { display: block; }
+
+/* Card de partida (placar central) no mobile: reduz o gap e o nome para o placar
+   ficar centralizado mesmo com nomes de time longos (antes o placar ia p/ a esquerda). */
+@media (max-width: 640px) {
+  .pg-topo   { gap: var(--sp-3); }
+  .pg-time   { font-size: var(--fs-sm); line-height: 1.15; }
+  .pg-placar { font-size: var(--fs-xl); }
+}

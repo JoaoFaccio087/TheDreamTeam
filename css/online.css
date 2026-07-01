@@ -770,7 +770,7 @@
 }
 .partida-grande.vitoria { border-color: rgba(93,190,122,0.5); }
 .partida-grande.derrota { border-color: rgba(232,112,112,0.5); }
-.pg-topo { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--sp-7); }
+.pg-topo { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: var(--sp-7); }
 .pg-time { font-weight: 700; font-size: var(--fs-base); color: #ddd; }
 .pg-time.dir { text-align: right; }
 .pg-time.eu { color: #D9B25A; }
