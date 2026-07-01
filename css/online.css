@@ -473,7 +473,9 @@
   display: flex;
   align-items: center;
   gap: var(--sp-4);
-  padding: 0.45rem 0.7rem;
+  min-height: 44px;          /* altura FIXA — todas as linhas iguais, não importa o nome */
+  box-sizing: border-box;
+  padding: 0 0.7rem;         /* padding só lateral; a altura vem do min-height */
   border-radius: var(--raio-md);
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.05);
@@ -1518,3 +1520,7 @@
 .proximo-mata-meu .pmj-time { color: #f4e6c5; font-weight: 700; }
 .pmj-time-dir { text-align: right; }
 .pmj-vs { color: #666; font-size: var(--fs-mini); }
+
+/* Mensagem de classificação no banner de fim de grupos (verde = passou, vermelho = eliminado) */
+.gmb-texto.gmb-classificado { color: var(--accent); font-weight: var(--peso-forte); }
+.gmb-texto.gmb-eliminado    { color: #ff8a8a; font-weight: var(--peso-medio); }

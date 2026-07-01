@@ -215,7 +215,18 @@
     var _bk = (typeof BACKEND_URL !== 'undefined') ? BACKEND_URL : '';
     socket = io(_bk, { auth: { token: token }, transports: ['websocket', 'polling'] });
     setupEventos();
-    socket.on('connect',       function () { if (callback) callback(); });
+    var _jaConectou = false;
+    socket.on('connect', function () {
+      if (_jaConectou) {
+        // RECONEXÃO (ex.: o celular dormiu a aba e voltou). Não recomeça o fluxo:
+        // re-emite room:join para o servidor recolocar o jogador no estado ATUAL da
+        // sala (partida em andamento), evitando o redirecionamento indevido ao lobby.
+        if (codigoSala) socket.emit('room:join', { codigo: codigoSala });
+        return;
+      }
+      _jaConectou = true;
+      if (callback) callback();
+    });
     socket.on('connect_error', function (err) {
       erroOnline('Erro de conexão: ' + (err.message || 'tente novamente'));
     });
@@ -1409,6 +1420,21 @@
       var banner = document.getElementById('grupos-mata-banner');
       var btnIni = document.getElementById('btn-iniciar-mata');
       var aguard = document.getElementById('gmb-aguardando');
+      // Diz claramente ao jogador se ELE classificou (e como) ou se foi eliminado,
+      // para não haver surpresa ao entrar no mata-mata.
+      var txt = document.querySelector('#grupos-mata-banner .gmb-texto');
+      if (txt) {
+        var lista = (dados && dados.classificados) || [];
+        var meu = lista.find(function (c) { return String(c.userId) === String(meuUserId); });
+        if (meu) {
+          var via = (meu.pos === 3) ? ' (repescagem — melhor 3º lugar)' : '';
+          txt.textContent = 'Você se classificou para o mata-mata!' + via;
+          txt.classList.remove('gmb-eliminado'); txt.classList.add('gmb-classificado');
+        } else {
+          txt.textContent = 'Você não se classificou. Acompanhe o mata-mata dos que passaram.';
+          txt.classList.remove('gmb-classificado'); txt.classList.add('gmb-eliminado');
+        }
+      }
       if (banner) banner.classList.remove('escondida');
       if (btnIni) { btnIni.classList.toggle('escondida', !ehHost); btnIni.disabled = false; }
       if (aguard) aguard.classList.toggle('escondida', ehHost);
