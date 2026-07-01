@@ -242,3 +242,10 @@
   .pg-time   { font-size: var(--fs-sm); line-height: 1.15; }
   .pg-placar { font-size: var(--fs-xl); }
 }
+
+/* Sorteio de grupos no mobile: a grade colava nas bordas e cortava o card da direita.
+   Reduz o mínimo das colunas e o gap, e garante respiro lateral. */
+@media (max-width: 640px) {
+  .sorteio-wrap  { width: 100%; padding-left: 0.6rem; padding-right: 0.6rem; box-sizing: border-box; }
+  .sorteio-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); }
+}
