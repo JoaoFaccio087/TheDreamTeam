@@ -28,6 +28,46 @@ html {
   --btn-txt:       #0B0C0F;                 /* texto escuro sobre o verde */
   --accent-sombra: #178A41;                 /* verde escuro p/ sombra do botão */
   --titulo-sombra: #464C56;                 /* cinza p/ sombra da manchete (leitura melhor que o verde) */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     TOKENS DE TIPOGRAFIA E ESPAÇAMENTO (Etapa 1 — apenas DISPONÍVEIS).
+     Nada abaixo troca estilos existentes: estes tokens ficam prontos para as
+     telas migrarem uma a uma depois. Os valores refletem as famílias que já
+     aparecem no CSS hoje, para que a migração seja 1:1 (sem mudança visual).
+     ───────────────────────────────────────────────────────────────────────── */
+
+  /* Escala tipográfica — do menor (legenda) ao maior (manchete). */
+  --fs-legenda: 0.62rem;   /* rótulos minúsculos, tags, contadores */
+  --fs-mini:    0.72rem;   /* legendas, textos auxiliares */
+  --fs-sm:      0.82rem;   /* corpo pequeno, itens de lista densos */
+  --fs-base:    0.9rem;    /* corpo padrão */
+  --fs-md:      1rem;      /* corpo destacado */
+  --fs-lg:      1.1rem;    /* subtítulos */
+  --fs-xl:      1.4rem;    /* títulos de seção */
+  --fs-2xl:     2rem;      /* títulos grandes */
+  --fs-manchete: 3rem;     /* manchete da home (referência) */
+
+  /* Pesos de fonte padrão (Archivo). */
+  --peso-normal:  400;
+  --peso-medio:   600;
+  --peso-forte:   700;
+
+  /* Espaçamento — escala usada em gap/margin/padding. */
+  --sp-1: 0.3rem;
+  --sp-2: 0.4rem;
+  --sp-3: 0.5rem;
+  --sp-4: 0.6rem;
+  --sp-5: 0.7rem;
+  --sp-6: 0.8rem;
+  --sp-7: 1rem;
+  --sp-8: 1.2rem;
+  --sp-9: 1.4rem;
+
+  /* Raios de borda (cards, botões, pílulas). */
+  --raio-sm:   6px;
+  --raio-md:   8px;
+  --raio-lg:   12px;
+  --raio-pill: 999px;
 }
 
 /* Tema Libertadores: preto e dourado */
