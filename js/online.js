@@ -2072,6 +2072,15 @@
       var filtrados = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
       var vistos = {}; lista = [];
       filtrados.forEach(function (p) { if (p && !vistos[p.id]) { vistos[p.id] = 1; lista.push(p); } });
+      // Rede de segurança: NUNCA mostrar menos de 6 opções. Se a posição tiver poucos
+      // elegíveis, completa com o resto do pool do turno (o jogador pode escalar ali
+      // mesmo fora da posição natural) — melhor 6 opções do que travar o draft.
+      if (lista.length < 6) {
+        (poolLocal || []).forEach(function (p) {
+          if (lista.length >= 6) return;
+          if (p && !vistos[p.id]) { vistos[p.id] = 1; lista.push(p); }
+        });
+      }
     }
     modalPoolPos = embaralhar(lista);
     modalPosPage = 0;

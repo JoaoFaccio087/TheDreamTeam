@@ -864,15 +864,31 @@ function iniciarTurno(io, sala) {
   const abertos     = [];
   for (let i = 0; i < codigosForm.length; i++) { if (!picksJog[i]) abertos.push(codigosForm[i]); }
 
-  // Seleção por POSIÇÃO: para cada vaga aberta, manda uma amostra ALEATÓRIA de elegíveis
-  // daquela posição (deduplicados) — variedade suficiente para 6 cartas + re-sorteios.
-  const PER_POS = 30;
+  // Seleção por POSIÇÃO: cada vaga aberta recebe a SUA própria amostra de elegíveis,
+  // garantindo SEMPRE pelo menos MIN_POR_POS cartas para aquela posição (o cliente
+  // filtra o pool pela posição clicada, então cada posição precisa se sustentar sozinha).
+  // Um jogador versátil (ex.: LD/ZAG) pode aparecer como opção em mais de uma posição —
+  // isso é correto, ele realmente pode jogar nas duas. Só evitamos repetir a MESMA carta
+  // dentro da MESMA posição.
+  const PER_POS     = 30;   // teto de variedade por posição (6 cartas + re-sorteios)
+  const MIN_POR_POS = 6;    // piso: nunca menos de 6 opções para qualquer posição aberta
   const vistosIds = new Set();
   let cards = [];
   abertos.forEach(cod => {
-    shuffle(sala.poolDisponivel.filter(p => podeOcupar(p, cod)))
-      .slice(0, PER_POS)
-      .forEach(p => { if (!vistosIds.has(p.id)) { vistosIds.add(p.id); cards.push(p); } });
+    const elegiveis = shuffle(sala.poolDisponivel.filter(p => podeOcupar(p, cod)));
+    const doCod = elegiveis.slice(0, PER_POS);
+    let adicionadosNaPos = 0;
+    doCod.forEach(p => {
+      if (!vistosIds.has(p.id)) { vistosIds.add(p.id); cards.push(p); adicionadosNaPos++; }
+    });
+    // Se a deduplicação global deixou esta posição com menos de MIN_POR_POS cartas,
+    // completa reaproveitando elegíveis desta posição (mesmo que já vistos em outra).
+    if (adicionadosNaPos < MIN_POR_POS) {
+      for (let i = 0; i < elegiveis.length && adicionadosNaPos < MIN_POR_POS; i++) {
+        const p = elegiveis[i];
+        if (!cards.includes(p)) { cards.push(p); adicionadosNaPos++; }
+      }
+    }
   });
 
   io.to(sala.codigo).emit('draft:turno', {
