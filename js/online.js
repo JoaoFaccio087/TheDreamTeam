@@ -503,6 +503,7 @@
     gPicksTurno       = 1;
     gPicksFeitosTurno = 0;
     gPodeEscolher     = false;
+    draftResortsRestantes = 3;   // 3 re-sorteios para todo o draft (faltava resetar aqui — "Re-sortear 0" na Copa)
 
     subview('online-draft');
     var titulo = document.getElementById('online-draft-titulo');
@@ -2864,7 +2865,8 @@
     // Fim
     if (modalPremFechar) modalPremFechar.addEventListener('click', function () {
       if (modalPremiacao) modalPremiacao.classList.add('escondida');
-      if (fimAcoes) fimAcoes.classList.remove('escondida');   // libera os botões ao fechar
+      // Só a barra do TOPO (#fim-acoes-fixo) é exibida — ela aparece em todas as abas.
+      // O #fim-acoes de baixo (rodapé das estatísticas) foi desativado para não duplicar.
       if (fimAcoesFixo) fimAcoesFixo.classList.remove('escondida');
     });
     if (btnVerResumo) btnVerResumo.addEventListener('click', abrirResumoOnline);
