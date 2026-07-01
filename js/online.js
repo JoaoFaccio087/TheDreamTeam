@@ -1031,6 +1031,9 @@
           if (penEl) penEl.textContent = 'pênaltis ' + m.pen[0] + ' × ' + m.pen[1];
         }
         atualizarAcoesRodada();   // libera os botões só após o fim/pulo da animação
+        // Se a fase de grupos acabou de encerrar, agora (fim da animação) é a hora certa
+        // de revelar os confrontos do mata-mata na coluna lateral — não antes.
+        if (gruposEncerrados) renderProximos(null);
         if (typeof aoFimDaAnimacao === 'function') { var cb = aoFimDaAnimacao; aoFimDaAnimacao = null; cb(); }
       }
 
@@ -1086,6 +1089,9 @@
   // destacando o meu. Retorna null se o mata-mata ainda não foi sorteado.
   function cardProximoAdversarioMata() {
     if (!gruposEncerrados) return null;
+    // Ainda animando a última rodada dos grupos: NÃO revela o mata-mata na coluna lateral.
+    // Os confrontos só aparecem quando a simulação/animação termina (concluir() re-renderiza).
+    if (animacaoAtiva || simulandoRodada) return null;
     if (!chaveOnline || !chaveOnline.rounds || !chaveOnline.rounds.length) return null;
     var primeira = chaveOnline.rounds[0] || [];
     if (!primeira.length) return null;
