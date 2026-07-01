@@ -889,6 +889,16 @@ function iniciarTurno(io, sala) {
         if (!cards.includes(p)) { cards.push(p); adicionadosNaPos++; }
       }
     }
+    // ÚLTIMO RECURSO: no fim do draft o pool pode não ter 6 jogadores DESTA posição
+    // (ex.: goleiros esgotados). Para NUNCA mostrar menos de 6 opções, completa com o
+    // resto do pool disponível (fora da posição natural — melhor isso do que travar).
+    if (adicionadosNaPos < MIN_POR_POS) {
+      const resto = shuffle(sala.poolDisponivel.slice());
+      for (let i = 0; i < resto.length && adicionadosNaPos < MIN_POR_POS; i++) {
+        const p = resto[i];
+        if (!cards.includes(p)) { cards.push(p); adicionadosNaPos++; }
+      }
+    }
   });
 
   io.to(sala.codigo).emit('draft:turno', {

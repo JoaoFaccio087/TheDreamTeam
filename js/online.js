@@ -2092,8 +2092,19 @@
     if (!modalDraftPick) return;
     var lista;
     if (draftEhGrupo) {
-      // Draft em grupo: o servidor já manda 6+ cartas validadas por posição. Usa direto.
+      // Draft em grupo: o servidor manda as cartas validadas por posição.
       lista = (poolPorPosicao && poolPorPosicao[cod]) ? poolPorPosicao[cod].slice() : [];
+      // Rede de segurança: NUNCA mostrar menos de 6. Se vier pouco (pool esgotado no fim
+      // do draft), completa com cartas de outras posições que o servidor enviou.
+      if (lista.length < 6 && poolPorPosicao) {
+        var vistosG = {}; lista.forEach(function (p) { if (p) vistosG[p.id] = 1; });
+        Object.keys(poolPorPosicao).forEach(function (k) {
+          (poolPorPosicao[k] || []).forEach(function (p) {
+            if (lista.length >= 6) return;
+            if (p && !vistosG[p.id]) { vistosG[p.id] = 1; lista.push(p); }
+          });
+        });
+      }
     } else {
       // Snake: filtra o pool do turno pela posição e remove repetidos.
       var filtrados = (poolLocal || []).filter(function (p) { return podeOcupar(p, cod); });
