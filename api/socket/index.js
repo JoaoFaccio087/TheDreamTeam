@@ -792,7 +792,7 @@ function emitirFimDeJogo(io, sala, code) {
   const artilharia   = Object.entries(sala.statsGols).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
   const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
 
-  io.to(code).emit('game:end', { ranking: buildRanking(sala), artilharia, assistencias });
+  io.to(code).emit('game:end', { ranking: buildRanking(sala), artilharia, assistencias, statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {} });
   (async () => {
     for (const jogador of sala.jogadores) {
       if (jogador.ehBot || jogador.guest) continue;
@@ -1744,6 +1744,7 @@ function setupSocket(server, frontendUrl) {
           io.to(code).emit('game:end', {
             campeao: finalCampeao ? { userId: finalCampeao.userId, nome: finalCampeao.nome, ehBot: !!finalCampeao.ehBot } : null,
             ranking: rankingMata(sala), artilharia: art2, assistencias: ass2, mata: true,
+            statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {},
             rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
           });
         }

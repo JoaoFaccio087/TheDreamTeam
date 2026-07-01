@@ -82,6 +82,7 @@
   var btnVerResumo, btnVoltarInicio, fimAcoes, modalPremiacao, modalPremFechar;
   var fimAcoesFixo;
   var meuRankingFinal = null, ultimaArtilharia = [], ultimaAssistencia = [], rankingFinalCache = [];
+  var mapaGolsCompleto = {}, mapaAssistsCompleto = {};   // stats de TODOS os jogadores (não só top 18)
   var _campanhaOnlineSalva = false;
 
   // ── Formações (posições por slot) ─────────────────────────────────────────
@@ -1717,6 +1718,10 @@
 
   function onGameEnd(dados) {
     if (prontosLabel) prontosLabel.classList.add('escondida');
+    // Mapas COMPLETOS de gols/assists (todos os jogadores, não só o top 18) — usados no
+    // resumo do time para contabilizar TODOS os jogadores do elenco.
+    if (dados.statsGols)    mapaGolsCompleto    = dados.statsGols;
+    if (dados.statsAssists) mapaAssistsCompleto = dados.statsAssists;
     var ranking = dados.ranking || [];
     // Champions termina no mata-mata, igual à Copa/Liberta (chave + chaveOnline + rótulo).
     var ehChaveFinal = (formatoOnline === 'mata' || formatoOnline === 'champions');
@@ -1843,9 +1848,18 @@
     var pos = idx >= 0 ? (idx + 1) : null;
     var ehCampeao = !!me.campeao || pos === 1;
 
+    // Prioriza os mapas COMPLETOS (todos os jogadores). Cai para o top 18 só se não vierem.
     var golMap = {}, asiMap = {};
-    (ultimaArtilharia  || []).forEach(function (a) { golMap[a.nome] = a.gols; });
-    (ultimaAssistencia || []).forEach(function (a) { asiMap[a.nome] = a.assists; });
+    if (mapaGolsCompleto && Object.keys(mapaGolsCompleto).length) {
+      golMap = mapaGolsCompleto;
+    } else {
+      (ultimaArtilharia || []).forEach(function (a) { golMap[a.nome] = a.gols; });
+    }
+    if (mapaAssistsCompleto && Object.keys(mapaAssistsCompleto).length) {
+      asiMap = mapaAssistsCompleto;
+    } else {
+      (ultimaAssistencia || []).forEach(function (a) { asiMap[a.nome] = a.assists; });
+    }
 
     var trofeu = '<svg class="resumo-trofeu" viewBox="0 0 64 64" aria-hidden="true">' +
       '<path d="M20 6h24v10a12 12 0 0 1-24 0V6z" fill="currentColor"/>' +
