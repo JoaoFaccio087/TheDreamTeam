@@ -26,7 +26,7 @@
   }
 
   .home-descricao {
-    font-size: 0.95rem;
+    font-size: var(--fs-base);
     line-height: 1.6;
     margin-bottom: 26px;
   }
@@ -51,7 +51,7 @@
   .home-footer {
     flex-wrap: wrap;
     padding: 18px 0 28px;
-    font-size: 0.75rem;
+    font-size: var(--fs-mini);
   }
 
   /* TELA DE JOGO (escalação): 3 colunas → 1 */
@@ -90,7 +90,7 @@
 
   /* Voltar do topo: link bem clicável no celular (sem caixa) */
   .jogo-header-esq { gap: 12px; align-items: center; }
-  .jogo-voltar-topo { padding: 8px 4px; font-size: 0.95rem; }
+  .jogo-voltar-topo { padding: 8px 4px; font-size: var(--fs-base); }
   .jogo-voltar-linha { padding: 10px 16px 0; }
 
   /* Simulação no celular: 1 coluna. display:contents promove os filhos das duas
@@ -114,7 +114,7 @@
     margin-bottom: 0;
     padding: 12px 14px;
     border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 6px;
+    border-radius: var(--raio-sm);
     background: rgba(255, 255, 255, 0.04);
     flex-direction: row;
     gap: 16px;
@@ -167,7 +167,7 @@
   /* — Home: cabeçalho mais limpo — */
   .home-header { padding-top: 16px; margin-bottom: 22px; }
   .home-rotulo-topo {
-    font-size: 0.6rem; letter-spacing: 0.1em; line-height: 1.35;
+    font-size: var(--fs-legenda); letter-spacing: 0.1em; line-height: 1.35;
     max-width: 72%;
   }
   .perfil-wrapper { align-self: flex-start; }
