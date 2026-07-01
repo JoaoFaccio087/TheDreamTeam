@@ -1626,10 +1626,9 @@
     chaveOnline = { rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases || (chaveOnline && chaveOnline.fases) || [] };
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;
-    // Os resultados já chegaram → a simulação acabou. Restaura o botão de avançar
-    // imediatamente (sem esperar a animação visual da partida terminar), senão ele
-    // fica preso em "Simulando..." entre as fases do mata-mata.
-    atualizarAcoesMata();
+    // A atualização do botão de avançar foi MOVIDA para depois de sabermos se a minha
+    // partida vai animar (mais abaixo). Se chamássemos aqui, o botão "Próxima fase"
+    // ficaria clicável durante a animação, porque animacaoAtiva ainda é false neste ponto.
 
     var fase = dados.fase || chaveOnline.fases[chaveOnline.rodadaAtual - 1] || 'MATA-A-MATA';
     var compEl = document.getElementById('rodada-comp');
@@ -1669,10 +1668,11 @@
       // Anima a partida do time seguido na aba Partidas (com pênaltis, se houver).
       pararAnimacaoPartida();
       rodadaPartidas.innerHTML = '';
-      rodadaPartidas.appendChild(cardPartidaGrande(alvo));
+      rodadaPartidas.appendChild(cardPartidaGrande(alvo));   // aqui animacaoAtiva vira true
       outras.forEach(function (m) { rodadaPartidas.appendChild(cardPartidaPequena(m)); });
       if (proximosTitulo) proximosTitulo.textContent = 'PRÓXIMA FASE';
       if (rodadaProximos) rodadaProximos.innerHTML = '';
+      atualizarAcoesMata();   // agora animacaoAtiva=true → botão fica "Simulando…" BLOQUEADO
       aoFimDaAnimacao = aplicarPosAnim;
       selecionarAbaRodada('partidas');
     } else if (!animacaoAtiva) {
