@@ -36,7 +36,7 @@
 
 /* Rótulo pequeno em maiúsculas no verde de acento */
 .home-rotulo-topo {
-  font-size: 0.68rem;
+  font-size: var(--fs-mini);
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -71,7 +71,7 @@
 /* Manchete em 3 linhas — "Sorteie. / Escale. / Goleie." */
 .manchete {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 4.8rem;
+  font-size: var(--fs-manchete);
   line-height: 0.97;         /* linhas bem juntas para impacto visual */
   color: var(--txt);
   margin-bottom: 28px;
@@ -83,7 +83,7 @@
 
 /* Parágrafo descritivo abaixo da manchete */
 .home-descricao {
-  font-size: 1rem;
+  font-size: var(--fs-md);
   color: var(--txt-soft);
   line-height: 1.7;
   margin-bottom: 36px;
@@ -100,7 +100,7 @@
   gap: 4px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--linha);
-  border-radius: 9px;
+  border-radius: var(--raio-md);
   padding: 4px;
   margin-bottom: 12px;
 }
@@ -108,9 +108,9 @@
   border: none;
   cursor: pointer;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 700;
   background: transparent;
   color: var(--txt-soft);
@@ -130,7 +130,7 @@
 .pilula-soon:hover { background-color: rgba(255, 255, 255, 0.06) !important; }
 .pilula-tag {
   margin-left: 7px;
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -145,10 +145,10 @@
   background-color: var(--accent);
   color: var(--btn-txt);      /* texto escuro sobre o verde — contraste alto */
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   padding: 15px 32px;
   border: none;
-  border-radius: 2px;         /* quase reto, estilo adesivo/retrô */
+  border-radius: var(--raio-xs);         /* quase reto, estilo adesivo/retrô */
   cursor: pointer;
 
   /* Sombra verde-escura dura deslocada — efeito de "adesivo" */
@@ -169,7 +169,7 @@
 
 .home-rotulo-campo {
   display: block;
-  font-size: 0.65rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -188,12 +188,12 @@
 
 .pilula {
   padding: 7px 16px;
-  border-radius: 2px;          /* quase reto — visual de "escolha/estado", diferente do botão verde */
+  border-radius: var(--raio-xs);          /* quase reto — visual de "escolha/estado", diferente do botão verde */
   border: 1.5px solid var(--linha);
   background-color: rgba(255, 255, 255, 0.06);
   color: var(--txt);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
@@ -227,7 +227,7 @@
   position: relative;    /* necessário para as fichas (position:absolute) ficarem dentro */
   width: 230px;
   height: 344px;
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   border: 2px solid rgba(255, 255, 255, 0.3);
   overflow: visible;     /* fichas nas bordas extremas não são cortadas */
   margin-bottom: 20px;
@@ -318,7 +318,7 @@
 
 /* Legenda explicativa abaixo das pílulas de formação */
 .home-legenda {
-  font-size: 0.7rem;
+  font-size: var(--fs-mini);
   color: var(--txt-soft);
   font-style: italic;
 }
@@ -337,7 +337,7 @@
 .step-card {
   background-color: var(--surface);
   border: 1px solid var(--linha);
-  border-radius: 12px;
+  border-radius: var(--raio-lg);
   padding: 20px 24px;          /* reduzido de 28px — card menos alto */
   display: flex;
   flex-direction: row;
@@ -372,12 +372,12 @@
 
 .step-titulo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   color: var(--txt);
 }
 
 .step-desc {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--txt-soft);
 }
 
@@ -391,7 +391,7 @@
   gap: 12px;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--txt-soft);
 }
 
@@ -459,7 +459,7 @@
   max-width: 620px;
   background: #14161C;
   border: 1px solid var(--linha);
-  border-radius: 14px;
+  border-radius: var(--raio-lg);
   padding: 26px 28px 22px;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
 }
@@ -468,14 +468,14 @@
   position: absolute;
   top: 16px;
   left: 28px;
-  font-size: 0.6rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--btn-txt);
   background: var(--accent);
   padding: 3px 9px;
-  border-radius: 999px;
+  border-radius: var(--raio-pill);
 }
 .sala-fechar {
   position: absolute;
@@ -487,7 +487,7 @@
   border-radius: 50%;
   background: transparent;
   color: var(--txt-soft);
-  font-size: 1rem;
+  font-size: var(--fs-md);
   cursor: pointer;
   transition: color 0.15s ease, background 0.15s ease;
 }
@@ -503,14 +503,14 @@
 
 .sala-col-titulo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   color: var(--txt);
   margin-bottom: 14px;
 }
 
 .sala-rotulo {
   display: block;
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -522,10 +522,10 @@
   width: 100%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--linha);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   color: var(--txt);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
   padding: 9px 12px;
   outline: none;
   transition: border-color 0.15s ease;
@@ -546,7 +546,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid var(--linha);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   background: rgba(255, 255, 255, 0.04);
   color: var(--txt);
   cursor: pointer;
@@ -565,7 +565,7 @@
 .sala-aviso {
   margin-top: 18px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--accent);
 }
 

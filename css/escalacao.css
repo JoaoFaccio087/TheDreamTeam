@@ -5,7 +5,7 @@
 /* Título pequeno repetido no topo das telas temáticas */
 .titulo-topo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--txt-soft);
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -22,7 +22,7 @@
 
 /* Aviso "(em construção)" */
 .jogo-em-construcao {
-  font-size: 1rem;
+  font-size: var(--fs-md);
   color: var(--txt-soft);
   margin-bottom: 36px;
 }
@@ -34,9 +34,9 @@
   border: 1px solid var(--txt-soft);
   color: var(--txt-soft);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.88rem;
+  font-size: var(--fs-base);
   padding: 10px 24px;
-  border-radius: 2px;          /* quadrado, consistente com os outros botões */
+  border-radius: var(--raio-xs);          /* quadrado, consistente com os outros botões */
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
@@ -64,7 +64,7 @@
 }
 
 .skip-label-budget {
-  font-size: 0.52rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 1.5px;
   color: var(--txt-soft);
@@ -73,7 +73,7 @@
 /* Contador em destaque — pisca levemente quando chega a 0 */
 .skip-contador {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   color: var(--accent);
   transition: color 0.3s;
 }
@@ -91,9 +91,9 @@
   background: rgba(0, 0, 0, 0.65);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 2px;              /* bordas quadradas = visual retrô */
+  border-radius: var(--raio-xs);              /* bordas quadradas = visual retrô */
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.62rem;              /* aumentado de 0.48rem */
+  font-size: var(--fs-legenda);              /* aumentado de 0.48rem */
   letter-spacing: 0.8px;
   cursor: pointer;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
@@ -108,7 +108,7 @@
 
 /* Seta de re-sorteio — maior que o rótulo para dar destaque visual */
 .skip-icone {
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
   line-height: 1;
   flex-shrink: 0;
 }
@@ -167,7 +167,7 @@
   border: none;
   color: var(--txt-soft);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
   padding: 6px 4px;
   cursor: pointer;
   transition: color 0.18s ease;
@@ -186,7 +186,7 @@
 }
 
 .jogo-header-slogan {
-  font-size: 0.6rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 2.5px;
   color: var(--txt-soft);
@@ -194,7 +194,7 @@
 
 .jogo-header-info {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   letter-spacing: 2px;
   color: var(--txt-soft);
   text-align: right;
@@ -225,7 +225,7 @@
 
 /* Rótulo de seção dentro do jogo (FORMAÇÃO, ESCALAÇÃO, TIME ESCALADO) */
 .jogo-rotulo {
-  font-size: 0.65rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -283,10 +283,10 @@
   background-color: var(--accent);
   color: var(--bg);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   padding: 13px 20px;
   border: none;
-  border-radius: 2px;
+  border-radius: var(--raio-xs);
   cursor: pointer;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
   transition: transform 0.08s ease, box-shadow 0.08s ease;
@@ -330,14 +330,14 @@
 /* Card do clube sorteado */
 .clube-card {
   border: 1px solid var(--txt-soft);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.05);
 }
 
 /* Status do sorteio — rótulo acima do nome do clube */
 .clube-status {
-  font-size: 0.52rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--txt-soft);
@@ -350,7 +350,7 @@
 }
 
 .clube-edicao {
-  font-size: 0.68rem;
+  font-size: var(--fs-mini);
   color: var(--txt-soft);
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -359,7 +359,7 @@
 
 .clube-nome {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1.05rem;
+  font-size: var(--fs-md);
   color: var(--accent);
 }
 
@@ -379,7 +379,7 @@
 .lista-jogadores::-webkit-scrollbar-track { background: transparent; }
 .lista-jogadores::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.18);
-  border-radius: 3px;
+  border-radius: var(--raio-xs);
 }
 .lista-jogadores::-webkit-scrollbar-thumb:hover {
   background: rgba(255,255,255,0.32);
@@ -391,10 +391,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 11px;
-  border-radius: 4px;
+  border-radius: var(--raio-xs);
   border: 1px solid transparent;
   cursor: pointer;
-  font-size: 0.92rem;
+  font-size: var(--fs-base);
   color: var(--txt);
   transition: background 0.12s ease, border-color 0.12s ease;
 }
@@ -427,7 +427,7 @@
 /* Número de força em destaque — não encolhe, sempre alinhado à direita */
 .jogador-forca {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.88rem;
+  font-size: var(--fs-base);
   color: var(--accent);
   margin-left: 8px;
   flex-shrink: 0;
@@ -452,7 +452,7 @@
   aspect-ratio: 2 / 3;    /* mantém a proporção 2:3 sem altura fixa */
   height: auto;
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   border: 2px solid rgba(255, 255, 255, 0.3);
   overflow: visible;   /* slots nas bordas não são cortados */
   background: repeating-linear-gradient(
@@ -497,7 +497,7 @@
   background: rgba(255, 255, 255, 0.88);
   color: #1A1813;
   cursor: pointer;         /* clicável para ativar o modo de mover */
-  font-size: 0.72rem;      /* código da posição — grande e legível */
+  font-size: var(--fs-mini);      /* código da posição — grande e legível */
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -512,11 +512,11 @@
   background: rgba(0, 0, 0, 0.55);
   color: #fff;
   font-family: 'Archivo', sans-serif;
-  font-size: 0.72rem;   /* aumentado de 0.5rem para ficar bem legível */
+  font-size: var(--fs-mini);   /* aumentado de 0.5rem para ficar bem legível */
   font-weight: 600;
   white-space: nowrap;
   padding: 3px 7px;
-  border-radius: 3px;
+  border-radius: var(--raio-xs);
   pointer-events: none;    /* não interfere nos cliques do slot */
   letter-spacing: 0.2px;
   max-width: 88px;
@@ -569,7 +569,7 @@
 
 /* Rótulo de categoria: ATQ / DEF */
 .forca-rotulo {
-  font-size: 0.52rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 1.5px;
   color: var(--txt-soft);
@@ -599,7 +599,7 @@
 /* Valor numérico do secundário */
 .forca-sec-valor {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.88rem;
+  font-size: var(--fs-base);
 }
 
 /* ATAQUE: cor de destaque do tema (orange/gold) */
@@ -640,15 +640,15 @@
   align-items: center;
   gap: 8px;
   padding: 6px 9px;
-  border-radius: 4px;
-  font-size: 0.88rem;
+  border-radius: var(--raio-xs);
+  font-size: var(--fs-base);
   background: rgba(255, 255, 255, 0.04);
 }
 
 /* Código da posição (GOL, LD, ZAG...) */
 .box-codigo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.70rem;
+  font-size: var(--fs-mini);
   color: var(--accent);
   min-width: 30px;
 }
@@ -671,7 +671,7 @@
 /* Força do jogador — alinhada à direita, visível só quando o slot está preenchido */
 .box-forca {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--accent);
   flex-shrink: 0;
 }
@@ -681,7 +681,7 @@
 
 /* Posições do jogador exibidas na lista (ex: MEI/PD) */
 .jogador-posicoes {
-  font-size: 0.74rem;
+  font-size: var(--fs-mini);
   color: var(--txt-soft);
   margin: 0 6px;
   white-space: nowrap;
@@ -706,10 +706,10 @@
   width: 100%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--linha);
-  border-radius: 4px;
+  border-radius: var(--raio-xs);
   color: var(--txt);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.95rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   padding: 9px 12px;
   outline: none;

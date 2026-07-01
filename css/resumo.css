@@ -7,9 +7,9 @@
   background: transparent;
   color: var(--accent);
   border: 1px solid var(--accent);
-  border-radius: 3px;
+  border-radius: var(--raio-xs);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
@@ -47,7 +47,7 @@
     linear-gradient(170deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)),
     var(--bg);
   border: 1px solid var(--accent);
-  border-radius: 8px;
+  border-radius: var(--raio-md);
   box-shadow: 0 24px 70px rgba(0,0,0,0.65), inset 0 0 0 1px rgba(255,255,255,0.05);
   padding: 24px 24px 18px;
   color: var(--txt);
@@ -69,14 +69,14 @@
 .resumo-titulo {
   margin: 0;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 2rem;
+  font-size: var(--fs-2xl);
   letter-spacing: 1px;
   color: var(--accent);
   text-shadow: 0 2px 12px rgba(0,0,0,0.35);
 }
 .resumo-sub {
   margin: 5px 0 0;
-  font-size: 0.66rem;
+  font-size: var(--fs-mini);
   letter-spacing: 1.6px;
   text-transform: uppercase;
   color: var(--txt-soft);
@@ -100,10 +100,10 @@
   text-align: center;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
 }
 .rci-rot {
-  font-size: 0.58rem;
+  font-size: var(--fs-micro);
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--txt-soft);
@@ -120,7 +120,7 @@
 }
 .rci-val i { font-style: normal; color: var(--txt-soft); margin: 0 4px; }
 .rci-sub {
-  font-size: 0.56rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.4px;
   color: var(--txt-soft);
 }
@@ -139,7 +139,7 @@
 }
 .resumo-bloco-rot {
   margin: 0 0 8px;
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   letter-spacing: 1.4px;
   text-transform: uppercase;
   color: var(--txt-soft);
@@ -154,7 +154,7 @@
   max-width: 300px;
   aspect-ratio: 2 / 3;
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.4);
   background:
@@ -200,17 +200,17 @@
   border: 1.5px solid var(--accent);
   color: #fff;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.48rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.3px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 .resumo-jogador-nome {
-  font-size: 0.56rem;
+  font-size: var(--fs-micro);
   color: #fff;
   line-height: 1;
   white-space: nowrap;
   padding: 1px 5px;
-  border-radius: 3px;
+  border-radius: var(--raio-xs);
   background: rgba(0,0,0,0.42);
   text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
@@ -218,7 +218,7 @@
 /* Lista de estatísticas */
 .resumo-lista {
   border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   overflow: hidden;
 }
 .resumo-lista-head,
@@ -231,14 +231,14 @@
 }
 .resumo-lista-head {
   background: rgba(255,255,255,0.06);
-  font-size: 0.56rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--txt-soft);
 }
 .resumo-lista-linha {
   border-top: 1px solid rgba(255,255,255,0.06);
-  font-size: 0.74rem;
+  font-size: var(--fs-mini);
 }
 .resumo-lista-linha:nth-child(even) { background: rgba(255,255,255,0.02); }
 .rl-nome {
@@ -249,24 +249,24 @@
   flex: none;
   font-style: normal;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.5rem;
+  font-size: var(--fs-micro);
   color: var(--bg);
   background: var(--accent);
   padding: 2px 4px;
-  border-radius: 3px;
+  border-radius: var(--raio-xs);
   min-width: 26px;
   text-align: center;
 }
 .rl-num { text-align: center; }
 .resumo-lista-head .rl-num { color: var(--txt-soft); }
-.rl-forca { color: var(--accent); font-family: 'Archivo Black', sans-serif; font-size: 0.7rem; }
+.rl-forca { color: var(--accent); font-family: 'Archivo Black', sans-serif; font-size: var(--fs-mini); }
 
 /* Assinatura */
 .resumo-marca {
   text-align: center;
   margin-bottom: 16px;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.78rem;
+  font-size: var(--fs-sm);
   letter-spacing: 2px;
   color: var(--accent);
   opacity: 0.85;
@@ -287,9 +287,9 @@
   gap: 7px;
   white-space: nowrap;     /* mantém ícone + texto numa linha só, centralizados */
   padding: 12px 14px;
-  border-radius: 4px;
+  border-radius: var(--raio-xs);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.74rem;
+  font-size: var(--fs-mini);
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;

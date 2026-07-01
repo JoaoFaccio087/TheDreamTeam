@@ -37,6 +37,7 @@ html {
      ───────────────────────────────────────────────────────────────────────── */
 
   /* Escala tipográfica — do menor (legenda) ao maior (manchete). */
+  --fs-micro:   0.56rem;   /* textos minúsculos: mini-labels, nomes em cards compactos */
   --fs-legenda: 0.62rem;   /* rótulos minúsculos, tags, contadores */
   --fs-mini:    0.72rem;   /* legendas, textos auxiliares */
   --fs-sm:      0.82rem;   /* corpo pequeno, itens de lista densos */
@@ -45,7 +46,7 @@ html {
   --fs-lg:      1.1rem;    /* subtítulos */
   --fs-xl:      1.4rem;    /* títulos de seção */
   --fs-2xl:     2rem;      /* títulos grandes */
-  --fs-manchete: 3rem;     /* manchete da home (referência) */
+  --fs-manchete: 4.8rem;   /* manchete da home ("Sorteie. Escale. Goleie.") */
 
   /* Pesos de fonte padrão (Archivo). */
   --peso-normal:  400;
@@ -64,6 +65,7 @@ html {
   --sp-9: 1.4rem;
 
   /* Raios de borda (cards, botões, pílulas). */
+  --raio-xs:   4px;
   --raio-sm:   6px;
   --raio-md:   8px;
   --raio-lg:   12px;

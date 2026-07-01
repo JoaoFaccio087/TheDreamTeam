@@ -12,7 +12,7 @@
 
 /* Rótulo "A CAMPANHA" no cabeçalho (lado direito, alinhado à base) */
 .sim-label-campanha {
-  font-size: 0.78rem;
+  font-size: var(--fs-mini);
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--txt-soft);
@@ -39,7 +39,7 @@
 
 /* Rótulo da categoria (MODO, VELOCIDADE) */
 .sim-ctrl-rotulo {
-  font-size: 0.52rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 1.5px;
   color: var(--txt-soft);
@@ -49,12 +49,12 @@
 /* Pílulas de controle adaptadas ao fundo escuro do tema */
 .sim-pilula {
   padding: 5px 12px;
-  border-radius: 2px;
+  border-radius: var(--raio-xs);
   border: 1px solid var(--txt-soft);
   background: transparent;
   color: var(--txt-soft);
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
@@ -130,14 +130,14 @@
 /* Painel de estatísticas */
 .stats-campanha {
   border: 1px solid var(--txt-soft);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.03);
 }
 
 /* Rótulo de seção dentro da simulação (ESTATÍSTICAS) */
 .sim-rotulo {
-  font-size: 0.65rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 2.5px;
   text-transform: uppercase;
@@ -149,12 +149,12 @@
 .stats-tabela {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.78rem;
+  font-size: var(--fs-mini);
 }
 
 .stats-tabela thead th {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.56rem;
+  font-size: var(--fs-micro);
   letter-spacing: 1.5px;
   color: var(--txt-soft);
   padding: 4px 6px;
@@ -186,7 +186,7 @@
 /* Card: nasce com .expandido; perde a classe ao recolher */
 .partida-card {
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   padding: 10px 14px;
   margin-bottom: 8px;
   background: rgba(255, 255, 255, 0.03);
@@ -196,7 +196,7 @@
 
 /* Rótulo da fase: visível só quando expandido */
 .partida-fase {
-  font-size: 0.48rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--txt-soft);
@@ -237,11 +237,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.partida-card.expandido .partida-adversario-nome         { font-size: 1.25rem; line-height: 1.1; }
-.partida-card:not(.expandido) .partida-adversario-nome   { font-size: 1.05rem; }
+.partida-card.expandido .partida-adversario-nome         { font-size: var(--fs-lg); line-height: 1.1; }
+.partida-card:not(.expandido) .partida-adversario-nome   { font-size: var(--fs-md); }
 
 /* Edição: sempre pequena e apagada */
-.partida-adversario-ano { color: var(--txt-soft); font-size: 0.84rem; }
+.partida-adversario-ano { color: var(--txt-soft); font-size: var(--fs-sm); }
 
 /* Bloco direito: placar + relógio + mini-res + toggle */
 .partida-placar-bloco {
@@ -258,7 +258,7 @@
   transition: color 0.3s;
 }
 .partida-card.expandido .partida-placar         { font-size: 1.75rem; line-height: 1; }
-.partida-card:not(.expandido) .partida-placar   { font-size: 1.2rem; }
+.partida-card:not(.expandido) .partida-placar   { font-size: var(--fs-lg); }
 
 .partida-placar.vitoria { color: var(--accent); }
 .partida-placar.derrota { color: #E8593C; }
@@ -266,13 +266,13 @@
 /* Relógio: só quando expandido; some aos 90' via .escondida */
 .partida-relogio {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   color: var(--txt-soft);
 }
 .partida-card:not(.expandido) .partida-relogio { display: none !important; }
 
 /* Mini resultado (✓/✕/★): só quando recolhido e partida encerrada */
-.partida-mini-res { font-size: 1.05rem; }
+.partida-mini-res { font-size: var(--fs-md); }
 .partida-card.expandido .partida-mini-res { display: none; }
 .partida-mini-res.vitoria { color: var(--accent); }
 .partida-mini-res.derrota { color: #E8593C; }
@@ -282,7 +282,7 @@
   background: none;
   border: none;
   color: var(--txt-soft);
-  font-size: 0.75rem;
+  font-size: var(--fs-mini);
   cursor: pointer;
   padding: 0;
   line-height: 1;
@@ -307,7 +307,7 @@
 
 /* Linha genérica de evento */
 .partida-evento {
-  font-size: 0.75rem;
+  font-size: var(--fs-mini);
   line-height: 1.5;
 }
 
@@ -322,14 +322,14 @@
 
 /* Nome do clube ao lado do autor adversário — vermelho mais suave */
 .evento-adv-clube {
-  font-size: 0.65rem;
+  font-size: var(--fs-legenda);
   color: rgba(232, 89, 60, 0.65);
   font-style: normal;
 }
 
 /* Disputa de pênaltis: pequeno e centralizado */
 .evento-penaltis {
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   color: var(--txt-soft);
   font-style: italic;
   letter-spacing: 1px;
@@ -339,7 +339,7 @@
 
 /* Assistência: menor e mais suave que o nome do autor */
 .evento-assist {
-  font-size: 0.65rem;
+  font-size: var(--fs-legenda);
   color: var(--txt-soft);
   font-weight: normal;
 }
@@ -347,7 +347,7 @@
 /* Rótulo final: VITÓRIA ou DERROTA */
 .partida-resultado {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   letter-spacing: 2px;
 }
 
@@ -362,7 +362,7 @@
 }
 
 .penaltis-titulo {
-  font-size: 0.52rem;
+  font-size: var(--fs-micro);
   font-weight: 700;
   letter-spacing: 2px;
   color: var(--txt-soft);
@@ -383,7 +383,7 @@
 }
 
 .penaltis-col-nome {
-  font-size: 0.60rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--txt-soft);
@@ -400,7 +400,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 4px;
-  font-size: 0.76rem;
+  font-size: var(--fs-mini);
   line-height: 1.4;
   padding: 6px 2px;                                   /* respiro entre as cobranças */
   border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* separador sutil */
@@ -415,7 +415,7 @@
 }
 
 .pen-icone {
-  font-size: 0.80rem;
+  font-size: var(--fs-sm);
   flex-shrink: 0;
 }
 
@@ -425,7 +425,7 @@
 /* Placar corrente da disputa */
 .penaltis-placar-txt {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.88rem;
+  font-size: var(--fs-base);
   text-align: center;
   color: var(--txt);
   margin: 12px 0 0;
@@ -435,17 +435,17 @@
 /* TABELA DA FASE DE GRUPOS (aparece só no último jogo do grupo) */
 .grupo-tabela { margin-top: 12px; }
 .grupo-tabela-titulo {
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--txt-soft);
   margin: 0 0 8px;
 }
-.grupo-tabela table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.grupo-tabela table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
 .grupo-tabela thead th {
   text-align: left;
-  font-size: 0.58rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--txt-soft);
@@ -469,18 +469,18 @@
 /* Resumo condensado da Champions (fase de liga) — sem o tabelão de 10 */
 .fase-liga-resumo { margin-top: 12px; }
 .fl-titulo {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 1.5px;
+  font-size: var(--fs-legenda); font-weight: 700; letter-spacing: 1.5px;
   text-transform: uppercase; color: var(--txt-soft); margin: 0 0 6px;
 }
 .fl-status {
-  font-family: 'Archivo Black', sans-serif; font-size: 0.95rem;
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base);
   margin: 0 0 8px; letter-spacing: 0.3px;
 }
 .fl-status.ok  { color: #2BD46A; }
 .fl-status.out { color: #E0644C; }
-.fl-tabela { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.fl-tabela { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
 .fl-tabela thead th {
-  text-align: right; font-size: 0.55rem; letter-spacing: 0.5px; text-transform: uppercase;
+  text-align: right; font-size: var(--fs-micro); letter-spacing: 0.5px; text-transform: uppercase;
   color: var(--txt-soft); font-weight: 700; padding: 2px 8px 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -498,7 +498,7 @@
 .fl-tabela tr.fl-corte td { border-top: 2px solid rgba(224, 100, 76, 0.5); }
 .fl-tabela tr.fl-gap td { text-align: center; color: var(--txt-soft); letter-spacing: 2px; padding: 2px; border: none; }
 .fl-legenda {
-  font-size: 0.6rem; letter-spacing: 0.5px; text-transform: uppercase;
+  font-size: var(--fs-legenda); letter-spacing: 0.5px; text-transform: uppercase;
   color: var(--txt-soft); margin: 7px 0 0;
 }
 
@@ -512,7 +512,7 @@
 /* Painel da Tabela do Brasileirão (coluna da esquerda) */
 .tabela-brasileirao {
   border: 1px solid var(--linha);
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.03);
 }
@@ -524,12 +524,12 @@
   width: 100%;
   min-width: 460px;
   border-collapse: collapse;
-  font-size: 0.74rem;
+  font-size: var(--fs-mini);
 }
 
 .tb-tabela thead th {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.54rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.5px;
   color: var(--txt-soft);
   text-align: center;
@@ -569,7 +569,7 @@
 .sim-pular-tudo {
   align-self: center;          /* não estica: fica mais baixo que as pílulas */
   padding: 3px 10px;
-  font-size: 0.58rem;
+  font-size: var(--fs-micro);
   border-style: dashed;
 }
 .sim-pular-tudo:hover {
@@ -599,7 +599,7 @@
   position: relative;
   background: #181B21;
   border: 1px solid var(--linha);
-  border-radius: 10px;
+  border-radius: var(--raio-md);
   padding: 22px 24px;
   max-width: 360px;
   width: 100%;
@@ -607,12 +607,12 @@
 }
 .confirm-titulo {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
   color: var(--txt);
   margin-bottom: 8px;
 }
 .confirm-texto {
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--txt-soft);
   line-height: 1.5;
   margin-bottom: 18px;
@@ -637,7 +637,7 @@
   gap: 4px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 9px;
+  border-radius: var(--raio-md);
   padding: 4px;
   margin-bottom: 1rem;
 }
@@ -647,9 +647,9 @@
   border: none;
   cursor: pointer;
   padding: 9px 10px;
-  border-radius: 6px;
+  border-radius: var(--raio-sm);
   font-family: 'Archivo', sans-serif;
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   font-weight: 700;
   background: transparent;
   color: var(--txt-soft);
@@ -668,7 +668,7 @@
   padding: 0.4rem 0.2rem 1rem;
 }
 .chave-copa.escondida { display: none; }
-.chave-aviso { color: var(--txt-soft); font-size: 0.85rem; padding: 1.5rem 0.5rem; text-align: center; }
+.chave-aviso { color: var(--txt-soft); font-size: var(--fs-sm); padding: 1.5rem 0.5rem; text-align: center; }
 
 .ck-col {
   display: flex;
@@ -685,7 +685,7 @@
   gap: 8px;
 }
 .ck-fase {
-  font-size: 0.62rem;
+  font-size: var(--fs-legenda);
   font-weight: 700;
   letter-spacing: 1.5px;
   color: var(--txt-soft);
@@ -698,16 +698,16 @@
   gap: 2px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 7px;
+  border-radius: var(--raio-sm);
   padding: 4px;
 }
 .ck-jogo-meu { border-color: rgba(217, 178, 90, 0.55); box-shadow: 0 0 0 1px rgba(217, 178, 90, 0.25); }
 .ck-time {
-  font-size: 0.72rem;
+  font-size: var(--fs-mini);
   font-weight: 600;
   color: var(--txt);
   padding: 4px 7px;
-  border-radius: 4px;
+  border-radius: var(--raio-xs);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -726,12 +726,12 @@
   gap: 7px;
   justify-content: center;
   font-family: 'Archivo Black', sans-serif;
-  font-size: 0.85rem;
+  font-size: var(--fs-sm);
   color: var(--accent);
   background: rgba(43, 212, 106, 0.10);
   border: 1.5px solid var(--accent);
-  border-radius: 9px;
+  border-radius: var(--raio-md);
   padding: 12px 10px;
   text-align: center;
 }
-.ck-trofeu { color: #D9B25A; font-size: 1.1rem; }
+.ck-trofeu { color: #D9B25A; font-size: var(--fs-lg); }
