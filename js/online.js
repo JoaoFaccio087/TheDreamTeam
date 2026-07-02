@@ -1398,15 +1398,79 @@
     championsFimLiga = false;
     var confrontos = dados.confrontos || [];
     if (rodadaTituloEl) rodadaTituloEl.textContent = 'PLAYOFF · IDA E VOLTA';
-    if (rodadaPartidas) {
-      rodadaPartidas.innerHTML = '';
-      confrontos.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
-    }
-    if (rodadaProximos) rodadaProximos.innerHTML = '';
-    var proxTit = document.getElementById('proximos-titulo');
-    if (proxTit) proxTit.textContent = 'OITAVAS A SEGUIR';
     selecionarAbaRodada('partidas');
     subview('online-rodada');
+    var proxTit = document.getElementById('proximos-titulo');
+    if (proxTit) proxTit.textContent = 'OITAVAS A SEGUIR';
+    if (rodadaProximos) rodadaProximos.innerHTML = '';
+
+    // Meu confronto (se eu caí no playoff) e os demais.
+    var meuConf = null, outros = [];
+    confrontos.forEach(function (c) {
+      var souEu = String(c.alto.userId) === String(meuUserId) ||
+                  String(c.baixo.userId) === String(meuUserId);
+      if (souEu && !meuConf) meuConf = c; else outros.push(c);
+    });
+
+    if (!rodadaPartidas) return;
+    rodadaPartidas.innerHTML = '';
+
+    if (meuConf) {
+      // TENHO confronto → anima as duas mãos (ida e volta) e depois mostra o agregado.
+      // Os outros confrontos entram como cards de resultado, abaixo.
+      animarConfrontoPlayoff(meuConf, function () {
+        outros.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+      });
+    } else {
+      // NÃO tenho confronto (classifiquei direto no top 8, ou estou sozinho): aviso claro
+      // e os confrontos dos outros como resultado (sem animação). Cobre o caso misto.
+      var aviso = document.createElement('div');
+      aviso.className = 'po-aviso-direto';
+      aviso.innerHTML = '<span class="po-aviso-tit">Você já está nas oitavas! ✓</span>' +
+                        '<span class="po-aviso-sub">Acompanhe o playoff dos outros times abaixo.</span>';
+      rodadaPartidas.appendChild(aviso);
+      outros.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+    }
+  }
+
+  // Converte uma "mão" do playoff (ida/volta) no formato que cardPartidaGrande anima.
+  function maoParaPartida(c, mao, rotulo) {
+    var mandanteUid = mao.mandante;
+    var altoEhMandante = String(mandanteUid) === String(c.alto.userId);
+    var mandante = altoEhMandante ? c.alto : c.baixo;
+    var visitante = altoEhMandante ? c.baixo : c.alto;
+    return {
+      rotuloMao: rotulo,
+      homeUid: mandante.userId, homeNome: mandante.nome, homeBot: !!mandante.ehBot,
+      awayUid: visitante.userId, awayNome: visitante.nome, awayBot: !!visitante.ehBot,
+      gHome: mao.gMandante | 0, gAway: mao.gVisitante | 0,
+      fila: mao.fila || []
+    };
+  }
+
+  // Anima a ida, depois a volta, e então insere o card de agregado do confronto.
+  function animarConfrontoPlayoff(c, aoFim) {
+    var idaM   = maoParaPartida(c, c.ida,   '1ª MÃO');
+    var voltaM = maoParaPartida(c, c.volta, '2ª MÃO');
+
+    function animarMao(m, depois) {
+      rodadaPartidas.innerHTML = '';
+      var rotulo = document.createElement('p');
+      rotulo.className = 'po-mao-rotulo';
+      rotulo.textContent = m.rotuloMao;
+      rodadaPartidas.appendChild(rotulo);
+      aoFimDaAnimacao = depois;               // chamado quando a animação conclui
+      rodadaPartidas.appendChild(cardPartidaGrande(m));
+    }
+
+    animarMao(idaM, function () {
+      animarMao(voltaM, function () {
+        // Fim das duas mãos: mostra o card completo (agregado + classificado) e os outros.
+        rodadaPartidas.innerHTML = '';
+        rodadaPartidas.appendChild(cardPlayoff(c));
+        if (typeof aoFim === 'function') aoFim();
+      });
+    });
   }
 
   // Card de um confronto do playoff (ida/volta + agregado + classificado).

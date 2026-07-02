@@ -1524,3 +1524,17 @@
 /* Mensagem de classificação no banner de fim de grupos (verde = passou, vermelho = eliminado) */
 .gmb-texto.gmb-classificado { color: var(--accent); font-weight: var(--peso-forte); }
 .gmb-texto.gmb-eliminado    { color: #ff8a8a; font-weight: var(--peso-medio); }
+
+/* Playoff da Champions animado: rótulo da mão (1ª/2ª) e aviso para quem passou direto */
+.po-mao-rotulo {
+  text-align: center; font-size: var(--fs-legenda); letter-spacing: 0.14em;
+  color: var(--txt-soft); font-weight: var(--peso-forte); margin: 0 0 var(--sp-3);
+}
+.po-aviso-direto {
+  display: flex; flex-direction: column; gap: var(--sp-1); align-items: center;
+  text-align: center; padding: var(--sp-6); margin-bottom: var(--sp-4);
+  border: 1px solid var(--accent); border-radius: var(--raio-lg);
+  background: rgba(43, 212, 106, 0.06);
+}
+.po-aviso-tit { color: var(--accent); font-weight: var(--peso-forte); font-size: var(--fs-lg); }
+.po-aviso-sub { color: var(--txt-soft); font-size: var(--fs-sm); }
