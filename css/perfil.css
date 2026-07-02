@@ -143,21 +143,15 @@
 .hist-resumo-btn {
   align-self: flex-start;
   margin-top: 0.15rem;
-  background: transparent;
-  border: 1px solid var(--accent, #2BD46A);
-  color: var(--accent, #2BD46A);
   font-family: 'Archivo', sans-serif;
   font-size: var(--fs-mini);
   font-weight: var(--peso-medio);
   padding: 0.32rem 0.8rem;
   border-radius: var(--raio-pill);
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  transition: background 0.15s ease, color 0.15s ease;
 }
-.hist-resumo-btn:hover { background: var(--accent, #2BD46A); color: var(--bg, #0E0F13); }
 .hist-resumo-btn svg { width: 13px; height: 13px; }
 
 /* ── Responsivo ── */
