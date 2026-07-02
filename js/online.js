@@ -389,6 +389,38 @@
       renderPainelGrupos();
       verTimeDoUsuario(meuUserId);
       atualizarSubtituloGrupo();
+    } else if (dados.fase === 'sorteio') {
+      // Sorteio de grupos: reconstrói a grade JÁ preenchida (sem re-animar do zero).
+      if (sorteioTimer) { clearInterval(sorteioTimer); sorteioTimer = null; }
+      sorteioSeq      = dados.sequencia   || [];
+      sorteioLetras   = dados.gruposNomes || [];
+      sorteioPorGrupo = dados.porGrupo    || 4;
+      sorteioIdx      = sorteioSeq.length;
+      var compEl = document.getElementById('sorteio-comp');
+      if (compEl) compEl.textContent = (dados.competicao || '').toUpperCase();
+      subview('online-sorteio');
+      renderSorteioGrade();
+      // Preenche todos os slots de uma vez (animar=false) e finaliza.
+      sorteioSeq.forEach(function (item) { colocarNoSorteio(item, false); });
+      if (typeof finalizarSorteio === 'function') finalizarSorteio();
+    } else if (dados.fase === 'ready') {
+      // Tela de elencos (todos confirmando "pronto"): reconstrói elencos e a contagem.
+      (dados.jogadores || []).forEach(function (j) {
+        allPlayers[j.userId] = Object.assign(allPlayers[j.userId] || {}, j);
+      });
+      draftEhGrupo = false;
+      subview('online-elencos');
+      renderElencos();
+      var prontos = dados.prontos || 0, total = dados.total || 0;
+      if (elencosProntosCount) elencosProntosCount.textContent = prontos + '/' + total + ' Prontos';
+      // Se EU já estava pronto, mantém o botão nesse estado.
+      var eu = (dados.jogadores || []).find(function (j) { return String(j.userId) === String(meuUserId); });
+      if (eu && eu.pronto && btnElencosPronto) {
+        btnElencosPronto.disabled = true; btnElencosPronto.textContent = 'Aguardando...';
+      }
+      if (ehHost && prontos >= total && total >= 2 && btnElencosComecar) {
+        btnElencosComecar.classList.remove('escondida');
+      }
     }
   }
 

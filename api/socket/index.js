@@ -1378,6 +1378,31 @@ function setupSocket(server, frontendUrl) {
             grupoAtivo: grupoAtivo,
             elencos: sala.jogadores.map(j => ({ userId: j.userId, picks: j.picks || [] })),
           });
+        } else if (sala.status === 'sorteio') {
+          // Sorteio de grupos: manda a sequência completa; o cliente mostra o resultado JÁ
+          // preenchido (sem re-animar do zero).
+          const cfg = configGrupos(sala.competicao);
+          socket.emit('reconnect:state', {
+            fase: 'sorteio',
+            formato: sala.formato,
+            competicao: sala.competicao,
+            gruposNomes: cfg.letras,
+            porGrupo: cfg.porGrupo,
+            sequencia: sala.ordemSorteio || [],
+          });
+        } else if (sala.status === 'ready') {
+          // Tela de elencos (todos confirmando "pronto"): manda os elencos e a contagem.
+          socket.emit('reconnect:state', {
+            fase: 'ready',
+            formato: sala.formato,
+            competicao: sala.competicao,
+            jogadores: sala.jogadores.map(j => ({
+              userId: j.userId, username: j.username, nomeDoTime: j.nomeDoTime,
+              formacao: j.formacao, ehBot: !!j.ehBot, picks: j.picks || [], pronto: !!j.pronto,
+            })),
+            prontos: sala.jogadores.filter(j => j.pronto).length,
+            total: sala.jogadores.length,
+          });
         }
       } catch (err) {
         console.error('[socket room:join]', err);
