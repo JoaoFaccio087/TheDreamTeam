@@ -281,6 +281,7 @@
   function setupEventos() {
     socket.on('session:me',       onSessionMe);
     socket.on('room:state',       onRoomState);
+    socket.on('reconnect:state',  onReconnectState);
     socket.on('room:playerOrder', onPlayerOrder);
     socket.on('grupos:sorteio',   onGruposSorteio);
     socket.on('grupos:pular',     onGruposPular);
@@ -323,6 +324,40 @@
   // session:me — o servidor diz qual é o MEU userId (fonte da verdade da identidade)
   function onSessionMe(dados) {
     if (dados && dados.userId != null) meuUserId = dados.userId;
+  }
+
+  // reconnect:state — ao reconectar no meio de uma partida, o servidor manda um snapshot
+  // da fase atual (Fatia 1: rodada + mata-mata) para reconstruir a tela em vez de cair no
+  // lobby. Não anima nada: mostra o estado JÁ consolidado (classificação/chave prontas).
+  function onReconnectState(dados) {
+    if (!dados || !dados.fase) return;
+    formatoOnline = dados.formato || formatoOnline;
+    if (dados.competicao) window.__compOnline = dados.competicao;
+    mostrarTelaOnline();
+
+    if (dados.fase === 'rodada') {
+      rodadaAtual  = dados.rodada || rodadaAtual;
+      totalRodadas = dados.totalRodadas || totalRodadas;
+      ultimaArtilharia  = dados.artilharia   || [];
+      ultimaAssistencia = dados.assistencias || [];
+      simulandoRodada = false;
+      pararAnimacaoPartida();
+      configurarAbasRodada();
+      if (rodadaTituloEl) rodadaTituloEl.textContent = 'RODADA ' + rodadaAtual + ' DE ' + totalRodadas;
+      // Reconstrói a classificação/estatísticas (sem animar a rodada).
+      if (dados.grupos) renderGruposClassif(dados.grupos);
+      else              renderClassifLista(dados.classificacao || []);
+      renderStatsTodas(ultimaArtilharia, ultimaAssistencia);
+      // Sem partidas animando: mostra a aba de classificação/grupos (estado estável).
+      selecionarAbaRodada('classif');
+      if (rodadaPartidas) rodadaPartidas.innerHTML =
+        '<p class="rodada-reconectado">Você voltou! Aguardando a próxima ação da sala…</p>';
+      subview('online-rodada');
+    } else if (dados.fase === 'mata') {
+      // Reaproveita o fluxo da chave: onChaveState já reconstrói o mata-mata inteiro.
+      emMataMata = true;
+      onChaveState({ rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases });
+    }
   }
 
   // room:state — lobby

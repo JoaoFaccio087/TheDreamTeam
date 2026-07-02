@@ -284,6 +284,21 @@ function classificacaoTodosGrupos(sala) {
   return out;
 }
 
+// Classificação atual da LIGA (Brasileirão / fase de liga da Champions), ordenada.
+// Reutilizada pelo snapshot de reconexão para reconstruir a tabela sem recalcular a rodada.
+function montarClassificacaoAtual(sala) {
+  return sala.jogadores.map(j => {
+    const s = sala.resultados[j.userId] || { vitorias:0, empates:0, derrotas:0, gf:0, ga:0 };
+    return {
+      userId: j.userId, username: j.username, nomeDoTime: j.nomeDoTime, ehBot: !!j.ehBot,
+      vitorias: s.vitorias, empates: s.empates, derrotas: s.derrotas, gf: s.gf, ga: s.ga,
+      jogos:  s.vitorias + s.empates + s.derrotas,
+      pontos: s.vitorias * 3 + s.empates,
+      saldo:  s.gf - s.ga,
+    };
+  }).sort((a, b) => (b.pontos - a.pontos) || (b.saldo - a.saldo) || (b.gf - a.gf));
+}
+
 // Apura os classificados: 2 primeiros de cada grupo + melhores terceiros até a chave.
 // Copa → 32 (24 diretos + 8 melhores 3os). Libertadores → 16 (só os 2 primeiros).
 function apurarClassificados(sala) {
@@ -1310,6 +1325,33 @@ function setupSocket(server, frontendUrl) {
         socket.join(code);
         socket.salaAtual = code;
         io.to(code).emit('room:state', buildRoomState(sala));
+
+        // ── RECONEXÃO (Fatia 1: rodada + mata-mata) ──────────────────────────
+        // Se a sala já passou do lobby, reenvia ao SOCKET que acabou de (re)entrar um
+        // snapshot da fase atual, para o cliente reconstruir a tela certa em vez de
+        // ficar preso no lobby. Só para este socket (socket.emit, não broadcast).
+        if (sala.status === 'playing') {
+          socket.emit('reconnect:state', {
+            fase: 'rodada',
+            formato: sala.formato,
+            competicao: sala.competicao,
+            rodada: sala.rodadaAtual,
+            totalRodadas: sala.totalRodadas,
+            classificacao: montarClassificacaoAtual(sala),
+            artilharia:   Object.entries(sala.statsGols).sort((a,b)=>b[1]-a[1]).slice(0,18).map(([nome,gols])=>({nome,gols})),
+            assistencias: Object.entries(sala.statsAssists).sort((a,b)=>b[1]-a[1]).slice(0,18).map(([nome,assists])=>({nome,assists})),
+            grupos: (sala.formato === 'mata') ? classificacaoTodosGrupos(sala) : null,
+          });
+        } else if (sala.status === 'mata' && sala.chave) {
+          socket.emit('reconnect:state', {
+            fase: 'mata',
+            formato: sala.formato,
+            competicao: sala.competicao,
+            rounds: sala.chave.rounds,
+            rodadaAtual: sala.chave.rodadaAtual,
+            fases: sala.chave.fases,
+          });
+        }
       } catch (err) {
         console.error('[socket room:join]', err);
         socket.emit('erro', 'Erro ao entrar na sala');

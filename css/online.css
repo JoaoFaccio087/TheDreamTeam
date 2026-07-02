@@ -1538,3 +1538,9 @@
 }
 .po-aviso-tit { color: var(--accent); font-weight: var(--peso-forte); font-size: var(--fs-lg); }
 .po-aviso-sub { color: var(--txt-soft); font-size: var(--fs-sm); }
+
+/* Mensagem ao reconectar no meio de uma partida (Fatia 1 da reconexão) */
+.rodada-reconectado {
+  text-align: center; color: var(--txt-soft); font-size: var(--fs-sm);
+  padding: var(--sp-6); border: 1px dashed var(--linha); border-radius: var(--raio-md);
+}
