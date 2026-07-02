@@ -310,6 +310,13 @@
       // Destrava os botões do lobby caso uma ação (ex.: Começar) tenha falhado.
       if (btnLobbyComecar) { btnLobbyComecar.disabled = false; btnLobbyComecar.textContent = 'Começar →'; }
       if (btnLobbyPronto)  { btnLobbyPronto.disabled  = false; }
+      // Se um pick de draft foi rejeitado pelo servidor, reabilita o botão para o jogador
+      // tentar de novo (evita ficar preso em "Escolhendo..."). Se ainda é a vez dele, a vaga
+      // continua clicável; senão, o servidor já terá enviado o estado correto.
+      if (modalDraftPickSelecionar) {
+        modalDraftPickSelecionar.disabled    = !selectedPlayer;
+        modalDraftPickSelecionar.textContent = 'Selecionar';
+      }
     });
   }
 
@@ -725,14 +732,17 @@
   }
 
   // Envia o pick no canal certo conforme o modo (snake ou grupo).
+  // A VEZ é validada de forma autoritativa no SERVIDOR (ele rejeita picks fora de hora com
+  // 'erro'). Por isso NÃO travamos localmente por gPodeEscolher/minhaVez: se a flag local
+  // dessincronizar (timing de rede), o clique não deve ficar preso — mandamos e o servidor
+  // decide. Isso corrige o travamento da vaga no draft sem risco de pick duplicado.
   function enviarPick() {
     if (!selectedPlayer || selectedSlot === null) return false;
+    if (!socket || !socket.connected) return false;
     if (draftEhGrupo) {
-      if (!gPodeEscolher) return false;
       socket.emit('gdraft:pick', { playerId: selectedPlayer.id, slotIndex: selectedSlot });
       gPodeEscolher = false;
     } else {
-      if (String(draftTurnoUid) !== String(meuUserId)) return false;
       socket.emit('draft:pick', { playerId: selectedPlayer.id, slotIndex: selectedSlot });
       minhaVez = false;
     }
