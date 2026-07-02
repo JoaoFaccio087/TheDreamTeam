@@ -101,6 +101,10 @@
   function mostrarTelaOnline() {
     document.querySelectorAll('.tela').forEach(function (t) { t.classList.add('escondida'); });
     telaOnline.classList.remove('escondida');
+    // Cinto de segurança: garante que a barra de fim de campanha não "vaze" visível de uma
+    // sessão anterior ao entrar numa nova experiência online.
+    if (fimAcoesFixo) fimAcoesFixo.classList.add('escondida');
+    if (fimAcoes)     fimAcoes.classList.add('escondida');
   }
 
   function mostrarTelaInicial() {
@@ -913,6 +917,10 @@
     var ehGrupos = formatoOnline === 'mata';
     gruposEncerrados = false;
     emMataMata = false;
+    // Esconde a barra de fim de campanha: ela pode ter ficado visível de uma campanha
+    // ANTERIOR na mesma aba. Sem este reset, a barra aparecia já na rodada 1 da nova partida.
+    if (fimAcoesFixo) fimAcoesFixo.classList.add('escondida');
+    if (fimAcoes)     fimAcoes.classList.add('escondida');
     var bannerMataEl = document.getElementById('grupos-mata-banner');
     if (bannerMataEl) bannerMataEl.classList.add('escondida');
     configurarAbasRodada();
