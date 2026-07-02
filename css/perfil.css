@@ -2,9 +2,9 @@
    Reaproveitam .modal-auth / .auth-card / .modal-auth-fechar / .auth-logo-titulo
    / .auth-divisor / .auth-label / .auth-input (de auth.css). */
 
-.perfil-card    { max-width: 560px; text-align: left; padding: 32px 38px 30px; max-height: 90vh; }
+.perfil-card    { max-width: 560px; text-align: left; padding: 32px 38px 30px; max-height: 90vh; display: flex; flex-direction: column; }
 .editar-card    { max-width: 600px; text-align: left; padding: 30px 36px 26px; max-height: 90vh; }
-.historico-card { max-width: 620px; text-align: left; padding: 30px 38px 28px; max-height: 90vh; }
+.historico-card { max-width: 620px; text-align: left; padding: 30px 38px 28px; max-height: 90vh; display: flex; flex-direction: column; }
 
 /* ── Topo: avatar + identidade + lápis ── */
 .perfil-topo { display: flex; align-items: center; gap: var(--sp-6); margin: 0.3rem 0 0.4rem; }

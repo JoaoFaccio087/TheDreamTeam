@@ -144,8 +144,32 @@ if (ddCadastro) {
 if (ddLogout) {
   ddLogout.addEventListener('click', function () {
     fecharDropdown();
+    var modal = document.getElementById('modal-logout');
+    if (modal) modal.classList.remove('escondida');
+    else { limparSessao(); atualizarDropdown(null); }   // fallback se o modal não existir
+  });
+}
+
+// Confirmação do logout: só desconecta ao confirmar; feedback rápido de "Saindo…".
+var modalLogout          = document.getElementById('modal-logout');
+var modalLogoutCancelar  = document.getElementById('modal-logout-cancelar');
+var modalLogoutConfirmar = document.getElementById('modal-logout-confirmar');
+if (modalLogoutCancelar) {
+  modalLogoutCancelar.addEventListener('click', function () {
+    if (modalLogout) modalLogout.classList.add('escondida');
+  });
+}
+if (modalLogoutConfirmar) {
+  modalLogoutConfirmar.addEventListener('click', function () {
+    modalLogoutConfirmar.disabled = true;
+    modalLogoutConfirmar.textContent = 'Saindo…';
     limparSessao();
     atualizarDropdown(null);
+    setTimeout(function () {
+      if (modalLogout) modalLogout.classList.add('escondida');
+      modalLogoutConfirmar.disabled = false;
+      modalLogoutConfirmar.textContent = 'Sair';
+    }, 350);
   });
 }
 

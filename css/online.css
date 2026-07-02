@@ -1541,3 +1541,15 @@
   text-align: center; color: var(--txt-soft); font-size: var(--fs-sm);
   padding: var(--sp-6); border: 1px dashed var(--linha); border-radius: var(--raio-md);
 }
+
+/* Botão secundário dentro dos modais de confirmação (Cancelar): contorno, não preenchido,
+   para diferenciar da ação principal. Aplica a todos os .modal-confirm (logout, sair, pular). */
+.modal-confirm-acoes .btn-rolar.btn-sec {
+  background: transparent;
+  color: var(--txt-soft);
+  border: 1px solid var(--txt-soft);
+}
+.modal-confirm-acoes .btn-rolar.btn-sec:hover {
+  background: var(--txt-soft);
+  color: var(--bg);
+}
