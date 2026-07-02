@@ -357,6 +357,38 @@
       // Reaproveita o fluxo da chave: onChaveState já reconstrói o mata-mata inteiro.
       emMataMata = true;
       onChaveState({ rounds: dados.rounds, rodadaAtual: dados.rodadaAtual, fases: dados.fases });
+    } else if (dados.fase === 'draft') {
+      // Draft snake (Nível A): reconstrói a tela sem reabrir cartas. Aplica elencos parciais,
+      // ordem e a vez atual; se for minha vez, o jogador clica na vaga para escolher.
+      (dados.elencos || []).forEach(function (e) {
+        if (!allPlayers[e.userId]) allPlayers[e.userId] = {};
+        allPlayers[e.userId].picks = e.picks || [];
+      });
+      if (dados.ordemBase && dados.ordemBase.length) ordemDraftIds = dados.ordemBase;
+      if (dados.picks) picksSnapshot = dados.picks;
+      draftTurnoUid = dados.turnoUid;
+      minhaVez = String(dados.turnoUid) === String(meuUserId);
+      draftEhGrupo = false;
+      subview('online-draft');
+      renderOrdemLista();
+      mostrarCampoDaVez(meuUserId);
+      renderMeuTime();
+      if (draftCarouselWrap) draftCarouselWrap.classList.add('escondida');
+      if (minhaVez) destacarVagasAbertas();
+    } else if (dados.fase === 'gdraft') {
+      // Draft de grupo (Nível A): reconstrói elencos, grupos e o grupo ativo.
+      (dados.elencos || []).forEach(function (e) {
+        if (!allPlayers[e.userId]) allPlayers[e.userId] = {};
+        allPlayers[e.userId].picks = e.picks || [];
+      });
+      draftEhGrupo = true;
+      gGrupos = dados.grupos || {};
+      gGrupoAtivo = dados.grupoAtivo || null;
+      gVisualizandoUid = null;
+      subview('online-draft');
+      renderPainelGrupos();
+      verTimeDoUsuario(meuUserId);
+      atualizarSubtituloGrupo();
     }
   }
 

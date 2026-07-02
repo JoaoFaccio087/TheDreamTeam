@@ -1351,6 +1351,33 @@ function setupSocket(server, frontendUrl) {
             rodadaAtual: sala.chave.rodadaAtual,
             fases: sala.chave.fases,
           });
+        } else if (sala.status === 'draft') {
+          // Draft snake: contagem de picks por jogador (p/ a lista de ordem), de quem é a vez,
+          // e os elencos parciais de todos (p/ reconstruir o campo). Nível A: NÃO reabre cartas.
+          const picksSnap = {};
+          sala.jogadores.forEach(j => { picksSnap[j.userId] = (j.picks || []).filter(Boolean).length; });
+          const daVez = (sala.indiceTurno < (sala.ordemDraft || []).length)
+            ? sala.ordemDraft[sala.indiceTurno] : null;
+          socket.emit('reconnect:state', {
+            fase: 'draft',
+            formato: sala.formato,
+            competicao: sala.competicao,
+            ordemBase: sala.ordemBase || [],
+            picks: picksSnap,
+            turnoUid: daVez,
+            elencos: sala.jogadores.map(j => ({ userId: j.userId, picks: j.picks || [] })),
+          });
+        } else if (sala.status === 'gdraft') {
+          // Draft de grupo: grupo ativo, de quem é a vez no grupo, e os elencos parciais.
+          const grupoAtivo = (configGrupos(sala.competicao).letras || [])[sala.grupoDraftIdx] || null;
+          socket.emit('reconnect:state', {
+            fase: 'gdraft',
+            formato: sala.formato,
+            competicao: sala.competicao,
+            grupos: sala.grupos || {},
+            grupoAtivo: grupoAtivo,
+            elencos: sala.jogadores.map(j => ({ userId: j.userId, picks: j.picks || [] })),
+          });
         }
       } catch (err) {
         console.error('[socket room:join]', err);
