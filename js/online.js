@@ -515,7 +515,49 @@
   var gTotalTurnos      = 6;
   var gVisualizandoUid  = null;   // uid do time que estou olhando no campo (null = o meu)
 
+  // ── RESET CENTRAL ─────────────────────────────────────────────────────────
+  // Zera TODO o estado de PARTIDA de uma vez, para nada vazar de uma campanha para a
+  // seguinte na mesma aba (barra de fim, chave, draft, animação, stats...).
+  // PRESERVA de propósito o estado de IDENTIDADE/SALA: meuUserId, codigoSala, hostUserId,
+  // ehHost e a LISTA de jogadores da sala (só limpa os picks de cada um). Chamada ao entrar
+  // numa sala e ao iniciar uma nova campanha.
+  function resetEstadoOnline() {
+    // Fluxo / fase
+    rodadaAtual = 0; totalRodadas = 5;
+    chaveOnline = null; championsFimLiga = false; championsClassifFinal = null;
+    gruposEncerrados = false; emMataMata = false; simulandoRodada = false;
+    seguidoKey = null;
+    // Draft (snake + grupo)
+    poolLocal = []; poolPorPosicao = {}; carouselIndex = 0;
+    selectedPlayer = null; selectedSlot = null; repositionFrom = null;
+    ordemDraftIds = []; picksSnapshot = {}; indiceTurnoAtual = 0;
+    draftPicksTurno = 1; draftPicksFeitos = 0; draftTurnoUid = null;
+    draftResortsRestantes = 3; modalPoolPos = []; modalPosPage = 0;
+    minhaVez = false;
+    draftEhGrupo = false; gPodeEscolher = false; gGrupos = {}; gOrdemGrupos = [];
+    gPicksNecessarios = 11; gGrupoAtivo = null; gPickNum = 1; gPicksSnap = {};
+    gPicksTurno = 1; gPicksFeitosTurno = 0; gTotalTurnos = 6; gVisualizandoUid = null;
+    // Animação / skip
+    pararAnimacaoPartida(); aoFimDaAnimacao = null;
+    euVoteiPular = false; skipVotos = 0; skipTotal = 0;
+    // Fim de campanha / estatísticas
+    onlineRankingFinal = null; meuRankingFinal = null;
+    ultimaArtilharia = []; ultimaAssistencia = []; rankingFinalCache = [];
+    mapaGolsCompleto = {}; mapaAssistsCompleto = {};
+    _campanhaOnlineSalva = false;
+    // Picks dos jogadores da sala (mantém os jogadores; limpa só os elencos da partida anterior)
+    Object.keys(allPlayers || {}).forEach(function (uid) {
+      if (allPlayers[uid]) allPlayers[uid].picks = [];
+    });
+    // UI que pode ter ficado visível de uma partida anterior
+    if (fimAcoesFixo) fimAcoesFixo.classList.add('escondida');
+    if (fimAcoes)     fimAcoes.classList.add('escondida');
+    var bannerMata = document.getElementById('grupos-mata-banner');
+    if (bannerMata) bannerMata.classList.add('escondida');
+  }
+
   function onGdraftStart(dados) {
+    resetEstadoOnline();          // nova campanha: limpa o estado da partida anterior
     draftEhGrupo      = true;
     gGrupos           = (dados && dados.grupos) || {};
     gOrdemGrupos      = (dados && dados.ordemGrupos) || [];
@@ -753,6 +795,7 @@
 
   // room:playerOrder — início do draft
   function onPlayerOrder(dados) {
+    resetEstadoOnline();          // nova campanha: limpa o estado da partida anterior
     ordemDraftIds    = dados.ordem || [];
     indiceTurnoAtual = 0;
     draftResortsRestantes = 3;   // 3 re-sorteios para todo o draft (igual ao offline)
