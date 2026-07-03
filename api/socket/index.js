@@ -770,6 +770,12 @@ function rankingMata(sala) {
   });
   const final = chave.rounds[chave.rounds.length - 1][0];
   if (final && final.winner) elim[final.winner.userId] = chave.rounds.length;
+  // Jogadores que caíram ANTES do mata-mata (ex.: fase de grupos da Liberta) não aparecem em
+  // nenhum confronto da chave. Sem isto, ficam fora do ranking e o "Ver Resumo" fica indisponível
+  // para eles. Incluímos todos com rank -1 (abaixo de quem chegou ao mata-mata).
+  sala.jogadores.forEach(j => {
+    if (!(j.userId in elim)) elim[j.userId] = -1;
+  });
   return Object.keys(elim).sort((a, b) => elim[b] - elim[a]).map(uid => {
     const j = sala.jogadores.find(x => String(x.userId) === String(uid)) || {};
     const s = sala.resultados[uid] || {};

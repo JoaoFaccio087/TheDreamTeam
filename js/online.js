@@ -2088,7 +2088,17 @@
 
   function abrirResumoOnline() {
     var overlay = document.getElementById('resumo-overlay');
-    if (!overlay || !meuRankingFinal) return;
+    if (!overlay) return;
+    // Defesa: se o ranking do servidor não trouxe o jogador (ex.: eliminado cedo), monta um
+    // ranking mínimo a partir dos dados locais para o botão nunca ficar mudo.
+    if (!meuRankingFinal) {
+      var elencoLocal = allPlayers[meuUserId] || {};
+      meuRankingFinal = {
+        userId: meuUserId, nomeDoTime: elencoLocal.nomeDoTime || 'Seu time',
+        vitorias: 0, empates: 0, derrotas: 0, gf: 0, ga: 0,
+        picks: elencoLocal.picks || [], formacao: elencoLocal.formacao || '4-3-3',
+      };
+    }
     var me = meuRankingFinal;
     // O ranking final do servidor pode não incluir o elenco (picks) nem a formação —
     // nesse caso o mapa de escalação e a lista sairiam vazios. Buscamos o elenco que
