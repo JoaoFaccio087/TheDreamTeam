@@ -908,7 +908,6 @@
   width: 100%; padding: 11px 14px; border-radius: var(--raio-xs);
   font-family: 'Archivo Black', sans-serif; font-size: var(--fs-mini); letter-spacing: 0.5px;
 }
-.fim-btn-sec { color: var(--txt-soft); border-color: var(--txt-soft); }
 .fim-btn-sec:hover { background: var(--txt-soft); color: var(--bg); }
 
 .modal-premiacao {

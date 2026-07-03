@@ -207,3 +207,16 @@ body {
   background: var(--accent);
   color: var(--bg);
 }
+
+/* ── Botão canônico: contorno cinza (secundário neutro) ───────────────────────
+   Núcleo compartilhado (transparente + borda/cor --txt-soft) por .btn-secundario e
+   .fim-btn-sec. O HOVER é diferente em cada um DE PROPÓSITO (btn-secundario clareia;
+   fim-btn-sec preenche), então o hover fica na folha de cada um, não aqui. */
+.btn-outline-soft,
+.btn-secundario,
+.fim-btn-sec {
+  background: transparent;
+  color: var(--txt-soft);
+  border: 1px solid var(--txt-soft);
+  cursor: pointer;
+}

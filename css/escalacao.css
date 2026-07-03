@@ -30,14 +30,10 @@
 /* Botão secundário: Voltar — transparente com borda suave */
 .btn-secundario {
   display: inline-block;
-  background: transparent;
-  border: 1px solid var(--txt-soft);
-  color: var(--txt-soft);
   font-family: 'Archivo', sans-serif;
   font-size: var(--fs-base);
   padding: 10px 24px;
   border-radius: var(--raio-xs);          /* quadrado, consistente com os outros botões */
-  cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
