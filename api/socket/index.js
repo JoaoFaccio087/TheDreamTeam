@@ -1378,6 +1378,35 @@ function setupSocket(server, frontendUrl) {
             grupoAtivo: grupoAtivo,
             elencos: sala.jogadores.map(j => ({ userId: j.userId, picks: j.picks || [] })),
           });
+          // Re-sincroniza o TURNO: se o jogador que voltou está no grupo ativo e ainda NÃO
+          // fechou o turno, reenvia o estado do turno e as cartas dele — assim ele volta a
+          // poder escolher em vez de ficar travado. (Corrige a trava ao reconectar no draft.)
+          const uidsAtivo = (sala.grupos && grupoAtivo) ? (sala.grupos[grupoAtivo] || []) : [];
+          const estaNoGrupoAtivo = uidsAtivo.some(u => String(u) === String(userId));
+          const jaFechou = (sala.pickedThisTurn || []).some(u => String(u) === String(userId));
+          if (estaNoGrupoAtivo && !jaFechou) {
+            const jog = sala.jogadores.find(j => j.userId === userId);
+            if (jog && !jog.ehBot) {
+              const alvo = picksDoTurnoGrupo(sala.pickRodada);
+              socket.emit('gdraft:turnoGrupo', {
+                grupo: grupoAtivo,
+                pickNumero:  sala.pickRodada + 1,
+                totalPicks:  sala.totalPicksNecessarios,
+                picksTurno:  alvo,
+                turnoNum:    sala.pickRodada + 1,
+                totalTurnos: TURNOS_DRAFT,
+                uids: uidsAtivo,
+                segundos:    30,
+                picks:       picksSnapshotDe(sala),
+              });
+              socket.emit('gdraft:yourPick', {
+                grupo: grupoAtivo,
+                porPosicao:       cartasParaJogador(sala, jog),
+                picksTurno:       alvo,
+                picksFeitosTurno: (sala.picksTurnoPorUid && sala.picksTurnoPorUid[userId]) || 0,
+              });
+            }
+          }
         } else if (sala.status === 'sorteio') {
           // Sorteio de grupos: manda a sequência completa; o cliente mostra o resultado JÁ
           // preenchido (sem re-animar do zero).
