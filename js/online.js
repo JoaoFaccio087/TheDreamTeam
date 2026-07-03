@@ -2553,10 +2553,15 @@
     var jog   = allPlayers[uid] || {};
     var sou   = String(uid) === String(meuUserId);
     var ehBot = !!jog.ehBot;
+    // "Realmente posso agir agora?" — no grupo depende de gPodeEscolher; no snake, de ser a vez.
+    // Sem isto, o header dizia "É a SUA vez!" mesmo após eu já ter escolhido (contradizendo o
+    // painel "você já escolheu"), e um clique na vaga travava (servidor rejeita).
+    var podeAgir = draftEhGrupo ? gPodeEscolher : (String(draftTurnoUid) === String(meuUserId));
     // HEADER primeiro, sem depender do campo — assim nunca fica preso em "—".
     if (draftTituloEl) {
       var tag = ehBot ? ' <span class="draft-bot-tag">BOT</span>' : '';
-      draftTituloEl.innerHTML = (sou ? 'É a SUA vez!' : 'É a vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
+      var rotuloSou = podeAgir ? 'É a SUA vez!' : 'Seu time';
+      draftTituloEl.innerHTML = (sou ? rotuloSou : 'É a vez de: ' + htmlEsc(nomeUsuario(jog))) + tag;
     }
     if (!draftCampo) return;
     if (draftCampoLabel) {
@@ -2565,8 +2570,7 @@
     renderCampoOnline(draftCampo, jog.picks || [], jog.formacao || '4-3-3');
     // Reacende as vagas abertas quando este é o MEU campo e ainda posso agir
     // (ex.: um colega de grupo escolheu e disparou um re-render no meio da minha vez).
-    var podeAgora = draftEhGrupo ? gPodeEscolher : (String(draftTurnoUid) === String(meuUserId));
-    if (sou && podeAgora && repositionFrom === null) destacarVagasAbertas();
+    if (sou && podeAgir && repositionFrom === null) destacarVagasAbertas();
   }
   function verTimeDoUsuario(uid) {
     var sou = !uid || String(uid) === String(meuUserId);
