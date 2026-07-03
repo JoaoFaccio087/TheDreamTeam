@@ -1399,7 +1399,16 @@
       if (formatoOnline === 'champions') {
         if (championsFimLiga && ehHost) {
           btnRodadaProxima.disabled    = false;
-          btnRodadaProxima.textContent = 'Ir ao playoff →';
+          // Se EU passei direto (top 8), não vou JOGAR o playoff — só avanço a sala por ele.
+          // O texto reflete isso para não sugerir que vou disputar a repescagem.
+          var passeiDireto = false;
+          if (championsClassifFinal) {
+            var minhaPos = championsClassifFinal.findIndex(function (p) {
+              return String(p.userId) === String(meuUserId);
+            });
+            passeiDireto = (minhaPos >= 0 && minhaPos < 8);
+          }
+          btnRodadaProxima.textContent = passeiDireto ? 'Avançar (playoff) →' : 'Ir ao playoff →';
           btnRodadaProxima.classList.remove('escondida');
         } else if (!ehHost && rodadaAguardandoHost) {
           rodadaAguardandoHost.textContent = 'Fase de liga encerrada! Aguardando o host…';
