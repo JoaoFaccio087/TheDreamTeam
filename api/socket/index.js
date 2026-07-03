@@ -942,12 +942,20 @@ function iniciarTurno(io, sala) {
     io.to(jogador.socketId).emit('draft:yourTurn', { pool: cards, picksTurno, picksFeitosTurno: sala.picksNoTurno });
   }
 
+  agendarAutoPickSnake(io, sala, jogador, 30_000);
+}
+
+// Auto-pick do turno snake: se o jogador da vez não escolher no tempo, completa por ele.
+// Extraído para função nomeada para poder ser REAGENDADO (janela de graça na desconexão).
+function agendarAutoPickSnake(io, sala, jogador, ms) {
+  if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+  const picksTurno = picksDoTurno(sala, sala.indiceTurno);
   sala.timerDraft = setTimeout(() => {
     const faltam = picksTurno - sala.picksNoTurno;
     for (let p = 0; p < faltam && jogador; p++) colocarEmVagaAberta(io, sala, jogador, false);
     sala.picksNoTurno = 0;
     avancarTurno(io, sala);
-  }, 30_000);
+  }, ms);
 }
 
 function avancarTurno(io, sala) {
@@ -1145,6 +1153,12 @@ function colocarEmVagaGrupo(io, sala, jogador, ehBot) {
 }
 
 // Inicia o turno do grupo da vez: todos do grupo escolhem EM PARALELO.
+// Quantos picks ainda faltam a um jogador NESTE turno de grupo (limitado pelo total do elenco).
+function faltaNoTurnoGrupo(sala, jog, alvo, total) {
+  const jaTem = (jog.picks || []).filter(Boolean).length;
+  return Math.max(0, Math.min(alvo - (sala.picksTurnoPorUid[jog.userId] || 0), total - jaTem));
+}
+
 // Cada jogador faz picksDoTurnoGrupo() escolhas (2, ou 1 no último turno) antes de fechar.
 function iniciarTurnoGrupo(io, sala) {
   const cfg   = configGrupos(sala.competicao);
@@ -1157,10 +1171,7 @@ function iniciarTurnoGrupo(io, sala) {
   sala.picksTurnoPorUid = {};   // contador de picks feitos no turno, por uid
 
   // Quantas picks faltam pro jogador neste turno (limitado pelas vagas restantes até 11).
-  const faltaNoTurno = (jog) => {
-    const jaTem = (jog.picks || []).filter(Boolean).length;
-    return Math.max(0, Math.min(alvo - (sala.picksTurnoPorUid[jog.userId] || 0), total - jaTem));
-  };
+  const faltaNoTurno = (jog) => faltaNoTurnoGrupo(sala, jog, alvo, total);
 
   io.to(sala.codigo).emit('gdraft:turnoGrupo', {
     grupo,
@@ -1203,18 +1214,27 @@ function iniciarTurnoGrupo(io, sala) {
     return;
   }
 
+  agendarAutoPickGrupo(io, sala, uids, 30_000);
+}
+
+// Auto-pick do turno de grupo: quem não escolheu no tempo recebe picks automáticos.
+// Extraído para função nomeada para poder ser REAGENDADO (janela de graça na desconexão).
+function agendarAutoPickGrupo(io, sala, uids, ms) {
+  if (sala.timerDraft) { clearTimeout(sala.timerDraft); sala.timerDraft = null; }
+  const alvo  = picksDoTurnoGrupo(sala.pickRodada);
+  const total = sala.totalPicksNecessarios || 11;
   sala.timerDraft = setTimeout(() => {
     uids.forEach(uid => {
       if (sala.pickedThisTurn.indexOf(uid) >= 0) return;
       const jog = sala.jogadores.find(j => j.userId === uid);
       if (jog) {
-        let faltam = faltaNoTurno(jog);
+        let faltam = faltaNoTurnoGrupo(sala, jog, alvo, total);
         for (let p = 0; p < faltam; p++) colocarEmVagaGrupo(io, sala, jog, false);
       }
       sala.pickedThisTurn.push(uid);
     });
     avancarGrupoDraft(io, sala);
-  }, 30_000);
+  }, ms);
 }
 
 // Passa pro próximo grupo; ao fechar a volta, vai pra próxima rodada de pick.
@@ -1955,6 +1975,22 @@ function setupSocket(server, frontendUrl) {
         // Em draft/jogo, mantém a vaga para permitir reconexão.
         const jog = sala.jogadores.find(j => j.userId === userId);
         if (jog) { jog.conectado = false; jog.socketId = null; }
+
+        // Janela de graça (30s) para reconectar antes do auto-pick assumir, para o jogador não
+        // perder a vez por uma queda rápida — e SEM travar a sala (o timeout garante o avanço).
+        if (jog && !jog.ehBot) {
+          if (sala.status === 'gdraft') {
+            const cfg = configGrupos(sala.competicao);
+            const grupoAtivo = cfg.letras[sala.grupoDraftIdx];
+            const uidsAtivo = (sala.grupos && grupoAtivo) ? (sala.grupos[grupoAtivo] || []) : [];
+            const noGrupoAtivo = uidsAtivo.some(u => String(u) === String(userId));
+            const jaFechou = (sala.pickedThisTurn || []).some(u => String(u) === String(userId));
+            if (noGrupoAtivo && !jaFechou) agendarAutoPickGrupo(io, sala, uidsAtivo, 30_000);
+          } else if (sala.status === 'draft') {
+            const daVez = sala.ordemDraft[sala.indiceTurno];
+            if (String(daVez) === String(userId)) agendarAutoPickSnake(io, sala, jog, 30_000);
+          }
+        }
       }
 
       // Se a sala ficou sem humano (presente/conectado), descarta — evita salas órfãs.
