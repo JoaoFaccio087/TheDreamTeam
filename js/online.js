@@ -1248,14 +1248,19 @@
   // Monta a lista de confrontos da 1ª fase do mata-mata (após o fim dos grupos),
   // destacando o meu. Retorna null se o mata-mata ainda não foi sorteado.
   function cardProximoAdversarioMata() {
-    if (!gruposEncerrados) return null;
+    // Grupos (Copa/Liberta) usam gruposEncerrados; a Champions não tem grupos, então também
+    // vale quando já estamos no mata-mata (emMataMata). Sem isto, a coluna nunca aparecia na Champions.
+    if (!gruposEncerrados && !emMataMata) return null;
     // Ainda animando a última rodada dos grupos: NÃO revela o mata-mata na coluna lateral.
     // Os confrontos só aparecem quando a simulação/animação termina (concluir() re-renderiza).
     if (animacaoAtiva || simulandoRodada) return null;
     if (!chaveOnline || !chaveOnline.rounds || !chaveOnline.rounds.length) return null;
-    var primeira = chaveOnline.rounds[0] || [];
+    // Usa a fase ATUAL da chave (não a primeira fixa), senão a coluna mostra sempre "16-avos"
+    // mesmo depois de avançar para oitavas/quartas.
+    var idxFase  = Math.min(chaveOnline.rodadaAtual || 0, chaveOnline.rounds.length - 1);
+    var primeira = chaveOnline.rounds[idxFase] || [];
     if (!primeira.length) return null;
-    var faseNome = (chaveOnline.fases && chaveOnline.fases[0]) || 'MATA-A-MATA';
+    var faseNome = (chaveOnline.fases && chaveOnline.fases[idxFase]) || 'MATA-A-MATA';
     var wrap = document.createElement('div');
     wrap.className = 'proximo-mata-lista';
     wrap.innerHTML = '<span class="proximo-fase-tag">' + htmlEsc(faseNome) + '</span>';
@@ -1919,6 +1924,7 @@
       renderStatsTodas(ultimaArtilharia, ultimaAssistencia);
       atualizarAcoesMata();
       atualizarBarraEspectador();
+      renderProximos(null);   // atualiza a coluna lateral com os confrontos da fase ATUAL
       if (socket && socket.connected) socket.emit('chave:assisti'); // "X/Y prontos"
     }
 
