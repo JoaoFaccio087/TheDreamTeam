@@ -521,7 +521,7 @@
     var html = '';
     sorteioLetras.forEach(function (L) {
       html += '<div class="sorteio-grupo" id="sgrupo-' + L + '">' +
-                '<div class="sorteio-grupo-tit">Grupo ' + L + '</div>' +
+                '<div class="sorteio-grupo-tit">' + rotuloGrupo() + ' ' + L + '</div>' +
                 '<div class="sorteio-grupo-slots" id="sslots-' + L + '">';
       for (var i = 0; i < sorteioPorGrupo; i++) {
         html += '<div class="sorteio-slot">&mdash;</div>';
@@ -559,7 +559,7 @@
       var a = document.getElementById('sorteio-atual');
       var d = document.getElementById('sorteio-destino');
       if (a) a.textContent = item.nomeDoTime;
-      if (d) d.textContent = '→ Grupo ' + item.grupo;
+      if (d) d.textContent = '→ ' + rotuloGrupo() + ' ' + item.grupo;
       slot.classList.add('sorteio-slot-novo');
       grupoEl.classList.add('sorteio-grupo-pulse');
       setTimeout(function () { grupoEl.classList.remove('sorteio-grupo-pulse'); }, 460);
@@ -570,7 +570,7 @@
     if (sorteioTimer) { clearInterval(sorteioTimer); sorteioTimer = null; }
     var a = document.getElementById('sorteio-atual');
     var d = document.getElementById('sorteio-destino');
-    if (a) a.textContent = 'Grupos definidos!';
+    if (a) a.textContent = rotuloGrupo() + 's definidos!';
     if (d) d.textContent = '';
     resetSorteioBotoes(true);
   }
@@ -613,6 +613,15 @@
   var gPicksFeitosTurno = 0;      // picks que EU já fiz no turno atual
   var gTotalTurnos      = 6;
   var gVisualizandoUid  = null;   // uid do time que estou olhando no campo (null = o meu)
+
+  // Rótulo do agrupamento do draft: "Grupo" em Copa/Liberta (têm grupos reais); "Bloco" na
+  // Champions (não tem grupos — é só um bloco de times escolhendo junto). Centraliza para não
+  // espalhar "if champions" pela UI. Uso: rotuloGrupo() → "Grupo"/"Bloco"; rotuloGrupo(true) MAIÚSCULO.
+  function rotuloGrupo(maiusculo) {
+    var champ = (formatoOnline === 'champions');
+    var base = champ ? 'Bloco' : 'Grupo';
+    return maiusculo ? base.toUpperCase() : base;
+  }
 
   // ── RESET CENTRAL ─────────────────────────────────────────────────────────
   // Zera TODO o estado de PARTIDA de uma vez, para nada vazar de uma campanha para a
@@ -671,7 +680,7 @@
 
     subview('online-draft');
     var titulo = document.getElementById('online-draft-titulo');
-    if (titulo) titulo.textContent = 'Draft por Grupo';
+    if (titulo) titulo.textContent = 'Draft por ' + rotuloGrupo();
     if (draftSubtituloEl) draftSubtituloEl.textContent = 'Turno 1 / ' + gTotalTurnos;
 
     var minhaForm = (allPlayers[meuUserId] && allPlayers[meuUserId].formacao) || '4-3-3';
@@ -696,7 +705,12 @@
     var titulo = document.getElementById('online-draft-titulo');
     if (titulo) titulo.textContent = 'THE DREAM TEAM';
     var subMarca = document.getElementById('draft-subtitulo-marca');
-    if (subMarca) subMarca.textContent = 'GRUPO ' + dados.grupo;
+    // "GRUPO" só faz sentido em Copa/Liberta (que têm grupos). Na Champions não há grupos —
+    // o draft é organizado em BLOCOS de times que escolhem juntos. Rótulo correto por formato.
+    if (subMarca) {
+      var rotuloBloco = (formatoOnline === 'champions') ? 'BLOCO ' : 'GRUPO ';
+      subMarca.textContent = rotuloBloco + dados.grupo;
+    }
     atualizarSubtituloGrupo();
 
     renderPainelGrupos();
@@ -830,9 +844,9 @@
     var iMeu   = gOrdemGrupos.indexOf(meuG);
     if (iMeu > iAtivo) {
       var faltam = iMeu - iAtivo;
-      return 'Escolhendo: Grupo ' + gGrupoAtivo + ' · sua vez em ' + faltam + (faltam === 1 ? ' grupo' : ' grupos');
+      return 'Escolhendo: ' + rotuloGrupo() + ' ' + gGrupoAtivo + ' · sua vez em ' + faltam + (faltam === 1 ? ' ' + rotuloGrupo().toLowerCase() : ' ' + rotuloGrupo().toLowerCase() + 's');
     }
-    return 'Escolhendo: Grupo ' + gGrupoAtivo + ' · você já escolheu nesta rodada';
+    return 'Escolhendo: ' + rotuloGrupo() + ' ' + gGrupoAtivo + ' · você já escolheu nesta rodada';
   }
 
   function renderPainelGrupos() {
@@ -846,7 +860,7 @@
       var membros = gGrupos[L] || [];
       var temMeu  = membros.some(function (u) { return String(u) === String(meuUserId); });
       html += '<div class="gdraft-grupo' + (ativo ? ' gdraft-grupo-ativo' : '') + (temMeu ? ' gdraft-grupo-meu' : '') + '">';
-      html += '<div class="gdraft-grupo-cab">Grupo ' + L + (ativo ? ' · escolhendo' : '') + '</div>';
+      html += '<div class="gdraft-grupo-cab">' + rotuloGrupo() + ' ' + L + (ativo ? ' · escolhendo' : '') + '</div>';
       membros.forEach(function (uid) {
         var p      = allPlayers[uid] || {};
         var nome   = p.nomeDoTime || p.username || 'Time';
