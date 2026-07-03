@@ -991,9 +991,8 @@ function avancarTurno(io, sala) {
 // ── Formato 'mata' (Copa/Libertadores): grupos + sorteio ─────────────────────
 function configGrupos(competicao) {
   if (competicao === 'Copa do Mundo') return { letras: 'ABCDEFGHIJKL'.split(''), porGrupo: 4 };
-  // Champions: os "grupos" existem só para organizar o DRAFT (a competição usa fase de liga
-  // independente). 4 blocos de 9 fazem o draft percorrer 4 etapas/turno em vez de 8 → ~metade
-  // do tempo, sem afetar picks (6 turnos fixos) nem a fase de liga.
+  // Champions: 4 blocos de 9 (36 times). Os blocos organizam só o DRAFT; a competição usa a
+  // fase de liga (montarFaseLigaChampions), independente. 4 blocos → draft mais rápido que 8.
   if (competicao === 'Champions') return { letras: 'ABCD'.split(''), porGrupo: 9 };
   return { letras: 'ABCDEFGH'.split(''), porGrupo: 4 };   // Libertadores
 }
@@ -1518,8 +1517,10 @@ function setupSocket(server, frontendUrl) {
       const todosProntos = sala.jogadores.length >= 1 && sala.jogadores.every(j => j.pronto);
       if (!todosProntos) return socket.emit('erro', 'Todos os jogadores precisam estar prontos');
 
-      // Copa/Libertadores: sorteio de grupos em vez do snake draft do Brasileirão.
-      if (sala.formato === 'mata') {
+      // Copa/Libertadores (mata) e Champions: sorteio de blocos + draft por grupo, em vez do
+      // snake do Brasileirão. Na Champions os blocos servem só ao draft (a competição usa fase
+      // de liga); a distinção de nº de blocos fica no configGrupos.
+      if (sala.formato === 'mata' || sala.formato === 'champions') {
         try { iniciarSorteioGrupos(io, sala); }
         catch (err) { console.error('Erro no sorteio de grupos:', err); socket.emit('erro', 'Erro ao iniciar o sorteio.'); }
         return;
