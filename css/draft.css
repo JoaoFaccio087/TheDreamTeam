@@ -111,6 +111,8 @@
   position: relative;
   overflow: hidden;
   width: 124px;
+  flex: none;              /* largura FIXA: sem isto o flex encolhe os cards de forma desigual
+                              conforme o conteúdo (nomes longos vs curtos), deixando larguras diferentes */
   min-height: 172px;
   background: #141414;
   border: 1px solid rgba(255, 255, 255, 0.14);
