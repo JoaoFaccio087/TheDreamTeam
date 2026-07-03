@@ -991,7 +991,11 @@ function avancarTurno(io, sala) {
 // ── Formato 'mata' (Copa/Libertadores): grupos + sorteio ─────────────────────
 function configGrupos(competicao) {
   if (competicao === 'Copa do Mundo') return { letras: 'ABCDEFGHIJKL'.split(''), porGrupo: 4 };
-  return { letras: 'ABCDEFGH'.split(''), porGrupo: 4 };   // Libertadores/Champions
+  // Champions: os "grupos" existem só para organizar o DRAFT (a competição usa fase de liga
+  // independente). 4 blocos de 9 fazem o draft percorrer 4 etapas/turno em vez de 8 → ~metade
+  // do tempo, sem afetar picks (6 turnos fixos) nem a fase de liga.
+  if (competicao === 'Champions') return { letras: 'ABCD'.split(''), porGrupo: 9 };
+  return { letras: 'ABCDEFGH'.split(''), porGrupo: 4 };   // Libertadores
 }
 
 // Máximo de participantes (humanos+bots) por formato: liga=20, champions=36, Copa=48.
