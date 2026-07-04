@@ -1524,6 +1524,10 @@
   function onRoundResults(dados) {
     simulandoRodada = false;
     pararAnimacaoPartida();
+    // Cada rodada é uma nova votação de "pular tudo": reseta o meu voto, senão após votar uma
+    // vez euVoteiPular fica true para sempre (round:start só vem na 1ª rodada) e o botão "Pular
+    // tudo" para de abrir o modal (clico e nada acontece).
+    euVoteiPular = false; skipVotos = 0; skipTotal = 0;
     rodadaAtual     = dados.rodada || rodadaAtual;
     ultimaArtilharia  = dados.artilharia   || ultimaArtilharia;
     ultimaAssistencia = dados.assistencias || ultimaAssistencia;

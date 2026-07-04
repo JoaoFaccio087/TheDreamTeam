@@ -1803,6 +1803,7 @@ function setupSocket(server, frontendUrl) {
       sala.rodadaEmAndamento = true;
       try {
         const { isUltima, payload } = simularUmaRodada(sala);
+        sala.votosPular = [];   // nova rodada = nova votação de "pular tudo"
         if (sala.formato === 'mata') payload.grupos = classificacaoTodosGrupos(sala);
         io.to(code).emit('round:results', payload);
 
