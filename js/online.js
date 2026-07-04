@@ -1060,10 +1060,11 @@
 
   // ready:count — votos para começar
   function onReadyCount(dados) {
-    elencosProntosCount.textContent = dados.prontos + '/' + dados.total + ' Prontos';
+    if (!dados) return;
+    if (elencosProntosCount) elencosProntosCount.textContent = dados.prontos + '/' + dados.total + ' Prontos';
 
     if (ehHost && dados.prontos >= dados.total && dados.total >= 2) {
-      btnElencosComecar.classList.remove('escondida');
+      if (btnElencosComecar) btnElencosComecar.classList.remove('escondida');
     }
   }
 
