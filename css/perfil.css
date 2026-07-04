@@ -190,6 +190,14 @@
   margin: 0 auto;
   padding: 1.4rem 1.2rem 2.5rem;
 }
+/* A .tela base centraliza vertical/horizontalmente (splash). A tela de Perfil é uma página de
+   conteúdo: começa do topo e ocupa a largura, como as telas de jogo/simulação. Sem isto, o
+   conteúdo fica espremido no centro com aparência de "modal compacto". */
+#tela-perfil {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0;
+}
 .perfil-tela-topo { margin-bottom: 1.2rem; }
 
 /* Barra de abas — mesmo idioma visual das abas do online (.rodada-tab) */
