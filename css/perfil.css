@@ -222,3 +222,52 @@
 /* Na tela cheia, a lista de estatísticas/histórico pode usar mais altura que no modal antigo */
 .perfil-tela-wrap .perfil-acordeoes,
 .perfil-tela-wrap .historico-lista { max-height: none; overflow: visible; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ABA DE CONQUISTAS — Fase 2 (cards por categoria)
+   ═══════════════════════════════════════════════════════════════════ */
+.conq-cabecalho {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.conq-cab-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
+.conq-cab-total  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--accent, #2BD46A); }
+
+.conq-categoria { margin-bottom: 1.6rem; }
+.conq-cat-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.7rem; padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.conq-cat-nome { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm); letter-spacing: 0.5px; color: #cdd3da; text-transform: uppercase; }
+.conq-cat-prog { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
+
+.conq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.7rem;
+}
+
+.conq-card {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  padding: 0.9rem 0.85rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--raio-md);
+  background: rgba(255,255,255,0.03);
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+.conq-icone { width: 26px; height: 26px; margin-bottom: 0.2rem; }
+.conq-icone svg { width: 100%; height: 100%; }
+.conq-nome { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); line-height: 1.15; }
+.conq-desc { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); line-height: 1.25; }
+
+/* Desbloqueada: destaque em accent */
+.conq-desbloqueada { border-color: rgba(43,212,106,0.4); background: rgba(43,212,106,0.06); }
+.conq-desbloqueada .conq-icone { color: var(--accent, #2BD46A); }
+.conq-desbloqueada .conq-nome  { color: #fff; }
+.conq-desbloqueada:hover { transform: translateY(-2px); border-color: var(--accent, #2BD46A); }
+
+/* Bloqueada: esmaecida */
+.conq-bloqueada { opacity: 0.55; }
+.conq-bloqueada .conq-icone { color: var(--txt-soft, #9aa6b2); }
+.conq-bloqueada .conq-nome  { color: #cdd3da; }

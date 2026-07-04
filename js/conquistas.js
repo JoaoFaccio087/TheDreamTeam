@@ -1,0 +1,102 @@
+// conquistas.js — Fase 2: renderização visual das conquistas (dados mock).
+// Na Fase 3, a lista LISTA_CONQUISTAS e o estado "desbloqueada" virão da lógica/servidor.
+(function () {
+  'use strict';
+
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    if (window.UI && UI.esc) return UI.esc(s);
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // ─── Catálogo de conquistas (mock) ───────────────────────────────────────
+  // id: chave estável (usada na Fase 3 para marcar desbloqueio no banco).
+  // categoria: agrupa os cards. nome/desc: exibição. desbloqueada: mock (Fase 3 = real).
+  var LISTA_CONQUISTAS = [
+    // ── Progressão ──
+    { id: 'primeira_vez',      categoria: 'Progressão', nome: 'Primeira vez',      desc: 'Jogou pela primeira vez',              desbloqueada: true  },
+    { id: 'primeira_vitoria',  categoria: 'Progressão', nome: 'Primeira vitória',  desc: 'Venceu a primeira partida',            desbloqueada: true  },
+    { id: 'primeiro_titulo',   categoria: 'Progressão', nome: 'Primeiro título',   desc: 'Venceu um torneio pela primeira vez',  desbloqueada: false },
+    { id: 'veterano',          categoria: 'Progressão', nome: 'Veterano',          desc: 'Jogou 50 partidas',                    desbloqueada: false },
+    { id: 'lenda_viva',        categoria: 'Progressão', nome: 'Lenda viva',        desc: 'Jogou 200 partidas',                   desbloqueada: false },
+    { id: 'dinastico',         categoria: 'Progressão', nome: 'Dinástico',         desc: 'Venceu 5 torneios',                    desbloqueada: false },
+    { id: 'imperador',         categoria: 'Progressão', nome: 'Imperador',         desc: 'Venceu 15 torneios',                   desbloqueada: false },
+    { id: 'maquina_de_gols',   categoria: 'Progressão', nome: 'Máquina de gols',   desc: 'Marcou 100 gols no total',             desbloqueada: false },
+
+    // ── Placar & Campanha ──
+    { id: 'sete_a_zero',       categoria: 'Placar & Campanha', nome: '7 a 0!',          desc: 'Completou uma campanha 7 a 0 perfeita (7 vitórias, 0 derrotas)', desbloqueada: false },
+    { id: 'invencivel',        categoria: 'Placar & Campanha', nome: 'Invencível',      desc: 'Completou um torneio invicto',         desbloqueada: false },
+    { id: 'show_de_bola',      categoria: 'Placar & Campanha', nome: 'Show de bola',    desc: '7x0 com 5 artilheiros diferentes',     desbloqueada: false },
+    { id: 'massacre',          categoria: 'Placar & Campanha', nome: 'Massacre',        desc: 'Venceu por 6+ de saldo',               desbloqueada: false },
+    { id: 'hat_trick',         categoria: 'Placar & Campanha', nome: 'Hat-trick',       desc: 'Um jogador fez 3 gols num jogo',       desbloqueada: false },
+    { id: 'poquer',            categoria: 'Placar & Campanha', nome: 'Pôquer',          desc: 'Um jogador fez 4 gols num jogo',       desbloqueada: false },
+    { id: 'nos_penaltis',      categoria: 'Placar & Campanha', nome: 'Nos pênaltis',    desc: 'Venceu uma final nos pênaltis',        desbloqueada: false },
+    { id: 'coracao_forte',     categoria: 'Placar & Campanha', nome: 'Coração forte',   desc: '2+ mata-matas decididos nos pênaltis numa campanha', desbloqueada: false },
+
+    // ── Competições ──
+    { id: 'campeao_liberta',   categoria: 'Competições', nome: 'Glória eterna',      desc: 'Campeão da Libertadores',           desbloqueada: false },
+    { id: 'campeao_champions', categoria: 'Competições', nome: 'Orelhudas',          desc: 'Campeão da Champions',              desbloqueada: false },
+    { id: 'campeao_brasil',    categoria: 'Competições', nome: 'Brasil, decime',     desc: 'Campeão do Brasileirão',            desbloqueada: false },
+    { id: 'campeao_copa',      categoria: 'Competições', nome: 'Topo do mundo',      desc: 'Campeão da Copa do Mundo',          desbloqueada: false },
+    { id: 'colecionador',      categoria: 'Competições', nome: 'Colecionador',       desc: 'Campeão de todas as 4 competições', desbloqueada: false },
+  ];
+
+  // Ícone (SVG inline) por estado — cadeado quando bloqueada, troféu quando desbloqueada.
+  function iconeConquista(desbloqueada) {
+    if (desbloqueada) {
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/>' +
+        '<path d="M7 6H4.5v2A2.5 2.5 0 0 0 7 10.5"/><path d="M17 6h2.5v2a2.5 2.5 0 0 1-2.5 2.5"/></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+  }
+
+  function cardConquista(c) {
+    var cls = c.desbloqueada ? 'conq-card conq-desbloqueada' : 'conq-card conq-bloqueada';
+    return '<div class="' + cls + '">' +
+             '<span class="conq-icone">' + iconeConquista(c.desbloqueada) + '</span>' +
+             '<span class="conq-nome">' + esc(c.nome) + '</span>' +
+             '<span class="conq-desc">' + esc(c.desc) + '</span>' +
+           '</div>';
+  }
+
+  // Agrupa por categoria preservando a ordem de aparição.
+  function agrupar(lista) {
+    var ordem = [], grupos = {};
+    lista.forEach(function (c) {
+      if (!grupos[c.categoria]) { grupos[c.categoria] = []; ordem.push(c.categoria); }
+      grupos[c.categoria].push(c);
+    });
+    return ordem.map(function (cat) { return { categoria: cat, itens: grupos[cat] }; });
+  }
+
+  function renderConquistas() {
+    var cont = $('conq-lista');
+    if (!cont) return;
+
+    var totalDesb = LISTA_CONQUISTAS.filter(function (c) { return c.desbloqueada; }).length;
+    var totalGeral = LISTA_CONQUISTAS.length;
+    var elTotal = $('conq-contador-total');
+    if (elTotal) elTotal.textContent = totalDesb + '/' + totalGeral;
+
+    var html = agrupar(LISTA_CONQUISTAS).map(function (g) {
+      var desbCat = g.itens.filter(function (c) { return c.desbloqueada; }).length;
+      var cards = g.itens.map(cardConquista).join('');
+      return '<div class="conq-categoria">' +
+               '<div class="conq-cat-head">' +
+                 '<span class="conq-cat-nome">' + esc(g.categoria) + '</span>' +
+                 '<span class="conq-cat-prog">' + desbCat + '/' + g.itens.length + '</span>' +
+               '</div>' +
+               '<div class="conq-grid">' + cards + '</div>' +
+             '</div>';
+    }).join('');
+
+    cont.innerHTML = html;
+  }
+
+  // Exposto para o perfil.js chamar ao entrar na aba Conquistas.
+  window.renderConquistas = renderConquistas;
+})();

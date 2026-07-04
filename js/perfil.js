@@ -368,6 +368,7 @@
         // Popula sob demanda ao entrar na aba
         if (aba === 'historico') abrirHistorico();
         else if (aba === 'estatisticas') carregarAcordeoes();
+        else if (aba === 'conquistas' && typeof renderConquistas === 'function') renderConquistas();
       });
     });
 

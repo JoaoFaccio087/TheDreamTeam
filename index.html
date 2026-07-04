@@ -497,9 +497,13 @@
         <div id="historico-lista" class="historico-lista"></div>
       </div>
 
-      <!-- Painel: Conquistas (placeholder — vira a Fase 2) -->
+      <!-- Painel: Conquistas (renderizado por conquistas.js) -->
       <div id="perfil-painel-conquistas" class="perfil-painel escondida">
-        <p class="perfil-carregando">Conquistas em breve&hellip;</p>
+        <div class="conq-cabecalho">
+          <span class="conq-cab-titulo">Conquistas</span>
+          <span id="conq-contador-total" class="conq-cab-total">0/0</span>
+        </div>
+        <div id="conq-lista" class="conq-lista"></div>
       </div>
 
     </div><!-- /perfil-tela-wrap -->
@@ -1211,5 +1215,6 @@
   <script src="js/auth.js"        defer></script>
   <script src="js/online.js"      defer></script>
   <script src="js/perfil.js"      defer></script>
+  <script src="js/conquistas.js"  defer></script>
 </body>
 </html>
