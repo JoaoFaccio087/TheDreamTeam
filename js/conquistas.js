@@ -16,8 +16,8 @@
   // categoria: agrupa os cards. nome/desc: exibição. desbloqueada: mock (Fase 3 = real).
   var LISTA_CONQUISTAS = [
     // ── Progressão ──
-    { id: 'primeira_vez',      categoria: 'Progressão', nome: 'Primeira vez',      desc: 'Jogou pela primeira vez',              desbloqueada: true  },
-    { id: 'primeira_vitoria',  categoria: 'Progressão', nome: 'Primeira vitória',  desc: 'Venceu a primeira partida',            desbloqueada: true  },
+    { id: 'primeira_vez',      categoria: 'Progressão', nome: 'Primeira vez',      desc: 'Jogou pela primeira vez',              desbloqueada: false },
+    { id: 'primeira_vitoria',  categoria: 'Progressão', nome: 'Primeira vitória',  desc: 'Venceu a primeira partida',            desbloqueada: false },
     { id: 'primeiro_titulo',   categoria: 'Progressão', nome: 'Primeiro título',   desc: 'Venceu um torneio pela primeira vez',  desbloqueada: false },
     { id: 'veterano',          categoria: 'Progressão', nome: 'Veterano',          desc: 'Jogou 50 partidas',                    desbloqueada: false },
     { id: 'lenda_viva',        categoria: 'Progressão', nome: 'Lenda viva',        desc: 'Jogou 200 partidas',                   desbloqueada: false },
@@ -74,6 +74,30 @@
   }
 
   function renderConquistas() {
+    var cont = $('conq-lista');
+    if (!cont) return;
+    cont.innerHTML = '<p class="perfil-carregando">Carregando conquistas…</p>';
+
+    // Busca as conquistas realmente desbloqueadas (backend). Fallback: nenhuma.
+    var fonte = (typeof API !== 'undefined' && API.getAchievements) ? API.getAchievements()
+              : (typeof api !== 'undefined' && api.getAchievements) ? api.getAchievements()
+              : Promise.resolve([]);
+
+    fonte.then(function (desbloqueadas) {
+      var setDesb = {};
+      (desbloqueadas || []).forEach(function (d) {
+        var id = (typeof d === 'string') ? d : (d && d.achievement_id);
+        if (id) setDesb[id] = true;
+      });
+      // Aplica o estado real sobre o catálogo.
+      LISTA_CONQUISTAS.forEach(function (c) { c.desbloqueada = !!setDesb[c.id]; });
+      desenharConquistas();
+    }).catch(function () {
+      desenharConquistas();   // ao menos mostra tudo bloqueado
+    });
+  }
+
+  function desenharConquistas() {
     var cont = $('conq-lista');
     if (!cont) return;
 

@@ -28,6 +28,9 @@ const API = {
   getRanking: function () {
     return api.getRanking();
   },
+  getAchievements: function () {
+    return api.getAchievements();
+  },
 };
 
 // ===== BACKEND HTTP (autenticação + multiplayer) ============================
@@ -141,7 +144,6 @@ var api = {
     if (!_temLoginReal()) {
       return Promise.resolve(locais);
     }
-
     // Logado: junta o histórico do backend com as partidas offline (conjuntos
     // distintos, sem duplicação) e ordena por data (mais recentes primeiro).
     return _req('GET', '/matches').then(function (remotas) {
@@ -160,6 +162,14 @@ var api = {
   },
   getRanking: function () {
     return _req('GET', '/ranking');
+  },
+
+  // Conquistas desbloqueadas do usuário (só logado; convidado não tem persistência).
+  getAchievements: function () {
+    if (!_temLoginReal()) return Promise.resolve([]);
+    return _req('GET', '/matches/achievements')
+      .then(function (arr) { return Array.isArray(arr) ? arr : []; })
+      .catch(function () { return []; });
   },
 
   criarSala: function (opcoes) {
