@@ -186,9 +186,9 @@
    Reaproveita .perfil-topo/.perfil-avatar/.perfil-acordeoes/.historico-lista existentes.
    ═══════════════════════════════════════════════════════════════════ */
 .perfil-tela-wrap {
-  max-width: 720px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 1.4rem 1.2rem 2.5rem;
+  padding: 1.4rem 1.6rem 2.5rem;
 }
 /* A .tela base centraliza vertical/horizontalmente (splash). A tela de Perfil é uma página de
    conteúdo: começa do topo e ocupa a largura, como as telas de jogo/simulação. Sem isto, o
@@ -198,6 +198,19 @@
   align-items: stretch;
   padding: 0;
 }
+
+/* Estatísticas na tela cheia: os blocos (Geral, Libertadores…) viram um GRID de colunas,
+   todos abertos, aproveitando a largura — em vez de acordeões empilhados numa coluna só. */
+.perfil-tela-wrap #perfil-acordeoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+/* Na tela cheia o chevron/expandir perde a função (tudo aberto): esconde e desativa o clique. */
+.perfil-tela-wrap .acord-chevron { display: none; }
+.perfil-tela-wrap .acord-head { cursor: default; }
+.perfil-tela-wrap .acord-body.escondida { display: block; }   /* garante aberto */
 .perfil-tela-topo { margin-bottom: 1.2rem; }
 
 /* Barra de abas — mesmo idioma visual das abas do online (.rodada-tab) */
@@ -279,3 +292,48 @@
 .conq-bloqueada { opacity: 0.55; }
 .conq-bloqueada .conq-icone { color: var(--txt-soft, #9aa6b2); }
 .conq-bloqueada .conq-nome  { color: #cdd3da; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   TOAST DE CONQUISTA (estilo Steam) — Fase 4
+   Canto inferior direito, com fila. Fixo na viewport, acima de tudo.
+   ═══════════════════════════════════════════════════════════════════ */
+.conq-toast-container {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.conq-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 260px;
+  max-width: 340px;
+  padding: 14px 16px;
+  background: #141414;
+  border: 1px solid rgba(43,212,106,0.5);
+  border-left: 4px solid var(--accent, #2BD46A);
+  border-radius: var(--raio-md);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1), opacity 0.35s ease;
+}
+.conq-toast-visivel { transform: translateX(0); opacity: 1; }
+.conq-toast-icone {
+  flex: none;
+  width: 34px; height: 34px;
+  color: var(--accent, #2BD46A);
+}
+.conq-toast-icone svg { width: 100%; height: 100%; }
+.conq-toast-texto { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.conq-toast-titulo {
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-mini);
+  letter-spacing: 0.5px; text-transform: uppercase; color: var(--accent, #2BD46A);
+}
+.conq-toast-nome  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); color: #fff; }
+.conq-toast-desc  { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); line-height: 1.25; }

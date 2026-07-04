@@ -2009,7 +2009,11 @@
           posicao:    _idx >= 0 ? _idx + 1 : null,
           campeao:    _idx === 0,
           detalhes:   { online: true }
-        });
+        }).then(function (resp) {
+          if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
+            mostrarToastConquistas(resp.novasConquistas);
+          }
+        }).catch(function () {});
       } catch (e) {}
     }
 

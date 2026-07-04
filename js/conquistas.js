@@ -123,4 +123,74 @@
 
   // Exposto para o perfil.js chamar ao entrar na aba Conquistas.
   window.renderConquistas = renderConquistas;
+
+  // ─── Toast estilo Steam (canto inferior direito, com fila) ───────────────
+  var _filaToast = [];
+  var _toastAtivo = false;
+
+  function nomeConquista(id) {
+    var c = LISTA_CONQUISTAS.find(function (x) { return x.id === id; });
+    return c ? c.nome : id;
+  }
+  function descConquista(id) {
+    var c = LISTA_CONQUISTAS.find(function (x) { return x.id === id; });
+    return c ? c.desc : '';
+  }
+
+  // Garante o container dos toasts (criado uma vez).
+  function containerToast() {
+    var el = document.getElementById('conq-toast-container');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'conq-toast-container';
+      el.className = 'conq-toast-container';
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+
+  // Enfileira e dispara os toasts das conquistas recém-desbloqueadas.
+  // Aceita array de IDs (strings) ou de objetos { achievement_id }.
+  function mostrarToastConquistas(novas) {
+    if (!novas || !novas.length) return;
+    novas.forEach(function (n) {
+      var id = (typeof n === 'string') ? n : (n && n.achievement_id);
+      if (id) _filaToast.push(id);
+    });
+    if (!_toastAtivo) proximoToast();
+  }
+
+  function proximoToast() {
+    if (!_filaToast.length) { _toastAtivo = false; return; }
+    _toastAtivo = true;
+    var id = _filaToast.shift();
+
+    var cont = containerToast();
+    var toast = document.createElement('div');
+    toast.className = 'conq-toast';
+    toast.innerHTML =
+      '<span class="conq-toast-icone">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+          '<path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/>' +
+          '<path d="M7 6H4.5v2A2.5 2.5 0 0 0 7 10.5"/><path d="M17 6h2.5v2a2.5 2.5 0 0 1-2.5 2.5"/></svg>' +
+      '</span>' +
+      '<span class="conq-toast-texto">' +
+        '<span class="conq-toast-titulo">Conquista desbloqueada!</span>' +
+        '<span class="conq-toast-nome">' + esc(nomeConquista(id)) + '</span>' +
+        '<span class="conq-toast-desc">' + esc(descConquista(id)) + '</span>' +
+      '</span>';
+    cont.appendChild(toast);
+
+    // Anima entrada → espera → saída → próximo da fila.
+    requestAnimationFrame(function () { toast.classList.add('conq-toast-visivel'); });
+    setTimeout(function () {
+      toast.classList.remove('conq-toast-visivel');
+      setTimeout(function () {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+        proximoToast();
+      }, 350);   // dura o tempo da transição de saída
+    }, 4200);    // tempo visível de cada toast
+  }
+
+  window.mostrarToastConquistas = mostrarToastConquistas;
 })();

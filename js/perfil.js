@@ -101,7 +101,7 @@
         var ms = g.chave
           ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
           : lista.slice();
-        return acordeaoHTML(g.nome, ms, idx === 0);
+        return acordeaoHTML(g.nome, ms, true);   // tela cheia: todos abertos (grid, sem expandir)
       }).join('');
       ligarAcordeoes(box);
     }).catch(function () {
