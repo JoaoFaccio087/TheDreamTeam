@@ -166,34 +166,6 @@
 
 
   <!-- Modal de Perfil -->
-  <div id="modal-perfil" class="modal-auth escondida">
-    <div class="modal-auth-backdrop" id="modal-perfil-backdrop"></div>
-    <div class="auth-card modal-auth-card perfil-card">
-      <button id="modal-perfil-fechar" class="modal-auth-fechar" type="button" aria-label="Fechar">&times;</button>
-
-      <p class="auth-logo-titulo">MEU PERFIL</p>
-      <hr class="auth-divisor" />
-
-      <div class="perfil-topo">
-        <span id="perfil-avatar" class="perfil-avatar">?</span>
-        <div class="perfil-id">
-          <span class="perfil-nome-topo">
-            <span id="perfil-username" class="perfil-username">&mdash;</span>
-            <button id="perfil-editar" class="perfil-editar-btn" type="button" aria-label="Alterar informa&ccedil;&otilde;es" title="Alterar informa&ccedil;&otilde;es">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
-            </button>
-          </span>
-          <span id="perfil-email" class="perfil-email"></span>
-          <span id="perfil-nome-time-txt" class="perfil-nome-time-txt"></span>
-        </div>
-      </div>
-
-      <div class="perfil-sep"><span>Estat&iacute;sticas</span></div>
-
-      <div id="perfil-acordeoes" class="perfil-acordeoes"></div>
-    </div>
-  </div>
-
   <!-- Modal de Alterar Informações (abre pelo lápis do Perfil) -->
   <div id="modal-editar-perfil" class="modal-auth escondida">
     <div class="modal-auth-backdrop" id="modal-editar-backdrop"></div>
@@ -275,17 +247,7 @@
   </div>
 
   <!-- Modal de Histórico -->
-  <div id="modal-historico" class="modal-auth escondida">
-    <div class="modal-auth-backdrop" id="modal-historico-backdrop"></div>
-    <div class="auth-card modal-auth-card historico-card">
-      <button id="modal-historico-fechar" class="modal-auth-fechar" type="button" aria-label="Fechar">&times;</button>
-
-      <p class="auth-logo-titulo">MEU HIST&Oacute;RICO</p>
-      <hr class="auth-divisor" />
-
-      <div id="historico-lista" class="historico-lista"></div>
-    </div>
-  </div>
+  <!-- (Histórico agora é uma aba dentro da tela de Perfil) -->
 
 
   <!-- =============================================================
@@ -483,6 +445,66 @@
     </div><!-- /home-inner -->
 
   </div><!-- /tela-inicial -->
+
+
+  <!-- =============================================================
+       TELA DE PERFIL — tela cheia com abas (Estatísticas · Histórico · Conquistas)
+       ============================================================= -->
+  <div id="tela-perfil" class="tela escondida">
+
+    <div class="jogo-header-wrap">
+      <header class="jogo-header">
+        <div>
+          <p class="jogo-header-titulo">MEU PERFIL</p>
+          <p class="jogo-header-slogan">THE DREAM TEAM</p>
+        </div>
+        <button id="perfil-voltar" class="btn-secundario" type="button">&#8592; Voltar</button>
+      </header>
+      <div class="jogo-header-linha"></div>
+    </div>
+
+    <div class="perfil-tela-wrap">
+
+      <!-- Cartão de identidade do usuário (mesmos IDs de antes) -->
+      <div class="perfil-topo perfil-tela-topo">
+        <span id="perfil-avatar" class="perfil-avatar">?</span>
+        <div class="perfil-id">
+          <span class="perfil-nome-topo">
+            <span id="perfil-username" class="perfil-username">&mdash;</span>
+            <button id="perfil-editar" class="perfil-editar-btn" type="button" aria-label="Alterar informa&ccedil;&otilde;es" title="Alterar informa&ccedil;&otilde;es">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+            </button>
+          </span>
+          <span id="perfil-email" class="perfil-email"></span>
+          <span id="perfil-nome-time-txt" class="perfil-nome-time-txt"></span>
+        </div>
+      </div>
+
+      <!-- Barra de abas -->
+      <div class="perfil-abas" role="tablist">
+        <button class="perfil-aba perfil-aba-ativa" data-aba="estatisticas" role="tab">Estat&iacute;sticas</button>
+        <button class="perfil-aba" data-aba="historico" role="tab">Hist&oacute;rico</button>
+        <button class="perfil-aba" data-aba="conquistas" role="tab">Conquistas</button>
+      </div>
+
+      <!-- Painel: Estatísticas (mesmo ID perfil-acordeoes → carregarAcordeoes continua funcionando) -->
+      <div id="perfil-painel-estatisticas" class="perfil-painel">
+        <div id="perfil-acordeoes" class="perfil-acordeoes"></div>
+      </div>
+
+      <!-- Painel: Histórico (mesmo ID historico-lista → a lógica continua funcionando) -->
+      <div id="perfil-painel-historico" class="perfil-painel escondida">
+        <div id="historico-lista" class="historico-lista"></div>
+      </div>
+
+      <!-- Painel: Conquistas (placeholder — vira a Fase 2) -->
+      <div id="perfil-painel-conquistas" class="perfil-painel escondida">
+        <p class="perfil-carregando">Conquistas em breve&hellip;</p>
+      </div>
+
+    </div><!-- /perfil-tela-wrap -->
+
+  </div><!-- /tela-perfil -->
 
 
   <!-- =============================================================

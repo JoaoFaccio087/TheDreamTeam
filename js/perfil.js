@@ -6,12 +6,39 @@
   function $(id) { return document.getElementById(id); }
   function usuarioLogado() { return (typeof getUser === 'function' ? getUser() : null); }
 
-  var modalPerfil    = $('modal-perfil');
+  var modalPerfil    = $('modal-perfil');       // legado (removido do HTML) — pode ser null
   var modalEditar    = $('modal-editar-perfil');
-  var modalHistorico = $('modal-historico');
+  var modalHistorico = $('modal-historico');    // legado (removido do HTML) — pode ser null
   var modalExcluir   = $('modal-excluir-conta');
 
+  var telaPerfil     = $('tela-perfil');
+  var _telaAnterior  = null;   // para o botão "voltar" retornar de onde veio
+
   var _meCache = null;
+
+  // Mostra a tela de Perfil e ativa a aba pedida ('estatisticas' | 'historico' | 'conquistas').
+  function mostrarTelaPerfil(aba) {
+    if (!telaPerfil) return;
+    // guarda a tela visível atual (para voltar depois)
+    var atual = document.querySelector('.tela:not(.escondida)');
+    if (atual && atual.id !== 'tela-perfil') _telaAnterior = atual;
+    if (typeof mostrarTela === 'function') mostrarTela(telaPerfil);
+    else { document.querySelectorAll('.tela').forEach(function (t) { t.classList.add('escondida'); }); telaPerfil.classList.remove('escondida'); }
+    document.body.style.overflow = '';
+    trocarAbaPerfil(aba || 'estatisticas');
+  }
+
+  // Alterna a aba ativa e o painel correspondente.
+  function trocarAbaPerfil(aba) {
+    var abas = { estatisticas: 'perfil-painel-estatisticas', historico: 'perfil-painel-historico', conquistas: 'perfil-painel-conquistas' };
+    Object.keys(abas).forEach(function (k) {
+      var painel = $(abas[k]);
+      if (painel) painel.classList.toggle('escondida', k !== aba);
+    });
+    document.querySelectorAll('.perfil-aba').forEach(function (b) {
+      b.classList.toggle('perfil-aba-ativa', b.dataset.aba === aba);
+    });
+  }
 
   function algumAberto() {
     return [modalPerfil, modalEditar, modalHistorico, modalExcluir].some(function (m) {
@@ -34,13 +61,13 @@
 
   // ───────────────────────── MEU PERFIL ─────────────────────────
   function abrirPerfil() {
-    if (!modalPerfil) return;
+    if (!telaPerfil) return;
     var u = usuarioLogado() || {};
     setTexto('perfil-username', u.username || '—');
     setTexto('perfil-email', u.email || '');
     setTexto('perfil-nome-time-txt', u.nomeDoTime || u.nome_do_time || '');
     setAvatar('perfil-avatar', u.username);
-    abrir(modalPerfil);
+    mostrarTelaPerfil('estatisticas');
 
     if (typeof api !== 'undefined' && api.getMe) {
       api.getMe().then(function (me) {
@@ -256,10 +283,10 @@
   // ──────────────────────── MEU HISTÓRICO ────────────────────────
   var _histCache = [];
   function abrirHistorico() {
-    if (!modalHistorico) return;
+    if (!telaPerfil) return;
     var lista = $('historico-lista');
     if (lista) lista.innerHTML = '<p class="perfil-carregando">Carregando histórico…</p>';
-    abrir(modalHistorico);
+    mostrarTelaPerfil('historico');
     API.getHistorico().then(function (arr) {
       arr = arr || [];
       if (!arr.length) {
@@ -333,6 +360,25 @@
       abrirHistorico();
     });
 
+    // Abas da tela de Perfil (Estatísticas / Histórico / Conquistas)
+    document.querySelectorAll('.perfil-aba').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var aba = b.dataset.aba;
+        trocarAbaPerfil(aba);
+        // Popula sob demanda ao entrar na aba
+        if (aba === 'historico') abrirHistorico();
+        else if (aba === 'estatisticas') carregarAcordeoes();
+      });
+    });
+
+    // Botão voltar da tela de Perfil → retorna à tela anterior (ou à inicial)
+    var btnVoltarPerfil = $('perfil-voltar');
+    if (btnVoltarPerfil) btnVoltarPerfil.addEventListener('click', function () {
+      var destino = _telaAnterior || $('tela-inicial');
+      if (typeof mostrarTela === 'function' && destino) mostrarTela(destino);
+      else if (destino) { document.querySelectorAll('.tela').forEach(function (t) { t.classList.add('escondida'); }); destino.classList.remove('escondida'); }
+    });
+
     var lapis = $('perfil-editar');
     if (lapis) lapis.addEventListener('click', abrirEditar);
 
@@ -350,9 +396,7 @@
     if (btnExcluirCancelar) btnExcluirCancelar.addEventListener('click', function () { fechar(modalExcluir); abrirEditar(); });
     bindFechar('modal-excluir-fechar', 'modal-excluir-backdrop', modalExcluir);
 
-    bindFechar('modal-perfil-fechar',    'modal-perfil-backdrop',    modalPerfil);
     bindFechar('modal-editar-fechar',    'modal-editar-backdrop',    modalEditar);
-    bindFechar('modal-historico-fechar', 'modal-historico-backdrop', modalHistorico);
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { fechar(modalExcluir); fechar(modalEditar); fechar(modalPerfil); fechar(modalHistorico); }

@@ -180,3 +180,45 @@
 .btn-excluir-conta:disabled { opacity: 0.6; cursor: default; }
 .excluir-aviso { font-size: var(--fs-sm); color: #cdd3da; line-height: 1.5; margin: 0 0 1rem; }
 .excluir-card .editar-acoes { margin-top: 1.2rem; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   TELA DE PERFIL (tela cheia com abas) — Fase 1 das conquistas
+   Reaproveita .perfil-topo/.perfil-avatar/.perfil-acordeoes/.historico-lista existentes.
+   ═══════════════════════════════════════════════════════════════════ */
+.perfil-tela-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.4rem 1.2rem 2.5rem;
+}
+.perfil-tela-topo { margin-bottom: 1.2rem; }
+
+/* Barra de abas — mesmo idioma visual das abas do online (.rodada-tab) */
+.perfil-abas {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
+}
+.perfil-aba {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #aaa;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.5px;
+  padding: 0.5rem 1.3rem;
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.perfil-aba:hover { background: rgba(255,255,255,0.08); }
+.perfil-aba-ativa { background: var(--accent, #2BD46A); border-color: var(--accent, #2BD46A); color: var(--bg, #0E0F13); }
+
+/* Painéis de aba */
+.perfil-painel { animation: perfilFade 0.2s ease; }
+@keyframes perfilFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* Na tela cheia, a lista de estatísticas/histórico pode usar mais altura que no modal antigo */
+.perfil-tela-wrap .perfil-acordeoes,
+.perfil-tela-wrap .historico-lista { max-height: none; overflow: visible; }
