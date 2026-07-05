@@ -249,8 +249,12 @@
     vagas.forEach(function (v) {
       var temJog = !!v.jog;
       var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';
+      // Ancoragem do tooltip: nas bordas ele alinha pelo lado; no topo do campo, abre p/ baixo
+      // (o campo tem overflow:hidden, então acima do jogador do topo seria cortado).
+      var ancora = v.left <= 25 ? ' tip-esq' : (v.left >= 75 ? ' tip-dir' : '');
+      if (v.top <= 20) ancora += ' tip-baixo';
       html +=
-        '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '" data-tip="' + esc(titulo) + '">' +
+        '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + ancora + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '" data-tip="' + esc(titulo) + '">' +
           '<span class="pce-marca">' + (temJog ? esc(nomeIniciais(v.jog.nome)) : '·') + '</span>' +
           '<span class="pce-nome">' + (temJog ? esc(nomeCurtoEsc(v.jog.nome)) : '—') + '</span>' +
         '</div>';
