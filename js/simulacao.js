@@ -88,6 +88,28 @@ function gerarPlacar(forcaMinha, forcaAdv, ehMeuJogo) {
   return { meus: sortearPoisson(expMeus), adversario: sortearPoisson(expAdv) };
 }
 
+// --- Atualiza as flags de conquista com base no PLACAR de um jogo do usuário ---
+// golsPorJogador: { nome: nº de gols NESTE jogo }; gMeus/gAdv: placar final (tempo normal).
+// Cobre hat-trick, pôquer, massacre (maior saldo) e show de bola. Usado tanto na simulação
+// animada (encerrarPartida) quanto no "pular tudo" do Brasileirão.
+function registrarFlagsDoJogo(golsPorJogador, gMeus, gAdv) {
+  if (typeof campanhaFlags === 'undefined' || !campanhaFlags) return;
+  var gpj = golsPorJogador || {}, maxJog = 0, artilheiros = 0;
+  for (var nm in gpj) {
+    if (!Object.prototype.hasOwnProperty.call(gpj, nm)) continue;
+    if (gpj[nm] > maxJog) maxJog = gpj[nm];
+    if (gpj[nm] > 0) artilheiros++;
+  }
+  if (maxJog >= 3) campanhaFlags.hatTrick = true;   // 3 gols de um jogador num jogo
+  if (maxJog >= 4) campanhaFlags.poker    = true;   // 4 gols de um jogador num jogo
+
+  var saldo = (gMeus | 0) - (gAdv | 0);
+  if (saldo > campanhaFlags.maiorSaldoJogo) campanhaFlags.maiorSaldoJogo = saldo;
+
+  // Show de bola: 7x0 com 5+ artilheiros diferentes no mesmo jogo
+  if ((gMeus | 0) >= 7 && (gAdv | 0) === 0 && artilheiros >= 5) campanhaFlags.showDeBola = true;
+}
+
 // --- Distribui gols em minutos únicos e crescentes (1–90) ---
 function distribuirMinutos(total) {
   var mins = [];
@@ -219,6 +241,11 @@ function tickPartida(est) {
       }
       adicionarEventoCard(est.id, html, 'evento-meu');
       registrarStats(ev.autor.nome, ev.assist ? ev.assist.nome : null);
+      // Gols deste jogador NESTE jogo (base p/ hat-trick, pôquer e show de bola)
+      if (est.golsPorJogador) {
+        var nmA = ev.autor.nome;
+        est.golsPorJogador[nmA] = (est.golsPorJogador[nmA] || 0) + 1;
+      }
     } else {
       est.gAdv++;
       // Mostra o autor do gol adversário + nome do clube menor ao lado
@@ -475,6 +502,10 @@ function encerrarPartida(est) {
   campanhaGF += est.gMeus;
   campanhaGA += est.gAdv;
 
+  // ── Flags de eventos finos deste jogo (para as conquistas) ──
+  // Derivadas do placar e dos gols por jogador; helper compartilhado com o "pular tudo".
+  registrarFlagsDoJogo(est.golsPorJogador, est.gMeus, est.gAdv);
+
   // Esconde relógio — partida encerrada, não precisa mostrar "90'"
   var elRel = document.getElementById('prelogio-' + est.id);
   if (elRel) elRel.classList.add('escondida');
@@ -492,7 +523,15 @@ function encerrarPartida(est) {
     aplicarResultado(est, 'adv');           // derrota no tempo normal
   } else {
     // Mata-mata empatado: disputa de pênaltis antes de definir o resultado
-    disputarPenaltis(est, function (ganhador) { aplicarResultado(est, ganhador); });
+    var ehFinal = (faseAtual === fasesCampanha.length - 1);
+    disputarPenaltis(est, function (ganhador) {
+      // Só avanço na campanha se venço; conto minhas decisões nos pênaltis.
+      if (ganhador === 'meu' && typeof campanhaFlags !== 'undefined' && campanhaFlags) {
+        campanhaFlags.matasNosPenaltis++;
+        if (ehFinal) campanhaFlags.finalNosPenaltis = true;
+      }
+      aplicarResultado(est, ganhador);
+    });
   }
 }
 

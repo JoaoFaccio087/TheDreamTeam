@@ -17,6 +17,10 @@ function reiniciarCampanha() {
   campanhaEmpates   = 0;
   campanhaDerrotas  = 0;
   resumoCampeao     = false;
+  campanhaFlags     = {
+    hatTrick: false, poker: false, showDeBola: false,
+    maiorSaldoJogo: 0, finalNosPenaltis: false, matasNosPenaltis: 0
+  };
   if (btnResumo) btnResumo.classList.add('escondida'); // some até a próxima campanha terminar
   var stats = document.getElementById('stats-campanha');
   if (stats) stats.classList.add('escondida');          // só reaparece ao iniciar a 1ª partida
@@ -372,7 +376,8 @@ function iniciarPartida() {
     adversario: adversario,
     forcaMinha: forcaMinha,
     forcaAdv:   forcaAdv,
-    minuto:     0
+    minuto:     0,
+    golsPorJogador: {}   // { nomeJogador: nº de gols NESTE jogo } — p/ hat-trick/pôquer/show de bola
   };
 
   document.getElementById('btn-iniciar-jogo').disabled = true;

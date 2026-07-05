@@ -10,13 +10,6 @@ var tabCadastroBtn = document.getElementById('tab-cadastro');
 var authErro       = document.getElementById('auth-erro');
 
 var btnPerfil      = document.getElementById('btn-perfil');
-var dropdownPerfil = document.getElementById('dropdown-perfil');
-var menuConvidado  = document.getElementById('menu-convidado');
-var menuLogado     = document.getElementById('menu-logado');
-var dropdownNome   = document.getElementById('dropdown-usuario-nome');
-var ddLogin        = document.getElementById('dd-login');
-var ddCadastro     = document.getElementById('dd-cadastro');
-var ddLogout       = document.getElementById('dd-logout');
 
 // ── Sessão ────────────────────────────────────────────────────────────────
 
@@ -36,55 +29,32 @@ function getUser() {
   try { return JSON.parse(localStorage.getItem('dreamteam_user')); } catch (e) { return null; }
 }
 
-// ── Dropdown ──────────────────────────────────────────────────────────────
+// ── Ícone de perfil ───────────────────────────────────────────────────────
+// Sem menu: clicar leva o usuário logado direto à tela de Perfil; o convidado
+// vê o modal de login/cadastro. fecharDropdown() vira no-op (o dropdown saiu),
+// mantida só porque outros trechos ainda a chamam por compatibilidade.
 
-function abrirDropdown() {
-  dropdownPerfil.classList.remove('escondida');
-  btnPerfil.setAttribute('aria-expanded', 'true');
+function fecharDropdown() {}
+
+if (btnPerfil) {
+  btnPerfil.addEventListener('click', function (e) {
+    e.stopPropagation();
+    if (getUser()) {
+      if (typeof window.abrirPerfil === 'function') window.abrirPerfil();
+    } else {
+      tabLoginBtn.click();
+      abrirModal();
+    }
+  });
 }
-
-function fecharDropdown() {
-  dropdownPerfil.classList.add('escondida');
-  btnPerfil.setAttribute('aria-expanded', 'false');
-}
-
-function toggleDropdown() {
-  if (dropdownPerfil.classList.contains('escondida')) abrirDropdown();
-  else fecharDropdown();
-}
-
-btnPerfil.addEventListener('click', function (e) {
-  e.stopPropagation();
-  toggleDropdown();
-});
-
-document.addEventListener('click', function (e) {
-  if (!dropdownPerfil.classList.contains('escondida') &&
-      !dropdownPerfil.contains(e.target) &&
-      e.target !== btnPerfil) {
-    fecharDropdown();
-  }
-});
 
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    fecharDropdown();
-    fecharModal();
-  }
+  if (e.key === 'Escape') fecharModal();
 });
 
 // ── Estado do header ──────────────────────────────────────────────────────
 
 function atualizarDropdown(user) {
-  if (user) {
-    menuConvidado.classList.add('escondida');
-    menuLogado.classList.remove('escondida');
-    if (dropdownNome) dropdownNome.textContent = user.username;
-  } else {
-    menuLogado.classList.add('escondida');
-    menuConvidado.classList.remove('escondida');
-    if (dropdownNome) dropdownNome.textContent = '';
-  }
   // Nome do time nos modos: logado → nome do cadastro; senão → "Seu time".
   var temNome = !!(user && user.nomeDoTime);
   if (typeof nomeDoTime !== 'undefined') nomeDoTime = temNome ? user.nomeDoTime : 'Seu time';
@@ -123,27 +93,12 @@ function fecharModal() {
 if (modalFechar)   modalFechar.addEventListener('click', fecharModal);
 if (modalBackdrop) modalBackdrop.addEventListener('click', fecharModal);
 
-// ── Dropdown ações ────────────────────────────────────────────────────────
+// ── Logout ────────────────────────────────────────────────────────────────
+// Disparado pelo ícone de sair, ao lado das infos do usuário na tela de Perfil.
 
-if (ddLogin) {
-  ddLogin.addEventListener('click', function () {
-    fecharDropdown();
-    tabLoginBtn.click();
-    abrirModal();
-  });
-}
-
-if (ddCadastro) {
-  ddCadastro.addEventListener('click', function () {
-    fecharDropdown();
-    tabCadastroBtn.click();
-    abrirModal();
-  });
-}
-
-if (ddLogout) {
-  ddLogout.addEventListener('click', function () {
-    fecharDropdown();
+var btnPerfilLogout = document.getElementById('perfil-logout');
+if (btnPerfilLogout) {
+  btnPerfilLogout.addEventListener('click', function () {
     var modal = document.getElementById('modal-logout');
     if (modal) modal.classList.remove('escondida');
     else { limparSessao(); atualizarDropdown(null); }   // fallback se o modal não existir
@@ -169,6 +124,9 @@ if (modalLogoutConfirmar) {
       if (modalLogout) modalLogout.classList.add('escondida');
       modalLogoutConfirmar.disabled = false;
       modalLogoutConfirmar.textContent = 'Sair';
+      // Sai da tela de Perfil de volta para o início.
+      var inicial = document.getElementById('tela-inicial');
+      if (inicial && typeof mostrarTela === 'function') mostrarTela(inicial);
     }, 350);
   });
 }

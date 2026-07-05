@@ -238,6 +238,17 @@ function pularTudoBrasileirao() {
 
     registrarResultadoLiga(liga.tabela[0], advTeam, p.meus, p.adversario);
 
+    // Flags de conquista deste jogo (hat-trick/pôquer/massacre/show de bola) — mesmo
+    // no "pular tudo", que não passa por encerrarPartida.
+    if (typeof registrarFlagsDoJogo === 'function') {
+      var gpjRodada = {};
+      for (var gi = 0; gi < golsTime.length; gi++) {
+        var nmA = golsTime[gi].autor && golsTime[gi].autor.nome;
+        if (nmA) gpjRodada[nmA] = (gpjRodada[nmA] || 0) + 1;
+      }
+      registrarFlagsDoJogo(gpjRodada, p.meus, p.adversario);
+    }
+
     var venc = p.meus > p.adversario, perd = p.meus < p.adversario;
     if (venc) campanhaVitorias++; else if (perd) campanhaDerrotas++; else campanhaEmpates++;
     campanhaGF += p.meus; campanhaGA += p.adversario; campanhaPartidas++;

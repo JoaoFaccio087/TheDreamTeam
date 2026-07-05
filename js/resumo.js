@@ -77,6 +77,9 @@ function salvarCampanhaNoHistorico(campeao) {
     picks:    picks
   };
 
+  // Flags de eventos finos da campanha (conquistas). Espalhados em detalhes p/ o backend ler.
+  var flags = (typeof campanhaFlags !== 'undefined' && campanhaFlags) ? campanhaFlags : {};
+
   API.salvarPartida({
     competicao: comp,
     modo:       'solo',
@@ -87,7 +90,15 @@ function salvarCampanhaNoHistorico(campeao) {
     ga:         ga,
     posicao:    pos,
     campeao:    !!campeao,
-    detalhes:   { artilheiro: art, assistente: asi, snapshot: snapshot }
+    detalhes:   {
+      artilheiro: art, assistente: asi, snapshot: snapshot,
+      hatTrick:         !!flags.hatTrick,
+      poker:            !!flags.poker,
+      showDeBola:       !!flags.showDeBola,
+      maiorSaldoJogo:   flags.maiorSaldoJogo | 0,
+      finalNosPenaltis: !!flags.finalNosPenaltis,
+      matasNosPenaltis: flags.matasNosPenaltis | 0
+    }
   }).then(function (resp) {
     // Toast das conquistas recém-desbloqueadas (o backend retorna novasConquistas).
     if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {

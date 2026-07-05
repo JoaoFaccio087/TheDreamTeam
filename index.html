@@ -261,34 +261,14 @@
       <header class="home-header">
         <p class="home-rotulo-topo">The Dream Team &middot; Monte o time dos sonhos</p>
 
-        <!-- Ícone de perfil + dropdown -->
+        <!-- Ícone de perfil — logado abre a tela de Perfil; convidado abre login/cadastro -->
         <div class="perfil-wrapper">
-          <button id="btn-perfil" class="btn-perfil" type="button" aria-label="Abrir menu de perfil" aria-expanded="false">
+          <button id="btn-perfil" class="btn-perfil" type="button" aria-label="Abrir perfil">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="12" cy="7" r="4"/>
             </svg>
           </button>
-
-          <div id="dropdown-perfil" class="dropdown-perfil escondida" role="menu">
-
-            <!-- Usuário não logado -->
-            <div id="menu-convidado">
-              <button class="dropdown-item" id="dd-login"    role="menuitem">Login</button>
-              <button class="dropdown-item" id="dd-cadastro" role="menuitem">Cadastre-se</button>
-            </div>
-
-            <!-- Usuário logado -->
-            <div id="menu-logado" class="escondida">
-              <span class="dropdown-nome" id="dropdown-usuario-nome"></span>
-              <hr class="dropdown-divisor" />
-              <button class="dropdown-item" id="dd-perfil"    role="menuitem">Perfil</button>
-              <button class="dropdown-item" id="dd-historico" role="menuitem">Hist&oacute;rico</button>
-              <hr class="dropdown-divisor" />
-              <button class="dropdown-item" id="dd-logout" role="menuitem" class="dropdown-item-logout">Logout</button>
-            </div>
-
-          </div>
         </div>
 
         <div class="home-linha-divisor"></div>
@@ -478,6 +458,14 @@
           <span id="perfil-email" class="perfil-email"></span>
           <span id="perfil-nome-time-txt" class="perfil-nome-time-txt"></span>
         </div>
+        <button id="perfil-logout" class="perfil-logout-btn" type="button" aria-label="Sair da conta" title="Sair da conta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          <span class="perfil-logout-txt">Sair</span>
+        </button>
       </div>
 
       <!-- Barra de abas -->

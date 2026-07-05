@@ -26,6 +26,21 @@
 .perfil-email { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); word-break: break-all; }
 .perfil-nome-time-txt { font-size: var(--fs-sm); color: #cdd3da; }
 
+/* Botão de sair (logout) ao lado das infos do usuário, empurrado para a direita. */
+.perfil-logout-btn {
+  margin-left: auto; flex: 0 0 auto;
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  background: transparent; cursor: pointer;
+  color: var(--txt-soft, #9aa6b2);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--raio-md);
+  padding: 0.5rem 0.9rem;
+  font-family: 'Archivo', sans-serif; font-weight: var(--peso-forte); font-size: var(--fs-sm);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.perfil-logout-btn svg { width: 17px; height: 17px; }
+.perfil-logout-btn:hover { color: #ff6b6b; border-color: rgba(255, 107, 107, 0.55); background: rgba(255, 107, 107, 0.08); }
+
 /* ── Divisor "Estatísticas" (linha com rótulo centralizado) ── */
 .perfil-sep {
   display: flex; align-items: center; gap: var(--sp-5);
@@ -34,7 +49,7 @@
 .perfil-sep::before, .perfil-sep::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
 .perfil-sep span { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); letter-spacing: 0.05em; }
 
-/* ── Acordeões ── */
+/* ── Estatísticas por tópico (sem caixa) ── */
 .perfil-acordeoes {
   display: flex; flex-direction: column; gap: var(--sp-3);
   flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem;
@@ -54,22 +69,18 @@
 }
 .perfil-acordeoes::-webkit-scrollbar-thumb:hover,
 .historico-lista::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.30); background-clip: padding-box; }
-.acord { border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--raio-md); background: rgba(255, 255, 255, 0.04); overflow: hidden; }
-.acord-head {
-  width: 100%; display: flex; align-items: center; gap: var(--sp-4);
-  background: none; border: none; cursor: pointer; padding: 0.7rem 0.85rem;
-  color: #fff; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base); text-align: left;
+
+/* Cada categoria é um tópico: título sobre uma linha divisória + stats logo abaixo. */
+.perfil-topico { display: flex; flex-direction: column; gap: var(--sp-4); }
+.topico-head {
+  display: flex; align-items: baseline; gap: var(--sp-4);
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
-.acord-head:hover { background: rgba(255, 255, 255, 0.03); }
-.acord-nome { flex: 1; }
-.acord-tag { font-family: 'Archivo', sans-serif; font-weight: var(--peso-normal); font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
-.acord-chevron { display: inline-flex; color: var(--txt-soft, #9aa6b2); transition: transform 0.18s ease; }
-.acord-chevron svg { width: 16px; height: 16px; }
-.acord-aberto .acord-chevron { transform: rotate(180deg); }
-.acord-body { padding: 0 0.85rem 0.85rem; }
-.acord-body.escondida { display: none; }
-.acord-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-sm); padding: 0.1rem 0 0.3rem; }
-.acord-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
+.topico-nome { flex: 1; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
+.topico-tag { font-family: 'Archivo', sans-serif; font-weight: var(--peso-normal); font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
+.topico-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-sm); padding: 0.1rem 0 0.3rem; }
+.topico-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
 
 .perfil-stat {
   background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
@@ -157,8 +168,10 @@
 /* ── Responsivo ── */
 @media (max-width: 600px) {
   .perfil-card, .editar-card, .historico-card { padding: 28px 20px 24px; }
-  .acord-stats   { grid-template-columns: repeat(2, 1fr); }
+  .topico-stats  { grid-template-columns: repeat(2, 1fr); }
   .editar-grid   { grid-template-columns: 1fr; }
+  .perfil-logout-txt { display: none; }
+  .perfil-logout-btn { padding: 0.5rem 0.6rem; }
 }
 
 /* ── Zona de perigo: excluir conta (LGPD) ── */
@@ -186,7 +199,8 @@
    Reaproveita .perfil-topo/.perfil-avatar/.perfil-acordeoes/.historico-lista existentes.
    ═══════════════════════════════════════════════════════════════════ */
 .perfil-tela-wrap {
-  max-width: 1100px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 1.4rem 1.6rem 2.5rem;
 }
@@ -199,18 +213,20 @@
   padding: 0;
 }
 
-/* Estatísticas na tela cheia: os blocos (Geral, Libertadores…) viram um GRID de colunas,
-   todos abertos, aproveitando a largura — em vez de acordeões empilhados numa coluna só. */
+/* Estatísticas na tela cheia: tópicos empilhados (cada um ocupa a largura toda) e, dentro de
+   cada tópico, os stats se espalham em muitas colunas — aproveitando as laterais. */
 .perfil-tela-wrap #perfil-acordeoes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
 }
-/* Na tela cheia o chevron/expandir perde a função (tudo aberto): esconde e desativa o clique. */
-.perfil-tela-wrap .acord-chevron { display: none; }
-.perfil-tela-wrap .acord-head { cursor: default; }
-.perfil-tela-wrap .acord-body.escondida { display: block; }   /* garante aberto */
+.perfil-tela-wrap .topico-stats {
+  grid-template-columns: repeat(8, 1fr);
+}
+/* Em telas médias, 8 colunas apertam: cai para 4 (o mobile <600px já cai para 2). */
+@media (max-width: 900px) {
+  .perfil-tela-wrap .topico-stats { grid-template-columns: repeat(4, 1fr); }
+}
 .perfil-tela-topo { margin-bottom: 1.2rem; }
 
 /* Barra de abas — mesmo idioma visual das abas do online (.rodada-tab) */

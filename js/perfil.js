@@ -101,9 +101,8 @@
         var ms = g.chave
           ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
           : lista.slice();
-        return acordeaoHTML(g.nome, ms, true);   // tela cheia: todos abertos (grid, sem expandir)
+        return topicoHTML(g.nome, ms);
       }).join('');
-      ligarAcordeoes(box);
     }).catch(function () {
       box.innerHTML = '<p class="perfil-vazio">Não foi possível carregar as estatísticas.</p>';
     });
@@ -123,40 +122,29 @@
     };
   }
 
-  function acordeaoHTML(nome, ms, aberto) {
+  // Um "tópico" por categoria: cabeçalho (nome + nº de campanhas) sobre uma linha
+  // divisória e, logo abaixo, as estatísticas soltas — sem a caixa do acordeão.
+  function topicoHTML(nome, ms) {
     var s = agregaStats(ms);
     var corpo = (s.camp === 0)
-      ? '<p class="acord-vazio">Nenhuma campanha ainda nesta categoria.</p>'
-      : '<div class="acord-stats">' +
+      ? '<p class="topico-vazio">Nenhuma campanha ainda nesta categoria.</p>'
+      : '<div class="topico-stats">' +
           stat(s.camp, 'Campanhas') + stat(s.tit, 'Títulos') +
           stat(s.v, 'Vitórias') + stat(s.e, 'Empates') + stat(s.d, 'Derrotas') +
           stat(s.gf, 'Gols pró') + stat(s.ga, 'Gols contra') + stat(s.aprov + '%', 'Aproveit.') +
         '</div>';
     return '' +
-      '<div class="acord' + (aberto ? ' acord-aberto' : '') + '">' +
-        '<button class="acord-head" type="button">' +
-          '<span class="acord-nome">' + esc(nome) + '</span>' +
-          '<span class="acord-tag">' + s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') + '</span>' +
-          '<span class="acord-chevron" aria-hidden="true">' +
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>' +
-          '</span>' +
-        '</button>' +
-        '<div class="acord-body' + (aberto ? '' : ' escondida') + '">' + corpo + '</div>' +
-      '</div>';
+      '<section class="perfil-topico">' +
+        '<div class="topico-head">' +
+          '<span class="topico-nome">' + esc(nome) + '</span>' +
+          '<span class="topico-tag">' + s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') + '</span>' +
+        '</div>' +
+        corpo +
+      '</section>';
   }
   function stat(num, lbl) {
     return '<div class="perfil-stat"><span class="perfil-stat-num">' + num +
            '</span><span class="perfil-stat-lbl">' + lbl + '</span></div>';
-  }
-  function ligarAcordeoes(box) {
-    box.querySelectorAll('.acord-head').forEach(function (h) {
-      h.addEventListener('click', function () {
-        var acc = h.parentNode;
-        var body = acc.querySelector('.acord-body');
-        var aberto = acc.classList.toggle('acord-aberto');
-        if (body) body.classList.toggle('escondida', !aberto);
-      });
-    });
   }
 
   // ─────────────────────── ALTERAR INFORMAÇÕES ───────────────────────
@@ -349,17 +337,10 @@
     if (bd) bd.addEventListener('click', function () { fechar(modal); });
   }
 
-  (function init() {
-    var ddPerfil = $('dd-perfil'), ddHistorico = $('dd-historico');
-    if (ddPerfil) ddPerfil.addEventListener('click', function () {
-      if (typeof fecharDropdown === 'function') fecharDropdown();
-      abrirPerfil();
-    });
-    if (ddHistorico) ddHistorico.addEventListener('click', function () {
-      if (typeof fecharDropdown === 'function') fecharDropdown();
-      abrirHistorico();
-    });
+  // Exposta para o auth.js: o clique no ícone de perfil (usuário logado) abre esta tela.
+  window.abrirPerfil = abrirPerfil;
 
+  (function init() {
     // Abas da tela de Perfil (Estatísticas / Histórico / Conquistas)
     document.querySelectorAll('.perfil-aba').forEach(function (b) {
       b.addEventListener('click', function () {

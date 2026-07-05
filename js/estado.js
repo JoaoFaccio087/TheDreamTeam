@@ -124,3 +124,15 @@ var campanhaVitorias  = 0;
 var campanhaEmpates   = 0;
 var campanhaDerrotas  = 0;
 var resumoCampeao     = false;
+
+// Flags de eventos finos da campanha atual (para as conquistas: hat-trick, pôquer,
+// pênaltis, massacre, show de bola). Preenchidas ao longo dos jogos; enviadas em
+// `detalhes` ao salvar a campanha. Zeradas em reiniciarCampanha().
+var campanhaFlags = {
+  hatTrick:         false,  // algum jogador fez 3+ gols num jogo
+  poker:            false,  // algum jogador fez 4+ gols num jogo
+  showDeBola:       false,  // venci de 7x0 com 5+ artilheiros diferentes num jogo
+  maiorSaldoJogo:   0,      // maior saldo (gMeus - gAdv) num jogo vencido
+  finalNosPenaltis: false,  // venci a FINAL nos pênaltis
+  matasNosPenaltis: 0       // nº de mata-matas que venci nos pênaltis nesta campanha
+};
