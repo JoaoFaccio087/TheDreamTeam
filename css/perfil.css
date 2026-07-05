@@ -70,17 +70,28 @@
 .perfil-acordeoes::-webkit-scrollbar-thumb:hover,
 .historico-lista::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.30); background-clip: padding-box; }
 
-/* Cada categoria é um tópico: título sobre uma linha divisória + stats logo abaixo. */
-.perfil-topico { display: flex; flex-direction: column; gap: var(--sp-4); }
-.topico-head {
-  display: flex; align-items: baseline; gap: var(--sp-4);
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+/* Cada categoria é uma seção expansível: cabeçalho clicável + corpo que abre/fecha. */
+.perfil-acord { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.acord-head {
+  width: 100%; display: flex; align-items: center; gap: var(--sp-4);
+  background: none; border: none; cursor: pointer;
+  padding: 0.7rem 0.1rem; text-align: left; color: #fff;
 }
-.topico-nome { flex: 1; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
-.topico-tag { font-family: 'Archivo', sans-serif; font-weight: var(--peso-normal); font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
-.topico-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-sm); padding: 0.1rem 0 0.3rem; }
-.topico-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
+.acord-nome { flex: 1; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
+.acord-tag { font-family: 'Archivo', sans-serif; font-weight: var(--peso-normal); font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
+.acord-seta { width: 18px; height: 18px; color: var(--txt-soft, #9aa6b2); flex: 0 0 auto; transition: transform 0.2s ease; }
+.acord-aberta .acord-seta { transform: rotate(180deg); }
+.acord-head:hover .acord-nome { color: var(--accent, #2BD46A); }
+.acord-head:hover .acord-seta { color: var(--accent, #2BD46A); }
+/* Corpo: fechado por padrão (grid recolhido); abre quando a seção tem .acord-aberta. */
+.acord-corpo {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows 0.24s ease;
+}
+.acord-corpo > * { overflow: hidden; min-height: 0; }
+.acord-aberta .acord-corpo { grid-template-rows: 1fr; }
+.acord-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-sm); padding: 0.1rem 0 0.7rem; }
+.acord-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); padding-bottom: 0.9rem; }
 
 .perfil-stat {
   background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
@@ -168,7 +179,7 @@
 /* ── Responsivo ── */
 @media (max-width: 600px) {
   .perfil-card, .editar-card, .historico-card { padding: 28px 20px 24px; }
-  .topico-stats  { grid-template-columns: repeat(2, 1fr); }
+  .acord-stats   { grid-template-columns: repeat(2, 1fr); }
   .editar-grid   { grid-template-columns: 1fr; }
   .perfil-logout-txt { display: none; }
   .perfil-logout-btn { padding: 0.5rem 0.6rem; }
@@ -213,21 +224,85 @@
   padding: 0;
 }
 
-/* Estatísticas na tela cheia: tópicos empilhados (cada um ocupa a largura toda) e, dentro de
-   cada tópico, os stats se espalham em muitas colunas — aproveitando as laterais. */
+/* Estatísticas: as seções expansíveis empilham; ao abrir, os stats se distribuem em 4 colunas
+   (a coluna esquerda das 2 colunas comporta 4 confortavelmente). */
 .perfil-tela-wrap #perfil-acordeoes {
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 0;
 }
-.perfil-tela-wrap .topico-stats {
-  grid-template-columns: repeat(8, 1fr);
+.perfil-tela-wrap .acord-stats {
+  grid-template-columns: repeat(4, 1fr);
 }
-/* Em telas médias, 8 colunas apertam: cai para 4 (o mobile <600px já cai para 2). */
-@media (max-width: 900px) {
-  .perfil-tela-wrap .topico-stats { grid-template-columns: repeat(4, 1fr); }
+/* Em telas estreitas, cai para 2. */
+@media (max-width: 600px) {
+  .perfil-tela-wrap .acord-stats { grid-template-columns: repeat(2, 1fr); }
 }
 .perfil-tela-topo { margin-bottom: 1.2rem; }
+
+/* ── Estatísticas em 2 colunas: acordeão (esq) + time mais escalado (dir) ── */
+.perfil-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: 2rem;
+  align-items: start;
+}
+/* Dentro da coluna esquerda (mais estreita que a tela toda), os stats cabem em 4 colunas. */
+.perfil-cols .perfil-tela-wrap .acord-stats,
+.perfil-cols .acord-stats { grid-template-columns: repeat(4, 1fr); }
+
+/* Coluna do time mais escalado */
+.perfil-col-escalados { position: sticky; top: 1rem; }
+.perfil-escalados-titulo {
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm);
+  letter-spacing: 1.5px; color: #fff; text-align: center; margin: 0 0 0.8rem;
+}
+.perfil-campo-escalados {
+  position: relative; width: 100%; aspect-ratio: 3 / 4; margin: 0 auto;
+  border-radius: var(--raio-md); overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.4);
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 8%, rgba(0,0,0,0.05) 8% 16%),
+    linear-gradient(165deg, #2f7a37, #1e5224);
+  box-shadow: inset 0 0 34px rgba(0,0,0,0.3);
+}
+.pce-linha-meio { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: rgba(255,255,255,0.3); }
+.pce-circulo {
+  position: absolute; left: 50%; top: 50%; width: 74px; height: 74px;
+  transform: translate(-50%,-50%); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;
+}
+.pce-area { position: absolute; left: 50%; transform: translateX(-50%); width: 54%; height: 13%; border: 2px solid rgba(255,255,255,0.26); }
+.pce-area-cima  { top: 0;    border-top: none; }
+.pce-area-baixo { bottom: 0; border-bottom: none; }
+.pce-jogador {
+  position: absolute; transform: translate(-50%,-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 3px; z-index: 2; cursor: default;
+}
+.pce-marca {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.6); border: 1.5px solid var(--accent, #2BD46A); color: #fff;
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-micro); letter-spacing: 0.3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4); transition: transform 0.12s ease;
+}
+.pce-jogador:hover .pce-marca { transform: scale(1.12); }
+.pce-vazio .pce-marca { border-color: rgba(255,255,255,0.35); color: var(--txt-soft, #9aa6b2); background: rgba(0,0,0,0.4); }
+.pce-nome {
+  font-size: var(--fs-micro); color: #fff; line-height: 1; white-space: nowrap;
+  padding: 1px 5px; border-radius: var(--raio-xs, 4px);
+  background: rgba(0,0,0,0.42); text-shadow: 0 1px 2px rgba(0,0,0,0.8); max-width: 84px; overflow: hidden; text-overflow: ellipsis;
+}
+.perfil-escalados-sel { justify-content: center; margin-top: 0.9rem; }
+.perfil-escalados-vazio {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 1.4rem; color: rgba(255,255,255,0.85); font-size: var(--fs-sm); line-height: 1.5;
+}
+
+/* Empilha as 2 colunas em telas médias/estreitas */
+@media (max-width: 900px) {
+  .perfil-cols { grid-template-columns: 1fr; gap: 1.6rem; }
+  .perfil-col-escalados { position: static; max-width: 380px; margin: 0 auto; width: 100%; }
+}
 
 /* Barra de abas — mesmo idioma visual das abas do online (.rodada-tab) */
 .perfil-abas {

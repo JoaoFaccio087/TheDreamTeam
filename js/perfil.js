@@ -91,18 +91,24 @@
     { nome: 'Copa do Mundo', chave: 'copa' }
   ];
 
+  var _histCache = null;   // histórico carregado (reusado por acordeão + time escalado)
+
   function carregarAcordeoes() {
     var box = $('perfil-acordeoes');
     if (!box) return;
     box.innerHTML = '<p class="perfil-carregando">Carregando estatísticas…</p>';
     API.getHistorico().then(function (lista) {
       lista = lista || [];
+      _histCache = lista;
       box.innerHTML = GRUPOS.map(function (g, idx) {
         var ms = g.chave
           ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
           : lista.slice();
-        return topicoHTML(g.nome, ms);
+        // A seção "Geral" (idx 0) já vem aberta; as competições, fechadas.
+        return acordeaoHTML(g.nome, ms, idx === 0);
       }).join('');
+      ligarAcordeoes(box);
+      renderEscalados('geral');   // campo à direita começa no "Geral"
     }).catch(function () {
       box.innerHTML = '<p class="perfil-vazio">Não foi possível carregar as estatísticas.</p>';
     });
@@ -122,29 +128,146 @@
     };
   }
 
-  // Um "tópico" por categoria: cabeçalho (nome + nº de campanhas) sobre uma linha
-  // divisória e, logo abaixo, as estatísticas soltas — sem a caixa do acordeão.
-  function topicoHTML(nome, ms) {
+  // Seção expansível por categoria: cabeçalho clicável (nome + nº de campanhas + seta) e um
+  // corpo com as estatísticas que abre/fecha. `aberto` define o estado inicial (Geral = aberta).
+  function acordeaoHTML(nome, ms, aberto) {
     var s = agregaStats(ms);
     var corpo = (s.camp === 0)
-      ? '<p class="topico-vazio">Nenhuma campanha ainda nesta categoria.</p>'
-      : '<div class="topico-stats">' +
+      ? '<p class="acord-vazio">Nenhuma campanha ainda nesta categoria.</p>'
+      : '<div class="acord-stats">' +
           stat(s.camp, 'Campanhas') + stat(s.tit, 'Títulos') +
           stat(s.v, 'Vitórias') + stat(s.e, 'Empates') + stat(s.d, 'Derrotas') +
           stat(s.gf, 'Gols pró') + stat(s.ga, 'Gols contra') + stat(s.aprov + '%', 'Aproveit.') +
         '</div>';
     return '' +
-      '<section class="perfil-topico">' +
-        '<div class="topico-head">' +
-          '<span class="topico-nome">' + esc(nome) + '</span>' +
-          '<span class="topico-tag">' + s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') + '</span>' +
-        '</div>' +
-        corpo +
+      '<section class="perfil-acord' + (aberto ? ' acord-aberta' : '') + '">' +
+        '<button type="button" class="acord-head" aria-expanded="' + (aberto ? 'true' : 'false') + '">' +
+          '<span class="acord-nome">' + esc(nome) + '</span>' +
+          '<span class="acord-tag">' + s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') + '</span>' +
+          '<svg class="acord-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
+        '</button>' +
+        '<div class="acord-corpo">' + corpo + '</div>' +
       '</section>';
   }
   function stat(num, lbl) {
     return '<div class="perfil-stat"><span class="perfil-stat-num">' + num +
            '</span><span class="perfil-stat-lbl">' + lbl + '</span></div>';
+  }
+
+  // Liga o clique de cada cabeçalho: alterna a classe .acord-aberta e o aria-expanded.
+  function ligarAcordeoes(box) {
+    var heads = box.querySelectorAll('.acord-head');
+    Array.prototype.forEach.call(heads, function (head) {
+      head.addEventListener('click', function () {
+        var sec = head.parentNode;
+        var abrindo = !sec.classList.contains('acord-aberta');
+        sec.classList.toggle('acord-aberta', abrindo);
+        head.setAttribute('aria-expanded', abrindo ? 'true' : 'false');
+      });
+    });
+  }
+
+  // ─────────────────────── TIME MAIS ESCALADO ───────────────────────
+  // Formação fixa de exibição (1 GOL, 4 DEF, 3 MEI, 3 ATA) — as vagas vêm das coords 4-3-3.
+  var FORMACAO_ESCALADOS = '4-3-3';
+
+  // Conta, nas campanhas filtradas, quantas vezes cada jogador foi escalado, por posição.
+  // Retorna { GOL:[...], DEF:[...], MEI:[...], ATA:[...] }, cada lista ordenada por vezes desc.
+  function contarEscalados(matches) {
+    var porNome = {};   // nome → { nome, codigo, forca, vezes }
+    (matches || []).forEach(function (m) {
+      var picks = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
+      if (!picks || !picks.length) return;
+      picks.forEach(function (p) {
+        if (!p || !p.nome) return;
+        var k = p.codigo + '|' + p.nome;   // mesmo nome em posições diferentes conta separado
+        if (!porNome[k]) porNome[k] = { nome: p.nome, codigo: p.codigo, forca: p.forca | 0, vezes: 0 };
+        porNome[k].vezes++;
+        if ((p.forca | 0) > porNome[k].forca) porNome[k].forca = p.forca | 0;
+      });
+    });
+    var grupos = { GOL: [], DEF: [], MEI: [], ATA: [] };
+    Object.keys(porNome).forEach(function (k) {
+      var j = porNome[k];
+      if (grupos[j.codigo]) grupos[j.codigo].push(j);
+    });
+    Object.keys(grupos).forEach(function (g) {
+      grupos[g].sort(function (a, b) { return b.vezes !== a.vezes ? b.vezes - a.vezes : b.forca - a.forca; });
+    });
+    return grupos;
+  }
+
+  // Monta os 11 titulares posicionados: para cada vaga da formação, pega o próximo jogador
+  // mais escalado do grupo daquela vaga. Vagas sem candidato ficam vazias (—).
+  function montarOnzeEscalado(grupos, formacao) {
+    var coords = (typeof formacoes !== 'undefined' && formacoes[formacao]) ? formacoes[formacao] : [];
+    var usados = { GOL: 0, DEF: 0, MEI: 0, ATA: 0 };
+    return coords.map(function (c) {
+      var g = c.grupo;
+      var lista = grupos[g] || [];
+      var jog = lista[usados[g]] || null;
+      usados[g]++;
+      return { left: c.left, top: c.top, grupo: g, jog: jog };
+    });
+  }
+
+  function renderEscalados(chave) {
+    var campo = $('perfil-campo-escalados');
+    if (!campo) return;
+    var lista = _histCache || [];
+    var ms = (chave && chave !== 'geral')
+      ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(chave) >= 0; })
+      : lista.slice();
+
+    var grupos = contarEscalados(ms);
+    var totalEscalacoes = ms.reduce(function (acc, m) {
+      var pk = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
+      return acc + (pk ? 1 : 0);
+    }, 0);
+
+    if (totalEscalacoes === 0) {
+      campo.innerHTML = '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
+      return;
+    }
+
+    var vagas = montarOnzeEscalado(grupos, FORMACAO_ESCALADOS);
+    var html =
+      '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
+      '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>';
+    vagas.forEach(function (v) {
+      var temJog = !!v.jog;
+      var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';
+      html +=
+        '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '">' +
+          '<span class="pce-marca">' + (temJog ? esc(nomeIniciais(v.jog.nome)) : '·') + '</span>' +
+          '<span class="pce-nome">' + (temJog ? esc(nomeCurtoEsc(v.jog.nome)) : '—') + '</span>' +
+        '</div>';
+    });
+    campo.innerHTML = html;
+  }
+
+  // "Marcos Acuña" → "MA"; nome de uma palavra → 2 primeiras letras.
+  function nomeIniciais(nome) {
+    var ps = String(nome || '').trim().split(/\s+/);
+    if (ps.length >= 2) return (ps[0][0] + ps[ps.length - 1][0]).toUpperCase();
+    return String(nome || '').slice(0, 2).toUpperCase();
+  }
+  // "Marcos Acuña" → "Acuña"; uma palavra fica igual.
+  function nomeCurtoEsc(nome) {
+    var ps = String(nome || '').trim().split(/\s+/);
+    return ps.length >= 2 ? ps[ps.length - 1] : String(nome || '');
+  }
+
+  function ligarSeletorEscalados() {
+    var sel = $('perfil-escalados-sel');
+    if (!sel) return;
+    sel.addEventListener('click', function (e) {
+      var btn = e.target.closest ? e.target.closest('.pilula') : null;
+      if (!btn || !sel.contains(btn)) return;
+      Array.prototype.forEach.call(sel.querySelectorAll('.pilula'), function (p) { p.classList.remove('pilula-ativa'); });
+      btn.classList.add('pilula-ativa');
+      renderEscalados(btn.getAttribute('data-esc') || 'geral');
+    });
   }
 
   // ─────────────────────── ALTERAR INFORMAÇÕES ───────────────────────
@@ -352,6 +475,8 @@
         else if (aba === 'conquistas' && typeof renderConquistas === 'function') renderConquistas();
       });
     });
+
+    ligarSeletorEscalados();
 
     // Botão voltar da tela de Perfil → retorna à tela anterior (ou à inicial)
     var btnVoltarPerfil = $('perfil-voltar');

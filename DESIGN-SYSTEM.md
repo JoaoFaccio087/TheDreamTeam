@@ -160,6 +160,12 @@ Modais de confirmação — lógica ainda não unificada (dívida planejada):
   listeners próprios (têm lógica especial: votação no online, estado "Saindo…" no logout).
   Migrá-los para `UI.modalConfirm` um a um é o próximo passo incremental, quando fizer sentido.
 
+Campo de futebol (mapa de escalação) — 2 implementações parecidas (observação, ainda NÃO dívida):
+- `.resumo-campo` (resumo.js/resumo.css) e `.perfil-campo-escalados` (perfil) desenham o mesmo
+  gramado (linhas, círculo, áreas) com jogadores posicionados por coords da formação. Hoje são 2;
+  se surgir um 3º uso, virar componente (ex.: `UI.renderCampo(coords, jogadores, opts)`). Com 2
+  usos ainda contidos, consolidar agora seria prematuro.
+
 ## 7. Dívida de botões — ENCERRADA
 Consolidados os estilos que tinham redundância REAL (accent em 3 classes, cinza em 2).
 Os demais são únicos/bem contidos e não precisam de consolidação. A régua daqui pra frente:

@@ -100,7 +100,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 ### Geral
 
-- **Perfil do jogador**: clicar no ícone de perfil abre a sua tela (ou o login, se você for convidado). Reúne suas **estatísticas** por competição em tópicos (campanhas, títulos, vitórias, gols e aproveitamento), o **histórico** de campanhas e as **conquistas**.
+- **Perfil do jogador**: clicar no ícone de perfil abre a sua tela (ou o login, se você for convidado). Reúne suas **estatísticas** por competição em seções expansíveis (campanhas, títulos, vitórias, gols e aproveitamento), um mapa do seu **time mais escalado** (com seletor por competição), o **histórico** de campanhas e as **conquistas**.
 - **Conquistas**: 21 troféus que desbloqueiam conforme você joga — de progressão (primeira vitória, veterano, dinástico) a feitos de placar (7 a 0, hat-trick, pôquer, massacre, show de bola, vencer uma final nos pênaltis) e títulos por competição. Ao desbloquear, um **aviso no canto** anuncia o troféu (estilo Steam). O cálculo é feito e persistido no servidor.
 - **Quatro temas** que acompanham a competição escolhida.
 - **Layout responsivo** para celular e tablet — inclusive em todas as telas do modo online (sorteio, draft por grupos, elencos e mata-mata).

@@ -467,9 +467,24 @@
         <button class="perfil-aba" data-aba="conquistas" role="tab">Conquistas</button>
       </div>
 
-      <!-- Painel: Estatísticas (mesmo ID perfil-acordeoes → carregarAcordeoes continua funcionando) -->
+      <!-- Painel: Estatísticas — 2 colunas: acordeão (esq) + time mais escalado (dir) -->
       <div id="perfil-painel-estatisticas" class="perfil-painel">
-        <div id="perfil-acordeoes" class="perfil-acordeoes"></div>
+        <div class="perfil-cols">
+          <div class="perfil-col-stats">
+            <div id="perfil-acordeoes" class="perfil-acordeoes"></div>
+          </div>
+          <div class="perfil-col-escalados">
+            <p class="perfil-escalados-titulo">TIME MAIS ESCALADO</p>
+            <div id="perfil-campo-escalados" class="perfil-campo-escalados"></div>
+            <div class="area-pilulas perfil-escalados-sel" id="perfil-escalados-sel">
+              <button class="pilula pilula-ativa" type="button" data-esc="geral">Geral</button>
+              <button class="pilula" type="button" data-esc="libertadores">Libertadores</button>
+              <button class="pilula" type="button" data-esc="champions">Champions</button>
+              <button class="pilula" type="button" data-esc="brasileir">Brasileir&atilde;o</button>
+              <button class="pilula" type="button" data-esc="copa">Copa do Mundo</button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Painel: Histórico (mesmo ID historico-lista → a lógica continua funcionando) -->
