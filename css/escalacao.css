@@ -154,6 +154,8 @@
 
 /* Grupo da esquerda do cabeçalho: botão Voltar + bloco do título */
 .jogo-header-esq { display: flex; align-items: flex-end; gap: 16px; }
+/* Grupo da direita (modo brandingDireita): marca "THE DREAM TEAM" alinhada à direita. */
+.jogo-header-dir { text-align: right; }
 .jogo-voltar-topo {
   display: inline-flex;
   align-self: flex-start;   /* nunca estica/centraliza: fica colado à esquerda */

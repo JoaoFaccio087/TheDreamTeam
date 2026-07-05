@@ -87,8 +87,12 @@ Carregado antes das telas. Sempre prefira estes a remontar HTML na mão.
 | `UI.esc(s)` | Escapa `& < > " '` antes de injetar em innerHTML | `esc(string) → string` |
 | `UI.shuffle(arr)` | Fisher-Yates; devolve **cópia** (não muta) | `shuffle(array) → array` |
 | `UI.posicionarCampo(marcadores, formacao)` | Posiciona os 11 marcadores pelas coords da formação; sobe o nome quando há ficha logo abaixo | `→ coords | null` |
-| `UI.renderHeader(slot, opts)` / `UI.setHeader(slotId, opts)` | Cabeçalho padrão das telas (título, slogan, info, voltar) | `opts: {titulo,tituloId,slogan,sloganId,info\|infoHtml,infoId,voltarId}` |
+| `UI.renderHeader(slot, opts)` / `UI.setHeader(slotId, opts)` | Cabeçalho padrão das telas (título, slogan, info, voltar) | `opts: {titulo,tituloId,slogan,sloganId,info\|infoHtml,infoId,voltarId,brandingDireita}` |
 | `UI.modalConfirm(opts)` | **Modal de confirmação** (Cancelar/Confirmar) criado sob demanda; fecha por Cancelar, clique fora e Esc; devolve `Promise<boolean>` | `opts: {titulo, texto\|html, confirmar, cancelar, onConfirmar, onCancelar, perigo}` |
+
+**`UI.renderHeader` — dois layouts:** padrão → `[ (Voltar?) título+slogan ] … [ info ]` (telas de
+jogo/simulação/online). Com `brandingDireita: true` → `[ Voltar ] … [ título+slogan à direita ]`
+(tela de Perfil). A marca à direita fica em `.jogo-header-dir`.
 
 **`UI.modalConfirm` — quando usar:** em **modais de confirmação NOVOS**. Exemplo:
 ```js
