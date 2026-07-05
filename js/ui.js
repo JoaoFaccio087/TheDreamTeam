@@ -61,7 +61,10 @@
     'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>';
 
   // Cabeçalho padrão. opts: titulo, tituloId, slogan, sloganId, info|infoHtml,
-  // infoId, voltarId. Os *Id permitem que cada tela atualize os textos depois.
+  // infoId, voltarId, brandingDireita. Os *Id permitem que cada tela atualize os textos depois.
+  //   Layout padrão:            [ (Voltar?) título+slogan ]  ...........  [ info ]
+  //   brandingDireita: true →   [ Voltar ]  .................  [ título+slogan ]
+  //     (usado na tela de Perfil: Voltar à esquerda, marca "THE DREAM TEAM" à direita)
   UI.renderHeader = function (slot, opts) {
     if (!slot) return;
     opts = opts || {};
@@ -84,16 +87,22 @@
         '<p class="jogo-header-slogan"' + sIdAttr + '>' + esc(slogan) + '</p>' +
       '</div>';
 
-    var esquerda = voltarHtml
-      ? '<div class="jogo-header-esq">' + voltarHtml + blocoTitulo + '</div>'
-      : blocoTitulo;
+    var conteudo;
+    if (opts.brandingDireita) {
+      // Voltar (ou nada) à esquerda; marca à direita.
+      conteudo =
+        (voltarHtml || '<span></span>') +
+        '<div class="jogo-header-dir">' + blocoTitulo + '</div>';
+    } else {
+      var esquerda = voltarHtml
+        ? '<div class="jogo-header-esq">' + voltarHtml + blocoTitulo + '</div>'
+        : blocoTitulo;
+      conteudo = esquerda + '<p class="jogo-header-info"' + iIdAttr + '>' + infoInner + '</p>';
+    }
 
     slot.classList.add('jogo-header-wrap');
     slot.innerHTML =
-      '<header class="jogo-header">' +
-        esquerda +
-        '<p class="jogo-header-info"' + iIdAttr + '>' + infoInner + '</p>' +
-      '</header>' +
+      '<header class="jogo-header">' + conteudo + '</header>' +
       '<div class="jogo-header-linha"></div>';
   };
 
@@ -156,4 +165,6 @@
   // (abaixo do cabeçalho), não mais dentro do header.
   UI.setHeader('hdr-jogo',      { infoId: 'jogo-header-info' });
   UI.setHeader('hdr-simulacao', { infoHtml: '<span class="sim-label-campanha">A CAMPANHA</span>' });
+  // Perfil: Voltar à esquerda, marca "THE DREAM TEAM" à direita (brandingDireita).
+  UI.setHeader('hdr-perfil',    { brandingDireita: true, voltarId: 'perfil-voltar' });
 })();
