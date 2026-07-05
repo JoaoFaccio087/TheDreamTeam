@@ -578,55 +578,6 @@
 }
 
 
-/* Modal de confirmação do "Pular tudo" */
-.confirm-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.confirm-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.62);
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
-}
-.confirm-card {
-  position: relative;
-  background: #181B21;
-  border: 1px solid var(--linha);
-  border-radius: var(--raio-md);
-  padding: 22px 24px;
-  max-width: 360px;
-  width: 100%;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
-}
-.confirm-titulo {
-  font-family: 'Archivo Black', sans-serif;
-  font-size: var(--fs-lg);
-  color: var(--txt);
-  margin-bottom: 8px;
-}
-.confirm-texto {
-  font-size: var(--fs-sm);
-  color: var(--txt-soft);
-  line-height: 1.5;
-  margin-bottom: 18px;
-}
-.confirm-acoes {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-.confirm-acoes .btn-secundario,
-.confirm-acoes .btn-rolar {
-  width: auto;
-}
-
 /* Linha "Sem gols" nos cards de rodada simulada instantaneamente (Pular tudo) */
 .partida-sem-gols { opacity: 0.55; font-style: italic; }
 

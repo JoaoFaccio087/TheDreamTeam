@@ -187,7 +187,7 @@
 
 /* Mensagem de erro */
 .auth-erro {
-  color: #ff6b6b;
+  color: var(--perigo);
   font-size: var(--fs-sm);   /* 0.82rem */
   text-align: center;
   background: rgba(255, 107, 107, 0.08);

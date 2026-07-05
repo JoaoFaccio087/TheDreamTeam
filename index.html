@@ -749,14 +749,13 @@
   <!-- Overlay do resumo da campanha -->
   <div id="resumo-overlay" class="resumo-overlay escondida"></div>
 
-  <!-- Modal de confirmação do "Pular tudo" (Brasileirão) -->
-  <div id="confirm-overlay" class="confirm-overlay escondida">
-    <div class="confirm-backdrop" id="confirm-backdrop"></div>
-    <div class="confirm-card" role="dialog" aria-modal="true">
-      <p class="confirm-titulo">Pular tudo?</p>
-      <p class="confirm-texto">Todas as rodadas restantes ser&atilde;o simuladas de uma vez e voc&ecirc; ir&aacute; direto para o resultado final do campeonato.</p>
-      <div class="confirm-acoes">
-        <button id="confirm-cancelar" class="btn-secundario" type="button">Cancelar</button>
+  <!-- Modal de confirmação do "Pular tudo" (Brasileirão) — padrão .modal-confirm -->
+  <div id="confirm-overlay" class="modal-confirm escondida">
+    <div class="modal-confirm-box" role="dialog" aria-modal="true">
+      <p class="modal-confirm-titulo">Pular tudo?</p>
+      <p class="modal-confirm-texto">Todas as rodadas restantes ser&atilde;o simuladas de uma vez e voc&ecirc; ir&aacute; direto para o resultado final do campeonato.</p>
+      <div class="modal-confirm-acoes">
+        <button id="confirm-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>
         <button id="confirm-confirmar" class="btn-rolar" type="button">Confirmar</button>
       </div>
     </div>

@@ -102,6 +102,54 @@
     UI.renderHeader(document.getElementById(slotId), opts);
   };
 
+  // Modal de confirmação (Cancelar / Confirmar). Cria o overlay .modal-confirm sob demanda,
+  // resolve fechar por Cancelar, clique fora e Esc, e devolve a escolha via callback/Promise.
+  // Use em modais NOVOS; os antigos (logout, sair, pular) seguem com sua lógica própria.
+  //   opts: { titulo, texto|html, confirmar, cancelar, onConfirmar, onCancelar, perigo }
+  //   - texto: string (escapada) | html: markup já pronto (use um ou outro)
+  //   - confirmar/cancelar: rótulos dos botões (default 'Confirmar'/'Cancelar')
+  //   - perigo: true → botão Confirmar em tom destrutivo (classe .btn-perigo)
+  // Retorna uma Promise<boolean> (true = confirmou) além de chamar os callbacks.
+  UI.modalConfirm = function (opts) {
+    opts = opts || {};
+    var rotConf = opts.confirmar != null ? opts.confirmar : 'Confirmar';
+    var rotCanc = opts.cancelar  != null ? opts.cancelar  : 'Cancelar';
+    var corpo   = opts.html != null ? opts.html : esc(opts.texto != null ? opts.texto : '');
+    var classeConf = 'btn-rolar' + (opts.perigo ? ' btn-perigo' : '');
+
+    var overlay = document.createElement('div');
+    overlay.className = 'modal-confirm';
+    overlay.innerHTML =
+      '<div class="modal-confirm-box" role="dialog" aria-modal="true">' +
+        (opts.titulo ? '<p class="modal-confirm-titulo">' + esc(opts.titulo) + '</p>' : '') +
+        '<p class="modal-confirm-texto">' + corpo + '</p>' +
+        '<div class="modal-confirm-acoes">' +
+          '<button type="button" class="btn-rolar btn-sec" data-acao="cancelar">' + esc(rotCanc) + '</button>' +
+          '<button type="button" class="' + classeConf + '" data-acao="confirmar">' + esc(rotConf) + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    return new Promise(function (resolve) {
+      function fechar(ok) {
+        document.removeEventListener('keydown', onKey);
+        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        if (ok && typeof opts.onConfirmar === 'function') opts.onConfirmar();
+        if (!ok && typeof opts.onCancelar === 'function') opts.onCancelar();
+        resolve(ok);
+      }
+      function onKey(e) { if (e.key === 'Escape') fechar(false); }
+
+      overlay.addEventListener('click', function (e) {
+        var acao = e.target && e.target.getAttribute && e.target.getAttribute('data-acao');
+        if (acao === 'confirmar') return fechar(true);
+        if (acao === 'cancelar')  return fechar(false);
+        if (e.target === overlay) fechar(false);   // clique fora da caixa
+      });
+      document.addEventListener('keydown', onKey);
+    });
+  };
+
   window.UI = UI;
 
   // Cabeçalhos estáticos do single-player. O Voltar de cada tela é um link no corpo

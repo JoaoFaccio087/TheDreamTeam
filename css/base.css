@@ -21,6 +21,7 @@ html {
   --txt:      #F4F6F8;   /* texto branco */
   --txt-soft: #99A0AA;   /* texto secundário (cinza) */
   --accent:   #2BD46A;   /* verde-campo — cor de ação padrão */
+  --perigo:   #ff6b6b;   /* vermelho de ação destrutiva/negativa (logout, sair, derrota) */
 
   /* Tokens da tela inicial (modo escuro) */
   --surface:       #181B21;                 /* cards e superfícies */
@@ -220,3 +221,37 @@ body {
   border: 1px solid var(--txt-soft);
   cursor: pointer;
 }
+
+
+/* ============================================================
+   COMPONENTE: Modal de confirmação (.modal-confirm)
+   Overlay + caixa central + título + texto + duas ações (Cancelar/Confirmar).
+   Componente GLOBAL — usado por logout, sair da sala, pular tudo (solo e online),
+   pular sorteio. Para criar um novo, use UI.modalConfirm() (js/ui.js) ou replique
+   esta estrutura. O botão Cancelar leva .btn-rolar.btn-sec; o Confirmar, .btn-rolar.
+   ============================================================ */
+.modal-confirm {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-confirm-box {
+  background: #16181f; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--raio-lg);
+  padding: 1.5rem 1.6rem; max-width: 380px; width: 100%; text-align: center;
+}
+.modal-confirm-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: #fff; margin: 0 0 0.6rem; }
+.modal-confirm-texto  { font-size: var(--fs-sm); color: #aaa; line-height: 1.5; margin: 0 0 1.2rem; }
+.modal-confirm-acoes  { display: flex; gap: var(--sp-4); justify-content: center; }
+.modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
+/* Cancelar: contorno (não preenchido) para diferenciar da ação principal. */
+.modal-confirm-acoes .btn-rolar.btn-sec {
+  background: transparent; color: var(--txt-soft); border: 1px solid var(--txt-soft);
+}
+.modal-confirm-acoes .btn-rolar.btn-sec:hover { background: var(--txt-soft); color: var(--bg); }
+
+/* Variante de botão destrutivo (Confirmar em ações perigosas: excluir, sair definitivo).
+   Combina com .btn-rolar. Usada pelo UI.modalConfirm({ perigo: true }). */
+.btn-rolar.btn-perigo {
+  background: var(--perigo); color: #2a0a0a;
+}
+.btn-rolar.btn-perigo:hover { filter: brightness(1.08); }

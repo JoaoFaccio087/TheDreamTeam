@@ -60,7 +60,6 @@ const btnPularTudo           = document.getElementById('btn-pular-tudo');
 const confirmOverlay         = document.getElementById('confirm-overlay');
 const btnConfirmCancelar     = document.getElementById('confirm-cancelar');
 const btnConfirmConfirmar    = document.getElementById('confirm-confirmar');
-const btnConfirmBackdrop     = document.getElementById('confirm-backdrop');
 
 
 // --- Estado: tela inicial ---

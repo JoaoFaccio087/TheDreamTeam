@@ -200,7 +200,10 @@ if (btnConfirmConfirmar) btnConfirmConfirmar.addEventListener('click', function 
   pularTudoBrasileirao();
 });
 if (btnConfirmCancelar) btnConfirmCancelar.addEventListener('click', fecharConfirmPularTudo);
-if (btnConfirmBackdrop) btnConfirmBackdrop.addEventListener('click', fecharConfirmPularTudo);
+// Fecha ao clicar fora da caixa (o overlay agora É o backdrop, sem elemento separado).
+if (confirmOverlay) confirmOverlay.addEventListener('click', function (e) {
+  if (e.target === confirmOverlay) fecharConfirmPularTudo();
+});
 
 // Abre a tela de resumo da campanha (botão aparece ao fim de cada campanha)
 if (btnResumo) btnResumo.addEventListener('click', mostrarResumo);
