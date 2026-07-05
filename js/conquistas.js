@@ -43,6 +43,23 @@
     { id: 'colecionador',      categoria: 'Competições', nome: 'Colecionador',       desc: 'Campeão de todas as 4 competições', desbloqueada: false },
   ];
 
+  // Raridade por conquista (4 níveis, só cosmético): comum < raro < epico < lendario.
+  // Mais difícil de obter = mais rara. Conquistas sem entrada aqui caem em 'comum'.
+  var RARIDADE = {
+    // Comuns — primeiros passos
+    primeira_vez: 'comum', primeira_vitoria: 'comum', primeiro_titulo: 'comum', campeao_brasil: 'comum',
+    // Raras — exigem alguma consistência
+    veterano: 'raro', maquina_de_gols: 'raro', sete_a_zero: 'raro', hat_trick: 'raro',
+    nos_penaltis: 'raro', campeao_liberta: 'raro', campeao_champions: 'raro', campeao_copa: 'raro',
+    // Épicas — feitos difíceis
+    dinastico: 'epico', invencivel: 'epico', show_de_bola: 'epico', massacre: 'epico',
+    poquer: 'epico', coracao_forte: 'epico',
+    // Lendárias — muito difíceis
+    lenda_viva: 'lendario', imperador: 'lendario', colecionador: 'lendario'
+  };
+  var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
+  function raridadeDe(id) { return RARIDADE[id] || 'comum'; }
+
   // Ícone (SVG inline) por estado — cadeado quando bloqueada, troféu quando desbloqueada.
   function iconeConquista(desbloqueada) {
     if (desbloqueada) {
@@ -55,8 +72,10 @@
   }
 
   function cardConquista(c) {
-    var cls = c.desbloqueada ? 'conq-card conq-desbloqueada' : 'conq-card conq-bloqueada';
+    var rar = raridadeDe(c.id);
+    var cls = 'conq-card conq-rar-' + rar + (c.desbloqueada ? ' conq-desbloqueada' : ' conq-bloqueada');
     return '<div class="' + cls + '">' +
+             '<span class="conq-rar-tag">' + esc(RARIDADE_ROTULO[rar] || 'Comum') + '</span>' +
              '<span class="conq-icone">' + iconeConquista(c.desbloqueada) + '</span>' +
              '<span class="conq-nome">' + esc(c.nome) + '</span>' +
              '<span class="conq-desc">' + esc(c.desc) + '</span>' +

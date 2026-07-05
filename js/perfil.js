@@ -171,17 +171,29 @@
   // Formação fixa de exibição (1 GOL, 4 DEF, 3 MEI, 3 ATA) — as vagas vêm das coords 4-3-3.
   var FORMACAO_ESCALADOS = '4-3-3';
 
-  // Conta, nas campanhas filtradas, quantas vezes cada jogador foi escalado, por posição.
+  // Os códigos salvos em pick.codigo são posições ESPECÍFICAS (GOL, LE, ZAG, LD, MC, MEI, VOL,
+  // ME, MD, PE, ATA, PD...). Mapeia cada uma para o grupo do campo (GOL/DEF/MEI/ATA).
+  var POSICAO_GRUPO = {
+    GOL: 'GOL',
+    LE: 'DEF', LD: 'DEF', ZAG: 'DEF', LB: 'DEF', RB: 'DEF', ZE: 'DEF', ZD: 'DEF',
+    VOL: 'MEI', MC: 'MEI', MEI: 'MEI', ME: 'MEI', MD: 'MEI', MEIA: 'MEI',
+    PE: 'ATA', PD: 'ATA', ATA: 'ATA', CA: 'ATA', SA: 'ATA'
+  };
+  function grupoDaPosicao(codigo) { return POSICAO_GRUPO[String(codigo || '').toUpperCase()] || null; }
+
+  // Conta, nas campanhas filtradas, quantas vezes cada jogador foi escalado, por grupo de posição.
   // Retorna { GOL:[...], DEF:[...], MEI:[...], ATA:[...] }, cada lista ordenada por vezes desc.
   function contarEscalados(matches) {
-    var porNome = {};   // nome → { nome, codigo, forca, vezes }
+    var porNome = {};   // (grupo|nome) → { nome, grupo, forca, vezes }
     (matches || []).forEach(function (m) {
       var picks = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
       if (!picks || !picks.length) return;
       picks.forEach(function (p) {
         if (!p || !p.nome) return;
-        var k = p.codigo + '|' + p.nome;   // mesmo nome em posições diferentes conta separado
-        if (!porNome[k]) porNome[k] = { nome: p.nome, codigo: p.codigo, forca: p.forca | 0, vezes: 0 };
+        var g = grupoDaPosicao(p.codigo);
+        if (!g) return;                    // código desconhecido: ignora em vez de sumir com o jogador
+        var k = g + '|' + p.nome;          // mesmo jogador no mesmo setor conta junto (ZAG+LE = DEF)
+        if (!porNome[k]) porNome[k] = { nome: p.nome, grupo: g, forca: p.forca | 0, vezes: 0 };
         porNome[k].vezes++;
         if ((p.forca | 0) > porNome[k].forca) porNome[k].forca = p.forca | 0;
       });
@@ -189,7 +201,7 @@
     var grupos = { GOL: [], DEF: [], MEI: [], ATA: [] };
     Object.keys(porNome).forEach(function (k) {
       var j = porNome[k];
-      if (grupos[j.codigo]) grupos[j.codigo].push(j);
+      if (grupos[j.grupo]) grupos[j.grupo].push(j);
     });
     Object.keys(grupos).forEach(function (g) {
       grupos[g].sort(function (a, b) { return b.vezes !== a.vezes ? b.vezes - a.vezes : b.forca - a.forca; });
@@ -238,7 +250,7 @@
       var temJog = !!v.jog;
       var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';
       html +=
-        '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '">' +
+        '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '" data-tip="' + esc(titulo) + '">' +
           '<span class="pce-marca">' + (temJog ? esc(nomeIniciais(v.jog.nome)) : '·') + '</span>' +
           '<span class="pce-nome">' + (temJog ? esc(nomeCurtoEsc(v.jog.nome)) : '—') + '</span>' +
         '</div>';

@@ -46,6 +46,7 @@ ficam soltos de propósito — não force um token neles.
 ### Cores
 `--accent` (verde #2BD46A padrão/Brasil/Copa; dourado Liberta; prata Champions),
 `--perigo` (#ff6b6b — ação destrutiva/negativa: logout, sair, derrota),
+`--rar-comum/raro/epico/lendario` (raridade das conquistas: cinza/azul/roxo/dourado),
 `--bg`, `--txt`, `--txt-soft`, `--surface`, `--linha`, `--btn-txt`.
 
 ---

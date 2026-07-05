@@ -22,6 +22,11 @@ html {
   --txt-soft: #99A0AA;   /* texto secundário (cinza) */
   --accent:   #2BD46A;   /* verde-campo — cor de ação padrão */
   --perigo:   #ff6b6b;   /* vermelho de ação destrutiva/negativa (logout, sair, derrota) */
+  /* Raridade das conquistas (cosmético): comum < raro < épico < lendário */
+  --rar-comum:    #9aa6b2;   /* cinza */
+  --rar-raro:     #4aa3ff;   /* azul */
+  --rar-epico:    #b06bff;   /* roxo */
+  --rar-lendario: #f5c451;   /* dourado */
 
   /* Tokens da tela inicial (modo escuro) */
   --surface:       #181B21;                 /* cards e superfícies */

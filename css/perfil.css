@@ -83,13 +83,11 @@
 .acord-aberta .acord-seta { transform: rotate(180deg); }
 .acord-head:hover .acord-nome { color: var(--accent, #2BD46A); }
 .acord-head:hover .acord-seta { color: var(--accent, #2BD46A); }
-/* Corpo: fechado por padrão (grid recolhido); abre quando a seção tem .acord-aberta. */
-.acord-corpo {
-  display: grid; grid-template-rows: 0fr;
-  transition: grid-template-rows 0.24s ease;
-}
-.acord-corpo > * { overflow: hidden; min-height: 0; }
-.acord-aberta .acord-corpo { grid-template-rows: 1fr; }
+/* Corpo: escondido por padrão; aparece só quando a seção tem .acord-aberta.
+   (display none/grid é à prova de navegador — a animação por grid-template-rows:0fr
+   vazava em alguns browsers, deixando os stats visíveis com a seção fechada.) */
+.acord-corpo { display: none; }
+.acord-aberta .acord-corpo { display: block; }
 .acord-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-sm); padding: 0.1rem 0 0.7rem; }
 .acord-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); padding-bottom: 0.9rem; }
 
@@ -278,6 +276,18 @@
   position: absolute; transform: translate(-50%,-50%);
   display: flex; flex-direction: column; align-items: center; gap: 3px; z-index: 2; cursor: default;
 }
+/* Os filhos não capturam o hover — assim o container (com o tooltip) sempre recebe. */
+.pce-jogador > * { pointer-events: none; }
+/* Tooltip instantâneo com a contagem de escalações (data-tip), acima do jogador. */
+.pce-jogador:hover { z-index: 20; }
+.pce-jogador[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  white-space: nowrap; padding: 5px 9px; border-radius: var(--raio-sm, 6px);
+  background: rgba(10, 12, 16, 0.97); border: 1px solid var(--accent, #2BD46A);
+  color: #fff; font-family: 'Archivo', sans-serif; font-size: var(--fs-mini); font-weight: 600;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5); pointer-events: none; z-index: 21;
+}
 .pce-marca {
   width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -361,6 +371,7 @@
 }
 
 .conq-card {
+  position: relative;
   display: flex; flex-direction: column; gap: 0.3rem;
   padding: 0.9rem 0.85rem;
   border: 1px solid rgba(255,255,255,0.1);
@@ -373,14 +384,31 @@
 .conq-nome { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); line-height: 1.15; }
 .conq-desc { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); line-height: 1.25; }
 
-/* Desbloqueada: destaque em accent */
-.conq-desbloqueada { border-color: rgba(43,212,106,0.4); background: rgba(43,212,106,0.06); }
-.conq-desbloqueada .conq-icone { color: var(--accent, #2BD46A); }
-.conq-desbloqueada .conq-nome  { color: #fff; }
-.conq-desbloqueada:hover { transform: translateY(-2px); border-color: var(--accent, #2BD46A); }
+/* Etiqueta de raridade no canto superior direito do card */
+.conq-rar-tag {
+  position: absolute; top: 0.55rem; right: 0.6rem;
+  font-family: 'Archivo', sans-serif; font-weight: var(--peso-forte); font-size: 0.56rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 1px 6px; border-radius: var(--raio-pill, 999px);
+  color: var(--rar-cor); border: 1px solid var(--rar-cor);
+  background: color-mix(in srgb, var(--rar-cor) 12%, transparent);
+}
+/* Cor por nível de raridade (a var alimenta borda, tag e ícone quando desbloqueada) */
+.conq-rar-comum    { --rar-cor: var(--rar-comum); }
+.conq-rar-raro     { --rar-cor: var(--rar-raro); }
+.conq-rar-epico    { --rar-cor: var(--rar-epico); }
+.conq-rar-lendario { --rar-cor: var(--rar-lendario); }
 
-/* Bloqueada: esmaecida */
-.conq-bloqueada { opacity: 0.55; }
+/* Desbloqueada: a raridade domina a cor (borda/ícone/nome). */
+.conq-desbloqueada { border-color: var(--rar-cor); background: color-mix(in srgb, var(--rar-cor) 8%, transparent); }
+.conq-desbloqueada .conq-icone { color: var(--rar-cor); }
+.conq-desbloqueada .conq-nome  { color: #fff; }
+.conq-desbloqueada:hover { transform: translateY(-2px); box-shadow: 0 6px 18px color-mix(in srgb, var(--rar-cor) 22%, transparent); }
+/* Lendária desbloqueada: leve brilho para se destacar das demais. */
+.conq-rar-lendario.conq-desbloqueada { box-shadow: 0 0 14px color-mix(in srgb, var(--rar-lendario) 30%, transparent); }
+
+/* Bloqueada: esmaecida; a raridade fica discreta (só a tag mantém a cor). */
+.conq-bloqueada { opacity: 0.5; }
 .conq-bloqueada .conq-icone { color: var(--txt-soft, #9aa6b2); }
 .conq-bloqueada .conq-nome  { color: #cdd3da; }
 
