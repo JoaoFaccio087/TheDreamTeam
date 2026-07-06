@@ -213,13 +213,14 @@
   // mais escalado do grupo daquela vaga. Vagas sem candidato ficam vazias (—).
   function montarOnzeEscalado(grupos, formacao) {
     var coords = (typeof formacoes !== 'undefined' && formacoes[formacao]) ? formacoes[formacao] : [];
+    var cods   = (typeof codigosFormacao !== 'undefined' && codigosFormacao[formacao]) ? codigosFormacao[formacao] : [];
     var usados = { GOL: 0, DEF: 0, MEI: 0, ATA: 0 };
-    return coords.map(function (c) {
+    return coords.map(function (c, i) {
       var g = c.grupo;
       var lista = grupos[g] || [];
       var jog = lista[usados[g]] || null;
       usados[g]++;
-      return { left: c.left, top: c.top, grupo: g, jog: jog };
+      return { left: c.left, top: c.top, grupo: g, cod: cods[i] || g, jog: jog };
     });
   }
 
@@ -255,19 +256,13 @@
       if (v.top <= 20) ancora += ' tip-baixo';
       html +=
         '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + ancora + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '" data-tip="' + esc(titulo) + '">' +
-          '<span class="pce-marca">' + (temJog ? esc(nomeIniciais(v.jog.nome)) : '·') + '</span>' +
+          '<span class="pce-marca">' + esc(v.cod) + '</span>' +
           '<span class="pce-nome">' + (temJog ? esc(nomeCurtoEsc(v.jog.nome)) : '—') + '</span>' +
         '</div>';
     });
     campo.innerHTML = html;
   }
 
-  // "Marcos Acuña" → "MA"; nome de uma palavra → 2 primeiras letras.
-  function nomeIniciais(nome) {
-    var ps = String(nome || '').trim().split(/\s+/);
-    if (ps.length >= 2) return (ps[0][0] + ps[ps.length - 1][0]).toUpperCase();
-    return String(nome || '').slice(0, 2).toUpperCase();
-  }
   // "Marcos Acuña" → "Acuña"; uma palavra fica igual.
   function nomeCurtoEsc(nome) {
     var ps = String(nome || '').trim().split(/\s+/);

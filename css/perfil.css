@@ -297,7 +297,7 @@
   width: 30px; height: 30px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   background: rgba(0,0,0,0.6); border: 1.5px solid var(--accent, #2BD46A); color: #fff;
-  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-micro); letter-spacing: 0.3px;
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-micro); letter-spacing: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.4); transition: transform 0.12s ease;
 }
 .pce-jogador:hover .pce-marca { transform: scale(1.12); }

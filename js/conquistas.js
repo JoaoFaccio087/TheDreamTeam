@@ -20,17 +20,25 @@
     { id: 'primeira_vitoria',  categoria: 'Progressão', nome: 'Primeira vitória',  desc: 'Venceu a primeira partida',            desbloqueada: false },
     { id: 'primeiro_titulo',   categoria: 'Progressão', nome: 'Primeiro título',   desc: 'Venceu um torneio pela primeira vez',  desbloqueada: false },
     { id: 'veterano',          categoria: 'Progressão', nome: 'Veterano',          desc: 'Jogou 50 partidas',                    desbloqueada: false },
+    { id: 'centuriao',         categoria: 'Progressão', nome: 'Centurião',         desc: 'Jogou 100 partidas',                   desbloqueada: false },
     { id: 'lenda_viva',        categoria: 'Progressão', nome: 'Lenda viva',        desc: 'Jogou 200 partidas',                   desbloqueada: false },
+    { id: 'centenario',        categoria: 'Progressão', nome: 'Centenário',        desc: 'Somou 100 vitórias no total',          desbloqueada: false },
     { id: 'dinastico',         categoria: 'Progressão', nome: 'Dinástico',         desc: 'Venceu 5 torneios',                    desbloqueada: false },
     { id: 'imperador',         categoria: 'Progressão', nome: 'Imperador',         desc: 'Venceu 15 torneios',                   desbloqueada: false },
     { id: 'maquina_de_gols',   categoria: 'Progressão', nome: 'Máquina de gols',   desc: 'Marcou 100 gols no total',             desbloqueada: false },
+    { id: 'artilheiro_mor',    categoria: 'Progressão', nome: 'Artilheiro-mor',    desc: 'Marcou 500 gols no total',             desbloqueada: false },
 
     // ── Placar & Campanha ──
     { id: 'sete_a_zero',       categoria: 'Placar & Campanha', nome: '7 a 0!',          desc: 'Completou uma campanha 7 a 0 perfeita (7 vitórias, 0 derrotas)', desbloqueada: false },
     { id: 'invencivel',        categoria: 'Placar & Campanha', nome: 'Invencível',      desc: 'Completou um torneio invicto',         desbloqueada: false },
+    { id: 'perfeccionista',    categoria: 'Placar & Campanha', nome: 'Perfeição',       desc: 'Campeão vencendo todas as partidas da campanha', desbloqueada: false },
+    { id: 'muralha',           categoria: 'Placar & Campanha', nome: 'Muralha',         desc: 'Foi campeão sem sofrer nenhum gol na campanha', desbloqueada: false },
+    { id: 'goleador_serial',   categoria: 'Placar & Campanha', nome: 'Goleador serial', desc: 'Marcou 50+ gols numa única campanha',  desbloqueada: false },
     { id: 'show_de_bola',      categoria: 'Placar & Campanha', nome: 'Show de bola',    desc: '7x0 com 5 artilheiros diferentes',     desbloqueada: false },
     { id: 'massacre',          categoria: 'Placar & Campanha', nome: 'Massacre',        desc: 'Venceu por 6+ de saldo',               desbloqueada: false },
+    { id: 'aniquilacao',       categoria: 'Placar & Campanha', nome: 'Aniquilação',     desc: 'Venceu um jogo por 8+ de saldo',       desbloqueada: false },
     { id: 'hat_trick',         categoria: 'Placar & Campanha', nome: 'Hat-trick',       desc: 'Um jogador fez 3 gols num jogo',       desbloqueada: false },
+    { id: 'trinca_dupla',      categoria: 'Placar & Campanha', nome: 'Trinca dupla',    desc: 'Teve hat-trick em 2 campanhas diferentes', desbloqueada: false },
     { id: 'poquer',            categoria: 'Placar & Campanha', nome: 'Pôquer',          desc: 'Um jogador fez 4 gols num jogo',       desbloqueada: false },
     { id: 'nos_penaltis',      categoria: 'Placar & Campanha', nome: 'Nos pênaltis',    desc: 'Venceu uma final nos pênaltis',        desbloqueada: false },
     { id: 'coracao_forte',     categoria: 'Placar & Campanha', nome: 'Coração forte',   desc: '2+ mata-matas decididos nos pênaltis numa campanha', desbloqueada: false },
@@ -40,6 +48,12 @@
     { id: 'campeao_champions', categoria: 'Competições', nome: 'Orelhudas',          desc: 'Campeão da Champions',              desbloqueada: false },
     { id: 'campeao_brasil',    categoria: 'Competições', nome: 'Brasil, decime',     desc: 'Campeão do Brasileirão',            desbloqueada: false },
     { id: 'campeao_copa',      categoria: 'Competições', nome: 'Topo do mundo',      desc: 'Campeão da Copa do Mundo',          desbloqueada: false },
+    { id: 'bi_liberta',        categoria: 'Competições', nome: 'Bi da América',      desc: 'Campeão da Libertadores 2 vezes',   desbloqueada: false },
+    { id: 'bi_champions',      categoria: 'Competições', nome: 'Bi europeu',         desc: 'Campeão da Champions 2 vezes',      desbloqueada: false },
+    { id: 'bi_brasil',         categoria: 'Competições', nome: 'Bi nacional',        desc: 'Campeão do Brasileirão 2 vezes',    desbloqueada: false },
+    { id: 'bi_copa',           categoria: 'Competições', nome: 'Bi mundial',         desc: 'Campeão da Copa do Mundo 2 vezes',  desbloqueada: false },
+    { id: 'rei_america',       categoria: 'Competições', nome: 'Rei da América',     desc: 'Campeão da Libertadores 3 vezes',   desbloqueada: false },
+    { id: 'continental',       categoria: 'Competições', nome: 'Dono dos continentes', desc: 'Campeão da Libertadores e da Champions', desbloqueada: false },
     { id: 'colecionador',      categoria: 'Competições', nome: 'Colecionador',       desc: 'Campeão de todas as 4 competições', desbloqueada: false },
   ];
 
@@ -51,11 +65,15 @@
     // Raras — exigem alguma consistência
     veterano: 'raro', maquina_de_gols: 'raro', sete_a_zero: 'raro', hat_trick: 'raro',
     nos_penaltis: 'raro', campeao_liberta: 'raro', campeao_champions: 'raro', campeao_copa: 'raro',
+    centuriao: 'raro', goleador_serial: 'raro', trinca_dupla: 'raro',
+    bi_liberta: 'raro', bi_champions: 'raro', bi_brasil: 'raro', bi_copa: 'raro',
     // Épicas — feitos difíceis
     dinastico: 'epico', invencivel: 'epico', show_de_bola: 'epico', massacre: 'epico',
     poquer: 'epico', coracao_forte: 'epico',
+    artilheiro_mor: 'epico', centenario: 'epico', perfeccionista: 'epico', muralha: 'epico',
+    aniquilacao: 'epico', continental: 'epico',
     // Lendárias — muito difíceis
-    lenda_viva: 'lendario', imperador: 'lendario', colecionador: 'lendario'
+    lenda_viva: 'lendario', imperador: 'lendario', colecionador: 'lendario', rei_america: 'lendario'
   };
   var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
   function raridadeDe(id) { return RARIDADE[id] || 'comum'; }
