@@ -92,9 +92,21 @@
 .acord-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); padding-bottom: 0.9rem; }
 
 .perfil-stat {
+  position: relative;
   background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--raio-md); padding: 0.55rem 0.3rem;
   display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+}
+.perfil-stat[data-tip] { cursor: help; }
+/* Tooltip explicativo instantâneo, acima do bloco (padrão do mapa de escalados). */
+.perfil-stat[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  width: max-content; max-width: 220px; white-space: normal; text-align: center;
+  padding: 6px 10px; border-radius: var(--raio-sm, 6px);
+  background: rgba(10, 12, 16, 0.98); border: 1px solid var(--accent, #2BD46A);
+  color: #fff; font-family: 'Archivo', sans-serif; font-size: var(--fs-mini); font-weight: 500; line-height: 1.35;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5); pointer-events: none; z-index: 30;
 }
 .perfil-stat-num { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: #fff; }
 .perfil-stat-lbl { font-size: var(--fs-legenda); color: var(--txt-soft, #9aa6b2); text-align: center; }

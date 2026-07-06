@@ -135,9 +135,14 @@
     var corpo = (s.camp === 0)
       ? '<p class="acord-vazio">Nenhuma campanha ainda nesta categoria.</p>'
       : '<div class="acord-stats">' +
-          stat(s.camp, 'Campanhas') + stat(s.tit, 'Títulos') +
-          stat(s.v, 'Vitórias') + stat(s.e, 'Empates') + stat(s.d, 'Derrotas') +
-          stat(s.gf, 'Gols pró') + stat(s.ga, 'Gols contra') + stat(s.aprov + '%', 'Aproveit.') +
+          stat(s.camp, 'Campanhas', 'Total de campanhas disputadas nesta categoria') +
+          stat(s.tit, 'Títulos', 'Campanhas em que você foi campeão') +
+          stat(s.v, 'Vitórias', 'Jogos vencidos somando todas as campanhas') +
+          stat(s.e, 'Empates', 'Jogos empatados somando todas as campanhas') +
+          stat(s.d, 'Derrotas', 'Jogos perdidos somando todas as campanhas') +
+          stat(s.gf, 'Gols pró', 'Gols marcados pelo seu time no total') +
+          stat(s.ga, 'Gols contra', 'Gols que seu time sofreu no total') +
+          stat(s.aprov + '%', 'Aproveit.', 'Aproveitamento: pontos ganhos ÷ pontos possíveis (vitória=3, empate=1)') +
         '</div>';
     return '' +
       '<section class="perfil-acord' + (aberto ? ' acord-aberta' : '') + '">' +
@@ -149,8 +154,9 @@
         '<div class="acord-corpo">' + corpo + '</div>' +
       '</section>';
   }
-  function stat(num, lbl) {
-    return '<div class="perfil-stat"><span class="perfil-stat-num">' + num +
+  function stat(num, lbl, dica) {
+    var tip = dica ? ' title="' + esc(dica) + '" data-tip="' + esc(dica) + '"' : '';
+    return '<div class="perfil-stat"' + tip + '><span class="perfil-stat-num">' + num +
            '</span><span class="perfil-stat-lbl">' + lbl + '</span></div>';
   }
 

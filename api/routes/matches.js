@@ -107,8 +107,14 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 // GET /matches/achievements — IDs das conquistas desbloqueadas do usuário (+ quando).
+// Antes de retornar, recalcula sobre o histórico e grava as que faltam. Isso garante que
+// conquistas ADICIONADAS depois (ou já merecidas mas ainda não avaliadas) apareçam sem exigir
+// que o usuário jogue uma campanha nova — basta abrir a aba de Conquistas.
 router.get('/achievements', requireAuth, async (req, res) => {
   try {
+    try { await atualizarConquistas(req.user.id); }
+    catch (errC) { console.error('[matches] erro ao sincronizar conquistas no GET:', errC); }
+
     const { rows } = await pool.query(
       `SELECT achievement_id, unlocked_at FROM achievements WHERE user_id = $1 ORDER BY unlocked_at`,
       [req.user.id]
