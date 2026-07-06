@@ -403,11 +403,3 @@ function selecionarAbaSim(qual) {
     }
   }
 }
-
-function abrirConfirmPularTudo() {
-  if (confirmOverlay) confirmOverlay.classList.remove('escondida');
-}
-
-function fecharConfirmPularTudo() {
-  if (confirmOverlay) confirmOverlay.classList.add('escondida');
-}

@@ -99,35 +99,21 @@ if (modalBackdrop) modalBackdrop.addEventListener('click', fecharModal);
 var btnPerfilLogout = document.getElementById('perfil-logout');
 if (btnPerfilLogout) {
   btnPerfilLogout.addEventListener('click', function () {
-    var modal = document.getElementById('modal-logout');
-    if (modal) modal.classList.remove('escondida');
-    else { limparSessao(); atualizarDropdown(null); }   // fallback se o modal não existir
-  });
-}
-
-// Confirmação do logout: só desconecta ao confirmar; feedback rápido de "Saindo…".
-var modalLogout          = document.getElementById('modal-logout');
-var modalLogoutCancelar  = document.getElementById('modal-logout-cancelar');
-var modalLogoutConfirmar = document.getElementById('modal-logout-confirmar');
-if (modalLogoutCancelar) {
-  modalLogoutCancelar.addEventListener('click', function () {
-    if (modalLogout) modalLogout.classList.add('escondida');
-  });
-}
-if (modalLogoutConfirmar) {
-  modalLogoutConfirmar.addEventListener('click', function () {
-    modalLogoutConfirmar.disabled = true;
-    modalLogoutConfirmar.textContent = 'Saindo…';
-    limparSessao();
-    atualizarDropdown(null);
-    setTimeout(function () {
-      if (modalLogout) modalLogout.classList.add('escondida');
-      modalLogoutConfirmar.disabled = false;
-      modalLogoutConfirmar.textContent = 'Sair';
-      // Sai da tela de Perfil de volta para o início.
-      var inicial = document.getElementById('tela-inicial');
-      if (inicial && typeof mostrarTela === 'function') mostrarTela(inicial);
-    }, 350);
+    if (window.UI && UI.modalConfirm) {
+      UI.modalConfirm({
+        titulo: 'Sair da conta?',
+        texto: 'Você será desconectado e voltará ao modo visitante. Seu progresso continua salvo na sua conta.',
+        confirmar: 'Sair', cancelar: 'Cancelar', perigo: true,
+        onConfirmar: function () {
+          limparSessao();
+          atualizarDropdown(null);
+          var inicial = document.getElementById('tela-inicial');
+          if (inicial && typeof mostrarTela === 'function') mostrarTela(inicial);
+        }
+      });
+    } else {   // fallback sem UIKit
+      limparSessao(); atualizarDropdown(null);
+    }
   });
 }
 

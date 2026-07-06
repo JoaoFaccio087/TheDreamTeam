@@ -193,16 +193,15 @@ document.getElementById('btn-voltar-escalacao').addEventListener('click', functi
 // Skip: re-sorteia qualquer clube e qualquer ano da competição, sem gastar rolagem
 btnSkip.addEventListener('click', fazerSkip);
 
-// "Pular tudo" (Brasileirão): abre o modal de confirmação
-if (btnPularTudo) btnPularTudo.addEventListener('click', abrirConfirmPularTudo);
-if (btnConfirmConfirmar) btnConfirmConfirmar.addEventListener('click', function () {
-  fecharConfirmPularTudo();
-  pularTudoBrasileirao();
-});
-if (btnConfirmCancelar) btnConfirmCancelar.addEventListener('click', fecharConfirmPularTudo);
-// Fecha ao clicar fora da caixa (o overlay agora É o backdrop, sem elemento separado).
-if (confirmOverlay) confirmOverlay.addEventListener('click', function (e) {
-  if (e.target === confirmOverlay) fecharConfirmPularTudo();
+// "Pular tudo" (Brasileirão): confirma via UI.modalConfirm (componente do UIKit).
+if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
+  UI.modalConfirm({
+    titulo: 'Pular tudo?',
+    texto: 'Todas as rodadas restantes serão simuladas de uma vez e você irá direto para o resultado final do campeonato.',
+    confirmar: 'Confirmar',
+    cancelar: 'Cancelar',
+    onConfirmar: pularTudoBrasileirao
+  });
 });
 
 // Abre a tela de resumo da campanha (botão aparece ao fim de cada campanha)

@@ -152,17 +152,7 @@
   </div>
 
 
-  <!-- Modal de confirmação de logout -->
-  <div id="modal-logout" class="modal-confirm escondida">
-    <div class="modal-confirm-box">
-      <p class="modal-confirm-titulo">Sair da conta?</p>
-      <p class="modal-confirm-texto">Voc&ecirc; ser&aacute; desconectado e voltar&aacute; ao modo visitante. Seu progresso continua salvo na sua conta.</p>
-      <div class="modal-confirm-acoes">
-        <button id="modal-logout-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>
-        <button id="modal-logout-confirmar" class="btn-rolar" type="button">Sair</button>
-      </div>
-    </div>
-  </div>
+  <!-- Modal de logout agora é criado via UI.modalConfirm (js/ui.js). -->
 
 
   <!-- Modal de Perfil -->
@@ -756,17 +746,7 @@
   <!-- Overlay do resumo da campanha -->
   <div id="resumo-overlay" class="resumo-overlay escondida"></div>
 
-  <!-- Modal de confirmação do "Pular tudo" (Brasileirão) — padrão .modal-confirm -->
-  <div id="confirm-overlay" class="modal-confirm escondida">
-    <div class="modal-confirm-box" role="dialog" aria-modal="true">
-      <p class="modal-confirm-titulo">Pular tudo?</p>
-      <p class="modal-confirm-texto">Todas as rodadas restantes ser&atilde;o simuladas de uma vez e voc&ecirc; ir&aacute; direto para o resultado final do campeonato.</p>
-      <div class="modal-confirm-acoes">
-        <button id="confirm-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>
-        <button id="confirm-confirmar" class="btn-rolar" type="button">Confirmar</button>
-      </div>
-    </div>
-  </div>
+  <!-- Modal "Pular tudo" (Brasileirão) agora é criado via UI.modalConfirm (js/ui.js). -->
 
 
   <!-- =============================================================
@@ -878,17 +858,7 @@
 
       </div><!-- /sorteio-wrap -->
 
-      <!-- Modal: confirmar pular -->
-      <div id="modal-sorteio-pular" class="modal-confirm escondida">
-        <div class="modal-confirm-box">
-          <p class="modal-confirm-titulo">Pular o sorteio?</p>
-          <p class="modal-confirm-texto">A anima&ccedil;&atilde;o ser&aacute; pulada e os grupos aparecem j&aacute; preenchidos para todos.</p>
-          <div class="modal-confirm-acoes">
-            <button id="sorteio-pular-cancelar"  class="btn-rolar btn-sec" type="button">Cancelar</button>
-            <button id="sorteio-pular-confirmar" class="btn-rolar" type="button">Pular</button>
-          </div>
-        </div>
-      </div>
+      <!-- Modal "pular sorteio" agora via UI.modalConfirm (js/ui.js). -->
 
     </div><!-- /online-sorteio -->
 
@@ -1098,16 +1068,7 @@
       </div>
 
       <!-- Modal: confirmar "pular tudo" -->
-      <div id="modal-pular" class="modal-confirm escondida">
-        <div class="modal-confirm-box">
-          <p class="modal-confirm-titulo">Pular todos os jogos?</p>
-          <p class="modal-confirm-texto">Isso simula o restante da temporada de uma vez. <strong>Todos os jogadores</strong> da sala precisam aceitar para pular.</p>
-          <div class="modal-confirm-acoes">
-            <button id="modal-pular-cancelar" class="btn-rolar btn-sec">Cancelar</button>
-            <button id="modal-pular-confirmar" class="btn-rolar">Confirmar</button>
-          </div>
-        </div>
-      </div>
+      <div id="modal-pular-placeholder"><!-- modal "pular tudo" online agora via UI.modalConfirm --></div>
 
     </div><!-- /online-rodada -->
 
@@ -1127,16 +1088,7 @@
     </div>
 
     <!-- Modal: confirmar saída do online (lobby) -->
-    <div id="modal-sair-online" class="modal-confirm escondida">
-      <div class="modal-confirm-box">
-        <p class="modal-confirm-titulo">Sair da sala?</p>
-        <p class="modal-confirm-texto">Voc&ecirc; vai deixar a sala e voltar ao in&iacute;cio. Se voc&ecirc; for o anfitri&atilde;o e a sala ficar vazia, ela ser&aacute; encerrada.</p>
-        <div class="modal-confirm-acoes">
-          <button id="modal-sair-cancelar"  class="btn-rolar btn-sec">Cancelar</button>
-          <button id="modal-sair-confirmar" class="btn-rolar">Sair</button>
-        </div>
-      </div>
-    </div>
+    <div id="modal-sair-placeholder"><!-- modal "sair da sala" agora via UI.modalConfirm --></div>
 
     <!-- Modal de premiação — abre SOBRE a aba Classificação ao fim do campeonato -->
     <div id="modal-premiacao" class="modal-premiacao escondida">

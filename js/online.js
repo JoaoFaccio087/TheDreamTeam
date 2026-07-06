@@ -48,7 +48,6 @@
   // Lobby
   var lobbyNomeTime, lobbyPilulasFormacao, lobbyProntosCount;
   var btnLobbyPronto, btnLobbyComecar, btnLobbyVoltar;
-  var modalSairOnline, modalSairCancelar, modalSairConfirmar;
   var lobbyCampo, lobbyBoxScore;
 
   // Draft
@@ -74,7 +73,7 @@
   var animTimer = null;   // timer da animação da partida do usuário
   var animacaoAtiva = false;   // true enquanto a partida do usuário está sendo animada
   var aoFimDaAnimacao = null;  // callback rodado quando a animação termina (atualiza a classificação só então)
-  var btnPularTudo, modalPular, modalPularConfirmar, modalPularCancelar, skipContador, prontosLabel;
+  var btnPularTudo, skipContador, prontosLabel;
   var euVoteiPular = false, skipVotos = 0, skipTotal = 0;
 
   // Fim
@@ -1880,7 +1879,16 @@
       if (lista) lista.classList.toggle('escondida');
     });
     barraEspectador.querySelector('#esp-casa').addEventListener('click', function () {
-      if (modalSairOnline) modalSairOnline.classList.remove('escondida');
+      UI.modalConfirm({
+        titulo: 'Sair da sala?',
+        texto: 'Você vai deixar a sala e voltar ao início. Se você for o anfitrião e a sala ficar vazia, ela será encerrada.',
+        confirmar: 'Sair', cancelar: 'Cancelar', perigo: true,
+        onConfirmar: function () {
+          if (socket && socket.connected) socket.emit('room:leave');
+          desconectar();
+          mostrarTelaInicial();
+        }
+      });
     });
   }
 
@@ -2893,9 +2901,7 @@
     btnLobbyPronto       = document.getElementById('btn-lobby-pronto');
     btnLobbyComecar      = document.getElementById('btn-lobby-comecar');
     btnLobbyVoltar       = document.getElementById('btn-lobby-voltar');
-    modalSairOnline      = document.getElementById('modal-sair-online');
-    modalSairCancelar    = document.getElementById('modal-sair-cancelar');
-    modalSairConfirmar   = document.getElementById('modal-sair-confirmar');
+
     lobbyCampo           = document.getElementById('lobby-campo');
     lobbyBoxScore        = document.getElementById('lobby-box-score');
 
@@ -2974,9 +2980,6 @@
     tabChave    = document.getElementById('tab-chave');
     abaChave    = document.getElementById('aba-chave');
     btnPularTudo        = document.getElementById('online-btn-pular');
-    modalPular          = document.getElementById('modal-pular');
-    modalPularConfirmar = document.getElementById('modal-pular-confirmar');
-    modalPularCancelar  = document.getElementById('modal-pular-cancelar');
     skipContador        = document.getElementById('online-skip-cont');
     prontosLabel        = document.getElementById('online-prontos');
 
@@ -3078,19 +3081,16 @@
     // ── Botões do Sorteio de Grupos ──
     var btnSorteioPular    = document.getElementById('btn-sorteio-pular');
     var btnSorteioAvancar  = document.getElementById('btn-sorteio-avancar');
-    var modalSorteioPular  = document.getElementById('modal-sorteio-pular');
-    var sorteioPularCancel = document.getElementById('sorteio-pular-cancelar');
-    var sorteioPularConfir = document.getElementById('sorteio-pular-confirmar');
 
     if (btnSorteioPular) btnSorteioPular.addEventListener('click', function () {
-      if (modalSorteioPular) modalSorteioPular.classList.remove('escondida');
-    });
-    if (sorteioPularCancel) sorteioPularCancel.addEventListener('click', function () {
-      if (modalSorteioPular) modalSorteioPular.classList.add('escondida');
-    });
-    if (sorteioPularConfir) sorteioPularConfir.addEventListener('click', function () {
-      if (modalSorteioPular) modalSorteioPular.classList.add('escondida');
-      if (socket && socket.connected) socket.emit('grupos:pular');
+      UI.modalConfirm({
+        titulo: 'Pular o sorteio?',
+        texto: 'A animação será pulada e os grupos aparecem já preenchidos para todos.',
+        confirmar: 'Pular', cancelar: 'Cancelar',
+        onConfirmar: function () {
+          if (socket && socket.connected) socket.emit('grupos:pular');
+        }
+      });
     });
     if (btnSorteioAvancar) btnSorteioAvancar.addEventListener('click', function () {
       if (!socket || !socket.connected) return;
@@ -3099,16 +3099,16 @@
     });
 
     btnLobbyVoltar.addEventListener('click', function () {
-      if (modalSairOnline) modalSairOnline.classList.remove('escondida');
-    });
-    if (modalSairCancelar) modalSairCancelar.addEventListener('click', function () {
-      if (modalSairOnline) modalSairOnline.classList.add('escondida');
-    });
-    if (modalSairConfirmar) modalSairConfirmar.addEventListener('click', function () {
-      if (modalSairOnline) modalSairOnline.classList.add('escondida');
-      if (socket && socket.connected) socket.emit('room:leave');
-      desconectar();
-      mostrarTelaInicial();
+      UI.modalConfirm({
+        titulo: 'Sair da sala?',
+        texto: 'Você vai deixar a sala e voltar ao início. Se você for o anfitrião e a sala ficar vazia, ela será encerrada.',
+        confirmar: 'Sair', cancelar: 'Cancelar', perigo: true,
+        onConfirmar: function () {
+          if (socket && socket.connected) socket.emit('room:leave');
+          desconectar();
+          mostrarTelaInicial();
+        }
+      });
     });
 
     // Draft: setas rolam a lista de jogadores (scroll nativo).
@@ -3179,16 +3179,16 @@
 
     if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
       if (euVoteiPular) return;
-      if (modalPular) modalPular.classList.remove('escondida');
-    });
-    if (modalPularCancelar) modalPularCancelar.addEventListener('click', function () {
-      if (modalPular) modalPular.classList.add('escondida');
-    });
-    if (modalPularConfirmar) modalPularConfirmar.addEventListener('click', function () {
-      if (modalPular) modalPular.classList.add('escondida');
-      euVoteiPular = true;
-      if (socket && socket.connected) socket.emit('round:skipAll');
-      atualizarAcoesRodada();
+      UI.modalConfirm({
+        titulo: 'Pular todos os jogos?',
+        html: 'Isso simula o restante da temporada de uma vez. <strong>Todos os jogadores</strong> da sala precisam aceitar para pular.',
+        confirmar: 'Confirmar', cancelar: 'Cancelar',
+        onConfirmar: function () {
+          euVoteiPular = true;
+          if (socket && socket.connected) socket.emit('round:skipAll');
+          atualizarAcoesRodada();
+        }
+      });
     });
 
     btnRodadaFim.addEventListener('click', function () {

@@ -155,11 +155,13 @@ Dívida de cor de perigo — PARCIALMENTE PAGA:
 - **Resta migrar** os usos em `background: #ff6b6b` e `rgba(255,107,107,…)` (ex.: hover do
   `.perfil-logout-btn`, `.btn-excluir-conta:hover`) — trocar quando mexer nesses componentes.
 
-Modais de confirmação — lógica ainda não unificada (dívida planejada):
-- Visual/HTML/CSS já consolidados em `.modal-confirm` (base.css) e há `UI.modalConfirm` p/ os novos.
-- Os 5 antigos (logout, sair da sala, pular tudo solo/online, pular sorteio) mantêm seus
-  listeners próprios (têm lógica especial: votação no online, estado "Saindo…" no logout).
-  Migrá-los para `UI.modalConfirm` um a um é o próximo passo incremental, quando fizer sentido.
+Modais de confirmação — lógica UNIFICADA (dívida ENCERRADA):
+- Visual/HTML/CSS consolidados em `.modal-confirm` (base.css) e `UI.modalConfirm` (js/ui.js).
+- Os 5 modais antigos (logout, sair da sala, pular tudo solo/online, pular sorteio) foram MIGRADOS
+  para `UI.modalConfirm`, um a um, preservando a lógica de cada um (votação do pular-online via
+  guard euVoteiPular; logout volta à home; sair da sala reusado no botão espectador). Os HTMLs
+  estáticos e as vars/listeners correspondentes foram removidos. Não há mais modal de confirmação
+  montado à mão no HTML — todos nascem do componente.
 
 Campo de futebol (mapa de escalação) — 2 implementações parecidas (observação, ainda NÃO dívida):
 - `.resumo-campo` (resumo.js/resumo.css) e `.perfil-campo-escalados` (perfil) desenham o mesmo
