@@ -39,7 +39,7 @@
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .perfil-logout-btn svg { width: 17px; height: 17px; }
-.perfil-logout-btn:hover { color: var(--perigo); border-color: rgba(255, 107, 107, 0.55); background: rgba(255, 107, 107, 0.08); }
+.perfil-logout-btn:hover { color: var(--perigo); border-color: color-mix(in srgb, var(--perigo) 55%, transparent); background: color-mix(in srgb, var(--perigo) 8%, transparent); }
 
 /* ── Divisor "Estatísticas" (linha com rótulo centralizado) ── */
 .perfil-sep {
@@ -195,10 +195,10 @@
   font-family: 'Archivo', sans-serif; font-weight: var(--peso-forte); font-size: var(--fs-sm);
   padding: 0.6rem 1.1rem; border-radius: var(--raio-md); cursor: pointer;
   color: var(--perigo); background: transparent;
-  border: 1.5px solid rgba(255, 107, 107, 0.55);
+  border: 1.5px solid color-mix(in srgb, var(--perigo) 55%, transparent);
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-.btn-excluir-conta:hover { background: #ff6b6b; color: #1a0606; border-color: var(--perigo); }
+.btn-excluir-conta:hover { background: var(--perigo); color: #1a0606; border-color: var(--perigo); }
 .btn-excluir-conta:disabled { opacity: 0.6; cursor: default; }
 .excluir-aviso { font-size: var(--fs-sm); color: #cdd3da; line-height: 1.5; margin: 0 0 1rem; }
 .excluir-card .editar-acoes { margin-top: 1.2rem; }

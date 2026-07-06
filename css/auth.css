@@ -190,8 +190,8 @@
   color: var(--perigo);
   font-size: var(--fs-sm);   /* 0.82rem */
   text-align: center;
-  background: rgba(255, 107, 107, 0.08);
-  border: 1px solid rgba(255, 107, 107, 0.2);
+  background: color-mix(in srgb, var(--perigo) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--perigo) 20%, transparent);
   border-radius: var(--raio-md);   /* 8px */
   padding: 8px 12px;
 }
