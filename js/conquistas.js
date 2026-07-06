@@ -55,6 +55,22 @@
     { id: 'rei_america',       categoria: 'Competições', nome: 'Rei da América',     desc: 'Campeão da Libertadores 3 vezes',   desbloqueada: false },
     { id: 'continental',       categoria: 'Competições', nome: 'Dono dos continentes', desc: 'Campeão da Libertadores e da Champions', desbloqueada: false },
     { id: 'colecionador',      categoria: 'Competições', nome: 'Colecionador',       desc: 'Campeão de todas as 4 competições', desbloqueada: false },
+
+    { id: 'tri_champions',     categoria: 'Competições', nome: 'Trono europeu',      desc: 'Campeão da Champions 3 vezes',      desbloqueada: false },
+    { id: 'tri_brasil',        categoria: 'Competições', nome: 'Tri nacional',       desc: 'Campeão do Brasileirão 3 vezes',    desbloqueada: false },
+    { id: 'tri_copa',          categoria: 'Competições', nome: 'Tri mundial',        desc: 'Campeão da Copa do Mundo 3 vezes',  desbloqueada: false },
+    { id: 'penta_liberta',     categoria: 'Competições', nome: 'Lenda da América',   desc: 'Campeão da Libertadores 5 vezes',   desbloqueada: false },
+    { id: 'penta_champions',   categoria: 'Competições', nome: 'Lenda da Europa',    desc: 'Campeão da Champions 5 vezes',      desbloqueada: false },
+    { id: 'penta_brasil',      categoria: 'Competições', nome: 'Penta nacional',     desc: 'Campeão do Brasileirão 5 vezes',    desbloqueada: false },
+    { id: 'penta_copa',        categoria: 'Competições', nome: 'Penta mundial',      desc: 'Campeão da Copa do Mundo 5 vezes',  desbloqueada: false },
+    { id: 'especialista_liberta',   categoria: 'Competições', nome: 'Alma sul-americana', desc: 'Disputou 10 campanhas da Libertadores', desbloqueada: false },
+    { id: 'especialista_champions', categoria: 'Competições', nome: 'Alma europeia',      desc: 'Disputou 10 campanhas da Champions',    desbloqueada: false },
+    { id: 'especialista_brasil',    categoria: 'Competições', nome: 'Coração brasileiro',  desc: 'Disputou 10 campanhas do Brasileirão',  desbloqueada: false },
+    { id: 'especialista_copa',      categoria: 'Competições', nome: 'Espírito mundial',    desc: 'Disputou 10 campanhas da Copa do Mundo', desbloqueada: false },
+    { id: 'matador_liberta',   categoria: 'Competições', nome: 'Matador da América',  desc: 'Marcou 100 gols na Libertadores',   desbloqueada: false },
+    { id: 'matador_champions', categoria: 'Competições', nome: 'Matador da Europa',   desc: 'Marcou 100 gols na Champions',      desbloqueada: false },
+    { id: 'matador_brasil',    categoria: 'Competições', nome: 'Matador nacional',    desc: 'Marcou 100 gols no Brasileirão',    desbloqueada: false },
+    { id: 'matador_copa',      categoria: 'Competições', nome: 'Matador mundial',     desc: 'Marcou 100 gols na Copa do Mundo',  desbloqueada: false },
   ];
 
   // Raridade por conquista (4 níveis, só cosmético): comum < raro < epico < lendario.
@@ -73,7 +89,13 @@
     artilheiro_mor: 'epico', centenario: 'epico', perfeccionista: 'epico', muralha: 'epico',
     aniquilacao: 'epico', continental: 'epico',
     // Lendárias — muito difíceis
-    lenda_viva: 'lendario', imperador: 'lendario', colecionador: 'lendario', rei_america: 'lendario'
+    lenda_viva: 'lendario', imperador: 'lendario', colecionador: 'lendario', rei_america: 'lendario',
+    penta_liberta: 'lendario', penta_champions: 'lendario', penta_brasil: 'lendario', penta_copa: 'lendario',
+    // Épicas por competição (tri + matador)
+    tri_champions: 'epico', tri_brasil: 'epico', tri_copa: 'epico',
+    matador_liberta: 'epico', matador_champions: 'epico', matador_brasil: 'epico', matador_copa: 'epico',
+    // Raras por competição (especialista — acumula com o tempo)
+    especialista_liberta: 'raro', especialista_champions: 'raro', especialista_brasil: 'raro', especialista_copa: 'raro'
   };
   var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
   function raridadeDe(id) { return RARIDADE[id] || 'comum'; }

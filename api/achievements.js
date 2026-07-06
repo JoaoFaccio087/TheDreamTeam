@@ -19,6 +19,14 @@ function ehLiberta(c)   { return normComp(c).includes('liberta'); }
 function ehChampions(c) { return normComp(c).includes('champions'); }
 function ehBrasil(c)    { return normComp(c).includes('brasileir'); }
 function ehCopa(c)      { return normComp(c).includes('copa'); }
+// Grupo canônico de uma competição (ou null se não reconhecida).
+function grupoDe(c) {
+  if (ehLiberta(c))   return 'liberta';
+  if (ehChampions(c)) return 'champions';
+  if (ehBrasil(c))    return 'brasil';
+  if (ehCopa(c))      return 'copa';
+  return null;
+}
 
 const CATALOGO = [
   // ── Progressão ──
@@ -67,10 +75,28 @@ const CATALOGO = [
       const v = [...ctx.competicoesVencidas];
       return v.some(ehLiberta) && v.some(ehChampions) && v.some(ehBrasil) && v.some(ehCopa);
   } },
+
+  // ── Competições — específicas por modo (tri, penta, especialista, matador) ──
+  { id: 'tri_champions',   check: ctx => ctx.titulosPorGrupo.champions >= 3 },
+  { id: 'tri_brasil',      check: ctx => ctx.titulosPorGrupo.brasil    >= 3 },
+  { id: 'tri_copa',        check: ctx => ctx.titulosPorGrupo.copa      >= 3 },
+  { id: 'penta_liberta',   check: ctx => ctx.titulosPorGrupo.liberta   >= 5 },
+  { id: 'penta_champions', check: ctx => ctx.titulosPorGrupo.champions >= 5 },
+  { id: 'penta_brasil',    check: ctx => ctx.titulosPorGrupo.brasil    >= 5 },
+  { id: 'penta_copa',      check: ctx => ctx.titulosPorGrupo.copa      >= 5 },
+  { id: 'especialista_liberta',   check: ctx => ctx.campanhasPorGrupo.liberta   >= 10 },
+  { id: 'especialista_champions', check: ctx => ctx.campanhasPorGrupo.champions >= 10 },
+  { id: 'especialista_brasil',    check: ctx => ctx.campanhasPorGrupo.brasil    >= 10 },
+  { id: 'especialista_copa',      check: ctx => ctx.campanhasPorGrupo.copa      >= 10 },
+  { id: 'matador_liberta',   check: ctx => ctx.golsPorGrupo.liberta   >= 100 },
+  { id: 'matador_champions', check: ctx => ctx.golsPorGrupo.champions >= 100 },
+  { id: 'matador_brasil',    check: ctx => ctx.golsPorGrupo.brasil    >= 100 },
+  { id: 'matador_copa',      check: ctx => ctx.golsPorGrupo.copa      >= 100 },
 ];
 
 // Monta o contexto agregando todas as campanhas do usuário.
 function montarContexto(matches) {
+  const vazio = () => ({ liberta: 0, champions: 0, brasil: 0, copa: 0 });
   const ctx = {
     matches: matches || [],
     totalPartidas: 0,
@@ -78,19 +104,25 @@ function montarContexto(matches) {
     totalVitorias: 0,
     titulos: 0,
     competicoesVencidas: new Set(),
-    titulosPorGrupo: { liberta: 0, champions: 0, brasil: 0, copa: 0 },  // títulos por competição
+    titulosPorGrupo:   vazio(),  // títulos por competição
+    golsPorGrupo:      vazio(),  // gols marcados por competição
+    vitoriasPorGrupo:  vazio(),  // vitórias por competição
+    campanhasPorGrupo: vazio(),  // campanhas disputadas por competição
   };
   for (const m of ctx.matches) {
     ctx.totalPartidas += (m.vitorias || 0) + (m.empates || 0) + (m.derrotas || 0);
     ctx.totalGols     += (m.gf || 0);
     ctx.totalVitorias += (m.vitorias || 0);
+    const g = grupoDe(m.competicao);
+    if (g) {
+      ctx.campanhasPorGrupo[g]++;
+      ctx.golsPorGrupo[g]     += (m.gf || 0);
+      ctx.vitoriasPorGrupo[g] += (m.vitorias || 0);
+    }
     if (m.campeao) {
       ctx.titulos++;
       ctx.competicoesVencidas.add(m.competicao);
-      if (ehLiberta(m.competicao))   ctx.titulosPorGrupo.liberta++;
-      if (ehChampions(m.competicao)) ctx.titulosPorGrupo.champions++;
-      if (ehBrasil(m.competicao))    ctx.titulosPorGrupo.brasil++;
-      if (ehCopa(m.competicao))      ctx.titulosPorGrupo.copa++;
+      if (g) ctx.titulosPorGrupo[g]++;
     }
   }
   return ctx;
