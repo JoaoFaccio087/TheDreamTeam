@@ -6,9 +6,7 @@
   function $(id) { return document.getElementById(id); }
   function usuarioLogado() { return (typeof getUser === 'function' ? getUser() : null); }
 
-  var modalPerfil    = $('modal-perfil');       // legado (removido do HTML) — pode ser null
   var modalEditar    = $('modal-editar-perfil');
-  var modalHistorico = $('modal-historico');    // legado (removido do HTML) — pode ser null
   var modalExcluir   = $('modal-excluir-conta');
 
   var telaPerfil     = $('tela-perfil');
@@ -41,7 +39,7 @@
   }
 
   function algumAberto() {
-    return [modalPerfil, modalEditar, modalHistorico, modalExcluir].some(function (m) {
+    return [modalEditar, modalExcluir].some(function (m) {
       return m && !m.classList.contains('escondida');
     });
   }
@@ -299,7 +297,6 @@
     setVal('editar-confirmar-senha', '');
     setAvatar('editar-avatar', u.username);
     esconderMsg('editar-msg');
-    fechar(modalPerfil);
     abrir(modalEditar);
   }
 
@@ -523,7 +520,7 @@
     bindFechar('modal-editar-fechar',    'modal-editar-backdrop',    modalEditar);
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { fechar(modalExcluir); fechar(modalEditar); fechar(modalPerfil); fechar(modalHistorico); }
+      if (e.key === 'Escape') { fechar(modalExcluir); fechar(modalEditar); }
     });
   }());
 })();
