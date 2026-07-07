@@ -28,6 +28,38 @@ function grupoDe(c) {
   return null;
 }
 
+// ── Combinações de jogadores (quadrados mágicos, trios) ──
+// Cada combo exige que TODOS os nomes tenham sido escalados JUNTOS numa mesma campanha.
+// `nomes` usa a grafia EXATA do banco (js/dados/*.js). `alternativas` permite variações do
+// mesmo jogador (ex.: 'Neymar' ou 'Neymar Jr') — basta uma bater. Curado com o João.
+const COMBOS = [
+  { id: 'trio_msn',        nomes: [['Lionel Messi'], ['Luis Suarez'], ['Neymar', 'Neymar Jr']] },
+  { id: 'trio_bbc',        nomes: [['Gareth Bale'], ['Karim Benzema'], ['Cristiano Ronaldo']] },
+  { id: 'trio_holandes',   nomes: [['Ruud Gullit'], ['Marco van Basten'], ['Frank Rijkaard']] },
+];
+
+// Extrai o conjunto de nomes escalados numa campanha (do snapshot.picks).
+function nomesEscalados(m) {
+  const picks = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
+  if (!Array.isArray(picks)) return null;
+  const set = new Set();
+  for (const p of picks) { if (p && p.nome) set.add(p.nome); }
+  return set;
+}
+
+// Um combo é satisfeito se existe ALGUMA campanha onde todos os seus jogadores foram escalados.
+function comboFeito(ctx, combo) {
+  for (const m of ctx.matches) {
+    const set = nomesEscalados(m);
+    if (!set) continue;
+    const todos = combo.nomes.every(function (variacoes) {
+      return variacoes.some(function (nome) { return set.has(nome); });
+    });
+    if (todos) return true;
+  }
+  return false;
+}
+
 const CATALOGO = [
   // ── Progressão ──
   { id: 'primeira_vez',      check: ctx => ctx.matches.length >= 1 },
@@ -92,6 +124,11 @@ const CATALOGO = [
   { id: 'matador_champions', check: ctx => ctx.golsPorGrupo.champions >= 100 },
   { id: 'matador_brasil',    check: ctx => ctx.golsPorGrupo.brasil    >= 100 },
   { id: 'matador_copa',      check: ctx => ctx.golsPorGrupo.copa      >= 100 },
+
+  // ── Combinações de jogadores (geradas de COMBOS) ──
+  ...COMBOS.map(function (combo) {
+    return { id: combo.id, check: ctx => comboFeito(ctx, combo) };
+  }),
 ];
 
 // Monta o contexto agregando todas as campanhas do usuário.

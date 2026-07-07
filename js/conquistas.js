@@ -71,6 +71,11 @@
     { id: 'matador_champions', categoria: 'Competições', nome: 'Matador da Europa',   desc: 'Marcou 100 gols na Champions',      desbloqueada: false },
     { id: 'matador_brasil',    categoria: 'Competições', nome: 'Matador nacional',    desc: 'Marcou 100 gols no Brasileirão',    desbloqueada: false },
     { id: 'matador_copa',      categoria: 'Competições', nome: 'Matador mundial',     desc: 'Marcou 100 gols na Copa do Mundo',  desbloqueada: false },
+
+    // ── Combinações de jogadores ──
+    { id: 'trio_msn',      categoria: 'Combinações', nome: 'MSN',            desc: 'Escalou Messi, Suárez e Neymar juntos', desbloqueada: false },
+    { id: 'trio_bbc',      categoria: 'Combinações', nome: 'BBC',            desc: 'Escalou Bale, Benzema e Cristiano Ronaldo juntos', desbloqueada: false },
+    { id: 'trio_holandes', categoria: 'Combinações', nome: 'Trio holandês',  desc: 'Escalou Gullit, Van Basten e Rijkaard juntos', desbloqueada: false },
   ];
 
   // Raridade por conquista (4 níveis, só cosmético): comum < raro < epico < lendario.
@@ -95,7 +100,9 @@
     tri_champions: 'epico', tri_brasil: 'epico', tri_copa: 'epico',
     matador_liberta: 'epico', matador_champions: 'epico', matador_brasil: 'epico', matador_copa: 'epico',
     // Raras por competição (especialista — acumula com o tempo)
-    especialista_liberta: 'raro', especialista_champions: 'raro', especialista_brasil: 'raro', especialista_copa: 'raro'
+    especialista_liberta: 'raro', especialista_champions: 'raro', especialista_brasil: 'raro', especialista_copa: 'raro',
+    // Combinações de jogadores — épicas (exigem escalar craques específicos juntos)
+    trio_msn: 'epico', trio_bbc: 'epico', trio_holandes: 'epico'
   };
   var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
   function raridadeDe(id) { return RARIDADE[id] || 'comum'; }
