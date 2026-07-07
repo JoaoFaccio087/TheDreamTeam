@@ -36,6 +36,11 @@ const COMBOS = [
   { id: 'trio_msn',        nomes: [['Lionel Messi'], ['Luis Suarez'], ['Neymar', 'Neymar Jr']] },
   { id: 'trio_bbc',        nomes: [['Gareth Bale'], ['Karim Benzema'], ['Cristiano Ronaldo']] },
   { id: 'trio_holandes',   nomes: [['Ruud Gullit'], ['Marco van Basten'], ['Frank Rijkaard']] },
+  { id: 'trio_sfm',        nomes: [['Mohamed Salah'], ['Roberto Firmino'], ['Sadio Mané', 'Sadio Mane']] },
+  { id: 'tres_rs',         nomes: [['Ronaldo'], ['Rivaldo'], ['Ronaldinho']] },
+  { id: 'quadrado_magico', nomes: [['Ronaldo'], ['Adriano'], ['Kaká'], ['Ronaldinho']] },
+  { id: 'pele_garrincha',  nomes: [['Pelé'], ['Garrincha']] },
+  { id: 'ro_ro',           nomes: [['Romário'], ['Ronaldo']] },
 ];
 
 // Extrai o conjunto de nomes escalados numa campanha (do snapshot.picks).
@@ -75,7 +80,7 @@ const CATALOGO = [
   { id: 'centenario',        check: ctx => ctx.totalVitorias >= 100 },
 
   // ── Placar & Campanha (dependem de stats da campanha ou de flags em detalhes) ──
-  { id: 'sete_a_zero',   check: ctx => ctx.matches.some(m => (m.vitorias || 0) >= 7 && (m.derrotas || 0) === 0) },
+  { id: 'rolo_compressor', check: ctx => ctx.matches.some(m => m.campeao && (m.derrotas || 0) === 0 && ((m.gf || 0) - (m.ga || 0)) >= 15) },
   { id: 'invencivel',    check: ctx => ctx.matches.some(m => m.campeao && (m.derrotas || 0) === 0) },
   { id: 'perfeccionista',check: ctx => ctx.matches.some(m => m.campeao && (m.derrotas || 0) === 0 && (m.empates || 0) === 0 && (m.vitorias || 0) >= 3) },
   { id: 'muralha',       check: ctx => ctx.matches.some(m => m.campeao && (m.ga || 0) === 0 && (m.vitorias || 0) >= 1) },

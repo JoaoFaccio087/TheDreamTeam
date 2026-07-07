@@ -29,7 +29,7 @@
     { id: 'artilheiro_mor',    categoria: 'Progressão', nome: 'Artilheiro-mor',    desc: 'Marcou 500 gols no total',             desbloqueada: false },
 
     // ── Placar & Campanha ──
-    { id: 'sete_a_zero',       categoria: 'Placar & Campanha', nome: '7 a 0!',          desc: 'Completou uma campanha 7 a 0 perfeita (7 vitórias, 0 derrotas)', desbloqueada: false },
+    { id: 'rolo_compressor',   categoria: 'Placar & Campanha', nome: 'Rolo compressor',  desc: 'Foi campeão sem perder e com 15+ de saldo de gols na campanha', desbloqueada: false },
     { id: 'invencivel',        categoria: 'Placar & Campanha', nome: 'Invencível',      desc: 'Completou um torneio invicto',         desbloqueada: false },
     { id: 'perfeccionista',    categoria: 'Placar & Campanha', nome: 'Perfeição',       desc: 'Campeão vencendo todas as partidas da campanha', desbloqueada: false },
     { id: 'muralha',           categoria: 'Placar & Campanha', nome: 'Muralha',         desc: 'Foi campeão sem sofrer nenhum gol na campanha', desbloqueada: false },
@@ -76,6 +76,11 @@
     { id: 'trio_msn',      categoria: 'Combinações', nome: 'MSN',            desc: 'Escalou Messi, Suárez e Neymar juntos', desbloqueada: false },
     { id: 'trio_bbc',      categoria: 'Combinações', nome: 'BBC',            desc: 'Escalou Bale, Benzema e Cristiano Ronaldo juntos', desbloqueada: false },
     { id: 'trio_holandes', categoria: 'Combinações', nome: 'Trio holandês',  desc: 'Escalou Gullit, Van Basten e Rijkaard juntos', desbloqueada: false },
+    { id: 'trio_sfm',      categoria: 'Combinações', nome: 'Salah, Firmino e Mané', desc: 'Escalou Salah, Firmino e Mané juntos', desbloqueada: false },
+    { id: 'tres_rs',       categoria: 'Combinações', nome: 'Os 3 Rs',        desc: 'Escalou Ronaldo, Rivaldo e Ronaldinho juntos', desbloqueada: false },
+    { id: 'quadrado_magico', categoria: 'Combinações', nome: 'Quadrado Mágico', desc: 'Escalou Ronaldo, Adriano, Kaká e Ronaldinho juntos', desbloqueada: false },
+    { id: 'pele_garrincha', categoria: 'Combinações', nome: 'Pelé & Garrincha', desc: 'Escalou Pelé e Garrincha juntos — o duo imbatível', desbloqueada: false },
+    { id: 'ro_ro',         categoria: 'Combinações', nome: 'Ro-Ro',          desc: 'Escalou Romário e Ronaldo juntos', desbloqueada: false },
   ];
 
   // Raridade por conquista (4 níveis, só cosmético): comum < raro < epico < lendario.
@@ -84,7 +89,7 @@
     // Comuns — primeiros passos
     primeira_vez: 'comum', primeira_vitoria: 'comum', primeiro_titulo: 'comum', campeao_brasil: 'comum',
     // Raras — exigem alguma consistência
-    veterano: 'raro', maquina_de_gols: 'raro', sete_a_zero: 'raro', hat_trick: 'raro',
+    veterano: 'raro', maquina_de_gols: 'raro', rolo_compressor: 'raro', hat_trick: 'raro',
     nos_penaltis: 'raro', campeao_liberta: 'raro', campeao_champions: 'raro', campeao_copa: 'raro',
     centuriao: 'raro', goleador_serial: 'raro', trinca_dupla: 'raro',
     bi_liberta: 'raro', bi_champions: 'raro', bi_brasil: 'raro', bi_copa: 'raro',
@@ -102,7 +107,10 @@
     // Raras por competição (especialista — acumula com o tempo)
     especialista_liberta: 'raro', especialista_champions: 'raro', especialista_brasil: 'raro', especialista_copa: 'raro',
     // Combinações de jogadores — épicas (exigem escalar craques específicos juntos)
-    trio_msn: 'epico', trio_bbc: 'epico', trio_holandes: 'epico'
+    trio_msn: 'epico', trio_bbc: 'epico', trio_holandes: 'epico',
+    trio_sfm: 'epico', tres_rs: 'epico', ro_ro: 'epico',
+    // Combinações icônicas/quádruplas — lendárias
+    quadrado_magico: 'lendario', pele_garrincha: 'lendario'
   };
   var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
   function raridadeDe(id) { return RARIDADE[id] || 'comum'; }
