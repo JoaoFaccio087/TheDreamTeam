@@ -81,6 +81,12 @@
     { id: 'quadrado_magico', categoria: 'Combinações', nome: 'Quadrado Mágico', desc: 'Escalou Ronaldo, Adriano, Kaká e Ronaldinho juntos', desbloqueada: false },
     { id: 'pele_garrincha', categoria: 'Combinações', nome: 'Pelé & Garrincha', desc: 'Escalou Pelé e Garrincha juntos — o duo imbatível', desbloqueada: false },
     { id: 'ro_ro',         categoria: 'Combinações', nome: 'Ro-Ro',          desc: 'Escalou Romário e Ronaldo juntos', desbloqueada: false },
+    { id: 'meio_barca',    categoria: 'Combinações', nome: 'Meio do Barça',   desc: 'Escalou Xavi, Iniesta e Busquets juntos', desbloqueada: false },
+    { id: 'quadrado_82',   categoria: 'Combinações', nome: 'Quadrado de 82',  desc: 'Escalou Zico, Sócrates, Falcão e Cerezo juntos', desbloqueada: false },
+    { id: 'zaga_milan',    categoria: 'Combinações', nome: 'Muralha rossonera', desc: 'Escalou Maldini, Baresi e Nesta juntos', desbloqueada: false },
+    { id: 'alemanha_70',   categoria: 'Combinações', nome: 'Pança alemã',     desc: 'Escalou Gerd Müller, Beckenbauer e Breitner juntos', desbloqueada: false },
+    { id: 'trio_argentino', categoria: 'Combinações', nome: 'Hermanos',       desc: 'Escalou Messi, Di María e Agüero juntos', desbloqueada: false },
+    { id: 'eixo_bayern',   categoria: 'Combinações', nome: 'Espinha do Bayern', desc: 'Escalou Neuer, Lahm e Schweinsteiger juntos', desbloqueada: false },
   ];
 
   // Raridade por conquista (4 níveis, só cosmético): comum < raro < epico < lendario.
@@ -109,8 +115,10 @@
     // Combinações de jogadores — épicas (exigem escalar craques específicos juntos)
     trio_msn: 'epico', trio_bbc: 'epico', trio_holandes: 'epico',
     trio_sfm: 'epico', tres_rs: 'epico', ro_ro: 'epico',
+    meio_barca: 'epico', zaga_milan: 'epico', alemanha_70: 'epico',
+    trio_argentino: 'epico', eixo_bayern: 'epico',
     // Combinações icônicas/quádruplas — lendárias
-    quadrado_magico: 'lendario', pele_garrincha: 'lendario'
+    quadrado_magico: 'lendario', pele_garrincha: 'lendario', quadrado_82: 'lendario'
   };
   var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
   function raridadeDe(id) { return RARIDADE[id] || 'comum'; }

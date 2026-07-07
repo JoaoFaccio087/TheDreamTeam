@@ -159,6 +159,15 @@
     });
   };
 
+  // Liga um listener por id COM GUARDA: se o elemento não existir, não faz nada (evita o
+  // TypeError de addEventListener em null). Devolve o elemento (ou null). Uso:
+  //   UI.on('btn-x', 'click', fn)
+  UI.on = function (id, evento, handler, opts) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener(evento, handler, opts);
+    return el || null;
+  };
+
   window.UI = UI;
 
   // Cabeçalhos estáticos do single-player. O Voltar de cada tela é um link no corpo

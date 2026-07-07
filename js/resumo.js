@@ -240,9 +240,9 @@ function mostrarResumo() {
 
   resumoOverlay.classList.remove('escondida');
   resumoOverlay.querySelector('.resumo-backdrop').addEventListener('click', fecharResumo);
-  document.getElementById('resumo-baixar').addEventListener('click', baixarResumo);
-  document.getElementById('resumo-compartilhar').addEventListener('click', compartilharResumo);
-  document.getElementById('resumo-jogar').addEventListener('click', jogarDeNovo);
+  UI.on('resumo-baixar', 'click', baixarResumo);
+  UI.on('resumo-compartilhar', 'click', compartilharResumo);
+  UI.on('resumo-jogar', 'click', jogarDeNovo);
 }
 
 function fecharResumo() {
@@ -443,7 +443,7 @@ function mostrarResumoHistorico(item) {
 
   resumoOverlay.classList.remove('escondida');
   resumoOverlay.querySelector('.resumo-backdrop').addEventListener('click', fecharResumo);
-  document.getElementById('resumo-baixar').addEventListener('click', baixarResumo);
-  document.getElementById('resumo-compartilhar').addEventListener('click', compartilharResumo);
-  document.getElementById('resumo-hist-fechar').addEventListener('click', fecharResumo);
+  UI.on('resumo-baixar', 'click', baixarResumo);
+  UI.on('resumo-compartilhar', 'click', compartilharResumo);
+  UI.on('resumo-hist-fechar', 'click', fecharResumo);
 }

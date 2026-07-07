@@ -2212,8 +2212,8 @@
     overlay.classList.remove('escondida');
     function fechar() { overlay.classList.add('escondida'); }
     overlay.querySelector('.resumo-backdrop').addEventListener('click', fechar);
-    document.getElementById('resumo-online-fechar').addEventListener('click', fechar);
-    document.getElementById('resumo-online-baixar').addEventListener('click', function () {
+    UI.on('resumo-online-fechar', 'click', fechar);
+    UI.on('resumo-online-baixar', 'click', function () {
       var alvo = document.getElementById('resumo-card');
       if (typeof html2canvas === 'undefined' || !alvo) return;
       var fundo = getComputedStyle(document.body).backgroundColor;

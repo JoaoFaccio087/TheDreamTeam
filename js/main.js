@@ -144,7 +144,7 @@ btnSimular.addEventListener('click', function () {
 });
 
 // Tela de simulação: comportamento do botão muda conforme o estado da campanha
-document.getElementById('btn-iniciar-jogo').addEventListener('click', function () {
+UI.on('btn-iniciar-jogo', 'click', function () {
   if (acaoBotao === 'nova-campanha') {
     // Terminou (campeão/temporada) → volta para montar um time NOVO
     // (formação, estilo e mapa de escalação), na mesma competição.
@@ -186,7 +186,7 @@ simPilulasVel.forEach(function (btn) {
 });
 
 // Tela de simulação: voltar para a escalação
-document.getElementById('btn-voltar-escalacao').addEventListener('click', function () {
+UI.on('btn-voltar-escalacao', 'click', function () {
   mostrarTela(telaJogo);
 });
 

@@ -41,6 +41,12 @@ const COMBOS = [
   { id: 'quadrado_magico', nomes: [['Ronaldo'], ['Adriano'], ['Kaká'], ['Ronaldinho']] },
   { id: 'pele_garrincha',  nomes: [['Pelé'], ['Garrincha']] },
   { id: 'ro_ro',           nomes: [['Romário'], ['Ronaldo']] },
+  { id: 'meio_barca',      nomes: [['Xavi'], ['Andrés Iniesta'], ['Sergio Busquets']] },
+  { id: 'quadrado_82',     nomes: [['Zico'], ['Sócrates'], ['Falcão'], ['Toninho Cerezo']] },
+  { id: 'zaga_milan',      nomes: [['Paolo Maldini'], ['Franco Baresi'], ['Alessandro Nesta']] },
+  { id: 'alemanha_70',     nomes: [['Gerd Müller'], ['Franz Beckenbauer'], ['Paul Breitner']] },
+  { id: 'trio_argentino',  nomes: [['Lionel Messi'], ['Ángel Di María'], ['Sergio Agüero']] },
+  { id: 'eixo_bayern',     nomes: [['Manuel Neuer'], ['Philipp Lahm'], ['Bastian Schweinsteiger']] },
 ];
 
 // Extrai o conjunto de nomes escalados numa campanha (do snapshot.picks).
