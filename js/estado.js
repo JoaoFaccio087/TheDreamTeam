@@ -85,13 +85,14 @@ let draftIniciado     = false;       // true após clicar em "Começar" no modo 
 let draftSkipsRestantes = 3;         // re-sorteios disponíveis por draft
 
 // --- Estado: modo Orçamento (single-player) ---
-// Teto fixo; cada jogador custa preco = round((forca-60)^2 / 10). Craque(99)≈152, mediano(77)≈29.
-// Com teto 1000 dá pra montar time forte com ~4-5 craques, nunca 11 craques.
-const ORCAMENTO_TETO = 1000;
+// Teto fixo; cada jogador custa preco = round((forca-60)^2 / 4). Craque(99)≈380, bom(90)≈225,
+// mediano(80)≈100, reserva(66)≈9. Com teto 2500 dá pra montar time forte com ~4-5 craques, nunca 11.
+// (A proporção é a mesma da calibragem original; só os números foram ampliados p/ dar mais peso.)
+const ORCAMENTO_TETO = 2500;
 function precoJogador(forca) {
   var f = +forca || 0;
-  if (f <= 60) return 1;
-  return Math.round(Math.pow(f - 60, 2) / 10);
+  if (f <= 60) return 2;
+  return Math.round(Math.pow(f - 60, 2) / 4);
 }
 // Soma o custo do XI atual (jogadores já escalados).
 function orcamentoGasto() {

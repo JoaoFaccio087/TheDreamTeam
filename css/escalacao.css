@@ -429,14 +429,19 @@
   text-overflow: ellipsis;    /* nomes longos viram "Bastian Schwein…" em vez de quebrar linha */
 }
 
-/* Preço do jogador no modo Orçamento — dourado, ao lado da força */
+/* Preço do jogador no modo Orçamento — dourado, destacado ao lado da força */
 .jogador-preco {
   font-family: 'Archivo Black', sans-serif;
-  font-size: var(--fs-mini);
+  font-size: var(--fs-sm);
   color: var(--rar-lendario, #f5c451);
+  background: color-mix(in srgb, var(--rar-lendario, #f5c451) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--rar-lendario, #f5c451) 35%, transparent);
+  border-radius: 6px;
+  padding: 1px 7px;
   margin-left: 8px;
   flex-shrink: 0;
   text-align: right;
+  min-width: 52px;
 }
 
 /* Número de força em destaque — não encolhe, sempre alinhado à direita */
@@ -740,3 +745,35 @@
   width: fit-content;
 }
 .jogo-header-titulo:hover { opacity: 0.72; }
+
+/* ── Barra de orçamento (modo Orçamento, acima do mapa) ── */
+.orcamento-barra {
+  margin: 0 auto 0.7rem;
+  max-width: 520px;
+  padding: 0.5rem 0.85rem;
+  background: color-mix(in srgb, var(--rar-lendario, #f5c451) 8%, rgba(255,255,255,0.03));
+  border: 1px solid color-mix(in srgb, var(--rar-lendario, #f5c451) 30%, transparent);
+  border-radius: var(--raio-md, 10px);
+}
+.orcamento-info {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+.orcamento-label {
+  font-family: 'Archivo', sans-serif; font-weight: 700;
+  font-size: var(--fs-legenda); letter-spacing: 0.08em;
+  color: var(--txt-soft, #9aa6b2);
+}
+.orcamento-valores { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: var(--rar-lendario, #f5c451); }
+.orcamento-teto { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
+.orcamento-progresso {
+  height: 8px; border-radius: 999px; overflow: hidden;
+  background: rgba(255,255,255,0.08);
+}
+.orcamento-preenchido {
+  height: 100%; width: 0%; border-radius: 999px;
+  background: var(--accent, #2BD46A);
+  transition: width 0.35s ease, background 0.3s ease;
+}
+.orcamento-preenchido.orc-medio { background: var(--rar-lendario, #f5c451); }
+.orcamento-preenchido.orc-alto  { background: var(--perigo, #ff6b6b); }

@@ -74,6 +74,30 @@ function atualizarForcas() {
 
 // INICIAR TELA DO JOGO — reseta TUDO ao entrar numa nova partida
 
+// Atualiza a barra de orçamento acima do mapa (só visível no modo Orçamento).
+function atualizarBarraOrcamento() {
+  var barra = document.getElementById('orcamento-barra');
+  if (!barra) return;
+  var modoOrc = (typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento');
+  barra.classList.toggle('escondida', !modoOrc);
+  if (!modoOrc) return;
+
+  var restante = orcamentoRestante();
+  var gasto = orcamentoGasto();
+  var elRest = document.getElementById('orcamento-restante');
+  var elTeto = barra.querySelector('.orcamento-teto');
+  var elFill = document.getElementById('orcamento-preenchido');
+  if (elRest) elRest.textContent = '$' + restante;
+  if (elTeto) elTeto.textContent = '/ $' + ORCAMENTO_TETO;
+  if (elFill) {
+    var pct = Math.max(0, Math.min(100, (gasto / ORCAMENTO_TETO) * 100));
+    elFill.style.width = pct + '%';
+    // Muda de cor conforme aperta: verde → amarelo → vermelho.
+    elFill.classList.toggle('orc-alto', pct >= 90);
+    elFill.classList.toggle('orc-medio', pct >= 70 && pct < 90);
+  }
+}
+
 // Atualiza o texto "formação · modo" no cabeçalho da tela do jogo
 function atualizarHeaderInfo() {
   if (jogoHeaderInfo) {
@@ -83,11 +107,10 @@ function atualizarHeaderInfo() {
       else if (estiloJogo === 'orcamento') estilo = 'ORÇAMENTO';
     }
     var txt = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + ' · ' + estilo;
-    if (typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento') {
-      txt += ' · $' + orcamentoRestante() + '/' + ORCAMENTO_TETO;
-    }
     jogoHeaderInfo.textContent = txt;
   }
+  // A barra de orçamento (acima do mapa) mostra o valor em destaque no modo Orçamento.
+  if (typeof atualizarBarraOrcamento === 'function') atualizarBarraOrcamento();
 }
 
 function iniciarTelaJogo() {
