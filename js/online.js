@@ -2007,11 +2007,23 @@
     meuRankingFinal = ranking.find(function (p) { return String(p.userId) === String(meuUserId); }) || null;
 
     // Grava a campanha online no histórico (logado → backend; convidado → local).
-    if (meuRankingFinal && !_campanhaOnlineSalva && typeof API !== 'undefined' && API.salvarPartida) {
+    // IMPORTANTE: só grava/dispara conquistas DEPOIS que a animação da final terminar — senão o
+    // toast aparece antes de o jogador ver o resultado (bug relatado). Se não há animação, grava já.
+    function salvarCampanhaOnline() {
+      if (!meuRankingFinal || _campanhaOnlineSalva || typeof API === 'undefined' || !API.salvarPartida) return;
       _campanhaOnlineSalva = true;
       try {
         var _idx = ranking.findIndex(function (p) { return String(p.userId) === String(meuUserId); });
         var r = meuRankingFinal;
+        // Campeão: usa o userId que o SERVIDOR manda explicitamente (fonte de verdade), não o
+        // índice do ranking. Assim, espectadores/eliminados nunca são marcados como campeão por
+        // engano — só quem o servidor apontou como vencedor da final leva o título.
+        var souCampeao;
+        if (dados.campeao && dados.campeao.userId != null) {
+          souCampeao = String(dados.campeao.userId) === String(meuUserId);
+        } else {
+          souCampeao = (_idx === 0);  // fallback (liga sem 'campeao' explícito): 1º do ranking
+        }
         API.salvarPartida({
           competicao: ehChaveFinal ? (window.__compOnline || 'Copa do Mundo') : 'Brasileirão',
           modo:       'online',
@@ -2021,7 +2033,7 @@
           gf:         r.gf | 0,
           ga:         r.ga | 0,
           posicao:    _idx >= 0 ? _idx + 1 : null,
-          campeao:    _idx === 0,
+          campeao:    souCampeao,
           detalhes:   { online: true }
         }).then(function (resp) {
           if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
@@ -2029,6 +2041,12 @@
           }
         }).catch(function () {});
       } catch (e) {}
+    }
+    if (animacaoAtiva) {
+      var _prevFim = aoFimDaAnimacao;
+      aoFimDaAnimacao = function () { if (typeof _prevFim === 'function') _prevFim(); salvarCampanhaOnline(); };
+    } else {
+      salvarCampanhaOnline();
     }
 
     // Fica na tela da liga, na aba Classificação, com a tabela FINAL.
