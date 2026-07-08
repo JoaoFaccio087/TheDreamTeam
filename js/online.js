@@ -448,9 +448,15 @@
     // Renderiza lista de jogadores no lobby (box-score à direita)
     renderLobbyJogadores(sala.jogadores || []);
 
-    // Campo: mostra a formação já escolhida pelo usuário atual (slots vazios)
+    // Campo: mostra a formação já escolhida pelo usuário atual (slots vazios).
+    // Usa a formação LOCAL (pílula ativa) se houver — assim, se o usuário trocou a formação mas
+    // ainda não deu "Pronto", um room:update de outro jogador não reverte o campo para 4-3-3.
     var eu = (sala.jogadores || []).find(function (j) { return String(j.userId) === String(meuUserId); });
-    if (eu) renderCampoOnline(lobbyCampo, eu.picks || [], eu.formacao || '4-3-3');
+    if (eu) {
+      var plAtiva = document.querySelector('#lobby-pilulas-formacao .pilula-ativa');
+      var formLocal = (plAtiva && plAtiva.dataset.fl) || eu.formacao || '4-3-3';
+      renderCampoOnline(lobbyCampo, eu.picks || [], formLocal);
+    }
 
     // Pré-preenche o nome do time (logado → nome do cadastro; convidado → "Seu time"),
     // sem sobrescrever o que o usuário já tiver digitado.
@@ -2058,6 +2064,8 @@
     if (btnPularTudo)         btnPularTudo.classList.add('escondida');
     if (rodadaAguardandoHost) rodadaAguardandoHost.classList.add('escondida');
     if (skipContador)         skipContador.classList.add('escondida');
+    // A competição acabou: some com a barra "Assistindo: <time>" (não faz mais sentido).
+    if (barraEspectador)      barraEspectador.classList.add('escondida');
 
     // ── Premiação ──────────────────────────────────────────────────────────
     var campeao  = ranking[0] || null;
