@@ -80,9 +80,25 @@ let edicaoSorteada     = null;                 // entrada de DADOS do sorteio at
 let skipsRestantes     = 5;                    // skips disponíveis por partida
 
 // --- Estado: modo Draft ---
-let estiloJogo        = 'classico';  // 'classico' | 'draft'
+let estiloJogo        = 'classico';  // 'classico' | 'draft' | 'orcamento'
 let draftIniciado     = false;       // true após clicar em "Começar" no modo Draft
 let draftSkipsRestantes = 3;         // re-sorteios disponíveis por draft
+
+// --- Estado: modo Orçamento (single-player) ---
+// Teto fixo; cada jogador custa preco = round((forca-60)^2 / 10). Craque(99)≈152, mediano(77)≈29.
+// Com teto 1000 dá pra montar time forte com ~4-5 craques, nunca 11 craques.
+const ORCAMENTO_TETO = 1000;
+function precoJogador(forca) {
+  var f = +forca || 0;
+  if (f <= 60) return 1;
+  return Math.round(Math.pow(f - 60, 2) / 10);
+}
+// Soma o custo do XI atual (jogadores já escalados).
+function orcamentoGasto() {
+  if (typeof escalacao === 'undefined') return 0;
+  return escalacao.reduce(function (s, e) { return s + (e ? precoJogador(e.forca) : 0); }, 0);
+}
+function orcamentoRestante() { return ORCAMENTO_TETO - orcamentoGasto(); }
 
 // --- Preferência: "Mostrar Força" (vale para offline e online) ---
 // ON (padrão) → força sempre visível. OFF → força escondida até completar o XI.

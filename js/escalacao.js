@@ -77,8 +77,16 @@ function atualizarForcas() {
 // Atualiza o texto "formação · modo" no cabeçalho da tela do jogo
 function atualizarHeaderInfo() {
   if (jogoHeaderInfo) {
-    var estilo = (typeof estiloJogo !== 'undefined' && estiloJogo === 'draft') ? 'DRAFT' : 'CLÁSSICO';
-    jogoHeaderInfo.textContent = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + ' · ' + estilo;
+    var estilo = 'CLÁSSICO';
+    if (typeof estiloJogo !== 'undefined') {
+      if (estiloJogo === 'draft') estilo = 'DRAFT';
+      else if (estiloJogo === 'orcamento') estilo = 'ORÇAMENTO';
+    }
+    var txt = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + ' · ' + estilo;
+    if (typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento') {
+      txt += ' · $' + orcamentoRestante() + '/' + ORCAMENTO_TETO;
+    }
+    jogoHeaderInfo.textContent = txt;
   }
 }
 
@@ -197,11 +205,20 @@ function construirListaJogadores(jogadores) {
       }
     }
 
-    var disponivel = !jaAlocado && temVagaDisponivel;
+    // (c) Modo Orçamento: preço do jogador e se cabe no restante.
+    var modoOrc = (typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento');
+    var preco = modoOrc ? precoJogador(jogador.forca) : 0;
+    var cabeNoOrcamento = !modoOrc || preco <= orcamentoRestante();
+
+    var disponivel = !jaAlocado && temVagaDisponivel && cabeNoOrcamento;
 
     if (!disponivel) {
       // Indisponível: visual apagado, sem evento de clique
       item.classList.add('ja-escalado');
+      // No orçamento, marca especificamente quem não cabe (custa mais que o restante).
+      if (modoOrc && !jaAlocado && temVagaDisponivel && !cabeNoOrcamento) {
+        item.classList.add('sem-orcamento');
+      }
     } else {
       // Disponível: registra o clique
       item.addEventListener('click', function () {
@@ -215,6 +232,7 @@ function construirListaJogadores(jogadores) {
     item.innerHTML =
       '<span class="jogador-nome" title="' + jogador.nome + '">' + jogador.nome + '</span>' +
       '<span class="jogador-posicoes">' + posStr        + '</span>' +
+      (modoOrc ? '<span class="jogador-preco" title="Custo do jogador">$' + preco + '</span>' : '') +
       '<span class="jogador-forca' + (revela ? '' : ' forca-oculta') + '">' + (revela ? jogador.forca : '?') + '</span>';
 
     listaJogadores.appendChild(item);
@@ -302,6 +320,7 @@ function alocarJogador(indice) {
   blocoSkips.classList.add('escondida');
 
   atualizarBoxScore();
+  atualizarHeaderInfo();   // atualiza o orçamento restante no modo Orçamento
 
   if (slotsPreenchidos >= 11) {
     verificarCompleto();

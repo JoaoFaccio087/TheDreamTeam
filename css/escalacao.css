@@ -413,6 +413,13 @@
   opacity: 0.3;
   cursor: default;
 }
+/* Bloqueado por orçamento: custa mais que o restante. Vermelho discreto para diferenciar
+   do "já escalado" (que é só apagado). */
+.item-jogador.sem-orcamento {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.item-jogador.sem-orcamento .jogador-preco { color: var(--perigo); }
 
 .jogador-nome {
   flex: 1;
@@ -420,6 +427,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;    /* nomes longos viram "Bastian Schwein…" em vez de quebrar linha */
+}
+
+/* Preço do jogador no modo Orçamento — dourado, ao lado da força */
+.jogador-preco {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: var(--fs-mini);
+  color: var(--rar-lendario, #f5c451);
+  margin-left: 8px;
+  flex-shrink: 0;
+  text-align: right;
 }
 
 /* Número de força em destaque — não encolhe, sempre alinhado à direita */

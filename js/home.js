@@ -10,6 +10,18 @@ function selecionarModo(novoModo) {
       p.classList.remove('pilula-ativa');
     }
   });
+
+  // Modo Orçamento: por ora só habilitado na Libertadores (fase 1 de testes). A pílula aparece
+  // só nela; ao trocar para outra competição, esconde e volta o estilo para Clássico se estava nela.
+  var pilulaOrc = document.querySelector('#jogo-pilulas-estilo .pilula-orcamento');
+  if (pilulaOrc) {
+    var permite = (novoModo === 'libertadores');
+    pilulaOrc.classList.toggle('escondida', !permite);
+    if (!permite && typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento'
+        && typeof selecionarEstilo === 'function') {
+      selecionarEstilo('classico');
+    }
+  }
 }
 
 function selecionarFormacaoAmostra(nomeFormacao) {
