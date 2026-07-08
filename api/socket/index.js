@@ -105,38 +105,38 @@ function podeOcupar(jogador, cod) {
 }
 
 // Escolha "equilibrada" a partir de uma lista: bons jogadores, mas com variação.
-// Amostra balanceada de uma posição por faixas de força (humano, bot e timeout
-// usam a mesma distribuição). Dá chance de craques sem encher o time deles.
+// Amostra de uma posição por AMOSTRAGEM PONDERADA (sem cota fixa de faixas). O peso cresce com a
+// força — craques têm mais chance de aparecer, mas NÃO são garantidos em toda carta. Assim cada
+// carta é variada de verdade: às vezes vem com craque, às vezes não; nem só reservas, nem sempre 90+.
 function amostraPosicao(fonte, n) {
   n = n || 12;
   if (!fonte || !fonte.length) return [];
   if (fonte.length <= n) return shuffle(fonte.slice());
-  const F     = p => (p.forca || 70);
-  const elite = fonte.filter(p => F(p) >= 88);
-  const bom   = fonte.filter(p => F(p) >= 82 && F(p) < 88);
-  const medio = fonte.filter(p => F(p) >= 76 && F(p) < 82);
-  const resto = fonte.filter(p => F(p) <  76);
-  const pega  = (arr, k) => shuffle(arr.slice()).slice(0, k);
-  // ~3 craques + 4 bons + 3 médios + 2 resto → ofertas variadas, com craque possível
-  let amostra = [].concat(pega(elite, 3), pega(bom, 4), pega(medio, 3), pega(resto, 2));
-  if (amostra.length < n) {                       // completa se alguma faixa for curta
-    const ids = new Set(amostra.map(p => p.id));
-    const ord = fonte.slice().sort((a, b) => F(b) - F(a));
-    for (const p of ord) { if (amostra.length >= n) break; if (!ids.has(p.id)) { amostra.push(p); ids.add(p.id); } }
+  const F = p => (p.forca || 70);
+  // Sorteio ponderado SEM reposição: peso = (forca-58)^1.5.
+  const pool = fonte.slice();
+  const out = [];
+  for (let k = 0; k < n && pool.length; k++) {
+    let total = 0;
+    const pesos = pool.map(p => { const w = Math.pow(Math.max(1, F(p) - 58), 1.5); total += w; return w; });
+    let r = Math.random() * total, acum = 0, escolhido = 0;
+    for (let i = 0; i < pool.length; i++) { acum += pesos[i]; if (r <= acum) { escolhido = i; break; } }
+    out.push(pool[escolhido]);
+    pool.splice(escolhido, 1);
   }
-  return shuffle(amostra).slice(0, n);
+  return shuffle(out);
 }
 
-// Bot/timeout: escolha ponderada (linear) na amostra — favorece os melhores sem
-// pegar sempre o máximo.
+// Bot/timeout: escolhe 1 dos 3 MAIS FORTES da amostra (semi-guloso). Fica competitivo com os
+// humanos (que pegam sempre o melhor), sem clonar — cada bot pega um dos top-3, então uns times
+// saem mais fortes que outros. Gap típico p/ o humano fica em ~3-4 de força média (equilibrado).
 function escolherPickBotDe(fonte) {
   if (!fonte || !fonte.length) return null;
   const amostra = amostraPosicao(fonte, 12);
-  let total = 0;
-  const pesos = amostra.map(p => { const w = Math.max(1, (p.forca || 70) - 60); total += w; return w; });
-  let r = Math.random() * total, acum = 0;
-  for (let i = 0; i < amostra.length; i++) { acum += pesos[i]; if (r <= acum) return amostra[i]; }
-  return amostra[0];
+  if (!amostra.length) return null;
+  const ord = amostra.slice().sort((a, b) => (b.forca || 70) - (a.forca || 70));
+  const top = ord.slice(0, Math.min(3, ord.length));
+  return top[Math.floor(Math.random() * top.length)];
 }
 
 // Coloca um jogador numa vaga ABERTA e VÁLIDA. Bot: vaga aleatória; timeout: 1ª aberta.
