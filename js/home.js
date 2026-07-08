@@ -1,11 +1,14 @@
 // home.js — ações da tela inicial e estatísticas do rodapé.
 
-// Mostra a pílula "Orçamento" só nas competições onde o modo está habilitado (fase 1: Libertadores).
-// Se o modo atual não permite e o estilo estava em 'orcamento', volta para 'classico'.
+// Mostra a pílula "Orçamento" nas competições single-player onde o modo está habilitado.
+// Fase 2: habilitado em todas (Libertadores, Champions, Brasileirão, Copa) — o preço vem da força,
+// então a mecânica é idêntica em qualquer uma. Se algum dia uma competição não puder ter Orçamento,
+// é só removê-la de ORCAMENTO_COMPETICOES.
+var ORCAMENTO_COMPETICOES = ['libertadores', 'champions', 'brasileirao', 'copa'];
 function sincronizarPilulaOrcamento() {
   var pilulaOrc = document.querySelector('#jogo-pilulas-estilo .pilula-orcamento');
   if (!pilulaOrc) return;
-  var permite = (modoSelecionado === 'libertadores');
+  var permite = ORCAMENTO_COMPETICOES.indexOf(modoSelecionado) >= 0;
   pilulaOrc.classList.toggle('escondida', !permite);
   if (!permite && typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento'
       && typeof selecionarEstilo === 'function') {

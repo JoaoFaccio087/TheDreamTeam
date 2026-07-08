@@ -83,18 +83,18 @@ function atualizarBarraOrcamento() {
   if (!modoOrc) return;
 
   var restante = orcamentoRestante();
-  var gasto = orcamentoGasto();
   var elRest = document.getElementById('orcamento-restante');
   var elTeto = barra.querySelector('.orcamento-teto');
   var elFill = document.getElementById('orcamento-preenchido');
   if (elRest) elRest.textContent = '$' + restante;
   if (elTeto) elTeto.textContent = '/ $' + ORCAMENTO_TETO;
   if (elFill) {
-    var pct = Math.max(0, Math.min(100, (gasto / ORCAMENTO_TETO) * 100));
-    elFill.style.width = pct + '%';
-    // Muda de cor conforme aperta: verde → amarelo → vermelho.
-    elFill.classList.toggle('orc-alto', pct >= 90);
-    elFill.classList.toggle('orc-medio', pct >= 70 && pct < 90);
+    // A barra reflete o que RESTA: cheia no início, esvazia ao comprar (tipo tanque).
+    var pctRestante = Math.max(0, Math.min(100, (restante / ORCAMENTO_TETO) * 100));
+    elFill.style.width = pctRestante + '%';
+    // Cores pelo que resta: verde (folgado) → amarelo (apertando) → vermelho (quase no fim).
+    elFill.classList.toggle('orc-medio', pctRestante <= 30 && pctRestante > 10);
+    elFill.classList.toggle('orc-alto', pctRestante <= 10);
   }
 }
 
