@@ -27,6 +27,10 @@
     { id: 'imperador',         categoria: 'Progressão', nome: 'Imperador',         desc: 'Venceu 15 torneios',                   desbloqueada: false },
     { id: 'maquina_de_gols',   categoria: 'Progressão', nome: 'Máquina de gols',   desc: 'Marcou 100 gols no total',             desbloqueada: false },
     { id: 'artilheiro_mor',    categoria: 'Progressão', nome: 'Artilheiro-mor',    desc: 'Marcou 500 gols no total',             desbloqueada: false },
+    { id: 'imortal',           categoria: 'Progressão', nome: 'Imortal',           desc: 'Jogou 300 partidas',                   desbloqueada: false },
+    { id: 'milesimo',          categoria: 'Progressão', nome: 'Milésimo',          desc: 'Marcou 1000 gols no total',            desbloqueada: false },
+    { id: 'bicentenario',      categoria: 'Progressão', nome: 'Bicentenário',      desc: 'Somou 200 vitórias no total',          desbloqueada: false },
+    { id: 'maratonista',       categoria: 'Progressão', nome: 'Maratonista',       desc: 'Completou 50 campanhas',               desbloqueada: false },
 
     // ── Placar & Campanha ──
     { id: 'rolo_compressor',   categoria: 'Placar & Campanha', nome: 'Rolo compressor',  desc: 'Foi campeão sem perder e com 15+ de saldo de gols na campanha', desbloqueada: false },
@@ -54,7 +58,7 @@
     { id: 'bi_copa',           categoria: 'Competições', nome: 'Bi mundial',         desc: 'Campeão da Copa do Mundo 2 vezes',  desbloqueada: false },
     { id: 'rei_america',       categoria: 'Competições', nome: 'Rei da América',     desc: 'Campeão da Libertadores 3 vezes',   desbloqueada: false },
     { id: 'continental',       categoria: 'Competições', nome: 'Dono dos continentes', desc: 'Campeão da Libertadores e da Champions', desbloqueada: false },
-    { id: 'colecionador',      categoria: 'Competições', nome: 'Colecionador',       desc: 'Campeão de todas as 4 competições', desbloqueada: false },
+    { id: 'colecionador',      categoria: 'Competições', nome: 'Colecionador',       desc: 'Campeão de todas as competições disponíveis', desbloqueada: false },
 
     { id: 'tri_champions',     categoria: 'Competições', nome: 'Trono europeu',      desc: 'Campeão da Champions 3 vezes',      desbloqueada: false },
     { id: 'tri_brasil',        categoria: 'Competições', nome: 'Tri nacional',       desc: 'Campeão do Brasileirão 3 vezes',    desbloqueada: false },
@@ -87,6 +91,16 @@
     { id: 'alemanha_70',   categoria: 'Combinações', nome: 'Pança alemã',     desc: 'Escalou Gerd Müller, Beckenbauer e Breitner juntos', desbloqueada: false },
     { id: 'trio_argentino', categoria: 'Combinações', nome: 'Hermanos',       desc: 'Escalou Messi, Di María e Agüero juntos', desbloqueada: false },
     { id: 'eixo_bayern',   categoria: 'Combinações', nome: 'Espinha do Bayern', desc: 'Escalou Neuer, Lahm e Schweinsteiger juntos', desbloqueada: false },
+
+    // ── Craques & Feitos (desempenho individual e composição do time) ──
+    { id: 'artilheiro_camp', categoria: 'Craques & Feitos', nome: 'Artilheiro',      desc: 'Um jogador seu marcou 15+ gols numa campanha', desbloqueada: false },
+    { id: 'show_individual', categoria: 'Craques & Feitos', nome: 'Show individual', desc: 'Um jogador seu marcou 20+ gols numa campanha', desbloqueada: false },
+    { id: 'garcom',          categoria: 'Craques & Feitos', nome: 'Garçom',          desc: 'Um jogador seu deu 10+ assistências numa campanha', desbloqueada: false },
+    { id: 'maestro',         categoria: 'Craques & Feitos', nome: 'Maestro',         desc: 'Um jogador seu deu 15+ assistências numa campanha', desbloqueada: false },
+    { id: 'craque_completo', categoria: 'Craques & Feitos', nome: 'Craque completo', desc: 'Um jogador com 10+ gols e 10+ assistências na mesma campanha', desbloqueada: false },
+    { id: 'galacticos',      categoria: 'Craques & Feitos', nome: 'Galácticos',      desc: 'Montou um XI com força média 90+', desbloqueada: false },
+    { id: 'so_craques',      categoria: 'Craques & Feitos', nome: 'Só craques',      desc: 'Escalou 11 titulares todos com força 85+', desbloqueada: false },
+    { id: 'zebra',           categoria: 'Craques & Feitos', nome: 'Zebra',           desc: 'Foi campeão com um time de força média 75 ou menos', desbloqueada: false },
   ];
 
   // Raridade por conquista (4 níveis, só cosmético): comum < raro < epico < lendario.
@@ -118,7 +132,12 @@
     meio_barca: 'epico', zaga_milan: 'epico', alemanha_70: 'epico',
     trio_argentino: 'epico', eixo_bayern: 'epico',
     // Combinações icônicas/quádruplas — lendárias
-    quadrado_magico: 'lendario', pele_garrincha: 'lendario', quadrado_82: 'lendario'
+    quadrado_magico: 'lendario', pele_garrincha: 'lendario', quadrado_82: 'lendario',
+    // Craques & Feitos
+    artilheiro_camp: 'raro', garcom: 'raro', show_individual: 'epico', maestro: 'epico',
+    craque_completo: 'epico', galacticos: 'epico', zebra: 'epico', so_craques: 'lendario',
+    // Progressão avançada
+    maratonista: 'raro', bicentenario: 'epico', imortal: 'lendario', milesimo: 'lendario'
   };
   var RARIDADE_ROTULO = { comum: 'Comum', raro: 'Raro', epico: 'Épico', lendario: 'Lendário' };
   function raridadeDe(id) { return RARIDADE[id] || 'comum'; }

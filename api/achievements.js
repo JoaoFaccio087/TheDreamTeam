@@ -19,13 +19,25 @@ function ehLiberta(c)   { return normComp(c).includes('liberta'); }
 function ehChampions(c) { return normComp(c).includes('champions'); }
 function ehBrasil(c)    { return normComp(c).includes('brasileir'); }
 function ehCopa(c)      { return normComp(c).includes('copa'); }
+
+// FONTE DE VERDADE ÚNICA das competições conhecidas. Ao adicionar uma competição nova (ex.:
+// Premier League), inclua-a AQUI (id + matcher) e as conquistas "de todas as competições" e as
+// métricas por grupo se ajustam SOZINHAS — sem manutenção espalhada.
+const GRUPOS_CONHECIDOS = [
+  { id: 'liberta',   eh: ehLiberta },
+  { id: 'champions', eh: ehChampions },
+  { id: 'brasil',    eh: ehBrasil },
+  { id: 'copa',      eh: ehCopa },
+];
 // Grupo canônico de uma competição (ou null se não reconhecida).
 function grupoDe(c) {
-  if (ehLiberta(c))   return 'liberta';
-  if (ehChampions(c)) return 'champions';
-  if (ehBrasil(c))    return 'brasil';
-  if (ehCopa(c))      return 'copa';
+  for (const g of GRUPOS_CONHECIDOS) { if (g.eh(c)) return g.id; }
   return null;
+}
+// Quantos grupos distintos o usuário venceu (usa competicoesVencidas).
+function gruposVencidos(ctx) {
+  const venc = [...ctx.competicoesVencidas];
+  return GRUPOS_CONHECIDOS.filter(g => venc.some(g.eh)).length;
 }
 
 // ── Combinações de jogadores (quadrados mágicos, trios) ──
@@ -68,6 +80,27 @@ function comboFeito(ctx, combo) {
     });
     if (todos) return true;
   }
+  return false;
+}
+
+// ── Feitos individuais (usam gols/assistências por jogador em snapshot.picks) ──
+// Devolve true se ALGUMA campanha tem um jogador que satisfaz o teste (recebe o pick).
+function algumJogador(ctx, teste) {
+  for (const m of ctx.matches) {
+    const picks = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
+    if (!Array.isArray(picks)) continue;
+    for (const p of picks) { if (p && teste(p)) return true; }
+  }
+  return false;
+}
+// Maior força média de XI entre todas as campanhas (para conquistas de "time montado").
+function forcaMediaXI(picks) {
+  const vivos = (picks || []).filter(p => p && p.forca);
+  if (!vivos.length) return 0;
+  return vivos.reduce((s, p) => s + (p.forca | 0), 0) / vivos.length;
+}
+function algumaCampanha(ctx, teste) {
+  for (const m of ctx.matches) { if (teste(m)) return true; }
   return false;
 }
 
@@ -114,10 +147,7 @@ const CATALOGO = [
       const v = [...ctx.competicoesVencidas];
       return v.some(ehLiberta) && v.some(ehChampions);
   } },
-  { id: 'colecionador',      check: ctx => {
-      const v = [...ctx.competicoesVencidas];
-      return v.some(ehLiberta) && v.some(ehChampions) && v.some(ehBrasil) && v.some(ehCopa);
-  } },
+  { id: 'colecionador',      check: ctx => gruposVencidos(ctx) >= GRUPOS_CONHECIDOS.length },
 
   // ── Competições — específicas por modo (tri, penta, especialista, matador) ──
   { id: 'tri_champions',   check: ctx => ctx.titulosPorGrupo.champions >= 3 },
@@ -135,6 +165,28 @@ const CATALOGO = [
   { id: 'matador_champions', check: ctx => ctx.golsPorGrupo.champions >= 100 },
   { id: 'matador_brasil',    check: ctx => ctx.golsPorGrupo.brasil    >= 100 },
   { id: 'matador_copa',      check: ctx => ctx.golsPorGrupo.copa      >= 100 },
+
+  // ── Feitos individuais (gols/assistências de um jogador numa campanha) ──
+  { id: 'artilheiro_camp', check: ctx => algumJogador(ctx, p => (p.gols | 0) >= 15) },
+  { id: 'show_individual', check: ctx => algumJogador(ctx, p => (p.gols | 0) >= 20) },
+  { id: 'garcom',          check: ctx => algumJogador(ctx, p => (p.asis | 0) >= 10) },
+  { id: 'maestro',         check: ctx => algumJogador(ctx, p => (p.asis | 0) >= 15) },
+  { id: 'craque_completo', check: ctx => algumJogador(ctx, p => (p.gols | 0) >= 10 && (p.asis | 0) >= 10) },
+
+  // ── Força do time (composição do XI) ──
+  { id: 'galacticos',   check: ctx => algumaCampanha(ctx, m => forcaMediaXI(m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks) >= 90) },
+  { id: 'so_craques',   check: ctx => algumaCampanha(ctx, m => {
+      const picks = m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
+      const vivos = (picks || []).filter(p => p && p.forca);
+      return vivos.length >= 11 && vivos.every(p => (p.forca | 0) >= 85);
+  }) },
+  { id: 'zebra',        check: ctx => algumaCampanha(ctx, m => m.campeao && forcaMediaXI(m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks) > 0 && forcaMediaXI(m.detalhes.snapshot.picks) <= 75) },
+
+  // ── Progressão avançada (thresholds altos) ──
+  { id: 'imortal',      check: ctx => ctx.totalPartidas >= 300 },
+  { id: 'milesimo',     check: ctx => ctx.totalGols     >= 1000 },
+  { id: 'bicentenario', check: ctx => ctx.totalVitorias >= 200 },
+  { id: 'maratonista',  check: ctx => ctx.matches.length >= 50 },
 
   // ── Combinações de jogadores (geradas de COMBOS) ──
   ...COMBOS.map(function (combo) {
