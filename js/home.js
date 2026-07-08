@@ -1,5 +1,18 @@
 // home.js — ações da tela inicial e estatísticas do rodapé.
 
+// Mostra a pílula "Orçamento" só nas competições onde o modo está habilitado (fase 1: Libertadores).
+// Se o modo atual não permite e o estilo estava em 'orcamento', volta para 'classico'.
+function sincronizarPilulaOrcamento() {
+  var pilulaOrc = document.querySelector('#jogo-pilulas-estilo .pilula-orcamento');
+  if (!pilulaOrc) return;
+  var permite = (modoSelecionado === 'libertadores');
+  pilulaOrc.classList.toggle('escondida', !permite);
+  if (!permite && typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento'
+      && typeof selecionarEstilo === 'function') {
+    selecionarEstilo('classico');
+  }
+}
+
 function selecionarModo(novoModo) {
   modoSelecionado = novoModo;
 
@@ -11,17 +24,7 @@ function selecionarModo(novoModo) {
     }
   });
 
-  // Modo Orçamento: por ora só habilitado na Libertadores (fase 1 de testes). A pílula aparece
-  // só nela; ao trocar para outra competição, esconde e volta o estilo para Clássico se estava nela.
-  var pilulaOrc = document.querySelector('#jogo-pilulas-estilo .pilula-orcamento');
-  if (pilulaOrc) {
-    var permite = (novoModo === 'libertadores');
-    pilulaOrc.classList.toggle('escondida', !permite);
-    if (!permite && typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento'
-        && typeof selecionarEstilo === 'function') {
-      selecionarEstilo('classico');
-    }
-  }
+  sincronizarPilulaOrcamento();
 }
 
 function selecionarFormacaoAmostra(nomeFormacao) {

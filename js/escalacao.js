@@ -127,6 +127,8 @@ function iniciarTelaJogo() {
 
   // Volta ao estilo Clássico e desfaz qualquer estado de Draft
   if (typeof resetEstiloDraft === 'function') resetEstiloDraft();
+  // Mostra/esconde a pílula "Orçamento" conforme a competição (fase 1: só Libertadores).
+  if (typeof sincronizarPilulaOrcamento === 'function') sincronizarPilulaOrcamento();
 
   campoJogo.classList.remove('tem-selecao');
 
