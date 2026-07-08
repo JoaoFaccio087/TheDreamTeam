@@ -242,6 +242,14 @@
 
 /* Edição: sempre pequena e apagada */
 .partida-adversario-ano { color: var(--txt-soft); font-size: var(--fs-sm); }
+/* Força do adversário — discreta/opaca, abaixo do nome e da edição */
+.partida-adversario-forca {
+  color: var(--txt-soft);
+  font-size: var(--fs-legenda);
+  opacity: 0.7;
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 0.02em;
+}
 
 /* Bloco direito: placar + relógio + mini-res + toggle */
 .partida-placar-bloco {

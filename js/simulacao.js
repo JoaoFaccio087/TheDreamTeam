@@ -177,12 +177,15 @@ function criarCardPartida(id, adversario, fase) {
   div.className = 'partida-card expandido';
   div.id        = 'partida-' + id;
 
+  var forcaAdv = Math.round(forcaDoClube(adversario));
+
   div.innerHTML =
     '<div class="partida-fase">' + fase + '</div>' +
     '<div class="partida-header">' +
       '<div class="partida-adversario-bloco">' +
         '<span class="partida-adversario-nome">' + adversario.clube + '</span>' +
         '<span class="partida-adversario-ano">' + rotuloCompeticao(adversario.competicao) + ' \xB7 ' + adversario.edicao + '</span>' +
+        '<span class="partida-adversario-forca">Força ' + forcaAdv + '</span>' +
       '</div>' +
       '<div class="partida-placar-bloco">' +
         '<span class="partida-placar" id="pplacar-' + id + '">0 – 0</span>' +

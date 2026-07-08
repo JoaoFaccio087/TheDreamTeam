@@ -733,7 +733,12 @@
       if (ehCelular()) setTimeout(function () { scrollParaEl(document.getElementById('draft-campo')); }, 120);
     } else {
       gPodeEscolher = false;
-      verTimeDoUsuario(gVisualizandoUid || meuUserId);   // mantém o time que estou olhando
+      // Não é minha vez: o mapa ACOMPANHA sozinho o grupo que está escolhendo agora — mostra o
+      // primeiro time do grupo ativo (o "cabeça"), sem exigir clique. Assim dá pra acompanhar a
+      // vez em curso. (O usuário ainda pode clicar em outro membro para trocar o que vê.)
+      var primeiroDoGrupo = membros.length ? membros[0] : (gVisualizandoUid || meuUserId);
+      gVisualizandoUid = primeiroDoGrupo;
+      verTimeDoUsuario(primeiroDoGrupo);
       limparDestaquesVaga();
       if (draftCarouselWrap) draftCarouselWrap.classList.add('escondida');
       fecharModalDraftPick();
