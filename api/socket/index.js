@@ -837,6 +837,44 @@ function codigosAceitosServidor(codigo) {
   return mapa[codigo] || [codigo];
 }
 
+// ── "Pular tudo" (fase de liga/grupos) ─────────────────────────────────────────
+// Executa o pulo se TODOS os humanos já votaram e não há rodada em andamento.
+// Extraído para poder ser RE-CHECADO depois que uma rodada termina: antes, um voto dado enquanto
+// a rodada estava sendo simulada ficava órfão (a condição falhava e ninguém tentava de novo),
+// e o próximo round:next ainda zerava os votos — o clique simplesmente não fazia nada.
+function tentarPularTudo(io, sala, code) {
+  if (!sala || sala.status !== 'playing' || sala.rodadaEmAndamento) return false;
+  const humanos = sala.jogadores.filter(j => !j.ehBot).length;
+  const votos   = (sala.votosPular || []).length;
+  if (!(humanos > 0 && votos >= humanos)) return false;
+
+  sala.rodadaEmAndamento = true;
+  try {
+    let res;
+    do { res = simularUmaRodada(sala); } while (!res.isUltima);
+    if (sala.formato === 'mata') {
+      if (res && res.payload) { res.payload.grupos = classificacaoTodosGrupos(sala); io.to(code).emit('round:results', res.payload); }
+      const apur = apurarClassificados(sala);
+      sala.classificados = apur.classificados;
+      sala.status = 'mata';
+      io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
+      montarChaveOnline(sala);
+      io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
+    } else if (sala.formato === 'champions') {
+      if (res && res.payload) io.to(code).emit('round:results', res.payload);
+      finalizarFaseLigaChampions(io, sala, code, res && res.payload);
+    } else {
+      emitirFimDeJogo(io, sala, code);
+    }
+    return true;
+  } catch (err) {
+    console.error('[socket tentarPularTudo]', err);
+    return false;
+  } finally {
+    sala.rodadaEmAndamento = false;
+  }
+}
+
 // ── Turno de Draft ─────────────────────────────────────────────────────────────
 
 function iniciarTurno(io, sala) {
@@ -1814,9 +1852,14 @@ function setupSocket(server, frontendUrl) {
       if (sala.rodadaEmAndamento) return;
 
       sala.rodadaEmAndamento = true;
+      let pularDepois = false;
       try {
         const { isUltima, payload } = simularUmaRodada(sala);
-        sala.votosPular = [];   // nova rodada = nova votação de "pular tudo"
+        // Se TODOS os humanos já votaram para pular (inclusive votos dados enquanto esta rodada
+        // rodava), o pulo é honrado logo abaixo. Caso contrário, nova rodada = nova votação.
+        const humanos = sala.jogadores.filter(j => !j.ehBot).length;
+        pularDepois = !isUltima && humanos > 0 && (sala.votosPular || []).length >= humanos;
+        if (!pularDepois) sala.votosPular = [];
         if (sala.formato === 'mata') payload.grupos = classificacaoTodosGrupos(sala);
         io.to(code).emit('round:results', payload);
 
@@ -1841,6 +1884,9 @@ function setupSocket(server, frontendUrl) {
       } finally {
         sala.rodadaEmAndamento = false;
       }
+      // Voto de "pular tudo" dado DURANTE esta rodada: agora que ela terminou, executa o pulo
+      // (antes o voto ficava órfão e o jogo só seguia para a próxima partida).
+      if (pularDepois) tentarPularTudo(io, sala, code);
     });
 
     // ── champions:advancePlayoff — host roda o playoff (9–24) e abre as oitavas ─
@@ -1953,31 +1999,9 @@ function setupSocket(server, frontendUrl) {
       const humanos = sala.jogadores.filter(j => !j.ehBot).length;
       io.to(code).emit('round:skipVotes', { votos: sala.votosPular.length, total: humanos });
 
-      if (humanos > 0 && sala.votosPular.length >= humanos && !sala.rodadaEmAndamento) {
-        sala.rodadaEmAndamento = true;
-        try {
-          let res;
-          do { res = simularUmaRodada(sala); } while (!res.isUltima);
-          if (sala.formato === 'mata') {
-            if (res && res.payload) { res.payload.grupos = classificacaoTodosGrupos(sala); io.to(code).emit('round:results', res.payload); }
-            const apur = apurarClassificados(sala);
-            sala.classificados = apur.classificados;
-            sala.status = 'mata';
-            io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
-            montarChaveOnline(sala);
-            io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
-          } else if (sala.formato === 'champions') {
-            if (res && res.payload) io.to(code).emit('round:results', res.payload);
-            finalizarFaseLigaChampions(io, sala, code, res && res.payload);
-          } else {
-            emitirFimDeJogo(io, sala, code);
-          }
-        } catch (err) {
-          console.error('[socket round:skipAll]', err);
-        } finally {
-          sala.rodadaEmAndamento = false;
-        }
-      }
+      // Se já dá quórum e nada está rodando, pula agora. Se uma rodada estiver em andamento, o
+      // voto NÃO se perde: ao terminar, o round:simulate re-checa e executa o pulo.
+      tentarPularTudo(io, sala, code);
     });
 
     // ── disconnect ────────────────────────────────────────────────────────────
