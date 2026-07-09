@@ -113,7 +113,11 @@
   width: 124px;
   flex: none;              /* largura FIXA: sem isto o flex encolhe os cards de forma desigual
                               conforme o conteúdo (nomes longos vs curtos), deixando larguras diferentes */
-  min-height: 172px;
+  /* Altura FIXA (não min-height): antes, nomes/clubes longos (ex.: "Anatoliy Tymoshchuk" +
+     "Bayern München") faziam a carta crescer e as cartas ficavam desalinhadas na fileira.
+     Agora todas têm a mesma altura, dimensionada para o pior caso (nome em 3 linhas +
+     clube em 2 linhas); nomes curtos ficam bem posicionados pelo espaço reservado. */
+  height: 196px;
   background: #141414;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--raio-lg);
@@ -121,6 +125,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   text-align: center;
   cursor: pointer;
   color: #fff;
@@ -240,7 +245,9 @@
   font-size: var(--fs-base);
   line-height: 1.12;
   margin-bottom: 10px;
-  min-height: 2.3em;
+  /* Altura RESERVADA para 3 linhas (3 * 1.12em ≈ 3.36em): nomes curtos ficam centralizados
+     verticalmente nesse espaço e os longos usam as 3 linhas — todas as cartas alinhadas. */
+  height: 3.36em;
   text-align: center;
   /* Nomes longos: quebram a palavra e usam até 3 linhas com reticências,
      em vez de serem cortados no meio de uma letra. line-clamp exige
@@ -255,11 +262,20 @@
   -webkit-line-clamp: 3;
 }
 
+/* Clube: reserva 2 linhas (nomes como "Bayern München" quebram) para não empurrar o resto. */
 .carta-time {
   font-size: var(--fs-legenda);
   letter-spacing: 1px;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
+  height: 2.4em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
 }
 
 .carta-ano {
@@ -276,8 +292,11 @@
   margin-bottom: 8px;
 }
 
-/* Força em destaque no rodapé da carta */
+/* Força em destaque no rodapé da carta.
+   margin-top:auto empurra a força para o fim: com a carta de altura fixa, ela fica sempre
+   ancorada embaixo, independentemente de o nome ocupar 1, 2 ou 3 linhas. */
 .carta-forca {
+  margin-top: auto;
   font-family: 'Archivo Black', sans-serif;
   font-size: var(--fs-2xl);
   line-height: 1;
@@ -384,7 +403,7 @@
 
   .draft-carta {
     width: 104px;
-    min-height: 152px;
+    height: 176px;      /* altura FIXA também no celular (mesmo motivo do desktop) */
     padding: 11px 9px;
   }
 
@@ -392,7 +411,7 @@
     font-size: var(--fs-mini);
     line-height: 1.1;
     margin-bottom: 8px;
-    min-height: 2.4em;
+    height: 3.3em;      /* reserva 3 linhas */
   }
 
   .carta-forca {

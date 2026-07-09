@@ -618,6 +618,7 @@
   var gPicksFeitosTurno = 0;      // picks que EU já fiz no turno atual
   var gTotalTurnos      = 6;
   var gVisualizandoUid  = null;   // uid do time que estou olhando no campo (null = o meu)
+  var _ultimoGrupoRolado = null;  // último grupo p/ o qual a coluna de ordem rolou (evita rolar a cada re-render)
 
   // Rótulo do agrupamento do draft: "Grupo" em Copa/Liberta (têm grupos reais); "Bloco" na
   // Champions (não tem grupos — é só um bloco de times escolhendo junto). Centraliza para não
@@ -650,6 +651,7 @@
     draftEhGrupo = false; gPodeEscolher = false; gGrupos = {}; gOrdemGrupos = [];
     gPicksNecessarios = 11; gGrupoAtivo = null; gPickNum = 1; gPicksSnap = {};
     gPicksTurno = 1; gPicksFeitosTurno = 0; gTotalTurnos = 6; gVisualizandoUid = null;
+    _ultimoGrupoRolado = null;
     // Animação / skip
     pararAnimacaoPartida(); aoFimDaAnimacao = null;
     euVoteiPular = false; skipVotos = 0; skipTotal = 0;
@@ -894,6 +896,18 @@
       html += '</div>';
     });
     cont.innerHTML = html;
+
+    // A coluna "acompanha" a vez: rola até o grupo que passou a escolher. Só rola quando o grupo
+    // ativo MUDA — assim o scroll não briga com o usuário que está navegando pela lista (o painel
+    // re-renderiza a cada pick/clique). 'nearest' rola dentro do container, sem pular a página.
+    if (gGrupoAtivo && gGrupoAtivo !== _ultimoGrupoRolado) {
+      _ultimoGrupoRolado = gGrupoAtivo;
+      var ativoEl = cont.querySelector('.gdraft-grupo-ativo');
+      if (ativoEl && typeof ativoEl.scrollIntoView === 'function') {
+        try { ativoEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+        catch (e) { ativoEl.scrollIntoView(false); }   // fallback p/ navegadores sem options
+      }
+    }
   }
 
   // Envia o pick no canal certo conforme o modo (snake ou grupo).
