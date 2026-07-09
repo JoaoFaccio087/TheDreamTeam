@@ -1606,15 +1606,30 @@
       animarConfrontoPlayoff(meuConf, function () {
         outros.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
       });
-    } else {
-      // NÃO tenho confronto (classifiquei direto no top 8, ou estou sozinho): aviso claro
-      // e os confrontos dos outros como resultado (sem animação). Cobre o caso misto.
+    } else if (outros.length) {
+      // NÃO tenho confronto (classifiquei direto no top 8). Antes, os resultados de TODOS os
+      // confrontos apareciam prontos na hora — spoiler: eu já sabia quem passou enquanto os
+      // outros ainda estavam vendo suas partidas. Agora eu ASSISTO um confronto animado (o
+      // primeiro) no mesmo ritmo; só ao fim dele os demais resultados são revelados.
       var aviso = document.createElement('div');
       aviso.className = 'po-aviso-direto';
       aviso.innerHTML = '<span class="po-aviso-tit">Você já está nas oitavas! ✓</span>' +
-                        '<span class="po-aviso-sub">Acompanhe o playoff dos outros times abaixo.</span>';
+                        '<span class="po-aviso-sub">Assista ao playoff dos outros times.</span>';
       rodadaPartidas.appendChild(aviso);
-      outros.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+
+      var assistido = outros[0];
+      var demais    = outros.slice(1);
+      animarConfrontoPlayoff(assistido, function () {
+        // Reinsere o aviso (a animação limpa o container) e revela os demais resultados.
+        rodadaPartidas.insertBefore(aviso, rodadaPartidas.firstChild);
+        demais.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+      });
+    } else {
+      // Caso raro: passei direto e não há nenhum confronto de playoff para assistir.
+      var avisoSo = document.createElement('div');
+      avisoSo.className = 'po-aviso-direto';
+      avisoSo.innerHTML = '<span class="po-aviso-tit">Você já está nas oitavas! ✓</span>';
+      rodadaPartidas.appendChild(avisoSo);
     }
   }
 
