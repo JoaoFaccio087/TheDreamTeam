@@ -239,4 +239,4 @@ function calcularDesbloqueadas(matches) {
   return ids;
 }
 
-module.exports = { CATALOGO, calcularDesbloqueadas, montarContexto };
+module.exports = { CATALOGO, calcularDesbloqueadas, montarContexto, grupoDe, GRUPOS_CONHECIDOS };

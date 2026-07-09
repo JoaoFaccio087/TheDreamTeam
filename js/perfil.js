@@ -81,13 +81,18 @@
   }
 
   // Grupos do acordeão: Geral + cada competição (match por palavra-chave no nome salvo).
+  // `chave` filtra o histórico local (substring de competicao); `api` é o id do grupo devolvido
+  // por GET /matches/stats (mesmo id de GRUPOS_CONHECIDOS no backend).
   var GRUPOS = [
-    { nome: 'Geral',         chave: null },
-    { nome: 'Libertadores',  chave: 'libertadores' },
-    { nome: 'Champions',     chave: 'champions' },
-    { nome: 'Brasileirão',   chave: 'brasileir' },
-    { nome: 'Copa do Mundo', chave: 'copa' }
+    { nome: 'Geral',         chave: null,           api: 'geral' },
+    { nome: 'Libertadores',  chave: 'libertadores', api: 'liberta' },
+    { nome: 'Champions',     chave: 'champions',    api: 'champions' },
+    { nome: 'Brasileirão',   chave: 'brasileir',    api: 'brasil' },
+    { nome: 'Copa do Mundo', chave: 'copa',         api: 'copa' }
   ];
+  // Tradução da chave do seletor do mapa (data-esc) para o id do backend.
+  var ESC_PARA_API = { geral: 'geral', libertadores: 'liberta', champions: 'champions', brasileir: 'brasil', copa: 'copa' };
+  var _statsCache = null;   // resposta de /matches/stats (quando logado)
 
   var _histCache = null;   // histórico carregado (reusado por acordeão + time escalado)
 
@@ -95,22 +100,52 @@
     var box = $('perfil-acordeoes');
     if (!box) return;
     box.innerHTML = '<p class="perfil-carregando">Carregando estatísticas…</p>';
-    API.getHistorico().then(function (lista) {
-      lista = lista || [];
-      _histCache = lista;
-      box.innerHTML = GRUPOS.map(function (g, idx) {
-        var ms = g.chave
-          ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
-          : lista.slice();
-        // A seção "Geral" (idx 0) já vem aberta; as competições, fechadas.
-        return acordeaoHTML(g.nome, ms, idx === 0);
-      }).join('');
-      ligarAcordeoes(box);
-      renderEscalados('geral');   // campo à direita começa no "Geral"
+
+    // Caminho preferido (logado): somas prontas do servidor — payload pequeno, não depende de
+    // baixar o histórico inteiro. Convidado (ou falha da rota) → cálculo local do histórico.
+    API.getEstatisticas().then(function (stats) {
+      if (stats && stats.grupos) {
+        _statsCache = stats;
+        _histCache = null;                 // não precisamos do histórico completo aqui
+        box.innerHTML = GRUPOS.map(function (g, idx) {
+          var s = comAproveitamento(stats.grupos[g.api] || STATS_ZERO);
+          return acordeaoHTML(g.nome, s, idx === 0);
+        }).join('');
+        ligarAcordeoes(box);
+        renderEscalados('geral');
+        return;
+      }
+      // Fallback: calcula a partir do histórico (convidado/offline).
+      return API.getHistorico().then(function (lista) {
+        lista = lista || [];
+        _statsCache = null;
+        _histCache = lista;
+        box.innerHTML = GRUPOS.map(function (g, idx) {
+          var ms = g.chave
+            ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
+            : lista.slice();
+          // A seção "Geral" (idx 0) já vem aberta; as competições, fechadas.
+          return acordeaoHTML(g.nome, agregaStats(ms), idx === 0);
+        }).join('');
+        ligarAcordeoes(box);
+        renderEscalados('geral');   // campo à direita começa no "Geral"
+      });
     }).catch(function () {
       box.innerHTML = '<p class="perfil-vazio">Não foi possível carregar as estatísticas.</p>';
     });
   }
+
+  // Calcula o aproveitamento a partir das somas. Serve tanto para o objeto do servidor
+  // (que manda só as somas) quanto para o calculado localmente.
+  function comAproveitamento(s) {
+    var v = s.v | 0, e = s.e | 0, d = s.d | 0;
+    var jogos = v + e + d;
+    return {
+      camp: s.camp | 0, tit: s.tit | 0, v: v, e: e, d: d, gf: s.gf | 0, ga: s.ga | 0,
+      aprov: jogos ? Math.round((v * 3 + e) / (jogos * 3) * 100) : 0
+    };
+  }
+  var STATS_ZERO = { camp: 0, tit: 0, v: 0, e: 0, d: 0, gf: 0, ga: 0 };
 
   function agregaStats(ms) {
     var v = 0, e = 0, d = 0, gf = 0, ga = 0, tit = 0;
@@ -126,21 +161,55 @@
     };
   }
 
-  // Seção expansível por categoria: cabeçalho clicável (nome + nº de campanhas + seta) e um
-  // corpo com as estatísticas que abre/fecha. `aberto` define o estado inicial (Geral = aberta).
-  function acordeaoHTML(nome, ms, aberto) {
-    var s = agregaStats(ms);
+  // Escopo textual da categoria, para as dicas dos blocos: 'Geral' → null (dicas globais);
+  // competição → 'na Libertadores' / 'no Brasileirão' (preposição correta por nome).
+  var PREPOSICAO = { 'Brasileirão': 'no' };   // padrão: 'na'
+  function escopoDe(nome) {
+    if (!nome || nome === 'Geral') return null;
+    return (PREPOSICAO[nome] || 'na') + ' ' + nome;
+  }
+
+  // Dicas dos 8 blocos. Sem escopo (Geral) fala do total; com escopo, cita a competição — antes
+  // todas as categorias repetiam o texto do Geral ("somando todas as campanhas") mesmo dentro
+  // da Libertadores, o que era enganoso.
+  function dicasDe(escopo) {
+    if (!escopo) return {
+      camp:  'Total de campanhas disputadas',
+      tit:   'Campanhas em que você foi campeão',
+      v:     'Jogos vencidos somando todas as campanhas',
+      e:     'Jogos empatados somando todas as campanhas',
+      d:     'Jogos perdidos somando todas as campanhas',
+      gf:    'Gols marcados pelo seu time no total',
+      ga:    'Gols que seu time sofreu no total',
+      aprov: 'Aproveitamento: pontos ganhos ÷ pontos possíveis (vitória=3, empate=1)'
+    };
+    return {
+      camp:  'Campanhas disputadas ' + escopo,
+      tit:   'Títulos conquistados ' + escopo,
+      v:     'Jogos vencidos ' + escopo,
+      e:     'Jogos empatados ' + escopo,
+      d:     'Jogos perdidos ' + escopo,
+      gf:    'Gols marcados pelo seu time ' + escopo,
+      ga:    'Gols que seu time sofreu ' + escopo,
+      aprov: 'Aproveitamento ' + escopo + ': pontos ganhos ÷ pontos possíveis (vitória=3, empate=1)'
+    };
+  }
+
+  // Seção expansível por categoria. `s` são as somas já agregadas (do servidor ou calculadas
+  // localmente por agregaStats) — assim a montagem do HTML não depende da origem dos dados.
+  function acordeaoHTML(nome, s, aberto) {
+    var t = dicasDe(escopoDe(nome));
     var corpo = (s.camp === 0)
       ? '<p class="acord-vazio">Nenhuma campanha ainda nesta categoria.</p>'
       : '<div class="acord-stats">' +
-          stat(s.camp, 'Campanhas', 'Total de campanhas disputadas nesta categoria') +
-          stat(s.tit, 'Títulos', 'Campanhas em que você foi campeão') +
-          stat(s.v, 'Vitórias', 'Jogos vencidos somando todas as campanhas') +
-          stat(s.e, 'Empates', 'Jogos empatados somando todas as campanhas') +
-          stat(s.d, 'Derrotas', 'Jogos perdidos somando todas as campanhas') +
-          stat(s.gf, 'Gols pró', 'Gols marcados pelo seu time no total') +
-          stat(s.ga, 'Gols contra', 'Gols que seu time sofreu no total') +
-          stat(s.aprov + '%', 'Aproveit.', 'Aproveitamento: pontos ganhos ÷ pontos possíveis (vitória=3, empate=1)') +
+          stat(s.camp, 'Campanhas', t.camp) +
+          stat(s.tit, 'Títulos', t.tit) +
+          stat(s.v, 'Vitórias', t.v) +
+          stat(s.e, 'Empates', t.e) +
+          stat(s.d, 'Derrotas', t.d) +
+          stat(s.gf, 'Gols pró', t.gf) +
+          stat(s.ga, 'Gols contra', t.ga) +
+          stat(s.aprov + '%', 'Aproveit.', t.aprov) +
         '</div>';
     return '' +
       '<section class="perfil-acord' + (aberto ? ' acord-aberta' : '') + '">' +
@@ -231,18 +300,24 @@
   function renderEscalados(chave) {
     var campo = $('perfil-campo-escalados');
     if (!campo) return;
-    var lista = _histCache || [];
-    var ms = (chave && chave !== 'geral')
-      ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(chave) >= 0; })
-      : lista.slice();
 
-    var grupos = contarEscalados(ms);
-    var totalEscalacoes = ms.reduce(function (acc, m) {
-      var pk = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
-      return acc + (pk ? 1 : 0);
-    }, 0);
+    var grupos;
+    if (_statsCache && _statsCache.escalados) {
+      // Servidor já contou as escalações: recebe {GOL,DEF,MEI,ATA} ordenados por vezes.
+      var apiKey = ESC_PARA_API[chave || 'geral'] || 'geral';
+      grupos = _statsCache.escalados[apiKey] || { GOL: [], DEF: [], MEI: [], ATA: [] };
+    } else {
+      var lista = _histCache || [];
+      var ms = (chave && chave !== 'geral')
+        ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(chave) >= 0; })
+        : lista.slice();
+      grupos = contarEscalados(ms);
+    }
 
-    if (totalEscalacoes === 0) {
+    var temAlgum = ['GOL', 'DEF', 'MEI', 'ATA'].some(function (g) {
+      return (grupos[g] || []).length > 0;
+    });
+    if (!temAlgum) {
       campo.innerHTML = '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
       return;
     }
@@ -406,7 +481,10 @@
   }
 
   // ──────────────────────── MEU HISTÓRICO ────────────────────────
-  var _histCache = [];
+  // Cache PRÓPRIO da aba Histórico (as 20 mais recentes, p/ o botão "Ver resumo").
+  // Não confundir com o cache das Estatísticas: eram a MESMA variável (mesmo escopo),
+  // então abrir o Histórico truncava em 20 os dados do mapa de escalados.
+  var _histLista = [];
   function abrirHistorico() {
     if (!telaPerfil) return;
     var lista = $('historico-lista');
@@ -419,14 +497,14 @@
         return;
       }
       // Mostra no máximo as 20 partidas mais recentes.
-      _histCache = arr.slice(0, 20);
+      _histLista = arr.slice(0, 20);
       if (lista) {
-        lista.innerHTML = _histCache.map(itemHistorico).join('');
+        lista.innerHTML = _histLista.map(itemHistorico).join('');
         // Liga os botões "Ver resumo" pelo índice no cache.
         lista.querySelectorAll('.hist-resumo-btn').forEach(function (b) {
           b.addEventListener('click', function () {
             var idx = +b.dataset.idx;
-            var item = _histCache[idx];
+            var item = _histLista[idx];
             if (item && typeof mostrarResumoHistorico === 'function') mostrarResumoHistorico(item);
           });
         });

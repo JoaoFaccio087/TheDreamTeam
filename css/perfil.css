@@ -97,7 +97,9 @@
   border-radius: var(--raio-md); padding: 0.55rem 0.3rem;
   display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
 }
-.perfil-stat[data-tip] { cursor: help; }
+/* Cursor padrão: os blocos não são clicáveis nem interativos — o `cursor: help` (a setinha com "?")
+   só confundia. O tooltip aparece no hover de qualquer jeito. */
+.perfil-stat[data-tip] { cursor: default; }
 /* Tooltip explicativo instantâneo, acima do bloco (padrão do mapa de escalados). */
 .perfil-stat[data-tip]:hover::after {
   content: attr(data-tip);

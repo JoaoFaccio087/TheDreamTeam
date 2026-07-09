@@ -172,6 +172,16 @@ var api = {
       .catch(function () { return []; });
   },
 
+  // Estatísticas agregadas no servidor (somas em SQL + time mais escalado). Payload pequeno e
+  // constante, independente do número de campanhas. Devolve null p/ convidado ou se a rota falhar
+  // (o Perfil então cai no cálculo local a partir do histórico).
+  getEstatisticas: function () {
+    if (!_temLoginReal()) return Promise.resolve(null);
+    return _req('GET', '/matches/stats')
+      .then(function (o) { return (o && o.grupos) ? o : null; })
+      .catch(function () { return null; });
+  },
+
   criarSala: function (opcoes) {
     return _req('POST', '/rooms', opcoes);
   },
