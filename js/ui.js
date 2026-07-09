@@ -168,6 +168,19 @@
     return el || null;
   };
 
+  // Classe extra para o nome do jogador nas cartas do draft. O espaço do nome é fixo (2 linhas);
+  // nomes longos encolhem a fonte para caberem, em vez de cortar o nome ou esticar a carta.
+  // Medido no banco (14.571 nomes): ~96% cabem normal, ~3,9% usam 'longa', só 2 usam 'xlonga'.
+  //   '<span class="carta-nome' + UI.classeNomeCarta(j.nome) + '">'
+  UI.LIMITE_NOME_CARTA  = 18;   // acima disto: fonte menor
+  UI.LIMITE_NOME_CARTA_X = 26;  // acima disto: fonte bem menor (nomes extremos)
+  UI.classeNomeCarta = function (nome) {
+    var n = String(nome || '').length;
+    if (n > UI.LIMITE_NOME_CARTA_X) return ' carta-nome-xlonga';
+    if (n > UI.LIMITE_NOME_CARTA)   return ' carta-nome-longa';
+    return '';
+  };
+
   window.UI = UI;
 
   // Cabeçalhos estáticos do single-player. O Voltar de cada tela é um link no corpo

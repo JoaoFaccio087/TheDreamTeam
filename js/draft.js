@@ -214,7 +214,7 @@ function renderizarCartas() {
 
     carta.innerHTML =
       '<span class="carta-brilho" style="animation-delay:' + (atraso + 0.26).toFixed(2) + 's"></span>' +
-      '<span class="carta-nome" title="' + j.nome + '">' + j.nome + '</span>' +
+      '<span class="carta-nome' + (window.UI ? UI.classeNomeCarta(j.nome) : '') + '" title="' + j.nome + '">' + j.nome + '</span>' +
       '<span class="carta-time">' + j.clube + '</span>' +
       '<span class="carta-ano">' + j.edicao + '</span>' +
       '<span class="carta-posicoes">' + j.posicoes.join('/') + '</span>' +

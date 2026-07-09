@@ -2517,7 +2517,7 @@
       carta.style.animationDelay = atraso + 's';
       carta.innerHTML =
         '<span class="carta-brilho" style="animation-delay:' + (atraso + 0.26).toFixed(2) + 's"></span>' +
-        '<span class="carta-nome" title="' + htmlEsc(j.nome || '') + '">' + htmlEsc(j.nome || '—') + '</span>' +
+        '<span class="carta-nome' + (window.UI ? UI.classeNomeCarta(j.nome) : '') + '" title="' + htmlEsc(j.nome || '') + '">' + htmlEsc(j.nome || '—') + '</span>' +
         '<span class="carta-time">' + htmlEsc(j.clube || '') + '</span>' +
         '<span class="carta-ano">' + htmlEsc(j.edicao || '') + '</span>' +
         '<span class="carta-posicoes">' + htmlEsc((j.posicoes || []).join('/')) + '</span>' +

@@ -113,11 +113,10 @@
   width: 124px;
   flex: none;              /* largura FIXA: sem isto o flex encolhe os cards de forma desigual
                               conforme o conteúdo (nomes longos vs curtos), deixando larguras diferentes */
-  /* Altura FIXA (não min-height): antes, nomes/clubes longos (ex.: "Anatoliy Tymoshchuk" +
-     "Bayern München") faziam a carta crescer e as cartas ficavam desalinhadas na fileira.
-     Agora todas têm a mesma altura, dimensionada para o pior caso (nome em 3 linhas +
-     clube em 2 linhas); nomes curtos ficam bem posicionados pelo espaço reservado. */
-  height: 196px;
+  /* Altura FIXA (não min-height): sem ela, nomes/clubes longos esticavam a carta e a fileira
+     ficava desalinhada. Dimensionada para nome em 2 linhas + clube em 2 linhas — os raros nomes
+     gigantes encolhem a fonte (.carta-nome-longa) em vez de crescer a carta. */
+  height: 180px;
   background: #141414;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--raio-lg);
@@ -245,13 +244,12 @@
   font-size: var(--fs-base);
   line-height: 1.12;
   margin-bottom: 10px;
-  /* Altura RESERVADA para 3 linhas (3 * 1.12em ≈ 3.36em): nomes curtos ficam centralizados
-     verticalmente nesse espaço e os longos usam as 3 linhas — todas as cartas alinhadas. */
-  height: 3.36em;
+  /* Espaço reservado para 2 LINHAS (altura em rem, não em em: assim não muda quando a fonte
+     encolhe em .carta-nome-longa). Medição do banco: 27% dos nomes cabem em 1 linha, 72% em 2
+     e só ~0,5% (22 de 4678) precisariam de 3 — reservar 3 linhas deixava quase toda carta com
+     um buraco. Os poucos nomes gigantes usam .carta-nome-longa (fonte menor) e cabem nas 2. */
+  height: 2.05rem;
   text-align: center;
-  /* Nomes longos: quebram a palavra e usam até 3 linhas com reticências,
-     em vez de serem cortados no meio de uma letra. line-clamp exige
-     display:-webkit-box (não pode coexistir com flex). */
   overflow-wrap: anywhere;
   word-break: break-word;
   hyphens: auto;
@@ -259,7 +257,19 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-box-pack: center;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
+}
+
+/* Nomes muito longos (ex.: "Giorgian de Arrascaeta"): fonte menor para caberem nas 2 linhas
+   reservadas, sem cortar o nome nem esticar a carta. Aplicada pelo JS (UI.classeNomeCarta). */
+.carta-nome.carta-nome-longa {
+  font-size: var(--fs-mini);
+  line-height: 1.15;
+}
+/* Casos extremos (ex.: "Carlos Alejandro Alfaro Moreno") — 2 nomes no banco inteiro. */
+.carta-nome.carta-nome-xlonga {
+  font-size: var(--fs-micro);
+  line-height: 1.18;
 }
 
 /* Clube: reserva 2 linhas (nomes como "Bayern München" quebram) para não empurrar o resto. */
@@ -403,7 +413,7 @@
 
   .draft-carta {
     width: 104px;
-    height: 176px;      /* altura FIXA também no celular (mesmo motivo do desktop) */
+    height: 164px;      /* altura FIXA também no celular (nome em 2 linhas) */
     padding: 11px 9px;
   }
 
@@ -411,8 +421,10 @@
     font-size: var(--fs-mini);
     line-height: 1.1;
     margin-bottom: 8px;
-    height: 3.3em;      /* reserva 3 linhas */
+    height: 1.6rem;     /* 2 linhas em rem (não muda com .carta-nome-longa) */
   }
+  .carta-nome.carta-nome-longa  { font-size: var(--fs-micro); line-height: 1.12; }
+  .carta-nome.carta-nome-xlonga { font-size: 0.5rem;          line-height: 1.14; }
 
   .carta-forca {
     font-size: 1.6rem;
