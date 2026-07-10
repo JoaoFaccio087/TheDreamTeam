@@ -15,19 +15,16 @@
 <h2>CLUBES</h2><div class="grid" id="clubes"></div>
 <h2>SELEÇÕES</h2><div class="grid" id="selecoes"></div>
 <script src="js/escudos.js"></script>
+<script src="js/escudos-cores.js"></script>
 <script>
-  var clubes=[['Flamengo',['#CC0000','#000']],['Palmeiras',['#006437','#FFF']],['Goiás',['#006437','#FFF']],
-    ['Cruzeiro',['#0033A0','#FFF']],['Grêmio',['#0D80BF','#000']],['Vasco',['#000','#FFF']],
-    ['Juventus',['#000','#FFF']],['Barcelona',['#004D98','#A50044']],['Boca',['#003893','#F2A900']],
-    ['Peñarol',['#000','#F2A900']],['River',['#FFF','#E5122E']],['Santos',['#FFF','#000']]];
-  var selecoes=Escudos.paisesSuportados();
   var g=document.getElementById('clubes');
-  clubes.forEach(function(c,i){
+  EscudosCores.todosClubes().forEach(function(nome,i){
     var d=document.createElement('div');d.className='card';
-    var svg=Escudos.gerar({tipo:'clube',nome:c[0],cores:c[1],seed:c[0],estrelas:i%4});
-    d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+c[0]+'</div><div class="sm">'+svg+'</div>';
+    var svg=Escudos.gerar({tipo:'clube',nome:nome,cores:EscudosCores.coresClube(nome),seed:nome,estrelas:i%4});
+    d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+nome+'</div><div class="sm">'+svg+'</div>';
     g.appendChild(d);
   });
+  var selecoes=Escudos.paisesSuportados();
   var s=document.getElementById('selecoes');
   selecoes.forEach(function(p,i){
     var d=document.createElement('div');d.className='card';

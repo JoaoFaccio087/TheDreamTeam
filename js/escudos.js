@@ -225,7 +225,17 @@
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       '<rect x="8" y="34.5" width="48" height="9" fill="#CE1124"/><rect x="27.5" y="14" width="9" height="50" fill="#CE1124"/>'; },
     US: function () { return faixasH(['#B22234', '#FFFFFF', '#B22234', '#FFFFFF', '#B22234'], [1, 1, 1, 1, 1]) +
-      '<rect x="8" y="14" width="20" height="24" fill="#3C3B6E"/>'; }
+      '<rect x="8" y="14" width="20" height="24" fill="#3C3B6E"/>'; },
+    MX: function () { return faixasV(['#006847', '#FFFFFF', '#CE1126']) + disco('#9D2449', 4); },
+    CL: function () { return '<rect x="8" y="14" width="48" height="25" fill="#FFFFFF"/>' +
+      '<rect x="8" y="39" width="48" height="25" fill="#D52B1E"/>' +
+      '<rect x="8" y="14" width="20" height="25" fill="#0039A6"/>' + estrelaBranca(18, 26, 5); },
+    CO: function () { return faixasH(['#FCD116', '#003893', '#CE1126'], [2, 1, 1]); },
+    JP: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' + disco('#BC002D', 9); },
+    HR: function () { return faixasH(['#FF0000', '#FFFFFF', '#171796'], [1, 1, 1]); },
+    PL: function () { return faixasH(['#FFFFFF', '#DC143C'], [1, 1]); },
+    PE: function () { return faixasV(['#D91023', '#FFFFFF', '#D91023']); },
+    EC: function () { return faixasH(['#FFDD00', '#0033A0', '#CE1126'], [2, 1, 1]); }
   };
   function faixasStripesUY() {
     var out = '', ys = [26.2, 36.4, 46.7, 56.9];
@@ -233,6 +243,15 @@
     return out;
   }
   function disco2(cx, cy, cor, r) { return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + cor + '"/>'; }
+  function estrelaBranca(cx, cy, r) {
+    var pts = '';
+    for (var i = 0; i < 10; i++) {
+      var ang = Math.PI / 5 * i - Math.PI / 2;
+      var rr = (i % 2 === 0) ? r : r * 0.45;
+      pts += (cx + rr * Math.cos(ang)).toFixed(1) + ',' + (cy + rr * Math.sin(ang)).toFixed(1) + ' ';
+    }
+    return '<polygon points="' + pts.trim() + '" fill="#FFFFFF"/>';
+  }
 
   function gerarSelecao(o) {
     var pais = String(o.pais || '').toUpperCase();
