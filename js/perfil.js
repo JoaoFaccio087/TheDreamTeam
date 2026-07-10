@@ -103,7 +103,18 @@
 
     // Caminho preferido (logado): somas prontas do servidor — payload pequeno, não depende de
     // baixar o histórico inteiro. Convidado (ou falha da rota) → cálculo local do histórico.
-    API.getEstatisticas().then(function (stats) {
+    // GUARDA: se o api.js no ar for antigo (sem getEstatisticas), chamar .then() em undefined
+    // lançaria um erro SÍNCRONO que ninguém captura — e a tela ficava presa em "Carregando…".
+    var pedirStats;
+    try {
+      pedirStats = (typeof API !== 'undefined' && API && typeof API.getEstatisticas === 'function')
+        ? API.getEstatisticas()
+        : Promise.resolve(null);
+    } catch (e) {
+      pedirStats = Promise.resolve(null);
+    }
+
+    Promise.resolve(pedirStats).then(function (stats) {
       if (stats && stats.grupos) {
         _statsCache = stats;
         _histCache = null;                 // não precisamos do histórico completo aqui
