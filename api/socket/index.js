@@ -814,22 +814,12 @@ function emitirFimDeJogo(io, sala, code) {
   const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
 
   io.to(code).emit('game:end', { ranking: buildRanking(sala), artilharia, assistencias, statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {} });
-  (async () => {
-    for (const jogador of sala.jogadores) {
-      if (jogador.ehBot || jogador.guest) continue;
-      const s = sala.resultados[jogador.userId];
-      if (!s) continue;
-      try {
-        await db.query(
-          `INSERT INTO matches (user_id, competicao, modo, vitorias, empates, derrotas, gf, ga, campeao, detalhes)
-           VALUES ($1,$2,'online',$3,$4,$5,$6,$7,$8,$9)`,
-          [jogador.userId, sala.competicao, s.vitorias, s.empates, s.derrotas, s.gf, s.ga, s.campeao,
-           JSON.stringify({ sala: code, rodadas: sala.totalRodadas, numPicks: (jogador.picks || []).length })]
-        );
-      } catch (e) { console.error('[socket] Erro ao salvar partida:', e); }
-    }
-    deleteSala(code);
-  })();
+
+  // NÃO gravamos a campanha aqui. O CLIENTE grava (js/online.js → salvarCampanhaOnline → POST
+  // /matches) e essa é a fonte de verdade: a linha dele tem `posicao`, o rótulo correto da
+  // competição e devolve as conquistas novas para o toast. O mata-mata (chave/champions) já
+  // funcionava assim — a liga gravava nos DOIS lados e duplicava a campanha no histórico.
+  deleteSala(code);
 }
 
 function codigosAceitosServidor(codigo) {
