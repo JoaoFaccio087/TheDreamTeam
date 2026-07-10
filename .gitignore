@@ -62,6 +62,7 @@ temp/
 # O jogo NÃO precisa deles para rodar; são só nossas anotações.
 # SEGURANCA.md é o mais sensível (descreve proteções e fragilidades).
 ESTADO.md
+ESTADO-ARQUIVO.md
 RECURSOS.md
 SEGURANCA.md
 CONTRATOS.md
