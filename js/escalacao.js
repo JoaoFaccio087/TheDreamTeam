@@ -354,6 +354,9 @@ function alocarJogador(indice) {
   } else {
     btnRolar.classList.remove('escondida');
   }
+
+  // Modo Orçamento: depois de comprar, checa se o jogador ficou sem saída (falência).
+  if (typeof verificarFalencia === 'function') verificarFalencia();
 }
 
 

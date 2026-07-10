@@ -16,18 +16,90 @@ function codigosVagasVazias() {
 }
 
 // Um clube "serve" se tem ao menos um jogador elegível para alguma vaga vazia.
+// ── MODO ORÇAMENTO ────────────────────────────────────────────────────────────
+// No Orçamento, "servir" não é só ter a posição: o jogador precisa CABER no que sobrou.
+// Sem isto, o sorteio entregava clubes cujos jogadores da posição faltante eram caros demais.
+function _modoOrcamento() {
+  return (typeof estiloJogo !== 'undefined' && estiloJogo === 'orcamento');
+}
+function jogadorCabeNoOrcamento(j) {
+  if (!_modoOrcamento()) return true;
+  return precoJogador(j.forca) <= orcamentoRestante();
+}
+
+// Um clube serve se tem ALGUM jogador que (a) ocupa uma vaga vazia e (b) cabe no orçamento.
 function clubeServeVagas(clube, codigos) {
   if (!codigos.length) return true; // nada faltando → qualquer clube serve
   return clube.jogadores.some(function (j) {
+    if (!jogadorCabeNoOrcamento(j)) return false;
     return codigos.some(function (cod) { return podeOcupar(j, cod); });
   });
 }
 
-// Reduz aos clubes úteis; se nenhum servir, devolve a lista original (nunca trava).
+// Reduz aos clubes úteis. Nos modos normais, se nenhum servir devolve a lista original
+// (nunca trava). No Orçamento, devolver [] é a resposta correta: significa FALÊNCIA — não
+// adianta sortear um clube onde nada é comprável.
 function filtrarClubesUteis(candidatos) {
   var faltam = codigosVagasVazias();
   var uteis = candidatos.filter(function (c) { return clubeServeVagas(c, faltam); });
-  return uteis.length > 0 ? uteis : candidatos;
+  if (uteis.length > 0) return uteis;
+  if (_modoOrcamento() && faltam.length) return [];
+  return candidatos;
+}
+
+// Dá para comprar alguém no clube que está na tela agora?
+function haCompraPossivelNoClubeAtual() {
+  if (!edicaoSorteada) return true;
+  var faltam = codigosVagasVazias();
+  if (!faltam.length) return true;
+  return clubeServeVagas(edicaoSorteada, faltam);
+}
+
+// Existe, em toda a competição, algum clube que ainda serviria?
+function existeClubeQueServe() {
+  if (typeof modoSelecionado === 'undefined' || !COMPETICOES[modoSelecionado]) return false;
+  var faltam = codigosVagasVazias();
+  if (!faltam.length) return false;
+  return API.getClubesPorCompeticao(COMPETICOES[modoSelecionado].dados)
+            .some(function (c) { return clubeServeVagas(c, faltam); });
+}
+
+// FALÊNCIA: time incompleto e NENHUM jogador comprável — nem no clube da vez, nem em qualquer
+// outro clube da competição. Não depende dos skips: o botão "Rolar" já sorteia um clube por
+// jogador (o skip só troca o clube da vez). Chamada após cada alocação e após cada sorteio/skip.
+function verificarFalencia() {
+  if (!_modoOrcamento()) return false;
+  if (!codigosVagasVazias().length) return false;        // time completo: nada a fazer
+  if (haCompraPossivelNoClubeAtual()) return false;      // ainda dá para comprar aqui
+  if (existeClubeQueServe()) return false;               // ainda dá para sortear outro clube
+  mostrarFalencia();
+  return true;
+}
+
+function mostrarFalencia() {
+  var restante = (typeof orcamentoRestante === 'function') ? orcamentoRestante() : 0;
+  var vagas = 0;
+  for (var i = 0; i < escalacao.length; i++) { if (!escalacao[i]) vagas++; }
+  var plural = vagas === 1 ? 'vaga' : 'vagas';
+  var html =
+    '<p>Você ficou com <strong>$' + restante + '</strong> e ainda faltam <strong>' +
+    vagas + ' ' + plural + '</strong> para preencher.</p>' +
+    '<p>Nenhum jogador disponível cabe no que sobrou.</p>';
+
+  if (typeof UI === 'undefined' || typeof UI.modalConfirm !== 'function') {
+    if (typeof iniciarTelaJogo === 'function') iniciarTelaJogo();
+    return;
+  }
+  UI.modalConfirm({
+    titulo: 'Falência!',
+    html: html,
+    confirmar: 'Recomeçar',
+    cancelar: 'Voltar ao início',
+    perigo: true
+  }).then(function (recomecar) {
+    if (recomecar) { if (typeof iniciarTelaJogo === 'function') iniciarTelaJogo(); }
+    else { if (typeof voltarHome === 'function') voltarHome(); }
+  });
 }
 
 // Animação estilo "slot machine" (~900ms) até revelar o clube sorteado.
@@ -66,6 +138,8 @@ function atualizarBotoesSkip() {
   var candidatos = API.getClubesPorCompeticao(edicaoSorteada.competicao).filter(function (d) {
     return !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
   });
+  // No Orçamento, um clube só conta como candidato se tiver jogador comprável para uma vaga.
+  candidatos = filtrarClubesUteis(candidatos);
   btnSkip.disabled = (skipsRestantes <= 0) || candidatos.length === 0;
 }
 
@@ -77,7 +151,10 @@ function fazerSkip() {
     return !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
   });
   candidatos = filtrarClubesUteis(candidatos);   // só clubes que preenchem uma vaga vazia
-  if (candidatos.length === 0) return;
+  if (candidatos.length === 0) {                 // sem clube comprável → falência
+    if (_modoOrcamento()) mostrarFalencia();
+    return;
+  }
 
   skipsRestantes--;
   btnSkip.disabled = true; // evita clique duplo durante a animação
@@ -107,7 +184,10 @@ function rolar() {
     return true;
   });
   opcoes = filtrarClubesUteis(opcoes);   // só clubes que ajudam a preencher uma vaga vazia
-  if (opcoes.length === 0) return;
+  if (opcoes.length === 0) {              // no Orçamento, isso significa que nada é comprável
+    if (_modoOrcamento()) mostrarFalencia();
+    return;
+  }
 
   var sorteado = opcoes[Math.floor(Math.random() * opcoes.length)];
   clubeSorteado  = sorteado.clube;
