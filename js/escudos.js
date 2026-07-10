@@ -136,6 +136,25 @@
         return '<rect x="' + (CENTRO.x - 4) + '" y="' + y + '" width="8" height="' + h + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (CENTRO.y - 4) + '" width="' + w + '" height="8" fill="' + cor + '"/>';
       case 'solido':
+        return '';
+      // Estrela grande central (Botafogo)
+      case 'estrela-central': {
+        var cx = CENTRO.x, cy = CENTRO.y + 1, R = 15;
+        var p = '';
+        for (var k = 0; k < 10; k++) {
+          var a = Math.PI / 5 * k - Math.PI / 2;
+          var rr = (k % 2 === 0) ? R : R * 0.42;
+          p += (cx + rr * Math.cos(a)).toFixed(1) + ',' + (cy + rr * Math.sin(a)).toFixed(1) + ' ';
+        }
+        return '<polygon points="' + p.trim() + '" fill="' + cor + '"/>';
+      }
+      // Faixa horizontal BICOLOR (São Paulo: metade da faixa cor, metade cor2)
+      case 'faixa-bicolor': {
+        var c2b = opts.cor2 || cor;
+        var fy = y + h * 0.38, fh = h * 0.24;
+        return '<rect x="' + x + '" y="' + fy + '" width="' + (w / 2) + '" height="' + fh + '" fill="' + cor + '"/>' +
+               '<rect x="' + (x + w / 2) + '" y="' + fy + '" width="' + (w / 2) + '" height="' + fh + '" fill="' + c2b + '"/>';
+      }
       default:
         return '';
     }
@@ -151,12 +170,19 @@
     }
     return '<polygon points="' + pts.trim() + '" fill="#FFD24A" stroke="rgba(0,0,0,0.35)" stroke-width="0.4"/>';
   }
+  // Estrelas de título acima do escudo (1 a 5), distribuídas em leque.
   function estrelasSVG(n) {
+    n = Math.max(0, Math.min(5, n | 0));
     if (!n) return '';
-    var y = 9, out = '';
-    if (n === 1) out = estrela(32, y, 4);
-    else if (n === 2) out = estrela(25, y, 3.6) + estrela(39, y, 3.6);
-    else out = estrela(20, y + 1, 3.4) + estrela(32, y - 2, 3.8) + estrela(44, y + 1, 3.4);
+    var out = '', r = n >= 4 ? 3 : 3.6;
+    var larg = 9 + n * 3.5;               // leque mais largo com mais estrelas
+    var x0 = 32 - larg / 2, passo = n > 1 ? larg / (n - 1) : 0;
+    for (var i = 0; i < n; i++) {
+      var cx = n === 1 ? 32 : x0 + i * passo;
+      // leve arco: as das pontas descem um pouco
+      var dy = Math.abs(i - (n - 1) / 2) * 0.9;
+      out += estrela(cx, 8.5 + dy, r);
+    }
     return out;
   }
 

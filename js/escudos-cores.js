@@ -14,72 +14,76 @@
 (function () {
   'use strict';
 
-  // clube → [cor primária, cor secundária, (3ª cor opcional p/ tricolores)]
-  // Alguns clubes têm um "estilo" fixo: padrao (listras-v, faixa-h…) e/ou uma cor terciária.
+  // clube → [cor primária, cor secundária, (3ª opcional)]. CHAVES = nome exato em js/dados/*.
   var CORES_CLUBES = {
-    'Athletico-PR':   ['#B10000', '#000000'],
-    'Atlético-GO':    ['#E30613', '#000000'],
-    'Atlético-MG':    ['#000000', '#FFFFFF'],
-    'Bahia':          ['#0056A7', '#E30613', '#FFFFFF'],
-    'Botafogo':       ['#000000', '#FFFFFF'],
-    'Bragantino':     ['#FFFFFF', '#C0142B'],
-    'Ceará':          ['#000000', '#FFFFFF'],
-    'Corinthians':    ['#FFFFFF', '#000000'],
-    'Criciúma':       ['#F4D40C', '#000000'],
-    'Cruzeiro':       ['#0A2C6B', '#FFFFFF'],
-    'Cuiabá':         ['#006437', '#F4D40C'],
-    'Flamengo':       ['#C52613', '#000000'],
-    'Fluminense':     ['#7A0026', '#006437', '#FFFFFF'],
-    'Fortaleza':      ['#003DA5', '#E30613'],
-    'Goiás':          ['#006437', '#FFFFFF'],
-    'Grêmio':         ['#0A9BDC', '#000000', '#FFFFFF'],  // celeste, preto, branco
-    'Internacional':  ['#C4122E', '#FFFFFF'],
-    'Juventude':      ['#006437', '#FFFFFF'],
-    'Palmeiras':      ['#006437', '#FFFFFF'],
-    'Santos':         ['#FFFFFF', '#000000'],
-    'São Paulo':      ['#FE0000', '#000000', '#FFFFFF'],
-    'Sport Recife':   ['#C4122E', '#000000'],
-    'Vasco da Gama':  ['#000000', '#FFFFFF'],
-    'Vitória':        ['#E30613', '#000000']
+    'América-RJ':          ['#00913F', '#FFFFFF'],
+    'Athletico-PR':        ['#B10000', '#000000'],
+    'Atlético-MG':         ['#000000', '#FFFFFF'],
+    'Avaí':                ['#004B8D', '#FFFFFF'],
+    'Bahia':               ['#0056A7', '#E30613', '#FFFFFF'],
+    'Bangu':               ['#E30613', '#FFFFFF'],
+    'Botafogo':            ['#000000', '#FFFFFF'],
+    'Bragantino':          ['#FFFFFF', '#C0142B'],
+    'Red Bull Bragantino': ['#FFFFFF', '#C0142B'],
+    'Brasil de Pelotas':   ['#000000', '#FFFFFF'],
+    'Corinthians':         ['#FFFFFF', '#000000'],
+    'Coritiba':            ['#00543C', '#FFFFFF'],
+    'Cruzeiro':            ['#0A2C6B', '#FFFFFF'],
+    'Flamengo':            ['#C52613', '#000000'],
+    'Fluminense':          ['#7A0026', '#006437', '#FFFFFF'],
+    'Fortaleza':           ['#003DA5', '#E30613'],
+    'Goiás':               ['#006437', '#FFFFFF'],
+    'Grêmio':              ['#0A9BDC', '#000000', '#FFFFFF'],
+    'Guarani':             ['#005CA9', '#FFFFFF'],
+    'Internacional':       ['#C4122E', '#FFFFFF'],
+    'Londrina':            ['#003DA5', '#FFFFFF'],
+    'Mirassol':            ['#FFD200', '#006437'],
+    'Náutico':             ['#C4122E', '#FFFFFF'],
+    'Operário-MS':         ['#000000', '#FFFFFF'],
+    'Palmeiras':           ['#006437', '#FFFFFF'],
+    'Paraná':              ['#004B8D', '#E30613'],
+    'Ponte Preta':         ['#000000', '#FFFFFF'],
+    'Portuguesa':          ['#006437', '#E30613', '#FFFFFF'],
+    'Santa Cruz':          ['#C4122E', '#000000', '#FFFFFF'],
+    'Santos':              ['#FFFFFF', '#000000'],
+    'Sport':               ['#C4122E', '#000000'],
+    'São Caetano':         ['#003DA5', '#FFFFFF'],
+    'São Paulo':           ['#FFFFFF', '#FE0000', '#000000'],
+    'Vasco':               ['#000000', '#FFFFFF'],
+    'Vitória':             ['#E30613', '#000000']
   };
 
-  // Estilo fiel à camisa de cada clube: padrão + parâmetros + estrelas.
-  // Feito olhando o uniforme real — com carinho, um por um.
+  // Estilo fiel à camisa/escudo de cada clube. CHAVES = nome exato em js/dados/*.
   var ESTILO_CLUBES = {
-    // Grêmio: listrão VERTICAL azul-celeste e preto, com brancos finos. Azul como cor da frente.
-    'Grêmio':         { padrao: 'listras-v', listras: 4, inverter: true },
-    // Atlético-MG e Athletico-PR: alvinegro de listras VERTICAIS finas.
-    'Atlético-MG':    { padrao: 'listras-finas', listras: 7 },
-    'Athletico-PR':   { padrao: 'listras-finas', listras: 6 },
-    // Botafogo: preto com listras finas brancas (a camisa histórica).
-    'Botafogo':       { padrao: 'listras-finas', listras: 6, estrela: 1 },
-    // Bahia: tricolor em faixas (azul, vermelho, branco).
-    'Bahia':          { padrao: 'tri-h' },
-    // São Paulo: faixa horizontal (o "tricolor" clássico com a banda vermelha e preta).
-    'São Paulo':      { padrao: 'faixa-h' },
-    // Vasco: faixa DIAGONAL preta sobre branco.
-    'Vasco da Gama':  { padrao: 'diagonal', inverter: true },
-    // Fluminense: listras verticais grená e verde.
-    'Fluminense':     { padrao: 'listras-v', listras: 3 },
-    // Internacional: vermelho sólido.
-    'Internacional':  { padrao: 'solido' },
-    // Flamengo: faixa horizontal (as faixas rubro-negras).
-    'Flamengo':       { padrao: 'faixa-h' },
-    // Corinthians / Santos / Ceará: sólidos limpos.
-    'Corinthians':    { padrao: 'solido' },
-    'Santos':         { padrao: 'solido' },
-    // Cruzeiro: azul com detalhe (a cruz da estrela) — sólido azul.
-    'Cruzeiro':       { padrao: 'solido' },
-    // Palmeiras / Goiás / Juventude / Cuiabá: verdes sólidos.
-    'Palmeiras':      { padrao: 'solido' },
-    'Goiás':          { padrao: 'solido' },
-    // Bragantino: branco com faixa.
-    'Bragantino':     { padrao: 'faixa-h' },
-    // Criciúma: listras verticais amarelo e preto.
-    'Criciúma':       { padrao: 'listras-v', listras: 4 },
-    // Sport / Vitória: listras verticais vermelho e preto.
-    'Sport Recife':   { padrao: 'listras-v', listras: 4 },
-    'Vitória':        { padrao: 'listras-v', listras: 4 }
+    'Grêmio':              { padrao: 'listras-v', listras: 4, inverter: true },
+    'Atlético-MG':         { padrao: 'listras-finas', listras: 7 },
+    'Athletico-PR':        { padrao: 'listras-finas', listras: 6 },
+    // Botafogo: preto com ESTRELA branca grande no centro (o escudo, não a camisa).
+    'Botafogo':            { padrao: 'estrela-central' },
+    'Bahia':               { padrao: 'tri-h' },
+    // São Paulo: branco com faixa horizontal metade vermelha, metade preta.
+    'São Paulo':           { padrao: 'faixa-bicolor' },
+    'Vasco':               { padrao: 'diagonal', inverter: true },
+    'Fluminense':          { padrao: 'listras-v', listras: 3 },
+    'Internacional':       { padrao: 'solido' },
+    'Flamengo':            { padrao: 'faixa-h' },
+    'Corinthians':         { padrao: 'solido' },
+    'Santos':              { padrao: 'solido' },
+    'Cruzeiro':            { padrao: 'solido' },
+    'Palmeiras':           { padrao: 'solido' },
+    'Goiás':               { padrao: 'solido' },
+    'Coritiba':            { padrao: 'listras-finas', listras: 6 },
+    'Bragantino':          { padrao: 'faixa-h' },
+    'Red Bull Bragantino': { padrao: 'faixa-h' },
+    'Sport':               { padrao: 'listras-v', listras: 4 },
+    'Vitória':             { padrao: 'listras-v', listras: 4 },
+    'Portuguesa':          { padrao: 'faixa-h' },
+    'Ponte Preta':         { padrao: 'listras-finas', listras: 7 },
+    'Guarani':             { padrao: 'faixa-h' },
+    'Náutico':             { padrao: 'listras-v', listras: 4 },
+    'Santa Cruz':          { padrao: 'tri-h' },
+    'Avaí':                { padrao: 'faixa-h' },
+    'Paraná':              { padrao: 'listras-v', listras: 4 }
   };
 
   // seleção → ISO-2 (o gerador desenha a bandeira a partir do código do país).
@@ -108,6 +112,13 @@
     return Math.abs(h);
   }
 
+  // Títulos de Copa do Mundo = estrelas no escudo (dado real, não aleatório).
+  // Brasil 5, Alemanha/Itália 4, Argentina 3, Uruguai/França 2, Espanha/Inglaterra 1.
+  var TITULOS_SELECAO = {
+    'Brasil': 5, 'Alemanha': 4, 'Itália': 4, 'Argentina': 3,
+    'Uruguai': 2, 'França': 2, 'Espanha': 1, 'Inglaterra': 1
+  };
+
   var API = {
     // Cor real (mapa) quando existe; senão, uma paleta de reserva estável derivada do nome.
     coresClube: function (nome) {
@@ -115,9 +126,11 @@
     },
     // Só a cor CATALOGADA (null se não houver) — útil para saber se temos a cor oficial.
     corOficialClube: function (nome) { return CORES_CLUBES[nome] || null; },
-    // Estilo fixo (padrão/estrela) de um clube, se houver.
+    // Estilo fixo (padrão) de um clube, se houver.
     estiloClube: function (nome) { return ESTILO_CLUBES[nome] || null; },
     isoSelecao: function (nome) { return PAIS_SELECAO[nome] || null; },
+    // Estrelas de título mundial de uma seleção (0 se não tiver/for desconhecida).
+    estrelasSelecao: function (nome) { return TITULOS_SELECAO[nome] || 0; },
     todosClubes: function () { return Object.keys(CORES_CLUBES); },
     todasSelecoes: function () { return Object.keys(PAIS_SELECAO); }
   };

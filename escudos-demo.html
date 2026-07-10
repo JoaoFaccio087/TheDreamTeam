@@ -26,12 +26,13 @@
     d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+nome+'</div><div class="sm">'+svg+'</div>';
     g.appendChild(d);
   });
-  var selecoes=Escudos.paisesSuportados();
   var s=document.getElementById('selecoes');
-  selecoes.forEach(function(p,i){
+  var elSel=document.getElementById('selecoes');
+  EscudosCores.todasSelecoes().forEach(function(nome){
+    var iso=EscudosCores.isoSelecao(nome);
     var d=document.createElement('div');d.className='card';
-    var svg=Escudos.gerar({tipo:'selecao',pais:p,seed:p,estrelas:i%3});
-    d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+p+'</div><div class="sm">'+svg+'</div>';
-    s.appendChild(d);
+    var svg=Escudos.gerar({tipo:'selecao',pais:iso,seed:nome,estrelas:EscudosCores.estrelasSelecao(nome)});
+    d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+nome+'</div><div class="sm">'+svg+'</div>';
+    elSel.appendChild(d);
   });
 </script></body></html>
