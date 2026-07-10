@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escudos — demonstração</title>
+<style>
+  body{background:#0E0F13;color:#F4F6F8;font-family:system-ui,sans-serif;margin:0;padding:24px}
+  h1{font-size:20px}h2{font-size:14px;color:#2BD46A;margin-top:28px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:14px;margin-top:12px}
+  .card{background:#16181F;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;text-align:center}
+  .big{width:80px;height:80px;margin:0 auto}
+  .nm{font-size:12px;margin-top:6px}.sm{width:24px;height:24px;margin:8px auto 0}
+</style></head><body>
+<h1>Escudos genéricos &amp; bandeiras — demonstração</h1>
+<p style="color:#99A0AA;font-size:13px">Nenhum escudo real é usado. Clubes = cor + forma + monograma; seleções = bandeira (domínio público).</p>
+<h2>CLUBES</h2><div class="grid" id="clubes"></div>
+<h2>SELEÇÕES</h2><div class="grid" id="selecoes"></div>
+<script src="js/escudos.js"></script>
+<script>
+  var clubes=[['Flamengo',['#CC0000','#000']],['Palmeiras',['#006437','#FFF']],['Goiás',['#006437','#FFF']],
+    ['Cruzeiro',['#0033A0','#FFF']],['Grêmio',['#0D80BF','#000']],['Vasco',['#000','#FFF']],
+    ['Juventus',['#000','#FFF']],['Barcelona',['#004D98','#A50044']],['Boca',['#003893','#F2A900']],
+    ['Peñarol',['#000','#F2A900']],['River',['#FFF','#E5122E']],['Santos',['#FFF','#000']]];
+  var selecoes=Escudos.paisesSuportados();
+  var g=document.getElementById('clubes');
+  clubes.forEach(function(c,i){
+    var d=document.createElement('div');d.className='card';
+    var svg=Escudos.gerar({tipo:'clube',nome:c[0],cores:c[1],seed:c[0],estrelas:i%4});
+    d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+c[0]+'</div><div class="sm">'+svg+'</div>';
+    g.appendChild(d);
+  });
+  var s=document.getElementById('selecoes');
+  selecoes.forEach(function(p,i){
+    var d=document.createElement('div');d.className='card';
+    var svg=Escudos.gerar({tipo:'selecao',pais:p,seed:p,estrelas:i%3});
+    d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+p+'</div><div class="sm">'+svg+'</div>';
+    s.appendChild(d);
+  });
+</script></body></html>
