@@ -32,7 +32,7 @@
     'Fluminense':     ['#7A0026', '#006437', '#FFFFFF'],
     'Fortaleza':      ['#003DA5', '#E30613'],
     'Goiás':          ['#006437', '#FFFFFF'],
-    'Grêmio':         ['#0A9BDC', '#000000', '#FFFFFF'],
+    'Grêmio':         ['#0A9BDC', '#000000', '#FFFFFF'],  // celeste, preto, branco
     'Internacional':  ['#C4122E', '#FFFFFF'],
     'Juventude':      ['#006437', '#FFFFFF'],
     'Palmeiras':      ['#006437', '#FFFFFF'],
@@ -43,16 +43,43 @@
     'Vitória':        ['#E30613', '#000000']
   };
 
-  // Estilo fixo por clube: padrão do desenho e nº de estrelas (só onde faz sentido).
+  // Estilo fiel à camisa de cada clube: padrão + parâmetros + estrelas.
+  // Feito olhando o uniforme real — com carinho, um por um.
   var ESTILO_CLUBES = {
-    'Atlético-MG':   { padrao: 'listras-v' },   // alvinegro listrado
-    'Botafogo':      { padrao: 'solido', estrela: 1 },
-    'Athletico-PR':  { padrao: 'listras-v' },
-    'Grêmio':        { padrao: 'faixa-h' },      // tricolor em faixas
-    'Bahia':         { padrao: 'faixa-h' },
-    'São Paulo':     { padrao: 'faixa-h' },
-    'Internacional': { padrao: 'solido' },
-    'Vasco da Gama': { padrao: 'diagonal' }      // a faixa diagonal característica
+    // Grêmio: listrão VERTICAL azul-celeste e preto, com brancos finos. Azul como cor da frente.
+    'Grêmio':         { padrao: 'listras-v', listras: 4, inverter: true },
+    // Atlético-MG e Athletico-PR: alvinegro de listras VERTICAIS finas.
+    'Atlético-MG':    { padrao: 'listras-finas', listras: 7 },
+    'Athletico-PR':   { padrao: 'listras-finas', listras: 6 },
+    // Botafogo: preto com listras finas brancas (a camisa histórica).
+    'Botafogo':       { padrao: 'listras-finas', listras: 6, estrela: 1 },
+    // Bahia: tricolor em faixas (azul, vermelho, branco).
+    'Bahia':          { padrao: 'tri-h' },
+    // São Paulo: faixa horizontal (o "tricolor" clássico com a banda vermelha e preta).
+    'São Paulo':      { padrao: 'faixa-h' },
+    // Vasco: faixa DIAGONAL preta sobre branco.
+    'Vasco da Gama':  { padrao: 'diagonal', inverter: true },
+    // Fluminense: listras verticais grená e verde.
+    'Fluminense':     { padrao: 'listras-v', listras: 3 },
+    // Internacional: vermelho sólido.
+    'Internacional':  { padrao: 'solido' },
+    // Flamengo: faixa horizontal (as faixas rubro-negras).
+    'Flamengo':       { padrao: 'faixa-h' },
+    // Corinthians / Santos / Ceará: sólidos limpos.
+    'Corinthians':    { padrao: 'solido' },
+    'Santos':         { padrao: 'solido' },
+    // Cruzeiro: azul com detalhe (a cruz da estrela) — sólido azul.
+    'Cruzeiro':       { padrao: 'solido' },
+    // Palmeiras / Goiás / Juventude / Cuiabá: verdes sólidos.
+    'Palmeiras':      { padrao: 'solido' },
+    'Goiás':          { padrao: 'solido' },
+    // Bragantino: branco com faixa.
+    'Bragantino':     { padrao: 'faixa-h' },
+    // Criciúma: listras verticais amarelo e preto.
+    'Criciúma':       { padrao: 'listras-v', listras: 4 },
+    // Sport / Vitória: listras verticais vermelho e preto.
+    'Sport Recife':   { padrao: 'listras-v', listras: 4 },
+    'Vitória':        { padrao: 'listras-v', listras: 4 }
   };
 
   // seleção → ISO-2 (o gerador desenha a bandeira a partir do código do país).

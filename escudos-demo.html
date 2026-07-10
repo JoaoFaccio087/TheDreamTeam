@@ -20,9 +20,9 @@
   var g=document.getElementById('clubes');
   EscudosCores.todosClubes().forEach(function(nome,i){
     var d=document.createElement('div');d.className='card';
-    var estilo=EscudosCores.estiloClube(nome)||{};
+    var e=EscudosCores.estiloClube(nome)||{};
     var svg=Escudos.gerar({tipo:'clube',nome:nome,cores:EscudosCores.coresClube(nome),seed:nome,
-      padrao:estilo.padrao,estrelas:estilo.estrela||0});
+      padrao:e.padrao,listras:e.listras,inverter:e.inverter,estrelas:e.estrela||0});
     d.innerHTML='<div class="big">'+svg+'</div><div class="nm">'+nome+'</div><div class="sm">'+svg+'</div>';
     g.appendChild(d);
   });

@@ -93,26 +93,49 @@
   }
 
   // ---- padrões internos (recortados na caixa do escudo) ---------------------
-  function padrao(tipo, cor, sep) {
+  // Desenha o padrão interno DENTRO da caixa do escudo.
+  // opts: { cor2 } para tricolores (3ª cor usada como separador/segunda listra).
+  function padrao(tipo, fundo, cor, opts) {
     var b = BOX, x = b.x, y = b.y, w = b.w, h = b.h;
-    var linha = sep ? ' stroke="' + sep + '" stroke-width="1.2"' : '';
+    opts = opts || {};
     switch (tipo) {
-      case 'listras-v':
-        var out = '', n = 6, lw = w / (n * 2 - 1);   // 6 listras finas (camisa listrada)
-        for (var i = 0; i < n; i++)
-          out += '<rect x="' + (x + i * 2 * lw) + '" y="' + y + '" width="' + lw + '" height="' + h + '" fill="' + cor + '"' + linha + '/>';
+      // Listras verticais grossas alternando fundo↔cor (camisa "listrão": Grêmio, Athletico, Bahia)
+      case 'listras-v': {
+        var n = opts.n || 5;                 // nº de listras da cor da frente
+        var total = n * 2 + 1;               // intercala com o fundo
+        var lw = w / total;
+        var out = '';
+        for (var i = 0; i < n; i++) {
+          var lx = x + (i * 2 + 1) * lw;
+          out += '<rect x="' + lx.toFixed(2) + '" y="' + y + '" width="' + lw.toFixed(2) + '" height="' + h + '" fill="' + cor + '"/>';
+        }
         return out;
+      }
+      // Listras verticais FINAS (alvinegro tipo Atlético-MG / Botafogo listrado)
+      case 'listras-finas': {
+        var nf = opts.n || 7, lwf = w / (nf * 2 - 1), of = '';
+        for (var j = 0; j < nf; j++)
+          of += '<rect x="' + (x + j * 2 * lwf).toFixed(2) + '" y="' + y + '" width="' + lwf.toFixed(2) + '" height="' + h + '" fill="' + cor + '"/>';
+        return of;
+      }
+      // Faixa horizontal central (uma cor) — usada com cor2 vira tricolor horizontal
       case 'faixa-h':
-        return '<rect x="' + x + '" y="' + (y + h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + cor + '"' + linha + '/>';
+        return '<rect x="' + x + '" y="' + (y + h * 0.36) + '" width="' + w + '" height="' + (h * 0.28) + '" fill="' + cor + '"/>';
+      // Três faixas horizontais (tricolor tipo bandeira)
+      case 'tri-h': {
+        var c2 = opts.cor2 || cor;
+        return '<rect x="' + x + '" y="' + (y + h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + cor + '"/>' +
+               '<rect x="' + x + '" y="' + (y + 2 * h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + c2 + '"/>';
+      }
       case 'metade':
-        return '<rect x="' + CENTRO.x + '" y="' + y + '" width="' + (x + w - CENTRO.x) + '" height="' + h + '" fill="' + cor + '"' + linha + '/>';
+        return '<rect x="' + CENTRO.x + '" y="' + y + '" width="' + (x + w - CENTRO.x) + '" height="' + h + '" fill="' + cor + '"/>';
+      // Faixa diagonal larga (Vasco, River)
       case 'diagonal':
-        return '<polygon points="' + x + ',' + (y + h) + ' ' + x + ',' + (y + h * 0.6) + ' ' + (x + w) + ',' + (y + h * 0.1) + ' ' + (x + w) + ',' + (y + h * 0.5) + '" fill="' + cor + '"' + linha + '/>';
+        return '<polygon points="' + x + ',' + (y + h) + ' ' + x + ',' + (y + h * 0.62) + ' ' + (x + w) + ',' + (y + h * 0.08) + ' ' + (x + w) + ',' + (y + h * 0.46) + '" fill="' + cor + '"/>';
       case 'cruz':
-        return '<rect x="' + (CENTRO.x - 4) + '" y="' + y + '" width="8" height="' + h + '" fill="' + cor + '"' + linha + '/>' +
-               '<rect x="' + x + '" y="' + (CENTRO.y - 4) + '" width="' + w + '" height="8" fill="' + cor + '"' + linha + '/>';
-      case 'chevron':
-        return '<polygon points="' + x + ',' + (y + h * 0.55) + ' ' + CENTRO.x + ',' + (y + h * 0.25) + ' ' + (x + w) + ',' + (y + h * 0.55) + ' ' + (x + w) + ',' + (y + h * 0.8) + ' ' + CENTRO.x + ',' + (y + h * 0.5) + ' ' + x + ',' + (y + h * 0.8) + '" fill="' + cor + '"' + linha + '/>';
+        return '<rect x="' + (CENTRO.x - 4) + '" y="' + y + '" width="8" height="' + h + '" fill="' + cor + '"/>' +
+               '<rect x="' + x + '" y="' + (CENTRO.y - 4) + '" width="' + w + '" height="8" fill="' + cor + '"/>';
+      case 'solido':
       default:
         return '';
     }
@@ -163,36 +186,19 @@
     var corC = normHex(o.cores && o.cores[2], null);   // 3ª cor opcional (tricolores)
     var rand = mulberry32(cyrb128(String(o.seed || o.nome || '') + '|' + (o.nome || '')));
 
-    var padroes = ['listras-v', 'faixa-h', 'metade', 'diagonal', 'cruz', 'chevron', 'solido'];
-    var inverter = rand() > 0.5;
+    // Sem estilo definido, escolhe um padrão pela seed (mantém variedade dos clubes sem cor real).
+    var padroesAuto = ['listras-v', 'listras-finas', 'faixa-h', 'metade', 'diagonal', 'solido'];
+    var tipo = o.padrao || padroesAuto[Math.floor(rand() * padroesAuto.length)];
+
+    // Fundo e frente: por padrão a 1ª cor é o fundo. `inverter` troca (pela seed, se não fixado).
+    var inverter = (o.inverter != null) ? o.inverter : (rand() > 0.5 && !o.padrao);
     var fundo = inverter ? corB : corA;
     var frente = inverter ? corA : corB;
 
-    // Leve variação de tom do fundo (determinística) para separar clubes de paleta igual.
-    fundo = ajustarTom(fundo, (rand() - 0.5) * 0.16);
-
-    var sep = contraste(fundo, frente) < 1.7 ? traçoSobre(fundo) : null;
-    var tipo = o.padrao || padroes[Math.floor(rand() * padroes.length)];
-
     var interior = '<rect x="' + BOX.x + '" y="' + BOX.y + '" width="' + BOX.w + '" height="' + BOX.h + '" fill="' + fundo + '"/>';
-    // Tricolor: uma faixa central com a 3ª cor, antes do padrão.
-    if (corC) interior += '<rect x="' + BOX.x + '" y="' + (BOX.y + BOX.h * 0.36) + '" width="' + BOX.w + '" height="' + (BOX.h * 0.28) + '" fill="' + corC + '"/>';
-    interior += padrao(tipo, frente, sep);
+    interior += padrao(tipo, fundo, frente, { n: o.listras, cor2: corC });
 
-    // Monograma sobre um DISCO sólido: a cor do texto se decide contra o disco (não contra o fundo,
-    // que o padrão pode cobrir). Resolve "letra branca em metade branca", Botafogo, Grêmio etc.
-    var txt = iniciais(o.nome);
-    // Disco: usa a cor mais escura entre as do escudo, para o texto claro sempre contrastar.
-    var candidatos = [corA, corB]; if (corC) candidatos.push(corC);
-    var discoCor = candidatos.slice().sort(function (a, b) { return luminancia(a) - luminancia(b); })[0];
-    // Se todas forem claras, escurece; se todas escuras, o disco escuro já serve.
-    if (luminancia(discoCor) > 0.4) discoCor = ajustarTom(discoCor, -0.35);
-    var corTexto = luminancia(discoCor) > 0.4 ? '#0E0F13' : '#F4F6F8';
-
-    interior += '<circle cx="32" cy="38" r="12.5" fill="' + discoCor + '" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>';
-    interior += '<text x="32" y="43.5" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" ' +
-      'font-weight="900" font-size="15" fill="' + corTexto + '">' + txt + '</text>';
-
+    // Sem monograma: o nome do clube aparece ao lado do escudo na interface (decisão do João).
     return envelope(interior, fundo, o.estrelas | 0);
   }
 
