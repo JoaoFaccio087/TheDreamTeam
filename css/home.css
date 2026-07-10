@@ -384,16 +384,27 @@
 
 /* RODAPÉ — estatísticas do jogo */
 
+/* Rodapé em DUAS linhas: números do jogo em cima, links (Como Jogar · Privacidade) embaixo. */
 .home-footer {
   border-top: 1px solid var(--linha);
   padding: 20px 0 36px;
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
   align-items: center;
   justify-content: center;
   font-size: var(--fs-sm);
   color: var(--txt-soft);
 }
+.footer-linha {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+/* Linha dos links: um tom abaixo, para os números seguirem em destaque. */
+.footer-linha-links { font-size: var(--fs-mini); }
 
 /* Pontinho separador entre as estatísticas */
 .footer-sep {

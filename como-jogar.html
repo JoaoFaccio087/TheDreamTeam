@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg" />
+  <title>Como Jogar — The Dream Team</title>
+  <meta name="description" content="Aprenda a jogar The Dream Team: escolha a competição, sorteie um clube, escale o XI dos sonhos e leve seu time ao título." />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0E0F13; --card: #16181F; --txt: #F4F6F8; --txt-soft: #99A0AA;
+      --accent: #2BD46A; --ouro: #D9B25A; --linha: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 112.5%; }
+    body {
+      background: var(--bg); color: var(--txt);
+      font-family: 'Archivo', system-ui, sans-serif; line-height: 1.6;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; }
+    .voltar {
+      display: inline-block; color: var(--accent); text-decoration: none;
+      font-weight: 600; font-size: 0.9rem; margin-bottom: 1.6rem;
+    }
+    .voltar:hover { text-decoration: underline; }
+    h1 {
+      font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+      line-height: 1.1; margin-bottom: 0.4rem;
+    }
+    .subtitulo { color: var(--txt-soft); font-size: 0.82rem; margin-bottom: 2rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    h2 {
+      font-family: 'Archivo Black', sans-serif; font-size: 1.15rem;
+      margin: 2.2rem 0 0.7rem; color: var(--accent);
+    }
+    h3 {
+      font-family: 'Archivo Black', sans-serif; font-size: 0.95rem;
+      margin: 1.2rem 0 0.4rem; color: var(--ouro);
+    }
+    p, li { color: #D6DAE0; font-size: 0.95rem; margin-bottom: 0.7rem; }
+    ul { padding-left: 1.3rem; margin-bottom: 0.7rem; }
+    li { margin-bottom: 0.4rem; }
+    strong { color: var(--txt); }
+    a { color: var(--accent); }
+    .destaque {
+      background: var(--card); border: 1px solid var(--linha);
+      border-radius: 12px; padding: 1rem 1.2rem; margin: 1.2rem 0;
+    }
+    /* Passos numerados do fluxo principal */
+    .passos { list-style: none; padding: 0; counter-reset: passo; }
+    .passos li {
+      counter-increment: passo; position: relative;
+      padding: 0.9rem 1rem 0.9rem 3.4rem; margin-bottom: 0.6rem;
+      background: var(--card); border: 1px solid var(--linha); border-radius: 12px;
+    }
+    .passos li::before {
+      content: counter(passo, decimal-leading-zero);
+      position: absolute; left: 1rem; top: 0.85rem;
+      font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; color: var(--ouro);
+    }
+    .passos b { color: var(--txt); display: block; margin-bottom: 0.15rem; }
+    .rodape {
+      margin-top: 2.8rem; padding-top: 1.4rem; border-top: 1px solid var(--linha);
+      color: var(--txt-soft); font-size: 0.82rem;
+    }
+    .rodape a { color: var(--txt-soft); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="voltar" href="index.html">&larr; Voltar ao jogo</a>
+
+    <h1>Como Jogar</h1>
+    <p class="subtitulo">Sorteie &middot; Escale &middot; Goleie</p>
+
+    <p>
+      No <strong>The Dream Team</strong> você monta o time dos sonhos com craques que
+      realmente jogaram a competição escolhida — e tenta levá-lo ao título. Não precisa
+      instalar nada: é tudo no navegador, de graça.
+    </p>
+
+    <h2>O jogo em 4 passos</h2>
+    <ol class="passos">
+      <li>
+        <b>Escolha a competição</b>
+        Libertadores, Champions League, Brasileirão ou Copa do Mundo. Cada uma tem seus
+        próprios clubes, edições e elencos históricos.
+      </li>
+      <li>
+        <b>Sorteie um clube e uma edição</b>
+        O sorteio decide qual time histórico você comanda — por exemplo, o Internacional
+        de 1977. Não gostou? Você tem <strong>5 skips</strong> por partida para sortear de novo.
+      </li>
+      <li>
+        <b>Escale o seu XI</b>
+        Escolha uma das <strong>8 formações</strong> e posicione os craques daquele elenco.
+        Acompanhe a força de Ataque, Defesa e a força Geral do time enquanto monta.
+      </li>
+      <li>
+        <b>Simule a campanha</b>
+        Veja seu time avançar rodada a rodada. Ao final, confira o resumo da campanha, os
+        artilheiros e quem deu mais assistências.
+      </li>
+    </ol>
+
+    <h2>Estilos de jogo</h2>
+    <p>Antes de montar o time, você escolhe <strong>como</strong> quer montá-lo:</p>
+
+    <h3>Clássico</h3>
+    <p>
+      O sorteio te dá um clube e uma edição, e você escala livremente entre os jogadores
+      daquele elenco. É o modo mais direto — bom para começar.
+    </p>
+
+    <h3>Draft</h3>
+    <p>
+      Para cada posição, aparecem cartas de jogadores aleatórios e você escolhe uma. Não há
+      repetição de jogadores, e você tem <strong>3 re-sorteios</strong> para trocar as cartas
+      quando nenhuma agradar. Monta times mais imprevisíveis.
+    </p>
+
+    <h3>Orçamento</h3>
+    <p>
+      Cada jogador tem um <strong>preço conforme a força</strong>, e você monta o XI sem
+      estourar um teto de <strong>$2.500</strong>. Um craque custa caro; um reserva sai quase
+      de graça. Poucos astros ou muitos medianos — a escolha é sua. Disponível no modo de um
+      jogador, em todas as competições.
+    </p>
+
+    <div class="destaque">
+      <p style="margin:0">
+        <strong>Dica:</strong> a barra de orçamento fica acima do campo e vai esvaziando
+        conforme você contrata. Quando ficar amarela, é hora de pensar duas vezes antes de
+        gastar no próximo craque.
+      </p>
+    </div>
+
+    <h2>Jogando com amigos (online)</h2>
+    <p>
+      No modo online, vários jogadores disputam a mesma competição, cada um com o seu time.
+    </p>
+    <ul>
+      <li><strong>Criar uma sala</strong> — dê um nome, escolha a velocidade da simulação e compartilhe o <strong>código de 4 caracteres</strong> com seus amigos.</li>
+      <li><strong>Entrar numa sala</strong> — digite o código que você recebeu.</li>
+      <li><strong>Lobby</strong> — escolha o nome do seu time e a formação. Quando todos clicarem em "Pronto", o anfitrião começa a partida.</li>
+      <li><strong>Draft</strong> — os jogadores escolhem seus craques por turnos. Fique de olho no cronômetro: se o tempo acabar, a escolha é feita automaticamente.</li>
+      <li><strong>Rodadas</strong> — acompanhe os jogos, a classificação, a artilharia e as assistências. Ao final, sai a premiação da temporada.</li>
+    </ul>
+    <p>
+      As vagas restantes são preenchidas por <strong>bots</strong>, então dá para jogar mesmo
+      com poucos amigos disponíveis.
+    </p>
+
+    <h2>Conquistas e perfil</h2>
+    <p>
+      Ao criar uma conta, seu progresso fica salvo. No seu perfil você acompanha:
+    </p>
+    <ul>
+      <li><strong>Estatísticas</strong> — campanhas, títulos, vitórias, gols e aproveitamento, no geral e por competição.</li>
+      <li><strong>Histórico</strong> — suas campanhas anteriores, com o resumo de cada uma.</li>
+      <li><strong>Conquistas</strong> — são <strong>76 troféus</strong> para desbloquear, de "primeira campanha" a feitos raros como escalar trios históricos juntos.</li>
+      <li><strong>Time mais escalado</strong> — o XI que você mais colocou em campo.</li>
+    </ul>
+    <p>
+      Você também pode jogar sem conta, como convidado — mas nesse caso o progresso fica
+      apenas no seu navegador.
+    </p>
+
+    <div class="rodape">
+      The Dream Team &middot; <a href="index.html">Voltar ao jogo</a> &middot;
+      <a href="privacidade.html">Política de Privacidade</a>
+    </div>
+  </div>
+</body>
+</html>
