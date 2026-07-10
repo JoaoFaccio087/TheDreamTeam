@@ -14,12 +14,13 @@
 (function () {
   'use strict';
 
-  // clube → [cor primária, cor secundária]
+  // clube → [cor primária, cor secundária, (3ª cor opcional p/ tricolores)]
+  // Alguns clubes têm um "estilo" fixo: padrao (listras-v, faixa-h…) e/ou uma cor terciária.
   var CORES_CLUBES = {
     'Athletico-PR':   ['#B10000', '#000000'],
     'Atlético-GO':    ['#E30613', '#000000'],
     'Atlético-MG':    ['#000000', '#FFFFFF'],
-    'Bahia':          ['#0056A7', '#E30613'],
+    'Bahia':          ['#0056A7', '#E30613', '#FFFFFF'],
     'Botafogo':       ['#000000', '#FFFFFF'],
     'Bragantino':     ['#FFFFFF', '#C0142B'],
     'Ceará':          ['#000000', '#FFFFFF'],
@@ -28,18 +29,30 @@
     'Cruzeiro':       ['#0A2C6B', '#FFFFFF'],
     'Cuiabá':         ['#006437', '#F4D40C'],
     'Flamengo':       ['#C52613', '#000000'],
-    'Fluminense':     ['#7A0026', '#006437'],
+    'Fluminense':     ['#7A0026', '#006437', '#FFFFFF'],
     'Fortaleza':      ['#003DA5', '#E30613'],
     'Goiás':          ['#006437', '#FFFFFF'],
-    'Grêmio':         ['#0A9BDC', '#000000'],
+    'Grêmio':         ['#0A9BDC', '#000000', '#FFFFFF'],
     'Internacional':  ['#C4122E', '#FFFFFF'],
     'Juventude':      ['#006437', '#FFFFFF'],
     'Palmeiras':      ['#006437', '#FFFFFF'],
     'Santos':         ['#FFFFFF', '#000000'],
-    'São Paulo':      ['#FE0000', '#000000'],
+    'São Paulo':      ['#FE0000', '#000000', '#FFFFFF'],
     'Sport Recife':   ['#C4122E', '#000000'],
     'Vasco da Gama':  ['#000000', '#FFFFFF'],
     'Vitória':        ['#E30613', '#000000']
+  };
+
+  // Estilo fixo por clube: padrão do desenho e nº de estrelas (só onde faz sentido).
+  var ESTILO_CLUBES = {
+    'Atlético-MG':   { padrao: 'listras-v' },   // alvinegro listrado
+    'Botafogo':      { padrao: 'solido', estrela: 1 },
+    'Athletico-PR':  { padrao: 'listras-v' },
+    'Grêmio':        { padrao: 'faixa-h' },      // tricolor em faixas
+    'Bahia':         { padrao: 'faixa-h' },
+    'São Paulo':     { padrao: 'faixa-h' },
+    'Internacional': { padrao: 'solido' },
+    'Vasco da Gama': { padrao: 'diagonal' }      // a faixa diagonal característica
   };
 
   // seleção → ISO-2 (o gerador desenha a bandeira a partir do código do país).
@@ -75,6 +88,8 @@
     },
     // Só a cor CATALOGADA (null se não houver) — útil para saber se temos a cor oficial.
     corOficialClube: function (nome) { return CORES_CLUBES[nome] || null; },
+    // Estilo fixo (padrão/estrela) de um clube, se houver.
+    estiloClube: function (nome) { return ESTILO_CLUBES[nome] || null; },
     isoSelecao: function (nome) { return PAIS_SELECAO[nome] || null; },
     todosClubes: function () { return Object.keys(CORES_CLUBES); },
     todasSelecoes: function () { return Object.keys(PAIS_SELECAO); }

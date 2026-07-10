@@ -98,7 +98,7 @@
     var linha = sep ? ' stroke="' + sep + '" stroke-width="1.2"' : '';
     switch (tipo) {
       case 'listras-v':
-        var out = '', n = 4, lw = w / (n * 2 - 1);
+        var out = '', n = 6, lw = w / (n * 2 - 1);   // 6 listras finas (camisa listrada)
         for (var i = 0; i < n; i++)
           out += '<rect x="' + (x + i * 2 * lw) + '" y="' + y + '" width="' + lw + '" height="' + h + '" fill="' + cor + '"' + linha + '/>';
         return out;
@@ -160,6 +160,7 @@
   function gerarClube(o) {
     var corA = normHex(o.cores && o.cores[0], '#3A3F4B');
     var corB = normHex(o.cores && o.cores[1], '#F4F6F8');
+    var corC = normHex(o.cores && o.cores[2], null);   // 3ª cor opcional (tricolores)
     var rand = mulberry32(cyrb128(String(o.seed || o.nome || '') + '|' + (o.nome || '')));
 
     var padroes = ['listras-v', 'faixa-h', 'metade', 'diagonal', 'cruz', 'chevron', 'solido'];
@@ -171,18 +172,26 @@
     fundo = ajustarTom(fundo, (rand() - 0.5) * 0.16);
 
     var sep = contraste(fundo, frente) < 1.7 ? traçoSobre(fundo) : null;
-    var tipo = padroes[Math.floor(rand() * padroes.length)];
+    var tipo = o.padrao || padroes[Math.floor(rand() * padroes.length)];
 
     var interior = '<rect x="' + BOX.x + '" y="' + BOX.y + '" width="' + BOX.w + '" height="' + BOX.h + '" fill="' + fundo + '"/>';
+    // Tricolor: uma faixa central com a 3ª cor, antes do padrão.
+    if (corC) interior += '<rect x="' + BOX.x + '" y="' + (BOX.y + BOX.h * 0.36) + '" width="' + BOX.w + '" height="' + (BOX.h * 0.28) + '" fill="' + corC + '"/>';
     interior += padrao(tipo, frente, sep);
 
-    // Monograma: garante que clubes de mesma paleta não colidam (defeito 1).
+    // Monograma sobre um DISCO sólido: a cor do texto se decide contra o disco (não contra o fundo,
+    // que o padrão pode cobrir). Resolve "letra branca em metade branca", Botafogo, Grêmio etc.
     var txt = iniciais(o.nome);
-    var corTexto = luminancia(fundo) > 0.45 ? '#0E0F13' : '#F4F6F8';
-    interior += '<text x="32" y="43" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" ' +
-      'font-weight="900" font-size="17" fill="' + corTexto + '" ' +
-      'stroke="' + (corTexto === '#0E0F13' ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)') + '" ' +
-      'stroke-width="0.6" paint-order="stroke">' + txt + '</text>';
+    // Disco: usa a cor mais escura entre as do escudo, para o texto claro sempre contrastar.
+    var candidatos = [corA, corB]; if (corC) candidatos.push(corC);
+    var discoCor = candidatos.slice().sort(function (a, b) { return luminancia(a) - luminancia(b); })[0];
+    // Se todas forem claras, escurece; se todas escuras, o disco escuro já serve.
+    if (luminancia(discoCor) > 0.4) discoCor = ajustarTom(discoCor, -0.35);
+    var corTexto = luminancia(discoCor) > 0.4 ? '#0E0F13' : '#F4F6F8';
+
+    interior += '<circle cx="32" cy="38" r="12.5" fill="' + discoCor + '" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>';
+    interior += '<text x="32" y="43.5" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" ' +
+      'font-weight="900" font-size="15" fill="' + corTexto + '">' + txt + '</text>';
 
     return envelope(interior, fundo, o.estrelas | 0);
   }
@@ -235,7 +244,8 @@
     HR: function () { return faixasH(['#FF0000', '#FFFFFF', '#171796'], [1, 1, 1]); },
     PL: function () { return faixasH(['#FFFFFF', '#DC143C'], [1, 1]); },
     PE: function () { return faixasV(['#D91023', '#FFFFFF', '#D91023']); },
-    EC: function () { return faixasH(['#FFDD00', '#0033A0', '#CE1126'], [2, 1, 1]); }
+    EC: function () { return faixasH(['#FFDD00', '#0033A0', '#CE1126'], [2, 1, 1]) +
+      '<circle cx="32" cy="34" r="4.5" fill="#0033A0" stroke="#8B6914" stroke-width="0.8"/>'; }
   };
   function faixasStripesUY() {
     var out = '', ys = [26.2, 36.4, 46.7, 56.9];
