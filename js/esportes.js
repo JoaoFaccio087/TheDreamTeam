@@ -123,6 +123,16 @@ function titularesDe(id) {
   return getEsporte(id).titulares;
 }
 
+// Atalhos do esporte ATIVO. Usados como semente: o resto do código deriva de `escalacao.length`,
+// para que exista um único ponto que conhece o número de titulares.
+function titularesAtuais() {
+  return titularesDe(esporteAtual);
+}
+function emCampoAtuais() {
+  var e = getEsporte(esporteAtual);
+  return e.emCampo || e.titulares;
+}
+
 // Regras de uma competição específica (ex.: NBA 12min vs FIBA 10min — mesmo esporte).
 function regrasDaCompeticao(idEsporte, idCompeticao) {
   const e = getEsporte(idEsporte);
@@ -135,8 +145,11 @@ if (typeof window !== 'undefined') {
   window.esportesVisiveis = esportesVisiveis;
   window.getEsporte = getEsporte;
   window.titularesDe = titularesDe;
+  window.titularesAtuais = titularesAtuais;
+  window.emCampoAtuais = emCampoAtuais;
   window.regrasDaCompeticao = regrasDaCompeticao;
 }
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { ESPORTES, esportesVisiveis, getEsporte, titularesDe, regrasDaCompeticao };
+  module.exports = { ESPORTES, esportesVisiveis, getEsporte, titularesDe,
+                     titularesAtuais, emCampoAtuais, regrasDaCompeticao };
 }

@@ -610,7 +610,7 @@
   var gPodeEscolher     = false;
   var gGrupos           = {};
   var gOrdemGrupos      = [];
-  var gPicksNecessarios = 11;
+  var gPicksNecessarios = (typeof titularesAtuais === 'function') ? titularesAtuais() : 11;
   var gGrupoAtivo       = null;
   var gPickNum          = 1;
   var gPicksSnap        = {};
@@ -649,7 +649,7 @@
     draftResortsRestantes = 3; modalPoolPos = []; modalPosPage = 0;
     minhaVez = false;
     draftEhGrupo = false; gPodeEscolher = false; gGrupos = {}; gOrdemGrupos = [];
-    gPicksNecessarios = 11; gGrupoAtivo = null; gPickNum = 1; gPicksSnap = {};
+    gPicksNecessarios = (typeof titularesAtuais === 'function') ? titularesAtuais() : 11; gGrupoAtivo = null; gPickNum = 1; gPicksSnap = {};
     gPicksTurno = 1; gPicksFeitosTurno = 0; gTotalTurnos = 6; gVisualizandoUid = null;
     _ultimoGrupoRolado = null;
     // Animação / skip
@@ -676,7 +676,9 @@
     draftEhGrupo      = true;
     gGrupos           = (dados && dados.grupos) || {};
     gOrdemGrupos      = (dados && dados.ordemGrupos) || [];
-    gPicksNecessarios = (dados && dados.picksNecessarios) || 11;
+    // O servidor é a fonte de verdade no online; o catálogo é só fallback.
+    gPicksNecessarios = (dados && dados.picksNecessarios)
+      || ((typeof titularesAtuais === 'function') ? titularesAtuais() : 11);
     gGrupoAtivo       = null;
     gPickNum          = 1;
     gPicksSnap        = {};
@@ -2227,7 +2229,7 @@
 
     var campoHtml = '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
       '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < coords.length; i++) {
       var pc = coords[i]; if (!pc) continue;
       var jg = picks[i];
       campoHtml += '<div class="resumo-jogador" style="left:' + pc.left + '%;top:' + pc.top + '%">' +
@@ -2237,7 +2239,7 @@
 
     var listaHtml = '<div class="resumo-lista-head"><span class="rl-nome">Jogador</span>' +
       '<span class="rl-num">Fça</span><span class="rl-num">G</span><span class="rl-num">A</span></div>';
-    for (var k = 0; k < 11; k++) {
+    for (var k = 0; k < picks.length; k++) {
       var j = picks[k]; if (!j) continue;
       listaHtml += '<div class="resumo-lista-linha">' +
         '<span class="rl-nome"><i class="rl-cod">' + (cods[k] || '') + '</i>' + htmlEsc(curtoNome(j.nome)) + '</span>' +

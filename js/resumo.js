@@ -60,10 +60,14 @@ function salvarCampanhaNoHistorico(campeao) {
     });
   }
 
-  // Snapshot (formação + 11 titulares com força/gols/assist.) para reabrir o resumo
+  // Snapshot (formação + titulares com força/gols/assist.) para reabrir o resumo
   // no histórico. Mantém os índices das vagas (null nas vazias) p/ remontar o mapa.
   var picks = [];
-  for (var pi = 0; pi < 11; pi++) {
+  // `escalacao` pode não existir aqui (a guarda abaixo já existia). Preserva o número de vagas.
+  var _totalVagas = (typeof escalacao !== 'undefined' && escalacao)
+    ? escalacao.length
+    : ((typeof titularesAtuais === 'function') ? titularesAtuais() : 11);
+  for (var pi = 0; pi < _totalVagas; pi++) {
     var jp = (typeof escalacao !== 'undefined') ? escalacao[pi] : null;
     if (!jp) { picks.push(null); continue; }
     var sp = (statsJogadores && statsJogadores[jp.nome]) || { gols: 0, asis: 0 };
@@ -173,12 +177,12 @@ function mostrarResumo() {
          assistente ? nomeCurto(assistente.nome) : '\u2014',
          assistente ? (assistente.v + ' assist\u00EAncias') : 'sem assist\u00EAncias');
 
-  // ---- MINI-CAMPO: 11 jogadores posicionados pela formação ----
+  // ---- MINI-CAMPO: titulares posicionados pela formação ----
   var coords = formacoes[formacaoJogo] || [];
   var campoHtml =
     '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
     '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < coords.length; i++) {
     var pos = coords[i];
     if (!pos) continue;
     var jog = escalacao[i];
@@ -191,7 +195,7 @@ function mostrarResumo() {
 
   // ---- Lista de estatísticas, na ordem das vagas da formação (GOL primeiro) ----
   var titulares = [];
-  for (var k = 0; k < 11; k++) { if (escalacao[k]) titulares.push(escalacao[k]); }
+  for (var k = 0; k < escalacao.length; k++) { if (escalacao[k]) titulares.push(escalacao[k]); }
 
   var listaHtml =
     '<div class="resumo-lista-head">' +
@@ -379,7 +383,7 @@ function mostrarResumoHistorico(item) {
     var campoHtml =
       '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
       '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
-    for (var i = 0; i < 11; i++) {
+    for (var i = 0; i < coords.length; i++) {
       var c = coords[i]; if (!c) continue;
       var jog = snap.picks[i];
       campoHtml +=

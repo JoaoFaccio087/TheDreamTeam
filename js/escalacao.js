@@ -1,18 +1,18 @@
 // escalacao.js — montar XI: lista, alocar, mover, trocar, box score.
 
-// Força deve aparecer? ON sempre mostra; OFF só revela com o XI completo (11/11).
+// Força deve aparecer? ON sempre mostra; OFF só revela com o time completo (todas as vagas).
 function forcaVisivel() {
-  return (typeof mostrarForca === 'undefined') ? true : (mostrarForca || slotsPreenchidos >= 11);
+  return (typeof mostrarForca === 'undefined') ? true : (mostrarForca || slotsPreenchidos >= escalacao.length);
 }
 
-// BOX SCORE — reconstrói a lista de 11 linhas a cada alocação ou mover
+// BOX SCORE — reconstrói a lista de vagas a cada alocação ou mover
 
 function atualizarBoxScore() {
   var codigos = codigosFormacao[formacaoJogo];
   boxScore.innerHTML = '';
   var revela = forcaVisivel();
 
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < escalacao.length; i++) {
     var div    = document.createElement('div');
     var codigo = escalacao[i] ? escalacao[i].codigo : codigos[i];
     var nome   = escalacao[i] ? escalacao[i].nome   : '---';
@@ -117,7 +117,9 @@ function iniciarTelaJogo() {
   formacaoJogo       = '4-3-3';
   formacaoTravada    = false;
   jogadorSelecionado = null;
-  escalacao          = Array(11).fill(null);
+  // SEMENTE do número de titulares: único ponto que consulta o catálogo de esportes.
+  // Todo o resto do código deriva de `escalacao.length` — nada mais crava o 11.
+  escalacao          = Array(typeof titularesAtuais === 'function' ? titularesAtuais() : 11).fill(null);
   slotsPreenchidos   = 0;
   slotMovendo        = null;
   clubeSorteado      = '';
@@ -222,7 +224,7 @@ function construirListaJogadores(jogadores) {
     // (b) Sem nenhuma vaga vazia compatível com este jogador
     var temVagaDisponivel = false;
     if (!jaAlocado) {
-      for (var si = 0; si < 11; si++) {
+      for (var si = 0; si < escalacao.length; si++) {
         if (!escalacao[si] && podeOcupar(jogador, codigosFormacao[formacaoJogo][si])) {
           temVagaDisponivel = true;
           break;
@@ -347,7 +349,7 @@ function alocarJogador(indice) {
   atualizarBoxScore();
   atualizarHeaderInfo();   // atualiza o orçamento restante no modo Orçamento
 
-  if (slotsPreenchidos >= 11) {
+  if (slotsPreenchidos >= escalacao.length) {
     verificarCompleto();
   } else {
     btnRolar.classList.remove('escondida');

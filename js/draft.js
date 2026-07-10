@@ -288,8 +288,8 @@ function confirmarSelecaoDraft() {
   fecharCartasDraft();
   atualizarBoxScore();
 
-  // Simular só aparece com as 11 vagas preenchidas
-  if (slotsPreenchidos >= 11) verificarCompleto();
+  // Simular só aparece com TODAS as vagas preenchidas
+  if (slotsPreenchidos >= escalacao.length) verificarCompleto();
 }
 
 // FECHAR — esconde o overlay e limpa a vaga-alvo (sem alterar a escalação).

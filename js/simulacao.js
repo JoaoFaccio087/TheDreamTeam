@@ -60,7 +60,7 @@ function sortearPoisson(lambda) {
 // --- Força média do meu time escalado ---
 function forcaDoTime() {
   var soma = 0, n = 0;
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < escalacao.length; i++) {
     if (escalacao[i]) { soma += escalacao[i].forca; n++; }
   }
   return n > 0 ? soma / n : 81;
@@ -276,11 +276,11 @@ function tickPartida(est) {
   timerPartida = setTimeout(function() { tickPartida(est); }, cadenciaAtual());
 }
 
-// --- Cobradores: os 11 mais fortes, em ordem decrescente de força (o mais forte bate primeiro) ---
+// --- Cobradores: os que estão em campo, do mais forte ao mais fraco (o mais forte bate primeiro) ---
 function montarCobradores(lista) {
   return lista.slice()
     .sort(function(a, b) { return b.forca - a.forca; })
-    .slice(0, 11);
+    .slice(0, (typeof emCampoAtuais === 'function') ? emCampoAtuais() : 11);
 }
 
 function limita(v, min, max) { return Math.max(min, Math.min(max, v)); }
@@ -352,7 +352,7 @@ function simularDisputa(cobMeus, cobAdv, golMeu, golAdv) {
 }
 
 function disputarPenaltis(est, onFim) {
-  // Cobradores: os 11 em campo de cada lado (com goleiro), ordem embaralhada
+  // Cobradores: os que estão em campo de cada lado (com goleiro), ordem embaralhada
   var jogadores = escalacao.filter(function(j) { return j !== null; });
   var cobradoresMeus = montarCobradores(jogadores);
 

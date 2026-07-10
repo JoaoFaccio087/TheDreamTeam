@@ -72,7 +72,9 @@ let formacaoJogo       = '4-3-3';
 let formacaoTravada    = false;
 let nomeDoTime         = 'Seu time';           // nome do time do jogador (editável na escalação)
 let jogadorSelecionado = null;                 // jogador escolhido na lista, aguardando um slot
-let escalacao          = Array(11).fill(null); // null = vaga vazia; objeto = jogador alocado
+// Semente inicial: tamanho vem do catálogo de esportes (js/esportes.js carrega antes).
+// Fallback 11 caso o catálogo não esteja disponível.
+let escalacao          = Array(typeof titularesAtuais === 'function' ? titularesAtuais() : 11).fill(null); // null = vaga vazia
 let slotsPreenchidos   = 0;
 let slotMovendo        = null;                 // índice do slot cujo jogador está sendo movido
 let clubeSorteado      = '';
