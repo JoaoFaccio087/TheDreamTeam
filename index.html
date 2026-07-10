@@ -44,6 +44,8 @@
   <link rel="stylesheet" href="css/perfil.css" />
   <link rel="stylesheet" href="css/campo.css" />
   <link rel="stylesheet" href="css/penaltis.css" />
+  <!-- Quadras dos outros esportes (Fase 4): classes ainda não aplicadas por ninguém. -->
+  <link rel="stylesheet" href="css/quadras.css" />
   <link rel="stylesheet" href="css/responsivo.css" />
 </head>
 <body>
@@ -329,6 +331,13 @@
             <div class="ficha" data-indice="9">ATA</div>
             <div class="ficha" data-indice="10">ATA</div>
           </div><!-- /campo -->
+
+          <!-- Seletor de ESPORTE (Fase 5). Fica vazio e escondido enquanto só houver
+               um esporte habilitado em js/esportes.js — ou seja, hoje não aparece. -->
+          <div id="home-esporte" class="home-esporte escondida">
+            <span class="home-rotulo-campo">ESPORTE</span>
+            <div class="area-pilulas" id="pilulas-esporte"></div>
+          </div>
 
           <div class="home-formacao">
             <span class="home-rotulo-campo">FORMA&Ccedil;&Atilde;O</span>

@@ -1,0 +1,141 @@
+/* ============================================================
+   quadras.css — desenhos de quadra dos outros esportes
+   ------------------------------------------------------------
+   ⚠️ FASE 4 da expansão multi-esportes. Estas classes ainda NÃO são aplicadas
+   por nenhum elemento: existem para o mapa da tela inicial trocar de desenho
+   quando um esporte novo for habilitado (js/esportes.js → campo `mapa`).
+
+   Regras que seguem o esboço do João:
+   - a CAIXA mantém o mesmo tamanho do campo de futebol (proporção 2:3, retrato);
+   - vôlei e basquete mostram MEIA-QUADRA (você só escala o seu lado);
+   - o futebol continua com o campo inteiro (css/escalacao.css, intocado).
+   ============================================================ */
+
+/* Base comum: mesma caixa do #campo-jogo, só muda o miolo. */
+.quadra {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 2 / 3;
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--raio-sm);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  overflow: visible;
+}
+
+/* Linhas brancas translúcidas, como as do campo de futebol. */
+.quadra::before,
+.quadra::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────── BASQUETE (meia-quadra, cesta em cima)
+   Piso de madeira clara; garrafão, círculo do lance livre e arco de 3 pontos. */
+.meia-quadra-basquete {
+  background:
+    repeating-linear-gradient(to bottom,
+      #C58A4B 0px, #C58A4B 26px,
+      #BC8244 26px, #BC8244 52px);
+}
+
+/* Garrafão (a "chave"), colado na linha de fundo (topo da caixa). */
+.meia-quadra-basquete .garrafao {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34%;
+  height: 38%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-top: none;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Círculo do lance livre, no fim do garrafão. */
+.meia-quadra-basquete .circulo-lance {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26%;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+}
+
+/* Arco de 3 pontos: meio círculo grande a partir da linha de fundo. */
+.meia-quadra-basquete .arco-tres {
+  position: absolute;
+  top: -32%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  clip-path: inset(50% 0 0 0);   /* mostra só a metade de baixo do círculo */
+}
+
+/* Aro/cesta. */
+.meia-quadra-basquete .aro {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7%;
+  aspect-ratio: 1;
+  border: 2px solid #E8622A;
+  border-radius: 50%;
+}
+
+/* ─────────────────────────────── VÔLEI (só o seu lado da rede)
+   Piso laranja, zona livre azul na borda; rede no topo, linha de ataque a 3 m. */
+.quadra-volei {
+  background: #17608F;               /* zona livre (fora da quadra) */
+  padding: 6%;                       /* margem que vira a zona livre */
+}
+
+.quadra-volei .piso {
+  position: absolute;
+  inset: 6%;
+  background: #E38B54;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Rede: fica na borda de cima (o outro lado da quadra não é desenhado). */
+.quadra-volei .rede {
+  position: absolute;
+  top: 6%;
+  left: 6%;
+  right: 6%;
+  height: 8px;
+  transform: translateY(-50%);
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,0.9) 0 2px,
+      transparent 2px 7px),
+    rgba(255, 255, 255, 0.35);
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+/* Linha de ataque: 3 m da rede (≈ 1/3 do comprimento da meia-quadra). */
+.quadra-volei .linha-ataque {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 37%;
+  border-top: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Bloco do seletor de ESPORTE na home (Fase 5). Fica escondido enquanto só houver
+   um esporte habilitado; o estilo espelha o de .home-formacao. */
+.home-esporte {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}

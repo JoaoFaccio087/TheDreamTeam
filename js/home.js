@@ -78,3 +78,29 @@ function calcularEstatisticasFooter() {
 }
 
 calcularEstatisticasFooter();
+
+
+// ── FASE 5: seletor de ESPORTE na home ────────────────────────────────────────
+// Só renderiza quando houver MAIS DE UM esporte habilitado em js/esportes.js.
+// Hoje (só futebol) a função sai na primeira linha e a home fica idêntica.
+function renderSeletorEsporte() {
+  if (typeof esportesVisiveis !== 'function') return;
+
+  var lista = esportesVisiveis();
+  if (!lista || lista.length < 2) return;   // ← nada muda enquanto só existir futebol
+
+  var bloco = document.getElementById('home-esporte');
+  var pilulas = document.getElementById('pilulas-esporte');
+  if (!bloco || !pilulas) return;
+
+  pilulas.innerHTML = lista.map(function (e) {
+    var ativa = (e.id === esporteAtual) ? ' pilula-ativa' : '';
+    return '<button type="button" class="pilula' + ativa + '" data-esporte="' +
+           UI.esc(e.id) + '">' + UI.esc(e.nome) + '</button>';
+  }).join('');
+
+  bloco.classList.remove('escondida');
+}
+
+// Roda na carga: com um esporte só, é um no-op.
+renderSeletorEsporte();
