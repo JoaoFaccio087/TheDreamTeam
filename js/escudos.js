@@ -148,12 +148,12 @@
         }
         return '<polygon points="' + p.trim() + '" fill="' + cor + '"/>';
       }
-      // Faixa horizontal BICOLOR (São Paulo: metade da faixa cor, metade cor2)
+      // Faixa horizontal BICOLOR empilhada (São Paulo: vermelha EM CIMA da preta, largura toda)
       case 'faixa-bicolor': {
         var c2b = opts.cor2 || cor;
-        var fy = y + h * 0.38, fh = h * 0.24;
-        return '<rect x="' + x + '" y="' + fy + '" width="' + (w / 2) + '" height="' + fh + '" fill="' + cor + '"/>' +
-               '<rect x="' + (x + w / 2) + '" y="' + fy + '" width="' + (w / 2) + '" height="' + fh + '" fill="' + c2b + '"/>';
+        var fy = y + h * 0.36, fh = h * 0.13;
+        return '<rect x="' + x + '" y="' + fy + '" width="' + w + '" height="' + fh + '" fill="' + cor + '"/>' +
+               '<rect x="' + x + '" y="' + (fy + fh) + '" width="' + w + '" height="' + fh + '" fill="' + c2b + '"/>';
       }
       default:
         return '';
@@ -258,9 +258,47 @@
     IT: function () { return faixasV(['#008C45', '#F4F5F0', '#CD212A']); },
     FR: function () { return faixasV(['#0055A4', '#FFFFFF', '#EF4135']); },
     ES: function () { return faixasH(['#AA151B', '#F1BF00', '#AA151B'], [1, 2, 1]); },
-    PT: function () { return faixasV(['#006600', '#FF0000']).replace('width="' + (BOX.w / 2 + 0.5), 'width="' + (BOX.w * 0.4 + 0.5)) + disco('#FFE800', 4); },
+    // Portugal: verde (2/5) + vermelho (3/5) na vertical, esfera armilar na divisa.
+    PT: function () {
+      var b = BOX, wv = b.w * 0.4;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + wv + '" height="' + b.h + '" fill="#006600"/>' +
+             '<rect x="' + (b.x + wv) + '" y="' + b.y + '" width="' + (b.w - wv) + '" height="' + b.h + '" fill="#FF0000"/>' +
+             '<circle cx="' + (b.x + wv) + '" cy="' + CENTRO.y + '" r="4.5" fill="#FFE800" stroke="#8B6914" stroke-width="0.7"/>' +
+             '<circle cx="' + (b.x + wv) + '" cy="' + CENTRO.y + '" r="2.2" fill="#FFFFFF" stroke="#003399" stroke-width="0.6"/>';
+    },
     NL: function () { return faixasH(['#AE1C28', '#FFFFFF', '#21468B'], [1, 1, 1]); },
     BE: function () { return faixasV(['#000000', '#FDDA24', '#EF3340']); },
+    // ── Grupo 1 de novas seleções ──
+    SE: function () { return cruzNordica('#006AA7', '#FECC00'); },        // Suécia
+    DK: function () { return cruzNordica('#C60C30', '#FFFFFF'); },        // Dinamarca
+    CH: function () {                                                     // Suíça
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#D52B1E"/>' +
+             '<rect x="' + (CENTRO.x - 3) + '" y="' + (CENTRO.y - 9) + '" width="6" height="18" fill="#FFFFFF"/>' +
+             '<rect x="' + (CENTRO.x - 9) + '" y="' + (CENTRO.y - 3) + '" width="18" height="6" fill="#FFFFFF"/>';
+    },
+    NG: function () { return faixasV(['#008751', '#FFFFFF', '#008751']); },  // Nigéria
+    CM: function () { return faixasV(['#007A5E', '#CE1126', '#FCD116']) +    // Camarões
+      estrelaCor(CENTRO.x, CENTRO.y, 4, '#FCD116'); },
+    GH: function () { return faixasH(['#CE1126', '#FCD116', '#006B3F'], [1, 1, 1]) +  // Gana
+      estrelaCor(CENTRO.x, CENTRO.y, 4, '#000000'); },
+    // ── Grupo 2 de novas seleções ──
+    RS: function () { return faixasH(['#C6363C', '#0C4076', '#FFFFFF'], [1, 1, 1]); },  // Sérvia
+    RU: function () { return faixasH(['#FFFFFF', '#0039A6', '#D52B1E'], [1, 1, 1]); },  // Rússia
+    AT: function () { return faixasH(['#ED2939', '#FFFFFF', '#ED2939'], [1, 1, 1]); },  // Áustria
+    MA: function () {                                                                   // Marrocos
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#C1272D"/>' +
+             estrelaCorVazada(CENTRO.x, CENTRO.y, 7, '#006233');
+    },
+    SN: function () { return faixasV(['#00853F', '#FDEF42', '#E31B23']) +               // Senegal
+      estrelaCor(CENTRO.x, CENTRO.y, 4, '#00853F'); },
+    SCO: function () {                                                                  // Escócia
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#0065BF"/>' +
+             saltire('#FFFFFF');
+    },
+    PY: function () { return faixasH(['#D52B1E', '#FFFFFF', '#0038A8'], [1, 1, 1]); },   // Paraguai
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
@@ -285,6 +323,39 @@
     return out;
   }
   function disco2(cx, cy, cor, r) { return '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + cor + '"/>'; }
+  // Estrela de 5 pontas de cor livre (para bandeiras: Camarões, Gana…).
+  function estrelaCor(cx, cy, r, cor) {
+    var pts = '';
+    for (var i = 0; i < 10; i++) {
+      var ang = Math.PI / 5 * i - Math.PI / 2;
+      var rr = (i % 2 === 0) ? r : r * 0.45;
+      pts += (cx + rr * Math.cos(ang)).toFixed(1) + ',' + (cy + rr * Math.sin(ang)).toFixed(1) + ' ';
+    }
+    return '<polygon points="' + pts.trim() + '" fill="' + cor + '"/>';
+  }
+  // Cruz nórdica (Suécia, Dinamarca…): fundo + cruz deslocada para a esquerda.
+  function cruzNordica(fundo, cruz) {
+    var b = BOX, cxCruz = b.x + b.w * 0.38;
+    return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="' + fundo + '"/>' +
+           '<rect x="' + (cxCruz - 3) + '" y="' + b.y + '" width="6" height="' + b.h + '" fill="' + cruz + '"/>' +
+           '<rect x="' + b.x + '" y="' + (CENTRO.y - 3) + '" width="' + b.w + '" height="6" fill="' + cruz + '"/>';
+  }
+  // Cruz de Santo André (X) — Escócia. Duas faixas diagonais cruzando a caixa.
+  function saltire(cor) {
+    var b = BOX, x0 = b.x, y0 = b.y, x1 = b.x + b.w, y1 = b.y + b.h, t = 3;
+    return '<polygon points="' + x0 + ',' + (y0) + ' ' + (x0 + t) + ',' + y0 + ' ' + x1 + ',' + (y1 - t) + ' ' + x1 + ',' + y1 + ' ' + (x1 - t) + ',' + y1 + ' ' + x0 + ',' + (y0 + t) + '" fill="' + cor + '"/>' +
+           '<polygon points="' + x1 + ',' + y0 + ' ' + x1 + ',' + (y0 + t) + ' ' + (x0 + t) + ',' + y1 + ' ' + x0 + ',' + y1 + ' ' + x0 + ',' + (y1 - t) + ' ' + (x1 - t) + ',' + y0 + '" fill="' + cor + '"/>';
+  }
+  // Estrela de 5 pontas VAZADA (só contorno) — pentagrama de Marrocos.
+  function estrelaCorVazada(cx, cy, r, cor) {
+    var pts = '';
+    for (var i = 0; i < 10; i++) {
+      var ang = Math.PI / 5 * i - Math.PI / 2;
+      var rr = (i % 2 === 0) ? r : r * 0.45;
+      pts += (cx + rr * Math.cos(ang)).toFixed(1) + ',' + (cy + rr * Math.sin(ang)).toFixed(1) + ' ';
+    }
+    return '<polygon points="' + pts.trim() + '" fill="none" stroke="' + cor + '" stroke-width="1.4"/>';
+  }
   function estrelaBranca(cx, cy, r) {
     var pts = '';
     for (var i = 0; i < 10; i++) {

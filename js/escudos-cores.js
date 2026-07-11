@@ -94,7 +94,11 @@
     'França': 'FR', 'Holanda': 'NL', 'Países Baixos': 'NL', 'Inglaterra': 'EN', 'Itália': 'IT',
     'Portugal': 'PT', 'Uruguai': 'UY', 'Bélgica': 'BE', 'Estados Unidos': 'US',
     'México': 'MX', 'Chile': 'CL', 'Colômbia': 'CO', 'Japão': 'JP',
-    'Croácia': 'HR', 'Polônia': 'PL', 'Peru': 'PE', 'Equador': 'EC'
+    'Croácia': 'HR', 'Polônia': 'PL', 'Peru': 'PE', 'Equador': 'EC',
+    'Suécia': 'SE', 'Dinamarca': 'DK', 'Suíça': 'CH', 'Nigéria': 'NG',
+    'Camarões': 'CM', 'Gana': 'GH',
+    'Sérvia': 'RS', 'Rússia': 'RU', 'Áustria': 'AT', 'Marrocos': 'MA',
+    'Senegal': 'SN', 'Escócia': 'SCO', 'Paraguai': 'PY'
   };
 
   // Paleta de reserva para clubes fora do mapa manual: cores derivadas do NOME, de forma
