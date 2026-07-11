@@ -111,7 +111,9 @@
     'Turquia': 'TR', 'Grécia': 'GR', 'Noruega': 'NO', 'Hungria': 'HU',
     'Romênia': 'RO', 'Bulgária': 'BG', 'Costa Rica': 'CR', 'Coreia do Sul': 'KR',
     'Irlanda': 'IE', 'Ucrânia': 'UA', 'Tchéquia': 'CZ', 'Eslováquia': 'SK',
-    'Eslovênia': 'SI', 'Islândia': 'IS', 'Argélia': 'DZ', 'Austrália': 'AU'
+    'Eslovênia': 'SI', 'Islândia': 'IS', 'Argélia': 'DZ', 'Austrália': 'AU',
+    'Tunísia': 'TN', 'Egito': 'EG', 'África do Sul': 'ZA', 'Canadá': 'CA',
+    'China': 'CN', 'Arábia Saudita': 'SA', 'Catar': 'QA', 'Irã': 'IR'
   };
 
   // Paleta de reserva para clubes fora do mapa manual: cores derivadas do NOME, de forma

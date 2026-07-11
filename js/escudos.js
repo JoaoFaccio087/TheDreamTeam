@@ -251,8 +251,13 @@
   }
 
   var BANDEIRAS = {
-    BR: function () { return '<rect x="8" y="14" width="48" height="50" fill="#009B3A"/>' +
-      '<polygon points="32,19 51,39 32,59 13,39" fill="#FEDF00"/>' + disco('#002776', 8.5); },
+    BR: function () {                                                                     // Brasil
+      var b = BOX, cx = CENTRO.x, cy = CENTRO.y;
+      // Losango proporcional, com margem — não encosta nas bordas (evita o "esticado").
+      var dx = b.w * 0.40, dy = b.h * 0.36;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#009B3A"/>' +
+             '<polygon points="' + cx + ',' + (cy - dy) + ' ' + (cx + dx) + ',' + cy + ' ' + cx + ',' + (cy + dy) + ' ' + (cx - dx) + ',' + cy + '" fill="#FEDF00"/>' +
+             '<circle cx="' + cx + '" cy="' + cy + '" r="' + (b.w * 0.19) + '" fill="#002776"/>'; },
     AR: function () { return faixasH(['#74ACDF', '#FFFFFF', '#74ACDF'], [1, 1, 1]) + disco('#F6B40E', 5); },
     DE: function () { return faixasH(['#000000', '#DD0000', '#FFCE00'], [1, 1, 1]); },
     IT: function () { return faixasV(['#008C45', '#F4F5F0', '#CD212A']); },
@@ -359,6 +364,54 @@
              '<path d="M ' + b.x + ' ' + b.y + ' L ' + (b.x + b.w * 0.42) + ' ' + (b.y + b.h * 0.42) + ' M ' + (b.x + b.w * 0.42) + ' ' + b.y + ' L ' + b.x + ' ' + (b.y + b.h * 0.42) + '" stroke="#FFFFFF" stroke-width="2"/>' +
              estrelaCor(b.x + b.w * 0.21, b.y + b.h * 0.72, 2.5, '#FFFFFF') +
              estrelaCor(b.x + b.w * 0.72, b.y + b.h * 0.3, 2.8, '#FFFFFF'); },
+    // ── Grupo 5 de novas seleções ──
+    TN: function () {                                                                     // Tunísia
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#E70013"/>' +
+             '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="8" fill="#FFFFFF"/>' +
+             '<circle cx="' + (CENTRO.x + 1) + '" cy="' + CENTRO.y + '" r="4.2" fill="#E70013"/>' +
+             '<circle cx="' + (CENTRO.x + 2.3) + '" cy="' + CENTRO.y + '" r="3.2" fill="#FFFFFF"/>' +
+             estrelaCor(CENTRO.x + 2.5, CENTRO.y, 2.6, '#E70013'); },
+    EG: function () { return faixasH(['#CE1126', '#FFFFFF', '#000000'], [1, 1, 1]) +       // Egito
+      '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3" fill="#C09300"/>'; },
+    ZA: function () {                                                                     // África do Sul
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#DE3831"/>' +
+             '<rect x="' + b.x + '" y="' + CENTRO.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#002395"/>' +
+             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.28) + ' ' + (b.x + b.w * 0.32) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h * 0.72) + '" fill="#007749"/>' +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.5) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#FFB915"/>' +
+             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.12) + ' ' + (b.x + b.w * 0.38) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h * 0.88) + '" fill="#007749"/>'; },
+    CA: function () {                                                                     // Canadá
+      var b = BOX, q = b.w * 0.26;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+             '<rect x="' + b.x + '" y="' + b.y + '" width="' + q + '" height="' + b.h + '" fill="#FF0000"/>' +
+             '<rect x="' + (b.x + b.w - q) + '" y="' + b.y + '" width="' + q + '" height="' + b.h + '" fill="#FF0000"/>' +
+             '<polygon points="' + cxFolha() + '" fill="#FF0000"/>'; },
+    CN: function () {                                                                     // China
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#DE2910"/>' +
+             estrelaCor(b.x + b.w * 0.28, b.y + b.h * 0.32, 5, '#FFDE00') +
+             estrelaCor(b.x + b.w * 0.5, b.y + b.h * 0.18, 1.8, '#FFDE00') +
+             estrelaCor(b.x + b.w * 0.58, b.y + b.h * 0.3, 1.8, '#FFDE00') +
+             estrelaCor(b.x + b.w * 0.58, b.y + b.h * 0.46, 1.8, '#FFDE00') +
+             estrelaCor(b.x + b.w * 0.5, b.y + b.h * 0.58, 1.8, '#FFDE00'); },
+    SA: function () {                                                                     // Arábia Saudita
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#006C35"/>' +
+             '<rect x="' + (b.x + 4) + '" y="' + (b.y + b.h * 0.62) + '" width="' + (b.w - 8) + '" height="2.5" fill="#FFFFFF"/>' +
+             '<text x="' + CENTRO.x + '" y="' + (b.y + b.h * 0.5) + '" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFFFFF">۩</text>'; },
+    QA: function () {                                                                     // Catar
+      var b = BOX, wv = b.w * 0.34;
+      var out = '<rect x="' + b.x + '" y="' + b.y + '" width="' + wv + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+                '<rect x="' + (b.x + wv) + '" y="' + b.y + '" width="' + (b.w - wv) + '" height="' + b.h + '" fill="#8A1538"/>';
+      // serrilhado entre branco e grená
+      for (var i = 0; i < 9; i++) {
+        var yy = b.y + i * b.h / 9;
+        out += '<polygon points="' + (b.x + wv - 3) + ',' + yy + ' ' + (b.x + wv + 3) + ',' + (yy + b.h / 18) + ' ' + (b.x + wv - 3) + ',' + (yy + b.h / 9) + '" fill="' + (i % 2 ? '#FFFFFF' : '#8A1538') + '"/>';
+      }
+      return out; },
+    IR: function () { return faixasH(['#239F40', '#FFFFFF', '#DA0000'], [1, 1, 1]) +       // Irã
+      '<text x="' + CENTRO.x + '" y="' + (CENTRO.y + 2) + '" text-anchor="middle" font-family="Arial" font-size="5" fill="#DA0000">☫</text>'; },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
@@ -417,7 +470,19 @@
     }
     return '<polygon points="' + pts.trim() + '" fill="none" stroke="' + cor + '" stroke-width="1.4"/>';
   }
-  // Dameiro (xadrez) vermelho e branco — brasão da Croácia. n = casas por lado.
+  // Folha de bordo simplificada (Canadá) — pontos de um polígono centrado na caixa.
+  function cxFolha() {
+    var cx = CENTRO.x, cy = CENTRO.y, s = 9;
+    // 11 pontos aproximando a silhueta da folha (simétrica)
+    var p = [
+      [0, -1.0], [0.18, -0.55], [0.5, -0.62], [0.34, -0.28], [0.7, -0.2],
+      [0.42, 0.05], [0.55, 0.5], [0.15, 0.35], [0.2, 0.85], [0, 0.6]
+    ];
+    // espelha para a direita
+    var full = p.slice();
+    for (var i = p.length - 2; i >= 1; i--) full.push([-p[i][0], p[i][1]]);
+    return full.map(function (pt) { return (cx + pt[0] * s).toFixed(1) + ',' + (cy + pt[1] * s).toFixed(1); }).join(' ');
+  }
   function xadrez(x, y, lado, n) {
     var c = lado / n, out = '<rect x="' + x + '" y="' + y + '" width="' + lado + '" height="' + lado + '" fill="#FFFFFF"/>';
     for (var i = 0; i < n; i++)
