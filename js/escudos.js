@@ -484,6 +484,47 @@
              '<rect x="' + b.x + '" y="' + (CENTRO.y - 3) + '" width="' + b.w + '" height="6" fill="#CF142B"/>' +
              '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="4" fill="#FFFFFF" stroke="#CF142B" stroke-width="0.8"/>' +
              estrelaCor(CENTRO.x, CENTRO.y - 0.5, 2.6, '#CF142B'); },
+    // ── Grupo 8 de novas seleções (várias históricas) ──
+    YU: function () { return faixasH(['#003893', '#FFFFFF', '#DE2910'], [1, 1, 1]) +       // Iugoslávia
+      estrelaCor(CENTRO.x, CENTRO.y, 3.5, '#FCD116'); },
+    CS: function () {                                                                     // Tchecoslováquia
+      var b = BOX;
+      return faixasH(['#FFFFFF', '#D7141A'], [1, 1]) +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.44) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#11457E"/>'; },
+    KP: function () {                                                                     // Coreia do Norte
+      var b = BOX;
+      return faixasH(['#024FA2', '#FFFFFF', '#ED1C27', '#FFFFFF', '#024FA2'], [1, 0.4, 2, 0.4, 1]) +
+             '<circle cx="' + (b.x + b.w * 0.36) + '" cy="' + CENTRO.y + '" r="4.5" fill="#FFFFFF"/>' +
+             estrelaCor(b.x + b.w * 0.36, CENTRO.y, 3, '#ED1C27'); },
+    CV: function () {                                                                     // Cabo Verde
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#003893"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h * 0.5) + '" width="' + b.w + '" height="' + (b.h * 0.16) + '" fill="#FFFFFF"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h * 0.66) + '" width="' + b.w + '" height="' + (b.h * 0.08) + '" fill="#CF2027"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h * 0.74) + '" width="' + b.w + '" height="' + (b.h * 0.16) + '" fill="#FFFFFF"/>' +
+             estrelaCor(b.x + b.w * 0.38, b.y + b.h * 0.44, 2, '#F7D116'); },
+    AE: function () {                                                                     // Emirados Árabes
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.28) + '" height="' + b.h + '" fill="#FF0000"/>' +
+             '<rect x="' + (b.x + b.w * 0.28) + '" y="' + b.y + '" width="' + (b.w * 0.72) + '" height="' + (b.h / 3) + '" fill="#009739"/>' +
+             '<rect x="' + (b.x + b.w * 0.28) + '" y="' + (b.y + b.h / 3) + '" width="' + (b.w * 0.72) + '" height="' + (b.h / 3) + '" fill="#FFFFFF"/>' +
+             '<rect x="' + (b.x + b.w * 0.28) + '" y="' + (b.y + 2 * b.h / 3) + '" width="' + (b.w * 0.72) + '" height="' + (b.h / 3) + '" fill="#000000"/>'; },
+    HT: function () {                                                                     // Haiti
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#00209F"/>' +
+             '<rect x="' + b.x + '" y="' + CENTRO.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#D21034"/>' +
+             '<rect x="' + (CENTRO.x - 4) + '" y="' + (CENTRO.y - 3) + '" width="8" height="6" fill="#FFFFFF"/>'; },
+    JO: function () {                                                                     // Jordânia
+      var b = BOX;
+      return faixasH(['#000000', '#FFFFFF', '#007A3D'], [1, 1, 1]) +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.4) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#CE1126"/>' +
+             estrelaCor(b.x + b.w * 0.14, CENTRO.y, 1.8, '#FFFFFF'); },
+    UZ: function () {                                                                     // Uzbequistão
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + (b.h / 3) + '" fill="#0099B5"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h / 3) + '" width="' + b.w + '" height="' + (b.h / 3) + '" fill="#FFFFFF"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + 2 * b.h / 3) + '" width="' + b.w + '" height="' + (b.h / 3) + '" fill="#1EB53A"/>' +
+             '<circle cx="' + (b.x + b.w * 0.2) + '" cy="' + (b.y + b.h * 0.18) + '" r="2.5" fill="#FFFFFF"/>'; },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
