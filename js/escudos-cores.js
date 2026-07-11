@@ -24,8 +24,7 @@
     'Bangu':               ['#E30613', '#FFFFFF'],
     'Botafogo':            ['#000000', '#FFFFFF'],
     'Bragantino':          ['#FFFFFF', '#C0142B'],
-    'Red Bull Bragantino': ['#FFFFFF', '#C0142B'],
-    'Brasil de Pelotas':   ['#000000', '#FFFFFF'],
+    'Brasil de Pelotas':   ['#E30613', '#000000'],
     'Corinthians':         ['#FFFFFF', '#000000'],
     'Coritiba':            ['#00543C', '#FFFFFF'],
     'Cruzeiro':            ['#0A2C6B', '#FFFFFF'],
@@ -34,7 +33,7 @@
     'Fortaleza':           ['#003DA5', '#E30613'],
     'Goiás':               ['#006437', '#FFFFFF'],
     'Grêmio':              ['#0A9BDC', '#000000', '#FFFFFF'],
-    'Guarani':             ['#005CA9', '#FFFFFF'],
+    'Guarani':             ['#006437', '#FFFFFF'],
     'Internacional':       ['#C4122E', '#FFFFFF'],
     'Londrina':            ['#003DA5', '#FFFFFF'],
     'Mirassol':            ['#FFD200', '#006437'],
@@ -47,11 +46,19 @@
     'Santa Cruz':          ['#C4122E', '#000000', '#FFFFFF'],
     'Santos':              ['#FFFFFF', '#000000'],
     'Sport':               ['#C4122E', '#000000'],
-    'São Caetano':         ['#003DA5', '#FFFFFF'],
+    'São Caetano':         ['#003DA5', '#FFD200', '#006437'],
     'São Paulo':           ['#FFFFFF', '#FE0000', '#000000'],
     'Vasco':               ['#000000', '#FFFFFF'],
     'Vitória':             ['#E30613', '#000000']
   };
+
+  // Aliases: nomes diferentes para o MESMO clube → apontam para a mesma entrada (sem duplicar).
+  var ALIAS_CLUBES = {
+    'Red Bull Bragantino': 'Bragantino',
+    'Vasco da Gama':       'Vasco',
+    'Holanda':             'Países Baixos'
+  };
+  function resolveAlias(nome) { return ALIAS_CLUBES[nome] || nome; }
 
   // Estilo fiel à camisa/escudo de cada clube. CHAVES = nome exato em js/dados/*.
   var ESTILO_CLUBES = {
@@ -74,7 +81,6 @@
     'Goiás':               { padrao: 'solido' },
     'Coritiba':            { padrao: 'listras-finas', listras: 6 },
     'Bragantino':          { padrao: 'faixa-h' },
-    'Red Bull Bragantino': { padrao: 'faixa-h' },
     'Sport':               { padrao: 'listras-v', listras: 4 },
     'Vitória':             { padrao: 'listras-v', listras: 4 },
     'Portuguesa':          { padrao: 'faixa-h' },
@@ -83,7 +89,10 @@
     'Náutico':             { padrao: 'listras-v', listras: 4 },
     'Santa Cruz':          { padrao: 'tri-h' },
     'Avaí':                { padrao: 'faixa-h' },
-    'Paraná':              { padrao: 'listras-v', listras: 4 }
+    'Paraná':              { padrao: 'listras-v', listras: 4 },
+    'Brasil de Pelotas':   { padrao: 'listras-v', listras: 4 },
+    'São Caetano':         { padrao: 'metade' },
+    'Guarani':             { padrao: 'faixa-h' }
   };
 
   // seleção → ISO-2 (o gerador desenha a bandeira a partir do código do país).
@@ -125,16 +134,18 @@
 
   var API = {
     // Cor real (mapa) quando existe; senão, uma paleta de reserva estável derivada do nome.
+    // Resolve alias antes (Red Bull Bragantino → Bragantino, etc.).
     coresClube: function (nome) {
-      return CORES_CLUBES[nome] || PALETA_RESERVA[hashNome(nome) % PALETA_RESERVA.length];
+      var n = resolveAlias(nome);
+      return CORES_CLUBES[n] || PALETA_RESERVA[hashNome(n) % PALETA_RESERVA.length];
     },
     // Só a cor CATALOGADA (null se não houver) — útil para saber se temos a cor oficial.
-    corOficialClube: function (nome) { return CORES_CLUBES[nome] || null; },
+    corOficialClube: function (nome) { return CORES_CLUBES[resolveAlias(nome)] || null; },
     // Estilo fixo (padrão) de um clube, se houver.
-    estiloClube: function (nome) { return ESTILO_CLUBES[nome] || null; },
-    isoSelecao: function (nome) { return PAIS_SELECAO[nome] || null; },
+    estiloClube: function (nome) { return ESTILO_CLUBES[resolveAlias(nome)] || null; },
+    isoSelecao: function (nome) { return PAIS_SELECAO[resolveAlias(nome)] || null; },
     // Estrelas de título mundial de uma seleção (0 se não tiver/for desconhecida).
-    estrelasSelecao: function (nome) { return TITULOS_SELECAO[nome] || 0; },
+    estrelasSelecao: function (nome) { return TITULOS_SELECAO[resolveAlias(nome)] || 0; },
     todosClubes: function () { return Object.keys(CORES_CLUBES); },
     todasSelecoes: function () { return Object.keys(PAIS_SELECAO); }
   };
