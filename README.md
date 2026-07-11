@@ -59,15 +59,13 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 </div>
 
-> As imagens do modo online (`online-sorteio.png`, `online-draft.png`, `online-grupos.png`, `online-mata.png`) ainda precisam ser geradas e adicionadas em `assets/imagens/screenshots/`.
-
 ## Funcionalidades
 
 ### Modo um jogador (offline)
 
 - **Sorteio de clubes e seleções** lendários da Libertadores, da Champions, do Brasileirão e da Copa do Mundo, por edição.
 - **Outro sorteio**, que re-sorteia qualquer clube ou ano da competição, com orçamento de skips por partida.
-- **Estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados — sem jogadores repetidos. Há ainda o **Orçamento** (em um jogador, na Libertadores): cada jogador tem um preço conforme a força e você monta o time sem estourar um teto — poucos craques caros ou muitos medianos, a escolha é sua.
+- **Estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados — sem jogadores repetidos. Há ainda o **Orçamento** (em um jogador): cada jogador tem um preço conforme a força e você monta o time sem estourar um teto — poucos craques caros ou muitos medianos, a escolha é sua.
 - **Escalação livre**: alocar, mover e trocar jogadores no campo, com a lista indicando quem pode ocupar cada posição.
 - **Oito formações**: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-3-2-1, 4-5-1, 3-4-3 e 4-1-2-1-2.
 - **Campanha completa** na Libertadores, na Champions e na Copa do Mundo, com fase de grupos e classificação seguidas de mata-mata até a final, e uma aba **Mata-a-Mata** que desenha a chave inteira (com seu time em destaque e os pênaltis quando há empate).
