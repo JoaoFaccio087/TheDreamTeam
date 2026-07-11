@@ -137,6 +137,14 @@
                '<rect x="' + x + '" y="' + (CENTRO.y - 4) + '" width="' + w + '" height="8" fill="' + cor + '"/>';
       case 'solido':
         return '';
+      // Constelação Cruzeiro do Sul (Cruzeiro) — 5 estrelas em forma de cruz, na cor da frente.
+      case 'cruzeiro-do-sul': {
+        var e = '', cx = CENTRO.x, cy = CENTRO.y;
+        var pts = [[0, -9], [0, 7], [-6, -1], [6, 0], [1.5, 2]];   // α,β,γ,δ,ε aproximados
+        var rr = [2.6, 2.6, 2.2, 2.2, 1.6];
+        pts.forEach(function (p, k) { e += estrelaCor(cx + p[0], cy + p[1], rr[k], cor); });
+        return e;
+      }
       // Estrela grande central (Botafogo)
       case 'estrela-central': {
         var cx = CENTRO.x, cy = CENTRO.y + 1, R = 15;

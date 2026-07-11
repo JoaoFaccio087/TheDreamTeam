@@ -76,7 +76,7 @@
     'Flamengo':            { padrao: 'faixa-h' },
     'Corinthians':         { padrao: 'solido' },
     'Santos':              { padrao: 'solido' },
-    'Cruzeiro':            { padrao: 'solido' },
+    'Cruzeiro':            { padrao: 'cruzeiro-do-sul' },
     'Palmeiras':           { padrao: 'solido' },
     'Goiás':               { padrao: 'solido' },
     'Coritiba':            { padrao: 'listras-finas', listras: 6 },
