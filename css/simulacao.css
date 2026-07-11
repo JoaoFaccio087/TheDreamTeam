@@ -556,9 +556,22 @@
 }
 .tb-tabela td.tb-time {
   text-align: left;
-  max-width: 160px;
+  max-width: 180px;
+}
+.tb-escudo {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  flex: 0 0 auto;
+}
+.tb-escudo svg { width: 100%; height: 100%; display: block; }
+.tb-nome {
+  vertical-align: middle;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tb-pos { color: var(--txt-soft); width: 1.6rem; }

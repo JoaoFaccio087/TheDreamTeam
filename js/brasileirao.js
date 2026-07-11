@@ -100,6 +100,20 @@ function resolverDemaisJogos(rIdx) {
 }
 
 // Desenha a Tabela do Brasileirão (20 times) na coluna da esquerda.
+// HTML do escudo de um clube (24px), para a tabela. Guarda: se os módulos de escudo não
+// estiverem carregados, devolve string vazia — a tabela fica exatamente como antes.
+function escudoClubeHTML(nome) {
+  if (typeof Escudos === 'undefined' || typeof EscudosCores === 'undefined') return '';
+  try {
+    var e = EscudosCores.estiloClube(nome) || {};
+    var svg = Escudos.gerar({
+      tipo: 'clube', nome: nome, cores: EscudosCores.coresClube(nome), seed: nome,
+      padrao: e.padrao, listras: e.listras, inverter: e.inverter
+    });
+    return '<span class="tb-escudo">' + svg + '</span>';
+  } catch (err) { return ''; }
+}
+
 function renderTabelaBrasileirao() {
   if (!tabelaBrasileiraoCorpo || !liga) return;
   var ordenada = liga.tabela.slice().sort(ordenarLiga);
@@ -111,7 +125,7 @@ function renderTabelaBrasileirao() {
     html +=
       '<tr class="' + cls + '">' +
         '<td class="tb-pos">' + (i + 1) + '</td>' +
-        '<td class="tb-time">' + t.nome + '</td>' +
+        '<td class="tb-time">' + escudoClubeHTML(t.nome) + '<span class="tb-nome">' + t.nome + '</span></td>' +
         '<td class="tb-pts">' + t.pts + '</td>' +
         '<td>' + t.j + '</td><td>' + t.v + '</td><td>' + t.e + '</td><td>' + t.d + '</td>' +
         '<td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + sg + '</td>' +

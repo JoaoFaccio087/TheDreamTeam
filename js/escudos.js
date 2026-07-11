@@ -412,6 +412,42 @@
       return out; },
     IR: function () { return faixasH(['#239F40', '#FFFFFF', '#DA0000'], [1, 1, 1]) +       // Irã
       '<text x="' + CENTRO.x + '" y="' + (CENTRO.y + 2) + '" text-anchor="middle" font-family="Arial" font-size="5" fill="#DA0000">☫</text>'; },
+    // ── Grupo 6 de novas seleções ──
+    WAL: function () { return faixasH(['#FFFFFF', '#00AB39'], [1, 1]) +                    // País de Gales
+      '<path d="M ' + (CENTRO.x - 8) + ' ' + (CENTRO.y - 2) + ' q 5 -5 10 -1 q 3 -3 6 0 q -2 2 -5 2 q 2 3 -2 4 q -3 3 -7 0 q -3 2 -5 -1 q 3 -1 3 -4 z" fill="#C8102E"/>'; },
+    CI: function () { return faixasV(['#FF8200', '#FFFFFF', '#009A44']); },                // Costa do Marfim
+    BO: function () { return faixasH(['#D52B1E', '#F9E300', '#007934'], [1, 1, 1]); },     // Bolívia
+    HN: function () { return faixasH(['#0073CF', '#FFFFFF', '#0073CF'], [1, 1, 1]) +       // Honduras
+      estrelaCor(CENTRO.x, CENTRO.y, 2, '#0073CF') +
+      estrelaCor(CENTRO.x - 7, CENTRO.y - 2, 1.4, '#0073CF') + estrelaCor(CENTRO.x + 7, CENTRO.y - 2, 1.4, '#0073CF') +
+      estrelaCor(CENTRO.x - 7, CENTRO.y + 2, 1.4, '#0073CF') + estrelaCor(CENTRO.x + 7, CENTRO.y + 2, 1.4, '#0073CF'); },
+    PA: function () {                                                                     // Panamá
+      var b = BOX, hw = b.w / 2, hh = b.h / 2;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+             '<rect x="' + (b.x + hw) + '" y="' + b.y + '" width="' + hw + '" height="' + hh + '" fill="#DA121A"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + hh) + '" width="' + hw + '" height="' + hh + '" fill="#005293"/>' +
+             estrelaCor(b.x + hw * 0.5, b.y + hh * 0.5, 2.6, '#005293') +
+             estrelaCor(b.x + hw * 1.5, b.y + hh * 1.5, 2.6, '#DA121A'); },
+    JM: function () {                                                                     // Jamaica
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#009B3A"/>' +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.42) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#000000"/>' +
+             '<polygon points="' + (b.x + b.w) + ',' + b.y + ' ' + (b.x + b.w * 0.58) + ',' + CENTRO.y + ' ' + (b.x + b.w) + ',' + (b.y + b.h) + '" fill="#000000"/>' +
+             '<path d="M ' + b.x + ' ' + b.y + ' L ' + (b.x + b.w) + ' ' + (b.y + b.h) + ' M ' + (b.x + b.w) + ' ' + b.y + ' L ' + b.x + ' ' + (b.y + b.h) + '" stroke="#FED100" stroke-width="4"/>'; },
+    NZ: function () {                                                                     // Nova Zelândia
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#00247D"/>' +
+             '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.42) + '" height="' + (b.h * 0.42) + '" fill="#012169"/>' +
+             '<path d="M ' + b.x + ' ' + b.y + ' L ' + (b.x + b.w * 0.42) + ' ' + (b.y + b.h * 0.42) + ' M ' + (b.x + b.w * 0.42) + ' ' + b.y + ' L ' + b.x + ' ' + (b.y + b.h * 0.42) + '" stroke="#FFFFFF" stroke-width="1.6"/>' +
+             estrelaCor(b.x + b.w * 0.72, b.y + b.h * 0.3, 2, '#CC142B') +
+             estrelaCor(b.x + b.w * 0.82, b.y + b.h * 0.55, 2, '#CC142B') +
+             estrelaCor(b.x + b.w * 0.62, b.y + b.h * 0.62, 2, '#CC142B') +
+             estrelaCor(b.x + b.w * 0.75, b.y + b.h * 0.78, 2, '#CC142B'); },
+    CU: function () {                                                                     // Cuba
+      var b = BOX;
+      return faixasH(['#002A8F', '#FFFFFF', '#002A8F', '#FFFFFF', '#002A8F'], [1, 1, 1, 1, 1]) +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.44) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#CF142B"/>' +
+             estrelaCor(b.x + b.w * 0.14, CENTRO.y, 3, '#FFFFFF'); },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
