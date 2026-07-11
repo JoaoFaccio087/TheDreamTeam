@@ -100,18 +100,12 @@ function resolverDemaisJogos(rIdx) {
 }
 
 // Desenha a Tabela do Brasileirão (20 times) na coluna da esquerda.
-// HTML do escudo de um clube (24px), para a tabela. Guarda: se os módulos de escudo não
-// estiverem carregados, devolve string vazia — a tabela fica exatamente como antes.
+// HTML do escudo de um clube (20px), para a tabela. Usa a API única Escudos.porNome (decide
+// clube/seleção e já tem guarda). Devolve '' se os módulos não estiverem carregados.
 function escudoClubeHTML(nome) {
-  if (typeof Escudos === 'undefined' || typeof EscudosCores === 'undefined') return '';
-  try {
-    var e = EscudosCores.estiloClube(nome) || {};
-    var svg = Escudos.gerar({
-      tipo: 'clube', nome: nome, cores: EscudosCores.coresClube(nome), seed: nome,
-      padrao: e.padrao, listras: e.listras, inverter: e.inverter
-    });
-    return '<span class="tb-escudo">' + svg + '</span>';
-  } catch (err) { return ''; }
+  if (typeof Escudos === 'undefined' || !Escudos.porNome) return '';
+  var svg = Escudos.porNome(nome);
+  return svg ? '<span class="tb-escudo">' + svg + '</span>' : '';
 }
 
 function renderTabelaBrasileirao() {

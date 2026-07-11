@@ -183,7 +183,9 @@ function criarCardPartida(id, adversario, fase) {
     '<div class="partida-fase">' + fase + '</div>' +
     '<div class="partida-header">' +
       '<div class="partida-adversario-bloco">' +
-        '<span class="partida-adversario-nome">' + adversario.clube + '</span>' +
+        '<span class="partida-adversario-nome">' +
+          ((typeof Escudos !== 'undefined' && Escudos.porNome) ? '<span class="partida-escudo">' + Escudos.porNome(adversario.clube) + '</span>' : '') +
+          adversario.clube + '</span>' +
         '<span class="partida-adversario-ano">' + rotuloCompeticao(adversario.competicao) + ' \xB7 ' + adversario.edicao + '</span>' +
         '<span class="partida-adversario-forca">Força ' + forcaAdv + '</span>' +
       '</div>' +

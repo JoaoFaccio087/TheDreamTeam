@@ -448,6 +448,42 @@
       return faixasH(['#002A8F', '#FFFFFF', '#002A8F', '#FFFFFF', '#002A8F'], [1, 1, 1, 1, 1]) +
              '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.44) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#CF142B"/>' +
              estrelaCor(b.x + b.w * 0.14, CENTRO.y, 3, '#FFFFFF'); },
+    // ── Grupo 7 de novas seleções ──
+    AO: function () { return faixasH(['#CC092F', '#000000'], [1, 1]) +                    // Angola
+      estrelaCor(CENTRO.x, CENTRO.y, 3.5, '#FFCB00'); },
+    BA: function () {                                                                     // Bósnia
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#002395"/>' +
+             '<polygon points="' + (b.x + b.w * 0.3) + ',' + b.y + ' ' + (b.x + b.w * 0.72) + ',' + b.y + ' ' + (b.x + b.w * 0.3) + ',' + (b.y + b.h) + '" fill="#FECB00"/>' +
+             estrelaCor(b.x + b.w * 0.34, b.y + b.h * 0.24, 1.6, '#FFFFFF') + estrelaCor(b.x + b.w * 0.44, b.y + b.h * 0.5, 1.6, '#FFFFFF') + estrelaCor(b.x + b.w * 0.34, b.y + b.h * 0.76, 1.6, '#FFFFFF'); },
+    SV: function () { return faixasH(['#0F47AF', '#FFFFFF', '#0F47AF'], [1, 1, 1]) +       // El Salvador
+      '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3" fill="#FCD116" stroke="#0F47AF" stroke-width="0.6"/>'; },
+    IQ: function () { return faixasH(['#CE1126', '#FFFFFF', '#000000'], [1, 1, 1]) +       // Iraque
+      '<text x="' + CENTRO.x + '" y="' + (CENTRO.y + 1.5) + '" text-anchor="middle" font-family="Arial" font-size="4" fill="#007A3D">الله أكبر</text>'; },
+    IL: function () {                                                                     // Israel
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h * 0.14) + '" width="' + b.w + '" height="' + (b.h * 0.1) + '" fill="#0038B8"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h * 0.76) + '" width="' + b.w + '" height="' + (b.h * 0.1) + '" fill="#0038B8"/>' +
+             '<path d="M ' + CENTRO.x + ' ' + (CENTRO.y - 5) + ' L ' + (CENTRO.x + 4.3) + ' ' + (CENTRO.y + 2.5) + ' L ' + (CENTRO.x - 4.3) + ' ' + (CENTRO.y + 2.5) + ' Z" fill="none" stroke="#0038B8" stroke-width="1"/>' +
+             '<path d="M ' + CENTRO.x + ' ' + (CENTRO.y + 5) + ' L ' + (CENTRO.x + 4.3) + ' ' + (CENTRO.y - 2.5) + ' L ' + (CENTRO.x - 4.3) + ' ' + (CENTRO.y - 2.5) + ' Z" fill="none" stroke="#0038B8" stroke-width="1"/>'; },
+    TG: function () {                                                                     // Togo
+      var b = BOX;
+      return faixasH(['#006A4E', '#FFCE00', '#006A4E', '#FFCE00', '#006A4E'], [1, 1, 1, 1, 1]) +
+             '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.4) + '" height="' + (b.h * 0.6) + '" fill="#D21034"/>' +
+             estrelaCor(b.x + b.w * 0.2, b.y + b.h * 0.3, 3, '#FFFFFF'); },
+    SU: function () {                                                                     // União Soviética
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#CC0000"/>' +
+             '<path d="M ' + (b.x + 6) + ' ' + (b.y + 8) + ' q 5 1 4 6 q 3 -3 1 -6 M ' + (b.x + 5) + ' ' + (b.y + 9) + ' l 4 5 l 2 -1 z" fill="#FFD700"/>' +
+             estrelaCorVazada(b.x + 8, b.y + 6, 2.5, '#FFD700'); },
+    NIR: function () {                                                                    // Irlanda do Norte
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+             '<rect x="' + (CENTRO.x - 3) + '" y="' + b.y + '" width="6" height="' + b.h + '" fill="#CF142B"/>' +
+             '<rect x="' + b.x + '" y="' + (CENTRO.y - 3) + '" width="' + b.w + '" height="6" fill="#CF142B"/>' +
+             '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="4" fill="#FFFFFF" stroke="#CF142B" stroke-width="0.8"/>' +
+             estrelaCor(CENTRO.x, CENTRO.y - 0.5, 2.6, '#CF142B'); },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
@@ -552,6 +588,20 @@
     gerar: function (o) {
       o = o || {};
       return (o.tipo === 'selecao') ? gerarSelecao(o) : gerarClube(o);
+    },
+    // API única para o jogo: dado um NOME, decide entre bandeira de seleção (Copa) e escudo de
+    // clube, consultando EscudosCores. Devolve '' se os módulos/cores não estiverem disponíveis.
+    // Assim todos os lugares (tabela, card, simulação) usam a mesma lógica.
+    porNome: function (nome) {
+      if (typeof window === 'undefined' || !window.EscudosCores) return '';
+      var C = window.EscudosCores;
+      try {
+        var iso = C.isoSelecao(nome);
+        if (iso) return gerarSelecao({ pais: iso, seed: nome, estrelas: C.estrelasSelecao(nome) });
+        var e = C.estiloClube(nome) || {};
+        return gerarClube({ nome: nome, cores: C.coresClube(nome), seed: nome,
+          padrao: e.padrao, listras: e.listras, inverter: e.inverter });
+      } catch (err) { return ''; }
     },
     paisesSuportados: function () { return Object.keys(BANDEIRAS); }
   };

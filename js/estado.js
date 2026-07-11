@@ -21,6 +21,7 @@ const clubeCard           = document.getElementById('clube-card');
 const clubeStatus         = document.getElementById('clube-status');
 const clubeNome           = document.getElementById('clube-nome');
 const clubeEdicao         = document.getElementById('clube-edicao');
+const clubeEscudo         = document.getElementById('clube-escudo');
 const listaJogadores      = document.getElementById('lista-jogadores');
 const boxScore            = document.getElementById('box-score');
 const forcaGeral          = document.getElementById('forca-geral');

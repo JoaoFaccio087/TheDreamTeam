@@ -102,9 +102,16 @@ function mostrarFalencia() {
   });
 }
 
+// Preenche o escudo/bandeira no card do sorteio, usando a API única (decide clube/seleção).
+function preencherEscudoCard(edicao) {
+  if (typeof clubeEscudo === 'undefined' || !clubeEscudo) return;
+  clubeEscudo.innerHTML = (typeof Escudos !== 'undefined' && Escudos.porNome) ? Escudos.porNome(edicao.clube) : '';
+}
+
 // Animação estilo "slot machine" (~900ms) até revelar o clube sorteado.
 function animarSorteio(opcoes, sorteado, onFim) {
   clubeCard.classList.remove('escondida');
+  if (clubeEscudo) clubeEscudo.innerHTML = '';   // limpa durante o giro
 
   clubeStatus.textContent = 'SORTEANDO…';
   clubeStatus.classList.remove('revelado');
@@ -126,6 +133,7 @@ function animarSorteio(opcoes, sorteado, onFim) {
       clubeEdicao.textContent = rotuloCompeticao(sorteado.competicao) + ' · ' + sorteado.edicao;
       clubeStatus.textContent = 'SAIU';
       clubeStatus.classList.add('revelado');
+      preencherEscudoCard(sorteado);
       onFim();
     }
   }, intervaloMs);

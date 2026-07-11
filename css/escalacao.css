@@ -331,7 +331,18 @@
   border-radius: var(--raio-sm);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.05);
+  position: relative;
 }
+
+/* Escudo do clube/seleção sorteado — canto superior direito do card */
+.clube-escudo {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+}
+.clube-escudo svg { width: 100%; height: 100%; display: block; }
 
 /* Status do sorteio — rótulo acima do nome do clube */
 .clube-status {

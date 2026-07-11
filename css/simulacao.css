@@ -236,7 +236,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
+.partida-escudo {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+}
+.partida-escudo svg { width: 100%; height: 100%; display: block; }
 .partida-card.expandido .partida-adversario-nome         { font-size: var(--fs-lg); line-height: 1.1; }
 .partida-card:not(.expandido) .partida-adversario-nome   { font-size: var(--fs-md); }
 
