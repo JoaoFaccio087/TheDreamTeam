@@ -298,7 +298,10 @@
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#0065BF"/>' +
              saltire('#FFFFFF');
     },
-    PY: function () { return faixasH(['#D52B1E', '#FFFFFF', '#0038A8'], [1, 1, 1]); },   // Paraguai
+    PY: function () { return faixasH(['#D52B1E', '#FFFFFF', '#0038A8'], [1, 1, 1]) +      // Paraguai
+      '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="5.5" fill="#FFFFFF" stroke="#0038A8" stroke-width="0.8"/>' +
+      '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="4" fill="none" stroke="#008000" stroke-width="1"/>' +
+      estrelaCor(CENTRO.x, CENTRO.y, 2.4, '#FCD116'); },
     // ── Grupo 3 de novas seleções ──
     TR: function () {                                                                    // Turquia
       var b = BOX;
@@ -327,6 +330,35 @@
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
              '<path d="M ' + (CENTRO.x - 6) + ' ' + CENTRO.y + ' a 6 6 0 0 1 12 0 a 3 3 0 0 1 -6 0 a 3 3 0 0 0 -6 0" fill="#CD2E3A"/>' +
              '<path d="M ' + (CENTRO.x + 6) + ' ' + CENTRO.y + ' a 6 6 0 0 1 -12 0 a 3 3 0 0 1 6 0 a 3 3 0 0 0 6 0" fill="#0047A0"/>'; },
+    // ── Grupo 4 de novas seleções ──
+    IE: function () { return faixasV(['#169B62', '#FFFFFF', '#FF883E']); },               // Irlanda
+    UA: function () { return faixasH(['#0057B7', '#FFD700'], [1, 1]); },                  // Ucrânia
+    CZ: function () {                                                                     // Tchéquia
+      var b = BOX;
+      return faixasH(['#FFFFFF', '#D7141A'], [1, 1]) +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.42) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#11457E"/>'; },
+    SK: function () { return faixasH(['#FFFFFF', '#0B4EA2', '#EE1C25'], [1, 1, 1]) +       // Eslováquia
+      '<rect x="' + (BOX.x + 4) + '" y="' + (BOX.y + BOX.h * 0.3) + '" width="8" height="10" rx="1" fill="#EE1C25" stroke="#FFFFFF" stroke-width="1"/>'; },
+    SI: function () { return faixasH(['#FFFFFF', '#0000A0', '#DE2918'], [1, 1, 1]) +       // Eslovênia
+      '<rect x="' + (BOX.x + 4) + '" y="' + (BOX.y + BOX.h * 0.22) + '" width="9" height="11" fill="#0000A0"/>' +
+      estrelaCor(BOX.x + 8.5, BOX.y + BOX.h * 0.3, 1.6, '#FFDF00'); },
+    IS: function () { return cruzNordica('#02529C', '#FFFFFF') +                           // Islândia
+      '<rect x="' + (BOX.x + BOX.w * 0.38 - 1.3) + '" y="' + BOX.y + '" width="2.6" height="' + BOX.h + '" fill="#DC1E35"/>' +
+      '<rect x="' + BOX.x + '" y="' + (CENTRO.y - 1.3) + '" width="' + BOX.w + '" height="2.6" fill="#DC1E35"/>'; },
+    DZ: function () {                                                                     // Argélia
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w / 2) + '" height="' + b.h + '" fill="#006233"/>' +
+             '<rect x="' + CENTRO.x + '" y="' + b.y + '" width="' + (b.w / 2) + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+             '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="5" fill="none" stroke="#D21034" stroke-width="1.5"/>' +
+             '<circle cx="' + (CENTRO.x + 1.5) + '" cy="' + CENTRO.y + '" r="4" fill="#FFFFFF"/>' +
+             estrelaCor(CENTRO.x + 2.5, CENTRO.y, 2.5, '#D21034'); },
+    AU: function () {                                                                     // Austrália
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#00247D"/>' +
+             '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.42) + '" height="' + (b.h * 0.42) + '" fill="#012169"/>' +
+             '<path d="M ' + b.x + ' ' + b.y + ' L ' + (b.x + b.w * 0.42) + ' ' + (b.y + b.h * 0.42) + ' M ' + (b.x + b.w * 0.42) + ' ' + b.y + ' L ' + b.x + ' ' + (b.y + b.h * 0.42) + '" stroke="#FFFFFF" stroke-width="2"/>' +
+             estrelaCor(b.x + b.w * 0.21, b.y + b.h * 0.72, 2.5, '#FFFFFF') +
+             estrelaCor(b.x + b.w * 0.72, b.y + b.h * 0.3, 2.8, '#FFFFFF'); },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
@@ -339,7 +371,8 @@
       '<rect x="8" y="14" width="20" height="25" fill="#0039A6"/>' + estrelaBranca(18, 26, 5); },
     CO: function () { return faixasH(['#FCD116', '#003893', '#CE1126'], [2, 1, 1]); },
     JP: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' + disco('#BC002D', 9); },
-    HR: function () { return faixasH(['#FF0000', '#FFFFFF', '#171796'], [1, 1, 1]); },
+    HR: function () { return faixasH(['#FF0000', '#FFFFFF', '#171796'], [1, 1, 1]) +      // Croácia
+      xadrez(CENTRO.x - 5, CENTRO.y - 5, 10, 5); },
     PL: function () { return faixasH(['#FFFFFF', '#DC143C'], [1, 1]); },
     PE: function () { return faixasV(['#D91023', '#FFFFFF', '#D91023']); },
     EC: function () { return faixasH(['#FFDD00', '#0033A0', '#CE1126'], [2, 1, 1]) +
@@ -383,6 +416,15 @@
       pts += (cx + rr * Math.cos(ang)).toFixed(1) + ',' + (cy + rr * Math.sin(ang)).toFixed(1) + ' ';
     }
     return '<polygon points="' + pts.trim() + '" fill="none" stroke="' + cor + '" stroke-width="1.4"/>';
+  }
+  // Dameiro (xadrez) vermelho e branco — brasão da Croácia. n = casas por lado.
+  function xadrez(x, y, lado, n) {
+    var c = lado / n, out = '<rect x="' + x + '" y="' + y + '" width="' + lado + '" height="' + lado + '" fill="#FFFFFF"/>';
+    for (var i = 0; i < n; i++)
+      for (var j = 0; j < n; j++)
+        if ((i + j) % 2 === 0)
+          out += '<rect x="' + (x + i * c).toFixed(2) + '" y="' + (y + j * c).toFixed(2) + '" width="' + c.toFixed(2) + '" height="' + c.toFixed(2) + '" fill="#D0122B"/>';
+    return out;
   }
   function estrelaBranca(cx, cy, r) {
     var pts = '';
