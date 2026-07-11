@@ -145,10 +145,14 @@ function renderTabelaGrupo(id, ordenada) {
   ordenada.forEach(function (t, i) {
     var sg = (t.gf - t.ga >= 0 ? '+' : '') + (t.gf - t.ga);
     var cls = (t.voce ? 'grupo-voce' : '') + (i < grupo.avancam ? ' grupo-classifica' : '');
+    // Escudo/bandeira pelo nome-base (clubeRef.clube), não por t.nome que tem o ano junto.
+    var esc = (t.clubeRef && typeof Escudos !== 'undefined' && Escudos.porNome)
+      ? Escudos.porNome(t.clubeRef.clube) : '';
+    var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
     linhas +=
       '<tr class="' + cls + '">' +
         '<td class="grupo-pos">' + (i + 1) + '</td>' +
-        '<td class="grupo-time">' + t.nome + '</td>' +
+        '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + t.nome + '</span></td>' +
         '<td class="grupo-num">' + t.gf + '</td>' +
         '<td class="grupo-num">' + t.ga + '</td>' +
         '<td class="grupo-num">' + sg + '</td>' +
@@ -480,7 +484,10 @@ function renderChaveCopa() {
   function celula(time, ehVenc, jogoResolvido) {
     if (!time) return '<div class="ck-time ck-vazio">A definir</div>';
     var cls = 'ck-time' + (time.voce ? ' ck-voce' : '') + (jogoResolvido && ehVenc ? ' ck-venc' : '') + (jogoResolvido && !ehVenc ? ' ck-perd' : '');
-    return '<div class="' + cls + '">' + time.nome + '</div>';
+    var esc = (time.clubeRef && typeof Escudos !== 'undefined' && Escudos.porNome)
+      ? Escudos.porNome(time.clubeRef.clube) : '';
+    var escHTML = esc ? '<span class="ck-escudo">' + esc + '</span>' : '';
+    return '<div class="' + cls + '">' + escHTML + '<span class="ck-nome">' + time.nome + '</span></div>';
   }
 
   var html = '';

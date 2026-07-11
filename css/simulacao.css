@@ -700,6 +700,24 @@
 .ck-perd  { color: var(--txt-soft); opacity: 0.6; }
 .ck-voce  { box-shadow: inset 0 0 0 1.5px #D9B25A; color: #E7C77A; }
 
+/* Bandeira/escudo na célula da chave (pequeno) e na tabela de grupos */
+.ck-time { display: flex; align-items: center; gap: 5px; }
+.ck-escudo { width: 15px; height: 15px; flex: 0 0 auto; }
+.ck-escudo svg { width: 100%; height: 100%; display: block; }
+.ck-nome { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+td.grupo-time { text-align: left; }
+.grupo-escudo {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  flex: 0 0 auto;
+}
+.grupo-escudo svg { width: 100%; height: 100%; display: block; }
+.grupo-nome { vertical-align: middle; }
+
 .ck-col-campeao { justify-content: center; min-width: 150px; }
 .ck-jogos-campeao { justify-content: center; }
 .ck-campeao {

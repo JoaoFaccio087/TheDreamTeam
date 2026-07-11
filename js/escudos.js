@@ -368,10 +368,12 @@
     AU: function () {                                                                     // Austrália
       var b = BOX;
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#00247D"/>' +
-             '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.42) + '" height="' + (b.h * 0.42) + '" fill="#012169"/>' +
-             '<path d="M ' + b.x + ' ' + b.y + ' L ' + (b.x + b.w * 0.42) + ' ' + (b.y + b.h * 0.42) + ' M ' + (b.x + b.w * 0.42) + ' ' + b.y + ' L ' + b.x + ' ' + (b.y + b.h * 0.42) + '" stroke="#FFFFFF" stroke-width="2"/>' +
-             estrelaCor(b.x + b.w * 0.21, b.y + b.h * 0.72, 2.5, '#FFFFFF') +
-             estrelaCor(b.x + b.w * 0.72, b.y + b.h * 0.3, 2.8, '#FFFFFF'); },
+             unionJack(b.x, b.y, b.w * 0.46, b.h * 0.46) +
+             estrelaCor(b.x + b.w * 0.23, b.y + b.h * 0.74, 3.4, '#FFFFFF') +
+             estrelaCor(b.x + b.w * 0.74, b.y + b.h * 0.32, 2, '#FFFFFF') +
+             estrelaCor(b.x + b.w * 0.84, b.y + b.h * 0.56, 2, '#FFFFFF') +
+             estrelaCor(b.x + b.w * 0.66, b.y + b.h * 0.66, 2, '#FFFFFF') +
+             estrelaCor(b.x + b.w * 0.78, b.y + b.h * 0.8, 1.6, '#FFFFFF'); },
     // ── Grupo 5 de novas seleções ──
     TN: function () {                                                                     // Tunísia
       var b = BOX;
@@ -404,10 +406,15 @@
              estrelaCor(b.x + b.w * 0.58, b.y + b.h * 0.46, 1.8, '#FFDE00') +
              estrelaCor(b.x + b.w * 0.5, b.y + b.h * 0.58, 1.8, '#FFDE00'); },
     SA: function () {                                                                     // Arábia Saudita
-      var b = BOX;
+      var b = BOX, sy = CENTRO.y + 6;
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#006C35"/>' +
-             '<rect x="' + (b.x + 4) + '" y="' + (b.y + b.h * 0.62) + '" width="' + (b.w - 8) + '" height="2.5" fill="#FFFFFF"/>' +
-             '<text x="' + CENTRO.x + '" y="' + (b.y + b.h * 0.5) + '" text-anchor="middle" font-family="Arial" font-size="7" fill="#FFFFFF">۩</text>'; },
+             // "inscrição" sugerida por traços brancos (não é texto real, só evoca a caligrafia)
+             '<rect x="' + (b.x + 7) + '" y="' + (b.y + b.h * 0.32) + '" width="' + (b.w - 14) + '" height="1.6" fill="#FFFFFF"/>' +
+             '<rect x="' + (b.x + 10) + '" y="' + (b.y + b.h * 0.4) + '" width="' + (b.w - 20) + '" height="1.6" fill="#FFFFFF"/>' +
+             // espada horizontal branca com cabo
+             '<rect x="' + (b.x + 8) + '" y="' + sy + '" width="' + (b.w - 18) + '" height="2.2" rx="1" fill="#FFFFFF"/>' +
+             '<polygon points="' + (b.x + b.w - 10) + ',' + (sy - 1) + ' ' + (b.x + b.w - 6) + ',' + (sy + 1.1) + ' ' + (b.x + b.w - 10) + ',' + (sy + 3.2) + '" fill="#FFFFFF"/>' +
+             '<rect x="' + (b.x + 6) + '" y="' + (sy - 1) + '" width="2.4" height="4.2" rx="0.8" fill="#FFFFFF"/>'; },
     QA: function () {                                                                     // Catar
       var b = BOX, wv = b.w * 0.34;
       var out = '<rect x="' + b.x + '" y="' + b.y + '" width="' + wv + '" height="' + b.h + '" fill="#FFFFFF"/>' +
@@ -419,10 +426,14 @@
       }
       return out; },
     IR: function () { return faixasH(['#239F40', '#FFFFFF', '#DA0000'], [1, 1, 1]) +       // Irã
-      '<text x="' + CENTRO.x + '" y="' + (CENTRO.y + 2) + '" text-anchor="middle" font-family="Arial" font-size="5" fill="#DA0000">☫</text>'; },
+      '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="2.4" fill="none" stroke="#DA0000" stroke-width="1"/>'; },
     // ── Grupo 6 de novas seleções ──
     WAL: function () { return faixasH(['#FFFFFF', '#00AB39'], [1, 1]) +                    // País de Gales
-      '<path d="M ' + (CENTRO.x - 8) + ' ' + (CENTRO.y - 2) + ' q 5 -5 10 -1 q 3 -3 6 0 q -2 2 -5 2 q 2 3 -2 4 q -3 3 -7 0 q -3 2 -5 -1 q 3 -1 3 -4 z" fill="#C8102E"/>'; },
+      // dragão estilizado (silhueta simplificada) sobre a divisa branco/verde
+      '<path d="M ' + (CENTRO.x - 10) + ' ' + (CENTRO.y - 3) +
+      ' q 3 -3 6 -1 q 2 -3 5 -2 q -1 2 -3 2 q 3 1 5 -1 q 1 3 -2 4 q 2 1 4 0 q -1 3 -4 2 q -2 2 -5 1 q -1 2 -4 1 q 1 -2 -1 -3 q -3 0 -4 -2 q 2 0 3 -1 z"' +
+      ' fill="#C8102E"/>' +
+      '<circle cx="' + (CENTRO.x - 8) + '" cy="' + (CENTRO.y - 2.5) + '" r="0.7" fill="#FFFFFF"/>'; },
     CI: function () { return faixasV(['#FF8200', '#FFFFFF', '#009A44']); },                // Costa do Marfim
     BO: function () { return faixasH(['#D52B1E', '#F9E300', '#007934'], [1, 1, 1]); },     // Bolívia
     HN: function () { return faixasH(['#0073CF', '#FFFFFF', '#0073CF'], [1, 1, 1]) +       // Honduras
@@ -445,12 +456,11 @@
     NZ: function () {                                                                     // Nova Zelândia
       var b = BOX;
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#00247D"/>' +
-             '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.42) + '" height="' + (b.h * 0.42) + '" fill="#012169"/>' +
-             '<path d="M ' + b.x + ' ' + b.y + ' L ' + (b.x + b.w * 0.42) + ' ' + (b.y + b.h * 0.42) + ' M ' + (b.x + b.w * 0.42) + ' ' + b.y + ' L ' + b.x + ' ' + (b.y + b.h * 0.42) + '" stroke="#FFFFFF" stroke-width="1.6"/>' +
-             estrelaCor(b.x + b.w * 0.72, b.y + b.h * 0.3, 2, '#CC142B') +
-             estrelaCor(b.x + b.w * 0.82, b.y + b.h * 0.55, 2, '#CC142B') +
-             estrelaCor(b.x + b.w * 0.62, b.y + b.h * 0.62, 2, '#CC142B') +
-             estrelaCor(b.x + b.w * 0.75, b.y + b.h * 0.78, 2, '#CC142B'); },
+             unionJack(b.x, b.y, b.w * 0.46, b.h * 0.46) +
+             estrelaCor(b.x + b.w * 0.72, b.y + b.h * 0.32, 2.2, '#CC142B') +
+             estrelaCor(b.x + b.w * 0.84, b.y + b.h * 0.56, 2.2, '#CC142B') +
+             estrelaCor(b.x + b.w * 0.64, b.y + b.h * 0.62, 2.2, '#CC142B') +
+             estrelaCor(b.x + b.w * 0.76, b.y + b.h * 0.82, 2.2, '#CC142B'); },
     CU: function () {                                                                     // Cuba
       var b = BOX;
       return faixasH(['#002A8F', '#FFFFFF', '#002A8F', '#FFFFFF', '#002A8F'], [1, 1, 1, 1, 1]) +
@@ -461,13 +471,18 @@
       estrelaCor(CENTRO.x, CENTRO.y, 3.5, '#FFCB00'); },
     BA: function () {                                                                     // Bósnia
       var b = BOX;
-      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#002395"/>' +
-             '<polygon points="' + (b.x + b.w * 0.3) + ',' + b.y + ' ' + (b.x + b.w * 0.72) + ',' + b.y + ' ' + (b.x + b.w * 0.3) + ',' + (b.y + b.h) + '" fill="#FECB00"/>' +
-             estrelaCor(b.x + b.w * 0.34, b.y + b.h * 0.24, 1.6, '#FFFFFF') + estrelaCor(b.x + b.w * 0.44, b.y + b.h * 0.5, 1.6, '#FFFFFF') + estrelaCor(b.x + b.w * 0.34, b.y + b.h * 0.76, 1.6, '#FFFFFF'); },
+      var out = '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#002395"/>' +
+             '<polygon points="' + (b.x + b.w * 0.32) + ',' + b.y + ' ' + (b.x + b.w * 0.78) + ',' + b.y + ' ' + (b.x + b.w * 0.32) + ',' + (b.y + b.h) + '" fill="#FECB00"/>';
+      // estrelas brancas correndo na diagonal (hipotenusa do triângulo)
+      for (var i = 0; i < 5; i++) {
+        var t = 0.12 + i * 0.19;
+        out += estrelaCor(b.x + b.w * (0.78 - t * 0.46), b.y + b.h * t, 1.7, '#FFFFFF');
+      }
+      return out; },
     SV: function () { return faixasH(['#0F47AF', '#FFFFFF', '#0F47AF'], [1, 1, 1]) +       // El Salvador
       '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3" fill="#FCD116" stroke="#0F47AF" stroke-width="0.6"/>'; },
     IQ: function () { return faixasH(['#CE1126', '#FFFFFF', '#000000'], [1, 1, 1]) +       // Iraque
-      '<text x="' + CENTRO.x + '" y="' + (CENTRO.y + 1.5) + '" text-anchor="middle" font-family="Arial" font-size="4" fill="#007A3D">الله أكبر</text>'; },
+      estrelaCor(CENTRO.x - 8, CENTRO.y, 2, '#007A3D') + estrelaCor(CENTRO.x, CENTRO.y, 2, '#007A3D') + estrelaCor(CENTRO.x + 8, CENTRO.y, 2, '#007A3D'); },
     IL: function () {                                                                     // Israel
       var b = BOX;
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
@@ -617,6 +632,16 @@
     var b = BOX, x0 = b.x, y0 = b.y, x1 = b.x + b.w, y1 = b.y + b.h, t = 3;
     return '<polygon points="' + x0 + ',' + (y0) + ' ' + (x0 + t) + ',' + y0 + ' ' + x1 + ',' + (y1 - t) + ' ' + x1 + ',' + y1 + ' ' + (x1 - t) + ',' + y1 + ' ' + x0 + ',' + (y0 + t) + '" fill="' + cor + '"/>' +
            '<polygon points="' + x1 + ',' + y0 + ' ' + x1 + ',' + (y0 + t) + ' ' + (x0 + t) + ',' + y1 + ' ' + x0 + ',' + y1 + ' ' + x0 + ',' + (y1 - t) + ' ' + (x1 - t) + ',' + y0 + '" fill="' + cor + '"/>';
+  }
+  // Union Jack simplificado (cantão de Austrália e Nova Zelândia). x,y = canto; w,h = tamanho.
+  function unionJack(x, y, w, h) {
+    var cx = x + w / 2, cy = y + h / 2;
+    return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#012169"/>' +
+      '<path d="M ' + x + ' ' + y + ' L ' + (x + w) + ' ' + (y + h) + ' M ' + (x + w) + ' ' + y + ' L ' + x + ' ' + (y + h) + '" stroke="#FFFFFF" stroke-width="2.4"/>' +
+      '<rect x="' + (cx - 2.4) + '" y="' + y + '" width="4.8" height="' + h + '" fill="#FFFFFF"/>' +
+      '<rect x="' + x + '" y="' + (cy - 2.4) + '" width="' + w + '" height="4.8" fill="#FFFFFF"/>' +
+      '<rect x="' + (cx - 1.1) + '" y="' + y + '" width="2.2" height="' + h + '" fill="#C8102E"/>' +
+      '<rect x="' + x + '" y="' + (cy - 1.1) + '" width="' + w + '" height="2.2" fill="#C8102E"/>';
   }
   // Estrela de 5 pontas VAZADA (só contorno) — pentagrama de Marrocos.
   function estrelaCorVazada(cx, cy, r, cor) {
