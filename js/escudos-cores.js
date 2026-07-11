@@ -119,7 +119,10 @@
     'Angola': 'AO', 'Bósnia e Herzegovina': 'BA', 'El Salvador': 'SV', 'Iraque': 'IQ',
     'Israel': 'IL', 'Togo': 'TG', 'União Soviética': 'SU', 'Irlanda do Norte': 'NIR',
     'Iugoslávia': 'YU', 'Tchecoslováquia': 'CS', 'Coreia do Norte': 'KP', 'Cabo Verde': 'CV',
-    'Emirados Árabes Unidos': 'AE', 'Haiti': 'HT', 'Jordânia': 'JO', 'Uzbequistão': 'UZ'
+    'Emirados Árabes Unidos': 'AE', 'Haiti': 'HT', 'Jordânia': 'JO', 'Uzbequistão': 'UZ',
+    'Alemanha Oriental': 'DDR', 'Curaçao': 'CW', 'Kuwait': 'KW', 'República Democrática do Congo': 'CD',
+    'Sérvia e Montenegro': 'SCG', 'Trinidad e Tobago': 'TT', 'Zaire': 'ZAI',
+    'Índias Orientais Holandesas': 'NEI'
   };
 
   // Paleta de reserva para clubes fora do mapa manual: cores derivadas do NOME, de forma

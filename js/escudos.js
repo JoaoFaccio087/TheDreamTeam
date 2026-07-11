@@ -140,8 +140,8 @@
       // Constelação Cruzeiro do Sul (Cruzeiro) — 5 estrelas em forma de cruz, na cor da frente.
       case 'cruzeiro-do-sul': {
         var e = '', cx = CENTRO.x, cy = CENTRO.y;
-        var pts = [[0, -9], [0, 7], [-6, -1], [6, 0], [1.5, 2]];   // α,β,γ,δ,ε aproximados
-        var rr = [2.6, 2.6, 2.2, 2.2, 1.6];
+        var pts = [[0, -13], [0, 11], [-9, -1.5], [9, 0], [2, 3]];   // α,β,γ,δ,ε aproximados, maiores
+        var rr = [3.6, 3.6, 3.1, 3.1, 2.2];
         pts.forEach(function (p, k) { e += estrelaCor(cx + p[0], cy + p[1], rr[k], cor); });
         return e;
       }
@@ -533,6 +533,43 @@
              '<rect x="' + b.x + '" y="' + (b.y + b.h / 3) + '" width="' + b.w + '" height="' + (b.h / 3) + '" fill="#FFFFFF"/>' +
              '<rect x="' + b.x + '" y="' + (b.y + 2 * b.h / 3) + '" width="' + b.w + '" height="' + (b.h / 3) + '" fill="#1EB53A"/>' +
              '<circle cx="' + (b.x + b.w * 0.2) + '" cy="' + (b.y + b.h * 0.18) + '" r="2.5" fill="#FFFFFF"/>'; },
+    // ── Grupo 9 (final): as 8 últimas, quase todas históricas ──
+    DDR: function () {                                                                    // Alemanha Oriental
+      var b = BOX;
+      return faixasH(['#000000', '#DD0000', '#FFCE00'], [1, 1, 1]) +
+             '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3.5" fill="none" stroke="#FFCE00" stroke-width="1"/>'; },
+    CW: function () {                                                                     // Curaçao
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#002B7F"/>' +
+             '<rect x="' + b.x + '" y="' + (b.y + b.h * 0.62) + '" width="' + b.w + '" height="' + (b.h * 0.16) + '" fill="#F9D90F"/>' +
+             estrelaCor(b.x + b.w * 0.24, b.y + b.h * 0.24, 2.4, '#FFFFFF') +
+             estrelaCor(b.x + b.w * 0.36, b.y + b.h * 0.36, 3.2, '#FFFFFF'); },
+    KW: function () {                                                                     // Kuwait
+      var b = BOX;
+      return faixasH(['#007A3D', '#FFFFFF', '#CE1126'], [1, 1, 1]) +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.34) + ',' + (b.y + b.h / 3) + ' ' + (b.x + b.w * 0.34) + ',' + (b.y + 2 * b.h / 3) + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#000000"/>'; },
+    CD: function () {                                                                     // Rep. Dem. Congo
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#007FFF"/>' +
+             '<polygon points="' + b.x + ',' + (b.y + b.h) + ' ' + (b.x + b.w) + ',' + b.y + ' ' + (b.x + b.w) + ',' + (b.y + b.h * 0.2) + ' ' + (b.x + b.w * 0.2) + ',' + (b.y + b.h) + '" fill="#F7D618"/>' +
+             '<polygon points="' + b.x + ',' + (b.y + b.h) + ' ' + (b.x + b.w) + ',' + (b.y + b.h * 0.08) + ' ' + (b.x + b.w) + ',' + (b.y + b.h * 0.16) + ' ' + (b.x + b.w * 0.16) + ',' + (b.y + b.h) + '" fill="#CE1021"/>' +
+             estrelaCor(b.x + b.w * 0.18, b.y + b.h * 0.2, 3, '#F7D618'); },
+    SCG: function () { return faixasH(['#0C4076', '#FFFFFF', '#C6363C'], [1, 1, 1]); },   // Sérvia e Montenegro
+    TT: function () {                                                                     // Trinidad e Tobago
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#DA1A35"/>' +
+             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.28) + ',' + b.y + ' ' + (b.x + b.w) + ',' + (b.y + b.h) + ' ' + (b.x + b.w * 0.72) + ',' + (b.y + b.h) + '" fill="#FFFFFF"/>' +
+             '<polygon points="' + (b.x + b.w * 0.06) + ',' + b.y + ' ' + (b.x + b.w * 0.22) + ',' + b.y + ' ' + (b.x + b.w * 0.94) + ',' + (b.y + b.h) + ' ' + (b.x + b.w * 0.78) + ',' + (b.y + b.h) + '" fill="#000000"/>'; },
+    ZAI: function () {                                                                    // Zaire
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#0F9B4C"/>' +
+             '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="9" fill="#F7D618"/>' +
+             '<path d="M ' + (CENTRO.x - 3) + ' ' + (CENTRO.y - 3) + ' l 6 0 l -1.5 4 z" fill="#7B3F00"/>' +
+             '<rect x="' + (CENTRO.x - 0.7) + '" y="' + (CENTRO.y - 3) + '" width="1.4" height="7" fill="#7B3F00"/>'; },
+    NEI: function () {                                                                    // Índias Orientais Holandesas
+      var b = BOX;
+      return faixasH(['#AE1C28', '#FFFFFF', '#21468B'], [1, 1, 1]);
+    },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
