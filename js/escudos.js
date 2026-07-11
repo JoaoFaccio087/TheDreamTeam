@@ -299,6 +299,34 @@
              saltire('#FFFFFF');
     },
     PY: function () { return faixasH(['#D52B1E', '#FFFFFF', '#0038A8'], [1, 1, 1]); },   // Paraguai
+    // ── Grupo 3 de novas seleções ──
+    TR: function () {                                                                    // Turquia
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#E30A17"/>' +
+             '<circle cx="' + (CENTRO.x - 3) + '" cy="' + CENTRO.y + '" r="6" fill="#FFFFFF"/>' +
+             '<circle cx="' + (CENTRO.x - 1) + '" cy="' + CENTRO.y + '" r="4.8" fill="#E30A17"/>' +
+             estrelaCor(CENTRO.x + 5, CENTRO.y, 3, '#FFFFFF'); },
+    GR: function () {                                                                    // Grécia
+      var b = BOX, n = 5, fh = b.h / 9;
+      var out = '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#0D5EAF"/>';
+      for (var i = 0; i < 4; i++)
+        out += '<rect x="' + b.x + '" y="' + (b.y + (i * 2 + 1) * fh) + '" width="' + b.w + '" height="' + fh + '" fill="#FFFFFF"/>';
+      out += '<rect x="' + b.x + '" y="' + b.y + '" width="' + (b.w * 0.4) + '" height="' + (fh * 5) + '" fill="#0D5EAF"/>';
+      out += '<rect x="' + (b.x + b.w * 0.16 - 2) + '" y="' + (b.y + fh) + '" width="4" height="' + (fh * 3) + '" fill="#FFFFFF"/>';
+      out += '<rect x="' + (b.x + 2) + '" y="' + (b.y + fh * 2.5 - 2) + '" width="' + (b.w * 0.32) + '" height="4" fill="#FFFFFF"/>';
+      return out; },
+    NO: function () { return cruzNordica('#BA0C2F', '#FFFFFF') +                          // Noruega
+      '<rect x="' + (BOX.x + BOX.w * 0.38 - 1.5) + '" y="' + BOX.y + '" width="3" height="' + BOX.h + '" fill="#00205B"/>' +
+      '<rect x="' + BOX.x + '" y="' + (CENTRO.y - 1.5) + '" width="' + BOX.w + '" height="3" fill="#00205B"/>'; },
+    HU: function () { return faixasH(['#CE2939', '#FFFFFF', '#477050'], [1, 1, 1]); },    // Hungria
+    RO: function () { return faixasV(['#002B7F', '#FCD116', '#CE1126']); },               // Romênia
+    BG: function () { return faixasH(['#FFFFFF', '#00966E', '#D62612'], [1, 1, 1]); },    // Bulgária
+    CR: function () { return faixasH(['#002B7F', '#FFFFFF', '#CE1126', '#FFFFFF', '#002B7F'], [1, 1, 2, 1, 1]); },  // Costa Rica
+    KR: function () {                                                                     // Coreia do Sul
+      var b = BOX;
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
+             '<path d="M ' + (CENTRO.x - 6) + ' ' + CENTRO.y + ' a 6 6 0 0 1 12 0 a 3 3 0 0 1 -6 0 a 3 3 0 0 0 -6 0" fill="#CD2E3A"/>' +
+             '<path d="M ' + (CENTRO.x + 6) + ' ' + CENTRO.y + ' a 6 6 0 0 1 -12 0 a 3 3 0 0 1 6 0 a 3 3 0 0 0 6 0" fill="#0047A0"/>'; },
     UY: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
       faixasStripesUY() + '<rect x="8" y="14" width="20.5" height="22.4" fill="#FFFFFF"/>' + disco2(19, 25, '#FCD116', 6.5); },
     EN: function () { return '<rect x="8" y="14" width="48" height="50" fill="#FFFFFF"/>' +
