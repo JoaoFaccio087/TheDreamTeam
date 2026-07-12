@@ -1930,16 +1930,12 @@ function setupSocket(server, frontendUrl) {
         sala.prontosRodada = new Set();
         io.to(code).emit('chave:prontos', { x: 0, y: sala.jogadores.filter(j => !j.ehBot).length });
 
-        // Se nenhum humano segue vivo na próxima fase, simula o resto direto.
+        // Antes: se nenhum humano seguia vivo, simulava o resto direto até a final.
+        // Isso quebrava a experiência do ESPECTADOR (quem caiu na fase de grupos e acompanha o
+        // mata-mata): ao avançar as oitavas, o servidor pulava quartas/semi/final de uma vez e já
+        // mandava o fim. Agora NÃO pulamos: o host-espectador avança fase por fase, como um jogador.
+        // A sala não trava porque o próprio host controla o "Próxima fase →".
         let finalCampeao = campeao, acabou = ehFinal;
-        if (!ehFinal) {
-          const prox = sala.chave.rounds[sala.chave.rodadaAtual] || [];
-          const temHumano = prox.some(n => [n.a, n.b].some(t => t && !t.ehBot));
-          if (!temHumano) {
-            let r2; do { r2 = simularRodadaMata(sala); } while (!r2.ehFinal);
-            finalCampeao = r2.campeao; acabou = true;
-          }
-        }
 
         if (acabou) {
           sala.status = 'fim';
