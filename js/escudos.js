@@ -385,12 +385,25 @@
     EG: function () { return faixasH(['#CE1126', '#FFFFFF', '#000000'], [1, 1, 1]) +       // Egito
       '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3" fill="#C09300"/>'; },
     ZA: function () {                                                                     // África do Sul
-      var b = BOX;
-      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#DE3831"/>' +
-             '<rect x="' + b.x + '" y="' + CENTRO.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#002395"/>' +
-             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.28) + ' ' + (b.x + b.w * 0.32) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h * 0.72) + '" fill="#007749"/>' +
-             '<polygon points="' + b.x + ',' + b.y + ' ' + (b.x + b.w * 0.5) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h) + '" fill="#FFB915"/>' +
-             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.12) + ' ' + (b.x + b.w * 0.38) + ',' + CENTRO.y + ' ' + b.x + ',' + (b.y + b.h * 0.88) + '" fill="#007749"/>'; },
+      var b = BOX, cy = CENTRO.y;
+      // Metades vermelha (topo) e azul (base), com o Y verde e o triângulo preto/dourado à esquerda.
+      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#E03C31"/>' +
+             '<rect x="' + b.x + '" y="' + cy + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#001489"/>' +
+             // banda verde em Y (deitado): entra da esquerda e abre para as duas pontas da direita
+             '<polygon points="' +
+               b.x + ',' + (b.y + b.h * 0.30) + ' ' +
+               (b.x + b.w * 0.40) + ',' + cy + ' ' +
+               (b.x + b.w) + ',' + (b.y + b.h * 0.16) + ' ' +
+               (b.x + b.w) + ',' + (b.y + b.h * 0.34) + ' ' +
+               (b.x + b.w * 0.52) + ',' + cy + ' ' +
+               (b.x + b.w) + ',' + (b.y + b.h * 0.66) + ' ' +
+               (b.x + b.w) + ',' + (b.y + b.h * 0.84) + ' ' +
+               (b.x + b.w * 0.40) + ',' + cy + ' ' +
+               b.x + ',' + (b.y + b.h * 0.70) +
+             '" fill="#007A4D"/>' +
+             // triângulo preto à esquerda com contorno dourado
+             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.22) + ' ' + (b.x + b.w * 0.30) + ',' + cy + ' ' + b.x + ',' + (b.y + b.h * 0.78) + '" fill="#FFB81C"/>' +
+             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.28) + ' ' + (b.x + b.w * 0.22) + ',' + cy + ' ' + b.x + ',' + (b.y + b.h * 0.72) + '" fill="#000000"/>'; },
     CA: function () {                                                                     // Canadá
       var b = BOX, q = b.w * 0.26;
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
@@ -471,12 +484,13 @@
       estrelaCor(CENTRO.x, CENTRO.y, 3.5, '#FFCB00'); },
     BA: function () {                                                                     // Bósnia
       var b = BOX;
+      // Fundo azul; grande triângulo amarelo ocupando a metade superior-direita (diagonal).
       var out = '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#002395"/>' +
-             '<polygon points="' + (b.x + b.w * 0.32) + ',' + b.y + ' ' + (b.x + b.w * 0.78) + ',' + b.y + ' ' + (b.x + b.w * 0.32) + ',' + (b.y + b.h) + '" fill="#FECB00"/>';
-      // estrelas brancas correndo na diagonal (hipotenusa do triângulo)
-      for (var i = 0; i < 5; i++) {
-        var t = 0.12 + i * 0.19;
-        out += estrelaCor(b.x + b.w * (0.78 - t * 0.46), b.y + b.h * t, 1.7, '#FFFFFF');
+             '<polygon points="' + (b.x + b.w * 0.28) + ',' + b.y + ' ' + (b.x + b.w) + ',' + b.y + ' ' + (b.x + b.w) + ',' + (b.y + b.h) + '" fill="#FECB00"/>';
+      // estrelas brancas correndo ao longo da diagonal (hipotenusa), como na bandeira real
+      for (var i = 0; i < 6; i++) {
+        var t = 0.06 + i * 0.16;
+        out += estrelaCor(b.x + b.w * (0.28 + t * 0.72), b.y + b.h * t, 1.7, '#FFFFFF');
       }
       return out; },
     SV: function () { return faixasH(['#0F47AF', '#FFFFFF', '#0F47AF'], [1, 1, 1]) +       // El Salvador

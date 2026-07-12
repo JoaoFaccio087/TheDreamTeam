@@ -225,8 +225,8 @@
 }
 .partida-card:not(.expandido) .partida-adversario-bloco {
   flex-direction: row;
-  align-items: baseline;
-  gap: 5px;
+  align-items: center;
+  gap: 8px;
 }
 
 /* Nome do clube: grande quando expandido */
@@ -238,20 +238,22 @@
   text-overflow: ellipsis;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 .partida-escudo {
   display: inline-flex;
-  width: 26px;
-  height: 26px;
+  width: 32px;
+  height: 32px;
   flex: 0 0 auto;
 }
 .partida-escudo svg { width: 100%; height: 100%; display: block; }
 .partida-card.expandido .partida-adversario-nome         { font-size: var(--fs-lg); line-height: 1.1; }
 .partida-card:not(.expandido) .partida-adversario-nome   { font-size: var(--fs-md); }
 
-/* Edição: sempre pequena e apagada */
+/* Edição: sempre pequena e apagada. No card fechado, alinha verticalmente com o nome. */
 .partida-adversario-ano { color: var(--txt-soft); font-size: var(--fs-sm); }
+.partida-card:not(.expandido) .partida-adversario-ano { align-self: center; }
+
 /* Força do adversário — discreta/opaca, abaixo do nome e da edição */
 .partida-adversario-forca {
   color: var(--txt-soft);
@@ -260,6 +262,8 @@
   font-family: 'Archivo Black', sans-serif;
   letter-spacing: 0.02em;
 }
+/* Card fechado: não mostra a força (só quando expandido) */
+.partida-card:not(.expandido) .partida-adversario-forca { display: none; }
 
 /* Bloco direito: placar + relógio + mini-res + toggle */
 .partida-placar-bloco {
