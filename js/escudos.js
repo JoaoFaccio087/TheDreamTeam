@@ -385,25 +385,20 @@
     EG: function () { return faixasH(['#CE1126', '#FFFFFF', '#000000'], [1, 1, 1]) +       // Egito
       '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3" fill="#C09300"/>'; },
     ZA: function () {                                                                     // África do Sul
-      var b = BOX, cy = CENTRO.y;
-      // Metades vermelha (topo) e azul (base), com o Y verde e o triângulo preto/dourado à esquerda.
-      return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#E03C31"/>' +
-             '<rect x="' + b.x + '" y="' + cy + '" width="' + b.w + '" height="' + (b.h / 2) + '" fill="#001489"/>' +
-             // banda verde em Y (deitado): entra da esquerda e abre para as duas pontas da direita
-             '<polygon points="' +
-               b.x + ',' + (b.y + b.h * 0.30) + ' ' +
-               (b.x + b.w * 0.40) + ',' + cy + ' ' +
-               (b.x + b.w) + ',' + (b.y + b.h * 0.16) + ' ' +
-               (b.x + b.w) + ',' + (b.y + b.h * 0.34) + ' ' +
-               (b.x + b.w * 0.52) + ',' + cy + ' ' +
-               (b.x + b.w) + ',' + (b.y + b.h * 0.66) + ' ' +
-               (b.x + b.w) + ',' + (b.y + b.h * 0.84) + ' ' +
-               (b.x + b.w * 0.40) + ',' + cy + ' ' +
-               b.x + ',' + (b.y + b.h * 0.70) +
-             '" fill="#007A4D"/>' +
-             // triângulo preto à esquerda com contorno dourado
-             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.22) + ' ' + (b.x + b.w * 0.30) + ',' + cy + ' ' + b.x + ',' + (b.y + b.h * 0.78) + '" fill="#FFB81C"/>' +
-             '<polygon points="' + b.x + ',' + (b.y + b.h * 0.28) + ' ' + (b.x + b.w * 0.22) + ',' + cy + ' ' + b.x + ',' + (b.y + b.h * 0.72) + '" fill="#000000"/>'; },
+      // BOX: x 10..54, y 16..62, cy=39. O Y é feito com linhas grossas (stroke).
+      var L = 10, R = 54, T = 16, B = 62, cy = 39, W = 44, H = 46, pinch = 30, hasteL = 23;
+      return (
+        '<rect x="' + L + '" y="' + T + '" width="' + W + '" height="' + (H / 2) + '" fill="#E03C31"/>' +
+        '<rect x="' + L + '" y="' + cy + '" width="' + W + '" height="' + (H / 2) + '" fill="#001489"/>' +
+        // Y branco por baixo (borda): haste até o triângulo + dois braços às pontas
+        '<path d="M ' + hasteL + ' ' + cy + ' L ' + pinch + ' ' + cy + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (T + 3) + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (B - 3) + '" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="butt"/>' +
+        // Y verde por cima (mais fino)
+        '<path d="M ' + hasteL + ' ' + cy + ' L ' + pinch + ' ' + cy + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (T + 3) + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (B - 3) + '" stroke="#007A4D" stroke-width="6" fill="none" stroke-linecap="butt"/>' +
+        // triângulo preto à esquerda com borda dourada
+        '<polygon points="' + L + ',' + T + ' ' + (L + 17) + ',' + cy + ' ' + L + ',' + B + '" fill="#FFB81C"/>' +
+        '<polygon points="' + L + ',' + (T + 3) + ' ' + (L + 13) + ',' + cy + ' ' + L + ',' + (B - 3) + '" fill="#000000"/>'
+      );
+    },
     CA: function () {                                                                     // Canadá
       var b = BOX, q = b.w * 0.26;
       return '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="#FFFFFF"/>' +
@@ -727,6 +722,14 @@
         return gerarClube({ nome: nome, cores: C.coresClube(nome), seed: nome,
           padrao: e.padrao, listras: e.listras, inverter: e.inverter });
       } catch (err) { return ''; }
+    },
+    // Modos onde os escudos estão LIGADOS por enquanto. Libertadores/Champions ficam de fora até
+    // termos as cores reais dos clubes sul-americanos/europeus (senão usariam a paleta de reserva).
+    MODOS_ATIVOS: ['brasileirao', 'copa'],
+    ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
+    // porNome só se o modo permitir — usada pelos pontos de integração.
+    porNomeSeModo: function (nome, modo) {
+      return this.ativoNoModo(modo) ? this.porNome(nome) : '';
     },
     paisesSuportados: function () { return Object.keys(BANDEIRAS); }
   };

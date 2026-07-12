@@ -105,7 +105,8 @@ function mostrarFalencia() {
 // Preenche o escudo/bandeira no card do sorteio, usando a API única (decide clube/seleção).
 function preencherEscudoCard(edicao) {
   if (typeof clubeEscudo === 'undefined' || !clubeEscudo) return;
-  clubeEscudo.innerHTML = (typeof Escudos !== 'undefined' && Escudos.porNome) ? Escudos.porNome(edicao.clube) : '';
+  clubeEscudo.innerHTML = (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
+    ? Escudos.porNomeSeModo(edicao.clube, modoSelecionado) : '';
 }
 
 // Animação estilo "slot machine" (~900ms) até revelar o clube sorteado.

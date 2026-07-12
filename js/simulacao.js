@@ -184,7 +184,7 @@ function criarCardPartida(id, adversario, fase) {
     '<div class="partida-header">' +
       '<div class="partida-adversario-bloco">' +
         '<span class="partida-adversario-nome">' +
-          ((typeof Escudos !== 'undefined' && Escudos.porNome) ? '<span class="partida-escudo">' + Escudos.porNome(adversario.clube) + '</span>' : '') +
+          ((typeof Escudos !== 'undefined' && Escudos.porNomeSeModo) ? (function(){ var s = Escudos.porNomeSeModo(adversario.clube, modoSelecionado); return s ? '<span class="partida-escudo">' + s + '</span>' : ''; })() : '') +
           adversario.clube + '</span>' +
         '<span class="partida-adversario-ano">' + rotuloCompeticao(adversario.competicao) + ' \xB7 ' + adversario.edicao + '</span>' +
         '<span class="partida-adversario-forca">Força ' + forcaAdv + '</span>' +
@@ -314,9 +314,10 @@ function bonusPosicao(jog) {
 // erra de vez em quando, e o goleiro fraco às vezes pega.
 function resultadoCobranca(cob, fGoleiro) {
   var fAt = cob.forca || 73;
-  var pGol = limita(0.74 + (fAt - fGoleiro) * 0.006 + bonusPosicao(cob), 0.45, 0.90);
+  // Conversão real de pênaltis fica ~75-80%. Base mais alta e piso maior para não errar demais.
+  var pGol = limita(0.80 + (fAt - fGoleiro) * 0.005 + bonusPosicao(cob), 0.58, 0.93);
   if (Math.random() < pGol) return 'gol';
-  var pDefesa = limita(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.78);
+  var pDefesa = limita(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.75);
   return Math.random() < pDefesa ? 'defesa' : 'fora';
 }
 
