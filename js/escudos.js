@@ -385,18 +385,14 @@
     EG: function () { return faixasH(['#CE1126', '#FFFFFF', '#000000'], [1, 1, 1]) +       // Egito
       '<circle cx="' + CENTRO.x + '" cy="' + CENTRO.y + '" r="3" fill="#C09300"/>'; },
     ZA: function () {                                                                     // África do Sul
-      // BOX: x 10..54, y 16..62, cy=39. O Y é feito com linhas grossas (stroke).
-      var L = 10, R = 54, T = 16, B = 62, cy = 39, W = 44, H = 46, pinch = 30, hasteL = 23;
+      // Versão simplificada e limpa: faixas vermelho/branco/verde/branco/azul + triângulo preto
+      // à esquerda com borda dourada. Evoca a bandeira sem o "Y" (que ficava torto no escudo).
+      var L = 10, R = 54, T = 16, B = 62, cy = 39, W = 44, H = 46;
       return (
-        '<rect x="' + L + '" y="' + T + '" width="' + W + '" height="' + (H / 2) + '" fill="#E03C31"/>' +
-        '<rect x="' + L + '" y="' + cy + '" width="' + W + '" height="' + (H / 2) + '" fill="#001489"/>' +
-        // Y branco por baixo (borda): haste até o triângulo + dois braços às pontas
-        '<path d="M ' + hasteL + ' ' + cy + ' L ' + pinch + ' ' + cy + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (T + 3) + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (B - 3) + '" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="butt"/>' +
-        // Y verde por cima (mais fino)
-        '<path d="M ' + hasteL + ' ' + cy + ' L ' + pinch + ' ' + cy + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (T + 3) + ' M ' + pinch + ' ' + cy + ' L ' + R + ' ' + (B - 3) + '" stroke="#007A4D" stroke-width="6" fill="none" stroke-linecap="butt"/>' +
+        faixasH(['#E03C31', '#FFFFFF', '#007A4D', '#FFFFFF', '#001489'], [4, 1, 3, 1, 4]) +
         // triângulo preto à esquerda com borda dourada
-        '<polygon points="' + L + ',' + T + ' ' + (L + 17) + ',' + cy + ' ' + L + ',' + B + '" fill="#FFB81C"/>' +
-        '<polygon points="' + L + ',' + (T + 3) + ' ' + (L + 13) + ',' + cy + ' ' + L + ',' + (B - 3) + '" fill="#000000"/>'
+        '<polygon points="' + L + ',' + T + ' ' + (L + 18) + ',' + cy + ' ' + L + ',' + B + '" fill="#FFB81C"/>' +
+        '<polygon points="' + L + ',' + (T + 3) + ' ' + (L + 14) + ',' + cy + ' ' + L + ',' + (B - 3) + '" fill="#000000"/>'
       );
     },
     CA: function () {                                                                     // Canadá
