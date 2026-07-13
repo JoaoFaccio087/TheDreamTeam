@@ -815,12 +815,42 @@ function emitirFimDeJogo(io, sala, code) {
   const artilharia   = Object.entries(sala.statsGols).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
   const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1] - a[1]).slice(0, 18).map(([nome, assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
 
-  io.to(code).emit('game:end', { ranking: buildRanking(sala), artilharia, assistencias, statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {} });
+  // Payload do fim. Inclui a CHAVE final (rounds/fases) e o campeão explícito — necessário para o
+  // cliente renderizar o chaveamento com o vencedor, inclusive no "Pular tudo" (que vai direto ao
+  // fim sem passar pelas telas intermediárias do mata-mata).
+  const fimPayload = {
+    ranking: buildRanking(sala), artilharia, assistencias,
+    statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {},
+  };
+  if (sala.chave) {
+    fimPayload.rounds      = sala.chave.rounds;
+    fimPayload.rodadaAtual = sala.chave.rodadaAtual;
+    fimPayload.fases       = sala.chave.fases;
+  }
+  if (campeao) fimPayload.campeao = { userId: campeao.userId, nome: campeao.nomeDoTime || campeao.nome };
+  io.to(code).emit('game:end', fimPayload);
 
   // NÃO gravamos a campanha aqui. O CLIENTE grava (js/online.js → salvarCampanhaOnline → POST
   // /matches) e essa é a fonte de verdade: a linha dele tem `posicao`, o rótulo correto da
   // competição e devolve as conquistas novas para o toast. O mata-mata (chave/champions) já
   // funcionava assim — a liga gravava nos DOIS lados e duplicava a campanha no histórico.
+  deleteSala(code);
+}
+
+// Fim do MATA-MATA (chave): o campeão é o vencedor da FINAL (não pontos de liga), ranking é o
+// rankingMata, e envia a chave (rounds/fases). Compartilhada entre o avanço manual e o "Pular tudo".
+function emitirFimDeMata(io, sala, code, campeaoFinal) {
+  sala.status = 'fim';
+  const timeDoJogador = {};
+  sala.jogadores.forEach(j => { (j.picks || []).forEach(p => { if (p && p.nome) timeDoJogador[p.nome] = j.nomeDoTime; }); });
+  const artilharia   = Object.entries(sala.statsGols).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
+  const assistencias = Object.entries(sala.statsAssists).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
+  io.to(code).emit('game:end', {
+    campeao: campeaoFinal ? { userId: campeaoFinal.userId, nome: campeaoFinal.nome, ehBot: !!campeaoFinal.ehBot } : null,
+    ranking: rankingMata(sala), artilharia, assistencias, mata: true,
+    statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {},
+    rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
+  });
   deleteSala(code);
 }
 
@@ -853,30 +883,22 @@ function tentarPularTudo(io, sala, code) {
       montarChaveOnline(sala);
       // Simula todas as fases do mata-mata de uma vez.
       let rm; do { rm = simularRodadaMata(sala); } while (!rm.ehFinal);
-      // Chegou ao campeão → resultado final da campanha.
-      emitirFimDeJogo(io, sala, code);
+      // Chegou ao campeão → resultado final da campanha (fim específico do mata-mata).
+      emitirFimDeMata(io, sala, code, rm && rm.campeao);
     } else if (sala.formato === 'champions') {
       // "Pular tudo" no Champions é LITERAL: liga → playoff → mata-mata inteiro → resultado final.
-      console.log('[pularTudo champions] iniciando. classificacao length=', (res && res.payload && res.payload.classificacao || []).length);
       const classificacao = (res && res.payload && res.payload.classificacao) || [];
       const cortes = cortesChampions(classificacao);
       sala.cortesLiga = cortes;
-      console.log('[pularTudo champions] cortes: direto=', cortes.direto.length, 'playoff=', cortes.playoff.length);
-      // Roda o playoff (9–24) e apura os 8 vencedores + 8 diretos = 16 das oitavas.
       const { vencedores } = simularPlayoffChampions(sala);
-      console.log('[pularTudo champions] playoff resolvido. vencedores=', vencedores.length);
       const linhaPorUid = {};
       (cortes.playoff || []).forEach(r => { linhaPorUid[r.userId] = r; });
       const vencedoresLinhas = vencedores.map(v => linhaPorUid[v.userId]).filter(Boolean);
       sala.classificados = (cortes.direto || []).concat(vencedoresLinhas);
       sala.status = 'mata';
       montarChaveChampions(sala, vencedores);
-      console.log('[pularTudo champions] chave montada. rounds=', sala.chave && sala.chave.rounds && sala.chave.rounds.length);
-      // Simula todo o mata-mata de uma vez.
-      let rmc, guarda = 0; do { rmc = simularRodadaMata(sala); guarda++; } while (!rmc.ehFinal && guarda < 20);
-      console.log('[pularTudo champions] mata simulado em', guarda, 'fases. campeao=', rmc && rmc.campeao && rmc.campeao.nome);
-      emitirFimDeJogo(io, sala, code);
-      console.log('[pularTudo champions] emitirFimDeJogo OK');
+      let rmc; do { rmc = simularRodadaMata(sala); } while (!rmc.ehFinal);
+      emitirFimDeMata(io, sala, code, rmc && rmc.campeao);
     } else {
       emitirFimDeJogo(io, sala, code);
     }
@@ -1979,15 +2001,7 @@ function setupSocket(server, frontendUrl) {
         let finalCampeao = campeao, acabou = ehFinal;
 
         if (acabou) {
-          sala.status = 'fim';
-          const art2 = Object.entries(sala.statsGols).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,gols])    => ({ nome, gols,    time: timeDoJogador[nome] || '' }));
-          const ass2 = Object.entries(sala.statsAssists).sort((a, b) => b[1]-a[1]).slice(0,18).map(([nome,assists]) => ({ nome, assists, time: timeDoJogador[nome] || '' }));
-          io.to(code).emit('game:end', {
-            campeao: finalCampeao ? { userId: finalCampeao.userId, nome: finalCampeao.nome, ehBot: !!finalCampeao.ehBot } : null,
-            ranking: rankingMata(sala), artilharia: art2, assistencias: ass2, mata: true,
-            statsGols: sala.statsGols || {}, statsAssists: sala.statsAssists || {},
-            rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases,
-          });
+          emitirFimDeMata(io, sala, code, finalCampeao);
         }
       } catch (err) {
         console.error('[socket chave:advance]', err);

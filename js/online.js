@@ -2138,6 +2138,9 @@
 
     function revelarFinal() {
     if (ehChaveFinal) {
+      // Garante que a aba "Mata-a-Mata" esteja visível — no "pular tudo" o cliente vai direto ao
+      // fim sem passar pelo fluxo que normalmente a revela, deixando o resultado inacessível.
+      if (tabChave) tabChave.classList.remove('escondida');
       renderChaveOnline();
       renderStatsTodas(ultimaArtilharia, ultimaAssistencia);
       selecionarAbaRodada('chave');
