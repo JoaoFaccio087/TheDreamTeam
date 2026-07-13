@@ -1144,11 +1144,19 @@ function idsPicados(jogador) {
   (jogador.picks || []).forEach(p => { if (p && p.id != null) set.add(p.id); });
   return set;
 }
+// Nomes já escolhidos (normalizados) — impede o MESMO jogador repetido mesmo que seja de outra
+// edição/ano (IDs diferentes, mesmo nome). Ex.: dois "Gvardiol" no mesmo time.
+function nomesPicados(jogador) {
+  const set = new Set();
+  (jogador.picks || []).forEach(p => { if (p && p.nome) set.add(String(p.nome).trim().toLowerCase()); });
+  return set;
+}
 
 function cartasParaJogador(sala, jogador) {
   const codigos = codigosDaFormacao(jogador.formacao || '4-3-3');
   const picks   = jogador.picks || [];
   const jaTenho = idsPicados(jogador);
+  const jaNomes = nomesPicados(jogador);   // nomes já no time — não oferecer repetidos
   const pool    = sala.poolCompleto || sala.poolDisponivel || [];
   const porPosicao = {};
   const feitas = new Set();
@@ -1157,7 +1165,9 @@ function cartasParaJogador(sala, jogador) {
     if (feitas.has(cod)) continue;
     feitas.add(cod);
     // Cartas para toda posição (mesmo preenchidas): permite remanejar e reabrir vaga no turno.
-    const eleg = pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id));
+    // Exclui jogadores já escolhidos por ID e por NOME (bloqueia "Gvardiol" repetido de outra edição).
+    const eleg = pool.filter(p => podeOcupar(p, cod) && !jaTenho.has(p.id) &&
+      !(p.nome && jaNomes.has(String(p.nome).trim().toLowerCase())));
     porPosicao[cod] = amostraPosicao(eleg, 12);
   }
   return porPosicao;   // { 'ZAG': [..6-12..], 'LE': [...], ... } — cliente usa direto
@@ -1669,6 +1679,9 @@ function setupSocket(server, frontendUrl) {
         const pool   = sala.poolCompleto || sala.poolDisponivel || [];
         const picked = pool.find(p => p.id === playerId);
         if (!picked)                            return socket.emit('erro', 'Jogador não disponível');
+        // Bloqueia o mesmo jogador repetido por NOME (ex.: dois "Gvardiol" de edições diferentes).
+        if (picked.nome && nomesPicados(jog).has(String(picked.nome).trim().toLowerCase()))
+          return socket.emit('erro', 'Você já tem esse jogador no time');
         if (!podeOcupar(picked, codigos[slot])) return socket.emit('erro', 'Jogador não joga nessa posição');
 
         jog.picks[slot] = picked;   // sem splice — pode repetir entre usuários
@@ -1722,6 +1735,10 @@ function setupSocket(server, frontendUrl) {
 
       const idx = sala.poolDisponivel.findIndex(p => p.id === playerId);
       if (idx === -1) return socket.emit('erro', 'Jogador não disponível');
+      const alvoPick = sala.poolDisponivel[idx];
+      // Bloqueia mesmo jogador repetido por NOME (edições diferentes, mesmo nome).
+      if (alvoPick.nome && nomesPicados(jog).has(String(alvoPick.nome).trim().toLowerCase()))
+        return socket.emit('erro', 'Você já tem esse jogador no time');
       if (!podeOcupar(sala.poolDisponivel[idx], codigos[slot]))
         return socket.emit('erro', 'Jogador não joga nessa posição');
 

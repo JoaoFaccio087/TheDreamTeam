@@ -617,7 +617,25 @@
 }
 .elencos-acoes-top .lobby-prontos { margin: 0; text-align: center; }
 .elencos-campo-col { display: flex; flex-direction: column; gap: var(--sp-4); align-items: center; }
-.elencos-users-lista { display: flex; flex-direction: column; gap: var(--sp-2); }
+.elencos-users-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  /* Lista rolável: não deixa a página esticar quando há muitos times. Altura acompanha
+     aprox. a coluna do campo. Scroll invisível (padrão das outras telas). */
+  max-height: 62vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
+  padding-right: 4px;
+}
+.elencos-users-lista::-webkit-scrollbar { width: 6px; }
+.elencos-users-lista::-webkit-scrollbar-track { background: transparent; }
+.elencos-users-lista::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: 3px;
+}
+.elencos-users-lista::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
 .elencos-user-row {
   display: flex;
   align-items: center;
