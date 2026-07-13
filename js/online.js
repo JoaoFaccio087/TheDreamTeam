@@ -1664,7 +1664,7 @@
     };
   }
 
-  // Anima a ida, depois a volta, e então insere o card de agregado do confronto.
+  // Anima a ida, PAUSA (botão "Próxima partida"), anima a volta, e então mostra o agregado.
   function animarConfrontoPlayoff(c, aoFim) {
     var idaM   = maoParaPartida(c, c.ida,   '1ª MÃO');
     var voltaM = maoParaPartida(c, c.volta, '2ª MÃO');
@@ -1679,36 +1679,72 @@
       rodadaPartidas.appendChild(cardPartidaGrande(m));
     }
 
+    // Tela de pausa entre as duas mãos: mostra o placar da ida e um botão para seguir.
+    function pausaEntreMaos(depois) {
+      rodadaPartidas.innerHTML = '';
+      var box = document.createElement('div');
+      box.className = 'po-intervalo';
+      var altoNome = htmlEsc(c.alto.nome), baixoNome = htmlEsc(c.baixo.nome);
+      box.innerHTML =
+        '<p class="po-intervalo-tit">Fim da 1ª mão</p>' +
+        '<p class="po-intervalo-placar">' + baixoNome + ' <b>' + (c.ida.gMandante | 0) + '</b> – <b>' + (c.ida.gVisitante | 0) + '</b> ' + altoNome + '</p>' +
+        '<p class="po-intervalo-sub">A 2ª mão será na casa de ' + altoNome + '.</p>';
+      var btn = document.createElement('button');
+      btn.className = 'po-intervalo-btn';
+      btn.textContent = 'Próxima partida →';
+      btn.addEventListener('click', function () { btn.disabled = true; depois(); });
+      box.appendChild(btn);
+      rodadaPartidas.appendChild(box);
+      selecionarAbaRodada('partidas');
+    }
+
     animarMao(idaM, function () {
-      animarMao(voltaM, function () {
-        // Fim das duas mãos: mostra o card completo (agregado + classificado) e os outros.
-        rodadaPartidas.innerHTML = '';
-        rodadaPartidas.appendChild(cardPlayoff(c));
-        if (typeof aoFim === 'function') aoFim();
+      pausaEntreMaos(function () {
+        animarMao(voltaM, function () {
+          // Fim das duas mãos: card de resultado do confronto (novo layout) + os outros.
+          rodadaPartidas.innerHTML = '';
+          rodadaPartidas.appendChild(cardPlayoff(c));
+          if (typeof aoFim === 'function') aoFim();
+        });
       });
     });
   }
 
-  // Card de um confronto do playoff (ida/volta + agregado + classificado).
+  // Card de resultado do confronto de playoff (ida/volta + agregado).
+  // Layout: placar da 2ª mão em destaque · 1ª mão opaca embaixo · agregado com destaque.
   function cardPlayoff(c) {
     var div = document.createElement('div');
     var altoNome = htmlEsc(c.alto.nome), baixoNome = htmlEsc(c.baixo.nome);
     var altoVence = c.vencedor && String(c.vencedor.userId) === String(c.alto.userId);
     var meu = String(c.alto.userId) === String(meuUserId) || String(c.baixo.userId) === String(meuUserId);
-    var penTxt = (c.pen && c.pen.length === 2) ? ' · pênaltis ' + c.pen[0] + '–' + c.pen[1] : '';
-    div.className = 'po-card' + (meu ? ' po-card-meu' : '');
+    var vencNome = htmlEsc(c.vencedor ? c.vencedor.nome : '?');
+    var penTxt = (c.pen && c.pen.length === 2) ? '<span class="po2-pen">pênaltis ' + (c.pen[0] | 0) + '–' + (c.pen[1] | 0) + '</span>' : '';
+
+    div.className = 'po2-card' + (meu ? ' po2-card-meu' : '');
     div.innerHTML =
-      '<div class="po-times">' +
-        '<span class="po-time' + (altoVence ? ' po-venc' : '') + '">' + altoNome + '</span>' +
-        '<span class="po-x">×</span>' +
-        '<span class="po-time' + (!altoVence ? ' po-venc' : '') + '">' + baixoNome + '</span>' +
+      // Título: os dois times, com o vencedor destacado
+      '<div class="po2-head">' +
+        '<span class="po2-time' + (altoVence ? ' po2-venc' : '') + '">' + altoNome + '</span>' +
+        '<span class="po2-vs">×</span>' +
+        '<span class="po2-time' + (!altoVence ? ' po2-venc' : '') + '">' + baixoNome + '</span>' +
       '</div>' +
-      '<div class="po-maos">' +
-        '<span>1ª mão: ' + baixoNome + ' ' + (c.ida.gMandante | 0) + '–' + (c.ida.gVisitante | 0) + ' ' + altoNome + '</span>' +
-        '<span>2ª mão: ' + altoNome + ' ' + (c.volta.gMandante | 0) + '–' + (c.volta.gVisitante | 0) + ' ' + baixoNome + '</span>' +
+      // Placar da 2ª mão (a última jogada) em destaque
+      '<div class="po2-placar-destaque">' +
+        '<span class="po2-mao-tag">2ª mão</span>' +
+        '<span class="po2-placar">' + altoNome + ' <b>' + (c.volta.gMandante | 0) + '</b> – <b>' + (c.volta.gVisitante | 0) + '</b> ' + baixoNome + '</span>' +
       '</div>' +
-      '<div class="po-agg">Agregado ' + (c.aggAlto | 0) + '–' + (c.aggBaixo | 0) + penTxt + '</div>' +
-      '<div class="po-venc-badge">Classificado: ' + htmlEsc(c.vencedor ? c.vencedor.nome : '?') + '</div>';
+      // 1ª mão, opaca, embaixo
+      '<div class="po2-mao-secundaria">' +
+        '<span class="po2-mao-tag">1ª mão</span>' +
+        '<span>' + baixoNome + ' ' + (c.ida.gMandante | 0) + ' – ' + (c.ida.gVisitante | 0) + ' ' + altoNome + '</span>' +
+      '</div>' +
+      // Agregado destacado + pênaltis (se houve)
+      '<div class="po2-agg">' +
+        '<span class="po2-agg-label">Agregado</span>' +
+        '<span class="po2-agg-valor">' + (c.aggAlto | 0) + ' – ' + (c.aggBaixo | 0) + '</span>' +
+        penTxt +
+      '</div>' +
+      '<div class="po2-classificado">Classificado: <b>' + vencNome + '</b></div>';
     return div;
   }
 

@@ -1541,6 +1541,65 @@
 .po-aviso-tit { color: var(--accent); font-weight: var(--peso-forte); font-size: var(--fs-lg); }
 .po-aviso-sub { color: var(--txt-soft); font-size: var(--fs-sm); }
 
+/* ── Pausa entre a 1ª e a 2ª mão do playoff (botão "Próxima partida") ── */
+.po-intervalo {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  text-align: center; padding: var(--sp-8) var(--sp-6);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: var(--raio-lg);
+  background: rgba(255,255,255,0.03);
+}
+.po-intervalo-tit { color: var(--txt-soft); font-size: var(--fs-legenda); letter-spacing: 0.14em; font-weight: var(--peso-forte); }
+.po-intervalo-placar { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--txt); }
+.po-intervalo-placar b { color: var(--accent); }
+.po-intervalo-sub { color: var(--txt-soft); font-size: var(--fs-sm); }
+.po-intervalo-btn {
+  margin-top: var(--sp-2); padding: 0.7rem 1.6rem;
+  background: var(--accent); color: #06210f; border: none; border-radius: var(--raio-md);
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); cursor: pointer;
+  transition: filter 0.15s;
+}
+.po-intervalo-btn:hover { filter: brightness(1.08); }
+.po-intervalo-btn:disabled { opacity: 0.6; cursor: default; }
+
+/* ── Nova tela de resultado do confronto de playoff ── */
+.po2-card {
+  border: 1px solid rgba(255,255,255,0.1); border-radius: var(--raio-lg);
+  background: rgba(255,255,255,0.03); padding: var(--sp-5) var(--sp-6);
+  margin-bottom: var(--sp-4); max-width: 460px; margin-left: auto; margin-right: auto;
+}
+.po2-card-meu { border-color: rgba(217,178,90,0.45); background: rgba(217,178,90,0.06); }
+.po2-head {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-3);
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); margin-bottom: var(--sp-4);
+}
+.po2-time { color: var(--txt-soft); }
+.po2-time.po2-venc { color: var(--accent); }
+.po2-vs { color: var(--txt-soft); opacity: 0.6; }
+/* Placar da 2ª mão — destaque principal */
+.po2-placar-destaque {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: var(--sp-3); border-radius: var(--raio-md);
+  background: rgba(0,0,0,0.25);
+}
+.po2-mao-tag { font-size: var(--fs-legenda); letter-spacing: 0.12em; color: var(--txt-soft); text-transform: uppercase; }
+.po2-placar { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: var(--txt); }
+.po2-placar b { color: var(--accent); }
+/* 1ª mão — secundária, opaca, embaixo */
+.po2-mao-secundaria {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  margin-top: var(--sp-2); font-size: var(--fs-sm); color: var(--txt-soft); opacity: 0.55;
+}
+/* Agregado — destaque */
+.po2-agg {
+  display: flex; align-items: center; justify-content: center; gap: var(--sp-3);
+  margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid rgba(255,255,255,0.08);
+}
+.po2-agg-label { font-size: var(--fs-legenda); letter-spacing: 0.12em; color: var(--txt-soft); text-transform: uppercase; }
+.po2-agg-valor { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--accent); }
+.po2-pen { font-size: var(--fs-sm); color: var(--txt-soft); }
+.po2-classificado { text-align: center; margin-top: var(--sp-3); font-size: var(--fs-sm); color: var(--txt-soft); }
+.po2-classificado b { color: var(--accent); }
+
 /* Mensagem ao reconectar no meio de uma partida (Fatia 1 da reconexão) */
 .rodada-reconectado {
   text-align: center; color: var(--txt-soft); font-size: var(--fs-sm);
