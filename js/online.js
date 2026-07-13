@@ -1666,8 +1666,8 @@
 
   // Anima a ida, PAUSA (botão "Próxima partida"), anima a volta, e então mostra o agregado.
   function animarConfrontoPlayoff(c, aoFim) {
-    var idaM   = maoParaPartida(c, c.ida,   '1ª MÃO');
-    var voltaM = maoParaPartida(c, c.volta, '2ª MÃO');
+    var idaM   = maoParaPartida(c, c.ida,   'JOGO DE IDA');
+    var voltaM = maoParaPartida(c, c.volta, 'JOGO DE VOLTA');
 
     function animarMao(m, depois) {
       rodadaPartidas.innerHTML = '';
@@ -1686,9 +1686,9 @@
       box.className = 'po-intervalo';
       var altoNome = htmlEsc(c.alto.nome), baixoNome = htmlEsc(c.baixo.nome);
       box.innerHTML =
-        '<p class="po-intervalo-tit">Fim da 1ª mão</p>' +
+        '<p class="po-intervalo-tit">Fim do jogo de ida</p>' +
         '<p class="po-intervalo-placar">' + baixoNome + ' <b>' + (c.ida.gMandante | 0) + '</b> – <b>' + (c.ida.gVisitante | 0) + '</b> ' + altoNome + '</p>' +
-        '<p class="po-intervalo-sub">A 2ª mão será na casa de ' + altoNome + '.</p>';
+        '<p class="po-intervalo-sub">O jogo de volta será na casa de ' + altoNome + '.</p>';
       var btn = document.createElement('button');
       btn.className = 'po-intervalo-btn';
       btn.textContent = 'Próxima partida →';
@@ -1711,31 +1711,24 @@
   }
 
   // Card de resultado do confronto de playoff (ida/volta + agregado).
-  // Layout: placar da 2ª mão em destaque · 1ª mão opaca embaixo · agregado com destaque.
+  // Layout: placar da volta em destaque · ida opaca embaixo · agregado com destaque.
   function cardPlayoff(c) {
     var div = document.createElement('div');
     var altoNome = htmlEsc(c.alto.nome), baixoNome = htmlEsc(c.baixo.nome);
-    var altoVence = c.vencedor && String(c.vencedor.userId) === String(c.alto.userId);
     var meu = String(c.alto.userId) === String(meuUserId) || String(c.baixo.userId) === String(meuUserId);
     var vencNome = htmlEsc(c.vencedor ? c.vencedor.nome : '?');
     var penTxt = (c.pen && c.pen.length === 2) ? '<span class="po2-pen">pênaltis ' + (c.pen[0] | 0) + '–' + (c.pen[1] | 0) + '</span>' : '';
 
     div.className = 'po2-card' + (meu ? ' po2-card-meu' : '');
     div.innerHTML =
-      // Título: os dois times, com o vencedor destacado
-      '<div class="po2-head">' +
-        '<span class="po2-time' + (altoVence ? ' po2-venc' : '') + '">' + altoNome + '</span>' +
-        '<span class="po2-vs">×</span>' +
-        '<span class="po2-time' + (!altoVence ? ' po2-venc' : '') + '">' + baixoNome + '</span>' +
-      '</div>' +
-      // Placar da 2ª mão (a última jogada) em destaque
+      // Placar do jogo de volta (o último jogado) em destaque
       '<div class="po2-placar-destaque">' +
-        '<span class="po2-mao-tag">2ª mão</span>' +
+        '<span class="po2-mao-tag">Volta</span>' +
         '<span class="po2-placar">' + altoNome + ' <b>' + (c.volta.gMandante | 0) + '</b> – <b>' + (c.volta.gVisitante | 0) + '</b> ' + baixoNome + '</span>' +
       '</div>' +
-      // 1ª mão, opaca, embaixo
+      // Jogo de ida, opaco, embaixo
       '<div class="po2-mao-secundaria">' +
-        '<span class="po2-mao-tag">1ª mão</span>' +
+        '<span class="po2-mao-tag">Ida</span>' +
         '<span>' + baixoNome + ' ' + (c.ida.gMandante | 0) + ' – ' + (c.ida.gVisitante | 0) + ' ' + altoNome + '</span>' +
       '</div>' +
       // Agregado destacado + pênaltis (se houve)
