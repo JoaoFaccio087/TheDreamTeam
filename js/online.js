@@ -2130,6 +2130,8 @@
     emMataMata = false;
 
     function revelarFinal() {
+    // O título ainda mostrava "RODADA X DE X" mesmo com o campeonato encerrado. Corrige.
+    if (rodadaTituloEl) rodadaTituloEl.textContent = 'CAMPEONATO ENCERRADO';
     if (ehChaveFinal) {
       // Garante que a aba "Mata-a-Mata" esteja visível — no "pular tudo" o cliente vai direto ao
       // fim sem passar pelo fluxo que normalmente a revela, deixando o resultado inacessível.
@@ -3275,7 +3277,7 @@
       if (euVoteiPular) return;
       UI.modalConfirm({
         titulo: 'Pular todos os jogos?',
-        html: 'Isso simula o restante da temporada de uma vez. <strong>Todos os jogadores</strong> da sala precisam aceitar para pular.',
+        html: 'Simula tudo o que falta — as rodadas restantes <strong>e o mata-mata inteiro</strong> — e vai direto ao resultado final com o campeão. <strong>Todos os jogadores</strong> da sala precisam aceitar.',
         confirmar: 'Confirmar', cancelar: 'Cancelar',
         onConfirmar: function () {
           euVoteiPular = true;
