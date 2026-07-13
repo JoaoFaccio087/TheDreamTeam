@@ -857,26 +857,32 @@ function tentarPularTudo(io, sala, code) {
       emitirFimDeJogo(io, sala, code);
     } else if (sala.formato === 'champions') {
       // "Pular tudo" no Champions é LITERAL: liga → playoff → mata-mata inteiro → resultado final.
+      console.log('[pularTudo champions] iniciando. classificacao length=', (res && res.payload && res.payload.classificacao || []).length);
       const classificacao = (res && res.payload && res.payload.classificacao) || [];
       const cortes = cortesChampions(classificacao);
       sala.cortesLiga = cortes;
+      console.log('[pularTudo champions] cortes: direto=', cortes.direto.length, 'playoff=', cortes.playoff.length);
       // Roda o playoff (9–24) e apura os 8 vencedores + 8 diretos = 16 das oitavas.
       const { vencedores } = simularPlayoffChampions(sala);
+      console.log('[pularTudo champions] playoff resolvido. vencedores=', vencedores.length);
       const linhaPorUid = {};
       (cortes.playoff || []).forEach(r => { linhaPorUid[r.userId] = r; });
       const vencedoresLinhas = vencedores.map(v => linhaPorUid[v.userId]).filter(Boolean);
       sala.classificados = (cortes.direto || []).concat(vencedoresLinhas);
       sala.status = 'mata';
       montarChaveChampions(sala, vencedores);
+      console.log('[pularTudo champions] chave montada. rounds=', sala.chave && sala.chave.rounds && sala.chave.rounds.length);
       // Simula todo o mata-mata de uma vez.
-      let rmc; do { rmc = simularRodadaMata(sala); } while (!rmc.ehFinal);
+      let rmc, guarda = 0; do { rmc = simularRodadaMata(sala); guarda++; } while (!rmc.ehFinal && guarda < 20);
+      console.log('[pularTudo champions] mata simulado em', guarda, 'fases. campeao=', rmc && rmc.campeao && rmc.campeao.nome);
       emitirFimDeJogo(io, sala, code);
+      console.log('[pularTudo champions] emitirFimDeJogo OK');
     } else {
       emitirFimDeJogo(io, sala, code);
     }
     return true;
   } catch (err) {
-    console.error('[socket tentarPularTudo]', err);
+    console.error('[socket tentarPularTudo] ERRO:', err && err.message, '\n', err && err.stack);
     return false;
   } finally {
     sala.rodadaEmAndamento = false;
