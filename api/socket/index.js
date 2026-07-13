@@ -845,13 +845,16 @@ function tentarPularTudo(io, sala, code) {
     let res;
     do { res = simularUmaRodada(sala); } while (!res.isUltima);
     if (sala.formato === 'mata') {
-      if (res && res.payload) { res.payload.grupos = classificacaoTodosGrupos(sala); io.to(code).emit('round:results', res.payload); }
+      // Fim dos grupos: apura classificados e monta a chave. Mas "Pular tudo" é LITERAL — não para
+      // nos grupos: simula também TODO o mata-mata (oitavas → final) e vai ao resultado final.
       const apur = apurarClassificados(sala);
       sala.classificados = apur.classificados;
       sala.status = 'mata';
-      io.to(code).emit('grupos:fim', { classificacao: apur.classificacao, classificados: apur.classificados });
       montarChaveOnline(sala);
-      io.to(code).emit('chave:state', { rounds: sala.chave.rounds, rodadaAtual: sala.chave.rodadaAtual, fases: sala.chave.fases });
+      // Simula todas as fases do mata-mata de uma vez.
+      let rm; do { rm = simularRodadaMata(sala); } while (!rm.ehFinal);
+      // Chegou ao campeão → resultado final da campanha.
+      emitirFimDeJogo(io, sala, code);
     } else if (sala.formato === 'champions') {
       if (res && res.payload) io.to(code).emit('round:results', res.payload);
       finalizarFaseLigaChampions(io, sala, code, res && res.payload);
