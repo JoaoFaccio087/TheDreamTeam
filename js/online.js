@@ -2295,7 +2295,7 @@
         '<div class="resumo-conteudo">' +
           '<div class="resumo-hero">' + (ehCampeao ? trofeu : '') +
             '<h2 class="resumo-titulo">' + titulo + '</h2>' +
-            '<p class="resumo-sub">BRASILEIRÃO · ' + htmlEsc(me.nomeDoTime || nomeUsuario(me)) + ' · ' + form + '</p>' +
+            '<p class="resumo-sub">' + htmlEsc((window.__compOnline || (formatoOnline === 'liga' ? 'Brasileirão' : 'Copa do Mundo')).toUpperCase()) + ' · ' + htmlEsc(me.nomeDoTime || nomeUsuario(me)) + ' · ' + form + '</p>' +
           '</div>' +
           '<div class="resumo-cards">' + cardsHtml + '</div>' +
           '<div class="resumo-grid">' +
