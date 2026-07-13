@@ -833,10 +833,25 @@ function codigosAceitosServidor(codigo) {
 // a rodada estava sendo simulada ficava órfão (a condição falhava e ninguém tentava de novo),
 // e o próximo round:next ainda zerava os votos — o clique simplesmente não fazia nada.
 function tentarPularTudo(io, sala, code) {
-  if (!sala || sala.status !== 'playing' || sala.rodadaEmAndamento) return false;
+  // LOG TEMPORÁRIO (diagnóstico do bug "pular tudo" — remover depois)
+  console.log('[pularTudo] tentativa:', {
+    status: sala && sala.status,
+    rodadaEmAndamento: sala && sala.rodadaEmAndamento,
+    humanos: sala && sala.jogadores.filter(j => !j.ehBot).length,
+    votos: sala && (sala.votosPular || []).length,
+    formato: sala && sala.formato
+  });
+  if (!sala || sala.status !== 'playing' || sala.rodadaEmAndamento) {
+    console.log('[pularTudo] RECUSADO na entrada (status/rodadaEmAndamento)');
+    return false;
+  }
   const humanos = sala.jogadores.filter(j => !j.ehBot).length;
   const votos   = (sala.votosPular || []).length;
-  if (!(humanos > 0 && votos >= humanos)) return false;
+  if (!(humanos > 0 && votos >= humanos)) {
+    console.log('[pularTudo] RECUSADO por quórum:', votos, '/', humanos);
+    return false;
+  }
+  console.log('[pularTudo] EXECUTANDO o pulo!');
 
   sala.rodadaEmAndamento = true;
   try {
