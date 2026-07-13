@@ -856,8 +856,21 @@ function tentarPularTudo(io, sala, code) {
       // Chegou ao campeão → resultado final da campanha.
       emitirFimDeJogo(io, sala, code);
     } else if (sala.formato === 'champions') {
-      if (res && res.payload) io.to(code).emit('round:results', res.payload);
-      finalizarFaseLigaChampions(io, sala, code, res && res.payload);
+      // "Pular tudo" no Champions é LITERAL: liga → playoff → mata-mata inteiro → resultado final.
+      const classificacao = (res && res.payload && res.payload.classificacao) || [];
+      const cortes = cortesChampions(classificacao);
+      sala.cortesLiga = cortes;
+      // Roda o playoff (9–24) e apura os 8 vencedores + 8 diretos = 16 das oitavas.
+      const { vencedores } = simularPlayoffChampions(sala);
+      const linhaPorUid = {};
+      (cortes.playoff || []).forEach(r => { linhaPorUid[r.userId] = r; });
+      const vencedoresLinhas = vencedores.map(v => linhaPorUid[v.userId]).filter(Boolean);
+      sala.classificados = (cortes.direto || []).concat(vencedoresLinhas);
+      sala.status = 'mata';
+      montarChaveChampions(sala, vencedores);
+      // Simula todo o mata-mata de uma vez.
+      let rmc; do { rmc = simularRodadaMata(sala); } while (!rmc.ehFinal);
+      emitirFimDeJogo(io, sala, code);
     } else {
       emitirFimDeJogo(io, sala, code);
     }
