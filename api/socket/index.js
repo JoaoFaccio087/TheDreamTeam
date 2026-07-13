@@ -677,9 +677,11 @@ function bonusPosicaoSrv(jog) {
 // Os limites do pGol são a "zebra" (até o craque erra; goleiro fraco às vezes pega).
 function resultadoCobrancaSrv(cob, fGoleiro) {
   const fAt = cob.forca || 72;
-  const pGol = limitaSrv(0.74 + (fAt - fGoleiro) * 0.006 + bonusPosicaoSrv(cob), 0.45, 0.90);
+  // Conversão real de pênaltis fica ~75-80%. Base mais alta e piso maior para não errar demais.
+  // (Mesma calibragem da resultadoCobranca offline — antes esta ficou defasada e o online errava tudo.)
+  const pGol = limitaSrv(0.80 + (fAt - fGoleiro) * 0.005 + bonusPosicaoSrv(cob), 0.58, 0.93);
   if (Math.random() < pGol) return 'gol';
-  const pDefesa = limitaSrv(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.78);
+  const pDefesa = limitaSrv(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.75);
   return Math.random() < pDefesa ? 'defesa' : 'fora';
 }
 
@@ -833,25 +835,10 @@ function codigosAceitosServidor(codigo) {
 // a rodada estava sendo simulada ficava órfão (a condição falhava e ninguém tentava de novo),
 // e o próximo round:next ainda zerava os votos — o clique simplesmente não fazia nada.
 function tentarPularTudo(io, sala, code) {
-  // LOG TEMPORÁRIO (diagnóstico do bug "pular tudo" — remover depois)
-  console.log('[pularTudo] tentativa:', {
-    status: sala && sala.status,
-    rodadaEmAndamento: sala && sala.rodadaEmAndamento,
-    humanos: sala && sala.jogadores.filter(j => !j.ehBot).length,
-    votos: sala && (sala.votosPular || []).length,
-    formato: sala && sala.formato
-  });
-  if (!sala || sala.status !== 'playing' || sala.rodadaEmAndamento) {
-    console.log('[pularTudo] RECUSADO na entrada (status/rodadaEmAndamento)');
-    return false;
-  }
+  if (!sala || sala.status !== 'playing' || sala.rodadaEmAndamento) return false;
   const humanos = sala.jogadores.filter(j => !j.ehBot).length;
   const votos   = (sala.votosPular || []).length;
-  if (!(humanos > 0 && votos >= humanos)) {
-    console.log('[pularTudo] RECUSADO por quórum:', votos, '/', humanos);
-    return false;
-  }
-  console.log('[pularTudo] EXECUTANDO o pulo!');
+  if (!(humanos > 0 && votos >= humanos)) return false;
 
   sala.rodadaEmAndamento = true;
   try {

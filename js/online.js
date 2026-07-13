@@ -1549,7 +1549,6 @@
 
   // round:results — resultados da rodada
   function onRoundResults(dados) {
-    console.log('[pularTudo cliente] onRoundResults rodada=', dados.rodada, 'de', totalRodadas);
     simulandoRodada = false;
     pararAnimacaoPartida();
     // Cada rodada é uma nova votação de "pular tudo": reseta o meu voto, senão após votar uma
@@ -1717,7 +1716,6 @@
   // grupos:fim — após a animação do último jogo, leva à aba Grupos com o banner
   // do mata-mata. Não pula direto para o mata-mata.
   function onGruposFim(dados) {
-    console.log('[pularTudo cliente] onGruposFim recebido! animacaoAtiva=', animacaoAtiva);
     gruposEncerrados = true;
 
     function finalizarGrupos() {
@@ -3249,7 +3247,6 @@
         confirmar: 'Confirmar', cancelar: 'Cancelar',
         onConfirmar: function () {
           euVoteiPular = true;
-          console.log('[pularTudo cliente] emitindo round:skipAll | rodadaAtual=', rodadaAtual, 'formato=', formatoOnline);
           if (socket && socket.connected) socket.emit('round:skipAll');
           atualizarAcoesRodada();
         }

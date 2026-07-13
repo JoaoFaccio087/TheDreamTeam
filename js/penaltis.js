@@ -282,7 +282,7 @@
       return null;
     }
     while (g++ < 60) {
-      var ok = Math.random() < 0.74;
+      var ok = Math.random() < 0.78;   // conversão realista (~78%); antes 0.74 errava demais
       if (lado === 'meu') { seq.push({ lado: 'meu', nome: nomesM[iM % nomesM.length], ok: ok }); if (ok) pM++; iM++; }
       else { seq.push({ lado: 'adv', nome: nomesA[iA % nomesA.length], ok: ok }); if (ok) pA++; iA++; }
       var d = decidiu(); if (d) return { sequencia: seq, vencedor: d };
