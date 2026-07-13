@@ -112,19 +112,10 @@ function amostraPosicao(fonte, n) {
   n = n || 12;
   if (!fonte || !fonte.length) return [];
   if (fonte.length <= n) return shuffle(fonte.slice());
-  const F = p => (p.forca || 70);
-  // Sorteio ponderado SEM reposição: peso = (forca-58)^1.5.
-  const pool = fonte.slice();
-  const out = [];
-  for (let k = 0; k < n && pool.length; k++) {
-    let total = 0;
-    const pesos = pool.map(p => { const w = Math.pow(Math.max(1, F(p) - 58), 1.5); total += w; return w; });
-    let r = Math.random() * total, acum = 0, escolhido = 0;
-    for (let i = 0; i < pool.length; i++) { acum += pesos[i]; if (r <= acum) { escolhido = i; break; } }
-    out.push(pool[escolhido]);
-    pool.splice(escolhido, 1);
-  }
-  return shuffle(out);
+  // Sorteio UNIFORME (aleatório de verdade), sem favorecer os mais fortes — João pediu variedade.
+  // As regras de elegibilidade (posição, sem repetir jogador no mesmo time) já são aplicadas ANTES,
+  // por quem chama esta função (cartasParaJogador filtra por posição/ids/nomes já escolhidos).
+  return shuffle(fonte.slice()).slice(0, n);
 }
 
 // Bot/timeout: escolhe 1 dos 3 MAIS FORTES da amostra (semi-guloso). Fica competitivo com os
