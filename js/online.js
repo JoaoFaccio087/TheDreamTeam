@@ -1426,8 +1426,9 @@
       if (formatoOnline === 'champions') {
         if (championsFimLiga && ehHost) {
           btnRodadaProxima.disabled    = false;
-          // Se EU passei direto (top 8), não vou JOGAR o playoff — só avanço a sala por ele.
-          // O texto reflete isso para não sugerir que vou disputar a repescagem.
+          // Se EU passei direto (top 8), NÃO vou jogar o playoff — só avanço a sala por ele e
+          // assisto. O texto precisa deixar isso claro: antes dizia "Avançar (playoff)", que soava
+          // como se eu fosse disputar a repescagem (João achou que estava jogando sem precisar).
           var passeiDireto = false;
           if (championsClassifFinal) {
             var minhaPos = championsClassifFinal.findIndex(function (p) {
@@ -1435,7 +1436,9 @@
             });
             passeiDireto = (minhaPos >= 0 && minhaPos < 8);
           }
-          btnRodadaProxima.textContent = passeiDireto ? 'Avançar (playoff) →' : 'Ir ao playoff →';
+          btnRodadaProxima.textContent = passeiDireto
+            ? 'Você está nas oitavas · Assistir playoff →'
+            : 'Disputar o playoff →';
           btnRodadaProxima.classList.remove('escondida');
         } else if (!ehHost && rodadaAguardandoHost) {
           rodadaAguardandoHost.textContent = 'Fase de liga encerrada! Aguardando o host…';
@@ -1618,9 +1621,16 @@
 
     if (meuConf) {
       // TENHO confronto → anima as duas mãos (ida e volta) e depois mostra o agregado.
-      // Os outros confrontos entram como cards de resultado, abaixo.
+      // Os outros confrontos entram como cards de resultado, abaixo, com um título separando —
+      // antes vinham colados no meu e passavam despercebidos (João não via os outros jogos).
       animarConfrontoPlayoff(meuConf, function () {
-        outros.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+        if (outros.length) {
+          var tit = document.createElement('p');
+          tit.className = 'jogo-rotulo po2-secao-titulo';
+          tit.textContent = 'OUTROS CONFRONTOS DO PLAYOFF';
+          rodadaPartidas.appendChild(tit);
+          outros.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+        }
       });
     } else if (outros.length) {
       // NÃO tenho confronto (classifiquei direto no top 8). Antes, os resultados de TODOS os
@@ -1638,7 +1648,13 @@
       animarConfrontoPlayoff(assistido, function () {
         // Reinsere o aviso (a animação limpa o container) e revela os demais resultados.
         rodadaPartidas.insertBefore(aviso, rodadaPartidas.firstChild);
-        demais.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+        if (demais.length) {
+          var tit2 = document.createElement('p');
+          tit2.className = 'jogo-rotulo po2-secao-titulo';
+          tit2.textContent = 'OUTROS CONFRONTOS DO PLAYOFF';
+          rodadaPartidas.appendChild(tit2);
+          demais.forEach(function (c) { rodadaPartidas.appendChild(cardPlayoff(c)); });
+        }
       });
     } else {
       // Caso raro: passei direto e não há nenhum confronto de playoff para assistir.

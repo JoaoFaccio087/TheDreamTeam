@@ -1600,6 +1600,15 @@
 .po2-classificado { text-align: center; margin-top: var(--sp-3); font-size: var(--fs-sm); color: var(--txt-soft); }
 .po2-classificado b { color: var(--accent); }
 
+/* Separador de seção do playoff: reusa .jogo-rotulo (design system) e só acrescenta a divisória.
+   Usar sempre junto: class="jogo-rotulo po2-secao-titulo" */
+.po2-secao-titulo {
+  text-align: center;
+  margin: var(--sp-6) 0 var(--sp-3);
+  padding-top: var(--sp-4);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
 /* Mensagem ao reconectar no meio de uma partida (Fatia 1 da reconexão) */
 .rodada-reconectado {
   text-align: center; color: var(--txt-soft); font-size: var(--fs-sm);
