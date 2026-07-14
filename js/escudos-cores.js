@@ -49,14 +49,87 @@
     'São Caetano':         ['#003DA5', '#FFD200', '#006437'],
     'São Paulo':           ['#FFFFFF', '#FE0000', '#000000'],
     'Vasco':               ['#000000', '#FFFFFF'],
-    'Vitória':             ['#E30613', '#000000']
+    'Vitória':             ['#E30613', '#000000'],
+
+    // ===== LIBERTADORES — clubes sul-americanos (cores reais dos mantos) =====
+    // ARGENTINA
+    'Boca Juniors':        ['#0A2A66', '#FFD100'],
+    'River Plate':         ['#FFFFFF', '#E1122C'],
+    'Independiente':       ['#E30613', '#FFFFFF'],
+    'Racing':              ['#6CACE4', '#FFFFFF'],
+    'San Lorenzo':         ['#0A2A66', '#E30613'],
+    'Estudiantes':         ['#E30613', '#FFFFFF'],
+    'Vélez Sarsfield':     ['#FFFFFF', '#0A2A66'],
+    'Argentinos Juniors':  ['#E30613', '#FFFFFF'],
+    'Newell\'s Old Boys':  ['#E30613', '#000000'],
+    'Rosario Central':     ['#0A2A66', '#FFD100'],
+    'Lanús':               ['#8B1A2B', '#FFFFFF'],
+    'Huracán':             ['#FFFFFF', '#E30613'],
+    // URUGUAI
+    'Peñarol':             ['#000000', '#FFD100'],
+    'Nacional':            ['#FFFFFF', '#0A2A66', '#E30613'],
+    'Defensor Sporting':   ['#5B2E86', '#FFFFFF'],
+    'Danubio':             ['#FFFFFF', '#000000'],
+    // CHILE
+    'Colo-Colo':           ['#FFFFFF', '#000000'],
+    'Universidad de Chile': ['#0A2A66', '#E30613'],
+    'Universidad Católica': ['#FFFFFF', '#0A4C96'],
+    'Cobreloa':            ['#F58220', '#FFFFFF'],
+    'Palestino':           ['#FFFFFF', '#007A33', '#E30613'],
+    'Unión Española':      ['#E30613', '#FFFFFF'],
+    'O\'Higgins':          ['#6CACE4', '#000000'],
+    // COLÔMBIA
+    'Atlético Nacional':   ['#007A33', '#FFFFFF'],
+    'Millonarios':         ['#0A2A66', '#FFFFFF'],
+    'Independiente Santa Fe': ['#E30613', '#FFFFFF'],
+    'Deportivo Cali':      ['#007A33', '#FFFFFF'],
+    'América de Cali':     ['#E30613', '#FFFFFF'],
+    'Independiente Medellín': ['#E30613', '#0A2A66'],
+    'Junior':              ['#E30613', '#FFFFFF'],
+    'Once Caldas':         ['#FFFFFF', '#000000'],
+    'Deportes Tolima':     ['#B10000', '#FFD100'],
+    'Cúcuta Deportivo':    ['#E30613', '#000000'],
+    // PERU
+    'Universitario':       ['#B08D2E', '#FFFFFF'],
+    'Alianza Lima':        ['#0A2A66', '#FFFFFF'],
+    'Sporting Cristal':    ['#6CACE4', '#FFFFFF'],
+    'Defensor Lima':       ['#FFFFFF', '#E30613'],
+    // EQUADOR
+    'LDU':                 ['#FFFFFF', '#0A2A66'],
+    'Barcelona-EQU':       ['#FFD100', '#000000'],
+    'Emelec':              ['#0A2A66', '#FFFFFF'],
+    'El Nacional':         ['#E30613', '#0A2A66'],
+    'Independiente del Valle': ['#0A2A66', '#000000'],
+    // PARAGUAI
+    'Olimpia':             ['#FFFFFF', '#000000'],
+    'Cerro Porteño':       ['#E30613', '#0A2A66'],
+    'Libertad':            ['#000000', '#FFFFFF'],
+    'Guaraní':             ['#000000', '#FFD100'],
+    'Nacional-PAR':        ['#FFFFFF', '#0A2A66'],
+    // BOLÍVIA
+    'Bolívar':             ['#6CACE4', '#FFFFFF'],
+    'Jorge Wilstermann':   ['#E30613', '#FFFFFF'],
+    'Blooming':            ['#6CACE4', '#FFFFFF'],
+    'San Cristóbal':       ['#FFFFFF', '#0A2A66'],
+    'Universidad de Los Andes': ['#0A2A66', '#FFFFFF'],
+    // MÉXICO (convidados)
+    'Cruz Azul':           ['#0A2A66', '#FFFFFF'],
+    'Chivas Guadalajara':  ['#E30613', '#FFFFFF'],
+    'América-MEX':         ['#FFD100', '#0A2A66'],
+    'Tigres UANL':         ['#FFD100', '#0A2A66']
   };
 
   // Aliases: nomes diferentes para o MESMO clube → apontam para a mesma entrada (sem duplicar).
   var ALIAS_CLUBES = {
     'Red Bull Bragantino': 'Bragantino',
     'Vasco da Gama':       'Vasco',
-    'Holanda':             'Países Baixos'
+    'Holanda':             'Países Baixos',
+    // Sul-americanos: a base usa nomes variados para o mesmo clube.
+    // CUIDADO: os vários "Nacional" são clubes DIFERENTES (URU, PAR, Atlético Nacional-COL,
+    // El Nacional-EQU) — só o "Nacional-URU" é alias do "Nacional" (uruguaio).
+    'Atlético Mineiro':    'Atlético-MG',
+    'LDU Quito':           'LDU',
+    'Nacional-URU':        'Nacional'
   };
   function resolveAlias(nome) { return ALIAS_CLUBES[nome] || nome; }
 

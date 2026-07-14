@@ -226,6 +226,10 @@
 
     // Fundo e frente: por padrão a 1ª cor é o fundo. `inverter` troca (pela seed, se não fixado).
     var inverter = (o.inverter != null) ? o.inverter : (rand() > 0.5 && !o.padrao);
+    // BUG CORRIGIDO: no padrão 'solido' o escudo é só o FUNDO — se invertesse, ficaria inteiro na
+    // cor secundária e a cor principal do clube sumia (ex.: Atlético Nacional verde/branco saía todo
+    // branco). Sólido sempre usa a 1ª cor (a identidade do clube), salvo inverter explícito.
+    if (tipo === 'solido' && o.inverter == null) inverter = false;
     var fundo = inverter ? corB : corA;
     var frente = inverter ? corA : corB;
 
@@ -719,9 +723,10 @@
           padrao: e.padrao, listras: e.listras, inverter: e.inverter });
       } catch (err) { return ''; }
     },
-    // Modos onde os escudos estão LIGADOS por enquanto. Libertadores/Champions ficam de fora até
-    // termos as cores reais dos clubes sul-americanos/europeus (senão usariam a paleta de reserva).
-    MODOS_ATIVOS: ['brasileirao', 'copa'],
+    // Modos onde os escudos estão LIGADOS. Champions fica de fora até catalogarmos as cores reais
+    // dos clubes europeus (senão usariam a paleta de reserva, com cores erradas).
+    // Libertadores entrou em jul/2026: os 73 clubes sul-americanos já têm cor real.
+    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores'],
     ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
