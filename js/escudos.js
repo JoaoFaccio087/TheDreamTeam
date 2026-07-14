@@ -155,6 +155,22 @@
       case 'quartos':
         return '<rect x="' + (x + w / 2) + '" y="' + y + '" width="' + (w / 2) + '" height="' + (h / 2) + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (y + h / 2) + '" width="' + (w / 2) + '" height="' + (h / 2) + '" fill="' + cor + '"/>';
+      // Cruz Azul (MEX) — escudo próprio: fundo azul, quadrado vermelho ao centro e a CRUZ azul
+      // com contorno branco por cima. Padrão dedicado, como o do Barcelona-EQU.
+      case 'cruz-azul': {
+        var cxq = CENTRO.x, cyq = CENTRO.y;
+        var lado = 22, meio = lado / 2;
+        var br = 3.0;                        // meia-largura do braço da cruz
+        var o3 = '';
+        // quadrado vermelho central
+        o3 += '<rect x="' + (cxq - meio) + '" y="' + (cyq - meio) + '" width="' + lado + '" height="' + lado + '" fill="#E30613"/>';
+        // disco branco atrás da cruz (dá o contorno branco)
+        o3 += '<circle cx="' + cxq + '" cy="' + cyq + '" r="8.4" fill="#FFFFFF"/>';
+        // cruz azul
+        o3 += '<rect x="' + (cxq - br) + '" y="' + (cyq - 7.2) + '" width="' + (br * 2) + '" height="14.4" fill="#0A2A66"/>';
+        o3 += '<rect x="' + (cxq - 7.2) + '" y="' + (cyq - br) + '" width="14.4" height="' + (br * 2) + '" fill="#0A2A66"/>';
+        return o3;
+      }
       // Barcelona SC (EQU) — escudo próprio: quadrante branco com cruz vermelha (Sant Jordi),
       // quadrante de listras amarelo/vermelho (Catalunha), base de listras azul/vermelho e a
       // faixa amarela atravessando. Padrão dedicado, como a constelação do Cruzeiro.

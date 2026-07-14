@@ -69,7 +69,7 @@
     // --- ARGENTINA ---
     'Boca Juniors':        ['#0A2A66', '#FFD100'],
     'River Plate':         ['#FFFFFF', '#E1122C'],
-    'Independiente':       ['#E30613', '#FFFFFF'],
+    'Independiente':       ['#FFFFFF', '#E30613'],
     'Racing':              ['#6CACE4', '#FFFFFF'],
     'San Lorenzo':         ['#0A2A66', '#E30613'],
     'Estudiantes':         ['#FFFFFF', '#E30613'],
@@ -205,7 +205,7 @@
     // --- ARGENTINA ---
     'Boca Juniors':        { padrao: 'faixa-h' },                    // azul, faixa amarela
     'River Plate':         { padrao: 'diagonal' },                   // branco, banda vermelha
-    'Independiente':       { padrao: 'solido' },                     // todo vermelho
+    'Independiente':       { padrao: 'diagonal' },                   // branco, banda vermelha
     'Racing':              { padrao: 'listras-v', listras: 4 },      // celeste e branco
     'San Lorenzo':         { padrao: 'listras-v', listras: 4 },      // azul e vermelho
     'Estudiantes':         { padrao: 'listras-v', listras: 4 },      // branco e vermelho
@@ -263,7 +263,7 @@
     'San Cristóbal':       { padrao: 'solido' },
     'Universidad de Los Andes': { padrao: 'solido' },
     // --- MÉXICO (convidados) ---
-    'Cruz Azul':           { padrao: 'solido' },                     // azul
+    'Cruz Azul':           { padrao: 'cruz-azul' },                  // azul + quadro verm + cruz
     'Chivas Guadalajara':  { padrao: 'listras-v', listras: 4 },      // branco e vermelho
     'América-MEX':         { padrao: 'solido' },                     // amarelo
     'Tigres UANL':         { padrao: 'solido' }                      // amarelo
@@ -339,6 +339,14 @@
     // Estrelas de título mundial de uma seleção (0 se não tiver/for desconhecida).
     estrelasSelecao: function (nome) { return TITULOS_SELECAO[resolveAlias(nome)] || 0; },
     todosClubes: function () { return Object.keys(CORES_CLUBES); },
+    // Clubes agrupados por competição — usado pela demo (escudos-demo.html) e por qualquer tela
+    // que queira listar separado. Para a Champions: incluir aqui quando existir CORES_CHAMPIONS.
+    clubesPorCompeticao: function () {
+      return {
+        'Brasileirão':  Object.keys(CORES_BRASILEIRAO),
+        'Libertadores': Object.keys(CORES_LIBERTADORES)
+      };
+    },
     todasSelecoes: function () { return Object.keys(PAIS_SELECAO); }
   };
 
