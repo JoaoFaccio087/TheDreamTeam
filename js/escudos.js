@@ -127,6 +127,12 @@
         return '<rect x="' + x + '" y="' + (y + h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (y + 2 * h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + c2 + '"/>';
       }
+      // Três faixas VERTICAIS (Palestino, Once Caldas — tricolor em pé). Fundo = 1º terço.
+      case 'tri-v': {
+        var cv2 = opts.cor2 || cor;
+        return '<rect x="' + (x + w / 3) + '" y="' + y + '" width="' + (w / 3) + '" height="' + h + '" fill="' + cor + '"/>' +
+               '<rect x="' + (x + 2 * w / 3) + '" y="' + y + '" width="' + (w / 3) + '" height="' + h + '" fill="' + cv2 + '"/>';
+      }
       case 'metade':
         return '<rect x="' + CENTRO.x + '" y="' + y + '" width="' + (x + w - CENTRO.x) + '" height="' + h + '" fill="' + cor + '"/>';
       // Faixa diagonal larga (Vasco, River)
