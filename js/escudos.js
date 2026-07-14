@@ -138,6 +138,13 @@
       // Faixa diagonal larga (Vasco, River)
       case 'diagonal':
         return '<polygon points="' + x + ',' + (y + h) + ' ' + x + ',' + (y + h * 0.62) + ' ' + (x + w) + ',' + (y + h * 0.08) + ' ' + (x + w) + ',' + (y + h * 0.46) + '" fill="' + cor + '"/>';
+      // Diagonal no sentido OPOSTO (topo-esquerda → base-direita) — Sporting Cristal.
+      case 'diagonal-inv':
+        return '<polygon points="' + x + ',' + (y + h * 0.08) + ' ' + x + ',' + (y + h * 0.46) + ' ' + (x + w) + ',' + (y + h) + ' ' + (x + w) + ',' + (y + h * 0.62) + '" fill="' + cor + '"/>';
+      // Escudo ESQUARTELADO: 4 quadrantes alternando fundo/frente (Barcelona-EQU).
+      case 'quartos':
+        return '<rect x="' + (x + w / 2) + '" y="' + y + '" width="' + (w / 2) + '" height="' + (h / 2) + '" fill="' + cor + '"/>' +
+               '<rect x="' + x + '" y="' + (y + h / 2) + '" width="' + (w / 2) + '" height="' + (h / 2) + '" fill="' + cor + '"/>';
       case 'cruz':
         return '<rect x="' + (CENTRO.x - 4) + '" y="' + y + '" width="8" height="' + h + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (CENTRO.y - 4) + '" width="' + w + '" height="8" fill="' + cor + '"/>';

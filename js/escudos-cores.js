@@ -81,7 +81,7 @@
 
     // --- URUGUAI ---
     'Peñarol':             ['#FFD100', '#000000'],
-    'Nacional':            ['#FFFFFF', '#0A2A66', '#E30613'],
+    'Nacional':            ['#0A2A66', '#FFFFFF', '#E30613'],
     'Defensor Sporting':   ['#5B2E86', '#FFFFFF'],
     'Danubio':             ['#FFFFFF', '#1A1A1A'],
 
@@ -97,12 +97,12 @@
     // --- COLÔMBIA ---
     'Atlético Nacional':   ['#007A33', '#FFFFFF'],
     'Millonarios':         ['#0A2A66', '#FFFFFF'],
-    'Independiente Santa Fe': ['#E30613', '#FFFFFF'],
+    'Independiente Santa Fe': ['#FFFFFF', '#E30613'],
     'Deportivo Cali':      ['#007A33', '#FFFFFF'],
     'América de Cali':     ['#E30613', '#FFFFFF'],
     'Independiente Medellín': ['#E30613', '#0A2A66'],
     'Junior':              ['#E30613', '#FFFFFF'],
-    'Once Caldas':         ['#FFFFFF', '#007A33', '#E30613'],
+    'Once Caldas':         ['#FFFFFF', '#0A2A66'],
     'Deportes Tolima':     ['#B10000', '#FFD100'],
     'Cúcuta Deportivo':    ['#E30613', '#000000'],
 
@@ -113,7 +113,7 @@
     'Defensor Lima':       ['#7B1B2F', '#FFFFFF'],
 
     // --- EQUADOR ---
-    'LDU':                 ['#FFFFFF', '#0A2A66'],
+    'LDU':                 ['#0A2A66', '#E30613'],
     'Barcelona-EQU':       ['#FFD100', '#E30613'],
     'Emelec':              ['#0A2A66', '#FFFFFF'],
     'El Nacional':         ['#E30613', '#0A2A66'],
@@ -207,7 +207,7 @@
     'Huracán':             { padrao: 'solido' },
     // --- URUGUAI ---
     'Peñarol':             { padrao: 'listras-v', listras: 4 },      // amarelo e preto
-    'Nacional':            { padrao: 'diagonal' },                   // branco, banda azul
+    'Nacional':            { padrao: 'diagonal' },                   // AZUL, banda branca
     'Defensor Sporting':   { padrao: 'listras-v', listras: 4 },
     'Danubio':             { padrao: 'diagonal' },                   // branco, banda preta
     // --- CHILE ---
@@ -217,26 +217,26 @@
     'Cobreloa':            { padrao: 'solido' },                     // laranja
     'Palestino':           { padrao: 'tri-v' },                      // branco/verde/vermelho em pé
     'Unión Española':      { padrao: 'solido' },
-    'O\'Higgins':          { padrao: 'solido' },                     // celeste
+    'O\'Higgins':          { padrao: 'faixa-h' },                    // celeste, faixa preta
     // --- COLÔMBIA ---
     'Atlético Nacional':   { padrao: 'listras-v', listras: 4 },      // verde e branco
     'Millonarios':         { padrao: 'solido' },                     // azul
-    'Independiente Santa Fe': { padrao: 'solido' },                  // vermelho
+    'Independiente Santa Fe': { padrao: 'faixa-h' },                 // branco, faixa vermelha
     'Deportivo Cali':      { padrao: 'diagonal' },                   // verde, banda branca
     'América de Cali':     { padrao: 'solido' },                     // vermelho
     'Independiente Medellín': { padrao: 'listras-v', listras: 4 },
-    'Junior':              { padrao: 'listras-v', listras: 4 },      // vermelho e branco
-    'Once Caldas':         { padrao: 'tri-v' },                      // branco/verde/vermelho
+    'Junior':              { padrao: 'listras-v', listras: 5 },      // vermelho e branco (mais listras)
+    'Once Caldas':         { padrao: 'faixa-h' },                    // branco, faixa azul (≠ Palestino)
     'Deportes Tolima':     { padrao: 'solido' },
     'Cúcuta Deportivo':    { padrao: 'solido' },
     // --- PERU ---
     'Universitario':       { padrao: 'solido' },                     // creme
     'Alianza Lima':        { padrao: 'solido' },                     // azul
-    'Sporting Cristal':    { padrao: 'diagonal' },                   // celeste, banda branca
+    'Sporting Cristal':    { padrao: 'diagonal-inv' },               // celeste, banda branca ao contrário
     'Defensor Lima':       { padrao: 'solido' },                     // granate
     // --- EQUADOR ---
-    'LDU':                 { padrao: 'solido' },                     // todo branco (manto da LDU)
-    'Barcelona-EQU':       { padrao: 'listras-v', listras: 4 },      // amarelo e vermelho
+    'LDU':                 { padrao: 'metade' },                     // triângulo azul | vermelho
+    'Barcelona-EQU':       { padrao: 'quartos' },                    // esquartelado amarelo/vermelho
     'Emelec':              { padrao: 'solido' },                     // azul
     'El Nacional':         { padrao: 'listras-v', listras: 4 },
     'Independiente del Valle': { padrao: 'listras-v', listras: 4 },  // branco e preto
