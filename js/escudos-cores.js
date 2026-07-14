@@ -15,13 +15,12 @@
   'use strict';
 
   // clube → [cor primária, cor secundária, (3ª opcional)]. CHAVES = nome exato em js/dados/*.
-  var CORES_CLUBES = {
-
-    // ============================================================
-    //  BRASILEIRÃO — clubes brasileiros
-    //  (os que também jogam a Libertadores estão listados de novo,
-    //   como comentário, na seção da Libertadores — só para conferência)
-    // ============================================================
+  // ============================================================
+  //  CORES — BRASILEIRÃO (clubes brasileiros)
+  //  Os brasileiros que também jogam a Libertadores ficam SÓ aqui:
+  //  são o mesmo clube, e duplicar criaria risco de divergência.
+  // ============================================================
+  var CORES_BRASILEIRAO = {
     'América-RJ':          ['#00913F', '#FFFFFF'],
     'Athletico-PR':        ['#B10000', '#000000'],
     'Atlético-MG':         ['#000000', '#FFFFFF'],
@@ -57,14 +56,16 @@
     'Vasco':               ['#000000', '#FFFFFF'],
     'Vitória':             ['#E30613', '#000000'],
 
-    // ============================================================
-    //  LIBERTADORES — clubes sul-americanos (cores reais dos mantos)
-    //  Brasileiros que também jogam a Liberta e já estão acima:
-    //  Flamengo · Palmeiras · Corinthians · São Paulo · Santos · Grêmio ·
-    //  Internacional · Cruzeiro · Atlético-MG · Athletico-PR · Botafogo ·
-    //  Fluminense · Vasco · São Caetano
-    // ============================================================
+  };
 
+  // ============================================================
+  //  CORES — LIBERTADORES (clubes sul-americanos + convidados)
+  //  Brasileiros que também disputam a Liberta e vêm de CORES_BRASILEIRAO:
+  //  Flamengo · Palmeiras · Corinthians · São Paulo · Santos · Grêmio ·
+  //  Internacional · Cruzeiro · Atlético-MG · Athletico-PR · Botafogo ·
+  //  Fluminense · Vasco · São Caetano
+  // ============================================================
+  var CORES_LIBERTADORES = {
     // --- ARGENTINA ---
     'Boca Juniors':        ['#0A2A66', '#FFD100'],
     'River Plate':         ['#FFFFFF', '#E1122C'],
@@ -102,7 +103,7 @@
     'América de Cali':     ['#E30613', '#FFFFFF'],
     'Independiente Medellín': ['#E30613', '#0A2A66'],
     'Junior':              ['#E30613', '#FFFFFF'],
-    'Once Caldas':         ['#FFFFFF', '#0A2A66'],
+    'Once Caldas':         ['#007A33', '#FFFFFF', '#E30613', '#0A2A66'],
     'Deportes Tolima':     ['#B10000', '#FFD100'],
     'Cúcuta Deportivo':    ['#E30613', '#000000'],
 
@@ -140,6 +141,10 @@
     'Tigres UANL':         ['#FFD100', '#0A2A66']
   };
 
+  // Junta as competições num mapa único (o resto do código usa só este).
+  // Para adicionar a Champions: criar CORES_CHAMPIONS e incluir aqui.
+  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES);
+
   // Aliases: nomes diferentes para o MESMO clube → apontam para a mesma entrada (sem duplicar).
   var ALIAS_CLUBES = {
     'Red Bull Bragantino': 'Bragantino',
@@ -154,8 +159,11 @@
   };
   function resolveAlias(nome) { return ALIAS_CLUBES[nome] || nome; }
 
-  // Estilo fiel à camisa/escudo de cada clube. CHAVES = nome exato em js/dados/*.
-  var ESTILO_CLUBES = {
+  // ============================================================
+  //  ESTILO (padrão do escudo) — BRASILEIRÃO
+  //  Estilo fiel à camisa/escudo. CHAVES = nome exato em js/dados/*.
+  // ============================================================
+  var ESTILO_BRASILEIRAO = {
     'Grêmio':              { padrao: 'listras-v', listras: 4, inverter: true },
     'Atlético-MG':         { padrao: 'listras-finas', listras: 7 },
     'Athletico-PR':        { padrao: 'listras-finas', listras: 6 },
@@ -185,13 +193,15 @@
     'Avaí':                { padrao: 'faixa-h' },
     'Paraná':              { padrao: 'listras-v', listras: 4 },
     'Brasil de Pelotas':   { padrao: 'listras-v', listras: 4 },
-    'São Caetano':         { padrao: 'metade' },
+    'São Caetano':         { padrao: 'metade' }
+  };
 
-    // ============================================================
-    //  LIBERTADORES — padrão de cada clube sul-americano.
-    //  IMPORTANTE: sem entrada aqui, o padrão é SORTEADO pela seed e sai errado
-    //  (Boca sem a faixa, Peñarol sem listras, Nacional sem a diagonal...).
-    // ============================================================
+  // ============================================================
+  //  ESTILO (padrão do escudo) — LIBERTADORES
+  //  IMPORTANTE: sem entrada aqui, o padrão é SORTEADO pela seed e sai errado
+  //  (Boca sem a faixa, Peñarol sem listras, Nacional sem a diagonal...).
+  // ============================================================
+  var ESTILO_LIBERTADORES = {
     // --- ARGENTINA ---
     'Boca Juniors':        { padrao: 'faixa-h' },                    // azul, faixa amarela
     'River Plate':         { padrao: 'diagonal' },                   // branco, banda vermelha
@@ -226,7 +236,7 @@
     'América de Cali':     { padrao: 'solido' },                     // vermelho
     'Independiente Medellín': { padrao: 'listras-v', listras: 4 },
     'Junior':              { padrao: 'listras-v', listras: 5 },      // vermelho e branco (mais listras)
-    'Once Caldas':         { padrao: 'faixa-h' },                    // branco, faixa azul (≠ Palestino)
+    'Once Caldas':         { padrao: 'tri-v-base' },                 // verde/branco/verm + base azul
     'Deportes Tolima':     { padrao: 'solido' },
     'Cúcuta Deportivo':    { padrao: 'solido' },
     // --- PERU ---
@@ -236,7 +246,7 @@
     'Defensor Lima':       { padrao: 'solido' },                     // granate
     // --- EQUADOR ---
     'LDU':                 { padrao: 'metade' },                     // triângulo azul | vermelho
-    'Barcelona-EQU':       { padrao: 'quartos' },                    // esquartelado amarelo/vermelho
+    'Barcelona-EQU':       { padrao: 'barcelona-equ' },              // escudo próprio (4 setores)
     'Emelec':              { padrao: 'solido' },                     // azul
     'El Nacional':         { padrao: 'listras-v', listras: 4 },
     'Independiente del Valle': { padrao: 'listras-v', listras: 4 },  // branco e preto
@@ -256,9 +266,11 @@
     'Cruz Azul':           { padrao: 'solido' },                     // azul
     'Chivas Guadalajara':  { padrao: 'listras-v', listras: 4 },      // branco e vermelho
     'América-MEX':         { padrao: 'solido' },                     // amarelo
-    'Tigres UANL':         { padrao: 'solido' },                     // amarelo
-    'Guarani':             { padrao: 'faixa-h' }
+    'Tigres UANL':         { padrao: 'solido' }                      // amarelo
   };
+
+  // Junta as competições (o resto do código usa só este).
+  var ESTILO_CLUBES = Object.assign({}, ESTILO_BRASILEIRAO, ESTILO_LIBERTADORES);
 
   // seleção → ISO-2 (o gerador desenha a bandeira a partir do código do país).
   // Cobre as seleções mais frequentes; entidades históricas (URSS, Iugoslávia…) e países sem

@@ -127,11 +127,21 @@
         return '<rect x="' + x + '" y="' + (y + h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (y + 2 * h / 3) + '" width="' + w + '" height="' + (h / 3) + '" fill="' + c2 + '"/>';
       }
-      // Três faixas VERTICAIS (Palestino, Once Caldas — tricolor em pé). Fundo = 1º terço.
+      // Três faixas VERTICAIS (Palestino — tricolor em pé). Fundo = 1º terço.
       case 'tri-v': {
         var cv2 = opts.cor2 || cor;
         return '<rect x="' + (x + w / 3) + '" y="' + y + '" width="' + (w / 3) + '" height="' + h + '" fill="' + cor + '"/>' +
                '<rect x="' + (x + 2 * w / 3) + '" y="' + y + '" width="' + (w / 3) + '" height="' + h + '" fill="' + cv2 + '"/>';
+      }
+      // Terços verticais + FAIXA na base (Once Caldas: verde/branco/vermelho + base azul).
+      // opts.cor3 = cor da faixa de baixo.
+      case 'tri-v-base': {
+        var tb2 = opts.cor2 || cor;
+        var tb3 = opts.cor3 || '#0A2A66';
+        var hb = h * 0.30;                        // altura da faixa de baixo
+        return '<rect x="' + (x + w / 3) + '" y="' + y + '" width="' + (w / 3) + '" height="' + h + '" fill="' + cor + '"/>' +
+               '<rect x="' + (x + 2 * w / 3) + '" y="' + y + '" width="' + (w / 3) + '" height="' + h + '" fill="' + tb2 + '"/>' +
+               '<rect x="' + x + '" y="' + (y + h - hb) + '" width="' + w + '" height="' + hb + '" fill="' + tb3 + '"/>';
       }
       case 'metade':
         return '<rect x="' + CENTRO.x + '" y="' + y + '" width="' + (x + w - CENTRO.x) + '" height="' + h + '" fill="' + cor + '"/>';
@@ -141,10 +151,32 @@
       // Diagonal no sentido OPOSTO (topo-esquerda → base-direita) — Sporting Cristal.
       case 'diagonal-inv':
         return '<polygon points="' + x + ',' + (y + h * 0.08) + ' ' + x + ',' + (y + h * 0.46) + ' ' + (x + w) + ',' + (y + h) + ' ' + (x + w) + ',' + (y + h * 0.62) + '" fill="' + cor + '"/>';
-      // Escudo ESQUARTELADO: 4 quadrantes alternando fundo/frente (Barcelona-EQU).
+      // Escudo ESQUARTELADO: 4 quadrantes alternando fundo/frente (genérico).
       case 'quartos':
         return '<rect x="' + (x + w / 2) + '" y="' + y + '" width="' + (w / 2) + '" height="' + (h / 2) + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (y + h / 2) + '" width="' + (w / 2) + '" height="' + (h / 2) + '" fill="' + cor + '"/>';
+      // Barcelona SC (EQU) — escudo próprio: quadrante branco com cruz vermelha (Sant Jordi),
+      // quadrante de listras amarelo/vermelho (Catalunha), base de listras azul/vermelho e a
+      // faixa amarela atravessando. Padrão dedicado, como a constelação do Cruzeiro.
+      case 'barcelona-equ': {
+        var hm = y + h * 0.46;                 // linha que separa o topo da base
+        var o2 = '';
+        // topo-esquerda: branco com cruz vermelha
+        o2 += '<rect x="' + x + '" y="' + y + '" width="' + (w / 2) + '" height="' + (hm - y) + '" fill="#FFFFFF"/>';
+        o2 += '<rect x="' + (x + w * 0.20) + '" y="' + y + '" width="' + (w * 0.09) + '" height="' + (hm - y) + '" fill="#E30613"/>';
+        o2 += '<rect x="' + x + '" y="' + (y + (hm - y) * 0.42) + '" width="' + (w / 2) + '" height="' + ((hm - y) * 0.18) + '" fill="#E30613"/>';
+        // topo-direita: listras amarelo/vermelho (senyera)
+        o2 += '<rect x="' + (x + w / 2) + '" y="' + y + '" width="' + (w / 2) + '" height="' + (hm - y) + '" fill="#FFD100"/>';
+        for (var b = 0; b < 3; b++)
+          o2 += '<rect x="' + (x + w / 2 + w * 0.06 + b * w * 0.15) + '" y="' + y + '" width="' + (w * 0.07) + '" height="' + (hm - y) + '" fill="#E30613"/>';
+        // base: listras azul/vermelho
+        o2 += '<rect x="' + x + '" y="' + hm + '" width="' + w + '" height="' + (y + h - hm) + '" fill="#0A2A66"/>';
+        for (var c3 = 0; c3 < 4; c3++)
+          o2 += '<rect x="' + (x + w * 0.08 + c3 * w * 0.23) + '" y="' + hm + '" width="' + (w * 0.10) + '" height="' + (y + h - hm) + '" fill="#E30613"/>';
+        // faixa amarela atravessando, na divisa
+        o2 += '<rect x="' + x + '" y="' + (hm - h * 0.09) + '" width="' + w + '" height="' + (h * 0.18) + '" fill="#FFD100"/>';
+        return o2;
+      }
       case 'cruz':
         return '<rect x="' + (CENTRO.x - 4) + '" y="' + y + '" width="8" height="' + h + '" fill="' + cor + '"/>' +
                '<rect x="' + x + '" y="' + (CENTRO.y - 4) + '" width="' + w + '" height="8" fill="' + cor + '"/>';
@@ -247,7 +279,7 @@
     var frente = inverter ? corA : corB;
 
     var interior = '<rect x="' + BOX.x + '" y="' + BOX.y + '" width="' + BOX.w + '" height="' + BOX.h + '" fill="' + fundo + '"/>';
-    interior += padrao(tipo, fundo, frente, { n: o.listras, cor2: corC });
+    interior += padrao(tipo, fundo, frente, { n: o.listras, cor2: corC, cor3: normHex(o.cores && o.cores[3], null) });
 
     // Sem monograma: o nome do clube aparece ao lado do escudo na interface (decisão do João).
     return envelope(interior, fundo, o.estrelas | 0);
