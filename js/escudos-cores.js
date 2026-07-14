@@ -69,13 +69,13 @@
     // --- ARGENTINA ---
     'Boca Juniors':        ['#0A2A66', '#FFD100'],
     'River Plate':         ['#FFFFFF', '#E1122C'],
-    'Independiente':       ['#FFFFFF', '#E30613'],
+    'Independiente':       ['#E30613', '#FFFFFF'],
     'Racing':              ['#6CACE4', '#FFFFFF'],
     'San Lorenzo':         ['#0A2A66', '#E30613'],
     'Estudiantes':         ['#FFFFFF', '#E30613'],
     'Vélez Sarsfield':     ['#FFFFFF', '#0A2A66'],
     'Argentinos Juniors':  ['#E30613', '#FFFFFF'],
-    'Newell\'s Old Boys':  ['#FFFFFF', '#E30613'],
+    'Newell\'s Old Boys':  ['#E30613', '#000000'],
     'Rosario Central':     ['#FFFFFF', '#0A2A66'],
     'Lanús':               ['#6E1E2E', '#FFFFFF'],
     'Huracán':             ['#FFFFFF', '#E30613'],
@@ -145,6 +145,15 @@
   // Para adicionar a Champions: criar CORES_CHAMPIONS e incluir aqui.
   var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES);
 
+  // Brasileiros que TAMBÉM disputam a Libertadores. As cores deles moram em CORES_BRASILEIRAO
+  // (fonte única — duplicar arriscaria divergir); esta lista existe só para EXIBIÇÃO: a demo
+  // mostra estes clubes também na aba da Libertadores. Nomes = chave em CORES_BRASILEIRAO.
+  var BRASILEIROS_NA_LIBERTADORES = [
+    'Athletico-PR', 'Atlético-MG', 'Botafogo', 'Corinthians', 'Cruzeiro', 'Flamengo',
+    'Fluminense', 'Grêmio', 'Internacional', 'Palmeiras', 'Santos', 'São Caetano',
+    'São Paulo', 'Vasco'
+  ];
+
   // Aliases: nomes diferentes para o MESMO clube → apontam para a mesma entrada (sem duplicar).
   var ALIAS_CLUBES = {
     'Red Bull Bragantino': 'Bragantino',
@@ -205,13 +214,13 @@
     // --- ARGENTINA ---
     'Boca Juniors':        { padrao: 'faixa-h' },                    // azul, faixa amarela
     'River Plate':         { padrao: 'diagonal' },                   // branco, banda vermelha
-    'Independiente':       { padrao: 'diagonal' },                   // branco, banda vermelha
+    'Independiente':       { padrao: 'diagonal-inv' },               // VERMELHO, banda branca (≠ River)
     'Racing':              { padrao: 'listras-v', listras: 4 },      // celeste e branco
     'San Lorenzo':         { padrao: 'listras-v', listras: 4 },      // azul e vermelho
     'Estudiantes':         { padrao: 'listras-v', listras: 4 },      // branco e vermelho
     'Vélez Sarsfield':     { padrao: 'diagonal' },                   // branco, V azul
     'Argentinos Juniors':  { padrao: 'solido' },
-    'Newell\'s Old Boys':  { padrao: 'metade' },                     // metade vermelha, metade preta→usa 2ª cor
+    'Newell\'s Old Boys':  { padrao: 'metade' },                     // metade vermelha | metade preta
     'Rosario Central':     { padrao: 'listras-v', listras: 4 },      // azul e amarelo
     'Lanús':               { padrao: 'solido' },                     // granate
     'Huracán':             { padrao: 'solido' },
@@ -341,12 +350,15 @@
     todosClubes: function () { return Object.keys(CORES_CLUBES); },
     // Clubes agrupados por competição — usado pela demo (escudos-demo.html) e por qualquer tela
     // que queira listar separado. Para a Champions: incluir aqui quando existir CORES_CHAMPIONS.
+    // A Libertadores inclui os brasileiros que a disputam (as cores deles vêm do Brasileirão —
+    // fonte única; aqui é só exibição, por isso aparecem nas duas listas).
     clubesPorCompeticao: function () {
       return {
         'Brasileirão':  Object.keys(CORES_BRASILEIRAO),
-        'Libertadores': Object.keys(CORES_LIBERTADORES)
+        'Libertadores': Object.keys(CORES_LIBERTADORES).concat(BRASILEIROS_NA_LIBERTADORES)
       };
     },
+    brasileirosNaLibertadores: function () { return BRASILEIROS_NA_LIBERTADORES.slice(); },
     todasSelecoes: function () { return Object.keys(PAIS_SELECAO); }
   };
 
