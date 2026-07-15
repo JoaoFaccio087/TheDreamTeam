@@ -45,20 +45,27 @@
   // Meta em unidades do modelo: x de -1 a 1, y de 0 (chão) a 0.707 (travessão).
   var GX = 1.0, GY = 0.707;
 
+  // BOLA TEM RAIO. O desenho usa r=11 com escala 0.56 ao chegar no gol (~6,16 SVG) e
+  // ESC=157 unidades SVG por unidade do modelo → 0,039.
+  // Sem isto o teste comparava o CENTRO da bola com a trave: centro em ly=0,70 dava GOL,
+  // mas a borda de cima ficava em 0,739 — a bola aparecia EM CIMA do travessão e contava.
+  // A bola passa limpo ou não passa.
+  var RBOLA = 0.039;
+
   var MIRA = {
-    R_MIN:     0.067,   // raio de erro do craque
-    R_MAX:     0.227,   // raio de erro do perna-de-pau
-    K_DIF:     2.633,   // quanto o raio cresce rumo ao ângulo
-    SIG_X:     0.322,   // espalhamento lateral do goleiro (fica perto do meio)
-    MU_Y:      0.109,   // altura típica do corpo dele: pés no chão
-    SIG_Y:     0.179,   // ele varia pouco na vertical
-    RX:        0.539,   // alcance lateral (braço de gente)
-    RY:        0.220,   // alcance vertical
-    P_PEGA:    0.588,   // chance de segurar, tendo alcançado
-    DECAY:     0.441,   // quanto a altura da bola atrapalha
-    K_GOL_ALC: 0.398,   // ganho de alcance pela força do goleiro
-    K_GOL_PEG: 0.746,   // ganho de pegada pela força do goleiro
-    K_ATA:     1.169    // potência do chute do cobrador
+    R_MIN:     0.064,   // raio de erro do craque
+    R_MAX:     0.180,   // raio de erro do perna-de-pau
+    K_DIF:     2.042,   // quanto o raio cresce rumo ao ângulo
+    SIG_X:     0.540,   // espalhamento lateral do goleiro (fica perto do meio)
+    MU_Y:      0.104,   // altura típica do corpo dele: pés no chão
+    SIG_Y:     0.080,   // ele varia pouco na vertical
+    RX:        0.432,   // alcance lateral (braço de gente)
+    RY:        0.313,   // alcance vertical
+    P_PEGA:    0.704,   // chance de segurar, tendo alcançado
+    DECAY:     0.372,   // quanto a altura da bola atrapalha
+    K_GOL_ALC: 0.484,   // ganho de alcance pela força do goleiro
+    K_GOL_PEG: 0.652,   // ganho de pegada pela força do goleiro
+    K_ATA:     1.159    // potência do chute do cobrador
   };
 
   // Limites FÍSICOS do goleiro. NÃO são ajustáveis pelo calibrador — se fossem, ele
@@ -109,7 +116,7 @@
     var kx = Math.max(-KX_LIM, Math.min(KX_LIM, gauss() * MIRA.SIG_X));
     var ky = Math.max(KY_MIN, Math.min(KY_MAX, MIRA.MU_Y + gauss() * MIRA.SIG_Y));
 
-    if (Math.abs(lx) > GX || ly > GY) {
+    if (Math.abs(lx) > GX - RBOLA || ly > GY - RBOLA) {
       return { resultado: 'fora', bola: { x: lx, y: ly }, goleiro: { x: kx, y: ky } };
     }
 
