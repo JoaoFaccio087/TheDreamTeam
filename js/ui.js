@@ -23,6 +23,44 @@
     return a;
   };
 
+  // Monta os marcadores de um campo/quadra: cria `qtd` divs, um por titular.
+  // Antes eram <div> cravados no index.html (11, um por titular do futebol); agora a
+  // quantidade vem do catálogo de esportes. Este helper só CRIA — quem posiciona é o
+  // `UI.posicionarCampo` abaixo, e quem preenche é cada tela.
+  //
+  // Os enfeites do desenho (linha do meio, círculo, áreas) continuam no HTML e são
+  // preservados: os marcadores entram DEPOIS deles, exatamente como no HTML de antes.
+  //
+  // opts: { classe: 'slot-ol slot-draft', attr: 'ol' }
+  //   · classe → classes do marcador. A PRIMEIRA é a âncora usada para localizar/limpar.
+  //   · attr   → nome do data-attribute com o índice (data-indice, data-ol…).
+  //
+  // Idempotente: chamar de novo (ex.: troca de esporte) refaz os marcadores sem duplicar.
+  UI.montarCampo = function (campo, qtd, opts) {
+    if (!campo) return [];
+    var o       = opts || {};
+    var classes = String(o.classe || 'slot-jogo').trim().split(/\s+/);
+    var ancora  = classes[0];                       // 'ficha' | 'slot-jogo' | 'slot-ol'
+    var attr    = o.attr || 'indice';
+    var n       = Math.max(0, parseInt(qtd, 10) || 0);
+
+    Array.prototype.forEach.call(campo.querySelectorAll('.' + ancora), function (el) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    });
+
+    var frag  = document.createDocumentFragment();
+    var lista = [];
+    for (var i = 0; i < n; i++) {
+      var el = document.createElement('div');
+      el.className     = classes.join(' ');
+      el.dataset[attr] = String(i);
+      frag.appendChild(el);
+      lista.push(el);
+    }
+    campo.appendChild(frag);
+    return lista;
+  };
+
   // Posiciona os marcadores (NodeList/array) pelas coordenadas da formação. Só
   // posiciona; o conteúdo de cada marcador fica a cargo de quem chama. Devolve as
   // coordenadas resolvidas (ou null se `formacoes` ainda não existir).

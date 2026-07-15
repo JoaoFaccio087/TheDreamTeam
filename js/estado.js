@@ -1,5 +1,27 @@
 // estado.js — referências de elementos do DOM e variáveis de estado globais.
 
+// --- Campos: os marcadores são GERADOS aqui (Fase 3 do multi-esportes) ---
+//
+// Antes eram 55 <div> cravados no index.html (5 campos × 11 titulares). Agora a
+// quantidade vem do catálogo (js/esportes.js) e ESTE é o único lugar que a conhece —
+// mesma semente do `escalacao = Array(N)` mais abaixo.
+//
+// ⚠️ ORDEM É TUDO: isto precisa rodar ANTES dos querySelectorAll logo abaixo, porque
+// `document.querySelectorAll` devolve NodeList ESTÁTICA — capturada antes, viria vazia.
+// Por isso a geração mora aqui, e não num módulo posterior.
+// A cascata de <script defer> garante que esportes.js e ui.js já rodaram.
+const N_TITULARES = (typeof titularesAtuais === 'function') ? titularesAtuais() : 11;
+
+if (typeof UI !== 'undefined' && UI.montarCampo) {
+  // Offline
+  UI.montarCampo(document.getElementById('campo'),      N_TITULARES, { classe: 'ficha' });
+  UI.montarCampo(document.getElementById('campo-jogo'), N_TITULARES, { classe: 'slot-jogo' });
+  // Online (consultados dinamicamente por online.js, mas geradas aqui para haver um só lugar)
+  UI.montarCampo(document.getElementById('lobby-campo'),   N_TITULARES, { classe: 'slot-ol',                attr: 'ol' });
+  UI.montarCampo(document.getElementById('draft-campo'),   N_TITULARES, { classe: 'slot-ol slot-draft',   attr: 'ol' });
+  UI.montarCampo(document.getElementById('elencos-campo'), N_TITULARES, { classe: 'slot-ol slot-elencos', attr: 'ol' });
+}
+
 // --- Elementos do DOM ---
 
 const telaInicial    = document.getElementById('tela-inicial');
@@ -73,9 +95,9 @@ let formacaoJogo       = '4-3-3';
 let formacaoTravada    = false;
 let nomeDoTime         = 'Seu time';           // nome do time do jogador (editável na escalação)
 let jogadorSelecionado = null;                 // jogador escolhido na lista, aguardando um slot
-// Semente inicial: tamanho vem do catálogo de esportes (js/esportes.js carrega antes).
-// Fallback 11 caso o catálogo não esteja disponível.
-let escalacao          = Array(typeof titularesAtuais === 'function' ? titularesAtuais() : 11).fill(null); // null = vaga vazia
+// Semente inicial: mesmo N que montou os campos lá em cima (catálogo js/esportes.js).
+// Um só número manda no DOM e no estado — se divergissem, sobrariam slots sem vaga.
+let escalacao          = Array(N_TITULARES).fill(null); // null = vaga vazia
 let slotsPreenchidos   = 0;
 let slotMovendo        = null;                 // índice do slot cujo jogador está sendo movido
 let clubeSorteado      = '';
