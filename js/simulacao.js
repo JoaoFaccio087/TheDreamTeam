@@ -285,8 +285,6 @@ function montarCobradores(lista) {
     .slice(0, (typeof emCampoAtuais === 'function') ? emCampoAtuais() : 11);
 }
 
-function limita(v, min, max) { return Math.max(min, Math.min(max, v)); }
-
 // Força do goleiro do elenco (por código de vaga 'GOL' ou por posição); 72 se não achar.
 function forcaGoleiro(lista) {
   var arr = (lista || []).filter(Boolean);
@@ -309,58 +307,37 @@ function bonusPosicao(jog) {
   return 0;   // MC, VOL, ME, MD…
 }
 
-// Resultado de uma cobrança: 'gol' | 'defesa' | 'fora'. Combina força do atacante
-// x goleiro + bônus de posição. Os limites do pGol são a "zebra": mesmo o craque
-// erra de vez em quando, e o goleiro fraco às vezes pega.
-function resultadoCobranca(cob, fGoleiro) {
-  var fAt = cob.forca || 73;
-  // Conversão real de pênaltis fica ~75-80%. Base mais alta e piso maior para não errar demais.
-  var pGol = limita(0.80 + (fAt - fGoleiro) * 0.005 + bonusPosicao(cob), 0.58, 0.93);
-  if (Math.random() < pGol) return 'gol';
-  var pDefesa = limita(0.45 + (fGoleiro - fAt) * 0.006, 0.25, 0.75);
-  return Math.random() < pDefesa ? 'defesa' : 'fora';
+// Força EFETIVA de cobrança = força + bônus de posição, convertido para pontos.
+//
+// Por que 200: o modelo antigo somava `(fAt - fGol) * 0.005 + bonusPosicao(cob)`.
+// Como 0.005 de chance vale 1 ponto de força, 1 de bônus vale 1/0.005 = 200 pontos.
+// Então +0.06 (atacante) = +12 pontos e -0.08 (goleiro) = -16. É o MESMO efeito de
+// antes, expresso na única moeda que o modelo geométrico entende: força.
+// Sem isto, zagueiro e goleiro bateriam tão bem quanto atacante — regressão silenciosa.
+function forcaCobranca(jog) {
+  return (jog.forca || 73) + bonusPosicao(jog) * 200;
 }
 
-// --- Disputa de pênaltis: best-of-5 + morte súbita; chama onFim('meu'|'adv') ---
-// Pré-simula a disputa inteira (atacante x goleiro por cobrança) e devolve a
-// sequência [{lado, nome, resultado}] + o vencedor, para a animação consumir.
-function simularDisputa(cobMeus, cobAdv, golMeu, golAdv) {
-  var seq = [], pMeus = 0, pAdv = 0, iMeu = 0, iAdv = 0, morte = false, lado = 'meu', guard = 0;
-  function decidiu() {
-    if (!morte) {
-      var rM = Math.max(0, 5 - iMeu), rA = Math.max(0, 5 - iAdv);
-      if (pMeus > pAdv + rA) return 'meu';
-      if (pAdv > pMeus + rM) return 'adv';
-      if (iMeu >= 5 && iAdv >= 5) {
-        if (pMeus > pAdv) return 'meu';
-        if (pAdv > pMeus) return 'adv';
-        morte = true;
-      }
-    } else if (iMeu === iAdv) {
-      if (pMeus > pAdv) return 'meu';
-      if (pAdv > pMeus) return 'adv';
-    }
-    return null;
-  }
-  while (guard++ < 60) {
-    var cob, res;
-    if (lado === 'meu') { cob = cobMeus[iMeu % cobMeus.length]; res = resultadoCobranca(cob, golAdv); if (res === 'gol') pMeus++; iMeu++; }
-    else { cob = cobAdv[iAdv % cobAdv.length]; res = resultadoCobranca(cob, golMeu); if (res === 'gol') pAdv++; iAdv++; }
-    seq.push({ lado: lado, nome: cob.nome, resultado: res });
-    var d = decidiu();
-    if (d) return { sequencia: seq, vencedor: d };
-    lado = (lado === 'meu') ? 'adv' : 'meu';
-  }
-  return { sequencia: seq, vencedor: pMeus >= pAdv ? 'meu' : 'adv' };
-}
+// --- Disputa de pênaltis ------------------------------------------------------
+// A COBRANÇA NÃO MORA MAIS AQUI. O modelo geométrico (Penaltis.cobrar, em js/penaltis.js)
+// é a fonte única do offline: mesma conta para as suas cobranças e as do adversário.
+//
+// Ficavam aqui `resultadoCobranca` e `simularDisputa`. Foram removidas de propósito:
+// este projeto já sangrou por ter a mesma conta copiada em vários lugares (o bug dos
+// pênaltis do online era exatamente isso — 3 funções, a do servidor defasada). O
+// modelo novo foi calibrado para reproduzir o `resultadoCobranca` antigo dentro de
+// ~2 p.p. em todo o espectro de força, então nada de balanceamento se moveu.
+//
+// O ONLINE segue com a conta do servidor (resultadoCobrancaSrv): lá a sequência vem
+// pronta e só é animada. Interativo é só offline (sincronia/anti-trapaça/ritmo).
 
 function disputarPenaltis(est, onFim) {
-  // Cobradores: os que estão em campo de cada lado (com goleiro), ordem embaralhada
+  // Cobradores: quem está em campo dos dois lados, do mais forte para o mais fraco.
   var jogadores = escalacao.filter(function(j) { return j !== null; });
   var cobradoresMeus = montarCobradores(jogadores);
 
   var jogadoresAdv = est.adversario.jogadores || [];
-  // Fallback: clube sem elenco no DADOS → cria 5 cobradores genéricos
+  // Fallback: clube sem elenco no DADOS → 5 cobradores genéricos
   if (jogadoresAdv.length === 0) {
     for (var fb = 0; fb < 5; fb++) {
       jogadoresAdv.push({ nome: est.adversario.clube + ' ' + (fb + 1), forca: 77 });
@@ -368,138 +345,29 @@ function disputarPenaltis(est, onFim) {
   }
   var cobradoresAdv = montarCobradores(jogadoresAdv);
 
-  // Probabilidade de conversão: ~75% base, leve vantagem pro time mais forte
-  var diff    = est.forcaMinha - est.forcaAdv;
-  var probMeu = Math.max(0.60, Math.min(0.88, 0.75 + diff / 400));
-  var probAdv = Math.max(0.60, Math.min(0.88, 0.75 - diff / 400));
-
-  // Animação: pré-simula a disputa e delega o visual ao módulo Penaltis.
-  if (window.Penaltis && Penaltis.disputar) {
-    var golMeu = forcaGoleiro(jogadores), golAdv = forcaGoleiro(jogadoresAdv);
-    var sim = simularDisputa(cobradoresMeus, cobradoresAdv, golMeu, golAdv);
-    Penaltis.disputar({
-      meuNome:    (typeof nomeDoTime !== 'undefined' ? nomeDoTime : 'Seu time'),
-      advNome:    est.adversario.clube,
-      sequencia:  sim.sequencia,
-      vencedor:   sim.vencedor,
-      velocidade: velocidadeSimulacao,
-      onFim:      onFim
+  // A ORDEM segue a força bruta (como sempre foi — mexer nisso mudaria quem bate
+  // primeiro); o bônus de posição entra só na conversão, via força efetiva.
+  function paraModelo(lista) {
+    return lista.map(function (j) {
+      return { nome: j.nome, forca: forcaCobranca(j) };
     });
-    return;
   }
 
-  // Cria o bloco visual dentro do .partida-corpo, antes do .partida-resultado
-  var cardEl      = document.getElementById('partida-' + est.id);
-  var corpo       = cardEl ? cardEl.querySelector('.partida-corpo') : null;
-  var elResultado = document.getElementById('presultado-' + est.id);
-
-  var wrapPen = document.createElement('div');
-  wrapPen.className = 'penaltis-wrap';
-  wrapPen.innerHTML =
-    '<p class="penaltis-titulo">Disputa de P\xEAnaltis</p>' +
-    '<div class="penaltis-colunas">' +
-      '<div class="penaltis-col">' +
-        '<p class="penaltis-col-nome">Seu Time</p>' +
-        '<div id="pen-meu-' + est.id + '"></div>' +
-      '</div>' +
-      '<div class="penaltis-col">' +
-        '<p class="penaltis-col-nome">' + est.adversario.clube + '</p>' +
-        '<div id="pen-adv-' + est.id + '"></div>' +
-      '</div>' +
-    '</div>' +
-    '<p class="penaltis-placar-txt" id="pen-placar-' + est.id + '">0 – 0</p>';
-
-  if (corpo && elResultado) {
-    corpo.insertBefore(wrapPen, elResultado);
-  } else if (corpo) {
-    corpo.appendChild(wrapPen);
-  }
-
-  var pMeus = 0, pAdv = 0; // gols marcados nos pênaltis
-  var iMeu  = 0, iAdv = 0; // cobranças já realizadas por cada lado
-  var morteSubita = false;
-
-  // Atualiza o "x – y" abaixo das colunas
-  function atualizarPlacar() {
-    var el = document.getElementById('pen-placar-' + est.id);
-    if (el) el.textContent = pMeus + ' – ' + pAdv;
-  }
-
-  // Adiciona uma linha (nome + ✓/✗) na coluna certa
-  function addLinha(lado, nome, ok) {
-    var colId = lado === 'meu' ? 'pen-meu-' + est.id : 'pen-adv-' + est.id;
-    var col   = document.getElementById(colId);
-    if (!col) return;
-    var d = document.createElement('div');
-    d.className = 'penaltis-linha';
-    d.innerHTML =
-      '<span class="pen-nome">' + nome + '</span>' +
-      '<span class="pen-icone ' + (ok ? 'pen-ok' : 'pen-fail') + '">' +
-        (ok ? '✓' : '✗') +
-      '</span>';
-    col.appendChild(d);
-  }
-
-  // Verifica se o resultado já está matematicamente decidido
-  // Também faz a transição silenciosa para morteSubita quando tudo empata em 5
-  function checarDecisao() {
-    if (!morteSubita) {
-      var restMeu = Math.max(0, 5 - iMeu);
-      var restAdv = Math.max(0, 5 - iAdv);
-      if (pMeus > pAdv + restAdv) return 'meu'; // adv já não alcança → encerra antes das 5
-      if (pAdv > pMeus + restMeu) return 'adv'; // meu já não alcança → encerra antes das 5
-      // Todas as 5 cobranças concluídas de cada lado
-      if (iMeu >= 5 && iAdv >= 5) {
-        if (pMeus > pAdv) return 'meu';
-        if (pAdv > pMeus) return 'adv';
-        morteSubita = true; // empate em 5 → morte súbita, continua
-      }
-    } else {
-      // Morte súbita: decide somente após o par completo (ambos chutaram)
-      if (iMeu === iAdv) {
-        if (pMeus > pAdv) return 'meu';
-        if (pAdv > pMeus) return 'adv';
-        // Empatou de novo → par seguinte
-      }
-    }
-    return null;
-  }
-
-  // Executa um chute, revela no visual, agenda o próximo
-  function chutar(lado) {
-    var cobrador, prob;
-    if (lado === 'meu') {
-      cobrador = cobradoresMeus[iMeu % cobradoresMeus.length];
-      prob     = probMeu;
-    } else {
-      cobrador = cobradoresAdv[iAdv % cobradoresAdv.length];
-      prob     = probAdv;
-    }
-
-    var ok = Math.random() < prob;
-    if (ok) { if (lado === 'meu') pMeus++; else pAdv++; }
-    if (lado === 'meu') iMeu++; else iAdv++;
-
-    addLinha(lado, cobrador.nome, ok);
-    atualizarPlacar();
-
-    var dec = checarDecisao();
-    if (dec) {
-      // Pequena pausa antes de fechar para o jogador ler o último chute
-      setTimeout(function() { onFim(dec); }, cadenciaPenalti());
-      return;
-    }
-
-    // Alterna o lado: meu → adv → meu → adv …
-    var proximoLado = (lado === 'meu') ? 'adv' : 'meu';
-    setTimeout(function() { chutar(proximoLado); }, cadenciaPenalti());
-  }
-
-  // Inicia com o meu time (pequena pausa para o DOM renderizar o bloco)
-  setTimeout(function() { chutar('meu'); }, cadenciaPenalti());
+  // O Penaltis dirige a disputa inteira (best-of-5 + morte súbita) e chama onFim.
+  // Você mira as suas; a CPU mira as do adversário. Mesmo modelo nos dois lados.
+  Penaltis.disputar({
+    meuNome:        (typeof nomeDoTime !== 'undefined' ? nomeDoTime : 'Seu time'),
+    advNome:        est.adversario.clube,
+    interativo:     true,
+    cobradoresMeus: paraModelo(cobradoresMeus),
+    cobradoresAdv:  paraModelo(cobradoresAdv),
+    golMeu:         forcaGoleiro(jogadores),      // defende as do adversário
+    golAdv:         forcaGoleiro(jogadoresAdv),   // defende as suas
+    velocidade:     velocidadeSimulacao,
+    onFim:          onFim
+  });
 }
 
-// --- Encerra a partida: decide o vencedor e avança (ou encerra) a campanha ---
 function encerrarPartida(est) {
   timerPartida = null;
 

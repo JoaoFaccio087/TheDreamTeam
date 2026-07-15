@@ -19,6 +19,128 @@
   function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
   function el(t, a) { var e = document.createElementNS(NS, t); for (var k in a) e.setAttribute(k, a[k]); return e; }
 
+  /* ===================================================================
+     MODELO GEOMÉTRICO DA COBRANÇA — fonte única do offline
+     ===================================================================
+     A bola cai em `alvo + erro aleatório dentro do raio`. Fora da meta = FORA;
+     goleiro alcança = DEFESA; senão GOL. Não há tabela de probabilidade por zona:
+     a geometria produz o número.
+
+     ONDE CADA COISA ENTRA:
+       · raio          → precisão. Cresce rumo ao ângulo, encolhe com a força do atacante.
+       · goleiro plantado no meio → é por isso que mirar no canto compensa.
+       · altura        → bola alta ele alcança mas não segura.
+       · potência      → craque chuta forte; o goleiro chega e não segura.
+
+     ⚠️ OS NÚMEROS DE `MIRA` NÃO SÃO CHUTE. Saíram de uma calibragem Monte Carlo
+     (scripts/calibra-penaltis.js, semente fixa) com três restrições:
+       1. reproduzir o `resultadoCobranca` antigo dentro de ~2 p.p. em todo o espectro
+          de força atacante × goleiro — senão as conquistas (matasNosPenaltis,
+          finalNosPenaltis) mudariam de dificuldade;
+       2. spread ≤ ~4 p.p. entre as zonas de mira: NENHUM canto pode dominar;
+       3. conversão global ~80%.
+     Mexeu num número? Rode o calibrador de novo e confira as três.
+     =================================================================== */
+
+  // Meta em unidades do modelo: x de -1 a 1, y de 0 (chão) a 0.707 (travessão).
+  var GX = 1.0, GY = 0.707;
+
+  var MIRA = {
+    R_MIN:     0.055,   // raio de erro do craque
+    R_MAX:     0.160,   // raio de erro do perna-de-pau
+    K_DIF:     0.826,   // quanto o raio cresce rumo ao ângulo
+    P_FICA:    0.085,   // chance de o goleiro ficar plantado no meio
+    RX:        0.745,   // alcance horizontal do goleiro
+    RY:        0.518,   // alcance vertical
+    P_PEGA:    0.581,   // chance de segurar, tendo alcançado
+    DECAY:     0.782,   // quanto a altura da bola atrapalha o goleiro
+    K_GOL_ALC: 0.712,   // ganho de alcance pela força do goleiro
+    K_GOL_PEG: 0.615,   // ganho de pegada pela força do goleiro
+    K_ATA:     0.874    // potência do chute do atacante
+  };
+
+  // Mergulhos do goleiro. O [0, 0.55] é ele plantado ESTICANDO para a bola central alta —
+  // sem essa opção sobra um buraco no centro-alto e ele vira o canto dominante (spread 10 p.p.).
+  var DIVES = [[-0.72, 0.17], [-0.72, 0.5], [0.72, 0.17], [0.72, 0.5], [0, 0.55]];
+  var PLANTADO = [0, 0.15];
+
+  // DUAS normalizações, e a diferença importa:
+  //  · COBRADOR: a força chega já somada ao bônus de posição (simulacao.js:forcaCobranca),
+  //    então sai da faixa dos dados — goleiro batendo vira ~69, atacante craque vira ~102.
+  //    Normalizar em 60-99 achatava os extremos e o bônus sumia (erro de 3,5 p.p.).
+  //  · GOLEIRO: força crua. Goleiro NUNCA recebe bônus de posição, então a faixa é a dos dados.
+  // Usar a mesma normalização nos dois tornava impossível cumprir fidelidade E spread ao
+  // mesmo tempo — separá-las destravou os dois.
+  function normCob(f) { return Math.max(0, Math.min(1, ((f || 73) - 44) / 67)); }
+  function normGol(f) { return Math.max(0, Math.min(1, ((f || 72) - 60) / 39)); }
+
+  // Raio de erro do chute. Exposto porque a mira desenha ESTE círculo no cursor:
+  // o usuário vê o risco antes de se comprometer.
+  function raioDe(ax, ay, fAtacante) {
+    var p   = normCob(fAtacante);
+    var r0  = MIRA.R_MAX - (MIRA.R_MAX - MIRA.R_MIN) * p;
+    var dif = Math.min(1, Math.sqrt((ax / GX) * (ax / GX) + (ay / GY) * (ay / GY)) / Math.SQRT2);
+    return r0 * (1 + MIRA.K_DIF * dif);
+  }
+
+  // Uma cobrança. Devolve o resultado E a geometria, para a animação mostrar
+  // exatamente o que foi calculado (a bola cai onde o modelo disse).
+  function cobrar(ax, ay, fAtacante, fGoleiro) {
+    var r = raioDe(ax, ay, fAtacante);
+
+    var a = Math.random() * 2 * Math.PI, d = r * Math.sqrt(Math.random());
+    var lx = ax + d * Math.cos(a), ly = ay + d * Math.sin(a);
+    if (ly < 0) ly = 0;                      // rasteira: continua valendo
+
+    var kOpt = (Math.random() < MIRA.P_FICA) ? PLANTADO : pick(DIVES);
+    var kx = kOpt[0], ky = kOpt[1];
+
+    if (Math.abs(lx) > GX || ly > GY) {
+      return { resultado: 'fora', bola: { x: lx, y: ly }, goleiro: { x: kx, y: ky } };
+    }
+
+    var g = normGol(fGoleiro);
+    var multAlc = 1 + MIRA.K_GOL_ALC * (g - 0.5);
+    var alc = Math.sqrt(
+      Math.pow((lx - kx) / (MIRA.RX * multAlc), 2) +
+      Math.pow((ly - ky) / (MIRA.RY * multAlc), 2)
+    );
+    if (alc < 1) {
+      var multPega = 1 + MIRA.K_GOL_PEG * (g - 0.5);
+      var pega = MIRA.P_PEGA * (1 - MIRA.DECAY * (ly / GY)) * multPega * (1 - MIRA.K_ATA * (normCob(fAtacante) - 0.5));
+      if (Math.random() < pega) {
+        return { resultado: 'defesa', bola: { x: lx, y: ly }, goleiro: { x: kx, y: ky } };
+      }
+    }
+    return { resultado: 'gol', bola: { x: lx, y: ly }, goleiro: { x: kx, y: ky } };
+  }
+
+  // Mira da CPU: sorteia um alvo plausível. Como o spread entre zonas é ~3 p.p.,
+  // não existe alvo "certo" — qualquer um serve, e é isso que mantém a disputa justa.
+  function alvoCPU() {
+    return { x: (Math.random() * 2 - 1) * 0.86, y: Math.random() * (GY * 0.92) };
+  }
+
+  // Best-of-5 + morte súbita. UMA cópia: antes vivia duplicada em `simularDisputa`
+  // (simulacao.js) e em `gerarSequencia` (aqui embaixo).
+  // e = { pM, pA, iM, iA, morte } → 'meu' | 'adv' | null (null = continua)
+  function decidiu(e) {
+    if (!e.morte) {
+      var rM = Math.max(0, 5 - e.iM), rA = Math.max(0, 5 - e.iA);
+      if (e.pM > e.pA + rA) return 'meu';
+      if (e.pA > e.pM + rM) return 'adv';
+      if (e.iM >= 5 && e.iA >= 5) {
+        if (e.pM > e.pA) return 'meu';
+        if (e.pA > e.pM) return 'adv';
+        e.morte = true;
+      }
+    } else if (e.iM === e.iA) {
+      if (e.pM > e.pA) return 'meu';
+      if (e.pA > e.pM) return 'adv';
+    }
+    return null;
+  }
+
   // Bola clássica preto e branco (pentágono central + 5 na borda + costuras).
   function bolaFutebol() {
     var g = el('g', {});
@@ -121,6 +243,18 @@
         '</g>' +
 
         '<g id="pen-bl"></g>' +
+
+        // Camada de mira (só no interativo). O retângulo cobre a meta INTEIRA e um pouco
+        // além: mirar no ângulo tem de ser possível, e errar para fora também.
+        '<g id="pen-mira" style="display:none">' +
+          '<rect id="pen-mira-hit" x="40" y="40" width="400" height="180" fill="transparent" style="cursor:crosshair"/>' +
+          '<g id="pen-mira-alvo" style="pointer-events:none; opacity:0">' +
+            '<circle id="pen-mira-raio" cx="0" cy="0" r="30" fill="#D9B25A" fill-opacity="0.14" stroke="#D9B25A" stroke-width="1.4" stroke-dasharray="4 3"/>' +
+            '<line x1="-7" y1="0" x2="7" y2="0" stroke="#fff" stroke-width="1.6"/>' +
+            '<line x1="0" y1="-7" x2="0" y2="7" stroke="#fff" stroke-width="1.6"/>' +
+          '</g>' +
+        '</g>' +
+
         '<text id="pen-fl" x="240" y="150" text-anchor="middle" font-family="\'Archivo Black\',sans-serif" font-weight="800" font-size="27" letter-spacing="1" opacity="0" style="pointer-events:none"></text>' +
       '</svg>' +
 
@@ -162,6 +296,16 @@
     root.querySelector('#pen-bl').appendChild(bolaFutebol());
   }
 
+  /* --- Ponte SVG ↔ modelo -------------------------------------------------
+     A meta desenhada: traves em x=83 e x=397, travessão em y=73, linha em y=184.
+     Centro x=240, meia-largura 157, altura 111. E 111/157 = 0.707 = GY — ou seja,
+     a escala é a MESMA nos dois eixos: 157 unidades de SVG por unidade do modelo.
+     Não é coincidência: GY foi escolhido pela proporção real do gol. */
+  var CX = 240, CY = 184, ESC = 157;
+
+  function svgParaModelo(sx, sy) { return { x: (sx - CX) / ESC, y: (CY - sy) / ESC }; }
+  function modeloParaSvg(mx, my) { return { x: CX + mx * ESC, y: CY - my * ESC }; }
+
   // --- Disputa principal ---
   function disputar(opts) {
     opts = opts || {};
@@ -171,6 +315,16 @@
     var vencedor = opts.vencedor || 'meu';
     var cad      = cadencia(opts.velocidade);
     var onFim    = typeof opts.onFim === 'function' ? opts.onFim : function () {};
+
+    // MODO B (offline interativo): em vez de uma sequência pronta, recebe os elencos
+    // e as forças, e decide cobrança a cobrança — porque o resultado do SEU chute só
+    // pode existir depois que você mira. O MODO A (online) segue igual: sequência
+    // pronta do servidor, animada.
+    var interativo  = !!opts.interativo && !!window.Penaltis;
+    var cobMeus     = opts.cobradoresMeus || [];
+    var cobAdv      = opts.cobradoresAdv  || [];
+    var golMeu      = opts.golMeu || 72;   // meu goleiro: defende as do adversário
+    var golAdv      = opts.golAdv || 72;   // goleiro adversário: defende as minhas
 
     var ov = document.createElement('div');
     ov.className = 'pen-overlay';
@@ -240,6 +394,113 @@
       setTimeout(function () { fl.style.opacity = '0'; snap(); done(); }, Math.max(900, cad));
     }
 
+    /* ===== MODO B: disputa interativa (offline) ===================== */
+    var estado = { pM: 0, pA: 0, iM: 0, iA: 0, morte: false };
+    var ladoVez = 'meu', guarda = 0;
+    var mira = ov.querySelector('#pen-mira'),
+        miraHit = ov.querySelector('#pen-mira-hit'),
+        miraAlvo = ov.querySelector('#pen-mira-alvo'),
+        miraRaio = ov.querySelector('#pen-mira-raio');
+
+    function cobradorDa(lado) {
+      var lista = (lado === 'meu') ? cobMeus : cobAdv;
+      var i = (lado === 'meu') ? estado.iM : estado.iA;
+      return lista.length ? lista[i % lista.length] : { nome: '—', forca: 73 };
+    }
+
+    // Anima uma cobrança já resolvida pelo MODELO: a bola cai exatamente onde a
+    // geometria disse. Nada de sortear a posição por fora — se a animação mostrasse
+    // outra coisa, o jogador veria a conta mentindo.
+    function animarModelo(lado, cob, r, done) {
+      var alvoNome = (lado === 'meu' ? esc(meuNome) : esc(advNome));
+      status.innerHTML = alvoNome + ' &middot; bate: <b>' + esc(cob.nome) + '</b>';
+
+      var pB = modeloParaSvg(r.bola.x, r.bola.y);
+      var pG = modeloParaSvg(r.goleiro.x, r.goleiro.y);
+      var bx = pB.x - CX, by = pB.y - 288;                       // a bola parte de (240,288)
+      var kx = (pG.x - CX) * 0.46;                               // goleiro anda menos que a bola
+      var ky = 8 - (r.goleiro.y - 0.17) * 60;
+      var mergulha = Math.abs(r.goleiro.x) > 0.3;
+      var rot = (r.goleiro.x < 0 ? -1 : r.goleiro.x > 0 ? 1 : 0) * (r.goleiro.y > 0.35 ? 46 : 30);
+
+      bl.style.transform = 'translate(' + (CX + bx) + 'px,' + (288 + by) + 'px) scale(.56)';
+      setTimeout(function () {
+        if (mergulha) { kpI.style.opacity = '0'; kpD.style.opacity = '1'; }
+        kp.style.transform = 'translate(' + (CX + kx) + 'px,' + (180 + ky) + 'px) rotate(' + rot + 'deg)';
+      }, 110);
+
+      var rotulo = { gol: 'GOL', defesa: 'DEFENDEU', fora: 'FORA' }[r.resultado];
+      var fez = (r.resultado === 'gol');
+      setTimeout(function () {
+        fl.textContent = rotulo + '!';
+        fl.setAttribute('fill', fez ? '#2BD46A' : (r.resultado === 'defesa' ? '#ffd76a' : '#e8e8e8'));
+        fl.style.opacity = '1';
+        reagir((lado === 'meu') === fez);
+        if (lado === 'meu') { resM.push(fez); if (fez) estado.pM++; estado.iM++; }
+        else                { resA.push(fez); if (fez) estado.pA++; estado.iA++; }
+        render();
+      }, 560);
+      setTimeout(function () { fl.style.opacity = '0'; snap(); done(); }, Math.max(900, cad));
+    }
+
+    function fecharMira() {
+      mira.style.display = 'none';
+      miraAlvo.style.opacity = '0';
+      miraHit.onmousemove = miraHit.onclick = miraHit.ontouchstart = miraHit.ontouchmove = miraHit.ontouchend = null;
+    }
+
+    // Abre a mira e espera o clique. O círculo é o RAIO DE ERRO real (Penaltis.raioDe):
+    // cresce rumo ao ângulo, encolhe com a força do cobrador. O jogador vê o risco
+    // ANTES de se comprometer — a escolha é informada, não chute cego.
+    function pedirMira(cob, cb) {
+      mira.style.display = '';
+      status.innerHTML = '<b>' + esc(cob.nome) + '</b> &middot; escolha o canto &mdash; quanto mais no &acirc;ngulo, maior o risco';
+
+      function pos(ev) {
+        var pt = ov.querySelector('.pen-stage').getBoundingClientRect();
+        var t = (ev.touches && ev.touches[0]) || ev;
+        return {
+          sx: (t.clientX - pt.left) / pt.width * 480,
+          sy: (t.clientY - pt.top) / pt.height * 322
+        };
+      }
+      function mover(ev) {
+        var p = pos(ev), m = svgParaModelo(p.sx, p.sy);
+        miraAlvo.style.opacity = '1';
+        miraAlvo.setAttribute('transform', 'translate(' + p.sx.toFixed(1) + ',' + p.sy.toFixed(1) + ')');
+        miraRaio.setAttribute('r', (raioDe(m.x, m.y, cob.forca) * ESC).toFixed(1));
+      }
+      function atirar(ev) {
+        if (ev.cancelable) ev.preventDefault();
+        var p = pos(ev), m = svgParaModelo(p.sx, p.sy);
+        fecharMira();
+        cb(m);
+      }
+      miraHit.onmousemove = mover;
+      miraHit.onclick = atirar;
+      miraHit.ontouchmove = function (ev) { if (ev.cancelable) ev.preventDefault(); mover(ev); };
+      miraHit.ontouchend = atirar;
+    }
+
+    function proximoInterativo() {
+      if (pulado) return;
+      var fim = decidiu(estado);
+      if (fim || guarda++ > 60) return finalizar(fim || (estado.pM >= estado.pA ? 'meu' : 'adv'));
+
+      var lado = ladoVez, cob = cobradorDa(lado);
+      ladoVez = (lado === 'meu') ? 'adv' : 'meu';
+
+      function bater(alvo) {
+        var r = cobrar(alvo.x, alvo.y, cob.forca, lado === 'meu' ? golAdv : golMeu);
+        animarModelo(lado, cob, r, function () {
+          if (!pulado) timer = setTimeout(proximoInterativo, Math.round(cad * 0.25));
+        });
+      }
+      if (lado === 'meu') pedirMira(cob, bater);
+      else                bater(alvoCPU());
+    }
+
+    /* ===== MODO A: sequência pronta (online) ======================== */
     function proximo() {
       if (pulado) return;
       if (idx >= seq.length) { return finalizar(); }
@@ -247,25 +508,43 @@
       animarChute(k, function () { if (!pulado) timer = setTimeout(proximo, Math.round(cad * 0.25)); });
     }
 
+    // "Pular": resolve o resto SEM interação. No interativo a CPU mira pelo usuário —
+    // mesmo modelo, mesma matemática: pular não muda a chance de nada.
     function pular() {
       if (pulado) return;
       pulado = true; clearTimeout(timer); btnPular.disabled = true;
+      if (interativo) {
+        fecharMira();
+        var g = 0, fim;
+        while (!(fim = decidiu(estado)) && g++ < 60) {
+          var lado = ladoVez, cob = cobradorDa(lado);
+          ladoVez = (lado === 'meu') ? 'adv' : 'meu';
+          var a = alvoCPU();
+          var fez = cobrar(a.x, a.y, cob.forca, lado === 'meu' ? golAdv : golMeu).resultado === 'gol';
+          if (lado === 'meu') { resM.push(fez); if (fez) estado.pM++; estado.iM++; }
+          else                { resA.push(fez); if (fez) estado.pA++; estado.iA++; }
+        }
+        render();
+        return finalizar(fim || (estado.pM >= estado.pA ? 'meu' : 'adv'));
+      }
       for (; idx < seq.length; idx++) registrar(seq[idx]);
       render(); finalizar();
     }
 
-    function finalizar() {
+    function finalizar(quem) {
       btnPular.disabled = true;
-      status.innerHTML = '<b>' + esc(vencedor === 'meu' ? meuNome : advNome) + ' venceu nos p&ecirc;naltis!</b>';
+      fecharMira();
+      var v = quem || vencedor;   // modo B decide na hora; modo A já veio decidido
+      status.innerHTML = '<b>' + esc(v === 'meu' ? meuNome : advNome) + ' venceu nos p&ecirc;naltis!</b>';
       setTimeout(function () {
         ov.classList.remove('aberto');
-        setTimeout(function () { if (ov.parentNode) ov.parentNode.removeChild(ov); onFim(vencedor); }, 380);
+        setTimeout(function () { if (ov.parentNode) ov.parentNode.removeChild(ov); onFim(v); }, 380);
       }, 1400);
     }
 
     btnPular.addEventListener('click', pular);
     render(); snap();
-    timer = setTimeout(proximo, 500);
+    timer = setTimeout(interativo ? proximoInterativo : proximo, 500);
   }
 
   // --- Demo: gera uma disputa aleatória e abre o modal ---
@@ -296,5 +575,18 @@
     disputar({ meuNome: 'Faccio FC', advNome: 'Santos 1959', sequencia: r.sequencia, vencedor: r.vencedor, velocidade: 'normal', onFim: function () {} });
   }
 
-  window.Penaltis = { disputar: disputar, demo: demo };
+  window.Penaltis = {
+    disputar: disputar,
+    demo: demo,
+    // Modelo exposto: é a fonte única do offline (simulacao.js consome daqui) e
+    // o que os testes auditam. NÃO reimplemente cobrança em outro arquivo —
+    // este projeto já pagou caro por ter 4 cópias divergentes da mesma conta.
+    cobrar: cobrar,
+    raioDe: raioDe,
+    alvoCPU: alvoCPU,
+    decidiu: decidiu,
+    MIRA: MIRA,
+    GX: GX,
+    GY: GY
+  };
 })();
