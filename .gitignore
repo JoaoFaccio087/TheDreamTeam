@@ -75,3 +75,4 @@ scripts/
 
 # ── Testes (úteis no dev, irrelevantes para o público) ──────────
 *.test.js
+escudos-demo.html

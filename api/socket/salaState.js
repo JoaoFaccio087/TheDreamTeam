@@ -1,5 +1,7 @@
 // salaState.js — estado em memória de cada sala ativa (Map codigo → SalaState)
 
+const { estruturaDraft } = require('../esportes-catalogo');
+
 const salas = new Map();
 
 // Formato da competição: 'liga' (pontos corridos), 'mata' (grupos + mata-mata)
@@ -15,17 +17,23 @@ function criarSala(codigo, hostUserId, competicao) {
   const comp    = competicao || 'Brasileirão';
   const formato = FORMATO_POR_COMP[comp] || 'liga';
 
+  // Quantos picks esta competição exige, e em que turnos — vem do catálogo (js/esportes.js).
+  // Futebol: 11 picks em [2,2,2,2,2,1]. Se o catálogo sumir, cai neste mesmo padrão.
+  const draft = estruturaDraft(comp);
+
   const state = {
     codigo,
     hostUserId,
     competicao:            comp,
     formato,                          // 'liga' | 'mata' | 'champions'
+    esporte:               draft.esporte,   // 'futebol' hoje; o catálogo é quem diz
     jogadores:             [],   // { userId, username, nomeDoTime, formacao, socketId, conectado, picks[], pronto }
     poolDisponivel:        [],   // players individuais: { id, nome, posicoes, forca, clube, edicao, competicao }
-    ordemDraft:            [],   // snake order completo (userId[] × 11 rounds) — formato 'liga'
+    ordemDraft:            [],   // snake order completo (userId[] × N rounds) — formato 'liga'
     indiceTurno:           0,
     timerDraft:            null,
-    totalPicksNecessarios: 11,
+    totalPicksNecessarios: draft.totalPicks,     // futebol = 11
+    picksPorRodada:        draft.picksPorRodada, // futebol = [2,2,2,2,2,1]
     status:                'lobby',   // lobby | sorteio | gdraft | draft | ready | playing | fim
     rodadaAtual:           0,
     totalRodadas:          38,       // Brasileirão: todos contra todos, ida e volta (20 times)
