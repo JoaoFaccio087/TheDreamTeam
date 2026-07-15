@@ -46,23 +46,37 @@
   var GX = 1.0, GY = 0.707;
 
   var MIRA = {
-    R_MIN:     0.055,   // raio de erro do craque
-    R_MAX:     0.160,   // raio de erro do perna-de-pau
-    K_DIF:     0.826,   // quanto o raio cresce rumo ao ângulo
-    P_FICA:    0.085,   // chance de o goleiro ficar plantado no meio
-    RX:        0.745,   // alcance horizontal do goleiro
-    RY:        0.518,   // alcance vertical
-    P_PEGA:    0.581,   // chance de segurar, tendo alcançado
-    DECAY:     0.782,   // quanto a altura da bola atrapalha o goleiro
-    K_GOL_ALC: 0.712,   // ganho de alcance pela força do goleiro
-    K_GOL_PEG: 0.615,   // ganho de pegada pela força do goleiro
-    K_ATA:     0.874    // potência do chute do atacante
+    R_MIN:     0.067,   // raio de erro do craque
+    R_MAX:     0.227,   // raio de erro do perna-de-pau
+    K_DIF:     2.633,   // quanto o raio cresce rumo ao ângulo
+    SIG_X:     0.322,   // espalhamento lateral do goleiro (fica perto do meio)
+    MU_Y:      0.109,   // altura típica do corpo dele: pés no chão
+    SIG_Y:     0.179,   // ele varia pouco na vertical
+    RX:        0.539,   // alcance lateral (braço de gente)
+    RY:        0.220,   // alcance vertical
+    P_PEGA:    0.588,   // chance de segurar, tendo alcançado
+    DECAY:     0.441,   // quanto a altura da bola atrapalha
+    K_GOL_ALC: 0.398,   // ganho de alcance pela força do goleiro
+    K_GOL_PEG: 0.746,   // ganho de pegada pela força do goleiro
+    K_ATA:     1.169    // potência do chute do cobrador
   };
 
-  // Mergulhos do goleiro. O [0, 0.55] é ele plantado ESTICANDO para a bola central alta —
-  // sem essa opção sobra um buraco no centro-alto e ele vira o canto dominante (spread 10 p.p.).
-  var DIVES = [[-0.72, 0.17], [-0.72, 0.5], [0.72, 0.17], [0.72, 0.5], [0, 0.55]];
-  var PLANTADO = [0, 0.15];
+  // Limites FÍSICOS do goleiro. NÃO são ajustáveis pelo calibrador — se fossem, ele
+  // espalharia o goleiro pelo gol inteiro para achatar a superfície e entregaria uma
+  // nuvem aleatória que aparece fora do poste e enterrada no chão. Já aconteceu.
+  var KX_LIM = 0.85;              // ele fica ENTRE AS TRAVES
+  var KY_MIN = 0.02, KY_MAX = 0.55;  // PÉS NO CHÃO; nunca flutuando no travessão
+
+  // Normal(0,1) por Box-Muller — a posição do goleiro é contínua.
+  // A v1 sorteava entre 5 mergulhos fixos e isso deixava BURACOS de cobertura:
+  // (0, 0.5) só era coberto por um deles e convertia 88% contra 80% do resto.
+  // Buraco estrutural não se conserta com parâmetro.
+  function gauss() {
+    var u = 0; while (u === 0) u = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * Math.random());
+  }
+
+
 
   // DUAS normalizações, e a diferença importa:
   //  · COBRADOR: a força chega já somada ao bônus de posição (simulacao.js:forcaCobranca),
@@ -92,8 +106,8 @@
     var lx = ax + d * Math.cos(a), ly = ay + d * Math.sin(a);
     if (ly < 0) ly = 0;                      // rasteira: continua valendo
 
-    var kOpt = (Math.random() < MIRA.P_FICA) ? PLANTADO : pick(DIVES);
-    var kx = kOpt[0], ky = kOpt[1];
+    var kx = Math.max(-KX_LIM, Math.min(KX_LIM, gauss() * MIRA.SIG_X));
+    var ky = Math.max(KY_MIN, Math.min(KY_MAX, MIRA.MU_Y + gauss() * MIRA.SIG_Y));
 
     if (Math.abs(lx) > GX || ly > GY) {
       return { resultado: 'fora', bola: { x: lx, y: ly }, goleiro: { x: kx, y: ky } };
@@ -115,10 +129,15 @@
     return { resultado: 'gol', bola: { x: lx, y: ly }, goleiro: { x: kx, y: ky } };
   }
 
-  // Mira da CPU: sorteia um alvo plausível. Como o spread entre zonas é ~3 p.p.,
-  // não existe alvo "certo" — qualquer um serve, e é isso que mantém a disputa justa.
+  // Mira da CPU: um cobrador COMPETENTE, não chute a esmo pelo gol.
+  // A régua do modelo antigo (0.80) é um PÊNALTI BEM BATIDO — não a média de mirar em
+  // qualquer lugar, inclusive rasteiro no meio, onde ninguém bate. Comparar com a média
+  // do gol inteiro foi o erro que atravessou seis calibragens.
   function alvoCPU() {
-    return { x: (Math.random() * 2 - 1) * 0.86, y: Math.random() * (GY * 0.92) };
+    return {
+      x: Math.max(-0.85, Math.min(0.85, gauss() * 0.45)),
+      y: 0.15 + Math.random() * 0.40      // meia-altura: onde um cobrador decente mira
+    };
   }
 
   // Best-of-5 + morte súbita. UMA cópia: antes vivia duplicada em `simularDisputa`
@@ -456,25 +475,31 @@
       mira.style.display = '';
       status.innerHTML = '<b>' + esc(cob.nome) + '</b> &middot; escolha o canto &mdash; quanto mais no &acirc;ngulo, maior o risco';
 
+      // Prende a mira DENTRO da meta. Sem isto dava para mirar na grama, entre a linha
+      // e a marca do pênalti — alvo que não existe no futebol. O cursor anda livre; o
+      // alvo é que gruda na borda do gol.
       function pos(ev) {
         var pt = ov.querySelector('.pen-stage').getBoundingClientRect();
         var t = (ev.touches && ev.touches[0]) || ev;
-        return {
-          sx: (t.clientX - pt.left) / pt.width * 480,
-          sy: (t.clientY - pt.top) / pt.height * 322
-        };
+        var sx = (t.clientX - pt.left) / pt.width * 480;
+        var sy = (t.clientY - pt.top) / pt.height * 322;
+        var m = svgParaModelo(sx, sy);
+        m.x = Math.max(-GX, Math.min(GX, m.x));
+        m.y = Math.max(0, Math.min(GY, m.y));
+        var p = modeloParaSvg(m.x, m.y);
+        return { sx: p.x, sy: p.y, mx: m.x, my: m.y };
       }
       function mover(ev) {
-        var p = pos(ev), m = svgParaModelo(p.sx, p.sy);
+        var p = pos(ev);
         miraAlvo.style.opacity = '1';
         miraAlvo.setAttribute('transform', 'translate(' + p.sx.toFixed(1) + ',' + p.sy.toFixed(1) + ')');
-        miraRaio.setAttribute('r', (raioDe(m.x, m.y, cob.forca) * ESC).toFixed(1));
+        miraRaio.setAttribute('r', (raioDe(p.mx, p.my, cob.forca) * ESC).toFixed(1));
       }
       function atirar(ev) {
         if (ev.cancelable) ev.preventDefault();
-        var p = pos(ev), m = svgParaModelo(p.sx, p.sy);
+        var p = pos(ev);
         fecharMira();
-        cb(m);
+        cb({ x: p.mx, y: p.my });
       }
       miraHit.onmousemove = mover;
       miraHit.onclick = atirar;
