@@ -218,7 +218,7 @@
   // ============================================================
   var CORES_CHAMPIONS = {
     // --- ESPANHA ---
-    'Real Madrid':          ['#FFFFFF', '#FEBE10'],
+    'Real Madrid':          ['#FFFFFF', '#C9A227'],
     'Barcelona':            ['#004D98', '#A50044'],
     'Atlético de Madrid':   ['#FFFFFF', '#CB3524'],
     // --- ITÁLIA ---
@@ -240,6 +240,69 @@
     // --- PORTUGAL ---
     'Benfica':              ['#E00034', '#FFFFFF'],
     'Porto':                ['#FFFFFF', '#004B9B'],
+
+    // --- LOTE 2: os 61 restantes (cor real + forma; refino depois) ---
+    '1. FC Köln':              ['#FFFFFF', '#E32219'],
+    'Anderlecht':              ['#4B2E83', '#FFFFFF'],
+    'Aston Villa':             ['#95BFE5', '#670E36'],
+    'Austria Wien':            ['#5B2C86', '#FFFFFF'],
+    'Bayer Leverkusen':        ['#E32221', '#000000'],
+    'Bordeaux':                ['#000E3C', '#FFFFFF'],
+    'Borussia Mönchengladbach': ['#FFFFFF', '#000000'],
+    'CSKA Red Flag':           ['#CE1126', '#FFFFFF'],
+    'CSKA Sofia':              ['#CE1126', '#FFFFFF'],
+    'Celtic':                  ['#FFFFFF', '#008B5A'],
+    'Club Brugge':             ['#005BAA', '#000000'],
+    'Deportivo La Coruña':     ['#FFFFFF', '#0070B8'],
+    'Derby County':            ['#FFFFFF', '#000000'],
+    'Dinamo București':        ['#FFFFFF', '#E30613'],
+    'Dukla Prague':            ['#FFD700', '#E30613'],
+    'Dundee':                  ['#000E3C', '#FFFFFF'],
+    'Dundee United':           ['#FF6600', '#000000'],
+    'Dynamo Kyiv':             ['#FFFFFF', '#005BAA'],
+    'Eintracht Frankfurt':     ['#000000', '#E1000F'],
+    'Feyenoord':               ['#FFFFFF', '#E30613'],
+    'Fiorentina':              ['#582C83', '#FFFFFF'],
+    'Galatasaray':             ['#A90432', '#FBB800'],
+    'Győr':                    ['#008B5A', '#FFFFFF'],
+    'Hamburg':                 ['#FFFFFF', '#0A2A66'],
+    'Hibernian':               ['#008B5A', '#FFFFFF'],
+    'IFK Göteborg':            ['#0057A5', '#FFFFFF'],
+    'Leeds United':            ['#FFFFFF', '#1D428A'],
+    'Legia Warsaw':            ['#FFFFFF', '#006A4E'],
+    'Lyon':                    ['#FFFFFF', '#E30613'],
+    'Malmö FF':                ['#6CACE4', '#FFFFFF'],
+    'Manchester City':         ['#6CABDD', '#FFFFFF'],
+    'Marseille':               ['#FFFFFF', '#2FAEE0'],
+    'Monaco':                  ['#FFFFFF', '#E30613'],
+    'Nantes':                  ['#FFD100', '#008B5A'],
+    'Nottingham Forest':       ['#E30613', '#FFFFFF'],
+    'PSV Eindhoven':           ['#FFFFFF', '#E30613'],
+    'Panathinaikos':           ['#008B5A', '#FFFFFF'],
+    'Partizan':                ['#000000', '#FFFFFF'],
+    'RB Leipzig':              ['#FFFFFF', '#DD0741'],
+    'Rangers':                 ['#1B458F', '#FFFFFF'],
+    'Rapid Wien':              ['#008B5A', '#FFFFFF'],
+    'Real Sociedad':           ['#FFFFFF', '#0067B1'],
+    'Red Star Belgrade':       ['#FFFFFF', '#E30613'],
+    'Roma':                    ['#8E1F2F', '#F0BC42'],
+    'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
+    'Sampdoria':               ['#0A2A66', '#FFFFFF'],
+    'Schalke 04':              ['#004D9D', '#FFFFFF'],
+    'Sparta Prague':           ['#8E1F2F', '#FFD700'],
+    'Spartak Moscow':          ['#E30613', '#FFFFFF'],
+    'Spartak Trnava':          ['#E30613', '#000000'],
+    'Stade de Reims':          ['#FFFFFF', '#E30613'],
+    'Standard Liège':          ['#E30613', '#FFFFFF'],
+    'Steaua București':        ['#E30613', '#0A2A66'],
+    'Tottenham':               ['#FFFFFF', '#132257'],
+    'Valencia':                ['#FFFFFF', '#F18E00'],
+    'Vasas':                   ['#E30613', '#0A2A66'],
+    'Villarreal':              ['#FFE667', '#005187'],
+    'Widzew Łódź':             ['#E30613', '#FFFFFF'],
+    'Young Boys':              ['#FFD100', '#000000'],
+    'Zürich':                  ['#FFFFFF', '#0A5CA8'],
+    'Újpest':                  ['#5B2C86', '#FFFFFF'],
   };
 
   var ESTILO_LIBERTADORES = {
@@ -315,24 +378,87 @@
   //  CHAMPIONS — padrão FIXO por clube (LOTE 1)
   // ============================================================
   var ESTILO_CHAMPIONS = {
-    'Real Madrid':          { padrao: 'solido' },
+    'Real Madrid':          { padrao: 'solido' },                 // branco (o brasão é branco+dourado; monograma e coroa não desenhamos)
     'Barcelona':            { padrao: 'barcelona-equ' },            // cruz de São Jorge + senyera +
                                                                     // blaugrana. O Barcelona-EQU é
                                                                     // homenagem A ESTE: mesmo desenho.
-    'Atlético de Madrid':   { padrao: 'listras-v', listras: 4 },
+    'Atlético de Madrid':   { padrao: 'atletico-mad' },           // listras + triângulo azul (sem o urso)
     'Juventus':             { padrao: 'listras-v', listras: 4 },
-    'Milan':                { padrao: 'listras-v', listras: 4 },
+    'Milan':                { padrao: 'milan' },                                  // oval: listras | cruz de São Jorge
     'Inter de Milão':       { padrao: 'listras-v', listras: 4 },
     'Liverpool':            { padrao: 'solido' },
     'Manchester United':    { padrao: 'solido' },
     'Chelsea':              { padrao: 'solido' },
     'Arsenal':              { padrao: 'solido' },
-    'Bayern de Munique':    { padrao: 'solido' },                   // ⚠️ perde os losangos bávaros
-    'Borussia Dortmund':    { padrao: 'solido' },
+    'Bayern de Munique':    { padrao: 'bayern' },                                  // anel vermelho + LOSANGOS bávaros
+    'Borussia Dortmund':    { padrao: 'solido' },                 // amarelo liso (o anel preto era forma-dentro-de-forma)
     'Ajax':                 { padrao: 'faixa-v' },                  // branco, faixa vermelha central
     'PSG':                  { padrao: 'faixa-v', cor2: '#FFFFFF' }, // azul, faixa vermelha debruada
     'Benfica':              { padrao: 'solido' },
     'Porto':                { padrao: 'listras-v', listras: 4 },
+
+    // --- LOTE 2: os 61 restantes ---
+    '1. FC Köln':              { padrao: 'solido' },                                  // branco, detalhe vermelho
+    'Anderlecht':              { padrao: 'faixa-h' },                                 // roxo e branco
+    'Aston Villa':             { padrao: 'faixa-v' },                                 // claret e azul
+    'Austria Wien':            { padrao: 'solido' },                                  // violeta
+    'Bayer Leverkusen':        { padrao: 'faixa-v' },                                 // vermelho e preto
+    'Bordeaux':                { padrao: 'faixa-h' },                                 // marinho e branco
+    'Borussia Mönchengladbach': { padrao: 'faixa-v' },                                 // branco, preto e verde
+    'CSKA Red Flag':           { padrao: 'faixa-h' },                                 // vermelho (nome histórico do CSKA Sofia)
+    'CSKA Sofia':              { padrao: 'faixa-h' },                                 // vermelho
+    'Celtic':                  { padrao: 'listras-h' },                               // verde e branco (aros)
+    'Club Brugge':             { padrao: 'listras-v', listras: 4 },                     // azul e preto
+    'Deportivo La Coruña':     { padrao: 'listras-v', listras: 4 },                     // azul e branco
+    'Derby County':            { padrao: 'faixa-v' },                                 // branco e preto
+    'Dinamo București':        { padrao: 'metade' },                                  // vermelho e azul
+    'Dukla Prague':            { padrao: 'faixa-h' },                                 // amarelo e vermelho
+    'Dundee':                  { padrao: 'solido' },                                  // marinho
+    'Dundee United':           { padrao: 'faixa-h' },                                 // tangerina e preto
+    'Dynamo Kyiv':             { padrao: 'faixa-h' },                                 // branco e azul
+    'Eintracht Frankfurt':     { padrao: 'faixa-v' },                                 // preto e vermelho
+    'Feyenoord':               { padrao: 'metade' },                                  // vermelho e branco
+    'Fiorentina':              { padrao: 'solido' },                                  // violeta
+    'Galatasaray':             { padrao: 'metade' },                                  // vermelho e amarelo
+    'Győr':                    { padrao: 'faixa-h' },                                 // verde e branco
+    'Hamburg':                 { padrao: 'faixa-h' },                                 // branco e azul
+    'Hibernian':               { padrao: 'faixa-h' },                                 // verde e branco
+    'IFK Göteborg':            { padrao: 'faixa-h' },                                 // azul e branco
+    'Leeds United':            { padrao: 'faixa-v' },                                 // branco, azul e amarelo
+    'Legia Warsaw':            { padrao: 'faixa-v' },                                 // branco e verde
+    'Lyon':                    { padrao: 'tri-v', cor2: '#0A2A66' },                    // branco, vermelho e azul
+    'Malmö FF':                { padrao: 'solido' },                                  // celeste
+    'Manchester City':         { padrao: 'solido' },                                  // celeste
+    'Marseille':               { padrao: 'faixa-h' },                                 // branco e celeste
+    'Monaco':                  { padrao: 'diagonal' },                                // vermelho e branco na diagonal
+    'Nantes':                  { padrao: 'faixa-h' },                                 // amarelo e verde
+    'Nottingham Forest':       { padrao: 'solido' },                                  // vermelho
+    'PSV Eindhoven':           { padrao: 'listras-v', listras: 4 },                     // vermelho e branco
+    'Panathinaikos':           { padrao: 'faixa-h' },                                 // verde e branco (trevo)
+    'Partizan':                { padrao: 'listras-v', listras: 4 },                     // preto e branco
+    'RB Leipzig':              { padrao: 'faixa-h' },                                 // branco e vermelho
+    'Rangers':                 { padrao: 'solido' },                                  // azul
+    'Rapid Wien':              { padrao: 'faixa-h' },                                 // verde e branco
+    'Real Sociedad':           { padrao: 'listras-v', listras: 4 },                     // azul e branco
+    'Red Star Belgrade':       { padrao: 'metade' },                                  // vermelho e branco
+    'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
+    'Saint-Étienne':           { padrao: 'solido' },                                  // verde
+    'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa
+    'Schalke 04':              { padrao: 'solido' },                                  // azul real
+    'Sparta Prague':           { padrao: 'faixa-h' },                                 // vinho e amarelo
+    'Spartak Moscow':          { padrao: 'diagonal' },                                // vermelho com banda branca
+    'Spartak Trnava':          { padrao: 'faixa-v' },                                 // vermelho e preto
+    'Stade de Reims':          { padrao: 'faixa-v' },                                 // branco e vermelho
+    'Standard Liège':          { padrao: 'faixa-h' },                                 // vermelho e branco
+    'Steaua București':        { padrao: 'faixa-h' },                                 // vermelho e azul
+    'Tottenham':               { padrao: 'faixa-h' },                                 // branco e marinho
+    'Valencia':                { padrao: 'faixa-h' },                                 // branco e laranja
+    'Vasas':                   { padrao: 'metade' },                                  // vermelho e azul
+    'Villarreal':              { padrao: 'solido' },                                  // amarelo submarino
+    'Widzew Łódź':             { padrao: 'faixa-h' },                                 // vermelho e branco
+    'Young Boys':              { padrao: 'metade' },                                  // amarelo e preto
+    'Zürich':                  { padrao: 'faixa-h' },                                 // branco e azul
+    'Újpest':                  { padrao: 'faixa-h' },                                 // roxo e branco
   };
 
   var ESTILO_CLUBES = Object.assign({}, ESTILO_BRASILEIRAO, ESTILO_LIBERTADORES, ESTILO_CHAMPIONS);

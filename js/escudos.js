@@ -120,6 +120,70 @@
       }
       // Faixa horizontal central (uma cor) — usada com cor2 vira tricolor horizontal
       // Faixa VERTICAL central (Ajax, PSG). opts.cor2 = debrum nas bordas da faixa.
+      // ── ESCUDOS DEDICADOS DA CHAMPIONS ───────────────────────────────────
+      // REGRA: PINTAR A FORMA, não inscrever outra dentro dela. Um círculo desenhado
+      // dentro do escudo vira adesivo colado — forma dentro de forma. O Barcelona-EQU
+      // funciona porque os 4 setores SÃO o escudo. A meta é dar a IMPRESSÃO do brasão,
+      // não copiá-lo: cor certa, divisão certa, símbolo certo, preenchendo a silhueta.
+
+      // Milan: escudo partido ao meio. Esquerda listras vermelho/preto, direita branca
+      // com a cruz de São Jorge. É o brasão do Milan sem inscrever a oval.
+      case 'milan': {
+        var m = '<rect x="' + x + '" y="' + y + '" width="' + (w / 2) + '" height="' + h + '" fill="#FB090B"/>';
+        for (var st = 0; st < 3; st++)
+          m += '<rect x="' + (x + w * 0.08 + st * w * 0.16) + '" y="' + y + '" width="' + (w * 0.08) + '" height="' + h + '" fill="#000000"/>';
+        m += '<rect x="' + (x + w / 2) + '" y="' + y + '" width="' + (w / 2) + '" height="' + h + '" fill="#FFFFFF"/>';
+        m += '<rect x="' + (x + w * 0.71) + '" y="' + y + '" width="' + (w * 0.10) + '" height="' + h + '" fill="#FB090B"/>';
+        m += '<rect x="' + (x + w / 2) + '" y="' + (CENTRO.y - h * 0.05) + '" width="' + (w / 2) + '" height="' + (h * 0.10) + '" fill="#FB090B"/>';
+        return m;
+      }
+
+      // Bayern: VERMELHO manda — é a primeira cor do brasão. Os losangos bávaros são o
+      // MIOLO dentro do anel vermelho, não o escudo todo: enchendo tudo de losango vira
+      // bandeira da Baviera, não Bayern. Aqui: escudo vermelho + faixa de losangos.
+      case 'bayern': {
+        var o = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#DC052D"/>';
+        var fy = y + h * 0.30, fh = h * 0.34, d = w * 0.13;
+        o += '<clipPath id="bay' + Math.round(x) + '"><rect x="' + x + '" y="' + fy + '" width="' + w + '" height="' + fh + '"/></clipPath>';
+        o += '<g clip-path="url(#bay' + Math.round(x) + ')">';
+        o += '<rect x="' + x + '" y="' + fy + '" width="' + w + '" height="' + fh + '" fill="#FFFFFF"/>';
+        for (var lx = -1; lx <= 9; lx++) for (var ly = -1; ly <= 4; ly++) {
+          if ((lx + ly) % 2) continue;
+          var px = x + lx * d, py = fy + ly * d;
+          o += '<polygon points="' + px + ',' + (py - d) + ' ' + (px + d) + ',' + py + ' ' + px + ',' + (py + d) + ' ' + (px - d) + ',' + py + '" fill="#0066B2"/>';
+        }
+        o += '</g>';
+        return o;
+      }
+
+      // Atlético de Madrid: listras vermelho/branco preenchendo a silhueta + o TRIÂNGULO
+      // azul no canto superior esquerdo (onde mora o urso, que não desenhamos).
+      case 'atletico-mad': {
+        var a = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#FFFFFF"/>';
+        for (var k = 0; k < 4; k++)
+          a += '<rect x="' + (x + w * 0.06 + k * w * 0.24) + '" y="' + y + '" width="' + (w * 0.12) + '" height="' + h + '" fill="#CB3524"/>';
+        a += '<polygon points="' + x + ',' + y + ' ' + (x + w * 0.62) + ',' + y + ' ' + x + ',' + (y + h * 0.60) + '" fill="#1A3D8F"/>';
+        // Painel BRANCO dentro do azul: é onde o urso e o medronheiro ficam no brasão.
+        // Não desenhamos o urso, mas sem o painel o canto azul fica chapado e some a leitura.
+        a += '<polygon points="' + (x + w * 0.09) + ',' + (y + h * 0.07) + ' ' + (x + w * 0.44) + ',' + (y + h * 0.07) + ' ' + (x + w * 0.09) + ',' + (y + h * 0.42) + '" fill="#FFFFFF"/>';
+        return a;
+      }
+
+      // Real Madrid: escudo branco cortado pela BANDA AZUL diagonal — é ela que segura o
+      // monograma no brasão. Sem o monograma (letra à mão vira borrão) e sem a coroa.
+      case 'real-madrid': {
+        return '<polygon points="' + x + ',' + (y + h * 0.72) + ' ' + x + ',' + (y + h * 0.48) + ' ' +
+               (x + w) + ',' + (y + h * 0.10) + ' ' + (x + w) + ',' + (y + h * 0.34) + '" fill="#00529F"/>';
+      }
+
+      // Aros horizontais (Celtic, Sporting…). opts.n = nº de aros da cor da frente.
+      case 'listras-h': {
+        var nh = opts.n || 4, totalH = nh * 2 + 1, lh = h / totalH, oh = '';
+        for (var q = 0; q < nh; q++)
+          oh += '<rect x="' + x + '" y="' + (y + (q * 2 + 1) * lh) + '" width="' + w + '" height="' + lh + '" fill="' + cor + '"/>';
+        return oh;
+      }
+
       case 'faixa-v': {
         var fvw = w * 0.30, fvx = CENTRO.x - fvw / 2;
         var ov = '';
