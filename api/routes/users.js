@@ -27,13 +27,12 @@ router.get('/', async (req, res) => {
 // Padrões que o EDITOR libera. Lista FECHADA de propósito:
 //  · os dedicados (barcelona-equ, milan, bayern, atletico-mad, villarreal, lyon, dortmund,
 //    juventus, real-madrid) são o brasão de um clube real — não fazem sentido como opção;
-//  · `tri-v` está FORA porque é quebrado: pinta o 2º e o 3º terço, não o 1º e o 3º.
-//    Não se expõe padrão torto ao usuário.
+//  · em `tri-v`/`tri-h` o FUNDO é a 1ª faixa: [A,B] + cor2 C pinta A | B | C.
 // ⚠️ Todo nome aqui TEM de existir como `case` em js/escudos.js. Padrão inexistente não dá
 // erro: cai no default e o escudo sai SORTEADO pela seed — errado, e calado.
 const PADROES_ESCUDO = [
   'solido', 'listras-v', 'listras-h', 'listras-finas', 'metade', 'diagonal', 'diagonal-inv',
-  'faixa-v', 'faixa-h', 'faixa-bicolor', 'tri-h', 'tri-v-base', 'quartos', 'cruz',
+  'faixa-v', 'faixa-h', 'faixa-bicolor', 'tri-h', 'tri-v', 'tri-v-base', 'quartos', 'cruz',
 ];
 
 const escudoSchema = z.object({

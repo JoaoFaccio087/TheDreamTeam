@@ -65,10 +65,9 @@
   // Espelha a lista fechada do servidor (api/routes/users.js: PADROES_ESCUDO).
   // ⚠️ Fora: os brasões de clube real (barcelona-equ, milan, bayern…) e o `tri-v`,
   //    que pinta o 2º e o 3º terço em vez do 1º e do 3º — padrão torto não vira opção.
-  // `tri: true` = o formato USA a 3ª cor. Só 5 usam (conferido no gerador: faixa-bicolor,
-  // faixa-v, listras-finas, tri-h, tri-v-base). Nos outros 12 ela é ignorada em SILÊNCIO —
-  // por isso o seletor da 3ª cor só aparece quando ela faz alguma coisa. Oferecer escolha
-  // que não tem efeito é mentir para o usuário.
+  // `tri: true` = o formato USA a 3ª cor. Nos demais ela é ignorada em SILÊNCIO — por isso o
+  // seletor só aparece quando a cor faz alguma coisa. Oferecer escolha sem efeito é mentir.
+  // ⚠️ Em `tri-v`/`tri-h` o FUNDO é a 1ª faixa: [A,B] + cor2 C dá A | B | C.
   var PADROES_ESCUDO = [
     { id: 'solido',        nome: 'Liso' },
     { id: 'listras-v',     nome: 'Listras', n: 4 },
@@ -84,6 +83,7 @@
     { id: 'diagonal',      nome: 'Diagonal' },
     { id: 'diagonal-inv',  nome: 'Diagonal inv.' },
     { id: 'tri-h',         nome: 'Três faixas', tri: true },
+    { id: 'tri-v',         nome: 'Três faixas em pé', tri: true },
     { id: 'tri-v-base',    nome: 'Base', tri: true },
     { id: 'quartos',       nome: 'Quartos' },
     { id: 'cruz',          nome: 'Cruz' },
