@@ -1477,7 +1477,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 2010,
-    clube: "Internazionale",
+    clube: "Inter de Milão",
     jogadores: [
       { nome: "Júlio César", posicoes: ["GOL"], forca: 89 },
       { nome: "Maicon", posicoes: ["LD"], forca: 89 },
@@ -1501,7 +1501,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 2010,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Hans-Jörg Butt", posicoes: ["GOL"], forca: 81 },
       { nome: "Philipp Lahm", posicoes: ["LD"], forca: 87 },
@@ -2235,7 +2235,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 2003,
-    clube: "Internazionale",
+    clube: "Inter de Milão",
     jogadores: [
       { nome: "Francesco Toldo", posicoes: ["GOL"], forca: 84 },
       { nome: "Javier Zanetti", posicoes: ["LD","ZAG"], forca: 89 },
@@ -2359,7 +2359,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 2001,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 93 },
       { nome: "Willy Sagnol", posicoes: ["LD"], forca: 84 },
@@ -2505,7 +2505,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 2000,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 90 },
       { nome: "Samuel Kuffour", posicoes: ["ZAG"], forca: 83 },
@@ -2579,7 +2579,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1999,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 90 },
       { nome: "Markus Babbel", posicoes: ["LD","ZAG"], forca: 83 },
@@ -2961,7 +2961,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1995,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Oliver Kahn", posicoes: ["GOL"], forca: 85 },
       { nome: "Lothar Matthäus", posicoes: ["ZAG"], forca: 88 },
@@ -3321,7 +3321,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1991,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Raimond Aumann", posicoes: ["GOL"], forca: 83 },
       { nome: "Klaus Augenthaler", posicoes: ["ZAG"], forca: 84 },
@@ -3411,7 +3411,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1990,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Raimond Aumann", posicoes: ["GOL"], forca: 83 },
       { nome: "Klaus Augenthaler", posicoes: ["ZAG"], forca: 85 },
@@ -3659,7 +3659,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1987,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Jean-Marie Pfaff", posicoes: ["GOL"], forca: 87 },
       { nome: "Klaus Augenthaler", posicoes: ["ZAG"], forca: 86 },
@@ -4108,7 +4108,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1982,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Walter Junghans", posicoes: ["GOL"], forca: 82 },
       { nome: "Klaus Augenthaler", posicoes: ["ZAG"], forca: 85 },
@@ -4220,7 +4220,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1981,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Walter Junghans", posicoes: ["GOL"], forca: 82 },
       { nome: "Klaus Augenthaler", posicoes: ["ZAG"], forca: 85 },
@@ -4599,7 +4599,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1977,
-    clube: "FC Zürich",
+    clube: "Zürich",
     jogadores: [
       { nome: "Karl Grob", posicoes: ["GOL"], forca: 82 },
       { nome: "René Botteron", posicoes: ["LD"], forca: 80 },
@@ -4623,7 +4623,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1976,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Sepp Maier", posicoes: ["GOL"], forca: 90 },
       { nome: "Franz Beckenbauer", posicoes: ["ZAG"], forca: 94 },
@@ -4713,7 +4713,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1975,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Sepp Maier", posicoes: ["GOL"], forca: 90 },
       { nome: "Franz Beckenbauer", posicoes: ["ZAG"], forca: 94 },
@@ -4802,7 +4802,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1974,
-    clube: "Bayern München",
+    clube: "Bayern de Munique",
     jogadores: [
       { nome: "Sepp Maier", posicoes: ["GOL"], forca: 90 },
       { nome: "Johnny Hansen", posicoes: ["LD"], forca: 80 },
@@ -5900,7 +5900,7 @@ const DADOS_CHAMPIONS = [
   {
     competicao: "Champions",
     edicao: 1962,
-    clube: "Tottenham Hotspur",
+    clube: "Tottenham",
     jogadores: [
       { nome: "Bill Brown", posicoes: ["GOL"], forca: 84 },
       { nome: "Peter Baker", posicoes: ["LD"], forca: 82 },
