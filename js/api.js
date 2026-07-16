@@ -166,7 +166,7 @@ Object.assign(API, {
   },
 
   getHistorico: function () {
-    var locais = api._historicoLocal();
+    var locais = API._historicoLocal();
 
     if (!_temLoginReal()) {
       return Promise.resolve(locais);
