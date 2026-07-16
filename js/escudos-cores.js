@@ -162,7 +162,7 @@
     'Liverpool':            ['#C8102E', '#F6EB61'],
     'Manchester United':    ['#DA291C', '#FBE122'],
     'Chelsea':              ['#034694', '#FFFFFF'],
-    'Arsenal':              ['#EF0107', '#FFFFFF'],
+    'Arsenal':              ['#FFFFFF', '#EF0107'],
     // --- ALEMANHA ---
     'Bayern de Munique':    ['#DC052D', '#0066B2'],
     'Borussia Dortmund':    ['#FDE100', '#000000'],
@@ -390,7 +390,7 @@
     'Liverpool':            { padrao: 'solido' },
     'Manchester United':    { padrao: 'solido' },
     'Chelsea':              { padrao: 'solido' },
-    'Arsenal':              { padrao: 'tri-v', cor2: '#FFFFFF' },         // vermelho com mangas brancas (a CAMISA: o brasão não traduz)
+    'Arsenal':              { padrao: 'faixa-v', larg: 0.62 },            // camisa: corpo vermelho, mangas brancas
     'Bayern de Munique':    { padrao: 'bayern' },                                  // anel vermelho + LOSANGOS bávaros
     'Borussia Dortmund':    { padrao: 'dortmund' },                   // amarelo com o anel preto
     'Ajax':                 { padrao: 'faixa-v' },                  // branco, faixa vermelha central

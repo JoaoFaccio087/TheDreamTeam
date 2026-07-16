@@ -238,8 +238,10 @@
         return v;
       }
 
+      // opts.larg = largura da faixa (fração de w). Padrão 0.30.
+      // Arsenal usa 0.62: o corpo da camisa é largo e as mangas é que são estreitas.
       case 'faixa-v': {
-        var fvw = w * 0.30, fvx = CENTRO.x - fvw / 2;
+        var fvw = w * (opts.larg || 0.30), fvx = CENTRO.x - fvw / 2;
         var ov = '';
         if (opts.cor2) {   // debrum: duas linhas finas ladeando a faixa (PSG)
           ov += '<rect x="' + (fvx - w * 0.05) + '" y="' + y + '" width="' + (fvw + w * 0.10) + '" height="' + h + '" fill="' + opts.cor2 + '"/>';
@@ -423,7 +425,17 @@
     var frente = inverter ? corA : corB;
 
     var interior = '<rect x="' + BOX.x + '" y="' + BOX.y + '" width="' + BOX.w + '" height="' + BOX.h + '" fill="' + fundo + '"/>';
-    interior += padrao(tipo, fundo, frente, { n: o.listras, cor2: corC, cor3: normHex(o.cores && o.cores[3], null) });
+    // ⚠️ Repassa o ESTILO INTEIRO como opts. Antes este objeto era montado do ZERO com três
+    // chaves fixas ({n, cor2, cor3}) — qualquer outra chave do catálogo (larg, etc.) morria
+    // AQUI, calada. E `cor2` vinha da 3ª cor do array, não do `cor2` escrito no estilo: quem
+    // catalogava `cor2: '#FFF'` (PSG, Lyon, Sampdoria) via o valor ser ignorado sem aviso.
+    // Eram TRÊS filtros em série entre o catálogo e o desenho. Agora o estilo chega inteiro.
+    var opcoes = {};
+    for (var ok in o) if (Object.prototype.hasOwnProperty.call(o, ok)) opcoes[ok] = o[ok];
+    opcoes.n = o.listras;
+    if (opcoes.cor2 == null) opcoes.cor2 = corC;
+    if (opcoes.cor3 == null) opcoes.cor3 = normHex(o.cores && o.cores[3], null);
+    interior += padrao(tipo, fundo, frente, opcoes);
 
     // Sem monograma: o nome do clube aparece ao lado do escudo na interface (decisão do João).
     return envelope(interior, fundo, o.estrelas | 0);
@@ -908,8 +920,15 @@
         var iso = C.isoSelecao(nome);
         if (iso) return gerarSelecao({ pais: iso, seed: nome, estrelas: C.estrelasSelecao(nome) });
         var e = C.estiloClube(nome) || {};
-        return gerarClube({ nome: nome, cores: C.coresClube(nome), seed: nome,
-          padrao: e.padrao, listras: e.listras, inverter: e.inverter });
+        // ⚠️ REPASSA O ESTILO INTEIRO. Antes daqui só saíam `padrao`, `listras` e `inverter`:
+        // toda outra chave do catálogo era DESCARTADA CALADA. O `cor2` de PSG, Lyon e
+        // Sampdoria estava escrito no arquivo, parecia certo, e nunca chegava no gerador —
+        // ninguém reclamava, o escudo só saía sem o debrum. Mesma família do Object.assign
+        // engolindo undefined: o dado existe, o efeito some.
+        var o = {};
+        for (var k in e) if (Object.prototype.hasOwnProperty.call(e, k)) o[k] = e[k];
+        o.nome = nome; o.cores = C.coresClube(nome); o.seed = nome;
+        return gerarClube(o);
       } catch (err) { return ''; }
     },
     // Modos onde os escudos estão LIGADOS. Champions fica de fora até catalogarmos as cores reais
