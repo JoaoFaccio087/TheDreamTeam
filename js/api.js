@@ -31,6 +31,19 @@ const API = {
   getAchievements: function () {
     return api.getAchievements();
   },
+
+  // ⚠️ DELEGAÇÃO QUE FALTAVA. Sem ela, `API.getEstatisticas` era undefined, a guarda do
+  // perfil.js caía no `Promise.resolve(null)` e a tela ia para o cálculo local —
+  // ou seja, a rota GET /matches/stats NUNCA foi chamada em produção. Código morto
+  // desde que nasceu, e o Perfil desenhando "0 campanhas".
+  //
+  // A armadilha: `API` (fachada, dados locais + delegações) e `api` (HTTP) são objetos
+  // DIFERENTES que diferem só por maiúscula. Método novo no `api` precisa de delegação
+  // aqui, senão some calado. O perfil.js chama API.getEstatisticas mas api.getMe —
+  // essa mistura é o cheiro do problema.
+  getEstatisticas: function () {
+    return api.getEstatisticas();
+  },
 };
 
 // ===== BACKEND HTTP (autenticação + multiplayer) ============================
@@ -40,18 +53,50 @@ var _ehLocal    = location.hostname === 'localhost' || location.hostname === '12
 var BACKEND_URL = _ehLocal ? '' : 'https://thedreamteam.onrender.com';
 var API_BASE    = _ehLocal ? '/api' : BACKEND_URL;
 
+// SESSÃO EXPIRADA — 401 com token na mão significa que o JWT venceu ou é inválido.
+//
+// Por que isto existe: antes o 401 era engolido lá em cima (getEstatisticas tem
+// `.catch(() => null)`) e o Perfil desenhava "0 campanhas" / "0/76 conquistas". O app
+// ficava num limbo: o cabeçalho mostrava nome e time (vêm do localStorage, não do
+// servidor) enquanto TODA chamada era recusada. A tela dizia "você não tem nada" quando
+// a verdade era "não consegui perguntar". O dono do projeto achou que tinha perdido o
+// histórico; quem revisou o código foi caçar migração destrutiva. Custou caro aos dois.
+//
+// Aqui a sessão é encerrada DE VERDADE e o app avisa, em vez de mentir calado.
+function _sessaoExpirou() {
+  if (typeof limparSessao === 'function') limparSessao();
+  else { localStorage.removeItem('dreamteam_token'); localStorage.removeItem('dreamteam_user'); }
+  if (typeof atualizarDropdown === 'function') { try { atualizarDropdown(null); } catch (e) {} }
+  try { window.dispatchEvent(new CustomEvent('dreamteam:sessao-expirada')); } catch (e) {}
+}
+
 function _req(method, path, body) {
   var token   = localStorage.getItem('dreamteam_token');
   var headers = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = 'Bearer ' + token;
+
+  // Rotas de autenticação respondem 401 para SENHA ERRADA — isso não é sessão expirada.
+  var ehAuth = path.indexOf('/auth/') === 0;
 
   return fetch(API_BASE + path, {
     method:  method,
     headers: headers,
     body:    body !== undefined ? JSON.stringify(body) : undefined,
   }).then(function (r) {
-    return r.json().then(function (d) {
-      if (!r.ok) throw new Error(d.error || 'Erro ' + r.status);
+    // Um 502/503 do Render devolve HTML, não JSON — sem esta guarda o r.json() estoura
+    // e o erro que chega em quem chamou não diz nada sobre o que aconteceu.
+    return r.json().catch(function () { return {}; }).then(function (d) {
+      if (r.status === 401 && token && !ehAuth) {
+        _sessaoExpirou();
+        var e401 = new Error(d.error || 'Sessão expirada');
+        e401.sessaoExpirada = true;
+        throw e401;
+      }
+      if (!r.ok) {
+        var err = new Error(d.error || 'Erro ' + r.status);
+        err.status = r.status;
+        throw err;
+      }
       return d;
     });
   });
@@ -169,17 +214,22 @@ var api = {
     if (!_temLoginReal()) return Promise.resolve([]);
     return _req('GET', '/matches/achievements')
       .then(function (arr) { return Array.isArray(arr) ? arr : []; })
-      .catch(function () { return []; });
+      // Falha aqui NÃO é "zero conquistas" — é "não sei". Devolve null para a tela
+      // poder dizer a verdade em vez de desenhar 0/76 com o token vencido.
+      .catch(function (e) { if (e && e.sessaoExpirada) throw e; return null; });
   },
 
   // Estatísticas agregadas no servidor (somas em SQL + time mais escalado). Payload pequeno e
   // constante, independente do número de campanhas. Devolve null p/ convidado ou se a rota falhar
   // (o Perfil então cai no cálculo local a partir do histórico).
+  // ⚠️ `null` aqui significa "não consegui carregar", NÃO "não tem nada". Quem chama
+  // TEM de distinguir os dois: tratar falha como vazio foi o que fez o Perfil anunciar
+  // "0 campanhas" para um usuário com o histórico intacto, só porque o token venceu.
+  // O erro segue marcado (err.sessaoExpirada) para a tela saber o que dizer.
   getEstatisticas: function () {
     if (!_temLoginReal()) return Promise.resolve(null);
     return _req('GET', '/matches/stats')
-      .then(function (o) { return (o && o.grupos) ? o : null; })
-      .catch(function () { return null; });
+      .then(function (o) { return (o && o.grupos) ? o : null; });
   },
 
   criarSala: function (opcoes) {

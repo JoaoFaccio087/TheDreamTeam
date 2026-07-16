@@ -141,8 +141,17 @@
         ligarAcordeoes(box);
         renderEscalados('geral');   // campo à direita começa no "Geral"
       });
-    }).catch(function () {
-      box.innerHTML = '<p class="perfil-vazio">Não foi possível carregar as estatísticas.</p>';
+    }).catch(function (err) {
+      // "Não consegui carregar" NUNCA pode virar "você não tem nada". Enquanto o 401 era
+      // engolido como `null` lá no api.js, esta tela anunciava "0 campanhas" para quem
+      // tinha o histórico inteiro salvo — só o token tinha vencido. Dizer que os dados
+      // continuam lá é a parte que mais importa da mensagem.
+      var msg = (err && err.sessaoExpirada)
+        ? 'Sua sessão expirou. Entre de novo para ver suas estatísticas — <b>seus dados continuam salvos</b>.'
+        : 'Não foi possível carregar as estatísticas. Verifique sua conexão e tente de novo.';
+      box.innerHTML = '<p class="perfil-vazio">' + msg + '</p>';
+      var campo = $('perfil-campo-escalados');
+      if (campo) campo.innerHTML = '<p class="perfil-vazio">' + msg + '</p>';
     });
   }
 

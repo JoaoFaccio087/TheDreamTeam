@@ -185,6 +185,12 @@
               : Promise.resolve([]);
 
     fonte.then(function (desbloqueadas) {
+      // `null` = não consegui perguntar ao servidor. NÃO é "zero conquistas".
+      // Antes isso desenhava 0/76 com o progresso inteiro salvo no banco.
+      if (desbloqueadas === null) {
+        cont.innerHTML = '<p class="perfil-vazio">Não foi possível carregar suas conquistas. Verifique sua conexão e tente de novo.</p>';
+        return;
+      }
       var setDesb = {};
       (desbloqueadas || []).forEach(function (d) {
         var id = (typeof d === 'string') ? d : (d && d.achievement_id);
@@ -193,8 +199,13 @@
       // Aplica o estado real sobre o catálogo.
       LISTA_CONQUISTAS.forEach(function (c) { c.desbloqueada = !!setDesb[c.id]; });
       desenharConquistas();
-    }).catch(function () {
-      desenharConquistas();   // ao menos mostra tudo bloqueado
+    }).catch(function (err) {
+      // Desenhar "tudo bloqueado" quando a chamada FALHOU é mentir: o usuário lê 0/76 e
+      // acha que perdeu o progresso. Só a sessão venceu — o banco está intacto.
+      var msg = (err && err.sessaoExpirada)
+        ? 'Sua sessão expirou. Entre de novo para ver suas conquistas — <b>seu progresso continua salvo</b>.'
+        : 'Não foi possível carregar suas conquistas. Verifique sua conexão e tente de novo.';
+      cont.innerHTML = '<p class="perfil-vazio">' + msg + '</p>';
     });
   }
 
