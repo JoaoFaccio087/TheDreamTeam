@@ -184,6 +184,19 @@
         return oh;
       }
 
+      // Juventus: listras preto/branco preenchendo a silhueta + a FAIXA BRANCA atravessando,
+      // que é onde o nome fica no brasão clássico. Sem a faixa são só listras = a CAMISA.
+      // É a faixa que faz ler "escudo da Juve" em vez de "uniforme listrado".
+      case 'juventus': {
+        var j = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#FFFFFF"/>';
+        for (var jk = 0; jk < 4; jk++)
+          j += '<rect x="' + (x + w * 0.06 + jk * w * 0.24) + '" y="' + y + '" width="' + (w * 0.12) + '" height="' + h + '" fill="#000000"/>';
+        j += '<rect x="' + x + '" y="' + (CENTRO.y - h * 0.12) + '" width="' + w + '" height="' + (h * 0.24) + '" fill="#FFFFFF"/>';
+        j += '<rect x="' + x + '" y="' + (CENTRO.y - h * 0.14) + '" width="' + w + '" height="' + (h * 0.02) + '" fill="#C9A227"/>';
+        j += '<rect x="' + x + '" y="' + (CENTRO.y + h * 0.12) + '" width="' + w + '" height="' + (h * 0.02) + '" fill="#C9A227"/>';
+        return j;
+      }
+
       case 'faixa-v': {
         var fvw = w * 0.30, fvx = CENTRO.x - fvw / 2;
         var ov = '';

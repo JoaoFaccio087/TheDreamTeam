@@ -383,15 +383,15 @@
                                                                     // blaugrana. O Barcelona-EQU é
                                                                     // homenagem A ESTE: mesmo desenho.
     'Atlético de Madrid':   { padrao: 'atletico-mad' },           // listras + triângulo azul (sem o urso)
-    'Juventus':             { padrao: 'listras-v', listras: 4 },
+    'Juventus':             { padrao: 'juventus' },               // listras + faixa branca do brasão
     'Milan':                { padrao: 'milan' },                                  // oval: listras | cruz de São Jorge
-    'Inter de Milão':       { padrao: 'listras-v', listras: 4 },
+    'Inter de Milão':       { padrao: 'listras-v', listras: 4 },        // azul e preto, como o uniforme
     'Liverpool':            { padrao: 'solido' },
     'Manchester United':    { padrao: 'solido' },
     'Chelsea':              { padrao: 'solido' },
-    'Arsenal':              { padrao: 'solido' },
+    'Arsenal':              { padrao: 'tri-v', cor2: '#FFFFFF' },       // vermelho com as mangas brancas
     'Bayern de Munique':    { padrao: 'bayern' },                                  // anel vermelho + LOSANGOS bávaros
-    'Borussia Dortmund':    { padrao: 'solido' },                 // amarelo liso (o anel preto era forma-dentro-de-forma)
+    'Borussia Dortmund':    { padrao: 'faixa-h' },                      // amarelo com faixa preta
     'Ajax':                 { padrao: 'faixa-v' },                  // branco, faixa vermelha central
     'PSG':                  { padrao: 'faixa-v', cor2: '#FFFFFF' }, // azul, faixa vermelha debruada
     'Benfica':              { padrao: 'solido' },
