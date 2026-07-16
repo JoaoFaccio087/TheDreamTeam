@@ -17,33 +17,13 @@ const API = {
     return cfg ? API.getClubesPorCompeticao(cfg.dados) : [];
   },
 
-  salvarPartida: function (resultado) {
-    return api.salvarPartida(resultado);
-  },
-
-  getHistorico: function () {
-    return api.getHistorico();
-  },
-
-  getRanking: function () {
-    return api.getRanking();
-  },
-  getAchievements: function () {
-    return api.getAchievements();
-  },
-
-  // ⚠️ DELEGAÇÃO QUE FALTAVA. Sem ela, `API.getEstatisticas` era undefined, a guarda do
-  // perfil.js caía no `Promise.resolve(null)` e a tela ia para o cálculo local —
-  // ou seja, a rota GET /matches/stats NUNCA foi chamada em produção. Código morto
-  // desde que nasceu, e o Perfil desenhando "0 campanhas".
-  //
-  // A armadilha: `API` (fachada, dados locais + delegações) e `api` (HTTP) são objetos
-  // DIFERENTES que diferem só por maiúscula. Método novo no `api` precisa de delegação
-  // aqui, senão some calado. O perfil.js chama API.getEstatisticas mas api.getMe —
-  // essa mistura é o cheiro do problema.
-  getEstatisticas: function () {
-    return api.getEstatisticas();
-  },
+  // Os métodos de REDE ficam neste mesmo objeto, adicionados na seção HTTP lá embaixo.
+  // Antes existia um segundo objeto `api` (minúsculo) com o HTTP, e este aqui só REPASSAVA
+  // chamada para ele. Dois objetos que diferiam só por maiúscula, um repassando para o outro:
+  // método novo no `api` precisava de repasse aqui, senão sumia calado. Foi assim que
+  // `getEstatisticas` nasceu morta — a rota GET /matches/stats NUNCA foi chamada em produção,
+  // e o Perfil anunciava "0 campanhas" para quem tinha o histórico inteiro salvo.
+  // Um objeto só. Não há repasse para esquecer.
 };
 
 // ===== BACKEND HTTP (autenticação + multiplayer) ============================
@@ -131,7 +111,9 @@ function _temLoginReal() {
   return !!(p && !p.guest);
 }
 
-var api = {
+// ===== REDE (HTTP) =========================================================
+// Mesmo objeto API — a separação aqui é de SEÇÃO no arquivo, não de identidade.
+Object.assign(API, {
 
   register: function (username, email, password, nomeTime) {
     return _req('POST', '/auth/register', {
@@ -241,4 +223,4 @@ var api = {
   getEstadoSala: function (codigo) {
     return _req('GET', '/rooms/' + codigo);
   },
-};
+});

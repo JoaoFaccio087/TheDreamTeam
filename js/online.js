@@ -148,7 +148,7 @@
     if (!forcar && tokenValido(token)) return Promise.resolve(token);
     // ausente/expirado/inválido (ou forçado) → pega um novo token de convidado
     localStorage.removeItem('dreamteam_token');
-    return api.tokenConvidado().then(function (r) {
+    return API.tokenConvidado().then(function (r) {
       if (r && r.token) { localStorage.setItem('dreamteam_token', r.token); return r.token; }
       return null;
     });
@@ -2917,7 +2917,7 @@
 
     function pedirCriar(forcarToken) {
       return garantirToken(forcarToken).then(function () {
-        return api.criarSala({ competicao: competicao, nome: nome, velocidade: velocidade });
+        return API.criarSala({ competicao: competicao, nome: nome, velocidade: velocidade });
       });
     }
 
@@ -2953,7 +2953,7 @@
     btnEntrarSala.textContent = '...';
 
     function pedirEntrar(forcarToken) {
-      return garantirToken(forcarToken).then(function () { return api.entrarSala(codigo); });
+      return garantirToken(forcarToken).then(function () { return API.entrarSala(codigo); });
     }
 
     pedirEntrar(false)

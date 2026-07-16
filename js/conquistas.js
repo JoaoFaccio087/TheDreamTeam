@@ -180,9 +180,10 @@
     cont.innerHTML = '<p class="perfil-carregando">Carregando conquistas…</p>';
 
     // Busca as conquistas realmente desbloqueadas (backend). Fallback: nenhuma.
-    var fonte = (typeof API !== 'undefined' && API.getAchievements) ? API.getAchievements()
-              : (typeof api !== 'undefined' && api.getAchievements) ? api.getAchievements()
-              : Promise.resolve([]);
+    // Um objeto só (API). O fallback para um `api` minúsculo caiu junto com o objeto.
+    var fonte = (typeof API !== 'undefined' && API.getAchievements)
+      ? API.getAchievements()
+      : Promise.resolve([]);
 
     fonte.then(function (desbloqueadas) {
       // `null` = não consegui perguntar ao servidor. NÃO é "zero conquistas".

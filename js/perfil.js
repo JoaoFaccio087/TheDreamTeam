@@ -1,5 +1,5 @@
 // perfil.js — modais "Meu Perfil", "Alterar Informações" e "Meu Histórico".
-// Só para usuários logados; api.js cuida de backend vs offline.
+// Só para usuários logados; API.js cuida de backend vs offline.
 (function () {
   'use strict';
 
@@ -67,8 +67,8 @@
     setAvatar('perfil-avatar', u.username);
     mostrarTelaPerfil('estatisticas');
 
-    if (typeof api !== 'undefined' && api.getMe) {
-      api.getMe().then(function (me) {
+    if (typeof API !== 'undefined' && API.getMe) {
+      API.getMe().then(function (me) {
         if (!me) return;
         _meCache = me;
         setTexto('perfil-username', me.username || u.username || '—');
@@ -103,7 +103,7 @@
 
     // Caminho preferido (logado): somas prontas do servidor — payload pequeno, não depende de
     // baixar o histórico inteiro. Convidado (ou falha da rota) → cálculo local do histórico.
-    // GUARDA: se o api.js no ar for antigo (sem getEstatisticas), chamar .then() em undefined
+    // GUARDA: se o API.js no ar for antigo (sem getEstatisticas), chamar .then() em undefined
     // lançaria um erro SÍNCRONO que ninguém captura — e a tela ficava presa em "Carregando…".
     var pedirStats;
     try {
@@ -143,7 +143,7 @@
       });
     }).catch(function (err) {
       // "Não consegui carregar" NUNCA pode virar "você não tem nada". Enquanto o 401 era
-      // engolido como `null` lá no api.js, esta tela anunciava "0 campanhas" para quem
+      // engolido como `null` lá no API.js, esta tela anunciava "0 campanhas" para quem
       // tinha o histórico inteiro salvo — só o token tinha vencido. Dizer que os dados
       // continuam lá é a parte que mais importa da mensagem.
       var msg = (err && err.sessaoExpirada)
@@ -426,7 +426,7 @@
     var btn = $('editar-salvar');
     if (btn) { btn.disabled = true; btn.textContent = 'Salvando…'; }
 
-    api.patchMe(payload).then(function (res) {
+    API.patchMe(payload).then(function (res) {
       res = res || {};
       try {
         var user = usuarioLogado() || {};
@@ -473,12 +473,12 @@
   function confirmarExcluir() {
     var senha = val('excluir-senha');
     if (!senha) { msgExcluir('Digite sua senha para confirmar.', true); return; }
-    if (!api || !api.excluirConta) { msgExcluir('Indisponível.', true); return; }
+    if (typeof API === 'undefined' || !API.excluirConta) { msgExcluir('Indisponível.', true); return; }
 
     var btn = $('excluir-confirmar');
     if (btn) { btn.disabled = true; btn.textContent = 'Excluindo…'; }
 
-    api.excluirConta(senha).then(function () {
+    API.excluirConta(senha).then(function () {
       // Conta apagada: encerra a sessão e atualiza a UI para o estado deslogado.
       fechar(modalExcluir);
       if (typeof limparSessao === 'function') {
