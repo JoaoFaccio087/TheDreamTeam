@@ -197,6 +197,47 @@
         return j;
       }
 
+      // Dortmund: amarelo com o ANEL preto. O anel segue a silhueta (não é círculo inscrito):
+      // moldura preta por dentro da borda, com o miolo amarelo.
+      case 'dortmund': {
+        // Amarelo manda; o anel preto é MOLDURA seguindo a silhueta (escala 0.82), não um
+        // retângulo arredondado colado no meio — que foi o que ficou com cara de mancha.
+        var d2 = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#FDE100"/>';
+        var esc = function (k) { return 'transform="translate(' + CENTRO.x + ',' + CENTRO.y + ') scale(' + k + ') translate(' + (-CENTRO.x) + ',' + (-CENTRO.y) + ')"'; };
+        d2 += '<path d="' + SILHUETA + '" fill="none" stroke="#000000" stroke-width="5" ' + esc(0.80) + '/>';
+        d2 += '<text x="' + CENTRO.x + '" y="' + (CENTRO.y + h * 0.06) + '" text-anchor="middle" font-family="Archivo Black,Arial Black,sans-serif" font-weight="900" font-size="' + (h * 0.26) + '" fill="#000000">BVB</text>';
+        return d2;
+      }
+
+      // Lyon: FAIXA VERMELHA no topo (onde vai o nome), corpo azul.
+      case 'lyon': {
+        var l2 = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#123B85"/>';
+        l2 += '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + (h * 0.30) + '" fill="#E30613"/>';
+        l2 += '<rect x="' + x + '" y="' + (y + h * 0.30) + '" width="' + w + '" height="' + (h * 0.03) + '" fill="#FFFFFF"/>';
+        // "OL" em texto. Letra NÃO é desenho à mão: usa fonte de verdade e sai limpa.
+        // A regra do "vira borrão" vale para BICHO (leão, águia), não para tipografia.
+        l2 += '<text x="' + CENTRO.x + '" y="' + (y + h * 0.72) + '" text-anchor="middle" font-family="Archivo Black,Arial Black,sans-serif" font-weight="900" font-size="' + (h * 0.30) + '" fill="#FFFFFF">OL</text>';
+        // filete dourado acompanhando a silhueta, por dentro da borda
+        l2 += '<path d="' + SILHUETA + '" fill="none" stroke="#C9A227" stroke-width="2.2" transform="translate(' + CENTRO.x + ',' + CENTRO.y + ') scale(0.90) translate(' + (-CENTRO.x) + ',' + (-CENTRO.y) + ')"/>';
+        return l2;
+      }
+
+      // Villarreal: o brasão é AZUL com o losango da senyera (amarelo/vermelho) ao centro.
+      // Amarelo liso é a CAMISA — o "submarino amarelo" engana quem cataloga de memória.
+      case 'villarreal': {
+        var vcx = CENTRO.x, vcy = CENTRO.y, vw = w * 0.42, vh = h * 0.46;
+        var v = '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" fill="#005187"/>';
+        var id = 'vil' + Math.round(x);
+        v += '<clipPath id="' + id + '"><polygon points="' + vcx + ',' + (vcy - vh) + ' ' + (vcx + vw) + ',' + vcy + ' ' + vcx + ',' + (vcy + vh) + ' ' + (vcx - vw) + ',' + vcy + '"/></clipPath>';
+        v += '<g clip-path="url(#' + id + ')">';
+        v += '<rect x="' + (vcx - vw) + '" y="' + (vcy - vh) + '" width="' + (vw * 2) + '" height="' + (vh * 2) + '" fill="#FFE667"/>';
+        for (var vk = 0; vk < 4; vk++)
+          v += '<rect x="' + (vcx - vw + vw * 0.30 + vk * vw * 0.50) + '" y="' + (vcy - vh) + '" width="' + (vw * 0.22) + '" height="' + (vh * 2) + '" fill="#E30613"/>';
+        v += '</g>';
+        v += '<polygon points="' + vcx + ',' + (vcy - vh) + ' ' + (vcx + vw) + ',' + vcy + ' ' + vcx + ',' + (vcy + vh) + ' ' + (vcx - vw) + ',' + vcy + '" fill="none" stroke="#FFE667" stroke-width="' + (w * 0.03) + '"/>';
+        return v;
+      }
+
       case 'faixa-v': {
         var fvw = w * 0.30, fvx = CENTRO.x - fvw / 2;
         var ov = '';

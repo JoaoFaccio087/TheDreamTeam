@@ -203,7 +203,7 @@
     'IFK Göteborg':            ['#0057A5', '#FFFFFF'],
     'Leeds United':            ['#FFFFFF', '#1D428A'],
     'Legia Warsaw':            ['#FFFFFF', '#006A4E'],
-    'Lyon':                    ['#FFFFFF', '#E30613'],
+    'Lyon':                    ['#123B85', '#E30613'],
     'Malmö FF':                ['#6CACE4', '#FFFFFF'],
     'Manchester City':         ['#6CABDD', '#FFFFFF'],
     'Marseille':               ['#FFFFFF', '#2FAEE0'],
@@ -231,7 +231,7 @@
     'Tottenham':               ['#FFFFFF', '#132257'],
     'Valencia':                ['#FFFFFF', '#F18E00'],
     'Vasas':                   ['#E30613', '#0A2A66'],
-    'Villarreal':              ['#FFE667', '#005187'],
+    'Villarreal':              ['#005187', '#FFE667'],
     'Widzew Łódź':             ['#E30613', '#FFFFFF'],
     'Young Boys':              ['#FFD100', '#000000'],
     'Zürich':                  ['#FFFFFF', '#0A5CA8'],
@@ -390,9 +390,9 @@
     'Liverpool':            { padrao: 'solido' },
     'Manchester United':    { padrao: 'solido' },
     'Chelsea':              { padrao: 'solido' },
-    'Arsenal':              { padrao: 'tri-v', cor2: '#FFFFFF' },       // vermelho com as mangas brancas
+    'Arsenal':              { padrao: 'tri-v', cor2: '#FFFFFF' },         // vermelho com mangas brancas (a CAMISA: o brasão não traduz)
     'Bayern de Munique':    { padrao: 'bayern' },                                  // anel vermelho + LOSANGOS bávaros
-    'Borussia Dortmund':    { padrao: 'faixa-h' },                      // amarelo com faixa preta
+    'Borussia Dortmund':    { padrao: 'dortmund' },                   // amarelo com o anel preto
     'Ajax':                 { padrao: 'faixa-v' },                  // branco, faixa vermelha central
     'PSG':                  { padrao: 'faixa-v', cor2: '#FFFFFF' }, // azul, faixa vermelha debruada
     'Benfica':              { padrao: 'solido' },
@@ -427,7 +427,7 @@
     'IFK Göteborg':            { padrao: 'faixa-h' },                                 // azul e branco
     'Leeds United':            { padrao: 'faixa-v' },                                 // branco, azul e amarelo
     'Legia Warsaw':            { padrao: 'faixa-v' },                                 // branco e verde
-    'Lyon':                    { padrao: 'tri-v', cor2: '#0A2A66' },                    // branco, vermelho e azul
+    'Lyon':                    { padrao: 'lyon' },                       // faixa vermelha no topo, corpo azul
     'Malmö FF':                { padrao: 'solido' },                                  // celeste
     'Manchester City':         { padrao: 'solido' },                                  // celeste
     'Marseille':               { padrao: 'faixa-h' },                                 // branco e celeste
@@ -455,7 +455,7 @@
     'Tottenham':               { padrao: 'faixa-h' },                                 // branco e marinho
     'Valencia':                { padrao: 'faixa-h' },                                 // branco e laranja
     'Vasas':                   { padrao: 'metade' },                                  // vermelho e azul
-    'Villarreal':              { padrao: 'solido' },                                  // amarelo submarino
+    'Villarreal':              { padrao: 'villarreal' },                 // AZUL com losango da senyera (amarelo é a camisa)
     'Widzew Łódź':             { padrao: 'faixa-h' },                                 // vermelho e branco
     'Young Boys':              { padrao: 'metade' },                                  // amarelo e preto
     'Zürich':                  { padrao: 'faixa-h' },                                 // branco e azul
