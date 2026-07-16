@@ -143,7 +143,7 @@
 
   // Junta as competições num mapa único (o resto do código usa só este).
   // Para adicionar a Champions: criar CORES_CHAMPIONS e incluir aqui.
-  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES);
+  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS);
 
   // Brasileiros que TAMBÉM disputam a Libertadores. As cores deles moram em CORES_BRASILEIRAO
   // (fonte única — duplicar arriscaria divergir); esta lista existe só para EXIBIÇÃO: a demo
@@ -210,6 +210,38 @@
   //  IMPORTANTE: sem entrada aqui, o padrão é SORTEADO pela seed e sai errado
   //  (Boca sem a faixa, Peñarol sem listras, Nacional sem a diagonal...).
   // ============================================================
+  // ============================================================
+  //  CHAMPIONS — cor REAL + padrão FIXO  (LOTE 1 de ~5: os mais icônicos)
+  //  ⚠️ Cada clube PRECISA de entrada AQUI **E** em ESTILO_CHAMPIONS.
+  //     Só a cor não basta: sem ESTILO o padrão é sorteado pela seed e sai errado.
+  //     Foi exatamente o que custou 25 escudos na Libertadores.
+  // ============================================================
+  var CORES_CHAMPIONS = {
+    // --- ESPANHA ---
+    'Real Madrid':          ['#FFFFFF', '#FEBE10'],
+    'Barcelona':            ['#004D98', '#A50044'],
+    'Atlético de Madrid':   ['#FFFFFF', '#CB3524'],
+    // --- ITÁLIA ---
+    'Juventus':             ['#FFFFFF', '#000000'],
+    'Milan':                ['#FB090B', '#000000'],
+    'Inter de Milão':       ['#0068A8', '#000000'],
+    // --- INGLATERRA ---
+    'Liverpool':            ['#C8102E', '#F6EB61'],
+    'Manchester United':    ['#DA291C', '#FBE122'],
+    'Chelsea':              ['#034694', '#FFFFFF'],
+    'Arsenal':              ['#EF0107', '#FFFFFF'],
+    // --- ALEMANHA ---
+    'Bayern de Munique':    ['#DC052D', '#0066B2'],
+    'Borussia Dortmund':    ['#FDE100', '#000000'],
+    // --- HOLANDA ---
+    'Ajax':                 ['#FFFFFF', '#D2122E'],
+    // --- FRANÇA ---
+    'PSG':                  ['#004170', '#DA291C'],
+    // --- PORTUGAL ---
+    'Benfica':              ['#E00034', '#FFFFFF'],
+    'Porto':                ['#FFFFFF', '#004B9B'],
+  };
+
   var ESTILO_LIBERTADORES = {
     // --- ARGENTINA ---
     'Boca Juniors':        { padrao: 'faixa-h' },                    // azul, faixa amarela
@@ -279,7 +311,31 @@
   };
 
   // Junta as competições (o resto do código usa só este).
-  var ESTILO_CLUBES = Object.assign({}, ESTILO_BRASILEIRAO, ESTILO_LIBERTADORES);
+  // ============================================================
+  //  CHAMPIONS — padrão FIXO por clube (LOTE 1)
+  // ============================================================
+  var ESTILO_CHAMPIONS = {
+    'Real Madrid':          { padrao: 'solido' },
+    'Barcelona':            { padrao: 'barcelona-equ' },            // cruz de São Jorge + senyera +
+                                                                    // blaugrana. O Barcelona-EQU é
+                                                                    // homenagem A ESTE: mesmo desenho.
+    'Atlético de Madrid':   { padrao: 'listras-v', listras: 4 },
+    'Juventus':             { padrao: 'listras-v', listras: 4 },
+    'Milan':                { padrao: 'listras-v', listras: 4 },
+    'Inter de Milão':       { padrao: 'listras-v', listras: 4 },
+    'Liverpool':            { padrao: 'solido' },
+    'Manchester United':    { padrao: 'solido' },
+    'Chelsea':              { padrao: 'solido' },
+    'Arsenal':              { padrao: 'solido' },
+    'Bayern de Munique':    { padrao: 'solido' },                   // ⚠️ perde os losangos bávaros
+    'Borussia Dortmund':    { padrao: 'solido' },
+    'Ajax':                 { padrao: 'faixa-v' },                  // branco, faixa vermelha central
+    'PSG':                  { padrao: 'faixa-v', cor2: '#FFFFFF' }, // azul, faixa vermelha debruada
+    'Benfica':              { padrao: 'solido' },
+    'Porto':                { padrao: 'listras-v', listras: 4 },
+  };
+
+  var ESTILO_CLUBES = Object.assign({}, ESTILO_BRASILEIRAO, ESTILO_LIBERTADORES, ESTILO_CHAMPIONS);
 
   // seleção → ISO-2 (o gerador desenha a bandeira a partir do código do país).
   // Cobre as seleções mais frequentes; entidades históricas (URSS, Iugoslávia…) e países sem
@@ -355,7 +411,8 @@
     clubesPorCompeticao: function () {
       return {
         'Brasileirão':  Object.keys(CORES_BRASILEIRAO),
-        'Libertadores': Object.keys(CORES_LIBERTADORES).concat(BRASILEIROS_NA_LIBERTADORES)
+        'Libertadores': Object.keys(CORES_LIBERTADORES).concat(BRASILEIROS_NA_LIBERTADORES),
+        'Champions':    Object.keys(CORES_CHAMPIONS)
       };
     },
     brasileirosNaLibertadores: function () { return BRASILEIROS_NA_LIBERTADORES.slice(); },

@@ -119,6 +119,16 @@
         return of;
       }
       // Faixa horizontal central (uma cor) — usada com cor2 vira tricolor horizontal
+      // Faixa VERTICAL central (Ajax, PSG). opts.cor2 = debrum nas bordas da faixa.
+      case 'faixa-v': {
+        var fvw = w * 0.30, fvx = CENTRO.x - fvw / 2;
+        var ov = '';
+        if (opts.cor2) {   // debrum: duas linhas finas ladeando a faixa (PSG)
+          ov += '<rect x="' + (fvx - w * 0.05) + '" y="' + y + '" width="' + (fvw + w * 0.10) + '" height="' + h + '" fill="' + opts.cor2 + '"/>';
+        }
+        ov += '<rect x="' + fvx + '" y="' + y + '" width="' + fvw + '" height="' + h + '" fill="' + cor + '"/>';
+        return ov;
+      }
       case 'faixa-h':
         return '<rect x="' + x + '" y="' + (y + h * 0.36) + '" width="' + w + '" height="' + (h * 0.28) + '" fill="' + cor + '"/>';
       // Três faixas horizontais (tricolor tipo bandeira)
@@ -787,7 +797,7 @@
     // Modos onde os escudos estão LIGADOS. Champions fica de fora até catalogarmos as cores reais
     // dos clubes europeus (senão usariam a paleta de reserva, com cores erradas).
     // Libertadores entrou em jul/2026: os 73 clubes sul-americanos já têm cor real.
-    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores'],
+    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions'],
     ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
