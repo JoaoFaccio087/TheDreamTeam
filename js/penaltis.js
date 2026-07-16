@@ -480,14 +480,20 @@
     // ANTES de se comprometer — a escolha é informada, não chute cego.
     function pedirMira(cob, cb) {
       mira.style.display = '';
-      status.innerHTML = '<b>' + esc(cob.nome) + '</b> &middot; escolha o canto &mdash; quanto mais no &acirc;ngulo, maior o risco';
+      status.innerHTML = '<b>' + esc(cob.nome) + '</b> &middot; escolha o canto' +
+                         '<span class="pen-dica">quanto mais no &acirc;ngulo, maior o risco</span>';
 
       // Prende a mira DENTRO da meta. Sem isto dava para mirar na grama, entre a linha
       // e a marca do pênalti — alvo que não existe no futebol. O cursor anda livre; o
       // alvo é que gruda na borda do gol.
       function pos(ev) {
         var pt = ov.querySelector('.pen-stage').getBoundingClientRect();
-        var t = (ev.touches && ev.touches[0]) || ev;
+        // ⚠️ No `touchend` a lista `ev.touches` está VAZIA — o dedo já saiu da tela.
+        // O toque que acabou de terminar mora em `ev.changedTouches`. Sem isto, `t.clientX`
+        // era undefined, o alvo virava NaN, a bola recebia translate(NaN,NaN) e a animação
+        // simplesmente NÃO ACONTECIA no celular. No desktop nunca apareceu: `click` tem clientX.
+        var t = (ev.touches && ev.touches[0]) ||
+                (ev.changedTouches && ev.changedTouches[0]) || ev;
         var sx = (t.clientX - pt.left) / pt.width * 480;
         var sy = (t.clientY - pt.top) / pt.height * 322;
         var m = svgParaModelo(sx, sy);
@@ -502,16 +508,26 @@
         miraAlvo.setAttribute('transform', 'translate(' + p.sx.toFixed(1) + ',' + p.sy.toFixed(1) + ')');
         miraRaio.setAttribute('r', (raioDe(p.mx, p.my, cob.forca) * ESC).toFixed(1));
       }
+      var jaBateu = false;
       function atirar(ev) {
         if (ev.cancelable) ev.preventDefault();
+        // touchend dispara E o navegador ainda sintetiza um `click` depois. Sem esta trava
+        // a cobrança saía duas vezes no celular.
+        if (jaBateu) return;
         var p = pos(ev);
+        // Cinto de segurança: coordenada inválida nunca deve virar cobrança fantasma.
+        if (!isFinite(p.mx) || !isFinite(p.my)) return;
+        jaBateu = true;
         fecharMira();
         cb({ x: p.mx, y: p.my });
       }
       miraHit.onmousemove = mover;
       miraHit.onclick = atirar;
-      miraHit.ontouchmove = function (ev) { if (ev.cancelable) ev.preventDefault(); mover(ev); };
-      miraHit.ontouchend = atirar;
+      // No celular não existe mousemove: sem o `touchstart`/`touchmove` movendo a mira, o
+      // jogador não veria o raio antes de soltar — arrasta para mirar, solta para bater.
+      miraHit.ontouchstart = function (ev) { if (ev.cancelable) ev.preventDefault(); mover(ev); };
+      miraHit.ontouchmove  = function (ev) { if (ev.cancelable) ev.preventDefault(); mover(ev); };
+      miraHit.ontouchend   = atirar;
     }
 
     function proximoInterativo() {

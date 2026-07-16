@@ -68,6 +68,16 @@
 }
 .pen-status { color: #eaf2ec; font-size: var(--fs-base); font-weight: 600; margin: 0 0 10px; min-height: 20px; letter-spacing: 0.2px; }
 .pen-status b { color: #D9B25A; font-weight: 800; }
+/* Segunda linha da mensagem de mira: a instrução fica na primeira, o porquê aqui.
+   Numa linha só o texto quebrava feio e empurrava o layout no celular. */
+.pen-dica {
+  display: block;
+  font-size: var(--fs-xs, 0.75rem);
+  font-weight: 500;
+  color: #9fb3a6;
+  letter-spacing: 0.2px;
+  margin-top: 2px;
+}
 .pen-pular {
   background: transparent;
   color: #cfe0d4;

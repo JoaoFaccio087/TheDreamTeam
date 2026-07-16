@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- O Safari do iOS "detecta" telefone/endereço/data em texto solto e transforma em LINK
+       sozinho: nome de jogador virava sublinhado e, ao tocar, abria o Google Maps — dentro
+       da simulação, dos cards, do pênalti. Não é CSS nem JS: é o navegador mexendo no HTML.
+       Isto desliga a detecção. -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
   <link rel="icon" type="image/svg+xml" href="assets/imagens/favicon.svg">
   <title>The Dream Team — sorteie, escale, goleie</title>
 
