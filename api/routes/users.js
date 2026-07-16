@@ -13,7 +13,7 @@ router.use(requireAuth);
 router.get('/', async (req, res) => {
   try {
     const { rows } = await pool.query(
-      'SELECT id, username, email, nome_do_time, created_at FROM users WHERE id = $1',
+      'SELECT id, username, email, nome_do_time, escudo, created_at FROM users WHERE id = $1',
       [req.user.id]
     );
     if (!rows.length) return res.status(404).json({ error: 'Usuário não encontrado' });
@@ -24,7 +24,29 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Padrões que o EDITOR libera. Lista FECHADA de propósito:
+//  · os dedicados (barcelona-equ, milan, bayern, atletico-mad, villarreal, lyon, dortmund,
+//    juventus, real-madrid) são o brasão de um clube real — não fazem sentido como opção;
+//  · `tri-v` está FORA porque é quebrado: pinta o 2º e o 3º terço, não o 1º e o 3º.
+//    Não se expõe padrão torto ao usuário.
+// ⚠️ Todo nome aqui TEM de existir como `case` em js/escudos.js. Padrão inexistente não dá
+// erro: cai no default e o escudo sai SORTEADO pela seed — errado, e calado.
+const PADROES_ESCUDO = [
+  'solido', 'listras-v', 'listras-h', 'listras-finas', 'metade', 'diagonal', 'diagonal-inv',
+  'faixa-v', 'faixa-h', 'faixa-bicolor', 'tri-h', 'tri-v-base', 'quartos', 'cruz',
+];
+
+const escudoSchema = z.object({
+  padrao: z.enum(PADROES_ESCUDO),
+  // 2 ou 3 cores: a 3ª é opcional e o gerador já a consome (o.cores[3] / tri-v-base).
+  cores:  z.array(z.string().regex(/^#[0-9a-fA-F]{6}$/, 'cor deve ser hex #RRGGBB')).min(2).max(3),
+  n:      z.number().int().min(2).max(8).optional(),      // nº de listras
+  larg:   z.number().min(0.1).max(0.9).optional(),        // largura da faixa
+}).strict();
+
 const patchSchema = z.object({
+  // null = "apagar meu escudo, voltar ao círculo da inicial"
+  escudo:       escudoSchema.nullable().optional(),
   username:     z.string().min(3).max(30).trim().optional(),
   nome_do_time: z.string().min(1).max(50).optional(),
   email:        z.string().email().trim().toLowerCase().optional(),
@@ -48,6 +70,8 @@ router.patch('/', async (req, res) => {
   if (d.username     !== undefined) add('username',     d.username);
   if (d.email        !== undefined) add('email',        d.email);
   if (d.nome_do_time !== undefined) add('nome_do_time', d.nome_do_time);
+  // JSONB: o pg serializa objeto para JSON sozinho; null limpa a coluna.
+  if (d.escudo       !== undefined) add('escudo',       d.escudo === null ? null : JSON.stringify(d.escudo));
 
   // Troca de senha (opcional): exige senha atual correta.
   if (d.senha_nova !== undefined) {
@@ -69,7 +93,7 @@ router.patch('/', async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      `UPDATE users SET ${sets.join(', ')} WHERE id = $1 RETURNING id, username, email, nome_do_time`,
+      `UPDATE users SET ${sets.join(', ')} WHERE id = $1 RETURNING id, username, email, nome_do_time, escudo`,
       values
     );
     res.json(rows[0]);
