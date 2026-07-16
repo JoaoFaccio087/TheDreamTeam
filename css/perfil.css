@@ -121,7 +121,10 @@
 .editar-topo { display: flex; justify-content: center; margin: 0.2rem 0 0.9rem; }
 .editar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-5) 0.9rem; }
 .editar-full { grid-column: 1 / -1; }
-.editar-campo { display: flex; flex-direction: column; gap: var(--sp-1); }
+/* gap --sp-2 (0.4rem = 6.4px) entre label e input. Antes era --sp-1 e o label trazia
+   `margin-bottom: -6px` do auth.css: 4.8 - 6 = -1.2px, ou seja, encostava. Com a margem
+   negativa fora do label, o gap sozinho manda — e o valor é legível. */
+.editar-campo { display: flex; flex-direction: column; gap: var(--sp-2); }
 .editar-campo .auth-input { margin: 0; }
 .editar-sep-senha {
   display: flex; align-items: center; gap: var(--sp-5);
