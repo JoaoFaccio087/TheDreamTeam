@@ -65,22 +65,26 @@
   // Espelha a lista fechada do servidor (api/routes/users.js: PADROES_ESCUDO).
   // ⚠️ Fora: os brasões de clube real (barcelona-equ, milan, bayern…) e o `tri-v`,
   //    que pinta o 2º e o 3º terço em vez do 1º e do 3º — padrão torto não vira opção.
+  // `tri: true` = o formato USA a 3ª cor. Só 5 usam (conferido no gerador: faixa-bicolor,
+  // faixa-v, listras-finas, tri-h, tri-v-base). Nos outros 12 ela é ignorada em SILÊNCIO —
+  // por isso o seletor da 3ª cor só aparece quando ela faz alguma coisa. Oferecer escolha
+  // que não tem efeito é mentir para o usuário.
   var PADROES_ESCUDO = [
     { id: 'solido',        nome: 'Liso' },
     { id: 'listras-v',     nome: 'Listras', n: 4 },
-    { id: 'listras-v',     nome: 'Listras finas', n: 7 },
+    { id: 'listras-finas', nome: 'Listras finas', tri: true },
     { id: 'listras-v',     nome: 'Listras grossas', n: 2 },
     { id: 'listras-h',     nome: 'Aros', n: 4 },
     { id: 'listras-h',     nome: 'Aros finos', n: 7 },
     { id: 'metade',        nome: 'Metade' },
-    { id: 'faixa-v',       nome: 'Faixa' },
-    { id: 'faixa-v',       nome: 'Faixa larga', larg: 0.6 },
+    { id: 'faixa-v',       nome: 'Faixa', tri: true },
+    { id: 'faixa-v',       nome: 'Faixa larga', larg: 0.6, tri: true },
     { id: 'faixa-h',       nome: 'Faixa deitada' },
-    { id: 'faixa-bicolor', nome: 'Bicolor' },
+    { id: 'faixa-bicolor', nome: 'Bicolor', tri: true },
     { id: 'diagonal',      nome: 'Diagonal' },
     { id: 'diagonal-inv',  nome: 'Diagonal inv.' },
-    { id: 'tri-h',         nome: 'Três faixas' },
-    { id: 'tri-v-base',    nome: 'Base' },
+    { id: 'tri-h',         nome: 'Três faixas', tri: true },
+    { id: 'tri-v-base',    nome: 'Base', tri: true },
     { id: 'quartos',       nome: 'Quartos' },
     { id: 'cruz',          nome: 'Cruz' },
   ];
@@ -147,16 +151,18 @@
             '<div class="area-pilulas escudo-pads">' + pads + '</div>' +
             '<p class="jogo-rotulo">COR PRINCIPAL</p><div class="escudo-paleta">' + cores(0) + '</div>' +
             '<p class="jogo-rotulo">COR SECUNDÁRIA</p><div class="escudo-paleta">' + cores(1) + '</div>' +
-            '<p class="jogo-rotulo">TERCEIRA COR <span class="escudo-op">(opcional)</span></p>' +
-            '<div class="escudo-paleta">' +
-              '<button class="escudo-cor escudo-cor-nenhuma" data-slot="2" data-cor="" type="button">&#10005;</button>' + cores(2) +
+            '<div id="escudo-bloco-tri">' +
+              '<p class="jogo-rotulo">TERCEIRA COR</p>' +
+              '<div class="escudo-paleta">' +
+                '<button class="escudo-cor escudo-cor-nenhuma" data-slot="2" data-cor="" type="button" title="Sem terceira cor">&#10005;</button>' + cores(2) +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
         '<p id="escudo-erro" class="auth-erro escondida"></p>' +
         '<div class="modal-confirm-acoes">' +
           '<button id="escudo-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>' +
-          '<button id="escudo-remover" class="btn-rolar btn-sec" type="button">Remover</button>' +
+          '<button id="escudo-remover" class="btn-rolar btn-sec" type="button" title="Volta ao círculo com a inicial e remove o escudo do jogo">Não usar escudo</button>' +
           '<button id="escudo-salvar" class="btn-rolar" type="button">Salvar</button>' +
         '</div>' +
       '</div>';
@@ -200,7 +206,23 @@
     UI.on('escudo-salvar', 'click', function () { salvarEscudo(_rascunho, ov); });
   }
 
+  function formatoAtual() {
+    for (var i = 0; i < PADROES_ESCUDO.length; i++) {
+      var p = PADROES_ESCUDO[i];
+      if (p.id === _rascunho.padrao && (p.n || null) === (_rascunho.n || null) &&
+          (p.larg || null) === (_rascunho.larg || null)) return p;
+    }
+    return null;
+  }
+
   function marcarSelecionados(ov) {
+    // A 3ª cor só existe quando o formato a consome — senão o usuário escolheria uma cor
+    // que não aparece em lugar nenhum.
+    var f = formatoAtual();
+    var bloco = $('escudo-bloco-tri');
+    if (bloco) bloco.classList.toggle('escondida', !(f && f.tri));
+    if (!(f && f.tri) && _rascunho.cores.length > 2) _rascunho.cores = _rascunho.cores.slice(0, 2);
+
     ov.querySelectorAll('.escudo-pad').forEach(function (b) {
       var p = PADROES_ESCUDO[+b.dataset.i];
       var igual = p.id === _rascunho.padrao && (p.n || null) === (_rascunho.n || null) &&
@@ -214,6 +236,16 @@
     });
   }
 
+  // Traduz o erro técnico para algo que o usuário entenda e possa agir.
+  function mensagemDeErro(e) {
+    if (e && e.sessaoExpirada) return 'Sua sessão expirou. Entre de novo para salvar o escudo.';
+    if (e && e.status === 400)  return 'Este escudo não pôde ser salvo. Tente outro formato ou cor.';
+    if (e && (e.status === 502 || e.status === 503))
+      return 'O servidor está indisponível no momento. Tente de novo em alguns instantes.';
+    if (e && e.status >= 500)   return 'Algo deu errado no servidor. Tente de novo em alguns instantes.';
+    return 'Não foi possível salvar agora. Verifique sua conexão e tente de novo.';
+  }
+
   function salvarEscudo(esc, ov) {
     var err = $('escudo-erro');
     if (err) err.classList.add('escondida');
@@ -224,14 +256,10 @@
       ov.classList.add('escondida');
       abrirPerfil();   // redesenha o cabeçalho com o escudo novo
     }).catch(function (e) {
-      // NÃO engolir: se o backend ainda não subiu, o schema antigo é .strict() e devolve
-      // 400 no campo `escudo`. Dizer a verdade em vez de fingir que salvou.
-      if (err) {
-        err.textContent = (e && e.sessaoExpirada)
-          ? 'Sua sessão expirou. Entre de novo para salvar.'
-          : 'Não foi possível salvar o escudo. ' + ((e && e.message) || '');
-        err.classList.remove('escondida');
-      }
+      // NÃO engolir o erro — mas também não jogar téquiniquês na cara do usuário.
+      // O zod vazava "Unrecognized key(s) in object: 'escudo'", que não diz nada a ninguém.
+      // Cada caso vira uma frase que a pessoa entende E que sugere o que fazer.
+      if (err) { err.textContent = mensagemDeErro(e); err.classList.remove('escondida'); }
     });
   }
 

@@ -280,7 +280,7 @@
 }
 .pce-linha-meio { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: rgba(255,255,255,0.3); }
 .pce-circulo {
-  position: absolute; left: 50%; top: 50%; width: 74px; height: 74px;
+  position: absolute; left: 50%; top: 50%; width: 88px; height: 88px;
   transform: translate(-50%,-50%); border: 2px solid rgba(255,255,255,0.3); border-radius: 50%;
 }
 .pce-area { position: absolute; left: 50%; transform: translateX(-50%); width: 54%; height: 13%; border: 2px solid rgba(255,255,255,0.26); }
@@ -308,18 +308,22 @@
 /* Jogadores do topo: tooltip abre para BAIXO (o campo tem overflow:hidden e cortaria em cima). */
 .pce-jogador.tip-baixo[data-tip]:hover::after { bottom: auto; top: calc(100% + 6px); }
 .pce-marca {
-  width: 30px; height: 30px; border-radius: 50%;
+  /* 30px→36px e a fonte sai de --fs-micro (0.56rem ≈ 9px, o menor token da escala) para
+     --fs-legenda. O micro foi feito para mini-label em card compacto; aqui o mapa ocupa
+     meia tela e o nome ficava ilegível sem aproximar. */
+  width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   background: rgba(0,0,0,0.6); border: 1.5px solid var(--accent, #2BD46A); color: #fff;
-  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-micro); letter-spacing: 0;
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-legenda); letter-spacing: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.4); transition: transform 0.12s ease;
 }
 .pce-jogador:hover .pce-marca { transform: scale(1.12); }
 .pce-vazio .pce-marca { border-color: rgba(255,255,255,0.35); color: var(--txt-soft, #9aa6b2); background: rgba(0,0,0,0.4); }
 .pce-nome {
-  font-size: var(--fs-micro); color: #fff; line-height: 1; white-space: nowrap;
-  padding: 1px 5px; border-radius: var(--raio-xs, 4px);
-  background: rgba(0,0,0,0.42); text-shadow: 0 1px 2px rgba(0,0,0,0.8); max-width: 84px; overflow: hidden; text-overflow: ellipsis;
+  font-size: var(--fs-mini); font-weight: 600; color: #fff; line-height: 1.15; white-space: nowrap;
+  padding: 2px 6px; border-radius: var(--raio-xs, 4px);
+  background: rgba(0,0,0,0.55); text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+  max-width: 104px; overflow: hidden; text-overflow: ellipsis;
 }
 .perfil-escalados-sel { justify-content: center; margin-top: 0.9rem; }
 .perfil-escalados-vazio {
@@ -498,18 +502,25 @@
 .perfil-avatar-escudo svg { width: 100%; height: 100%; display: block; }
 
 .escudo-box { max-width: 620px; width: min(92vw, 620px); }
-.escudo-corpo { display: flex; gap: 1.2rem; align-items: flex-start; }
+.escudo-corpo { display: flex; gap: 1.4rem; align-items: flex-start; text-align: left; }
 .escudo-preview { width: 128px; flex: 0 0 128px; }
 .escudo-preview svg { width: 100%; height: auto; display: block; }
 .escudo-controles { flex: 1; min-width: 0; text-align: left; }
-.escudo-pads { margin-bottom: .5rem; }
-.escudo-op { opacity: .55; font-weight: 400; }
+.escudo-pads { margin-bottom: 1rem; gap: 6px; }
+.escudo-controles .jogo-rotulo { margin: 0 0 .45rem; }
+#escudo-bloco-tri { margin: 0; }
 
-.escudo-paleta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: .6rem; }
+/* GRADE, não flex-wrap: com 16 (e 17 na 3ª cor) os itens quebravam em fileiras de
+   tamanhos diferentes e as três seções ficavam desalinhadas entre si. */
+.escudo-paleta {
+  display: grid; grid-template-columns: repeat(9, 1fr);
+  gap: 6px; margin: 0 0 1rem;
+}
 .escudo-cor {
-  width: 26px; height: 26px; border-radius: 6px; cursor: pointer;
+  width: 100%; aspect-ratio: 1; border-radius: 6px; cursor: pointer;
   border: 2px solid transparent; padding: 0;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  transition: transform .1s ease;
 }
 .escudo-cor-ativa { border-color: var(--cor-marca, #D9B25A); transform: scale(1.1); }
 .escudo-cor-nenhuma { background: transparent; color: #9AA0A6; font-size: 12px; }
@@ -519,4 +530,5 @@
   .escudo-corpo { flex-direction: column; align-items: center; }
   .escudo-preview { width: 96px; flex: 0 0 auto; }
   .escudo-controles { width: 100%; }
+  .escudo-paleta { grid-template-columns: repeat(8, 1fr); }
 }
