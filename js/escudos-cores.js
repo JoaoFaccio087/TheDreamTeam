@@ -143,73 +143,6 @@
 
   // Junta as competições num mapa único (o resto do código usa só este).
   // Para adicionar a Champions: criar CORES_CHAMPIONS e incluir aqui.
-  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS);
-
-  // Brasileiros que TAMBÉM disputam a Libertadores. As cores deles moram em CORES_BRASILEIRAO
-  // (fonte única — duplicar arriscaria divergir); esta lista existe só para EXIBIÇÃO: a demo
-  // mostra estes clubes também na aba da Libertadores. Nomes = chave em CORES_BRASILEIRAO.
-  var BRASILEIROS_NA_LIBERTADORES = [
-    'Athletico-PR', 'Atlético-MG', 'Botafogo', 'Corinthians', 'Cruzeiro', 'Flamengo',
-    'Fluminense', 'Grêmio', 'Internacional', 'Palmeiras', 'Santos', 'São Caetano',
-    'São Paulo', 'Vasco'
-  ];
-
-  // Aliases: nomes diferentes para o MESMO clube → apontam para a mesma entrada (sem duplicar).
-  var ALIAS_CLUBES = {
-    'Red Bull Bragantino': 'Bragantino',
-    'Vasco da Gama':       'Vasco',
-    'Holanda':             'Países Baixos',
-    // Sul-americanos: a base usa nomes variados para o mesmo clube.
-    // CUIDADO: os vários "Nacional" são clubes DIFERENTES (URU, PAR, Atlético Nacional-COL,
-    // El Nacional-EQU) — só o "Nacional-URU" é alias do "Nacional" (uruguaio).
-    'Atlético Mineiro':    'Atlético-MG',
-    'LDU Quito':           'LDU',
-    'Nacional-URU':        'Nacional'
-  };
-  function resolveAlias(nome) { return ALIAS_CLUBES[nome] || nome; }
-
-  // ============================================================
-  //  ESTILO (padrão do escudo) — BRASILEIRÃO
-  //  Estilo fiel à camisa/escudo. CHAVES = nome exato em js/dados/*.
-  // ============================================================
-  var ESTILO_BRASILEIRAO = {
-    'Grêmio':              { padrao: 'listras-v', listras: 4, inverter: true },
-    'Atlético-MG':         { padrao: 'listras-finas', listras: 7 },
-    'Athletico-PR':        { padrao: 'listras-finas', listras: 6 },
-    // Botafogo: preto com ESTRELA branca grande no centro (o escudo, não a camisa).
-    'Botafogo':            { padrao: 'estrela-central' },
-    'Bahia':               { padrao: 'tri-h' },
-    // São Paulo: branco com faixa horizontal metade vermelha, metade preta.
-    'São Paulo':           { padrao: 'faixa-bicolor' },
-    'Vasco':               { padrao: 'diagonal', inverter: true },
-    'Fluminense':          { padrao: 'listras-v', listras: 3 },
-    'Internacional':       { padrao: 'solido' },
-    'Flamengo':            { padrao: 'faixa-h' },
-    'Corinthians':         { padrao: 'solido' },
-    'Santos':              { padrao: 'solido' },
-    'Cruzeiro':            { padrao: 'cruzeiro-do-sul' },
-    'Palmeiras':           { padrao: 'solido' },
-    'Goiás':               { padrao: 'solido' },
-    'Coritiba':            { padrao: 'listras-finas', listras: 6 },
-    'Bragantino':          { padrao: 'faixa-h' },
-    'Sport':               { padrao: 'listras-v', listras: 4 },
-    'Vitória':             { padrao: 'listras-v', listras: 4 },
-    'Portuguesa':          { padrao: 'faixa-h' },
-    'Ponte Preta':         { padrao: 'listras-finas', listras: 7 },
-    'Guarani':             { padrao: 'faixa-h' },
-    'Náutico':             { padrao: 'listras-v', listras: 4 },
-    'Santa Cruz':          { padrao: 'tri-h' },
-    'Avaí':                { padrao: 'faixa-h' },
-    'Paraná':              { padrao: 'listras-v', listras: 4 },
-    'Brasil de Pelotas':   { padrao: 'listras-v', listras: 4 },
-    'São Caetano':         { padrao: 'metade' }
-  };
-
-  // ============================================================
-  //  ESTILO (padrão do escudo) — LIBERTADORES
-  //  IMPORTANTE: sem entrada aqui, o padrão é SORTEADO pela seed e sai errado
-  //  (Boca sem a faixa, Peñarol sem listras, Nacional sem a diagonal...).
-  // ============================================================
   // ============================================================
   //  CHAMPIONS — cor REAL + padrão FIXO  (LOTE 1 de ~5: os mais icônicos)
   //  ⚠️ Cada clube PRECISA de entrada AQUI **E** em ESTILO_CHAMPIONS.
@@ -303,7 +236,75 @@
     'Young Boys':              ['#FFD100', '#000000'],
     'Zürich':                  ['#FFFFFF', '#0A5CA8'],
     'Újpest':                  ['#5B2C86', '#FFFFFF'],
+  }
+  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS);
+
+  // Brasileiros que TAMBÉM disputam a Libertadores. As cores deles moram em CORES_BRASILEIRAO
+  // (fonte única — duplicar arriscaria divergir); esta lista existe só para EXIBIÇÃO: a demo
+  // mostra estes clubes também na aba da Libertadores. Nomes = chave em CORES_BRASILEIRAO.
+  var BRASILEIROS_NA_LIBERTADORES = [
+    'Athletico-PR', 'Atlético-MG', 'Botafogo', 'Corinthians', 'Cruzeiro', 'Flamengo',
+    'Fluminense', 'Grêmio', 'Internacional', 'Palmeiras', 'Santos', 'São Caetano',
+    'São Paulo', 'Vasco'
+  ];
+
+  // Aliases: nomes diferentes para o MESMO clube → apontam para a mesma entrada (sem duplicar).
+  var ALIAS_CLUBES = {
+    'Red Bull Bragantino': 'Bragantino',
+    'Vasco da Gama':       'Vasco',
+    'Holanda':             'Países Baixos',
+    // Sul-americanos: a base usa nomes variados para o mesmo clube.
+    // CUIDADO: os vários "Nacional" são clubes DIFERENTES (URU, PAR, Atlético Nacional-COL,
+    // El Nacional-EQU) — só o "Nacional-URU" é alias do "Nacional" (uruguaio).
+    'Atlético Mineiro':    'Atlético-MG',
+    'LDU Quito':           'LDU',
+    'Nacional-URU':        'Nacional'
   };
+  function resolveAlias(nome) { return ALIAS_CLUBES[nome] || nome; }
+
+  // ============================================================
+  //  ESTILO (padrão do escudo) — BRASILEIRÃO
+  //  Estilo fiel à camisa/escudo. CHAVES = nome exato em js/dados/*.
+  // ============================================================
+  var ESTILO_BRASILEIRAO = {
+    'Grêmio':              { padrao: 'listras-v', listras: 4, inverter: true },
+    'Atlético-MG':         { padrao: 'listras-finas', listras: 7 },
+    'Athletico-PR':        { padrao: 'listras-finas', listras: 6 },
+    // Botafogo: preto com ESTRELA branca grande no centro (o escudo, não a camisa).
+    'Botafogo':            { padrao: 'estrela-central' },
+    'Bahia':               { padrao: 'tri-h' },
+    // São Paulo: branco com faixa horizontal metade vermelha, metade preta.
+    'São Paulo':           { padrao: 'faixa-bicolor' },
+    'Vasco':               { padrao: 'diagonal', inverter: true },
+    'Fluminense':          { padrao: 'listras-v', listras: 3 },
+    'Internacional':       { padrao: 'solido' },
+    'Flamengo':            { padrao: 'faixa-h' },
+    'Corinthians':         { padrao: 'solido' },
+    'Santos':              { padrao: 'solido' },
+    'Cruzeiro':            { padrao: 'cruzeiro-do-sul' },
+    'Palmeiras':           { padrao: 'solido' },
+    'Goiás':               { padrao: 'solido' },
+    'Coritiba':            { padrao: 'listras-finas', listras: 6 },
+    'Bragantino':          { padrao: 'faixa-h' },
+    'Sport':               { padrao: 'listras-v', listras: 4 },
+    'Vitória':             { padrao: 'listras-v', listras: 4 },
+    'Portuguesa':          { padrao: 'faixa-h' },
+    'Ponte Preta':         { padrao: 'listras-finas', listras: 7 },
+    'Guarani':             { padrao: 'faixa-h' },
+    'Náutico':             { padrao: 'listras-v', listras: 4 },
+    'Santa Cruz':          { padrao: 'tri-h' },
+    'Avaí':                { padrao: 'faixa-h' },
+    'Paraná':              { padrao: 'listras-v', listras: 4 },
+    'Brasil de Pelotas':   { padrao: 'listras-v', listras: 4 },
+    'São Caetano':         { padrao: 'metade' }
+  };
+
+  // ============================================================
+  //  ESTILO (padrão do escudo) — LIBERTADORES
+  //  IMPORTANTE: sem entrada aqui, o padrão é SORTEADO pela seed e sai errado
+  //  (Boca sem a faixa, Peñarol sem listras, Nacional sem a diagonal...).
+  // ============================================================
+;
 
   var ESTILO_LIBERTADORES = {
     // --- ARGENTINA ---
