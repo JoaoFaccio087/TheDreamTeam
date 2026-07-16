@@ -913,6 +913,21 @@
     // API única para o jogo: dado um NOME, decide entre bandeira de seleção (Copa) e escudo de
     // clube, consultando EscudosCores. Devolve '' se os módulos/cores não estiverem disponíveis.
     // Assim todos os lugares (tabela, card, simulação) usam a mesma lógica.
+    // Desenha a partir de um estilo SOLTO — { padrao, cores, n?, larg? } — sem passar pelo
+    // catálogo de clubes. É o que o escudo do USUÁRIO precisa: ele não é um clube, o estilo
+    // dele vem do banco. Mesmo gerador, mesma gramática: um lugar só desenha escudo.
+    porEstilo: function (est) {
+      if (!est || !est.padrao || !est.cores || est.cores.length < 2) return '';
+      try {
+        var o = {};
+        for (var k in est) if (Object.prototype.hasOwnProperty.call(est, k)) o[k] = est[k];
+        o.seed = (est.padrao + est.cores.join(''));   // determinístico: mesmo estilo, mesmo SVG
+        o.nome = o.nome || '';
+        o.listras = est.n;
+        return gerarClube(o);
+      } catch (err) { return ''; }
+    },
+
     porNome: function (nome) {
       if (typeof window === 'undefined' || !window.EscudosCores) return '';
       var C = window.EscudosCores;

@@ -475,3 +475,48 @@
 }
 .conq-toast-nome  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); color: #fff; }
 .conq-toast-desc  { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); line-height: 1.25; }
+
+/* ═══════════ EDITOR DE ESCUDO ═══════════
+   O avatar vira botão SÓ para quem tem conta: convidado não tem onde salvar.
+   Quem nunca editou continua com o círculo verde da inicial — opt-in. */
+.perfil-avatar-editavel { cursor: pointer; position: relative; }
+.perfil-avatar-editavel::after {
+  content: '✎';
+  position: absolute; right: -2px; bottom: -2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--cor-fundo, #111); color: var(--cor-marca, #D9B25A);
+  border: 1px solid var(--cor-marca, #D9B25A);
+  font-size: 10px; line-height: 16px; text-align: center;
+  opacity: 0; transition: opacity .15s;
+}
+.perfil-avatar-editavel:hover::after,
+.perfil-avatar-editavel:focus-visible::after { opacity: 1; }
+.perfil-avatar-editavel:hover { filter: brightness(1.12); }
+
+/* Com escudo o avatar deixa de ser círculo: o SVG traz a própria silhueta. */
+.perfil-avatar-escudo { background: none !important; border: none !important; padding: 0; }
+.perfil-avatar-escudo svg { width: 100%; height: 100%; display: block; }
+
+.escudo-box { max-width: 620px; width: min(92vw, 620px); }
+.escudo-corpo { display: flex; gap: 1.2rem; align-items: flex-start; }
+.escudo-preview { width: 128px; flex: 0 0 128px; }
+.escudo-preview svg { width: 100%; height: auto; display: block; }
+.escudo-controles { flex: 1; min-width: 0; text-align: left; }
+.escudo-pads { margin-bottom: .5rem; }
+.escudo-op { opacity: .55; font-weight: 400; }
+
+.escudo-paleta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: .6rem; }
+.escudo-cor {
+  width: 26px; height: 26px; border-radius: 6px; cursor: pointer;
+  border: 2px solid transparent; padding: 0;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+}
+.escudo-cor-ativa { border-color: var(--cor-marca, #D9B25A); transform: scale(1.1); }
+.escudo-cor-nenhuma { background: transparent; color: #9AA0A6; font-size: 12px; }
+
+/* No celular a prévia vai para cima: lado a lado não cabe. */
+@media (max-width: 620px) {
+  .escudo-corpo { flex-direction: column; align-items: center; }
+  .escudo-preview { width: 96px; flex: 0 0 auto; }
+  .escudo-controles { width: 100%; }
+}

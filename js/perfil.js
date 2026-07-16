@@ -57,6 +57,184 @@
   function val(id) { var el = $(id); return el ? (el.value || '') : ''; }
   function setVal(id, v) { var el = $(id); if (el) el.value = v; }
 
+
+  // ═════════════════════════ EDITOR DE ESCUDO ═════════════════════════
+  // Opt-in: quem nunca salvou fica com o círculo da inicial, aqui e no jogo.
+  // `escudo: null` no banco significa exatamente isso — nada muda para quem não pediu.
+
+  // Espelha a lista fechada do servidor (api/routes/users.js: PADROES_ESCUDO).
+  // ⚠️ Fora: os brasões de clube real (barcelona-equ, milan, bayern…) e o `tri-v`,
+  //    que pinta o 2º e o 3º terço em vez do 1º e do 3º — padrão torto não vira opção.
+  var PADROES_ESCUDO = [
+    { id: 'solido',        nome: 'Liso' },
+    { id: 'listras-v',     nome: 'Listras', n: 4 },
+    { id: 'listras-v',     nome: 'Listras finas', n: 7 },
+    { id: 'listras-v',     nome: 'Listras grossas', n: 2 },
+    { id: 'listras-h',     nome: 'Aros', n: 4 },
+    { id: 'listras-h',     nome: 'Aros finos', n: 7 },
+    { id: 'metade',        nome: 'Metade' },
+    { id: 'faixa-v',       nome: 'Faixa' },
+    { id: 'faixa-v',       nome: 'Faixa larga', larg: 0.6 },
+    { id: 'faixa-h',       nome: 'Faixa deitada' },
+    { id: 'faixa-bicolor', nome: 'Bicolor' },
+    { id: 'diagonal',      nome: 'Diagonal' },
+    { id: 'diagonal-inv',  nome: 'Diagonal inv.' },
+    { id: 'tri-h',         nome: 'Três faixas' },
+    { id: 'tri-v-base',    nome: 'Base' },
+    { id: 'quartos',       nome: 'Quartos' },
+    { id: 'cruz',          nome: 'Cruz' },
+  ];
+
+  // Paleta FECHADA, e de propósito: seletor RGB livre deixa escolher preto-no-preto,
+  // que some no fundo do jogo. Estas 16 são legíveis sobre o fundo escuro.
+  var PALETA = [
+    '#FFFFFF', '#E8E8E8', '#9AA0A6', '#2B2B2B', '#000000', '#E30613', '#8E1F2F', '#F18E00',
+    '#FDE100', '#2BD46A', '#008B5A', '#0A5CA8', '#004170', '#5B2C86', '#D9B25A', '#7A4A24',
+  ];
+
+  var _rascunho = null;   // { padrao, cores, n?, larg? } enquanto o modal está aberto
+
+  // Mesmo critério do api.js: convidado tem token, mas não é login de verdade — e o
+  // escudo mora no banco, então convidado não tem onde salvar.
+  function temContaReal() {
+    var u = usuarioLogado();
+    return !!(u && u.username && localStorage.getItem('dreamteam_token') && !u.convidado);
+  }
+
+  function escudoDoUsuario() {
+    var u = usuarioLogado() || {};
+    return u.escudo || null;
+  }
+
+  // Desenha o escudo no lugar do círculo da inicial. Sem escudo → devolve false e
+  // quem chamou mantém a inicial.
+  function pintarAvatar(id, esc) {
+    var el = $(id);
+    if (!el || !esc || typeof Escudos === 'undefined') return false;
+    var svg = Escudos.porEstilo ? Escudos.porEstilo(esc) : null;
+    if (!svg) return false;
+    el.innerHTML = svg;
+    el.classList.add('perfil-avatar-escudo');
+    return true;
+  }
+
+  function previewEscudo() {
+    var alvo = $('escudo-preview');
+    if (alvo && typeof Escudos !== 'undefined' && Escudos.porEstilo) {
+      alvo.innerHTML = Escudos.porEstilo(_rascunho) || '';
+    }
+  }
+
+  function montarModalEscudo() {
+    var ov = document.createElement('div');
+    ov.id = 'modal-escudo';
+    ov.className = 'modal-confirm';
+    var pads = PADROES_ESCUDO.map(function (p, i) {
+      return '<button class="pilula escudo-pad" data-i="' + i + '" type="button">' + UI.esc(p.nome) + '</button>';
+    }).join('');
+    var cores = function (slot) {
+      return PALETA.map(function (c) {
+        return '<button class="escudo-cor" data-slot="' + slot + '" data-cor="' + c + '" type="button" style="background:' + c + '" aria-label="' + c + '"></button>';
+      }).join('');
+    };
+    ov.innerHTML =
+      '<div class="modal-confirm-box escudo-box">' +
+        '<p class="modal-confirm-titulo">Escudo do seu time</p>' +
+        '<div class="escudo-corpo">' +
+          '<div id="escudo-preview" class="escudo-preview"></div>' +
+          '<div class="escudo-controles">' +
+            '<p class="jogo-rotulo">FORMATO</p>' +
+            '<div class="area-pilulas escudo-pads">' + pads + '</div>' +
+            '<p class="jogo-rotulo">COR PRINCIPAL</p><div class="escudo-paleta">' + cores(0) + '</div>' +
+            '<p class="jogo-rotulo">COR SECUNDÁRIA</p><div class="escudo-paleta">' + cores(1) + '</div>' +
+            '<p class="jogo-rotulo">TERCEIRA COR <span class="escudo-op">(opcional)</span></p>' +
+            '<div class="escudo-paleta">' +
+              '<button class="escudo-cor escudo-cor-nenhuma" data-slot="2" data-cor="" type="button">&#10005;</button>' + cores(2) +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+        '<p id="escudo-erro" class="auth-erro escondida"></p>' +
+        '<div class="modal-confirm-acoes">' +
+          '<button id="escudo-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>' +
+          '<button id="escudo-remover" class="btn-rolar btn-sec" type="button">Remover</button>' +
+          '<button id="escudo-salvar" class="btn-rolar" type="button">Salvar</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    return ov;
+  }
+
+  function abrirEditorEscudo() {
+    if (!temContaReal()) return;   // convidado não salva: não tem onde
+    var atual = escudoDoUsuario();
+    _rascunho = atual ? JSON.parse(JSON.stringify(atual))
+                      : { padrao: 'listras-v', cores: ['#E30613', '#FFFFFF'], n: 4 };
+
+    var ov = $('modal-escudo') || montarModalEscudo();
+    ov.classList.remove('escondida');
+    previewEscudo();
+    marcarSelecionados(ov);
+
+    ov.querySelectorAll('.escudo-pad').forEach(function (b) {
+      b.onclick = function () {
+        var p = PADROES_ESCUDO[+b.dataset.i];
+        _rascunho.padrao = p.id;
+        // n e larg pertencem ao formato: trocar de formato tem de LIMPAR o que sobrou,
+        // senão 'Faixa larga' contamina a 'Faixa' escolhida depois.
+        delete _rascunho.n; delete _rascunho.larg;
+        if (p.n) _rascunho.n = p.n;
+        if (p.larg) _rascunho.larg = p.larg;
+        previewEscudo(); marcarSelecionados(ov);
+      };
+    });
+    ov.querySelectorAll('.escudo-cor').forEach(function (b) {
+      b.onclick = function () {
+        var slot = +b.dataset.slot, cor = b.dataset.cor;
+        if (slot === 2 && !cor) _rascunho.cores = _rascunho.cores.slice(0, 2);
+        else _rascunho.cores[slot] = cor;
+        previewEscudo(); marcarSelecionados(ov);
+      };
+    });
+    UI.on('escudo-cancelar', 'click', function () { ov.classList.add('escondida'); });
+    UI.on('escudo-remover', 'click', function () { salvarEscudo(null, ov); });
+    UI.on('escudo-salvar', 'click', function () { salvarEscudo(_rascunho, ov); });
+  }
+
+  function marcarSelecionados(ov) {
+    ov.querySelectorAll('.escudo-pad').forEach(function (b) {
+      var p = PADROES_ESCUDO[+b.dataset.i];
+      var igual = p.id === _rascunho.padrao && (p.n || null) === (_rascunho.n || null) &&
+                  (p.larg || null) === (_rascunho.larg || null);
+      b.classList.toggle('pilula-ativa', igual);
+    });
+    ov.querySelectorAll('.escudo-cor').forEach(function (b) {
+      var slot = +b.dataset.slot;
+      var atual = _rascunho.cores[slot] || '';
+      b.classList.toggle('escudo-cor-ativa', (b.dataset.cor || '') === atual);
+    });
+  }
+
+  function salvarEscudo(esc, ov) {
+    var err = $('escudo-erro');
+    if (err) err.classList.add('escondida');
+    API.patchMe({ escudo: esc }).then(function (me) {
+      var u = usuarioLogado() || {};
+      u.escudo = (me && me.escudo !== undefined) ? me.escudo : esc;
+      localStorage.setItem('dreamteam_user', JSON.stringify(u));
+      ov.classList.add('escondida');
+      abrirPerfil();   // redesenha o cabeçalho com o escudo novo
+    }).catch(function (e) {
+      // NÃO engolir: se o backend ainda não subiu, o schema antigo é .strict() e devolve
+      // 400 no campo `escudo`. Dizer a verdade em vez de fingir que salvou.
+      if (err) {
+        err.textContent = (e && e.sessaoExpirada)
+          ? 'Sua sessão expirou. Entre de novo para salvar.'
+          : 'Não foi possível salvar o escudo. ' + ((e && e.message) || '');
+        err.classList.remove('escondida');
+      }
+    });
+  }
+
   // ───────────────────────── MEU PERFIL ─────────────────────────
   function abrirPerfil() {
     if (!telaPerfil) return;
@@ -64,7 +242,21 @@
     setTexto('perfil-username', u.username || '—');
     setTexto('perfil-email', u.email || '');
     setTexto('perfil-nome-time-txt', u.nomeDoTime || u.nome_do_time || '');
-    setAvatar('perfil-avatar', u.username);
+    // Escudo no lugar da inicial — mas SÓ se o usuário já salvou um. `escudo: null` no
+    // banco = nunca editou = fica o círculo verde, aqui e no jogo. Opt-in de verdade.
+    var av = $('perfil-avatar');
+    if (av) {
+      av.classList.remove('perfil-avatar-escudo', 'perfil-avatar-editavel');
+      av.innerHTML = '';
+      av.onclick = null; av.title = ''; av.removeAttribute('role');
+      if (!pintarAvatar('perfil-avatar', escudoDoUsuario())) setAvatar('perfil-avatar', u.username);
+      if (temContaReal()) {
+        av.classList.add('perfil-avatar-editavel');
+        av.title = escudoDoUsuario() ? 'Editar escudo' : 'Criar escudo do seu time';
+        av.setAttribute('role', 'button');
+        av.onclick = abrirEditorEscudo;
+      }
+    }
     mostrarTelaPerfil('estatisticas');
 
     if (typeof API !== 'undefined' && API.getMe) {
