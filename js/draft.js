@@ -125,6 +125,9 @@ function aplicarVisibilidadeEstilo() {
     if (par[1]) par[1].classList.toggle('escondida', par[0] !== alvo);
   });
 
+  // O resumo do pote só existe no Jogo Livre — trocar de estilo tem de sumir com ele.
+  if (typeof renderResumoPote === 'function') renderResumoPote();
+
   // Draft não sorteia: o card do clube e a lista de jogadores não existem lá.
   if (estiloJogo === 'draft') {
     clubeCard.classList.add('escondida');

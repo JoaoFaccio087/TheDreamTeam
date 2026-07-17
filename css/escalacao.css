@@ -381,20 +381,8 @@
   gap: 3px;
   max-height: 420px;
   overflow-y: auto;
-  scrollbar-width: thin;                               /* Firefox: barra fina */
-  scrollbar-color: rgba(255,255,255,0.18) transparent; /* Firefox: cor do thumb */
 }
-
-/* Barra de rolagem fina e translúcida (Chrome, Edge, Safari) */
-.lista-jogadores::-webkit-scrollbar { width: 6px; }
-.lista-jogadores::-webkit-scrollbar-track { background: transparent; }
-.lista-jogadores::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.18);
-  border-radius: var(--raio-xs);
-}
-.lista-jogadores::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.32);
-}
+/* A rolagem fina vem de `.scroll-fino` (base.css) — estava duplicada aqui e no online.css. */
 
 /* Item individual da lista */
 .item-jogador {

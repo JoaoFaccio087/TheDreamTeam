@@ -248,11 +248,33 @@ body {
 .modal-confirm-texto  { font-size: var(--fs-sm); color: #aaa; line-height: 1.5; margin: 0 0 1.2rem; }
 .modal-confirm-acoes  { display: flex; gap: var(--sp-4); justify-content: center; }
 .modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
-/* Cancelar: contorno (não preenchido) para diferenciar da ação principal. */
-.modal-confirm-acoes .btn-rolar.btn-sec {
+/* (o visual do .btn-sec agora é global — ver acima) */
+
+/* ═══ ROLAGEM FINA — classe reusável ═══
+   Estava COPIADA em .lista-jogadores (escalacao.css) e .rodada-classif (online.css),
+   e o modal do pote ia ser a terceira cópia. Agora é `class="scroll-fino"` em qualquer
+   elemento que role. Barra fina e translúcida; some no fundo escuro. */
+.scroll-fino {
+  scrollbar-width: thin;                                /* Firefox */
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
+}
+.scroll-fino::-webkit-scrollbar { width: 6px; height: 6px; }
+.scroll-fino::-webkit-scrollbar-track { background: transparent; }
+.scroll-fino::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.18);
+  border-radius: var(--raio-xs);
+}
+.scroll-fino::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.32); }
+
+/* ═══ BOTÃO SECUNDÁRIO ═══
+   ⚠️ Estava preso a `.modal-confirm-acoes .btn-rolar.btn-sec` — só funcionava DENTRO
+   daquele modal. Fora dele o `.btn-sec` não fazia nada e o botão saía verde de ação
+   principal. Foi o que aconteceu no modal do pote e no do escudo: três botões verdes,
+   nenhuma hierarquia. Agora `.btn-rolar.btn-sec` vale em qualquer lugar. */
+.btn-rolar.btn-sec {
   background: transparent; color: var(--txt-soft); border: 1px solid var(--txt-soft);
 }
-.modal-confirm-acoes .btn-rolar.btn-sec:hover { background: var(--txt-soft); color: var(--bg); }
+.btn-rolar.btn-sec:hover { background: var(--txt-soft); color: var(--bg); }
 
 /* Variante de botão destrutivo (Confirmar em ações perigosas: excluir, sair definitivo).
    Combina com .btn-rolar. Usada pelo UI.modalConfirm({ perigo: true }). */

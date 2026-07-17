@@ -467,7 +467,7 @@
    inteira faria o contador e o Avançar sumirem da vista. */
 .pote-grade {
   flex: 1; min-height: 0; overflow-y: auto;
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
   gap: 8px; padding: 2px;
 }
 .pote-card {
@@ -479,13 +479,15 @@
 }
 .pote-card:hover { border-color: var(--txt-soft, #9aa6b2); }
 .pote-card-on { border-color: var(--cor-marca, #d9b25a); background: rgba(217,178,90,0.10); }
-.pote-escudo { width: 40px; height: 44px; display: block; }
+.pote-escudo { width: 46px; height: 50px; display: block; }
 .pote-escudo svg { width: 100%; height: 100%; display: block; }
 .pote-nome {
-  font-size: var(--fs-legenda); font-weight: 600; color: #fff; line-height: 1.15;
+  /* --fs-legenda (0.62rem ≈ 10px) é token de "rótulo minúsculo, tag, contador" — não de
+     nome que se lê. Mesmo caso do --fs-micro no mapa do Perfil. */
+  font-size: var(--fs-sm); font-weight: 600; color: #fff; line-height: 1.2;
   text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.pote-ano { font-size: var(--fs-legenda); color: var(--txt-soft, #9aa6b2); }
+.pote-ano { font-size: var(--fs-mini); font-weight: 600; color: var(--txt-soft, #9aa6b2); }
 .pote-vazio { grid-column: 1/-1; text-align: center; color: var(--txt-soft, #9aa6b2); padding: 2rem 0; }
 
 /* No teto, os não-escolhidos ficam inertes — em vez de o clique não fazer nada calado. */
@@ -495,7 +497,7 @@
   display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
   flex-wrap: wrap; border-top: 1px solid var(--linha, #262a31); padding-top: 0.9rem;
 }
-.pote-contador { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
+.pote-contador { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
 .pote-contador-ok { color: var(--cor-marca, #d9b25a); font-weight: 600; }
 .pote-acoes { display: flex; gap: 0.5rem; }
 
@@ -506,3 +508,31 @@
   .pote-acoes { justify-content: stretch; }
   .pote-acoes .btn-rolar { flex: 1; }
 }
+
+/* Hierarquia dos botões: só o Avançar é ação principal. Limpar e Cancelar são
+   secundários e menores — três botões verdes do mesmo tamanho não dizem o que fazer. */
+.pote-btn-menor { padding: 0.5rem 0.9rem; font-size: var(--fs-mini); }
+.pote-acoes .btn-rolar { min-width: 0; }
+
+/* ═══════════ JOGO LIVRE — resumo do pote na tela do jogo ═══════════ */
+.pote-resumo {
+  margin: 0 0 1rem; padding: 0.7rem;
+  background: var(--cor-card, #16181d);
+  border: 1px solid var(--linha, #262a31); border-radius: var(--raio-md, 8px);
+}
+.pote-resumo-topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.pote-editar {
+  background: none; border: none; cursor: pointer; padding: 2px 4px;
+  color: var(--cor-marca, #d9b25a); font-family: 'Archivo', sans-serif;
+  font-size: var(--fs-mini); font-weight: 600; text-decoration: underline;
+}
+.pote-resumo-lista { display: flex; flex-wrap: wrap; gap: 4px; }
+.pote-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 7px; border-radius: var(--raio-xs, 4px);
+  background: var(--cor-fundo, #0e0f13);
+  font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2);
+}
+.pote-chip b { color: #fff; font-weight: 700; }
+.pote-chip-escudo { width: 14px; height: 16px; display: block; flex: 0 0 14px; }
+.pote-chip-escudo svg { width: 100%; height: 100%; display: block; }

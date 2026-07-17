@@ -59,12 +59,14 @@
           '<input id="pote-busca" class="pote-input" type="search" placeholder="Buscar clube ou ano…" autocomplete="off" />' +
           '<div class="area-pilulas" id="pote-decadas"></div>' +
         '</div>' +
-        '<div id="pote-grade" class="pote-grade"></div>' +
+        '<div id="pote-grade" class="pote-grade scroll-fino"></div>' +
         '<div class="pote-rodape">' +
           '<span id="pote-contador" class="pote-contador"></span>' +
           '<div class="pote-acoes">' +
-            '<button id="pote-limpar" class="btn-rolar btn-sec" type="button">Limpar</button>' +
-            '<button id="pote-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>' +
+            // Hierarquia: só o Avançar é ação principal (verde). Limpar e Cancelar são
+            // secundários — três botões verdes não dizem ao usuário o que fazer.
+            '<button id="pote-limpar" class="btn-rolar btn-sec pote-btn-menor" type="button">Limpar</button>' +
+            '<button id="pote-cancelar" class="btn-rolar btn-sec pote-btn-menor" type="button">Cancelar</button>' +
             '<button id="pote-avancar" class="btn-rolar" type="button" disabled>Avan&ccedil;ar &rarr;</button>' +
           '</div>' +
         '</div>' +
@@ -199,6 +201,7 @@
       // Com o pote montado, o "Próximo" some e o "Rolar" volta — é a mesma tabela
       // que orquestra os 4 estilos (BOTAO_DO_ESTILO, em draft.js).
       aplicarVisibilidadeEstilo();
+      renderResumo();
       atualizarHeaderInfo();
     });
 
@@ -206,6 +209,32 @@
     render();
     if (busca) busca.focus();
   }
+
+  // Depois de montado, o pote fica VISÍVEL na tela do jogo — senão você escolhe 16
+  // seleções, o modal fecha, e não sobra nenhum rastro do que você montou.
+  function renderResumo() {
+    var box = $('pote-resumo');
+    if (!box) return;
+    var mostrar = (estiloJogo === 'livre' && poteLivre.length >= POTE_MIN);
+    box.classList.toggle('escondida', !mostrar);
+    if (!mostrar) return;
+    box.innerHTML =
+      '<div class="pote-resumo-topo">' +
+        '<span class="jogo-rotulo" style="margin:0">SEU POTE &middot; ' + poteLivre.length + '</span>' +
+        '<button id="pote-editar" class="pote-editar" type="button">Editar</button>' +
+      '</div>' +
+      '<div class="pote-resumo-lista">' +
+        poteLivre.map(function (k) {
+          var p = k.split('|');
+          return '<span class="pote-chip">' +
+                   '<span class="pote-chip-escudo" data-escudo="' + UI.esc(p[0]) + '"></span>' +
+                   UI.esc(p[0]) + ' <b>' + UI.esc(p[1]) + '</b></span>';
+        }).join('') +
+      '</div>';
+    box.querySelectorAll('[data-escudo]').forEach(pintar);
+    UI.on('pote-editar', 'click', abrir);
+  }
+  window.renderResumoPote = renderResumo;
 
   function fechar() {
     if (_obs) { _obs.disconnect(); _obs = null; }
