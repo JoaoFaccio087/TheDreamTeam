@@ -99,27 +99,45 @@ function selecionarEstilo(novoEstilo) {
   atualizarHeaderInfo();
 }
 
+// Qual botão de ação cada estilo mostra. TABELA, não if/else: com 4 estilos a cadeia de
+// `if` vira sopa e cada estilo novo obriga a reler os outros três. Aqui, estilo novo é
+// uma linha — e é impossível esquecer de esconder o botão de outro modo.
+//   · classico  → "Rolar"     (sorteia na competição inteira)
+//   · orcamento → "Rolar"     (mesmo fluxo, com trava de custo)
+//   · draft     → "Começar"   (cartas por posição)
+//   · livre     → "Próximo"   (abre o modal do pote; depois vira "Rolar")
+var BOTAO_DO_ESTILO = {
+  classico:  'btn-rolar',
+  orcamento: 'btn-rolar',
+  draft:     'btn-comecar-draft',
+  livre:     'btn-proximo-livre',
+};
+
 // Mostra/esconde os controles conforme o estilo escolhido.
 function aplicarVisibilidadeEstilo() {
+  var alvo = BOTAO_DO_ESTILO[estiloJogo] || 'btn-rolar';
+
+  // No Jogo Livre o "Rolar" só volta DEPOIS que o pote está montado.
+  if (estiloJogo === 'livre' && poteLivre.length >= POTE_MIN) alvo = 'btn-rolar';
+
+  [['btn-rolar', btnRolar], ['btn-comecar-draft', btnComecarDraft],
+   ['btn-proximo-livre', btnProximoLivre]].forEach(function (par) {
+    if (par[1]) par[1].classList.toggle('escondida', par[0] !== alvo);
+  });
+
+  // Draft não sorteia: o card do clube e a lista de jogadores não existem lá.
   if (estiloJogo === 'draft') {
-    // Draft: esconde o fluxo de sorteio, mostra "Começar"
-    btnRolar.classList.add('escondida');
     clubeCard.classList.add('escondida');
     blocoSkips.classList.add('escondida');
     listaJogadores.classList.add('escondida');
-    btnComecarDraft.classList.remove('escondida');
+  }
 
-    // Com o campo ainda vazio, garante a escolha de formação no Draft
-    // (caso a formação tenha sido travada por um sorteio Clássico anterior).
-    if (slotsPreenchidos === 0) {
-      formacaoTravada = false;
-      formacaoBloco.classList.remove('escondida');
-      pilulasFormacaoJogo.forEach(function (p) { p.disabled = false; });
-    }
-  } else {
-    // Clássico: volta o fluxo de sorteio
-    btnComecarDraft.classList.add('escondida');
-    btnRolar.classList.remove('escondida');
+  // Com o campo vazio, garante a escolha de formação (pode ter sido travada por um
+  // sorteio Clássico anterior). Vale para Draft e Livre: os dois começam do zero.
+  if ((estiloJogo === 'draft' || estiloJogo === 'livre') && slotsPreenchidos === 0) {
+    formacaoTravada = false;
+    formacaoBloco.classList.remove('escondida');
+    pilulasFormacaoJogo.forEach(function (p) { p.disabled = false; });
   }
 }
 

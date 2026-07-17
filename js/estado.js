@@ -66,6 +66,7 @@ const resumoOverlay       = document.getElementById('resumo-overlay');
 const pilulasEstilo      = document.querySelectorAll('#jogo-pilulas-estilo .pilula');
 const estiloBloco        = document.getElementById('jogo-estilo-bloco');
 const btnComecarDraft    = document.getElementById('btn-comecar-draft');
+const btnProximoLivre    = document.getElementById('btn-proximo-livre');
 const draftOverlay       = document.getElementById('draft-overlay');
 const draftCartasEl      = document.getElementById('draft-cartas');
 const btnSelecionarDraft = document.getElementById('btn-selecionar-draft');
@@ -98,6 +99,14 @@ let jogadorSelecionado = null;                 // jogador escolhido na lista, ag
 // Semente inicial: mesmo N que montou os campos lá em cima (catálogo js/esportes.js).
 // Um só número manda no DOM e no estado — se divergissem, sobrariam slots sem vaga.
 let escalacao          = Array(N_TITULARES).fill(null); // null = vaga vazia
+
+// JOGO LIVRE — o pote de clube+edição que o usuário montou (8 a 16 itens).
+// Guarda a chave 'Clube|Ano': é o que identifica uma edição sem ambiguidade
+// (Palmeiras tem 40 edições; só o nome não diz qual).
+// VAZIO = todos os outros modos. O sorteio usa a competição inteira, como sempre —
+// é isto que faz o Jogo Livre não tocar em Clássico, Draft nem Orçamento.
+let poteLivre = [];
+const POTE_MIN = 8, POTE_MAX = 16;
 let slotsPreenchidos   = 0;
 let slotMovendo        = null;                 // índice do slot cujo jogador está sendo movido
 let clubeSorteado      = '';

@@ -60,8 +60,9 @@ function existeClubeQueServe() {
   if (typeof modoSelecionado === 'undefined' || !COMPETICOES[modoSelecionado]) return false;
   var faltam = codigosVagasVazias();
   if (!faltam.length) return false;
-  return API.getClubesPorCompeticao(COMPETICOES[modoSelecionado].dados)
-            .some(function (c) { return clubeServeVagas(c, faltam); });
+  // MESMO universo do rolar(): no Jogo Livre, olhar a competição inteira aqui diria que
+  // "existe clube que serve" quando na verdade ele está fora do pote e nunca vai cair.
+  return universoDoSorteio().some(function (c) { return clubeServeVagas(c, faltam); });
 }
 
 // FALÊNCIA: time incompleto e NENHUM jogador comprável — nem no clube da vez, nem em qualquer
@@ -144,22 +145,26 @@ function animarSorteio(opcoes, sorteado, onFim) {
 function atualizarBotoesSkip() {
   skipContador.textContent = skipsRestantes;
 
-  var candidatos = API.getClubesPorCompeticao(edicaoSorteada.competicao).filter(function (d) {
-    return !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
-  });
-  // No Orçamento, um clube só conta como candidato se tiver jogador comprável para uma vaga.
-  candidatos = filtrarClubesUteis(candidatos);
+  var candidatos = candidatosSkip();
   btnSkip.disabled = (skipsRestantes <= 0) || candidatos.length === 0;
 }
 
-// Re-sorteia qualquer clube/ano da competição, menos a edição atual.
+// Candidatos do "outro sorteio": tudo menos a edição atual, dentro do universo do modo.
+// ⚠️ Tem de sair de `universoDoSorteio()`, não da competição: no Jogo Livre o skip
+// entregaria clube FORA do pote — um buraco no modo, e silencioso.
+function candidatosSkip() {
+  var c = universoDoSorteio().filter(function (d) {
+    return !(edicaoSorteada && d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
+  });
+  // No Orçamento, um clube só conta se tiver jogador comprável para uma vaga.
+  return filtrarClubesUteis(c);
+}
+
+// Re-sorteia qualquer clube/ano do universo do modo, menos a edição atual.
 function fazerSkip() {
   if (skipsRestantes <= 0 || !edicaoSorteada) return;
 
-  var candidatos = API.getClubesPorCompeticao(edicaoSorteada.competicao).filter(function (d) {
-    return !(d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao);
-  });
-  candidatos = filtrarClubesUteis(candidatos);   // só clubes que preenchem uma vaga vazia
+  var candidatos = candidatosSkip();
   if (candidatos.length === 0) {                 // sem clube comprável → falência
     if (_modoOrcamento()) mostrarFalencia();
     return;
@@ -185,10 +190,18 @@ function fazerSkip() {
 
 // Sorteia um clube da competição escolhida e dispara a animação.
 // Evita repetir o clube+edição que acabou de sair (igual ao "Outro sorteio").
-function rolar() {
-  var filtro = COMPETICOES[modoSelecionado].dados;
+// O universo de onde o dado sorteia. No Jogo Livre é o POTE que o usuário montou;
+// nos demais, a competição inteira — exatamente como sempre foi.
+// É a única diferença do Jogo Livre: o resto do fluxo (rola → cai clube → escolhe 1
+// jogador → rola de novo) já é o do Clássico e não muda em nada.
+function universoDoSorteio() {
+  var todos = API.getClubesPorCompeticao(COMPETICOES[modoSelecionado].dados);
+  if (estiloJogo !== 'livre' || !poteLivre.length) return todos;
+  return todos.filter(function (d) { return poteLivre.indexOf(d.clube + '|' + d.edicao) >= 0; });
+}
 
-  var opcoes = API.getClubesPorCompeticao(filtro).filter(function (d) {
+function rolar() {
+  var opcoes = universoDoSorteio().filter(function (d) {
     if (edicaoSorteada && d.clube === edicaoSorteada.clube && d.edicao === edicaoSorteada.edicao) return false;
     return true;
   });
