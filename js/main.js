@@ -121,6 +121,12 @@ btnComecarDraft.addEventListener('click', comecarDraft);
 // Jogo Livre: o "Próximo" abre o modal do pote. Depois de montado, a tabela
 // BOTAO_DO_ESTILO troca este botão pelo "Rolar" e o fluxo vira o do Clássico.
 if (btnProximoLivre) btnProximoLivre.addEventListener('click', function () { abrirModalPote(); });
+
+// Filtros da lista de jogadores. Não sorteiam nada: só redesenham o elenco já sorteado.
+[filtroBusca, filtroPosicao, filtroOrdem].forEach(function (el) {
+  if (!el) return;
+  el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', renderListaJogadores);
+});
 btnSelecionarDraft.addEventListener('click', confirmarSelecaoDraft);
 btnResortearDraft.addEventListener('click', resortearCartas);
 

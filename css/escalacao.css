@@ -790,3 +790,21 @@
 }
 .orcamento-preenchido.orc-medio { background: var(--rar-lendario, #f5c451); }
 .orcamento-preenchido.orc-alto  { background: var(--perigo, #ff6b6b); }
+
+/* ═══════════ FILTROS DA LISTA DE JOGADORES ═══════════
+   Aparecem só quando há elenco grande o bastante para filtrar (Jogo Livre).
+   A visibilidade é derivada da lista, não sincronizada à mão — ver _sincronizarFiltros. */
+.lista-filtros { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.lista-filtros-linha { display: flex; gap: 6px; }
+.lista-busca, .lista-select {
+  background: var(--cor-fundo, #0e0f13); color: #fff;
+  border: 1px solid var(--linha, #262a31); border-radius: var(--raio-sm, 6px);
+  padding: 6px 8px; font-family: 'Archivo', sans-serif; font-size: var(--fs-legenda);
+}
+.lista-busca { width: 100%; }
+.lista-select { flex: 1; min-width: 0; cursor: pointer; }
+.lista-busca:focus, .lista-select:focus { outline: none; border-color: var(--cor-marca, #d9b25a); }
+.lista-vazia {
+  text-align: center; color: var(--txt-soft, #9aa6b2);
+  font-size: var(--fs-legenda); padding: 1.2rem 0; margin: 0;
+}
