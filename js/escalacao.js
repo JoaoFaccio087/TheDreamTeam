@@ -208,78 +208,20 @@ var ORDEM_POSICAO = ['GOL', 'LE', 'ZAG', 'LD', 'VOL', 'MC', 'ME', 'MEI', 'MD', '
 // O elenco do clube sorteado, cru. Guardado para os filtros re-renderizarem sem novo sorteio.
 var _elencoAtual = [];
 
-// sem acento e minúsculo: buscar "ronaldinho" tem de achar "Ronaldinho"; "muller", "Müller"
-function _norm(s) {
-  return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-}
-
-// Monta o <select> de posição com as posições que EXISTEM neste elenco — não a lista
-// inteira. Oferecer "PD" num elenco sem ponta direita é oferecer filtro que zera a tela.
-function _montarFiltroPosicao(jogadores) {
-  if (!filtroPosicao) return;
-  var tem = {};
-  jogadores.forEach(function (j) { (j.posicoes || []).forEach(function (p) { tem[p] = 1; }); });
-  var atual = filtroPosicao.value;
-  var opcoes = ORDEM_POSICAO.filter(function (p) { return tem[p]; });
-  filtroPosicao.innerHTML = '<option value="">Todas as posições</option>' +
-    opcoes.map(function (p) { return '<option value="' + p + '">' + p + '</option>'; }).join('');
-  if (opcoes.indexOf(atual) >= 0) filtroPosicao.value = atual;   // mantém a escolha entre sorteios
-}
-
-function _aplicarFiltros(jogadores) {
-  var b = _norm(filtroBusca && filtroBusca.value);
-  var pos = filtroPosicao && filtroPosicao.value;
-  var lista = jogadores.filter(function (j) {
-    if (pos && (j.posicoes || []).indexOf(pos) < 0) return false;
-    if (b && _norm(j.nome).indexOf(b) < 0) return false;
-    return true;
-  });
-
-  if (filtroOrdem && filtroOrdem.value === 'forca') {
-    lista.sort(function (a, b2) { return (b2.forca || 0) - (a.forca || 0); });
-  } else {
-    // PADRÃO: por posição — é o comportamento que sempre existiu.
-    lista.sort(function (a, b2) {
-      var ia = ORDEM_POSICAO.indexOf(a.posicoes[0]);
-      var ib = ORDEM_POSICAO.indexOf(b2.posicoes[0]);
-      return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
-    });
-  }
-  return lista;
-}
-
-// Sorteou um clube novo: guarda o elenco, remonta o filtro de posição e desenha.
 function construirListaJogadores(jogadores) {
   _elencoAtual = jogadores || [];
-  _montarFiltroPosicao(_elencoAtual);
   renderListaJogadores();
-}
-
-// A barra de filtros ACOMPANHA a lista. Oito lugares mexem no `escondida` de
-// `listaJogadores`; sincronizar a barra à mão em cada um é esquecer um — foi assim
-// que o escudo do Perfil quebrou (dois `setAvatar`, um deles apagando o outro).
-// Aqui a visibilidade é DERIVADA: um MutationObserver espelha o estado da lista.
-// Só faz sentido com jogador para filtrar: elenco de 20 com busca é ruído.
-function _sincronizarFiltros() {
-  if (!listaFiltros || !listaJogadores) return;
-  var some = listaJogadores.classList.contains('escondida') || _elencoAtual.length < 8;
-  listaFiltros.classList.toggle('escondida', some);
-}
-if (typeof MutationObserver !== 'undefined' && listaJogadores) {
-  new MutationObserver(_sincronizarFiltros)
-    .observe(listaJogadores, { attributes: true, attributeFilter: ['class'] });
 }
 
 // Redesenha a lista com os filtros atuais — sem sortear de novo.
 function renderListaJogadores() {
-  _sincronizarFiltros();
   listaJogadores.innerHTML = '';
-  var ordenados = _aplicarFiltros(_elencoAtual);
-
-  if (!ordenados.length) {
-    listaJogadores.innerHTML = '<p class="lista-vazia">Nenhum jogador com esse filtro.</p>';
-    return;
-  }
+  // Ordena pela PRIMEIRA posição — o comportamento de sempre.
+  var ordenados = _elencoAtual.slice().sort(function (a, b) {
+    var ia = ORDEM_POSICAO.indexOf(a.posicoes[0]);
+    var ib = ORDEM_POSICAO.indexOf(b.posicoes[0]);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
 
   ordenados.forEach(function (jogador) {
     var item = document.createElement('div');

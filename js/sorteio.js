@@ -221,6 +221,8 @@ function rolar() {
   // No primeiro sorteio, esconde os blocos de formação, estilo e nome (já escolhidos).
   if (!formacaoTravada) {
     formacaoTravada = true;
+    // O pote não pode mais ser editado depois do 1º sorteio — some com o resumo.
+    if (typeof renderResumoPote === 'function') renderResumoPote();
     formacaoBloco.classList.add('escondida');
     if (estiloBloco) estiloBloco.classList.add('escondida');
     if (jogoNomeBloco) jogoNomeBloco.classList.add('escondida');

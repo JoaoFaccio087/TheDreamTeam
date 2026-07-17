@@ -462,6 +462,17 @@
   font-family: 'Archivo', sans-serif; font-size: var(--fs-mini);
 }
 .pote-input:focus { outline: none; border-color: var(--cor-marca, #d9b25a); }
+/* O "X" de limpar do <input type=search> vem AZUL do navegador (padrão do WebKit) e não
+   tem nada a ver com a paleta. Recolore para vermelho — é ação de limpar/apagar. */
+.pote-input::-webkit-search-cancel-button {
+  -webkit-appearance: none; appearance: none;
+  width: 14px; height: 14px; cursor: pointer;
+  background: var(--perigo);   /* token da paleta: vermelho de ação destrutiva */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z'/%3E%3C/svg%3E") center/contain no-repeat;
+  opacity: 0.75;
+}
+.pote-input::-webkit-search-cancel-button:hover { opacity: 1; }
 
 /* A grade rola; o topo e o rodapé ficam fixos. Com 537 itens na Copa, rolar a caixa
    inteira faria o contador e o Avançar sumirem da vista. */

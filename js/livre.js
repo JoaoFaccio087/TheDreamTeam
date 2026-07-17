@@ -215,7 +215,11 @@
   function renderResumo() {
     var box = $('pote-resumo');
     if (!box) return;
-    var mostrar = (estiloJogo === 'livre' && poteLivre.length >= POTE_MIN);
+    // Some assim que a formação trava (= o primeiro sorteio rolou). Depois disso o pote
+    // não pode mais ser editado — os jogadores já vieram dele. Deixar o "Editar" à vista
+    // é oferecer uma ação que não existe.
+    var travado = (typeof formacaoTravada !== 'undefined' && formacaoTravada);
+    var mostrar = (estiloJogo === 'livre' && poteLivre.length >= POTE_MIN && !travado);
     box.classList.toggle('escondida', !mostrar);
     if (!mostrar) return;
     box.innerHTML =
