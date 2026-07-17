@@ -55,8 +55,20 @@
     return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
   }
   // Contorno: claro quando o fundo do escudo é escuro (para não sumir no site escuro).
-  function corContorno(fundo) {
-    return contraste(fundo, BG_SITE) < 1.6 ? CONTORNO_CLARO : CONTORNO_ESCURO;
+  // O contorno separa o escudo do fundo do site. Recebe TODAS as cores usadas e decide
+  // pela PIOR delas.
+  //
+  // ⚠️ Antes recebia só a cor de FUNDO. Um escudo azul/branco/PRETO recebia contorno
+  // escuro — porque o azul contrasta bem e o gerador concluía "esse escudo se vê" — e aí
+  // a parte preta encostava no fundo quase-preto com uma borda preta em cima, sem separar
+  // nada. O problema nunca foi a cor preta: era o contorno julgar o escudo por uma cor só.
+  function corContorno() {
+    var cores = Array.prototype.slice.call(arguments).filter(Boolean);
+    if (!cores.length) return CONTORNO_ESCURO;
+    var pior = cores.reduce(function (a, c) {
+      return contraste(c, BG_SITE) < contraste(a, BG_SITE) ? c : a;
+    });
+    return contraste(pior, BG_SITE) < 1.6 ? CONTORNO_CLARO : CONTORNO_ESCURO;
   }
   // Cor de traço interno legível sobre um fundo dado.
   function traçoSobre(fundo) {
@@ -385,13 +397,14 @@
     return out;
   }
 
-  function envelope(interior, fundoContorno, estrelas) {
+  // `coresUsadas`: lista com TODAS as cores do escudo — o contorno decide pela pior.
+  function envelope(interior, coresUsadas, estrelas) {
     var id = 'esc-' + (++_instancia);
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">' +
       '<defs><clipPath id="' + id + '"><path d="' + SILHUETA + '"/></clipPath></defs>' +
       estrelasSVG(estrelas) +
       '<g clip-path="url(#' + id + ')">' + interior + '</g>' +
-      '<path d="' + SILHUETA + '" fill="none" stroke="' + corContorno(fundoContorno) +
+      '<path d="' + SILHUETA + '" fill="none" stroke="' + corContorno.apply(null, [].concat(coresUsadas)) +
       '" stroke-width="2.5" stroke-linejoin="round"/>' +
       '</svg>';
   }
@@ -438,7 +451,7 @@
     interior += padrao(tipo, fundo, frente, opcoes);
 
     // Sem monograma: o nome do clube aparece ao lado do escudo na interface (decisão do João).
-    return envelope(interior, fundo, o.estrelas | 0);
+    return envelope(interior, [fundo, frente, corC], o.estrelas | 0);
   }
 
   // ---- BANDEIRA DE SELEÇÃO (recortada na caixa do escudo) -------------------
@@ -901,7 +914,7 @@
       : '<rect x="8" y="14" width="48" height="50" fill="#3A3F4B"/>' +
         '<text x="32" y="44" text-anchor="middle" font-family="Arial" font-weight="900" font-size="15" fill="#F4F6F8">' + pais + '</text>';
     // Bandeiras têm cor variável; contorno claro é sempre seguro sobre o site escuro.
-    return envelope(interior, '#000000', o.estrelas | 0);
+    return envelope(interior, ['#000000'], o.estrelas | 0);
   }
 
   // ---- API ------------------------------------------------------------------
