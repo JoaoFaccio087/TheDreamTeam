@@ -105,6 +105,26 @@
     return !!(u && u.username && localStorage.getItem('dreamteam_token') && !u.convidado);
   }
 
+  // UM lugar desenha o cabeçalho. Estava duplicado (aqui e no callback do getMe) e as
+  // duas cópias divergiram: a segunda não sabia do escudo e o apagava.
+  function pintarCabecalho(username) {
+    var av = $('perfil-avatar');
+    if (!av) return;
+    av.classList.remove('perfil-avatar-escudo', 'perfil-avatar-editavel');
+    av.innerHTML = '';
+    av.onclick = null; av.title = ''; av.removeAttribute('role');
+
+    var esc = escudoDoUsuario();
+    if (!pintarAvatar('perfil-avatar', esc)) setAvatar('perfil-avatar', username);
+
+    if (temContaReal()) {
+      av.classList.add('perfil-avatar-editavel');
+      av.title = esc ? 'Editar escudo' : 'Criar escudo do seu time';
+      av.setAttribute('role', 'button');
+      av.onclick = abrirEditorEscudo;
+    }
+  }
+
   function escudoDoUsuario() {
     var u = usuarioLogado() || {};
     return u.escudo || null;
@@ -272,19 +292,7 @@
     setTexto('perfil-nome-time-txt', u.nomeDoTime || u.nome_do_time || '');
     // Escudo no lugar da inicial — mas SÓ se o usuário já salvou um. `escudo: null` no
     // banco = nunca editou = fica o círculo verde, aqui e no jogo. Opt-in de verdade.
-    var av = $('perfil-avatar');
-    if (av) {
-      av.classList.remove('perfil-avatar-escudo', 'perfil-avatar-editavel');
-      av.innerHTML = '';
-      av.onclick = null; av.title = ''; av.removeAttribute('role');
-      if (!pintarAvatar('perfil-avatar', escudoDoUsuario())) setAvatar('perfil-avatar', u.username);
-      if (temContaReal()) {
-        av.classList.add('perfil-avatar-editavel');
-        av.title = escudoDoUsuario() ? 'Editar escudo' : 'Criar escudo do seu time';
-        av.setAttribute('role', 'button');
-        av.onclick = abrirEditorEscudo;
-      }
-    }
+    pintarCabecalho(u.username);
     mostrarTelaPerfil('estatisticas');
 
     if (typeof API !== 'undefined' && API.getMe) {
@@ -294,7 +302,23 @@
         setTexto('perfil-username', me.username || u.username || '—');
         setTexto('perfil-email', me.email || '');
         setTexto('perfil-nome-time-txt', me.nome_do_time || me.nomeDoTime || '');
-        setAvatar('perfil-avatar', me.username || u.username);
+
+        // ⚠️ ESTE callback roda DEPOIS do desenho lá em cima. Aqui havia um
+        // `setAvatar()` seco: ele apagava o escudo já desenhado e devolvia a inicial —
+        // mas a classe `perfil-avatar-escudo` (que zera o background) ficava. Dava
+        // círculo sem fundo com o "J" solto. O escudo aparecia e sumia em meio segundo.
+        //
+        // De quebra: o `escudo` do getMe é a FONTE DE VERDADE (vem do banco). O
+        // localStorage pode estar velho — outro dispositivo, ou save que falhou.
+        // Sincroniza os dois aqui.
+        if (me.escudo !== undefined) {
+          var uu = usuarioLogado() || {};
+          if (JSON.stringify(uu.escudo || null) !== JSON.stringify(me.escudo || null)) {
+            uu.escudo = me.escudo;
+            try { localStorage.setItem('dreamteam_user', JSON.stringify(uu)); } catch (e) {}
+          }
+        }
+        pintarCabecalho(me.username || u.username);
       }).catch(function () {});
     }
     carregarAcordeoes();
