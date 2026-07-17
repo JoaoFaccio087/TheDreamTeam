@@ -118,6 +118,9 @@ pilulasEstilo.forEach(function (pilula) {
 });
 
 btnComecarDraft.addEventListener('click', comecarDraft);
+// Jogo Livre: o "Próximo" abre o modal do pote. Depois de montado, a tabela
+// BOTAO_DO_ESTILO troca este botão pelo "Rolar" e o fluxo vira o do Clássico.
+if (btnProximoLivre) btnProximoLivre.addEventListener('click', function () { abrirModalPote(); });
 btnSelecionarDraft.addEventListener('click', confirmarSelecaoDraft);
 btnResortearDraft.addEventListener('click', resortearCartas);
 

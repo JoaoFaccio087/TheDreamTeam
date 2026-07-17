@@ -439,3 +439,70 @@
     min-width: 150px;
   }
 }
+
+/* ═══════════ JOGO LIVRE — modal do pote ═══════════
+   Reusa .draft-overlay (tela cheia dentro da tela do jogo), que já serve o draft. */
+.pote-caixa {
+  display: flex; flex-direction: column; gap: 0.9rem;
+  width: min(94vw, 900px); max-height: 88vh;
+  background: var(--cor-card, #16181d);
+  border: 1px solid var(--linha, #262a31);
+  border-radius: var(--raio-lg, 14px);
+  padding: 1.2rem;
+}
+.pote-topo { text-align: center; }
+.pote-topo .draft-titulo { margin: 0; }
+.pote-ajuda { margin: 0.2rem 0 0; font-size: var(--fs-legenda); color: var(--txt-soft, #9aa6b2); }
+
+.pote-filtros { display: flex; flex-direction: column; gap: 0.6rem; }
+.pote-input {
+  width: 100%; padding: 0.6rem 0.8rem;
+  background: var(--cor-fundo, #0e0f13); color: #fff;
+  border: 1px solid var(--linha, #262a31); border-radius: var(--raio-md, 8px);
+  font-family: 'Archivo', sans-serif; font-size: var(--fs-mini);
+}
+.pote-input:focus { outline: none; border-color: var(--cor-marca, #d9b25a); }
+
+/* A grade rola; o topo e o rodapé ficam fixos. Com 537 itens na Copa, rolar a caixa
+   inteira faria o contador e o Avançar sumirem da vista. */
+.pote-grade {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 8px; padding: 2px;
+}
+.pote-card {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 8px 4px; cursor: pointer;
+  background: var(--cor-fundo, #0e0f13);
+  border: 2px solid var(--linha, #262a31); border-radius: var(--raio-md, 8px);
+  transition: border-color 0.12s, transform 0.1s;
+}
+.pote-card:hover { border-color: var(--txt-soft, #9aa6b2); }
+.pote-card-on { border-color: var(--cor-marca, #d9b25a); background: rgba(217,178,90,0.10); }
+.pote-escudo { width: 40px; height: 44px; display: block; }
+.pote-escudo svg { width: 100%; height: 100%; display: block; }
+.pote-nome {
+  font-size: var(--fs-legenda); font-weight: 600; color: #fff; line-height: 1.15;
+  text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.pote-ano { font-size: var(--fs-legenda); color: var(--txt-soft, #9aa6b2); }
+.pote-vazio { grid-column: 1/-1; text-align: center; color: var(--txt-soft, #9aa6b2); padding: 2rem 0; }
+
+/* No teto, os não-escolhidos ficam inertes — em vez de o clique não fazer nada calado. */
+.pote-cheio .pote-card:not(.pote-card-on) { opacity: 0.4; cursor: not-allowed; }
+
+.pote-rodape {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
+  flex-wrap: wrap; border-top: 1px solid var(--linha, #262a31); padding-top: 0.9rem;
+}
+.pote-contador { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
+.pote-contador-ok { color: var(--cor-marca, #d9b25a); font-weight: 600; }
+.pote-acoes { display: flex; gap: 0.5rem; }
+
+@media (max-width: 620px) {
+  .pote-caixa { width: 96vw; max-height: 92vh; padding: 0.9rem; }
+  .pote-grade { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+  .pote-rodape { flex-direction: column; align-items: stretch; }
+  .pote-acoes { justify-content: stretch; }
+  .pote-acoes .btn-rolar { flex: 1; }
+}
