@@ -323,7 +323,9 @@ function fecharCartasDraft() {
 }
 
 
-// RESET — chamado por iniciarTelaJogo() ao (re)entrar na tela do jogo.
+// RESET do ESTILO DE JOGO — chamado por iniciarTelaJogo() ao (re)entrar na tela.
+// ⚠️ Apesar do nome, isto reseta TODOS os estilos, não só o draft. Todo estado que
+// pertence a UMA PARTIDA morre aqui.
 function resetEstiloDraft() {
   estiloJogo          = 'classico';
   draftIniciado       = false;
@@ -331,12 +333,19 @@ function resetEstiloDraft() {
   draftCartaSel       = null;
   draftSkipsRestantes = 3;
 
+  // O pote do Jogo Livre é estado de PARTIDA. Sem esta linha ele sobrevivia à campanha:
+  // você terminava, voltava para a home, escolhia Jogo Livre de novo e caía com as MESMAS
+  // seleções da vez anterior, sem poder montar outro pote.
+  if (typeof poteLivre !== 'undefined') poteLivre.length = 0;
+
   var wrapper = document.querySelector('.jogo-wrapper');
   if (wrapper) wrapper.classList.remove('draft-ativo');
 
   if (draftOverlay)  { draftOverlay.classList.add('escondida'); }
   if (draftCartasEl) { draftCartasEl.innerHTML = ''; }
   if (btnComecarDraft) btnComecarDraft.classList.add('escondida');
+  if (btnProximoLivre) btnProximoLivre.classList.add('escondida');   // idem para o Jogo Livre
+  if (typeof renderResumoPote === 'function') renderResumoPote();    // some com o resumo do pote
   if (estiloBloco) estiloBloco.classList.remove('escondida');  // volta a permitir trocar o estilo
 
   if (pilulasEstilo) {

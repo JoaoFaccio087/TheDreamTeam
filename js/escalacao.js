@@ -126,6 +126,7 @@ function iniciarTelaJogo() {
   edicaoSorteada     = null;
   skipsRestantes     = 5;
 
+
   formacaoBloco.classList.remove('escondida');
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 
@@ -143,6 +144,9 @@ function iniciarTelaJogo() {
     }
   });
 
+  // A visibilidade dos botões é da tabela BOTAO_DO_ESTILO (draft.js) — mostrar o
+  // btnRolar direto aqui furava a tabela e deixava dois botões visíveis ao voltar
+  // de um Jogo Livre. Um lugar decide qual botão aparece.
   btnRolar.classList.remove('escondida');
   clubeCard.classList.add('escondida');
   listaJogadores.classList.add('escondida');
