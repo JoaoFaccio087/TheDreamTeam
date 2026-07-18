@@ -205,6 +205,10 @@
       atualizarHeaderInfo();
     });
 
+    document.addEventListener('keydown', _esc);
+    // Clique no fundo (fora da caixa) fecha.
+    ov.onclick = function (ev) { if (ev.target === ov) fechar(); };
+
     ov.classList.remove('escondida');
     render();
     if (busca) busca.focus();
@@ -242,9 +246,15 @@
 
   function fechar() {
     if (_obs) { _obs.disconnect(); _obs = null; }
+    document.removeEventListener('keydown', _esc);
     var ov = $('modal-pote');
     if (ov) ov.classList.add('escondida');
   }
+
+  // ⚠️ SAÍDA DE EMERGÊNCIA. O modal só fechava pelo botão Cancelar — e se o rodapé sair da
+  // tela (celular, teclado aberto, conteúdo alto), o usuário fica PRESO e só sai
+  // recarregando a página. Esc e clique fora sempre funcionam.
+  function _esc(ev) { if (ev.key === 'Escape') fechar(); }
 
   window.abrirModalPote = abrir;
 })();

@@ -325,8 +325,14 @@ function clicarJogador(jogador, elemento) {
 
   // No celular, leva o usuário direto ao mapa para escolher a posição
   // (no desktop a lista e o campo já aparecem lado a lado, não precisa rolar).
+  //
+  // ⚠️ `block: 'center'` centraliza o CAMPO INTEIRO — e o campo é mais alto que a tela do
+  // celular. Centralizar empurra o topo dele para fora e o usuário aterrissa no bloco de
+  // forças, embaixo. Tinha que subir a cada jogador alocado.
+  // `block: 'start'` alinha o TOPO do campo com o topo da tela: você vê o campo inteiro
+  // a partir de onde ele começa, que é o que a pessoa quer ver.
   if (window.innerWidth <= 768) {
-    campoJogo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    campoJogo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 

@@ -221,7 +221,18 @@
         previewEscudo(); marcarSelecionados(ov);
       };
     });
-    UI.on('escudo-cancelar', 'click', function () { ov.classList.add('escondida'); });
+    // SAÍDA DE EMERGÊNCIA: se o rodapé sair da tela no celular, o botão Cancelar some e
+    // o usuário fica preso. Esc e clique fora sempre saem. O perfil.js já tem o
+    // `bindFechar` para os modais antigos — este segue a mesma ideia.
+    function fecharEscudo() {
+      document.removeEventListener('keydown', escEscudo);
+      ov.classList.add('escondida');
+    }
+    function escEscudo(ev) { if (ev.key === 'Escape') fecharEscudo(); }
+    document.addEventListener('keydown', escEscudo);
+    ov.onclick = function (ev) { if (ev.target === ov) fecharEscudo(); };
+
+    UI.on('escudo-cancelar', 'click', fecharEscudo);
     UI.on('escudo-remover', 'click', function () { salvarEscudo(null, ov); });
     UI.on('escudo-salvar', 'click', function () { salvarEscudo(_rascunho, ov); });
   }

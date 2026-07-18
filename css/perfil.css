@@ -529,9 +529,19 @@
 .escudo-cor-nenhuma { background: transparent; color: #9AA0A6; font-size: 12px; }
 
 /* No celular a prévia vai para cima: lado a lado não cabe. */
+/* O modal precisa CABER e ROLAR. Sem max-height ele estoura a tela do celular: o rodapé
+   com Cancelar/Salvar fica fora da área visível e não há como sair — só recarregando. */
+.escudo-box { max-height: 90vh; display: flex; flex-direction: column; }
+.escudo-corpo { flex: 1; min-height: 0; overflow-y: auto; }
+.escudo-box .modal-confirm-acoes { flex-shrink: 0; }   /* os botões nunca somem */
+
 @media (max-width: 620px) {
+  .escudo-box { max-height: 92vh; width: 96vw; padding: 0.9rem; }
   .escudo-corpo { flex-direction: column; align-items: center; }
   .escudo-preview { width: 96px; flex: 0 0 auto; }
   .escudo-controles { width: 100%; }
   .escudo-paleta { grid-template-columns: repeat(8, 1fr); }
+  /* Empilha: 3 botões lado a lado em 360px ficam ilegíveis e cortam. */
+  .escudo-box .modal-confirm-acoes { flex-direction: column; gap: 0.4rem; }
+  .escudo-box .modal-confirm-acoes .btn-rolar { width: 100%; }
 }

@@ -512,12 +512,18 @@
 .pote-contador-ok { color: var(--cor-marca, #d9b25a); font-weight: 600; }
 .pote-acoes { display: flex; gap: 0.5rem; }
 
+/* O overlay rola se o conteúdo passar da tela — senão o modal fica preso e cortado. */
+.draft-overlay { overflow-y: auto; }
+
 @media (max-width: 620px) {
   .pote-caixa { width: 96vw; max-height: 92vh; padding: 0.9rem; }
   .pote-grade { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
   .pote-rodape { flex-direction: column; align-items: stretch; }
   .pote-acoes { justify-content: stretch; }
   .pote-acoes .btn-rolar { flex: 1; }
+  /* O topo e os filtros encolhem para sobrar tela para a grade. */
+  .pote-topo .draft-titulo { font-size: var(--fs-md); }
+  .pote-ajuda { display: none; }
 }
 
 /* Hierarquia dos botões: só o Avançar é ação principal. Limpar e Cancelar são
