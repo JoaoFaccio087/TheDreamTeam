@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="../assets/imagens/favicon.svg" />
+
+  <title>Monte o Time da Libertadores — The Dream Team</title>
+  <meta name="description" content="Sorteie um clube campeão da Libertadores, escale o XI dos sonhos que esteve lá e leve seu time ao título. Jogo de futebol grátis, no navegador, sem instalar." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://thedreamteam.com.br/libertadores/" />
+  <meta name="theme-color" content="#0E0F13" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="The Dream Team" />
+  <meta property="og:title" content="Monte o Time da Libertadores — The Dream Team" />
+  <meta property="og:description" content="Sorteie um clube campeão da Libertadores, escale o XI dos sonhos que esteve lá e leve seu time ao título. Grátis, no navegador." />
+  <meta property="og:url" content="https://thedreamteam.com.br/libertadores/" />
+  <meta property="og:image" content="https://thedreamteam.com.br/assets/imagens/screenshots/og-home.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0E0F13; --card: #16181F; --txt: #F4F6F8; --txt-soft: #99A0AA;
+      --accent: #2BD46A; --ouro: #D9B25A; --linha: rgba(255,255,255,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 112.5%; }
+    body {
+      background: var(--bg); color: var(--txt);
+      font-family: 'Archivo', system-ui, sans-serif; line-height: 1.6;
+      padding: 2.5rem 1.2rem 4rem;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; }
+    .voltar {
+      display: inline-block; color: var(--accent); text-decoration: none;
+      font-weight: 600; font-size: 0.9rem; margin-bottom: 1.6rem;
+    }
+    .voltar:hover { text-decoration: underline; }
+    h1 {
+      font-family: 'Archivo Black', sans-serif; font-size: 2rem;
+      line-height: 1.1; margin-bottom: 0.4rem;
+    }
+    .subtitulo { color: var(--txt-soft); font-size: 0.82rem; margin-bottom: 1.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    h2 {
+      font-family: 'Archivo Black', sans-serif; font-size: 1.15rem;
+      margin: 2.2rem 0 0.7rem; color: var(--accent);
+    }
+    p, li { color: #D6DAE0; font-size: 0.95rem; margin-bottom: 0.7rem; }
+    ul { padding-left: 1.3rem; margin-bottom: 0.7rem; }
+    li { margin-bottom: 0.4rem; }
+    strong { color: var(--txt); }
+    a { color: var(--accent); }
+    .cta {
+      display: inline-block; background: var(--accent); color: #08210F;
+      font-family: 'Archivo Black', sans-serif; font-size: 1rem;
+      text-decoration: none; padding: 0.85rem 1.8rem; border-radius: 12px;
+      margin: 0.6rem 0 0.4rem;
+    }
+    .cta:hover { filter: brightness(1.08); }
+    .cta-linha { margin: 1.6rem 0 0.4rem; }
+    .destaque {
+      background: var(--card); border: 1px solid var(--linha);
+      border-radius: 12px; padding: 1rem 1.2rem; margin: 1.4rem 0;
+    }
+    .passos { list-style: none; padding: 0; counter-reset: passo; }
+    .passos li {
+      counter-increment: passo; position: relative;
+      padding: 0.9rem 1rem 0.9rem 3.4rem; margin-bottom: 0.6rem;
+      background: var(--card); border: 1px solid var(--linha); border-radius: 12px;
+    }
+    .passos li::before {
+      content: counter(passo, decimal-leading-zero);
+      position: absolute; left: 1rem; top: 0.85rem;
+      font-family: 'Archivo Black', sans-serif; font-size: 0.95rem; color: var(--ouro);
+    }
+    .passos b { color: var(--txt); display: block; margin-bottom: 0.15rem; }
+    .rodape {
+      margin-top: 2.8rem; padding-top: 1.4rem; border-top: 1px solid var(--linha);
+      color: var(--txt-soft); font-size: 0.82rem;
+    }
+    .rodape a { color: var(--txt-soft); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="voltar" href="../">&larr; Voltar ao jogo</a>
+
+    <h1>Monte o time dos sonhos da Libertadores</h1>
+    <p class="subtitulo">Sorteie &middot; Escale &middot; Goleie</p>
+
+    <p>
+      A <strong>Copa Libertadores</strong> é o maior torneio de clubes da América do Sul — e no
+      <strong>The Dream Team</strong> você revive a glória dela do seu jeito: sorteia um clube
+      histórico, escala o XI que esteve lá e tenta levar o time ao título. Não precisa instalar
+      nada, é tudo no navegador e de graça.
+    </p>
+
+    <p class="cta-linha">
+      <a class="cta" href="../?modo=libertadores">Jogar Libertadores agora &rarr;</a>
+    </p>
+
+    <h2>O que é o modo Libertadores</h2>
+    <p>
+      O jogo sorteia para você um <strong>clube e uma edição</strong> da história da Libertadores.
+      A partir daí, é com você: escale os craques daquele elenco na formação que preferir e comande
+      a campanha rumo à taça. Cada partida é uma nova história — e um novo time dos sonhos para montar.
+    </p>
+
+    <div class="destaque">
+      Não gostou do sorteio? Você tem <strong>skips</strong> para tentar de novo. E, se quiser um
+      desafio extra, pode montar o elenco no modo <strong>Draft</strong>, escolhendo carta a carta.
+    </div>
+
+    <h2>Como funciona, em 3 passos</h2>
+    <ol class="passos">
+      <li>
+        <b>Sorteie o clube</b>
+        O sorteio decide qual time histórico da Libertadores você comanda.
+      </li>
+      <li>
+        <b>Escale o XI dos sonhos</b>
+        Monte a escalação com os jogadores daquele elenco, na formação que quiser.
+      </li>
+      <li>
+        <b>Simule a campanha</b>
+        Acompanhe os jogos e veja até onde o seu time dos sonhos chega na competição.
+      </li>
+    </ol>
+
+    <h2>Os gigantes do continente</h2>
+    <p>
+      A Libertadores é o palco de clubes lendários de todo o continente — de potências brasileiras
+      como Flamengo, Palmeiras, São Paulo, Grêmio, Santos e Internacional, aos gigantes argentinos
+      Boca Juniors, River Plate e Independiente, passando pelos uruguaios Peñarol e Nacional. Cada
+      edição sorteada é uma chance de reviver um desses elencos e reescrever a história.
+    </p>
+
+    <p class="cta-linha">
+      <a class="cta" href="../?modo=libertadores">Começar meu time da Libertadores &rarr;</a>
+    </p>
+
+    <div class="rodape">
+      The Dream Team &middot;
+      <a href="../">Jogar</a> &middot;
+      <a href="../como-jogar/">Como jogar</a> &middot;
+      <a href="../privacidade/">Política de Privacidade</a>
+    </div>
+  </div>
+</body>
+</html>

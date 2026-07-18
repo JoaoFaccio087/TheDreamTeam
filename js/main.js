@@ -3,6 +3,20 @@
 // Competição do multiplayer (definida ao escolher a pílula). Default: Libertadores (1º da lista).
 window.__compOnline = window.__compOnline || 'Libertadores';
 
+// Ponte das landings de SEO (/libertadores/, /champions/…): a página de tema entra
+// no jogo via ?modo=xxx e já deixa a competição certa escolhida na home. Aditivo —
+// sem o parâmetro, nada muda; com um valor inválido, é ignorado.
+(function () {
+  try {
+    var m = new URLSearchParams(location.search).get('modo');
+    var validos = ['libertadores', 'champions', 'brasileirao', 'copa'];
+    if (m && validos.indexOf(m) >= 0 && typeof selecionarModo === 'function') {
+      modoOnlineSelecionado = false;
+      selecionarModo(m);
+    }
+  } catch (e) { /* sem URLSearchParams / sem params: ignora */ }
+})();
+
 // EVENTOS
 
 pilulasModo.forEach(function (pilula) {
