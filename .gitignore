@@ -70,9 +70,14 @@ CONTRATOS.md
 DESIGN-SYSTEM.md
 PLANO-CONQUISTAS.md
 
-# ── Scripts de manutenção (rodados localmente, fora do jogo) ────
-scripts/
+# ── Scripts de manutenção + rede de testes (agora RASTREADOS) ───
+# scripts/ passa a ir para o repo: se a máquina do João morrer, os testes,
+# o calibrador dos pênaltis e o gerador de ids sobrevivem e ficam auditáveis.
+# Verificado (jul/2026): nenhum segredo dentro — só tokens falsos de teste.
 
-# ── Testes (úteis no dev, irrelevantes para o público) ──────────
+# ── Testes ──────────────────────────────────────────────────────
+# Ignorados por padrão — mantém os *.test.js do backend (api/socket/) FORA
+# do deploy no Render. MAS os de scripts/ são versionados: são a rede de segurança.
 *.test.js
+!scripts/*.test.js
 escudos-demo.html
