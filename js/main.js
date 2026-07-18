@@ -244,3 +244,29 @@ if (switchForca) {
     }
   });
 }
+
+
+// ────────────────────────────────────────────────────────────────
+// Guarda contra F5 / fechar aba com jogo em andamento
+// ────────────────────────────────────────────────────────────────
+// O jogo é uma SPA: todo o estado (sorteio, escalação, campanha, sala online)
+// vive na MEMÓRIA. Um refresh recarrega o index.html e devolve o jogador à home,
+// perdendo tudo. Enquanto a restauração de estado não existe, este guarda ao
+// menos AVISA antes da perda acidental.
+//
+// Regra: se a home (tela-inicial) está visível, não há o que perder — não
+// atrapalha o F5. Qualquer OUTRA tela visível = jogo em andamento (offline ou
+// online) → dispara o aviso nativo do navegador.
+window.addEventListener('beforeunload', function (e) {
+  var inicial = document.getElementById('tela-inicial');
+  if (inicial && !inicial.classList.contains('escondida')) return; // na home: sem aviso
+
+  var emJogo = Array.prototype.some.call(
+    document.querySelectorAll('.tela'),
+    function (t) { return t.id !== 'tela-inicial' && !t.classList.contains('escondida'); }
+  );
+  if (!emJogo) return;
+
+  e.preventDefault();
+  e.returnValue = ''; // navegadores modernos ignoram texto custom e mostram o padrão
+});
