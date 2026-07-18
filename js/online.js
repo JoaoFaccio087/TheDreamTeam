@@ -212,6 +212,13 @@
   // ── Conexão ───────────────────────────────────────────────────────────────
 
   function _doConectar(callback) {
+    // socket.io agora carrega async (não trava o boot). Se o usuário entrar no online
+    // antes de ele terminar de baixar (servidor frio), avisa e deixa tentar de novo,
+    // em vez de estourar um ReferenceError em io().
+    if (typeof io === 'undefined') {
+      erroOnline('Conectando ao servidor… aguarde uns segundos e tente de novo.');
+      return;
+    }
     var token = localStorage.getItem('dreamteam_token');
     if (socket && socket.connected) { if (callback) callback(); return; }
     if (socket) socket.disconnect();

@@ -1128,8 +1128,13 @@
   <script src="js/dados/copa.js"></script>
   <script src="js/dados/dados.js"></script>
 
-  <!-- Socket.IO — servido pelo backend via nginx proxy -->
-  <script src="https://thedreamteam.onrender.com/socket.io/socket.io.js" defer></script>
+  <!-- Socket.IO — servido pelo backend via nginx proxy.
+       async (não defer): o backend no Render (free) hiberna, e como scripts defer
+       executam EM ORDEM, tê-lo antes dos scripts do jogo travava a página inteira
+       até o servidor acordar. async tira-o do caminho crítico — o jogo fica
+       interativo na hora e o socket carrega em segundo plano. io() só é usado ao
+       entrar no online (guardado em _doConectar), então nada no boot depende dele. -->
+  <script src="https://thedreamteam.onrender.com/socket.io/socket.io.js" async></script>
 
   <!-- Lógica em módulos — ordem importa -->
   <!-- Catálogo de esportes (fonte de verdade). Fase 1: declarado, ainda não consumido. -->
