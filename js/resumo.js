@@ -71,7 +71,11 @@ function salvarCampanhaNoHistorico(campeao) {
     var jp = (typeof escalacao !== 'undefined') ? escalacao[pi] : null;
     if (!jp) { picks.push(null); continue; }
     var sp = (statsJogadores && statsJogadores[jp.nome]) || { gols: 0, asis: 0 };
-    picks.push({ codigo: jp.codigo, nome: jp.nome, forca: jp.forca, gols: sp.gols | 0, asis: sp.asis | 0 });
+    // ⚠️ O `id` TEM de vir junto. É este snapshot que vai para o banco e alimenta as
+    // conquistas de Combinação (api/achievements.js). Sem ele o id morre aqui e as
+    // conquistas voltam a casar por nome — sem distinguir o Ronaldo Fenômeno do goleiro
+    // do Bahia. O dado existiria no escalacao e não chegaria a lugar nenhum.
+    picks.push({ id: jp.id, codigo: jp.codigo, nome: jp.nome, forca: jp.forca, gols: sp.gols | 0, asis: sp.asis | 0 });
   }
   var aprovCalc = (typeof campanhaPartidas !== 'undefined' && campanhaPartidas > 0)
     ? Math.round((v * 3 + e) / (campanhaPartidas * 3) * 100) : 0;

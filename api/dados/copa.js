@@ -11468,7 +11468,7 @@ const DADOS_COPA = [
         "forca": 85
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suárez",
+        id: 'luis-suarez-esp', "nome": "Luis Suárez",
         "posicoes": [
           "MC",
           "MEI"
@@ -13377,7 +13377,7 @@ const DADOS_COPA = [
         "forca": 85
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suárez",
+        id: 'luis-suarez-esp', "nome": "Luis Suárez",
         "posicoes": [
           "MC",
           "MEI"
@@ -18707,7 +18707,7 @@ const DADOS_COPA = [
         "forca": 85
       },
       {
-        id: 'zico', "nome": "Zico",
+        id: 'zico-galinho', "nome": "Zico",
         "posicoes": [
           "ATA",
           "MC"
@@ -20862,7 +20862,7 @@ const DADOS_COPA = [
         "forca": 73
       },
       {
-        id: 'zico', "nome": "Zico",
+        id: 'zico-galinho', "nome": "Zico",
         "posicoes": [
           "MC"
         ],
@@ -23933,7 +23933,7 @@ const DADOS_COPA = [
         "forca": 84
       },
       {
-        id: 'zico', "nome": "Zico",
+        id: 'zico-galinho', "nome": "Zico",
         "posicoes": [
           "MEI"
         ],
@@ -48437,7 +48437,7 @@ const DADOS_COPA = [
         "forca": 94
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suárez",
+        id: 'luis-suarez-uru', "nome": "Luis Suárez",
         "posicoes": [
           "ATA",
           "PD"
@@ -52478,7 +52478,7 @@ const DADOS_COPA = [
         "forca": 81
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suárez",
+        id: 'luis-suarez-uru', "nome": "Luis Suárez",
         "posicoes": [
           "ATA",
           "PD"
@@ -56519,7 +56519,7 @@ const DADOS_COPA = [
         "forca": 75
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suárez",
+        id: 'luis-suarez-uru', "nome": "Luis Suárez",
         "posicoes": [
           "ATA",
           "PD"
@@ -60303,7 +60303,7 @@ const DADOS_COPA = [
         "forca": 72
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suarez",
+        id: 'luis-suarez-uru', "nome": "Luis Suarez",
         "posicoes": [
           "ATA"
         ],
@@ -65928,7 +65928,7 @@ const DADOS_COPA = [
         "forca": 79
       },
       {
-        id: 'luis-suarez', "nome": "Luis Suarez",
+        id: 'luis-suarez-col', "nome": "Luis Suarez",
         "posicoes": [
           "ATA"
         ],

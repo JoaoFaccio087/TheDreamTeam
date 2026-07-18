@@ -344,6 +344,10 @@ function alocarJogador(indice) {
   var slot = slotsJogo[indice];
 
   escalacao[indice] = {
+    // `id` identifica a PESSOA; `nome` é só o rótulo. Sem ele, as conquistas de Combinação
+    // comparam string e não distinguem o Ronaldo Fenômeno do goleiro do Bahia — nem o
+    // Luis Suárez uruguaio do espanhol de 1965.
+    id:       jogadorSelecionado.id,
     nome:     jogadorSelecionado.nome,
     forca:    jogadorSelecionado.forca,
     posicoes: jogadorSelecionado.posicoes,  // ESSENCIAL: usado depois em podeOcupar() ao mover/trocar

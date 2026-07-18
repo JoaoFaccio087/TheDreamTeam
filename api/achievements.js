@@ -41,20 +41,27 @@ function gruposVencidos(ctx) {
 }
 
 // ── Combinações de jogadores (quadrados mágicos, trios) ──
-// Cada combo exige que TODOS os nomes tenham sido escalados JUNTOS numa mesma campanha.
-// `nomes` usa a grafia EXATA do banco (js/dados/*.js). `alternativas` permite variações do
-// mesmo jogador (ex.: 'Neymar' ou 'Neymar Jr') — basta uma bater. Curado com o João.
+// Cada combo exige que TODOS os jogadores tenham sido escalados JUNTOS numa mesma campanha.
+//
+// Cada entrada é uma lista de CHAVES e basta UMA bater. Prefira o `id` (js/dados/*.js):
+// ele identifica a PESSOA. Nome é string e não distingue gente diferente —
+// 'Ronaldo' cobria o Fenômeno, o goleiro do Bahia, o Cristiano e um zagueiro do Bangu;
+// 'Luis Suárez' cobre o uruguaio, o espanhol de 1965 e um colombiano.
+//
+// ⚠️ Os NOMES ficam ao lado do id de propósito: campanhas antigas foram salvas antes de o
+// id existir, e sem eles as conquistas de quem já jogou sumiriam. Campanha nova casa pelo
+// id (preciso); campanha velha casa pelo nome (o que dá para fazer).
 const COMBOS = [
-  { id: 'trio_msn',        nomes: [['Lionel Messi'], ['Luis Suarez'], ['Neymar', 'Neymar Jr']] },
+  { id: 'trio_msn',        nomes: [['lionel-messi', 'Lionel Messi'], ['luis-suarez-uru', 'Luis Suárez', 'Luis Suarez'], ['neymar', 'Neymar', 'Neymar Jr']] },
   { id: 'trio_bbc',        nomes: [['Gareth Bale'], ['Karim Benzema'], ['Cristiano Ronaldo']] },
   { id: 'trio_holandes',   nomes: [['Ruud Gullit'], ['Marco van Basten'], ['Frank Rijkaard']] },
   { id: 'trio_sfm',        nomes: [['Mohamed Salah'], ['Roberto Firmino'], ['Sadio Mané', 'Sadio Mane']] },
-  { id: 'tres_rs',         nomes: [['Ronaldo'], ['Rivaldo'], ['Ronaldinho']] },
-  { id: 'quadrado_magico', nomes: [['Ronaldo'], ['Adriano'], ['Kaká'], ['Ronaldinho']] },
+  { id: 'tres_rs',         nomes: [['ronaldo-fenomeno', 'Ronaldo'], ['rivaldo', 'Rivaldo'], ['ronaldinho', 'Ronaldinho']] },
+  { id: 'quadrado_magico', nomes: [['ronaldo-fenomeno', 'Ronaldo'], ['adriano', 'Adriano'], ['kaka', 'Kaká'], ['ronaldinho', 'Ronaldinho']] },
   { id: 'pele_garrincha',  nomes: [['Pelé'], ['Garrincha']] },
-  { id: 'ro_ro',           nomes: [['Romário'], ['Ronaldo']] },
+  { id: 'ro_ro',           nomes: [['romario', 'Romário'], ['ronaldo-fenomeno', 'Ronaldo']] },
   { id: 'meio_barca',      nomes: [['Xavi'], ['Andrés Iniesta'], ['Sergio Busquets']] },
-  { id: 'quadrado_82',     nomes: [['Zico'], ['Sócrates'], ['Falcão'], ['Toninho Cerezo']] },
+  { id: 'quadrado_82',     nomes: [['zico-galinho', 'Zico'], ['socrates', 'Sócrates'], ['falcao', 'Falcão'], ['toninho-cerezo', 'Toninho Cerezo']] },
   { id: 'zaga_milan',      nomes: [['Paolo Maldini'], ['Franco Baresi'], ['Alessandro Nesta']] },
   { id: 'alemanha_70',     nomes: [['Gerd Müller'], ['Franz Beckenbauer'], ['Paul Breitner']] },
   { id: 'trio_argentino',  nomes: [['Lionel Messi'], ['Ángel Di María'], ['Sergio Agüero']] },
@@ -66,7 +73,19 @@ function nomesEscalados(m) {
   const picks = m && m.detalhes && m.detalhes.snapshot && m.detalhes.snapshot.picks;
   if (!Array.isArray(picks)) return null;
   const set = new Set();
-  for (const p of picks) { if (p && p.nome) set.add(p.nome); }
+  // ⚠️ O `id` EXCLUI o nome — não somam.
+  //
+  // Guardar os dois no mesmo saco anula o id: o Suárez espanhol entraria como
+  // `luis-suarez-esp` E como 'Luis Suárez', e o combo casaria pelo nome. A
+  // compatibilidade com o passado destruiria a precisão do presente.
+  //
+  // Pick COM id (campanha nova) → só o id vale: identifica a pessoa.
+  // Pick SEM id (as 81 campanhas salvas antes do id existir) → o nome, que é o que há.
+  for (const p of picks) {
+    if (!p) continue;
+    if (p.id) set.add(p.id);
+    else if (p.nome) set.add(p.nome);
+  }
   return set;
 }
 
