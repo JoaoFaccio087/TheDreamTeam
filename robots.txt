@@ -1,0 +1,7 @@
+# The Dream Team — robots.txt
+# Libera o rastreio de todo o site para os buscadores.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://thedreamteam.com.br/sitemap.xml
