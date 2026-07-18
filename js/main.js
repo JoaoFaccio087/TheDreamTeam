@@ -270,3 +270,162 @@ window.addEventListener('beforeunload', function (e) {
   e.preventDefault();
   e.returnValue = ''; // navegadores modernos ignoram texto custom e mostram o padrão
 });
+
+
+// ════════════════════════════════════════════════════════════════
+// PERSISTÊNCIA DE SESSÃO — increment 2: restaurar o SETUP offline no F5
+// ════════════════════════════════════════════════════════════════
+// Guarda o estado da tela do jogo (sorteio + XI + skips) para que um refresh
+// devolva o jogador onde estava, em vez de cair na home.
+//
+// ESCOPO deste increment: só a tela-jogo (Clássico / Orçamento / Jogo Livre).
+//   - Campanha (tela-simulacao) e online → NÃO restauram ainda (increment 3).
+//   - Draft EM ANDAMENTO (cartas na tela) → descartado com segurança; só o Draft
+//     JÁ COMPLETO restaura (aí é um time pronto como qualquer outro).
+//   - O card do clube e a lista são transitórios (somem ao escalar); restauramos
+//     o estado de DESCANSO — pronto pra rolar o próximo, ou simular. Uma rolagem
+//     pendente (lista aberta sem escalar) não é restaurada: o jogador rola de novo.
+var SESSAO_KEY = 'dreamteam_sessao_offline';
+var SESSAO_VER = 2; // subir invalida saves de formato antigo
+
+function _telaVisivelId() {
+  var vis = Array.prototype.find.call(
+    document.querySelectorAll('.tela'),
+    function (el) { return !el.classList.contains('escondida'); }
+  );
+  return vis ? vis.id : null;
+}
+
+function limparSessaoOffline() {
+  try { localStorage.removeItem(SESSAO_KEY); } catch (e) {}
+}
+
+// Chamada ao sair da página (F5/fechar). Salva se estivermos na tela-jogo;
+// caso contrário APAGA o save — para não restaurar um setup já ultrapassado
+// (ex.: refresh no meio da campanha não deve devolver à escalação).
+function salvarSessaoOffline() {
+  try {
+    // Só salva a partir do 1º sorteio (formacaoTravada). Antes disso não há o que
+    // restaurar de útil — e evita casos de borda de pílulas de escolha.
+    if (_telaVisivelId() !== 'tela-jogo' || !formacaoTravada) { limparSessaoOffline(); return; }
+    var snap = {
+      v: SESSAO_VER,
+      tela: 'jogo',
+      modo: modoSelecionado,
+      estilo: estiloJogo,
+      formacao: formacaoJogo,
+      formacaoTravada: formacaoTravada,
+      nomeDoTime: nomeDoTime,
+      clubeSorteado: clubeSorteado,
+      edicaoSorteada: edicaoSorteada,      // carrega os jogadores do clube sorteado
+      escalacao: escalacao,                // {id,nome,forca,posicoes,codigo,clube} por vaga
+      skipsRestantes: skipsRestantes,
+      draftIniciado: draftIniciado,
+      draftSkipsRestantes: draftSkipsRestantes,
+      poteLivre: poteLivre,
+      ts: Date.now()
+    };
+    localStorage.setItem(SESSAO_KEY, JSON.stringify(snap));
+  } catch (e) { /* localStorage cheio/indisponível: ignora, sem travar o unload */ }
+}
+
+function restaurarSessaoOffline() {
+  var raw = null;
+  try { raw = localStorage.getItem(SESSAO_KEY); } catch (e) { return; }
+  if (!raw) return;
+
+  var s;
+  try { s = JSON.parse(raw); } catch (e) { limparSessaoOffline(); return; }
+
+  // Validação: sem isto, um save corrompido ou de formato antigo reviveria lixo.
+  if (!s || s.v !== SESSAO_VER || s.tela !== 'jogo' || !s.formacaoTravada ||
+      !s.edicaoSorteada || !Array.isArray(s.escalacao)) { limparSessaoOffline(); return; }
+
+  var completos = s.escalacao.filter(function (x) { return !!x; }).length;
+  // Draft em andamento não é restaurável ainda: descarta e segue pra home.
+  if (s.estilo === 'draft' && completos < s.escalacao.length) { limparSessaoOffline(); return; }
+
+  try {
+    // 1) Estado (offline)
+    modoOnlineSelecionado = false;
+    selecionarModo(s.modo);
+    estiloJogo          = s.estilo || 'classico';
+    formacaoJogo        = s.formacao || '4-3-3';
+    formacaoTravada     = !!s.formacaoTravada;
+    nomeDoTime          = s.nomeDoTime || 'Seu time';
+    clubeSorteado       = s.clubeSorteado || '';
+    edicaoSorteada      = s.edicaoSorteada;
+    escalacao           = s.escalacao;
+    slotsPreenchidos    = completos;
+    skipsRestantes      = (typeof s.skipsRestantes === 'number') ? s.skipsRestantes : 5;
+    draftIniciado       = !!s.draftIniciado;
+    draftSkipsRestantes = (typeof s.draftSkipsRestantes === 'number') ? s.draftSkipsRestantes : 3;
+    poteLivre           = Array.isArray(s.poteLivre) ? s.poteLivre : [];
+
+    // 2) Entrar na tela do jogo — SEM iniciarTelaJogo (ele RESETA o estado).
+    aplicarTema(modoSelecionado);
+    mostrarTela(telaJogo);
+
+    // 3) Blocos de escolha: se o sorteio já rolou, ficam escondidos (como em rolar()).
+    var travou = formacaoTravada;
+    formacaoBloco.classList.toggle('escondida', travou);
+    if (estiloBloco)    estiloBloco.classList.toggle('escondida', travou);
+    if (jogoNomeBloco)  jogoNomeBloco.classList.toggle('escondida', travou);
+    if (jogoForcaBloco) jogoForcaBloco.classList.toggle('escondida', travou);
+    if (inputNomeTime)  inputNomeTime.value = (nomeDoTime === 'Seu time') ? '' : nomeDoTime;
+
+    // 4) Campo: posiciona os slots na formação salva e desenha o XI.
+    slotsJogo.forEach(function (sl) { sl.classList.add('sem-transicao'); });
+    posicionarSlotsJogo(formacaoJogo);
+    slotsJogo.forEach(function (slot, i) {
+      slot.classList.remove('compativel', 'preenchido', 'movendo');
+      var j = escalacao[i];
+      if (j) {
+        slot.innerHTML = slot.dataset.codigo + '<span class="slot-nome">' + j.nome + '</span>';
+        slot.classList.add('preenchido');
+      } else {
+        slot.innerHTML = slot.dataset.codigo;
+      }
+    });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        slotsJogo.forEach(function (sl) { sl.classList.remove('sem-transicao'); });
+      });
+    });
+
+    // 5) Card, lista e skips são transitórios → estado de descanso: escondidos.
+    clubeCard.classList.add('escondida');
+    listaJogadores.classList.add('escondida');
+    blocoSkips.classList.add('escondida');
+    skipContador.textContent = String(skipsRestantes);
+
+    // 6) Medidores + botão correto (rolar o próximo, ou simular se o time está pronto).
+    atualizarBoxScore();   // já chama atualizarForcas()
+    atualizarHeaderInfo();
+    if (slotsPreenchidos >= escalacao.length) {
+      verificarCompleto();                          // mostra Simular, esconde skips
+      btnRolar.classList.add('escondida');
+      if (btnComecarDraft) btnComecarDraft.classList.add('escondida');
+      if (btnProximoLivre) btnProximoLivre.classList.add('escondida');
+    } else {
+      btnSimular.classList.add('escondida');
+      // Reusa a regra do jogo p/ qual botão "continuar" aparece (btn-rolar aqui).
+      if (typeof aplicarVisibilidadeEstilo === 'function') aplicarVisibilidadeEstilo();
+      else btnRolar.classList.remove('escondida');
+      clubeCard.classList.add('escondida');
+      listaJogadores.classList.add('escondida');
+      blocoSkips.classList.add('escondida');
+    }
+  } catch (e) {
+    // Qualquer falha na reidratação: nunca deixa tela quebrada — limpa e volta à home.
+    limparSessaoOffline();
+    try { voltarHome(); } catch (_) {}
+  }
+}
+
+// Salva ao sair (F5/fechar) e ao esconder a aba (mais confiável no mobile).
+window.addEventListener('beforeunload', salvarSessaoOffline);
+window.addEventListener('pagehide', salvarSessaoOffline);
+
+// Restaura no boot (main.js roda por último; todos os renders já existem).
+restaurarSessaoOffline();
