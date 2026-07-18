@@ -963,6 +963,31 @@
     porNomeSeModo: function (nome, modo) {
       return this.ativoNoModo(modo) ? this.porNome(nome) : '';
     },
+
+    // O escudo do USUÁRIO (o que ele montou no Perfil). `null` = nunca editou → sem escudo.
+    //
+    // ⚠️ NÃO lê o localStorage. Este módulo DESENHA; buscar dado é de quem chama.
+    // A primeira versão lia `localStorage.getItem` aqui — e o escudos.js também roda em
+    // NODE (tem module.exports; o validar-dados.js o carrega). Lá `localStorage` não
+    // existe, o try/catch engolia o ReferenceError e devolvia vazio CALADO.
+    // Quem sabe onde o usuário mora é o auth.js (getUser), e ele é do navegador.
+    doUsuario: function () {
+      var u = (typeof getUser === 'function') ? getUser() : null;
+      return (u && u.escudo) ? this.porEstilo(u.escudo) : '';
+    },
+
+    // Escudo de um time da CAMPANHA — o seu ou o do adversário.
+    //
+    // ⚠️ Você é o ÚNICO time com `clubeRef: null`, e isso está CERTO: o clubeRef aponta
+    // para os dados do clube adversário (`adversario = tabela[i].clubeRef`), e você não é
+    // adversário de ninguém. Era por isso que o seu time não tinha escudo na classificação:
+    // o desenho consultava o clubeRef, que no seu caso não existe.
+    // Aqui a origem é decidida por QUEM É o time, não por um campo que serve a outra coisa.
+    porTime: function (time, modo) {
+      if (!time) return '';
+      if (time.voce) return this.doUsuario();
+      return time.clubeRef ? this.porNomeSeModo(time.clubeRef.clube, modo) : '';
+    },
     paisesSuportados: function () { return Object.keys(BANDEIRAS); }
   };
 

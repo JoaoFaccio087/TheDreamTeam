@@ -102,12 +102,6 @@ function resolverDemaisJogos(rIdx) {
 // Desenha a Tabela do Brasileirão (20 times) na coluna da esquerda.
 // HTML do escudo de um clube (20px), para a tabela. Recebe o NOME-BASE do clube (sem o ano),
 // senão cai na paleta de reserva e gera cores erradas. Usa a API única Escudos.porNome.
-function escudoClubeHTML(nomeBase) {
-  if (!nomeBase || typeof Escudos === 'undefined' || !Escudos.porNome) return '';
-  var svg = Escudos.porNome(nomeBase);
-  return svg ? '<span class="tb-escudo">' + svg + '</span>' : '';
-}
-
 function renderTabelaBrasileirao() {
   if (!tabelaBrasileiraoCorpo || !liga) return;
   var ordenada = liga.tabela.slice().sort(ordenarLiga);
@@ -116,8 +110,9 @@ function renderTabelaBrasileirao() {
   ordenada.forEach(function (t, i) {
     var sg  = (t.gf - t.ga >= 0 ? '+' : '') + (t.gf - t.ga);
     var cls = (t.voce ? 'tb-voce' : '') + (i < 4 ? ' tb-g4' : (i >= 16 ? ' tb-z4' : ''));
-    // Escudo pelo nome-base (clubeRef.clube), não por t.nome que tem o ano junto.
-    var escudo = t.clubeRef ? escudoClubeHTML(t.clubeRef.clube) : '';
+    // Escudo pelo TIME: o seu vem do Perfil, o do adversário vem do clubeRef.
+    var svgT = (typeof Escudos !== 'undefined' && Escudos.porTime) ? Escudos.porTime(t, modoSelecionado) : '';
+    var escudo = svgT ? '<span class="tb-escudo">' + svgT + '</span>' : '';
     html +=
       '<tr class="' + cls + '">' +
         '<td class="tb-pos">' + (i + 1) + '</td>' +

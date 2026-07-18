@@ -145,9 +145,9 @@ function renderTabelaGrupo(id, ordenada) {
   ordenada.forEach(function (t, i) {
     var sg = (t.gf - t.ga >= 0 ? '+' : '') + (t.gf - t.ga);
     var cls = (t.voce ? 'grupo-voce' : '') + (i < grupo.avancam ? ' grupo-classifica' : '');
-    // Escudo/bandeira pelo nome-base (clubeRef.clube), não por t.nome que tem o ano junto.
-    var esc = (t.clubeRef && typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
-      ? Escudos.porNomeSeModo(t.clubeRef.clube, modoSelecionado) : '';
+    // Escudo pelo TIME: o seu vem do Perfil, o do adversário vem do clubeRef.
+    var esc = (typeof Escudos !== 'undefined' && Escudos.porTime)
+      ? Escudos.porTime(t, modoSelecionado) : '';
     var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
     linhas +=
       '<tr class="' + cls + '">' +
@@ -484,8 +484,8 @@ function renderChaveCopa() {
   function celula(time, ehVenc, jogoResolvido) {
     if (!time) return '<div class="ck-time ck-vazio">A definir</div>';
     var cls = 'ck-time' + (time.voce ? ' ck-voce' : '') + (jogoResolvido && ehVenc ? ' ck-venc' : '') + (jogoResolvido && !ehVenc ? ' ck-perd' : '');
-    var esc = (time.clubeRef && typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
-      ? Escudos.porNomeSeModo(time.clubeRef.clube, modoSelecionado) : '';
+    var esc = (typeof Escudos !== 'undefined' && Escudos.porTime)
+      ? Escudos.porTime(time, modoSelecionado) : '';
     var escHTML = esc ? '<span class="ck-escudo">' + esc + '</span>' : '';
     return '<div class="' + cls + '">' + escHTML + '<span class="ck-nome">' + time.nome + '</span></div>';
   }
