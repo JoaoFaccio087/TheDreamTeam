@@ -3123,8 +3123,20 @@
     btnCopiarCodigo.addEventListener('click', function () {
       var cod = (lobbyCodigo.textContent || '').trim();
       if (!cod || cod === '----') return;
-      // Copia o LINK de convite completo — o amigo clica e entra direto na sala.
+      // Link de convite completo — o amigo clica e entra direto na sala.
       var link = 'https://thedreamteam.com.br/sala/' + cod;
+
+      // No celular, abre a bandeja NATIVA de compartilhamento (WhatsApp, etc.),
+      // que já traz "copiar" como opção. No desktop (sem a API), copia direto.
+      if (navigator.share) {
+        navigator.share({
+          title: 'The Dream Team',
+          text: 'Bora jogar? Entra na minha sala do The Dream Team:',
+          url: link
+        }).catch(function () { /* usuário cancelou ou indisponível: ignora */ });
+        return;
+      }
+
       var orig = btnCopiarCodigo.innerHTML;
       (navigator.clipboard
         ? navigator.clipboard.writeText(link)
