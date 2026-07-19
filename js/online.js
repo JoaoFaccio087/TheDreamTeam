@@ -3123,13 +3123,15 @@
     btnCopiarCodigo.addEventListener('click', function () {
       var cod = (lobbyCodigo.textContent || '').trim();
       if (!cod || cod === '----') return;
+      // Copia o LINK de convite completo — o amigo clica e entra direto na sala.
+      var link = 'https://thedreamteam.com.br/sala/' + cod;
       var orig = btnCopiarCodigo.innerHTML;
       (navigator.clipboard
-        ? navigator.clipboard.writeText(cod)
+        ? navigator.clipboard.writeText(link)
         : Promise.reject()
       ).catch(function () {
         var ta = document.createElement('textarea');
-        ta.value = cod;
+        ta.value = link;
         document.body.appendChild(ta);
         ta.select();
         document.execCommand('copy');
@@ -3340,6 +3342,27 @@
         fecharModalOnline();
       }
     });
+
+    // ── Ponte do link de convite ──────────────────────────────────────────────
+    // /sala/CODIGO é redirecionado pelo 404.html para /?sala=CODIGO. Aqui, no boot,
+    // lemos o parâmetro, abrimos o modal com o código já preenchido e tentamos
+    // entrar — reusando entrarSala() por inteiro (token, API, socket, lobby).
+    // Erro (sala inexistente/cheia) aparece no modal aberto; sucesso vai ao lobby.
+    (function () {
+      try {
+        var alvo = new URLSearchParams(location.search).get('sala');
+        if (!alvo) return;
+        alvo = alvo.trim().toUpperCase().slice(0, 4);
+        if (alvo.length < 4) return;
+        // Remove o ?sala= da URL p/ um refresh não reentrar sozinho (evita loop).
+        if (window.history && history.replaceState) {
+          history.replaceState(null, '', location.pathname);
+        }
+        abrirModalOnline();            // modal aberto → erro fica visível
+        inputCodigoSala.value = alvo;
+        entrarSala();                  // reusa todo o fluxo de entrada
+      } catch (e) { /* sem params / indisponível: ignora */ }
+    })();
   }
 
   document.addEventListener('DOMContentLoaded', init);

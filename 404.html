@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/imagens/favicon.svg" />
+  <title>The Dream Team</title>
+  <meta name="robots" content="noindex" />
+
+  <!-- Roteamento do link de convite: /sala/CODIGO → /?sala=CODIGO.
+       Roda no <head>, antes do body pintar, para não piscar a página de 404
+       quando é, na verdade, um link de sala válido. -->
+  <script>
+    (function () {
+      var m = location.pathname.match(/^\/sala\/([A-Za-z0-9]{1,8})\/?$/i);
+      if (m) {
+        location.replace('/?sala=' + encodeURIComponent(m[1].toUpperCase()));
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { --bg: #0E0F13; --txt: #F4F6F8; --txt-soft: #99A0AA; --accent: #2BD46A; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--txt);
+      font-family: 'Archivo', system-ui, sans-serif;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .cod { font-family: 'Archivo Black', sans-serif; font-size: 4rem; color: var(--accent); line-height: 1; }
+    h1 { font-family: 'Archivo Black', sans-serif; font-size: 1.4rem; margin: 0.6rem 0 0.4rem; }
+    p { color: var(--txt-soft); margin-bottom: 1.6rem; }
+    a.btn {
+      display: inline-block; background: var(--accent); color: #08210F;
+      font-family: 'Archivo Black', sans-serif; text-decoration: none;
+      padding: 0.8rem 1.8rem; border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Só aparece se NÃO for um link de sala (404 de verdade). -->
+  <div>
+    <div class="cod">404</div>
+    <h1>P&aacute;gina n&atilde;o encontrada</h1>
+    <p>O endere&ccedil;o que voc&ecirc; tentou acessar n&atilde;o existe.</p>
+    <a class="btn" href="/">Voltar ao jogo &rarr;</a>
+  </div>
+</body>
+</html>
