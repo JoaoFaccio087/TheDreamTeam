@@ -510,10 +510,11 @@
   }
 
   // Títulos de Copa do Mundo = estrelas no escudo (dado real, não aleatório).
-  // Brasil 5, Alemanha/Itália 4, Argentina 3, Uruguai/França 2, Espanha/Inglaterra 1.
+  // Brasil 5, Alemanha/Itália 4, Argentina 3, Uruguai/França/Espanha 2, Inglaterra 1.
+  // (Espanha subiu de 1 → 2 ao vencer a Copa de 2026 sobre a Argentina.)
   var TITULOS_SELECAO = {
     'Brasil': 5, 'Alemanha': 4, 'Itália': 4, 'Argentina': 3,
-    'Uruguai': 2, 'França': 2, 'Espanha': 1, 'Inglaterra': 1
+    'Uruguai': 2, 'França': 2, 'Espanha': 2, 'Inglaterra': 1
   };
 
   var API = {
