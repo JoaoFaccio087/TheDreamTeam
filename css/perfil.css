@@ -551,17 +551,30 @@
    com Cancelar/Salvar fica fora da área visível e não há como sair — só recarregando. */
 .escudo-box { max-height: 90vh; display: flex; flex-direction: column; }
 .escudo-corpo { flex: 1; min-height: 0; overflow-y: auto; }
-.escudo-box .modal-confirm-acoes { flex-shrink: 0; max-width: 440px; margin: 0 auto; }   /* os botões nunca somem; alinham à largura dos controles */
-/* Botões de ação enxutos: dimensionam pelo conteúdo (não esticam), fonte menor. */
-.escudo-box .modal-confirm-acoes .btn-rolar {
-  flex: 0 1 auto; max-width: none; padding: 0.5rem 1.15rem; font-size: 0.9rem;
+.escudo-box .modal-confirm-acoes { flex-shrink: 0; }   /* os botões nunca somem */
+/* Ações: "Sem escudo" (link discreto, terciário/destrutivo) à esquerda;
+   Cancelar + Salvar (as ações de verdade) agrupados à direita. */
+.escudo-box .escudo-acoes { justify-content: space-between; align-items: center; gap: 1rem; }
+.escudo-acoes-btns { display: flex; gap: var(--sp-4, 12px); }
+.escudo-acoes-btns .btn-rolar {
+  flex: 0 0 auto; max-width: none; padding: 0.5rem 1.2rem; font-size: 0.9rem;
 }
+.escudo-remover-link {
+  background: none; border: none; cursor: pointer; padding: 4px 2px;
+  color: var(--txt-soft, #9aa6b2); font-size: 0.85rem; font-family: inherit;
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+.escudo-remover-link:hover,
+.escudo-remover-link:focus-visible { color: #e0625e; }   /* alerta suave: sinaliza que remove */
 
 @media (max-width: 620px) {
   .escudo-box { max-height: 92vh; width: 96vw; padding: 0.9rem; }
   .escudo-preview { width: 96px; }
   .escudo-paleta { grid-template-columns: repeat(8, 1fr); }
-  /* Empilha: 3 botões lado a lado em 360px ficam ilegíveis e cortam. */
-  .escudo-box .modal-confirm-acoes { flex-direction: column; gap: 0.4rem; }
-  .escudo-box .modal-confirm-acoes .btn-rolar { width: 100%; }
+  /* Empilha: Cancelar/Salvar um sobre o outro (largura cheia); "Sem escudo" discreto embaixo. */
+  .escudo-box .escudo-acoes { flex-direction: column-reverse; align-items: stretch; gap: 0.7rem; }
+  .escudo-acoes-btns { flex-direction: column; width: 100%; }
+  .escudo-acoes-btns .btn-rolar { width: 100%; }
+  .escudo-remover-link { width: 100%; text-align: center; }
 }

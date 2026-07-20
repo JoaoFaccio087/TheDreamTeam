@@ -180,10 +180,12 @@
           '</div>' +
         '</div>' +
         '<p id="escudo-erro" class="auth-erro escondida"></p>' +
-        '<div class="modal-confirm-acoes">' +
-          '<button id="escudo-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>' +
-          '<button id="escudo-remover" class="btn-rolar btn-sec" type="button" title="Volta ao círculo com a inicial e remove o escudo do jogo">Sem escudo</button>' +
-          '<button id="escudo-salvar" class="btn-rolar" type="button">Salvar</button>' +
+        '<div class="modal-confirm-acoes escudo-acoes">' +
+          '<button id="escudo-remover" class="escudo-remover-link" type="button" title="Volta ao círculo com a inicial e remove o escudo do jogo">Sem escudo</button>' +
+          '<div class="escudo-acoes-btns">' +
+            '<button id="escudo-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>' +
+            '<button id="escudo-salvar" class="btn-rolar" type="button">Salvar</button>' +
+          '</div>' +
         '</div>' +
       '</div>';
     document.body.appendChild(ov);
