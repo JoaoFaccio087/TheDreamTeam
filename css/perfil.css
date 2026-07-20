@@ -525,7 +525,9 @@
 .escudo-preview { width: 116px; flex: 0 0 auto; margin: 0.2rem auto 0.9rem; }
 .escudo-preview svg { width: 100%; height: auto; display: block; }
 .escudo-corpo { text-align: left; }
-.escudo-controles { width: 100%; min-width: 0; text-align: left; }
+/* Controles com largura limitada (o preview subiu, mas os itens não devem esticar
+   pra largura toda do modal — mantém o tamanho compacto que tinham ao lado do preview). */
+.escudo-controles { width: 100%; max-width: 440px; margin: 0 auto; min-width: 0; text-align: left; }
 .escudo-pads { margin-bottom: 1rem; gap: 6px; }
 .escudo-controles .jogo-rotulo { margin: 0 0 .45rem; }
 #escudo-bloco-tri { margin: 0; }
@@ -549,7 +551,7 @@
    com Cancelar/Salvar fica fora da área visível e não há como sair — só recarregando. */
 .escudo-box { max-height: 90vh; display: flex; flex-direction: column; }
 .escudo-corpo { flex: 1; min-height: 0; overflow-y: auto; }
-.escudo-box .modal-confirm-acoes { flex-shrink: 0; }   /* os botões nunca somem */
+.escudo-box .modal-confirm-acoes { flex-shrink: 0; max-width: 440px; margin: 0 auto; }   /* os botões nunca somem; alinham à largura dos controles */
 /* Botões de ação enxutos: dimensionam pelo conteúdo (não esticam), fonte menor. */
 .escudo-box .modal-confirm-acoes .btn-rolar {
   flex: 0 1 auto; max-width: none; padding: 0.5rem 1.15rem; font-size: 0.9rem;
