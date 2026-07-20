@@ -282,3 +282,16 @@ body {
   background: var(--perigo); color: #2a0a0a;
 }
 .btn-rolar.btn-perigo:hover { filter: brightness(1.08); }
+
+/* ═══ LINK DE AÇÃO (terciária/discreta) ═══
+   Ação terciária que não deve competir com botões (ex.: "Sem escudo" no editor de
+   escudo, "Limpar" no modal do pote): texto clicável, não botão. Hover em vermelho
+   suave sinaliza que é uma ação levemente destrutiva. Reutilizável em qualquer modal. */
+.acao-link {
+  background: none; border: none; cursor: pointer; padding: 4px 2px;
+  color: var(--txt-soft); font-family: inherit; font-size: 0.85rem;
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+.acao-link:hover,
+.acao-link:focus-visible { color: #e0625e; }

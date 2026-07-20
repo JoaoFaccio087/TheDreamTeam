@@ -559,14 +559,6 @@
 .escudo-acoes-btns .btn-rolar {
   flex: 0 0 auto; width: auto; max-width: none; padding: 0.5rem 1.2rem; font-size: 0.9rem;
 }
-.escudo-remover-link {
-  background: none; border: none; cursor: pointer; padding: 4px 2px;
-  color: var(--txt-soft, #9aa6b2); font-size: 0.85rem; font-family: inherit;
-  text-decoration: underline; text-underline-offset: 3px;
-  transition: color .15s ease;
-}
-.escudo-remover-link:hover,
-.escudo-remover-link:focus-visible { color: #e0625e; }   /* alerta suave: sinaliza que remove */
 
 @media (max-width: 620px) {
   .escudo-box { max-height: 92vh; width: 96vw; padding: 0.9rem; }
@@ -576,5 +568,5 @@
   .escudo-box .escudo-acoes { flex-direction: column-reverse; align-items: stretch; gap: 0.7rem; }
   .escudo-acoes-btns { flex-direction: column; width: 100%; }
   .escudo-acoes-btns .btn-rolar { width: 100%; }
-  .escudo-remover-link { width: 100%; text-align: center; }
+  .escudo-acoes .acao-link { width: 100%; text-align: center; }
 }

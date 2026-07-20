@@ -510,7 +510,7 @@
 }
 .pote-contador { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
 .pote-contador-ok { color: var(--cor-marca, #d9b25a); font-weight: 600; }
-.pote-acoes { display: flex; gap: 0.5rem; }
+.pote-acoes { display: flex; gap: 0.5rem; align-items: center; }
 
 /* O overlay rola se o conteúdo passar da tela — senão o modal fica preso e cortado. */
 .draft-overlay { overflow-y: auto; }
@@ -529,7 +529,7 @@
 /* Hierarquia dos botões: só o Avançar é ação principal. Limpar e Cancelar são
    secundários e menores — três botões verdes do mesmo tamanho não dizem o que fazer. */
 .pote-btn-menor { padding: 0.5rem 0.9rem; font-size: var(--fs-mini); }
-.pote-acoes .btn-rolar { min-width: 0; }
+.pote-acoes .btn-rolar { min-width: 0; width: auto; }
 
 /* ═══════════ JOGO LIVRE — resumo do pote na tela do jogo ═══════════ */
 .pote-resumo {

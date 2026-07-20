@@ -65,7 +65,7 @@
           '<div class="pote-acoes">' +
             // Hierarquia: só o Avançar é ação principal (verde). Limpar e Cancelar são
             // secundários — três botões verdes não dizem ao usuário o que fazer.
-            '<button id="pote-limpar" class="btn-rolar btn-sec pote-btn-menor" type="button">Limpar</button>' +
+            '<button id="pote-limpar" class="acao-link" type="button">Limpar</button>' +
             '<button id="pote-cancelar" class="btn-rolar btn-sec pote-btn-menor" type="button">Cancelar</button>' +
             '<button id="pote-avancar" class="btn-rolar" type="button" disabled>Avan&ccedil;ar &rarr;</button>' +
           '</div>' +
