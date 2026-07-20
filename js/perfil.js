@@ -164,8 +164,8 @@
     ov.innerHTML =
       '<div class="modal-confirm-box escudo-box">' +
         '<p class="modal-confirm-titulo">Escudo do seu time</p>' +
+        '<div id="escudo-preview" class="escudo-preview"></div>' +
         '<div class="escudo-corpo">' +
-          '<div id="escudo-preview" class="escudo-preview"></div>' +
           '<div class="escudo-controles">' +
             '<p class="jogo-rotulo">FORMATO</p>' +
             '<div class="area-pilulas escudo-pads">' + pads + '</div>' +
@@ -182,7 +182,7 @@
         '<p id="escudo-erro" class="auth-erro escondida"></p>' +
         '<div class="modal-confirm-acoes">' +
           '<button id="escudo-cancelar" class="btn-rolar btn-sec" type="button">Cancelar</button>' +
-          '<button id="escudo-remover" class="btn-rolar btn-sec" type="button" title="Volta ao círculo com a inicial e remove o escudo do jogo">Não usar escudo</button>' +
+          '<button id="escudo-remover" class="btn-rolar btn-sec" type="button" title="Volta ao círculo com a inicial e remove o escudo do jogo">Sem escudo</button>' +
           '<button id="escudo-salvar" class="btn-rolar" type="button">Salvar</button>' +
         '</div>' +
       '</div>';

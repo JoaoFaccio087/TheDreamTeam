@@ -519,10 +519,13 @@
 .perfil-avatar-escudo svg { width: 100%; height: 100%; display: block; }
 
 .escudo-box { max-width: 620px; width: min(92vw, 620px); }
-.escudo-corpo { display: flex; gap: 1.4rem; align-items: flex-start; text-align: left; }
-.escudo-preview { width: 128px; flex: 0 0 128px; }
+/* Preview do escudo no TOPO, centralizado — fica FORA da área que rola (via JS o
+   #escudo-preview é irmão de .escudo-corpo), então permanece visível enquanto se
+   escolhe formato e cores. */
+.escudo-preview { width: 116px; flex: 0 0 auto; margin: 0.2rem auto 0.9rem; }
 .escudo-preview svg { width: 100%; height: auto; display: block; }
-.escudo-controles { flex: 1; min-width: 0; text-align: left; }
+.escudo-corpo { text-align: left; }
+.escudo-controles { width: 100%; min-width: 0; text-align: left; }
 .escudo-pads { margin-bottom: 1rem; gap: 6px; }
 .escudo-controles .jogo-rotulo { margin: 0 0 .45rem; }
 #escudo-bloco-tri { margin: 0; }
@@ -542,18 +545,19 @@
 .escudo-cor-ativa { border-color: var(--cor-marca, #D9B25A); transform: scale(1.1); }
 .escudo-cor-nenhuma { background: transparent; color: #9AA0A6; font-size: 12px; }
 
-/* No celular a prévia vai para cima: lado a lado não cabe. */
 /* O modal precisa CABER e ROLAR. Sem max-height ele estoura a tela do celular: o rodapé
    com Cancelar/Salvar fica fora da área visível e não há como sair — só recarregando. */
 .escudo-box { max-height: 90vh; display: flex; flex-direction: column; }
 .escudo-corpo { flex: 1; min-height: 0; overflow-y: auto; }
 .escudo-box .modal-confirm-acoes { flex-shrink: 0; }   /* os botões nunca somem */
+/* Botões de ação enxutos: dimensionam pelo conteúdo (não esticam), fonte menor. */
+.escudo-box .modal-confirm-acoes .btn-rolar {
+  flex: 0 1 auto; max-width: none; padding: 0.5rem 1.15rem; font-size: 0.9rem;
+}
 
 @media (max-width: 620px) {
   .escudo-box { max-height: 92vh; width: 96vw; padding: 0.9rem; }
-  .escudo-corpo { flex-direction: column; align-items: center; }
-  .escudo-preview { width: 96px; flex: 0 0 auto; }
-  .escudo-controles { width: 100%; }
+  .escudo-preview { width: 96px; }
   .escudo-paleta { grid-template-columns: repeat(8, 1fr); }
   /* Empilha: 3 botões lado a lado em 360px ficam ilegíveis e cortam. */
   .escudo-box .modal-confirm-acoes { flex-direction: column; gap: 0.4rem; }
