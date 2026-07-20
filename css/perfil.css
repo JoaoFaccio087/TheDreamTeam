@@ -255,6 +255,20 @@
 }
 .perfil-tela-topo { margin-bottom: 1.2rem; }
 
+/* Escudo do perfil — só na TELA (não no modal): maior, na altura do bloco
+   nome+email+time ao lado. O SVG do escudo preenche 100%, então acompanha. */
+#tela-perfil .perfil-avatar {
+  width: 72px;
+  height: 72px;
+  font-size: 1.7rem;   /* a inicial (quando não há escudo) acompanha o tamanho maior */
+}
+/* O lápis "editar escudo" acompanha o avatar maior. */
+#tela-perfil .perfil-avatar-editavel::after {
+  width: 24px; height: 24px;
+  font-size: 13px; line-height: 22px;
+  right: -3px; bottom: -3px;
+}
+
 /* ── Estatísticas em 2 colunas: acordeão (esq) + time mais escalado (dir) ── */
 .perfil-cols {
   display: grid;
