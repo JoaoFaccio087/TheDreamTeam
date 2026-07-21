@@ -79,6 +79,30 @@ html {
   --raio-pill: 999px;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   MODO CLARO — valores claros dos tokens BASE.
+   `tema.js` (no <head>) adiciona `tema-claro` ao <html>; este bloco só
+   sobrescreve os tokens base (fundo, texto, superfícies, acento, linhas,
+   sombras). O verde e o vermelho são aprofundados para ganhar contraste
+   sobre fundo claro (o tom vivo do escuro fica ilegível no branco).
+   NÃO há alternador na UI ainda — o claro é migrado tela a tela.
+   ⚠️ Os temas de competição (body.tema-*, abaixo) são mais internos e
+   sobrescrevem estes valores DENTRO do jogo — decisão da fase final.
+   ───────────────────────────────────────────────────────────────────────── */
+html.tema-claro {
+  --bg:       #F4F6F8;   /* fundo off-white */
+  --txt:      #14161B;   /* texto quase-preto */
+  --txt-soft: #5B636E;   /* texto secundário (cinza escuro p/ contraste) */
+  --accent:   #12A150;   /* verde-campo aprofundado (legível no branco) */
+  --perigo:   #D64541;   /* vermelho de ação destrutiva aprofundado */
+
+  --surface:       #FFFFFF;                 /* cards e superfícies (elevação sutil sobre o bg) */
+  --linha:         rgba(14, 15, 19, 0.12);  /* divisórias e bordas escuras translúcidas */
+  --btn-txt:       #0B0C0F;                 /* texto escuro sobre o verde (mantém contraste) */
+  --accent-sombra: #0C7A3C;                 /* verde mais escuro p/ sombra do botão */
+  --titulo-sombra: #CBD0D8;                 /* cinza-claro p/ sombra da manchete */
+}
+
 /* Tema Libertadores: preto e dourado */
 body.tema-libertadores {
   --bg:       #0E0C0A;
@@ -241,11 +265,11 @@ body {
   display: flex; align-items: center; justify-content: center; padding: 1rem;
 }
 .modal-confirm-box {
-  background: #16181f; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: var(--raio-lg);
+  background: var(--surface); border: 1px solid var(--linha); border-radius: var(--raio-lg);
   padding: 1.5rem 1.6rem; max-width: 380px; width: 100%; text-align: center;
 }
-.modal-confirm-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: #fff; margin: 0 0 0.6rem; }
-.modal-confirm-texto  { font-size: var(--fs-sm); color: #aaa; line-height: 1.5; margin: 0 0 1.2rem; }
+.modal-confirm-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: var(--txt); margin: 0 0 0.6rem; }
+.modal-confirm-texto  { font-size: var(--fs-sm); color: var(--txt-soft); line-height: 1.5; margin: 0 0 1.2rem; }
 .modal-confirm-acoes  { display: flex; gap: var(--sp-4); justify-content: center; }
 .modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
 /* (o visual do .btn-sec agora é global — ver acima) */

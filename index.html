@@ -33,6 +33,30 @@
   <meta name="twitter:description" content="Monte o time dos sonhos com craques da Libertadores, da Champions e do Brasileirão e leve-o ao título." />
   <meta name="twitter:image" content="https://thedreamteam.com.br/assets/imagens/screenshots/og-home.png" />
 
+  <!-- ===== Dados estruturados (JSON-LD) =====
+       Diz ao Google, de forma legível por máquina, que isto é um videogame de
+       navegador, grátis e em pt-BR. Ajuda a ranquear pelo nome e a exibir um
+       resultado mais rico na busca. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "The Dream Team",
+    "alternateName": "The Dream Team \u2014 Monte o time dos sonhos",
+    "url": "https://thedreamteam.com.br/",
+    "description": "Monte o time dos sonhos com craques da Libertadores, da Champions e do Brasileir\u00e3o e leve-o ao t\u00edtulo. Jogo de navegador gr\u00e1tis, sem instala\u00e7\u00e3o.",
+    "inLanguage": "pt-BR",
+    "genre": ["Esporte", "Futebol", "Estrat\u00e9gia"],
+    "gamePlatform": "Navegador (Web)",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Qualquer navegador web",
+    "browserRequirements": "Requer JavaScript.",
+    "image": "https://thedreamteam.com.br/assets/imagens/screenshots/og-home.png",
+    "author": { "@type": "Person", "name": "Jo\u00e3o Faccio" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "BRL" }
+  }
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,6 +77,10 @@
   <!-- Quadras dos outros esportes (Fase 4): classes ainda não aplicadas por ninguém. -->
   <link rel="stylesheet" href="css/quadras.css" />
   <link rel="stylesheet" href="css/responsivo.css" />
+
+  <!-- Tema (claro/escuro). SÍNCRONO e depois do CSS: aplica a classe no <html>
+       antes do <body> pintar, sem piscar. Sem defer/async de propósito. -->
+  <script src="js/tema.js"></script>
 </head>
 <body>
 
