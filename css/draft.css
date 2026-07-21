@@ -318,9 +318,13 @@
 .draft-acoes {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   animation: draft-titulo-in 0.4s ease 0.15s both;
 }
+/* Sem isto, "Selecionar" herda width:100% do .btn-rolar e estica pra tela toda,
+   desbalanceando com o Re-sortear. Reseta pra tamanho de conteúdo. */
+.draft-acoes .btn-rolar { width: auto; }
 
 /* Botão Re-sortear — secundário, retrô escuro */
 .btn-resortear-draft {
