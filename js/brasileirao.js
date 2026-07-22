@@ -313,6 +313,9 @@ function criarCardLigaInstantaneo(rodadaNum, adversario, gMeus, gAdv, golsTime, 
   if (!eventosHtml) eventosHtml = '<div class="partida-evento partida-sem-gols">Sem gols</div>';
 
   var resCls = venc ? ' vitoria' : (perd ? ' derrota' : '');
+  var escudoHTML = (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
+    ? (function () { var s = Escudos.porNomeSeModo(adversario.clube, modoSelecionado); return s ? '<span class="partida-escudo">' + s + '</span>' : ''; })()
+    : '';
   var div = document.createElement('div');
   div.className = 'partida-card';   // começa colapsado (são muitos jogos)
   div.id = 'partida-' + id;
@@ -320,7 +323,7 @@ function criarCardLigaInstantaneo(rodadaNum, adversario, gMeus, gAdv, golsTime, 
     '<div class="partida-fase">Rodada ' + rodadaNum + ' \u00B7 Brasileir\u00E3o</div>' +
     '<div class="partida-header">' +
       '<div class="partida-adversario-bloco">' +
-        '<span class="partida-adversario-nome">' + adversario.clube + '</span>' +
+        '<span class="partida-adversario-nome">' + escudoHTML + adversario.clube + '</span>' +
         '<span class="partida-adversario-ano">' + rotuloCompeticao(adversario.competicao) + ' \u00B7 ' + adversario.edicao + '</span>' +
       '</div>' +
       '<div class="partida-placar-bloco">' +

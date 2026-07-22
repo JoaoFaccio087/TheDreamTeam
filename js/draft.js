@@ -151,7 +151,7 @@ function comecarDraft() {
 
   draftIniciado       = true;
   formacaoTravada     = true;
-  draftSkipsRestantes = 3;   // orçamento de re-sorteios para este draft
+  draftSkipsRestantes = 5;   // orçamento de re-sorteios para este draft
 
   var wrapper = document.querySelector('.jogo-wrapper');
   if (wrapper) wrapper.classList.add('draft-ativo');
@@ -331,7 +331,7 @@ function resetEstiloDraft() {
   draftIniciado       = false;
   draftSlotAtual      = null;
   draftCartaSel       = null;
-  draftSkipsRestantes = 3;
+  draftSkipsRestantes = 5;
 
   // O pote do Jogo Livre é estado de PARTIDA. Sem esta linha ele sobrevivia à campanha:
   // você terminava, voltava para a home, escolhia Jogo Livre de novo e caía com as MESMAS

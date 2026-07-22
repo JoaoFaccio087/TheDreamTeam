@@ -116,7 +116,7 @@ let skipsRestantes     = 5;                    // skips disponíveis por partida
 // --- Estado: modo Draft ---
 let estiloJogo        = 'classico';  // 'classico' | 'draft' | 'orcamento'
 let draftIniciado     = false;       // true após clicar em "Começar" no modo Draft
-let draftSkipsRestantes = 3;         // re-sorteios disponíveis por draft
+let draftSkipsRestantes = 5;         // re-sorteios disponíveis por draft
 
 // --- Estado: modo Orçamento (single-player) ---
 // Teto fixo; cada jogador custa preco = round((forca-60)^2 / 4). Craque(99)≈380, bom(90)≈225,

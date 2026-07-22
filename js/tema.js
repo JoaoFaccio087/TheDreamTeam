@@ -11,8 +11,8 @@
 // por serem mais internos, sobrescrevem estes tokens base dentro do jogo. Isso é
 // esperado nesta fase — a decisão sobre o claro nas telas de competição fica p/ depois.
 //
-// SEM alternador na UI ainda (de propósito): o claro está sendo entregue tela a tela.
-// Para testar no console:  alternarTema()
+// Alternador sol/lua no header da home (ao lado do perfil), disponível a todos —
+// mesmo sem conta. O ícone segue o tema via CSS (html.tema-claro). Console: alternarTema()
 (function () {
   'use strict';
 
@@ -49,6 +49,18 @@
   // Aplicação inicial, ainda no <head>, antes do primeiro paint.
   aplicar(lerTema());
 
-  // Único global exposto de propósito (sem alternador na UI por enquanto).
+  // Alternador exposto (útil no console também).
   window.alternarTema = alternarTema;
+
+  // Liga o botão sol/lua do header ao alternador quando o DOM existir. O ícone em si
+  // é puro CSS (segue html.tema-claro), então não precisamos trocá-lo aqui.
+  function ligarBotaoTema() {
+    var btn = document.getElementById('btn-tema');
+    if (btn) btn.addEventListener('click', function () { alternarTema(); });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ligarBotaoTema);
+  } else {
+    ligarBotaoTema();
+  }
 })();

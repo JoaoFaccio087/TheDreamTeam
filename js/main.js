@@ -377,7 +377,7 @@ function restaurarSessaoOffline() {
     slotsPreenchidos    = completos;
     skipsRestantes      = (typeof s.skipsRestantes === 'number') ? s.skipsRestantes : 5;
     draftIniciado       = !!s.draftIniciado;
-    draftSkipsRestantes = (typeof s.draftSkipsRestantes === 'number') ? s.draftSkipsRestantes : 3;
+    draftSkipsRestantes = (typeof s.draftSkipsRestantes === 'number') ? s.draftSkipsRestantes : 5;
     poteLivre           = Array.isArray(s.poteLivre) ? s.poteLivre : [];
 
     // 2) Entrar na tela do jogo — SEM iniciarTelaJogo (ele RESETA o estado).

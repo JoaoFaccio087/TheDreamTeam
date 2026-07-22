@@ -707,6 +707,9 @@ function criarCardMataInstantaneo(faseNome, adversario, gMeus, gAdv, golsMeus, g
   eventos.sort(function (a, b) { return a.minuto - b.minuto; });
 
   var nomeAdvClube = adversario ? adversario.clube : 'Advers\u00E1rio';
+  var escudoHTML = (adversario && typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
+    ? (function () { var s = Escudos.porNomeSeModo(adversario.clube, modoSelecionado); return s ? '<span class="partida-escudo">' + s + '</span>' : ''; })()
+    : '';
   var eventosHtml = '';
   eventos.forEach(function (e) {
     if (e.lado === 'meu') {
@@ -735,7 +738,7 @@ function criarCardMataInstantaneo(faseNome, adversario, gMeus, gAdv, golsMeus, g
     '<div class="partida-fase">' + faseNome + '</div>' +
     '<div class="partida-header">' +
       '<div class="partida-adversario-bloco">' +
-        '<span class="partida-adversario-nome">' + nomeAdvClube + '</span>' +
+        '<span class="partida-adversario-nome">' + escudoHTML + nomeAdvClube + '</span>' +
         '<span class="partida-adversario-ano">' + anoTxt + '</span>' +
       '</div>' +
       '<div class="partida-placar-bloco">' +

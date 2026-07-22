@@ -7,9 +7,13 @@
 .perfil-wrapper {
   position: relative;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
-.btn-perfil {
+.btn-perfil,
+.btn-tema {
   background: none;
   border: none;
   color: var(--txt-soft);
@@ -22,10 +26,18 @@
   transition: color 0.2s, background 0.15s;
 }
 
-.btn-perfil:hover {
+.btn-perfil:hover,
+.btn-tema:hover {
   color: var(--txt);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--elev-1);
 }
+
+/* Alternador de tema: o ícone segue o tema atual via a classe html.tema-claro
+   (sem JS trocar) — escuro mostra a lua, claro mostra o sol. Sem flash no load. */
+.tema-ico { display: none; }
+.tema-ico-lua { display: block; }
+html.tema-claro .tema-ico-lua { display: none; }
+html.tema-claro .tema-ico-sol { display: block; }
 
 /* ============================================================
    Modal de autenticação (overlay opcional)

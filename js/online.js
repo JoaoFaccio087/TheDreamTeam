@@ -56,7 +56,7 @@
   var draftCarouselWrap, draftCarousel, draftArrowEsq, draftArrowDir, btnDraftSelecionar, draftCarouselLabel;
   var modalDraftPick, modalDraftPickCartas, modalDraftPickTitulo, modalDraftPickSelecionar;
   var modalDraftPickResortear, modalDraftPickContador;
-  var draftResortsRestantes = 3;   // orçamento de re-sorteios para o draft (igual ao offline)
+  var draftResortsRestantes = 5;   // orçamento de re-sorteios para o draft (igual ao offline)
   var modalPoolPos = [];           // elegíveis (embaralhados) da posição aberta no modal
   var modalPosPage = 0;            // página atual (6 por página) no modal
 
@@ -653,7 +653,7 @@
     selectedPlayer = null; selectedSlot = null; repositionFrom = null;
     ordemDraftIds = []; picksSnapshot = {}; indiceTurnoAtual = 0;
     draftPicksTurno = 1; draftPicksFeitos = 0; draftTurnoUid = null;
-    draftResortsRestantes = 3; modalPoolPos = []; modalPosPage = 0;
+    draftResortsRestantes = 5; modalPoolPos = []; modalPosPage = 0;
     minhaVez = false;
     draftEhGrupo = false; gPodeEscolher = false; gGrupos = {}; gOrdemGrupos = [];
     gPicksNecessarios = (typeof titularesAtuais === 'function') ? titularesAtuais() : 11; gGrupoAtivo = null; gPickNum = 1; gPicksSnap = {};
@@ -692,7 +692,7 @@
     gPicksTurno       = 1;
     gPicksFeitosTurno = 0;
     gPodeEscolher     = false;
-    draftResortsRestantes = 3;   // 3 re-sorteios para todo o draft (faltava resetar aqui — "Re-sortear 0" na Copa)
+    draftResortsRestantes = 5;   // 5 re-sorteios para todo o draft (faltava resetar aqui — "Re-sortear 0" na Copa)
 
     subview('online-draft');
     var titulo = document.getElementById('online-draft-titulo');
@@ -944,7 +944,7 @@
     resetEstadoOnline();          // nova campanha: limpa o estado da partida anterior
     ordemDraftIds    = dados.ordem || [];
     indiceTurnoAtual = 0;
-    draftResortsRestantes = 3;   // 3 re-sorteios para todo o draft (igual ao offline)
+    draftResortsRestantes = 5;   // 5 re-sorteios para todo o draft (igual ao offline)
     _campanhaOnlineSalva  = false;
     subview('online-draft');
     renderOrdemLista();
