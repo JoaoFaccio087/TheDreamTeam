@@ -517,3 +517,286 @@ function renderChaveCopa() {
 
   alvo.innerHTML = html;
 }
+
+
+// ─────────────────── "PULAR TUDO" DOS MATA-MATA (Liberta/Champions/Copa) ───────────────────
+// Espelha o pularTudoBrasileirao: simula de uma vez a campanha que resta e cai no
+// desfecho (campeão OU eliminado na fase X), reaproveitando os mesmos helpers de
+// placar/estatística/flags e a chave da Copa.
+//   • Grupos: sem pênaltis; elimina por classificação (top N avançam).
+//   • Mata-mata: empate vai nos pênaltis, resolvidos na hora com leve vantagem por força.
+
+// Sorteia autores/assistências dos SEUS gols e já contabiliza nas estatísticas.
+function ptGolsMeus(jogadores, n) {
+  var gols = [];
+  for (var g = 0; g < n; g++) {
+    var autor  = sortearPorPeso(jogadores, pesoGol, null);
+    var assist = Math.random() < 0.70 ? sortearPorPeso(jogadores, pesoAssist, autor) : null;
+    gols.push({ autor: autor, assist: assist });
+    registrarStats(autor.nome, assist ? assist.nome : null);
+  }
+  return gols;
+}
+
+// Sorteia os autores dos gols do adversário (não entram nas suas estatísticas).
+function ptGolsAdv(adversario, n) {
+  var elenco = (adversario && adversario.jogadores) ? adversario.jogadores : [];
+  var gols = [];
+  for (var h = 0; h < n; h++) {
+    gols.push({ autor: elenco.length > 0 ? sortearPorPeso(elenco, pesoGol, null) : null });
+  }
+  return gols;
+}
+
+// Flags de conquista + gols/partidas da campanha. (V/E/D fica no chamador: no grupo empate
+// vale empate; no mata-mata o empate já virou vitória/derrota nos pênaltis.)
+function ptAcumular(gMeus, gAdv, golsMeus) {
+  if (typeof registrarFlagsDoJogo === 'function') {
+    var gpj = {};
+    golsMeus.forEach(function (e) {
+      var nm = e.autor && e.autor.nome;
+      if (nm) gpj[nm] = (gpj[nm] || 0) + 1;
+    });
+    registrarFlagsDoJogo(gpj, gMeus, gAdv);
+  }
+  campanhaGF += gMeus; campanhaGA += gAdv; campanhaPartidas++;
+}
+
+function pularTudoMata() {
+  if (modoSelecionado === 'brasileirao') return;   // Brasileirão tem o seu próprio
+  if (!COMPETICOES[modoSelecionado]) return;        // só nos modos de campanha
+
+  // Interrompe uma partida em animação e remove o card incompleto (igual ao Brasileirão)
+  var estavaRodando = (timerPartida !== null);
+  if (estavaRodando) { clearTimeout(timerPartida); timerPartida = null; }
+  if (!grupo) montarCampanha();
+  if (estavaRodando) {
+    var congelado = document.getElementById('partida-' + contadorPartidas);
+    if (congelado) { congelado.parentNode.removeChild(congelado); contadorPartidas--; }
+  }
+
+  // A 1ª "partida" pulada revela o painel de artilheiros (como o iniciarPartida faz)
+  var elStats = document.getElementById('stats-campanha');
+  if (elStats) elStats.classList.remove('escondida');
+
+  var jogadores   = escalacao.filter(function (j) { return j !== null; });
+  var filtroComp  = COMPETICOES[modoSelecionado].dados;
+  var isChampions = (modoSelecionado === 'champions');
+  var isCopa      = (modoSelecionado === 'copa');
+
+  // ─── FASE DE GRUPOS (se a campanha ainda estiver nela) ───
+  var eliminadoNoGrupo = false;
+  var faseIni = fasesCampanha[faseAtual];
+  if (faseIni && faseIni.tipo === 'grupo' && grupo) {
+    while (grupo.idxJogo < grupo.jogosVoce.length) {
+      var ehUltimoG = (grupo.idxJogo === grupo.jogosVoce.length - 1);
+      var advTeam   = grupo.tabela[grupo.jogosVoce[grupo.idxJogo]];
+      var advClube  = advTeam.clubeRef;
+
+      var pg     = gerarPlacar(grupo.tabela[0].forca, advTeam.forca, true);
+      var gMeusG = ptGolsMeus(jogadores, pg.meus);
+      var gAdvG  = ptGolsAdv(advClube, pg.adversario);
+      registrarResultadoTabela(grupo.tabela[0], advTeam, pg.meus, pg.adversario);
+
+      if (pg.meus > pg.adversario)      campanhaVitorias++;
+      else if (pg.meus < pg.adversario) campanhaDerrotas++;
+      else                              campanhaEmpates++;
+      ptAcumular(pg.meus, pg.adversario, gMeusG);
+
+      if (advClube) adversariosUsados.push(advClube.clube + '|' + advClube.edicao);
+      criarCardMataInstantaneo(grupo.nome + ' \u00B7 Rodada ' + (grupo.idxJogo + 1),
+                               advClube, pg.meus, pg.adversario, gMeusG, gAdvG, null);
+
+      grupo.idxJogo++;
+      if (!ehUltimoG) { faseAtual++; continue; }
+
+      // Último jogo do grupo → classifica
+      var ordenada = grupo.tabela.slice().sort(ordenarTabela);
+      var posVoce = 1;
+      for (var i = 0; i < ordenada.length; i++) { if (ordenada[i].voce) { posVoce = i + 1; break; } }
+      if (posVoce <= grupo.avancam) {
+        faseAtual++;                                 // entra no mata-mata
+        if (isCopa && !chaveCopa) montarChaveCopa();
+      } else {
+        eliminadoNoGrupo = true;
+      }
+    }
+  }
+
+  if (eliminadoNoGrupo) {
+    finalizarPularTudoMata(false, isChampions ? 'FASE DE LIGA' : 'FASE DE GRUPOS');
+    return;
+  }
+
+  // ─── MATA-MATA ───
+  var campeao = false, faseQueCaiu = null;
+  while (faseAtual < fasesCampanha.length && fasesCampanha[faseAtual].tipo === 'mata') {
+    var fase    = fasesCampanha[faseAtual];
+    var ehFinal = (faseAtual === fasesCampanha.length - 1);
+
+    var adversario;
+    if (isCopa) {
+      if (!chaveCopa) montarChaveCopa();
+      adversario = getAdversarioChave();
+    } else {
+      var cands = API.getClubesPorCompeticao(filtroComp).filter(function (d) {
+        return adversariosUsados.indexOf(d.clube + '|' + d.edicao) < 0;
+      });
+      if (cands.length === 0) cands = API.getClubesPorCompeticao(filtroComp);
+      adversario = cands.length ? cands[Math.floor(Math.random() * cands.length)] : null;
+    }
+    if (!adversario) break;   // segurança: sem adversário, encerra o laço
+    adversariosUsados.push(adversario.clube + '|' + adversario.edicao);
+
+    var forcaAdv = forcaDoClube(adversario);
+    var pm       = gerarPlacar(forcaDoTime(), forcaAdv, true);
+    var gMeusM   = ptGolsMeus(jogadores, pm.meus);
+    var gAdvM    = ptGolsAdv(adversario, pm.adversario);
+
+    var meuGanhou, nosPenaltis = false;
+    if (pm.meus > pm.adversario)      meuGanhou = true;
+    else if (pm.adversario > pm.meus) meuGanhou = false;
+    else {
+      nosPenaltis = true;   // empate → pênaltis (leve vantagem por força, instantâneo)
+      meuGanhou = (Math.random() < forcaDoTime() / (forcaDoTime() + forcaAdv));
+    }
+
+    if (meuGanhou) campanhaVitorias++; else campanhaDerrotas++;
+    ptAcumular(pm.meus, pm.adversario, gMeusM);
+    if (nosPenaltis && meuGanhou && typeof campanhaFlags !== 'undefined' && campanhaFlags) {
+      campanhaFlags.matasNosPenaltis++;
+      if (ehFinal) campanhaFlags.finalNosPenaltis = true;
+    }
+
+    criarCardMataInstantaneo(fase.nome, adversario, pm.meus, pm.adversario, gMeusM, gAdvM,
+                             { meuGanhou: meuGanhou, penaltis: nosPenaltis });
+
+    if (isCopa && typeof avancarChaveCopa === 'function') avancarChaveCopa(meuGanhou);
+
+    if (!meuGanhou) { faseQueCaiu = fase.nome; break; }
+    faseAtual++;
+    if (ehFinal) { campeao = true; break; }
+  }
+
+  if (isCopa && typeof renderChaveCopa === 'function') renderChaveCopa();
+  finalizarPularTudoMata(campeao, faseQueCaiu);
+}
+
+// Card colapsado de uma partida pulada, anexado ao fim (mata-mata é cronológico).
+// resMata: null no grupo (=/✓/✗ pelo placar) | { meuGanhou, penaltis } no mata-mata.
+function criarCardMataInstantaneo(faseNome, adversario, gMeus, gAdv, golsMeus, golsAdv, resMata) {
+  var anterior = document.getElementById('partida-' + contadorPartidas);
+  if (anterior) anterior.classList.remove('expandido');
+
+  contadorPartidas++;
+  var id = contadorPartidas;
+
+  var venc, perd;
+  if (resMata) { venc = resMata.meuGanhou; perd = !resMata.meuGanhou; }
+  else { venc = gMeus > gAdv; perd = gMeus < gAdv; }
+  var resCls = venc ? ' vitoria' : (perd ? ' derrota' : '');
+  var mini   = venc ? '\u2713' : (perd ? '\u2717' : '=');
+
+  // Eventos (seus gols + os do adversário) ordenados por minuto
+  var eventos = [];
+  golsMeus.forEach(function (e) { eventos.push({ lado: 'meu', autor: e.autor, assist: e.assist }); });
+  golsAdv.forEach(function (e) { eventos.push({ lado: 'adv', autor: e.autor }); });
+  var mins = distribuirMinutos(eventos.length);
+  eventos = UI.shuffle(eventos);
+  eventos.forEach(function (e, i) { e.minuto = mins[i]; });
+  eventos.sort(function (a, b) { return a.minuto - b.minuto; });
+
+  var nomeAdvClube = adversario ? adversario.clube : 'Advers\u00E1rio';
+  var eventosHtml = '';
+  eventos.forEach(function (e) {
+    if (e.lado === 'meu') {
+      var hm = '&#9917; ' + e.minuto + '\' <strong>' + e.autor.nome + '</strong>';
+      if (e.assist) hm += ' <span class="evento-assist">(assist.: ' + e.assist.nome + ')</span>';
+      eventosHtml += '<div class="partida-evento evento-meu">' + hm + '</div>';
+    } else {
+      var nomeAdv = e.autor ? e.autor.nome : nomeAdvClube;
+      var ha = e.minuto + '\' <strong>' + nomeAdv + '</strong>';
+      if (e.autor) ha += ' <span class="evento-adv-clube">(' + nomeAdvClube + ')</span>';
+      eventosHtml += '<div class="partida-evento evento-adv">' + ha + '</div>';
+    }
+  });
+  if (!eventosHtml) eventosHtml = '<div class="partida-evento partida-sem-gols">Sem gols</div>';
+
+  var penNota = (resMata && resMata.penaltis)
+    ? '<div class="partida-evento partida-penaltis">Decidido nos p\u00EAnaltis \u00B7 ' + (venc ? 'voc\u00EA avan\u00E7ou' : 'voc\u00EA caiu') + '</div>'
+    : '';
+
+  var anoTxt = adversario ? (rotuloCompeticao(adversario.competicao) + ' \u00B7 ' + adversario.edicao) : '';
+
+  var div = document.createElement('div');
+  div.className = 'partida-card';   // começa colapsado
+  div.id = 'partida-' + id;
+  div.innerHTML =
+    '<div class="partida-fase">' + faseNome + '</div>' +
+    '<div class="partida-header">' +
+      '<div class="partida-adversario-bloco">' +
+        '<span class="partida-adversario-nome">' + nomeAdvClube + '</span>' +
+        '<span class="partida-adversario-ano">' + anoTxt + '</span>' +
+      '</div>' +
+      '<div class="partida-placar-bloco">' +
+        '<span class="partida-placar' + resCls + '">' + gMeus + ' \u2013 ' + gAdv + '</span>' +
+        '<span class="partida-mini-res' + resCls + '">' + mini + '</span>' +
+        '<button class="partida-toggle-btn" type="button">\u25B4</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="partida-corpo">' +
+      '<div class="partida-eventos">' + eventosHtml + penNota + '</div>' +
+    '</div>';
+
+  div.querySelector('.partida-header').addEventListener('click', function () { toggleCard(id); });
+  var hist = document.getElementById('historico-jogos');
+  if (hist) hist.appendChild(div);   // mata-mata: cronológico (mais recente embaixo)
+}
+
+// Card de encerramento da campanha de mata-mata (campeão ou eliminado na fase X).
+function criarCardFinalMata(campeao, faseQueCaiu) {
+  var anterior = document.getElementById('partida-' + contadorPartidas);
+  if (anterior) anterior.classList.remove('expandido');
+
+  contadorPartidas++;
+  var id = contadorPartidas;
+
+  var comp    = (COMPETICOES[modoSelecionado] && COMPETICOES[modoSelecionado].label) || 'Campanha';
+  var titulo  = campeao ? '\u2605 Campe\u00E3o!' : 'Eliminado';
+  var sub     = campeao ? (comp + ' \u00B7 conclu\u00EDda') : (comp + ' \u00B7 ' + (faseQueCaiu || 'fim da campanha'));
+  var mini    = campeao ? '\u2605' : '\u2717';
+  var miniCls = campeao ? ' vitoria' : ' derrota';
+
+  var div = document.createElement('div');
+  div.className = 'partida-card expandido';
+  div.id = 'partida-' + id;
+  div.innerHTML =
+    '<div class="partida-fase">CAMPANHA CONCLU\u00CDDA</div>' +
+    '<div class="partida-header">' +
+      '<div class="partida-adversario-bloco">' +
+        '<span class="partida-adversario-nome">' + titulo + '</span>' +
+        '<span class="partida-adversario-ano">' + sub + '</span>' +
+      '</div>' +
+      '<div class="partida-placar-bloco">' +
+        '<span class="partida-mini-res' + miniCls + '">' + mini + '</span>' +
+      '</div>' +
+    '</div>';
+
+  var hist = document.getElementById('historico-jogos');
+  if (hist) hist.appendChild(div);
+}
+
+// Desfecho comum: card final, trava a fase no fim, ajusta o botão e revela o resumo.
+function finalizarPularTudoMata(campeao, faseQueCaiu) {
+  criarCardFinalMata(campeao, faseQueCaiu);
+  faseAtual = fasesCampanha.length - 1;
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) {
+    if (campeao) { btn.textContent = 'Nova Campanha';         acaoBotao = 'nova-campanha'; }
+    else         { btn.textContent = 'Montar Novo Time \u25BA'; acaoBotao = 'novo-time'; }
+    btn.disabled = false;
+  }
+  if (btnPularTudo) btnPularTudo.classList.add('escondida');
+  mostrarBotaoResumo(campeao);
+}

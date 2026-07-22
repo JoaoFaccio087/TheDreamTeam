@@ -210,14 +210,18 @@ UI.on('btn-voltar-escalacao', 'click', function () {
 // Skip: re-sorteia qualquer clube e qualquer ano da competição, sem gastar rolagem
 btnSkip.addEventListener('click', fazerSkip);
 
-// "Pular tudo" (Brasileirão): confirma via UI.modalConfirm (componente do UIKit).
+// "Pular tudo": confirma via UI.modalConfirm (componente do UIKit) e roteia por modo —
+// Brasileirão pula a temporada; Liberta/Champions/Copa pulam a campanha até o desfecho.
 if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
   UI.modalConfirm({
     titulo: 'Pular tudo?',
-    texto: 'Todas as rodadas restantes serão simuladas de uma vez e você irá direto para o resultado final do campeonato.',
+    texto: 'Todos os jogos restantes serão simulados de uma vez e você irá direto para o resultado final da campanha.',
     confirmar: 'Confirmar',
     cancelar: 'Cancelar',
-    onConfirmar: pularTudoBrasileirao
+    onConfirmar: function () {
+      if (modoSelecionado === 'brasileirao') pularTudoBrasileirao();
+      else pularTudoMata();
+    }
   });
 });
 

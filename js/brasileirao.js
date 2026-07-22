@@ -373,7 +373,10 @@ function criarCardFinalBrasileirao(pos, campeao) {
 function configurarTelaSimulacao() {
   var ehBrasileirao = (modoSelecionado === 'brasileirao');
   if (tabelaBrasileirao) tabelaBrasileirao.classList.toggle('escondida', !ehBrasileirao);
-  if (btnPularTudo)      btnPularTudo.classList.toggle('escondida', !ehBrasileirao);
+  // "Pular tudo" existe em TODOS os modos de campanha (Brasileirão + mata-matas);
+  // o Brasileirão pula a temporada, os demais pulam a campanha até o desfecho.
+  var temPularTudo = !!COMPETICOES[modoSelecionado];
+  if (btnPularTudo)      btnPularTudo.classList.toggle('escondida', !temPularTudo);
 
   if (ehBrasileirao) {
     montarCampanha();          // já monta a liga e mostra a tabela (20 times, zerada)
