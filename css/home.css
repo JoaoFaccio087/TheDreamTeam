@@ -98,7 +98,7 @@
 .modo-seletor {
   display: inline-flex;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--elev-1);
   border: 1px solid var(--linha);
   border-radius: var(--raio-md);
   padding: 4px;
@@ -127,7 +127,7 @@
   color: var(--txt-soft) !important;
   opacity: 0.75;
 }
-.pilula-soon:hover { background-color: rgba(255, 255, 255, 0.06) !important; }
+.pilula-soon:hover { background-color: var(--elev-1) !important; }
 .pilula-tag {
   margin-left: 7px;
   font-size: var(--fs-legenda);
@@ -190,7 +190,7 @@
   padding: 7px 16px;
   border-radius: var(--raio-xs);          /* quase reto — visual de "escolha/estado", diferente do botão verde */
   border: 1.5px solid var(--linha);
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--elev-1);
   color: var(--txt);
   font-family: 'Archivo', sans-serif;
   font-size: var(--fs-sm);
@@ -201,7 +201,7 @@
 
 /* Hover: superfície levemente mais clara, mantém texto e borda */
 .pilula:hover:not(.pilula-ativa) {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--elev-2);
 }
 
 /* Pílula selecionada: inverte para fundo branco e texto escuro. */
@@ -221,7 +221,9 @@
 }
 
 
-/* CAMPO DE FUTEBOL — gramado com listras e linhas brancas */
+/* CAMPO DE FUTEBOL — gramado com listras e linhas brancas.
+   As cores aqui (grama #2a8018/#309120, linhas e fichas brancas) são FIXAS de propósito:
+   o campo é um gramado verde nos dois temas. Não tokenizar. */
 
 #campo {
   position: relative;    /* necessário para as fichas (position:absolute) ficarem dentro */
@@ -408,7 +410,7 @@
 
 /* Pontinho separador entre as estatísticas */
 .footer-sep {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--txt-fraco);
 }
 
 /* Link da Política de Privacidade no rodapé */
@@ -460,7 +462,7 @@
 .sala-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.66);
+  background: var(--scrim);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
@@ -468,7 +470,7 @@
   position: relative;
   width: 100%;
   max-width: 620px;
-  background: #14161C;
+  background: var(--surface-2);
   border: 1px solid var(--linha);
   border-radius: var(--raio-lg);
   padding: 26px 28px 22px;
@@ -502,7 +504,7 @@
   cursor: pointer;
   transition: color 0.15s ease, background 0.15s ease;
 }
-.sala-fechar:hover { color: var(--txt); background: rgba(255, 255, 255, 0.06); }
+.sala-fechar:hover { color: var(--txt); background: var(--elev-1); }
 
 .sala-colunas {
   display: grid;
@@ -531,7 +533,7 @@
 
 .sala-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
   border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
   color: var(--txt);
@@ -558,7 +560,7 @@
   justify-content: center;
   border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
   color: var(--txt);
   cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease;
