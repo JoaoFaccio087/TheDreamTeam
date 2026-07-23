@@ -23,7 +23,7 @@
 .resumo-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.74);
+  background: var(--scrim);
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
@@ -92,8 +92,8 @@
   min-height: 86px;
   padding: 12px 8px;
   text-align: center;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
 }
 .rci-rot {
@@ -211,7 +211,7 @@
 
 /* Lista de estatísticas */
 .resumo-lista {
-  border: 1px solid rgba(255,255,255,0.09);
+  border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
   overflow: hidden;
 }
@@ -224,14 +224,14 @@
   padding: 7px 10px;
 }
 .resumo-lista-head {
-  background: rgba(255,255,255,0.06);
+  background: var(--elev-1);
   font-size: var(--fs-micro);
   letter-spacing: 0.8px;
   text-transform: uppercase;
   color: var(--txt-soft);
 }
 .resumo-lista-linha {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid var(--linha);
   font-size: var(--fs-mini);
 }
 .resumo-lista-linha:nth-child(even) { background: rgba(255,255,255,0.02); }
@@ -309,4 +309,18 @@
   .resumo-grid { grid-template-columns: 1fr; }
   .resumo-acoes { flex-wrap: wrap; }
   .resumo-btn-destaque { flex-basis: 100%; order: -1; }  /* "Jogar de Novo" em destaque no topo */
+}
+
+/* ── Modo claro: ajustes pontuais ─────────────────────────────────────────
+   Cores que NÃO têm token equivalente (o cartel V/E/D usa verdes/vermelhos
+   suaves, distintos de --accent/--derrota). Sobrescritas só no claro para o
+   modo escuro continuar exatamente como estava. O gramado e as marcas de
+   jogador em cima dele ficam fixos de propósito — é um campo nos dois temas. */
+html.tema-claro .rec-v { color: #2F7D3B; }   /* 4.05:1 no card */
+html.tema-claro .rec-d { color: #B5453C; }   /* 4.30:1 no card */
+html.tema-claro .resumo-lista-linha:nth-child(even) { background: rgba(14, 15, 19, 0.03); }
+html.tema-claro .resumo-btn { border-color: rgba(14, 15, 19, 0.22); }
+html.tema-claro .resumo-btn:hover {
+  background: rgba(14, 15, 19, 0.06);
+  border-color: rgba(14, 15, 19, 0.35);
 }

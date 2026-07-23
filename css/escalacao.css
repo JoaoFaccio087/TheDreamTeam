@@ -252,13 +252,13 @@
 
 /* Pílulas de formação adaptadas para o fundo escuro do tema */
 #jogo-pilulas-formacao .pilula {
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--elev-1);
   border-color: var(--txt-soft);
   color: var(--txt);
 }
 
 #jogo-pilulas-formacao .pilula:hover:not(.pilula-ativa):not(:disabled) {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--elev-2);
 }
 
 #jogo-pilulas-formacao .pilula.pilula-ativa {
@@ -329,7 +329,7 @@
   border: 1px solid var(--txt-soft);
   border-radius: var(--raio-sm);
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--elev-1);
   display: flex;
   align-items: center;
   gap: 14px;
@@ -398,13 +398,13 @@
 }
 
 .item-jogador:hover:not(.ja-escalado) {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--elev-1);
   border-color: var(--txt-soft);
 }
 
 /* Jogador selecionado (aguardando slot) */
 .item-jogador.selecionado {
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--elev-2);
   border-color: var(--accent);
 }
 
@@ -662,7 +662,7 @@
   padding: 6px 9px;
   border-radius: var(--raio-xs);
   font-size: var(--fs-base);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
 }
 
 /* Código da posição (GOL, LD, ZAG...) */
@@ -724,7 +724,7 @@
 
 .jogo-nome-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
   border: 1px solid var(--linha);
   border-radius: var(--raio-xs);
   color: var(--txt);
@@ -768,7 +768,7 @@
 .orcamento-teto { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
 .orcamento-progresso {
   height: 8px; border-radius: 999px; overflow: hidden;
-  background: rgba(255,255,255,0.08);
+  background: var(--elev-1);
 }
 .orcamento-preenchido {
   height: 100%; width: 0%; border-radius: 999px;
@@ -784,7 +784,7 @@
 .lista-filtros { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
 .lista-filtros-linha { display: flex; gap: 6px; }
 .lista-busca, .lista-select {
-  background: var(--cor-fundo, #0e0f13); color: #fff;
+  background: var(--surface-2); color: var(--txt);
   border: 1px solid var(--linha, #262a31); border-radius: var(--raio-sm, 6px);
   padding: 6px 8px; font-family: 'Archivo', sans-serif; font-size: var(--fs-legenda);
 }
