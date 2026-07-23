@@ -132,7 +132,7 @@
   border: 1px solid var(--txt-soft);
   border-radius: var(--raio-sm);
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--elev-1);
 }
 
 /* Rótulo de seção dentro da simulação (ESTATÍSTICAS) */
@@ -159,7 +159,7 @@
   color: var(--txt-soft);
   padding: 4px 6px;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--linha);
 }
 
 /* Coluna de nome: alinhada à esquerda */
@@ -172,12 +172,12 @@
   padding: 5px 6px;
   color: var(--txt);
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--linha);
 }
 
 /* Linha da tabela: hover sutil */
 .stats-tabela tbody tr:hover td {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
 }
 
 
@@ -185,11 +185,11 @@
 
 /* Card: nasce com .expandido; perde a classe ao recolher */
 .partida-card {
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
   padding: 10px 14px;
   margin-bottom: 8px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--elev-1);
 }
 /* Card minimizado: maior e mais legível */
 .partida-card:not(.expandido) { padding: 15px 16px; }
@@ -283,7 +283,7 @@
 .partida-card:not(.expandido) .partida-placar   { font-size: var(--fs-lg); }
 
 .partida-placar.vitoria { color: var(--accent); }
-.partida-placar.derrota { color: #E8593C; }
+.partida-placar.derrota { color: var(--derrota); }
 
 /* Relógio: só quando expandido; some aos 90' via .escondida */
 .partida-relogio {
@@ -297,7 +297,7 @@
 .partida-mini-res { font-size: var(--fs-md); }
 .partida-card.expandido .partida-mini-res { display: none; }
 .partida-mini-res.vitoria { color: var(--accent); }
-.partida-mini-res.derrota { color: #E8593C; }
+.partida-mini-res.derrota { color: var(--derrota); }
 
 /* Botão toggle: ▾ expandido / ▴ recolhido */
 .partida-toggle-btn {
@@ -338,7 +338,7 @@
 
 /* Gol do adversário: vermelho para sinalizar que tomamos o gol */
 .evento-adv {
-  color: #E8593C;
+  color: var(--derrota);
   font-style: italic;
 }
 
@@ -374,13 +374,13 @@
 }
 
 .partida-resultado.vitoria { color: var(--accent); }
-.partida-resultado.derrota { color: #E8593C; }
+.partida-resultado.derrota { color: var(--derrota); }
 
 /* Bloco de disputa de pênaltis dentro do card */
 .penaltis-wrap {
   margin-top: 10px;
   padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--linha);
 }
 
 .penaltis-titulo {
@@ -425,7 +425,7 @@
   font-size: var(--fs-mini);
   line-height: 1.4;
   padding: 6px 2px;                                   /* respiro entre as cobranças */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* separador sutil */
+  border-bottom: 1px solid var(--linha); /* separador sutil */
 }
 
 .pen-nome {
@@ -442,7 +442,7 @@
 }
 
 .pen-ok   { color: var(--accent); }
-.pen-fail { color: #E8593C; }
+.pen-fail { color: var(--derrota); }
 
 /* Placar corrente da disputa */
 .penaltis-placar-txt {
@@ -473,18 +473,18 @@
   color: var(--txt-soft);
   font-weight: 700;
   padding: 3px 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid var(--linha);
 }
 .grupo-tabela thead th:nth-child(n+3) { text-align: right; }
 .grupo-tabela td {
   padding: 6px 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--linha);
   color: var(--txt);
 }
 .grupo-pos  { width: 1.6rem; color: var(--txt-soft); }
 .grupo-num  { text-align: right; color: var(--txt-soft); }
 .grupo-pts  { text-align: right; font-family: 'Archivo Black', sans-serif; color: var(--accent); }
-.grupo-tabela tr.grupo-classifica { background: rgba(255, 255, 255, 0.035); }
+.grupo-tabela tr.grupo-classifica { background: var(--elev-1); }
 .grupo-tabela tr.grupo-classifica .grupo-pos { color: var(--accent); }
 .grupo-tabela tr.grupo-voce td { color: var(--accent); font-weight: 700; }
 
@@ -498,17 +498,17 @@
   font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base);
   margin: 0 0 8px; letter-spacing: 0.3px;
 }
-.fl-status.ok  { color: #2BD46A; }
-.fl-status.out { color: #E0644C; }
+.fl-status.ok  { color: var(--accent); }
+.fl-status.out { color: var(--derrota); }
 .fl-tabela { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
 .fl-tabela thead th {
   text-align: right; font-size: var(--fs-micro); letter-spacing: 0.5px; text-transform: uppercase;
   color: var(--txt-soft); font-weight: 700; padding: 2px 8px 5px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--linha);
 }
 .fl-tabela thead th:nth-child(1), .fl-tabela thead th:nth-child(2) { text-align: left; }
 .fl-tabela td {
-  padding: 5px 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); color: var(--txt);
+  padding: 5px 8px; border-bottom: 1px solid var(--linha); color: var(--txt);
 }
 .fl-pos  { width: 1.6rem; color: var(--txt-soft); }
 .fl-time { width: 100%; }
@@ -536,7 +536,7 @@
   border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--elev-1);
 }
 
 /* Rolagem horizontal no celular (a tabela tem 10 colunas) */
@@ -556,7 +556,7 @@
   color: var(--txt-soft);
   text-align: center;
   padding: 5px 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid var(--linha);
   white-space: nowrap;
 }
 .tb-tabela thead th.tb-th-time { text-align: left; }
@@ -565,7 +565,7 @@
   padding: 5px 4px;
   text-align: center;
   color: var(--txt);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--linha);
   white-space: nowrap;
 }
 .tb-tabela td.tb-time {
@@ -593,10 +593,10 @@
 
 /* Faixas de classificação: G4 (topo) e Z4 (rebaixamento) pela posição */
 .tb-tabela tr.tb-g4 .tb-pos { color: var(--accent); }
-.tb-tabela tr.tb-z4 .tb-pos { color: #E8593C; }
+.tb-tabela tr.tb-z4 .tb-pos { color: var(--derrota); }
 
 /* Sua linha em destaque */
-.tb-tabela tr.tb-voce td { color: var(--accent); font-weight: 700; background: rgba(255, 255, 255, 0.05); }
+.tb-tabela tr.tb-voce td { color: var(--accent); font-weight: 700; background: var(--elev-1); }
 .tb-tabela tr.tb-voce .tb-time { font-weight: 700; }
 
 
@@ -621,8 +621,8 @@
 .sim-tabs {
   display: flex;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
   border-radius: var(--raio-md);
   padding: 4px;
   margin-bottom: 1rem;
@@ -682,8 +682,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
   padding: 4px;
 }
@@ -697,7 +697,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--elev-escura);
 }
 .ck-vazio { color: var(--txt-soft); font-style: italic; opacity: 0.7; }
 .ck-venc  { color: var(--accent); font-weight: 800; }
