@@ -145,20 +145,32 @@ body.tema-champions {
   --accent:   #DCE6F4;   /* prata */
 }
 
-/* Tema Brasileirão: usa a MESMA paleta da tela inicial (fundo quase-preto + verde-campo) */
-body.tema-brasileirao {
-  --bg:       #0E0F13;
-  --txt:      #F4F6F8;
-  --txt-soft: #99A0AA;
-  --accent:   #2BD46A;   /* verde-campo (igual à home) */
-}
+/* Brasileirão e Copa NÃO têm bloco de tema: usavam exatamente a paleta padrão
+   (#0E0F13 / #F4F6F8 / #2BD46A), então só fixavam os valores escuros e impediam o
+   modo claro. Sem tema, essas telas herdam :root ou html.tema-claro normalmente.
 
-/* Tema Copa do Mundo: paleta PADRÃO do jogo (fundo quase-preto, cinza e verde-campo) */
-body.tema-copa {
-  --bg:       #0E0F13;
-  --txt:      #F4F6F8;
-  --txt-soft: #99A0AA;
-  --accent:   #2BD46A;   /* verde-campo (igual à home) */
+   Libertadores e Champions mantêm a identidade da competição e são SEMPRE escuras,
+   inclusive no modo claro (decisão do João, jul/2026). Como esses blocos só trocam
+   --bg/--txt/--accent, aqui reancoramos o RESTO dos tokens nos valores escuros —
+   senão, no claro, a tela ficaria com fundo escuro e superfícies/bordas claras. */
+body.tema-libertadores,
+body.tema-champions {
+  --perigo:        #ff6b6b;
+  --surface:       #181B21;
+  --surface-2:     #14161C;
+  --linha:         rgba(255, 255, 255, 0.09);
+  --btn-txt:       #0B0C0F;
+  --accent-sombra: #178A41;
+  --titulo-sombra: #464C56;
+  --derrota:       #E8593C;
+  --elev-escura:   rgba(0, 0, 0, 0.25);
+  --elev-1:        rgba(255, 255, 255, 0.06);
+  --elev-2:        rgba(255, 255, 255, 0.12);
+  --scrim:         rgba(0, 0, 0, 0.66);
+  --txt-fraco:     rgba(255, 255, 255, 0.25);
+  --txt-dim:       #666666;
+  --ouro:          #D9B25A;
+  --ouro-claro:    #E7C77A;
 }
 
 body {

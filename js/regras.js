@@ -2,11 +2,14 @@
 
 // Fonte única das competições. A chave é o id usado no código; dela saem o valor de
 // "competicao" no DADOS, o rótulo exibido e o tema de cor.
+// Só Libertadores e Champions têm tema próprio (identidade visual da competição, no
+// modo Um Jogador). Brasileirão e Copa usam a paleta da plataforma — sem `tema`, elas
+// acompanham o modo claro/escuro. O Multijogador nunca aplica tema de competição.
 const COMPETICOES = {
   libertadores: { dados: 'Libertadores', label: 'Libertadores',    tema: 'tema-libertadores' },
   champions:    { dados: 'Champions',    label: 'Champions League', tema: 'tema-champions' },
-  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão',      tema: 'tema-brasileirao' },
-  copa:         { dados: 'Copa do Mundo', label: 'Copa do Mundo',   tema: 'tema-copa' }
+  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão' },
+  copa:         { dados: 'Copa do Mundo', label: 'Copa do Mundo' }
 };
 
 // Converte o valor de "competicao" dos dados no rótulo exibido (ex.: "Champions" → "Champions League").

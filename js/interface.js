@@ -3,7 +3,9 @@
 function aplicarTema(idCompeticao) {
   document.body.classList.remove('tema-libertadores', 'tema-champions', 'tema-brasileirao', 'tema-copa');
   var cfg = COMPETICOES[idCompeticao];
-  if (cfg) document.body.classList.add(cfg.tema);
+  // Só Libertadores e Champions têm identidade visual própria. Brasileirão e Copa
+  // usam a paleta da plataforma (e por isso acompanham o modo claro/escuro).
+  if (cfg && cfg.tema) document.body.classList.add(cfg.tema);
 }
 
 function removerTema() {
