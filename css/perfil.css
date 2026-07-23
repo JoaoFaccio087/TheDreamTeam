@@ -16,7 +16,7 @@
 }
 .perfil-id { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
 .perfil-nome-topo { display: flex; align-items: center; gap: var(--sp-3); }
-.perfil-username { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
+.perfil-username { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--txt); }
 .perfil-editar-btn {
   background: none; border: none; cursor: pointer; padding: 2px;
   display: inline-flex; color: var(--txt-soft, #9aa6b2); transition: color 0.15s ease;
@@ -24,7 +24,7 @@
 .perfil-editar-btn svg { width: 16px; height: 16px; }
 .perfil-editar-btn:hover { color: var(--accent, #2BD46A); }
 .perfil-email { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); word-break: break-all; }
-.perfil-nome-time-txt { font-size: var(--fs-sm); color: #cdd3da; }
+.perfil-nome-time-txt { font-size: var(--fs-sm); color: var(--txt-soft); }
 
 /* Botão de sair (logout) ao lado das infos do usuário, empurrado para a direita. */
 .perfil-logout-btn {
@@ -32,7 +32,7 @@
   display: inline-flex; align-items: center; gap: var(--sp-3);
   background: transparent; cursor: pointer;
   color: var(--txt-soft, #9aa6b2);
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border: 1.5px solid var(--linha);
   border-radius: var(--raio-md);
   padding: 0.5rem 0.9rem;
   font-family: 'Archivo', sans-serif; font-weight: var(--peso-forte); font-size: var(--fs-sm);
@@ -46,14 +46,14 @@
   display: flex; align-items: center; gap: var(--sp-5);
   margin: 1.1rem 0 0.75rem; color: var(--txt-soft, #9aa6b2);
 }
-.perfil-sep::before, .perfil-sep::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
+.perfil-sep::before, .perfil-sep::after { content: ''; flex: 1; height: 1px; background: var(--linha); }
 .perfil-sep span { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); letter-spacing: 0.05em; }
 
 /* ── Estatísticas por tópico (sem caixa) ── */
 .perfil-acordeoes {
   display: flex; flex-direction: column; gap: var(--sp-3);
   flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem;
-  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent;
+  scrollbar-width: thin; scrollbar-color: var(--txt-fraco) transparent;
 }
 /* Scrollbar discreto e semi-transparente (padrão do app) */
 .perfil-acordeoes::-webkit-scrollbar,
@@ -62,22 +62,22 @@
 .historico-lista::-webkit-scrollbar-track { background: transparent; }
 .perfil-acordeoes::-webkit-scrollbar-thumb,
 .historico-lista::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.16);
+  background: var(--txt-fraco);
   border-radius: var(--raio-pill);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 .perfil-acordeoes::-webkit-scrollbar-thumb:hover,
-.historico-lista::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.30); background-clip: padding-box; }
+.historico-lista::-webkit-scrollbar-thumb:hover { background: var(--txt-soft); background-clip: padding-box; }
 
 /* Cada categoria é uma seção expansível: cabeçalho clicável + corpo que abre/fecha. */
-.perfil-acord { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.perfil-acord { border-bottom: 1px solid var(--linha); }
 .acord-head {
   width: 100%; display: flex; align-items: center; gap: var(--sp-4);
   background: none; border: none; cursor: pointer;
-  padding: 0.7rem 0.1rem; text-align: left; color: #fff;
+  padding: 0.7rem 0.1rem; text-align: left; color: var(--txt);
 }
-.acord-nome { flex: 1; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
+.acord-nome { flex: 1; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--txt); }
 .acord-tag { font-family: 'Archivo', sans-serif; font-weight: var(--peso-normal); font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
 .acord-seta { width: 18px; height: 18px; color: var(--txt-soft, #9aa6b2); flex: 0 0 auto; transition: transform 0.2s ease; }
 .acord-aberta .acord-seta { transform: rotate(180deg); }
@@ -93,7 +93,7 @@
 
 .perfil-stat {
   position: relative;
-  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--elev-1); border: 1px solid var(--linha);
   border-radius: var(--raio-md); padding: 0.55rem 0.3rem;
   display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
 }
@@ -110,7 +110,7 @@
   color: #fff; font-family: 'Archivo', sans-serif; font-size: var(--fs-mini); font-weight: 500; line-height: 1.35;
   box-shadow: 0 4px 14px rgba(0,0,0,0.5); pointer-events: none; z-index: 30;
 }
-.perfil-stat-num { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: #fff; }
+.perfil-stat-num { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: var(--txt); }
 .perfil-stat-lbl { font-size: var(--fs-legenda); color: var(--txt-soft, #9aa6b2); text-align: center; }
 
 .perfil-carregando, .perfil-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-sm); text-align: center; padding: 0.9rem 0; }
@@ -130,7 +130,7 @@
   display: flex; align-items: center; gap: var(--sp-5);
   color: var(--txt-soft, #9aa6b2); font-size: var(--fs-mini); margin-top: 0.35rem;
 }
-.editar-sep-senha::before, .editar-sep-senha::after { content: ''; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.12); }
+.editar-sep-senha::before, .editar-sep-senha::after { content: ''; flex: 1; height: 1px; background: var(--linha); }
 .editar-acoes { display: flex; gap: var(--sp-6); margin-top: 1.3rem; }
 /* Anula o width:100%/display:block do .btn-rolar para os dois dividirem o espaço. */
 .editar-acoes .btn-rolar,
@@ -150,28 +150,28 @@
 .historico-lista {
   display: flex; flex-direction: column; gap: var(--sp-3);
   flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem; margin-top: 0.3rem;
-  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent;
+  scrollbar-width: thin; scrollbar-color: var(--txt-fraco) transparent;
 }
 .historico-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-base); text-align: center; padding: 1.5rem 0.5rem; }
 .hist-item {
-  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--elev-1); border: 1px solid var(--linha);
   border-radius: var(--raio-md); padding: 0.6rem 0.7rem; display: flex; flex-direction: column; gap: var(--sp-2);
 }
 .hist-item-campeao { border-color: rgba(217, 178, 90, 0.55); background: rgba(217, 178, 90, 0.08); }
 .hist-topo { display: flex; align-items: center; gap: var(--sp-3); }
-.hist-comp { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base); color: #fff; flex: 1; }
+.hist-comp { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base); color: var(--txt); flex: 1; }
 .hist-modo {
   font-size: var(--fs-legenda); text-transform: uppercase; letter-spacing: 0.05em;
-  color: var(--txt-soft, #9aa6b2); border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--txt-soft, #9aa6b2); border: 1px solid var(--linha);
   border-radius: var(--raio-pill); padding: 0.12rem 0.55rem;
 }
 .hist-data { font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); }
 .hist-linha { display: flex; align-items: center; gap: var(--sp-6); font-size: var(--fs-sm); flex-wrap: wrap; }
 .hist-record b { font-family: 'Archivo Black', sans-serif; }
-.hist-v { color: #2BD46A; }
+.hist-v { color: var(--accent); }
 .hist-e { color: #D9B25A; }
 .hist-d { color: var(--perigo); }
-.hist-gols { color: #fff; }
+.hist-gols { color: var(--txt); }
 .hist-gols i { color: var(--txt-soft, #9aa6b2); font-style: normal; }
 .hist-campeao { color: #D9B25A; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); margin-left: auto; }
 .hist-pos { color: var(--txt-soft, #c2ccd6); font-size: var(--fs-sm); margin-left: auto; }
@@ -217,7 +217,7 @@
 }
 .btn-excluir-conta:hover { background: var(--perigo); color: #1a0606; border-color: var(--perigo); }
 .btn-excluir-conta:disabled { opacity: 0.6; cursor: default; }
-.excluir-aviso { font-size: var(--fs-sm); color: #cdd3da; line-height: 1.5; margin: 0 0 1rem; }
+.excluir-aviso { font-size: var(--fs-sm); color: var(--txt-soft); line-height: 1.5; margin: 0 0 1rem; }
 .excluir-card .editar-acoes { margin-top: 1.2rem; }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -284,7 +284,7 @@
 .perfil-col-escalados { position: sticky; top: 1rem; }
 .perfil-escalados-titulo {
   font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm);
-  letter-spacing: 1.5px; color: #fff; text-align: center; margin: 0 0 0.8rem;
+  letter-spacing: 1.5px; color: var(--txt); text-align: center; margin: 0 0 0.8rem;
 }
 .perfil-campo-escalados {
   position: relative; width: 100%; aspect-ratio: 3 / 4; margin: 0 auto;
@@ -362,9 +362,9 @@
   flex-wrap: wrap;
 }
 .perfil-aba {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #aaa;
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  color: var(--txt-soft);
   font-family: 'Archivo', sans-serif;
   font-weight: 700;
   font-size: var(--fs-sm);
@@ -374,7 +374,7 @@
   cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-.perfil-aba:hover { background: rgba(255,255,255,0.08); }
+.perfil-aba:hover { background: var(--elev-2); }
 .perfil-aba-ativa { background: var(--accent, #2BD46A); border-color: var(--accent, #2BD46A); color: var(--bg, #0E0F13); }
 
 /* Painéis de aba */
@@ -392,16 +392,16 @@
   display: flex; align-items: baseline; justify-content: space-between;
   margin-bottom: 1.2rem;
 }
-.conq-cab-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: #fff; }
+.conq-cab-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--txt); }
 .conq-cab-total  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--accent, #2BD46A); }
 
 .conq-categoria { margin-bottom: 1.6rem; }
 .conq-cat-head {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 0.7rem; padding-bottom: 0.35rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid var(--linha);
 }
-.conq-cat-nome { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm); letter-spacing: 0.5px; color: #cdd3da; text-transform: uppercase; }
+.conq-cat-nome { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm); letter-spacing: 0.5px; color: var(--txt-soft); text-transform: uppercase; }
 .conq-cat-prog { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
 
 .conq-grid {
@@ -414,9 +414,9 @@
   position: relative;
   display: flex; flex-direction: column; gap: 0.3rem;
   padding: 0.9rem 0.85rem;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--linha);
   border-radius: var(--raio-md);
-  background: rgba(255,255,255,0.03);
+  background: var(--elev-1);
   transition: transform 0.12s ease, border-color 0.12s ease;
 }
 .conq-icone { width: 26px; height: 26px; margin-bottom: 0.2rem; }
@@ -442,7 +442,7 @@
 /* Desbloqueada: a raridade domina a cor (borda/ícone/nome). */
 .conq-desbloqueada { border-color: var(--rar-cor); background: color-mix(in srgb, var(--rar-cor) 8%, transparent); }
 .conq-desbloqueada .conq-icone { color: var(--rar-cor); }
-.conq-desbloqueada .conq-nome  { color: #fff; }
+.conq-desbloqueada .conq-nome  { color: var(--txt); }
 .conq-desbloqueada:hover { transform: translateY(-2px); box-shadow: 0 6px 18px color-mix(in srgb, var(--rar-cor) 22%, transparent); }
 /* Lendária desbloqueada: leve brilho para se destacar das demais. */
 .conq-rar-lendario.conq-desbloqueada { box-shadow: 0 0 14px color-mix(in srgb, var(--rar-lendario) 30%, transparent); }
@@ -450,7 +450,7 @@
 /* Bloqueada: esmaecida; a raridade fica discreta (só a tag mantém a cor). */
 .conq-bloqueada { opacity: 0.5; }
 .conq-bloqueada .conq-icone { color: var(--txt-soft, #9aa6b2); }
-.conq-bloqueada .conq-nome  { color: #cdd3da; }
+.conq-bloqueada .conq-nome  { color: var(--txt-soft); }
 
 /* ═══════════════════════════════════════════════════════════════════
    TOAST DE CONQUISTA (estilo Steam) — Fase 4
@@ -541,11 +541,11 @@
 .escudo-cor {
   width: 100%; aspect-ratio: 1; border-radius: 6px; cursor: pointer;
   border: 2px solid transparent; padding: 0;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  box-shadow: inset 0 0 0 1px var(--linha);
   transition: transform .1s ease;
 }
 .escudo-cor-ativa { border-color: var(--cor-marca, #D9B25A); transform: scale(1.1); }
-.escudo-cor-nenhuma { background: transparent; color: #9AA0A6; font-size: 12px; }
+.escudo-cor-nenhuma { background: transparent; color: var(--txt-soft); font-size: 12px; }
 
 /* O modal precisa CABER e ROLAR. Sem max-height ele estoura a tela do celular: o rodapé
    com Cancelar/Salvar fica fora da área visível e não há como sair — só recarregando. */

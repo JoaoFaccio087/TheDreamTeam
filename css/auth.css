@@ -57,7 +57,7 @@ html.tema-claro .tema-ico-sol { display: block; }
 .modal-auth-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: var(--scrim);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
@@ -74,7 +74,7 @@ html.tema-claro .tema-ico-sol { display: block; }
   right: 14px;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--txt-soft);
   font-size: var(--fs-xl);   /* 1.4rem */
   line-height: 1;
   cursor: pointer;
@@ -83,15 +83,15 @@ html.tema-claro .tema-ico-sol { display: block; }
   transition: color 0.15s;
 }
 
-.modal-auth-fechar:hover { color: #fff; }
+.modal-auth-fechar:hover { color: var(--txt); }
 
 /* ============================================================
    Card de autenticação (dentro do modal)
    ============================================================ */
 
 .auth-card {
-  background: rgba(18, 18, 20, 0.97);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: var(--surface-2);
+  border: 1px solid var(--linha);
   border-radius: 18px;
   padding: 36px 32px 32px;
   width: 100%;
@@ -115,21 +115,21 @@ html.tema-claro .tema-ico-sol { display: block; }
 .auth-logo-slogan {
   font-size: var(--fs-legenda);   /* era 0.63rem → padronizado p/ 0.62 */
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--txt-soft);
   text-align: center;
   margin-top: 3px;
 }
 
 .auth-divisor {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--linha);
   margin: 0;
 }
 
 /* Abas Entrar / Cadastre-se */
 .auth-tabs {
   display: flex;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--linha);
 }
 
 .auth-tab {
@@ -137,7 +137,7 @@ html.tema-claro .tema-ico-sol { display: block; }
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--txt-soft);
   font-family: 'Archivo', sans-serif;
   font-size: var(--fs-base);   /* 0.9rem */
   font-weight: var(--peso-medio);   /* 600 */
@@ -158,7 +158,7 @@ html.tema-claro .tema-ico-sol { display: block; }
   font-family: 'Archivo', sans-serif;
   font-size: var(--fs-sm);   /* era 0.8rem → padronizado p/ 0.82 */
   font-weight: var(--peso-medio);   /* 600 */
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--txt-soft);
   letter-spacing: 0.04em;
   /* ZERO, e é de propósito. Aqui havia `margin-bottom: -6px`: uma compensação calibrada
      para o `.auth-form` (gap: 8px → 8-6 = 2px de folga). O problema é que o label é usado
@@ -178,10 +178,10 @@ html.tema-claro .tema-ico-sol { display: block; }
 .auth-form .auth-label { margin-bottom: calc(var(--sp-5, 0.7rem) * -1 + 2px); }
 
 .auth-input {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
   border-radius: 10px;
-  color: #fff;
+  color: var(--txt);
   font-family: 'Archivo', sans-serif;
   font-size: var(--fs-base);   /* era 0.95rem → padronizado p/ 0.9 */
   padding: 12px 14px;
@@ -194,10 +194,10 @@ html.tema-claro .tema-ico-sol { display: block; }
 
 .auth-input:focus {
   border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--elev-2);
 }
 
-.auth-input::placeholder { color: rgba(255, 255, 255, 0.25); }
+.auth-input::placeholder { color: var(--txt-fraco); }
 
 .auth-btn-submit {
   margin-top: 8px;
@@ -285,7 +285,7 @@ html.tema-claro .tema-ico-sol { display: block; }
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  color: #2BD46A;
+  color: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
