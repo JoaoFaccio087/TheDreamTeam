@@ -1051,7 +1051,7 @@
 .sala-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.66);
+  background: var(--scrim);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
 }
@@ -1059,7 +1059,7 @@
   position: relative;
   width: 100%;
   max-width: 620px;
-  background: #14161C;
+  background: var(--surface-2);
   border: 1px solid var(--linha);
   border-radius: var(--raio-lg);
   padding: 26px 28px 22px;
@@ -1079,7 +1079,7 @@
   cursor: pointer;
   transition: color 0.15s ease, background 0.15s ease;
 }
-.sala-fechar:hover { color: var(--txt); background: rgba(255, 255, 255, 0.06); }
+.sala-fechar:hover { color: var(--txt); background: var(--elev-1); }
 
 .sala-colunas {
   display: grid;
@@ -1108,7 +1108,7 @@
 
 .sala-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
   border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
   color: var(--txt);
@@ -1135,7 +1135,7 @@
   justify-content: center;
   border: 1px solid var(--linha);
   border-radius: var(--raio-sm);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--elev-1);
   color: var(--txt);
   cursor: pointer;
   transition: border-color 0.15s ease, color 0.15s ease;

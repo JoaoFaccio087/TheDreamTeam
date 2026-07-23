@@ -96,24 +96,27 @@ html {
    sobrescrevem estes valores DENTRO do jogo — decisão da fase final.
    ───────────────────────────────────────────────────────────────────────── */
 html.tema-claro {
-  --bg:       #E6E9EF;   /* cinza-claro (mais fechado que o branco dos cards, p/ dar separação) */
-  --txt:      #14161B;   /* texto quase-preto */
-  --txt-soft: #5B636E;   /* texto secundário (cinza escuro p/ contraste) */
-  --accent:   #12A150;   /* verde-campo aprofundado (legível no branco) */
-  --perigo:   #D64541;   /* vermelho de ação destrutiva aprofundado */
+  /* Paleta derivada do PRÓPRIO preto da marca (#0E0F13 "Onyx", matiz 228° / sat 15%),
+     variando só a luminosidade. Assim o claro é o mesmo universo do escuro, não um
+     cinza neutro qualquer. Nada de branco puro: o #FFF destoava do verde e da marca. */
+  --bg:       #DCDEE5;   /* L88% — canvas com corpo, não ofuscante */
+  --txt:      #0E0F13;   /* o Onyx puro: o preto do modo escuro vira o texto do claro */
+  --txt-soft: #565D75;   /* L40% da mesma rampa — 4.85:1 no fundo, 5.78:1 no card */
+  --accent:   #0D833F;   /* verde aprofundado: legível como TEXTO no claro (3.6:1 / 4.3:1) */
+  --perigo:   #C3352B;   /* vermelho aprofundado (4.0:1 / 4.8:1) */
 
-  --surface:       #FFFFFF;                 /* cards e superfícies (elevação sutil sobre o bg) */
-  --linha:         rgba(14, 15, 19, 0.12);  /* divisórias e bordas escuras translúcidas */
-  --btn-txt:       #0B0C0F;                 /* texto escuro sobre o verde (mantém contraste) */
-  --accent-sombra: #0C7A3C;                 /* verde mais escuro p/ sombra do botão */
-  --titulo-sombra: #CBD0D8;                 /* cinza-claro p/ sombra da manchete */
+  --surface:       #F0F1F4;                 /* L95% — cards sobem do fundo sem virar branco */
+  --linha:         rgba(14, 15, 19, 0.14);  /* divisórias: o próprio Onyx translúcido */
+  --btn-txt:       #0E0F13;                 /* Onyx sobre o verde (3.95:1, botão grande/bold) */
+  --accent-sombra: #095E2C;                 /* verde escuro p/ a sombra sólida do botão */
+  --titulo-sombra: #BFC3CE;                 /* sombra da manchete, um degrau abaixo do fundo */
 
-  /* Superfícies translúcidas / elevação — no claro: preto-azulado com alfa baixo sobre o off-white. */
+  /* Superfícies translúcidas / elevação — no claro: o Onyx com alfa baixo. */
   --elev-1:     rgba(14, 15, 19, 0.05);     /* superfície/hover sutil */
   --elev-2:     rgba(14, 15, 19, 0.09);     /* hover mais forte */
-  --surface-2:  #FFFFFF;                    /* card do modal de sala (branco sobre o off-white) */
+  --surface-2:  #F6F7F9;                    /* L97% — modais flutuam acima dos cards */
   --scrim:      rgba(14, 15, 19, 0.40);     /* escurece a página atrás do modal */
-  --txt-fraco:  rgba(20, 22, 27, 0.30);     /* separador apagado (escuro sobre claro) */
+  --txt-fraco:  rgba(14, 15, 19, 0.30);     /* separador apagado */
 }
 
 /* Tema Libertadores: preto e dourado */
