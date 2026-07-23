@@ -42,6 +42,9 @@ html {
   --elev-2:     rgba(255, 255, 255, 0.12);  /* hover mais forte (pílula) */
   --surface-2:  #14161C;                    /* superfície secundária (card do modal de sala) */
   --scrim:      rgba(0, 0, 0, 0.66);        /* fundo escurecido atrás de modais */
+  --ouro:       #D9B25A;                    /* dourado (conquistas, destaques do online) */
+  --ouro-claro: #E7C77A;                    /* dourado claro (realce sobre o dourado) */
+  --txt-dim:    #666666;                    /* cinza apagado de texto (listas/legendas do online) */
   --txt-fraco:  rgba(255, 255, 255, 0.25);  /* texto/separador bem apagado */
   /* ─────────────────────────────────────────────────────────────────────────
      TOKENS DE TIPOGRAFIA E ESPAÇAMENTO (Etapa 1 — apenas DISPONÍVEIS).
@@ -120,6 +123,9 @@ html.tema-claro {
   --elev-2:     rgba(14, 15, 19, 0.09);     /* hover mais forte */
   --surface-2:  #F6F7F9;                    /* L97% — modais flutuam acima dos cards */
   --scrim:      rgba(14, 15, 19, 0.40);     /* escurece a página atrás do modal */
+  --ouro:       #8A6B1F;                    /* ouro aprofundado p/ ler no claro (4.1:1) */
+  --ouro-claro: #6F5514;                    /* ouro claro vira o mais escuro no claro */
+  --txt-dim:    #5F6575;                    /* cinza apagado legível no claro (4.3:1 / 4.8:1) */
   --txt-fraco:  rgba(14, 15, 19, 0.30);     /* separador apagado */
 }
 

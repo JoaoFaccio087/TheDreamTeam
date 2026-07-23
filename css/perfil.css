@@ -169,11 +169,11 @@
 .hist-linha { display: flex; align-items: center; gap: var(--sp-6); font-size: var(--fs-sm); flex-wrap: wrap; }
 .hist-record b { font-family: 'Archivo Black', sans-serif; }
 .hist-v { color: var(--accent); }
-.hist-e { color: #D9B25A; }
+.hist-e { color: var(--ouro); }
 .hist-d { color: var(--perigo); }
 .hist-gols { color: var(--txt); }
 .hist-gols i { color: var(--txt-soft, #9aa6b2); font-style: normal; }
-.hist-campeao { color: #D9B25A; font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); margin-left: auto; }
+.hist-campeao { color: var(--ouro); font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); margin-left: auto; }
 .hist-pos { color: var(--txt-soft, #c2ccd6); font-size: var(--fs-sm); margin-left: auto; }
 
 /* Botão "Ver resumo" da campanha (dentro de cada item do histórico) */
