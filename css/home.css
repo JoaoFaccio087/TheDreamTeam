@@ -348,6 +348,12 @@
   gap: 16px;                   /* respiro entre texto e ícone */
 }
 
+/* No modo claro, os cards brancos ganham uma sombra sutil p/ "descolar" do fundo cinza.
+   No escuro ficam chapados de propósito (a superfície já é mais clara que o fundo). */
+html.tema-claro .step-card {
+  box-shadow: 0 1px 3px rgba(14, 15, 19, 0.07);
+}
+
 /* Grupo de texto à esquerda do card */
 .step-texto {
   display: flex;

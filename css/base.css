@@ -96,7 +96,7 @@ html {
    sobrescrevem estes valores DENTRO do jogo — decisão da fase final.
    ───────────────────────────────────────────────────────────────────────── */
 html.tema-claro {
-  --bg:       #F4F6F8;   /* fundo off-white */
+  --bg:       #E6E9EF;   /* cinza-claro (mais fechado que o branco dos cards, p/ dar separação) */
   --txt:      #14161B;   /* texto quase-preto */
   --txt-soft: #5B636E;   /* texto secundário (cinza escuro p/ contraste) */
   --accent:   #12A150;   /* verde-campo aprofundado (legível no branco) */
