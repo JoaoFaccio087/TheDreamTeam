@@ -236,6 +236,12 @@
     'Young Boys':              ['#FFD100', '#000000'],
     'Zürich':                  ['#FFFFFF', '#0A5CA8'],
     'Újpest':                  ['#5B2C86', '#FFFFFF'],
+
+    // Premier League (jul/2026) — ingleses que ainda não estavam no catálogo
+    'Bournemouth':             ['#DA291C', '#000000'],
+    'Crystal Palace':          ['#C4122E', '#1B458F'],
+    'Newcastle United':        ['#241F20', '#FFFFFF'],
+    'Sunderland':              ['#EB172B', '#FFFFFF'],
   }
   var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS);
 
@@ -460,6 +466,12 @@
     'Young Boys':              { padrao: 'metade' },                                  // amarelo e preto
     'Zürich':                  { padrao: 'faixa-h' },                                 // branco e azul
     'Újpest':                  { padrao: 'faixa-h' },                                 // roxo e branco
+
+    // Premier League (jul/2026) — os três usam listras verticais na camisa
+    'Bournemouth':             { padrao: 'listras-v' },                               // vermelho e preto
+    'Crystal Palace':          { padrao: 'listras-v' },                               // vermelho e azul
+    'Newcastle United':        { padrao: 'listras-v' },                               // preto e branco
+    'Sunderland':              { padrao: 'listras-v' },                               // vermelho e branco
   };
 
   var ESTILO_CLUBES = Object.assign({}, ESTILO_BRASILEIRAO, ESTILO_LIBERTADORES, ESTILO_CHAMPIONS);
