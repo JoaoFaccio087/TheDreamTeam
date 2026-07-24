@@ -20,6 +20,11 @@
   //  Os brasileiros que também jogam a Libertadores ficam SÓ aqui:
   //  são o mesmo clube, e duplicar criaria risco de divergência.
   // ============================================================
+  // Clubes da Premier League — usado só para AGRUPAR na demo (as cores/estilos moram
+  // junto com os europeus em CORES_CHAMPIONS). Declarado aqui no topo de propósito:
+  // se ficar depois do uso, o var hoisting entrega `undefined` em silêncio.
+  var CLUBES_PREMIER = ['Arsenal', 'Aston Villa', 'Bournemouth', 'Brentford', 'Brighton', 'Burnley', 'Chelsea', 'Crystal Palace', 'Everton', 'Fulham', 'Leeds United', 'Liverpool', 'Manchester City', 'Manchester United', 'Newcastle United', 'Nottingham Forest', 'Sunderland', 'Tottenham', 'West Ham United', 'Wolverhampton'];
+
   var CORES_BRASILEIRAO = {
     'América-RJ':          ['#00913F', '#FFFFFF'],
     'Athletico-PR':        ['#B10000', '#000000'],
@@ -240,7 +245,14 @@
     // Premier League (jul/2026) — ingleses que ainda não estavam no catálogo
     'Bournemouth':             ['#DA291C', '#000000'],
     'Crystal Palace':          ['#C4122E', '#1B458F'],
+    'Brighton':                ['#0057B8', '#FFFFFF'],
+    'Brentford':               ['#E30613', '#FFFFFF'],
+    'Everton':                 ['#003399', '#FFFFFF'],
+    'Fulham':                  ['#FFFFFF', '#231F20'],
+    'Burnley':                 ['#6C1D45', '#99D6EA'],
     'Newcastle United':        ['#241F20', '#FFFFFF'],
+    'West Ham United':         ['#7A263A', '#1BB1E7'],
+    'Wolverhampton':           ['#FDB913', '#231F20'],
     'Sunderland':              ['#EB172B', '#FFFFFF'],
   }
   var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS);
@@ -431,7 +443,7 @@
     'Hamburg':                 { padrao: 'faixa-h' },                                 // branco e azul
     'Hibernian':               { padrao: 'faixa-h' },                                 // verde e branco
     'IFK Göteborg':            { padrao: 'faixa-h' },                                 // azul e branco
-    'Leeds United':            { padrao: 'faixa-v' },                                 // branco, azul e amarelo
+    'Leeds United':            { padrao: 'faixa-h' },                                 // branco com faixa azul
     'Legia Warsaw':            { padrao: 'faixa-v' },                                 // branco e verde
     'Lyon':                    { padrao: 'lyon' },                       // faixa vermelha no topo, corpo azul
     'Malmö FF':                { padrao: 'solido' },                                  // celeste
@@ -470,7 +482,14 @@
     // Premier League (jul/2026) — os três usam listras verticais na camisa
     'Bournemouth':             { padrao: 'listras-v' },                               // vermelho e preto
     'Crystal Palace':          { padrao: 'listras-v' },                               // vermelho e azul
+    'Brighton':                { padrao: 'listras-v' },                               // azul e branco
+    'Brentford':               { padrao: 'listras-v' },                               // vermelho e branco
+    'Everton':                 { padrao: 'solido' },                                  // azul royal
+    'Fulham':                  { padrao: 'faixa-h' },                                 // branco com faixa preta
+    'Burnley':                 { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
     'Newcastle United':        { padrao: 'listras-v' },                               // preto e branco
+    'West Ham United':         { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
+    'Wolverhampton':           { padrao: 'solido' },                                  // ouro
     'Sunderland':              { padrao: 'listras-v' },                               // vermelho e branco
   };
 
@@ -552,7 +571,8 @@
       return {
         'Brasileirão':  Object.keys(CORES_BRASILEIRAO),
         'Libertadores': Object.keys(CORES_LIBERTADORES).concat(BRASILEIROS_NA_LIBERTADORES),
-        'Champions':    Object.keys(CORES_CHAMPIONS)
+        'Champions':    Object.keys(CORES_CHAMPIONS).filter(function (n) { return CLUBES_PREMIER.indexOf(n) < 0; }),
+        'Premier League': CLUBES_PREMIER.slice()
       };
     },
     brasileirosNaLibertadores: function () { return BRASILEIROS_NA_LIBERTADORES.slice(); },
