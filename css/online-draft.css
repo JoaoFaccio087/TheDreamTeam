@@ -1,0 +1,271 @@
+/* ============================================================
+   online-draft.css — Draft e visualização de elencos
+   Fatia SEQUENCIAL de online.css (linhas 398-662 do original).
+   ⚠️ A ordem dos <link> no index.html reproduz a ordem original — não
+   reordenar, senão a cascata muda.
+   ============================================================ */
+/* ── DRAFT ──────────────────────────────────────────────────────────────── */
+.draft-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, clamp(380px, 36vw, 600px)) clamp(280px, 24vw, 400px);
+  justify-content: center;
+  gap: var(--sp-9);
+  padding: 0 0 0.8rem;
+  align-items: start;
+}
+.draft-campo-col { display: flex; flex-direction: column; gap: var(--sp-3); align-items: center; }
+.draft-info-col  { display: flex; flex-direction: column; gap: var(--sp-6); padding-top: 0.2rem; }
+
+.draft-ordem-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  max-height: 470px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--txt-fraco) transparent;
+}
+.draft-ordem-lista::-webkit-scrollbar { width: 6px; }
+.draft-ordem-lista::-webkit-scrollbar-track { background: transparent; }
+.draft-ordem-lista::-webkit-scrollbar-thumb { background: var(--elev-2); border-radius: var(--raio-xs); }
+.draft-ordem-lista::-webkit-scrollbar-thumb:hover { background: var(--elev-2); }
+
+/* Tag "BOT" pequena depois do nome do time */
+.draft-bot-tag {
+  font-size: var(--fs-legenda);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--txt-soft);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-xs);
+  padding: 1px 4px;
+  margin-left: 5px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+#draft-titulo .draft-bot-tag { font-size: var(--fs-sm); }
+
+/* Tag "VOCÊ" — verde, distinta do cinza dos bots */
+.draft-eu-tag {
+  font-size: var(--fs-legenda);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #06210F;
+  background: var(--accent);
+  border-radius: var(--raio-xs);
+  padding: 1px 5px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+/* Faixa "MEU TIME" (horizontal) durante o draft */
+.draft-meu-time-wrap { max-width: 760px; margin: 0.2rem auto 0.4rem; text-align: center; }
+.draft-meu-time-label {
+  font-family: 'Archivo', sans-serif;
+  font-size: var(--fs-mini); letter-spacing: 1px; color: var(--txt-soft);
+  text-transform: uppercase; margin: 0 0 0.4rem;
+}
+.draft-meu-time { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-2); }
+.meu-time-chip {
+  display: flex; align-items: center; gap: var(--sp-1);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-sm); padding: 3px 7px; min-width: 62px;
+}
+.meu-time-chip .mt-pos  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-legenda); color: var(--ouro); }
+.meu-time-chip .mt-nome { font-size: var(--fs-mini); color: var(--txt); white-space: nowrap; }
+.meu-time-chip.vazio { border-style: dashed; border-color: rgba(217,178,90,0.4); background: rgba(217,178,90,0.06); }
+.meu-time-chip.vazio .mt-nome { color: var(--ouro); font-style: italic; }
+.draft-ordem-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-height: 44px;          /* altura FIXA — todas as linhas iguais, não importa o nome */
+  box-sizing: border-box;
+  padding: 0 0.7rem;         /* padding só lateral; a altura vem do min-height */
+  border-radius: var(--raio-md);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  font-size: var(--fs-sm);
+  color: var(--txt-soft);
+}
+.draft-ordem-item.ativo {
+  border-color: rgba(217,178,90,0.4);
+  color: var(--ouro);
+  font-weight: 700;
+  background: rgba(217,178,90,0.07);
+}
+.draft-ordem-item.eu { color: var(--txt); }
+.draft-ordem-picks {
+  margin-left: auto;
+  font-size: var(--fs-legenda);
+  color: #555;
+  white-space: nowrap;
+}
+
+.draft-ordem-turno {
+  font-size: var(--fs-legenda);
+  font-weight: 700;
+  color: #2a1a00;
+  background: #D9B25A;
+  padding: 0.05rem 0.4rem;
+  border-radius: var(--raio-pill);
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+.draft-timer-box {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: 0.4rem;
+}
+.draft-timer-bar-bg {
+  flex: 1;
+  height: 5px;
+  background: var(--elev-1);
+  border-radius: var(--raio-xs);
+  overflow: hidden;
+}
+.draft-timer-bar {
+  height: 100%;
+  width: 100%;
+  background: #D9B25A;
+  border-radius: var(--raio-xs);
+  transition: width 1s linear, background 0.3s;
+}
+.draft-timer-bar.urgente { background: #e87070; }
+.draft-timer-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: var(--fs-base);
+  color: var(--ouro);
+  min-width: 22px;
+  text-align: right;
+}
+
+/* Carousel */
+.draft-carousel-wrap {
+  max-width: 950px;
+  margin: 0.4rem auto 0;
+  padding: 1rem 1.2rem 1.4rem;
+  border-top: 1px solid var(--linha);
+}
+.draft-carousel-label {
+  font-weight: 700;
+  color: var(--ouro);
+  font-size: var(--fs-sm);
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+.draft-carousel-outer {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: 0.8rem;
+}
+.draft-carousel {
+  display: flex;
+  gap: var(--sp-4);
+  flex: 1;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+/* Setas removidas: mostramos 6 cards sorteados, sem rolagem */
+.draft-arrow { display: none; }
+.draft-card {
+  flex: 0 0 140px;
+  background: var(--elev-1);
+  border: 1.5px solid var(--linha);
+  border-radius: var(--raio-md);
+  padding: 0.75rem 0.65rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  user-select: none;
+  min-height: 100px;
+  display: flex; flex-direction: column; gap: 0.25rem; align-items: center; justify-content: center;
+}
+.draft-card:hover      { border-color: rgba(217,178,90,0.3); background: rgba(217,178,90,0.05); }
+.draft-card.selecionado {
+  border-color: var(--ouro);
+  background: rgba(217,178,90,0.1);
+}
+.draft-card-nome  { font-weight: 700; font-size: var(--fs-sm); color: var(--txt); }
+.draft-card-clube { font-size: var(--fs-legenda); color: var(--txt-soft); }
+.draft-card-pos   { font-size: var(--fs-legenda); color: var(--ouro); }
+.draft-card-forca {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: var(--fs-md);
+  color: var(--txt);
+}
+
+/* ── ELENCOS ────────────────────────────────────────────────────────────── */
+.elencos-wrapper {
+  display: grid;
+  grid-template-columns: clamp(230px, 19vw, 320px) 1fr;
+  gap: var(--sp-8);
+  padding: 0 1.2rem 2rem;
+  align-items: start;
+}
+.elencos-esq  { display: flex; flex-direction: column; gap: var(--sp-3); padding-top: 0.2rem; }
+/* Bloco de ação (Prontos + botão) ancorado no topo da coluna, sem precisar rolar */
+.elencos-acoes-top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  position: sticky;
+  top: 0.6rem;
+  z-index: 2;
+  padding-bottom: 0.7rem;
+  margin-bottom: 0.3rem;
+  border-bottom: 1px solid var(--linha);
+  background: var(--bg);
+}
+.elencos-acoes-top .lobby-prontos { margin: 0; text-align: center; }
+.elencos-campo-col { display: flex; flex-direction: column; gap: var(--sp-4); align-items: center; }
+.elencos-users-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  /* Lista rolável: não deixa a página esticar quando há muitos times. Altura acompanha
+     aprox. a coluna do campo. Scroll invisível (padrão das outras telas). */
+  max-height: 62vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--txt-fraco) transparent;
+  padding-right: 4px;
+}
+.elencos-users-lista::-webkit-scrollbar { width: 6px; }
+.elencos-users-lista::-webkit-scrollbar-track { background: transparent; }
+.elencos-users-lista::-webkit-scrollbar-thumb {
+  background: var(--elev-2);
+  border-radius: 3px;
+}
+.elencos-users-lista::-webkit-scrollbar-thumb:hover { background: var(--elev-2); }
+.elencos-user-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 0.5rem 0.7rem;
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-md);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.elencos-user-row:hover,
+.elencos-user-row.ativo { border-color: rgba(217,178,90,0.35); }
+.elencos-forca {
+  font-size: var(--fs-sm);
+  color: var(--txt-soft);
+  text-align: center;
+  margin: 0;
+}
+/* Mapa de elencos menor + força pequena logo abaixo do nome do time */
+.elencos-campo-col #elencos-campo-label { order: 1; margin-bottom: 0.15rem; }
+.elencos-campo-col .elencos-forca        { order: 2; margin: 0 0 0.5rem; font-size: var(--fs-mini); color: var(--txt-soft); }
+.elencos-campo-col #elencos-campo        { order: 3; max-width: clamp(360px, 32vw, 540px); }
+

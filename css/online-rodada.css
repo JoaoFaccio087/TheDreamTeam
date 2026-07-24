@@ -1,0 +1,384 @@
+/* ============================================================
+   online-rodada.css — Rodada, barra de abas, modal de cards, fim e responsivo
+   Fatia SEQUENCIAL de online.css (linhas 663-1040 do original).
+   ⚠️ A ordem dos <link> no index.html reproduz a ordem original — não
+   reordenar, senão a cascata muda.
+   ============================================================ */
+/* ── RODADA ─────────────────────────────────────────────────────────────── */
+.rodada-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 220px 220px;
+  gap: var(--sp-8);
+  padding: 0 1.2rem 2rem;
+  align-items: start;
+}
+.rodada-partidas-col { display: flex; flex-direction: column; gap: var(--sp-5); }
+.rodada-acoes        { display: flex; flex-direction: column; gap: var(--sp-3); margin-bottom: 0.5rem; }
+.rodada-classif-col  { display: flex; flex-direction: column; gap: var(--sp-3); }
+.rodada-stats-col    { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+/* Card de partida */
+.resultado-card {
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-lg);
+  padding: 0.85rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--sp-6);
+}
+.resultado-card.eu      { border-color: rgba(217,178,90,0.28); }
+.resultado-card.vitoria .resultado-placar { color: var(--accent); }
+.resultado-card.derrota .resultado-placar { color: var(--perigo); }
+.resultado-card.empate  .resultado-placar { color: var(--ouro); }
+
+.resultado-lado-esq { display: flex; flex-direction: column; gap: 0.12rem; }
+.resultado-lado-dir { display: flex; flex-direction: column; gap: 0.12rem; text-align: right; }
+.resultado-jogador-nome { font-weight: 700; font-size: var(--fs-sm); color: var(--txt); }
+.resultado-jogador-nome.eu { color: var(--ouro); }
+.resultado-clube-nome   { font-size: var(--fs-legenda); color: var(--txt-dim); }
+.resultado-placar {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: var(--fs-xl); color: var(--txt);
+  text-align: center; white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.placar-sep { font-size: var(--fs-base); color: #555; margin: 0 0.18rem; }
+
+/* Classificação */
+.rodada-classif {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.classif-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--raio-sm);
+  background: var(--elev-1);
+  border: 1px solid var(--linha);
+  font-size: var(--fs-mini);
+  color: var(--txt-soft);
+}
+.classif-linha.eu      { border-color: rgba(217,178,90,0.25); color: var(--ouro); }
+.classif-linha.primeiro { background: rgba(217,178,90,0.07); }
+.classif-pos  { font-family: 'Archivo Black', sans-serif; min-width: 18px; color: var(--txt-dim); font-size: var(--fs-mini); }
+.classif-nome { flex: 1; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.classif-pts  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm); color: var(--ouro); }
+.classif-sg   { font-size: var(--fs-legenda); color: var(--txt-dim); min-width: 28px; text-align: right; }
+
+/* Tabela de stats */
+.rodada-stats-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.stats-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--raio-sm);
+  background: var(--elev-1);
+  font-size: var(--fs-mini);
+}
+.stats-pos   { font-size: var(--fs-legenda); color: #555; min-width: 16px; }
+.stats-nome  { flex: 1; color: var(--txt); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stats-valor { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-mini); color: var(--ouro); }
+
+/* ── RODADA: barra (rodada atual + abas) ──────────────────────────────────── */
+.rodada-barra {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.4rem; margin: 0.2rem 0 1.4rem; flex-wrap: wrap; gap: var(--sp-4);
+}
+.rodada-barra-titulo {
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--txt);
+  letter-spacing: 0.04em; margin: 0;
+}
+.rodada-tabs { display: flex; gap: var(--sp-3); }
+.rodada-tab {
+  background: var(--elev-1); border: 1px solid var(--linha); color: var(--txt-soft);
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm); letter-spacing: 0.5px;
+  padding: 0.45rem 1.2rem; border-radius: var(--raio-md); cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.rodada-tab:hover { background: var(--elev-1); }
+.rodada-tab.ativa { background: var(--accent); border-color: var(--accent); color: #0E0F13; }
+.rodada-aba { padding: 0 1.2rem 2rem; }
+
+/* Animação do card grande */
+.pg-centro  { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+.pg-relogio { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-mini); color: var(--accent); letter-spacing: 0.05em; min-height: 0.9rem; }
+.partida-grande.anim { border-color: rgba(43,212,106,0.45); }
+.pg-gol-novo { animation: golPop 0.4s ease; }
+@keyframes golPop { 0% { opacity: 0; transform: translateY(-5px) scale(0.92); } 100% { opacity: 1; transform: none; } }
+
+/* Alinhamento das colunas da aba Classificação */
+.classif-tabela-col > .jogo-rotulo:first-child,
+.classif-stats-col  > .jogo-rotulo:first-child { margin-top: 0; }
+
+
+
+.partidas-wrapper { display: grid; grid-template-columns: 1fr 260px; gap: var(--sp-9); align-items: start; }
+.partidas-col { display: flex; flex-direction: column; gap: var(--sp-4); }
+.proximos-col { display: flex; flex-direction: column; gap: var(--sp-3); }
+
+.partida-grande {
+  background: var(--elev-1); border: 1px solid rgba(217,178,90,0.35);
+  border-radius: var(--raio-lg); padding: 1.1rem 1.2rem;
+}
+.partida-grande.vitoria { border-color: rgba(93,190,122,0.5); }
+.partida-grande.derrota { border-color: rgba(232,112,112,0.5); }
+.pg-topo { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: var(--sp-7); }
+.pg-time { font-weight: 700; font-size: var(--fs-base); color: var(--txt); }
+.pg-time.dir { text-align: right; }
+.pg-time.eu { color: var(--ouro); }
+.pg-placar { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-2xl); color: var(--txt); white-space: nowrap; text-align: center; }
+.partida-grande.vitoria .pg-placar { color: var(--accent); }
+.partida-grande.derrota .pg-placar { color: var(--perigo); }
+.pg-pen { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-legenda); color: var(--txt-soft); letter-spacing: 0.04em; }
+.pg-pen:empty { display: none; }
+.pg-gols { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px solid var(--linha); display: flex; flex-direction: column; gap: var(--sp-1); }
+.pg-gols.pg-sem { color: var(--txt-dim); font-size: var(--fs-mini); text-align: center; }
+.pg-gol { font-size: var(--fs-mini); color: var(--txt); }
+.pg-gol.dir { text-align: right; }
+.pg-min { color: var(--txt-soft); font-weight: 700; }
+.pg-autor { color: var(--txt); }
+.pg-assist { color: var(--txt-soft); font-size: var(--fs-mini); }
+
+.partida-mini {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--sp-4);
+  background: var(--elev-1); border: 1px solid var(--linha);
+  border-radius: var(--raio-md); padding: 0.5rem 0.8rem; font-size: var(--fs-mini);
+}
+.pm-time { color: var(--txt-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pm-time.dir { text-align: right; }
+.pm-placar { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base); color: var(--txt); white-space: nowrap; }
+
+.rodada-proximos { display: flex; flex-direction: column; gap: var(--sp-1); }
+.prox-jogo {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--sp-2);
+  background: var(--elev-1); border: 1px solid var(--linha);
+  border-radius: var(--raio-sm); padding: 0.35rem 0.5rem; font-size: var(--fs-mini); color: var(--txt-soft);
+}
+.prox-jogo.eu { border-color: rgba(217,178,90,0.4); background: rgba(217,178,90,0.08); color: var(--ouro-claro); }
+.pj-time { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pj-time.dir { text-align: right; }
+.pj-x { color: var(--txt-dim); }
+.rodada-aguardando { color: var(--txt-soft); font-size: var(--fs-mini); text-align: center; font-style: italic; margin-top: 0.5rem; }
+
+/* Botão "Pular tudo" (pequeno, centralizado) + contador + modal de confirmação */
+.btn-pular-tudo {
+  align-self: center; margin-top: 0.5rem;
+  padding: 4px 12px; border-radius: var(--raio-xs);
+  background: transparent; border: 1px dashed var(--txt-soft); color: var(--txt-soft);
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-micro); letter-spacing: 0.5px;
+  cursor: pointer; transition: border-color 0.12s ease, color 0.12s ease;
+}
+.btn-pular-tudo:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.btn-pular-tudo:disabled { opacity: 0.6; cursor: default; }
+
+.online-skip-cont {
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-mini); letter-spacing: 0.3px;
+  color: var(--accent); background: rgba(43,212,106,0.12);
+  border: 1px solid rgba(43,212,106,0.4); border-radius: var(--raio-xl); padding: 0.2rem 0.7rem;
+}
+
+/* .modal-confirm → componente GLOBAL, agora em base.css (era daqui). */
+
+/* Modal de escolha do draft online: fundo quase opaco (o campo verde não vaza).
+   Sem backdrop-filter de propósito — o reblur a cada repaint travaria a seleção. */
+#modal-draft-pick { background: rgba(8,9,12,0.97); }
+
+/* ===== Fluidez do modal de cards (online) — animações compositadas =====
+   Escopo só em #modal-draft-pick: usa transform/opacity (GPU) no lugar de
+   box-shadow/background-position. O draft offline fica intacto. */
+
+/* Contexto 3D + isolamento de repaint do container das cartas. */
+#modal-draft-pick-cartas { perspective: 800px; }
+
+/* 1) Não transicionar box-shadow; cada carta vira a própria camada de composição. */
+#modal-draft-pick .draft-carta {
+  transition: transform 0.12s ease, border-color 0.12s ease;
+  will-change: transform;
+}
+
+/* 2) Brilho de entrada via transform translateX (em vez de background-position). */
+#modal-draft-pick .carta-brilho {
+  background-size: 100% 100%;
+  background-position: 0 0;
+  transform: translateX(-100%);
+  animation-name: carta-glare-x;
+  will-change: transform, opacity;
+}
+@keyframes carta-glare-x {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  18%  { opacity: 1; }
+  100% { transform: translateX(100%);  opacity: 0; }
+}
+
+/* 3) Pulso elite via scale compositado (o glow estático escala junto). Ao selecionar
+      não cortamos a animação — a escolha é indicada só pela borda/brilho. */
+#modal-draft-pick .draft-carta.tier-elite                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
+#modal-draft-pick .draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
+#modal-draft-pick .draft-carta.tier-diamante                { animation: carta-elite-scale 1.8s ease-in-out 0.9s infinite; }
+#modal-draft-pick .draft-carta.tier-diamante.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
+@keyframes carta-elite-scale {
+  0%, 100% { transform: scale(1);    }
+  50%      { transform: scale(1.03); }
+}
+
+
+/* Fim de jogo: botões de ação (abaixo das estatísticas) + modal de premiação */
+.fim-acoes { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: 1.2rem; }
+
+/* Barra de fim FIXA — fora das abas, visível em qualquer aba ao terminar o campeonato. */
+.fim-acoes-fixo {
+  display: flex;
+  gap: var(--sp-5);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0.4rem 0 1rem;
+  padding: 0.9rem 1rem;
+  background: rgba(217,178,90,0.08);
+  border: 1px solid rgba(217,178,90,0.35);
+  border-radius: var(--raio-md);
+}
+/* A classe .escondida precisa vencer o display:flex acima (mesma especificidade,
+   mas este CSS carrega depois do base.css). Sem isto a barra aparecia desde o início. */
+.fim-acoes-fixo.escondida { display: none; }
+.fim-acoes-fixo .fim-btn { width: auto; min-width: 220px; }
+@media (max-width: 640px) {
+  .fim-acoes-fixo .fim-btn { width: 100%; min-width: 0; }
+}
+.fim-btn {
+  width: 100%; padding: 11px 14px; border-radius: var(--raio-xs);
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-mini); letter-spacing: 0.5px;
+}
+.fim-btn-sec:hover { background: var(--txt-soft); color: var(--bg); }
+
+.modal-premiacao {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.66);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal-prem-box {
+  position: relative;
+  background: #16181f; border: 1px solid rgba(217,178,90,0.3); border-radius: var(--raio-xl);
+  padding: 1.8rem 1.6rem 1.6rem; max-width: 560px; width: 100%;
+}
+.modal-prem-x {
+  position: absolute; top: 0.6rem; right: 0.85rem;
+  background: none; border: none; color: var(--txt-soft); font-size: 1.7rem; line-height: 1;
+  cursor: pointer; padding: 0.2rem;
+}
+.modal-prem-x:hover { color: var(--txt); }
+.modal-prem-titulo {
+  font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); color: var(--ouro);
+  text-align: center; margin: 0 0 1.3rem;
+}
+.modal-prem-cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+.prem-card {
+  display: flex; flex-direction: column; gap: var(--sp-1); align-items: center; text-align: center;
+  background: var(--elev-1); border: 1px solid var(--linha);
+  border-radius: var(--raio-lg); padding: 1rem 0.8rem;
+}
+.prem-label { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-mini); letter-spacing: 0.4px; color: var(--txt-soft); }
+.prem-time  { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: var(--txt); word-break: break-word; }
+.prem-stat  { font-size: var(--fs-mini); color: var(--txt-soft); }
+.prem-campeao  { border-color: rgba(217,178,90,0.5); background: rgba(217,178,90,0.08); }
+.prem-campeao  .prem-time { color: var(--ouro); }
+.prem-goleador { border-color: rgba(43,212,106,0.4); }
+.prem-goleador .prem-time { color: var(--accent); }
+.prem-peneira  { border-color: rgba(232,112,112,0.4); }
+.prem-peneira  .prem-time { color: var(--perigo); }
+@media (max-width: 460px) { .modal-prem-cards { grid-template-columns: 1fr; } }
+
+.classif-wrapper { display: grid; grid-template-columns: 1fr 300px; gap: var(--sp-9); align-items: start; }
+.classif-tabela-col { display: flex; flex-direction: column; gap: var(--sp-2); }
+.classif-stats-col  { display: flex; flex-direction: column; gap: var(--sp-2); }
+.classif-tabela-head, .ct-linha {
+  display: grid; grid-template-columns: 28px 1fr 34px 30px 28px 28px 28px 28px 28px 40px;
+  align-items: center; gap: var(--sp-1);
+}
+.classif-tabela-head { padding: 0.3rem 0.6rem; font-size: var(--fs-legenda); color: var(--txt-dim); font-weight: 700; letter-spacing: 0.5px; }
+.classif-tabela-head .ct-time { text-align: left; }
+.ct-linha {
+  padding: 0.45rem 0.6rem; border-radius: var(--raio-sm); font-size: var(--fs-mini); color: var(--txt-soft);
+  background: var(--elev-1); border: 1px solid var(--linha);
+}
+.ct-linha.eu       { border-color: rgba(217,178,90,0.35); color: var(--ouro-claro); background: rgba(217,178,90,0.06); }
+.ct-linha.primeiro { background: rgba(93,190,122,0.08); }
+/* Cortes da Champions: 1–8 oitavas diretas, 9–24 playoff, 25–36 eliminados */
+.ct-linha.ct-direto    { box-shadow: inset 3px 0 0 #5dbe7a; }
+.ct-linha.ct-playoff   { box-shadow: inset 3px 0 0 #D9B25A; }
+.ct-linha.ct-eliminado { box-shadow: inset 3px 0 0 #c0564a; opacity: 0.82; }
+.ct-linha.ct-direto  .ct-pos { color: var(--accent); font-weight: 700; }
+.ct-linha.ct-playoff .ct-pos { color: var(--ouro); font-weight: 700; }
+
+/* Cards do playoff da Champions (ida e volta) */
+.po-card {
+  background: var(--elev-1); border: 1px solid var(--linha);
+  border-radius: var(--raio-md); padding: 0.7rem 0.85rem; margin-bottom: 0.55rem;
+}
+.po-card-meu { border-color: rgba(217,178,90,0.4); background: rgba(217,178,90,0.06); }
+.po-times { display: flex; align-items: center; gap: var(--sp-3); font-weight: 700; font-size: var(--fs-base); color: var(--txt); }
+.po-times .po-time { flex: 1; }
+.po-times .po-time:last-child { text-align: right; }
+.po-times .po-venc { color: var(--accent); }
+.po-times .po-x { color: var(--txt-dim); font-size: var(--fs-sm); }
+.po-maos { display: flex; flex-direction: column; gap: 0.15rem; margin-top: 0.4rem; font-size: var(--fs-mini); color: var(--txt-soft); }
+.po-agg { margin-top: 0.35rem; font-size: var(--fs-mini); color: var(--txt); font-weight: 600; }
+.po-venc-badge {
+  margin-top: 0.45rem; display: inline-block; font-size: var(--fs-legenda); font-weight: 700;
+  color: var(--accent); background: rgba(93,190,122,0.12); border-radius: var(--raio-xs); padding: 0.18rem 0.5rem;
+}
+.ct-pos  { font-family: 'Archivo Black', sans-serif; color: var(--txt-soft); font-size: var(--fs-mini); text-align: center; }
+.ct-time { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ct-num  { text-align: center; font-size: var(--fs-mini); color: var(--txt-soft); }
+.ct-pts  { font-family: 'Archivo Black', sans-serif; color: var(--ouro); font-size: var(--fs-sm); }
+
+.stats-jog  { flex: 1; display: flex; flex-direction: column; min-width: 0; gap: 1px; }
+.stats-jog .stats-nome { flex: none; color: var(--txt); font-size: var(--fs-mini); }
+.stats-time { font-size: var(--fs-legenda); color: var(--txt-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── FIM ────────────────────────────────────────────────────────────────── */
+.online-ranking-final { margin: 1rem 1.2rem 1.5rem; }
+.ranking-final-linha {
+  display: flex; align-items: center; gap: var(--sp-5);
+  padding: 0.75rem 1rem; border-radius: var(--raio-md); margin-bottom: 0.45rem;
+  background: var(--elev-1); border: 1px solid var(--linha);
+}
+.ranking-final-linha.primeiro {
+  background: rgba(217,178,90,0.07); border-color: rgba(217,178,90,0.2);
+}
+.ranking-pos          { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-md); color: var(--txt-dim); min-width: 26px; }
+.ranking-pos.primeiro { color: var(--ouro); }
+.ranking-nome         { font-weight: 600; color: var(--txt); flex: 1; font-size: var(--fs-sm); }
+.ranking-nome.eu      { color: var(--ouro); }
+.ranking-time         { font-size: var(--fs-mini); color: var(--txt-dim); }
+.ranking-pts          { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-base); color: var(--ouro); min-width: 44px; text-align: right; }
+.ranking-stats        { font-size: var(--fs-legenda); color: var(--txt-dim); white-space: nowrap; }
+
+/* ── Responsivo ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .lobby-wrapper  { grid-template-columns: 200px 1fr 190px; gap: var(--sp-6); }
+  .rodada-wrapper { grid-template-columns: 1fr; }
+  .partidas-wrapper, .classif-wrapper { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .lobby-wrapper   { grid-template-columns: 1fr; padding: 0 0.8rem 2rem; }
+  .lobby-centro    { order: -1; }
+  .draft-wrapper   { grid-template-columns: 1fr; }
+  .elencos-wrapper { grid-template-columns: 1fr; }
+  .modal-online-cols { grid-template-columns: 1fr; }
+  .modal-online-divisor { width: 100%; height: 1px; min-height: 0; }
+  .resultado-card  { grid-template-columns: 1fr; text-align: center; }
+  .resultado-lado-dir { text-align: left; }
+}
+
+
+
