@@ -341,14 +341,20 @@
   // `chave` filtra o histórico local (substring de competicao); `api` é o id do grupo devolvido
   // por GET /matches/stats (mesmo id de GRUPOS_CONHECIDOS no backend).
   var GRUPOS = [
-    { nome: 'Geral',         chave: null,           api: 'geral' },
-    { nome: 'Libertadores',  chave: 'libertadores', api: 'liberta' },
-    { nome: 'Champions',     chave: 'champions',    api: 'champions' },
-    { nome: 'Brasileirão',   chave: 'brasileir',    api: 'brasil' },
-    { nome: 'Copa do Mundo', chave: 'copa',         api: 'copa' }
-  ];
+    { nome: 'Geral', chave: null, api: 'geral' }
+  ].concat(Object.keys(COMPETICOES).map(function (id) {
+    // Derivado de COMPETICOES: competição nova aparece aqui sozinha.
+    // `chave` casa com o texto salvo na partida; `api` é o id do backend.
+    return { nome: COMPETICOES[id].label, chave: CHAVE_PARTIDA[id] || id, api: API_POR_COMP[id] || id };
+  }));
   // Tradução da chave do seletor do mapa (data-esc) para o id do backend.
-  var ESC_PARA_API = { geral: 'geral', libertadores: 'liberta', champions: 'champions', brasileir: 'brasil', copa: 'copa' };
+  // Mapas de tradução — só precisam de entrada quando o id do backend/partida difere do id da competição.
+  var API_POR_COMP  = { libertadores: 'liberta', brasileirao: 'brasil' };
+  var CHAVE_PARTIDA = { brasileirao: 'brasileir' };
+  var ESC_PARA_API  = { geral: 'geral', brasileir: 'brasil' };
+  Object.keys(COMPETICOES).forEach(function (id) {
+    ESC_PARA_API[CHAVE_PARTIDA[id] || id] = API_POR_COMP[id] || id;
+  });
   var _statsCache = null;   // resposta de /matches/stats (quando logado)
 
   var _histCache = null;   // histórico carregado (reusado por acordeão + time escalado)

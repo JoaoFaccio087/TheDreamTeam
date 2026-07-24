@@ -338,6 +338,7 @@
               <button class="pilula" data-modo="champions">Champions League</button>
               <button class="pilula" data-modo="brasileirao">Brasileir&atilde;o</button>
               <button class="pilula" data-modo="copa">Copa do Mundo</button>
+              <button class="pilula" data-modo="premier">Premier League<span class="selo-beta">BETA</span></button>
             </div>
 
             <!-- Competições — Multijogador -->
@@ -730,7 +731,7 @@
 
         <div id="sim-painel-jogos">
           <div id="tabela-brasileirao" class="tabela-brasileirao escondida">
-            <p class="sim-rotulo">TABELA DO BRASILEIR&Atilde;O</p>
+            <p class="sim-rotulo" id="sim-rotulo-tabela">TABELA DO BRASILEIR&Atilde;O</p>
             <div class="tb-scroll">
               <table class="tb-tabela">
                 <thead>
@@ -1160,6 +1161,7 @@
   <script src="js/dados/champions.js"></script>
   <script src="js/dados/brasileirao.js"></script>
   <script src="js/dados/copa.js"></script>
+  <script src="js/dados/premier.js"></script>
   <script src="js/dados/dados.js"></script>
 
   <!-- Socket.IO — servido pelo backend via nginx proxy.

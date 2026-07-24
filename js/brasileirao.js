@@ -37,7 +37,7 @@ function gerarCalendarioLiga(n) {
 
 // Monta a liga: você + 19 clubes sorteados do Brasileirão, tabela zerada.
 function montarLigaBrasileirao() {
-  var comp = COMPETICOES.brasileirao.dados;
+  var comp = COMPETICOES[modoSelecionado].dados;   // funciona p/ qualquer liga
   var pool = UI.shuffle(API.getClubesPorCompeticao(comp));
   var outros = pool.slice(0, 19);
 
@@ -203,7 +203,7 @@ function posicaoNaTabela() {
 // Simula todas as rodadas restantes (com gols atribuídos aos jogadores e card por
 // rodada) e vai para o resultado final.
 function pularTudoBrasileirao() {
-  if (modoSelecionado !== 'brasileirao') return;
+  if (!ehFormatoLiga(modoSelecionado)) return;
 
   // Se uma partida estava animando, interrompe e remove o card incompleto dela
   var estavaRodando = (timerPartida !== null);
@@ -379,14 +379,20 @@ function criarCardFinalBrasileirao(pos, campeao) {
 
 // Mostra/esconde os elementos exclusivos do Brasileirão ao entrar na simulação.
 function configurarTelaSimulacao() {
-  var ehBrasileirao = (modoSelecionado === 'brasileirao');
-  if (tabelaBrasileirao) tabelaBrasileirao.classList.toggle('escondida', !ehBrasileirao);
+  var ehLiga = ehFormatoLiga(modoSelecionado);
+  if (tabelaBrasileirao) tabelaBrasileirao.classList.toggle('escondida', !ehLiga);
   // "Pular tudo" existe em TODOS os modos de campanha (Brasileirão + mata-matas);
   // o Brasileirão pula a temporada, os demais pulam a campanha até o desfecho.
   var temPularTudo = !!COMPETICOES[modoSelecionado];
   if (btnPularTudo)      btnPularTudo.classList.toggle('escondida', !temPularTudo);
 
-  if (ehBrasileirao) {
+  // Título da tabela segue a competição (era fixo em "TABELA DO BRASILEIRÃO")
+  var rotuloTab = document.getElementById('sim-rotulo-tabela');
+  if (rotuloTab && ehLiga) {
+    rotuloTab.textContent = 'TABELA · ' + COMPETICOES[modoSelecionado].label.toUpperCase();
+  }
+
+  if (ehLiga) {
     montarCampanha();          // já monta a liga e mostra a tabela (20 times, zerada)
     renderTabelaBrasileirao();
   }

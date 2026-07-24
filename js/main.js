@@ -9,7 +9,7 @@ window.__compOnline = window.__compOnline || 'Libertadores';
 (function () {
   try {
     var m = new URLSearchParams(location.search).get('modo');
-    var validos = ['libertadores', 'champions', 'brasileirao', 'copa'];
+    var validos = Object.keys(COMPETICOES);
     if (m && validos.indexOf(m) >= 0 && typeof selecionarModo === 'function') {
       modoOnlineSelecionado = false;
       selecionarModo(m);
@@ -219,7 +219,7 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
     confirmar: 'Confirmar',
     cancelar: 'Cancelar',
     onConfirmar: function () {
-      if (modoSelecionado === 'brasileirao') pularTudoBrasileirao();
+      if (ehFormatoLiga(modoSelecionado)) pularTudoBrasileirao();
       else pularTudoMata();
     }
   });

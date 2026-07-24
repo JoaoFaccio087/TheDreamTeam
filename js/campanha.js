@@ -37,8 +37,8 @@ function montarCampanha() {
   adversariosUsados = [];
   chaveCopa         = null;
 
-  // Brasileirão: liga de 20 times em 38 rodadas (sem fase de grupos/mata-mata)
-  if (modoSelecionado === 'brasileirao') {
+  // Formato LIGA (Brasileirão, Premier): 20 times em 38 rodadas, sem grupos/mata-mata
+  if (ehFormatoLiga(modoSelecionado)) {
     if (!liga) montarLigaBrasileirao();   // monta uma vez por campanha (tabela + calendário)
     if (tabelaBrasileirao) tabelaBrasileirao.classList.remove('escondida');
     if (btnPularTudo)      btnPularTudo.classList.remove('escondida');
@@ -563,7 +563,7 @@ function ptAcumular(gMeus, gAdv, golsMeus) {
 }
 
 function pularTudoMata() {
-  if (modoSelecionado === 'brasileirao') return;   // Brasileirão tem o seu próprio
+  if (ehFormatoLiga(modoSelecionado)) return;      // liga tem o seu próprio pular tudo
   if (!COMPETICOES[modoSelecionado]) return;        // só nos modos de campanha
 
   // Interrompe uma partida em animação e remove o card incompleto (igual ao Brasileirão)

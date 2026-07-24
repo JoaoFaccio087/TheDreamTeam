@@ -593,3 +593,18 @@ html.tema-claro .step-card {
   .sala-colunas { grid-template-columns: 1fr; gap: 8px; }
   .sala-divisor { display: none; }
 }
+
+/* Selo BETA nas pílulas de competição (Premier League, jul/2026).
+   Usa tokens, então acompanha claro/escuro sem ajuste. */
+.selo-beta {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 5px;
+  border-radius: var(--raio-pill);
+  background: var(--ouro);
+  color: var(--bg);
+  font-size: var(--fs-micro);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}

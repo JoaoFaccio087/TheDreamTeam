@@ -72,7 +72,7 @@
    Numa linha só o texto quebrava feio e empurrava o layout no celular. */
 .pen-dica {
   display: block;
-  font-size: var(--fs-xs, 0.75rem);
+  font-size: var(--fs-mini);
   font-weight: 500;
   color: #9fb3a6;
   letter-spacing: 0.2px;

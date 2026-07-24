@@ -8,9 +8,17 @@
 const COMPETICOES = {
   libertadores: { dados: 'Libertadores', label: 'Libertadores',    tema: 'tema-libertadores' },
   champions:    { dados: 'Champions',    label: 'Champions League', tema: 'tema-champions' },
-  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão' },
-  copa:         { dados: 'Copa do Mundo', label: 'Copa do Mundo' }
+  brasileirao:  { dados: 'Brasileirão',  label: 'Brasileirão',      formato: 'liga' },
+  copa:         { dados: 'Copa do Mundo', label: 'Copa do Mundo' },
+  // Premier League — OFFLINE apenas, em BETA (jul/2026). Sem `tema`, acompanha o
+  // modo claro/escuro. `formato: 'liga'` reusa o motor de 38 rodadas do Brasileirão.
+  premier:      { dados: 'Premier League', label: 'Premier League',  formato: 'liga', beta: true }
 };
+
+// Helper: a competição roda no formato de liga (pontos corridos)?
+function ehFormatoLiga(id) {
+  return !!(COMPETICOES[id] && COMPETICOES[id].formato === 'liga');
+}
 
 // Converte o valor de "competicao" dos dados no rótulo exibido (ex.: "Champions" → "Champions League").
 function rotuloCompeticao(valorDados) {

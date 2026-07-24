@@ -4,7 +4,7 @@
 // Fase 2: habilitado em todas (Libertadores, Champions, Brasileirão, Copa) — o preço vem da força,
 // então a mecânica é idêntica em qualquer uma. Se algum dia uma competição não puder ter Orçamento,
 // é só removê-la de ORCAMENTO_COMPETICOES.
-var ORCAMENTO_COMPETICOES = ['libertadores', 'champions', 'brasileirao', 'copa'];
+var ORCAMENTO_COMPETICOES = Object.keys(COMPETICOES);
 function sincronizarPilulaOrcamento() {
   var pilulaOrc = document.querySelector('#jogo-pilulas-estilo .pilula-orcamento');
   if (!pilulaOrc) return;

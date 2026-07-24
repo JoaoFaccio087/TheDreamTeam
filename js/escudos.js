@@ -957,7 +957,7 @@
     // Modos onde os escudos estão LIGADOS. Champions fica de fora até catalogarmos as cores reais
     // dos clubes europeus (senão usariam a paleta de reserva, com cores erradas).
     // Libertadores entrou em jul/2026: os 73 clubes sul-americanos já têm cor real.
-    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions'],
+    MODOS_ATIVOS: Object.keys(COMPETICOES),
     ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
