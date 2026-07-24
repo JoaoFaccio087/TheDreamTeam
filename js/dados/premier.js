@@ -1730,6 +1730,164 @@ const DADOS_PREMIER = [
       { id: 'kevin-gallacher',     nome: "Kevin Gallacher",     posicoes: ["ATA","PD"],  forca: 81 },
       { id: 'martin-dahlin',       nome: "Martin Dahlin",       posicoes: ["ATA"],       forca: 79 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1999 (temporada 1998-99) — o TRÍPLICE do United: Premier League,
+  //  FA Cup e Champions League. Última temporada de Schmeichel no clube.
+  //  Top-6: United (79), Arsenal (78), Chelsea (75), Leeds (67), West Ham (57),
+  //  Villa (55).
+  //  ⚠️ HOMÔNIMOS: existem DOIS "Alan Smith" no acervo — o atacante do Arsenal de
+  //  1994 (`alan-smith-arsenal`) e o do Leeds, revelado aqui (`alan-smith`).
+  //  Pessoas diferentes, ids diferentes, mesmo nome — é legítimo.
+  //  Transferências: Yorke (Villa→United), Stam e Ljungberg chegaram, Desailly
+  //  foi para o Chelsea, Batty voltou ao Leeds e Dublin foi para o Villa.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 1999,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'peter-schmeichel',    nome: "Peter Schmeichel",    posicoes: ["GOL"],       forca: 88 },
+      { id: 'raimond-van-der-gouw', nome: "Raimond van der Gouw", posicoes: ["GOL"],     forca: 76 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 84 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LE","MC"],   forca: 80 },
+      { id: 'jaap-stam',           nome: "Jaap Stam",           posicoes: ["ZAG"],       forca: 89 },
+      { id: 'ronny-johnsen',       nome: "Ronny Johnsen",       posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'henning-berg',        nome: "Henning Berg",        posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'david-may',           nome: "David May",           posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'denis-irwin',         nome: "Denis Irwin",         posicoes: ["LE","LD"],   forca: 84 },
+      { id: 'roy-keane',           nome: "Roy Keane",           posicoes: ["VOL","MC"],  forca: 90 },
+      { id: 'nicky-butt',          nome: "Nicky Butt",          posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'david-beckham',       nome: "David Beckham",       posicoes: ["PD","MC"],   forca: 89 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 88 },
+      { id: 'jesper-blomqvist',    nome: "Jesper Blomqvist",    posicoes: ["PE"],        forca: 79 },
+      { id: 'dwight-yorke',        nome: "Dwight Yorke",        posicoes: ["ATA","MEI"], forca: 89 },
+      { id: 'andy-cole',           nome: "Andy Cole",           posicoes: ["ATA"],       forca: 87 },
+      { id: 'teddy-sheringham',    nome: "Teddy Sheringham",    posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'ole-gunnar-solskjaer', nome: "Ole Gunnar Solskjær", posicoes: ["ATA"],      forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1999,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'david-seaman',        nome: "David Seaman",        posicoes: ["GOL"],       forca: 87 },
+      { id: 'alex-manninger',      nome: "Alex Manninger",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'lee-dixon',           nome: "Lee Dixon",           posicoes: ["LD"],        forca: 81 },
+      { id: 'tony-adams',          nome: "Tony Adams",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'martin-keown',        nome: "Martin Keown",        posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'steve-bould',         nome: "Steve Bould",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'nigel-winterburn',    nome: "Nigel Winterburn",    posicoes: ["LE"],        forca: 81 },
+      { id: 'gilles-grimandi',     nome: "Gilles Grimandi",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'nelson-vivas',        nome: "Nelson Vivas",        posicoes: ["LD","LE"],   forca: 75 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 89 },
+      { id: 'emmanuel-petit',      nome: "Emmanuel Petit",      posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'ray-parlour',         nome: "Ray Parlour",         posicoes: ["MC"],        forca: 82 },
+      { id: 'freddie-ljungberg',   nome: "Freddie Ljungberg",   posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'marc-overmars',       nome: "Marc Overmars",       posicoes: ["PE"],        forca: 87 },
+      { id: 'dennis-bergkamp',     nome: "Dennis Bergkamp",     posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'nicolas-anelka',      nome: "Nicolas Anelka",      posicoes: ["ATA"],       forca: 86 },
+      { id: 'kanu',                nome: "Nwankwo Kanu",        posicoes: ["ATA","MEI"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1999,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'ed-de-goey',          nome: "Ed de Goey",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD"],        forca: 82 },
+      { id: 'dan-petrescu',        nome: "Dan Petrescu",        posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'marcel-desailly',     nome: "Marcel Desailly",     posicoes: ["ZAG"],       forca: 89 },
+      { id: 'frank-leboeuf',       nome: "Frank Leboeuf",       posicoes: ["ZAG"],       forca: 85 },
+      { id: 'michael-duberry',     nome: "Michael Duberry",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'graeme-le-saux',      nome: "Graeme Le Saux",      posicoes: ["LE"],        forca: 84 },
+      { id: 'celestine-babayaro',  nome: "Celestine Babayaro",  posicoes: ["LE"],        forca: 80 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'dennis-wise',         nome: "Dennis Wise",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'gustavo-poyet',       nome: "Gustavo Poyet",       posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'tore-andre-flo',      nome: "Tore André Flo",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'brian-laudrup',       nome: "Brian Laudrup",       posicoes: ["MEI","PE"],  forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1999,
+    clube: "Leeds United",
+    jogadores: [
+      { id: 'nigel-martyn',        nome: "Nigel Martyn",        posicoes: ["GOL"],       forca: 86 },
+      { id: 'gary-kelly',          nome: "Gary Kelly",          posicoes: ["LD"],        forca: 81 },
+      { id: 'lucas-radebe',        nome: "Lucas Radebe",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'jonathan-woodgate',   nome: "Jonathan Woodgate",   posicoes: ["ZAG"],       forca: 80 },
+      { id: 'david-wetherall',     nome: "David Wetherall",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ian-harte',           nome: "Ian Harte",           posicoes: ["LE"],        forca: 81 },
+      { id: 'danny-granville',     nome: "Danny Granville",     posicoes: ["LE"],        forca: 76 },
+      { id: 'david-batty',         nome: "David Batty",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'lee-bowyer',          nome: "Lee Bowyer",          posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'alf-inge-haaland',    nome: "Alf-Inge Håland",     posicoes: ["VOL","ZAG"], forca: 79 },
+      { id: 'stephen-mcphail',     nome: "Stephen McPhail",     posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'harry-kewell',        nome: "Harry Kewell",        posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'jimmy-floyd-hasselbaink', nome: "Jimmy Floyd Hasselbaink", posicoes: ["ATA"], forca: 86 },
+      { id: 'alan-smith',          nome: "Alan Smith",          posicoes: ["ATA"],       forca: 79 },
+      { id: 'clyde-wijnhard',      nome: "Clyde Wijnhard",      posicoes: ["ATA"],       forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1999,
+    clube: "West Ham United",
+    jogadores: [
+      { id: 'shaka-hislop',        nome: "Shaka Hislop",        posicoes: ["GOL"],       forca: 81 },
+      { id: 'steve-potts',         nome: "Steve Potts",         posicoes: ["LD","ZAG"],  forca: 76 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ian-pearce',          nome: "Ian Pearce",          posicoes: ["ZAG"],       forca: 79 },
+      { id: 'neil-ruddock',        nome: "Neil Ruddock",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'stuart-pearce',       nome: "Stuart Pearce",       posicoes: ["LE"],        forca: 82 },
+      { id: 'scott-minto',         nome: "Scott Minto",         posicoes: ["LE"],        forca: 76 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'steve-lomas',         nome: "Steve Lomas",         posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'john-moncur',         nome: "John Moncur",         posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'eyal-berkovic',       nome: "Eyal Berkovic",       posicoes: ["MEI"],       forca: 83 },
+      { id: 'trevor-sinclair',     nome: "Trevor Sinclair",     posicoes: ["PD","PE"],   forca: 83 },
+      { id: 'ian-wright',          nome: "Ian Wright",          posicoes: ["ATA"],       forca: 83 },
+      { id: 'paolo-di-canio',      nome: "Paolo Di Canio",      posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'paul-kitson',         nome: "Paul Kitson",         posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1999,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'michael-oakes',       nome: "Michael Oakes",       posicoes: ["GOL"],       forca: 78 },
+      { id: 'mark-bosnich',        nome: "Mark Bosnich",        posicoes: ["GOL"],       forca: 83 },
+      { id: 'gary-charles',        nome: "Gary Charles",        posicoes: ["LD"],        forca: 76 },
+      { id: 'ugo-ehiogu',          nome: "Ugo Ehiogu",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'gareth-southgate',    nome: "Gareth Southgate",    posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'riccardo-scimeca',    nome: "Riccardo Scimeca",    posicoes: ["ZAG","MC"],  forca: 76 },
+      { id: 'alan-wright',         nome: "Alan Wright",         posicoes: ["LE"],        forca: 80 },
+      { id: 'mark-draper',         nome: "Mark Draper",         posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'ian-taylor',          nome: "Ian Taylor",          posicoes: ["MC"],        forca: 79 },
+      { id: 'lee-hendrie',         nome: "Lee Hendrie",         posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'alan-thompson',       nome: "Alan Thompson",       posicoes: ["PE","MC"],   forca: 78 },
+      { id: 'simon-grayson',       nome: "Simon Grayson",       posicoes: ["LD","ZAG"],  forca: 75 },
+      { id: 'dion-dublin',         nome: "Dion Dublin",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'stan-collymore',      nome: "Stan Collymore",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'julian-joachim',      nome: "Julian Joachim",      posicoes: ["ATA","PD"],  forca: 79 },
+      { id: 'darius-vassell',      nome: "Darius Vassell",      posicoes: ["ATA","PD"],  forca: 74 }
+    ]
   }
 
 ];
