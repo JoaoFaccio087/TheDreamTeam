@@ -683,6 +683,153 @@ const DADOS_PREMIER = [
       { id: 'tolu-arokodare',      nome: "Tolu Arokodare",      posicoes: ["ATA"],       forca: 77 },
       { id: 'enso-gonzalez',       nome: "Enso González",       posicoes: ["PE","PD"],   forca: 72 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2004 (temporada 2003-04) — TOP-6, convenção da casa para ligas.
+  //  O ano dos INVENCÍVEIS: o Arsenal terminou os 38 jogos SEM PERDER (26V 12E),
+  //  feito inédito na era Premier League. Elencos enxutos (14-16), padrão histórico.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2004,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'jens-lehmann',        nome: "Jens Lehmann",        posicoes: ["GOL"],       forca: 87 },
+      { id: 'lauren',              nome: "Lauren",              posicoes: ["LD"],        forca: 84 },
+      { id: 'sol-campbell',        nome: "Sol Campbell",        posicoes: ["ZAG"],       forca: 89 },
+      { id: 'kolo-toure',          nome: "Kolo Touré",          posicoes: ["ZAG"],       forca: 86 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 88 },
+      { id: 'pascal-cygan',        nome: "Pascal Cygan",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 92 },
+      { id: 'gilberto-silva',      nome: "Gilberto Silva",      posicoes: ["VOL"],       forca: 85 },
+      { id: 'robert-pires',        nome: "Robert Pirès",        posicoes: ["PE","MEI"],  forca: 89 },
+      { id: 'freddie-ljungberg',   nome: "Freddie Ljungberg",   posicoes: ["PD","MEI"],  forca: 86 },
+      { id: 'edu-gaspar',          nome: "Edu",                 posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'ray-parlour',         nome: "Ray Parlour",         posicoes: ["MC"],        forca: 80 },
+      { id: 'thierry-henry',       nome: "Thierry Henry",       posicoes: ["ATA","PE"],  forca: 95 },
+      { id: 'dennis-bergkamp',     nome: "Dennis Bergkamp",     posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'jose-antonio-reyes',  nome: "José Antonio Reyes",  posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'sylvain-wiltord',     nome: "Sylvain Wiltord",     posicoes: ["ATA","PD"],  forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2004,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'carlo-cudicini',      nome: "Carlo Cudicini",      posicoes: ["GOL"],       forca: 85 },
+      { id: 'marcel-desailly',     nome: "Marcel Desailly",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'william-gallas',      nome: "William Gallas",      posicoes: ["ZAG","LE"],  forca: 85 },
+      { id: 'wayne-bridge',        nome: "Wayne Bridge",        posicoes: ["LE"],        forca: 82 },
+      { id: 'mario-melchiot',      nome: "Mario Melchiot",      posicoes: ["LD"],        forca: 79 },
+      { id: 'glen-johnson',        nome: "Glen Johnson",        posicoes: ["LD"],        forca: 79 },
+      { id: 'claude-makelele',     nome: "Claude Makélélé",     posicoes: ["VOL"],       forca: 89 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'joe-cole',            nome: "Joe Cole",            posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'damien-duff',         nome: "Damien Duff",         posicoes: ["PE","PD"],   forca: 85 },
+      { id: 'scott-parker',        nome: "Scott Parker",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'eidur-gudjohnsen',    nome: "Eidur Gudjohnsen",    posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'jimmy-floyd-hasselbaink', nome: "Jimmy Floyd Hasselbaink", posicoes: ["ATA"], forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2004,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'tim-howard',          nome: "Tim Howard",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'roy-carroll',         nome: "Roy Carroll",         posicoes: ["GOL"],       forca: 77 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 85 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 89 },
+      { id: 'mikael-silvestre',    nome: "Mikaël Silvestre",    posicoes: ["ZAG","LE"],  forca: 82 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'john-oshea',          nome: "John O'Shea",         posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LE","MC"],   forca: 79 },
+      { id: 'roy-keane',           nome: "Roy Keane",           posicoes: ["VOL","MC"],  forca: 90 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 89 },
+      { id: 'nicky-butt',          nome: "Nicky Butt",          posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["PD","PE"],   forca: 84 },
+      { id: 'ruud-van-nistelrooy', nome: "Ruud van Nistelrooy", posicoes: ["ATA"],       forca: 92 },
+      { id: 'ole-gunnar-solskjaer', nome: "Ole Gunnar Solskjær", posicoes: ["ATA"],      forca: 84 },
+      { id: 'louis-saha',          nome: "Louis Saha",          posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2004,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'jerzy-dudek',         nome: "Jerzy Dudek",         posicoes: ["GOL"],       forca: 83 },
+      { id: 'steve-finnan',        nome: "Steve Finnan",        posicoes: ["LD"],        forca: 82 },
+      { id: 'sami-hyypia',         nome: "Sami Hyypiä",         posicoes: ["ZAG"],       forca: 86 },
+      { id: 'jamie-carragher',     nome: "Jamie Carragher",     posicoes: ["ZAG","LD"],  forca: 84 },
+      { id: 'stephane-henchoz',    nome: "Stéphane Henchoz",    posicoes: ["ZAG"],       forca: 80 },
+      { id: 'john-arne-riise',     nome: "John Arne Riise",     posicoes: ["LE"],        forca: 83 },
+      { id: 'djimi-traore',        nome: "Djimi Traoré",        posicoes: ["ZAG","LE"],  forca: 76 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","MEI"],  forca: 91 },
+      { id: 'dietmar-hamann',      nome: "Dietmar Hamann",      posicoes: ["VOL"],       forca: 84 },
+      { id: 'danny-murphy',        nome: "Danny Murphy",        posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'harry-kewell',        nome: "Harry Kewell",        posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'vladimir-smicer',     nome: "Vladimír Šmicer",     posicoes: ["MEI","PD"],  forca: 79 },
+      { id: 'michael-owen',        nome: "Michael Owen",        posicoes: ["ATA"],       forca: 90 },
+      { id: 'milan-baros',         nome: "Milan Baroš",         posicoes: ["ATA"],       forca: 81 },
+      { id: 'emile-heskey',        nome: "Emile Heskey",        posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2004,
+    clube: "Newcastle United",
+    jogadores: [
+      { id: 'shay-given',          nome: "Shay Given",          posicoes: ["GOL"],       forca: 86 },
+      { id: 'aaron-hughes',        nome: "Aaron Hughes",        posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'jonathan-woodgate',   nome: "Jonathan Woodgate",   posicoes: ["ZAG"],       forca: 84 },
+      { id: 'andy-obrien',         nome: "Andy O'Brien",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'titus-bramble',       nome: "Titus Bramble",       posicoes: ["ZAG"],       forca: 76 },
+      { id: 'olivier-bernard',     nome: "Olivier Bernard",     posicoes: ["LE"],        forca: 78 },
+      { id: 'kieron-dyer',         nome: "Kieron Dyer",         posicoes: ["MEI","PD"],  forca: 84 },
+      { id: 'gary-speed',          nome: "Gary Speed",          posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'jermaine-jenas',      nome: "Jermaine Jenas",      posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'lee-bowyer',          nome: "Lee Bowyer",          posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'laurent-robert',      nome: "Laurent Robert",      posicoes: ["PE"],        forca: 83 },
+      { id: 'nolberto-solano',     nome: "Nolberto Solano",     posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'alan-shearer',        nome: "Alan Shearer",        posicoes: ["ATA"],       forca: 90 },
+      { id: 'craig-bellamy',       nome: "Craig Bellamy",       posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'shola-ameobi',        nome: "Shola Ameobi",        posicoes: ["ATA"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2004,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'thomas-sorensen',     nome: "Thomas Sørensen",     posicoes: ["GOL"],       forca: 84 },
+      { id: 'mark-delaney',        nome: "Mark Delaney",        posicoes: ["LD"],        forca: 77 },
+      { id: 'olof-mellberg',       nome: "Olof Mellberg",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ronny-johnsen',       nome: "Ronny Johnsen",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'jlloyd-samuel',       nome: "Jlloyd Samuel",       posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'ulises-de-la-cruz',   nome: "Ulises de la Cruz",   posicoes: ["LD"],        forca: 76 },
+      { id: 'liam-ridgewell',      nome: "Liam Ridgewell",      posicoes: ["ZAG","LE"],  forca: 74 },
+      { id: 'gareth-barry',        nome: "Gareth Barry",        posicoes: ["MC","LE"],   forca: 84 },
+      { id: 'thomas-hitzlsperger', nome: "Thomas Hitzlsperger", posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'lee-hendrie',         nome: "Lee Hendrie",         posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'gavin-mccann',        nome: "Gavin McCann",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'steven-davis',        nome: "Steven Davis",      posicoes: ["MC","MEI"],  forca: 74 },
+      { id: 'juan-pablo-angel',    nome: "Juan Pablo Ángel",    posicoes: ["ATA"],       forca: 84 },
+      { id: 'darius-vassell',      nome: "Darius Vassell",      posicoes: ["ATA","PD"],  forca: 79 },
+      { id: 'marcus-allback',      nome: "Marcus Allbäck",      posicoes: ["ATA"],       forca: 76 }
+    ]
   }
 
 ];
