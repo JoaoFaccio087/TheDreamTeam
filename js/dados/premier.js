@@ -978,6 +978,153 @@ const DADOS_PREMIER = [
       { id: 'paul-stewart',        nome: "Paul Stewart",        posicoes: ["ATA","MC"],  forca: 75 },
       { id: 'ronny-rosenthal',     nome: "Ronny Rosenthal",     posicoes: ["ATA","PE"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1994 (temporada 1993-94) — o 1º "double" do United (liga + FA Cup),
+  //  com 92 pontos. Top-6: United (92), Blackburn (84), Newcastle (77),
+  //  Arsenal (71), Leeds (70) e Wimbledon (65) — o "Crazy Gang".
+  //  Transferências no meio da temporada respeitadas: Batty saiu do Leeds para o
+  //  Blackburn, Peacock do QPR e Fox do Norwich para o Newcastle.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 1994,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'peter-schmeichel',    nome: "Peter Schmeichel",    posicoes: ["GOL"],       forca: 92 },
+      { id: 'les-sealey',          nome: "Les Sealey",          posicoes: ["GOL"],       forca: 74 },
+      { id: 'paul-parker',         nome: "Paul Parker",         posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'steve-bruce',         nome: "Steve Bruce",         posicoes: ["ZAG"],       forca: 85 },
+      { id: 'gary-pallister',      nome: "Gary Pallister",      posicoes: ["ZAG"],       forca: 87 },
+      { id: 'denis-irwin',         nome: "Denis Irwin",         posicoes: ["LE","LD"],   forca: 86 },
+      { id: 'roy-keane',           nome: "Roy Keane",           posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'paul-ince',           nome: "Paul Ince",           posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'bryan-robson',        nome: "Bryan Robson",        posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'andrei-kanchelskis',  nome: "Andrei Kanchelskis",  posicoes: ["PD"],        forca: 85 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'lee-sharpe',          nome: "Lee Sharpe",          posicoes: ["PE","LE"],   forca: 81 },
+      { id: 'eric-cantona',        nome: "Eric Cantona",        posicoes: ["MEI","ATA"], forca: 92 },
+      { id: 'mark-hughes',         nome: "Mark Hughes",         posicoes: ["ATA"],       forca: 87 },
+      { id: 'brian-mcclair',       nome: "Brian McClair",       posicoes: ["ATA","MC"],  forca: 81 },
+      { id: 'nicky-butt',          nome: "Nicky Butt",          posicoes: ["VOL","MC"],  forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1994,
+    clube: "Blackburn Rovers",
+    jogadores: [
+      { id: 'tim-flowers',         nome: "Tim Flowers",         posicoes: ["GOL"],       forca: 85 },
+      { id: 'bobby-mimms',         nome: "Bobby Mimms",         posicoes: ["GOL"],       forca: 77 },
+      { id: 'david-may',           nome: "David May",           posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'colin-hendry',        nome: "Colin Hendry",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'kevin-moran',         nome: "Kevin Moran",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ian-pearce',          nome: "Ian Pearce",          posicoes: ["ZAG"],       forca: 75 },
+      { id: 'henning-berg',        nome: "Henning Berg",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'graeme-le-saux',      nome: "Graeme Le Saux",      posicoes: ["LE"],        forca: 83 },
+      { id: 'david-batty',         nome: "David Batty",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'tim-sherwood',        nome: "Tim Sherwood",        posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'mark-atkins',         nome: "Mark Atkins",         posicoes: ["MC"],        forca: 76 },
+      { id: 'stuart-ripley',       nome: "Stuart Ripley",       posicoes: ["PD"],        forca: 81 },
+      { id: 'jason-wilcox',        nome: "Jason Wilcox",        posicoes: ["PE"],        forca: 80 },
+      { id: 'alan-shearer',        nome: "Alan Shearer",        posicoes: ["ATA"],       forca: 90 },
+      { id: 'kevin-gallacher',     nome: "Kevin Gallacher",     posicoes: ["ATA","PD"],  forca: 81 },
+      { id: 'mike-newell',         nome: "Mike Newell",         posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1994,
+    clube: "Newcastle United",
+    jogadores: [
+      { id: 'pavel-srnicek',       nome: "Pavel Srníček",       posicoes: ["GOL"],       forca: 80 },
+      { id: 'mike-hooper',         nome: "Mike Hooper",         posicoes: ["GOL"],       forca: 74 },
+      { id: 'barry-venison',       nome: "Barry Venison",       posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'steve-howey',         nome: "Steve Howey",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'kevin-scott',         nome: "Kevin Scott",         posicoes: ["ZAG"],       forca: 75 },
+      { id: 'darren-peacock',      nome: "Darren Peacock",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'john-beresford',      nome: "John Beresford",      posicoes: ["LE"],        forca: 79 },
+      { id: 'rob-lee',             nome: "Rob Lee",             posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'paul-bracewell',      nome: "Paul Bracewell",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'lee-clark',           nome: "Lee Clark",           posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'scott-sellars',       nome: "Scott Sellars",       posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'ruel-fox',            nome: "Ruel Fox",            posicoes: ["PD","PE"],   forca: 81 },
+      { id: 'andy-cole',           nome: "Andy Cole",           posicoes: ["ATA"],       forca: 88 },
+      { id: 'peter-beardsley',     nome: "Peter Beardsley",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'malcolm-allen',       nome: "Malcolm Allen",       posicoes: ["ATA"],       forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1994,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'david-seaman',        nome: "David Seaman",        posicoes: ["GOL"],       forca: 89 },
+      { id: 'lee-dixon',           nome: "Lee Dixon",           posicoes: ["LD"],        forca: 83 },
+      { id: 'tony-adams',          nome: "Tony Adams",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'steve-bould',         nome: "Steve Bould",         posicoes: ["ZAG"],       forca: 83 },
+      { id: 'andy-linighan',       nome: "Andy Linighan",       posicoes: ["ZAG"],       forca: 77 },
+      { id: 'martin-keown',        nome: "Martin Keown",        posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'nigel-winterburn',    nome: "Nigel Winterburn",    posicoes: ["LE"],        forca: 83 },
+      { id: 'paul-davis',          nome: "Paul Davis",          posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'john-jensen',         nome: "John Jensen",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'ian-selley',          nome: "Ian Selley",          posicoes: ["MC"],        forca: 74 },
+      { id: 'ray-parlour',         nome: "Ray Parlour",         posicoes: ["MC"],        forca: 76 },
+      { id: 'eddie-mcgoldrick',    nome: "Eddie McGoldrick",    posicoes: ["PD","LD"],   forca: 75 },
+      { id: 'paul-merson',         nome: "Paul Merson",         posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'ian-wright',          nome: "Ian Wright",          posicoes: ["ATA"],       forca: 89 },
+      { id: 'kevin-campbell',      nome: "Kevin Campbell",      posicoes: ["ATA"],       forca: 78 },
+      { id: 'alan-smith-arsenal',  nome: "Alan Smith",          posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1994,
+    clube: "Leeds United",
+    jogadores: [
+      { id: 'john-lukic',          nome: "John Lukic",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'gary-kelly',          nome: "Gary Kelly",          posicoes: ["LD"],        forca: 80 },
+      { id: 'chris-fairclough',    nome: "Chris Fairclough",    posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jon-newsome',         nome: "Jon Newsome",         posicoes: ["ZAG"],       forca: 76 },
+      { id: 'david-wetherall',     nome: "David Wetherall",     posicoes: ["ZAG"],       forca: 76 },
+      { id: 'tony-dorigo',         nome: "Tony Dorigo",         posicoes: ["LE"],        forca: 82 },
+      { id: 'gary-mcallister',     nome: "Gary McAllister",     posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'gary-speed',          nome: "Gary Speed",          posicoes: ["MC","PE"],   forca: 82 },
+      { id: 'gordon-strachan',     nome: "Gordon Strachan",     posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'steve-hodge',         nome: "Steve Hodge",         posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'david-white',         nome: "David White",         posicoes: ["PD"],        forca: 78 },
+      { id: 'rod-wallace',         nome: "Rod Wallace",         posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'brian-deane',         nome: "Brian Deane",         posicoes: ["ATA"],       forca: 80 },
+      { id: 'noel-whelan',         nome: "Noel Whelan",         posicoes: ["ATA"],       forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1994,
+    clube: "Wimbledon",
+    jogadores: [
+      { id: 'hans-segers',         nome: "Hans Segers",         posicoes: ["GOL"],       forca: 79 },
+      { id: 'warren-barton',       nome: "Warren Barton",       posicoes: ["LD"],        forca: 81 },
+      { id: 'dean-blackwell',      nome: "Dean Blackwell",      posicoes: ["ZAG"],       forca: 76 },
+      { id: 'scott-fitzgerald',    nome: "Scott Fitzgerald",    posicoes: ["ZAG"],       forca: 75 },
+      { id: 'alan-reeves',         nome: "Alan Reeves",         posicoes: ["ZAG"],       forca: 74 },
+      { id: 'gary-elkins',         nome: "Gary Elkins",         posicoes: ["LE"],        forca: 74 },
+      { id: 'vinnie-jones',        nome: "Vinnie Jones",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'robbie-earle',        nome: "Robbie Earle",        posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'peter-fear',          nome: "Peter Fear",          posicoes: ["MC"],        forca: 73 },
+      { id: 'andy-clarke',         nome: "Andy Clarke",         posicoes: ["PD","ATA"],  forca: 75 },
+      { id: 'marcus-gayle',        nome: "Marcus Gayle",        posicoes: ["PE","ATA"],  forca: 77 },
+      { id: 'dean-holdsworth',     nome: "Dean Holdsworth",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'john-fashanu',        nome: "John Fashanu",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'gary-blissett',       nome: "Gary Blissett",       posicoes: ["ATA"],       forca: 73 }
+    ]
   }
 
 ];

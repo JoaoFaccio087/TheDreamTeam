@@ -255,6 +255,7 @@
     'Norwich City':            ['#FFF200', '#00A650'],
     'Queens Park Rangers':     ['#005CAB', '#FFFFFF'],
     'West Ham United':         ['#7A263A', '#1BB1E7'],
+    'Wimbledon':               ['#1B48A5', '#FFE500'],
     'Wolverhampton':           ['#FDB913', '#231F20'],
     'Sunderland':              ['#EB172B', '#FFFFFF'],
   }
@@ -495,6 +496,7 @@
     'Norwich City':            { padrao: 'solido' },                                  // amarelo canário
     'Queens Park Rangers':     { padrao: 'listras-h' },                               // aros azuis e brancos                               // preto e branco
     'West Ham United':         { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
+    'Wimbledon':               { padrao: 'faixa-h' },                                 // azul com faixa amarela
     'Wolverhampton':           { padrao: 'solido' },                                  // ouro
     'Sunderland':              { padrao: 'listras-v' },                               // vermelho e branco
   };
