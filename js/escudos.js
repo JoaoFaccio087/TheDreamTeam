@@ -954,10 +954,13 @@
         return gerarClube(o);
       } catch (err) { return ''; }
     },
-    // Modos onde os escudos estão LIGADOS. Champions fica de fora até catalogarmos as cores reais
-    // dos clubes europeus (senão usariam a paleta de reserva, com cores erradas).
-    // Libertadores entrou em jul/2026: os 73 clubes sul-americanos já têm cor real.
-    MODOS_ATIVOS: Object.keys(COMPETICOES),
+    // Modos onde os escudos estão LIGADOS. Lista CURADA de propósito: só entra competição
+    // cujos clubes já têm cor real cadastrada em escudos-cores.js — senão cairiam na paleta
+    // de reserva (cores erradas). ⚠️ NÃO derivar de COMPETICOES: além de ligar escudos sem
+    // cor, o escudos.js carrega ANTES do regras.js e daria ReferenceError.
+    // Libertadores entrou em jul/2026 (73 clubes sul-americanos com cor real).
+    // Premier entrou em jul/2026 (os 20 clubes da edição 2026 catalogados).
+    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier'],
     ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
