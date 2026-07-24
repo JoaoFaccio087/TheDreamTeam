@@ -830,6 +830,154 @@ const DADOS_PREMIER = [
       { id: 'darius-vassell',      nome: "Darius Vassell",      posicoes: ["ATA","PD"],  forca: 79 },
       { id: 'marcus-allback',      nome: "Marcus Allbäck",      posicoes: ["ATA"],       forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1993 (temporada 1992-93) — a PRIMEIRA Premier League.
+  //  Top-6: United (84), Aston Villa (74), Norwich (72), Blackburn (71),
+  //  QPR (63) e Liverpool (59). Cantona chegou em novembro e virou o título
+  //  do United — o primeiro deles em 26 anos.
+  //  ⚠️ `id` identifica a PESSOA, não a pessoa-naquele-ano: Shearer e Giggs
+  //  reusam os ids que já existem em outras edições (padrão do acervo).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 1993,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'peter-schmeichel',    nome: "Peter Schmeichel",    posicoes: ["GOL"],       forca: 91 },
+      { id: 'paul-parker',         nome: "Paul Parker",         posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'steve-bruce',         nome: "Steve Bruce",         posicoes: ["ZAG"],       forca: 85 },
+      { id: 'gary-pallister',      nome: "Gary Pallister",      posicoes: ["ZAG"],       forca: 86 },
+      { id: 'denis-irwin',         nome: "Denis Irwin",         posicoes: ["LE","LD"],   forca: 85 },
+      { id: 'lee-martin',          nome: "Lee Martin",          posicoes: ["LE"],        forca: 74 },
+      { id: 'paul-ince',           nome: "Paul Ince",           posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'bryan-robson',        nome: "Bryan Robson",        posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'mike-phelan',         nome: "Mike Phelan",         posicoes: ["MC","LD"],   forca: 76 },
+      { id: 'andrei-kanchelskis',  nome: "Andrei Kanchelskis",  posicoes: ["PD"],        forca: 84 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'lee-sharpe',          nome: "Lee Sharpe",          posicoes: ["PE","LE"],   forca: 80 },
+      { id: 'eric-cantona',        nome: "Eric Cantona",        posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'mark-hughes',         nome: "Mark Hughes",         posicoes: ["ATA"],       forca: 87 },
+      { id: 'brian-mcclair',       nome: "Brian McClair",       posicoes: ["ATA","MC"],  forca: 82 },
+      { id: 'dion-dublin',         nome: "Dion Dublin",         posicoes: ["ATA"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1993,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'nigel-spink',         nome: "Nigel Spink",         posicoes: ["GOL"],       forca: 80 },
+      { id: 'mark-bosnich',        nome: "Mark Bosnich",        posicoes: ["GOL"],       forca: 79 },
+      { id: 'earl-barrett',        nome: "Earl Barrett",        posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'paul-mcgrath',        nome: "Paul McGrath",        posicoes: ["ZAG"],       forca: 89 },
+      { id: 'shaun-teale',         nome: "Shaun Teale",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'steve-staunton',      nome: "Steve Staunton",      posicoes: ["LE"],        forca: 82 },
+      { id: 'ugo-ehiogu',          nome: "Ugo Ehiogu",          posicoes: ["ZAG"],       forca: 77 },
+      { id: 'kevin-richardson',    nome: "Kevin Richardson",    posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'garry-parker',        nome: "Garry Parker",        posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'ray-houghton',        nome: "Ray Houghton",        posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'tony-daley',          nome: "Tony Daley",          posicoes: ["PE","PD"],   forca: 78 },
+      { id: 'steve-froggatt',      nome: "Steve Froggatt",      posicoes: ["PE"],        forca: 74 },
+      { id: 'dean-saunders',       nome: "Dean Saunders",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'dalian-atkinson',     nome: "Dalian Atkinson",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'cyrille-regis',       nome: "Cyrille Regis",       posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1993,
+    clube: "Norwich City",
+    jogadores: [
+      { id: 'bryan-gunn',          nome: "Bryan Gunn",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'ian-culverhouse',     nome: "Ian Culverhouse",     posicoes: ["LD"],        forca: 77 },
+      { id: 'john-polston',        nome: "John Polston",        posicoes: ["ZAG"],       forca: 76 },
+      { id: 'ian-butterworth',     nome: "Ian Butterworth",     posicoes: ["ZAG"],       forca: 76 },
+      { id: 'rob-newman',          nome: "Rob Newman",          posicoes: ["ZAG","MC"],  forca: 75 },
+      { id: 'mark-bowen',          nome: "Mark Bowen",          posicoes: ["LE"],        forca: 78 },
+      { id: 'ian-crook',           nome: "Ian Crook",           posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'jeremy-goss',         nome: "Jeremy Goss",         posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'gary-megson',         nome: "Gary Megson",         posicoes: ["MC"],        forca: 74 },
+      { id: 'david-phillips',      nome: "David Phillips",      posicoes: ["MD","MC"],   forca: 77 },
+      { id: 'ruel-fox',            nome: "Ruel Fox",            posicoes: ["PD","PE"],   forca: 80 },
+      { id: 'mark-robins',         nome: "Mark Robins",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'chris-sutton',        nome: "Chris Sutton",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'efan-ekoku',          nome: "Efan Ekoku",          posicoes: ["ATA"],       forca: 77 },
+      { id: 'darren-beckford',     nome: "Darren Beckford",     posicoes: ["ATA"],       forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1993,
+    clube: "Blackburn Rovers",
+    jogadores: [
+      { id: 'bobby-mimms',         nome: "Bobby Mimms",         posicoes: ["GOL"],       forca: 78 },
+      { id: 'david-may',           nome: "David May",           posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'colin-hendry',        nome: "Colin Hendry",        posicoes: ["ZAG"],       forca: 83 },
+      { id: 'kevin-moran',         nome: "Kevin Moran",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'nicky-marker',        nome: "Nicky Marker",        posicoes: ["ZAG","VOL"], forca: 75 },
+      { id: 'alan-wright',         nome: "Alan Wright",         posicoes: ["LE"],        forca: 77 },
+      { id: 'tim-sherwood',        nome: "Tim Sherwood",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'mark-atkins',         nome: "Mark Atkins",         posicoes: ["MC"],        forca: 75 },
+      { id: 'gordon-cowans',       nome: "Gordon Cowans",       posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'stuart-ripley',       nome: "Stuart Ripley",       posicoes: ["PD"],        forca: 80 },
+      { id: 'jason-wilcox',        nome: "Jason Wilcox",        posicoes: ["PE"],        forca: 79 },
+      { id: 'alan-shearer',        nome: "Alan Shearer",        posicoes: ["ATA"],       forca: 88 },
+      { id: 'mike-newell',         nome: "Mike Newell",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'roy-wegerle',         nome: "Roy Wegerle",         posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'kevin-gallacher',     nome: "Kevin Gallacher",     posicoes: ["ATA","PD"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1993,
+    clube: "Queens Park Rangers",
+    jogadores: [
+      { id: 'jan-stejskal',        nome: "Jan Stejskal",        posicoes: ["GOL"],       forca: 79 },
+      { id: 'tony-roberts',        nome: "Tony Roberts",        posicoes: ["GOL"],       forca: 73 },
+      { id: 'david-bardsley',      nome: "David Bardsley",      posicoes: ["LD"],        forca: 79 },
+      { id: 'alan-mcdonald',       nome: "Alan McDonald",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'darren-peacock',      nome: "Darren Peacock",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'clive-wilson',        nome: "Clive Wilson",        posicoes: ["LE"],        forca: 78 },
+      { id: 'ray-wilkins',         nome: "Ray Wilkins",         posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'ian-holloway',        nome: "Ian Holloway",        posicoes: ["MC"],        forca: 75 },
+      { id: 'simon-barker',        nome: "Simon Barker",        posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'andy-sinton',         nome: "Andy Sinton",         posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'trevor-sinclair',     nome: "Trevor Sinclair",     posicoes: ["PD","PE"],   forca: 78 },
+      { id: 'les-ferdinand',       nome: "Les Ferdinand",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'bradley-allen',       nome: "Bradley Allen",       posicoes: ["ATA"],       forca: 75 },
+      { id: 'gary-penrice',        nome: "Gary Penrice",        posicoes: ["ATA","MEI"], forca: 75 },
+      { id: 'devon-white',         nome: "Devon White",         posicoes: ["ATA"],       forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1993,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'bruce-grobbelaar',    nome: "Bruce Grobbelaar",    posicoes: ["GOL"],       forca: 82 },
+      { id: 'david-james',         nome: "David James",         posicoes: ["GOL"],       forca: 79 },
+      { id: 'rob-jones',           nome: "Rob Jones",           posicoes: ["LD"],        forca: 81 },
+      { id: 'mark-wright',         nome: "Mark Wright",         posicoes: ["ZAG"],       forca: 83 },
+      { id: 'nick-tanner',         nome: "Nick Tanner",         posicoes: ["ZAG"],       forca: 73 },
+      { id: 'steve-nicol',         nome: "Steve Nicol",         posicoes: ["LD","ZAG"],  forca: 82 },
+      { id: 'david-burrows',       nome: "David Burrows",       posicoes: ["LE"],        forca: 78 },
+      { id: 'ronnie-whelan',       nome: "Ronnie Whelan",       posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'jamie-redknapp',      nome: "Jamie Redknapp",      posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'don-hutchison',       nome: "Don Hutchison",       posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'steve-mcmanaman',     nome: "Steve McManaman",     posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'mark-walters',        nome: "Mark Walters",        posicoes: ["PE","PD"],   forca: 79 },
+      { id: 'ian-rush',            nome: "Ian Rush",            posicoes: ["ATA"],       forca: 87 },
+      { id: 'paul-stewart',        nome: "Paul Stewart",        posicoes: ["ATA","MC"],  forca: 75 },
+      { id: 'ronny-rosenthal',     nome: "Ronny Rosenthal",     posicoes: ["ATA","PE"],  forca: 76 }
+    ]
   }
 
 ];

@@ -249,8 +249,11 @@
     'Brentford':               ['#E30613', '#FFFFFF'],
     'Everton':                 ['#003399', '#FFFFFF'],
     'Fulham':                  ['#FFFFFF', '#231F20'],
+    'Blackburn Rovers':        ['#009EE0', '#FFFFFF'],
     'Burnley':                 ['#6C1D45', '#99D6EA'],
     'Newcastle United':        ['#241F20', '#FFFFFF'],
+    'Norwich City':            ['#FFF200', '#00A650'],
+    'Queens Park Rangers':     ['#005CAB', '#FFFFFF'],
     'West Ham United':         ['#7A263A', '#1BB1E7'],
     'Wolverhampton':           ['#FDB913', '#231F20'],
     'Sunderland':              ['#EB172B', '#FFFFFF'],
@@ -486,8 +489,11 @@
     'Brentford':               { padrao: 'listras-v' },                               // vermelho e branco
     'Everton':                 { padrao: 'solido' },                                  // azul royal
     'Fulham':                  { padrao: 'faixa-h' },                                 // branco com faixa preta
+    'Blackburn Rovers':        { padrao: 'metade' },                                  // metades azul e branca
     'Burnley':                 { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
-    'Newcastle United':        { padrao: 'listras-v' },                               // preto e branco
+    'Newcastle United':        { padrao: 'listras-v' },
+    'Norwich City':            { padrao: 'solido' },                                  // amarelo canário
+    'Queens Park Rangers':     { padrao: 'listras-h' },                               // aros azuis e brancos                               // preto e branco
     'West Ham United':         { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
     'Wolverhampton':           { padrao: 'solido' },                                  // ouro
     'Sunderland':              { padrao: 'listras-v' },                               // vermelho e branco
