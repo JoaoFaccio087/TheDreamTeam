@@ -214,6 +214,11 @@ function pularTudoBrasileirao() {
     if (congelado) { congelado.parentNode.removeChild(congelado); contadorPartidas--; }
   }
 
+  // Revela o painel de artilheiros, igual ao iniciarPartida e ao pularTudoMata.
+  // (Faltava aqui: quirk antigo corrigido em jul/2026.)
+  var elStats = document.getElementById('stats-campanha');
+  if (elStats) elStats.classList.remove('escondida');
+
   var jogadores = escalacao.filter(function (j) { return j !== null; });
 
   while (liga.rodadaAtual < liga.calendario.length) {

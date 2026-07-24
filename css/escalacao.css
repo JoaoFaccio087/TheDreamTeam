@@ -790,7 +790,7 @@
 }
 .lista-busca { width: 100%; }
 .lista-select { flex: 1; min-width: 0; cursor: pointer; }
-.lista-busca:focus, .lista-select:focus { outline: none; border-color: var(--cor-marca, #d9b25a); }
+.lista-busca:focus, .lista-select:focus { outline: none; border-color: var(--ouro); }
 .lista-vazia {
   text-align: center; color: var(--txt-soft, #9aa6b2);
   font-size: var(--fs-legenda); padding: 1.2rem 0; margin: 0;

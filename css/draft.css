@@ -465,7 +465,7 @@
   border: 1px solid var(--linha, #262a31); border-radius: var(--raio-md, 8px);
   font-family: 'Archivo', sans-serif; font-size: var(--fs-mini);
 }
-.pote-input:focus { outline: none; border-color: var(--cor-marca, #d9b25a); }
+.pote-input:focus { outline: none; border-color: var(--ouro); }
 /* O "X" de limpar do <input type=search> vem AZUL do navegador (padrão do WebKit) e não
    tem nada a ver com a paleta. Recolore para vermelho — é ação de limpar/apagar. */
 .pote-input::-webkit-search-cancel-button {
@@ -493,7 +493,7 @@
   transition: border-color 0.12s, transform 0.1s;
 }
 .pote-card:hover { border-color: var(--txt-soft, #9aa6b2); }
-.pote-card-on { border-color: var(--cor-marca, #d9b25a); background: rgba(217,178,90,0.10); }
+.pote-card-on { border-color: var(--ouro); background: rgba(217,178,90,0.10); }
 .pote-escudo { width: 46px; height: 50px; display: block; }
 .pote-escudo svg { width: 100%; height: 100%; display: block; }
 .pote-nome {
@@ -513,7 +513,7 @@
   flex-wrap: wrap; border-top: 1px solid var(--linha, #262a31); padding-top: 0.9rem;
 }
 .pote-contador { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); }
-.pote-contador-ok { color: var(--cor-marca, #d9b25a); font-weight: 600; }
+.pote-contador-ok { color: var(--ouro); font-weight: 600; }
 .pote-acoes { display: flex; gap: 0.5rem; align-items: center; }
 
 /* O overlay rola se o conteúdo passar da tela — senão o modal fica preso e cortado. */
@@ -544,7 +544,7 @@
 .pote-resumo-topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .pote-editar {
   background: none; border: none; cursor: pointer; padding: 2px 4px;
-  color: var(--cor-marca, #d9b25a); font-family: 'Archivo', sans-serif;
+  color: var(--ouro); font-family: 'Archivo', sans-serif;
   font-size: var(--fs-mini); font-weight: 600; text-decoration: underline;
 }
 .pote-resumo-lista { display: flex; flex-wrap: wrap; gap: 4px; }

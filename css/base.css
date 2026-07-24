@@ -101,32 +101,33 @@ html {
    sobrescrevem estes valores DENTRO do jogo — decisão da fase final.
    ───────────────────────────────────────────────────────────────────────── */
 html.tema-claro {
-  /* Paleta derivada do PRÓPRIO preto da marca (#0E0F13 "Onyx", matiz 228° / sat 15%),
-     variando só a luminosidade. Assim o claro é o mesmo universo do escuro, não um
-     cinza neutro qualquer. Nada de branco puro: o #FFF destoava do verde e da marca. */
-  --bg:       #DCDEE5;   /* L88% — canvas com corpo, não ofuscante */
-  --txt:      #0E0F13;   /* o Onyx puro: o preto do modo escuro vira o texto do claro */
-  --txt-soft: #565D75;   /* L40% da mesma rampa — 4.85:1 no fundo, 5.78:1 no card */
-  --accent:   #0D833F;   /* verde aprofundado: legível como TEXTO no claro (3.6:1 / 4.3:1) */
-  --perigo:   #C3352B;   /* vermelho aprofundado (4.0:1 / 4.8:1) */
+  /* Paleta QUENTE (jul/2026, 4ª iteração — as três anteriores eram cinzas frios
+     derivados do onyx azulado e nunca agradaram). Família terrosa: pergaminho nas
+     superfícies, mocha no texto, taupe nas bordas. O verde desce um tom porque verde
+     vivo sobre bege briga. Contrastes medidos: texto 10:1, secundário 5:1, verde 5.2:1. */
+  --bg:       #EDE6DC;   /* pergaminho — canvas quente, sem ofuscar */
+  --txt:      #3A322C;   /* "Deep Mocha" — 10.14:1 no fundo, 11.17:1 no card */
+  --txt-soft: #6F5E53;   /* "Ash Brown" — 4.98:1 / 5.49:1 */
+  --accent:   #0A6E35;   /* verde profundo: grama madura, não neon (5.15:1 / 5.67:1) */
+  --perigo:   #A93226;   /* vermelho terroso (5.35:1 / 5.89:1) */
 
-  --surface:       #E8E9EE;                 /* L92% — card assenta no fundo, sem virar placa branca */
-  --linha:         rgba(14, 15, 19, 0.14);  /* divisórias: o próprio Onyx translúcido */
-  --btn-txt:       #0E0F13;                 /* Onyx sobre o verde (3.95:1, botão grande/bold) */
-  --accent-sombra: #095E2C;                 /* verde escuro p/ a sombra sólida do botão */
-  --derrota:    #B93325;                   /* vermelho de derrota legível no claro (4.4:1 / 4.9:1) */
-  --elev-escura: rgba(14, 15, 19, 0.07);   /* no claro, escurecer vira um véu suave */
-  --titulo-sombra: #BFC3CE;                 /* sombra da manchete, um degrau abaixo do fundo */
+  --surface:       #F6F1E9;                  /* card em creme, um degrau acima do fundo */
+  --linha:         rgba(58, 50, 44, 0.16);   /* divisórias no tom do mocha */
+  --btn-txt:       #F6F1E9;                  /* creme SOBRE o verde profundo (5.67:1) */
+  --accent-sombra: #065227;                /* placeholder substituído abaixo */
+  --derrota:       #9C3A1F;                  /* derrota em terracota (5.58:1 / 6.15:1) */
+  --elev-escura:   rgba(58, 50, 44, 0.07);   /* véu suave no claro */
+  --titulo-sombra: #D5C9B8;                  /* sombra da manchete, um degrau abaixo do fundo */
 
-  /* Superfícies translúcidas / elevação — no claro: o Onyx com alfa baixo. */
-  --elev-1:     rgba(14, 15, 19, 0.05);     /* superfície/hover sutil */
-  --elev-2:     rgba(14, 15, 19, 0.09);     /* hover mais forte */
-  --surface-2:  #F6F7F9;                    /* L97% — modais flutuam acima dos cards */
-  --scrim:      rgba(14, 15, 19, 0.40);     /* escurece a página atrás do modal */
-  --ouro:       #8A6B1F;                    /* ouro aprofundado p/ ler no claro (4.1:1) */
-  --ouro-claro: #6F5514;                    /* ouro claro vira o mais escuro no claro */
-  --txt-dim:    #5F6575;                    /* cinza apagado legível no claro (4.3:1 / 4.8:1) */
-  --txt-fraco:  rgba(14, 15, 19, 0.30);     /* separador apagado */
+  /* Superfícies translúcidas / elevação — no claro: o mocha com alfa baixo. */
+  --elev-1:     rgba(58, 50, 44, 0.05);      /* superfície/hover sutil */
+  --elev-2:     rgba(58, 50, 44, 0.09);      /* hover mais forte */
+  --surface-2:  #FBF8F3;                     /* modais flutuam acima dos cards */
+  --scrim:      rgba(35, 30, 26, 0.45);      /* escurece a página atrás do modal */
+  --ouro:       #7A5B18;                     /* ouro terroso legível no claro (5.08:1) */
+  --ouro-claro: #63490F;                     /* variante mais escura p/ realce */
+  --txt-dim:    #7E6C5F;                     /* texto apagado (4.04:1 / 4.45:1) */
+  --txt-fraco:  rgba(58, 50, 44, 0.32);      /* separador apagado */
 }
 
 /* Tema Libertadores: preto e dourado */
