@@ -1577,6 +1577,159 @@ const DADOS_PREMIER = [
       { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 85 },
       { id: 'mark-hughes',         nome: "Mark Hughes",         posicoes: ["ATA"],       forca: 84 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1998 (temporada 1997-98) — o 1º título de Wenger, com "double", e o
+  //  United ficando 1 ponto atrás depois de liderar por 11. Top-6: Arsenal (78),
+  //  United (77), Liverpool (65), Chelsea (63), Leeds (59), Blackburn (58).
+  //  Muita gente reusa id de 2004, fechando o arco de carreira: Owen, Murphy,
+  //  Kewell, Hasselbaink, Duff, Henchoz e Bowyer. Berg saiu do Blackburn para o
+  //  United e Le Saux do Blackburn para o Chelsea — ambos no clube certo aqui.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 1998,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'david-seaman',        nome: "David Seaman",        posicoes: ["GOL"],       forca: 88 },
+      { id: 'alex-manninger',      nome: "Alex Manninger",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'lee-dixon',           nome: "Lee Dixon",           posicoes: ["LD"],        forca: 82 },
+      { id: 'tony-adams',          nome: "Tony Adams",          posicoes: ["ZAG"],       forca: 89 },
+      { id: 'steve-bould',         nome: "Steve Bould",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'martin-keown',        nome: "Martin Keown",        posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'nigel-winterburn',    nome: "Nigel Winterburn",    posicoes: ["LE"],        forca: 82 },
+      { id: 'gilles-grimandi',     nome: "Gilles Grimandi",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 88 },
+      { id: 'emmanuel-petit',      nome: "Emmanuel Petit",      posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'ray-parlour',         nome: "Ray Parlour",         posicoes: ["MC"],        forca: 82 },
+      { id: 'stephen-hughes',      nome: "Stephen Hughes",      posicoes: ["MC","MEI"],  forca: 75 },
+      { id: 'marc-overmars',       nome: "Marc Overmars",       posicoes: ["PE"],        forca: 87 },
+      { id: 'dennis-bergkamp',     nome: "Dennis Bergkamp",     posicoes: ["MEI","ATA"], forca: 91 },
+      { id: 'ian-wright',          nome: "Ian Wright",          posicoes: ["ATA"],       forca: 86 },
+      { id: 'nicolas-anelka',      nome: "Nicolas Anelka",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'christopher-wreh',    nome: "Christopher Wreh",    posicoes: ["ATA"],       forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1998,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'peter-schmeichel',    nome: "Peter Schmeichel",    posicoes: ["GOL"],       forca: 89 },
+      { id: 'raimond-van-der-gouw', nome: "Raimond van der Gouw", posicoes: ["GOL"],     forca: 75 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 83 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LE","MC"],   forca: 80 },
+      { id: 'gary-pallister',      nome: "Gary Pallister",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'ronny-johnsen',       nome: "Ronny Johnsen",       posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'henning-berg',        nome: "Henning Berg",        posicoes: ["ZAG","LD"],  forca: 83 },
+      { id: 'david-may',           nome: "David May",           posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'denis-irwin',         nome: "Denis Irwin",         posicoes: ["LE","LD"],   forca: 84 },
+      { id: 'roy-keane',           nome: "Roy Keane",           posicoes: ["VOL","MC"],  forca: 89 },
+      { id: 'nicky-butt',          nome: "Nicky Butt",          posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'david-beckham',       nome: "David Beckham",       posicoes: ["PD","MC"],   forca: 87 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 88 },
+      { id: 'karel-poborsky',      nome: "Karel Poborský",      posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'teddy-sheringham',    nome: "Teddy Sheringham",    posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'andy-cole',           nome: "Andy Cole",           posicoes: ["ATA"],       forca: 86 },
+      { id: 'ole-gunnar-solskjaer', nome: "Ole Gunnar Solskjær", posicoes: ["ATA"],      forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1998,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'david-james',         nome: "David James",         posicoes: ["GOL"],       forca: 83 },
+      { id: 'brad-friedel',        nome: "Brad Friedel",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'rob-jones',           nome: "Rob Jones",           posicoes: ["LD"],        forca: 80 },
+      { id: 'jason-mcateer',       nome: "Jason McAteer",       posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'phil-babb',           nome: "Phil Babb",           posicoes: ["ZAG"],       forca: 79 },
+      { id: 'bjorn-tore-kvarme',   nome: "Bjørn Tore Kvarme",   posicoes: ["ZAG"],       forca: 77 },
+      { id: 'stig-inge-bjornebye', nome: "Stig Inge Bjørnebye", posicoes: ["LE"],        forca: 80 },
+      { id: 'steve-harkness',      nome: "Steve Harkness",      posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'paul-ince',           nome: "Paul Ince",           posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'jamie-redknapp',      nome: "Jamie Redknapp",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'danny-murphy',        nome: "Danny Murphy",        posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'patrik-berger',       nome: "Patrik Berger",       posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'steve-mcmanaman',     nome: "Steve McManaman",     posicoes: ["PE","MEI"],  forca: 87 },
+      { id: 'robbie-fowler',       nome: "Robbie Fowler",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'michael-owen',        nome: "Michael Owen",        posicoes: ["ATA"],       forca: 86 },
+      { id: 'karl-heinz-riedle',   nome: "Karl-Heinz Riedle",   posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1998,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'ed-de-goey',          nome: "Ed de Goey",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'dan-petrescu',        nome: "Dan Petrescu",        posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'steve-clarke',        nome: "Steve Clarke",        posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'frank-leboeuf',       nome: "Frank Leboeuf",       posicoes: ["ZAG"],       forca: 86 },
+      { id: 'michael-duberry',     nome: "Michael Duberry",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'graeme-le-saux',      nome: "Graeme Le Saux",      posicoes: ["LE"],        forca: 84 },
+      { id: 'celestine-babayaro',  nome: "Celestine Babayaro",  posicoes: ["LE"],        forca: 79 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'dennis-wise',         nome: "Dennis Wise",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'gustavo-poyet',       nome: "Gustavo Poyet",       posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'eddie-newton',        nome: "Eddie Newton",        posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'tore-andre-flo',      nome: "Tore André Flo",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'mark-hughes',         nome: "Mark Hughes",         posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1998,
+    clube: "Leeds United",
+    jogadores: [
+      { id: 'nigel-martyn',        nome: "Nigel Martyn",        posicoes: ["GOL"],       forca: 85 },
+      { id: 'gary-kelly',          nome: "Gary Kelly",          posicoes: ["LD"],        forca: 81 },
+      { id: 'lucas-radebe',        nome: "Lucas Radebe",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'david-wetherall',     nome: "David Wetherall",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'robert-molenaar',     nome: "Robert Molenaar",     posicoes: ["ZAG"],       forca: 76 },
+      { id: 'ian-harte',           nome: "Ian Harte",           posicoes: ["LE"],        forca: 80 },
+      { id: 'alf-inge-haaland',    nome: "Alf-Inge Håland",     posicoes: ["VOL","ZAG"], forca: 79 },
+      { id: 'david-hopkin',        nome: "David Hopkin",        posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'lee-bowyer',          nome: "Lee Bowyer",          posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'gunnar-halle',        nome: "Gunnar Halle",        posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'bruno-ribeiro',       nome: "Bruno Ribeiro",       posicoes: ["MC","PE"],   forca: 76 },
+      { id: 'harry-kewell',        nome: "Harry Kewell",        posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'jimmy-floyd-hasselbaink', nome: "Jimmy Floyd Hasselbaink", posicoes: ["ATA"], forca: 84 },
+      { id: 'rod-wallace',         nome: "Rod Wallace",         posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'derek-lilley',        nome: "Derek Lilley",        posicoes: ["ATA"],       forca: 72 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 1998,
+    clube: "Blackburn Rovers",
+    jogadores: [
+      { id: 'tim-flowers',         nome: "Tim Flowers",         posicoes: ["GOL"],       forca: 84 },
+      { id: 'john-filan',          nome: "John Filan",          posicoes: ["GOL"],       forca: 75 },
+      { id: 'jeff-kenna',          nome: "Jeff Kenna",          posicoes: ["LD"],        forca: 78 },
+      { id: 'colin-hendry',        nome: "Colin Hendry",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'stephane-henchoz',    nome: "Stéphane Henchoz",    posicoes: ["ZAG"],       forca: 81 },
+      { id: 'marlon-broomes',      nome: "Marlon Broomes",      posicoes: ["ZAG"],       forca: 74 },
+      { id: 'callum-davidson',     nome: "Callum Davidson",     posicoes: ["LE"],        forca: 77 },
+      { id: 'tim-sherwood',        nome: "Tim Sherwood",        posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'garry-flitcroft',     nome: "Garry Flitcroft",     posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'billy-mckinlay',      nome: "Billy McKinlay",      posicoes: ["MC"],        forca: 77 },
+      { id: 'jason-wilcox',        nome: "Jason Wilcox",        posicoes: ["PE"],        forca: 80 },
+      { id: 'damien-duff',         nome: "Damien Duff",         posicoes: ["PE","PD"],   forca: 78 },
+      { id: 'chris-sutton',        nome: "Chris Sutton",        posicoes: ["ATA"],       forca: 85 },
+      { id: 'kevin-gallacher',     nome: "Kevin Gallacher",     posicoes: ["ATA","PD"],  forca: 81 },
+      { id: 'martin-dahlin',       nome: "Martin Dahlin",       posicoes: ["ATA"],       forca: 79 }
+    ]
   }
 
 ];
