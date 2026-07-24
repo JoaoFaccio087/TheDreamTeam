@@ -1888,6 +1888,166 @@ const DADOS_PREMIER = [
       { id: 'julian-joachim',      nome: "Julian Joachim",      posicoes: ["ATA","PD"],  forca: 79 },
       { id: 'darius-vassell',      nome: "Darius Vassell",      posicoes: ["ATA","PD"],  forca: 74 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2000 (temporada 1999-2000) — o United campeão com 91 pontos e 18 de
+  //  vantagem, a maior margem da era até então. Foi a chegada de Thierry Henry
+  //  ao Arsenal e a explosão de Gerrard no Liverpool.
+  //  Top-6: United (91), Arsenal (73), Leeds (69), Liverpool (67), Chelsea (65),
+  //  Villa (58).
+  //  Transferências entre clubes DESTE top-6, respeitadas: Bosnich (Villa→United),
+  //  Duberry (Chelsea→Leeds), Sutton (Blackburn→Chelsea), James (Liverpool→Villa).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2000,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'mark-bosnich',        nome: "Mark Bosnich",        posicoes: ["GOL"],       forca: 82 },
+      { id: 'raimond-van-der-gouw', nome: "Raimond van der Gouw", posicoes: ["GOL"],     forca: 76 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 85 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LE","MC"],   forca: 81 },
+      { id: 'jaap-stam',           nome: "Jaap Stam",           posicoes: ["ZAG"],       forca: 90 },
+      { id: 'mikael-silvestre',    nome: "Mikaël Silvestre",    posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'ronny-johnsen',       nome: "Ronny Johnsen",       posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'henning-berg',        nome: "Henning Berg",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["ZAG"],       forca: 78 },
+      { id: 'denis-irwin',         nome: "Denis Irwin",         posicoes: ["LE","LD"],   forca: 83 },
+      { id: 'roy-keane',           nome: "Roy Keane",           posicoes: ["VOL","MC"],  forca: 91 },
+      { id: 'nicky-butt',          nome: "Nicky Butt",          posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'quinton-fortune',     nome: "Quinton Fortune",     posicoes: ["LE","PE"],   forca: 77 },
+      { id: 'david-beckham',       nome: "David Beckham",       posicoes: ["PD","MC"],   forca: 90 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 89 },
+      { id: 'dwight-yorke',        nome: "Dwight Yorke",        posicoes: ["ATA","MEI"], forca: 88 },
+      { id: 'andy-cole',           nome: "Andy Cole",           posicoes: ["ATA"],       forca: 87 },
+      { id: 'teddy-sheringham',    nome: "Teddy Sheringham",    posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'ole-gunnar-solskjaer', nome: "Ole Gunnar Solskjær", posicoes: ["ATA"],      forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2000,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'david-seaman',        nome: "David Seaman",        posicoes: ["GOL"],       forca: 86 },
+      { id: 'alex-manninger',      nome: "Alex Manninger",      posicoes: ["GOL"],       forca: 79 },
+      { id: 'lee-dixon',           nome: "Lee Dixon",           posicoes: ["LD"],        forca: 80 },
+      { id: 'oleg-luzhny',         nome: "Oleg Luzhny",         posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'tony-adams',          nome: "Tony Adams",          posicoes: ["ZAG"],       forca: 87 },
+      { id: 'martin-keown',        nome: "Martin Keown",        posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'gilles-grimandi',     nome: "Gilles Grimandi",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'nigel-winterburn',    nome: "Nigel Winterburn",    posicoes: ["LE"],        forca: 80 },
+      { id: 'silvinho',            nome: "Silvinho",            posicoes: ["LE"],        forca: 80 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 90 },
+      { id: 'emmanuel-petit',      nome: "Emmanuel Petit",      posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'ray-parlour',         nome: "Ray Parlour",         posicoes: ["MC"],        forca: 82 },
+      { id: 'freddie-ljungberg',   nome: "Freddie Ljungberg",   posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'marc-overmars',       nome: "Marc Overmars",       posicoes: ["PE"],        forca: 86 },
+      { id: 'dennis-bergkamp',     nome: "Dennis Bergkamp",     posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'thierry-henry',       nome: "Thierry Henry",       posicoes: ["ATA","PE"],  forca: 87 },
+      { id: 'kanu',                nome: "Nwankwo Kanu",        posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'davor-suker',         nome: "Davor Šuker",         posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2000,
+    clube: "Leeds United",
+    jogadores: [
+      { id: 'nigel-martyn',        nome: "Nigel Martyn",        posicoes: ["GOL"],       forca: 86 },
+      { id: 'gary-kelly',          nome: "Gary Kelly",          posicoes: ["LD"],        forca: 81 },
+      { id: 'danny-mills',         nome: "Danny Mills",         posicoes: ["LD"],        forca: 80 },
+      { id: 'lucas-radebe',        nome: "Lucas Radebe",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'jonathan-woodgate',   nome: "Jonathan Woodgate",   posicoes: ["ZAG"],       forca: 83 },
+      { id: 'michael-duberry',     nome: "Michael Duberry",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ian-harte',           nome: "Ian Harte",           posicoes: ["LE"],        forca: 82 },
+      { id: 'david-batty',         nome: "David Batty",         posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'lee-bowyer',          nome: "Lee Bowyer",          posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'eirik-bakke',         nome: "Eirik Bakke",         posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'stephen-mcphail',     nome: "Stephen McPhail",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'harry-kewell',        nome: "Harry Kewell",        posicoes: ["PE","MEI"],  forca: 86 },
+      { id: 'michael-bridges',     nome: "Michael Bridges",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'alan-smith',          nome: "Alan Smith",          posicoes: ["ATA"],       forca: 81 },
+      { id: 'darren-huckerby',     nome: "Darren Huckerby",     posicoes: ["ATA","PE"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2000,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'sander-westerveld',   nome: "Sander Westerveld",   posicoes: ["GOL"],       forca: 82 },
+      { id: 'vegard-heggem',       nome: "Vegard Heggem",       posicoes: ["LD"],        forca: 79 },
+      { id: 'sami-hyypia',         nome: "Sami Hyypiä",         posicoes: ["ZAG"],       forca: 86 },
+      { id: 'stephane-henchoz',    nome: "Stéphane Henchoz",    posicoes: ["ZAG"],       forca: 83 },
+      { id: 'jamie-carragher',     nome: "Jamie Carragher",     posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'dominic-matteo',      nome: "Dominic Matteo",      posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'rigobert-song',       nome: "Rigobert Song",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'dietmar-hamann',      nome: "Dietmar Hamann",      posicoes: ["VOL"],       forca: 84 },
+      { id: 'jamie-redknapp',      nome: "Jamie Redknapp",      posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'danny-murphy',        nome: "Danny Murphy",        posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'vladimir-smicer',     nome: "Vladimír Šmicer",     posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'patrik-berger',       nome: "Patrik Berger",       posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'michael-owen',        nome: "Michael Owen",        posicoes: ["ATA"],       forca: 88 },
+      { id: 'emile-heskey',        nome: "Emile Heskey",        posicoes: ["ATA"],       forca: 82 },
+      { id: 'titi-camara',         nome: "Titi Camara",         posicoes: ["ATA","PE"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2000,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'ed-de-goey',          nome: "Ed de Goey",          posicoes: ["GOL"],       forca: 82 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD"],        forca: 81 },
+      { id: 'dan-petrescu',        nome: "Dan Petrescu",        posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'marcel-desailly',     nome: "Marcel Desailly",     posicoes: ["ZAG"],       forca: 89 },
+      { id: 'frank-leboeuf',       nome: "Frank Leboeuf",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'emerson-thome',       nome: "Emerson Thome",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'celestine-babayaro',  nome: "Celestine Babayaro",  posicoes: ["LE"],        forca: 80 },
+      { id: 'didier-deschamps',    nome: "Didier Deschamps",    posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'dennis-wise',         nome: "Dennis Wise",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'gustavo-poyet',       nome: "Gustavo Poyet",       posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'gabriele-ambrosetti', nome: "Gabriele Ambrosetti", posicoes: ["PE"],        forca: 76 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'tore-andre-flo',      nome: "Tore André Flo",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'chris-sutton',        nome: "Chris Sutton",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'george-weah',         nome: "George Weah",         posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2000,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'david-james',         nome: "David James",         posicoes: ["GOL"],       forca: 83 },
+      { id: 'michael-oakes',       nome: "Michael Oakes",       posicoes: ["GOL"],       forca: 77 },
+      { id: 'mark-delaney',        nome: "Mark Delaney",        posicoes: ["LD"],        forca: 78 },
+      { id: 'steve-watson',        nome: "Steve Watson",        posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'ugo-ehiogu',          nome: "Ugo Ehiogu",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'gareth-southgate',    nome: "Gareth Southgate",    posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'gareth-barry',        nome: "Gareth Barry",        posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'alan-wright',         nome: "Alan Wright",         posicoes: ["LE"],        forca: 79 },
+      { id: 'george-boateng',      nome: "George Boateng",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'ian-taylor',          nome: "Ian Taylor",          posicoes: ["MC"],        forca: 78 },
+      { id: 'lee-hendrie',         nome: "Lee Hendrie",         posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'paul-merson',         nome: "Paul Merson",         posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'alan-thompson',       nome: "Alan Thompson",       posicoes: ["PE","MC"],   forca: 78 },
+      { id: 'dion-dublin',         nome: "Dion Dublin",         posicoes: ["ATA"],       forca: 82 },
+      { id: 'julian-joachim',      nome: "Julian Joachim",      posicoes: ["ATA","PD"],  forca: 79 },
+      { id: 'benito-carbone',      nome: "Benito Carbone",      posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'darius-vassell',      nome: "Darius Vassell",      posicoes: ["ATA","PD"],  forca: 76 }
+    ]
   }
 
 ];
