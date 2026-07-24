@@ -19,6 +19,7 @@ function ehLiberta(c)   { return normComp(c).includes('liberta'); }
 function ehChampions(c) { return normComp(c).includes('champions'); }
 function ehBrasil(c)    { return normComp(c).includes('brasileir'); }
 function ehCopa(c)      { return normComp(c).includes('copa'); }
+function ehPremier(c)   { return normComp(c).includes('premier'); }
 
 // FONTE DE VERDADE ÚNICA das competições conhecidas. Ao adicionar uma competição nova (ex.:
 // Premier League), inclua-a AQUI (id + matcher) e as conquistas "de todas as competições" e as
@@ -28,6 +29,7 @@ const GRUPOS_CONHECIDOS = [
   { id: 'champions', eh: ehChampions },
   { id: 'brasil',    eh: ehBrasil },
   { id: 'copa',      eh: ehCopa },
+  { id: 'premier',   eh: ehPremier, beta: true },   // jul/2026 — offline, ainda em BETA
 ];
 // Grupo canônico de uma competição (ou null se não reconhecida).
 function grupoDe(c) {
@@ -37,8 +39,12 @@ function grupoDe(c) {
 // Quantos grupos distintos o usuário venceu (usa competicoesVencidas).
 function gruposVencidos(ctx) {
   const venc = [...ctx.competicoesVencidas];
-  return GRUPOS_CONHECIDOS.filter(g => venc.some(g.eh)).length;
+  return GRUPOS_ESTAVEIS.filter(g => venc.some(g.eh)).length;
 }
+// Competições fora do beta. A "Colecionador" usa SÓ estas: se uma competição em beta contasse,
+// quem já tinha a conquista PERDERIA ela ao lançarmos a competição nova — desbloqueio sumindo.
+// Ao tirar a Premier do beta, remova o `beta: true` acima e ela passa a contar naturalmente.
+const GRUPOS_ESTAVEIS = GRUPOS_CONHECIDOS.filter(g => !g.beta);
 
 // ── Combinações de jogadores (quadrados mágicos, trios) ──
 // Cada combo exige que TODOS os jogadores tenham sido escalados JUNTOS numa mesma campanha.
@@ -166,7 +172,7 @@ const CATALOGO = [
       const v = [...ctx.competicoesVencidas];
       return v.some(ehLiberta) && v.some(ehChampions);
   } },
-  { id: 'colecionador',      check: ctx => gruposVencidos(ctx) >= GRUPOS_CONHECIDOS.length },
+  { id: 'colecionador',      check: ctx => gruposVencidos(ctx) >= GRUPOS_ESTAVEIS.length },
 
   // ── Competições — específicas por modo (tri, penta, especialista, matador) ──
   { id: 'tri_champions',   check: ctx => ctx.titulosPorGrupo.champions >= 3 },
@@ -215,7 +221,9 @@ const CATALOGO = [
 
 // Monta o contexto agregando todas as campanhas do usuário.
 function montarContexto(matches) {
-  const vazio = () => ({ liberta: 0, champions: 0, brasil: 0, copa: 0 });
+  // Derivado de GRUPOS_CONHECIDOS: se ficar fixo, um grupo novo vira `undefined++` = NaN
+  // sem erro nenhum — bug silencioso. Competição nova só precisa entrar lá em cima.
+  const vazio = () => Object.fromEntries(GRUPOS_CONHECIDOS.map(g => [g.id, 0]));
   const ctx = {
     matches: matches || [],
     totalPartidas: 0,
