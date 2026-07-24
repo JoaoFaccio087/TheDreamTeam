@@ -31,6 +31,26 @@ const GRUPOS_CONHECIDOS = [
   { id: 'copa',      eh: ehCopa },
   { id: 'premier',   eh: ehPremier, beta: true },   // jul/2026 — offline, ainda em BETA
 ];
+// Ids que já existem escritos à mão (não gerar em cima deles).
+const GRUPOS_MANUAIS = ['liberta', 'champions', 'brasil', 'copa'];
+// Gera campeao/bi/tri/penta/especialista/matador para todo grupo NOVO. Assim, cada liga que
+// entrar em GRUPOS_CONHECIDOS já nasce com conquistas — sem escrever 6 entradas na mão.
+function familiaDeGrupo() {
+  const regras = [];
+  for (const g of GRUPOS_CONHECIDOS) {
+    if (GRUPOS_MANUAIS.includes(g.id)) continue;
+    regras.push(
+      { id: 'campeao_' + g.id,      check: ctx => [...ctx.competicoesVencidas].some(g.eh) },
+      { id: 'bi_' + g.id,           check: ctx => (ctx.titulosPorGrupo[g.id]    || 0) >= 2 },
+      { id: 'tri_' + g.id,          check: ctx => (ctx.titulosPorGrupo[g.id]    || 0) >= 3 },
+      { id: 'penta_' + g.id,        check: ctx => (ctx.titulosPorGrupo[g.id]    || 0) >= 5 },
+      { id: 'especialista_' + g.id, check: ctx => (ctx.campanhasPorGrupo[g.id]  || 0) >= 10 },
+      { id: 'matador_' + g.id,      check: ctx => (ctx.golsPorGrupo[g.id]       || 0) >= 100 }
+    );
+  }
+  return regras;
+}
+
 // Grupo canônico de uma competição (ou null se não reconhecida).
 function grupoDe(c) {
   for (const g of GRUPOS_CONHECIDOS) { if (g.eh(c)) return g.id; }
@@ -190,6 +210,10 @@ const CATALOGO = [
   { id: 'matador_champions', check: ctx => ctx.golsPorGrupo.champions >= 100 },
   { id: 'matador_brasil',    check: ctx => ctx.golsPorGrupo.brasil    >= 100 },
   { id: 'matador_copa',      check: ctx => ctx.golsPorGrupo.copa      >= 100 },
+  // As 4 competições originais ficam escritas à mão ACIMA de propósito: seus ids já estão
+  // gravados no banco e têm irregularidades (não existe `tri_liberta` — é `rei_america`).
+  // Competição NOVA ganha a família completa gerada logo abaixo, sem manutenção manual.
+  ...familiaDeGrupo(),
 
   // ── Feitos individuais (gols/assistências de um jogador numa campanha) ──
   { id: 'artilheiro_camp', check: ctx => algumJogador(ctx, p => (p.gols | 0) >= 15) },

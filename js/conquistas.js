@@ -73,6 +73,14 @@
     { id: 'especialista_copa',      categoria: 'Competições', nome: 'Espírito mundial',    desc: 'Disputou 10 campanhas da Copa do Mundo', desbloqueada: false },
     { id: 'matador_liberta',   categoria: 'Competições', nome: 'Matador da América',  desc: 'Marcou 100 gols na Libertadores',   desbloqueada: false },
     { id: 'matador_champions', categoria: 'Competições', nome: 'Matador da Europa',   desc: 'Marcou 100 gols na Champions',      desbloqueada: false },
+    // Premier League (jul/2026) — a família é GERADA no backend a partir de GRUPOS_CONHECIDOS;
+    // aqui ficam só os nomes/descrições que a tela mostra.
+    { id: 'campeao_premier',      categoria: 'Competições', nome: 'Dono da Ilha',       desc: 'Campeão da Premier League',          desbloqueada: false },
+    { id: 'bi_premier',           categoria: 'Competições', nome: 'Bi inglês',          desc: 'Campeão da Premier League 2 vezes',  desbloqueada: false },
+    { id: 'tri_premier',          categoria: 'Competições', nome: 'Tri inglês',         desc: 'Campeão da Premier League 3 vezes',  desbloqueada: false },
+    { id: 'penta_premier',        categoria: 'Competições', nome: 'Dinastia inglesa',   desc: 'Campeão da Premier League 5 vezes',  desbloqueada: false },
+    { id: 'especialista_premier', categoria: 'Competições', nome: 'Veterano da Ilha',   desc: 'Disputou 10 campanhas na Premier',   desbloqueada: false },
+    { id: 'matador_premier',      categoria: 'Competições', nome: 'Matador da Ilha',    desc: 'Marcou 100 gols na Premier League',  desbloqueada: false },
     { id: 'matador_brasil',    categoria: 'Competições', nome: 'Matador nacional',    desc: 'Marcou 100 gols no Brasileirão',    desbloqueada: false },
     { id: 'matador_copa',      categoria: 'Competições', nome: 'Matador mundial',     desc: 'Marcou 100 gols na Copa do Mundo',  desbloqueada: false },
 
@@ -121,6 +129,8 @@
     // Lendárias — muito difíceis
     lenda_viva: 'lendario', imperador: 'lendario', colecionador: 'lendario', rei_america: 'lendario',
     penta_liberta: 'lendario', penta_champions: 'lendario', penta_brasil: 'lendario', penta_copa: 'lendario',
+    campeao_premier: 'raro', bi_premier: 'raro', tri_premier: 'epico',
+    penta_premier: 'lendario', especialista_premier: 'epico', matador_premier: 'epico',
     // Épicas por competição (tri + matador)
     tri_champions: 'epico', tri_brasil: 'epico', tri_copa: 'epico',
     matador_liberta: 'epico', matador_champions: 'epico', matador_brasil: 'epico', matador_copa: 'epico',
