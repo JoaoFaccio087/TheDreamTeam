@@ -206,6 +206,7 @@
     'Hamburg':                 ['#FFFFFF', '#0A2A66'],
     'Hibernian':               ['#008B5A', '#FFFFFF'],
     'IFK Göteborg':            ['#0057A5', '#FFFFFF'],
+    'Ipswich Town':            ['#0C4DA2', '#FFFFFF'],
     'Leeds United':            ['#FFFFFF', '#1D428A'],
     'Legia Warsaw':            ['#FFFFFF', '#006A4E'],
     'Lyon':                    ['#123B85', '#E30613'],
@@ -250,6 +251,7 @@
     'Everton':                 ['#003399', '#FFFFFF'],
     'Fulham':                  ['#FFFFFF', '#231F20'],
     'Blackburn Rovers':        ['#009EE0', '#FFFFFF'],
+    'Bolton Wanderers':        ['#263C7E', '#FFFFFF'],
     'Burnley':                 ['#6C1D45', '#99D6EA'],
     'Newcastle United':        ['#241F20', '#FFFFFF'],
     'Norwich City':            ['#FFF200', '#00A650'],
@@ -491,7 +493,9 @@
     'Everton':                 { padrao: 'solido' },                                  // azul royal
     'Fulham':                  { padrao: 'faixa-h' },                                 // branco com faixa preta
     'Blackburn Rovers':        { padrao: 'metade' },                                  // metades azul e branca
+    'Bolton Wanderers':        { padrao: 'solido' },                                  // azul-marinho                                  // metades azul e branca
     'Burnley':                 { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
+    'Ipswich Town':            { padrao: 'faixa-h' },                                 // azul com faixa branca
     'Newcastle United':        { padrao: 'listras-v' },
     'Norwich City':            { padrao: 'solido' },                                  // amarelo canário
     'Queens Park Rangers':     { padrao: 'listras-h' },                               // aros azuis e brancos                               // preto e branco
