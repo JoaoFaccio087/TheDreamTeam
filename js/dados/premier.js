@@ -2696,6 +2696,159 @@ const DADOS_PREMIER = [
       { id: 'kevin-davies',        nome: "Kevin Davies",        posicoes: ["ATA"],       forca: 79 },
       { id: 'henrik-pedersen',     nome: "Henrik Pedersen",     posicoes: ["ATA","PE"],  forca: 74 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2006 (temporada 2005-06) — o bi seguido do Chelsea de Mourinho (91
+  //  pts). Top-6: Chelsea (91), United (83), Liverpool (82), Arsenal (67),
+  //  Tottenham (65), Blackburn (63). Foi a última temporada do Highbury, antes
+  //  de o Arsenal mudar para o Emirates. Van der Sar já é o goleiro do United.
+  //  Michael Owen tinha voltado ao Newcastle (fora do top-6), então some daqui.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2006,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 89 },
+      { id: 'paulo-ferreira',      nome: "Paulo Ferreira",      posicoes: ["LD"],        forca: 82 },
+      { id: 'geremi',              nome: "Geremi",              posicoes: ["LD","MC"],   forca: 79 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 89 },
+      { id: 'ricardo-carvalho',    nome: "Ricardo Carvalho",    posicoes: ["ZAG"],       forca: 87 },
+      { id: 'william-gallas',      nome: "William Gallas",      posicoes: ["ZAG","LE"],  forca: 85 },
+      { id: 'asier-del-horno',     nome: "Asier del Horno",     posicoes: ["LE"],        forca: 80 },
+      { id: 'claude-makelele',     nome: "Claude Makélélé",     posicoes: ["VOL"],       forca: 87 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'michael-essien',      nome: "Michael Essien",      posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'joe-cole',            nome: "Joe Cole",            posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'damien-duff',         nome: "Damien Duff",         posicoes: ["PE","PD"],   forca: 84 },
+      { id: 'arjen-robben',        nome: "Arjen Robben",        posicoes: ["PD","PE"],   forca: 87 },
+      { id: 'shaun-wright-phillips', nome: "Shaun Wright-Phillips", posicoes: ["PD"],    forca: 81 },
+      { id: 'didier-drogba',       nome: "Didier Drogba",       posicoes: ["ATA"],       forca: 88 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'eidur-gudjohnsen',    nome: "Eidur Gudjohnsen",    posicoes: ["ATA","MEI"], forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2006,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 87 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 83 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 87 },
+      { id: 'nemanja-vidic',       nome: "Nemanja Vidić",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'mikael-silvestre',    nome: "Mikaël Silvestre",    posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'patrice-evra',        nome: "Patrice Evra",        posicoes: ["LE"],        forca: 82 },
+      { id: 'gabriel-heinze',      nome: "Gabriel Heinze",      posicoes: ["LE","ZAG"],  forca: 83 },
+      { id: 'john-oshea',          nome: "John O'Shea",         posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'roy-keane',           nome: "Roy Keane",           posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'darren-fletcher',     nome: "Darren Fletcher",     posicoes: ["MC"],        forca: 79 },
+      { id: 'alan-smith',           nome: "Alan Smith",          posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 86 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["PD","PE"],   forca: 88 },
+      { id: 'park-ji-sung',        nome: "Park Ji-sung",        posicoes: ["PE","MC"],   forca: 80 },
+      { id: 'ruud-van-nistelrooy', nome: "Ruud van Nistelrooy", posicoes: ["ATA"],       forca: 89 },
+      { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 89 },
+      { id: 'louis-saha',          nome: "Louis Saha",          posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2006,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'jose-reina',          nome: "José Reina",          posicoes: ["GOL"],       forca: 85 },
+      { id: 'steve-finnan',        nome: "Steve Finnan",        posicoes: ["LD"],        forca: 82 },
+      { id: 'jamie-carragher',     nome: "Jamie Carragher",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'sami-hyypia',         nome: "Sami Hyypiä",         posicoes: ["ZAG"],       forca: 83 },
+      { id: 'daniel-agger',        nome: "Daniel Agger",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'john-arne-riise',     nome: "John Arne Riise",     posicoes: ["LE"],        forca: 83 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'momo-sissoko',        nome: "Momo Sissoko",        posicoes: ["VOL"],       forca: 80 },
+      { id: 'luis-garcia',         nome: "Luis García",         posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'harry-kewell',        nome: "Harry Kewell",        posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'boudewijn-zenden',    nome: "Boudewijn Zenden",    posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'peter-crouch',        nome: "Peter Crouch",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'djibril-cisse',       nome: "Djibril Cissé",       posicoes: ["ATA"],       forca: 81 },
+      { id: 'robbie-fowler',       nome: "Robbie Fowler",       posicoes: ["ATA"],       forca: 79 },
+      { id: 'fernando-morientes',  nome: "Fernando Morientes",  posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2006,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'jens-lehmann',        nome: "Jens Lehmann",        posicoes: ["GOL"],       forca: 86 },
+      { id: 'emmanuel-eboue',      nome: "Emmanuel Eboué",      posicoes: ["LD"],        forca: 80 },
+      { id: 'kolo-toure',          nome: "Kolo Touré",          posicoes: ["ZAG"],       forca: 85 },
+      { id: 'sol-campbell',        nome: "Sol Campbell",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'philippe-senderos',   nome: "Philippe Senderos",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 87 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 80 },
+      { id: 'gilberto-silva',      nome: "Gilberto Silva",      posicoes: ["VOL"],       forca: 84 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'alexander-hleb',      nome: "Alexander Hleb",      posicoes: ["MEI","PD"],  forca: 83 },
+      { id: 'freddie-ljungberg',   nome: "Freddie Ljungberg",   posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'robert-pires',        nome: "Robert Pirès",        posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'jose-antonio-reyes',  nome: "José Antonio Reyes",  posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'thierry-henry',       nome: "Thierry Henry",       posicoes: ["ATA","PE"],  forca: 93 },
+      { id: 'robin-van-persie',    nome: "Robin van Persie",    posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'emmanuel-adebayor',   nome: "Emmanuel Adebayor",   posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2006,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'paul-robinson',       nome: "Paul Robinson",       posicoes: ["GOL"],       forca: 83 },
+      { id: 'young-pyo-lee',       nome: "Lee Young-pyo",       posicoes: ["LE"],        forca: 80 },
+      { id: 'ledley-king',         nome: "Ledley King",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'michael-dawson',      nome: "Michael Dawson",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'anthony-gardner',     nome: "Anthony Gardner",     posicoes: ["ZAG"],       forca: 77 },
+      { id: 'paul-stalteri',       nome: "Paul Stalteri",       posicoes: ["LD"],        forca: 76 },
+      { id: 'michael-carrick',     nome: "Michael Carrick",     posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'jermaine-jenas',      nome: "Jermaine Jenas",      posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'aaron-lennon',        nome: "Aaron Lennon",        posicoes: ["PD"],        forca: 79 },
+      { id: 'wayne-routledge',     nome: "Wayne Routledge",     posicoes: ["PD","PE"],   forca: 76 },
+      { id: 'robbie-keane',        nome: "Robbie Keane",        posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'jermain-defoe',       nome: "Jermain Defoe",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'mido',                nome: "Mido",                posicoes: ["ATA"],       forca: 79 },
+      { id: 'grzegorz-rasiak',     nome: "Grzegorz Rasiak",     posicoes: ["ATA"],       forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2006,
+    clube: "Blackburn Rovers",
+    jogadores: [
+      { id: 'brad-friedel',        nome: "Brad Friedel",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'zurab-khizanishvili', nome: "Zurab Khizanishvili", posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'ryan-nelsen',         nome: "Ryan Nelsen",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'andy-todd',           nome: "Andy Todd",           posicoes: ["ZAG"],       forca: 76 },
+      { id: 'lucas-neill',         nome: "Lucas Neill",         posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'dominic-matteo',      nome: "Dominic Matteo",      posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'steven-reid',         nome: "Steven Reid",         posicoes: ["MC","MD"],   forca: 78 },
+      { id: 'tugay-kerimoglu',     nome: "Tugay Kerimoğlu",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'robbie-savage',       nome: "Robbie Savage",       posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'morten-gamst-pedersen', nome: "Morten Gamst Pedersen", posicoes: ["PE","MEI"], forca: 81 },
+      { id: 'david-bentley',       nome: "David Bentley",       posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'craig-bellamy',       nome: "Craig Bellamy",       posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'shefki-kuqi',         nome: "Shefki Kuqi",         posicoes: ["ATA"],       forca: 75 },
+      { id: 'paul-dickov',         nome: "Paul Dickov",         posicoes: ["ATA"],       forca: 75 }
+    ]
   }
 
 ];
