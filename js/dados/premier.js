@@ -3009,6 +3009,164 @@ const DADOS_PREMIER = [
       { id: 'james-mcfadden',      nome: "James McFadden",      posicoes: ["ATA","PE"],  forca: 78 },
       { id: 'victor-anichebe',     nome: "Victor Anichebe",     posicoes: ["ATA"],       forca: 74 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2008 (temporada 2007-08) — o bi do United (87 pts) sobre o Chelsea
+  //  no saldo, e a 1ª final toda inglesa da Champions (United x Chelsea, Moscou).
+  //  Ronaldo fez 31 gols na liga (recorde para meia/ponta) e ganhou a Bola de
+  //  Ouro. Top-6: United (87), Chelsea (85), Arsenal (83), Liverpool (76),
+  //  Everton (65), Aston Villa (60). Berbatov ainda no Tottenham (fora do top-6).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2008,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 87 },
+      { id: 'tomasz-kuszczak',     nome: "Tomasz Kuszczak",     posicoes: ["GOL"],       forca: 77 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 88 },
+      { id: 'nemanja-vidic',       nome: "Nemanja Vidić",       posicoes: ["ZAG"],       forca: 88 },
+      { id: 'patrice-evra',        nome: "Patrice Evra",        posicoes: ["LE"],        forca: 85 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 80 },
+      { id: 'john-oshea',          nome: "John O'Shea",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'michael-carrick',     nome: "Michael Carrick",     posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'owen-hargreaves',     nome: "Owen Hargreaves",     posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'anderson',            nome: "Anderson",            posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'darren-fletcher',     nome: "Darren Fletcher",     posicoes: ["MC"],        forca: 79 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["PD","PE"],   forca: 93 },
+      { id: 'nani',                nome: "Nani",                posicoes: ["PE","PD"],   forca: 81 },
+      { id: 'park-ji-sung',        nome: "Park Ji-sung",        posicoes: ["PE","MC"],   forca: 81 },
+      { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 89 },
+      { id: 'carlos-tevez',        nome: "Carlos Tévez",        posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'louis-saha',          nome: "Louis Saha",          posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2008,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 88 },
+      { id: 'paulo-ferreira',      nome: "Paulo Ferreira",      posicoes: ["LD"],        forca: 80 },
+      { id: 'juliano-belletti',    nome: "Juliano Belletti",    posicoes: ["LD"],        forca: 80 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'ricardo-carvalho',    nome: "Ricardo Carvalho",    posicoes: ["ZAG"],       forca: 87 },
+      { id: 'alex',                nome: "Alex",                posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 88 },
+      { id: 'wayne-bridge',        nome: "Wayne Bridge",        posicoes: ["LE"],        forca: 79 },
+      { id: 'michael-essien',      nome: "Michael Essien",      posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'claude-makelele',     nome: "Claude Makélélé",     posicoes: ["VOL"],       forca: 84 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'michael-ballack',     nome: "Michael Ballack",     posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'joe-cole',            nome: "Joe Cole",            posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'florent-malouda',     nome: "Florent Malouda",     posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'shaun-wright-phillips', nome: "Shaun Wright-Phillips", posicoes: ["PD"],    forca: 79 },
+      { id: 'didier-drogba',       nome: "Didier Drogba",       posicoes: ["ATA"],       forca: 88 },
+      { id: 'nicolas-anelka',      nome: "Nicolas Anelka",      posicoes: ["ATA"],       forca: 84 },
+      { id: 'salomon-kalou',       nome: "Salomon Kalou",       posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2008,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'manuel-almunia',      nome: "Manuel Almunia",      posicoes: ["GOL"],       forca: 81 },
+      { id: 'bacary-sagna',        nome: "Bacary Sagna",        posicoes: ["LD"],        forca: 84 },
+      { id: 'kolo-toure',          nome: "Kolo Touré",          posicoes: ["ZAG"],       forca: 85 },
+      { id: 'william-gallas',      nome: "William Gallas",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'philippe-senderos',   nome: "Philippe Senderos",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 84 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'mathieu-flamini',     nome: "Mathieu Flamini",     posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'gilberto-silva',      nome: "Gilberto Silva",      posicoes: ["VOL"],       forca: 82 },
+      { id: 'alexander-hleb',      nome: "Alexander Hleb",      posicoes: ["MEI","PD"],  forca: 84 },
+      { id: 'tomas-rosicky',       nome: "Tomáš Rosický",       posicoes: ["MEI","PD"],  forca: 83 },
+      { id: 'abou-diaby',          nome: "Abou Diaby",          posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'emmanuel-eboue',      nome: "Emmanuel Eboué",      posicoes: ["LD","PD"],   forca: 79 },
+      { id: 'robin-van-persie',    nome: "Robin van Persie",    posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'emmanuel-adebayor',   nome: "Emmanuel Adebayor",   posicoes: ["ATA"],       forca: 85 },
+      { id: 'nicklas-bendtner',    nome: "Nicklas Bendtner",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'eduardo',             nome: "Eduardo",             posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2008,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'jose-reina',          nome: "José Reina",          posicoes: ["GOL"],       forca: 87 },
+      { id: 'steve-finnan',        nome: "Steve Finnan",        posicoes: ["LD"],        forca: 80 },
+      { id: 'alvaro-arbeloa',      nome: "Álvaro Arbeloa",      posicoes: ["LD","LE"],   forca: 81 },
+      { id: 'jamie-carragher',     nome: "Jamie Carragher",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'daniel-agger',        nome: "Daniel Agger",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'martin-skrtel',       nome: "Martin Škrtel",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'fabio-aurelio',       nome: "Fábio Aurélio",       posicoes: ["LE"],        forca: 80 },
+      { id: 'john-arne-riise',     nome: "John Arne Riise",     posicoes: ["LE"],        forca: 81 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'javier-mascherano',   nome: "Javier Mascherano",   posicoes: ["VOL"],       forca: 85 },
+      { id: 'jermaine-pennant',    nome: "Jermaine Pennant",    posicoes: ["PD"],        forca: 78 },
+      { id: 'yossi-benayoun',      nome: "Yossi Benayoun",      posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'dirk-kuyt',           nome: "Dirk Kuyt",           posicoes: ["ATA","PD"],  forca: 82 },
+      { id: 'fernando-torres',     nome: "Fernando Torres",     posicoes: ["ATA"],       forca: 89 },
+      { id: 'peter-crouch',        nome: "Peter Crouch",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'ryan-babel',          nome: "Ryan Babel",          posicoes: ["PE","ATA"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2008,
+    clube: "Everton",
+    jogadores: [
+      { id: 'tim-howard',          nome: "Tim Howard",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'tony-hibbert',        nome: "Tony Hibbert",        posicoes: ["LD"],        forca: 77 },
+      { id: 'joleon-lescott',      nome: "Joleon Lescott",      posicoes: ["ZAG","LE"],  forca: 83 },
+      { id: 'joseph-yobo',         nome: "Joseph Yobo",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'phil-jagielka',       nome: "Phil Jagielka",       posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'leighton-baines',     nome: "Leighton Baines",     posicoes: ["LE"],        forca: 80 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'mikel-arteta',        nome: "Mikel Arteta",        posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'lee-carsley',         nome: "Lee Carsley",         posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'leon-osman',          nome: "Leon Osman",          posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'tim-cahill',          nome: "Tim Cahill",          posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'steven-pienaar',      nome: "Steven Pienaar",      posicoes: ["MEI","PE"],  forca: 81 },
+      { id: 'andrew-johnson',      nome: "Andrew Johnson",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'yakubu',              nome: "Yakubu",              posicoes: ["ATA"],       forca: 83 },
+      { id: 'victor-anichebe',     nome: "Victor Anichebe",     posicoes: ["ATA"],       forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2008,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'scott-carson',        nome: "Scott Carson",        posicoes: ["GOL"],       forca: 79 },
+      { id: 'craig-gardner',       nome: "Craig Gardner",       posicoes: ["LD","MC"],   forca: 76 },
+      { id: 'martin-laursen',      nome: "Martin Laursen",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'zat-knight',          nome: "Zat Knight",          posicoes: ["ZAG"],       forca: 77 },
+      { id: 'curtis-davies',       nome: "Curtis Davies",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'wilfred-bouma',       nome: "Wilfred Bouma",       posicoes: ["LE"],        forca: 78 },
+      { id: 'nigel-reo-coker',     nome: "Nigel Reo-Coker",     posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'gareth-barry',        nome: "Gareth Barry",        posicoes: ["MC","LE"],   forca: 84 },
+      { id: 'stiliyan-petrov',     nome: "Stiliyan Petrov",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'gabriel-agbonlahor',  nome: "Gabriel Agbonlahor",  posicoes: ["ATA","PD"],  forca: 81 },
+      { id: 'john-carew',          nome: "John Carew",          posicoes: ["ATA"],       forca: 82 },
+      { id: 'marlon-harewood',     nome: "Marlon Harewood",     posicoes: ["ATA"],       forca: 76 },
+      { id: 'shaun-maloney',       nome: "Shaun Maloney",       posicoes: ["MEI","PE"],  forca: 77 }
+    ]
   }
 
 ];
