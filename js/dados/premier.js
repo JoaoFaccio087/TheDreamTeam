@@ -3321,6 +3321,163 @@ const DADOS_PREMIER = [
       { id: 'john-carew',          nome: "John Carew",          posicoes: ["ATA"],       forca: 82 },
       { id: 'emile-heskey',        nome: "Emile Heskey",        posicoes: ["ATA"],       forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2010 (temporada 2009-10) — o Chelsea de Ancelotti campeão com 86 pts
+  //  e RECORDE de 103 gols (primeiro time a passar de 100 na era Premier).
+  //  Top-6: Chelsea (86), United (85), Arsenal (75), Tottenham (70), City (67),
+  //  Aston Villa (64). Primeira vez do City recém-comprado no top-6.
+  //  Valência (Wigan→United), Adebayor e Tévez foram para o City vindos de
+  //  Arsenal/United — aparecem só no City.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2010,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 87 },
+      { id: 'branislav-ivanovic',  nome: "Branislav Ivanović",  posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'jose-bosingwa',       nome: "José Bosingwa",       posicoes: ["LD"],        forca: 81 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'alex',                nome: "Alex",                posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ricardo-carvalho',    nome: "Ricardo Carvalho",    posicoes: ["ZAG"],       forca: 85 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 88 },
+      { id: 'yuri-zhirkov',        nome: "Yuri Zhirkov",        posicoes: ["LE","PE"],   forca: 81 },
+      { id: 'michael-essien',      nome: "Michael Essien",      posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'michael-ballack',     nome: "Michael Ballack",     posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'jon-obi-mikel',       nome: "John Obi Mikel",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'deco',                nome: "Deco",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'florent-malouda',     nome: "Florent Malouda",     posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'joe-cole',            nome: "Joe Cole",            posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'salomon-kalou',       nome: "Salomon Kalou",       posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'didier-drogba',       nome: "Didier Drogba",       posicoes: ["ATA"],       forca: 88 },
+      { id: 'nicolas-anelka',      nome: "Nicolas Anelka",      posicoes: ["ATA"],       forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2010,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 86 },
+      { id: 'tomasz-kuszczak',     nome: "Tomasz Kuszczak",     posicoes: ["GOL"],       forca: 77 },
+      { id: 'rafael-da-silva',     nome: "Rafael",              posicoes: ["LD"],        forca: 80 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 78 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 87 },
+      { id: 'nemanja-vidic',       nome: "Nemanja Vidić",       posicoes: ["ZAG"],       forca: 89 },
+      { id: 'patrice-evra',        nome: "Patrice Evra",        posicoes: ["LE"],        forca: 86 },
+      { id: 'john-oshea',          nome: "John O'Shea",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'michael-carrick',     nome: "Michael Carrick",     posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'darren-fletcher',     nome: "Darren Fletcher",     posicoes: ["MC"],        forca: 82 },
+      { id: 'anderson',            nome: "Anderson",            posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'antonio-valencia',    nome: "Antonio Valencia",    posicoes: ["PD"],        forca: 83 },
+      { id: 'nani',                nome: "Nani",                posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'park-ji-sung',        nome: "Park Ji-sung",        posicoes: ["PE","MC"],   forca: 81 },
+      { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 91 },
+      { id: 'dimitar-berbatov',    nome: "Dimitar Berbatov",    posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'michael-owen',        nome: "Michael Owen",        posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2010,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'manuel-almunia',      nome: "Manuel Almunia",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'bacary-sagna',        nome: "Bacary Sagna",        posicoes: ["LD"],        forca: 84 },
+      { id: 'thomas-vermaelen',    nome: "Thomas Vermaelen",    posicoes: ["ZAG"],       forca: 84 },
+      { id: 'william-gallas',      nome: "William Gallas",      posicoes: ["ZAG"],       forca: 83 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 83 },
+      { id: 'sol-campbell',        nome: "Sol Campbell",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'alex-song',           nome: "Alex Song",           posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'abou-diaby',          nome: "Abou Diaby",          posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'samir-nasri',         nome: "Samir Nasri",         posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'andrey-arshavin',     nome: "Andrey Arshavin",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'theo-walcott',        nome: "Theo Walcott",        posicoes: ["PD"],        forca: 82 },
+      { id: 'tomas-rosicky',       nome: "Tomáš Rosický",       posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'robin-van-persie',    nome: "Robin van Persie",    posicoes: ["ATA","PE"],  forca: 86 },
+      { id: 'nicklas-bendtner',    nome: "Nicklas Bendtner",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'eduardo',             nome: "Eduardo",             posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2010,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'heurelho-gomes',      nome: "Heurelho Gomes",      posicoes: ["GOL"],       forca: 81 },
+      { id: 'alan-hutton',         nome: "Alan Hutton",         posicoes: ["LD"],        forca: 78 },
+      { id: 'michael-dawson',      nome: "Michael Dawson",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'ledley-king',         nome: "Ledley King",         posicoes: ["ZAG"],       forca: 83 },
+      { id: 'jonathan-woodgate',   nome: "Jonathan Woodgate",   posicoes: ["ZAG"],       forca: 80 },
+      { id: 'benoit-assou-ekotto', nome: "Benoît Assou-Ekotto", posicoes: ["LE"],        forca: 80 },
+      { id: 'vedran-corluka',      nome: "Vedran Ćorluka",      posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'luka-modric',         nome: "Luka Modrić",         posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'tom-huddlestone',     nome: "Tom Huddlestone",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'wilson-palacios',     nome: "Wilson Palacios",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'aaron-lennon',        nome: "Aaron Lennon",        posicoes: ["PD"],        forca: 82 },
+      { id: 'gareth-bale',         nome: "Gareth Bale",         posicoes: ["PE","LE"],   forca: 83 },
+      { id: 'niko-kranjcar',       nome: "Niko Kranjčar",       posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'jermain-defoe',       nome: "Jermain Defoe",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'peter-crouch',        nome: "Peter Crouch",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'robbie-keane',        nome: "Robbie Keane",        posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'roman-pavlyuchenko',  nome: "Roman Pavlyuchenko",  posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2010,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'shay-given',          nome: "Shay Given",          posicoes: ["GOL"],       forca: 84 },
+      { id: 'micah-richards',      nome: "Micah Richards",      posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'kolo-toure',          nome: "Kolo Touré",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'joleon-lescott',      nome: "Joleon Lescott",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'vincent-kompany',     nome: "Vincent Kompany",     posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'wayne-bridge',        nome: "Wayne Bridge",        posicoes: ["LE"],        forca: 79 },
+      { id: 'pablo-zabaleta',      nome: "Pablo Zabaleta",      posicoes: ["LD","LE"],   forca: 81 },
+      { id: 'gareth-barry',        nome: "Gareth Barry",        posicoes: ["MC","LE"],   forca: 84 },
+      { id: 'nigel-de-jong',       nome: "Nigel de Jong",       posicoes: ["VOL"],       forca: 82 },
+      { id: 'stephen-ireland',     nome: "Stephen Ireland",     posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'shaun-wright-phillips', nome: "Shaun Wright-Phillips", posicoes: ["PD"],    forca: 80 },
+      { id: 'craig-bellamy',       nome: "Craig Bellamy",       posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'martin-petrov',       nome: "Martin Petrov",       posicoes: ["PE"],        forca: 79 },
+      { id: 'carlos-tevez',        nome: "Carlos Tévez",        posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'emmanuel-adebayor',   nome: "Emmanuel Adebayor",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'roque-santa-cruz',    nome: "Roque Santa Cruz",    posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2010,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'brad-friedel',        nome: "Brad Friedel",        posicoes: ["GOL"],       forca: 82 },
+      { id: 'luke-young',          nome: "Luke Young",          posicoes: ["LD"],        forca: 78 },
+      { id: 'richard-dunne',       nome: "Richard Dunne",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'james-collins',       nome: "James Collins",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'carlos-cuellar',      nome: "Carlos Cuéllar",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'stephen-warnock',     nome: "Stephen Warnock",     posicoes: ["LE"],        forca: 78 },
+      { id: 'stiliyan-petrov',     nome: "Stiliyan Petrov",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'nigel-reo-coker',     nome: "Nigel Reo-Coker",     posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'stewart-downing',     nome: "Stewart Downing",     posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","MD"],   forca: 83 },
+      { id: 'gabriel-agbonlahor',  nome: "Gabriel Agbonlahor",  posicoes: ["ATA","PD"],  forca: 81 },
+      { id: 'john-carew',          nome: "John Carew",          posicoes: ["ATA"],       forca: 81 },
+      { id: 'emile-heskey',        nome: "Emile Heskey",        posicoes: ["ATA"],       forca: 78 }
+    ]
   }
 
 ];
