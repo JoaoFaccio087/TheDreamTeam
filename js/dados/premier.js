@@ -2849,6 +2849,166 @@ const DADOS_PREMIER = [
       { id: 'shefki-kuqi',         nome: "Shefki Kuqi",         posicoes: ["ATA"],       forca: 75 },
       { id: 'paul-dickov',         nome: "Paul Dickov",         posicoes: ["ATA"],       forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2007 (temporada 2006-07) — o United retomou o título (89 pts) após
+  //  a dupla do Chelsea, no ano da explosão de Cristiano Ronaldo (17 gols de
+  //  ponta, PFA Player of the Year). Top-6: United (89), Chelsea (83), Liverpool
+  //  (68), Arsenal (68), Tottenham (60), Everton (58).
+  //  Carrick foi do Tottenham para o United (aparece só no United). Ballack e
+  //  Shevchenko chegaram ao Chelsea; Dirk Kuyt ao Liverpool.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2007,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 87 },
+      { id: 'tomasz-kuszczak',     nome: "Tomasz Kuszczak",     posicoes: ["GOL"],       forca: 76 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 82 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 88 },
+      { id: 'nemanja-vidic',       nome: "Nemanja Vidić",       posicoes: ["ZAG"],       forca: 86 },
+      { id: 'patrice-evra',        nome: "Patrice Evra",        posicoes: ["LE"],        forca: 84 },
+      { id: 'gabriel-heinze',      nome: "Gabriel Heinze",      posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'john-oshea',          nome: "John O'Shea",         posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'michael-carrick',     nome: "Michael Carrick",     posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'darren-fletcher',     nome: "Darren Fletcher",     posicoes: ["MC"],        forca: 79 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["PD","PE"],   forca: 91 },
+      { id: 'park-ji-sung',        nome: "Park Ji-sung",        posicoes: ["PE","MC"],   forca: 80 },
+      { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 90 },
+      { id: 'louis-saha',          nome: "Louis Saha",          posicoes: ["ATA"],       forca: 82 },
+      { id: 'ole-gunnar-solskjaer', nome: "Ole Gunnar Solskjær", posicoes: ["ATA"],      forca: 80 },
+      { id: 'alan-smith',          nome: "Alan Smith",          posicoes: ["ATA","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2007,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 88 },
+      { id: 'henrique-hilario',    nome: "Henrique Hilário",    posicoes: ["GOL"],       forca: 74 },
+      { id: 'paulo-ferreira',      nome: "Paulo Ferreira",      posicoes: ["LD"],        forca: 81 },
+      { id: 'geremi',              nome: "Geremi",              posicoes: ["LD","MC"],   forca: 78 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 89 },
+      { id: 'ricardo-carvalho',    nome: "Ricardo Carvalho",    posicoes: ["ZAG"],       forca: 87 },
+      { id: 'khalid-boulahrouz',   nome: "Khalid Boulahrouz",   posicoes: ["ZAG"],       forca: 78 },
+      { id: 'wayne-bridge',        nome: "Wayne Bridge",        posicoes: ["LE"],        forca: 80 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 87 },
+      { id: 'claude-makelele',     nome: "Claude Makélélé",     posicoes: ["VOL"],       forca: 85 },
+      { id: 'michael-essien',      nome: "Michael Essien",      posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'michael-ballack',     nome: "Michael Ballack",     posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'joe-cole',            nome: "Joe Cole",            posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'arjen-robben',        nome: "Arjen Robben",        posicoes: ["PD","PE"],   forca: 86 },
+      { id: 'shaun-wright-phillips', nome: "Shaun Wright-Phillips", posicoes: ["PD"],    forca: 79 },
+      { id: 'didier-drogba',       nome: "Didier Drogba",       posicoes: ["ATA"],       forca: 89 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'salomon-kalou',       nome: "Salomon Kalou",       posicoes: ["ATA","PE"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2007,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'jose-reina',          nome: "José Reina",          posicoes: ["GOL"],       forca: 86 },
+      { id: 'steve-finnan',        nome: "Steve Finnan",        posicoes: ["LD"],        forca: 81 },
+      { id: 'alvaro-arbeloa',      nome: "Álvaro Arbeloa",      posicoes: ["LD","LE"],   forca: 80 },
+      { id: 'jamie-carragher',     nome: "Jamie Carragher",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'daniel-agger',        nome: "Daniel Agger",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sami-hyypia',         nome: "Sami Hyypiä",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'john-arne-riise',     nome: "John Arne Riise",     posicoes: ["LE"],        forca: 82 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'javier-mascherano',   nome: "Javier Mascherano",   posicoes: ["VOL"],       forca: 84 },
+      { id: 'momo-sissoko',        nome: "Momo Sissoko",        posicoes: ["VOL"],       forca: 79 },
+      { id: 'jermaine-pennant',    nome: "Jermaine Pennant",    posicoes: ["PD"],        forca: 79 },
+      { id: 'boudewijn-zenden',    nome: "Boudewijn Zenden",    posicoes: ["PE","MEI"],  forca: 78 },
+      { id: 'dirk-kuyt',           nome: "Dirk Kuyt",           posicoes: ["ATA","PD"],  forca: 83 },
+      { id: 'peter-crouch',        nome: "Peter Crouch",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'craig-bellamy',       nome: "Craig Bellamy",       posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'robbie-fowler',       nome: "Robbie Fowler",       posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2007,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'jens-lehmann',        nome: "Jens Lehmann",        posicoes: ["GOL"],       forca: 85 },
+      { id: 'manuel-almunia',      nome: "Manuel Almunia",      posicoes: ["GOL"],       forca: 78 },
+      { id: 'emmanuel-eboue',      nome: "Emmanuel Eboué",      posicoes: ["LD"],        forca: 80 },
+      { id: 'kolo-toure',          nome: "Kolo Touré",          posicoes: ["ZAG"],       forca: 85 },
+      { id: 'william-gallas',      nome: "William Gallas",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'philippe-senderos',   nome: "Philippe Senderos",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'justin-hoyte',        nome: "Justin Hoyte",        posicoes: ["LD","LE"],   forca: 74 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 82 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'gilberto-silva',      nome: "Gilberto Silva",      posicoes: ["VOL"],       forca: 84 },
+      { id: 'mathieu-flamini',     nome: "Mathieu Flamini",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'alexander-hleb',      nome: "Alexander Hleb",      posicoes: ["MEI","PD"],  forca: 83 },
+      { id: 'tomas-rosicky',       nome: "Tomáš Rosický",       posicoes: ["MEI","PD"],  forca: 83 },
+      { id: 'freddie-ljungberg',   nome: "Freddie Ljungberg",   posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'robin-van-persie',    nome: "Robin van Persie",    posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'thierry-henry',       nome: "Thierry Henry",       posicoes: ["ATA","PE"],  forca: 91 },
+      { id: 'emmanuel-adebayor',   nome: "Emmanuel Adebayor",   posicoes: ["ATA"],       forca: 83 },
+      { id: 'julio-baptista',      nome: "Júlio Baptista",      posicoes: ["ATA","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2007,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'paul-robinson',       nome: "Paul Robinson",       posicoes: ["GOL"],       forca: 82 },
+      { id: 'pascal-chimbonda',    nome: "Pascal Chimbonda",    posicoes: ["LD"],        forca: 80 },
+      { id: 'young-pyo-lee',       nome: "Lee Young-pyo",       posicoes: ["LE"],        forca: 80 },
+      { id: 'ledley-king',         nome: "Ledley King",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'michael-dawson',      nome: "Michael Dawson",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'anthony-gardner',     nome: "Anthony Gardner",     posicoes: ["ZAG"],       forca: 77 },
+      { id: 'benoit-assou-ekotto', nome: "Benoît Assou-Ekotto", posicoes: ["LE"],        forca: 78 },
+      { id: 'didier-zokora',       nome: "Didier Zokora",       posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'jermaine-jenas',      nome: "Jermaine Jenas",      posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'tom-huddlestone',     nome: "Tom Huddlestone",     posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'steed-malbranque',    nome: "Steed Malbranque",    posicoes: ["MEI","PD"],  forca: 79 },
+      { id: 'aaron-lennon',        nome: "Aaron Lennon",        posicoes: ["PD"],        forca: 81 },
+      { id: 'jermain-defoe',       nome: "Jermain Defoe",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'dimitar-berbatov',    nome: "Dimitar Berbatov",    posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'robbie-keane',        nome: "Robbie Keane",        posicoes: ["ATA","MEI"], forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2007,
+    clube: "Everton",
+    jogadores: [
+      { id: 'tim-howard',          nome: "Tim Howard",          posicoes: ["GOL"],       forca: 82 },
+      { id: 'tony-hibbert',        nome: "Tony Hibbert",        posicoes: ["LD"],        forca: 77 },
+      { id: 'joleon-lescott',      nome: "Joleon Lescott",      posicoes: ["ZAG","LE"],  forca: 82 },
+      { id: 'joseph-yobo',         nome: "Joseph Yobo",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'alan-stubbs',         nome: "Alan Stubbs",         posicoes: ["ZAG"],       forca: 77 },
+      { id: 'nuno-valente',        nome: "Nuno Valente",        posicoes: ["LE"],        forca: 76 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'mikel-arteta',        nome: "Mikel Arteta",        posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'lee-carsley',         nome: "Lee Carsley",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'leon-osman',          nome: "Leon Osman",          posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'tim-cahill',          nome: "Tim Cahill",          posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'manuel-fernandes',    nome: "Manuel Fernandes",    posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'andrew-johnson',      nome: "Andrew Johnson",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'james-mcfadden',      nome: "James McFadden",      posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'victor-anichebe',     nome: "Victor Anichebe",     posicoes: ["ATA"],       forca: 74 }
+    ]
   }
 
 ];
