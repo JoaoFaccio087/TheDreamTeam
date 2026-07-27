@@ -3167,6 +3167,160 @@ const DADOS_PREMIER = [
       { id: 'marlon-harewood',     nome: "Marlon Harewood",     posicoes: ["ATA"],       forca: 76 },
       { id: 'shaun-maloney',       nome: "Shaun Maloney",       posicoes: ["MEI","PE"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2009 (temporada 2008-09) — o tri seguido do United (90 pts), último
+  //  ano de Cristiano Ronaldo antes do Real Madrid. Top-6: United (90), Liverpool
+  //  (86), Chelsea (83), Arsenal (72), Everton (63), Aston Villa (62).
+  //  Melhor campanha do Liverpool na era Premier (86 pts, vice). Robinho foi para
+  //  o City (fora do top-6). Arshavin chegou ao Arsenal em janeiro.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2009,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 88 },
+      { id: 'ben-foster',          nome: "Ben Foster",          posicoes: ["GOL"],       forca: 78 },
+      { id: 'wes-brown',           nome: "Wes Brown",           posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'rio-ferdinand',       nome: "Rio Ferdinand",       posicoes: ["ZAG"],       forca: 88 },
+      { id: 'nemanja-vidic',       nome: "Nemanja Vidić",       posicoes: ["ZAG"],       forca: 89 },
+      { id: 'patrice-evra',        nome: "Patrice Evra",        posicoes: ["LE"],        forca: 86 },
+      { id: 'gary-neville',        nome: "Gary Neville",        posicoes: ["LD"],        forca: 79 },
+      { id: 'john-oshea',          nome: "John O'Shea",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'rafael-da-silva',     nome: "Rafael",              posicoes: ["LD"],        forca: 78 },
+      { id: 'michael-carrick',     nome: "Michael Carrick",     posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'paul-scholes',        nome: "Paul Scholes",        posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'anderson',            nome: "Anderson",            posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'darren-fletcher',     nome: "Darren Fletcher",     posicoes: ["MC"],        forca: 81 },
+      { id: 'ryan-giggs',          nome: "Ryan Giggs",          posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'park-ji-sung',        nome: "Park Ji-sung",        posicoes: ["PE","MC"],   forca: 81 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["PD","PE"],   forca: 93 },
+      { id: 'nani',                nome: "Nani",                posicoes: ["PE","PD"],   forca: 81 },
+      { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 90 },
+      { id: 'carlos-tevez',        nome: "Carlos Tévez",        posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'dimitar-berbatov',    nome: "Dimitar Berbatov",    posicoes: ["ATA","MEI"], forca: 86 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2009,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'jose-reina',          nome: "José Reina",          posicoes: ["GOL"],       forca: 87 },
+      { id: 'alvaro-arbeloa',      nome: "Álvaro Arbeloa",      posicoes: ["LD","LE"],   forca: 81 },
+      { id: 'jamie-carragher',     nome: "Jamie Carragher",     posicoes: ["ZAG"],       forca: 85 },
+      { id: 'martin-skrtel',       nome: "Martin Škrtel",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'daniel-agger',        nome: "Daniel Agger",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'fabio-aurelio',       nome: "Fábio Aurélio",       posicoes: ["LE"],        forca: 80 },
+      { id: 'emiliano-insua',      nome: "Emiliano Insúa",      posicoes: ["LE"],        forca: 77 },
+      { id: 'javier-mascherano',   nome: "Javier Mascherano",   posicoes: ["VOL"],       forca: 86 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["MC","VOL"],  forca: 87 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'dirk-kuyt',           nome: "Dirk Kuyt",           posicoes: ["ATA","PD"],  forca: 83 },
+      { id: 'yossi-benayoun',      nome: "Yossi Benayoun",      posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'albert-riera',        nome: "Albert Riera",        posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'fernando-torres',     nome: "Fernando Torres",     posicoes: ["ATA"],       forca: 90 },
+      { id: 'ryan-babel',          nome: "Ryan Babel",          posicoes: ["PE","ATA"],  forca: 79 },
+      { id: 'david-ngog',          nome: "David N'Gog",         posicoes: ["ATA"],       forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2009,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 87 },
+      { id: 'jose-bosingwa',       nome: "José Bosingwa",       posicoes: ["LD"],        forca: 82 },
+      { id: 'branislav-ivanovic',  nome: "Branislav Ivanović",  posicoes: ["ZAG","LD"],  forca: 83 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'ricardo-carvalho',    nome: "Ricardo Carvalho",    posicoes: ["ZAG"],       forca: 86 },
+      { id: 'alex',                nome: "Alex",                posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 88 },
+      { id: 'michael-essien',      nome: "Michael Essien",      posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'michael-ballack',     nome: "Michael Ballack",     posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'deco',                nome: "Deco",                posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'jon-obi-mikel',       nome: "John Obi Mikel",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'florent-malouda',     nome: "Florent Malouda",     posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'joe-cole',            nome: "Joe Cole",            posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'salomon-kalou',       nome: "Salomon Kalou",       posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'didier-drogba',       nome: "Didier Drogba",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'nicolas-anelka',      nome: "Nicolas Anelka",      posicoes: ["ATA"],       forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2009,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'manuel-almunia',      nome: "Manuel Almunia",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'bacary-sagna',        nome: "Bacary Sagna",        posicoes: ["LD"],        forca: 84 },
+      { id: 'william-gallas',      nome: "William Gallas",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'kolo-toure',          nome: "Kolo Touré",          posicoes: ["ZAG"],       forca: 84 },
+      { id: 'mikael-silvestre',    nome: "Mikaël Silvestre",    posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 84 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'denilson',            nome: "Denílson",            posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'abou-diaby',          nome: "Abou Diaby",          posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'samir-nasri',         nome: "Samir Nasri",         posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'emmanuel-eboue',      nome: "Emmanuel Eboué",      posicoes: ["LD","PD"],   forca: 79 },
+      { id: 'theo-walcott',        nome: "Theo Walcott",        posicoes: ["PD"],        forca: 82 },
+      { id: 'andrey-arshavin',     nome: "Andrey Arshavin",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'robin-van-persie',    nome: "Robin van Persie",    posicoes: ["ATA","PE"],  forca: 86 },
+      { id: 'emmanuel-adebayor',   nome: "Emmanuel Adebayor",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'nicklas-bendtner',    nome: "Nicklas Bendtner",    posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2009,
+    clube: "Everton",
+    jogadores: [
+      { id: 'tim-howard',          nome: "Tim Howard",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'tony-hibbert',        nome: "Tony Hibbert",        posicoes: ["LD"],        forca: 77 },
+      { id: 'phil-jagielka',       nome: "Phil Jagielka",       posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'joleon-lescott',      nome: "Joleon Lescott",      posicoes: ["ZAG","LE"],  forca: 83 },
+      { id: 'joseph-yobo',         nome: "Joseph Yobo",         posicoes: ["ZAG"],       forca: 81 },
+      { id: 'leighton-baines',     nome: "Leighton Baines",     posicoes: ["LE"],        forca: 81 },
+      { id: 'phil-neville',        nome: "Phil Neville",        posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'mikel-arteta',        nome: "Mikel Arteta",        posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'marouane-fellaini',   nome: "Marouane Fellaini",   posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'tim-cahill',          nome: "Tim Cahill",          posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'steven-pienaar',      nome: "Steven Pienaar",      posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'leon-osman',          nome: "Leon Osman",          posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'louis-saha',          nome: "Louis Saha",          posicoes: ["ATA"],       forca: 80 },
+      { id: 'yakubu',              nome: "Yakubu",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'victor-anichebe',     nome: "Victor Anichebe",     posicoes: ["ATA"],       forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2009,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'brad-friedel',        nome: "Brad Friedel",        posicoes: ["GOL"],       forca: 83 },
+      { id: 'luke-young',          nome: "Luke Young",          posicoes: ["LD"],        forca: 78 },
+      { id: 'martin-laursen',      nome: "Martin Laursen",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'curtis-davies',       nome: "Curtis Davies",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'carlos-cuellar',      nome: "Carlos Cuéllar",      posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'wilfred-bouma',       nome: "Wilfred Bouma",       posicoes: ["LE"],        forca: 77 },
+      { id: 'nigel-reo-coker',     nome: "Nigel Reo-Coker",     posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'gareth-barry',        nome: "Gareth Barry",        posicoes: ["MC","LE"],   forca: 85 },
+      { id: 'stiliyan-petrov',     nome: "Stiliyan Petrov",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'stewart-downing',     nome: "Stewart Downing",     posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'gabriel-agbonlahor',  nome: "Gabriel Agbonlahor",  posicoes: ["ATA","PD"],  forca: 82 },
+      { id: 'john-carew',          nome: "John Carew",          posicoes: ["ATA"],       forca: 82 },
+      { id: 'emile-heskey',        nome: "Emile Heskey",        posicoes: ["ATA"],       forca: 78 }
+    ]
   }
 
 ];
