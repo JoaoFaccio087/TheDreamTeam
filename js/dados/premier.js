@@ -5051,6 +5051,159 @@ const DADOS_PREMIER = [
       { id: 'steven-bergwijn',     nome: "Steven Bergwijn",     posicoes: ["PE","ATA"],  forca: 79 },
       { id: 'harry-kane',          nome: "Harry Kane",          posicoes: ["ATA"],       forca: 88 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2021 (temporada 2020-21) — o City retomou o título (86 pts) numa
+  //  temporada ainda com portões fechados. O United foi vice; o Chelsea de
+  //  Tuchel ganhou a Champions. Top-6: City (86), United (74), Liverpool (69),
+  //  Chelsea (67), Leicester (66), West Ham (65). West Ham no top-6 pela 1ª vez
+  //  na era moderna. Rúben Dias chegou ao City e mudou a defesa.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2021,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 88 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 84 },
+      { id: 'joao-cancelo',        nome: "João Cancelo",        posicoes: ["LD","LE"],   forca: 86 },
+      { id: 'ruben-dias',          nome: "Rúben Dias",          posicoes: ["ZAG"],       forca: 87 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'aymeric-laporte',     nome: "Aymeric Laporte",     posicoes: ["ZAG"],       forca: 85 },
+      { id: 'oleksandr-zinchenko', nome: "Oleksandr Zinchenko", posicoes: ["LE","MC"],   forca: 81 },
+      { id: 'rodri',               nome: "Rodri",               posicoes: ["VOL"],       forca: 86 },
+      { id: 'fernandinho',         nome: "Fernandinho",         posicoes: ["VOL","ZAG"], forca: 82 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'ilkay-gundogan',      nome: "İlkay Gündoğan",      posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 86 },
+      { id: 'phil-foden',          nome: "Phil Foden",          posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'riyad-mahrez',        nome: "Riyad Mahrez",        posicoes: ["PD","MEI"],  forca: 85 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 86 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'sergio-aguero',       nome: "Sergio Agüero",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'ferran-torres',       nome: "Ferran Torres",       posicoes: ["PD","ATA"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2021,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'dean-henderson',      nome: "Dean Henderson",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'aaron-wan-bissaka',   nome: "Aaron Wan-Bissaka",   posicoes: ["LD"],        forca: 82 },
+      { id: 'harry-maguire',       nome: "Harry Maguire",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'victor-lindelof',     nome: "Victor Lindelöf",     posicoes: ["ZAG"],       forca: 81 },
+      { id: 'eric-bailly',         nome: "Eric Bailly",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE"],        forca: 83 },
+      { id: 'alex-telles',         nome: "Alex Telles",         posicoes: ["LE"],        forca: 80 },
+      { id: 'fred',                nome: "Fred",                posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'scott-mctominay',     nome: "Scott McTominay",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'bruno-fernandes',     nome: "Bruno Fernandes",     posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'mason-greenwood',     nome: "Mason Greenwood",     posicoes: ["ATA","PD"],  forca: 80 },
+      { id: 'marcus-rashford',     nome: "Marcus Rashford",     posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'anthony-martial',     nome: "Anthony Martial",     posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'edinson-cavani',      nome: "Edinson Cavani",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'daniel-james',        nome: "Daniel James",        posicoes: ["PD","PE"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2021,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 85 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 89 },
+      { id: 'joe-gomez',           nome: "Joe Gomez",           posicoes: ["ZAG"],       forca: 81 },
+      { id: 'nathaniel-phillips',  nome: "Nathaniel Phillips",  posicoes: ["ZAG"],       forca: 76 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 86 },
+      { id: 'fabinho',             nome: "Fabinho",             posicoes: ["VOL","ZAG"], forca: 85 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'georginio-wijnaldum', nome: "Georginio Wijnaldum", posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'thiago-alcantara',    nome: "Thiago Alcântara",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","LE"],   forca: 79 },
+      { id: 'sadio-mane',          nome: "Sadio Mané",          posicoes: ["PE","ATA"],  forca: 87 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 90 },
+      { id: 'roberto-firmino',     nome: "Roberto Firmino",     posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'diogo-jota',          nome: "Diogo Jota",          posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'xherdan-shaqiri',     nome: "Xherdan Shaqiri",     posicoes: ["MEI","PD"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2021,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'edouard-mendy',       nome: "Édouard Mendy",       posicoes: ["GOL"],       forca: 84 },
+      { id: 'reece-james',         nome: "Reece James",         posicoes: ["LD"],        forca: 83 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["LD","ZAG"],  forca: 82 },
+      { id: 'antonio-rudiger',     nome: "Antonio Rüdiger",     posicoes: ["ZAG"],       forca: 83 },
+      { id: 'thiago-silva',        nome: "Thiago Silva",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'kurt-zouma',          nome: "Kurt Zouma",          posicoes: ["ZAG"],       forca: 81 },
+      { id: 'ben-chilwell',        nome: "Ben Chilwell",        posicoes: ["LE"],        forca: 82 },
+      { id: 'marcos-alonso',       nome: "Marcos Alonso",       posicoes: ["LE"],        forca: 79 },
+      { id: 'ngolo-kante',         nome: "N'Golo Kanté",        posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mateo-kovacic',       nome: "Mateo Kovačić",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'mason-mount',         nome: "Mason Mount",         posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'kai-havertz',         nome: "Kai Havertz",         posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'christian-pulisic',   nome: "Christian Pulisic",   posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'timo-werner',         nome: "Timo Werner",         posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'hakim-ziyech',        nome: "Hakim Ziyech",        posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'tammy-abraham',       nome: "Tammy Abraham",       posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2021,
+    clube: "Leicester City",
+    jogadores: [
+      { id: 'kasper-schmeichel',   nome: "Kasper Schmeichel",   posicoes: ["GOL"],       forca: 82 },
+      { id: 'ricardo-pereira',     nome: "Ricardo Pereira",     posicoes: ["LD"],        forca: 82 },
+      { id: 'timothy-castagne',    nome: "Timothy Castagne",    posicoes: ["LD","LE"],   forca: 81 },
+      { id: 'jonny-evans',         nome: "Jonny Evans",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'caglar-soyuncu',      nome: "Çağlar Söyüncü",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'wesley-fofana',       nome: "Wesley Fofana",       posicoes: ["ZAG"],       forca: 80 },
+      { id: 'james-justin',        nome: "James Justin",        posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'wilfred-ndidi',       nome: "Wilfred Ndidi",       posicoes: ["VOL"],       forca: 83 },
+      { id: 'youri-tielemans',     nome: "Youri Tielemans",     posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'james-maddison',      nome: "James Maddison",      posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'marc-albrighton',     nome: "Marc Albrighton",     posicoes: ["PE","MEI"],  forca: 77 },
+      { id: 'harvey-barnes',       nome: "Harvey Barnes",       posicoes: ["PE","PD"],   forca: 80 },
+      { id: 'ayoze-perez',         nome: "Ayoze Pérez",         posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'jamie-vardy',         nome: "Jamie Vardy",         posicoes: ["ATA"],       forca: 84 },
+      { id: 'kelechi-iheanacho',   nome: "Kelechi Iheanacho",   posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2021,
+    clube: "West Ham United",
+    jogadores: [
+      { id: 'lukasz-fabianski',    nome: "Łukasz Fabiański",    posicoes: ["GOL"],       forca: 81 },
+      { id: 'vladimir-coufal',     nome: "Vladimír Coufal",     posicoes: ["LD"],        forca: 80 },
+      { id: 'craig-dawson',        nome: "Craig Dawson",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'angelo-ogbonna',      nome: "Angelo Ogbonna",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'issa-diop',           nome: "Issa Diop",           posicoes: ["ZAG"],       forca: 79 },
+      { id: 'aaron-cresswell',     nome: "Aaron Cresswell",     posicoes: ["LE"],        forca: 80 },
+      { id: 'declan-rice',         nome: "Declan Rice",         posicoes: ["VOL","ZAG"], forca: 84 },
+      { id: 'tomas-soucek',        nome: "Tomáš Souček",        posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'pablo-fornals',       nome: "Pablo Fornals",       posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'jarrod-bowen',        nome: "Jarrod Bowen",        posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'said-benrahma',       nome: "Saïd Benrahma",       posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'jesse-lingard',       nome: "Jesse Lingard",       posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'michail-antonio',     nome: "Michail Antonio",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'sebastien-haller',    nome: "Sébastien Haller",    posicoes: ["ATA"],       forca: 78 }
+    ]
   }
 
 ];
