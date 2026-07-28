@@ -4894,6 +4894,163 @@ const DADOS_PREMIER = [
       { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 84 },
       { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["PE","ATA"],  forca: 81 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2020 (temporada 2019-20) — o LIVERPOOL de Klopp campeão após 30 ANOS
+  //  de jejum, com 99 pontos (recorde do clube) e o título encaminhado com 7
+  //  rodadas de antecedência. Temporada interrompida pela pandemia (Project
+  //  Restart). Top-6: Liverpool (99), City (81), United (66), Chelsea (66),
+  //  Leicester (62), Tottenham (59). Mané, Salah e Van Dijk no auge.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2020,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 90 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 87 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 90 },
+      { id: 'joe-gomez',           nome: "Joe Gomez",           posicoes: ["ZAG"],       forca: 82 },
+      { id: 'joel-matip',          nome: "Joël Matip",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 87 },
+      { id: 'fabinho',             nome: "Fabinho",             posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'georginio-wijnaldum', nome: "Georginio Wijnaldum", posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'naby-keita',          nome: "Naby Keïta",          posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","LE"],   forca: 80 },
+      { id: 'alex-oxlade-chamberlain', nome: "Alex Oxlade-Chamberlain", posicoes: ["MC","PD"], forca: 82 },
+      { id: 'sadio-mane',          nome: "Sadio Mané",          posicoes: ["PE","ATA"],  forca: 89 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 90 },
+      { id: 'roberto-firmino',     nome: "Roberto Firmino",     posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'divock-origi',        nome: "Divock Origi",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'xherdan-shaqiri',     nome: "Xherdan Shaqiri",     posicoes: ["MEI","PD"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2020,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 88 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 84 },
+      { id: 'joao-cancelo',        nome: "João Cancelo",        posicoes: ["LD","LE"],   forca: 84 },
+      { id: 'aymeric-laporte',     nome: "Aymeric Laporte",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'nicolas-otamendi',    nome: "Nicolás Otamendi",    posicoes: ["ZAG"],       forca: 81 },
+      { id: 'benjamin-mendy',      nome: "Benjamin Mendy",      posicoes: ["LE"],        forca: 80 },
+      { id: 'fernandinho',         nome: "Fernandinho",         posicoes: ["VOL","ZAG"], forca: 84 },
+      { id: 'rodri',               nome: "Rodri",               posicoes: ["VOL"],       forca: 85 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'ilkay-gundogan',      nome: "İlkay Gündoğan",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 86 },
+      { id: 'phil-foden',          nome: "Phil Foden",          posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 88 },
+      { id: 'riyad-mahrez',        nome: "Riyad Mahrez",        posicoes: ["PD","MEI"],  forca: 85 },
+      { id: 'sergio-aguero',       nome: "Sergio Agüero",       posicoes: ["ATA"],       forca: 89 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2020,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 87 },
+      { id: 'aaron-wan-bissaka',   nome: "Aaron Wan-Bissaka",   posicoes: ["LD"],        forca: 82 },
+      { id: 'victor-lindelof',     nome: "Victor Lindelöf",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'harry-maguire',       nome: "Harry Maguire",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'eric-bailly',         nome: "Eric Bailly",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE"],        forca: 80 },
+      { id: 'brandon-williams',    nome: "Brandon Williams",    posicoes: ["LE"],        forca: 75 },
+      { id: 'nemanja-matic',       nome: "Nemanja Matić",       posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'fred',                nome: "Fred",                posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'scott-mctominay',     nome: "Scott McTominay",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'bruno-fernandes',     nome: "Bruno Fernandes",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'juan-mata',           nome: "Juan Mata",           posicoes: ["MEI","PD"],  forca: 79 },
+      { id: 'daniel-james',        nome: "Daniel James",        posicoes: ["PD","PE"],   forca: 77 },
+      { id: 'mason-greenwood',     nome: "Mason Greenwood",     posicoes: ["ATA","PD"],  forca: 79 },
+      { id: 'marcus-rashford',     nome: "Marcus Rashford",     posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'anthony-martial',     nome: "Anthony Martial",     posicoes: ["ATA","PE"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2020,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'kepa-arrizabalaga',   nome: "Kepa Arrizabalaga",   posicoes: ["GOL"],       forca: 81 },
+      { id: 'willy-caballero',     nome: "Willy Caballero",     posicoes: ["GOL"],       forca: 75 },
+      { id: 'reece-james',         nome: "Reece James",         posicoes: ["LD"],        forca: 80 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["LD","ZAG"],  forca: 82 },
+      { id: 'antonio-rudiger',     nome: "Antonio Rüdiger",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'andreas-christensen', nome: "Andreas Christensen", posicoes: ["ZAG"],       forca: 80 },
+      { id: 'kurt-zouma',          nome: "Kurt Zouma",          posicoes: ["ZAG"],       forca: 80 },
+      { id: 'marcos-alonso',       nome: "Marcos Alonso",       posicoes: ["LE"],        forca: 80 },
+      { id: 'ngolo-kante',         nome: "N'Golo Kanté",        posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'mateo-kovacic',       nome: "Mateo Kovačić",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'mason-mount',         nome: "Mason Mount",         posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'ross-barkley',        nome: "Ross Barkley",        posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'christian-pulisic',   nome: "Christian Pulisic",   posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'willian',             nome: "Willian",             posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'callum-hudson-odoi',  nome: "Callum Hudson-Odoi",  posicoes: ["PE","PD"],   forca: 78 },
+      { id: 'tammy-abraham',       nome: "Tammy Abraham",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2020,
+    clube: "Leicester City",
+    jogadores: [
+      { id: 'kasper-schmeichel',   nome: "Kasper Schmeichel",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'ricardo-pereira',     nome: "Ricardo Pereira",     posicoes: ["LD"],        forca: 83 },
+      { id: 'jonny-evans',         nome: "Jonny Evans",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'caglar-soyuncu',      nome: "Çağlar Söyüncü",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'wes-morgan',          nome: "Wes Morgan",          posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ben-chilwell',        nome: "Ben Chilwell",        posicoes: ["LE"],        forca: 82 },
+      { id: 'wilfred-ndidi',       nome: "Wilfred Ndidi",       posicoes: ["VOL"],       forca: 83 },
+      { id: 'youri-tielemans',     nome: "Youri Tielemans",     posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'james-maddison',      nome: "James Maddison",      posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'dennis-praet',        nome: "Dennis Praet",        posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'marc-albrighton',     nome: "Marc Albrighton",     posicoes: ["PE","MEI"],  forca: 77 },
+      { id: 'ayoze-perez',         nome: "Ayoze Pérez",         posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'harvey-barnes',       nome: "Harvey Barnes",       posicoes: ["PE","PD"],   forca: 78 },
+      { id: 'jamie-vardy',         nome: "Jamie Vardy",         posicoes: ["ATA"],       forca: 85 },
+      { id: 'kelechi-iheanacho',   nome: "Kelechi Iheanacho",   posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2020,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'hugo-lloris',         nome: "Hugo Lloris",         posicoes: ["GOL"],       forca: 85 },
+      { id: 'serge-aurier',        nome: "Serge Aurier",        posicoes: ["LD"],        forca: 80 },
+      { id: 'toby-alderweireld',   nome: "Toby Alderweireld",   posicoes: ["ZAG"],       forca: 84 },
+      { id: 'davinson-sanchez',    nome: "Davinson Sánchez",    posicoes: ["ZAG"],       forca: 81 },
+      { id: 'jan-vertonghen',      nome: "Jan Vertonghen",      posicoes: ["ZAG","LE"],  forca: 82 },
+      { id: 'ben-davies',          nome: "Ben Davies",          posicoes: ["LE"],        forca: 80 },
+      { id: 'eric-dier',           nome: "Eric Dier",           posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'moussa-sissoko',      nome: "Moussa Sissoko",      posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'harry-winks',         nome: "Harry Winks",         posicoes: ["MC"],        forca: 80 },
+      { id: 'giovani-lo-celso',    nome: "Giovani Lo Celso",    posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'tanguy-ndombele',     nome: "Tanguy Ndombele",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'dele-alli',           nome: "Dele Alli",           posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'son-heung-min',       nome: "Son Heung-min",       posicoes: ["PE","ATA"],  forca: 87 },
+      { id: 'lucas-moura',         nome: "Lucas Moura",         posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'steven-bergwijn',     nome: "Steven Bergwijn",     posicoes: ["PE","ATA"],  forca: 79 },
+      { id: 'harry-kane',          nome: "Harry Kane",          posicoes: ["ATA"],       forca: 88 }
+    ]
   }
 
 ];
