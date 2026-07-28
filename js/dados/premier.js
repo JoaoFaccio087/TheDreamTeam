@@ -4735,6 +4735,165 @@ const DADOS_PREMIER = [
       { id: 'alexandre-lacazette', nome: "Alexandre Lacazette", posicoes: ["ATA"],       forca: 84 },
       { id: 'danny-welbeck',       nome: "Danny Welbeck",       posicoes: ["ATA"],       forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2019 (temporada 2018-19) — a disputa mais épica da era: City 98 x 97
+  //  Liverpool, decidida na última rodada. O Liverpool fez a MAIOR pontuação de
+  //  vice da história (97) e perdeu só 1 jogo. Top-6: City (98), Liverpool (97),
+  //  Chelsea (72), Tottenham (71), Arsenal (70), United (66).
+  //  Alisson chegou ao Liverpool; Fabinho também. Riyad Mahrez foi do Leicester
+  //  campeão de 2016 para o City. Hazard em sua última temporada antes do Real.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2019,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 88 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 85 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG"],       forca: 83 },
+      { id: 'aymeric-laporte',     nome: "Aymeric Laporte",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'nicolas-otamendi',    nome: "Nicolás Otamendi",    posicoes: ["ZAG"],       forca: 82 },
+      { id: 'vincent-kompany',     nome: "Vincent Kompany",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'benjamin-mendy',      nome: "Benjamin Mendy",      posicoes: ["LE"],        forca: 80 },
+      { id: 'fabian-delph',        nome: "Fabian Delph",        posicoes: ["LE","MC"],   forca: 79 },
+      { id: 'fernandinho',         nome: "Fernandinho",         posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'ilkay-gundogan',      nome: "İlkay Gündoğan",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 87 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 88 },
+      { id: 'leroy-sane',          nome: "Leroy Sané",          posicoes: ["PE","PD"],   forca: 85 },
+      { id: 'riyad-mahrez',        nome: "Riyad Mahrez",        posicoes: ["PD","MEI"],  forca: 85 },
+      { id: 'sergio-aguero',       nome: "Sergio Agüero",       posicoes: ["ATA"],       forca: 89 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2019,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 84 },
+      { id: 'joe-gomez',           nome: "Joe Gomez",           posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 89 },
+      { id: 'joel-matip',          nome: "Joël Matip",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'dejan-lovren',        nome: "Dejan Lovren",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 85 },
+      { id: 'fabinho',             nome: "Fabinho",             posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'georginio-wijnaldum', nome: "Georginio Wijnaldum", posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","LE"],   forca: 81 },
+      { id: 'naby-keita',          nome: "Naby Keïta",          posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'xherdan-shaqiri',     nome: "Xherdan Shaqiri",     posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'sadio-mane',          nome: "Sadio Mané",          posicoes: ["PE","ATA"],  forca: 88 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 90 },
+      { id: 'roberto-firmino',     nome: "Roberto Firmino",     posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'divock-origi',        nome: "Divock Origi",        posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2019,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'kepa-arrizabalaga',   nome: "Kepa Arrizabalaga",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["LD","ZAG"],  forca: 84 },
+      { id: 'antonio-rudiger',     nome: "Antonio Rüdiger",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'david-luiz',          nome: "David Luiz",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'andreas-christensen', nome: "Andreas Christensen", posicoes: ["ZAG"],       forca: 80 },
+      { id: 'marcos-alonso',       nome: "Marcos Alonso",       posicoes: ["LE"],        forca: 83 },
+      { id: 'emerson-palmieri',    nome: "Emerson Palmieri",    posicoes: ["LE"],        forca: 80 },
+      { id: 'ngolo-kante',         nome: "N'Golo Kanté",        posicoes: ["VOL","MC"],  forca: 88 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mateo-kovacic',       nome: "Mateo Kovačić",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'ross-barkley',        nome: "Ross Barkley",        posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'eden-hazard',         nome: "Eden Hazard",         posicoes: ["PE","MEI"],  forca: 91 },
+      { id: 'willian',             nome: "Willian",             posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'pedro',               nome: "Pedro",               posicoes: ["PD","PE"],   forca: 81 },
+      { id: 'callum-hudson-odoi',  nome: "Callum Hudson-Odoi",  posicoes: ["PE","PD"],   forca: 78 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'gonzalo-higuain',     nome: "Gonzalo Higuaín",     posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2019,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'hugo-lloris',         nome: "Hugo Lloris",         posicoes: ["GOL"],       forca: 86 },
+      { id: 'kieran-trippier',     nome: "Kieran Trippier",     posicoes: ["LD"],        forca: 82 },
+      { id: 'serge-aurier',        nome: "Serge Aurier",        posicoes: ["LD"],        forca: 80 },
+      { id: 'toby-alderweireld',   nome: "Toby Alderweireld",   posicoes: ["ZAG"],       forca: 85 },
+      { id: 'jan-vertonghen',      nome: "Jan Vertonghen",      posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'davinson-sanchez',    nome: "Davinson Sánchez",    posicoes: ["ZAG"],       forca: 82 },
+      { id: 'ben-davies',          nome: "Ben Davies",          posicoes: ["LE"],        forca: 80 },
+      { id: 'danny-rose',          nome: "Danny Rose",          posicoes: ["LE"],        forca: 80 },
+      { id: 'eric-dier',           nome: "Eric Dier",           posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'moussa-sissoko',      nome: "Moussa Sissoko",      posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'harry-winks',         nome: "Harry Winks",         posicoes: ["MC"],        forca: 80 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'dele-alli',           nome: "Dele Alli",           posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'son-heung-min',       nome: "Son Heung-min",       posicoes: ["PE","ATA"],  forca: 86 },
+      { id: 'lucas-moura',         nome: "Lucas Moura",         posicoes: ["PD","ATA"],  forca: 83 },
+      { id: 'harry-kane',          nome: "Harry Kane",          posicoes: ["ATA"],       forca: 89 },
+      { id: 'fernando-llorente',   nome: "Fernando Llorente",   posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2019,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'bernd-leno',          nome: "Bernd Leno",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 80 },
+      { id: 'hector-bellerin',     nome: "Héctor Bellerín",     posicoes: ["LD"],        forca: 82 },
+      { id: 'sokratis-papastathopoulos', nome: "Sokratis",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'laurent-koscielny',   nome: "Laurent Koscielny",   posicoes: ["ZAG"],       forca: 82 },
+      { id: 'shkodran-mustafi',    nome: "Shkodran Mustafi",    posicoes: ["ZAG"],       forca: 79 },
+      { id: 'nacho-monreal',       nome: "Nacho Monreal",       posicoes: ["LE"],        forca: 80 },
+      { id: 'sead-kolasinac',      nome: "Sead Kolašinac",      posicoes: ["LE"],        forca: 80 },
+      { id: 'granit-xhaka',        nome: "Granit Xhaka",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'lucas-torreira',      nome: "Lucas Torreira",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'matteo-guendouzi',    nome: "Matteo Guendouzi",    posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'mesut-ozil',          nome: "Mesut Özil",          posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'aaron-ramsey',        nome: "Aaron Ramsey",        posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'alexandre-lacazette', nome: "Alexandre Lacazette", posicoes: ["ATA"],       forca: 85 },
+      { id: 'pierre-emerick-aubameyang', nome: "Pierre-Emerick Aubameyang", posicoes: ["ATA","PE"], forca: 87 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2019,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 89 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["LD","LE"],   forca: 79 },
+      { id: 'diogo-dalot',         nome: "Diogo Dalot",         posicoes: ["LD"],        forca: 78 },
+      { id: 'victor-lindelof',     nome: "Victor Lindelöf",     posicoes: ["ZAG"],       forca: 81 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'eric-bailly',         nome: "Eric Bailly",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE"],        forca: 81 },
+      { id: 'nemanja-matic',       nome: "Nemanja Matić",       posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'ander-herrera',       nome: "Ander Herrera",       posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'fred',                nome: "Fred",                posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'juan-mata',           nome: "Juan Mata",           posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'jesse-lingard',       nome: "Jesse Lingard",       posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'anthony-martial',     nome: "Anthony Martial",     posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'marcus-rashford',     nome: "Marcus Rashford",     posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["PE","ATA"],  forca: 81 }
+    ]
   }
 
 ];
