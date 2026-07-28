@@ -5499,6 +5499,149 @@ const DADOS_PREMIER = [
       { id: 'deniz-undav',         nome: "Deniz Undav",         posicoes: ["ATA"],       forca: 76 },
       { id: 'adam-lallana',        nome: "Adam Lallana",        posicoes: ["MEI","MC"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2024 (temporada 2023-24) — o City TETRACAMPEÃO seguido (91 pts),
+  //  feito inédito na história do futebol inglês. Arsenal (89) e Liverpool (82)
+  //  brigaram até o fim. Top-6: City (91), Arsenal (89), Liverpool (82), Aston
+  //  Villa (68), Tottenham (66), Chelsea (63). Villa voltou à Champions após 41
+  //  anos com Emery. Declan Rice foi do West Ham para o Arsenal por recorde inglês.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2024,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 88 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 84 },
+      { id: 'ruben-dias',          nome: "Rúben Dias",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'manuel-akanji',       nome: "Manuel Akanji",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'nathan-ake',          nome: "Nathan Aké",          posicoes: ["ZAG","LE"],  forca: 83 },
+      { id: 'josko-gvardiol',      nome: "Joško Gvardiol",      posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'rodri',               nome: "Rodri",               posicoes: ["VOL"],       forca: 90 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 90 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 87 },
+      { id: 'phil-foden',          nome: "Phil Foden",          posicoes: ["MEI","PE"],  forca: 88 },
+      { id: 'julian-alvarez',      nome: "Julián Álvarez",      posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'jack-grealish',       nome: "Jack Grealish",       posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'jeremy-doku',         nome: "Jérémy Doku",         posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'erling-haaland',      nome: "Erling Haaland",      posicoes: ["ATA"],       forca: 91 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2024,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'david-raya',          nome: "David Raya",          posicoes: ["GOL"],       forca: 84 },
+      { id: 'ben-white',           nome: "Ben White",           posicoes: ["LD","ZAG"],  forca: 84 },
+      { id: 'william-saliba',      nome: "William Saliba",      posicoes: ["ZAG"],       forca: 86 },
+      { id: 'gabriel-magalhaes',   nome: "Gabriel Magalhães",   posicoes: ["ZAG"],       forca: 85 },
+      { id: 'oleksandr-zinchenko', nome: "Oleksandr Zinchenko", posicoes: ["LE","MC"],   forca: 82 },
+      { id: 'jakub-kiwior',        nome: "Jakub Kiwior",        posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'declan-rice',         nome: "Declan Rice",         posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'martin-odegaard',     nome: "Martin Ødegaard",     posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'kai-havertz',         nome: "Kai Havertz",         posicoes: ["MC","ATA"],  forca: 84 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'bukayo-saka',         nome: "Bukayo Saka",         posicoes: ["PD","PE"],   forca: 87 },
+      { id: 'gabriel-martinelli',  nome: "Gabriel Martinelli",  posicoes: ["PE","ATA"],  forca: 84 },
+      { id: 'leandro-trossard',    nome: "Leandro Trossard",    posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'eddie-nketiah',       nome: "Eddie Nketiah",       posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2024,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 86 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 88 },
+      { id: 'ibrahima-konate',     nome: "Ibrahima Konaté",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 85 },
+      { id: 'joe-gomez',           nome: "Joe Gomez",           posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'alexis-mac-allister', nome: "Alexis Mac Allister", posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'dominik-szoboszlai',  nome: "Dominik Szoboszlai",  posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'wataru-endo',         nome: "Wataru Endo",         posicoes: ["VOL"],       forca: 80 },
+      { id: 'curtis-jones',        nome: "Curtis Jones",        posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 89 },
+      { id: 'luis-diaz',           nome: "Luis Díaz",           posicoes: ["PE","ATA"],  forca: 84 },
+      { id: 'diogo-jota',          nome: "Diogo Jota",          posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'darwin-nunez',        nome: "Darwin Núñez",        posicoes: ["ATA"],       forca: 82 },
+      { id: 'cody-gakpo',          nome: "Cody Gakpo",          posicoes: ["ATA","PE"],  forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2024,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'emiliano-martinez',   nome: "Emiliano Martínez",   posicoes: ["GOL"],       forca: 85 },
+      { id: 'matty-cash',          nome: "Matty Cash",          posicoes: ["LD"],        forca: 80 },
+      { id: 'ezri-konsa',          nome: "Ezri Konsa",          posicoes: ["ZAG"],       forca: 81 },
+      { id: 'pau-torres',          nome: "Pau Torres",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'lucas-digne',         nome: "Lucas Digne",         posicoes: ["LE"],        forca: 80 },
+      { id: 'diego-carlos',        nome: "Diego Carlos",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'boubacar-kamara',     nome: "Boubacar Kamara",     posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'douglas-luiz',        nome: "Douglas Luiz",        posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'john-mcginn',         nome: "John McGinn",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'youri-tielemans',     nome: "Youri Tielemans",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'leon-bailey',         nome: "Leon Bailey",         posicoes: ["PD","PE"],   forca: 82 },
+      { id: 'moussa-diaby',        nome: "Moussa Diaby",        posicoes: ["PD","PE"],   forca: 82 },
+      { id: 'ollie-watkins',       nome: "Ollie Watkins",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'nicolo-zaniolo',      nome: "Nicolò Zaniolo",      posicoes: ["MEI","ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2024,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'guglielmo-vicario',   nome: "Guglielmo Vicario",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'pedro-porro',         nome: "Pedro Porro",         posicoes: ["LD"],        forca: 82 },
+      { id: 'cristian-romero',     nome: "Cristian Romero",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'micky-van-de-ven',    nome: "Micky van de Ven",    posicoes: ["ZAG"],       forca: 82 },
+      { id: 'destiny-udogie',      nome: "Destiny Udogie",      posicoes: ["LE"],        forca: 80 },
+      { id: 'ben-davies',          nome: "Ben Davies",          posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'yves-bissouma',       nome: "Yves Bissouma",       posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'pape-matar-sarr',     nome: "Pape Matar Sarr",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'james-maddison',      nome: "James Maddison",      posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'dejan-kulusevski',    nome: "Dejan Kulusevski",    posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'brennan-johnson',     nome: "Brennan Johnson",     posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'son-heung-min',       nome: "Son Heung-min",       posicoes: ["PE","ATA"],  forca: 87 },
+      { id: 'richarlison',         nome: "Richarlison",         posicoes: ["ATA"],       forca: 81 },
+      { id: 'timo-werner',         nome: "Timo Werner",         posicoes: ["PE","ATA"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2024,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'robert-sanchez',      nome: "Robert Sánchez",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'reece-james',         nome: "Reece James",         posicoes: ["LD"],        forca: 83 },
+      { id: 'thiago-silva',        nome: "Thiago Silva",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'axel-disasi',         nome: "Axel Disasi",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'levi-colwill',        nome: "Levi Colwill",        posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'ben-chilwell',        nome: "Ben Chilwell",        posicoes: ["LE"],        forca: 80 },
+      { id: 'moises-caicedo',      nome: "Moisés Caicedo",      posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'enzo-fernandez',      nome: "Enzo Fernández",      posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'conor-gallagher',     nome: "Conor Gallagher",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'cole-palmer',         nome: "Cole Palmer",         posicoes: ["MEI","PD"],  forca: 84 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'mykhailo-mudryk',     nome: "Mykhailo Mudryk",     posicoes: ["PE","ATA"],  forca: 78 },
+      { id: 'noni-madueke',        nome: "Noni Madueke",        posicoes: ["PD","PE"],   forca: 78 },
+      { id: 'nicolas-jackson',     nome: "Nicolas Jackson",     posicoes: ["ATA"],       forca: 80 }
+    ]
   }
 
 ];
