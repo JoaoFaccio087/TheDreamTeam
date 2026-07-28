@@ -5204,6 +5204,155 @@ const DADOS_PREMIER = [
       { id: 'michail-antonio',     nome: "Michail Antonio",     posicoes: ["ATA"],       forca: 81 },
       { id: 'sebastien-haller',    nome: "Sébastien Haller",    posicoes: ["ATA"],       forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2022 (temporada 2021-22) — mais uma decisão na última rodada: o City
+  //  virou sobre o Aston Villa (de 0-2 a 3-2 em 5 minutos) e ficou com 93 pts
+  //  contra 92 do Liverpool. Top-6: City (93), Liverpool (92), Chelsea (74),
+  //  Tottenham (71), Arsenal (69), United (58). Grealish chegou ao City por
+  //  recorde inglês; Ronaldo voltou ao United. Salah e Son dividiram a artilharia.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2022,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 84 },
+      { id: 'joao-cancelo',        nome: "João Cancelo",        posicoes: ["LD","LE"],   forca: 87 },
+      { id: 'ruben-dias',          nome: "Rúben Dias",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'aymeric-laporte',     nome: "Aymeric Laporte",     posicoes: ["ZAG"],       forca: 85 },
+      { id: 'nathan-ake',          nome: "Nathan Aké",          posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'oleksandr-zinchenko', nome: "Oleksandr Zinchenko", posicoes: ["LE","MC"],   forca: 81 },
+      { id: 'rodri',               nome: "Rodri",               posicoes: ["VOL"],       forca: 87 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 87 },
+      { id: 'ilkay-gundogan',      nome: "İlkay Gündoğan",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'phil-foden',          nome: "Phil Foden",          posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'jack-grealish',       nome: "Jack Grealish",       posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'riyad-mahrez',        nome: "Riyad Mahrez",        posicoes: ["PD","MEI"],  forca: 85 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 85 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA","PD"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2022,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 87 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 89 },
+      { id: 'joel-matip',          nome: "Joël Matip",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ibrahima-konate',     nome: "Ibrahima Konaté",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 86 },
+      { id: 'kostas-tsimikas',     nome: "Kostas Tsimikas",     posicoes: ["LE"],        forca: 79 },
+      { id: 'fabinho',             nome: "Fabinho",             posicoes: ["VOL"],       forca: 86 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'thiago-alcantara',    nome: "Thiago Alcântara",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'naby-keita',          nome: "Naby Keïta",          posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'sadio-mane',          nome: "Sadio Mané",          posicoes: ["PE","ATA"],  forca: 87 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 90 },
+      { id: 'diogo-jota',          nome: "Diogo Jota",          posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'roberto-firmino',     nome: "Roberto Firmino",     posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'luis-diaz',           nome: "Luis Díaz",           posicoes: ["PE","ATA"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2022,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'edouard-mendy',       nome: "Édouard Mendy",       posicoes: ["GOL"],       forca: 84 },
+      { id: 'reece-james',         nome: "Reece James",         posicoes: ["LD"],        forca: 84 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'antonio-rudiger',     nome: "Antonio Rüdiger",     posicoes: ["ZAG"],       forca: 85 },
+      { id: 'thiago-silva',        nome: "Thiago Silva",        posicoes: ["ZAG"],       forca: 85 },
+      { id: 'trevoh-chalobah',     nome: "Trevoh Chalobah",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'marcos-alonso',       nome: "Marcos Alonso",       posicoes: ["LE"],        forca: 79 },
+      { id: 'ben-chilwell',        nome: "Ben Chilwell",        posicoes: ["LE"],        forca: 81 },
+      { id: 'ngolo-kante',         nome: "N'Golo Kanté",        posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mateo-kovacic',       nome: "Mateo Kovačić",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'mason-mount',         nome: "Mason Mount",         posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'kai-havertz',         nome: "Kai Havertz",         posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'christian-pulisic',   nome: "Christian Pulisic",   posicoes: ["PE","PD"],   forca: 81 },
+      { id: 'hakim-ziyech',        nome: "Hakim Ziyech",        posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2022,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'hugo-lloris',         nome: "Hugo Lloris",         posicoes: ["GOL"],       forca: 85 },
+      { id: 'emerson-royal',       nome: "Emerson Royal",       posicoes: ["LD"],        forca: 79 },
+      { id: 'cristian-romero',     nome: "Cristian Romero",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'eric-dier',           nome: "Eric Dier",           posicoes: ["ZAG"],       forca: 81 },
+      { id: 'ben-davies',          nome: "Ben Davies",          posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'sergio-reguilon',     nome: "Sergio Reguilón",     posicoes: ["LE"],        forca: 80 },
+      { id: 'matt-doherty',        nome: "Matt Doherty",        posicoes: ["LD"],        forca: 79 },
+      { id: 'pierre-emile-hojbjerg', nome: "Pierre-Emile Højbjerg", posicoes: ["VOL","MC"], forca: 83 },
+      { id: 'rodrigo-bentancur',   nome: "Rodrigo Bentancur",   posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'oliver-skipp',        nome: "Oliver Skipp",        posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'dejan-kulusevski',    nome: "Dejan Kulusevski",    posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'son-heung-min',       nome: "Son Heung-min",       posicoes: ["PE","ATA"],  forca: 89 },
+      { id: 'lucas-moura',         nome: "Lucas Moura",         posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'harry-kane',          nome: "Harry Kane",          posicoes: ["ATA"],       forca: 89 },
+      { id: 'steven-bergwijn',     nome: "Steven Bergwijn",     posicoes: ["PE","ATA"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2022,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'aaron-ramsdale',      nome: "Aaron Ramsdale",      posicoes: ["GOL"],       forca: 82 },
+      { id: 'takehiro-tomiyasu',   nome: "Takehiro Tomiyasu",   posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'ben-white',           nome: "Ben White",           posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'gabriel-magalhaes',   nome: "Gabriel Magalhães",   posicoes: ["ZAG"],       forca: 82 },
+      { id: 'nuno-tavares',        nome: "Nuno Tavares",        posicoes: ["LE"],        forca: 77 },
+      { id: 'kieran-tierney',      nome: "Kieran Tierney",      posicoes: ["LE"],        forca: 82 },
+      { id: 'thomas-partey',       nome: "Thomas Partey",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'granit-xhaka',        nome: "Granit Xhaka",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'martin-odegaard',     nome: "Martin Ødegaard",     posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'emile-smith-rowe',    nome: "Emile Smith Rowe",    posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'bukayo-saka',         nome: "Bukayo Saka",         posicoes: ["PD","PE"],   forca: 84 },
+      { id: 'gabriel-martinelli',  nome: "Gabriel Martinelli",  posicoes: ["PE","ATA"],  forca: 81 },
+      { id: 'alexandre-lacazette', nome: "Alexandre Lacazette", posicoes: ["ATA"],       forca: 81 },
+      { id: 'eddie-nketiah',       nome: "Eddie Nketiah",       posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2022,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'diogo-dalot',         nome: "Diogo Dalot",         posicoes: ["LD"],        forca: 80 },
+      { id: 'aaron-wan-bissaka',   nome: "Aaron Wan-Bissaka",   posicoes: ["LD"],        forca: 80 },
+      { id: 'raphael-varane',      nome: "Raphaël Varane",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'harry-maguire',       nome: "Harry Maguire",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'victor-lindelof',     nome: "Victor Lindelöf",     posicoes: ["ZAG"],       forca: 81 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE"],        forca: 81 },
+      { id: 'fred',                nome: "Fred",                posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'scott-mctominay',     nome: "Scott McTominay",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'bruno-fernandes',     nome: "Bruno Fernandes",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'jadon-sancho',        nome: "Jadon Sancho",        posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'marcus-rashford',     nome: "Marcus Rashford",     posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA"],       forca: 87 },
+      { id: 'anthony-elanga',      nome: "Anthony Elanga",      posicoes: ["PE","ATA"],  forca: 76 }
+    ]
   }
 
 ];
