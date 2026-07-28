@@ -3953,6 +3953,327 @@ const DADOS_PREMIER = [
       { id: 'victor-anichebe',     nome: "Victor Anichebe",     posicoes: ["ATA"],       forca: 77 },
       { id: 'steven-naismith',     nome: "Steven Naismith",     posicoes: ["ATA","MEI"], forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2014 (temporada 2013-14) — o City de Pellegrini campeão (86 pts),
+  //  com o Liverpool de Suárez e Sturridge (o "SAS") em 2º após quase quebrar o
+  //  jejum ("we go again" / o escorregão de Gerrard). Suárez fez 31 gols.
+  //  Top-6: City (86), Liverpool (84), Chelsea (82), Arsenal (79), Everton (72),
+  //  Tottenham (69). Özil chegou ao Arsenal (recorde do clube); Mourinho voltou
+  //  ao Chelsea. Eriksen e Lamela no 1º ano do Tottenham pós-Bale.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2014,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'joe-hart',            nome: "Joe Hart",            posicoes: ["GOL"],       forca: 84 },
+      { id: 'pablo-zabaleta',      nome: "Pablo Zabaleta",      posicoes: ["LD","LE"],   forca: 84 },
+      { id: 'vincent-kompany',     nome: "Vincent Kompany",     posicoes: ["ZAG"],       forca: 87 },
+      { id: 'martin-demichelis',   nome: "Martín Demichelis",   posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'matija-nastasic',     nome: "Matija Nastasić",     posicoes: ["ZAG"],       forca: 80 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 82 },
+      { id: 'aleksandar-kolarov',  nome: "Aleksandar Kolarov",  posicoes: ["LE"],        forca: 81 },
+      { id: 'bacary-sagna',        nome: "Bacary Sagna",        posicoes: ["LD"],        forca: 81 },
+      { id: 'yaya-toure',          nome: "Yaya Touré",          posicoes: ["MC","VOL"],  forca: 88 },
+      { id: 'fernandinho',         nome: "Fernandinho",         posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'javi-garcia',         nome: "Javi García",         posicoes: ["VOL"],       forca: 79 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","PE"],  forca: 87 },
+      { id: 'samir-nasri',         nome: "Samir Nasri",         posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","MD"],   forca: 82 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD"],        forca: 81 },
+      { id: 'sergio-aguero',       nome: "Sergio Agüero",       posicoes: ["ATA"],       forca: 90 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 84 },
+      { id: 'alvaro-negredo',      nome: "Álvaro Negredo",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'stevan-jovetic',      nome: "Stevan Jovetić",      posicoes: ["ATA","MEI"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2014,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'simon-mignolet',      nome: "Simon Mignolet",      posicoes: ["GOL"],       forca: 81 },
+      { id: 'glen-johnson',        nome: "Glen Johnson",        posicoes: ["LD"],        forca: 80 },
+      { id: 'martin-skrtel',       nome: "Martin Škrtel",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'mamadou-sakho',       nome: "Mamadou Sakho",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'daniel-agger',        nome: "Daniel Agger",        posicoes: ["ZAG"],       forca: 81 },
+      { id: 'jon-flanagan',        nome: "Jon Flanagan",        posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'aly-cissokho',        nome: "Aly Cissokho",        posicoes: ["LE"],        forca: 77 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'lucas-leiva',         nome: "Lucas Leiva",         posicoes: ["VOL"],       forca: 80 },
+      { id: 'philippe-coutinho',   nome: "Philippe Coutinho",   posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'luis-suarez',         nome: "Luis Suárez",         posicoes: ["ATA"],       forca: 90 },
+      { id: 'daniel-sturridge',    nome: "Daniel Sturridge",    posicoes: ["ATA","PD"],  forca: 85 },
+      { id: 'jordon-ibe',          nome: "Jordon Ibe",          posicoes: ["PD","PE"],   forca: 74 },
+      { id: 'victor-moses',        nome: "Victor Moses",        posicoes: ["PD","PE"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2014,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 85 },
+      { id: 'branislav-ivanovic',  nome: "Branislav Ivanović",  posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["LD","LE"],   forca: 84 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 84 },
+      { id: 'gary-cahill',         nome: "Gary Cahill",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'david-luiz',          nome: "David Luiz",          posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'ashley-cole',         nome: "Ashley Cole",         posicoes: ["LE"],        forca: 83 },
+      { id: 'nemanja-matic',       nome: "Nemanja Matić",       posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'ramires',             nome: "Ramires",             posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'frank-lampard',       nome: "Frank Lampard",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'jon-obi-mikel',       nome: "John Obi Mikel",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'eden-hazard',         nome: "Eden Hazard",         posicoes: ["PE","MEI"],  forca: 88 },
+      { id: 'oscar',               nome: "Oscar",               posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'willian',             nome: "Willian",             posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'andre-schurrle',      nome: "André Schürrle",      posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'samuel-etoo',         nome: "Samuel Eto'o",        posicoes: ["ATA"],       forca: 82 },
+      { id: 'fernando-torres',     nome: "Fernando Torres",     posicoes: ["ATA"],       forca: 79 },
+      { id: 'demba-ba',            nome: "Demba Ba",            posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2014,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'carl-jenkinson',      nome: "Carl Jenkinson",      posicoes: ["LD"],        forca: 76 },
+      { id: 'per-mertesacker',     nome: "Per Mertesacker",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'laurent-koscielny',   nome: "Laurent Koscielny",   posicoes: ["ZAG"],       forca: 85 },
+      { id: 'thomas-vermaelen',    nome: "Thomas Vermaelen",    posicoes: ["ZAG"],       forca: 81 },
+      { id: 'nacho-monreal',       nome: "Nacho Monreal",       posicoes: ["LE"],        forca: 81 },
+      { id: 'kieran-gibbs',        nome: "Kieran Gibbs",        posicoes: ["LE"],        forca: 80 },
+      { id: 'mikel-arteta',        nome: "Mikel Arteta",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'mathieu-flamini',     nome: "Mathieu Flamini",     posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'aaron-ramsey',        nome: "Aaron Ramsey",        posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'jack-wilshere',       nome: "Jack Wilshere",       posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'mesut-ozil',          nome: "Mesut Özil",          posicoes: ["MEI","PE"],  forca: 87 },
+      { id: 'santi-cazorla',       nome: "Santi Cazorla",       posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'tomas-rosicky',       nome: "Tomáš Rosický",       posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'theo-walcott',        nome: "Theo Walcott",        posicoes: ["PD","ATA"],  forca: 83 },
+      { id: 'lukas-podolski',      nome: "Lukas Podolski",      posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2014,
+    clube: "Everton",
+    jogadores: [
+      { id: 'tim-howard',          nome: "Tim Howard",          posicoes: ["GOL"],       forca: 82 },
+      { id: 'seamus-coleman',      nome: "Séamus Coleman",      posicoes: ["LD"],        forca: 83 },
+      { id: 'phil-jagielka',       nome: "Phil Jagielka",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'sylvain-distin',      nome: "Sylvain Distin",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG"],       forca: 77 },
+      { id: 'leighton-baines',     nome: "Leighton Baines",     posicoes: ["LE"],        forca: 84 },
+      { id: 'gareth-barry',        nome: "Gareth Barry",        posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'james-mccarthy',      nome: "James McCarthy",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'ross-barkley',        nome: "Ross Barkley",        posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'kevin-mirallas',      nome: "Kevin Mirallas",      posicoes: ["PE","ATA"],  forca: 81 },
+      { id: 'steven-pienaar',      nome: "Steven Pienaar",      posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'gerard-deulofeu',     nome: "Gerard Deulofeu",     posicoes: ["PD","PE"],   forca: 78 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'steven-naismith',     nome: "Steven Naismith",     posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'leon-osman',          nome: "Leon Osman",          posicoes: ["MEI","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2014,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'hugo-lloris',         nome: "Hugo Lloris",         posicoes: ["GOL"],       forca: 85 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 82 },
+      { id: 'jan-vertonghen',      nome: "Jan Vertonghen",      posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'younes-kaboul',       nome: "Younès Kaboul",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'michael-dawson',      nome: "Michael Dawson",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'danny-rose',          nome: "Danny Rose",          posicoes: ["LE"],        forca: 79 },
+      { id: 'kyle-naughton',       nome: "Kyle Naughton",       posicoes: ["LD","LE"],   forca: 76 },
+      { id: 'sandro',              nome: "Sandro",              posicoes: ["VOL"],       forca: 80 },
+      { id: 'moussa-dembele',      nome: "Moussa Dembélé",      posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'paulinho',            nome: "Paulinho",            posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'aaron-lennon',        nome: "Aaron Lennon",        posicoes: ["PD"],        forca: 80 },
+      { id: 'erik-lamela',         nome: "Erik Lamela",         posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'nacer-chadli',        nome: "Nacer Chadli",        posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'gylfi-sigurdsson',    nome: "Gylfi Sigurðsson",    posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'roberto-soldado',     nome: "Roberto Soldado",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'emmanuel-adebayor',   nome: "Emmanuel Adebayor",   posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2015 (temporada 2014-15) — o Chelsea de Mourinho campeão (87 pts) na
+  //  2ª passagem, liderando do começo ao fim. Top-6: Chelsea (87), City (79),
+  //  Arsenal (75), United (70), Tottenham (64), Liverpool (62). Ano de estreia
+  //  de Diego Costa, Fàbregas e Alexis (que voltou ao acervo pelo Arsenal).
+  //  Ángel Di María e Herrera chegaram ao United sob Van Gaal; Suárez saiu do
+  //  Liverpool para o Barça, então some daqui.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2015,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'thibaut-courtois',    nome: "Thibaut Courtois",    posicoes: ["GOL"],       forca: 86 },
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 84 },
+      { id: 'branislav-ivanovic',  nome: "Branislav Ivanović",  posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["LE","LD"],   forca: 85 },
+      { id: 'john-terry',          nome: "John Terry",          posicoes: ["ZAG"],       forca: 85 },
+      { id: 'gary-cahill',         nome: "Gary Cahill",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'kurt-zouma',          nome: "Kurt Zouma",          posicoes: ["ZAG"],       forca: 79 },
+      { id: 'filipe-luis',         nome: "Filipe Luís",         posicoes: ["LE"],        forca: 82 },
+      { id: 'nemanja-matic',       nome: "Nemanja Matić",       posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'ramires',             nome: "Ramires",             posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'jon-obi-mikel',       nome: "John Obi Mikel",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'eden-hazard',         nome: "Eden Hazard",         posicoes: ["PE","MEI"],  forca: 89 },
+      { id: 'oscar',               nome: "Oscar",               posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'willian',             nome: "Willian",             posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'andre-schurrle',      nome: "André Schürrle",      posicoes: ["PE","ATA"],  forca: 81 },
+      { id: 'diego-costa',         nome: "Diego Costa",         posicoes: ["ATA"],       forca: 86 },
+      { id: 'loic-remy',           nome: "Loïc Rémy",           posicoes: ["ATA"],       forca: 80 },
+      { id: 'didier-drogba',       nome: "Didier Drogba",       posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2015,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'joe-hart',            nome: "Joe Hart",            posicoes: ["GOL"],       forca: 85 },
+      { id: 'pablo-zabaleta',      nome: "Pablo Zabaleta",      posicoes: ["LD","LE"],   forca: 83 },
+      { id: 'vincent-kompany',     nome: "Vincent Kompany",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'eliaquim-mangala',    nome: "Eliaquim Mangala",    posicoes: ["ZAG"],       forca: 80 },
+      { id: 'martin-demichelis',   nome: "Martín Demichelis",   posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'gael-clichy',         nome: "Gaël Clichy",         posicoes: ["LE"],        forca: 81 },
+      { id: 'bacary-sagna',        nome: "Bacary Sagna",        posicoes: ["LD"],        forca: 80 },
+      { id: 'aleksandar-kolarov',  nome: "Aleksandar Kolarov",  posicoes: ["LE"],        forca: 80 },
+      { id: 'yaya-toure',          nome: "Yaya Touré",          posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'fernandinho',         nome: "Fernandinho",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'fernando-reges',      nome: "Fernando",            posicoes: ["VOL"],       forca: 80 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","PE"],  forca: 87 },
+      { id: 'samir-nasri',         nome: "Samir Nasri",         posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","MD"],   forca: 82 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD"],        forca: 80 },
+      { id: 'sergio-aguero',       nome: "Sergio Agüero",       posicoes: ["ATA"],       forca: 90 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 83 },
+      { id: 'stevan-jovetic',      nome: "Stevan Jovetić",      posicoes: ["ATA","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2015,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 82 },
+      { id: 'david-ospina',        nome: "David Ospina",        posicoes: ["GOL"],       forca: 81 },
+      { id: 'hector-bellerin',     nome: "Héctor Bellerín",     posicoes: ["LD"],        forca: 80 },
+      { id: 'per-mertesacker',     nome: "Per Mertesacker",     posicoes: ["ZAG"],       forca: 83 },
+      { id: 'laurent-koscielny',   nome: "Laurent Koscielny",   posicoes: ["ZAG"],       forca: 85 },
+      { id: 'nacho-monreal',       nome: "Nacho Monreal",       posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'kieran-gibbs',        nome: "Kieran Gibbs",        posicoes: ["LE"],        forca: 79 },
+      { id: 'francis-coquelin',    nome: "Francis Coquelin",    posicoes: ["VOL"],       forca: 81 },
+      { id: 'mikel-arteta',        nome: "Mikel Arteta",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'aaron-ramsey',        nome: "Aaron Ramsey",        posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'santi-cazorla',       nome: "Santi Cazorla",       posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'mesut-ozil',          nome: "Mesut Özil",          posicoes: ["MEI","PE"],  forca: 86 },
+      { id: 'jack-wilshere',       nome: "Jack Wilshere",       posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["PE","ATA"],  forca: 87 },
+      { id: 'theo-walcott',        nome: "Theo Walcott",        posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'danny-welbeck',       nome: "Danny Welbeck",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2015,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 88 },
+      { id: 'antonio-valencia',    nome: "Antonio Valencia",    posicoes: ["LD","PD"],   forca: 81 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'phil-jones',          nome: "Phil Jones",          posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'marcos-rojo',         nome: "Marcos Rojo",         posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE"],        forca: 80 },
+      { id: 'daley-blind',         nome: "Daley Blind",         posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'michael-carrick',     nome: "Michael Carrick",     posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'ander-herrera',       nome: "Ander Herrera",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'marouane-fellaini',   nome: "Marouane Fellaini",   posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'juan-mata',           nome: "Juan Mata",           posicoes: ["MEI","PD"],  forca: 84 },
+      { id: 'angel-di-maria',      nome: "Ángel Di María",      posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["PE","LE"],   forca: 79 },
+      { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'robin-van-persie',    nome: "Robin van Persie",    posicoes: ["ATA"],       forca: 83 },
+      { id: 'radamel-falcao',      nome: "Radamel Falcao",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'javier-hernandez',    nome: "Javier Hernández",    posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2015,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'hugo-lloris',         nome: "Hugo Lloris",         posicoes: ["GOL"],       forca: 85 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 82 },
+      { id: 'jan-vertonghen',      nome: "Jan Vertonghen",      posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'eric-dier',           nome: "Eric Dier",           posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'federico-fazio',      nome: "Federico Fazio",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'danny-rose',          nome: "Danny Rose",          posicoes: ["LE"],        forca: 80 },
+      { id: 'ben-davies',          nome: "Ben Davies",          posicoes: ["LE"],        forca: 78 },
+      { id: 'nabil-bentaleb',      nome: "Nabil Bentaleb",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'ryan-mason',          nome: "Ryan Mason",          posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'moussa-dembele',      nome: "Moussa Dembélé",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'nacer-chadli',        nome: "Nacer Chadli",        posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'erik-lamela',         nome: "Erik Lamela",         posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'andros-townsend',     nome: "Andros Townsend",     posicoes: ["PD","PE"],   forca: 78 },
+      { id: 'harry-kane',          nome: "Harry Kane",          posicoes: ["ATA"],       forca: 84 },
+      { id: 'roberto-soldado',     nome: "Roberto Soldado",     posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2015,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'simon-mignolet',      nome: "Simon Mignolet",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'brad-jones',          nome: "Brad Jones",          posicoes: ["GOL"],       forca: 73 },
+      { id: 'glen-johnson',        nome: "Glen Johnson",        posicoes: ["LD"],        forca: 78 },
+      { id: 'martin-skrtel',       nome: "Martin Škrtel",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'mamadou-sakho',       nome: "Mamadou Sakho",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'dejan-lovren',        nome: "Dejan Lovren",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'alberto-moreno',      nome: "Alberto Moreno",      posicoes: ["LE"],        forca: 79 },
+      { id: 'emre-can',            nome: "Emre Can",            posicoes: ["VOL","ZAG"], forca: 81 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'steven-gerrard',      nome: "Steven Gerrard",      posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'lucas-leiva',         nome: "Lucas Leiva",         posicoes: ["VOL"],       forca: 79 },
+      { id: 'philippe-coutinho',   nome: "Philippe Coutinho",   posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","ATA"],  forca: 84 },
+      { id: 'adam-lallana',        nome: "Adam Lallana",        posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'jordon-ibe',          nome: "Jordon Ibe",          posicoes: ["PD","PE"],   forca: 75 },
+      { id: 'daniel-sturridge',    nome: "Daniel Sturridge",    posicoes: ["ATA","PD"],  forca: 84 },
+      { id: 'mario-balotelli',     nome: "Mario Balotelli",     posicoes: ["ATA"],       forca: 79 },
+      { id: 'rickie-lambert',      nome: "Rickie Lambert",      posicoes: ["ATA"],       forca: 76 }
+    ]
   }
 
 ];
