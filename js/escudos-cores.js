@@ -207,6 +207,7 @@
     'Hibernian':               ['#008B5A', '#FFFFFF'],
     'IFK Göteborg':            ['#0057A5', '#FFFFFF'],
     'Ipswich Town':            ['#0C4DA2', '#FFFFFF'],
+    'Leicester City':          ['#003090', '#FDBE11'],
     'Leeds United':            ['#FFFFFF', '#1D428A'],
     'Legia Warsaw':            ['#FFFFFF', '#006A4E'],
     'Lyon':                    ['#123B85', '#E30613'],
@@ -254,6 +255,7 @@
     'Bolton Wanderers':        ['#263C7E', '#FFFFFF'],
     'Burnley':                 ['#6C1D45', '#99D6EA'],
     'Newcastle United':        ['#241F20', '#FFFFFF'],
+    'Southampton':             ['#D71920', '#FFFFFF'],
     'Norwich City':            ['#FFF200', '#00A650'],
     'Queens Park Rangers':     ['#005CAB', '#FFFFFF'],
     'West Ham United':         ['#7A263A', '#1BB1E7'],
@@ -449,6 +451,7 @@
     'Hamburg':                 { padrao: 'faixa-h' },                                 // branco e azul
     'Hibernian':               { padrao: 'faixa-h' },                                 // verde e branco
     'IFK Göteborg':            { padrao: 'faixa-h' },                                 // azul e branco
+    'Leicester City':          { padrao: 'solido' },                                  // azul real
     'Leeds United':            { padrao: 'faixa-h' },                                 // branco com faixa azul
     'Legia Warsaw':            { padrao: 'faixa-v' },                                 // branco e verde
     'Lyon':                    { padrao: 'lyon' },                       // faixa vermelha no topo, corpo azul
@@ -497,6 +500,7 @@
     'Burnley':                 { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
     'Ipswich Town':            { padrao: 'faixa-h' },                                 // azul com faixa branca
     'Newcastle United':        { padrao: 'listras-v' },
+    'Southampton':             { padrao: 'faixa-v' },                                 // vermelho com faixa branca central
     'Norwich City':            { padrao: 'solido' },                                  // amarelo canário
     'Queens Park Rangers':     { padrao: 'listras-h' },                               // aros azuis e brancos                               // preto e branco
     'West Ham United':         { padrao: 'faixa-h' },                                 // grená com faixa azul-clara
