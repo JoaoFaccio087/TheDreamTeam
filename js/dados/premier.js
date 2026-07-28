@@ -4579,6 +4579,162 @@ const DADOS_PREMIER = [
       { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 87 },
       { id: 'wayne-rooney',        nome: "Wayne Rooney",        posicoes: ["ATA","MEI"], forca: 80 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2018 (temporada 2017-18) — o CITY CENTURIÃO de Guardiola: 100 pontos,
+  //  32 vitórias, 106 gols — recordes que seguem de pé. Único time a chegar aos
+  //  100 na era Premier. Top-6: City (100), United (81), Tottenham (77),
+  //  Liverpool (75), Chelsea (70), Arsenal (63). Salah chegou ao Liverpool e fez
+  //  32 gols (recorde de temporada de 38 jogos). Ederson e Walker no 1º ano de City.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2018,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 86 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 85 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'nicolas-otamendi',    nome: "Nicolás Otamendi",    posicoes: ["ZAG"],       forca: 83 },
+      { id: 'aymeric-laporte',     nome: "Aymeric Laporte",     posicoes: ["ZAG"],       forca: 83 },
+      { id: 'vincent-kompany',     nome: "Vincent Kompany",     posicoes: ["ZAG"],       forca: 83 },
+      { id: 'benjamin-mendy',      nome: "Benjamin Mendy",      posicoes: ["LE"],        forca: 81 },
+      { id: 'fabian-delph',        nome: "Fabian Delph",        posicoes: ["LE","MC"],   forca: 80 },
+      { id: 'fernandinho',         nome: "Fernandinho",         posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","PE"],  forca: 88 },
+      { id: 'ilkay-gundogan',      nome: "İlkay Gündoğan",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 85 },
+      { id: 'raheem-sterling',     nome: "Raheem Sterling",     posicoes: ["PE","PD"],   forca: 87 },
+      { id: 'leroy-sane',          nome: "Leroy Sané",          posicoes: ["PE","PD"],   forca: 86 },
+      { id: 'sergio-aguero',       nome: "Sergio Agüero",       posicoes: ["ATA"],       forca: 89 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2018,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 91 },
+      { id: 'antonio-valencia',    nome: "Antonio Valencia",    posicoes: ["LD"],        forca: 82 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'eric-bailly',         nome: "Eric Bailly",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'phil-jones',          nome: "Phil Jones",          posicoes: ["ZAG"],       forca: 81 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'victor-lindelof',     nome: "Victor Lindelöf",     posicoes: ["ZAG"],       forca: 80 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE"],        forca: 79 },
+      { id: 'nemanja-matic',       nome: "Nemanja Matić",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'ander-herrera',       nome: "Ander Herrera",       posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'juan-mata',           nome: "Juan Mata",           posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'jesse-lingard',       nome: "Jesse Lingard",       posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'marcus-rashford',     nome: "Marcus Rashford",     posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'anthony-martial',     nome: "Anthony Martial",     posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["PE","ATA"],  forca: 85 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2018,
+    clube: "Tottenham",
+    jogadores: [
+      { id: 'hugo-lloris',         nome: "Hugo Lloris",         posicoes: ["GOL"],       forca: 87 },
+      { id: 'kieran-trippier',     nome: "Kieran Trippier",     posicoes: ["LD"],        forca: 82 },
+      { id: 'serge-aurier',        nome: "Serge Aurier",        posicoes: ["LD"],        forca: 80 },
+      { id: 'toby-alderweireld',   nome: "Toby Alderweireld",   posicoes: ["ZAG"],       forca: 86 },
+      { id: 'jan-vertonghen',      nome: "Jan Vertonghen",      posicoes: ["ZAG","LE"],  forca: 85 },
+      { id: 'davinson-sanchez',    nome: "Davinson Sánchez",    posicoes: ["ZAG"],       forca: 82 },
+      { id: 'ben-davies',          nome: "Ben Davies",          posicoes: ["LE"],        forca: 80 },
+      { id: 'danny-rose',          nome: "Danny Rose",          posicoes: ["LE"],        forca: 81 },
+      { id: 'eric-dier',           nome: "Eric Dier",           posicoes: ["VOL","ZAG"], forca: 82 },
+      { id: 'moussa-dembele',      nome: "Mousa Dembélé",       posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'harry-winks',         nome: "Harry Winks",         posicoes: ["MC"],        forca: 79 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'dele-alli',           nome: "Dele Alli",           posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'son-heung-min',       nome: "Son Heung-min",       posicoes: ["PE","ATA"],  forca: 85 },
+      { id: 'erik-lamela',         nome: "Erik Lamela",         posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'harry-kane',          nome: "Harry Kane",          posicoes: ["ATA"],       forca: 89 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2018,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'loris-karius',        nome: "Loris Karius",        posicoes: ["GOL"],       forca: 78 },
+      { id: 'simon-mignolet',      nome: "Simon Mignolet",      posicoes: ["GOL"],       forca: 78 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 80 },
+      { id: 'joe-gomez',           nome: "Joe Gomez",           posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'dejan-lovren',        nome: "Dejan Lovren",        posicoes: ["ZAG"],       forca: 81 },
+      { id: 'joel-matip',          nome: "Joël Matip",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 82 },
+      { id: 'alberto-moreno',      nome: "Alberto Moreno",      posicoes: ["LE"],        forca: 78 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'georginio-wijnaldum', nome: "Georginio Wijnaldum", posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'emre-can',            nome: "Emre Can",            posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'james-milner',        nome: "James Milner",        posicoes: ["MC","LE"],   forca: 82 },
+      { id: 'alex-oxlade-chamberlain', nome: "Alex Oxlade-Chamberlain", posicoes: ["MC","PD"], forca: 82 },
+      { id: 'sadio-mane',          nome: "Sadio Mané",          posicoes: ["PE","ATA"],  forca: 86 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 89 },
+      { id: 'roberto-firmino',     nome: "Roberto Firmino",     posicoes: ["ATA","MEI"], forca: 86 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2018,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'thibaut-courtois',    nome: "Thibaut Courtois",    posicoes: ["GOL"],       forca: 87 },
+      { id: 'cesar-azpilicueta',   nome: "César Azpilicueta",   posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'gary-cahill',         nome: "Gary Cahill",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'david-luiz',          nome: "David Luiz",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'antonio-rudiger',     nome: "Antonio Rüdiger",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'andreas-christensen', nome: "Andreas Christensen", posicoes: ["ZAG"],       forca: 80 },
+      { id: 'marcos-alonso',       nome: "Marcos Alonso",       posicoes: ["LE"],        forca: 83 },
+      { id: 'victor-moses',        nome: "Victor Moses",        posicoes: ["LD","PD"],   forca: 80 },
+      { id: 'ngolo-kante',         nome: "N'Golo Kanté",        posicoes: ["VOL","MC"],  forca: 88 },
+      { id: 'cesc-fabregas',       nome: "Cesc Fàbregas",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'tiemoue-bakayoko',    nome: "Tiémoué Bakayoko",    posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'eden-hazard',         nome: "Eden Hazard",         posicoes: ["PE","MEI"],  forca: 90 },
+      { id: 'willian',             nome: "Willian",             posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'pedro',               nome: "Pedro",               posicoes: ["PD","PE"],   forca: 82 },
+      { id: 'alvaro-morata',       nome: "Álvaro Morata",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2018,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'petr-cech',           nome: "Petr Čech",           posicoes: ["GOL"],       forca: 82 },
+      { id: 'david-ospina',        nome: "David Ospina",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'hector-bellerin',     nome: "Héctor Bellerín",     posicoes: ["LD"],        forca: 82 },
+      { id: 'laurent-koscielny',   nome: "Laurent Koscielny",   posicoes: ["ZAG"],       forca: 83 },
+      { id: 'shkodran-mustafi',    nome: "Shkodran Mustafi",    posicoes: ["ZAG"],       forca: 81 },
+      { id: 'nacho-monreal',       nome: "Nacho Monreal",       posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'sead-kolasinac',      nome: "Sead Kolašinac",      posicoes: ["LE"],        forca: 80 },
+      { id: 'granit-xhaka',        nome: "Granit Xhaka",        posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'aaron-ramsey',        nome: "Aaron Ramsey",        posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'jack-wilshere',       nome: "Jack Wilshere",       posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'mohamed-elneny',      nome: "Mohamed Elneny",      posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'mesut-ozil',          nome: "Mesut Özil",          posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'alex-iwobi',          nome: "Alex Iwobi",          posicoes: ["PE","MEI"],  forca: 78 },
+      { id: 'pierre-emerick-aubameyang', nome: "Pierre-Emerick Aubameyang", posicoes: ["ATA","PE"], forca: 86 },
+      { id: 'alexandre-lacazette', nome: "Alexandre Lacazette", posicoes: ["ATA"],       forca: 84 },
+      { id: 'danny-welbeck',       nome: "Danny Welbeck",       posicoes: ["ATA"],       forca: 78 }
+    ]
   }
 
 ];
