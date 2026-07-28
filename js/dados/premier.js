@@ -5353,6 +5353,152 @@ const DADOS_PREMIER = [
       { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA"],       forca: 87 },
       { id: 'anthony-elanga',      nome: "Anthony Elanga",      posicoes: ["PE","ATA"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2023 (temporada 2022-23) — o City da TRÍPLICE (Premier, FA Cup e
+  //  Champions), no 1º ano de Haaland, que bateu o recorde de gols numa
+  //  temporada com 36. Top-6: City (89), Arsenal (84), United (75), Newcastle
+  //  (71), Liverpool (67), Brighton (62). Arsenal liderou boa parte do ano antes
+  //  de cair. Brighton no top-6 pela 1ª vez, com Caicedo e Mac Allister.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2023,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 83 },
+      { id: 'ruben-dias',          nome: "Rúben Dias",          posicoes: ["ZAG"],       forca: 88 },
+      { id: 'john-stones',         nome: "John Stones",         posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'manuel-akanji',       nome: "Manuel Akanji",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'nathan-ake',          nome: "Nathan Aké",          posicoes: ["ZAG","LE"],  forca: 83 },
+      { id: 'rodri',               nome: "Rodri",               posicoes: ["VOL"],       forca: 89 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 87 },
+      { id: 'ilkay-gundogan',      nome: "İlkay Gündoğan",      posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'jack-grealish',       nome: "Jack Grealish",       posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'phil-foden',          nome: "Phil Foden",          posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'riyad-mahrez',        nome: "Riyad Mahrez",        posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'julian-alvarez',      nome: "Julián Álvarez",      posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'erling-haaland',      nome: "Erling Haaland",      posicoes: ["ATA"],       forca: 91 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2023,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'aaron-ramsdale',      nome: "Aaron Ramsdale",      posicoes: ["GOL"],       forca: 83 },
+      { id: 'ben-white',           nome: "Ben White",           posicoes: ["LD","ZAG"],  forca: 83 },
+      { id: 'william-saliba',      nome: "William Saliba",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'gabriel-magalhaes',   nome: "Gabriel Magalhães",   posicoes: ["ZAG"],       forca: 84 },
+      { id: 'oleksandr-zinchenko', nome: "Oleksandr Zinchenko", posicoes: ["LE","MC"],   forca: 82 },
+      { id: 'takehiro-tomiyasu',   nome: "Takehiro Tomiyasu",   posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'thomas-partey',       nome: "Thomas Partey",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'granit-xhaka',        nome: "Granit Xhaka",        posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'martin-odegaard',     nome: "Martin Ødegaard",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'bukayo-saka',         nome: "Bukayo Saka",         posicoes: ["PD","PE"],   forca: 86 },
+      { id: 'gabriel-martinelli',  nome: "Gabriel Martinelli",  posicoes: ["PE","ATA"],  forca: 84 },
+      { id: 'leandro-trossard',    nome: "Leandro Trossard",    posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'fabio-vieira',        nome: "Fábio Vieira",        posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'eddie-nketiah',       nome: "Eddie Nketiah",       posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2023,
+    clube: "Manchester United",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 83 },
+      { id: 'diogo-dalot',         nome: "Diogo Dalot",         posicoes: ["LD"],        forca: 81 },
+      { id: 'raphael-varane',      nome: "Raphaël Varane",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'lisandro-martinez',   nome: "Lisandro Martínez",   posicoes: ["ZAG"],       forca: 84 },
+      { id: 'harry-maguire',       nome: "Harry Maguire",       posicoes: ["ZAG"],       forca: 80 },
+      { id: 'luke-shaw',           nome: "Luke Shaw",           posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'tyrell-malacia',      nome: "Tyrell Malacia",      posicoes: ["LE"],        forca: 78 },
+      { id: 'casemiro',            nome: "Casemiro",            posicoes: ["VOL"],       forca: 87 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'fred',                nome: "Fred",                posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'bruno-fernandes',     nome: "Bruno Fernandes",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'antony',              nome: "Antony",              posicoes: ["PD","PE"],   forca: 81 },
+      { id: 'jadon-sancho',        nome: "Jadon Sancho",        posicoes: ["PE","PD"],   forca: 80 },
+      { id: 'marcus-rashford',     nome: "Marcus Rashford",     posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'anthony-martial',     nome: "Anthony Martial",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'wout-weghorst',       nome: "Wout Weghorst",       posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2023,
+    clube: "Newcastle United",
+    jogadores: [
+      { id: 'nick-pope',           nome: "Nick Pope",           posicoes: ["GOL"],       forca: 83 },
+      { id: 'kieran-trippier',     nome: "Kieran Trippier",     posicoes: ["LD"],        forca: 83 },
+      { id: 'fabian-schar',        nome: "Fabian Schär",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sven-botman',         nome: "Sven Botman",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'dan-burn',            nome: "Dan Burn",            posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'matt-targett',        nome: "Matt Targett",        posicoes: ["LE"],        forca: 78 },
+      { id: 'bruno-guimaraes',     nome: "Bruno Guimarães",     posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'joelinton',           nome: "Joelinton",           posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'sean-longstaff',      nome: "Sean Longstaff",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'miguel-almiron',      nome: "Miguel Almirón",      posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'jacob-murphy',        nome: "Jacob Murphy",        posicoes: ["PD","PE"],   forca: 77 },
+      { id: 'allan-saint-maximin', nome: "Allan Saint-Maximin", posicoes: ["PE","ATA"],  forca: 81 },
+      { id: 'callum-wilson',       nome: "Callum Wilson",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'alexander-isak',      nome: "Alexander Isak",      posicoes: ["ATA"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2023,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 89 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 86 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 88 },
+      { id: 'ibrahima-konate',     nome: "Ibrahima Konaté",     posicoes: ["ZAG"],       forca: 83 },
+      { id: 'joel-matip',          nome: "Joël Matip",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 85 },
+      { id: 'fabinho',             nome: "Fabinho",             posicoes: ["VOL"],       forca: 83 },
+      { id: 'jordan-henderson',    nome: "Jordan Henderson",    posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'thiago-alcantara',    nome: "Thiago Alcântara",    posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'harvey-elliott',      nome: "Harvey Elliott",      posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 89 },
+      { id: 'luis-diaz',           nome: "Luis Díaz",           posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'diogo-jota',          nome: "Diogo Jota",          posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'darwin-nunez',        nome: "Darwin Núñez",        posicoes: ["ATA"],       forca: 82 },
+      { id: 'cody-gakpo',          nome: "Cody Gakpo",          posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'roberto-firmino',     nome: "Roberto Firmino",     posicoes: ["ATA","MEI"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2023,
+    clube: "Brighton",
+    jogadores: [
+      { id: 'robert-sanchez',      nome: "Robert Sánchez",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'joel-veltman',        nome: "Joël Veltman",        posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'lewis-dunk',          nome: "Lewis Dunk",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'adam-webster',        nome: "Adam Webster",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'pervis-estupinan',    nome: "Pervis Estupiñán",    posicoes: ["LE"],        forca: 81 },
+      { id: 'moises-caicedo',      nome: "Moisés Caicedo",      posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'alexis-mac-allister', nome: "Alexis Mac Allister", posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'pascal-gross',        nome: "Pascal Groß",         posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'solly-march',         nome: "Solly March",         posicoes: ["PD","PE"],   forca: 80 },
+      { id: 'kaoru-mitoma',        nome: "Kaoru Mitoma",        posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'danny-welbeck',       nome: "Danny Welbeck",      posicoes: ["ATA"],       forca: 78 },
+      { id: 'evan-ferguson',       nome: "Evan Ferguson",       posicoes: ["ATA"],       forca: 77 },
+      { id: 'deniz-undav',         nome: "Deniz Undav",         posicoes: ["ATA"],       forca: 76 },
+      { id: 'adam-lallana',        nome: "Adam Lallana",        posicoes: ["MEI","MC"],  forca: 76 }
+    ]
   }
 
 ];
