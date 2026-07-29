@@ -227,6 +227,7 @@
     'Red Star Belgrade':       ['#FFFFFF', '#E30613'],
     'Napoli':                  ['#12A0D7', '#FFFFFF'],
     'Parma':                   ['#FFD200', '#004B9E'],
+    'Torino':                  ['#7B1E26', '#FFFFFF'],
     'Roma':                    ['#8E1F2F', '#F0BC42'],
     'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
     'Sampdoria':               ['#0A2A66', '#FFFFFF'],
@@ -473,6 +474,7 @@
     'Red Star Belgrade':       { padrao: 'metade' },                                  // vermelho e branco
     'Napoli':                  { padrao: 'solido' },                                  // azul celeste
     'Parma':                   { padrao: 'cruz' },                                    // cruz azul sobre amarelo
+    'Torino':                  { padrao: 'solido' },                                  // granata
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

@@ -293,7 +293,147 @@ const DADOS_SERIE_A = [
       { id: 'gerald-vanenburg',    nome: "Gerald Vanenburg",    posicoes: ["MEI","MC"],  forca: 79 },
       { id: 'roberto-policano',    nome: "Roberto Policano",    posicoes: ["LD","MD"],   forca: 76 }
     ]
-  }
+  },
 
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1992 (temporada 1991-92) — o MILAN de Capello CAMPEÃO INVICTO (56 pts),
+  //  22 vitórias e 12 empates em 34 jogos, feito raríssimo no futebol. Van Basten
+  //  artilheiro (25 gols) na sua última grande temporada antes das lesões. Top-6:
+  //  Milan (56), Juventus (48), Torino (46), Napoli (44), Sampdoria (43), Inter (43).
+  //  O Torino de Mondonico fazia sua última grande temporada; a Juve trazia Baggio
+  //  no auge. Começa aqui a dinastia rossonera que dominaria a Europa.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1992,
+    clube: "Milan",
+    jogadores: [
+      { id: 'sebastiano-rossi',    nome: "Sebastiano Rossi",    posicoes: ["GOL"],       forca: 83 },
+      { id: 'mauro-tassotti',      nome: "Mauro Tassotti",      posicoes: ["LD"],        forca: 82 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 89 },
+      { id: 'franco-baresi',       nome: "Franco Baresi",       posicoes: ["ZAG"],       forca: 91 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 85 },
+      { id: 'paolo-di-canio',      nome: "Paolo Di Canio",      posicoes: ["PE","MEI"],  forca: 78 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'carlo-ancelotti',     nome: "Carlo Ancelotti",     posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'roberto-donadoni',    nome: "Roberto Donadoni",    posicoes: ["MEI","PD"],  forca: 85 },
+      { id: 'frank-rijkaard',      nome: "Frank Rijkaard",      posicoes: ["VOL","ZAG"], forca: 88 },
+      { id: 'ruud-gullit',         nome: "Ruud Gullit",         posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'marco-van-basten',    nome: "Marco van Basten",    posicoes: ["ATA"],       forca: 92 },
+      { id: 'daniele-massaro',     nome: "Daniele Massaro",     posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'stefano-eranio',      nome: "Stefano Eranio",      posicoes: ["MD","MC"],   forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1992,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'stefano-tacconi',     nome: "Stefano Tacconi",     posicoes: ["GOL"],       forca: 82 },
+      { id: 'luca-fusi',           nome: "Luca Fusi",           posicoes: ["MC","ZAG"],  forca: 78 },
+      { id: 'giuseppe-bruno',      nome: "Giuseppe Bruno",      posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'luigi-de-agostini',   nome: "Luigi De Agostini",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'jurgen-kohler',       nome: "Jürgen Kohler",       posicoes: ["ZAG"],       forca: 85 },
+      { id: 'giancarlo-marocchi',  nome: "Giancarlo Marocchi",  posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'thomas-hassler',      nome: "Thomas Häßler",       posicoes: ["MEI","PD"],  forca: 84 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 79 },
+      { id: 'roberto-baggio',      nome: "Roberto Baggio",      posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'pierluigi-casiraghi', nome: "Pierluigi Casiraghi", posicoes: ["ATA"],       forca: 82 },
+      { id: 'salvatore-schillaci', nome: "Salvatore Schillaci", posicoes: ["ATA"],       forca: 82 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'andreas-moeller',     nome: "Andreas Möller",      posicoes: ["MEI","MC"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1992,
+    clube: "Torino",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 82 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'giorgio-bresciani',   nome: "Giorgio Bresciani",   posicoes: ["ATA"],       forca: 76 },
+      { id: 'enrico-annoni',       nome: "Enrico Annoni",       posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'luigi-sartor',        nome: "Luigi Sartor",        posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'sandro-cois',         nome: "Sandro Cois",         posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 80 },
+      { id: 'giorgio-venturin',    nome: "Giorgio Venturin",    posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'gianluigi-lentini',   nome: "Gianluigi Lentini",   posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'walter-casagrande',   nome: "Walter Casagrande",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'rafael-martin-vazquez', nome: "Rafael Martín Vázquez", posicoes: ["MEI","MC"], forca: 82 },
+      { id: 'roberto-cravero',     nome: "Roberto Cravero",     posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'silvano-benedetti',   nome: "Silvano Benedetti",   posicoes: ["ZAG"],       forca: 76 },
+      { id: 'antonino-asta',       nome: "Antonino Asta",       posicoes: ["LD","MD"],   forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1992,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'giovanni-galli',      nome: "Giovanni Galli",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'giancarlo-corradini', nome: "Giancarlo Corradini", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'massimo-tarantino',   nome: "Massimo Tarantino",   posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'fernando-de-napoli',  nome: "Fernando De Napoli",  posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'massimo-crippa',      nome: "Massimo Crippa",      posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'jonas-thern',         nome: "Jonas Thern",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'careca',              nome: "Careca",              posicoes: ["ATA"],       forca: 85 },
+      { id: 'daniel-fonseca',      nome: "Daniel Fonseca",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'roberto-bordin',      nome: "Roberto Bordin",      posicoes: ["MC","MD"],   forca: 76 },
+      { id: 'beto-napoli',         nome: "Beto",                posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'giovanni-francini',   nome: "Giovanni Francini",   posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'raffaele-di-fusco',   nome: "Raffaele Di Fusco",   posicoes: ["GOL"],       forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1992,
+    clube: "Sampdoria",
+    jogadores: [
+      { id: 'gianluca-pagliuca',   nome: "Gianluca Pagliuca",   posicoes: ["GOL"],       forca: 85 },
+      { id: 'moreno-mannini',      nome: "Moreno Mannini",      posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'pietro-vierchowod',   nome: "Pietro Vierchowod",   posicoes: ["ZAG"],       forca: 85 },
+      { id: 'marco-lanna',         nome: "Marco Lanna",         posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'luca-pellegrini',     nome: "Luca Pellegrini",     posicoes: ["LE"],        forca: 79 },
+      { id: 'fausto-pari',         nome: "Fausto Pari",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'toninho-cerezo',      nome: "Toninho Cerezo",      posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'attilio-lombardo',    nome: "Attilio Lombardo",    posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'srecko-katanec',      nome: "Srečko Katanec",      posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'roberto-mancini',     nome: "Roberto Mancini",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 88 },
+      { id: 'giovanni-invernizzi', nome: "Giovanni Invernizzi", posicoes: ["MC","MD"],   forca: 76 },
+      { id: 'vladimir-jugovic',    nome: "Vladimir Jugović",    posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'giovanni-dossena',    nome: "Giovanni Dossena",    posicoes: ["MC","LE"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1992,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'walter-zenga',        nome: "Walter Zenga",        posicoes: ["GOL"],       forca: 85 },
+      { id: 'giuseppe-bergomi',    nome: "Giuseppe Bergomi",    posicoes: ["LD","ZAG"],  forca: 84 },
+      { id: 'riccardo-ferri',      nome: "Riccardo Ferri",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'andreas-brehme',      nome: "Andreas Brehme",      posicoes: ["LE"],        forca: 84 },
+      { id: 'giuseppe-baresi',     nome: "Giuseppe Baresi",     posicoes: ["VOL","ZAG"], forca: 79 },
+      { id: 'nicola-berti',        nome: "Nicola Berti",        posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'lothar-matthaus',     nome: "Lothar Matthäus",     posicoes: ["MC","MEI"],  forca: 90 },
+      { id: 'darko-pancev',        nome: "Darko Pančev",        posicoes: ["ATA"],       forca: 82 },
+      { id: 'juergen-klinsmann',   nome: "Jürgen Klinsmann",    posicoes: ["ATA"],       forca: 86 },
+      { id: 'alessandro-bianchi',  nome: "Alessandro Bianchi",  posicoes: ["PD","MD"],   forca: 77 },
+      { id: 'antonio-paganin',     nome: "Antonio Paganin",     posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'davide-fontolan',     nome: "Davide Fontolan",     posicoes: ["MEI","ATA"], forca: 77 },
+      { id: 'stefano-pellegrini',  nome: "Stefano Pellegrini",  posicoes: ["LE","MD"],   forca: 75 },
+      { id: 'matthias-sammer',     nome: "Matthias Sammer",     posicoes: ["MEI","MC"],  forca: 83 }
+    ]
+  }
 
 ];
