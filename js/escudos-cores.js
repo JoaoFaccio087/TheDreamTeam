@@ -229,6 +229,7 @@
     'Parma':                   ['#FFD200', '#004B9E'],
     'Torino':                  ['#7B1E26', '#FFFFFF'],
     'Lazio':                   ['#87CEEB', '#FFFFFF'],
+    'Udinese':                 ['#000000', '#FFFFFF'],
     'Roma':                    ['#8E1F2F', '#F0BC42'],
     'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
     'Sampdoria':               ['#0A2A66', '#FFFFFF'],
@@ -477,6 +478,7 @@
     'Parma':                   { padrao: 'cruz' },                                    // cruz azul sobre amarelo
     'Torino':                  { padrao: 'solido' },                                  // granata
     'Lazio':                   { padrao: 'solido' },                                  // celeste (biancoceleste)
+    'Udinese':                 { padrao: 'listras-v', listras: 4 },                  // preto e branco
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

@@ -1001,6 +1001,148 @@ const DADOS_SERIE_A = [
       { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 80 },
       { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1997 (temporada 1996-97) — a JUVENTUS de Lippi bicampeã (65 pts), 24º
+  //  título, decidido por 2 pts sobre o Parma. Foi a 1ª temporada do ZIDANE (contratado
+  //  pós-lei Bosman) e de Christian Vieri na Juve. Top-6: Juventus (65), Parma (63),
+  //  Inter (59), Lazio (55), Udinese (54), Sampdoria (53). O Parma quase surpreendeu,
+  //  com o jovem Buffon estreando e o trio Thuram/Cannavaro/Crespo se formando. Inzaghi
+  //  (Atalanta) foi artilheiro com 24 gols. A Udinese de Zaccheroni entra no acervo.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1997,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 86 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'mark-iuliano',        nome: "Mark Iuliano",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'moreno-torricelli',   nome: "Moreno Torricelli",   posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'zinedine-zidane',     nome: "Zinédine Zidane",     posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'didier-deschamps',    nome: "Didier Deschamps",    posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 80 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'alen-boksic',         nome: "Alen Bokšić",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'michele-padovano',    nome: "Michele Padovano",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'nicola-amoruso',      nome: "Nicola Amoruso",      posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1997,
+    clube: "Parma",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 82 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 85 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'massimo-crippa',      nome: "Massimo Crippa",      posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'enrico-chiesa',       nome: "Enrico Chiesa",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'luigi-apolloni',      nome: "Luigi Apolloni",      posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1997,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'gianluca-pagliuca',   nome: "Gianluca Pagliuca",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'giuseppe-bergomi',    nome: "Giuseppe Bergomi",    posicoes: ["LD","ZAG"],  forca: 82 },
+      { id: 'salvatore-fresi',     nome: "Salvatore Fresi",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'francesco-colonnese', nome: "Francesco Colonnese", posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 84 },
+      { id: 'aron-winter',         nome: "Aron Winter",         posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'youri-djorkaeff',     nome: "Youri Djorkaeff",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'ciriaco-sforza',      nome: "Ciriaco Sforza",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'paul-ince',           nome: "Paul Ince",           posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'maurizio-ganz',       nome: "Maurizio Ganz",       posicoes: ["ATA"],       forca: 79 },
+      { id: 'marco-branca',        nome: "Marco Branca",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'benito-carbone',      nome: "Benito Carbone",      posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'nicola-berti',        nome: "Nicola Berti",        posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'fabio-galante',       nome: "Fabio Galante",       posicoes: ["ZAG"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1997,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 82 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'jose-chamot',         nome: "José Chamot",         posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'roberto-rambaudi',    nome: "Roberto Rambaudi",    posicoes: ["MD","PD"],   forca: 78 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'guerino-gottardi',    nome: "Guerino Gottardi",    posicoes: ["MC","LD"],   forca: 76 },
+      { id: 'giuliano-giannichedda', nome: "Giuliano Giannichedda", posicoes: ["VOL","MC"], forca: 78 },
+      { id: 'pierluigi-casiraghi', nome: "Pierluigi Casiraghi", posicoes: ["ATA"],       forca: 82 },
+      { id: 'igor-protti',         nome: "Igor Protti",         posicoes: ["ATA"],       forca: 81 },
+      { id: 'marco-di-vaio',       nome: "Marco Di Vaio",       posicoes: ["ATA"],       forca: 77 },
+      { id: 'vladimir-jugovic',    nome: "Vladimir Jugović",    posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1997,
+    clube: "Udinese",
+    jogadores: [
+      { id: 'luigi-turci',         nome: "Luigi Turci",         posicoes: ["GOL"],       forca: 78 },
+      { id: 'thomas-helveg',       nome: "Thomas Helveg",       posicoes: ["LD","VOL"],  forca: 80 },
+      { id: 'paolo-poggi',         nome: "Paolo Poggi",         posicoes: ["ATA"],       forca: 76 },
+      { id: 'giovanni-bia',        nome: "Giovanni Bia",        posicoes: ["MC","MD"],   forca: 77 },
+      { id: 'valerio-bertotto',    nome: "Valerio Bertotto",    posicoes: ["ZAG"],       forca: 78 },
+      { id: 'stefano-bettarini',   nome: "Stefano Bettarini",   posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'johnnier-montano',    nome: "Johnnier Montaño",    posicoes: ["MEI","MC"],  forca: 75 },
+      { id: 'oliver-bierhoff',     nome: "Oliver Bierhoff",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'marcio-amoroso',      nome: "Márcio Amoroso",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'alessandro-calori',   nome: "Alessandro Calori",   posicoes: ["ZAG","VOL"], forca: 76 },
+      { id: 'thomas-locatelli',    nome: "Tomas Locatelli",     posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'alessandro-pierini',  nome: "Alessandro Pierini",  posicoes: ["LE","ZAG"], forca: 75 },
+      { id: 'gennaro-ruotolo',     nome: "Gennaro Ruotolo",     posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'fabio-rossitto',      nome: "Fabio Rossitto",      posicoes: ["MC","VOL"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1997,
+    clube: "Sampdoria",
+    jogadores: [
+      { id: 'fabrizio-ferron',     nome: "Fabrizio Ferron",     posicoes: ["GOL"],       forca: 79 },
+      { id: 'moreno-mannini',      nome: "Moreno Mannini",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'pietro-vierchowod',   nome: "Pietro Vierchowod",   posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'michele-serena',      nome: "Michele Serena",      posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 84 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'vincenzo-montella',   nome: "Vincenzo Montella",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'roberto-mancini',     nome: "Roberto Mancini",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'alberico-evani',      nome: "Alberico Evani",      posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'pierre-laigle',       nome: "Pierre Laigle",       posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'christian-karembeu',  nome: "Christian Karembeu",  posicoes: ["VOL","LD"],  forca: 80 },
+      { id: 'fausto-salsano',      nome: "Fausto Salsano",      posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'marco-franceschetti', nome: "Marco Franceschetti", posicoes: ["LE","LD"],   forca: 74 }
+    ]
   }
 
 ];
