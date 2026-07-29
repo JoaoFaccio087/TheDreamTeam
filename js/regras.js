@@ -12,7 +12,10 @@ const COMPETICOES = {
   copa:         { dados: 'Copa do Mundo', label: 'Copa do Mundo' },
   // Premier League — OFFLINE apenas, em BETA (jul/2026). Sem `tema`, acompanha o
   // modo claro/escuro. `formato: 'liga'` reusa o motor de 38 rodadas do Brasileirão.
-  premier:      { dados: 'Premier League', label: 'Premier League',  formato: 'liga', beta: true }
+  premier:      { dados: 'Premier League', label: 'Premier League',  formato: 'liga', beta: true },
+  // Serie A Italiana — OFFLINE apenas, em BETA (jul/2026). Sem `tema`, acompanha o
+  // modo claro/escuro. `formato: 'liga'` reusa o motor de pontos corridos.
+  serie_a:      { dados: 'Serie A',        label: 'Serie A',          formato: 'liga', beta: true }
 };
 
 // Helper: a competição roda no formato de liga (pontos corridos)?
