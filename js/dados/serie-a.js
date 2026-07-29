@@ -1566,6 +1566,147 @@ const DADOS_SERIE_A = [
       { id: 'marcos-assuncao',     nome: "Marcos Assunção",     posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'gustavo-bartelt',     nome: "Gustavo Bartelt",     posicoes: ["ATA"],       forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2001 (temporada 2000-01) — a ROMA de Fabio CAPELLO campeã (75 pts), 3º
+  //  título giallorosso e o 1º em 18 anos (desde 1983), decidido na última rodada
+  //  (3-1 no Parma, gols de Totti, Montella e Batistuta). O trio Totti-Batistuta-
+  //  Montella somou 46 gols. Top-6: Roma (75), Juventus (73), Lazio (69), Parma (56),
+  //  Inter (55), Milan (52). Crespo (agora na Lazio) foi artilheiro com 26 gols. A
+  //  chegada de Batistuta (recorde de transferência p/ um trintão) coroou o projeto.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2001,
+    clube: "Roma",
+    jogadores: [
+      { id: 'francesco-antonioli', nome: "Francesco Antonioli",  posicoes: ["GOL"],      forca: 79 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 81 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'jonathan-zebina',     nome: "Jonathan Zebina",     posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'cristiano-zanetti',   nome: "Cristiano Zanetti",   posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'emerson',             nome: "Emerson",             posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'gabriel-batistuta',   nome: "Gabriel Batistuta",   posicoes: ["ATA"],       forca: 86 },
+      { id: 'vincenzo-montella',   nome: "Vincenzo Montella",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'marco-delvecchio',    nome: "Marco Delvecchio",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'hidetoshi-nakata',    nome: "Hidetoshi Nakata",    posicoes: ["MEI","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2001,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 86 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 81 },
+      { id: 'paolo-montero',       nome: "Paolo Montero",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'zinedine-zidane',     nome: "Zinédine Zidane",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'darko-kovacevic',     nome: "Darko Kovačević",     posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2001,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 85 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 86 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 87 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'claudio-lopez',       nome: "Claudio López",       posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'marcelo-salas',       nome: "Marcelo Salas",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'sergio-conceicao',    nome: "Sérgio Conceição",    posicoes: ["PD","MD"],   forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2001,
+    clube: "Parma",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 87 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'matteo-ferrari',      nome: "Matteo Ferrari",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 80 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'johan-micoud',        nome: "Johan Micoud",        posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'marco-di-vaio',       nome: "Marco Di Vaio",       posicoes: ["ATA"],       forca: 81 },
+      { id: 'savo-milosevic',      nome: "Savo Milošević",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'sabri-lamouchi',      nome: "Sabri Lamouchi",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'junior',              nome: "Júnior",              posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'daniele-bonera',      nome: "Daniele Bonera",      posicoes: ["ZAG","LD"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2001,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 79 },
+      { id: 'laurent-blanc',       nome: "Laurent Blanc",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 81 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'francesco-coco',      nome: "Francesco Coco",      posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'okan-buruk',          nome: "Okan Buruk",          posicoes: ["MD","MC"],   forca: 79 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'stephane-dalmat',     nome: "Stéphane Dalmat",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'vratislav-gresko',    nome: "Vratislav Greško",    posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'alvaro-recoba',       nome: "Álvaro Recoba",       posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'ronaldo',             nome: "Ronaldo",             posicoes: ["ATA"],       forca: 88 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 88 },
+      { id: 'hakan-sukur',         nome: "Hakan Şükür",         posicoes: ["ATA"],       forca: 82 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2001,
+    clube: "Milan",
+    jogadores: [
+      { id: 'christian-abbiati',   nome: "Christian Abbiati",   posicoes: ["GOL"],       forca: 82 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 88 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 81 },
+      { id: 'roque-junior',        nome: "Roque Júnior",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'thomas-helveg',       nome: "Thomas Helveg",       posicoes: ["LD","VOL"],  forca: 79 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'serginho',            nome: "Serginho",            posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 89 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'oliver-bierhoff',     nome: "Oliver Bierhoff",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'jose-mari',           nome: "José Mari",           posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'gianni-comandini',    nome: "Gianni Comandini",    posicoes: ["ATA"],       forca: 75 }
+    ]
   }
 
 ];
