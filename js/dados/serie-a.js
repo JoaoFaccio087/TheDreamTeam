@@ -576,6 +576,148 @@ const DADOS_SERIE_A = [
       { id: 'francesco-statuto',   nome: "Francesco Statuto",   posicoes: ["LE","LD"],   forca: 76 },
       { id: 'ottavio-palladini',   nome: "Ottavio Palladini",   posicoes: ["MC","MEI"],  forca: 74 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1994 (temporada 1993-94) — o MILAN de Capello TRICAMPEÃO seguido (50 pts),
+  //  campeão marcando apenas 36 gols (o menor da história da Serie A) mas com a
+  //  melhor defesa (15 sofridos). Complementou com a Champions, goleando o Barça por
+  //  4-0 na final. Último ano com 2 pts por vitória. Top-6: Milan (50), Juventus (47),
+  //  Lazio (44), Sampdoria (44), Parma (41), Napoli (36). Signori (Lazio) artilheiro
+  //  com 23 gols. A Inter caiu ao 13º lugar (mas ganhou a Copa da UEFA).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1994,
+    clube: "Milan",
+    jogadores: [
+      { id: 'sebastiano-rossi',    nome: "Sebastiano Rossi",    posicoes: ["GOL"],       forca: 85 },
+      { id: 'mauro-tassotti',      nome: "Mauro Tassotti",      posicoes: ["LD"],        forca: 82 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 90 },
+      { id: 'franco-baresi',       nome: "Franco Baresi",       posicoes: ["ZAG"],       forca: 91 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 86 },
+      { id: 'filippo-galli',       nome: "Filippo Galli",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'marcel-desailly',     nome: "Marcel Desailly",     posicoes: ["VOL","ZAG"], forca: 86 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'roberto-donadoni',    nome: "Roberto Donadoni",    posicoes: ["MEI","PD"],  forca: 83 },
+      { id: 'dejan-savicevic',     nome: "Dejan Savićević",     posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'jean-pierre-papin',   nome: "Jean-Pierre Papin",   posicoes: ["ATA"],       forca: 85 },
+      { id: 'marco-simone',        nome: "Marco Simone",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'gianluigi-lentini',   nome: "Gianluigi Lentini",   posicoes: ["PD","MD"],   forca: 81 },
+      { id: 'daniele-massaro',     nome: "Daniele Massaro",     posicoes: ["ATA","MEI"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1994,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 85 },
+      { id: 'jurgen-kohler',       nome: "Jürgen Kohler",       posicoes: ["ZAG"],       forca: 85 },
+      { id: 'massimo-carrera',     nome: "Massimo Carrera",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'sergio-porrini',      nome: "Sergio Porrini",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 80 },
+      { id: 'andreas-moeller',     nome: "Andreas Möller",      posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'david-platt',         nome: "David Platt",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'roberto-baggio',      nome: "Roberto Baggio",      posicoes: ["MEI","ATA"], forca: 91 },
+      { id: 'fabrizio-ravanelli',  nome: "Fabrizio Ravanelli",  posicoes: ["ATA"],       forca: 83 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'giancarlo-marocchi',  nome: "Giancarlo Marocchi",  posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'luca-fusi',           nome: "Luca Fusi",           posicoes: ["ZAG","MC"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1994,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 83 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'roberto-cravero',     nome: "Roberto Cravero",     posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'aron-winter',         nome: "Aron Winter",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 82 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'thomas-doll',         nome: "Thomas Doll",         posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'giuseppe-signori',    nome: "Giuseppe Signori",    posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'karlheinz-riedle',    nome: "Karl-Heinz Riedle",   posicoes: ["ATA"],       forca: 83 },
+      { id: 'alen-boksic',         nome: "Alen Bokšić",         posicoes: ["ATA"],       forca: 85 },
+      { id: 'cristian-bucchi',     nome: "Cristian Bucchi",     posicoes: ["ATA"],       forca: 74 },
+      { id: 'maurizio-poli',       nome: "Maurizio Poli",       posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'claudio-sclosa',      nome: "Claudio Sclosa",      posicoes: ["MC"],        forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1994,
+    clube: "Sampdoria",
+    jogadores: [
+      { id: 'gianluca-pagliuca',   nome: "Gianluca Pagliuca",   posicoes: ["GOL"],       forca: 85 },
+      { id: 'moreno-mannini',      nome: "Moreno Mannini",      posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'pietro-vierchowod',   nome: "Pietro Vierchowod",   posicoes: ["ZAG"],       forca: 84 },
+      { id: 'marco-lanna',         nome: "Marco Lanna",         posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'michele-serena',      nome: "Michele Serena",      posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'vladimir-jugovic',    nome: "Vladimir Jugović",    posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'fausto-pari',         nome: "Fausto Pari",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'attilio-lombardo',    nome: "Attilio Lombardo",    posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'roberto-mancini',     nome: "Roberto Mancini",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'ruud-gullit',         nome: "Ruud Gullit",         posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'enrico-chiesa',       nome: "Enrico Chiesa",       posicoes: ["ATA"],       forca: 81 },
+      { id: 'alberico-evani',      nome: "Alberico Evani",      posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'srecko-katanec',      nome: "Srečko Katanec",      posicoes: ["VOL","ZAG"], forca: 79 },
+      { id: 'vladimir-bulatovic',  nome: "Vladimir Bulatović",  posicoes: ["MC"],        forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1994,
+    clube: "Parma",
+    jogadores: [
+      { id: 'claudio-taffarel',    nome: "Cláudio Taffarel",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'lorenzo-minotti',     nome: "Lorenzo Minotti",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'luigi-apolloni',      nome: "Luigi Apolloni",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'alberto-di-chiara',   nome: "Alberto Di Chiara",   posicoes: ["LE"],        forca: 78 },
+      { id: 'massimo-crippa',      nome: "Massimo Crippa",      posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'gabriele-pin',        nome: "Gabriele Pin",        posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'thomas-brolin',       nome: "Thomas Brolin",       posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'faustino-asprilla',   nome: "Faustino Asprilla",   posicoes: ["ATA"],       forca: 85 },
+      { id: 'alessandro-melli',    nome: "Alessandro Melli",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'daniele-zoratto',     nome: "Daniele Zoratto",     posicoes: ["MC","MEI"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1994,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'giovanni-galli',      nome: "Giovanni Galli",      posicoes: ["GOL"],       forca: 79 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'giancarlo-corradini', nome: "Giancarlo Corradini", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'massimo-tarantino',   nome: "Massimo Tarantino",   posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'giovanni-francini',   nome: "Giovanni Francini",   posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'fernando-de-napoli',  nome: "Fernando De Napoli",  posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'jonas-thern',         nome: "Jonas Thern",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'roberto-bordin',      nome: "Roberto Bordin",      posicoes: ["MC","MD"],   forca: 76 },
+      { id: 'antonio-buso',        nome: "Antonio Buso",        posicoes: ["ATA"],       forca: 76 },
+      { id: 'careca',              nome: "Careca",              posicoes: ["ATA"],       forca: 83 },
+      { id: 'daniel-fonseca',      nome: "Daniel Fonseca",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'beto-napoli',         nome: "Beto",                posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'raffaele-di-fusco',   nome: "Raffaele Di Fusco",   posicoes: ["GOL"],       forca: 74 },
+      { id: 'stefano-bettarini',   nome: "Stefano Bettarini",   posicoes: ["LD","MD"],   forca: 75 }
+    ]
   }
 
 ];
