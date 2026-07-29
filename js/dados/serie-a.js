@@ -434,6 +434,148 @@ const DADOS_SERIE_A = [
       { id: 'stefano-pellegrini',  nome: "Stefano Pellegrini",  posicoes: ["LE","MD"],   forca: 75 },
       { id: 'matthias-sammer',     nome: "Matthias Sammer",     posicoes: ["MEI","MC"],  forca: 83 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1993 (temporada 1992-93) — o MILAN de Capello BICAMPEÃO seguido (50 pts
+  //  em novo formato de 3 pts por vitória parcial; recordes de invencibilidade que
+  //  se estenderam por 58 jogos). Chegaram Papin, Lentini (transferência recordista
+  //  mundial) e Gianluigi Lentini. Top-6: Milan (50), Inter (44), Parma (43),
+  //  Juventus (42), Lazio (41), Roma (39). A Lazio de Cragnotti começava a investir
+  //  pesado (chegada de Signori, artilheiro com 26 gols). Fim da era Vialli/Mancini
+  //  na Sampdoria, que caiu de rendimento.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1993,
+    clube: "Milan",
+    jogadores: [
+      { id: 'sebastiano-rossi',    nome: "Sebastiano Rossi",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'mauro-tassotti',      nome: "Mauro Tassotti",      posicoes: ["LD"],        forca: 82 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 90 },
+      { id: 'franco-baresi',       nome: "Franco Baresi",       posicoes: ["ZAG"],       forca: 91 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 86 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'frank-rijkaard',      nome: "Frank Rijkaard",      posicoes: ["VOL","ZAG"], forca: 87 },
+      { id: 'roberto-donadoni',    nome: "Roberto Donadoni",    posicoes: ["MEI","PD"],  forca: 84 },
+      { id: 'gianluigi-lentini',   nome: "Gianluigi Lentini",   posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'jean-pierre-papin',   nome: "Jean-Pierre Papin",   posicoes: ["ATA"],       forca: 87 },
+      { id: 'marco-van-basten',    nome: "Marco van Basten",    posicoes: ["ATA"],       forca: 90 },
+      { id: 'daniele-massaro',     nome: "Daniele Massaro",     posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'stefano-eranio',      nome: "Stefano Eranio",      posicoes: ["MD","MC"],   forca: 80 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1993,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'walter-zenga',        nome: "Walter Zenga",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'giuseppe-bergomi',    nome: "Giuseppe Bergomi",    posicoes: ["LD","ZAG"],  forca: 84 },
+      { id: 'riccardo-ferri',      nome: "Riccardo Ferri",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'antonio-paganin',     nome: "Antonio Paganin",     posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'nicola-berti',        nome: "Nicola Berti",        posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'matthias-sammer',     nome: "Matthias Sammer",     posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'ruben-sosa',          nome: "Rubén Sosa",          posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'darko-pancev',        nome: "Darko Pančev",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'igor-shalimov',       nome: "Igor Shalimov",       posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'alessandro-bianchi',  nome: "Alessandro Bianchi",  posicoes: ["PD","MD"],   forca: 76 },
+      { id: 'fausto-pizzi',        nome: "Fausto Pizzi",        posicoes: ["MEI","ATA"], forca: 76 },
+      { id: 'giuseppe-baresi',     nome: "Giuseppe Baresi",     posicoes: ["VOL","ZAG"], forca: 78 },
+      { id: 'massimo-paganin',     nome: "Massimo Paganin",     posicoes: ["ZAG"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1993,
+    clube: "Parma",
+    jogadores: [
+      { id: 'claudio-taffarel',    nome: "Cláudio Taffarel",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'lorenzo-minotti',     nome: "Lorenzo Minotti",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'luigi-apolloni',      nome: "Luigi Apolloni",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'georges-grun',        nome: "Georges Grün",        posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'alberto-di-chiara',   nome: "Alberto Di Chiara",   posicoes: ["LE"],        forca: 78 },
+      { id: 'gabriele-pin',        nome: "Gabriele Pin",        posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'marco-osio',          nome: "Marco Osio",          posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'thomas-brolin',       nome: "Thomas Brolin",       posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'alessandro-melli',    nome: "Alessandro Melli",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'faustino-asprilla',   nome: "Faustino Asprilla",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'stefano-cuoghi',      nome: "Stefano Cuoghi",      posicoes: ["MEI","MC"],  forca: 76 },
+      { id: 'giovanni-bia',        nome: "Giovanni Bia",        posicoes: ["MC","MD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1993,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 84 },
+      { id: 'jurgen-kohler',       nome: "Jürgen Kohler",       posicoes: ["ZAG"],       forca: 85 },
+      { id: 'massimo-carrera',     nome: "Massimo Carrera",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'luigi-de-agostini',   nome: "Luigi De Agostini",   posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 79 },
+      { id: 'andreas-moeller',     nome: "Andreas Möller",      posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'giancarlo-marocchi',  nome: "Giancarlo Marocchi",  posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'roberto-baggio',      nome: "Roberto Baggio",      posicoes: ["MEI","ATA"], forca: 91 },
+      { id: 'fabrizio-ravanelli',  nome: "Fabrizio Ravanelli",  posicoes: ["ATA"],       forca: 82 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'david-platt',         nome: "David Platt",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'sergio-porrini',      nome: "Sergio Porrini",      posicoes: ["LD","ZAG"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1993,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 83 },
+      { id: 'roberto-cravero',     nome: "Roberto Cravero",     posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'aron-winter',         nome: "Aron Winter",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'claudio-sclosa',      nome: "Claudio Sclosa",      posicoes: ["MC"],        forca: 76 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 81 },
+      { id: 'giuseppe-signori',    nome: "Giuseppe Signori",    posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'thomas-doll',         nome: "Thomas Doll",         posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'karlheinz-riedle',    nome: "Karl-Heinz Riedle",   posicoes: ["ATA"],       forca: 83 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'cristian-bucchi',     nome: "Cristian Bucchi",     posicoes: ["ATA"],       forca: 74 },
+      { id: 'stefano-desideri',    nome: "Stefano Desideri",    posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'fernando-orsi',       nome: "Fernando Orsi",       posicoes: ["GOL"],       forca: 74 },
+      { id: 'maurizio-poli',       nome: "Maurizio Poli",       posicoes: ["ZAG","LD"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1993,
+    clube: "Roma",
+    jogadores: [
+      { id: 'giovanni-cervone',    nome: "Giovanni Cervone",    posicoes: ["GOL"],       forca: 78 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 85 },
+      { id: 'amedeo-carboni',      nome: "Amedeo Carboni",      posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'thomas-berthold',     nome: "Thomas Berthold",     posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'giuseppe-giannini',   nome: "Giuseppe Giannini",   posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'fabrizio-di-mauro',   nome: "Fabrizio Di Mauro",   posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'ruggiero-rizzitelli', nome: "Ruggiero Rizzitelli", posicoes: ["ATA"],       forca: 80 },
+      { id: 'claudio-caniggia',    nome: "Claudio Caniggia",    posicoes: ["ATA"],       forca: 84 },
+      { id: 'abel-balbo',          nome: "Abel Balbo",          posicoes: ["ATA"],       forca: 83 },
+      { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 76 },
+      { id: 'francesco-statuto',   nome: "Francesco Statuto",   posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'ottavio-palladini',   nome: "Ottavio Palladini",   posicoes: ["MC","MEI"],  forca: 74 }
+    ]
   }
 
 ];
