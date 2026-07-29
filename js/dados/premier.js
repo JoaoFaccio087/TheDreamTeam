@@ -75,7 +75,7 @@ const DADOS_PREMIER = [
       { id: 'rayan-cherki',         nome: "Rayan Cherki",         posicoes: ["MEI","PD"], forca: 82 },
       { id: 'jeremy-doku',          nome: "Jérémy Doku",          posicoes: ["PE"],       forca: 85 },
       { id: 'antoine-semenyo',      nome: "Antoine Semenyo",      posicoes: ["PE","ATA"], forca: 84 },
-      { id: 'savinho',              nome: "Savinho",              posicoes: ["PD"],       forca: 82 },
+      { id: 'savio',                nome: "Sávio",                posicoes: ["PD"],       forca: 82 },
       { id: 'oscar-bobb',           nome: "Oscar Bobb",           posicoes: ["PD"],       forca: 77 },
       { id: 'erling-haaland',       nome: "Erling Haaland",       posicoes: ["ATA"],      forca: 93 },
       { id: 'omar-marmoush',        nome: "Omar Marmoush",        posicoes: ["ATA","PE"], forca: 83 }
@@ -5641,6 +5641,152 @@ const DADOS_PREMIER = [
       { id: 'mykhailo-mudryk',     nome: "Mykhailo Mudryk",     posicoes: ["PE","ATA"],  forca: 78 },
       { id: 'noni-madueke',        nome: "Noni Madueke",        posicoes: ["PD","PE"],   forca: 78 },
       { id: 'nicolas-jackson',     nome: "Nicolas Jackson",     posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2025 (temporada 2024-25) — o LIVERPOOL de Arne Slot campeão no 1º ano
+  //  pós-Klopp (84 pts), igualando o recorde de 20 títulos do United. Salah teve
+  //  uma temporada monstruosa (29 gols, 18 assists). Top-6: Liverpool (84),
+  //  Arsenal (74), City (71), Chelsea (69), Newcastle (66), Aston Villa (66).
+  //  ÚLTIMA edição da coleta cronológica 1993→2025.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Premier League",
+    edicao: 2025,
+    clube: "Liverpool",
+    jogadores: [
+      { id: 'alisson',             nome: "Alisson",             posicoes: ["GOL"],       forca: 88 },
+      { id: 'caoimhin-kelleher',   nome: "Caoimhín Kelleher",   posicoes: ["GOL"],       forca: 79 },
+      { id: 'trent-alexander-arnold', nome: "Trent Alexander-Arnold", posicoes: ["LD"],  forca: 86 },
+      { id: 'virgil-van-dijk',     nome: "Virgil van Dijk",     posicoes: ["ZAG"],       forca: 88 },
+      { id: 'ibrahima-konate',     nome: "Ibrahima Konaté",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'andrew-robertson',    nome: "Andrew Robertson",    posicoes: ["LE"],        forca: 84 },
+      { id: 'jarell-quansah',      nome: "Jarell Quansah",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'ryan-gravenberch',    nome: "Ryan Gravenberch",    posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'alexis-mac-allister', nome: "Alexis Mac Allister", posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'dominik-szoboszlai',  nome: "Dominik Szoboszlai",  posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'curtis-jones',        nome: "Curtis Jones",        posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 90 },
+      { id: 'luis-diaz',           nome: "Luis Díaz",           posicoes: ["PE","ATA"],  forca: 84 },
+      { id: 'cody-gakpo',          nome: "Cody Gakpo",          posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'diogo-jota',          nome: "Diogo Jota",          posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'darwin-nunez',        nome: "Darwin Núñez",        posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2025,
+    clube: "Arsenal",
+    jogadores: [
+      { id: 'david-raya',          nome: "David Raya",          posicoes: ["GOL"],       forca: 85 },
+      { id: 'jurrien-timber',      nome: "Jurriën Timber",      posicoes: ["LD","ZAG"],  forca: 82 },
+      { id: 'william-saliba',      nome: "William Saliba",      posicoes: ["ZAG"],       forca: 87 },
+      { id: 'gabriel-magalhaes',   nome: "Gabriel Magalhães",   posicoes: ["ZAG"],       forca: 86 },
+      { id: 'riccardo-calafiori',  nome: "Riccardo Calafiori",  posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'ben-white',           nome: "Ben White",           posicoes: ["LD"],        forca: 82 },
+      { id: 'declan-rice',         nome: "Declan Rice",         posicoes: ["VOL","MC"],  forca: 88 },
+      { id: 'martin-odegaard',     nome: "Martin Ødegaard",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'thomas-partey',       nome: "Thomas Partey",       posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'mikel-merino',        nome: "Mikel Merino",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'bukayo-saka',         nome: "Bukayo Saka",         posicoes: ["PD","PE"],   forca: 87 },
+      { id: 'gabriel-martinelli',  nome: "Gabriel Martinelli",  posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'leandro-trossard',    nome: "Leandro Trossard",    posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'kai-havertz',         nome: "Kai Havertz",         posicoes: ["ATA","MC"],  forca: 84 },
+      { id: 'gabriel-jesus',       nome: "Gabriel Jesus",       posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2025,
+    clube: "Manchester City",
+    jogadores: [
+      { id: 'ederson',             nome: "Ederson",             posicoes: ["GOL"],       forca: 86 },
+      { id: 'kyle-walker',         nome: "Kyle Walker",         posicoes: ["LD"],        forca: 81 },
+      { id: 'ruben-dias',          nome: "Rúben Dias",          posicoes: ["ZAG"],       forca: 87 },
+      { id: 'josko-gvardiol',      nome: "Joško Gvardiol",      posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'manuel-akanji',       nome: "Manuel Akanji",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'nathan-ake',          nome: "Nathan Aké",          posicoes: ["ZAG","LE"],  forca: 82 },
+      { id: 'rico-lewis',          nome: "Rico Lewis",          posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'rodri',               nome: "Rodri",               posicoes: ["VOL"],       forca: 89 },
+      { id: 'mateo-kovacic',       nome: "Mateo Kovačić",       posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'bernardo-silva',      nome: "Bernardo Silva",      posicoes: ["MEI","PD"],  forca: 85 },
+      { id: 'phil-foden',          nome: "Phil Foden",          posicoes: ["MEI","PE"],  forca: 86 },
+      { id: 'jack-grealish',       nome: "Jack Grealish",       posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'jeremy-doku',         nome: "Jérémy Doku",         posicoes: ["PE","PD"],   forca: 82 },
+      { id: 'savio',               nome: "Sávio",               posicoes: ["PD","PE"],   forca: 81 },
+      { id: 'erling-haaland',      nome: "Erling Haaland",      posicoes: ["ATA"],       forca: 90 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2025,
+    clube: "Chelsea",
+    jogadores: [
+      { id: 'robert-sanchez',      nome: "Robert Sánchez",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'malo-gusto',          nome: "Malo Gusto",          posicoes: ["LD"],        forca: 80 },
+      { id: 'levi-colwill',        nome: "Levi Colwill",        posicoes: ["ZAG","LE"],  forca: 82 },
+      { id: 'wesley-fofana',       nome: "Wesley Fofana",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'marc-cucurella',      nome: "Marc Cucurella",      posicoes: ["LE"],        forca: 82 },
+      { id: 'tosin-adarabioyo',    nome: "Tosin Adarabioyo",    posicoes: ["ZAG"],       forca: 80 },
+      { id: 'moises-caicedo',      nome: "Moisés Caicedo",      posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'enzo-fernandez',      nome: "Enzo Fernández",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'cole-palmer',         nome: "Cole Palmer",         posicoes: ["MEI","PD"],  forca: 86 },
+      { id: 'noni-madueke',        nome: "Noni Madueke",        posicoes: ["PD","PE"],   forca: 80 },
+      { id: 'jadon-sancho',        nome: "Jadon Sancho",        posicoes: ["PE","PD"],   forca: 79 },
+      { id: 'pedro-neto',          nome: "Pedro Neto",          posicoes: ["PD","PE"],   forca: 81 },
+      { id: 'christopher-nkunku',  nome: "Christopher Nkunku",  posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'nicolas-jackson',     nome: "Nicolas Jackson",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'joao-felix',          nome: "João Félix",          posicoes: ["ATA","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2025,
+    clube: "Newcastle United",
+    jogadores: [
+      { id: 'nick-pope',           nome: "Nick Pope",           posicoes: ["GOL"],       forca: 82 },
+      { id: 'kieran-trippier',     nome: "Kieran Trippier",     posicoes: ["LD"],        forca: 81 },
+      { id: 'fabian-schar',        nome: "Fabian Schär",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sven-botman',         nome: "Sven Botman",         posicoes: ["ZAG"],       forca: 82 },
+      { id: 'dan-burn',            nome: "Dan Burn",            posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'tino-livramento',     nome: "Tino Livramento",     posicoes: ["LD","LE"],   forca: 80 },
+      { id: 'bruno-guimaraes',     nome: "Bruno Guimarães",     posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'joelinton',           nome: "Joelinton",           posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'sandro-tonali',       nome: "Sandro Tonali",       posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'jacob-murphy',        nome: "Jacob Murphy",        posicoes: ["PD","PE"],   forca: 80 },
+      { id: 'harvey-barnes',       nome: "Harvey Barnes",       posicoes: ["PE","PD"],   forca: 80 },
+      { id: 'anthony-gordon',      nome: "Anthony Gordon",      posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'alexander-isak',      nome: "Alexander Isak",      posicoes: ["ATA"],       forca: 87 },
+      { id: 'callum-wilson',       nome: "Callum Wilson",       posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Premier League",
+    edicao: 2025,
+    clube: "Aston Villa",
+    jogadores: [
+      { id: 'emiliano-martinez',   nome: "Emiliano Martínez",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'matty-cash',          nome: "Matty Cash",          posicoes: ["LD"],        forca: 79 },
+      { id: 'ezri-konsa',          nome: "Ezri Konsa",          posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'pau-torres',          nome: "Pau Torres",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'tyrone-mings',        nome: "Tyrone Mings",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'lucas-digne',         nome: "Lucas Digne",         posicoes: ["LE"],        forca: 79 },
+      { id: 'boubacar-kamara',     nome: "Boubacar Kamara",     posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'youri-tielemans',     nome: "Youri Tielemans",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'john-mcginn',         nome: "John McGinn",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'morgan-rogers',       nome: "Morgan Rogers",       posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'leon-bailey',         nome: "Leon Bailey",         posicoes: ["PD","PE"],   forca: 82 },
+      { id: 'marco-asensio',       nome: "Marco Asensio",       posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'ollie-watkins',       nome: "Ollie Watkins",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'jhon-duran',          nome: "Jhon Durán",          posicoes: ["ATA"],       forca: 78 }
     ]
   }
 
