@@ -1707,6 +1707,147 @@ const DADOS_SERIE_A = [
       { id: 'jose-mari',           nome: "José Mari",           posicoes: ["ATA","MEI"], forca: 78 },
       { id: 'gianni-comandini',    nome: "Gianni Comandini",    posicoes: ["ATA"],       forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2002 (temporada 2001-02) — a JUVENTUS de Lippi campeã (71 pts), 26º
+  //  título, conquistado na ÚLTIMA rodada: a Inter liderava, mas perdeu de 4-2 para
+  //  a Lazio no Olímpico e entregou o Scudetto. Top-3 separado por 2 pts: Juventus
+  //  (71), Roma (70), Inter (69). Top-6: +Milan (55), Chievo (54), Lazio (53). O
+  //  "milagre" do CHIEVO recém-promovido, líder por 6 semanas, terminou em 5º e entra
+  //  no acervo. Trezeguet e Hübner (Piacenza) dividiram a artilharia (24 gols).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2002,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 88 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 85 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'paolo-montero',       nome: "Paolo Montero",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'alessandro-birindelli', nome: "Alessandro Birindelli", posicoes: ["LD","ZAG"], forca: 77 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'marcelo-salas',       nome: "Marcelo Salas",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2002,
+    clube: "Roma",
+    jogadores: [
+      { id: 'francesco-antonioli', nome: "Francesco Antonioli",  posicoes: ["GOL"],      forca: 79 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 85 },
+      { id: 'jonathan-zebina',     nome: "Jonathan Zebina",     posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'emerson',             nome: "Emerson",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'cristiano-zanetti',   nome: "Cristiano Zanetti",   posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'gabriel-batistuta',   nome: "Gabriel Batistuta",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'vincenzo-montella',   nome: "Vincenzo Montella",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'marco-delvecchio',    nome: "Marco Delvecchio",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'antonio-cassano',     nome: "Antonio Cassano",     posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2002,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 85 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'francesco-coco',      nome: "Francesco Coco",      posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'emre-belozoglu',      nome: "Emre Belözoğlu",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'alvaro-recoba',       nome: "Álvaro Recoba",       posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'ronaldo',             nome: "Ronaldo",             posicoes: ["ATA"],       forca: 87 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 88 },
+      { id: 'hakan-sukur',         nome: "Hakan Şükür",         posicoes: ["ATA"],       forca: 81 },
+      { id: 'sergio-conceicao',    nome: "Sérgio Conceição",    posicoes: ["PD","MD"],   forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2002,
+    clube: "Milan",
+    jogadores: [
+      { id: 'christian-abbiati',   nome: "Christian Abbiati",   posicoes: ["GOL"],       forca: 82 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 88 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 80 },
+      { id: 'roque-junior',        nome: "Roque Júnior",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'martin-laursen',      nome: "Martin Laursen",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'kakha-kaladze',       nome: "Kakha Kaladze",       posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'manuel-rui-costa',    nome: "Manuel Rui Costa",    posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'serginho',            nome: "Serginho",            posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 89 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'javi-moreno',         nome: "Javi Moreno",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2002,
+    clube: "Chievo",
+    jogadores: [
+      { id: 'cristiano-lupatelli', nome: "Cristiano Lupatelli", posicoes: ["GOL"],       forca: 78 },
+      { id: 'nicola-legrottaglie', nome: "Nicola Legrottaglie", posicoes: ["ZAG"],       forca: 79 },
+      { id: 'lorenzo-dangelo',     nome: "Lorenzo D'Angelo",    posicoes: ["ZAG"],       forca: 76 },
+      { id: 'salvatore-lanna',     nome: "Salvatore Lanna",     posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'nicola-corrent',      nome: "Nicola Corrent",      posicoes: ["LE","LD"],   forca: 75 },
+      { id: 'eugenio-corini',      nome: "Eugenio Corini",      posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'simone-perrotta',     nome: "Simone Perrotta",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'lamberto-zauli',      nome: "Lamberto Zauli",      posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'federico-cossato',    nome: "Federico Cossato",    posicoes: ["ATA"],       forca: 76 },
+      { id: 'bernardo-corradi',    nome: "Bernardo Corradi",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'massimo-marazzina',   nome: "Massimo Marazzina",   posicoes: ["ATA"],       forca: 78 },
+      { id: 'stefano-lorenzetti',  nome: "Stefano Lorenzetti",  posicoes: ["LD","MD"],   forca: 74 },
+      { id: 'andrea-mandorlini',   nome: "Andrea Mandorlini",   posicoes: ["ZAG"],       forca: 73 },
+      { id: 'lorenzo-marronaro',   nome: "Lorenzo Marronaro",   posicoes: ["MEI","ATA"], forca: 72 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2002,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 84 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 86 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 86 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'claudio-lopez',       nome: "Claudio López",       posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'simone-inzaghi',      nome: "Simone Inzaghi",      posicoes: ["ATA"],       forca: 77 },
+      { id: 'karel-poborsky',      nome: "Karel Poborský",      posicoes: ["PD","MD"],   forca: 80 }
+    ]
   }
 
 ];

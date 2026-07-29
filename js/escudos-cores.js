@@ -230,6 +230,7 @@
     'Torino':                  ['#7B1E26', '#FFFFFF'],
     'Lazio':                   ['#87CEEB', '#FFFFFF'],
     'Udinese':                 ['#000000', '#FFFFFF'],
+    'Chievo':                  ['#FFD800', '#0057B8'],
     'Roma':                    ['#8E1F2F', '#F0BC42'],
     'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
     'Sampdoria':               ['#0A2A66', '#FFFFFF'],
@@ -479,6 +480,7 @@
     'Torino':                  { padrao: 'solido' },                                  // granata
     'Lazio':                   { padrao: 'solido' },                                  // celeste (biancoceleste)
     'Udinese':                 { padrao: 'listras-v', listras: 4 },                  // preto e branco
+    'Chievo':                  { padrao: 'solido' },                                  // amarelo (gialloblu)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa
