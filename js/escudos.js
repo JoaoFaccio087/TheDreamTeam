@@ -960,7 +960,9 @@
     // cor, o escudos.js carrega ANTES do regras.js e daria ReferenceError.
     // Libertadores entrou em jul/2026 (73 clubes sul-americanos com cor real).
     // Premier entrou em jul/2026 (os 20 clubes da edição 2026 catalogados).
-    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier'],
+    // Serie A entrou em jul/2026 (clubes italianos com cor real: Napoli/Parma/Torino/
+    // Lazio/Udinese cadastrados; Milan/Juve/Inter/Samp/Roma/Fiorentina vêm da Champions).
+    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier', 'serie_a'],
     ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
