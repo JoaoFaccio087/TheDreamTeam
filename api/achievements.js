@@ -29,7 +29,7 @@ const GRUPOS_CONHECIDOS = [
   { id: 'champions', eh: ehChampions },
   { id: 'brasil',    eh: ehBrasil },
   { id: 'copa',      eh: ehCopa },
-  { id: 'premier',   eh: ehPremier, beta: true },   // jul/2026 — offline, ainda em BETA
+  { id: 'premier',   eh: ehPremier },                // jul/2026 — coleta completa, fora do beta
 ];
 // Ids que já existem escritos à mão (não gerar em cima deles).
 const GRUPOS_MANUAIS = ['liberta', 'champions', 'brasil', 'copa'];
