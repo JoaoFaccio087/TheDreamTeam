@@ -718,6 +718,148 @@ const DADOS_SERIE_A = [
       { id: 'raffaele-di-fusco',   nome: "Raffaele Di Fusco",   posicoes: ["GOL"],       forca: 74 },
       { id: 'stefano-bettarini',   nome: "Stefano Bettarini",   posicoes: ["LD","MD"],   forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1995 (temporada 1994-95) — a JUVENTUS de Marcello LIPPI campeã (73 pts),
+  //  10 pontos à frente, no 1º ano dos 3 pts por vitória. Lippi usou um 4-3-3 muito
+  //  ofensivo com o trio Vialli-Ravanelli-R.Baggio e um jovem DEL PIERO surgindo.
+  //  Top-6: Juventus (73), Parma (63), Lazio (63), Milan (60), Roma (59), Inter (52).
+  //  Batistuta (Fiorentina) foi artilheiro com 26 gols. A Juve fez a dobradinha com
+  //  a Coppa Italia mas perdeu a final da UEFA justamente para o Parma.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1995,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 86 },
+      { id: 'moreno-torricelli',   nome: "Moreno Torricelli",   posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'jurgen-kohler',       nome: "Jürgen Kohler",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'sergio-porrini',      nome: "Sergio Porrini",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 80 },
+      { id: 'paulo-sousa',         nome: "Paulo Sousa",         posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'roberto-baggio',      nome: "Roberto Baggio",      posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'fabrizio-ravanelli',  nome: "Fabrizio Ravanelli",  posicoes: ["ATA"],       forca: 84 },
+      { id: 'andreas-moeller',     nome: "Andreas Möller",      posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'massimo-carrera',     nome: "Massimo Carrera",     posicoes: ["ZAG"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1995,
+    clube: "Parma",
+    jogadores: [
+      { id: 'luca-bucci',          nome: "Luca Bucci",          posicoes: ["GOL"],       forca: 82 },
+      { id: 'lorenzo-minotti',     nome: "Lorenzo Minotti",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'luigi-apolloni',      nome: "Luigi Apolloni",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'massimo-crippa',      nome: "Massimo Crippa",      posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'thomas-brolin',       nome: "Thomas Brolin",       posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'faustino-asprilla',   nome: "Faustino Asprilla",   posicoes: ["ATA"],       forca: 86 },
+      { id: 'marco-branca',        nome: "Marco Branca",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'gabriele-pin',        nome: "Gabriele Pin",        posicoes: ["VOL","MC"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1995,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 83 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'cristiano-bergodi',   nome: "Cristiano Bergodi",   posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'roberto-cravero',     nome: "Roberto Cravero",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'aron-winter',         nome: "Aron Winter",         posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 82 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'giuseppe-signori',    nome: "Giuseppe Signori",    posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'pierluigi-casiraghi', nome: "Pierluigi Casiraghi", posicoes: ["ATA"],       forca: 82 },
+      { id: 'alen-boksic',         nome: "Alen Bokšić",         posicoes: ["ATA"],       forca: 84 },
+      { id: 'thomas-doll',         nome: "Thomas Doll",         posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'alessandro-grandoni', nome: "Alessandro Grandoni", posicoes: ["MC","MD"],   forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1995,
+    clube: "Milan",
+    jogadores: [
+      { id: 'sebastiano-rossi',    nome: "Sebastiano Rossi",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'mauro-tassotti',      nome: "Mauro Tassotti",      posicoes: ["LD"],        forca: 81 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 90 },
+      { id: 'franco-baresi',       nome: "Franco Baresi",       posicoes: ["ZAG"],       forca: 90 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 86 },
+      { id: 'marcel-desailly',     nome: "Marcel Desailly",     posicoes: ["VOL","ZAG"], forca: 87 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'roberto-donadoni',    nome: "Roberto Donadoni",    posicoes: ["MEI","PD"],  forca: 83 },
+      { id: 'dejan-savicevic',     nome: "Dejan Savićević",     posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'marco-simone',        nome: "Marco Simone",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'daniele-massaro',     nome: "Daniele Massaro",     posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'gianluigi-lentini',   nome: "Gianluigi Lentini",   posicoes: ["PD","MD"],   forca: 79 },
+      { id: 'paolo-di-canio',      nome: "Paolo Di Canio",      posicoes: ["PE","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1995,
+    clube: "Roma",
+    jogadores: [
+      { id: 'giovanni-cervone',    nome: "Giovanni Cervone",    posicoes: ["GOL"],       forca: 78 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 85 },
+      { id: 'amedeo-carboni',      nome: "Amedeo Carboni",      posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'francesco-statuto',   nome: "Francesco Statuto",   posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'giuseppe-giannini',   nome: "Giuseppe Giannini",   posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'abel-balbo',          nome: "Abel Balbo",          posicoes: ["ATA"],       forca: 84 },
+      { id: 'daniel-fonseca',      nome: "Daniel Fonseca",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'ruggiero-rizzitelli', nome: "Ruggiero Rizzitelli", posicoes: ["ATA"],       forca: 79 },
+      { id: 'francesco-moriero',   nome: "Francesco Moriero",   posicoes: ["PD","MD"],   forca: 80 },
+      { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1995,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'gianluca-pagliuca',   nome: "Gianluca Pagliuca",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'giuseppe-bergomi',    nome: "Giuseppe Bergomi",    posicoes: ["LD","ZAG"],  forca: 83 },
+      { id: 'riccardo-ferri',      nome: "Riccardo Ferri",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'salvatore-fresi',     nome: "Salvatore Fresi",     posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'paul-ince',           nome: "Paul Ince",           posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'nicola-berti',        nome: "Nicola Berti",        posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'wim-jonk',            nome: "Wim Jonk",            posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'dennis-bergkamp',     nome: "Dennis Bergkamp",     posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'ruben-sosa',          nome: "Rubén Sosa",          posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'maurizio-ganz',       nome: "Maurizio Ganz",       posicoes: ["ATA"],       forca: 79 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 82 },
+      { id: 'gianluca-festa',      nome: "Gianluca Festa",      posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'antonio-paganin',     nome: "Antonio Paganin",     posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'fausto-pizzi',        nome: "Fausto Pizzi",        posicoes: ["MEI","ATA"], forca: 75 }
+    ]
   }
 
 ];
