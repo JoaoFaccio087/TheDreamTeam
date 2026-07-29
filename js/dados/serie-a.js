@@ -1425,6 +1425,147 @@ const DADOS_SERIE_A = [
       { id: 'johnnier-montano',    nome: "Johnnier Montaño",    posicoes: ["MEI","MC"],  forca: 76 },
       { id: 'paolo-poggi',         nome: "Paolo Poggi",         posicoes: ["ATA"],       forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2000 (temporada 1999-2000) — a LAZIO de Sven-Göran Eriksson BICAMPEÃ
+  //  nacional (72 pts), 2º título do clube, conquistado na última rodada: a Juventus
+  //  liderava por 9 pts a 8 rodadas do fim, mas desabou (perdeu para Perugia no campo
+  //  alagado) e a Lazio ganhou tudo. Top-6: Lazio (72), Juventus (71), Milan (61),
+  //  Inter (58), Parma (58), Roma (54). Shevchenko chegou ao Milan e foi artilheiro
+  //  (24 gols) logo no 1º ano. A Lazio fez a dobradinha com a Coppa Italia.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2000,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 85 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 86 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 87 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'sergio-conceicao',    nome: "Sérgio Conceição",    posicoes: ["PD","MD"],   forca: 83 },
+      { id: 'marcelo-salas',       nome: "Marcelo Salas",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'simone-inzaghi',      nome: "Simone Inzaghi",      posicoes: ["ATA"],       forca: 78 },
+      { id: 'roberto-mancini',     nome: "Roberto Mancini",     posicoes: ["MEI","ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2000,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'edwin-van-der-sar',   nome: "Edwin van der Sar",   posicoes: ["GOL"],       forca: 85 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'mark-iuliano',        nome: "Mark Iuliano",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'paolo-montero',       nome: "Paolo Montero",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'alessandro-birindelli', nome: "Alessandro Birindelli", posicoes: ["LD","ZAG"], forca: 77 },
+      { id: 'zinedine-zidane',     nome: "Zinédine Zidane",     posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'didier-deschamps',    nome: "Didier Deschamps",    posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'darko-kovacevic',     nome: "Darko Kovačević",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2000,
+    clube: "Milan",
+    jogadores: [
+      { id: 'christian-abbiati',   nome: "Christian Abbiati",   posicoes: ["GOL"],       forca: 82 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 89 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 82 },
+      { id: 'roberto-ayala',       nome: "Roberto Ayala",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'thomas-helveg',       nome: "Thomas Helveg",       posicoes: ["LD","VOL"],  forca: 80 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'leonardo',            nome: "Leonardo",            posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 88 },
+      { id: 'george-weah',         nome: "George Weah",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'oliver-bierhoff',     nome: "Oliver Bierhoff",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'jose-mari',           nome: "José Mari",           posicoes: ["ATA","MEI"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2000,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 79 },
+      { id: 'laurent-blanc',       nome: "Laurent Blanc",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'fabio-galante',       nome: "Fabio Galante",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'christian-panucci',   nome: "Christian Panucci",   posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'grigoris-georgatos',  nome: "Grigoris Georgatos",  posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'benoit-cauet',        nome: "Benoît Cauet",        posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'youri-djorkaeff',     nome: "Youri Djorkaeff",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'ivan-zamorano',       nome: "Iván Zamorano",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'ronaldo',             nome: "Ronaldo",             posicoes: ["ATA"],       forca: 90 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 87 },
+      { id: 'roberto-baggio',      nome: "Roberto Baggio",      posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'vladimir-jugovic',    nome: "Vladimir Jugović",    posicoes: ["MC","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2000,
+    clube: "Parma",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 86 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 86 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'alain-boghossian',    nome: "Alain Boghossian",    posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 81 },
+      { id: 'ariel-ortega',        nome: "Ariel Ortega",        posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'marcio-amoroso',      nome: "Márcio Amoroso",      posicoes: ["ATA"],       forca: 84 },
+      { id: 'abel-balbo',          nome: "Abel Balbo",          posicoes: ["ATA"],       forca: 78 },
+      { id: 'sabri-lamouchi',      nome: "Sabri Lamouchi",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2000,
+    clube: "Roma",
+    jogadores: [
+      { id: 'francesco-antonioli', nome: "Francesco Antonioli",  posicoes: ["GOL"],      forca: 79 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'zago',                nome: "Zago",                posicoes: ["ZAG"],       forca: 78 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'cristiano-zanetti',   nome: "Cristiano Zanetti",   posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'vincenzo-montella',   nome: "Vincenzo Montella",   posicoes: ["ATA"],       forca: 83 },
+      { id: 'marco-delvecchio',    nome: "Marco Delvecchio",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'eusebio-di-francesco', nome: "Eusebio Di Francesco", posicoes: ["MC","MEI"], forca: 78 },
+      { id: 'marcos-assuncao',     nome: "Marcos Assunção",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'gustavo-bartelt',     nome: "Gustavo Bartelt",     posicoes: ["ATA"],       forca: 75 }
+    ]
   }
 
 ];
