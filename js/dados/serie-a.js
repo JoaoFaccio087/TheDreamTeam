@@ -1116,7 +1116,7 @@ const DADOS_SERIE_A = [
       { id: 'oliver-bierhoff',     nome: "Oliver Bierhoff",     posicoes: ["ATA"],       forca: 84 },
       { id: 'marcio-amoroso',      nome: "Márcio Amoroso",      posicoes: ["ATA"],       forca: 83 },
       { id: 'alessandro-calori',   nome: "Alessandro Calori",   posicoes: ["ZAG","VOL"], forca: 76 },
-      { id: 'thomas-locatelli',    nome: "Tomas Locatelli",     posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'tomas-locatelli',     nome: "Tomas Locatelli",     posicoes: ["MEI","MC"],  forca: 78 },
       { id: 'alessandro-pierini',  nome: "Alessandro Pierini",  posicoes: ["LE","ZAG"], forca: 75 },
       { id: 'gennaro-ruotolo',     nome: "Gennaro Ruotolo",     posicoes: ["MC","VOL"],  forca: 77 },
       { id: 'fabio-rossitto',      nome: "Fabio Rossitto",      posicoes: ["MC","VOL"],  forca: 77 }
@@ -1142,6 +1142,288 @@ const DADOS_SERIE_A = [
       { id: 'christian-karembeu',  nome: "Christian Karembeu",  posicoes: ["VOL","LD"],  forca: 80 },
       { id: 'fausto-salsano',      nome: "Fausto Salsano",      posicoes: ["MC","MEI"],  forca: 77 },
       { id: 'marco-franceschetti', nome: "Marco Franceschetti", posicoes: ["LE","LD"],   forca: 74 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1998 (temporada 1997-98) — a JUVENTUS de Lippi TRICAMPEÃA (74 pts), 25º
+  //  título, num ano marcado pela polêmica do pênalti não marcado no Juve 1x0 Inter.
+  //  Foi a 1ª temporada de RONALDO Fenômeno na Inter (vindo do Barça, 25 gols).
+  //  Top-6: Juventus (74), Inter (69), Udinese (64), Roma (59), Fiorentina (57),
+  //  Parma (57). Bierhoff (Udinese) foi artilheiro com 27 gols. R.Baggio renasceu no
+  //  Bologna. Del Piero e Ronaldo protagonizaram a maior rivalidade individual da era.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1998,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 86 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 83 },
+      { id: 'mark-iuliano',        nome: "Mark Iuliano",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'moreno-torricelli',   nome: "Moreno Torricelli",   posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'alessandro-birindelli', nome: "Alessandro Birindelli", posicoes: ["LD","ZAG"], forca: 77 },
+      { id: 'zinedine-zidane',     nome: "Zinédine Zidane",     posicoes: ["MEI","MC"],  forca: 90 },
+      { id: 'didier-deschamps',    nome: "Didier Deschamps",    posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 79 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1998,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'gianluca-pagliuca',   nome: "Gianluca Pagliuca",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'giuseppe-bergomi',    nome: "Giuseppe Bergomi",    posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'salvatore-fresi',     nome: "Salvatore Fresi",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'fabio-galante',       nome: "Fabio Galante",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'francesco-colonnese', nome: "Francesco Colonnese", posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'youri-djorkaeff',     nome: "Youri Djorkaeff",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'aron-winter',         nome: "Aron Winter",         posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'ivan-zamorano',       nome: "Iván Zamorano",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'ronaldo',             nome: "Ronaldo",             posicoes: ["ATA"],       forca: 92 },
+      { id: 'benoit-cauet',        nome: "Benoît Cauet",        posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'taribo-west',         nome: "Taribo West",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'nicola-berti',        nome: "Nicola Berti",        posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1998,
+    clube: "Udinese",
+    jogadores: [
+      { id: 'luigi-turci',         nome: "Luigi Turci",         posicoes: ["GOL"],       forca: 78 },
+      { id: 'thomas-helveg',       nome: "Thomas Helveg",       posicoes: ["LD","VOL"],  forca: 81 },
+      { id: 'valerio-bertotto',    nome: "Valerio Bertotto",    posicoes: ["ZAG"],       forca: 78 },
+      { id: 'alessandro-calori',   nome: "Alessandro Calori",   posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'alessandro-pierini',  nome: "Alessandro Pierini",  posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'giuliano-giannichedda', nome: "Giuliano Giannichedda", posicoes: ["VOL","MC"], forca: 79 },
+      { id: 'stephane-guidi',      nome: "Stéphane Guidi",      posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'tomas-locatelli',     nome: "Tomas Locatelli",     posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'oliver-bierhoff',     nome: "Oliver Bierhoff",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'marcio-amoroso',      nome: "Márcio Amoroso",      posicoes: ["ATA"],       forca: 84 },
+      { id: 'paolo-poggi',         nome: "Paolo Poggi",         posicoes: ["ATA"],       forca: 76 },
+      { id: 'gennaro-ruotolo',     nome: "Gennaro Ruotolo",     posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'fabio-rossitto',      nome: "Fabio Rossitto",      posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'johnnier-montano',    nome: "Johnnier Montaño",    posicoes: ["MEI","MC"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1998,
+    clube: "Roma",
+    jogadores: [
+      { id: 'giovanni-cervone',    nome: "Giovanni Cervone",    posicoes: ["GOL"],       forca: 77 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'zago',                nome: "Zago",                posicoes: ["ZAG"],       forca: 78 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'eusebio-di-francesco', nome: "Eusebio Di Francesco", posicoes: ["MC","MEI"], forca: 78 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'abel-balbo',          nome: "Abel Balbo",          posicoes: ["ATA"],       forca: 83 },
+      { id: 'marco-delvecchio',    nome: "Marco Delvecchio",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'paulo-sergio',        nome: "Paulo Sérgio",        posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'gustavo-bartelt',     nome: "Gustavo Bartelt",     posicoes: ["ATA"],       forca: 75 },
+      { id: 'marcos-assuncao',     nome: "Marcos Assunção",     posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1998,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 85 },
+      { id: 'daniele-carnasciali', nome: "Daniele Carnasciali", posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'pasquale-padalino',   nome: "Pasquale Padalino",   posicoes: ["ZAG"],       forca: 78 },
+      { id: 'lorenzo-amoruso',     nome: "Lorenzo Amoruso",     posicoes: ["ZAG"],       forca: 80 },
+      { id: 'tomas-repka',         nome: "Tomáš Řepka",        posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'sandro-cois',         nome: "Sandro Cois",         posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'manuel-rui-costa',    nome: "Manuel Rui Costa",    posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'andrei-kanchelskis',  nome: "Andrei Kanchelskis",  posicoes: ["PD","MD"],   forca: 80 },
+      { id: 'gabriel-batistuta',   nome: "Gabriel Batistuta",   posicoes: ["ATA"],       forca: 89 },
+      { id: 'luis-oliveira',       nome: "Luís Oliveira",       posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'anselmo-robbiati',    nome: "Anselmo Robbiati",    posicoes: ["PE","ATA"],  forca: 77 },
+      { id: 'emiliano-bigica',     nome: "Emiliano Bigica",     posicoes: ["VOL","MC"],  forca: 75 },
+      { id: 'gianmatteo-mareggini', nome: "Gianmatteo Mareggini", posicoes: ["GOL"],     forca: 73 },
+      { id: 'gabriele-ammazzalorso', nome: "Gabriele Ammazzalorso", posicoes: ["ATA"],   forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1998,
+    clube: "Parma",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 86 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 85 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 81 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 85 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'enrico-chiesa',       nome: "Enrico Chiesa",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'mario-stanic',        nome: "Mario Stanić",        posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'massimo-crippa',      nome: "Massimo Crippa",      posicoes: ["MC","VOL"],  forca: 76 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1999 (temporada 1998-99) — o MILAN de Zaccheroni campeão (70 pts), 16º
+  //  título, virada na reta final sobre a Lazio (que perdeu o título na última
+  //  rodada). Zaccheroni trouxe Bierhoff e Helveg da Udinese e usou o 3-4-3. Top-6:
+  //  Milan (70), Lazio (69), Fiorentina (56), Parma (55), Roma (54), Udinese (54).
+  //  Amoroso (Udinese) foi artilheiro com 22 gols. A Lazio de Eriksson montava o time
+  //  que dominaria 2000, com Vieri e Salas no ataque. Parma ganhou a Copa da UEFA.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1999,
+    clube: "Milan",
+    jogadores: [
+      { id: 'christian-abbiati',   nome: "Christian Abbiati",   posicoes: ["GOL"],       forca: 81 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 89 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 83 },
+      { id: 'roberto-ayala',       nome: "Roberto Ayala",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'thomas-helveg',       nome: "Thomas Helveg",       posicoes: ["LD","VOL"],  forca: 81 },
+      { id: 'luigi-sala',          nome: "Luigi Sala",          posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'andre-cruz',          nome: "André Cruz",          posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'oliver-bierhoff',     nome: "Oliver Bierhoff",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'george-weah',         nome: "George Weah",         posicoes: ["ATA"],       forca: 85 },
+      { id: 'maurizio-ganz',       nome: "Maurizio Ganz",       posicoes: ["ATA"],       forca: 78 },
+      { id: 'leonardo',            nome: "Leonardo",            posicoes: ["MEI","MC"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1999,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 82 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 85 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 86 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'matias-almeyda',      nome: "Matías Almeyda",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'marcelo-salas',       nome: "Marcelo Salas",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'roberto-mancini',     nome: "Roberto Mancini",     posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'guerino-gottardi',    nome: "Guerino Gottardi",    posicoes: ["MC","LD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1999,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 85 },
+      { id: 'moreno-torricelli',   nome: "Moreno Torricelli",   posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'tomas-repka',         nome: "Tomáš Řepka",         posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'daniele-adani',       nome: "Daniele Adani",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'pasquale-padalino',   nome: "Pasquale Padalino",   posicoes: ["ZAG"],       forca: 77 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 79 },
+      { id: 'sandro-cois',         nome: "Sandro Cois",         posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'manuel-rui-costa',    nome: "Manuel Rui Costa",    posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'guillermo-amor',      nome: "Guillermo Amor",      posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'gabriel-batistuta',   nome: "Gabriel Batistuta",   posicoes: ["ATA"],       forca: 88 },
+      { id: 'luis-oliveira',       nome: "Luís Oliveira",       posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'edmundo',             nome: "Edmundo",             posicoes: ["ATA"],       forca: 82 },
+      { id: 'anselmo-robbiati',    nome: "Anselmo Robbiati",    posicoes: ["PE","ATA"],  forca: 77 },
+      { id: 'emiliano-bigica',     nome: "Emiliano Bigica",     posicoes: ["VOL","MC"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1999,
+    clube: "Parma",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 85 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 86 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 81 },
+      { id: 'ariel-ortega',        nome: "Ariel Ortega",        posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'enrico-chiesa',       nome: "Enrico Chiesa",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'mario-stanic',        nome: "Mario Stanić",        posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'alain-boghossian',    nome: "Alain Boghossian",    posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 76 },
+      { id: 'sergio-conceicao',    nome: "Sérgio Conceição",    posicoes: ["PD","MD"],   forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1999,
+    clube: "Roma",
+    jogadores: [
+      { id: 'francesco-antonioli', nome: "Francesco Antonioli",  posicoes: ["GOL"],      forca: 79 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'zago',                nome: "Zago",                posicoes: ["ZAG"],       forca: 78 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'eusebio-di-francesco', nome: "Eusebio Di Francesco", posicoes: ["MC","MEI"], forca: 78 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'marco-delvecchio',    nome: "Marco Delvecchio",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'paulo-sergio',        nome: "Paulo Sérgio",        posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'marcos-assuncao',     nome: "Marcos Assunção",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'abel-balbo',          nome: "Abel Balbo",          posicoes: ["ATA"],       forca: 80 },
+      { id: 'eddy-baggio',         nome: "Eddy Baggio",         posicoes: ["MC","MD"],   forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1999,
+    clube: "Udinese",
+    jogadores: [
+      { id: 'luigi-turci',         nome: "Luigi Turci",         posicoes: ["GOL"],       forca: 78 },
+      { id: 'valerio-bertotto',    nome: "Valerio Bertotto",    posicoes: ["ZAG"],       forca: 78 },
+      { id: 'alessandro-calori',   nome: "Alessandro Calori",   posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'alessandro-pierini',  nome: "Alessandro Pierini",  posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'giuliano-giannichedda', nome: "Giuliano Giannichedda", posicoes: ["VOL","MC"], forca: 79 },
+      { id: 'tomas-locatelli',     nome: "Tomas Locatelli",     posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'fabio-rossitto',      nome: "Fabio Rossitto",      posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'marcio-amoroso',      nome: "Márcio Amoroso",      posicoes: ["ATA"],       forca: 85 },
+      { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 78 },
+      { id: 'stephane-guidi',      nome: "Stéphane Guidi",      posicoes: ["MC","MEI"],  forca: 75 },
+      { id: 'gennaro-ruotolo',     nome: "Gennaro Ruotolo",     posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'johnnier-montano',    nome: "Johnnier Montaño",    posicoes: ["MEI","MC"],  forca: 76 },
+      { id: 'paolo-poggi',         nome: "Paolo Poggi",         posicoes: ["ATA"],       forca: 75 }
     ]
   }
 
