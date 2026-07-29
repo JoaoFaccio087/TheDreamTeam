@@ -1848,6 +1848,147 @@ const DADOS_SERIE_A = [
       { id: 'simone-inzaghi',      nome: "Simone Inzaghi",      posicoes: ["ATA"],       forca: 77 },
       { id: 'karel-poborsky',      nome: "Karel Poborský",      posicoes: ["PD","MD"],   forca: 80 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2003 (temporada 2002-03) — a JUVENTUS de Lippi bicampeã (72 pts), 27º
+  //  título, com Nedvěd (que ganharia a Bola de Ouro) no auge. Top-6: Juventus (72),
+  //  Inter (65), Milan (61), Lazio (60), Parma (56), Udinese (56). Foi o ano da 1ª
+  //  final de Champions 100% italiana (Milan bateu a Juve nos pênaltis em Old
+  //  Trafford). Vieri (Inter) foi artilheiro com 24 gols. O Milan de Ancelotti já era
+  //  potência europeia, mas ficou só em 3º no nacional.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2003,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 88 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 85 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'igor-tudor',          nome: "Igor Tudor",          posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'paolo-montero',       nome: "Paolo Montero",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mauro-camoranesi',    nome: "Mauro Camoranesi",    posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'marcelo-salas',       nome: "Marcelo Salas",       posicoes: ["ATA"],       forca: 79 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2003,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 84 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 86 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'francesco-coco',      nome: "Francesco Coco",      posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'emre-belozoglu',      nome: "Emre Belözoğlu",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'cristiano-zanetti',   nome: "Cristiano Zanetti",   posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'sergio-conceicao',    nome: "Sérgio Conceição",    posicoes: ["PD","MD"],   forca: 80 },
+      { id: 'alvaro-recoba',       nome: "Álvaro Recoba",       posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 88 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'domenico-morfeo',     nome: "Domenico Morfeo",     posicoes: ["MEI","ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2003,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 85 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 87 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 87 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 79 },
+      { id: 'kakha-kaladze',       nome: "Kakha Kaladze",       posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'manuel-rui-costa',    nome: "Manuel Rui Costa",    posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'serginho',            nome: "Serginho",            posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 89 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'jon-dahl-tomasson',   nome: "Jon Dahl Tomasson",   posicoes: ["ATA","MEI"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2003,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 84 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'gaizka-mendieta',     nome: "Gaizka Mendieta",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'claudio-lopez',       nome: "Claudio López",       posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'bernardo-corradi',    nome: "Bernardo Corradi",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'simone-inzaghi',      nome: "Simone Inzaghi",      posicoes: ["ATA"],       forca: 77 },
+      { id: 'massimo-oddo',        nome: "Massimo Oddo",        posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'giuliano-giannichedda', nome: "Giuliano Giannichedda", posicoes: ["VOL","MC"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2003,
+    clube: "Parma",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'matteo-ferrari',      nome: "Matteo Ferrari",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'bruno-cirillo',       nome: "Bruno Cirillo",       posicoes: ["ZAG"],       forca: 77 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'daniele-bonera',      nome: "Daniele Bonera",      posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'johan-micoud',        nome: "Johan Micoud",        posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'sabri-lamouchi',      nome: "Sabri Lamouchi",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'stefano-morrone',     nome: "Stefano Morrone",     posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'marco-marchionni',    nome: "Marco Marchionni",    posicoes: ["MD","MEI"],  forca: 77 },
+      { id: 'adriano',             nome: "Adriano",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'marco-di-vaio',       nome: "Marco Di Vaio",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'junior',              nome: "Júnior",              posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'alberto-gilardino',   nome: "Alberto Gilardino",   posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2003,
+    clube: "Udinese",
+    jogadores: [
+      { id: 'morgan-de-sanctis',   nome: "Morgan De Sanctis",   posicoes: ["GOL"],       forca: 80 },
+      { id: 'valerio-bertotto',    nome: "Valerio Bertotto",    posicoes: ["ZAG"],       forca: 77 },
+      { id: 'felipe',              nome: "Felipe",              posicoes: ["ZAG"],       forca: 77 },
+      { id: 'giovanni-pisano',     nome: "Giovanni Pisano",     posicoes: ["LE","LD"],   forca: 75 },
+      { id: 'manuele-blasi',       nome: "Manuele Blasi",       posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'gianni-guigou',       nome: "Gianni Guigou",       posicoes: ["MD","LD"],   forca: 76 },
+      { id: 'davide-pinato',       nome: "Davide Pinato",       posicoes: ["MC","MEI"],  forca: 75 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'vincenzo-iaquinta',   nome: "Vincenzo Iaquinta",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'marcio-amoroso',      nome: "Márcio Amoroso",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 77 },
+      { id: 'edgaras-jankauskas',  nome: "Edgaras Jankauskas",  posicoes: ["ATA"],       forca: 77 },
+      { id: 'sulley-muntari',      nome: "Sulley Muntari",      posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'massimo-gobbi',       nome: "Massimo Gobbi",       posicoes: ["LE","MD"],   forca: 75 }
+    ]
   }
 
 ];
