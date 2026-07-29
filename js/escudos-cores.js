@@ -226,6 +226,7 @@
     'Real Sociedad':           ['#FFFFFF', '#0067B1'],
     'Red Star Belgrade':       ['#FFFFFF', '#E30613'],
     'Napoli':                  ['#12A0D7', '#FFFFFF'],
+    'Parma':                   ['#FFD200', '#004B9E'],
     'Roma':                    ['#8E1F2F', '#F0BC42'],
     'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
     'Sampdoria':               ['#0A2A66', '#FFFFFF'],
@@ -471,6 +472,7 @@
     'Real Sociedad':           { padrao: 'listras-v', listras: 4 },                     // azul e branco
     'Red Star Belgrade':       { padrao: 'metade' },                                  // vermelho e branco
     'Napoli':                  { padrao: 'solido' },                                  // azul celeste
+    'Parma':                   { padrao: 'cruz' },                                    // cruz azul sobre amarelo
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa
