@@ -860,6 +860,147 @@ const DADOS_SERIE_A = [
       { id: 'antonio-paganin',     nome: "Antonio Paganin",     posicoes: ["ZAG","LD"],  forca: 76 },
       { id: 'fausto-pizzi',        nome: "Fausto Pizzi",        posicoes: ["MEI","ATA"], forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1996 (temporada 1995-96) — o MILAN de Capello campeão (73 pts), 15º
+  //  título rossonero, com a chegada de George WEAH (Bola de Ouro 1995) e Roberto
+  //  BAGGIO vindo da Juve. Top-6: Milan (73), Juventus (65), Lazio (59), Fiorentina
+  //  (59), Roma (58), Parma (58). A Juventus de Lippi conquistaria a Champions neste
+  //  ano (nos pênaltis sobre o Ajax). A Fiorentina de Batistuta ganhou a Coppa Italia
+  //  e entra no acervo. Signori e Protti dividiram a artilharia (24 gols).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 1996,
+    clube: "Milan",
+    jogadores: [
+      { id: 'sebastiano-rossi',    nome: "Sebastiano Rossi",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'mauro-tassotti',      nome: "Mauro Tassotti",      posicoes: ["LD"],        forca: 80 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 90 },
+      { id: 'franco-baresi',       nome: "Franco Baresi",       posicoes: ["ZAG"],       forca: 89 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 85 },
+      { id: 'marcel-desailly',     nome: "Marcel Desailly",     posicoes: ["VOL","ZAG"], forca: 87 },
+      { id: 'demetrio-albertini',  nome: "Demetrio Albertini",  posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'zvonimir-boban',      nome: "Zvonimir Boban",      posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'roberto-donadoni',    nome: "Roberto Donadoni",    posicoes: ["MEI","PD"],  forca: 82 },
+      { id: 'dejan-savicevic',     nome: "Dejan Savićević",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'george-weah',         nome: "George Weah",         posicoes: ["ATA"],       forca: 88 },
+      { id: 'roberto-baggio',      nome: "Roberto Baggio",      posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'marco-simone',        nome: "Marco Simone",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'christian-panucci',   nome: "Christian Panucci",   posicoes: ["LD","ZAG"],  forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1996,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 86 },
+      { id: 'moreno-torricelli',   nome: "Moreno Torricelli",   posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'ciro-ferrara',        nome: "Ciro Ferrara",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'sergio-porrini',      nome: "Sergio Porrini",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'paulo-sousa',         nome: "Paulo Sousa",         posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'antonio-conte',       nome: "Antonio Conte",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'angelo-di-livio',     nome: "Angelo Di Livio",     posicoes: ["MD","VOL"],  forca: 80 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'gianluca-vialli',     nome: "Gianluca Vialli",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'fabrizio-ravanelli',  nome: "Fabrizio Ravanelli",  posicoes: ["ATA"],       forca: 84 },
+      { id: 'vladimir-jugovic',    nome: "Vladimir Jugović",    posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'michele-padovano',    nome: "Michele Padovano",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1996,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'luca-marchegiani',    nome: "Luca Marchegiani",    posicoes: ["GOL"],       forca: 83 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'paolo-negro',         nome: "Paolo Negro",         posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'giuseppe-pancaro',    nome: "Giuseppe Pancaro",    posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'cristiano-bergodi',   nome: "Cristiano Bergodi",   posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'aron-winter',         nome: "Aron Winter",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'diego-fuser',         nome: "Diego Fuser",         posicoes: ["MD","MC"],   forca: 82 },
+      { id: 'roberto-di-matteo',   nome: "Roberto Di Matteo",   posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'giuseppe-signori',    nome: "Giuseppe Signori",    posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'pierluigi-casiraghi', nome: "Pierluigi Casiraghi", posicoes: ["ATA"],       forca: 82 },
+      { id: 'alen-boksic',         nome: "Alen Bokšić",         posicoes: ["ATA"],       forca: 84 },
+      { id: 'marco-di-vaio',       nome: "Marco Di Vaio",       posicoes: ["ATA"],       forca: 76 },
+      { id: 'jose-chamot',         nome: "José Chamot",         posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'alessandro-grandoni', nome: "Alessandro Grandoni", posicoes: ["MC","MD"],   forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1996,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 84 },
+      { id: 'daniele-carnasciali', nome: "Daniele Carnasciali", posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'lorenzo-amoruso',     nome: "Lorenzo Amoruso",     posicoes: ["ZAG"],       forca: 80 },
+      { id: 'pasquale-padalino',   nome: "Pasquale Padalino",   posicoes: ["ZAG"],       forca: 78 },
+      { id: 'stefano-carobbi',     nome: "Stefano Carobbi",     posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'sandro-cois',         nome: "Sandro Cois",         posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'emiliano-bigica',     nome: "Emiliano Bigica",     posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'manuel-rui-costa',    nome: "Manuel Rui Costa",    posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'stefan-schwarz',      nome: "Stefan Schwarz",      posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'gabriel-batistuta',   nome: "Gabriel Batistuta",   posicoes: ["ATA"],       forca: 89 },
+      { id: 'francesco-baiano',    nome: "Francesco Baiano",    posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'anselmo-robbiati',    nome: "Anselmo Robbiati",    posicoes: ["PE","ATA"],  forca: 77 },
+      { id: 'marco-nappi',         nome: "Marco Nappi",         posicoes: ["MD","MEI"],  forca: 76 },
+      { id: 'renato-buso',         nome: "Renato Buso",         posicoes: ["MEI","ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1996,
+    clube: "Roma",
+    jogadores: [
+      { id: 'giovanni-cervone',    nome: "Giovanni Cervone",    posicoes: ["GOL"],       forca: 78 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 84 },
+      { id: 'amedeo-carboni',      nome: "Amedeo Carboni",      posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'francesco-statuto',   nome: "Francesco Statuto",   posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'gigi-di-biagio',      nome: "Luigi Di Biagio",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'francesco-moriero',   nome: "Francesco Moriero",   posicoes: ["PD","MD"],   forca: 80 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'abel-balbo',          nome: "Abel Balbo",          posicoes: ["ATA"],       forca: 84 },
+      { id: 'daniel-fonseca',      nome: "Daniel Fonseca",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'marco-delvecchio',    nome: "Marco Delvecchio",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'fabio-petruzzi',      nome: "Fabio Petruzzi",      posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'eugenio-corini',      nome: "Eugenio Corini",      posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 1996,
+    clube: "Parma",
+    jogadores: [
+      { id: 'luca-bucci',          nome: "Luca Bucci",          posicoes: ["GOL"],       forca: 82 },
+      { id: 'lorenzo-minotti',     nome: "Lorenzo Minotti",     posicoes: ["ZAG"],       forca: 81 },
+      { id: 'luigi-apolloni',      nome: "Luigi Apolloni",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'antonio-benarrivo',   nome: "Antonio Benarrivo",   posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'roberto-mussi',       nome: "Roberto Mussi",       posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'dino-baggio',         nome: "Dino Baggio",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'massimo-crippa',      nome: "Massimo Crippa",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'gianfranco-zola',     nome: "Gianfranco Zola",     posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'hristo-stoichkov',    nome: "Hristo Stoichkov",    posicoes: ["ATA","PE"],  forca: 87 },
+      { id: 'faustino-asprilla',   nome: "Faustino Asprilla",   posicoes: ["ATA"],       forca: 85 },
+      { id: 'gabriele-pin',        nome: "Gabriele Pin",        posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'nestor-sensini',      nome: "Néstor Sensini",      posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 77 }
+    ]
   }
 
 ];
