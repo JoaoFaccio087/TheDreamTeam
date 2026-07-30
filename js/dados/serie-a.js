@@ -2130,6 +2130,147 @@ const DADOS_SERIE_A = [
       { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 79 },
       { id: 'ousmane-dabo',        nome: "Ousmane Dabo",        posicoes: ["VOL","MC"],  forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2005 (temporada 2004-05) — a JUVENTUS de Capello campeã (86 pts), o
+  //  título de campo (mais tarde anulado pelo Calciopoli, mas aqui registramos o
+  //  resultado esportivo). 1ª temporada com 20 clubes (38 rodadas). Top-6: Juventus
+  //  (86), Milan (79), Inter (72), Udinese (62), Sampdoria (61), Palermo (53). A
+  //  Udinese se classificou à Champions pela 1ª vez; o Palermo, de volta à elite após
+  //  30+ anos, foi 6º. Lucarelli (Livorno) foi artilheiro com 24 gols.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2005,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 89 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 84 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 87 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'jonathan-zebina',     nome: "Jonathan Zebina",     posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'emerson',             nome: "Emerson",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mauro-camoranesi',    nome: "Mauro Camoranesi",    posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'stephen-appiah',      nome: "Stephen Appiah",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 85 },
+      { id: 'ruben-olivera',       nome: "Rubén Olivera",       posicoes: ["MC","LE"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2005,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 85 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 88 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 85 },
+      { id: 'jaap-stam',           nome: "Jaap Stam",           posicoes: ["ZAG"],       forca: 83 },
+      { id: 'kakha-kaladze',       nome: "Kakha Kaladze",       posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 87 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'kaka',                nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 89 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 90 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'jon-dahl-tomasson',   nome: "Jon Dahl Tomasson",   posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'serginho',            nome: "Serginho",            posicoes: ["LE","MD"],   forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2005,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 83 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'giovanni-pasquale',   nome: "Giovanni Pasquale",   posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'esteban-cambiasso',   nome: "Esteban Cambiasso",   posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 82 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'alvaro-recoba',       nome: "Álvaro Recoba",       posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'adriano',             nome: "Adriano",             posicoes: ["ATA"],       forca: 87 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'obafemi-martins',     nome: "Obafemi Martins",     posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2005,
+    clube: "Udinese",
+    jogadores: [
+      { id: 'morgan-de-sanctis',   nome: "Morgan De Sanctis",   posicoes: ["GOL"],       forca: 81 },
+      { id: 'felipe',              nome: "Felipe",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'valerio-bertotto',    nome: "Valerio Bertotto",    posicoes: ["ZAG"],       forca: 77 },
+      { id: 'daniele-mannini',     nome: "Daniele Mannini",     posicoes: ["MD","MEI"],  forca: 75 },
+      { id: 'giampiero-pinzi',     nome: "Giampiero Pinzi",     posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'gaetano-dagostino',   nome: "Gaetano D'Agostino",  posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'sulley-muntari',      nome: "Sulley Muntari",      posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'vincenzo-iaquinta',   nome: "Vincenzo Iaquinta",   posicoes: ["ATA"],       forca: 81 },
+      { id: 'antonio-di-natale',   nome: "Antonio Di Natale",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'marek-jankulovski',   nome: "Marek Jankulovski",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'cesare-natali',       nome: "Cesare Natali",       posicoes: ["ZAG"],       forca: 76 },
+      { id: 'manuele-blasi',       nome: "Manuele Blasi",       posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'gianni-guigou',       nome: "Gianni Guigou",       posicoes: ["MD","LD"],   forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2005,
+    clube: "Sampdoria",
+    jogadores: [
+      { id: 'francesco-antonioli',  nome: "Francesco Antonioli",  posicoes: ["GOL"],     forca: 78 },
+      { id: 'cristian-zenoni',     nome: "Cristian Zenoni",     posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'daniele-gastaldello', nome: "Daniele Gastaldello", posicoes: ["ZAG"],       forca: 77 },
+      { id: 'marco-rossi-samp',    nome: "Marco Rossi",         posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'sergio-volpi',        nome: "Sergio Volpi",        posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'angelo-palombo',      nome: "Angelo Palombo",      posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'aimo-diana',          nome: "Aimo Diana",          posicoes: ["MD","LD"],   forca: 76 },
+      { id: 'cristiano-doni',      nome: "Cristiano Doni",      posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'fabio-bazzani',       nome: "Fabio Bazzani",       posicoes: ["ATA"],       forca: 77 },
+      { id: 'francesco-flachi',    nome: "Francesco Flachi",    posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'fabio-quagliarella',  nome: "Fabio Quagliarella",  posicoes: ["ATA"],       forca: 78 },
+      { id: 'emiliano-bonazzoli', nome: "Emiliano Bonazzoli",  posicoes: ["ATA"],       forca: 77 },
+      { id: 'gennaro-delvecchio',  nome: "Gennaro Delvecchio",  posicoes: ["MC","MEI"],  forca: 74 },
+      { id: 'reto-ziegler',        nome: "Reto Ziegler",        posicoes: ["LE","ZAG"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2005,
+    clube: "Palermo",
+    jogadores: [
+      { id: 'alberto-fontana',     nome: "Alberto Fontana",     posicoes: ["GOL"],       forca: 77 },
+      { id: 'cesare-bovo',         nome: "Cesare Bovo",         posicoes: ["ZAG"],       forca: 77 },
+      { id: 'giuseppe-biava',      nome: "Giuseppe Biava",      posicoes: ["ZAG"],       forca: 76 },
+      { id: 'eugenio-corini',      nome: "Eugenio Corini",      posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'fabio-grosso',        nome: "Fabio Grosso",        posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'santiago-biglione',   nome: "Santiago Biglione",   posicoes: ["LD","ZAG"],  forca: 74 },
+      { id: 'franco-brienza',      nome: "Franco Brienza",      posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'giovanni-tedesco',    nome: "Giovanni Tedesco",    posicoes: ["MC","VOL"],  forca: 75 },
+      { id: 'guilherme',           nome: "Guilherme",           posicoes: ["MEI","ATA"], forca: 77 },
+      { id: 'luca-toni',           nome: "Luca Toni",           posicoes: ["ATA"],       forca: 83 },
+      { id: 'andrea-caracciolo',   nome: "Andrea Caracciolo",   posicoes: ["ATA"],       forca: 77 },
+      { id: 'david-di-michele',    nome: "David Di Michele",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'cristian-zaccardo',   nome: "Cristian Zaccardo",   posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'stephen-makinwa',     nome: "Stephen Makinwa",     posicoes: ["ATA"],       forca: 73 }
+    ]
   }
 
 ];
