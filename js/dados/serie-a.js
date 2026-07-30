@@ -2271,6 +2271,147 @@ const DADOS_SERIE_A = [
       { id: 'cristian-zaccardo',   nome: "Cristian Zaccardo",   posicoes: ["LD","ZAG"],  forca: 78 },
       { id: 'stephen-makinwa',     nome: "Stephen Makinwa",     posicoes: ["ATA"],       forca: 73 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2006 (temporada 2005-06) — a JUVENTUS de Capello campeã DE CAMPO (91 pts,
+  //  27 vitórias, só 1 derrota), registrada aqui pelo resultado esportivo (o título
+  //  foi depois anulado pelo Calciopoli e dado à Inter, mas mantemos a tabela de
+  //  campo). Top-6 de campo: Juventus (91), Milan (88), Inter (76), Fiorentina (74),
+  //  Roma (69), Lazio (62). Luca Toni (Fiorentina) fez 31 gols, o 1º a chegar aos 30
+  //  desde 1959. Foi o ano do título mundial da Itália, com forte base da Serie A.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2006,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 90 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 83 },
+      { id: 'fabio-cannavaro',     nome: "Fabio Cannavaro",     posicoes: ["ZAG"],       forca: 88 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'jonathan-zebina',     nome: "Jonathan Zebina",     posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'emerson',             nome: "Emerson",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mauro-camoranesi',    nome: "Mauro Camoranesi",    posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 87 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 86 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2006,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 84 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 88 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 84 },
+      { id: 'jaap-stam',           nome: "Jaap Stam",           posicoes: ["ZAG"],       forca: 82 },
+      { id: 'marek-jankulovski',   nome: "Marek Jankulovski",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 87 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'kaka',                nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 90 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 89 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 83 },
+      { id: 'alberto-gilardino',   nome: "Alberto Gilardino",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'serginho',            nome: "Serginho",            posicoes: ["LE","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2006,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'julio-cesar',         nome: "Júlio César",         posicoes: ["GOL"],       forca: 84 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'maicon',              nome: "Maicon",              posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'esteban-cambiasso',   nome: "Esteban Cambiasso",   posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 81 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'adriano',             nome: "Adriano",             posicoes: ["ATA"],       forca: 87 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'obafemi-martins',     nome: "Obafemi Martins",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'alvaro-recoba',       nome: "Álvaro Recoba",       posicoes: ["MEI","ATA"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2006,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 83 },
+      { id: 'dario-dainelli',      nome: "Dario Dainelli",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'alessandro-gamberini', nome: "Alessandro Gamberini", posicoes: ["ZAG"],     forca: 79 },
+      { id: 'manuel-pasqual',      nome: "Manuel Pasqual",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'cesare-natali',       nome: "Cesare Natali",       posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'martin-jorgensen',    nome: "Martin Jørgensen",    posicoes: ["MD","MEI"],  forca: 80 },
+      { id: 'fabio-liverani',      nome: "Fabio Liverani",      posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'giampaolo-pazzini',   nome: "Giampaolo Pazzini",   posicoes: ["ATA"],       forca: 78 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'luca-toni',           nome: "Luca Toni",           posicoes: ["ATA"],       forca: 86 },
+      { id: 'enzo-maresca',        nome: "Enzo Maresca",        posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'tomas-ujfalusi',      nome: "Tomáš Ujfaluši",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'valeri-bojinov',      nome: "Valeri Bojinov",      posicoes: ["ATA"],       forca: 76 },
+      { id: 'cristian-brocchi',    nome: "Cristian Brocchi",    posicoes: ["VOL","MC"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2006,
+    clube: "Roma",
+    jogadores: [
+      { id: 'gianluca-curci',      nome: "Gianluca Curci",      posicoes: ["GOL"],       forca: 77 },
+      { id: 'christian-panucci',   nome: "Christian Panucci",   posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'philippe-mexes',      nome: "Philippe Mexès",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'chivu',               nome: "Cristian Chivu",      posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'matteo-ferrari',      nome: "Matteo Ferrari",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'simone-perrotta',     nome: "Simone Perrotta",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'mancini',             nome: "Mancini",             posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'vincenzo-montella',   nome: "Vincenzo Montella",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'shabani-nonda',       nome: "Shabani Nonda",       posicoes: ["ATA"],       forca: 78 },
+      { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2006,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 82 },
+      { id: 'massimo-oddo',        nome: "Massimo Oddo",        posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'sebastiano-siviglia', nome: "Sebastiano Siviglia", posicoes: ["ZAG"],       forca: 77 },
+      { id: 'guglielmo-stendardo', nome: "Guglielmo Stendardo", posicoes: ["ZAG"],       forca: 76 },
+      { id: 'stefano-mauri',       nome: "Stefano Mauri",       posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'ousmane-dabo',        nome: "Ousmane Dabo",        posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'gaby-mudingayi',      nome: "Gaby Mudingayi",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'cesar',               nome: "César",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'goran-pandev',        nome: "Goran Pandev",        posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'tommaso-rocchi',      nome: "Tommaso Rocchi",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'paolo-di-canio',      nome: "Paolo Di Canio",      posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 75 },
+      { id: 'luciano-zauri',       nome: "Luciano Zauri",       posicoes: ["LE","LD"],   forca: 76 }
+    ]
   }
 
 ];
