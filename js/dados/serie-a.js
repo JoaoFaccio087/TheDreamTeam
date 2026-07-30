@@ -2835,6 +2835,147 @@ const DADOS_SERIE_A = [
       { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 77 },
       { id: 'jeremy-menez',        nome: "Jérémy Ménez",        posicoes: ["PD","ATA"],  forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2010 (temporada 2009-10) — a INTER da TRÍPLICE de MOURINHO (82 pts):
+  //  Scudetto + Coppa Italia + Champions League no mesmo ano, feito inédito no
+  //  futebol italiano. Milito (30 gols na temporada), Sneijder e Eto'o formaram o
+  //  eixo. Top-6: Inter (82), Roma (80), Milan (70), Sampdoria (67), Palermo (65),
+  //  Napoli (59). Di Natale (Udinese, fora do top-6) foi artilheiro com 29 gols. O
+  //  NAPOLI de Mazzarri, com Hamsik e Lavezzi, entra no acervo.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2010,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'julio-cesar',         nome: "Júlio César",         posicoes: ["GOL"],       forca: 87 },
+      { id: 'maicon',              nome: "Maicon",              posicoes: ["LD","MD"],   forca: 86 },
+      { id: 'lucio',               nome: "Lúcio",               posicoes: ["ZAG"],       forca: 84 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 84 },
+      { id: 'chivu',               nome: "Cristian Chivu",      posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'esteban-cambiasso',   nome: "Esteban Cambiasso",   posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'thiago-motta',        nome: "Thiago Motta",        posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'wesley-sneijder',     nome: "Wesley Sneijder",     posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'samuel-etoo',         nome: "Samuel Eto'o",        posicoes: ["ATA","PD"],  forca: 87 },
+      { id: 'diego-milito',        nome: "Diego Milito",        posicoes: ["ATA"],       forca: 86 },
+      { id: 'goran-pandev',        nome: "Goran Pandev",        posicoes: ["ATA","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2010,
+    clube: "Roma",
+    jogadores: [
+      { id: 'julio-sergio',        nome: "Júlio Sérgio",        posicoes: ["GOL"],       forca: 79 },
+      { id: 'marco-cassetti',      nome: "Marco Cassetti",      posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'nicolas-burdisso',    nome: "Nicolás Burdisso",    posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'juan',                nome: "Juan",                posicoes: ["ZAG"],       forca: 81 },
+      { id: 'john-arne-riise',     nome: "John Arne Riise",     posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'simone-perrotta',     nome: "Simone Perrotta",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 77 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'mirko-vucinic',       nome: "Mirko Vučinić",       posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'luca-toni',           nome: "Luca Toni",           posicoes: ["ATA"],       forca: 80 },
+      { id: 'jeremy-menez',        nome: "Jérémy Ménez",        posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'julio-baptista',      nome: "Júlio Baptista",      posicoes: ["ATA","MEI"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2010,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 80 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 84 },
+      { id: 'thiago-silva',        nome: "Thiago Silva",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'marek-jankulovski',   nome: "Marek Jankulovski",   posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'ronaldinho',          nome: "Ronaldinho",          posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'alexandre-pato',      nome: "Alexandre Pato",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'marco-borriello',     nome: "Marco Borriello",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'klaas-jan-huntelaar', nome: "Klaas-Jan Huntelaar", posicoes: ["ATA"],       forca: 80 },
+      { id: 'ignazio-abate',       nome: "Ignazio Abate",       posicoes: ["LD","MD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2010,
+    clube: "Sampdoria",
+    jogadores: [
+      { id: 'luca-castellazzi',    nome: "Luca Castellazzi",    posicoes: ["GOL"],       forca: 78 },
+      { id: 'reto-ziegler',        nome: "Reto Ziegler",        posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'daniele-gastaldello', nome: "Daniele Gastaldello", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'stefano-lucchini',    nome: "Stefano Lucchini",    posicoes: ["ZAG"],       forca: 77 },
+      { id: 'marius-stankevicius', nome: "Marius Stankevičius",  posicoes: ["LD","ZAG"], forca: 76 },
+      { id: 'angelo-palombo',      nome: "Angelo Palombo",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'fernando-tissone',    nome: "Fernando Tissone",    posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'gennaro-delvecchio',  nome: "Gennaro Delvecchio",  posicoes: ["MC","MEI"],  forca: 74 },
+      { id: 'vladimir-koman',      nome: "Vladimir Koman",      posicoes: ["MEI","MC"],  forca: 74 },
+      { id: 'antonio-cassano',     nome: "Antonio Cassano",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'giampaolo-pazzini',   nome: "Giampaolo Pazzini",   posicoes: ["ATA"],       forca: 81 },
+      { id: 'nicola-pozzi-samp',   nome: "Nicola Pozzi",        posicoes: ["ATA"],       forca: 74 },
+      { id: 'gennaro-sardo',       nome: "Gennaro Sardo",       posicoes: ["ZAG","LD"],  forca: 74 },
+      { id: 'daniele-mannini',     nome: "Daniele Mannini",     posicoes: ["MD","MEI"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2010,
+    clube: "Palermo",
+    jogadores: [
+      { id: 'salvatore-sirigu',    nome: "Salvatore Sirigu",    posicoes: ["GOL"],       forca: 80 },
+      { id: 'cesare-bovo',         nome: "Cesare Bovo",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'simon-kjaer',         nome: "Simon Kjær",          posicoes: ["ZAG"],       forca: 80 },
+      { id: 'mattia-cassani',      nome: "Mattia Cassani",      posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'federico-balzaretti',  nome: "Federico Balzaretti", posicoes: ["LE","LD"], forca: 78 },
+      { id: 'giulio-migliaccio',   nome: "Giulio Migliaccio",   posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'antonio-nocerino',    nome: "Antonio Nocerino",    posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'mark-bresciano',      nome: "Mark Bresciano",      posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'javier-pastore',      nome: "Javier Pastore",      posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'fabrizio-miccoli',    nome: "Fabrizio Miccoli",    posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'edinson-cavani',      nome: "Edinson Cavani",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'moris-carrozzieri',   nome: "Moris Carrozzieri",   posicoes: ["ZAG"],       forca: 74 },
+      { id: 'ezequiel-munoz',      nome: "Ezequiel Muñoz",      posicoes: ["ZAG"],       forca: 74 },
+      { id: 'liam-lawrence',       nome: "Liam Lawrence",       posicoes: ["MD","MEI"],  forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2010,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'morgan-de-sanctis',   nome: "Morgan De Sanctis",   posicoes: ["GOL"],       forca: 80 },
+      { id: 'paolo-cannavaro',     nome: "Paolo Cannavaro",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'hugo-campagnaro',     nome: "Hugo Campagnaro",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'salvatore-aronica',   nome: "Salvatore Aronica",   posicoes: ["ZAG","LE"],  forca: 76 },
+      { id: 'christian-maggio',    nome: "Christian Maggio",    posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'andrea-dossena',      nome: "Andrea Dossena",      posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'walter-gargano',      nome: "Walter Gargano",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'michele-pazienza',    nome: "Michele Pazienza",    posicoes: ["VOL","MC"],  forca: 75 },
+      { id: 'marek-hamsik',        nome: "Marek Hamšík",        posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'ezequiel-lavezzi',    nome: "Ezequiel Lavezzi",    posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'german-denis',        nome: "Germán Denis",        posicoes: ["ATA"],       forca: 78 },
+      { id: 'fabiano-santacroce',  nome: "Fabiano Santacroce",  posicoes: ["ZAG"],       forca: 74 },
+      { id: 'juan-camilo-zuniga',  nome: "Juan Zúñiga",         posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'jesus-datolo',        nome: "Jesús Dátolo",        posicoes: ["MEI","MD"],  forca: 75 }
+    ]
   }
 
 ];
