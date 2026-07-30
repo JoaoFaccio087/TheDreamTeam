@@ -2553,6 +2553,147 @@ const DADOS_SERIE_A = [
       { id: 'valeri-bojinov',      nome: "Valeri Bojinov",      posicoes: ["ATA"],       forca: 76 },
       { id: 'zdravko-kuzmanovic',  nome: "Zdravko Kuzmanović",  posicoes: ["MC","MEI"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2008 (temporada 2007-08) — a INTER de Mancini bicampeã (85 pts, 16º
+  //  título), garantido na última rodada, 3 pts à frente da Roma. A JUVENTUS voltou
+  //  da Serie B direto ao 3º lugar, com Del Piero artilheiro (21 gols) aos 33 anos.
+  //  Top-6: Inter (85), Roma (82), Juventus (72), Fiorentina (66), Milan (64),
+  //  Sampdoria (60). Foi a última temporada de Mancini na Inter antes de Mourinho.
+  //  A Sampdoria de Cassano e Quagliarella voltou ao top-6.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2008,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'julio-cesar',         nome: "Júlio César",         posicoes: ["GOL"],       forca: 86 },
+      { id: 'maicon',              nome: "Maicon",              posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 81 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 84 },
+      { id: 'maxwell',             nome: "Maxwell",             posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'esteban-cambiasso',   nome: "Esteban Cambiasso",   posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'luis-jimenez',        nome: "Luís Jiménez",        posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 88 },
+      { id: 'julio-cruz',          nome: "Julio Cruz",          posicoes: ["ATA"],       forca: 79 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2008,
+    clube: "Roma",
+    jogadores: [
+      { id: 'doni',                nome: "Doni",                posicoes: ["GOL"],       forca: 81 },
+      { id: 'marco-cassetti',      nome: "Marco Cassetti",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'philippe-mexes',      nome: "Philippe Mexès",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'juan',                nome: "Juan",                posicoes: ["ZAG"],       forca: 82 },
+      { id: 'max-tonetto',         nome: "Max Tonetto",         posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'simone-perrotta',     nome: "Simone Perrotta",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'mirko-vucinic',       nome: "Mirko Vučinić",       posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'mancini',             nome: "Mancini",             posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 77 },
+      { id: 'ludovic-giuly',       nome: "Ludovic Giuly",       posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'christian-panucci',   nome: "Christian Panucci",   posicoes: ["LD","ZAG"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2008,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 89 },
+      { id: 'zdenek-grygera',      nome: "Zdeněk Grygera",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'nicola-legrottaglie', nome: "Nicola Legrottaglie", posicoes: ["ZAG"],       forca: 79 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'jean-alain-boumsong', nome: "Jean-Alain Boumsong", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'molinaro',            nome: "Cristian Molinaro",   posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'mauro-camoranesi',    nome: "Mauro Camoranesi",    posicoes: ["MD","MEI"],  forca: 81 },
+      { id: 'momo-sissoko',        nome: "Momo Sissoko",        posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'claudio-marchisio',   nome: "Claudio Marchisio",   posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 85 },
+      { id: 'vincenzo-iaquinta',   nome: "Vincenzo Iaquinta",   posicoes: ["ATA"],       forca: 79 },
+      { id: 'tiago',               nome: "Tiago",               posicoes: ["MC","VOL"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2008,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 84 },
+      { id: 'manuel-pasqual',      nome: "Manuel Pasqual",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'tomas-ujfalusi',      nome: "Tomáš Ujfaluši",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'alessandro-gamberini', nome: "Alessandro Gamberini", posicoes: ["ZAG"],     forca: 79 },
+      { id: 'dario-dainelli',      nome: "Dario Dainelli",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'massimo-gobbi',       nome: "Massimo Gobbi",       posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'riccardo-montolivo',  nome: "Riccardo Montolivo",  posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'martin-jorgensen',    nome: "Martin Jørgensen",    posicoes: ["MD","MEI"],  forca: 78 },
+      { id: 'zdravko-kuzmanovic',  nome: "Zdravko Kuzmanović",  posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'giampaolo-pazzini',   nome: "Giampaolo Pazzini",   posicoes: ["ATA"],       forca: 79 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 77 },
+      { id: 'franco-semioli',      nome: "Franco Semioli",      posicoes: ["MD","PD"],   forca: 76 },
+      { id: 'juan-manuel-vargas',  nome: "Juan Manuel Vargas",  posicoes: ["LE","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2008,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 82 },
+      { id: 'massimo-oddo',        nome: "Massimo Oddo",        posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 86 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'marek-jankulovski',   nome: "Marek Jankulovski",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'kaka',                nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 90 },
+      { id: 'ronaldo',             nome: "Ronaldo",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'alberto-gilardino',   nome: "Alberto Gilardino",   posicoes: ["ATA"],       forca: 81 },
+      { id: 'yoann-gourcuff',      nome: "Yoann Gourcuff",      posicoes: ["MEI","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2008,
+    clube: "Sampdoria",
+    jogadores: [
+      { id: 'luca-castellazzi',    nome: "Luca Castellazzi",    posicoes: ["GOL"],       forca: 78 },
+      { id: 'lorenzo-stovini',     nome: "Lorenzo Stovini",     posicoes: ["ZAG"],       forca: 75 },
+      { id: 'daniele-gastaldello', nome: "Daniele Gastaldello", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'sergio-volpi',        nome: "Sergio Volpi",        posicoes: ["VOL","ZAG"], forca: 76 },
+      { id: 'reto-ziegler',        nome: "Reto Ziegler",        posicoes: ["LE","ZAG"],  forca: 76 },
+      { id: 'angelo-palombo',      nome: "Angelo Palombo",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'cristian-zenoni',     nome: "Cristian Zenoni",     posicoes: ["LD","MD"],   forca: 75 },
+      { id: 'gennaro-delvecchio',  nome: "Gennaro Delvecchio",  posicoes: ["MC","MEI"],  forca: 75 },
+      { id: 'vitali-kutuzov',      nome: "Vitali Kutuzov",      posicoes: ["ATA"],       forca: 75 },
+      { id: 'antonio-cassano',     nome: "Antonio Cassano",     posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'fabio-quagliarella',  nome: "Fabio Quagliarella",  posicoes: ["ATA"],       forca: 81 },
+      { id: 'claudio-bellucci',    nome: "Claudio Bellucci",    posicoes: ["ATA"],       forca: 75 },
+      { id: 'pietro-accardi',      nome: "Pietro Accardi",      posicoes: ["LD","ZAG"],  forca: 74 },
+      { id: 'francesco-flachi',    nome: "Francesco Flachi",    posicoes: ["ATA","MEI"], forca: 76 }
+    ]
   }
 
 ];
