@@ -2412,6 +2412,147 @@ const DADOS_SERIE_A = [
       { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 75 },
       { id: 'luciano-zauri',       nome: "Luciano Zauri",       posicoes: ["LE","LD"],   forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2007 (temporada 2006-07) — a INTER de Mancini campeã (97 pts, RECORDE
+  //  de pontos da Serie A à época), 1ª sem a Juventus (rebaixada à Serie B pelo
+  //  Calciopoli). A Inter contratou Vieira, Ibrahimović e Maicon da Juve e teve uma
+  //  sequência de 17 vitórias seguidas. Top-6: Inter (97), Roma (75), Lazio (62),
+  //  Milan (61), Palermo (58), Fiorentina (58). Totti (Roma) foi artilheiro com 26
+  //  gols. O Milan, mesmo docado em 8 pts, ganharia a Champions naquele ano.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2007,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'julio-cesar',         nome: "Júlio César",         posicoes: ["GOL"],       forca: 85 },
+      { id: 'maicon',              nome: "Maicon",              posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'esteban-cambiasso',   nome: "Esteban Cambiasso",   posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 87 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'julio-cruz',          nome: "Julio Cruz",          posicoes: ["ATA"],       forca: 79 },
+      { id: 'nicolas-burdisso',    nome: "Nicolás Burdisso",    posicoes: ["ZAG","LD"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2007,
+    clube: "Roma",
+    jogadores: [
+      { id: 'doni',                nome: "Doni",                posicoes: ["GOL"],       forca: 81 },
+      { id: 'christian-panucci',   nome: "Christian Panucci",   posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'philippe-mexes',      nome: "Philippe Mexès",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'chivu',               nome: "Cristian Chivu",      posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'max-tonetto',         nome: "Max Tonetto",         posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'simone-perrotta',     nome: "Simone Perrotta",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'mancini',             nome: "Mancini",             posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'mirko-vucinic',       nome: "Mirko Vučinić",       posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 78 },
+      { id: 'marco-cassetti',      nome: "Marco Cassetti",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'stefano-okaka',       nome: "Stefano Okaka",       posicoes: ["ATA"],       forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2007,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'marco-ballotta',      nome: "Marco Ballotta",      posicoes: ["GOL"],       forca: 78 },
+      { id: 'lionel-scaloni',      nome: "Lionel Scaloni",      posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'sebastiano-siviglia', nome: "Sebastiano Siviglia", posicoes: ["ZAG"],       forca: 77 },
+      { id: 'guglielmo-stendardo', nome: "Guglielmo Stendardo", posicoes: ["ZAG"],       forca: 77 },
+      { id: 'emilson-cribari',     nome: "Emílson Cribari",     posicoes: ["ZAG"],       forca: 77 },
+      { id: 'luciano-zauri',       nome: "Luciano Zauri",       posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'gaby-mudingayi',      nome: "Gaby Mudingayi",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'stefano-mauri',       nome: "Stefano Mauri",       posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'cristian-ledesma',    nome: "Cristian Ledesma",    posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'aleksandar-kolarov',  nome: "Aleksandar Kolarov",  posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'goran-pandev',        nome: "Goran Pandev",        posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'tommaso-rocchi',      nome: "Tommaso Rocchi",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'valon-behrami',       nome: "Valon Behrami",       posicoes: ["MD","VOL"],  forca: 78 },
+      { id: 'massimo-mutarelli',   nome: "Massimo Mutarelli",   posicoes: ["MC","VOL"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2007,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 83 },
+      { id: 'massimo-oddo',        nome: "Massimo Oddo",        posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 87 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 83 },
+      { id: 'marek-jankulovski',   nome: "Marek Jankulovski",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'kaka',                nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'alberto-gilardino',   nome: "Alberto Gilardino",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'ricardo-oliveira',    nome: "Ricardo Oliveira",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'yoann-gourcuff',      nome: "Yoann Gourcuff",      posicoes: ["MEI","MC"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2007,
+    clube: "Palermo",
+    jogadores: [
+      { id: 'alberto-fontana',     nome: "Alberto Fontana",     posicoes: ["GOL"],       forca: 77 },
+      { id: 'cristian-zaccardo',   nome: "Cristian Zaccardo",   posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'andrea-barzagli',     nome: "Andrea Barzagli",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'cesare-bovo',         nome: "Cesare Bovo",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'mattia-cassani',      nome: "Mattia Cassani",      posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'fabio-liverani',      nome: "Fabio Liverani",      posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'giulio-migliaccio',   nome: "Giulio Migliaccio",   posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'mark-bresciano',      nome: "Mark Bresciano",      posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'fabio-simplicio',     nome: "Fábio Simplício",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'andrea-caracciolo',   nome: "Andrea Caracciolo",   posicoes: ["ATA"],       forca: 77 },
+      { id: 'amauri',              nome: "Amauri",              posicoes: ["ATA"],       forca: 81 },
+      { id: 'david-di-michele',    nome: "David Di Michele",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'fabrizio-miccoli',    nome: "Fabrizio Miccoli",    posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'eugenio-corini',      nome: "Eugenio Corini",      posicoes: ["MC","MEI"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2007,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 83 },
+      { id: 'tomas-ujfalusi',      nome: "Tomáš Ujfaluši",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'alessandro-gamberini', nome: "Alessandro Gamberini", posicoes: ["ZAG"],     forca: 79 },
+      { id: 'dario-dainelli',      nome: "Dario Dainelli",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'manuel-pasqual',      nome: "Manuel Pasqual",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'martin-jorgensen',    nome: "Martin Jørgensen",    posicoes: ["MD","MEI"],  forca: 79 },
+      { id: 'cristian-brocchi',    nome: "Cristian Brocchi",    posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'riccardo-montolivo',  nome: "Riccardo Montolivo",  posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'franco-semioli',      nome: "Franco Semioli",      posicoes: ["MD","PD"],   forca: 76 },
+      { id: 'luca-toni',           nome: "Luca Toni",           posicoes: ["ATA"],       forca: 85 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'giampaolo-pazzini',   nome: "Giampaolo Pazzini",   posicoes: ["ATA"],       forca: 78 },
+      { id: 'valeri-bojinov',      nome: "Valeri Bojinov",      posicoes: ["ATA"],       forca: 76 },
+      { id: 'zdravko-kuzmanovic',  nome: "Zdravko Kuzmanović",  posicoes: ["MC","MEI"],  forca: 76 }
+    ]
   }
 
 ];
