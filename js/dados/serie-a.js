@@ -1989,6 +1989,147 @@ const DADOS_SERIE_A = [
       { id: 'sulley-muntari',      nome: "Sulley Muntari",      posicoes: ["MC","VOL"],  forca: 77 },
       { id: 'massimo-gobbi',       nome: "Massimo Gobbi",       posicoes: ["LE","MD"],   forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2004 (temporada 2003-04) — o MILAN de Ancelotti campeão (82 pts, recorde
+  //  igualado), 17º título, com a chegada de KAKÁ e a dupla Shevchenko-Inzaghi. Top-6:
+  //  Milan (82), Roma (71), Juventus (69), Inter (59), Parma (58), Lazio (56). A Roma
+  //  de Totti e Cassano brigou até as últimas rodadas. Shevchenko foi artilheiro (24
+  //  gols). O Milan fez uma campanha quase perfeita: 25 vitórias, só 2 derrotas.
+  //  Última temporada de 18 clubes (viraria 20 em 2004-05).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2004,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 85 },
+      { id: 'cafu',                nome: "Cafu",                posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 88 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 86 },
+      { id: 'kakha-kaladze',       nome: "Kakha Kaladze",       posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'alessandro-costacurta', nome: "Alessandro Costacurta", posicoes: ["ZAG"],   forca: 78 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'kaka',                nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'manuel-rui-costa',    nome: "Manuel Rui Costa",    posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 90 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'jon-dahl-tomasson',   nome: "Jon Dahl Tomasson",   posicoes: ["ATA","MEI"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2004,
+    clube: "Roma",
+    jogadores: [
+      { id: 'ivan-pelizzoli',      nome: "Ivan Pelizzoli",      posicoes: ["GOL"],       forca: 78 },
+      { id: 'christian-panucci',   nome: "Christian Panucci",   posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 85 },
+      { id: 'jonathan-zebina',     nome: "Jonathan Zebina",     posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'vincent-candela',     nome: "Vincent Candela",     posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'olivier-dacourt',     nome: "Olivier Dacourt",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'damiano-tommasi',     nome: "Damiano Tommasi",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'antonio-cassano',     nome: "Antonio Cassano",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'vincenzo-montella',   nome: "Vincenzo Montella",   posicoes: ["ATA"],       forca: 83 },
+      { id: 'gabriel-batistuta',   nome: "Gabriel Batistuta",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'emerson',             nome: "Emerson",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'marcos-assuncao',     nome: "Marcos Assunção",     posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'aldair',              nome: "Aldair",              posicoes: ["ZAG"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2004,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 89 },
+      { id: 'lilian-thuram',       nome: "Lilian Thuram",       posicoes: ["LD","ZAG"],  forca: 85 },
+      { id: 'igor-tudor',          nome: "Igor Tudor",          posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'paolo-montero',       nome: "Paolo Montero",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'edgar-davids',        nome: "Edgar Davids",        posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'mauro-camoranesi',    nome: "Mauro Camoranesi",    posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'alessio-tacchinardi', nome: "Alessio Tacchinardi", posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'marcelo-zalayeta',    nome: "Marcelo Zalayeta",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'gianluca-pessotto',   nome: "Gianluca Pessotto",   posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'enzo-maresca',        nome: "Enzo Maresca",        posicoes: ["MC","MEI"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2004,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'francesco-toldo',     nome: "Francesco Toldo",     posicoes: ["GOL"],       forca: 84 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'marco-materazzi',     nome: "Marco Materazzi",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 85 },
+      { id: 'francesco-coco',      nome: "Francesco Coco",      posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'giovanni-pasquale',   nome: "Giovanni Pasquale",   posicoes: ["LE","LD"],   forca: 75 },
+      { id: 'emre-belozoglu',      nome: "Emre Belözoğlu",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'cristiano-zanetti',   nome: "Cristiano Zanetti",   posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'juan-sebastian-veron', nome: "Juan Sebastián Verón", posicoes: ["MC","MEI"], forca: 84 },
+      { id: 'sergio-conceicao',    nome: "Sérgio Conceição",    posicoes: ["PD","MD"],   forca: 79 },
+      { id: 'christian-vieri',     nome: "Christian Vieri",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'obafemi-martins',     nome: "Obafemi Martins",     posicoes: ["ATA"],       forca: 79 },
+      { id: 'julio-cruz',          nome: "Julio Cruz",          posicoes: ["ATA"],       forca: 79 },
+      { id: 'andy-van-der-meyde',  nome: "Andy van der Meyde",  posicoes: ["PD","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2004,
+    clube: "Parma",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 81 },
+      { id: 'matteo-ferrari',      nome: "Matteo Ferrari",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'bruno-cirillo',       nome: "Bruno Cirillo",       posicoes: ["ZAG"],       forca: 77 },
+      { id: 'daniele-bonera',      nome: "Daniele Bonera",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'domenico-morfeo',     nome: "Domenico Morfeo",     posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'johan-micoud',        nome: "Johan Micoud",        posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'sabri-lamouchi',      nome: "Sabri Lamouchi",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'marco-marchionni',    nome: "Marco Marchionni",    posicoes: ["MD","MEI"],  forca: 77 },
+      { id: 'stefano-morrone',     nome: "Stefano Morrone",     posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'adriano',             nome: "Adriano",             posicoes: ["ATA"],       forca: 86 },
+      { id: 'alberto-gilardino',   nome: "Alberto Gilardino",   posicoes: ["ATA"],       forca: 82 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'junior',              nome: "Júnior",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'daniele-dessena',     nome: "Daniele Dessena",     posicoes: ["MC","VOL"],  forca: 73 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2004,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'angelo-peruzzi',      nome: "Angelo Peruzzi",      posicoes: ["GOL"],       forca: 83 },
+      { id: 'giuseppe-favalli',    nome: "Giuseppe Favalli",    posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'massimo-oddo',        nome: "Massimo Oddo",        posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'giuliano-giannichedda', nome: "Giuliano Giannichedda", posicoes: ["VOL","MC"], forca: 78 },
+      { id: 'fabio-liverani',      nome: "Fabio Liverani",      posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'stefano-fiore',       nome: "Stefano Fiore",       posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'cesar',               nome: "César",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jaap-stam',           nome: "Jaap Stam",           posicoes: ["ZAG"],       forca: 84 },
+      { id: 'bernardo-corradi',    nome: "Bernardo Corradi",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'simone-inzaghi',      nome: "Simone Inzaghi",      posicoes: ["ATA"],       forca: 76 },
+      { id: 'roberto-muzzi',       nome: "Roberto Muzzi",       posicoes: ["ATA"],       forca: 76 },
+      { id: 'sinisa-mihajlovic',   nome: "Siniša Mihajlović",   posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'ousmane-dabo',        nome: "Ousmane Dabo",        posicoes: ["VOL","MC"],  forca: 78 }
+    ]
   }
 
 ];
