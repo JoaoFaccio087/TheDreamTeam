@@ -2694,6 +2694,147 @@ const DADOS_SERIE_A = [
       { id: 'pietro-accardi',      nome: "Pietro Accardi",      posicoes: ["LD","ZAG"],  forca: 74 },
       { id: 'francesco-flachi',    nome: "Francesco Flachi",    posicoes: ["ATA","MEI"], forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2009 (temporada 2008-09) — a INTER campeã (84 pts), 1º ano de José
+  //  MOURINHO, 17º título e 4º seguido. Ibrahimović artilheiro (25 gols). Top-6:
+  //  Inter (84), Juventus (74), Milan (74), Fiorentina (68), Genoa (68), Roma (63).
+  //  Juve e Milan empataram em pontos (Juve 2ª no confronto direto). O GENOA de Gasperini,
+  //  com Milito e Thiago Motta, voltou à elite e entra no acervo. Era o prelúdio da
+  //  tríplice de Mourinho, que viria no ano seguinte.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2009,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'julio-cesar',         nome: "Júlio César",         posicoes: ["GOL"],       forca: 87 },
+      { id: 'maicon',              nome: "Maicon",              posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'ivan-cordoba',        nome: "Iván Córdoba",        posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'nicolas-burdisso',    nome: "Nicolás Burdisso",    posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'javier-zanetti',      nome: "Javier Zanetti",      posicoes: ["LD","VOL"],  forca: 84 },
+      { id: 'maxwell',             nome: "Maxwell",             posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'esteban-cambiasso',   nome: "Esteban Cambiasso",   posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'dejan-stankovic',     nome: "Dejan Stanković",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'sulley-muntari',      nome: "Sulley Muntari",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 89 },
+      { id: 'adriano',             nome: "Adriano",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'mario-balotelli',     nome: "Mario Balotelli",     posicoes: ["ATA"],       forca: 79 },
+      { id: 'patrick-vieira',      nome: "Patrick Vieira",      posicoes: ["VOL","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2009,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 89 },
+      { id: 'zdenek-grygera',      nome: "Zdeněk Grygera",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 85 },
+      { id: 'nicola-legrottaglie', nome: "Nicola Legrottaglie", posicoes: ["ZAG"],       forca: 79 },
+      { id: 'fabio-grosso',        nome: "Fabio Grosso",        posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'momo-sissoko',        nome: "Momo Sissoko",        posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'claudio-marchisio',   nome: "Claudio Marchisio",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'mauro-camoranesi',    nome: "Mauro Camoranesi",    posicoes: ["MD","MEI"],  forca: 80 },
+      { id: 'pavel-nedved',        nome: "Pavel Nedvěd",        posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'alessandro-del-piero', nome: "Alessandro Del Piero", posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'david-trezeguet',     nome: "David Trezeguet",     posicoes: ["ATA"],       forca: 84 },
+      { id: 'amauri',              nome: "Amauri",              posicoes: ["ATA"],       forca: 81 },
+      { id: 'vincenzo-iaquinta',   nome: "Vincenzo Iaquinta",   posicoes: ["ATA"],       forca: 79 },
+      { id: 'tiago',               nome: "Tiago",               posicoes: ["MC","VOL"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2009,
+    clube: "Milan",
+    jogadores: [
+      { id: 'dida',                nome: "Dida",                posicoes: ["GOL"],       forca: 81 },
+      { id: 'massimo-oddo',        nome: "Massimo Oddo",        posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'alessandro-nesta',    nome: "Alessandro Nesta",    posicoes: ["ZAG"],       forca: 85 },
+      { id: 'paolo-maldini',       nome: "Paolo Maldini",       posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'gianluca-zambrotta',  nome: "Gianluca Zambrotta",  posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'marek-jankulovski',   nome: "Marek Jankulovski",   posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'gennaro-gattuso',     nome: "Gennaro Gattuso",     posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'clarence-seedorf',    nome: "Clarence Seedorf",    posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'kaka',                nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 89 },
+      { id: 'ronaldinho',          nome: "Ronaldinho",          posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'filippo-inzaghi',     nome: "Filippo Inzaghi",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'alexandre-pato',      nome: "Alexandre Pato",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'andriy-shevchenko',   nome: "Andriy Shevchenko",   posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2009,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'sebastien-frey',      nome: "Sébastien Frey",      posicoes: ["GOL"],       forca: 83 },
+      { id: 'manuel-pasqual',      nome: "Manuel Pasqual",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'tomas-ujfalusi',      nome: "Tomáš Ujfaluši",      posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'alessandro-gamberini', nome: "Alessandro Gamberini", posicoes: ["ZAG"],     forca: 79 },
+      { id: 'dario-dainelli',      nome: "Dario Dainelli",      posicoes: ["ZAG"],       forca: 77 },
+      { id: 'massimo-gobbi',       nome: "Massimo Gobbi",       posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'riccardo-montolivo',  nome: "Riccardo Montolivo",  posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'felipe-melo',         nome: "Felipe Melo",         posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'juan-manuel-vargas',  nome: "Juan Manuel Vargas",  posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'stevan-jovetic',      nome: "Stevan Jovetić",      posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'alberto-gilardino',   nome: "Alberto Gilardino",   posicoes: ["ATA"],       forca: 81 },
+      { id: 'adrian-mutu',         nome: "Adrian Mutu",         posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'giampaolo-pazzini',   nome: "Giampaolo Pazzini",   posicoes: ["ATA"],       forca: 79 },
+      { id: 'martin-jorgensen',    nome: "Martin Jørgensen",    posicoes: ["MD","MEI"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2009,
+    clube: "Genoa",
+    jogadores: [
+      { id: 'rubinho-genoa',       nome: "Rubinho",             posicoes: ["GOL"],       forca: 77 },
+      { id: 'salvatore-bocchetti', nome: "Salvatore Bocchetti", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'matteo-ferrari',      nome: "Matteo Ferrari",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'giuseppe-biava',      nome: "Giuseppe Biava",      posicoes: ["ZAG"],       forca: 77 },
+      { id: 'domenico-criscito',   nome: "Domenico Criscito",   posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'omar-milanetto',      nome: "Omar Milanetto",      posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'thiago-motta',        nome: "Thiago Motta",        posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'ivan-juric',          nome: "Ivan Jurić",          posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'raffaele-palladino',  nome: "Raffaele Palladino",  posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'diego-milito',        nome: "Diego Milito",        posicoes: ["ATA"],       forca: 84 },
+      { id: 'marco-borriello',     nome: "Marco Borriello",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'hernan-crespo',       nome: "Hernán Crespo",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'sokratis',            nome: "Sokratis",            posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'giandomenico-mesto',  nome: "Giandomenico Mesto",  posicoes: ["LD","MD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2009,
+    clube: "Roma",
+    jogadores: [
+      { id: 'doni',                nome: "Doni",                posicoes: ["GOL"],       forca: 80 },
+      { id: 'marco-cassetti',      nome: "Marco Cassetti",      posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'philippe-mexes',      nome: "Philippe Mexès",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'juan',                nome: "Juan",                posicoes: ["ZAG"],       forca: 82 },
+      { id: 'max-tonetto',         nome: "Max Tonetto",         posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'simone-perrotta',     nome: "Simone Perrotta",     posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'matteo-brighi',       nome: "Matteo Brighi",       posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'mirko-vucinic',       nome: "Mirko Vučinić",       posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'julio-baptista',      nome: "Júlio Baptista",      posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 77 },
+      { id: 'jeremy-menez',        nome: "Jérémy Ménez",        posicoes: ["PD","ATA"],  forca: 78 }
+    ]
   }
 
 ];
