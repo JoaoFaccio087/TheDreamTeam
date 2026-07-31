@@ -4104,6 +4104,147 @@ const DADOS_SERIE_A = [
       { id: 'andre-silva',         nome: "André Silva",         posicoes: ["ATA"],       forca: 78 },
       { id: 'fabio-borini',        nome: "Fabio Borini",        posicoes: ["ATA","MD"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2019 (temporada 2018-19) — a JUVENTUS de Allegri OCTACAMPEÃ (90 pts),
+  //  35º título e o 8º SEGUIDO, título selado a 5 rodadas do fim. O ano do terremoto
+  //  CRISTIANO RONALDO, contratado do Real Madrid por €100M+ — o maior negócio da
+  //  história do futebol italiano. Top-6: Juventus (90), Napoli (79), Atalanta (69),
+  //  Inter (69), Milan (68), Roma (66). Quagliarella (Sampdoria, aos 36) foi artilheiro
+  //  (26 gols). Foi a última temporada de Allegri neste ciclo e de vários veteranos.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2019,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'joao-cancelo',        nome: "João Cancelo",        posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 85 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 86 },
+      { id: 'medhi-benatia',       nome: "Medhi Benatia",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'alex-sandro',         nome: "Alex Sandro",         posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'miralem-pjanic',      nome: "Miralem Pjanić",      posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'blaise-matuidi',      nome: "Blaise Matuidi",      posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'rodrigo-bentancur',   nome: "Rodrigo Bentancur",   posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 91 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 86 },
+      { id: 'mario-mandzukic',     nome: "Mario Mandžukić",     posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'douglas-costa',       nome: "Douglas Costa",       posicoes: ["PD","PE"],   forca: 83 },
+      { id: 'federico-bernardeschi', nome: "Federico Bernardeschi", posicoes: ["MEI","PD"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2019,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'alex-meret',          nome: "Alex Meret",          posicoes: ["GOL"],       forca: 79 },
+      { id: 'kalidou-koulibaly',   nome: "Kalidou Koulibaly",   posicoes: ["ZAG"],       forca: 86 },
+      { id: 'raul-albiol',         nome: "Raúl Albiol",         posicoes: ["ZAG"],       forca: 81 },
+      { id: 'elseid-hysaj',        nome: "Elseid Hysaj",        posicoes: ["LD","LE"],   forca: 78 },
+      { id: 'mario-rui',           nome: "Mário Rui",           posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'kevin-malcuit',       nome: "Kévin Malcuit",       posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'allan',               nome: "Allan",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'fabian-ruiz',         nome: "Fabián Ruiz",         posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'jose-callejon',       nome: "José Callejón",       posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'lorenzo-insigne',     nome: "Lorenzo Insigne",     posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'dries-mertens',       nome: "Dries Mertens",       posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'arkadiusz-milik',     nome: "Arkadiusz Milik",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'marek-hamsik',        nome: "Marek Hamšík",        posicoes: ["MEI","MC"],  forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2019,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'etrit-berisha',       nome: "Etrit Berisha",       posicoes: ["GOL"],       forca: 78 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'jose-luis-palomino',  nome: "José Luis Palomino",  posicoes: ["ZAG"],       forca: 79 },
+      { id: 'berat-djimsiti',      nome: "Berat Djimsiti",      posicoes: ["ZAG"],       forca: 77 },
+      { id: 'hans-hateboer',       nome: "Hans Hateboer",       posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'robin-gosens',        nome: "Robin Gosens",        posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'remo-freuler',        nome: "Remo Freuler",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'alejandro-gomez',     nome: "Alejandro Gómez",     posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'josip-ilicic',        nome: "Josip Iličić",        posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'duvan-zapata',        nome: "Duván Zapata",        posicoes: ["ATA"],       forca: 82 },
+      { id: 'timothy-castagne',    nome: "Timothy Castagne",    posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'mario-pasalic',       nome: "Mario Pašalić",       posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2019,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'samir-handanovic',    nome: "Samir Handanović",    posicoes: ["GOL"],       forca: 85 },
+      { id: 'milan-skriniar',      nome: "Milan Škriniar",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'danilo-dambrosio',    nome: "Danilo D'Ambrosio",   posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'kwadwo-asamoah',      nome: "Kwadwo Asamoah",      posicoes: ["LE","MC"],   forca: 78 },
+      { id: 'marcelo-brozovic',    nome: "Marcelo Brozović",    posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'roberto-gagliardini', nome: "Roberto Gagliardini", posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'radja-nainggolan',    nome: "Radja Nainggolan",    posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'matias-vecino',       nome: "Matías Vecino",       posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'ivan-perisic',        nome: "Ivan Perišić",        posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'mauro-icardi',        nome: "Mauro Icardi",        posicoes: ["ATA"],       forca: 85 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'keita-balde',         nome: "Keita Baldé",         posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'antonio-candreva',    nome: "Antonio Candreva",    posicoes: ["MD","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2019,
+    clube: "Milan",
+    jogadores: [
+      { id: 'gianluigi-donnarumma', nome: "Gianluigi Donnarumma", posicoes: ["GOL"],     forca: 84 },
+      { id: 'davide-calabria',     nome: "Davide Calabria",     posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'alessio-romagnoli',   nome: "Alessio Romagnoli",   posicoes: ["ZAG"],       forca: 82 },
+      { id: 'mateo-musacchio',     nome: "Mateo Musacchio",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ricardo-rodriguez',   nome: "Ricardo Rodríguez",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'franck-kessie',       nome: "Franck Kessié",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'lucas-biglia',        nome: "Lucas Biglia",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'tiemoue-bakayoko',    nome: "Tiémoué Bakayoko",    posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'suso',                nome: "Suso",                posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'krzysztof-piatek',    nome: "Krzysztof Piątek",    posicoes: ["ATA"],       forca: 80 },
+      { id: 'gonzalo-higuain',     nome: "Gonzalo Higuaín",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'patrick-cutrone',     nome: "Patrick Cutrone",     posicoes: ["ATA"],       forca: 77 },
+      { id: 'giacomo-bonaventura', nome: "Giacomo Bonaventura", posicoes: ["MC","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2019,
+    clube: "Roma",
+    jogadores: [
+      { id: 'robin-olsen',         nome: "Robin Olsen",         posicoes: ["GOL"],       forca: 78 },
+      { id: 'federico-fazio',      nome: "Federico Fazio",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'kostas-manolas',      nome: "Kostas Manolas",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'aleksandar-kolarov',  nome: "Aleksandar Kolarov",  posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'alessandro-florenzi', nome: "Alessandro Florenzi", posicoes: ["LD","MC"],   forca: 78 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'javier-pastore',      nome: "Javier Pastore",      posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'nicolo-zaniolo',      nome: "Nicolò Zaniolo",      posicoes: ["MEI","PD"],  forca: 78 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 83 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'cengiz-under',        nome: "Cengiz Ünder",        posicoes: ["PD","MEI"],  forca: 78 },
+      { id: 'justin-kluivert',     nome: "Justin Kluivert",     posicoes: ["PE","ATA"],  forca: 76 }
+    ]
   }
 
 ];
