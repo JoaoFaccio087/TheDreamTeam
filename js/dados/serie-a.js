@@ -4245,6 +4245,147 @@ const DADOS_SERIE_A = [
       { id: 'cengiz-under',        nome: "Cengiz Ünder",        posicoes: ["PD","MEI"],  forca: 78 },
       { id: 'justin-kluivert',     nome: "Justin Kluivert",     posicoes: ["PE","ATA"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2020 (temporada 2019-20) — a JUVENTUS de Sarri campeã (83 pts), 36º título
+  //  e o 9º e ÚLTIMO seguido do ciclo, num final apertadíssimo (só 1 pt à frente da
+  //  Inter de Conte). Foi a temporada mais longa da história, paralisada pela pandemia
+  //  de covid-19 (mar-jun) e concluída em agosto. Immobile fez 36 gols (recorde
+  //  igualado + Chuteira de Ouro). Top-6: Juventus (83), Inter (82), Atalanta (78),
+  //  Lazio (78), Roma (70), Milan (66). A Atalanta fez 98 gols, recorde da Serie A.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2020,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'danilo',              nome: "Danilo",              posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 84 },
+      { id: 'matthijs-de-ligt',    nome: "Matthijs de Ligt",    posicoes: ["ZAG"],       forca: 84 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 84 },
+      { id: 'alex-sandro',         nome: "Alex Sandro",         posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'miralem-pjanic',      nome: "Miralem Pjanić",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'rodrigo-bentancur',   nome: "Rodrigo Bentancur",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'blaise-matuidi',      nome: "Blaise Matuidi",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'aaron-ramsey',        nome: "Aaron Ramsey",        posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 90 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'gonzalo-higuain',     nome: "Gonzalo Higuaín",     posicoes: ["ATA"],       forca: 81 },
+      { id: 'douglas-costa',       nome: "Douglas Costa",       posicoes: ["PD","PE"],   forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2020,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'samir-handanovic',    nome: "Samir Handanović",    posicoes: ["GOL"],       forca: 85 },
+      { id: 'milan-skriniar',      nome: "Milan Škriniar",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'diego-godin',         nome: "Diego Godín",         posicoes: ["ZAG"],       forca: 83 },
+      { id: 'antonio-candreva',    nome: "Antonio Candreva",    posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'marcelo-brozovic',    nome: "Marcelo Brozović",    posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'stefano-sensi',       nome: "Stefano Sensi",       posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 84 },
+      { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["ATA","PD"],  forca: 80 },
+      { id: 'victor-moses',        nome: "Victor Moses",        posicoes: ["LD","MD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2020,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'marco-sportiello',    nome: "Marco Sportiello",    posicoes: ["GOL"],       forca: 77 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'jose-luis-palomino',  nome: "José Luis Palomino",  posicoes: ["ZAG"],       forca: 80 },
+      { id: 'berat-djimsiti',      nome: "Berat Djimsiti",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'hans-hateboer',       nome: "Hans Hateboer",       posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'robin-gosens',        nome: "Robin Gosens",        posicoes: ["LE","ME"],   forca: 81 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'remo-freuler',        nome: "Remo Freuler",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'alejandro-gomez',     nome: "Alejandro Gómez",     posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'ruslan-malinovskyi',  nome: "Ruslan Malinovskyi",  posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'josip-ilicic',        nome: "Josip Iličić",        posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'duvan-zapata',        nome: "Duván Zapata",        posicoes: ["ATA"],       forca: 83 },
+      { id: 'luis-muriel',         nome: "Luis Muriel",         posicoes: ["ATA"],       forca: 81 },
+      { id: 'mario-pasalic',       nome: "Mario Pašalić",       posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2020,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'thomas-strakosha',    nome: "Thomas Strakosha",    posicoes: ["GOL"],       forca: 80 },
+      { id: 'luiz-felipe',         nome: "Luiz Felipe",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'francesco-acerbi',    nome: "Francesco Acerbi",    posicoes: ["ZAG"],       forca: 82 },
+      { id: 'stefan-radu',         nome: "Ștefan Radu",         posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'manuel-lazzari',      nome: "Manuel Lazzari",      posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'senad-lulic',         nome: "Senad Lulić",         posicoes: ["LE","ME"],   forca: 78 },
+      { id: 'lucas-leiva',         nome: "Lucas Leiva",         posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'sergej-milinkovic-savic', nome: "Sergej Milinković-Savić", posicoes: ["MC","MEI"], forca: 85 },
+      { id: 'luis-alberto',        nome: "Luis Alberto",        posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'marco-parolo',        nome: "Marco Parolo",        posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'ciro-immobile',       nome: "Ciro Immobile",       posicoes: ["ATA"],       forca: 87 },
+      { id: 'joaquin-correa',      nome: "Joaquín Correa",      posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'felipe-caicedo',      nome: "Felipe Caicedo",      posicoes: ["ATA"],       forca: 77 },
+      { id: 'adam-marusic',        nome: "Adam Marušić",        posicoes: ["LD","MD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2020,
+    clube: "Roma",
+    jogadores: [
+      { id: 'pau-lopez',           nome: "Pau López",           posicoes: ["GOL"],       forca: 78 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'roger-ibanez',        nome: "Roger Ibañez",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'aleksandar-kolarov',  nome: "Aleksandar Kolarov",  posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'bruno-peres',         nome: "Bruno Peres",         posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'jordan-veretout',     nome: "Jordan Veretout",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MEI","PD"],  forca: 81 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 83 },
+      { id: 'nicolo-zaniolo',      nome: "Nicolò Zaniolo",      posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'justin-kluivert',     nome: "Justin Kluivert",     posicoes: ["PE","ATA"],  forca: 77 },
+      { id: 'diego-perotti',       nome: "Diego Perotti",       posicoes: ["PE","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2020,
+    clube: "Milan",
+    jogadores: [
+      { id: 'gianluigi-donnarumma', nome: "Gianluigi Donnarumma", posicoes: ["GOL"],     forca: 85 },
+      { id: 'davide-calabria',     nome: "Davide Calabria",     posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'alessio-romagnoli',   nome: "Alessio Romagnoli",   posicoes: ["ZAG"],       forca: 82 },
+      { id: 'simon-kjaer',         nome: "Simon Kjær",          posicoes: ["ZAG"],       forca: 80 },
+      { id: 'theo-hernandez',      nome: "Theo Hernández",      posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'franck-kessie',       nome: "Franck Kessié",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'ismael-bennacer',     nome: "Ismaël Bennacer",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["MEI","PE"],  forca: 81 },
+      { id: 'ante-rebic',          nome: "Ante Rebić",          posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 83 },
+      { id: 'rafael-leao',         nome: "Rafael Leão",         posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'samu-castillejo',     nome: "Samu Castillejo",     posicoes: ["PD","MEI"],  forca: 77 },
+      { id: 'giacomo-bonaventura', nome: "Giacomo Bonaventura", posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'alexis-saelemaekers', nome: "Alexis Saelemaekers", posicoes: ["PD","MD"],   forca: 76 }
+    ]
   }
 
 ];
