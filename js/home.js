@@ -72,9 +72,16 @@ function calcularEstatisticasFooter() {
 
   var spanEdicoes   = document.getElementById('stat-edicoes');
   var spanJogadores = document.getElementById('stat-jogadores');
+  var spanComps     = document.getElementById('stat-competicoes');
   var textoEdicoes  = edicoes.length === 1 ? '1 edição' : edicoes.length + ' edições';
   if (spanEdicoes)   spanEdicoes.textContent   = textoEdicoes;
   if (spanJogadores) spanJogadores.textContent = totalJogadores + ' jogadores';
+  // Nº de competições vem de COMPETICOES (fonte da verdade), então nunca defasa ao
+  // adicionar uma nova (Premier, Serie A, etc.).
+  if (spanComps && typeof COMPETICOES !== 'undefined') {
+    var nComps = Object.keys(COMPETICOES).length;
+    spanComps.textContent = nComps === 1 ? '1 competição' : nComps + ' competições';
+  }
 }
 
 calcularEstatisticasFooter();

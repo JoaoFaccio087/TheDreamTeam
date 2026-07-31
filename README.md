@@ -2,7 +2,7 @@
 
 # The Dream Team
 
-Monte o time dos sonhos com craques da Libertadores, da Champions League, do Brasileirão e da Copa do Mundo e leve-o ao título — sozinho ou contra outros jogadores online.
+Monte o time dos sonhos com craques da Libertadores, da Champions League, do Brasileirão, da Copa do Mundo, da Premier League e da Serie A e leve-o ao título — sozinho ou contra outros jogadores online.
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
@@ -18,14 +18,14 @@ Monte o time dos sonhos com craques da Libertadores, da Champions League, do Bra
 
 ## Sobre o projeto
 
-The Dream Team é um jogo de futebol de navegador. Você sorteia clubes lendários, monta uma escalação misturando craques de diferentes times e épocas e conduz uma campanha completa até o título — mata-mata com fase de grupos e pênaltis nas competições "de copa" (Libertadores, Champions e Copa do Mundo), ou pontos corridos (20 times, 38 rodadas) no Brasileirão. No modo online, a Copa do Mundo também é disputada em **grupos + mata-mata** entre os jogadores da sala.
+The Dream Team é um jogo de futebol de navegador. Você sorteia clubes lendários, monta uma escalação misturando craques de diferentes times e épocas e conduz uma campanha completa até o título — mata-mata com fase de grupos e pênaltis nas competições "de copa" (Libertadores, Champions e Copa do Mundo), ou pontos corridos (20 times, 38 rodadas) nas ligas (Brasileirão, Premier League e Serie A). No modo online, a Copa do Mundo também é disputada em **grupos + mata-mata** entre os jogadores da sala. A Premier League e a Serie A são as competições mais recentes; a Serie A ainda está em **beta**.
 
 O jogo tem dois grandes modos:
 
 - **Um jogador (offline):** roda inteiramente no navegador, sem instalação e sem servidor — HTML, CSS e JavaScript puro, sem frameworks nem etapa de build.
-- **Online (multiplayer):** salas em tempo real onde vários jogadores fazem um **draft** disputado e jogam um campeonato juntos — **liga de pontos corridos** (Brasileirão), **grupos + mata-mata** (Libertadores e Copa do Mundo) ou a **fase de liga fiel** da Champions League. Esse modo usa um backend leve (Node + Socket.IO + PostgreSQL).
+- **Online (multiplayer):** salas em tempo real onde vários jogadores fazem um **draft** disputado e jogam um campeonato juntos — **liga de pontos corridos** (Brasileirão, Premier League e Serie A), **grupos + mata-mata** (Libertadores e Copa do Mundo) ou a **fase de liga fiel** da Champions League. Esse modo usa um backend leve (Node + Socket.IO + PostgreSQL).
 
-A base de dados reúne elencos reais de cada temporada da Copa Libertadores (1960 a 2025), da UEFA Champions League (1956 a 2025), do Campeonato Brasileiro (1959 a 2025) e da Copa do Mundo (1930 a 2026). São **1.521 elencos** e mais de **23 mil jogadores**, com a força de cada atleta calibrada individualmente. Os elencos históricos mais antigos refletem o plantel registrado da época e podem ter menos de 16 nomes.
+A base de dados reúne elencos reais de cada temporada da Copa Libertadores (1960 a 2025), da UEFA Champions League (1956 a 2025), do Campeonato Brasileiro (1959 a 2025), da Copa do Mundo (1930 a 2026), da Premier League (1993 a 2026) e da Serie A (1990 em diante, em construção). São mais de **1.800 elencos** e cerca de **28 mil jogadores**, com a força de cada atleta calibrada individualmente. Os elencos históricos mais antigos refletem o plantel registrado da época e podem ter menos de 16 nomes.
 
 ## Demonstração
 
@@ -63,13 +63,13 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 
 ### Modo um jogador (offline)
 
-- **Sorteio de clubes e seleções** lendários da Libertadores, da Champions, do Brasileirão e da Copa do Mundo, por edição.
+- **Sorteio de clubes e seleções** lendários da Libertadores, da Champions, do Brasileirão, da Copa do Mundo, da Premier League e da Serie A, por edição.
 - **Outro sorteio**, que re-sorteia qualquer clube ou ano da competição, com orçamento de skips por partida.
 - **Estilos de jogo**: Clássico (sorteio de clubes) e Draft, em que você monta o XI escolhendo entre cartas aleatórias por posição, com raridade por força e re-sorteios limitados — sem jogadores repetidos. Há ainda o **Orçamento** (em um jogador): cada jogador tem um preço conforme a força e você monta o time sem estourar um teto — poucos craques caros ou muitos medianos, a escolha é sua.
 - **Escalação livre**: alocar, mover e trocar jogadores no campo, com a lista indicando quem pode ocupar cada posição.
 - **Oito formações**: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-3-2-1, 4-5-1, 3-4-3 e 4-1-2-1-2.
 - **Campanha completa** na Libertadores, na Champions e na Copa do Mundo, com fase de grupos e classificação seguidas de mata-mata até a final, e uma aba **Mata-a-Mata** que desenha a chave inteira (com seu time em destaque e os pênaltis quando há empate).
-- **Modo Brasileirão (liga)**: pontos corridos com 20 times e 38 rodadas, **Tabela** completa (P, J, V, E, D, GF, GS e SG) atualizada a cada rodada e botão **Pular tudo** para simular o restante da temporada de uma vez.
+- **Modo liga (Brasileirão, Premier League e Serie A)**: pontos corridos com 20 times e 38 rodadas, **Tabela** completa (P, J, V, E, D, GF, GS e SG) atualizada a cada rodada e botão **Pular tudo** para simular o restante da temporada de uma vez.
 - **Disputa de pênaltis** quando o mata-mata termina empatado.
 - **Simulação jogo a jogo ou automática**, em três velocidades.
 - **Estatísticas por jogador** (gols e assistências) atualizadas ao vivo.
@@ -80,7 +80,7 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 - **Contas e convidados**: jogue com login (e-mail/senha) ou entre como **convidado**, sem cadastro.
 - **Salas em tempo real**: crie uma sala (recebe um código) ou entre em uma existente; o **host** comanda o início e o avanço das partidas.
 - **Formatos**, escolhidos pela competição da sala:
-  - **Brasileirão (liga)**: 20 times, pontos corridos, 38 rodadas, todos contra todos (ida e volta).
+  - **Ligas (Brasileirão, Premier League e Serie A)**: 20 times, pontos corridos, 38 rodadas, todos contra todos (ida e volta).
   - **Libertadores (grupos + mata-mata)**: 32 participantes em 8 grupos de 4, fase de grupos e depois a chave eliminatória até a final.
   - **Copa do Mundo (grupos + mata-mata)**: 48 participantes em 12 grupos de 4, fase de grupos e depois a chave eliminatória até a final.
   - **Champions League (fase de liga fiel 25/26)**: 36 participantes numa tabela única, 8 rodadas; top 8 às oitavas, 9º–24º ao playoff e 25º–36º eliminados.
@@ -99,22 +99,22 @@ As capturas de tela ficam em `assets/imagens/screenshots/`.
 ### Geral
 
 - **Perfil do jogador**: clicar no ícone de perfil abre a sua tela (ou o login, se você for convidado). Reúne suas **estatísticas** por competição em seções expansíveis (campanhas, títulos, vitórias, gols e aproveitamento), um mapa do seu **time mais escalado** (com seletor por competição), o **histórico** de campanhas e as **conquistas**.
-- **Conquistas**: 76 troféus que desbloqueiam conforme você joga, cada um com uma **raridade** (comum, raro, épico ou lendário) — de progressão (primeira vitória, veterano, dinástico) a feitos de placar (7 a 0, hat-trick, pôquer, massacre, show de bola, vencer uma final nos pênaltis) e títulos por competição. Ao desbloquear, um **aviso no canto** anuncia o troféu (estilo Steam). O cálculo é feito e persistido no servidor.
-- **Quatro temas** que acompanham a competição escolhida.
+- **Conquistas**: 82 troféus que desbloqueiam conforme você joga, cada um com uma **raridade** (comum, raro, épico ou lendário) — de progressão (primeira vitória, veterano, dinástico) a feitos de placar (7 a 0, hat-trick, pôquer, massacre, show de bola, vencer uma final nos pênaltis) e títulos por competição. Ao desbloquear, um **aviso no canto** anuncia o troféu (estilo Steam). O cálculo é feito e persistido no servidor.
+- **Temas visuais**: Libertadores e Champions têm identidade própria; as demais (Brasileirão, Copa do Mundo, Premier League e Serie A) acompanham o tema claro/escuro da plataforma.
 - **Layout responsivo** para celular e tablet — inclusive em todas as telas do modo online (sorteio, draft por grupos, elencos e mata-mata).
 
 ## Como jogar
 
 ### Offline
 
-1. Escolha a competição (Libertadores, Champions, Brasileirão ou Copa do Mundo) e uma formação de amostra na tela inicial.
+1. Escolha a competição (Libertadores, Champions, Brasileirão, Copa do Mundo, Premier League ou Serie A) e uma formação de amostra na tela inicial.
 2. Clique em **Jogar agora**.
 3. Escolha o **estilo de jogo**: Clássico ou Draft. Após rolar ou começar, o estilo e a formação ficam travados.
 4. No **Clássico**: sorteie um clube (use **Outro sorteio** para trocar) e monte seu XI selecionando um jogador da lista e uma vaga compatível no campo. É possível misturar clubes.
 5. No **Draft**: escolha a formação e clique em **Começar**. Clique em cada vaga do campo para abrir cartas aleatórias e selecione o jogador desejado; você tem re-sorteios limitados por draft.
 6. Com o time completo, clique em **Simular**.
 7. Na Libertadores, na Champions e na Copa do Mundo, avance pela fase de grupos e pelo mata-mata e vença a final; a aba **Mata-a-Mata** mostra a chave completa.
-8. No **Brasileirão**, dispute as 38 rodadas acompanhando a tabela; use **Pular tudo** para ir direto ao resultado final. Ser **1º colocado** é o título.
+8. Nas **ligas** (Brasileirão, Premier League e Serie A), dispute as 38 rodadas acompanhando a tabela; use **Pular tudo** para ir direto ao resultado final. Ser **1º colocado** é o título.
 9. Ao final, abra o resumo da campanha.
 
 ### Online
