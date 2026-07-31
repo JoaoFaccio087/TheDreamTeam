@@ -3540,6 +3540,147 @@ const DADOS_SERIE_A = [
       { id: 'felipe',              nome: "Felipe",              posicoes: ["ZAG"],       forca: 76 },
       { id: 'walter-gargano',      nome: "Walter Gargano",      posicoes: ["VOL","MC"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2015 (temporada 2014-15) — a JUVENTUS de Massimiliano ALLEGRI tetracampeã
+  //  (87 pts), 31º título, no ano em que também foi VICE da Champions (perdeu a final
+  //  para o Barcelona). Tevez brilhou; Pogba e Vidal no auge. Top-6: Juventus (87),
+  //  Roma (70), Lazio (69), Fiorentina (64), Napoli (63), Genoa (59). Icardi (Inter)
+  //  e Luca Toni (Verona, aos 37) dividiram a artilharia (22 gols). Foi a última
+  //  temporada de Pirlo, Vidal, Tevez e Pogba juntos antes da desmontagem.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2015,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 88 },
+      { id: 'stephan-lichtsteiner', nome: "Stephan Lichtsteiner", posicoes: ["LD","MD"], forca: 82 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 87 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 86 },
+      { id: 'andrea-barzagli',     nome: "Andrea Barzagli",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'patrice-evra',        nome: "Patrice Evra",        posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'arturo-vidal',        nome: "Arturo Vidal",        posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","VOL"],  forca: 87 },
+      { id: 'claudio-marchisio',   nome: "Claudio Marchisio",   posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'carlos-tevez',        nome: "Carlos Tévez",        posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'alvaro-morata',       nome: "Álvaro Morata",       posicoes: ["ATA"],       forca: 81 },
+      { id: 'fernando-llorente',   nome: "Fernando Llorente",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'roberto-pereyra',     nome: "Roberto Pereyra",     posicoes: ["MEI","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2015,
+    clube: "Roma",
+    jogadores: [
+      { id: 'morgan-de-sanctis',   nome: "Morgan De Sanctis",   posicoes: ["GOL"],       forca: 79 },
+      { id: 'maicon',              nome: "Maicon",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'kostas-manolas',      nome: "Kostas Manolas",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'leandro-castan',      nome: "Leandro Castán",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jose-holebas',        nome: "José Holebas",        posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'miralem-pjanic',      nome: "Miralem Pjanić",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'kevin-strootman',     nome: "Kevin Strootman",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'seydou-keita',        nome: "Seydou Keita",        posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'gervinho',            nome: "Gervinho",            posicoes: ["PE","ATA"],  forca: 79 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'adem-ljajic',         nome: "Adem Ljajić",         posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'juan-iturbe',         nome: "Juan Iturbe",         posicoes: ["PD","ATA"],  forca: 77 },
+      { id: 'alessandro-florenzi', nome: "Alessandro Florenzi", posicoes: ["MC","MD"],   forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2015,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'federico-marchetti',  nome: "Federico Marchetti",  posicoes: ["GOL"],       forca: 79 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'santiago-gentiletti', nome: "Santiago Gentiletti", posicoes: ["ZAG"],       forca: 76 },
+      { id: 'mauricio',            nome: "Maurício",            posicoes: ["ZAG"],       forca: 77 },
+      { id: 'stefan-radu',         nome: "Ștefan Radu",         posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'lucas-biglia',        nome: "Lucas Biglia",        posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'marco-parolo',        nome: "Marco Parolo",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'felipe-anderson',     nome: "Felipe Anderson",     posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'antonio-candreva',    nome: "Antonio Candreva",    posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'senad-lulic',         nome: "Senad Lulić",         posicoes: ["ME","LE"],   forca: 78 },
+      { id: 'miroslav-klose',      nome: "Miroslav Klose",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'stefano-mauri',       nome: "Stefano Mauri",       posicoes: ["MEI","MC"],  forca: 76 },
+      { id: 'filip-djordjevic',    nome: "Filip Đorđević",      posicoes: ["ATA"],       forca: 76 },
+      { id: 'keita-balde',         nome: "Keita Baldé",         posicoes: ["ATA","PE"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2015,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'norberto-neto',       nome: "Neto",                posicoes: ["GOL"],       forca: 80 },
+      { id: 'gonzalo-rodriguez',   nome: "Gonzalo Rodríguez",   posicoes: ["ZAG"],       forca: 81 },
+      { id: 'stefan-savic',        nome: "Stefan Savić",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'davide-astori',       nome: "Davide Astori",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'manuel-pasqual',      nome: "Manuel Pasqual",      posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'borja-valero',        nome: "Borja Valero",        posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'milan-badelj',        nome: "Milan Badelj",        posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'matias-fernandez',    nome: "Matías Fernández",    posicoes: ["MEI","MD"],  forca: 78 },
+      { id: 'juan-cuadrado',       nome: "Juan Cuadrado",       posicoes: ["PD","MD"],   forca: 82 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'mario-gomez',         nome: "Mario Gómez",         posicoes: ["ATA"],       forca: 80 },
+      { id: 'khouma-babacar',      nome: "Khouma Babacar",      posicoes: ["ATA"],       forca: 76 },
+      { id: 'josip-ilicic',        nome: "Josip Iličić",        posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'joaquin',             nome: "Joaquín",             posicoes: ["PD","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2015,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'pepe-reina',          nome: "Pepe Reina",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'raul-albiol',         nome: "Raúl Albiol",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'kalidou-koulibaly',   nome: "Kalidou Koulibaly",   posicoes: ["ZAG"],       forca: 81 },
+      { id: 'henrique',            nome: "Henrique",            posicoes: ["ZAG"],       forca: 76 },
+      { id: 'faouzi-ghoulam',      nome: "Faouzi Ghoulam",      posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'christian-maggio',    nome: "Christian Maggio",    posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'jose-callejon',       nome: "José Callejón",       posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'marek-hamsik',        nome: "Marek Hamšík",        posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'david-lopez',         nome: "David López",         posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'gonzalo-higuain',     nome: "Gonzalo Higuaín",     posicoes: ["ATA"],       forca: 86 },
+      { id: 'dries-mertens',       nome: "Dries Mertens",       posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'lorenzo-insigne',     nome: "Lorenzo Insigne",     posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'manolo-gabbiadini',   nome: "Manolo Gabbiadini",   posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2015,
+    clube: "Genoa",
+    jogadores: [
+      { id: 'mattia-perin',        nome: "Mattia Perin",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'sebastien-de-maio',   nome: "Sébastien De Maio",   posicoes: ["ZAG"],       forca: 77 },
+      { id: 'nicolas-burdisso',    nome: "Nicolás Burdisso",    posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'armando-izzo',        nome: "Armando Izzo",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'luca-antonelli',      nome: "Luca Antonelli",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'panagiotis-tachtsidis', nome: "Panagiotis Tachtsidis", posicoes: ["VOL","MC"], forca: 77 },
+      { id: 'andrea-bertolacci',   nome: "Andrea Bertolacci",   posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'tomas-rincon',        nome: "Tomás Rincón",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'juraj-kucka',         nome: "Juraj Kucka",         posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'iago-falque',         nome: "Iago Falque",         posicoes: ["PD","MEI"],  forca: 77 },
+      { id: 'leonardo-pavoletti',  nome: "Leonardo Pavoletti",  posicoes: ["ATA"],       forca: 77 },
+      { id: 'mauricio-pinilla',    nome: "Mauricio Pinilla",    posicoes: ["ATA"],       forca: 77 },
+      { id: 'goran-pandev',        nome: "Goran Pandev",        posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'diego-milito',        nome: "Diego Milito",        posicoes: ["ATA"],       forca: 78 }
+    ]
   }
 
 ];
