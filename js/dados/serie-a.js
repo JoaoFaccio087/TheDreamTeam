@@ -3258,6 +3258,147 @@ const DADOS_SERIE_A = [
       { id: 'diego-forlan',        nome: "Diego Forlán",        posicoes: ["ATA","MEI"], forca: 80 },
       { id: 'mauro-zarate',        nome: "Mauro Zárate",        posicoes: ["ATA","MEI"], forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2013 (temporada 2012-13) — a JUVENTUS de Conte bicampeã (87 pts), 29º
+  //  título, com a defesa BBC (Barzagli-Bonucci-Chiellini) e Pogba recém-chegado de
+  //  graça. Top-6: Juventus (87), Napoli (78), Milan (72), Fiorentina (70), Udinese
+  //  (66), Roma (62). Cavani foi artilheiro (29 gols) na despedida do Napoli antes do
+  //  PSG. A Fiorentina de Montella, com Jovetić e Gómez, encantou. Foi a última
+  //  temporada de Del Piero, El Shaarawy explodiu no Milan (16 gols no 1º turno).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2013,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 88 },
+      { id: 'stephan-lichtsteiner', nome: "Stephan Lichtsteiner", posicoes: ["LD","MD"], forca: 82 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 87 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 84 },
+      { id: 'andrea-barzagli',     nome: "Andrea Barzagli",     posicoes: ["ZAG"],       forca: 84 },
+      { id: 'arturo-vidal',        nome: "Arturo Vidal",        posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'andrea-pirlo',        nome: "Andrea Pirlo",        posicoes: ["MC","VOL"],  forca: 87 },
+      { id: 'claudio-marchisio',   nome: "Claudio Marchisio",   posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'paul-pogba',          nome: "Paul Pogba",          posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'kwadwo-asamoah',      nome: "Kwadwo Asamoah",      posicoes: ["MC","LE"],   forca: 80 },
+      { id: 'mirko-vucinic',       nome: "Mirko Vučinić",       posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'sebastian-giovinco',  nome: "Sebastian Giovinco",  posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'fabio-quagliarella',  nome: "Fabio Quagliarella",  posicoes: ["ATA"],       forca: 79 },
+      { id: 'mauricio-isla',       nome: "Mauricio Isla",       posicoes: ["LD","MD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2013,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'morgan-de-sanctis',   nome: "Morgan De Sanctis",   posicoes: ["GOL"],       forca: 81 },
+      { id: 'paolo-cannavaro',     nome: "Paolo Cannavaro",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'federico-fernandez',  nome: "Federico Fernández",  posicoes: ["ZAG"],       forca: 79 },
+      { id: 'hugo-campagnaro',     nome: "Hugo Campagnaro",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'christian-maggio',    nome: "Christian Maggio",    posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'juan-camilo-zuniga',  nome: "Juan Zúñiga",         posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'walter-gargano',      nome: "Walter Gargano",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'gokhan-inler',        nome: "Gökhan Inler",        posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'valon-behrami',       nome: "Valon Behrami",       posicoes: ["MD","VOL"],  forca: 78 },
+      { id: 'marek-hamsik',        nome: "Marek Hamšík",        posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'edinson-cavani',      nome: "Edinson Cavani",      posicoes: ["ATA"],       forca: 88 },
+      { id: 'goran-pandev',        nome: "Goran Pandev",        posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'lorenzo-insigne',     nome: "Lorenzo Insigne",     posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'blerim-dzemaili',     nome: "Blerim Džemaili",     posicoes: ["MC","MEI"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2013,
+    clube: "Milan",
+    jogadores: [
+      { id: 'christian-abbiati',   nome: "Christian Abbiati",   posicoes: ["GOL"],       forca: 81 },
+      { id: 'ignazio-abate',       nome: "Ignazio Abate",       posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'philippe-mexes',      nome: "Philippe Mexès",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'cristian-zapata',     nome: "Cristián Zapata",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'kevin-constant',      nome: "Kevin Constant",      posicoes: ["LE","VOL"],  forca: 76 },
+      { id: 'massimo-ambrosini',   nome: "Massimo Ambrosini",   posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'riccardo-montolivo',  nome: "Riccardo Montolivo",  posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'sulley-muntari',      nome: "Sulley Muntari",      posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'kevin-prince-boateng', nome: "Kevin-Prince Boateng", posicoes: ["MC","MEI"], forca: 80 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 82 },
+      { id: 'giampaolo-pazzini',   nome: "Giampaolo Pazzini",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'mbaye-niang',         nome: "M'Baye Niang",        posicoes: ["ATA"],       forca: 75 },
+      { id: 'bojan-krkic',         nome: "Bojan Krkić",         posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'mattia-de-sciglio',   nome: "Mattia De Sciglio",   posicoes: ["LD","LE"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2013,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'emiliano-viviano',    nome: "Emiliano Viviano",    posicoes: ["GOL"],       forca: 79 },
+      { id: 'gonzalo-rodriguez',   nome: "Gonzalo Rodríguez",   posicoes: ["ZAG"],       forca: 80 },
+      { id: 'nenad-tomovic',       nome: "Nenad Tomović",       posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'facundo-roncaglia',   nome: "Facundo Roncaglia",   posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'manuel-pasqual',      nome: "Manuel Pasqual",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'borja-valero',        nome: "Borja Valero",        posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'david-pizarro',       nome: "David Pizarro",       posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'alberto-aquilani',    nome: "Alberto Aquilani",    posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'juan-cuadrado',       nome: "Juan Cuadrado",       posicoes: ["PD","MD"],   forca: 79 },
+      { id: 'stevan-jovetic',      nome: "Stevan Jovetić",      posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'mario-gomez',         nome: "Mario Gómez",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'luca-toni',           nome: "Luca Toni",           posicoes: ["ATA"],       forca: 77 },
+      { id: 'adem-ljajic',         nome: "Adem Ljajić",         posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'alessandro-gamberini', nome: "Alessandro Gamberini", posicoes: ["ZAG"],      forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2013,
+    clube: "Udinese",
+    jogadores: [
+      { id: 'zeljko-brkic',        nome: "Željko Brkić",        posicoes: ["GOL"],       forca: 77 },
+      { id: 'mehdi-benatia',       nome: "Mehdi Benatia",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'danilo',              nome: "Danilo",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'thomas-heurtaux',     nome: "Thomas Heurtaux",     posicoes: ["ZAG"],       forca: 76 },
+      { id: 'maurizio-domizzi',    nome: "Maurizio Domizzi",    posicoes: ["ZAG","LE"],  forca: 76 },
+      { id: 'giampiero-pinzi',     nome: "Giampiero Pinzi",     posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'emmanuel-badu',       nome: "Emmanuel Agyemang-Badu", posicoes: ["MC","VOL"], forca: 77 },
+      { id: 'allan',               nome: "Allan",               posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'roberto-pereyra',     nome: "Roberto Pereyra",     posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'antonio-di-natale',   nome: "Antonio Di Natale",   posicoes: ["ATA"],       forca: 83 },
+      { id: 'luis-muriel',         nome: "Luis Muriel",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'maicosuel',           nome: "Maicosuel",           posicoes: ["MEI","ATA"], forca: 76 },
+      { id: 'dusan-basta',         nome: "Dušan Basta",         posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'pablo-armero',        nome: "Pablo Armero",        posicoes: ["LE","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2013,
+    clube: "Roma",
+    jogadores: [
+      { id: 'mauro-goicoechea',    nome: "Mauro Goicoechea",    posicoes: ["GOL"],       forca: 76 },
+      { id: 'marco-cassetti',      nome: "Marco Cassetti",      posicoes: ["LD","ZAG"],  forca: 76 },
+      { id: 'leandro-castan',      nome: "Leandro Castán",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'nicolas-burdisso',    nome: "Nicolás Burdisso",    posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'federico-balzaretti', nome: "Federico Balzaretti", posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'miralem-pjanic',      nome: "Miralem Pjanić",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'alessandro-florenzi', nome: "Alessandro Florenzi", posicoes: ["MC","MD"],   forca: 78 },
+      { id: 'panagiotis-tachtsidis', nome: "Panagiotis Tachtsidis", posicoes: ["VOL","MC"], forca: 76 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'erik-lamela',         nome: "Erik Lamela",         posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'pablo-osvaldo',       nome: "Pablo Osvaldo",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'mattia-destro',       nome: "Mattia Destro",       posicoes: ["ATA"],       forca: 78 },
+      { id: 'rodrigo-taddei',      nome: "Rodrigo Taddei",      posicoes: ["MD","MEI"],  forca: 75 }
+    ]
   }
 
 ];
