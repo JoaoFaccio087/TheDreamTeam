@@ -234,6 +234,7 @@
     'Palermo':                 ['#EFB8CE', '#231F20'],
     'Genoa':                   ['#B0182B', '#1B3A5C'],
     'Sassuolo':                ['#00A752', '#000000'],
+    'Atalanta':                ['#1B1B4B', '#000000'],
     'Roma':                    ['#8E1F2F', '#F0BC42'],
     'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
     'Sampdoria':               ['#0A2A66', '#FFFFFF'],
@@ -487,6 +488,7 @@
     'Palermo':                 { padrao: 'solido' },                                  // rosanero (rosa)
     'Genoa':                   { padrao: 'metade' },                                  // metade azul sobre fundo vermelho
     'Sassuolo':                { padrao: 'listras-v', listras: 4 },                  // verde e preto (neroverdi)
+    'Atalanta':                { padrao: 'listras-v', listras: 5 },                  // azul e preto (nerazzurri di Bergamo)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

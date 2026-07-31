@@ -3822,6 +3822,147 @@ const DADOS_SERIE_A = [
       { id: 'matteo-politano',     nome: "Matteo Politano",     posicoes: ["PD","MEI"],  forca: 77 },
       { id: 'sergio-floccari',     nome: "Sergio Floccari",     posicoes: ["ATA"],       forca: 75 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2017 (temporada 2016-17) — a JUVENTUS de Allegri HEXACAMPEÃ (91 pts), 33º
+  //  título e a dobradinha com a Coppa Italia, no ano em que também foi VICE da
+  //  Champions (perdeu a final para o Real Madrid em Cardiff). Higuaín reforçou a Juve
+  //  vindo do Napoli. Top-6: Juventus (91), Roma (87), Napoli (86), Atalanta (72),
+  //  Lazio (70), Milan (63). Džeko (Roma) foi artilheiro (29 gols). A ATALANTA de
+  //  Gasperini foi a revelação (4º, à Europa) e entra no acervo com Gómez e Caldara.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2017,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'gianluigi-buffon',    nome: "Gianluigi Buffon",    posicoes: ["GOL"],       forca: 89 },
+      { id: 'dani-alves',          nome: "Dani Alves",          posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 87 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 87 },
+      { id: 'andrea-barzagli',     nome: "Andrea Barzagli",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'alex-sandro',         nome: "Alex Sandro",         posicoes: ["LE","MD"],   forca: 84 },
+      { id: 'miralem-pjanic',      nome: "Miralem Pjanić",      posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'sami-khedira',        nome: "Sami Khedira",        posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'claudio-marchisio',   nome: "Claudio Marchisio",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'gonzalo-higuain',     nome: "Gonzalo Higuaín",     posicoes: ["ATA"],       forca: 87 },
+      { id: 'mario-mandzukic',     nome: "Mario Mandžukić",     posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'juan-cuadrado',       nome: "Juan Cuadrado",       posicoes: ["PD","MD"],   forca: 82 },
+      { id: 'stefano-sturaro',     nome: "Stefano Sturaro",     posicoes: ["MC","VOL"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2017,
+    clube: "Roma",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'federico-fazio',      nome: "Federico Fazio",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'kostas-manolas',      nome: "Kostas Manolas",      posicoes: ["ZAG"],       forca: 83 },
+      { id: 'antonio-rudiger',     nome: "Antonio Rüdiger",     posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'emerson-palmieri',    nome: "Emerson Palmieri",    posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'daniele-de-rossi',    nome: "Daniele De Rossi",    posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'radja-nainggolan',    nome: "Radja Nainggolan",    posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'kevin-strootman',     nome: "Kevin Strootman",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'alessandro-florenzi', nome: "Alessandro Florenzi", posicoes: ["LD","MC"],   forca: 79 },
+      { id: 'mohamed-salah',       nome: "Mohamed Salah",       posicoes: ["PD","ATA"],  forca: 85 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 85 },
+      { id: 'diego-perotti',       nome: "Diego Perotti",       posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'francesco-totti',     nome: "Francesco Totti",     posicoes: ["MEI","ATA"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2017,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'pepe-reina',          nome: "Pepe Reina",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'elseid-hysaj',        nome: "Elseid Hysaj",        posicoes: ["LD","LE"],   forca: 78 },
+      { id: 'kalidou-koulibaly',   nome: "Kalidou Koulibaly",   posicoes: ["ZAG"],       forca: 84 },
+      { id: 'raul-albiol',         nome: "Raúl Albiol",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'faouzi-ghoulam',      nome: "Faouzi Ghoulam",      posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'jorginho',            nome: "Jorginho",            posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'allan',               nome: "Allan",               posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'marek-hamsik',        nome: "Marek Hamšík",        posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'jose-callejon',       nome: "José Callejón",       posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'lorenzo-insigne',     nome: "Lorenzo Insigne",     posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'dries-mertens',       nome: "Dries Mertens",       posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'arkadiusz-milik',     nome: "Arkadiusz Milik",     posicoes: ["ATA"],       forca: 79 },
+      { id: 'emanuele-giaccherini', nome: "Emanuele Giaccherini", posicoes: ["MEI","MD"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2017,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'etrit-berisha',       nome: "Etrit Berisha",       posicoes: ["GOL"],       forca: 78 },
+      { id: 'mattia-caldara',      nome: "Mattia Caldara",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'andrea-masiello',     nome: "Andrea Masiello",     posicoes: ["ZAG"],       forca: 77 },
+      { id: 'leonardo-spinazzola', nome: "Leonardo Spinazzola", posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'hans-hateboer',       nome: "Hans Hateboer",       posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'remo-freuler',        nome: "Remo Freuler",        posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'roberto-gagliardini', nome: "Roberto Gagliardini", posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'alejandro-gomez',     nome: "Alejandro Gómez",     posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'andrea-petagna',      nome: "Andrea Petagna",      posicoes: ["ATA"],       forca: 78 },
+      { id: 'andrea-conti',        nome: "Andrea Conti",        posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'franck-kessie',       nome: "Franck Kessié",       posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'jasmin-kurtic',       nome: "Jasmin Kurtić",       posicoes: ["MC","MEI"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2017,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'thomas-strakosha',    nome: "Thomas Strakosha",    posicoes: ["GOL"],       forca: 79 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'wallace',             nome: "Wallace",             posicoes: ["ZAG"],       forca: 76 },
+      { id: 'stefan-radu',         nome: "Ștefan Radu",         posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'senad-lulic',         nome: "Senad Lulić",         posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'dusan-basta',         nome: "Dušan Basta",         posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'lucas-biglia',        nome: "Lucas Biglia",        posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'sergej-milinkovic-savic', nome: "Sergej Milinković-Savić", posicoes: ["MC","MEI"], forca: 81 },
+      { id: 'marco-parolo',        nome: "Marco Parolo",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'felipe-anderson',     nome: "Felipe Anderson",     posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'ciro-immobile',       nome: "Ciro Immobile",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'keita-balde',         nome: "Keita Baldé",         posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'luis-alberto',        nome: "Luis Alberto",        posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'wesley-hoedt',        nome: "Wesley Hoedt",        posicoes: ["ZAG"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2017,
+    clube: "Milan",
+    jogadores: [
+      { id: 'gianluigi-donnarumma', nome: "Gianluigi Donnarumma", posicoes: ["GOL"],     forca: 82 },
+      { id: 'ignazio-abate',       nome: "Ignazio Abate",       posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'alessio-romagnoli',   nome: "Alessio Romagnoli",   posicoes: ["ZAG"],       forca: 80 },
+      { id: 'gabriel-paletta',     nome: "Gabriel Paletta",     posicoes: ["ZAG"],       forca: 77 },
+      { id: 'mattia-de-sciglio',   nome: "Mattia De Sciglio",   posicoes: ["LD","LE"],   forca: 77 },
+      { id: 'juraj-kucka',         nome: "Juraj Kucka",         posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'manuel-locatelli',    nome: "Manuel Locatelli",    posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'giacomo-bonaventura', nome: "Giacomo Bonaventura", posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'suso',                nome: "Suso",                posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'carlos-bacca',        nome: "Carlos Bacca",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'mbaye-niang',         nome: "M'Baye Niang",        posicoes: ["ATA","PD"],  forca: 77 },
+      { id: 'gerard-deulofeu',     nome: "Gerard Deulofeu",     posicoes: ["PE","ATA"],  forca: 78 },
+      { id: 'riccardo-montolivo',  nome: "Riccardo Montolivo",  posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'vangelis-moras',      nome: "Vangelis Moras",      posicoes: ["ZAG"],       forca: 74 }
+    ]
   }
 
 ];
