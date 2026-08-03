@@ -245,7 +245,7 @@ const DADOS_LALIGA = [
       { id: 'martin-dominguez',    nome: "Martín Domínguez",    posicoes: ["VOL","MC"],  forca: 77 },
       { id: 'martin-gonzalez',     nome: "Martín González",     posicoes: ["MC","VOL"],  forca: 77 },
       { id: 'javier-ibañez-osa',   nome: "Ibáñez",              posicoes: ["MC","MEI"],  forca: 76 },
-      { id: 'jose-luis-ziganda',   nome: "Ziganda",             posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'cuco-ziganda',        nome: "Ziganda",             posicoes: ["ATA","MEI"], forca: 79 },
       { id: 'urban-osasuna',       nome: "Urban",               posicoes: ["ATA"],       forca: 77 },
       { id: 'ramon-maria-cholo',   nome: "Cholo",               posicoes: ["MEI","MD"],  forca: 76 },
       { id: 'unanua-osasuna',      nome: "Unanua",              posicoes: ["ME","LE"],   forca: 75 },
@@ -268,7 +268,7 @@ const DADOS_LALIGA = [
       { id: 'juan-carlos-spo',     nome: "Juan Carlos (SPO)",   posicoes: ["ZAG","LD"],  forca: 76 },
       { id: 'jozef-luhovy',        nome: "Luhový",              posicoes: ["ATA"],       forca: 78 },
       { id: 'oscar-gil-spo',       nome: "Óscar",               posicoes: ["MC","MEI"],  forca: 76 },
-      { id: 'luis-enrique-sporting', nome: "Luis Enrique",      posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 81 },
       { id: 'jose-manuel-manjarin', nome: "Manjarín",           posicoes: ["MEI","MC"],  forca: 78 },
       { id: 'plamen-yordanov',     nome: "Yordanov",            posicoes: ["ATA","MEI"], forca: 77 },
       { id: 'roland-nilsson-spo',  nome: "Nilsson",             posicoes: ["LD","ZAG"],  forca: 77 },
@@ -546,7 +546,7 @@ const DADOS_LALIGA = [
       { id: 'cesar-gomez-ten',     nome: "César Gómez",         posicoes: ["ZAG"],       forca: 77 },
       { id: 'agustin-alvarez-ten', nome: "Chano",               posicoes: ["ZAG","VOL"], forca: 77 },
       { id: 'toni-ten',            nome: "Toni",                posicoes: ["LE","LD"],   forca: 76 },
-      { id: 'fernando-redondo',    nome: "Redondo",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 84 },
       { id: 'jose-del-solar',      nome: "Del Solar",           posicoes: ["MC","VOL"],  forca: 80 },
       { id: 'quique-estebaranz',   nome: "Quique Estebaranz",   posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'felipe-miñambres',    nome: "Felipe",              posicoes: ["MEI","MC"],  forca: 77 },
@@ -577,6 +577,147 @@ const DADOS_LALIGA = [
       { id: 'juan-sabas-atm',      nome: "Sabas",               posicoes: ["ATA"],       forca: 77 },
       { id: 'alfredo-santaelena',  nome: "Santaelena",          posicoes: ["ZAG","LD"],  forca: 76 },
       { id: 'diego-rivas-atm',     nome: "Diego (ATM)",         posicoes: ["MD","PD"],   forca: 75 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1994 (temporada 1993-94) — o BARCELONA de Cruyff TETRACAMPEÃO (56 pts), 14º
+  //  título, decidido por 1 KICK: na última rodada o Deportivo (também 56 pts) precisava
+  //  vencer o Valencia mas empatou 0-0 após Djukić PERDER um pênalti no fim; o Barça goleou
+  //  o Sevilla 5-2 e ficou com o tetra no saldo. ROMÁRIO chegou e foi Pichichi (30 gols),
+  //  formando com Stoichkov a dupla mais temida da Europa. Top-6: Barcelona (56), Deportivo
+  //  (56), Zaragoza (46), Real Madrid (45), Athletic (43), Sevilla (42). Barça vice Champions.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1994,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'andoni-zubizarreta',  nome: "Andoni Zubizarreta",  posicoes: ["GOL"],       forca: 84 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'ronald-koeman',       nome: "Ronald Koeman",       posicoes: ["ZAG","VOL"], forca: 86 },
+      { id: 'miguel-angel-nadal',  nome: "Miguel Ángel Nadal",  posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'jose-mari-bakero',    nome: "José Mari Bakero",    posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'guillermo-amor',      nome: "Guillermo Amor",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'txiki-begiristain',   nome: "Txiki Begiristain",   posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'hristo-stoichkov',    nome: "Hristo Stoichkov",    posicoes: ["ATA","PE"],  forca: 89 },
+      { id: 'romario',             nome: "Romário",             posicoes: ["ATA"],       forca: 90 },
+      { id: 'michael-laudrup',     nome: "Michael Laudrup",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'julio-salinas',       nome: "Julio Salinas",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'jon-andoni-goikoetxea', nome: "Goikoetxea (BAR)",  posicoes: ["MD","PD"],   forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1994,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'francisco-liaño',     nome: "Liaño",               posicoes: ["GOL"],       forca: 84 },
+      { id: 'aitor-lopez-rekarte-dep', nome: "López Rekarte",   posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'fernando-nando-dep',  nome: "Nando (DEP)",         posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'jose-ramon-alberto-dep', nome: "Ribera",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'voro-gonzalez',       nome: "Voro",                posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 81 },
+      { id: 'jose-manuel-manjarin', nome: "Manjarín",          posicoes: ["MEI","MD"],  forca: 79 },
+      { id: 'bebeto',              nome: "Bebeto",              posicoes: ["ATA"],       forca: 87 },
+      { id: 'claudio-barragan',    nome: "Claudio",             posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'adolfo-aldana',       nome: "Aldana (DEP)",        posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'juan-manuel-canales', nome: "Canales",             posicoes: ["MD","PD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1994,
+    clube: "Zaragoza",
+    jogadores: [
+      { id: 'andoni-cedrun',       nome: "Cedrún",              posicoes: ["GOL"],       forca: 79 },
+      { id: 'francisco-solana',    nome: "Solana",              posicoes: ["LD","LE"],   forca: 76 },
+      { id: 'pablo-alfaro',        nome: "Pablo Alfaro",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'xavier-aguado',       nome: "Aguado",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'alberto-belsue',      nome: "Belsué",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'dario-franco',        nome: "Darío Franco",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'gustavo-poyet',       nome: "Poyet",               posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'juan-antonio-higuera', nome: "Higuera",            posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'nayim',               nome: "Nayim",               posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'miguel-pardeza',      nome: "Pardeza",             posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'juan-esnaider',       nome: "Esnáider",            posicoes: ["ATA"],       forca: 81 },
+      { id: 'santiago-aragon',     nome: "Aragón",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 78 },
+      { id: 'andoni-goikoetxea-zar', nome: "Goikoetxea (ZAR)",  posicoes: ["ZAG","VOL"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1994,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'francisco-buyo',      nome: "Francisco Buyo",      posicoes: ["GOL"],       forca: 81 },
+      { id: 'chendo',              nome: "Chendo",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 86 },
+      { id: 'rafael-alkorta',      nome: "Rafael Alkorta",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'luis-milla',          nome: "Luis Milla",          posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'jose-miguel-gonzalez', nome: "Míchel",             posicoes: ["MEI","MD"],  forca: 84 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'jose-emilio-amavisca', nome: "Amavisca",           posicoes: ["PE","ATA"],  forca: 80 },
+      { id: 'ivan-zamorano',       nome: "Iván Zamorano",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'emilio-butragueno',   nome: "Emilio Butragueño",   posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'gheorghe-hagi',       nome: "Gheorghe Hagi",       posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'alfonso-perez',       nome: "Alfonso",             posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1994,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'jose-luis-valencia',  nome: "Valencia",            posicoes: ["GOL"],       forca: 78 },
+      { id: 'javier-larrainzar-ath', nome: "Larrainzar (ATH)",  posicoes: ["LD","ZAG"],  forca: 76 },
+      { id: 'aitor-larrazabal',    nome: "Larrazábal",          posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'genar-andrinua',      nome: "Andrinúa",            posicoes: ["ZAG"],       forca: 77 },
+      { id: 'aitor-karanka',       nome: "Karanka",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'andoni-lakabeg',      nome: "Lakabeg",             posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'ander-garitano-ath',  nome: "Garitano",            posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'aitor-uribarrena',    nome: "Uribarrena",          posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'julen-guerrero',      nome: "Julen Guerrero",      posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'ernesto-valverde-ath', nome: "Valverde",           posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'cuco-ziganda',        nome: "Ziganda",             posicoes: ["ATA"],       forca: 79 },
+      { id: 'aitor-urrutia-ath',   nome: "Urrutia",             posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'inaki-eskurza',       nome: "Eskurza",             posicoes: ["MD","PD"],   forca: 76 },
+      { id: 'jose-maria-tabuenka', nome: "Tabuenka",            posicoes: ["ZAG","LE"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1994,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'juan-carlos-unzue-sev', nome: "Unzué",             posicoes: ["GOL"],       forca: 79 },
+      { id: 'manuel-jimenez-sev',  nome: "Manolo Jiménez",      posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'jose-andrades',       nome: "Andrades",            posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'diego-sevilla',       nome: "Diego",               posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'francisco-soler-sev', nome: "Soler",               posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'rafa-paz',            nome: "Rafa Paz",            posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'jose-martagon',       nome: "Martagón",            posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'manuel-prieto-sev',   nome: "Prieto",              posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'davor-suker',         nome: "Davor Šuker",         posicoes: ["ATA"],       forca: 85 },
+      { id: 'jose-maria-bango',    nome: "Bango (SEV)",         posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'jose-luis-moya-sev',  nome: "Moya",                posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'ramon-tevenet',       nome: "Tevenet",             posicoes: ["ZAG","VOL"], forca: 76 },
+      { id: 'antonio-marcos-sev',  nome: "Marcos (SEV)",        posicoes: ["MD","PD"],   forca: 76 }
     ]
   }
 
