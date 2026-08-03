@@ -20,6 +20,7 @@ function ehChampions(c) { return normComp(c).includes('champions'); }
 function ehBrasil(c)    { return normComp(c).includes('brasileir'); }
 function ehCopa(c)      { return normComp(c).includes('copa'); }
 function ehPremier(c)   { return normComp(c).includes('premier'); }
+function ehSerieA(c)    { return normComp(c).includes('serie a') || normComp(c).includes('série a'); }
 
 // FONTE DE VERDADE ÚNICA das competições conhecidas. Ao adicionar uma competição nova (ex.:
 // Premier League), inclua-a AQUI (id + matcher) e as conquistas "de todas as competições" e as
@@ -30,6 +31,7 @@ const GRUPOS_CONHECIDOS = [
   { id: 'brasil',    eh: ehBrasil },
   { id: 'copa',      eh: ehCopa },
   { id: 'premier',   eh: ehPremier },                // jul/2026 — coleta completa, fora do beta
+  { id: 'serie_a',   eh: ehSerieA },                 // ago/2026 — coleta completa 1990-2026, fora do beta
 ];
 // Ids que já existem escritos à mão (não gerar em cima deles).
 const GRUPOS_MANUAIS = ['liberta', 'champions', 'brasil', 'copa'];
