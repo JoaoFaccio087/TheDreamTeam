@@ -499,6 +499,8 @@
     'Sporting Gijón':          { padrao: 'listras-v', listras: 5 },                  // vermelho e branco (rojiblanco)
     'Oviedo':                  { padrao: 'solido' },                                  // azul (carbayón)
     'Zaragoza':                { padrao: 'metade' },                                  // branco e azul (blanquillos)
+    'Deportivo':               { padrao: 'listras-v', listras: 4 },                  // azul e branco (Depor)
+    'Tenerife':                { padrao: 'solido' },                                  // branco/azul (chicharreros)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

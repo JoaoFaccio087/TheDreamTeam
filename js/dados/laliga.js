@@ -368,7 +368,7 @@ const DADOS_LALIGA = [
       { id: 'paulo-futre',         nome: "Paulo Futre",         posicoes: ["MEI","ATA"], forca: 84 },
       { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 80 },
       { id: 'alfredo-santaelena',  nome: "Santaelena",          posicoes: ["ZAG","LD"],  forca: 76 },
-      { id: 'sabas-sarria',        nome: "Sabas",               posicoes: ["ATA"],       forca: 77 },
+      { id: 'juan-sabas-atm',      nome: "Sabas",               posicoes: ["ATA"],       forca: 77 },
       { id: 'roberto-fernandez-atm', nome: "Roberto (ATM)",     posicoes: ["MC","MEI"],  forca: 76 }
     ]
   },
@@ -389,7 +389,7 @@ const DADOS_LALIGA = [
       { id: 'luboslav-penev',      nome: "Lyuboslav Penev",     posicoes: ["ATA"],       forca: 83 },
       { id: 'fernando-gimenez',    nome: "Fernando Giménez",    posicoes: ["ATA"],       forca: 77 },
       { id: 'quique-sanchez-flores', nome: "Quique Sánchez Flores", posicoes: ["LD","VOL"], forca: 79 },
-      { id: 'paco-camarasa',       nome: "Camarasa",            posicoes: ["VOL","ZAG"], forca: 77 },
+      { id: 'francisco-camarasa',  nome: "Camarasa",            posicoes: ["VOL","ZAG"], forca: 77 },
       { id: 'jose-luis-arroyo',    nome: "Arroyo",              posicoes: ["MC","MEI"],  forca: 76 },
       { id: 'javier-subirats',     nome: "Javier Subirats",     posicoes: ["MEI","MD"],  forca: 75 }
     ]
@@ -436,6 +436,147 @@ const DADOS_LALIGA = [
       { id: 'alberto-belsue',      nome: "Belsué",              posicoes: ["LD","MD"],   forca: 78 },
       { id: 'santiago-aragon',     nome: "Aragón",              posicoes: ["VOL","MC"],  forca: 77 },
       { id: 'gustavo-julia-zar',   nome: "Julià",               posicoes: ["ATA"],       forca: 76 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1993 (temporada 1992-93) — o BARCELONA de Cruyff TRICAMPEÃO (58 pts), 13º
+  //  título, de novo na última rodada (Real Madrid liderava por 1 pt e perdeu 0-2 no
+  //  Tenerife pela 2ª vez seguida!). O Barça bateu o Zaragoza por 1-0 e garantiu o tri.
+  //  Top-6: Barcelona (58), Real Madrid (57), Deportivo (54), Valencia (48), Tenerife
+  //  (44), Atlético (43). Bebeto (Deportivo) foi artilheiro (29 gols). Ainda SEM Romário
+  //  (chegou só em 93-94). O Deportivo de Arsenio Iglesias emergia como potência.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1993,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'andoni-zubizarreta',  nome: "Andoni Zubizarreta",  posicoes: ["GOL"],       forca: 84 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'ronald-koeman',       nome: "Ronald Koeman",       posicoes: ["ZAG","VOL"], forca: 87 },
+      { id: 'miguel-angel-nadal',  nome: "Miguel Ángel Nadal",  posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'juan-carlos-bcn',     nome: "Juan Carlos (BAR)",   posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'jose-mari-bakero',    nome: "José Mari Bakero",    posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'guillermo-amor',      nome: "Guillermo Amor",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'eusebio-sacristan',   nome: "Eusebio Sacristán",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'txiki-begiristain',   nome: "Txiki Begiristain",   posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'hristo-stoichkov',    nome: "Hristo Stoichkov",    posicoes: ["ATA","PE"],  forca: 88 },
+      { id: 'michael-laudrup',     nome: "Michael Laudrup",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'julio-salinas',       nome: "Julio Salinas",       posicoes: ["ATA"],       forca: 81 },
+      { id: 'jon-andoni-goikoetxea', nome: "Goikoetxea (BAR)",  posicoes: ["MD","PD"],   forca: 79 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1993,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'francisco-buyo',      nome: "Francisco Buyo",      posicoes: ["GOL"],       forca: 82 },
+      { id: 'chendo',              nome: "Chendo",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 86 },
+      { id: 'rafael-alkorta',      nome: "Rafael Alkorta",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'jose-miguel-gonzalez', nome: "Míchel",             posicoes: ["MEI","MD"],  forca: 85 },
+      { id: 'luis-milla',          nome: "Luis Milla",          posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'rafael-martin-vazquez', nome: "Martín Vázquez",    posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'gheorghe-hagi',       nome: "Gheorghe Hagi",       posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'emilio-butragueno',   nome: "Emilio Butragueño",   posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'hugo-sanchez',        nome: "Hugo Sánchez",        posicoes: ["ATA"],       forca: 84 },
+      { id: 'ivan-zamorano',       nome: "Iván Zamorano",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'paco-llorente',       nome: "Paco Llorente",       posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'chuti-villarroya',    nome: "Villarroya",          posicoes: ["LE","LD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1993,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'francisco-liaño',     nome: "Liaño",               posicoes: ["GOL"],       forca: 83 },
+      { id: 'aitor-lopez-rekarte-dep', nome: "López Rekarte",   posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'fernando-nando-dep',  nome: "Nando (DEP)",         posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 81 },
+      { id: 'jose-ramon-alberto-dep', nome: "Ribera",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'genaro-albistegi',    nome: "Albístegi",           posicoes: ["VOL","ZAG"], forca: 76 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'adolfo-aldana',       nome: "Aldana (DEP)",        posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'bebeto',              nome: "Bebeto",              posicoes: ["ATA"],       forca: 86 },
+      { id: 'claudio-barragan',    nome: "Claudio",             posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'jose-yosu-mari',      nome: "Yosu",                posicoes: ["ATA"],       forca: 76 },
+      { id: 'mariano-hoyas',       nome: "Mariano Hoyas",       posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'juan-manuel-canales', nome: "Canales",             posicoes: ["MD","PD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1993,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'jose-manuel-sempere', nome: "José Manuel Sempere", posicoes: ["GOL"],       forca: 80 },
+      { id: 'fernando',            nome: "Fernando Giner",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'ricardo-arias',       nome: "Ricardo Arias",       posicoes: ["ZAG"],       forca: 77 },
+      { id: 'nando-valencia',      nome: "Nando",               posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'francisco-camarasa',  nome: "Camarasa",            posicoes: ["VOL","ZAG"], forca: 78 },
+      { id: 'fernando-gomez',      nome: "Fernando Gómez",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'leonardo-enrique',    nome: "Leonardo",            posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'mazinho-oliveira-val', nome: "Mazinho",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'eloy-olaya-val',      nome: "Eloy",                posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'luboslav-penev',      nome: "Lyuboslav Penev",     posicoes: ["ATA"],       forca: 83 },
+      { id: 'quique-sanchez-flores', nome: "Quique Sánchez Flores", posicoes: ["LD","VOL"], forca: 79 },
+      { id: 'roberto-fernandez',   nome: "Roberto",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jose-luis-arroyo',    nome: "Arroyo",              posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'javier-subirats',     nome: "Javier Subirats",     posicoes: ["MEI","MD"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1993,
+    clube: "Tenerife",
+    jogadores: [
+      { id: 'jose-manuel-ochotorena', nome: "Ochotorena",       posicoes: ["GOL"],       forca: 80 },
+      { id: 'antonio-toño-ten',    nome: "Toño",                posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'cesar-gomez-ten',     nome: "César Gómez",         posicoes: ["ZAG"],       forca: 77 },
+      { id: 'agustin-alvarez-ten', nome: "Chano",               posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'toni-ten',            nome: "Toni",                posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'fernando-redondo',    nome: "Redondo",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'jose-del-solar',      nome: "Del Solar",           posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'quique-estebaranz',   nome: "Quique Estebaranz",   posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'felipe-miñambres',    nome: "Felipe",              posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'juan-antonio-pizzi-ten', nome: "Pizzi",            posicoes: ["ATA"],       forca: 82 },
+      { id: 'antonio-dertycia',    nome: "Dertycia",            posicoes: ["ATA"],       forca: 79 },
+      { id: 'manolo-tenerife',     nome: "Manolo (TEN)",        posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'diego-latorre-ten',   nome: "Latorre",             posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'antonio-mata-ten',    nome: "Mata",                posicoes: ["MC","VOL"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1993,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'abel-resino',         nome: "Abel Resino",         posicoes: ["GOL"],       forca: 81 },
+      { id: 'tomas-reñones',       nome: "Tomás Reñones",       posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'roberto-solozabal',   nome: "Roberto Solozábal",   posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'juan-manuel-lopez',   nome: "López",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'toni-muñoz',          nome: "Toni Muñoz",          posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 81 },
+      { id: 'juan-vizcaino',       nome: "Vizcaíno",            posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'bernd-schuster',      nome: "Bernd Schuster",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'luis-garcia-atm',     nome: "Luis García",         posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'manolo',              nome: "Manolo",              posicoes: ["ATA"],       forca: 81 },
+      { id: 'paulo-futre',         nome: "Paulo Futre",         posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'juan-sabas-atm',      nome: "Sabas",               posicoes: ["ATA"],       forca: 77 },
+      { id: 'alfredo-santaelena',  nome: "Santaelena",          posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'diego-rivas-atm',     nome: "Diego (ATM)",         posicoes: ["MD","PD"],   forca: 75 }
     ]
   }
 
