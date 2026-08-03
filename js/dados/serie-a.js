@@ -4809,6 +4809,147 @@ const DADOS_SERIE_A = [
       { id: 'georginio-wijnaldum', nome: "Georginio Wijnaldum", posicoes: ["MC","MEI"],  forca: 79 },
       { id: 'andrea-belotti',      nome: "Andrea Belotti",      posicoes: ["ATA"],       forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2024 (temporada 2023-24) — a INTER de Simone INZAGHI campeã (94 pts), 20º
+  //  título e a 2ª ESTRELA, conquistada no Derby della Madonnina sobre o Milan a 5
+  //  rodadas do fim. Domínio quase absoluto (28 jogos de invencibilidade). Lautaro foi
+  //  artilheiro (24 gols). Top-6: Inter (94), Milan (75), Juventus (71), Atalanta (69),
+  //  Bologna (68), Roma (63). O BOLOGNA de Thiago Motta foi a revelação (5º, à Champions
+  //  após 60 anos) e entra no acervo. A Atalanta ganhou a Europa League naquele ano.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2024,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'yann-sommer',         nome: "Yann Sommer",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'benjamin-pavard',     nome: "Benjamin Pavard",     posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'alessandro-bastoni',  nome: "Alessandro Bastoni",  posicoes: ["ZAG"],       forca: 85 },
+      { id: 'denzel-dumfries',     nome: "Denzel Dumfries",     posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'federico-dimarco',    nome: "Federico Dimarco",    posicoes: ["LE","ZAG"],  forca: 84 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["VOL","MEI"], forca: 85 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 88 },
+      { id: 'marcus-thuram',       nome: "Marcus Thuram",       posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'davy-klaassen',       nome: "Davy Klaassen",       posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'marko-arnautovic',    nome: "Marko Arnautović",    posicoes: ["ATA"],       forca: 78 },
+      { id: 'matteo-darmian',      nome: "Matteo Darmian",      posicoes: ["LD","ZAG"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2024,
+    clube: "Milan",
+    jogadores: [
+      { id: 'mike-maignan',        nome: "Mike Maignan",        posicoes: ["GOL"],       forca: 85 },
+      { id: 'davide-calabria',     nome: "Davide Calabria",     posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'fikayo-tomori',       nome: "Fikayo Tomori",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'malick-thiaw',        nome: "Malick Thiaw",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'theo-hernandez',      nome: "Theo Hernández",      posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'ismael-bennacer',     nome: "Ismaël Bennacer",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'tijjani-reijnders',   nome: "Tijjani Reijnders",   posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'ruben-loftus-cheek',  nome: "Ruben Loftus-Cheek",  posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'christian-pulisic',   nome: "Christian Pulisic",   posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'rafael-leao',         nome: "Rafael Leão",         posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'samuel-chukwueze',    nome: "Samuel Chukwueze",    posicoes: ["PD","MEI"],  forca: 78 },
+      { id: 'noah-okafor',         nome: "Noah Okafor",         posicoes: ["ATA","PE"],  forca: 77 },
+      { id: 'yunus-musah',         nome: "Yunus Musah",         posicoes: ["MC","VOL"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2024,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'danilo',              nome: "Danilo",              posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'gleison-bremer',      nome: "Gleison Bremer",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'federico-gatti',      nome: "Federico Gatti",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'andrea-cambiaso',     nome: "Andrea Cambiaso",     posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'weston-mckennie',     nome: "Weston McKennie",     posicoes: ["MC","LD"],   forca: 79 },
+      { id: 'manuel-locatelli',    nome: "Manuel Locatelli",    posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'adrien-rabiot',       nome: "Adrien Rabiot",       posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'filip-kostic',        nome: "Filip Kostić",        posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'federico-chiesa',     nome: "Federico Chiesa",     posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'dusan-vlahovic',      nome: "Dušan Vlahović",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'timothy-weah',        nome: "Timothy Weah",        posicoes: ["PD","MD"],   forca: 77 },
+      { id: 'moise-kean',          nome: "Moise Kean",          posicoes: ["ATA"],       forca: 77 },
+      { id: 'kenan-yildiz',        nome: "Kenan Yıldız",        posicoes: ["MEI","ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2024,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'juan-musso',          nome: "Juan Musso",          posicoes: ["GOL"],       forca: 79 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'giorgio-scalvini',    nome: "Giorgio Scalvini",    posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'isak-hien',           nome: "Isak Hien",           posicoes: ["ZAG"],       forca: 78 },
+      { id: 'davide-zappacosta',   nome: "Davide Zappacosta",   posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'matteo-ruggeri',      nome: "Matteo Ruggeri",      posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ederson',             nome: "Éderson",             posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'teun-koopmeiners',    nome: "Teun Koopmeiners",    posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'charles-de-ketelaere', nome: "Charles De Ketelaere", posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'ademola-lookman',     nome: "Ademola Lookman",     posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'gianluca-scamacca',   nome: "Gianluca Scamacca",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'mario-pasalic',       nome: "Mario Pašalić",       posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'aleksey-miranchuk',   nome: "Aleksey Miranchuk",   posicoes: ["MEI","ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2024,
+    clube: "Bologna",
+    jogadores: [
+      { id: 'lukasz-skorupski',    nome: "Łukasz Skorupski",    posicoes: ["GOL"],       forca: 79 },
+      { id: 'sam-beukema',         nome: "Sam Beukema",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jhon-lucumi',         nome: "Jhon Lucumí",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'riccardo-calafiori',  nome: "Riccardo Calafiori",  posicoes: ["ZAG","LE"],  forca: 80 },
+      { id: 'lorenzo-de-silvestri', nome: "Lorenzo De Silvestri", posicoes: ["LD","MD"], forca: 76 },
+      { id: 'remo-freuler',        nome: "Remo Freuler",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'lewis-ferguson',      nome: "Lewis Ferguson",      posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'nikola-moro',         nome: "Nikola Moro",         posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'riccardo-orsolini',   nome: "Riccardo Orsolini",   posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'joshua-zirkzee',      nome: "Joshua Zirkzee",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'dan-ndoye',           nome: "Dan Ndoye",           posicoes: ["PD","ATA"],  forca: 78 },
+      { id: 'alexis-saelemaekers', nome: "Alexis Saelemaekers", posicoes: ["PD","MD"],   forca: 78 },
+      { id: 'giovanni-fabbian',    nome: "Giovanni Fabbian",    posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'stefan-posch',        nome: "Stefan Posch",        posicoes: ["LD","ZAG"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2024,
+    clube: "Roma",
+    jogadores: [
+      { id: 'rui-patricio',        nome: "Rui Patrício",        posicoes: ["GOL"],       forca: 79 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'diego-llorente',      nome: "Diego Llorente",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'zeki-celik',          nome: "Zeki Çelik",          posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'leonardo-spinazzola', nome: "Leonardo Spinazzola", posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'leandro-paredes',     nome: "Leandro Paredes",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'houssem-aouar',       nome: "Houssem Aouar",       posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'edoardo-bove',        nome: "Edoardo Bove",        posicoes: ["MC","VOL"],  forca: 76 }
+    ]
   }
 
 ];
