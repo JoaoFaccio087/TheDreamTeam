@@ -4668,6 +4668,147 @@ const DADOS_SERIE_A = [
       { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 78 },
       { id: 'carles-perez',        nome: "Carles Pérez",        posicoes: ["PD","MEI"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2023 (temporada 2022-23) — o NAPOLI de Luciano SPALLETTI campeão (90 pts),
+  //  3º título e o 1º em 33 ANOS (desde a era Maradona em 1990), com folga de 16 pts
+  //  sobre o vice. A dupla Kvaratskhelia (revelação) e Osimhen (artilheiro, 26 gols)
+  //  encantou a Europa. Top-6: Napoli (90), Lazio (74), Inter (72), Milan (70),
+  //  Atalanta (64), Roma (63). Foi um título de goleada histórico; o Napoli também
+  //  chegou às quartas da Champions. A Inter seria vice da Champions naquele ano.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2023,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'alex-meret',          nome: "Alex Meret",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'giovanni-di-lorenzo', nome: "Giovanni Di Lorenzo", posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'amir-rrahmani',       nome: "Amir Rrahmani",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'kim-min-jae',         nome: "Kim Min-jae",         posicoes: ["ZAG"],       forca: 84 },
+      { id: 'mario-rui',           nome: "Mário Rui",           posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'stanislav-lobotka',   nome: "Stanislav Lobotka",   posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'frank-anguissa',      nome: "Frank Anguissa",      posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'khvicha-kvaratskhelia', nome: "Khvicha Kvaratskhelia", posicoes: ["PE","MEI"], forca: 85 },
+      { id: 'victor-osimhen',      nome: "Victor Osimhen",      posicoes: ["ATA"],       forca: 87 },
+      { id: 'matteo-politano',     nome: "Matteo Politano",     posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'hirving-lozano',      nome: "Hirving Lozano",      posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'giacomo-raspadori',   nome: "Giacomo Raspadori",   posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'eljif-elmas',         nome: "Eljif Elmas",         posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2023,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'ivan-provedel',       nome: "Ivan Provedel",       posicoes: ["GOL"],       forca: 80 },
+      { id: 'alessio-romagnoli',   nome: "Alessio Romagnoli",   posicoes: ["ZAG"],       forca: 82 },
+      { id: 'nicolo-casale',       nome: "Nicolò Casale",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'adam-marusic',        nome: "Adam Marušić",        posicoes: ["LD","LE"],   forca: 78 },
+      { id: 'manuel-lazzari',      nome: "Manuel Lazzari",      posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'matias-vecino',       nome: "Matías Vecino",       posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'danilo-cataldi',      nome: "Danilo Cataldi",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'sergej-milinkovic-savic', nome: "Sergej Milinković-Savić", posicoes: ["MC","MEI"], forca: 84 },
+      { id: 'luis-alberto',        nome: "Luis Alberto",        posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'mattia-zaccagni',     nome: "Mattia Zaccagni",     posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'ciro-immobile',       nome: "Ciro Immobile",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'felipe-anderson',     nome: "Felipe Anderson",     posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'pedro',               nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 78 },
+      { id: 'elseid-hysaj',        nome: "Elseid Hysaj",        posicoes: ["LD","LE"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2023,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'andre-onana',         nome: "André Onana",         posicoes: ["GOL"],       forca: 83 },
+      { id: 'milan-skriniar',      nome: "Milan Škriniar",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'alessandro-bastoni',  nome: "Alessandro Bastoni",  posicoes: ["ZAG"],       forca: 85 },
+      { id: 'denzel-dumfries',     nome: "Denzel Dumfries",     posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'federico-dimarco',    nome: "Federico Dimarco",    posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["VOL","MEI"], forca: 83 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 87 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 81 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'marcelo-brozovic',    nome: "Marcelo Brozović",    posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'matteo-darmian',      nome: "Matteo Darmian",      posicoes: ["LD","ZAG"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2023,
+    clube: "Milan",
+    jogadores: [
+      { id: 'mike-maignan',        nome: "Mike Maignan",        posicoes: ["GOL"],       forca: 85 },
+      { id: 'davide-calabria',     nome: "Davide Calabria",     posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'fikayo-tomori',       nome: "Fikayo Tomori",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'pierre-kalulu',       nome: "Pierre Kalulu",       posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'theo-hernandez',      nome: "Theo Hernández",      posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'ismael-bennacer',     nome: "Ismaël Bennacer",     posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'sandro-tonali',       nome: "Sandro Tonali",       posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'rade-krunic',         nome: "Rade Krunić",         posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'rafael-leao',         nome: "Rafael Leão",         posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'brahim-diaz',         nome: "Brahim Díaz",         posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'ante-rebic',          nome: "Ante Rebić",          posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'junior-messias',      nome: "Junior Messias",      posicoes: ["PD","MEI"],  forca: 77 },
+      { id: 'charles-de-ketelaere', nome: "Charles De Ketelaere", posicoes: ["MEI","ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2023,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'juan-musso',          nome: "Juan Musso",          posicoes: ["GOL"],       forca: 79 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'jose-luis-palomino',  nome: "José Luis Palomino",  posicoes: ["ZAG"],       forca: 79 },
+      { id: 'giorgio-scalvini',    nome: "Giorgio Scalvini",    posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'hans-hateboer',       nome: "Hans Hateboer",       posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'davide-zappacosta',   nome: "Davide Zappacosta",   posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ederson',             nome: "Éderson",             posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'teun-koopmeiners',    nome: "Teun Koopmeiners",    posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'ademola-lookman',     nome: "Ademola Lookman",     posicoes: ["ATA","PE"],  forca: 81 },
+      { id: 'duvan-zapata',        nome: "Duván Zapata",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'rasmus-hojlund',      nome: "Rasmus Højlund",      posicoes: ["ATA"],       forca: 79 },
+      { id: 'mario-pasalic',       nome: "Mario Pašalić",       posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'joakim-maehle',       nome: "Joakim Mæhle",        posicoes: ["LE","MD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2023,
+    clube: "Roma",
+    jogadores: [
+      { id: 'rui-patricio',        nome: "Rui Patrício",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'roger-ibanez',        nome: "Roger Ibañez",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'rick-karsdorp',       nome: "Rick Karsdorp",       posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'leonardo-spinazzola', nome: "Leonardo Spinazzola", posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'nemanja-matic',       nome: "Nemanja Matić",       posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'tammy-abraham',       nome: "Tammy Abraham",       posicoes: ["ATA"],       forca: 80 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'georginio-wijnaldum', nome: "Georginio Wijnaldum", posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'andrea-belotti',      nome: "Andrea Belotti",      posicoes: ["ATA"],       forca: 78 }
+    ]
   }
 
 ];
