@@ -962,7 +962,7 @@
     // Premier entrou em jul/2026 (os 20 clubes da edição 2026 catalogados).
     // Serie A entrou em jul/2026 (clubes italianos com cor real: Napoli/Parma/Torino/
     // Lazio/Udinese cadastrados; Milan/Juve/Inter/Samp/Roma/Fiorentina vêm da Champions).
-    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier', 'serie_a'],
+    MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier', 'serie_a', 'laliga'],
     ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {

@@ -15,5 +15,6 @@ const DADOS = [
   ...DADOS_BRASILEIRAO,
   ...DADOS_COPA,
   ...DADOS_PREMIER,
-  ...DADOS_SERIE_A
+  ...DADOS_SERIE_A,
+  ...DADOS_LALIGA
 ];
