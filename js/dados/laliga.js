@@ -127,11 +127,11 @@ const DADOS_LALIGA = [
       { id: 'luis-perez-loren',    nome: "Loren",               posicoes: ["ZAG","LD"],  forca: 79 },
       { id: 'inaki-bengoetxea',    nome: "Bengoetxea",          posicoes: ["MEI","MD"],  forca: 78 },
       { id: 'john-aldridge',       nome: "John Aldridge",       posicoes: ["ATA"],       forca: 84 },
-      { id: 'aitor-begiristain-rs', nome: "Vergara",            posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'jose-vergara-rs',     nome: "Vergara",            posicoes: ["MEI","MC"],  forca: 78 },
       { id: 'jose-mari-mentxaka',  nome: "Mentxaka",            posicoes: ["MC","VOL"],  forca: 76 },
       { id: 'francisco-mujika',    nome: "Mujika",              posicoes: ["MD","PD"],   forca: 76 },
       { id: 'gontzal-billabona',   nome: "Billabona",           posicoes: ["MC","MEI"],  forca: 76 },
-      { id: 'inaki-goikoetxea',    nome: "Goikoetxea",          posicoes: ["LE","ME"],   forca: 76 }
+      { id: 'inaki-goikoetxea',    nome: "Goikoetxea (RS)",     posicoes: ["LE","ME"],   forca: 76 }
     ]
   },
 
@@ -295,6 +295,147 @@ const DADOS_LALIGA = [
       { id: 'zubeldia-oviedo',     nome: "Zubeldia",            posicoes: ["MC","VOL"],  forca: 75 },
       { id: 'juan-carlos-zuñiga',  nome: "Zúñiga",              posicoes: ["VOL","MC"],  forca: 75 },
       { id: 'sarriugarte-oviedo',  nome: "Sarriugarte",         posicoes: ["ME","LE"],   forca: 75 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1992 (temporada 1991-92) — o BARCELONA de Cruyff BICAMPEÃO (55 pts), 12º
+  //  título, decidido na última rodada: o Real Madrid liderava por 1 pt mas perdeu de
+  //  virada para o Tenerife de Valdano (2-3), entregando a liga ao Barça. Foi o ano do
+  //  "Dream Team" no auge — venceu a 1ª CHAMPIONS da história do clube em Wembley (1-0
+  //  na Sampdoria, gol de falta de Koeman). Top-6: Barcelona (55), Real Madrid (54),
+  //  Atlético (53), Valencia, Real Sociedad, Zaragoza. Manolo (Atlético) artilheiro (27).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1992,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'andoni-zubizarreta',  nome: "Andoni Zubizarreta",  posicoes: ["GOL"],       forca: 85 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'ronald-koeman',       nome: "Ronald Koeman",       posicoes: ["ZAG","VOL"], forca: 88 },
+      { id: 'jose-ramon-alexanko', nome: "José Ramón Alexanko", posicoes: ["ZAG"],       forca: 78 },
+      { id: 'juan-carlos-bcn',     nome: "Juan Carlos (BAR)",   posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'eusebio-sacristan',   nome: "Eusebio Sacristán",   posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'jose-mari-bakero',    nome: "José Mari Bakero",    posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'guillermo-amor',      nome: "Guillermo Amor",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'txiki-begiristain',   nome: "Txiki Begiristain",   posicoes: ["PD","ATA"],  forca: 83 },
+      { id: 'hristo-stoichkov',    nome: "Hristo Stoichkov",    posicoes: ["ATA","PE"],  forca: 88 },
+      { id: 'michael-laudrup',     nome: "Michael Laudrup",     posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'julio-salinas',       nome: "Julio Salinas",       posicoes: ["ATA"],       forca: 81 },
+      { id: 'fernando-muñoz-nando', nome: "Nando (BAR)",        posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'jon-andoni-goikoetxea', nome: "Goikoetxea (BAR)",  posicoes: ["MD","PD"],   forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1992,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'francisco-buyo',      nome: "Francisco Buyo",      posicoes: ["GOL"],       forca: 82 },
+      { id: 'chendo',              nome: "Chendo",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 86 },
+      { id: 'rafael-martin-vazquez', nome: "Martín Vázquez",    posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'jose-miguel-gonzalez', nome: "Míchel",             posicoes: ["MEI","MD"],  forca: 85 },
+      { id: 'ricardo-gallego',     nome: "Ricardo Gallego",     posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'luis-milla',          nome: "Luis Milla",          posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'hugo-sanchez',        nome: "Hugo Sánchez",        posicoes: ["ATA"],       forca: 86 },
+      { id: 'emilio-butragueno',   nome: "Emilio Butragueño",   posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'gheorghe-hagi',       nome: "Gheorghe Hagi",       posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'paco-llorente',       nome: "Paco Llorente",       posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'chuti-villarroya',    nome: "Villarroya",          posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'jose-luis-aldana',    nome: "Aldana",              posicoes: ["ZAG"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1992,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'abel-resino',         nome: "Abel Resino",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'tomas-reñones',       nome: "Tomás Reñones",       posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'juan-carlos-arteche', nome: "Juan Carlos Arteche", posicoes: ["ZAG"],       forca: 77 },
+      { id: 'roberto-solozabal',   nome: "Roberto Solozábal",   posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'toni-muñoz',          nome: "Toni Muñoz",          posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'bernd-schuster',      nome: "Bernd Schuster",      posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'juan-vizcaino',       nome: "Vizcaíno",            posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'juan-antonio-pirri',  nome: "Pirri",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'manolo',              nome: "Manolo",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'paulo-futre',         nome: "Paulo Futre",         posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'alfredo-santaelena',  nome: "Santaelena",          posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'sabas-sarria',        nome: "Sabas",               posicoes: ["ATA"],       forca: 77 },
+      { id: 'roberto-fernandez-atm', nome: "Roberto (ATM)",     posicoes: ["MC","MEI"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1992,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'jose-manuel-sempere', nome: "José Manuel Sempere", posicoes: ["GOL"],       forca: 80 },
+      { id: 'fernando',            nome: "Fernando Giner",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'ricardo-arias',       nome: "Ricardo Arias",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'nando-valencia',      nome: "Nando",               posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'roberto-fernandez',   nome: "Roberto",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'fernando-gomez',      nome: "Fernando Gómez",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'leonardo-enrique',    nome: "Leonardo",            posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'juan-carlos-rodriguez', nome: "Juan Carlos",       posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'luboslav-penev',      nome: "Lyuboslav Penev",     posicoes: ["ATA"],       forca: 83 },
+      { id: 'fernando-gimenez',    nome: "Fernando Giménez",    posicoes: ["ATA"],       forca: 77 },
+      { id: 'quique-sanchez-flores', nome: "Quique Sánchez Flores", posicoes: ["LD","VOL"], forca: 79 },
+      { id: 'paco-camarasa',       nome: "Camarasa",            posicoes: ["VOL","ZAG"], forca: 77 },
+      { id: 'jose-luis-arroyo',    nome: "Arroyo",              posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'javier-subirats',     nome: "Javier Subirats",     posicoes: ["MEI","MD"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1992,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'luis-maria-gonzalez-rs', nome: "Luis María González", posicoes: ["GOL"],    forca: 79 },
+      { id: 'agustin-gajate',      nome: "Agustín Gajate",      posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'jose-mari-gorriz',    nome: "José Mari Górriz",    posicoes: ["ZAG"],       forca: 79 },
+      { id: 'inaki-larrañaga',     nome: "Iñaki Larrañaga",     posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'luis-perez-loren',    nome: "Loren",               posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'imanol-igoa',         nome: "Igoa",                posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'inaki-bengoetxea',    nome: "Bengoetxea",          posicoes: ["MEI","MD"],  forca: 78 },
+      { id: 'jose-maria-lasa-rs',  nome: "Lasa",                posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'john-aldridge',       nome: "John Aldridge",       posicoes: ["ATA"],       forca: 83 },
+      { id: 'kevin-richardson-rs', nome: "Richardson",          posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'jose-vergara-rs',     nome: "Vergara",            posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'francisco-mujika',    nome: "Mujika",              posicoes: ["MD","PD"],   forca: 76 },
+      { id: 'gontzal-billabona',   nome: "Billabona",           posicoes: ["MC","MEI"],  forca: 76 },
+      { id: 'inaki-goikoetxea',    nome: "Goikoetxea (RS)",     posicoes: ["LE","ME"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1992,
+    clube: "Zaragoza",
+    jogadores: [
+      { id: 'andoni-cedrun',       nome: "Cedrún",              posicoes: ["GOL"],       forca: 79 },
+      { id: 'francisco-solana',    nome: "Solana",              posicoes: ["LD","LE"],   forca: 76 },
+      { id: 'esteban-vigo-zar',    nome: "Esteban",             posicoes: ["MD","ME"],   forca: 75 },
+      { id: 'pablo-alfaro',        nome: "Pablo Alfaro",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'xavier-aguado',       nome: "Aguado",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'dario-franco',        nome: "Darío Franco",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'gustavo-poyet',       nome: "Poyet",               posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'francisco-gay',       nome: "Gay",                 posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'ioan-sabin-mateut',   nome: "Mateuț",              posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'juan-antonio-higuera', nome: "Higuera",            posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'miguel-pardeza',      nome: "Pardeza",             posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'alberto-belsue',      nome: "Belsué",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'santiago-aragon',     nome: "Aragón",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'gustavo-julia-zar',   nome: "Julià",               posicoes: ["ATA"],       forca: 76 }
     ]
   }
 

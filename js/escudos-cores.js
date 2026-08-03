@@ -498,6 +498,7 @@
     'Osasuna':                 { padrao: 'solido' },                                  // azul/vermelho (osasuna=rojillo)
     'Sporting Gijón':          { padrao: 'listras-v', listras: 5 },                  // vermelho e branco (rojiblanco)
     'Oviedo':                  { padrao: 'solido' },                                  // azul (carbayón)
+    'Zaragoza':                { padrao: 'metade' },                                  // branco e azul (blanquillos)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa
