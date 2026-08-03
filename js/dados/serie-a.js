@@ -4386,6 +4386,288 @@ const DADOS_SERIE_A = [
       { id: 'giacomo-bonaventura', nome: "Giacomo Bonaventura", posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'alexis-saelemaekers', nome: "Alexis Saelemaekers", posicoes: ["PD","MD"],   forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2021 (temporada 2020-21) — a INTER de Antonio CONTE campeã (91 pts), 19º
+  //  título e o 1º em 11 anos, ENCERRANDO a hegemonia de 9 títulos seguidos da
+  //  Juventus (que caiu ao 4º). A dupla Lukaku-Lautaro (a "LuLa") foi decisiva. Top-6:
+  //  Inter (91), Milan (79), Atalanta (78), Juventus (78), Napoli (77), Lazio (68).
+  //  Cristiano Ronaldo (Juve) foi artilheiro (29 gols). O Milan de Pioli renasceu e
+  //  voltou à Champions após 7 anos. A temporada ainda foi disputada sem público.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2021,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'samir-handanovic',    nome: "Samir Handanović",    posicoes: ["GOL"],       forca: 84 },
+      { id: 'milan-skriniar',      nome: "Milan Škriniar",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'alessandro-bastoni',  nome: "Alessandro Bastoni",  posicoes: ["ZAG"],       forca: 82 },
+      { id: 'achraf-hakimi',       nome: "Achraf Hakimi",       posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'ivan-perisic',        nome: "Ivan Perišić",        posicoes: ["LE","PE"],   forca: 81 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'marcelo-brozovic',    nome: "Marcelo Brozović",    posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'arturo-vidal',        nome: "Arturo Vidal",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'christian-eriksen',   nome: "Christian Eriksen",   posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 88 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 85 },
+      { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["ATA","PD"],  forca: 80 },
+      { id: 'ashley-young',        nome: "Ashley Young",        posicoes: ["LE","MD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2021,
+    clube: "Milan",
+    jogadores: [
+      { id: 'gianluigi-donnarumma', nome: "Gianluigi Donnarumma", posicoes: ["GOL"],     forca: 85 },
+      { id: 'davide-calabria',     nome: "Davide Calabria",     posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'simon-kjaer',         nome: "Simon Kjær",          posicoes: ["ZAG"],       forca: 81 },
+      { id: 'alessio-romagnoli',   nome: "Alessio Romagnoli",   posicoes: ["ZAG"],       forca: 80 },
+      { id: 'theo-hernandez',      nome: "Theo Hernández",      posicoes: ["LE","MD"],   forca: 84 },
+      { id: 'franck-kessie',       nome: "Franck Kessié",       posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'ismael-bennacer',     nome: "Ismaël Bennacer",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'alexis-saelemaekers', nome: "Alexis Saelemaekers", posicoes: ["PD","MD"],   forca: 77 },
+      { id: 'rafael-leao',         nome: "Rafael Leão",         posicoes: ["ATA","PE"],  forca: 81 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 84 },
+      { id: 'ante-rebic',          nome: "Ante Rebić",          posicoes: ["ATA","PE"],  forca: 80 },
+      { id: 'brahim-diaz',         nome: "Brahim Díaz",         posicoes: ["MEI","PD"],  forca: 78 },
+      { id: 'sandro-tonali',       nome: "Sandro Tonali",       posicoes: ["MC","VOL"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2021,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'pierluigi-gollini',   nome: "Pierluigi Gollini",   posicoes: ["GOL"],       forca: 78 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'jose-luis-palomino',  nome: "José Luis Palomino",  posicoes: ["ZAG"],       forca: 80 },
+      { id: 'cristian-romero',     nome: "Cristian Romero",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'hans-hateboer',       nome: "Hans Hateboer",       posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'robin-gosens',        nome: "Robin Gosens",        posicoes: ["LE","ME"],   forca: 82 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'remo-freuler',        nome: "Remo Freuler",        posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'ruslan-malinovskyi',  nome: "Ruslan Malinovskyi",  posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'josip-ilicic',        nome: "Josip Iličić",        posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'duvan-zapata',        nome: "Duván Zapata",        posicoes: ["ATA"],       forca: 83 },
+      { id: 'luis-muriel',         nome: "Luis Muriel",         posicoes: ["ATA"],       forca: 82 },
+      { id: 'mario-pasalic',       nome: "Mario Pašalić",       posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'matteo-pessina',      nome: "Matteo Pessina",      posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2021,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 84 },
+      { id: 'juan-cuadrado',       nome: "Juan Cuadrado",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 84 },
+      { id: 'matthijs-de-ligt',    nome: "Matthijs de Ligt",    posicoes: ["ZAG"],       forca: 85 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 83 },
+      { id: 'alex-sandro',         nome: "Alex Sandro",         posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'weston-mckennie',     nome: "Weston McKennie",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'rodrigo-bentancur',   nome: "Rodrigo Bentancur",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'adrien-rabiot',       nome: "Adrien Rabiot",       posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'aaron-ramsey',        nome: "Aaron Ramsey",        posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 89 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'alvaro-morata',       nome: "Álvaro Morata",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'federico-chiesa',     nome: "Federico Chiesa",     posicoes: ["PD","ATA"],  forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2021,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'david-ospina',        nome: "David Ospina",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'giovanni-di-lorenzo', nome: "Giovanni Di Lorenzo", posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'kalidou-koulibaly',   nome: "Kalidou Koulibaly",   posicoes: ["ZAG"],       forca: 86 },
+      { id: 'kostas-manolas',      nome: "Kostas Manolas",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'mario-rui',           nome: "Mário Rui",           posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'fabian-ruiz',         nome: "Fabián Ruiz",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'diego-demme',         nome: "Diego Demme",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'lorenzo-insigne',     nome: "Lorenzo Insigne",     posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'hirving-lozano',      nome: "Hirving Lozano",      posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'victor-osimhen',      nome: "Victor Osimhen",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'dries-mertens',       nome: "Dries Mertens",       posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'matteo-politano',     nome: "Matteo Politano",     posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'eljif-elmas',         nome: "Eljif Elmas",         posicoes: ["MC","MEI"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2021,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'pepe-reina',          nome: "Pepe Reina",          posicoes: ["GOL"],       forca: 79 },
+      { id: 'francesco-acerbi',    nome: "Francesco Acerbi",    posicoes: ["ZAG"],       forca: 82 },
+      { id: 'luiz-felipe',         nome: "Luiz Felipe",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'stefan-radu',         nome: "Ștefan Radu",         posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'manuel-lazzari',      nome: "Manuel Lazzari",      posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'adam-marusic',        nome: "Adam Marušić",        posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'lucas-leiva',         nome: "Lucas Leiva",         posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'sergej-milinkovic-savic', nome: "Sergej Milinković-Savić", posicoes: ["MC","MEI"], forca: 84 },
+      { id: 'luis-alberto',        nome: "Luis Alberto",        posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'joaquin-correa',      nome: "Joaquín Correa",      posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'ciro-immobile',       nome: "Ciro Immobile",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'felipe-caicedo',      nome: "Felipe Caicedo",      posicoes: ["ATA"],       forca: 77 },
+      { id: 'jean-daniel-akpa-akpro', nome: "Jean-Daniel Akpa Akpro", posicoes: ["MC","VOL"], forca: 75 },
+      { id: 'mohamed-fares',       nome: "Mohamed Fares",       posicoes: ["LE","ME"],   forca: 75 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2022 (temporada 2021-22) — o MILAN de Stefano PIOLI campeão (86 pts), 19º
+  //  título e o 1º em 11 anos (desde 2011), superando a Inter num duelo que durou até
+  //  a última rodada. Leão e Theo Hernández foram os destaques ofensivos. Top-6: Milan
+  //  (86), Inter (84), Napoli (79), Juventus (70), Lazio (64), Roma (63). Immobile foi
+  //  artilheiro pela 4ª vez (27 gols). A Juventus, sem CR7 (foi ao United), viveu a 1ª
+  //  temporada sem títulos em mais de uma década. A Roma de Mourinho estreou no acervo.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2022,
+    clube: "Milan",
+    jogadores: [
+      { id: 'mike-maignan',        nome: "Mike Maignan",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'davide-calabria',     nome: "Davide Calabria",     posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'fikayo-tomori',       nome: "Fikayo Tomori",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'pierre-kalulu',       nome: "Pierre Kalulu",       posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'theo-hernandez',      nome: "Theo Hernández",      posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'ismael-bennacer',     nome: "Ismaël Bennacer",     posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'sandro-tonali',       nome: "Sandro Tonali",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'franck-kessie',       nome: "Franck Kessié",       posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'rafael-leao',         nome: "Rafael Leão",         posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'brahim-diaz',         nome: "Brahim Díaz",         posicoes: ["MEI","PD"],  forca: 79 },
+      { id: 'ante-rebic',          nome: "Ante Rebić",          posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'olivier-giroud',      nome: "Olivier Giroud",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'zlatan-ibrahimovic',  nome: "Zlatan Ibrahimović",  posicoes: ["ATA"],       forca: 81 },
+      { id: 'alexis-saelemaekers', nome: "Alexis Saelemaekers", posicoes: ["PD","MD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2022,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'samir-handanovic',    nome: "Samir Handanović",    posicoes: ["GOL"],       forca: 83 },
+      { id: 'milan-skriniar',      nome: "Milan Škriniar",      posicoes: ["ZAG"],       forca: 85 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 83 },
+      { id: 'alessandro-bastoni',  nome: "Alessandro Bastoni",  posicoes: ["ZAG"],       forca: 84 },
+      { id: 'denzel-dumfries',     nome: "Denzel Dumfries",     posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'ivan-perisic',        nome: "Ivan Perišić",        posicoes: ["LE","PE"],   forca: 82 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'marcelo-brozovic',    nome: "Marcelo Brozović",    posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 85 },
+      { id: 'edin-dzeko',          nome: "Edin Džeko",          posicoes: ["ATA"],       forca: 82 },
+      { id: 'joaquin-correa',      nome: "Joaquín Correa",      posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'alexis-sanchez',      nome: "Alexis Sánchez",      posicoes: ["ATA","PD"],  forca: 79 },
+      { id: 'matteo-darmian',      nome: "Matteo Darmian",      posicoes: ["LD","ZAG"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2022,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'david-ospina',        nome: "David Ospina",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'giovanni-di-lorenzo', nome: "Giovanni Di Lorenzo", posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'kalidou-koulibaly',   nome: "Kalidou Koulibaly",   posicoes: ["ZAG"],       forca: 85 },
+      { id: 'amir-rrahmani',       nome: "Amir Rrahmani",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'mario-rui',           nome: "Mário Rui",           posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'fabian-ruiz',         nome: "Fabián Ruiz",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'stanislav-lobotka',   nome: "Stanislav Lobotka",   posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'lorenzo-insigne',     nome: "Lorenzo Insigne",     posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'victor-osimhen',      nome: "Victor Osimhen",      posicoes: ["ATA"],       forca: 84 },
+      { id: 'hirving-lozano',      nome: "Hirving Lozano",      posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'dries-mertens',       nome: "Dries Mertens",       posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'matteo-politano',     nome: "Matteo Politano",     posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'eljif-elmas',         nome: "Eljif Elmas",         posicoes: ["MC","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2022,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'wojciech-szczesny',   nome: "Wojciech Szczęsny",   posicoes: ["GOL"],       forca: 83 },
+      { id: 'juan-cuadrado',       nome: "Juan Cuadrado",       posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'matthijs-de-ligt',    nome: "Matthijs de Ligt",    posicoes: ["ZAG"],       forca: 85 },
+      { id: 'leonardo-bonucci',    nome: "Leonardo Bonucci",    posicoes: ["ZAG"],       forca: 83 },
+      { id: 'giorgio-chiellini',   nome: "Giorgio Chiellini",   posicoes: ["ZAG","LE"],  forca: 82 },
+      { id: 'alex-sandro',         nome: "Alex Sandro",         posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'manuel-locatelli',    nome: "Manuel Locatelli",    posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'weston-mckennie',     nome: "Weston McKennie",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'adrien-rabiot',       nome: "Adrien Rabiot",       posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'federico-chiesa',     nome: "Federico Chiesa",     posicoes: ["PD","ATA"],  forca: 84 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'alvaro-morata',       nome: "Álvaro Morata",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'dusan-vlahovic',      nome: "Dušan Vlahović",      posicoes: ["ATA"],       forca: 83 },
+      { id: 'moise-kean',          nome: "Moise Kean",          posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2022,
+    clube: "Lazio",
+    jogadores: [
+      { id: 'thomas-strakosha',    nome: "Thomas Strakosha",    posicoes: ["GOL"],       forca: 79 },
+      { id: 'francesco-acerbi',    nome: "Francesco Acerbi",    posicoes: ["ZAG"],       forca: 81 },
+      { id: 'luiz-felipe',         nome: "Luiz Felipe",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'stefan-radu',         nome: "Ștefan Radu",         posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'manuel-lazzari',      nome: "Manuel Lazzari",      posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'adam-marusic',        nome: "Adam Marušić",        posicoes: ["LE","LD"],   forca: 78 },
+      { id: 'lucas-leiva',         nome: "Lucas Leiva",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'sergej-milinkovic-savic', nome: "Sergej Milinković-Savić", posicoes: ["MC","MEI"], forca: 85 },
+      { id: 'luis-alberto',        nome: "Luis Alberto",        posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'ciro-immobile',       nome: "Ciro Immobile",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'pedro',               nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'felipe-anderson',     nome: "Felipe Anderson",     posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'mattia-zaccagni',     nome: "Mattia Zaccagni",     posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'toma-basic',          nome: "Toma Bašić",          posicoes: ["MC","MEI"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2022,
+    clube: "Roma",
+    jogadores: [
+      { id: 'rui-patricio',        nome: "Rui Patrício",        posicoes: ["GOL"],       forca: 81 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'chris-smalling',      nome: "Chris Smalling",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'roger-ibanez',        nome: "Roger Ibañez",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'rick-karsdorp',       nome: "Rick Karsdorp",       posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'matias-vina',         nome: "Matías Viña",         posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'jordan-veretout',     nome: "Jordan Veretout",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'tammy-abraham',       nome: "Tammy Abraham",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'nicolo-zaniolo',      nome: "Nicolò Zaniolo",      posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'carles-perez',        nome: "Carles Pérez",        posicoes: ["PD","MEI"],  forca: 76 }
+    ]
   }
 
 ];
