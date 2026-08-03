@@ -35,6 +35,8 @@ var btnModoOnline     = document.getElementById('btn-modo-online');
 var btnModoOnlineCopa = document.getElementById('btn-modo-online-copa');
 var btnModoOnlineChampions = document.getElementById('btn-modo-online-champions');
 var btnModoOnlineLibertadores = document.getElementById('btn-modo-online-libertadores');
+var btnModoOnlinePremier = document.getElementById('btn-modo-online-premier');
+var btnModoOnlineSerieA = document.getElementById('btn-modo-online-serie-a');
 
 // Define a competição do online e destaca a pílula escolhida.
 function escolherOnline(comp, pilula) {
@@ -45,6 +47,8 @@ function escolherOnline(comp, pilula) {
   if (btnModoOnlineCopa) btnModoOnlineCopa.classList.remove('pilula-ativa');
   if (btnModoOnlineChampions) btnModoOnlineChampions.classList.remove('pilula-ativa');
   if (btnModoOnlineLibertadores) btnModoOnlineLibertadores.classList.remove('pilula-ativa');
+  if (btnModoOnlinePremier) btnModoOnlinePremier.classList.remove('pilula-ativa');
+  if (btnModoOnlineSerieA) btnModoOnlineSerieA.classList.remove('pilula-ativa');
   if (pilula) pilula.classList.add('pilula-ativa');
 }
 
@@ -59,6 +63,12 @@ if (btnModoOnlineChampions) {
 }
 if (btnModoOnlineCopa) {
   btnModoOnlineCopa.addEventListener('click', function () { escolherOnline('Copa do Mundo', btnModoOnlineCopa); });
+}
+if (btnModoOnlinePremier) {
+  btnModoOnlinePremier.addEventListener('click', function () { escolherOnline('Premier League', btnModoOnlinePremier); });
+}
+if (btnModoOnlineSerieA) {
+  btnModoOnlineSerieA.addEventListener('click', function () { escolherOnline('Serie A', btnModoOnlineSerieA); });
 }
 
 // Seletor Um Jogador / Multijogador — alterna as abas de competições.
