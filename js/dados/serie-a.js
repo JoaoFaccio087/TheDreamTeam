@@ -4950,6 +4950,147 @@ const DADOS_SERIE_A = [
       { id: 'houssem-aouar',       nome: "Houssem Aouar",       posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'edoardo-bove',        nome: "Edoardo Bove",        posicoes: ["MC","VOL"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2025 (temporada 2024-25) — o NAPOLI de Antonio CONTE campeão (82 pts),
+  //  4º título e o 2º em 3 anos, numa disputa palpitante decidida por 1 ponto sobre a
+  //  Inter na última rodada. Conte tornou-se o único treinador a ser campeão italiano
+  //  por 3 clubes diferentes (Juve, Inter e Napoli). McTominay e Lukaku, contratados no
+  //  verão, foram decisivos. Top-6: Napoli (82), Inter (81), Atalanta (74), Juventus
+  //  (70), Roma (69), Fiorentina (65). Kvaratskhelia saiu ao PSG em jan; fica no Napoli.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2025,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'alex-meret',          nome: "Alex Meret",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'giovanni-di-lorenzo', nome: "Giovanni Di Lorenzo", posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'amir-rrahmani',       nome: "Amir Rrahmani",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'alessandro-buongiorno', nome: "Alessandro Buongiorno", posicoes: ["ZAG"],   forca: 82 },
+      { id: 'leonardo-spinazzola', nome: "Leonardo Spinazzola", posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'stanislav-lobotka',   nome: "Stanislav Lobotka",   posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'frank-anguissa',      nome: "Frank Anguissa",      posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'scott-mctominay',     nome: "Scott McTominay",     posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'khvicha-kvaratskhelia', nome: "Khvicha Kvaratskhelia", posicoes: ["PE","MEI"], forca: 86 },
+      { id: 'matteo-politano',     nome: "Matteo Politano",     posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'giacomo-raspadori',   nome: "Giacomo Raspadori",   posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'david-neres',         nome: "David Neres",         posicoes: ["PD","PE"],   forca: 79 },
+      { id: 'billy-gilmour',       nome: "Billy Gilmour",       posicoes: ["MC","VOL"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2025,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'yann-sommer',         nome: "Yann Sommer",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'benjamin-pavard',     nome: "Benjamin Pavard",     posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'alessandro-bastoni',  nome: "Alessandro Bastoni",  posicoes: ["ZAG"],       forca: 85 },
+      { id: 'denzel-dumfries',     nome: "Denzel Dumfries",     posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'federico-dimarco',    nome: "Federico Dimarco",    posicoes: ["LE","ZAG"],  forca: 84 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["VOL","MEI"], forca: 84 },
+      { id: 'henrikh-mkhitaryan',  nome: "Henrikh Mkhitaryan",  posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 87 },
+      { id: 'marcus-thuram',       nome: "Marcus Thuram",       posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'mehdi-taremi',        nome: "Mehdi Taremi",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'matteo-darmian',      nome: "Matteo Darmian",      posicoes: ["LD","ZAG"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2025,
+    clube: "Atalanta",
+    jogadores: [
+      { id: 'marco-carnesecchi',   nome: "Marco Carnesecchi",   posicoes: ["GOL"],       forca: 80 },
+      { id: 'rafael-toloi',        nome: "Rafael Tolói",        posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'isak-hien',           nome: "Isak Hien",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'sead-kolasinac',      nome: "Sead Kolašinac",      posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'davide-zappacosta',   nome: "Davide Zappacosta",   posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'matteo-ruggeri',      nome: "Matteo Ruggeri",      posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'marten-de-roon',      nome: "Marten de Roon",      posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ederson',             nome: "Éderson",             posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'charles-de-ketelaere', nome: "Charles De Ketelaere", posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'ademola-lookman',     nome: "Ademola Lookman",     posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'mateo-retegui',       nome: "Mateo Retegui",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'marco-brescianini',   nome: "Marco Brescianini",   posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'mario-pasalic',       nome: "Mario Pašalić",       posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'raoul-bellanova',     nome: "Raoul Bellanova",     posicoes: ["LD","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2025,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'michele-di-gregorio', nome: "Michele Di Gregorio", posicoes: ["GOL"],       forca: 81 },
+      { id: 'pierre-kalulu',       nome: "Pierre Kalulu",       posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'gleison-bremer',      nome: "Gleison Bremer",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'federico-gatti',      nome: "Federico Gatti",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'andrea-cambiaso',     nome: "Andrea Cambiaso",     posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'manuel-locatelli',    nome: "Manuel Locatelli",    posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'khephren-thuram',     nome: "Khéphren Thuram",     posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'teun-koopmeiners',    nome: "Teun Koopmeiners",    posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'kenan-yildiz',        nome: "Kenan Yıldız",        posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'nico-gonzalez',       nome: "Nico González",       posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'dusan-vlahovic',      nome: "Dušan Vlahović",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'weston-mckennie',     nome: "Weston McKennie",     posicoes: ["MC","LD"],   forca: 79 },
+      { id: 'timothy-weah',        nome: "Timothy Weah",        posicoes: ["PD","MD"],   forca: 77 },
+      { id: 'randal-kolo-muani',   nome: "Randal Kolo Muani",   posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2025,
+    clube: "Roma",
+    jogadores: [
+      { id: 'mile-svilar',         nome: "Mile Svilar",         posicoes: ["GOL"],       forca: 81 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'evan-ndicka',         nome: "Evan Ndicka",         posicoes: ["ZAG"],       forca: 80 },
+      { id: 'mario-hermoso',       nome: "Mario Hermoso",       posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'zeki-celik',          nome: "Zeki Çelik",          posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'angelino',            nome: "Angeliño",            posicoes: ["LE","ME"],   forca: 80 },
+      { id: 'manu-kone',           nome: "Manu Koné",           posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'artem-dovbyk',        nome: "Artem Dovbyk",        posicoes: ["ATA"],       forca: 80 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'matias-soule',        nome: "Matías Soulé",        posicoes: ["PD","MEI"],  forca: 78 },
+      { id: 'eldor-shomurodov',    nome: "Eldor Shomurodov",    posicoes: ["ATA"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2025,
+    clube: "Fiorentina",
+    jogadores: [
+      { id: 'david-de-gea',        nome: "David de Gea",        posicoes: ["GOL"],       forca: 82 },
+      { id: 'dodo',                nome: "Dodô",                posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'pietro-comuzzo',      nome: "Pietro Comuzzo",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'marin-pongracic',     nome: "Marin Pongračić",     posicoes: ["ZAG"],       forca: 78 },
+      { id: 'robin-gosens',        nome: "Robin Gosens",        posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'danilo-cataldi',      nome: "Danilo Cataldi",      posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'rolando-mandragora',  nome: "Rolando Mandragora",  posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'edoardo-bove',        nome: "Edoardo Bove",        posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'andrea-colpani',      nome: "Andrea Colpani",      posicoes: ["MEI","PD"],  forca: 77 },
+      { id: 'albert-gudmundsson',  nome: "Albert Guðmundsson",  posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'moise-kean',          nome: "Moise Kean",          posicoes: ["ATA"],       forca: 82 },
+      { id: 'riccardo-sottil',     nome: "Riccardo Sottil",     posicoes: ["PE","MEI"],  forca: 76 },
+      { id: 'lucas-beltran',       nome: "Lucas Beltrán",       posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'yacine-adli',         nome: "Yacine Adli",         posicoes: ["MC","MEI"],  forca: 77 }
+    ]
   }
 
 ];
