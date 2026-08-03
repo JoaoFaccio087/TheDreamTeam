@@ -719,6 +719,125 @@ const DADOS_LALIGA = [
       { id: 'ramon-tevenet',       nome: "Tevenet",             posicoes: ["ZAG","VOL"], forca: 76 },
       { id: 'antonio-marcos-sev',  nome: "Marcos (SEV)",        posicoes: ["MD","PD"],   forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1995 (temporada 1994-95) — o REAL MADRID de Jorge VALDANO campeão (55 pts),
+  //  26º título, ENCERRANDO o reinado de 4 anos do Barça. Zamorano foi Pichichi (28 gols,
+  //  "Iván la Bamba") e surgiu RAÚL aos 17 anos. Laudrup trocou o Barça pelo Real (polêmico)
+  //  e Redondo veio do Tenerife. Top-6: Real Madrid (55), Deportivo (51), Betis (46),
+  //  Barcelona (46), Espanyol (43), Sevilla (43). ÚLTIMA temporada com 2 pts por vitória.
+  //  Entram Real Betis e Espanyol. (Nota: Sevilla/Celta quase rebaixados por dívidas.)
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1995,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'francisco-buyo',      nome: "Francisco Buyo",      posicoes: ["GOL"],       forca: 81 },
+      { id: 'quique-sanchez-flores', nome: "Quique Sánchez Flores", posicoes: ["LD","VOL"], forca: 79 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 84 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 86 },
+      { id: 'rafael-alkorta',      nome: "Rafael Alkorta",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'chendo',              nome: "Chendo",              posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'jose-miguel-gonzalez', nome: "Míchel",             posicoes: ["MEI","MD"],  forca: 83 },
+      { id: 'michael-laudrup',     nome: "Michael Laudrup",     posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'ivan-zamorano',       nome: "Iván Zamorano",       posicoes: ["ATA"],       forca: 86 },
+      { id: 'jose-emilio-amavisca', nome: "Amavisca",           posicoes: ["PE","ATA"],  forca: 81 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'alfonso-perez',       nome: "Alfonso",             posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1995,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'francisco-liaño',     nome: "Liaño",               posicoes: ["GOL"],       forca: 84 },
+      { id: 'aitor-lopez-rekarte-dep', nome: "López Rekarte",   posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'fernando-nando-dep',  nome: "Nando (DEP)",         posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'voro-gonzalez',       nome: "Voro",                posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'jose-manuel-manjarin', nome: "Manjarín",          posicoes: ["MEI","MD"],  forca: 79 },
+      { id: 'bebeto',              nome: "Bebeto",              posicoes: ["ATA"],       forca: 86 },
+      { id: 'julio-salinas',       nome: "Julio Salinas",       posicoes: ["ATA"],       forca: 79 },
+      { id: 'adolfo-aldana',       nome: "Aldana (DEP)",        posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'jose-ramon-alberto-dep', nome: "Ribera",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'alfredo-santaelena-dep', nome: "Alfredo (DEP)",    posicoes: ["MC","VOL"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1995,
+    clube: "Real Betis",
+    jogadores: [
+      { id: 'pedro-jaro',          nome: "Jaro",                posicoes: ["GOL"],       forca: 79 },
+      { id: 'jaime-quesada',       nome: "Jaime Quesada",       posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'josete-betis',        nome: "Josete",              posicoes: ["ZAG"],       forca: 76 },
+      { id: 'nenad-vidakovic',     nome: "Vidaković",           posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'juan-merino',         nome: "Merino (BET)",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'jose-ureña',          nome: "Ureña",               posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'alexis-trujillo',     nome: "Alexis",              posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'roberto-rios-bet',    nome: "Roberto Ríos",        posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'juan-canas',          nome: "Cañas",               posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'radoslav-stosic',     nome: "Stošić",              posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'juan-sabas-bet',      nome: "Sabas (BET)",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'nariman-kasumov',     nome: "Kasumov",             posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'francisco-olias',     nome: "Olías",               posicoes: ["MEI","MD"],  forca: 76 },
+      { id: 'alberto-marquez-bet', nome: "Márquez",             posicoes: ["ZAG","LD"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1995,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'carles-busquets',     nome: "Carles Busquets",     posicoes: ["GOL"],       forca: 78 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'ronald-koeman',       nome: "Ronald Koeman",       posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'miguel-angel-nadal',  nome: "Miguel Ángel Nadal",  posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'jose-mari-bakero',    nome: "José Mari Bakero",    posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'guillermo-amor',      nome: "Guillermo Amor",      posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'gheorghe-hagi',       nome: "Gheorghe Hagi",       posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'hristo-stoichkov',    nome: "Hristo Stoichkov",    posicoes: ["ATA","PE"],  forca: 87 },
+      { id: 'romario',             nome: "Romário",             posicoes: ["ATA"],       forca: 89 },
+      { id: 'txiki-begiristain',   nome: "Txiki Begiristain",   posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'jordi-cruyff',        nome: "Jordi Cruyff",        posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'gica-popescu',        nome: "Popescu",             posicoes: ["VOL","ZAG"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1995,
+    clube: "Espanyol",
+    jogadores: [
+      { id: 'antoni-jimenez-esp',  nome: "Toni (ESP)",          posicoes: ["GOL"],       forca: 78 },
+      { id: 'jordi-mendiondo',     nome: "Mendiondo",           posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'enrique-torres-mestre', nome: "Torres Mestre",     posicoes: ["ZAG"],       forca: 76 },
+      { id: 'mauricio-pochettino', nome: "Mauricio Pochettino", posicoes: ["ZAG"],       forca: 79 },
+      { id: 'dragan-brnovic',      nome: "Brnović",             posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'roberto-fernandez-esp', nome: "Roberto (ESP)",     posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'francisco-arteaga',   nome: "Arteaga",             posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'juan-lardin',         nome: "Lardín",              posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'luis-cembranos',      nome: "Cembranos",           posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'florin-raducioiu',    nome: "Răducioiu",           posicoes: ["ATA"],       forca: 81 },
+      { id: 'raul-espanyol',       nome: "Raúl (ESP)",          posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'oleg-kuznetsov-esp',  nome: "Kuznetsov",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'jose-mari-esp',       nome: "José Mari",           posicoes: ["MD","PD"],   forca: 76 },
+      { id: 'francisco-esp',       nome: "Francisco",           posicoes: ["MC","VOL"],  forca: 76 }
+    ]
   }
 
 ];
