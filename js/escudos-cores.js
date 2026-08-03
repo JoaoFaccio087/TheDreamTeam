@@ -236,6 +236,7 @@
     'Sassuolo':                ['#00A752', '#000000'],
     'Atalanta':                ['#1B1B4B', '#000000'],
     'Bologna':                 ['#A21C24', '#1A2F5A'],
+    'Como':                    ['#005BAC', '#FFFFFF'],
     'Roma':                    ['#8E1F2F', '#F0BC42'],
     'Saint-Étienne':           ['#008B5A', '#FFFFFF'],
     'Sampdoria':               ['#0A2A66', '#FFFFFF'],
@@ -491,6 +492,7 @@
     'Sassuolo':                { padrao: 'listras-v', listras: 4 },                  // verde e preto (neroverdi)
     'Atalanta':                { padrao: 'listras-v', listras: 5 },                  // azul e preto (nerazzurri di Bergamo)
     'Bologna':                 { padrao: 'metade' },                                  // metade azul sobre fundo vermelho (rossoblu)
+    'Como':                    { padrao: 'solido' },                                  // azul (azzurri lariani)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

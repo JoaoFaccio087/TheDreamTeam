@@ -81,6 +81,13 @@
     { id: 'penta_premier',        categoria: 'Competições', nome: 'Dinastia inglesa',   desc: 'Campeão da Premier League 5 vezes',  desbloqueada: false },
     { id: 'especialista_premier', categoria: 'Competições', nome: 'Veterano da Ilha',   desc: 'Disputou 10 campanhas na Premier',   desbloqueada: false },
     { id: 'matador_premier',      categoria: 'Competições', nome: 'Matador da Ilha',    desc: 'Marcou 100 gols na Premier League',  desbloqueada: false },
+    // Serie A (ago/2026) — mesma lógica: família GERADA no backend, aqui só nomes/descrições.
+    { id: 'campeao_serie_a',      categoria: 'Competições', nome: 'Rei do Calcio',      desc: 'Campeão da Serie A',                 desbloqueada: false },
+    { id: 'bi_serie_a',           categoria: 'Competições', nome: 'Bi italiano',        desc: 'Campeão da Serie A 2 vezes',         desbloqueada: false },
+    { id: 'tri_serie_a',          categoria: 'Competições', nome: 'Tri italiano',       desc: 'Campeão da Serie A 3 vezes',         desbloqueada: false },
+    { id: 'penta_serie_a',        categoria: 'Competições', nome: 'Dinastia italiana',  desc: 'Campeão da Serie A 5 vezes',         desbloqueada: false },
+    { id: 'especialista_serie_a', categoria: 'Competições', nome: 'Veterano do Calcio', desc: 'Disputou 10 campanhas na Serie A',   desbloqueada: false },
+    { id: 'matador_serie_a',      categoria: 'Competições', nome: 'Matador do Calcio',  desc: 'Marcou 100 gols na Serie A',         desbloqueada: false },
     { id: 'matador_brasil',    categoria: 'Competições', nome: 'Matador nacional',    desc: 'Marcou 100 gols no Brasileirão',    desbloqueada: false },
     { id: 'matador_copa',      categoria: 'Competições', nome: 'Matador mundial',     desc: 'Marcou 100 gols na Copa do Mundo',  desbloqueada: false },
 
@@ -131,6 +138,8 @@
     penta_liberta: 'lendario', penta_champions: 'lendario', penta_brasil: 'lendario', penta_copa: 'lendario',
     campeao_premier: 'raro', bi_premier: 'raro', tri_premier: 'epico',
     penta_premier: 'lendario', especialista_premier: 'epico', matador_premier: 'epico',
+    campeao_serie_a: 'raro', bi_serie_a: 'raro', tri_serie_a: 'epico',
+    penta_serie_a: 'lendario', especialista_serie_a: 'epico', matador_serie_a: 'epico',
     // Épicas por competição (tri + matador)
     tri_champions: 'epico', tri_brasil: 'epico', tri_copa: 'epico',
     matador_liberta: 'epico', matador_champions: 'epico', matador_brasil: 'epico', matador_copa: 'epico',

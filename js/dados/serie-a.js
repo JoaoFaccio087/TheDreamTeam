@@ -5091,6 +5091,147 @@ const DADOS_SERIE_A = [
       { id: 'lucas-beltran',       nome: "Lucas Beltrán",       posicoes: ["ATA","MEI"], forca: 77 },
       { id: 'yacine-adli',         nome: "Yacine Adli",         posicoes: ["MC","MEI"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2026 (temporada 2025-26) — a INTER campeã (87 pts), 21º título, conquistado
+  //  com 3 rodadas de antecedência sob o comando de Cristian Chivu (que assumiu no lugar
+  //  de Inzaghi). Lautaro foi artilheiro (17 gols). Top-6: Inter (87), Napoli (76), Roma
+  //  (73), Como (71), Milan (70), Juventus (69). A grande revelação foi o COMO de Cesc
+  //  Fàbregas, recém-promovido, que terminou em 4º e à Champions — e entra no acervo.
+  //  Edição de FECHAMENTO do acervo Serie A (1990→2026), trazendo o Calcio ao presente.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Serie A",
+    edicao: 2026,
+    clube: "Inter de Milão",
+    jogadores: [
+      { id: 'yann-sommer',         nome: "Yann Sommer",         posicoes: ["GOL"],       forca: 81 },
+      { id: 'benjamin-pavard',     nome: "Benjamin Pavard",     posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'stefan-de-vrij',      nome: "Stefan de Vrij",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'alessandro-bastoni',  nome: "Alessandro Bastoni",  posicoes: ["ZAG"],       forca: 85 },
+      { id: 'denzel-dumfries',     nome: "Denzel Dumfries",     posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'federico-dimarco',    nome: "Federico Dimarco",    posicoes: ["LE","ZAG"],  forca: 84 },
+      { id: 'nicolo-barella',      nome: "Nicolò Barella",      posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'hakan-calhanoglu',    nome: "Hakan Çalhanoğlu",    posicoes: ["VOL","MEI"], forca: 84 },
+      { id: 'petar-sucic',         nome: "Petar Sučić",         posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'lautaro-martinez',    nome: "Lautaro Martínez",    posicoes: ["ATA"],       forca: 87 },
+      { id: 'marcus-thuram',       nome: "Marcus Thuram",       posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'ange-yoan-bonny',     nome: "Ange-Yoan Bonny",     posicoes: ["ATA"],       forca: 78 },
+      { id: 'piotr-zielinski',     nome: "Piotr Zieliński",     posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'francesco-pio-esposito', nome: "Francesco Pio Esposito", posicoes: ["ATA"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2026,
+    clube: "Napoli",
+    jogadores: [
+      { id: 'alex-meret',          nome: "Alex Meret",          posicoes: ["GOL"],       forca: 80 },
+      { id: 'giovanni-di-lorenzo', nome: "Giovanni Di Lorenzo", posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'amir-rrahmani',       nome: "Amir Rrahmani",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'alessandro-buongiorno', nome: "Alessandro Buongiorno", posicoes: ["ZAG"],   forca: 82 },
+      { id: 'leonardo-spinazzola', nome: "Leonardo Spinazzola", posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'stanislav-lobotka',   nome: "Stanislav Lobotka",   posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'frank-anguissa',      nome: "Frank Anguissa",      posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'scott-mctominay',     nome: "Scott McTominay",     posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'kevin-de-bruyne',     nome: "Kevin De Bruyne",     posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'matteo-politano',     nome: "Matteo Politano",     posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'romelu-lukaku',       nome: "Romelu Lukaku",       posicoes: ["ATA"],       forca: 82 },
+      { id: 'rasmus-hojlund',      nome: "Rasmus Højlund",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'david-neres',         nome: "David Neres",         posicoes: ["PD","PE"],   forca: 80 },
+      { id: 'billy-gilmour',       nome: "Billy Gilmour",       posicoes: ["MC","VOL"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2026,
+    clube: "Roma",
+    jogadores: [
+      { id: 'mile-svilar',         nome: "Mile Svilar",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'gianluca-mancini',    nome: "Gianluca Mancini",    posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'evan-ndicka',         nome: "Evan Ndicka",         posicoes: ["ZAG"],       forca: 81 },
+      { id: 'mario-hermoso',       nome: "Mario Hermoso",       posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'zeki-celik',          nome: "Zeki Çelik",          posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'wesley',              nome: "Wesley",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'manu-kone',           nome: "Manu Koné",           posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'bryan-cristante',     nome: "Bryan Cristante",     posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'lorenzo-pellegrini',  nome: "Lorenzo Pellegrini",  posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'matias-soule',        nome: "Matías Soulé",        posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'paulo-dybala',        nome: "Paulo Dybala",        posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'artem-dovbyk',        nome: "Artem Dovbyk",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'evan-ferguson',       nome: "Evan Ferguson",       posicoes: ["ATA"],       forca: 77 },
+      { id: 'stephan-el-shaarawy', nome: "Stephan El Shaarawy", posicoes: ["ATA","PE"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2026,
+    clube: "Como",
+    jogadores: [
+      { id: 'jean-butez',          nome: "Jean Butez",          posicoes: ["GOL"],       forca: 78 },
+      { id: 'marc-oliver-kempf',   nome: "Marc-Oliver Kempf",   posicoes: ["ZAG"],       forca: 77 },
+      { id: 'alberto-dossena',     nome: "Alberto Dossena",     posicoes: ["ZAG"],       forca: 77 },
+      { id: 'edoardo-goldaniga',   nome: "Edoardo Goldaniga",   posicoes: ["ZAG"],       forca: 76 },
+      { id: 'alex-valle',          nome: "Álex Valle",          posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'sergi-roberto',       nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 78 },
+      { id: 'maximo-perrone',      nome: "Máximo Perrone",      posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'nicolas-paz',         nome: "Nico Paz",            posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'lucas-da-cunha',      nome: "Lucas Da Cunha",      posicoes: ["MEI","PE"],  forca: 76 },
+      { id: 'jesus-rodriguez',     nome: "Jesús Rodríguez",     posicoes: ["PE","ATA"],  forca: 76 },
+      { id: 'assane-diao',         nome: "Assane Diao",         posicoes: ["PD","ATA"],  forca: 78 },
+      { id: 'anastasios-douvikas', nome: "Anastasios Douvikas", posicoes: ["ATA"],       forca: 77 },
+      { id: 'patrick-cutrone',     nome: "Patrick Cutrone",     posicoes: ["ATA"],       forca: 76 },
+      { id: 'ivan-smolcic',        nome: "Ivan Smolčić",        posicoes: ["ZAG","LD"],  forca: 74 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2026,
+    clube: "Milan",
+    jogadores: [
+      { id: 'mike-maignan',        nome: "Mike Maignan",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'fikayo-tomori',       nome: "Fikayo Tomori",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'strahinja-pavlovic',  nome: "Strahinja Pavlović",  posicoes: ["ZAG"],       forca: 79 },
+      { id: 'matteo-gabbia',       nome: "Matteo Gabbia",       posicoes: ["ZAG"],       forca: 78 },
+      { id: 'theo-hernandez',      nome: "Theo Hernández",      posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'youssouf-fofana',     nome: "Youssouf Fofana",     posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'luka-modric',         nome: "Luka Modrić",         posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'ruben-loftus-cheek',  nome: "Ruben Loftus-Cheek",  posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'christian-pulisic',   nome: "Christian Pulisic",   posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'rafael-leao',         nome: "Rafael Leão",         posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'santiago-gimenez',    nome: "Santiago Giménez",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'christopher-nkunku',  nome: "Christopher Nkunku",  posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'samuele-ricci',       nome: "Samuele Ricci",       posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'alexis-saelemaekers', nome: "Alexis Saelemaekers", posicoes: ["PD","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Serie A",
+    edicao: 2026,
+    clube: "Juventus",
+    jogadores: [
+      { id: 'michele-di-gregorio', nome: "Michele Di Gregorio", posicoes: ["GOL"],       forca: 81 },
+      { id: 'pierre-kalulu',       nome: "Pierre Kalulu",       posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'gleison-bremer',      nome: "Gleison Bremer",      posicoes: ["ZAG"],       forca: 83 },
+      { id: 'federico-gatti',      nome: "Federico Gatti",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'andrea-cambiaso',     nome: "Andrea Cambiaso",     posicoes: ["LE","LD"],   forca: 80 },
+      { id: 'manuel-locatelli',    nome: "Manuel Locatelli",    posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'khephren-thuram',     nome: "Khéphren Thuram",     posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'kenan-yildiz',        nome: "Kenan Yıldız",        posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'teun-koopmeiners',    nome: "Teun Koopmeiners",    posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'francisco-conceicao', nome: "Francisco Conceição", posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'jonathan-david',      nome: "Jonathan David",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'dusan-vlahovic',      nome: "Dušan Vlahović",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'lois-openda',         nome: "Loïs Openda",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'weston-mckennie',     nome: "Weston McKennie",     posicoes: ["MC","LD"],   forca: 78 }
+    ]
   }
 
 ];

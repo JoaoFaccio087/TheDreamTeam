@@ -15,7 +15,7 @@ const COMPETICOES = {
   premier:      { dados: 'Premier League', label: 'Premier League',  formato: 'liga' },
   // Serie A Italiana — OFFLINE apenas, em BETA (jul/2026). Sem `tema`, acompanha o
   // modo claro/escuro. `formato: 'liga'` reusa o motor de pontos corridos.
-  serie_a:      { dados: 'Serie A',        label: 'Serie A',          formato: 'liga', beta: true }
+  serie_a:      { dados: 'Serie A',        label: 'Serie A',          formato: 'liga' }
 };
 
 // Helper: a competição roda no formato de liga (pontos corridos)?
