@@ -1121,6 +1121,147 @@ const DADOS_LALIGA = [
       { id: 'jose-maria-alkiza',   nome: "Alkiza",              posicoes: ["MC","VOL"],  forca: 77 },
       { id: 'roberto-tiko-ath',    nome: "Tiko",                posicoes: ["LD","MD"],   forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1998 (temporada 1997-98) — o BARCELONA de Louis VAN GAAL campeão (74 pts),
+  //  15º título, no 1º ano do técnico holandês. Rivaldo brilhou (19 gols) ao lado de Luis
+  //  Enrique, Figo, Giovanni e o jovem KLUIVERT. O Real focou na Champions (venceu a 7ª,
+  //  fim de 32 anos de jejum europeu). Vieri (Atlético) foi Pichichi (24 gols) mas o time
+  //  ficou em 7º. Top-6: Barcelona (74), Athletic (65), Real Sociedad (63), Real Madrid
+  //  (63), Mallorca (60), Celta (60). Entram Mallorca e Celta. Volta a 20 times.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1998,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'ruud-hesp',           nome: "Ruud Hesp",           posicoes: ["GOL"],       forca: 79 },
+      { id: 'michael-reiziger',    nome: "Reiziger",            posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'miguel-angel-nadal',  nome: "Miguel Ángel Nadal",  posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'philip-cocu',         nome: "Cocu",                posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 87 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'patrick-kluivert',    nome: "Kluivert",            posicoes: ["ATA"],       forca: 84 },
+      { id: 'giovanni-silva',      nome: "Giovanni",            posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'sonny-anderson',      nome: "Sonny Anderson",      posicoes: ["ATA"],       forca: 82 },
+      { id: 'albert-celades',      nome: "Celades",             posicoes: ["VOL","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1998,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'jose-luis-valencia',  nome: "Valencia",            posicoes: ["GOL"],       forca: 78 },
+      { id: 'aitor-larrazabal',    nome: "Larrazábal",          posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'aitor-karanka',       nome: "Karanka",             posicoes: ["ZAG"],       forca: 79 },
+      { id: 'roberto-tiko-ath',    nome: "Tiko",                posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'julen-guerrero',      nome: "Julen Guerrero",      posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'cuco-ziganda',        nome: "Ziganda",             posicoes: ["ATA"],       forca: 79 },
+      { id: 'ismael-urzaiz',       nome: "Urzaiz",              posicoes: ["ATA"],       forca: 83 },
+      { id: 'joseba-etxeberria',   nome: "Etxeberria",          posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'ernesto-valverde-ath', nome: "Valverde",           posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'javier-larrainzar-ath', nome: "Larrainzar (ATH)",  posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'ander-garitano-ath',  nome: "Garitano",            posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'jose-maria-alkiza',   nome: "Alkiza",              posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'carmelo-lacruz',      nome: "Lacruz",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'patxi-ferreira-ath',  nome: "Ferreira (ATH)",      posicoes: ["ZAG"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1998,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'agustin-elduayen',    nome: "Elduayen",            posicoes: ["GOL"],       forca: 78 },
+      { id: 'agustin-aranzabal',   nome: "Aranzábal",           posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'bjorn-tore-kvarme',   nome: "Kvarme",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'inigo-idiakez',       nome: "Idiákez",             posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'imanol-lete',         nome: "Lete",                posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'gaizka-garitano-rs',  nome: "Garitano (RS)",       posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'javier-de-pedro',     nome: "De Pedro",            posicoes: ["ME","MEI"],  forca: 81 },
+      { id: 'oscar-de-paula',      nome: "De Paula",            posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'darko-kovacevic',     nome: "Kovačević",           posicoes: ["ATA"],       forca: 83 },
+      { id: 'craig-burley',        nome: "Burley",              posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'meho-kodro-rs',       nome: "Kodro",               posicoes: ["ATA"],       forca: 79 },
+      { id: 'luis-perez-rs',       nome: "Luis Pérez",          posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'agustin-fuentes-rs',  nome: "Fuentes (RS)",        posicoes: ["ZAG"],       forca: 76 },
+      { id: 'aitor-lopez-rekarte-rs', nome: "López Rekarte (RS)", posicoes: ["LD","MD"], forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1998,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'bodo-illgner',        nome: "Illgner",             posicoes: ["GOL"],       forca: 81 },
+      { id: 'christian-panucci',   nome: "Panucci",             posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 88 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'clarence-seedorf',    nome: "Seedorf",             posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'christian-karembeu',  nome: "Karembeu",            posicoes: ["MD","VOL"],  forca: 81 },
+      { id: 'predrag-mijatovic',   nome: "Predrag Mijatović",   posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'davor-suker',         nome: "Davor Šuker",         posicoes: ["ATA"],       forca: 84 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 86 },
+      { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 83 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'jose-amavisca-rm2',   nome: "Jaime (RM)",          posicoes: ["ZAG"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1998,
+    clube: "Mallorca",
+    jogadores: [
+      { id: 'carlos-roa',          nome: "Roa",                 posicoes: ["GOL"],       forca: 81 },
+      { id: 'marcelino-elena',     nome: "Marcelino",           posicoes: ["ZAG"],       forca: 79 },
+      { id: 'jose-luis-perez-siljak', nome: "Siljak",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'miquel-soler-mll',    nome: "Soler (MLL)",         posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'josu-olaizola-mll',   nome: "Olaizola",            posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'ivan-campo',          nome: "Iván Campo",          posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'lauren-etame',        nome: "Lauren",              posicoes: ["MD","LD"],   forca: 79 },
+      { id: 'marcos-vales-mll',    nome: "Marcos",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'dani-garcia-mll',     nome: "Dani",                posicoes: ["ATA"],       forca: 81 },
+      { id: 'jovan-stankovic',     nome: "Stanković",           posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'juan-manuel-biagini', nome: "Biagini",            posicoes: ["ATA"],       forca: 77 },
+      { id: 'vicente-engonga',     nome: "Engonga",             posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'ruben-siviero-mll',   nome: "Siviero",             posicoes: ["MD","PD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1998,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'richard-dutruel',     nome: "Dutruel",             posicoes: ["GOL"],       forca: 79 },
+      { id: 'eduardo-berizzo',     nome: "Berizzo",             posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'fernando-caceres',    nome: "Cáceres",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'goran-djorovic',      nome: "Djorović",            posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'mazinho-celta',       nome: "Mazinho (CEL)",       posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'aleksandr-mostovoi',  nome: "Mostovoi",            posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'valeri-karpin',       nome: "Karpin",              posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'haim-revivo',         nome: "Revivo",              posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'lubomir-moravcik',    nome: "Moravčík",            posicoes: ["MEI","MD"],  forca: 81 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 79 },
+      { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'vladislav-radimov',   nome: "Radimov",             posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'tomas-cadavid',       nome: "Tomás",               posicoes: ["ZAG","LD"],  forca: 76 }
+    ]
   }
 
 ];

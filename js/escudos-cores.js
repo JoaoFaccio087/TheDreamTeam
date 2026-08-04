@@ -504,6 +504,8 @@
     'Athletic Bilbao':         { padrao: 'listras-v', listras: 5 },                  // vermelho e branco (rojiblancos)
     'Real Betis':              { padrao: 'listras-v', listras: 4 },                  // verde e branco (verdiblancos)
     'Espanyol':                { padrao: 'listras-v', listras: 4 },                  // azul e branco (pericos)
+    'Mallorca':                { padrao: 'solido' },                                  // vermelho (bermellones)
+    'Celta Vigo':              { padrao: 'solido' },                                  // azul celeste (celestes)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa
