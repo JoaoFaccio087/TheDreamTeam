@@ -1544,6 +1544,147 @@ const DADOS_LALIGA = [
       { id: 'ruben-magno-ala',     nome: "Magno",               posicoes: ["MEI","PE"],  forca: 78 },
       { id: 'josete-alaves',       nome: "Josete (ALA)",        posicoes: ["ZAG","LD"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2001 (temporada 2000-01) — o REAL MADRID de Vicente del Bosque campeão (80
+  //  pts), 28º título, INÍCIO da era dos GALÁCTICOS: FIGO chegou do Barça na transferência
+  //  mais polêmica da história (Pérez cumpriu promessa eleitoral). Raúl foi Pichichi (24
+  //  gols). Top-6: Real Madrid (80), Deportivo (73), Mallorca (71), Barcelona (63),
+  //  Valencia (63), Celta (59). Barça em reconstrução pós-saída de Figo. Valencia rumo à
+  //  2ª final de Champions seguida. Entra Villarreal na elite (7º, fora do top-6).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2001,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 84 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'ivan-helguera',       nome: "Helguera",            posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 88 },
+      { id: 'claude-makelele',     nome: "Makélélé",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'flavio-conceicao',    nome: "Flávio Conceição",    posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 88 },
+      { id: 'steve-mcmanaman',     nome: "McManaman",           posicoes: ["MEI","MD"],  forca: 82 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 88 },
+      { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 85 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'savio-bortolini',     nome: "Sávio",               posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'aitor-karanka',       nome: "Karanka",             posicoes: ["ZAG"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2001,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'jacques-songo-o',     nome: "Songo'o",             posicoes: ["GOL"],       forca: 81 },
+      { id: 'manuel-pablo-dep',    nome: "Manuel Pablo",        posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'noureddine-naybet',   nome: "Naybet",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'cesar-martin-dep',    nome: "César",               posicoes: ["ZAG"],       forca: 80 },
+      { id: 'enrique-romero-dep',  nome: "Romero",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'aldo-duscher',        nome: "Duscher",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'sergio-gonzalez-dep', nome: "Sergio",              posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'djalminha',           nome: "Djalminha",           posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'roy-makaay',          nome: "Makaay",              posicoes: ["ATA"],       forca: 85 },
+      { id: 'diego-tristan',       nome: "Diego Tristán",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'victor-sanchez-dep',  nome: "Víctor (DEP)",        posicoes: ["MD","MEI"],  forca: 79 },
+      { id: 'walter-pandiani-dep', nome: "Pandiani",            posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2001,
+    clube: "Mallorca",
+    jogadores: [
+      { id: 'leo-franco',          nome: "Leo Franco",          posicoes: ["GOL"],       forca: 81 },
+      { id: 'miquel-soler-mll',    nome: "Soler (MLL)",         posicoes: ["LE","LD"],   forca: 76 },
+      { id: 'ivan-campo',          nome: "Iván Campo",          posicoes: ["ZAG"],       forca: 79 },
+      { id: 'marcelino-elena',     nome: "Marcelino",           posicoes: ["ZAG"],       forca: 79 },
+      { id: 'francisco-soler-poms', nome: "Poms",               posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'vicente-engonga',     nome: "Engonga",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'marcos-vales-mll',    nome: "Marcos",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'lauren-etame',        nome: "Lauren",              posicoes: ["MD","LD"],   forca: 81 },
+      { id: 'samuel-etoo',         nome: "Eto'o",               posicoes: ["ATA"],       forca: 82 },
+      { id: 'jovan-stankovic',     nome: "Stanković",           posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'carlos-roa',          nome: "Roa",                 posicoes: ["GOL"],       forca: 79 },
+      { id: 'novo-mallorca',       nome: "Novo",                posicoes: ["ATA","PD"],  forca: 78 },
+      { id: 'albert-luque-mll2',   nome: "Luque",               posicoes: ["ATA","PE"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2001,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'pepe-reina',          nome: "Reina",               posicoes: ["GOL"],       forca: 80 },
+      { id: 'michael-reiziger',    nome: "Reiziger",            posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'frank-de-boer',       nome: "Frank de Boer",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'philip-cocu',         nome: "Cocu",                posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'marc-overmars',       nome: "Overmars",            posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 89 },
+      { id: 'patrick-kluivert',    nome: "Kluivert",            posicoes: ["ATA"],       forca: 85 },
+      { id: 'simao-sabrosa',       nome: "Simão",               posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'gerard-lopez-val',    nome: "Gerard",              posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'emmanuel-petit',      nome: "Petit",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'dani-garcia-barcelona', nome: "Dani (BAR)",        posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2001,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'santiago-cañizares',  nome: "Cañizares",           posicoes: ["GOL"],       forca: 85 },
+      { id: 'jocelyn-angloma',     nome: "Angloma",             posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'mauricio-pellegrino-val', nome: "Pellegrino (VAL)", posicoes: ["ZAG"],      forca: 80 },
+      { id: 'amedeo-carboni',      nome: "Carboni",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'gaizka-mendieta',     nome: "Mendieta",            posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'ruben-baraja',        nome: "Baraja",              posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'kily-gonzalez',       nome: "Kily González",       posicoes: ["ME","MEI"],  forca: 82 },
+      { id: 'vicente-rodriguez',   nome: "Vicente",             posicoes: ["PE","ME"],   forca: 82 },
+      { id: 'john-carew',          nome: "Carew",               posicoes: ["ATA"],       forca: 82 },
+      { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'zlatko-zahovic',      nome: "Zahovič",             posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'fabio-aurelio',       nome: "Fábio Aurélio",       posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'francisco-rufete',    nome: "Rufete",              posicoes: ["PD","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2001,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'pablo-cavallero',     nome: "Cavallero",           posicoes: ["GOL"],       forca: 80 },
+      { id: 'eduardo-berizzo',     nome: "Berizzo",             posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'fernando-caceres',    nome: "Cáceres",             posicoes: ["ZAG"],       forca: 77 },
+      { id: 'juan-manuel-vazquez-cel', nome: "Juanfran",        posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'mazinho-celta',       nome: "Mazinho (CEL)",       posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'aleksandr-mostovoi',  nome: "Mostovoi",            posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'valeri-karpin',       nome: "Karpin",              posicoes: ["MD","MEI"],  forca: 81 },
+      { id: 'benni-mccarthy',      nome: "McCarthy",            posicoes: ["ATA"],       forca: 81 },
+      { id: 'catanha-celta',       nome: "Catanha",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'claude-makelele-cel', nome: "Makélélé (CEL)",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'haim-revivo',         nome: "Revivo",              posicoes: ["MEI","ATA"], forca: 80 },
+      { id: 'jesuli-celta',        nome: "Jesuli",              posicoes: ["PD","ATA"],  forca: 77 },
+      { id: 'vagner-celta',        nome: "Vagner",              posicoes: ["ZAG","LD"],  forca: 77 }
+    ]
   }
 
 ];
