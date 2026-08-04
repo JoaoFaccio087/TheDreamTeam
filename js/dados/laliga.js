@@ -1826,6 +1826,147 @@ const DADOS_LALIGA = [
       { id: 'assuncao-betis',      nome: "Assunção",            posicoes: ["VOL","MC"],  forca: 80 },
       { id: 'capi-betis',          nome: "Capi",                posicoes: ["MEI","ME"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2003 (temporada 2002-03) — o REAL MADRID de Del Bosque campeão (78 pts), 29º
+  //  título, AUGE dos GALÁCTICOS: chegou o RONALDO FENÔMENO formando ataque estelar com
+  //  Zidane, Figo, Raúl. A Real Sociedad de Denoueix fez campanha histórica (vice, quase
+  //  campeã, com Xabi Alonso, Nihat 23 gols, Kovačević). Makaay Pichichi (29 gols). Top-6:
+  //  Real Madrid (78), Real Sociedad, Deportivo, Celta, Valencia, Barcelona. Beckham
+  //  chegaria no verão seguinte. Foi o último título antes da "seca" de 3 anos do Real.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2003,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 86 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'ivan-helguera',       nome: "Helguera",            posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 87 },
+      { id: 'claude-makelele',     nome: "Makélélé",            posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'zinedine-zidane',     nome: "Zidane",              posicoes: ["MEI","MC"],  forca: 92 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 87 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'ronaldo-fenomeno',    nome: "Ronaldo",             posicoes: ["ATA"],       forca: 91 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 83 },
+      { id: 'santiago-solari',     nome: "Solari",              posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'flavio-conceicao',    nome: "Flávio Conceição",    posicoes: ["VOL","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2003,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'sander-westerveld',   nome: "Westerveld",          posicoes: ["GOL"],       forca: 80 },
+      { id: 'agustin-aranzabal',   nome: "Aranzábal",           posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'bjorn-tore-kvarme',   nome: "Kvarme",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'aitor-lopez-rekarte-rs', nome: "López Rekarte (RS)", posicoes: ["LD","MD"], forca: 78 },
+      { id: 'gabriel-schurrer',    nome: "Schürrer",            posicoes: ["ZAG"],       forca: 78 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mikel-aramburu',      nome: "Aramburu",            posicoes: ["MD","MEI"],  forca: 78 },
+      { id: 'javier-de-pedro',     nome: "De Pedro",            posicoes: ["ME","MEI"],  forca: 81 },
+      { id: 'valeri-karpin-rs',    nome: "Karpin (RS)",         posicoes: ["MD","MEI"],  forca: 80 },
+      { id: 'darko-kovacevic',     nome: "Kovačević",           posicoes: ["ATA"],       forca: 84 },
+      { id: 'nihat-kahveci',       nome: "Nihat",               posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'sergio-boris-rs',     nome: "Boris",               posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'igor-jauregi-rs',     nome: "Jauregui (RS)",       posicoes: ["ZAG"],       forca: 77 },
+      { id: 'francisco-alberto-rs', nome: "Alberto",            posicoes: ["MC","VOL"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2003,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'jose-molina-dep',     nome: "Molina (DEP)",        posicoes: ["GOL"],       forca: 80 },
+      { id: 'manuel-pablo-dep',    nome: "Manuel Pablo",        posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'noureddine-naybet',   nome: "Naybet",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'cesar-martin-dep',    nome: "César",               posicoes: ["ZAG"],       forca: 80 },
+      { id: 'enrique-romero-dep',  nome: "Romero",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'aldo-duscher',        nome: "Duscher",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'sergio-gonzalez-dep', nome: "Sergio",              posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'juan-carlos-valeron', nome: "Valerón",             posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'roy-makaay',          nome: "Makaay",              posicoes: ["ATA"],       forca: 86 },
+      { id: 'diego-tristan',       nome: "Diego Tristán",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'victor-sanchez-dep',  nome: "Víctor (DEP)",        posicoes: ["MD","MEI"],  forca: 79 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'albert-luque-mll2',   nome: "Luque",               posicoes: ["ATA","PE"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2003,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'pablo-cavallero',     nome: "Cavallero",           posicoes: ["GOL"],       forca: 81 },
+      { id: 'eduardo-berizzo',     nome: "Berizzo",             posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'francisco-vidal-cel', nome: "Vidal",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'juan-manuel-vazquez-cel', nome: "Juanfran",        posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'sylvinho-celta',      nome: "Sylvinho",            posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'aleksandr-mostovoi',  nome: "Mostovoi",            posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'valeri-karpin',       nome: "Karpin",              posicoes: ["MD","MEI"],  forca: 80 },
+      { id: 'peter-luccin',        nome: "Luccin",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'jesuli-celta',        nome: "Jesuli",              posicoes: ["PD","ATA"],  forca: 77 },
+      { id: 'catanha-celta',       nome: "Catanha",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'benni-mccarthy',      nome: "McCarthy",            posicoes: ["ATA"],       forca: 81 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 79 },
+      { id: 'jose-ignacio-doreste', nome: "Edu",                posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'vagner-celta',        nome: "Vagner",              posicoes: ["ZAG","LD"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2003,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'santiago-cañizares',  nome: "Cañizares",           posicoes: ["GOL"],       forca: 85 },
+      { id: 'curro-torres',        nome: "Curro Torres",        posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'roberto-ayala',       nome: "Ayala",               posicoes: ["ZAG"],       forca: 85 },
+      { id: 'amedeo-carboni',      nome: "Carboni",             posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'fabio-aurelio',       nome: "Fábio Aurélio",       posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'ruben-baraja',        nome: "Baraja",              posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'vicente-rodriguez',   nome: "Vicente",             posicoes: ["PE","ME"],   forca: 83 },
+      { id: 'pablo-aimar',         nome: "Aimar",               posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'mista-valencia',      nome: "Mista",               posicoes: ["ATA"],       forca: 82 },
+      { id: 'john-carew',          nome: "Carew",               posicoes: ["ATA"],       forca: 81 },
+      { id: 'francisco-rufete',    nome: "Rufete",              posicoes: ["PD","MEI"],  forca: 78 },
+      { id: 'miguel-angel-angulo', nome: "Angulo",              posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'carlos-marchena',     nome: "Marchena",            posicoes: ["ZAG","VOL"], forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2003,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'roberto-bonano',      nome: "Bonano",              posicoes: ["GOL"],       forca: 78 },
+      { id: 'michael-reiziger',    nome: "Reiziger",            posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 84 },
+      { id: 'frank-de-boer',       nome: "Frank de Boer",       posicoes: ["ZAG"],       forca: 81 },
+      { id: 'philip-cocu',         nome: "Cocu",                posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'gaizka-mendieta-bcn', nome: "Mendieta (BAR)",      posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'marc-overmars',       nome: "Overmars",            posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'juan-roman-riquelme', nome: "Riquelme",            posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'patrick-kluivert',    nome: "Kluivert",            posicoes: ["ATA"],       forca: 84 },
+      { id: 'javier-saviola',      nome: "Saviola",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'thiago-motta-bcn',    nome: "Thiago Motta",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'gabri-garcia',        nome: "Gabri",               posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'fabio-rochemback',    nome: "Rochemback",          posicoes: ["VOL","MC"],  forca: 77 }
+    ]
   }
 
 ];
