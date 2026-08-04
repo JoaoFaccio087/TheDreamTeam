@@ -1403,6 +1403,147 @@ const DADOS_LALIGA = [
       { id: 'manuel-pablo-dep',    nome: "Manuel Pablo",        posicoes: ["LD","MD"],   forca: 79 },
       { id: 'noureddine-naybet',   nome: "Naybet",              posicoes: ["ZAG"],       forca: 83 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2000 (temporada 1999-2000) — o DEPORTIVO LA CORUÑA de Javier IRURETA campeão
+  //  (69 pts), o 1º título HISTÓRICO e INÉDITO do clube, o "SuperDepor". Makaay artilheiro
+  //  do time (22 gols). Quebrou a hegemonia dos grandes. Top-6: Deportivo (69), Barcelona
+  //  (64), Valencia (64), Zaragoza (63), Real Madrid (62), Alavés (61). O Atlético foi
+  //  surpreendentemente REBAIXADO. Valencia e Real Madrid faziam a final da Champions
+  //  (Real campeão, a 8ª). Entra o Alavés (faria a lendária final da UEFA em 2001).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2000,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'jacques-songo-o',     nome: "Songo'o",             posicoes: ["GOL"],       forca: 81 },
+      { id: 'manuel-pablo-dep',    nome: "Manuel Pablo",        posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'noureddine-naybet',   nome: "Naybet",              posicoes: ["ZAG"],       forca: 84 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 79 },
+      { id: 'enrique-romero-dep',  nome: "Romero",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'emerson-moises-costa', nome: "Emerson",            posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'djalminha',           nome: "Djalminha",           posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'roy-makaay',          nome: "Makaay",              posicoes: ["ATA"],       forca: 84 },
+      { id: 'jose-manuel-turu-flores', nome: "Turu Flores",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 77 },
+      { id: 'walter-pandiani-dep', nome: "Pandiani",            posicoes: ["ATA"],       forca: 79 },
+      { id: 'victor-sanchez-dep',  nome: "Víctor (DEP)",        posicoes: ["MD","MEI"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2000,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'ruud-hesp',           nome: "Ruud Hesp",           posicoes: ["GOL"],       forca: 78 },
+      { id: 'michael-reiziger',    nome: "Reiziger",            posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'frank-de-boer',       nome: "Frank de Boer",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'mauricio-pellegrino-bcn', nome: "Pellegrino",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'philip-cocu',         nome: "Cocu",                posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 88 },
+      { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'patrick-kluivert',    nome: "Kluivert",            posicoes: ["ATA"],       forca: 85 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'simao-sabrosa',       nome: "Simão",               posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'boudewijn-zenden',    nome: "Zenden",              posicoes: ["PE","MD"],   forca: 80 },
+      { id: 'dani-garcia-barcelona', nome: "Dani (BAR)",        posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2000,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'santiago-cañizares',  nome: "Cañizares",           posicoes: ["GOL"],       forca: 85 },
+      { id: 'jocelyn-angloma',     nome: "Angloma",             posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'mauricio-pellegrino-val', nome: "Pellegrino (VAL)", posicoes: ["ZAG"],      forca: 80 },
+      { id: 'amedeo-carboni',      nome: "Carboni",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'miroslav-djukic-val', nome: "Djukić (VAL)",        posicoes: ["ZAG"],       forca: 79 },
+      { id: 'gaizka-mendieta',     nome: "Mendieta",            posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'kily-gonzalez',       nome: "Kily González",       posicoes: ["ME","MEI"],  forca: 82 },
+      { id: 'gerard-lopez-val',    nome: "Gerard",              posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'claudio-lopez',       nome: "Claudio López",       posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'adrian-ilie',         nome: "Ilie",                posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'javier-farinos',      nome: "Fariñós",             posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'didier-deschamps-val', nome: "Deschamps",          posicoes: ["VOL","MC"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2000,
+    clube: "Zaragoza",
+    jogadores: [
+      { id: 'juan-manuel-juanmi-zar', nome: "Juanmi",          posicoes: ["GOL"],       forca: 79 },
+      { id: 'pablo-alfaro',        nome: "Pablo Alfaro",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'teddy-sundgren',      nome: "Sündgren",            posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'paco-jemez',          nome: "Paco Jémez",          posicoes: ["ZAG"],       forca: 79 },
+      { id: 'xavier-aguado',       nome: "Aguado",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'santiago-aragon',     nome: "Aragón",              posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'roberto-acuña',       nome: "Acuña",               posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'ander-garitano-zar',  nome: "Garitano (ZAR)",      posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'savo-milosevic',      nome: "Milošević",           posicoes: ["ATA"],       forca: 83 },
+      { id: 'juanele-zaragoza',    nome: "Juanele (ZAR)",       posicoes: ["MEI","PD"],  forca: 79 },
+      { id: 'yordi-zaragoza',      nome: "Yordi",               posicoes: ["ATA"],       forca: 79 },
+      { id: 'jamelli-zaragoza',    nome: "Jamelli",             posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'marcos-vales-zar',    nome: "Marcos Vales",        posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'vladislav-radimov',   nome: "Radimov",             posicoes: ["VOL","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2000,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 82 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'ivan-campo',          nome: "Iván Campo",          posicoes: ["ZAG"],       forca: 79 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 88 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'clarence-seedorf',    nome: "Seedorf",             posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'steve-mcmanaman',     nome: "McManaman",           posicoes: ["MEI","MD"],  forca: 82 },
+      { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 85 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'nicolas-anelka',      nome: "Anelka",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'savio-bortolini',     nome: "Sávio",               posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'geremi-njitap',       nome: "Geremi",              posicoes: ["MD","VOL"],  forca: 79 },
+      { id: 'aitor-karanka',       nome: "Karanka",             posicoes: ["ZAG"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2000,
+    clube: "Alavés",
+    jogadores: [
+      { id: 'martin-herrera-ala',  nome: "Herrera",             posicoes: ["GOL"],       forca: 79 },
+      { id: 'cosmin-contra-ala',   nome: "Contra",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'oscar-tellez',        nome: "Téllez",              posicoes: ["ZAG"],       forca: 77 },
+      { id: 'dan-eggen',           nome: "Eggen",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'antonio-karmona',     nome: "Karmona",             posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'hermes-desio',        nome: "Desio",               posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'delfi-pablo-ala',     nome: "Pablo (ALA)",         posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'javi-moreno-ala',     nome: "Javi Moreno",         posicoes: ["ATA"],       forca: 82 },
+      { id: 'meho-kodro-rs',       nome: "Kodro",               posicoes: ["ATA"],       forca: 79 },
+      { id: 'julio-salinas',       nome: "Julio Salinas",       posicoes: ["ATA"],       forca: 78 },
+      { id: 'ibon-begoña',         nome: "Ibon Begoña",         posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'kike-alaves',         nome: "Kike",                posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'ruben-magno-ala',     nome: "Magno",               posicoes: ["MEI","PE"],  forca: 78 },
+      { id: 'josete-alaves',       nome: "Josete (ALA)",        posicoes: ["ZAG","LD"],  forca: 76 }
+    ]
   }
 
 ];

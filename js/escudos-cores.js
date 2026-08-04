@@ -506,6 +506,7 @@
     'Espanyol':                { padrao: 'listras-v', listras: 4 },                  // azul e branco (pericos)
     'Mallorca':                { padrao: 'solido' },                                  // vermelho (bermellones)
     'Celta Vigo':              { padrao: 'solido' },                                  // azul celeste (celestes)
+    'Alavés':                  { padrao: 'listras-v', listras: 4 },                  // azul e branco (babazorros)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa
