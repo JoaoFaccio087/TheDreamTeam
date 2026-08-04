@@ -1262,6 +1262,147 @@ const DADOS_LALIGA = [
       { id: 'vladislav-radimov',   nome: "Radimov",             posicoes: ["VOL","MC"],  forca: 78 },
       { id: 'tomas-cadavid',       nome: "Tomás",               posicoes: ["ZAG","LD"],  forca: 76 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1999 (temporada 1998-99) — o BARCELONA de Van Gaal BICAMPEÃO (79 pts), 16º
+  //  título, no ano em que RIVALDO ganhou a Bola de Ouro. Chegaram os irmãos De Boer,
+  //  Cocu (consolidado), Zenden. Raúl (Real) foi Pichichi (25 gols). O Real terminou 2º
+  //  na liga mas focava na Champions. Top-6: Barcelona (79), Real Madrid (68), Mallorca
+  //  (66), Valencia (65), Celta (64), Deportivo (63). Valencia montava o time que seria
+  //  vice-campeão europeu com Mendieta, Claudio López e Ilie. Entram Kily González etc.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1999,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'ruud-hesp',           nome: "Ruud Hesp",           posicoes: ["GOL"],       forca: 78 },
+      { id: 'michael-reiziger',    nome: "Reiziger",            posicoes: ["LD","ZAG"],  forca: 81 },
+      { id: 'frank-de-boer',       nome: "Frank de Boer",       posicoes: ["ZAG"],       forca: 84 },
+      { id: 'mauricio-pellegrino-bcn', nome: "Pellegrino",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'philip-cocu',         nome: "Cocu",                posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 88 },
+      { id: 'ronald-de-boer',      nome: "Ronald de Boer",      posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 90 },
+      { id: 'patrick-kluivert',    nome: "Kluivert",            posicoes: ["ATA"],       forca: 85 },
+      { id: 'boudewijn-zenden',    nome: "Zenden",              posicoes: ["PE","MD"],   forca: 81 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'sonny-anderson',      nome: "Sonny Anderson",      posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1999,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'bodo-illgner',        nome: "Illgner",             posicoes: ["GOL"],       forca: 80 },
+      { id: 'christian-panucci',   nome: "Panucci",             posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 88 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'clarence-seedorf',    nome: "Seedorf",             posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'christian-karembeu',  nome: "Karembeu",            posicoes: ["MD","VOL"],  forca: 80 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 87 },
+      { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 84 },
+      { id: 'davor-suker',         nome: "Davor Šuker",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'predrag-mijatovic',   nome: "Predrag Mijatović",   posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'savio-bortolini',     nome: "Sávio",               posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1999,
+    clube: "Mallorca",
+    jogadores: [
+      { id: 'carlos-roa',          nome: "Roa",                 posicoes: ["GOL"],       forca: 81 },
+      { id: 'marcelino-elena',     nome: "Marcelino",           posicoes: ["ZAG"],       forca: 79 },
+      { id: 'ivan-campo',          nome: "Iván Campo",          posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'jose-luis-perez-siljak', nome: "Siljak",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'miquel-soler-mll',    nome: "Soler (MLL)",         posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'lauren-etame',        nome: "Lauren",              posicoes: ["MD","LD"],   forca: 80 },
+      { id: 'vicente-engonga',     nome: "Engonga",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'jovan-stankovic',     nome: "Stanković",           posicoes: ["MEI","ATA"], forca: 78 },
+      { id: 'dani-garcia-mll',     nome: "Dani",                posicoes: ["ATA"],       forca: 82 },
+      { id: 'gabriel-amato',       nome: "Amato",               posicoes: ["ATA"],       forca: 81 },
+      { id: 'juan-carlos-valeron', nome: "Valerón",             posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'josu-olaizola-mll',   nome: "Olaizola",            posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'fernando-niño-mll',   nome: "Niño",                posicoes: ["ZAG","LD"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1999,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'santiago-cañizares',  nome: "Cañizares",           posicoes: ["GOL"],       forca: 84 },
+      { id: 'jocelyn-angloma',     nome: "Angloma",             posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'mauricio-pellegrino-val', nome: "Pellegrino (VAL)", posicoes: ["ZAG"],      forca: 79 },
+      { id: 'amedeo-carboni',      nome: "Carboni",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'jose-serrer',         nome: "Serrer",              posicoes: ["ZAG"],       forca: 77 },
+      { id: 'gaizka-mendieta',     nome: "Mendieta",            posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'kily-gonzalez',       nome: "Kily González",       posicoes: ["ME","MEI"],  forca: 82 },
+      { id: 'adrian-ilie',         nome: "Ilie",                posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'claudio-lopez',       nome: "Claudio López",       posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'stefan-schwarz',      nome: "Schwarz",             posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'javier-farinos',      nome: "Fariñós",             posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'jose-luis-lucarelli', nome: "Lucarelli",           posicoes: ["ATA"],       forca: 78 },
+      { id: 'miroslav-djukic-val', nome: "Djukić (VAL)",        posicoes: ["ZAG"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1999,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'richard-dutruel',     nome: "Dutruel",             posicoes: ["GOL"],       forca: 79 },
+      { id: 'eduardo-berizzo',     nome: "Berizzo",             posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'fernando-caceres',    nome: "Cáceres",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'goran-djorovic',      nome: "Djorović",            posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'mazinho-celta',       nome: "Mazinho (CEL)",       posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'aleksandr-mostovoi',  nome: "Mostovoi",            posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'valeri-karpin',       nome: "Karpin",              posicoes: ["MD","MEI"],  forca: 82 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'lubomir-moravcik',    nome: "Moravčík",            posicoes: ["MEI","MD"],  forca: 80 },
+      { id: 'haim-revivo',         nome: "Revivo",              posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'lubo-penev-cel',      nome: "Penev (CEL)",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'vladislav-radimov',   nome: "Radimov",             posicoes: ["VOL","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1999,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'jacques-songo-o',     nome: "Songo'o",             posicoes: ["GOL"],       forca: 81 },
+      { id: 'enrique-romero-dep',  nome: "Romero",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'fernando-nando-dep',  nome: "Nando (DEP)",         posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 78 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'djalminha',           nome: "Djalminha",           posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'corentin-martins',    nome: "Corentin Martins",    posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'roy-makaay',          nome: "Makaay",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'jose-manuel-turu-flores', nome: "Turu Flores",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'walter-pandiani-dep', nome: "Pandiani",            posicoes: ["ATA"],       forca: 78 },
+      { id: 'manuel-pablo-dep',    nome: "Manuel Pablo",        posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'noureddine-naybet',   nome: "Naybet",              posicoes: ["ZAG"],       forca: 83 }
+    ]
   }
 
 ];
