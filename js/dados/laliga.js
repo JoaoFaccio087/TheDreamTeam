@@ -830,13 +830,154 @@ const DADOS_LALIGA = [
       { id: 'dragan-brnovic',      nome: "Brnović",             posicoes: ["ZAG","VOL"], forca: 77 },
       { id: 'roberto-fernandez-esp', nome: "Roberto (ESP)",     posicoes: ["LE","MD"],   forca: 76 },
       { id: 'francisco-arteaga',   nome: "Arteaga",             posicoes: ["VOL","MC"],  forca: 77 },
-      { id: 'juan-lardin',         nome: "Lardín",              posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'jordi-lardin',        nome: "Lardín",              posicoes: ["MEI","MC"],  forca: 78 },
       { id: 'luis-cembranos',      nome: "Cembranos",           posicoes: ["MC","MEI"],  forca: 77 },
       { id: 'florin-raducioiu',    nome: "Răducioiu",           posicoes: ["ATA"],       forca: 81 },
       { id: 'raul-espanyol',       nome: "Raúl (ESP)",          posicoes: ["ATA","MEI"], forca: 77 },
       { id: 'oleg-kuznetsov-esp',  nome: "Kuznetsov",           posicoes: ["ZAG"],       forca: 77 },
       { id: 'jose-mari-esp',       nome: "José Mari",           posicoes: ["MD","PD"],   forca: 76 },
       { id: 'francisco-esp',       nome: "Francisco",           posicoes: ["MC","VOL"],  forca: 76 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1996 (temporada 1995-96) — o ATLÉTICO DE MADRID de Radomir ANTIĆ campeão do
+  //  DOBLETE (87 pts), 9º título de liga + Copa del Rey, o 1º liguero em 13 anos. Título
+  //  selado na última rodada (2-0 no Albacete, gols de Simeone e Kiko). Pantić (meia
+  //  sérvio) e Penev foram decisivos. Pizzi (Tenerife) foi Pichichi (31 gols). Top-6:
+  //  Atlético (87), Valencia (83), Barcelona (80), Espanyol (74), Tenerife (72), Real
+  //  Madrid (70). Temporada especial de 42 jogos/22 times; 1ª com 3 pts por vitória.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1996,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jose-francisco-molina', nome: "Molina",            posicoes: ["GOL"],       forca: 82 },
+      { id: 'toni-muñoz',          nome: "Toni Muñoz",          posicoes: ["LD","LE"],   forca: 78 },
+      { id: 'santi-denia',         nome: "Santi Denia",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'roberto-solozabal',   nome: "Roberto Solozábal",   posicoes: ["ZAG"],       forca: 80 },
+      { id: 'delfi-geli',          nome: "Geli",                posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'juan-vizcaino',       nome: "Vizcaíno",            posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'jose-luis-perez-caminero', nome: "Caminero",       posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'milinko-pantic',      nome: "Pantić",              posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'kiko-narvaez',        nome: "Kiko",                posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'luboslav-penev',      nome: "Lyuboslav Penev",     posicoes: ["ATA"],       forca: 83 },
+      { id: 'roberto-fresnedoso',  nome: "Fresnedoso",          posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'daniel-prodan',       nome: "Prodan",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'juan-manuel-biagini', nome: "Biagini",            posicoes: ["ATA"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1996,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'andoni-zubizarreta-val', nome: "Zubizarreta",      posicoes: ["GOL"],       forca: 82 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'jose-serrer',         nome: "Serrer",              posicoes: ["ZAG"],       forca: 77 },
+      { id: 'fernando',            nome: "Fernando Giner",      posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'francisco-camarasa',  nome: "Camarasa",            posicoes: ["VOL","ZAG"], forca: 78 },
+      { id: 'fernando-gomez',      nome: "Fernando Gómez",      posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'mazinho-oliveira-val', nome: "Mazinho",            posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'predrag-mijatovic-val', nome: "Predrag Mijatović", posicoes: ["ATA"],       forca: 85 },
+      { id: 'oleg-salenko',        nome: "Salenko",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'quique-sanchez-flores-val', nome: "Quique Flores", posicoes: ["LD","VOL"],  forca: 78 },
+      { id: 'jose-manzano-val',    nome: "Manzano",             posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'poyatos-val',         nome: "Poyatos",             posicoes: ["MEI","MD"],  forca: 76 },
+      { id: 'javier-subirats',     nome: "Javier Subirats",     posicoes: ["MEI","MD"],  forca: 75 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1996,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'carles-busquets',     nome: "Carles Busquets",     posicoes: ["GOL"],       forca: 78 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'miguel-angel-nadal',  nome: "Miguel Ángel Nadal",  posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'gica-popescu',        nome: "Popescu",             posicoes: ["VOL","ZAG"], forca: 82 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'jose-mari-bakero',    nome: "José Mari Bakero",    posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'guillermo-amor',      nome: "Guillermo Amor",      posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'juan-antonio-pizzi-bcn', nome: "Juan Antonio Pizzi", posicoes: ["ATA"],     forca: 82 },
+      { id: 'jordi-cruyff',        nome: "Jordi Cruyff",        posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'ivan-de-la-peña',     nome: "Iván de la Peña",     posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'roger-garcia-bcn',    nome: "Roger",               posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'txiki-begiristain',   nome: "Txiki Begiristain",   posicoes: ["PD","ATA"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1996,
+    clube: "Espanyol",
+    jogadores: [
+      { id: 'antoni-jimenez-esp',  nome: "Toni (ESP)",          posicoes: ["GOL"],       forca: 78 },
+      { id: 'mauricio-pochettino', nome: "Mauricio Pochettino", posicoes: ["ZAG"],       forca: 80 },
+      { id: 'enrique-torres-mestre', nome: "Torres Mestre",     posicoes: ["ZAG"],       forca: 76 },
+      { id: 'roberto-fernandez-esp', nome: "Roberto (ESP)",     posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'francisco-arteaga',   nome: "Arteaga",             posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'luis-cembranos',      nome: "Cembranos",           posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'constantin-galca',    nome: "Galca",               posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'jordi-lardin',        nome: "Lardín",              posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'florin-raducioiu',    nome: "Răducioiu",           posicoes: ["ATA"],       forca: 82 },
+      { id: 'jose-oscar-flores-esp', nome: "Óscar (ESP)",       posicoes: ["ATA","MEI"], forca: 77 },
+      { id: 'sergio-santamaria-esp', nome: "Cristóbal",         posicoes: ["MD","PD"],   forca: 76 },
+      { id: 'juan-pauleta-esp',    nome: "Pauleta",             posicoes: ["ATA"],       forca: 78 },
+      { id: 'toni-velamazan',      nome: "Velamazán",           posicoes: ["VOL","MC"],  forca: 76 },
+      { id: 'jose-mari-esp',       nome: "José Mari",           posicoes: ["MD","PD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1996,
+    clube: "Tenerife",
+    jogadores: [
+      { id: 'jose-manuel-ochotorena', nome: "Ochotorena",       posicoes: ["GOL"],       forca: 79 },
+      { id: 'agustin-alvarez-ten', nome: "Chano",               posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'cesar-gomez-ten',     nome: "César Gómez",         posicoes: ["ZAG"],       forca: 77 },
+      { id: 'antonio-mata-ten',    nome: "Mata",                posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'jose-del-solar',      nome: "Del Solar",           posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'quique-estebaranz',   nome: "Quique Estebaranz",   posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'juan-antonio-pizzi-ten', nome: "Pizzi",            posicoes: ["ATA"],       forca: 84 },
+      { id: 'antonio-dertycia',    nome: "Dertycia",            posicoes: ["ATA"],       forca: 78 },
+      { id: 'juanele-tenerife',    nome: "Juanele",             posicoes: ["MEI","PD"],  forca: 78 },
+      { id: 'diego-latorre-ten',   nome: "Latorre",             posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'antonito-tenerife',   nome: "Antoñito",            posicoes: ["LE","MD"],   forca: 76 },
+      { id: 'aitor-aguirre-ten',   nome: "Aguirre",             posicoes: ["MC","VOL"],  forca: 76 },
+      { id: 'felipe-miñambres',    nome: "Felipe",              posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'yuri-ten',            nome: "Yuri",                posicoes: ["MD","PD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1996,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'francisco-buyo',      nome: "Francisco Buyo",      posicoes: ["GOL"],       forca: 80 },
+      { id: 'chendo',              nome: "Chendo",              posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 83 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'rafael-alkorta',      nome: "Rafael Alkorta",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'jose-miguel-gonzalez', nome: "Míchel",             posicoes: ["MEI","MD"],  forca: 82 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'michael-laudrup',     nome: "Michael Laudrup",     posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'jose-emilio-amavisca', nome: "Amavisca",           posicoes: ["PE","ATA"],  forca: 80 },
+      { id: 'ivan-zamorano',       nome: "Iván Zamorano",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'luis-milla',          nome: "Luis Milla",          posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'juan-esnaider',       nome: "Esnáider",            posicoes: ["ATA"],       forca: 80 }
     ]
   }
 
