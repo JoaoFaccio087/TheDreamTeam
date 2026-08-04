@@ -1685,6 +1685,147 @@ const DADOS_LALIGA = [
       { id: 'jesuli-celta',        nome: "Jesuli",              posicoes: ["PD","ATA"],  forca: 77 },
       { id: 'vagner-celta',        nome: "Vagner",              posicoes: ["ZAG","LD"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2002 (temporada 2001-02) — o VALENCIA de Rafa BENÍTEZ campeão (75 pts), 5º
+  //  título, o 1º em 31 anos, quebrando a hegemonia Madrid-Barça com a MELHOR DEFESA (só
+  //  27 gols sofridos). Diego Tristán (Depor) foi Pichichi (21 gols). ZIDANE chegou ao
+  //  Real por recorde mundial (€77,5M) e Saviola ao Barça. Top-6: Valencia (75), Deportivo
+  //  (68), Real Madrid (66), Barcelona (64), Celta (60), Betis (59). Real venceu a 9ª
+  //  Champions (gol de Zidane em Glasgow) mas só foi 3º na liga. Mendieta saiu p/ Lazio.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2002,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'santiago-cañizares',  nome: "Cañizares",           posicoes: ["GOL"],       forca: 85 },
+      { id: 'jocelyn-angloma',     nome: "Angloma",             posicoes: ["LD","ZAG"],  forca: 80 },
+      { id: 'mauricio-pellegrino-val', nome: "Pellegrino (VAL)", posicoes: ["ZAG"],      forca: 80 },
+      { id: 'amedeo-carboni',      nome: "Carboni",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'fabio-aurelio',       nome: "Fábio Aurélio",       posicoes: ["LE","ME"],   forca: 79 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'ruben-baraja',        nome: "Baraja",              posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'francisco-rufete',    nome: "Rufete",              posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'vicente-rodriguez',   nome: "Vicente",             posicoes: ["PE","ME"],   forca: 83 },
+      { id: 'pablo-aimar',         nome: "Aimar",               posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'john-carew',          nome: "Carew",               posicoes: ["ATA"],       forca: 82 },
+      { id: 'mista-valencia',      nome: "Mista",               posicoes: ["ATA"],       forca: 81 },
+      { id: 'kily-gonzalez',       nome: "Kily González",       posicoes: ["ME","MEI"],  forca: 81 },
+      { id: 'salva-ballesta',      nome: "Salva",               posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2002,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'jacques-songo-o',     nome: "Songo'o",             posicoes: ["GOL"],       forca: 80 },
+      { id: 'manuel-pablo-dep',    nome: "Manuel Pablo",        posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'noureddine-naybet',   nome: "Naybet",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'cesar-martin-dep',    nome: "César",               posicoes: ["ZAG"],       forca: 80 },
+      { id: 'enrique-romero-dep',  nome: "Romero",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'aldo-duscher',        nome: "Duscher",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'sergio-gonzalez-dep', nome: "Sergio",              posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'juan-carlos-valeron', nome: "Valerón",             posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'djalminha',           nome: "Djalminha",           posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'roy-makaay',          nome: "Makaay",              posicoes: ["ATA"],       forca: 85 },
+      { id: 'diego-tristan',       nome: "Diego Tristán",       posicoes: ["ATA"],       forca: 85 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'victor-sanchez-dep',  nome: "Víctor (DEP)",        posicoes: ["MD","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2002,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 85 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'ivan-helguera',       nome: "Helguera",            posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 87 },
+      { id: 'claude-makelele',     nome: "Makélélé",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'zinedine-zidane',     nome: "Zidane",              posicoes: ["MEI","MC"],  forca: 91 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 88 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 88 },
+      { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 84 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'steve-mcmanaman',     nome: "McManaman",           posicoes: ["MEI","MD"],  forca: 81 },
+      { id: 'flavio-conceicao',    nome: "Flávio Conceição",    posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'santiago-solari',     nome: "Solari",              posicoes: ["PE","MEI"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2002,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'roberto-bonano',      nome: "Bonano",              posicoes: ["GOL"],       forca: 79 },
+      { id: 'michael-reiziger',    nome: "Reiziger",            posicoes: ["LD","ZAG"],  forca: 79 },
+      { id: 'frank-de-boer',       nome: "Frank de Boer",       posicoes: ["ZAG"],       forca: 82 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 83 },
+      { id: 'philip-cocu',         nome: "Cocu",                posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'gabri-garcia',        nome: "Gabri",               posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'marc-overmars',       nome: "Overmars",            posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'patrick-kluivert',    nome: "Kluivert",            posicoes: ["ATA"],       forca: 85 },
+      { id: 'javier-saviola',      nome: "Saviola",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'philippe-christanval', nome: "Christanval",        posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'geovanni-deiberson',  nome: "Geovanni",            posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'fabio-rochemback',    nome: "Rochemback",          posicoes: ["VOL","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2002,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'pablo-cavallero',     nome: "Cavallero",           posicoes: ["GOL"],       forca: 80 },
+      { id: 'eduardo-berizzo',     nome: "Berizzo",             posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'fernando-caceres',    nome: "Cáceres",             posicoes: ["ZAG"],       forca: 77 },
+      { id: 'juan-manuel-vazquez-cel', nome: "Juanfran",        posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'doriva-celta',        nome: "Doriva",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'aleksandr-mostovoi',  nome: "Mostovoi",            posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'valeri-karpin',       nome: "Karpin",              posicoes: ["MD","MEI"],  forca: 81 },
+      { id: 'benni-mccarthy',      nome: "McCarthy",            posicoes: ["ATA"],       forca: 81 },
+      { id: 'catanha-celta',       nome: "Catanha",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'jesuli-celta',        nome: "Jesuli",              posicoes: ["PD","ATA"],  forca: 77 },
+      { id: 'vagner-celta',        nome: "Vagner",              posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'jorge-otero-cel',     nome: "Otero",               posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'peter-luccin',        nome: "Luccin",              posicoes: ["VOL","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2002,
+    clube: "Real Betis",
+    jogadores: [
+      { id: 'antonio-prats-bet',   nome: "Toni Prats",          posicoes: ["GOL"],       forca: 78 },
+      { id: 'juanito-gutierrez-bet', nome: "Juanito",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'david-rivas-bet',     nome: "Rivas (BET)",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'nano-betis',          nome: "Nano",                posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'juan-jose-canas-bet', nome: "Cañas (BET)",         posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'joaquin-sanchez',     nome: "Joaquín (BET)",       posicoes: ["PD","MEI"],  forca: 83 },
+      { id: 'benjamin-zarandona',  nome: "Zarandona",           posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'alfonso-perez',       nome: "Alfonso",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'denilson-betis',      nome: "Denílson",            posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'fernando-fernandez-bet2', nome: "Fernando F. (BET)", posicoes: ["MC","VOL"], forca: 78 },
+      { id: 'ricardo-oliveira-bet', nome: "Ricardo Oliveira",   posicoes: ["ATA"],       forca: 80 },
+      { id: 'juan-merino',         nome: "Merino (BET)",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'assuncao-betis',      nome: "Assunção",            posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'capi-betis',          nome: "Capi",                posicoes: ["MEI","ME"],  forca: 77 }
+    ]
   }
 
 ];
