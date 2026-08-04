@@ -884,7 +884,7 @@ const DADOS_LALIGA = [
       { id: 'fernando-gomez',      nome: "Fernando Gómez",      posicoes: ["MC","MEI"],  forca: 81 },
       { id: 'mazinho-oliveira-val', nome: "Mazinho",            posicoes: ["VOL","MC"],  forca: 80 },
       { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
-      { id: 'predrag-mijatovic-val', nome: "Predrag Mijatović", posicoes: ["ATA"],       forca: 85 },
+      { id: 'predrag-mijatovic',   nome: "Predrag Mijatović",   posicoes: ["ATA"],       forca: 85 },
       { id: 'oleg-salenko',        nome: "Salenko",             posicoes: ["ATA"],       forca: 81 },
       { id: 'quique-sanchez-flores-val', nome: "Quique Flores", posicoes: ["LD","VOL"],  forca: 78 },
       { id: 'jose-manzano-val',    nome: "Manzano",             posicoes: ["LE","MD"],   forca: 76 },
@@ -978,6 +978,148 @@ const DADOS_LALIGA = [
       { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 84 },
       { id: 'luis-milla',          nome: "Luis Milla",          posicoes: ["VOL","MC"],  forca: 79 },
       { id: 'juan-esnaider',       nome: "Esnáider",            posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 1997 (temporada 1996-97) — o REAL MADRID de Fabio CAPELLO campeão (92 pts,
+  //  RECORDE histórico à época), 27º título, com 5 pts sobre o Barça. Capello foi o 1º
+  //  técnico italiano a vencer a La Liga. Chegaram Roberto Carlos, Šuker, Mijatović e
+  //  Seedorf. O Barça de Bobby Robson (vice, 90 pts) tinha o RONALDO FENÔMENO (34 gols na
+  //  liga, 47 no total!) em seu único ano no clube, com Figo, Luis Enrique e Giovanni.
+  //  Top-6: Real Madrid (92), Barcelona (90), Deportivo (77), Betis (77), Atlético (71),
+  //  Athletic (64). Última temporada com 22 times. Rivaldo brilhou no Deportivo.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1997,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'bodo-illgner',        nome: "Illgner",             posicoes: ["GOL"],       forca: 82 },
+      { id: 'christian-panucci',   nome: "Panucci",             posicoes: ["LD","ZAG"],  forca: 82 },
+      { id: 'manolo-sanchis',      nome: "Manolo Sanchís",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'fernando-hierro',     nome: "Fernando Hierro",     posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 87 },
+      { id: 'fernando-redondo',    nome: "Fernando Redondo",    posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'clarence-seedorf',    nome: "Seedorf",             posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'victor-sanchez-rm',   nome: "Víctor",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'predrag-mijatovic',   nome: "Predrag Mijatović",   posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'davor-suker',         nome: "Davor Šuker",         posicoes: ["ATA"],       forca: 86 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'jose-emilio-amavisca', nome: "Amavisca",           posicoes: ["PE","ATA"],  forca: 79 },
+      { id: 'rafael-alkorta',      nome: "Rafael Alkorta",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1997,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'vitor-baia',          nome: "Vítor Baía",          posicoes: ["GOL"],       forca: 83 },
+      { id: 'albert-ferrer',       nome: "Albert Ferrer",       posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'miguel-angel-nadal',  nome: "Miguel Ángel Nadal",  posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'fernando-couto',      nome: "Fernando Couto",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sergi-barjuan',       nome: "Sergi",               posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'josep-guardiola',     nome: "Pep Guardiola",       posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'jose-mari-bakero',    nome: "José Mari Bakero",    posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 86 },
+      { id: 'luis-enrique',        nome: "Luis Enrique",        posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'giovanni-silva',      nome: "Giovanni",            posicoes: ["MEI","ATA"], forca: 81 },
+      { id: 'ronaldo-fenomeno',    nome: "Ronaldo",             posicoes: ["ATA"],       forca: 91 },
+      { id: 'hristo-stoichkov',    nome: "Hristo Stoichkov",    posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'ivan-de-la-peña',     nome: "Iván de la Peña",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'laurent-blanc',       nome: "Laurent Blanc",       posicoes: ["ZAG"],       forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1997,
+    clube: "Deportivo",
+    jogadores: [
+      { id: 'francisco-liaño',     nome: "Liaño",               posicoes: ["GOL"],       forca: 83 },
+      { id: 'armando-alvarez-dep', nome: "Armando",             posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'miroslav-djukic',     nome: "Djukić",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'fernando-nando-dep',  nome: "Nando (DEP)",         posicoes: ["ZAG","LE"],  forca: 78 },
+      { id: 'donato',              nome: "Donato",              posicoes: ["VOL","ZAG"], forca: 79 },
+      { id: 'mauro-silva',         nome: "Mauro Silva",         posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'fran-gonzalez',       nome: "Fran",                posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'corentin-martins',    nome: "Corentin Martins",    posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 87 },
+      { id: 'bebeto',              nome: "Bebeto",              posicoes: ["ATA"],       forca: 84 },
+      { id: 'jose-manuel-manjarin', nome: "Manjarín",          posicoes: ["MEI","MD"],  forca: 78 },
+      { id: 'alfredo-santaelena-dep', nome: "Alfredo (DEP)",    posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'jose-ramon-alberto-dep', nome: "Ribera",           posicoes: ["ZAG"],       forca: 76 },
+      { id: 'aitor-lopez-rekarte-dep', nome: "López Rekarte",   posicoes: ["LD","MD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1997,
+    clube: "Real Betis",
+    jogadores: [
+      { id: 'pedro-jaro',          nome: "Jaro",                posicoes: ["GOL"],       forca: 79 },
+      { id: 'juan-canas',          nome: "Cañas",               posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'nenad-vidakovic',     nome: "Vidaković",           posicoes: ["ZAG","VOL"], forca: 78 },
+      { id: 'roberto-solozabal-bet', nome: "Solozábal (BET)",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'robert-jarni-bet',    nome: "Jarni",               posicoes: ["LE","MEI"],  forca: 81 },
+      { id: 'alexis-trujillo',     nome: "Alexis",              posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'juan-merino',         nome: "Merino (BET)",        posicoes: ["ZAG"],       forca: 77 },
+      { id: 'fernando-fernandez-bet', nome: "Fernando (BET)",   posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'finidi-george',       nome: "Finidi",              posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'alfonso-perez',       nome: "Alfonso",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'jose-pier-bet',       nome: "Pier",                posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'roberto-rios-bet',    nome: "Roberto Ríos",        posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'francisco-olias',     nome: "Olías",               posicoes: ["MEI","MD"],  forca: 76 },
+      { id: 'ivan-cuellar-bet',    nome: "Cuéllar",             posicoes: ["LD","LE"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1997,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jose-francisco-molina', nome: "Molina",            posicoes: ["GOL"],       forca: 82 },
+      { id: 'delfi-geli',          nome: "Geli",                posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'santi-denia',         nome: "Santi Denia",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'roberto-solozabal',   nome: "Roberto Solozábal",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'toni-muñoz',          nome: "Toni Muñoz",          posicoes: ["LD","LE"],   forca: 77 },
+      { id: 'diego-simeone',       nome: "Diego Simeone",       posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'radek-bejbl',         nome: "Bejbl",               posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'jose-luis-perez-caminero', nome: "Caminero",       posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'milinko-pantic',      nome: "Pantić",              posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'juan-esnaider',       nome: "Esnáider",            posicoes: ["ATA"],       forca: 81 },
+      { id: 'kiko-narvaez',        nome: "Kiko",                posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'juan-vizcaino',       nome: "Vizcaíno",            posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'daniel-prodan',       nome: "Prodan",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'juan-carlos-aguilera', nome: "Aguilera",           posicoes: ["MD","LD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 1997,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'jose-luis-valencia',  nome: "Valencia",            posicoes: ["GOL"],       forca: 78 },
+      { id: 'aitor-larrazabal',    nome: "Larrazábal",          posicoes: ["LE","LD"],   forca: 77 },
+      { id: 'aitor-karanka',       nome: "Karanka",             posicoes: ["ZAG"],       forca: 79 },
+      { id: 'julen-guerrero',      nome: "Julen Guerrero",      posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'cuco-ziganda',        nome: "Ziganda",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'ismael-urzaiz',       nome: "Urzaiz",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'joseba-etxeberria',   nome: "Etxeberria",          posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'ernesto-valverde-ath', nome: "Valverde",           posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'genar-andrinua',      nome: "Andrinúa",            posicoes: ["ZAG"],       forca: 76 },
+      { id: 'javier-larrainzar-ath', nome: "Larrainzar (ATH)",  posicoes: ["ZAG","LD"],  forca: 76 },
+      { id: 'ander-garitano-ath',  nome: "Garitano",            posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'andoni-lakabeg',      nome: "Lakabeg",             posicoes: ["ZAG"],       forca: 76 },
+      { id: 'jose-maria-alkiza',   nome: "Alkiza",              posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'roberto-tiko-ath',    nome: "Tiko",                posicoes: ["LD","MD"],   forca: 76 }
     ]
   }
 
