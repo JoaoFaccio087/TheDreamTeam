@@ -2074,7 +2074,7 @@ const DADOS_LALIGA = [
       { id: 'inaki-lafuente',      nome: "Lafuente",            posicoes: ["GOL"],       forca: 78 },
       { id: 'aitor-lopez-rekarte-ath', nome: "López Rekarte (ATH)", posicoes: ["LD","MD"], forca: 77 },
       { id: 'carlos-gurpegui',     nome: "Gurpegui",            posicoes: ["VOL","ZAG"], forca: 79 },
-      { id: 'aitor-ocio',          nome: "Ocio",                posicoes: ["ZAG"],       forca: 78 },
+      { id: 'aitor-ocio',          nome: "Aitor Ocio",          posicoes: ["ZAG"],       forca: 78 },
       { id: 'josu-sarriegi',       nome: "Sarriegi",            posicoes: ["ZAG"],       forca: 77 },
       { id: 'joseba-etxeberria',   nome: "Etxeberria",          posicoes: ["PD","ATA"],  forca: 81 },
       { id: 'julen-guerrero',      nome: "Julen Guerrero",      posicoes: ["MEI","ATA"], forca: 79 },
@@ -2107,6 +2107,147 @@ const DADOS_LALIGA = [
       { id: 'francisco-gallardo-sev', nome: "Gallardo",         posicoes: ["ATA"],       forca: 78 },
       { id: 'jesus-navas',        nome: "Jesús Navas",          posicoes: ["PD","MD"],   forca: 79 },
       { id: 'antonito-sevilla',   nome: "Antoñito",             posicoes: ["LD","MD"],   forca: 76 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2005 (temporada 2004-05) — o BARCELONA de Frank RIJKAARD campeão (84 pts), 17º
+  //  título, encerrando 6 anos de jejum e inaugurando a era mágica de RONALDINHO e ETO'O.
+  //  Chegou Deco (do Porto campeão europeu). Eto'o e Forlán (Villarreal) empataram como
+  //  Pichichi (25 gols). Top-6: Barcelona (84), Real Madrid (80), Villarreal (65), Betis
+  //  (62), Espanyol (61), Sevilla (60). Entra o Villarreal, o "submarino amarelo" de
+  //  Riquelme e Forlán. Real ainda com Galácticos (Owen chegou) mas 2º, seguia na seca.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2005,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 83 },
+      { id: 'juliano-belletti',    nome: "Belletti",            posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 86 },
+      { id: 'rafael-marquez',      nome: "Rafa Márquez",        posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'gio-van-bronckhorst', nome: "Van Bronckhorst",     posicoes: ["LE","VOL"],  forca: 81 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'deco-souza',          nome: "Deco",                posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'edmilson-gomes',      nome: "Edmílson",            posicoes: ["VOL","ZAG"], forca: 81 },
+      { id: 'ludovic-giuly',       nome: "Giuly",               posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'ronaldinho-gaucho',   nome: "Ronaldinho",          posicoes: ["MEI","ATA"], forca: 91 },
+      { id: 'samuel-etoo',         nome: "Eto'o",               posicoes: ["ATA"],       forca: 88 },
+      { id: 'henrik-larsson',      nome: "Larsson",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'sylvinho-celta',      nome: "Sylvinho",            posicoes: ["LE","MD"],   forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2005,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 86 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'ivan-helguera',       nome: "Helguera",            posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'walter-samuel',       nome: "Walter Samuel",       posicoes: ["ZAG"],       forca: 83 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 85 },
+      { id: 'david-beckham',       nome: "Beckham",             posicoes: ["MD","MC"],   forca: 85 },
+      { id: 'zinedine-zidane',     nome: "Zidane",              posicoes: ["MEI","MC"],  forca: 90 },
+      { id: 'luis-figo',           nome: "Luís Figo",           posicoes: ["PD","MEI"],  forca: 85 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 85 },
+      { id: 'ronaldo-fenomeno',    nome: "Ronaldo",             posicoes: ["ATA"],       forca: 89 },
+      { id: 'michael-owen',        nome: "Owen",                posicoes: ["ATA"],       forca: 84 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'thomas-gravesen',     nome: "Gravesen",            posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'santiago-solari',     nome: "Solari",              posicoes: ["PE","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2005,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'jose-manuel-viera-vil', nome: "Viera",             posicoes: ["GOL"],       forca: 80 },
+      { id: 'javi-venta',          nome: "Javi Venta",          posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'quique-alvarez-vil',  nome: "Quique Álvarez",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'gonzalo-rodriguez-vil', nome: "Gonzalo",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'rodolfo-arruabarrena-vil', nome: "Arruabarrena",   posicoes: ["LE","ZAG"],  forca: 78 },
+      { id: 'marcos-senna',        nome: "Marcos Senna",        posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'juan-roman-riquelme', nome: "Riquelme",            posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'juan-pablo-sorin',    nome: "Sorín",               posicoes: ["LE","ME"],   forca: 81 },
+      { id: 'diego-forlan',        nome: "Forlán",              posicoes: ["ATA"],       forca: 84 },
+      { id: 'jose-mari-romero-vil', nome: "José Mari (VIL)",    posicoes: ["ATA"],       forca: 79 },
+      { id: 'santiago-cazorla-vil', nome: "Cazorla",            posicoes: ["MEI","MD"],  forca: 79 },
+      { id: 'hector-font-vil',     nome: "Font",                posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'javier-calleja-vil',  nome: "Calleja",             posicoes: ["MEI","PD"],  forca: 77 },
+      { id: 'juan-manuel-pena-vil', nome: "Juan M. Peña",       posicoes: ["ZAG"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2005,
+    clube: "Real Betis",
+    jogadores: [
+      { id: 'antonio-doblas-bet',  nome: "Doblas",              posicoes: ["GOL"],       forca: 78 },
+      { id: 'juanito-gutierrez-bet', nome: "Juanito",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'david-rivas-bet',     nome: "Rivas (BET)",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'arzu-betis',          nome: "Arzu",                posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'juan-jose-canas-bet', nome: "Cañas (BET)",         posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'joaquin-sanchez',     nome: "Joaquín (BET)",       posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'benjamin-zarandona',  nome: "Zarandona",           posicoes: ["MC","MEI"],  forca: 77 },
+      { id: 'alberto-rico-bet',    nome: "Alberto (BET)",       posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'denilson-betis',      nome: "Denílson",            posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'ricardo-oliveira-bet', nome: "Ricardo Oliveira",   posicoes: ["ATA"],       forca: 84 },
+      { id: 'dani-martin-bet',     nome: "Dani (BET)",          posicoes: ["ATA","MEI"], forca: 78 },
+      { id: 'assuncao-betis',      nome: "Assunção",            posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'capi-betis',          nome: "Capi",                posicoes: ["MEI","ME"],  forca: 77 },
+      { id: 'melli-betis',         nome: "Melli",               posicoes: ["VOL","MC"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2005,
+    clube: "Espanyol",
+    jogadores: [
+      { id: 'carlos-kameni',       nome: "Kameni",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'moises-hurtado-esp',  nome: "Moisés Hurtado",      posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'daniel-jarque',       nome: "Jarque",              posicoes: ["ZAG"],       forca: 79 },
+      { id: 'alberto-lopo-esp',    nome: "Lopo",                posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'david-garcia-esp',    nome: "David García",        posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'ivan-de-la-peña',     nome: "Iván de la Peña",     posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'raul-tamudo',         nome: "Tamudo",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'maxi-rodriguez-esp',  nome: "Maxi Rodríguez",      posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'walter-pandiani-esp', nome: "Pandiani (ESP)",      posicoes: ["ATA"],       forca: 79 },
+      { id: 'francisco-rufete-esp', nome: "Rufete (ESP)",       posicoes: ["PD","MEI"],  forca: 78 },
+      { id: 'domenech-esp',        nome: "Domènech",            posicoes: ["LD","MD"],   forca: 76 },
+      { id: 'coro-esp',            nome: "Coro",                posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'fredson-esp',         nome: "Fredson",             posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'javi-chica-esp',      nome: "Chica",               posicoes: ["LD","ZAG"],  forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2005,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'andres-palop',        nome: "Palop",               posicoes: ["GOL"],       forca: 82 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'javi-navarro',        nome: "Javi Navarro",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'pablo-alfaro',        nome: "Pablo Alfaro",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'david-castedo',       nome: "David Castedo",       posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'aitor-ocio',          nome: "Aitor Ocio",          posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jose-luis-marti',     nome: "Martí",               posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'renato-dirnei',       nome: "Renato",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'julio-baptista-sev',  nome: "Júlio Baptista",      posicoes: ["MEI","ATA"], forca: 85 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD","MD"],   forca: 81 },
+      { id: 'adriano-correia-sev', nome: "Adriano",             posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'francisco-gallardo-sev', nome: "Gallardo",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'dario-silva-sev',     nome: "Darío Silva",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'sergio-ramos-sev',    nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 82 }
     ]
   }
 
