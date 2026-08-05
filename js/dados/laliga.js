@@ -2247,7 +2247,148 @@ const DADOS_LALIGA = [
       { id: 'adriano-correia-sev', nome: "Adriano",             posicoes: ["LE","MD"],   forca: 79 },
       { id: 'francisco-gallardo-sev', nome: "Gallardo",         posicoes: ["ATA"],       forca: 78 },
       { id: 'dario-silva-sev',     nome: "Darío Silva",         posicoes: ["ATA"],       forca: 78 },
-      { id: 'sergio-ramos-sev',    nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 82 }
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 82 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2006 (temporada 2005-06) — o BARCELONA de Rijkaard BICAMPEÃO (82 pts), 18º
+  //  título, no ano da 2ª CHAMPIONS (final de Paris vs Arsenal). Eto'o Pichichi (26 gols),
+  //  Ronaldinho no auge (Bola de Ouro 2005). Estreou o jovem MESSI (18 anos). Top-6:
+  //  Barcelona (82), Real Madrid (70), Valencia (69), Osasuna (68), Sevilla (68), Celta
+  //  (64). Osasuna fez campanha histórica (4º, vaga na Champions). Real na seca (Florentino
+  //  renunciou em fev/2006). Entra Osasuna no acervo. Sevilla montava base da era gloriosa.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2006,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 84 },
+      { id: 'juliano-belletti',    nome: "Belletti",            posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 86 },
+      { id: 'rafael-marquez',      nome: "Rafa Márquez",        posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'gio-van-bronckhorst', nome: "Van Bronckhorst",     posicoes: ["LE","VOL"],  forca: 81 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'deco-souza',          nome: "Deco",                posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'edmilson-gomes',      nome: "Edmílson",            posicoes: ["VOL","ZAG"], forca: 81 },
+      { id: 'ludovic-giuly',       nome: "Giuly",               posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'ronaldinho-gaucho',   nome: "Ronaldinho",          posicoes: ["MEI","ATA"], forca: 92 },
+      { id: 'samuel-etoo',         nome: "Eto'o",               posicoes: ["ATA"],       forca: 89 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'mark-van-bommel',     nome: "Van Bommel",          posicoes: ["VOL","MC"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2006,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 86 },
+      { id: 'michel-salgado',      nome: "Míchel Salgado",      posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 83 },
+      { id: 'ivan-helguera',       nome: "Helguera",            posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'roberto-carlos',      nome: "Roberto Carlos",      posicoes: ["LE","ME"],   forca: 84 },
+      { id: 'david-beckham',       nome: "Beckham",             posicoes: ["MD","MC"],   forca: 84 },
+      { id: 'zinedine-zidane',     nome: "Zidane",              posicoes: ["MEI","MC"],  forca: 89 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 84 },
+      { id: 'ronaldo-fenomeno',    nome: "Ronaldo",             posicoes: ["ATA"],       forca: 87 },
+      { id: 'robinho-silva',       nome: "Robinho",             posicoes: ["PE","ATA"],  forca: 84 },
+      { id: 'thomas-gravesen',     nome: "Gravesen",            posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'julio-baptista-sev',  nome: "Júlio Baptista",      posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'cicinho-rm',          nome: "Cicinho",             posicoes: ["LD","MD"],   forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2006,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'santiago-cañizares',  nome: "Cañizares",           posicoes: ["GOL"],       forca: 84 },
+      { id: 'miguel-brito-val',    nome: "Miguel",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'roberto-ayala',       nome: "Ayala",               posicoes: ["ZAG"],       forca: 85 },
+      { id: 'carlos-marchena',     nome: "Marchena",            posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'emiliano-moretti',    nome: "Moretti",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'ruben-baraja',        nome: "Baraja",              posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","ME"],  forca: 82 },
+      { id: 'vicente-rodriguez',   nome: "Vicente",             posicoes: ["PE","ME"],   forca: 83 },
+      { id: 'pablo-aimar',         nome: "Aimar",               posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'david-villa',         nome: "David Villa",         posicoes: ["ATA"],       forca: 85 },
+      { id: 'miguel-angel-angulo', nome: "Angulo",              posicoes: ["PD","ATA"],  forca: 78 },
+      { id: 'fernando-morientes-val', nome: "Morientes (VAL)",  posicoes: ["ATA"],       forca: 81 },
+      { id: 'raul-albiol-val',     nome: "Albiol",              posicoes: ["ZAG"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2006,
+    clube: "Osasuna",
+    jogadores: [
+      { id: 'ricardo-elizondo-osa', nome: "Ricardo",            posicoes: ["GOL"],       forca: 80 },
+      { id: 'cruchaga-osasuna',    nome: "Cruchaga",            posicoes: ["ZAG"],       forca: 78 },
+      { id: 'corrales-osasuna',    nome: "Corrales",            posicoes: ["ZAG"],       forca: 78 },
+      { id: 'josetxo-osasuna',     nome: "Josetxo",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'delporte-osasuna',    nome: "Delporte",            posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'patxi-punal',         nome: "Puñal",               posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'javier-flano-osa',    nome: "Flaño",               posicoes: ["LD","ZAG"],  forca: 77 },
+      { id: 'pierre-webo',         nome: "Webó",                posicoes: ["ATA"],       forca: 80 },
+      { id: 'juanfran-torres-osa', nome: "Juanfran (OSA)",      posicoes: ["MD","PD"],   forca: 78 },
+      { id: 'savo-milosevic',     nome: "Milošević",           posicoes: ["ATA"],       forca: 80 },
+      { id: 'valdo-osasuna',       nome: "Valdo",               posicoes: ["MEI","ME"],  forca: 78 },
+      { id: 'romeo-osasuna',       nome: "Romeo",               posicoes: ["MC","VOL"],  forca: 77 },
+      { id: 'moha-osasuna',        nome: "Moha",                posicoes: ["MEI","MC"],  forca: 77 },
+      { id: 'jose-izquierdo-osa',  nome: "Izquierdo",           posicoes: ["LE","LD"],   forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2006,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'andres-palop',        nome: "Palop",               posicoes: ["GOL"],       forca: 82 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'javi-navarro',        nome: "Javi Navarro",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'ivica-dragutinovic',  nome: "Dragutinović",        posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'aitor-ocio',          nome: "Aitor Ocio",          posicoes: ["ZAG"],       forca: 78 },
+      { id: 'adriano-correia-sev', nome: "Adriano",             posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'renato-dirnei',       nome: "Renato",              posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'jose-luis-marti',     nome: "Martí",               posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD","MD"],   forca: 82 },
+      { id: 'frederic-kanoute',    nome: "Kanouté",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'luis-fabiano',        nome: "Luís Fabiano",        posicoes: ["ATA"],       forca: 83 },
+      { id: 'enzo-maresca',        nome: "Maresca",             posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'julien-escude-sev',   nome: "Escudé",              posicoes: ["ZAG"],       forca: 79 },
+      { id: 'saviola-sevilla',     nome: "Saviola (SEV)",       posicoes: ["ATA"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2006,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'jose-manuel-pinto',   nome: "Pinto",               posicoes: ["GOL"],       forca: 80 },
+      { id: 'angel-lopez-cel',     nome: "Ángel",               posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'fernando-caceres',    nome: "Cáceres",             posicoes: ["ZAG"],       forca: 77 },
+      { id: 'roberto-lago-cel',    nome: "Lago",                posicoes: ["LE","ZAG"],  forca: 77 },
+      { id: 'contreras-celta',     nome: "Contreras",           posicoes: ["ZAG"],       forca: 77 },
+      { id: 'oscar-lopez-cel',     nome: "Óscar López",         posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'jonathan-vera-canobbio', nome: "Canobbio",         posicoes: ["MD","PD"],   forca: 78 },
+      { id: 'gustavo-lopez-zar',   nome: "Gustavo López",       posicoes: ["MEI","PE"],  forca: 78 },
+      { id: 'nene-celta',          nome: "Nené",                posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'catanha-celta',       nome: "Catanha",             posicoes: ["ATA"],       forca: 79 },
+      { id: 'jorge-larena-cel',    nome: "Jorge Larena",        posicoes: ["PD","ATA"],  forca: 77 },
+      { id: 'gustavo-varela-cel',  nome: "Varela",              posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'pablo-couñago',       nome: "Couñago",             posicoes: ["ATA"],       forca: 79 },
+      { id: 'guayre-celta',        nome: "Guayre",              posicoes: ["ATA","MEI"], forca: 77 }
     ]
   }
 
