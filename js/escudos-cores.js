@@ -27,7 +27,7 @@
 
   // Clubes que aparecem como SEÇÃO PRÓPRIA no demo (escudos-demo.html) e são filtrados da
   // Champions para não duplicar. Espelham os clubes de js/dados/laliga.js e js/dados/serie-a.js.
-  var CLUBES_LALIGA = ['Alavés', 'Athletic Bilbao', 'Atlético de Madrid', 'Barcelona', 'Celta Vigo', 'Deportivo', 'Espanyol', 'Mallorca', 'Osasuna', 'Oviedo', 'Racing Santander', 'Real Betis', 'Real Madrid', 'Real Sociedad', 'Sevilla', 'Sporting Gijón', 'Tenerife', 'Valencia', 'Villarreal', 'Zaragoza'];
+  var CLUBES_LALIGA = ['Alavés', 'Athletic Bilbao', 'Atlético de Madrid', 'Barcelona', 'Celta Vigo', 'Deportivo', 'Espanyol', 'Getafe', 'Mallorca', 'Osasuna', 'Oviedo', 'Racing Santander', 'Real Betis', 'Real Madrid', 'Real Sociedad', 'Sevilla', 'Sporting Gijón', 'Tenerife', 'Valencia', 'Villarreal', 'Zaragoza'];
   var CLUBES_SERIEA = ['Atalanta', 'Bologna', 'Chievo', 'Como', 'Fiorentina', 'Genoa', 'Inter de Milão', 'Juventus', 'Lazio', 'Milan', 'Napoli', 'Palermo', 'Parma', 'Roma', 'Sampdoria', 'Sassuolo', 'Torino', 'Udinese'];
 
   var CORES_BRASILEIRAO = {
@@ -291,6 +291,7 @@
     'Celta Vigo':      ['#8AC3EE', '#FFFFFF'],   // azul celeste (celestes)
     'Deportivo':       ['#0066B3', '#FFFFFF'],   // azul e branco listras
     'Espanyol':        ['#0067B1', '#FFFFFF'],   // azul e branco listras (pericos)
+    'Getafe':          ['#005999', '#FFFFFF'],   // azul (azulones)
     'Mallorca':        ['#CC0000', '#000000'],   // vermelho, detalhe preto (bermellones)
     'Osasuna':         ['#D81E05', '#0A2240'],   // vermelho, detalhe marinho (rojillos)
     'Oviedo':          ['#0033A0', '#FFFFFF'],   // azul royal (carbayones)
@@ -532,6 +533,7 @@
     'Celta Vigo':              { padrao: 'solido' },                                  // azul celeste (celestes)
     'Alavés':                  { padrao: 'listras-v', listras: 4 },                  // azul e branco (babazorros)
     'Racing Santander':        { padrao: 'listras-v', listras: 4 },                  // verde e branco (Racing)
+    'Getafe':                  { padrao: 'solido' },                                  // azul (azulones)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

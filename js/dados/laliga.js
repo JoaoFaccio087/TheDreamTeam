@@ -2813,6 +2813,147 @@ const DADOS_LALIGA = [
       { id: 'pablo-hernandez-val', nome: "Pablo Hernández",     posicoes: ["PD","MEI"],  forca: 79 },
       { id: 'joaquin-sanchez',     nome: "Joaquín",             posicoes: ["PD","MEI"],  forca: 81 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2010 (temporada 2009-10) — o BARCELONA de Guardiola BICAMPEÃO (99 pts), 20º
+  //  título, num DUELO ÉPICO com o Real Madrid (96 pts, recorde da época para vice). Messi
+  //  Pichichi (34 gols). Chegou IBRAHIMOVIĆ ao Barça; o Real montou os novos Galácticos de
+  //  Florentino com CRISTIANO RONALDO, KAKÁ, BENZEMA e Xabi Alonso (Mourinho viria no ano
+  //  seguinte). Top-6: Barcelona (99), Real Madrid (96), Valencia (71), Sevilla (63),
+  //  Mallorca (62), Getafe (58). Dois maiores placares de pontos da história até então.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2010,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 85 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 87 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 86 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 86 },
+      { id: 'maxwell-scherrer',    nome: "Maxwell",             posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 92 },
+      { id: 'zlatan-ibrahimovic',  nome: "Ibrahimović",         posicoes: ["ATA"],       forca: 88 },
+      { id: 'thierry-henry',       nome: "Henry",               posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'pedro-rodriguez',     nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'seydou-keita-sev',    nome: "Keita",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'yaya-toure-bcn',      nome: "Yaya Touré",          posicoes: ["VOL","MC"],  forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2010,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 89 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 86 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG"],       forca: 84 },
+      { id: 'raul-albiol-val',      nome: "Albiol",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 84 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'lassana-diarra',      nome: "Lass Diarra",         posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'kaka-real',           nome: "Kaká",                posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 91 },
+      { id: 'gonzalo-higuain',     nome: "Higuaín",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'rafael-van-der-vaart', nome: "Van der Vaart",      posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'alvaro-arbeloa',      nome: "Arbeloa",             posicoes: ["LD","LE"],   forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2010,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'cesar-sanchez-val',   nome: "César (VAL)",         posicoes: ["GOL"],       forca: 80 },
+      { id: 'miguel-brito-val',    nome: "Miguel",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'david-navarro-val',   nome: "David Navarro",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'carlos-marchena',     nome: "Marchena",            posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","ME"],  forca: 86 },
+      { id: 'juan-manuel-mata',    nome: "Juan Mata",           posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'david-villa',         nome: "David Villa",         posicoes: ["ATA"],       forca: 87 },
+      { id: 'pablo-hernandez-val', nome: "Pablo Hernández",     posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'ruben-baraja',        nome: "Baraja",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'alexis-ruano-val',    nome: "Alexis (VAL)",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'joaquin-sanchez',     nome: "Joaquín",             posicoes: ["PD","MEI"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2010,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'andres-palop',        nome: "Palop",               posicoes: ["GOL"],       forca: 81 },
+      { id: 'abdoulay-konko-sev',  nome: "Konko",               posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'julien-escude-sev',   nome: "Escudé",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'sebastien-squillaci', nome: "Squillaci",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'fernando-navarro-sev', nome: "Fernando Navarro",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'didier-zokora-sev',   nome: "Zokora",              posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'renato-dirnei',       nome: "Renato",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'diego-capel-sev',     nome: "Capel",               posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'frederic-kanoute',    nome: "Kanouté",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'luis-fabiano',        nome: "Luís Fabiano",        posicoes: ["ATA"],       forca: 85 },
+      { id: 'alvaro-negredo-sev',  nome: "Negredo",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'diego-perotti-sev',   nome: "Perotti",             posicoes: ["PE","MEI"],  forca: 78 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2010,
+    clube: "Mallorca",
+    jogadores: [
+      { id: 'dudu-aouate',         nome: "Aouate",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'jose-nunes-mll',      nome: "Nunes",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ivan-ramis-mll',      nome: "Ramis",               posicoes: ["ZAG"],       forca: 79 },
+      { id: 'kevin-mirallas-mll',  nome: "Mirallas",            posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'jonas-goncalves-mll', nome: "Jonás",               posicoes: ["ATA"],       forca: 82 },
+      { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'jose-luis-marti-mll', nome: "Martí (MLL)",         posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'borja-valero-mll',    nome: "Borja Valero",        posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'aritz-aduriz-mll',    nome: "Aduriz",              posicoes: ["ATA"],       forca: 81 },
+      { id: 'gonzalo-castro-mll',  nome: "Castro",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'chico-flores-mll',    nome: "Chico",               posicoes: ["ZAG"],       forca: 78 },
+      { id: 'pierre-webo',         nome: "Webó",                posicoes: ["ATA"],       forca: 79 },
+      { id: 'tomas-pina-mll',      nome: "Pina",                posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'juan-arango-mll',     nome: "Arango",              posicoes: ["ME","MEI"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2010,
+    clube: "Getafe",
+    jogadores: [
+      { id: 'oscar-ustari-get',   nome: "Ustari",              posicoes: ["GOL"],       forca: 79 },
+      { id: 'miguel-torres-get',  nome: "Miguel Torres",       posicoes: ["LD","LE"],   forca: 78 },
+      { id: 'cata-diaz-get',      nome: "Cata Díaz",           posicoes: ["ZAG"],       forca: 79 },
+      { id: 'rafa-lopez-get',     nome: "Rafa",                posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'jose-manuel-mane-get', nome: "Mané",              posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'derek-boateng-get',  nome: "Boateng",             posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'francisco-casquero', nome: "Casquero",           posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'fabio-celestini-get', nome: "Celestini",          posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'daniel-parejo-get',  nome: "Parejo",              posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'pedro-leon-get',     nome: "Pedro León",          posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'roberto-soldado-get', nome: "Soldado",            posicoes: ["ATA"],       forca: 82 },
+      { id: 'manu-del-moral-get', nome: "Del Moral",           posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'miku-get',           nome: "Miku",                posicoes: ["ATA"],       forca: 78 },
+      { id: 'jaime-gavilan-get',  nome: "Gavilán",             posicoes: ["MEI","ME"],  forca: 78 }
+    ]
   }
 
 ];
