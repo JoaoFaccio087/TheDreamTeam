@@ -276,7 +276,25 @@
     'Wolverhampton':           ['#FDB913', '#231F20'],
     'Sunderland':              ['#EB172B', '#FFFFFF'],
   }
-  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS);
+
+  // La Liga (espanhola). Cores oficiais (fonte: RSSSF + Football Kit Archive). Os clubes que
+  // também disputam a Champions (Real Madrid, Barcelona, Atlético, Valencia, Real Sociedad,
+  // Sevilla, Villarreal) já têm cor em CORES_CHAMPIONS — não se repetem aqui.
+  var CORES_LALIGA = {
+    'Alavés':          ['#1F4BA0', '#FFFFFF'],   // azul e branco listras (babazorros)
+    'Athletic Bilbao': ['#EE2523', '#FFFFFF'],   // vermelho e branco listras (rojiblancos)
+    'Celta Vigo':      ['#8AC3EE', '#FFFFFF'],   // azul celeste (celestes)
+    'Deportivo':       ['#0066B3', '#FFFFFF'],   // azul e branco listras
+    'Espanyol':        ['#0067B1', '#FFFFFF'],   // azul e branco listras (pericos)
+    'Mallorca':        ['#CC0000', '#000000'],   // vermelho, detalhe preto (bermellones)
+    'Osasuna':         ['#D81E05', '#0A2240'],   // vermelho, detalhe marinho (rojillos)
+    'Oviedo':          ['#0033A0', '#FFFFFF'],   // azul royal (carbayones)
+    'Real Betis':      ['#00954C', '#FFFFFF'],   // verde e branco listras (verdiblancos)
+    'Sporting Gijón':  ['#E30613', '#FFFFFF'],   // vermelho e branco listras
+    'Tenerife':        ['#FFFFFF', '#005BAC'],   // branco, detalhe azul (chicharreros)
+    'Zaragoza':        ['#FFFFFF', '#0A2C6B'],   // branco, detalhe azul (blanquillos)
+  }
+  var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS, CORES_LALIGA);
 
   // Brasileiros que TAMBÉM disputam a Libertadores. As cores deles moram em CORES_BRASILEIRAO
   // (fonte única — duplicar arriscaria divergir); esta lista existe só para EXIBIÇÃO: a demo
@@ -498,7 +516,7 @@
     'Osasuna':                 { padrao: 'solido' },                                  // azul/vermelho (osasuna=rojillo)
     'Sporting Gijón':          { padrao: 'listras-v', listras: 5 },                  // vermelho e branco (rojiblanco)
     'Oviedo':                  { padrao: 'solido' },                                  // azul (carbayón)
-    'Zaragoza':                { padrao: 'metade' },                                  // branco e azul (blanquillos)
+    'Zaragoza':                { padrao: 'solido' },                                  // branco (detalhe azul) — blanquillos
     'Deportivo':               { padrao: 'listras-v', listras: 4 },                  // azul e branco (Depor)
     'Tenerife':                { padrao: 'solido' },                                  // branco/azul (chicharreros)
     'Athletic Bilbao':         { padrao: 'listras-v', listras: 5 },                  // vermelho e branco (rojiblancos)
@@ -518,7 +536,7 @@
     'Standard Liège':          { padrao: 'faixa-h' },                                 // vermelho e branco
     'Steaua București':        { padrao: 'faixa-h' },                                 // vermelho e azul
     'Tottenham':               { padrao: 'faixa-h' },                                 // branco e marinho
-    'Valencia':                { padrao: 'faixa-h' },                                 // branco e laranja
+    'Valencia':                { padrao: 'solido' },                                  // branco (detalhe laranja/preto)
     'Vasas':                   { padrao: 'metade' },                                  // vermelho e azul
     'Villarreal':              { padrao: 'villarreal' },                 // AZUL com losango da senyera (amarelo é a camisa)
     'Widzew Łódź':             { padrao: 'faixa-h' },                                 // vermelho e branco
