@@ -27,7 +27,7 @@
 
   // Clubes que aparecem como SEÇÃO PRÓPRIA no demo (escudos-demo.html) e são filtrados da
   // Champions para não duplicar. Espelham os clubes de js/dados/laliga.js e js/dados/serie-a.js.
-  var CLUBES_LALIGA = ['Alavés', 'Athletic Bilbao', 'Atlético de Madrid', 'Barcelona', 'Celta Vigo', 'Deportivo', 'Espanyol', 'Mallorca', 'Osasuna', 'Oviedo', 'Real Betis', 'Real Madrid', 'Real Sociedad', 'Sevilla', 'Sporting Gijón', 'Tenerife', 'Valencia', 'Villarreal', 'Zaragoza'];
+  var CLUBES_LALIGA = ['Alavés', 'Athletic Bilbao', 'Atlético de Madrid', 'Barcelona', 'Celta Vigo', 'Deportivo', 'Espanyol', 'Mallorca', 'Osasuna', 'Oviedo', 'Racing Santander', 'Real Betis', 'Real Madrid', 'Real Sociedad', 'Sevilla', 'Sporting Gijón', 'Tenerife', 'Valencia', 'Villarreal', 'Zaragoza'];
   var CLUBES_SERIEA = ['Atalanta', 'Bologna', 'Chievo', 'Como', 'Fiorentina', 'Genoa', 'Inter de Milão', 'Juventus', 'Lazio', 'Milan', 'Napoli', 'Palermo', 'Parma', 'Roma', 'Sampdoria', 'Sassuolo', 'Torino', 'Udinese'];
 
   var CORES_BRASILEIRAO = {
@@ -294,6 +294,7 @@
     'Mallorca':        ['#CC0000', '#000000'],   // vermelho, detalhe preto (bermellones)
     'Osasuna':         ['#D81E05', '#0A2240'],   // vermelho, detalhe marinho (rojillos)
     'Oviedo':          ['#0033A0', '#FFFFFF'],   // azul royal (carbayones)
+    'Racing Santander':['#009B48', '#FFFFFF'],   // verde e branco listras (verdiblancos cántabros)
     'Real Betis':      ['#00954C', '#FFFFFF'],   // verde e branco listras (verdiblancos)
     'Sporting Gijón':  ['#E30613', '#FFFFFF'],   // vermelho e branco listras
     'Tenerife':        ['#FFFFFF', '#005BAC'],   // branco, detalhe azul (chicharreros)
@@ -530,6 +531,7 @@
     'Mallorca':                { padrao: 'solido' },                                  // vermelho (bermellones)
     'Celta Vigo':              { padrao: 'solido' },                                  // azul celeste (celestes)
     'Alavés':                  { padrao: 'listras-v', listras: 4 },                  // azul e branco (babazorros)
+    'Racing Santander':        { padrao: 'listras-v', listras: 4 },                  // verde e branco (Racing)
     'Roma':                    { padrao: 'faixa-h' },                                 // vinho e dourado
     'Saint-Étienne':           { padrao: 'solido' },                                  // verde
     'Sampdoria':               { padrao: 'faixa-bicolor', cor2: '#E30613' },            // azul com faixa

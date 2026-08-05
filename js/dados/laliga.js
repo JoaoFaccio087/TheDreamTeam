@@ -2531,6 +2531,147 @@ const DADOS_LALIGA = [
       { id: 'gorka-movilla-zar',   nome: "Movilla",             posicoes: ["MC","VOL"],  forca: 78 },
       { id: 'luciano-galletti-zar', nome: "Galletti",           posicoes: ["PD","MEI"],  forca: 79 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2008 (temporada 2007-08) — o REAL MADRID de Bernd SCHUSTER BICAMPEÃO (85 pts),
+  //  31º título, os 1ºs títulos consecutivos desde 1990. Selado com 2-1 sobre o Osasuna
+  //  (gol tardio de Higuaín). Dani Güiza (Mallorca) Pichichi (27 gols). Robinho brilhou.
+  //  Top-6: Real Madrid (85), Villarreal (77), Barcelona (67), Atlético (64), Sevilla (64),
+  //  Racing (60). Villarreal fez sua melhor campanha (vice). Atlético voltou à Champions
+  //  após 11 anos com Agüero/Forlán. Fim da era Ronaldinho no Barça (Guardiola chegaria).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2008,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 87 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG"],       forca: 83 },
+      { id: 'fabio-cannavaro',     nome: "Cannavaro",           posicoes: ["ZAG"],       forca: 85 },
+      { id: 'gabriel-heinze',      nome: "Heinze",              posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'mahamadou-diarra',    nome: "Diarra",              posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'fernando-gago-rm',    nome: "Gago",                posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'wesley-sneijder',     nome: "Sneijder",            posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'robinho-silva',       nome: "Robinho",             posicoes: ["PE","ATA"],  forca: 86 },
+      { id: 'ruud-van-nistelrooy', nome: "Van Nistelrooy",      posicoes: ["ATA"],       forca: 86 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'arjen-robben-rm',     nome: "Robben",              posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'gonzalo-higuain',     nome: "Higuaín",             posicoes: ["ATA"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2008,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'diego-lopez-vil',     nome: "Diego López",         posicoes: ["GOL"],       forca: 81 },
+      { id: 'javi-venta',          nome: "Javi Venta",          posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'gonzalo-rodriguez-vil', nome: "Gonzalo",           posicoes: ["ZAG"],       forca: 81 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 82 },
+      { id: 'joan-capdevila',      nome: "Capdevila",           posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'marcos-senna',        nome: "Marcos Senna",        posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'santiago-cazorla-vil', nome: "Cazorla",            posicoes: ["MEI","MD"],  forca: 83 },
+      { id: 'robert-pires-vil',    nome: "Pires",               posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'matias-fernandez-vil', nome: "Matías Fernández",   posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'giuseppe-rossi-vil',  nome: "Rossi",               posicoes: ["ATA"],       forca: 82 },
+      { id: 'nihat-kahveci',       nome: "Nihat",               posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'guillermo-franco-vil', nome: "Franco",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'santi-cazorla-bruno', nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2008,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 84 },
+      { id: 'gianluca-zambrotta',  nome: "Zambrotta",           posicoes: ["LD","LE"],   forca: 82 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 86 },
+      { id: 'rafael-marquez',      nome: "Rafa Márquez",        posicoes: ["ZAG","VOL"], forca: 83 },
+      { id: 'lilian-thuram',       nome: "Thuram",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'deco-souza',          nome: "Deco",                posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'ronaldinho-gaucho',   nome: "Ronaldinho",          posicoes: ["MEI","ATA"], forca: 88 },
+      { id: 'samuel-etoo',         nome: "Eto'o",               posicoes: ["ATA"],       forca: 88 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 87 },
+      { id: 'thierry-henry',       nome: "Henry",               posicoes: ["ATA","PE"],  forca: 86 },
+      { id: 'yaya-toure-bcn',      nome: "Yaya Touré",          posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'gabriel-milito-bcn',  nome: "Gabriel Milito",      posicoes: ["ZAG"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2008,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'christian-abbiati-atm', nome: "Abbiati",           posicoes: ["GOL"],       forca: 81 },
+      { id: 'antonio-lopez-atm',   nome: "Antonio López",       posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'luis-perea',          nome: "Perea",               posicoes: ["ZAG"],       forca: 81 },
+      { id: 'pablo-ibanez-atm',    nome: "Pablo Ibáñez",        posicoes: ["ZAG"],       forca: 80 },
+      { id: 'juanito-gutierrez-bet', nome: "Juanito",           posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'maniche-atm',         nome: "Maniche",             posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'raul-garcia-atm',     nome: "Raúl García",         posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'simao-sabrosa',       nome: "Simão",               posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'jose-antonio-reyes',  nome: "Reyes",               posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'sergio-aguero',       nome: "Agüero",              posicoes: ["ATA"],       forca: 85 },
+      { id: 'diego-forlan',        nome: "Forlán",              posicoes: ["ATA"],       forca: 85 },
+      { id: 'maxi-rodriguez-esp',  nome: "Maxi Rodríguez",      posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'jose-manuel-jurado',  nome: "Jurado",              posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'giourkas-seitaridis', nome: "Seitaridis",          posicoes: ["LD","ZAG"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2008,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'andres-palop',        nome: "Palop",               posicoes: ["GOL"],       forca: 82 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 86 },
+      { id: 'julien-escude-sev',   nome: "Escudé",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'ivica-dragutinovic',  nome: "Dragutinović",        posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'adriano-correia-sev', nome: "Adriano",             posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'christian-poulsen',   nome: "Poulsen",             posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'seydou-keita-sev',    nome: "Keita",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'diego-capel-sev',     nome: "Capel",               posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'frederic-kanoute',    nome: "Kanouté",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'luis-fabiano',        nome: "Luís Fabiano",        posicoes: ["ATA"],       forca: 85 },
+      { id: 'renato-dirnei',       nome: "Renato",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ernesto-chevanton-sev', nome: "Chevantón",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'aitor-ocio',          nome: "Aitor Ocio",          posicoes: ["ZAG"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2008,
+    clube: "Racing Santander",
+    jogadores: [
+      { id: 'fabio-coltorti-rac', nome: "Coltorti",            posicoes: ["GOL"],       forca: 79 },
+      { id: 'pablo-pinillos-rac', nome: "Pinillos",            posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'ezequiel-garay-rac', nome: "Garay",               posicoes: ["ZAG"],       forca: 81 },
+      { id: 'cesar-navas-rac',    nome: "César Navas",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'oriol-rac',          nome: "Oriol",               posicoes: ["LD","MD"],   forca: 77 },
+      { id: 'jose-moraton-rac',   nome: "Moratón",             posicoes: ["ZAG","LE"],  forca: 77 },
+      { id: 'gonzalo-colsa-rac',  nome: "Colsa",               posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'aldo-duscher-rac',   nome: "Duscher (RAC)",       posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'jorge-lopez-rac',    nome: "Jorge López",         posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'oscar-serrano-rac',  nome: "Óscar Serrano",       posicoes: ["MEI","MD"],  forca: 78 },
+      { id: 'pedro-munitis',      nome: "Munitis",             posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'mohamed-tchite-rac', nome: "Tchité",              posicoes: ["ATA"],       forca: 80 },
+      { id: 'ebi-smolarek-rac',   nome: "Smolarek",            posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'pablo-alvarez-rac',  nome: "Pablo Álvarez",       posicoes: ["MC","VOL"],  forca: 77 }
+    ]
   }
 
 ];
