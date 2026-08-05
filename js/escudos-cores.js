@@ -25,6 +25,11 @@
   // se ficar depois do uso, o var hoisting entrega `undefined` em silêncio.
   var CLUBES_PREMIER = ['Arsenal', 'Aston Villa', 'Bournemouth', 'Brentford', 'Brighton', 'Burnley', 'Chelsea', 'Crystal Palace', 'Everton', 'Fulham', 'Leeds United', 'Liverpool', 'Manchester City', 'Manchester United', 'Newcastle United', 'Nottingham Forest', 'Sunderland', 'Tottenham', 'West Ham United', 'Wolverhampton'];
 
+  // Clubes que aparecem como SEÇÃO PRÓPRIA no demo (escudos-demo.html) e são filtrados da
+  // Champions para não duplicar. Espelham os clubes de js/dados/laliga.js e js/dados/serie-a.js.
+  var CLUBES_LALIGA = ['Alavés', 'Athletic Bilbao', 'Atlético de Madrid', 'Barcelona', 'Celta Vigo', 'Deportivo', 'Espanyol', 'Mallorca', 'Osasuna', 'Oviedo', 'Real Betis', 'Real Madrid', 'Real Sociedad', 'Sevilla', 'Sporting Gijón', 'Tenerife', 'Valencia', 'Villarreal', 'Zaragoza'];
+  var CLUBES_SERIEA = ['Atalanta', 'Bologna', 'Chievo', 'Como', 'Fiorentina', 'Genoa', 'Inter de Milão', 'Juventus', 'Lazio', 'Milan', 'Napoli', 'Palermo', 'Parma', 'Roma', 'Sampdoria', 'Sassuolo', 'Torino', 'Udinese'];
+
   var CORES_BRASILEIRAO = {
     'América-RJ':          ['#00913F', '#FFFFFF'],
     'Athletico-PR':        ['#B10000', '#000000'],
@@ -640,11 +645,14 @@
     // A Libertadores inclui os brasileiros que a disputam (as cores deles vêm do Brasileirão —
     // fonte única; aqui é só exibição, por isso aparecem nas duas listas).
     clubesPorCompeticao: function () {
+      var FORA_CHAMPIONS = CLUBES_PREMIER.concat(CLUBES_LALIGA, CLUBES_SERIEA);
       return {
         'Brasileirão':  Object.keys(CORES_BRASILEIRAO),
         'Libertadores': Object.keys(CORES_LIBERTADORES).concat(BRASILEIROS_NA_LIBERTADORES),
-        'Champions':    Object.keys(CORES_CHAMPIONS).filter(function (n) { return CLUBES_PREMIER.indexOf(n) < 0; }),
-        'Premier League': CLUBES_PREMIER.slice()
+        'Champions':    Object.keys(CORES_CHAMPIONS).filter(function (n) { return FORA_CHAMPIONS.indexOf(n) < 0; }),
+        'Premier League': CLUBES_PREMIER.slice(),
+        'La Liga':      CLUBES_LALIGA.slice(),
+        'Serie A':      CLUBES_SERIEA.slice()
       };
     },
     brasileirosNaLibertadores: function () { return BRASILEIROS_NA_LIBERTADORES.slice(); },
