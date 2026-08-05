@@ -264,7 +264,7 @@ const DADOS_LALIGA = [
       { id: 'luis-sierra-spo',     nome: "Luis Sierra",         posicoes: ["LE","LD"],   forca: 76 },
       { id: 'jose-manuel-abelardo', nome: "Abelardo",           posicoes: ["ZAG","VOL"], forca: 81 },
       { id: 'jimenez-sporting',    nome: "Jiménez",             posicoes: ["ZAG"],       forca: 76 },
-      { id: 'joaquin-alonso',      nome: "Joaquín",             posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'joaquin-alonso',      nome: "Joaquín (SPO)",             posicoes: ["MC","VOL"],  forca: 78 },
       { id: 'juan-carlos-spo',     nome: "Juan Carlos (SPO)",   posicoes: ["ZAG","LD"],  forca: 76 },
       { id: 'jozef-luhovy',        nome: "Luhový",              posicoes: ["ATA"],       forca: 78 },
       { id: 'oscar-gil-spo',       nome: "Óscar",               posicoes: ["MC","MEI"],  forca: 76 },
@@ -770,7 +770,7 @@ const DADOS_LALIGA = [
       { id: 'julio-salinas',       nome: "Julio Salinas",       posicoes: ["ATA"],       forca: 79 },
       { id: 'adolfo-aldana',       nome: "Aldana (DEP)",        posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'jose-ramon-alberto-dep', nome: "Ribera",           posicoes: ["ZAG"],       forca: 77 },
-      { id: 'alfredo-santaelena-dep', nome: "Alfredo (DEP)",    posicoes: ["MC","VOL"],  forca: 76 }
+      { id: 'alfredo-santaelena-dep', nome: "Alfredo",    posicoes: ["MC","VOL"],  forca: 76 }
     ]
   },
 
@@ -1051,7 +1051,7 @@ const DADOS_LALIGA = [
       { id: 'rivaldo',             nome: "Rivaldo",             posicoes: ["MEI","ATA"], forca: 87 },
       { id: 'bebeto',              nome: "Bebeto",              posicoes: ["ATA"],       forca: 84 },
       { id: 'jose-manuel-manjarin', nome: "Manjarín",          posicoes: ["MEI","MD"],  forca: 78 },
-      { id: 'alfredo-santaelena-dep', nome: "Alfredo (DEP)",    posicoes: ["ZAG","VOL"], forca: 77 },
+      { id: 'alfredo-santaelena-dep', nome: "Alfredo",    posicoes: ["ZAG","VOL"], forca: 77 },
       { id: 'jose-ramon-alberto-dep', nome: "Ribera",           posicoes: ["ZAG"],       forca: 76 },
       { id: 'aitor-lopez-rekarte-dep', nome: "López Rekarte",   posicoes: ["LD","MD"],   forca: 76 }
     ]
@@ -1065,7 +1065,7 @@ const DADOS_LALIGA = [
       { id: 'pedro-jaro',          nome: "Jaro",                posicoes: ["GOL"],       forca: 79 },
       { id: 'juan-canas',          nome: "Cañas",               posicoes: ["LD","MD"],   forca: 77 },
       { id: 'nenad-vidakovic',     nome: "Vidaković",           posicoes: ["ZAG","VOL"], forca: 78 },
-      { id: 'roberto-solozabal-bet', nome: "Solozábal (BET)",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'roberto-solozabal-bet', nome: "Solozábal",   posicoes: ["ZAG"],       forca: 79 },
       { id: 'robert-jarni-bet',    nome: "Jarni",               posicoes: ["LE","MEI"],  forca: 81 },
       { id: 'alexis-trujillo',     nome: "Alexis",              posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'juan-merino',         nome: "Merino (BET)",        posicoes: ["ZAG"],       forca: 77 },
@@ -1172,7 +1172,7 @@ const DADOS_LALIGA = [
       { id: 'ander-garitano-ath',  nome: "Garitano",            posicoes: ["MC","MEI"],  forca: 78 },
       { id: 'jose-maria-alkiza',   nome: "Alkiza",              posicoes: ["MC","VOL"],  forca: 78 },
       { id: 'carmelo-lacruz',      nome: "Lacruz",              posicoes: ["VOL","MC"],  forca: 77 },
-      { id: 'patxi-ferreira-ath',  nome: "Ferreira (ATH)",      posicoes: ["ZAG"],       forca: 76 }
+      { id: 'patxi-ferreira-ath',  nome: "Ferreira",      posicoes: ["ZAG"],       forca: 76 }
     ]
   },
 
@@ -1216,7 +1216,7 @@ const DADOS_LALIGA = [
       { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 86 },
       { id: 'fernando-morientes',  nome: "Morientes",           posicoes: ["ATA"],       forca: 83 },
       { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 79 },
-      { id: 'jose-amavisca-rm2',   nome: "Jaime (RM)",          posicoes: ["ZAG"],       forca: 77 }
+      { id: 'jose-amavisca-rm2',   nome: "Jaime",          posicoes: ["ZAG"],       forca: 77 }
     ]
   },
 
@@ -1378,7 +1378,7 @@ const DADOS_LALIGA = [
       { id: 'lubomir-moravcik',    nome: "Moravčík",            posicoes: ["MEI","MD"],  forca: 80 },
       { id: 'haim-revivo',         nome: "Revivo",              posicoes: ["MEI","ATA"], forca: 81 },
       { id: 'juan-sanchez-val',    nome: "Juan Sánchez",        posicoes: ["ATA"],       forca: 79 },
-      { id: 'lubo-penev-cel',      nome: "Penev (CEL)",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'lubo-penev-cel',      nome: "Penev",         posicoes: ["ATA"],       forca: 79 },
       { id: 'vladislav-radimov',   nome: "Radimov",             posicoes: ["VOL","MC"],  forca: 78 }
     ]
   },
@@ -1876,7 +1876,7 @@ const DADOS_LALIGA = [
       { id: 'darko-kovacevic',     nome: "Kovačević",           posicoes: ["ATA"],       forca: 84 },
       { id: 'nihat-kahveci',       nome: "Nihat",               posicoes: ["ATA","MEI"], forca: 83 },
       { id: 'sergio-boris-rs',     nome: "Boris",               posicoes: ["MC","VOL"],  forca: 77 },
-      { id: 'igor-jauregi-rs',     nome: "Jauregui (RS)",       posicoes: ["ZAG"],       forca: 77 },
+      { id: 'igor-jauregi-rs',     nome: "Jauregui",       posicoes: ["ZAG"],       forca: 77 },
       { id: 'francisco-alberto-rs', nome: "Alberto",            posicoes: ["MC","VOL"],  forca: 77 }
     ]
   },
@@ -2195,7 +2195,7 @@ const DADOS_LALIGA = [
       { id: 'david-rivas-bet',     nome: "Rivas (BET)",         posicoes: ["ZAG"],       forca: 78 },
       { id: 'arzu-betis',          nome: "Arzu",                posicoes: ["LD","MD"],   forca: 77 },
       { id: 'juan-jose-canas-bet', nome: "Cañas (BET)",         posicoes: ["LE","MD"],   forca: 77 },
-      { id: 'joaquin-sanchez',     nome: "Joaquín (BET)",       posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'joaquin-sanchez',     nome: "Joaquín",       posicoes: ["PD","MEI"],  forca: 84 },
       { id: 'benjamin-zarandona',  nome: "Zarandona",           posicoes: ["MC","MEI"],  forca: 77 },
       { id: 'alberto-rico-bet',    nome: "Alberto (BET)",       posicoes: ["MC","VOL"],  forca: 78 },
       { id: 'denilson-betis',      nome: "Denílson",            posicoes: ["PE","MEI"],  forca: 80 },
@@ -2671,6 +2671,147 @@ const DADOS_LALIGA = [
       { id: 'mohamed-tchite-rac', nome: "Tchité",              posicoes: ["ATA"],       forca: 80 },
       { id: 'ebi-smolarek-rac',   nome: "Smolarek",            posicoes: ["ATA","MEI"], forca: 79 },
       { id: 'pablo-alvarez-rac',  nome: "Pablo Álvarez",       posicoes: ["MC","VOL"],  forca: 77 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2009 (temporada 2008-09) — o BARCELONA de Pep GUARDIOLA campeão (87 pts), 19º
+  //  título, INÍCIO da ERA DOURADA e ano do histórico SEXTUPLE (liga, Copa, Champions,
+  //  Supercopa Espanha, Supercopa Europa, Mundial). 105 gols marcados! Trio MSX: Messi/
+  //  Eto'o (34 cada em todas)/Henry. Forlán (Atlético) Pichichi (32 gols liga). Top-6:
+  //  Barcelona (87), Real Madrid (78), Sevilla (70), Atlético (67), Villarreal (65),
+  //  Valencia (62). Real goleado 2-6 em casa no Camp Nou (clássico histórico). Fim da seca.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2009,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 85 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 86 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 86 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 84 },
+      { id: 'sylvinho-celta',      nome: "Sylvinho",            posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'yaya-toure-bcn',      nome: "Yaya Touré",          posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 90 },
+      { id: 'samuel-etoo',         nome: "Eto'o",               posicoes: ["ATA"],       forca: 88 },
+      { id: 'thierry-henry',       nome: "Henry",               posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'seydou-keita-sev',    nome: "Keita",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'rafael-marquez',      nome: "Rafa Márquez",        posicoes: ["ZAG","VOL"], forca: 82 },
+      { id: 'bojan-krkic',         nome: "Bojan",               posicoes: ["ATA","MEI"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2009,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 88 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG"],       forca: 84 },
+      { id: 'fabio-cannavaro',     nome: "Cannavaro",           posicoes: ["ZAG"],       forca: 84 },
+      { id: 'gabriel-heinze',      nome: "Heinze",              posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'fernando-gago-rm',    nome: "Gago",                posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'mahamadou-diarra',    nome: "Diarra",              posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'wesley-sneijder',     nome: "Sneijder",            posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'jose-maria-guti',     nome: "Guti",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'arjen-robben-rm',     nome: "Robben",              posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'gonzalo-higuain',     nome: "Higuaín",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'ruud-van-nistelrooy', nome: "Van Nistelrooy",      posicoes: ["ATA"],       forca: 85 },
+      { id: 'raul-gonzalez',       nome: "Raúl",                posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'rafael-van-der-vaart', nome: "Van der Vaart",      posicoes: ["MEI","MC"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2009,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'andres-palop',        nome: "Palop",               posicoes: ["GOL"],       forca: 82 },
+      { id: 'abdoulay-konko-sev',  nome: "Konko",               posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'julien-escude-sev',   nome: "Escudé",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'ivica-dragutinovic',  nome: "Dragutinović",        posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'adriano-correia-sev', nome: "Adriano",             posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'christian-poulsen',   nome: "Poulsen",             posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'renato-dirnei',       nome: "Renato",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'diego-capel-sev',     nome: "Capel",               posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'frederic-kanoute',    nome: "Kanouté",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'luis-fabiano',        nome: "Luís Fabiano",        posicoes: ["ATA"],       forca: 85 },
+      { id: 'alvaro-negredo-sev',  nome: "Negredo",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'sebastien-squillaci', nome: "Squillaci",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'didier-zokora-sev',   nome: "Zokora",              posicoes: ["VOL","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2009,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'sergio-asenjo-atm',   nome: "Asenjo",              posicoes: ["GOL"],       forca: 79 },
+      { id: 'tomas-ujfalusi',      nome: "Ujfalusi",            posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'luis-perea',          nome: "Perea",               posicoes: ["ZAG"],       forca: 81 },
+      { id: 'juanito-gutierrez-bet', nome: "Juanito",           posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'antonio-lopez-atm',   nome: "Antonio López",       posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'maniche-atm',         nome: "Maniche",             posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'paulo-assuncao-atm',  nome: "Paulo Assunção",      posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'simao-sabrosa',       nome: "Simão",               posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'maxi-rodriguez-esp',  nome: "Maxi Rodríguez",      posicoes: ["MEI","ATA"], forca: 82 },
+      { id: 'sergio-aguero',       nome: "Agüero",              posicoes: ["ATA"],       forca: 87 },
+      { id: 'diego-forlan',        nome: "Forlán",              posicoes: ["ATA"],       forca: 87 },
+      { id: 'jose-antonio-reyes',  nome: "Reyes",               posicoes: ["PE","ATA"],  forca: 81 },
+      { id: 'raul-garcia-atm',     nome: "Raúl García",         posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'juanfran-torres-atm', nome: "Juanfran (ATM)",      posicoes: ["LD","MD"],   forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2009,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'diego-lopez-vil',     nome: "Diego López",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'joan-capdevila',      nome: "Capdevila",           posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 82 },
+      { id: 'gonzalo-rodriguez-vil', nome: "Gonzalo",           posicoes: ["ZAG"],       forca: 81 },
+      { id: 'angel-villarreal',    nome: "Ángel (VIL)",         posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'marcos-senna',        nome: "Marcos Senna",        posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'santi-cazorla-bruno', nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'santiago-cazorla-vil', nome: "Cazorla",            posicoes: ["MEI","MD"],  forca: 83 },
+      { id: 'robert-pires-vil',    nome: "Pires",               posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'giuseppe-rossi-vil',  nome: "Rossi",               posicoes: ["ATA"],       forca: 83 },
+      { id: 'nihat-kahveci',       nome: "Nihat",               posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'marcos-senna-fuentes', nome: "Fuentes (VIL)",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 79 },
+      { id: 'joseba-llorente-vil', nome: "Llorente",            posicoes: ["ATA"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2009,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'renan-brito-val',     nome: "Renan",               posicoes: ["GOL"],       forca: 79 },
+      { id: 'raul-albiol-val',     nome: "Albiol",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'carlos-marchena',     nome: "Marchena",            posicoes: ["ZAG","VOL"], forca: 81 },
+      { id: 'alexis-ruano-val',    nome: "Alexis (VAL)",        posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'ruben-baraja',        nome: "Baraja",              posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","ME"],  forca: 85 },
+      { id: 'vicente-rodriguez',   nome: "Vicente",             posicoes: ["PE","ME"],   forca: 80 },
+      { id: 'david-villa',         nome: "David Villa",         posicoes: ["ATA"],       forca: 87 },
+      { id: 'juan-manuel-mata',    nome: "Juan Mata",           posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'pablo-hernandez-val', nome: "Pablo Hernández",     posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'joaquin-sanchez',     nome: "Joaquín",             posicoes: ["PD","MEI"],  forca: 81 }
     ]
   }
 
