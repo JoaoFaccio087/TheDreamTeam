@@ -2581,7 +2581,7 @@ const DADOS_LALIGA = [
       { id: 'giuseppe-rossi-vil',  nome: "Rossi",               posicoes: ["ATA"],       forca: 82 },
       { id: 'nihat-kahveci',       nome: "Nihat",               posicoes: ["ATA","MEI"], forca: 81 },
       { id: 'guillermo-franco-vil', nome: "Franco",             posicoes: ["ATA"],       forca: 80 },
-      { id: 'santi-cazorla-bruno', nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'bruno-soriano-vil',   nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 80 },
       { id: 'ariel-ibagaza',       nome: "Ibagaza",             posicoes: ["MEI","MC"],  forca: 79 }
     ]
   },
@@ -2782,7 +2782,7 @@ const DADOS_LALIGA = [
       { id: 'gonzalo-rodriguez-vil', nome: "Gonzalo",           posicoes: ["ZAG"],       forca: 81 },
       { id: 'angel-villarreal',    nome: "Ángel (VIL)",         posicoes: ["LD","MD"],   forca: 78 },
       { id: 'marcos-senna',        nome: "Marcos Senna",        posicoes: ["VOL","MC"],  forca: 82 },
-      { id: 'santi-cazorla-bruno', nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'bruno-soriano-vil',   nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 80 },
       { id: 'santiago-cazorla-vil', nome: "Cazorla",            posicoes: ["MEI","MD"],  forca: 83 },
       { id: 'robert-pires-vil',    nome: "Pires",               posicoes: ["PE","MEI"],  forca: 81 },
       { id: 'giuseppe-rossi-vil',  nome: "Rossi",               posicoes: ["ATA"],       forca: 83 },
@@ -2953,6 +2953,147 @@ const DADOS_LALIGA = [
       { id: 'manu-del-moral-get', nome: "Del Moral",           posicoes: ["ATA","PE"],  forca: 79 },
       { id: 'miku-get',           nome: "Miku",                posicoes: ["ATA"],       forca: 78 },
       { id: 'jaime-gavilan-get',  nome: "Gavilán",             posicoes: ["MEI","ME"],  forca: 78 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2011 (temporada 2010-11) — o BARCELONA de Guardiola TRICAMPEÃO (96 pts), 21º
+  //  título, o AUGE do time considerado um dos maiores de todos os tempos. Cristiano Ronaldo
+  //  (Real) Pichichi com RECORDE de 40 gols. Temporada do histórico 5-0 do Barça sobre o
+  //  Real de MOURINHO (que chegou para acender o clássico). Top-6: Barcelona (96), Real
+  //  Madrid (92), Valencia (71), Villarreal (62), Sevilla (58), Athletic (58). Barça
+  //  invicto por 31 jogos. Real ganhou a Copa (1-0 na final, gol de CR7 na prorrogação).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2011,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 86 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 87 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 87 },
+      { id: 'eric-abidal',         nome: "Abidal",              posicoes: ["LE","ZAG"],  forca: 83 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 93 },
+      { id: 'david-villa',         nome: "David Villa",         posicoes: ["ATA","PE"],  forca: 87 },
+      { id: 'pedro-rodriguez',     nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 84 },
+      { id: 'seydou-keita-sev',    nome: "Keita",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'javier-mascherano',   nome: "Mascherano",          posicoes: ["VOL","ZAG"], forca: 84 },
+      { id: 'ibrahim-afellay',     nome: "Afellay",             posicoes: ["MEI","PD"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2011,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 89 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 87 },
+      { id: 'ricardo-carvalho-rm', nome: "Carvalho",            posicoes: ["ZAG"],       forca: 84 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'alvaro-arbeloa',      nome: "Arbeloa",             posicoes: ["LD","LE"],   forca: 81 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'sami-khedira',        nome: "Khedira",             posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'mesut-ozil',          nome: "Özil",                posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'angel-di-maria',      nome: "Di María",            posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 93 },
+      { id: 'gonzalo-higuain',     nome: "Higuaín",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'mahamadou-diarra',    nome: "Diarra",              posicoes: ["VOL","MC"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2011,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'vicente-guaita-val',  nome: "Guaita",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'miguel-brito-val',    nome: "Miguel",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'adil-rami-val',       nome: "Rami",                posicoes: ["ZAG"],       forca: 80 },
+      { id: 'ricardo-costa-val',   nome: "Ricardo Costa",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'tino-costa-val',      nome: "Tino Costa",          posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'juan-manuel-mata',    nome: "Juan Mata",           posicoes: ["MEI","PE"],  forca: 85 },
+      { id: 'roberto-soldado-get', nome: "Soldado",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'pablo-hernandez-val', nome: "Pablo Hernández",     posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'aritz-aduriz-mll',    nome: "Aduriz",              posicoes: ["ATA"],       forca: 80 },
+      { id: 'joaquin-sanchez',     nome: "Joaquín",             posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2011,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'diego-lopez-vil',     nome: "Diego López",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'mario-gaspar-vil',    nome: "Mario",               posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 82 },
+      { id: 'carlos-marchena-vil', nome: "Marchena (VIL)",      posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'joan-capdevila',      nome: "Capdevila",           posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'bruno-soriano-vil',   nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'borja-valero-mll',    nome: "Borja Valero",        posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'santiago-cazorla-vil', nome: "Cazorla",            posicoes: ["MEI","MD"],  forca: 84 },
+      { id: 'cani-villarreal',     nome: "Cani",                posicoes: ["MEI","PD"],  forca: 80 },
+      { id: 'giuseppe-rossi-vil',  nome: "Rossi",               posicoes: ["ATA"],       forca: 84 },
+      { id: 'nilmar-honorato-vil', nome: "Nilmar",              posicoes: ["ATA"],       forca: 81 },
+      { id: 'marco-ruben-vil',     nome: "Rubén",               posicoes: ["ATA"],       forca: 78 },
+      { id: 'carlos-marchena-catala', nome: "Catalá",           posicoes: ["ZAG","LD"],  forca: 77 },
+      { id: 'joan-oriol-vil',      nome: "Oriol (VIL)",         posicoes: ["LE","MD"],   forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2011,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'javi-varas-sev',      nome: "Varas",               posicoes: ["GOL"],       forca: 79 },
+      { id: 'abdoulay-konko-sev',  nome: "Konko",               posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'julien-escude-sev',   nome: "Escudé",              posicoes: ["ZAG"],       forca: 79 },
+      { id: 'federico-fazio-sev',  nome: "Fazio",               posicoes: ["ZAG"],       forca: 80 },
+      { id: 'fernando-navarro-sev', nome: "Fernando Navarro",   posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'didier-zokora-sev',   nome: "Zokora",              posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["PD","MD"],   forca: 84 },
+      { id: 'diego-perotti-sev',   nome: "Perotti",             posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'frederic-kanoute',    nome: "Kanouté",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'alvaro-negredo-sev',  nome: "Negredo",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'luis-fabiano',        nome: "Luís Fabiano",        posicoes: ["ATA"],       forca: 83 },
+      { id: 'renato-dirnei',       nome: "Renato",              posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'martin-caceres-sev',  nome: "Cáceres (SEV)",       posicoes: ["ZAG","LD"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2011,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'gorka-iraizoz-ath',   nome: "Iraizoz",             posicoes: ["GOL"],       forca: 79 },
+      { id: 'andoni-iraola-ath',   nome: "Iraola",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'fernando-amorebieta-ath', nome: "Amorebieta",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'javi-martinez-ath',   nome: "Javi Martínez",       posicoes: ["VOL","ZAG"], forca: 83 },
+      { id: 'koikili-lertxundi-ath', nome: "Koikili",           posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'ander-iturraspe-ath', nome: "Iturraspe",           posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'markel-susaeta-ath',  nome: "Susaeta",             posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'iker-muniain-ath',    nome: "Muniain",             posicoes: ["MEI","PE"],  forca: 80 },
+      { id: 'ander-herrera-ath',   nome: "Ander Herrera",       posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'fernando-llorente-ath', nome: "F. Llorente",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'gaizka-toquero-ath',  nome: "Toquero",             posicoes: ["ATA"],       forca: 77 },
+      { id: 'igor-gabilondo-ath',  nome: "Gabilondo",           posicoes: ["ME","MEI"],  forca: 77 },
+      { id: 'david-lopez-ath',     nome: "David López",         posicoes: ["ZAG","LD"],  forca: 78 },
+      { id: 'pablo-orbaiz',        nome: "Orbaiz",              posicoes: ["VOL","MC"],  forca: 77 }
     ]
   }
 
