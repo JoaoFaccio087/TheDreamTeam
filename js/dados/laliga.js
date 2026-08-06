@@ -3095,6 +3095,147 @@ const DADOS_LALIGA = [
       { id: 'david-lopez-ath',     nome: "David López",         posicoes: ["ZAG","LD"],  forca: 78 },
       { id: 'pablo-orbaiz',        nome: "Orbaiz",              posicoes: ["VOL","MC"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2012 (temporada 2011-12) — o REAL MADRID de José MOURINHO campeão (100 pts),
+  //  32º título, quebrando a hegemonia do Barça com RECORDES históricos: mais pontos (100),
+  //  mais gols (121), melhor saldo (+89), mais vitórias (32). Messi Pichichi com incríveis
+  //  50 GOLS mas o Barça foi 2º (91 pts). Top-6: Real Madrid (100), Barcelona (91), Valencia
+  //  (61), Málaga (58), Atlético (56), Levante (55). Entram Málaga (era Al-Thani, com Isco/
+  //  Cazorla) e Levante (surpresa, brigou por Champions). Atlético de Simeone recém-chegado.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2012,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 89 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 88 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'alvaro-arbeloa',      nome: "Arbeloa",             posicoes: ["LD","LE"],   forca: 81 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'sami-khedira',        nome: "Khedira",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mesut-ozil',          nome: "Özil",                posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'angel-di-maria',      nome: "Di María",            posicoes: ["PE","MEI"],  forca: 86 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 93 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 86 },
+      { id: 'gonzalo-higuain',     nome: "Higuaín",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'jose-callejon-rm',    nome: "Callejón",            posicoes: ["PD","ATA"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2012,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 86 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 87 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 87 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 84 },
+      { id: 'javier-mascherano',   nome: "Mascherano",          posicoes: ["VOL","ZAG"], forca: 84 },
+      { id: 'eric-abidal',         nome: "Abidal",              posicoes: ["LE","ZAG"],  forca: 82 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 94 },
+      { id: 'cesc-fabregas',       nome: "Cesc",                posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'david-villa',         nome: "David Villa",         posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'pedro-rodriguez',     nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 83 },
+      { id: 'alexis-sanchez-bcn',  nome: "Alexis Sánchez",      posicoes: ["ATA","PD"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2012,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'vicente-guaita-val',  nome: "Guaita",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'joao-pereira-val',    nome: "João Pereira",        posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'adil-rami-val',       nome: "Rami",                posicoes: ["ZAG"],       forca: 81 },
+      { id: 'victor-ruiz-val',     nome: "Víctor Ruiz",         posicoes: ["ZAG"],       forca: 79 },
+      { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'david-albelda',       nome: "Albelda",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'tino-costa-val',      nome: "Tino Costa",          posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'sofiane-feghouli-val', nome: "Feghouli",           posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'pablo-piatti-val',    nome: "Piatti",              posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'roberto-soldado-get', nome: "Soldado",             posicoes: ["ATA"],       forca: 84 },
+      { id: 'jonas-goncalves-mll', nome: "Jonás",               posicoes: ["ATA"],       forca: 81 },
+      { id: 'aritz-aduriz-mll',    nome: "Aduriz",              posicoes: ["ATA"],       forca: 80 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2012,
+    clube: "Málaga",
+    jogadores: [
+      { id: 'willy-caballero-mal', nome: "Caballero",           posicoes: ["GOL"],       forca: 80 },
+      { id: 'jesus-gamez-mal',     nome: "Gámez",               posicoes: ["LD","LE"],   forca: 79 },
+      { id: 'martin-demichelis-mal', nome: "Demichelis",        posicoes: ["ZAG"],       forca: 81 },
+      { id: 'weligton-robson-mal', nome: "Weligton",            posicoes: ["ZAG"],       forca: 79 },
+      { id: 'nacho-monreal-mal',   nome: "Monreal",             posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'jeremy-toulalan-mal', nome: "Toulalan",            posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'manuel-iturra-mal',   nome: "Iturra",              posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'santiago-cazorla-mal', nome: "Cazorla (MAL)",      posicoes: ["MEI","MD"],  forca: 84 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'joaquin-sanchez-mal', nome: "Joaquín (MAL)",       posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'ruud-van-nistelrooy', nome: "Van Nistelrooy",      posicoes: ["ATA"],       forca: 81 },
+      { id: 'julio-baptista-sev',  nome: "Júlio Baptista",      posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'salomon-rondon-mal',  nome: "Rondón",              posicoes: ["ATA"],       forca: 79 },
+      { id: 'diego-buonanotte-mal', nome: "Buonanotte",         posicoes: ["MEI","PE"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2012,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'thibaut-courtois-atm', nome: "Courtois",           posicoes: ["GOL"],       forca: 84 },
+      { id: 'juanfran-torres-atm', nome: "Juanfran (ATM)",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'joao-miranda-atm',    nome: "Miranda",             posicoes: ["ZAG"],       forca: 82 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 84 },
+      { id: 'filipe-luis-atm',     nome: "Filipe Luís",         posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'gabi-fernandez-zar',  nome: "Gabi",                posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'mario-suarez-atm',    nome: "Mario Suárez",        posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'arda-turan-atm',      nome: "Arda Turan",          posicoes: ["MEI","PE"],  forca: 83 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'radamel-falcao-atm',  nome: "Falcao",              posicoes: ["ATA"],       forca: 87 },
+      { id: 'adrian-lopez-atm',    nome: "Adrián",              posicoes: ["ATA"],       forca: 80 },
+      { id: 'diego-ribas-atm',     nome: "Diego Ribas",         posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'eduardo-salvio-atm',  nome: "Salvio",              posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'cristian-rodriguez-atm', nome: "Cebolla",          posicoes: ["ME","MEI"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2012,
+    clube: "Levante",
+    jogadores: [
+      { id: 'gustavo-munua-lev',   nome: "Munúa",               posicoes: ["GOL"],       forca: 79 },
+      { id: 'sergio-ballesteros-lev', nome: "Ballesteros",      posicoes: ["ZAG"],       forca: 79 },
+      { id: 'david-navarro-lev',   nome: "Navarro",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'hector-rodas-lev',    nome: "Rodas",               posicoes: ["ZAG"],       forca: 77 },
+      { id: 'juanfran-garcia-lev', nome: "Juanfran (LEV)",      posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'xavi-venta-lev',      nome: "Xavi Venta",          posicoes: ["LE","MD"],   forca: 77 },
+      { id: 'nano-rivas-lev',      nome: "Nano (LEV)",          posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'xisco-nadal-lev',     nome: "Xisco",               posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'ruben-suarez-lev',    nome: "Rubén Suárez",        posicoes: ["MEI","ATA"], forca: 79 },
+      { id: 'arouna-kone-lev',     nome: "Koné",                posicoes: ["ATA"],       forca: 81 },
+      { id: 'felipe-caicedo-lev',  nome: "Caicedo",             posicoes: ["ATA"],       forca: 79 },
+      { id: 'valdo-lev',           nome: "Valdo (LEV)",         posicoes: ["ME","MEI"],  forca: 78 },
+      { id: 'sergio-martinez-lev', nome: "El Zhar",             posicoes: ["PD","MEI"],  forca: 77 },
+      { id: 'vicente-iborra-lev',  nome: "Iborra",              posicoes: ["VOL","MC"],  forca: 79 }
+    ]
   }
 
 ];
