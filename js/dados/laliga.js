@@ -3428,7 +3428,7 @@ const DADOS_LALIGA = [
       { id: 'neymar-junior',       nome: "Neymar",              posicoes: ["PE","ATA"],  forca: 86 },
       { id: 'alexis-sanchez-bcn',  nome: "Alexis Sánchez",      posicoes: ["ATA","PD"],  forca: 84 },
       { id: 'pedro-rodriguez',     nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 83 },
-      { id: 'sergio-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 79 }
+      { id: 'sergi-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 79 }
     ]
   },
 
@@ -3547,7 +3547,7 @@ const DADOS_LALIGA = [
       { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 90 },
       { id: 'neymar-junior',       nome: "Neymar",              posicoes: ["PE","ATA"],  forca: 88 },
       { id: 'pedro-rodriguez',     nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 82 },
-      { id: 'sergio-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 80 }
+      { id: 'sergi-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 80 }
     ]
   },
 
@@ -3687,7 +3687,7 @@ const DADOS_LALIGA = [
       { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 91 },
       { id: 'neymar-junior',       nome: "Neymar",              posicoes: ["PE","ATA"],  forca: 89 },
       { id: 'arda-turan-atm',      nome: "Arda Turan",          posicoes: ["MEI","PE"],  forca: 82 },
-      { id: 'sergio-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 81 },
+      { id: 'sergi-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 81 },
       { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["ZAG","LE"],  forca: 80 }
     ]
   },
@@ -3799,6 +3799,147 @@ const DADOS_LALIGA = [
       { id: 'pape-cheikh-cel',     nome: "Pape Cheikh",         posicoes: ["VOL","MC"],  forca: 77 },
       { id: 'marcelo-diaz-cel',    nome: "Marcelo Díaz",        posicoes: ["VOL","MC"],  forca: 78 },
       { id: 'pione-sisto-cel',     nome: "Sisto",               posicoes: ["PE","MEI"],  forca: 78 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2017 (temporada 2016-17) — o REAL MADRID de Zinedine ZIDANE campeão (93 pts),
+  //  33º título, encerrando a SECA de 5 anos na liga (desde 2011-12), 3 pts à frente do
+  //  Barça (90). Messi Pichichi (37 gols). Real e Barça somaram 222 gols (recorde da dupla).
+  //  Título selado com 2-0 no Málaga na última rodada. Top-6: Real Madrid (93), Barcelona
+  //  (90), Atlético (78), Sevilla (72), Villarreal (67), Real Sociedad (64). Real também
+  //  bi da Champions (Zidane). Sevilla de Sampaoli surpreendeu. Trio BBC no auge.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2017,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'keylor-navas-rm',     nome: "Keylor Navas",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 89 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 85 },
+      { id: 'nacho-fernandez-rm',  nome: "Nacho",               posicoes: ["ZAG","LD"],  forca: 80 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 87 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'toni-kroos-rm',       nome: "Kroos",               posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'luka-modric',         nome: "Modrić",              posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'casemiro-rm',         nome: "Casemiro",            posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 86 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 92 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 86 },
+      { id: 'gareth-bale-rm',      nome: "Bale",                posicoes: ["PD","ATA"],  forca: 87 },
+      { id: 'james-rodriguez-rm',  nome: "James",               posicoes: ["MEI","PE"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2017,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'marc-andre-ter-stegen', nome: "Ter Stegen",        posicoes: ["GOL"],       forca: 86 },
+      { id: 'sergi-roberto-bcn',   nome: "Sergi Roberto",       posicoes: ["LD","MC"],   forca: 82 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 87 },
+      { id: 'samuel-umtiti-bcn',   nome: "Umtiti",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 85 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 94 },
+      { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 90 },
+      { id: 'neymar-junior',       nome: "Neymar",              posicoes: ["PE","ATA"],  forca: 90 },
+      { id: 'andre-gomes-val',     nome: "André Gomes",         posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'paco-alcacer-val',    nome: "Alcácer",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'javier-mascherano',   nome: "Mascherano",          posicoes: ["VOL","ZAG"], forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2017,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 87 },
+      { id: 'juanfran-torres-atm', nome: "Juanfran (ATM)",      posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'joao-miranda-atm',    nome: "Miranda",             posicoes: ["ZAG"],       forca: 83 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 86 },
+      { id: 'filipe-luis-atm',     nome: "Filipe Luís",         posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'gabi-fernandez-zar',  nome: "Gabi",                posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'saul-niguez-atm',     nome: "Saúl",                posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'yannick-carrasco-atm', nome: "Carrasco",           posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 88 },
+      { id: 'kevin-gameiro-sev',   nome: "Gameiro",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'fernando-torres-atm', nome: "Fernando Torres",     posicoes: ["ATA"],       forca: 80 },
+      { id: 'angel-correa-atm',    nome: "Correa",              posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'stefan-savic-atm',    nome: "Savić",               posicoes: ["ZAG"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2017,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'sergio-rico-sev',     nome: "Sergio Rico",         posicoes: ["GOL"],       forca: 80 },
+      { id: 'mariano-ferreira-sev', nome: "Mariano",            posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'nicolas-pareja-sev',  nome: "Pareja",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'adil-rami-val',       nome: "Rami",                posicoes: ["ZAG"],       forca: 80 },
+      { id: 'sergio-escudero-sev', nome: "Escudero",            posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'steven-nzonzi-sev',   nome: "N'Zonzi",             posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'vicente-iborra-lev',  nome: "Iborra",              posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'samir-nasri-sev',     nome: "Nasri",               posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'vitolo-machin-sev',   nome: "Vitolo",              posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'pablo-sarabia-sev',   nome: "Sarabia",             posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'wissam-ben-yedder-sev', nome: "Ben Yedder",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'luciano-vietto-vil',  nome: "Vietto",              posicoes: ["ATA"],       forca: 79 },
+      { id: 'stevan-jovetic-sev',  nome: "Jovetić",             posicoes: ["ATA","MEI"], forca: 80 },
+      { id: 'gabriel-mercado-sev', nome: "Mercado",             posicoes: ["ZAG","LD"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2017,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'sergio-asenjo-atm',   nome: "Asenjo",              posicoes: ["GOL"],       forca: 83 },
+      { id: 'mario-gaspar-vil',    nome: "Mario",               posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'victor-ruiz-val',     nome: "Víctor Ruiz",         posicoes: ["ZAG"],       forca: 81 },
+      { id: 'daniele-bonera-vil',  nome: "Bonera",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jaume-costa-vil',     nome: "Jaume Costa",         posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'bruno-soriano-vil',   nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'manu-trigueros-vil',  nome: "Trigueros",           posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'roberto-soldado-get', nome: "Soldado",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'samu-castillejo-vil', nome: "Castillejo",          posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'cedric-bakambu-vil',  nome: "Bakambu",             posicoes: ["ATA"],       forca: 82 },
+      { id: 'nicola-sansone-vil',  nome: "Sansone",             posicoes: ["PE","ATA"],  forca: 80 },
+      { id: 'denis-suarez-sev',    nome: "Denis Suárez",        posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'rodri-hernandez-vil', nome: "Rodri",               posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'alfred-njie-vil',     nome: "Njie",                posicoes: ["ATA","PE"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2017,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'geronimo-rulli-rs',   nome: "Rulli",               posicoes: ["GOL"],       forca: 80 },
+      { id: 'carlos-martinez-rs',  nome: "Carlos Martínez",     posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'inigo-martinez-rs',   nome: "Íñigo Martínez",      posicoes: ["ZAG"],       forca: 82 },
+      { id: 'raul-navas-rs',       nome: "Raúl Navas",          posicoes: ["ZAG"],       forca: 78 },
+      { id: 'yuri-berchiche-rs',   nome: "Yuri Berchiche",      posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'asier-illarramendi-rs', nome: "Illarramendi",      posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'david-zurutuza-rs',   nome: "Zurutuza",            posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'xabi-prieto-rs',      nome: "Xabi Prieto",         posicoes: ["MEI","MD"],  forca: 80 },
+      { id: 'carlos-vela-rs',      nome: "Vela",                posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'willian-jose-rs',     nome: "Willian José",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'juanmi-jimenez-rs',   nome: "Juanmi (RS)",         posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'mikel-oyarzabal-rs',  nome: "Oyarzabal",           posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'sergio-canales-rs',   nome: "Sergio Canales",      posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'jon-bautista-rs',     nome: "Bautista",            posicoes: ["ATA"],       forca: 76 }
     ]
   }
 
