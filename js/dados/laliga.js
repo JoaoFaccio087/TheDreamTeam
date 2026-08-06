@@ -4364,6 +4364,147 @@ const DADOS_LALIGA = [
       { id: 'adnan-januzaj-rs',    nome: "Januzaj",             posicoes: ["PD","MEI"],  forca: 79 },
       { id: 'robin-le-normand-rs', nome: "Le Normand",          posicoes: ["ZAG"],       forca: 79 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2021 (temporada 2020-21) — o ATLÉTICO DE MADRID de Diego SIMEONE campeão (86 pts),
+  //  11º título, o 1º desde 2013-14, conquistado na ÚLTIMA rodada com virada 2-1 sobre o
+  //  Valladolid. LUIS SUÁREZ (veio do Barça) foi decisivo. Oblak melhor jogador da temporada;
+  //  Messi Pichichi (30 gols) no seu ÚLTIMO ano no Barça (saiu em ago/2021). Top-6: Atlético
+  //  (86), Real Madrid (84), Barcelona (79), Sevilla (77), Real Sociedad (62), Betis (61).
+  //  Disputa Atlético×Real até a última rodada. Barça de Koeman em transição (3º).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2021,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 90 },
+      { id: 'kieran-trippier-atm', nome: "Trippier",            posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'jose-gimenez-atm',    nome: "Giménez",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'stefan-savic-atm',    nome: "Savić",               posicoes: ["ZAG"],       forca: 82 },
+      { id: 'mario-hermoso-atm',   nome: "Hermoso",             posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'renan-lodi-atm',      nome: "Lodi",                posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'saul-niguez-atm',     nome: "Saúl",                posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'marcos-llorente-atm', nome: "Marcos Llorente",     posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'yannick-carrasco-atm', nome: "Carrasco",           posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 85 },
+      { id: 'joao-felix-atm',      nome: "João Félix",          posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'angel-correa-atm',    nome: "Correa",              posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'thomas-lemar-atm',    nome: "Lemar",               posicoes: ["MEI","PE"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2021,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'thibaut-courtois-atm', nome: "Courtois",           posicoes: ["GOL"],       forca: 89 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 88 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 85 },
+      { id: 'ferland-mendy-rm',    nome: "Mendy",               posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'nacho-fernandez-rm',  nome: "Nacho",               posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'toni-kroos-rm',       nome: "Kroos",               posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'luka-modric',         nome: "Modrić",              posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'casemiro-rm',         nome: "Casemiro",            posicoes: ["VOL","MC"],  forca: 88 },
+      { id: 'fede-valverde-rm',    nome: "Fede Valverde",       posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 89 },
+      { id: 'vinicius-junior-rm',  nome: "Vinícius Jr",         posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'marco-asensio-rm',    nome: "Asensio",             posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'rodrygo-goes-rm',     nome: "Rodrygo",             posicoes: ["PD","ATA"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2021,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'marc-andre-ter-stegen', nome: "Ter Stegen",        posicoes: ["GOL"],       forca: 87 },
+      { id: 'sergino-dest-bcn',    nome: "Dest",                posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 85 },
+      { id: 'clement-lenglet-bcn', nome: "Lenglet",             posicoes: ["ZAG"],       forca: 82 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 85 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'frenkie-de-jong-bcn', nome: "De Jong",             posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'pedri-gonzalez-bcn',  nome: "Pedri",               posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 93 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'ousmane-dembele-bcn', nome: "Dembélé",             posicoes: ["PE","PD"],   forca: 83 },
+      { id: 'sergi-roberto-bcn',   nome: "Sergi Roberto",       posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'miralem-pjanic-bcn',  nome: "Pjanić",              posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'ronald-araujo-bcn',   nome: "Araújo",              posicoes: ["ZAG"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2021,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'yassine-bounou-sev',  nome: "Bono",                posicoes: ["GOL"],       forca: 83 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["LD","PD"],   forca: 80 },
+      { id: 'diego-carlos-sev',    nome: "Diego Carlos",        posicoes: ["ZAG"],       forca: 84 },
+      { id: 'jules-kounde-sev',    nome: "Koundé",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'marcos-acuna-sev',    nome: "Marcos Acuña",        posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'fernando-reges-sev',  nome: "Fernando Reges",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'joan-jordan-sev',     nome: "Jordán",              posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'lucas-ocampos-sev',   nome: "Ocampos",             posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'youssef-en-nesyri-sev', nome: "En-Nesyri",         posicoes: ["ATA"],       forca: 82 },
+      { id: 'suso-fernandez-sev',  nome: "Suso",                posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'luuk-de-jong-sev',    nome: "Luuk de Jong",        posicoes: ["ATA"],       forca: 78 },
+      { id: 'oscar-rodriguez-sev', nome: "Óscar (SEV)",         posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'nemanja-gudelj-sev',  nome: "Gudelj",              posicoes: ["VOL","ZAG"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2021,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'alex-remiro-rs',      nome: "Remiro",              posicoes: ["GOL"],       forca: 81 },
+      { id: 'andoni-gorosabel-rs', nome: "Gorosabel",           posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'robin-le-normand-rs', nome: "Le Normand",          posicoes: ["ZAG"],       forca: 81 },
+      { id: 'aritz-elustondo-rs',  nome: "Elustondo",           posicoes: ["ZAG"],       forca: 78 },
+      { id: 'nacho-monreal-mal',   nome: "Monreal",             posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'asier-illarramendi-rs', nome: "Illarramendi",      posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'mikel-merino-rs',     nome: "Mikel Merino",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'david-silva',         nome: "David Silva",         posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'mikel-oyarzabal-rs',  nome: "Oyarzabal",           posicoes: ["PE","MEI"],  forca: 84 },
+      { id: 'alexander-isak-rs',   nome: "Isak",                posicoes: ["ATA"],       forca: 82 },
+      { id: 'cristian-portu-rs',   nome: "Portu",               posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'adnan-januzaj-rs',    nome: "Januzaj",             posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'ander-barrenetxea-rs', nome: "Barrenetxea",        posicoes: ["PE","MEI"],  forca: 78 },
+      { id: 'igor-zubeldia-rs',    nome: "Igor Zubeldia",       posicoes: ["VOL","ZAG"], forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2021,
+    clube: "Real Betis",
+    jogadores: [
+      { id: 'claudio-bravo-rs',    nome: "Bravo",               posicoes: ["GOL"],       forca: 80 },
+      { id: 'martin-montoya-val',  nome: "Montoya",             posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'marc-bartra-bet',     nome: "Bartra",              posicoes: ["ZAG"],       forca: 80 },
+      { id: 'aissa-mandi-bet',     nome: "Mandi",               posicoes: ["ZAG"],       forca: 80 },
+      { id: 'alex-moreno-bet',     nome: "Álex Moreno",         posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'guido-rodriguez-bet', nome: "Guido",               posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'william-carvalho-bet', nome: "William Carvalho",   posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'sergio-canales-rs',   nome: "Sergio Canales",      posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'nabil-fekir-bet',     nome: "Fekir",               posicoes: ["MEI","ATA"], forca: 83 },
+      { id: 'cristian-tello-bet',  nome: "Tello",               posicoes: ["PE","MEI"],  forca: 78 },
+      { id: 'borja-iglesias-bet',  nome: "Borja Iglesias",      posicoes: ["ATA"],       forca: 80 },
+      { id: 'juanmi-jimenez-rs',   nome: "Juanmi (RS)",         posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'loren-moron-bet',     nome: "Loren (BET)",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'andres-guardado-val', nome: "Guardado",            posicoes: ["MC","VOL"],  forca: 78 }
+    ]
   }
 
 ];
