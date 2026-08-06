@@ -4787,6 +4787,147 @@ const DADOS_LALIGA = [
       { id: 'juanmi-jimenez-rs',   nome: "Juanmi (RS)",         posicoes: ["ATA","PE"],  forca: 79 },
       { id: 'rodri-sanchez-bet',   nome: "Rodri (BET)",         posicoes: ["MEI","MC"],  forca: 77 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2024 (temporada 2023-24) — o REAL MADRID de Carlo ANCELOTTI campeão (95 pts),
+  //  36º título, com 4 rodadas de antecedência, ficando INVICTO por 32 jogos. JUDE
+  //  BELLINGHAM explodiu na estreia (melhor jogador da liga, 19 gols). Dovbyk (Girona)
+  //  Pichichi (24 gols); Unai Simón melhor goleiro. Top-6: Real Madrid (95), Barcelona (85),
+  //  Girona (81, TERCEIRO histórico!), Atlético (76), Athletic (68), Real Sociedad (60).
+  //  GIRONA foi a sensação da temporada (brigou pelo título metade do ano). Entra Girona.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2024,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'andriy-lunin-rm',     nome: "Lunin",               posicoes: ["GOL"],       forca: 82 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'eder-militao-rm',     nome: "Militão",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'antonio-rudiger-rm',  nome: "Rüdiger",             posicoes: ["ZAG"],       forca: 85 },
+      { id: 'ferland-mendy-rm',    nome: "Mendy",               posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'nacho-fernandez-rm',  nome: "Nacho",               posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'toni-kroos-rm',       nome: "Kroos",               posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'aurelien-tchouameni-rm', nome: "Tchouaméni",       posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'fede-valverde-rm',    nome: "Fede Valverde",       posicoes: ["MC","VOL"],  forca: 86 },
+      { id: 'jude-bellingham-rm',  nome: "Bellingham",          posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'vinicius-junior-rm',  nome: "Vinícius Jr",         posicoes: ["PE","ATA"],  forca: 89 },
+      { id: 'rodrygo-goes-rm',     nome: "Rodrygo",             posicoes: ["PD","ATA"],  forca: 85 },
+      { id: 'joselu-mato-rm',      nome: "Joselu",              posicoes: ["ATA"],       forca: 80 },
+      { id: 'eduardo-camavinga-rm', nome: "Camavinga",          posicoes: ["VOL","LE"],  forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2024,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'marc-andre-ter-stegen', nome: "Ter Stegen",        posicoes: ["GOL"],       forca: 87 },
+      { id: 'jules-kounde-sev',    nome: "Koundé",              posicoes: ["ZAG","LD"],  forca: 84 },
+      { id: 'ronald-araujo-bcn',   nome: "Araújo",              posicoes: ["ZAG"],       forca: 85 },
+      { id: 'andreas-christensen-bcn', nome: "Christensen",     posicoes: ["ZAG"],       forca: 82 },
+      { id: 'alejandro-balde-bcn', nome: "Balde",               posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'ilkay-gundogan-bcn',  nome: "Gündoğan",            posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'frenkie-de-jong-bcn', nome: "De Jong",             posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'pedri-gonzalez-bcn',  nome: "Pedri",               posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'gavi-paez-bcn',       nome: "Gavi",                posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'robert-lewandowski-bcn', nome: "Lewandowski",      posicoes: ["ATA"],       forca: 88 },
+      { id: 'lamine-yamal-bcn',    nome: "Lamine Yamal",        posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'raphinha-dias-bcn',   nome: "Raphinha",            posicoes: ["PD","ATA"],  forca: 83 },
+      { id: 'joao-felix-atm',      nome: "João Félix",          posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'joao-cancelo-bcn',    nome: "Cancelo",             posicoes: ["LD","LE"],   forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2024,
+    clube: "Girona",
+    jogadores: [
+      { id: 'paulo-gazzaniga-gir', nome: "Gazzaniga",           posicoes: ["GOL"],       forca: 80 },
+      { id: 'yan-couto-gir',       nome: "Yan Couto",           posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'daley-blind-gir',     nome: "Blind",               posicoes: ["ZAG","LE"],  forca: 79 },
+      { id: 'david-lopez-gir',     nome: "David López (GIR)",   posicoes: ["ZAG"],       forca: 79 },
+      { id: 'miguel-gutierrez-gir', nome: "Miguel Gutiérrez",   posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'aleix-garcia-gir',    nome: "Aleix García",        posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'ivan-martin-gir',     nome: "Iván Martín",         posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'yangel-herrera-gir',  nome: "Yangel Herrera",      posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'viktor-tsygankov-gir', nome: "Tsygankov",          posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'artem-dovbyk-gir',    nome: "Dovbyk",              posicoes: ["ATA"],       forca: 82 },
+      { id: 'savio-moreira-gir',   nome: "Sávio (GIR)",         posicoes: ["PE","MEI"],  forca: 81 },
+      { id: 'cristhian-stuani-gir', nome: "Stuani",             posicoes: ["ATA"],       forca: 79 },
+      { id: 'cristian-portu-rs',   nome: "Portu",               posicoes: ["PD","ATA"],  forca: 78 },
+      { id: 'eric-garcia-gir',     nome: "Eric García",         posicoes: ["ZAG","VOL"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2024,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 87 },
+      { id: 'nahuel-molina-atm',   nome: "Nahuel Molina",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'jose-gimenez-atm',    nome: "Giménez",             posicoes: ["ZAG"],       forca: 83 },
+      { id: 'mario-hermoso-atm',   nome: "Hermoso",             posicoes: ["ZAG","LE"],  forca: 81 },
+      { id: 'reinildo-mandava-atm', nome: "Reinildo",           posicoes: ["LE","ZAG"],  forca: 80 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'rodrigo-de-paul-atm', nome: "De Paul",             posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'marcos-llorente-atm', nome: "Marcos Llorente",     posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'saul-niguez-atm',     nome: "Saúl",                posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 86 },
+      { id: 'alvaro-morata-atm',   nome: "Morata",              posicoes: ["ATA"],       forca: 83 },
+      { id: 'memphis-depay-bcn',   nome: "Depay",               posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'samuel-lino-atm',     nome: "Lino",                posicoes: ["PE","MEI"],  forca: 80 },
+      { id: 'angel-correa-atm',    nome: "Correa",              posicoes: ["ATA","MEI"], forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2024,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'unai-simon-ath',      nome: "Unai Simón",          posicoes: ["GOL"],       forca: 84 },
+      { id: 'oscar-de-marcos-ath', nome: "De Marcos",           posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'daniel-vivian-ath',   nome: "Vivian",              posicoes: ["ZAG"],       forca: 81 },
+      { id: 'aitor-paredes-ath',   nome: "Paredes",             posicoes: ["ZAG"],       forca: 79 },
+      { id: 'yuri-berchiche-rs',   nome: "Yuri Berchiche",      posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'mikel-vesga-ath',     nome: "Vesga",               posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'oihan-sancet-ath',    nome: "Sancet",              posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'inigo-ruiz-de-galarreta-ath', nome: "Galarreta",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'nico-williams-ath',   nome: "Nico Williams",       posicoes: ["PE","PD"],   forca: 83 },
+      { id: 'inaki-williams-ath',  nome: "Williams",            posicoes: ["ATA","PD"],  forca: 82 },
+      { id: 'gorka-guruzeta-ath',  nome: "Guruzeta",            posicoes: ["ATA"],       forca: 78 },
+      { id: 'alex-berenguer-ath',  nome: "Berenguer",           posicoes: ["PE","ATA"],  forca: 80 },
+      { id: 'ander-herrera-ath',   nome: "Ander Herrera",       posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'yeray-alvarez-ath',   nome: "Yeray",               posicoes: ["ZAG"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2024,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'alex-remiro-rs',      nome: "Remiro",              posicoes: ["GOL"],       forca: 83 },
+      { id: 'hamari-traore-rs',    nome: "Traoré",              posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'robin-le-normand-rs', nome: "Le Normand",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'igor-zubeldia-rs',    nome: "Igor Zubeldia",       posicoes: ["ZAG","VOL"], forca: 80 },
+      { id: 'aihen-munoz-rs',      nome: "Aihen",               posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'martin-zubimendi-rs', nome: "Zubimendi",           posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'mikel-merino-rs',     nome: "Mikel Merino",        posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'brais-mendez-rs',     nome: "Brais Méndez",        posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'takefusa-kubo-rs',    nome: "Kubo",                posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'mikel-oyarzabal-rs',  nome: "Oyarzabal",           posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'andre-silva-sev',     nome: "André Silva",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'umar-sadiq-rs',       nome: "Sadiq",               posicoes: ["ATA"],       forca: 79 },
+      { id: 'ander-barrenetxea-rs', nome: "Barrenetxea",        posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'jon-pacheco-rs',      nome: "Pacheco",             posicoes: ["ZAG"],       forca: 78 }
+    ]
   }
 
 ];
