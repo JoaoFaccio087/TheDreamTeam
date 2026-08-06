@@ -4223,6 +4223,147 @@ const DADOS_LALIGA = [
       { id: 'franco-vazquez-sev',  nome: "Franco Vázquez",      posicoes: ["MEI","MC"],  forca: 80 },
       { id: 'daniel-carrico-sev',  nome: "Carriço",             posicoes: ["ZAG","VOL"], forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2020 (temporada 2019-20) — o REAL MADRID de Zinedine ZIDANE campeão (87 pts),
+  //  34º título, conquistado na RETOMADA PÓS-PANDEMIA de COVID-19 (venceu 10 jogos seguidos
+  //  após a paralisação). Selado com 2-1 no Villarreal na penúltima rodada. Courtois melhor
+  //  goleiro; Messi Pichichi (25 gols). Top-6: Real Madrid (87), Barcelona (82), Atlético
+  //  (70), Sevilla (70), Villarreal (60), Real Sociedad (56). Hazard chegou ao Real (lesões);
+  //  Griezmann foi ao Barça. Temporada com jogos sem público. Benzema líder do Real.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2020,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'thibaut-courtois-atm', nome: "Courtois",           posicoes: ["GOL"],       forca: 88 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 88 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 86 },
+      { id: 'ferland-mendy-rm',    nome: "Mendy",               posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'toni-kroos-rm',       nome: "Kroos",               posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'luka-modric',         nome: "Modrić",              posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'casemiro-rm',         nome: "Casemiro",            posicoes: ["VOL","MC"],  forca: 88 },
+      { id: 'fede-valverde-rm',    nome: "Fede Valverde",       posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 88 },
+      { id: 'eden-hazard-rm',      nome: "Hazard",              posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'marco-asensio-rm',    nome: "Asensio",             posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'vinicius-junior-rm',  nome: "Vinícius Jr",         posicoes: ["PE","ATA"],  forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2020,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'marc-andre-ter-stegen', nome: "Ter Stegen",        posicoes: ["GOL"],       forca: 89 },
+      { id: 'nelson-semedo-bcn',   nome: "Semedo",              posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 86 },
+      { id: 'clement-lenglet-bcn', nome: "Lenglet",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 86 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'frenkie-de-jong-bcn', nome: "De Jong",             posicoes: ["MC","VOL"],  forca: 85 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 93 },
+      { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 86 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 86 },
+      { id: 'ousmane-dembele-bcn', nome: "Dembélé",             posicoes: ["PE","PD"],   forca: 83 },
+      { id: 'arturo-vidal-bcn',    nome: "Arturo Vidal",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'sergi-roberto-bcn',   nome: "Sergi Roberto",       posicoes: ["LD","MC"],   forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2020,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 90 },
+      { id: 'kieran-trippier-atm', nome: "Trippier",            posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'jose-gimenez-atm',    nome: "Giménez",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'stefan-savic-atm',    nome: "Savić",               posicoes: ["ZAG"],       forca: 81 },
+      { id: 'renan-lodi-atm',      nome: "Lodi",                posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'saul-niguez-atm',     nome: "Saúl",                posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'thomas-partey-atm',   nome: "Thomas",              posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'marcos-llorente-atm', nome: "Marcos Llorente",     posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'joao-felix-atm',      nome: "João Félix",          posicoes: ["ATA","MEI"], forca: 82 },
+      { id: 'alvaro-morata-atm',   nome: "Morata",              posicoes: ["ATA"],       forca: 83 },
+      { id: 'angel-correa-atm',    nome: "Correa",              posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'yannick-carrasco-atm', nome: "Carrasco",           posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'diego-costa-atm',     nome: "Diego Costa",         posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2020,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'tomas-vaclik-sev',    nome: "Vaclík",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["LD","PD"],   forca: 81 },
+      { id: 'diego-carlos-sev',    nome: "Diego Carlos",        posicoes: ["ZAG"],       forca: 83 },
+      { id: 'jules-kounde-sev',    nome: "Koundé",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'sergio-reguilon-sev', nome: "Reguilón",            posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'fernando-reges-sev',  nome: "Fernando Reges",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'joan-jordan-sev',     nome: "Jordán",              posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'lucas-ocampos-sev',   nome: "Ocampos",             posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'youssef-en-nesyri-sev', nome: "En-Nesyri",         posicoes: ["ATA"],       forca: 80 },
+      { id: 'luuk-de-jong-sev',    nome: "Luuk de Jong",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'suso-fernandez-sev',  nome: "Suso",                posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'munir-el-haddadi-sev', nome: "Munir",              posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'nemanja-gudelj-sev',  nome: "Gudelj",              posicoes: ["VOL","ZAG"], forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2020,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'sergio-asenjo-atm',   nome: "Asenjo",              posicoes: ["GOL"],       forca: 81 },
+      { id: 'mario-gaspar-vil',    nome: "Mario",               posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'raul-albiol-val',     nome: "Albiol",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'pau-torres-vil',      nome: "Pau Torres",          posicoes: ["ZAG"],       forca: 82 },
+      { id: 'alberto-moreno-sev',  nome: "Alberto Moreno",      posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'vicente-iborra-lev',  nome: "Iborra",              posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'manu-trigueros-vil',  nome: "Trigueros",           posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'dani-parejo-vil',     nome: "Parejo (VIL)",        posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'santiago-cazorla-vil', nome: "Cazorla",            posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'gerard-moreno-vil',   nome: "Gerard Moreno",       posicoes: ["ATA"],       forca: 84 },
+      { id: 'paco-alcacer-val',    nome: "Alcácer",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'carlos-bacca-sev',    nome: "Bacca",               posicoes: ["ATA"],       forca: 79 },
+      { id: 'moi-gomez-vil',       nome: "Moi Gómez",           posicoes: ["ME","MEI"],  forca: 78 },
+      { id: 'ruben-pena-vil',      nome: "Rubén Peña",          posicoes: ["LD","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2020,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'alex-remiro-rs',      nome: "Remiro",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'joseba-zaldua-rs',    nome: "Zaldua",              posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'diego-llorente-rs',   nome: "Diego Llorente",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'aritz-elustondo-rs',  nome: "Elustondo",           posicoes: ["ZAG"],       forca: 78 },
+      { id: 'nacho-monreal-mal',   nome: "Monreal",             posicoes: ["LE","MD"],   forca: 80 },
+      { id: 'asier-illarramendi-rs', nome: "Illarramendi",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'martin-odegaard-rs',  nome: "Ødegaard",            posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'mikel-merino-rs',     nome: "Mikel Merino",        posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'cristian-portu-rs',   nome: "Portu",               posicoes: ["PD","ATA"],  forca: 80 },
+      { id: 'mikel-oyarzabal-rs',  nome: "Oyarzabal",           posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'alexander-isak-rs',   nome: "Isak",                posicoes: ["ATA"],       forca: 80 },
+      { id: 'willian-jose-rs',     nome: "Willian José",        posicoes: ["ATA"],       forca: 81 },
+      { id: 'adnan-januzaj-rs',    nome: "Januzaj",             posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'robin-le-normand-rs', nome: "Le Normand",          posicoes: ["ZAG"],       forca: 79 }
+    ]
   }
 
 ];
