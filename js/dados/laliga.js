@@ -510,7 +510,7 @@ const DADOS_LALIGA = [
       { id: 'claudio-barragan',    nome: "Claudio",             posicoes: ["ATA","MEI"], forca: 78 },
       { id: 'jose-yosu-mari',      nome: "Yosu",                posicoes: ["ATA"],       forca: 76 },
       { id: 'mariano-hoyas',       nome: "Mariano Hoyas",       posicoes: ["MC","VOL"],  forca: 76 },
-      { id: 'juan-manuel-canales', nome: "Canales",             posicoes: ["MD","PD"],   forca: 76 }
+      { id: 'juan-manuel-canales', nome: "Canales (DEP)",             posicoes: ["MD","PD"],   forca: 76 }
     ]
   },
 
@@ -629,7 +629,7 @@ const DADOS_LALIGA = [
       { id: 'bebeto',              nome: "Bebeto",              posicoes: ["ATA"],       forca: 87 },
       { id: 'claudio-barragan',    nome: "Claudio",             posicoes: ["ATA","MEI"], forca: 78 },
       { id: 'adolfo-aldana',       nome: "Aldana (DEP)",        posicoes: ["MC","MEI"],  forca: 78 },
-      { id: 'juan-manuel-canales', nome: "Canales",             posicoes: ["MD","PD"],   forca: 76 }
+      { id: 'juan-manuel-canales', nome: "Canales (DEP)",             posicoes: ["MD","PD"],   forca: 76 }
     ]
   },
 
@@ -3235,6 +3235,147 @@ const DADOS_LALIGA = [
       { id: 'valdo-lev',           nome: "Valdo (LEV)",         posicoes: ["ME","MEI"],  forca: 78 },
       { id: 'sergio-martinez-lev', nome: "El Zhar",             posicoes: ["PD","MEI"],  forca: 77 },
       { id: 'vicente-iborra-lev',  nome: "Iborra",              posicoes: ["VOL","MC"],  forca: 79 }
+    ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2013 (temporada 2012-13) — o BARCELONA de Tito VILANOVA campeão (100 pts), 22º
+  //  título, IGUALANDO o recorde de pontos do Real do ano anterior, 15 pts à frente. Recorde
+  //  de 115 gols marcados; Messi Pichichi (46 gols). Temporada marcada pela luta de Tito
+  //  contra o câncer. Top-6: Barcelona (100), Real Madrid (85), Atlético (76), Real Sociedad
+  //  (66), Valencia (65), Málaga (57). Atlético de Simeone com Falcao brilhou (venceu a Copa
+  //  batendo o Real na final). Real Sociedad voltou à Champions após anos (Griezmann jovem).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2013,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'victor-valdes',       nome: "Víctor Valdés",       posicoes: ["GOL"],       forca: 86 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 86 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 87 },
+      { id: 'javier-mascherano',   nome: "Mascherano",          posicoes: ["VOL","ZAG"], forca: 84 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 84 },
+      { id: 'carles-puyol',        nome: "Puyol",               posicoes: ["ZAG","LD"],  forca: 83 },
+      { id: 'xavi-hernandez',      nome: "Xavi",                posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'cesc-fabregas',       nome: "Cesc",                posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 94 },
+      { id: 'pedro-rodriguez',     nome: "Pedro",               posicoes: ["PD","ATA"],  forca: 83 },
+      { id: 'david-villa',         nome: "David Villa",         posicoes: ["ATA","PE"],  forca: 84 },
+      { id: 'alexis-sanchez-bcn',  nome: "Alexis Sánchez",      posicoes: ["ATA","PD"],  forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2013,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'iker-casillas',       nome: "Casillas",            posicoes: ["GOL"],       forca: 88 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 88 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG","VOL"], forca: 85 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 83 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'alvaro-arbeloa',      nome: "Arbeloa",             posicoes: ["LD","LE"],   forca: 80 },
+      { id: 'xabi-alonso',         nome: "Xabi Alonso",         posicoes: ["VOL","MC"],  forca: 86 },
+      { id: 'sami-khedira',        nome: "Khedira",             posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'luka-modric',         nome: "Modrić",              posicoes: ["MC","MEI"],  forca: 85 },
+      { id: 'mesut-ozil',          nome: "Özil",                posicoes: ["MEI","MC"],  forca: 87 },
+      { id: 'angel-di-maria',      nome: "Di María",            posicoes: ["PE","MEI"],  forca: 85 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 93 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 86 },
+      { id: 'gonzalo-higuain',     nome: "Higuaín",             posicoes: ["ATA"],       forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2013,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'thibaut-courtois-atm', nome: "Courtois",           posicoes: ["GOL"],       forca: 86 },
+      { id: 'juanfran-torres-atm', nome: "Juanfran (ATM)",      posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'joao-miranda-atm',    nome: "Miranda",             posicoes: ["ZAG"],       forca: 83 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 85 },
+      { id: 'filipe-luis-atm',     nome: "Filipe Luís",         posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'gabi-fernandez-zar',  nome: "Gabi",                posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'mario-suarez-atm',    nome: "Mario Suárez",        posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'arda-turan-atm',      nome: "Arda Turan",          posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'radamel-falcao-atm',  nome: "Falcao",              posicoes: ["ATA"],       forca: 88 },
+      { id: 'diego-costa-atm',     nome: "Diego Costa",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'adrian-lopez-atm',    nome: "Adrián",              posicoes: ["ATA"],       forca: 80 },
+      { id: 'cristian-rodriguez-atm', nome: "Cebolla",          posicoes: ["ME","MEI"],  forca: 79 },
+      { id: 'emiliano-insua-atm',  nome: "Insúa",               posicoes: ["LE","MD"],   forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2013,
+    clube: "Real Sociedad",
+    jogadores: [
+      { id: 'claudio-bravo-rs',    nome: "Bravo",               posicoes: ["GOL"],       forca: 82 },
+      { id: 'carlos-martinez-rs',  nome: "Carlos Martínez",     posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'inigo-martinez-rs',   nome: "Íñigo Martínez",      posicoes: ["ZAG"],       forca: 81 },
+      { id: 'mikel-gonzalez-rs',   nome: "Mikel González",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'alberto-de-la-bella-rs', nome: "De la Bella",      posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'asier-illarramendi-rs', nome: "Illarramendi",      posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'ruben-pardo-rs',      nome: "Rubén Pardo",         posicoes: ["MC","MEI"],  forca: 78 },
+      { id: 'xabi-prieto-rs',      nome: "Xabi Prieto",         posicoes: ["MEI","MD"],  forca: 81 },
+      { id: 'carlos-vela-rs',      nome: "Vela",                posicoes: ["PE","ATA"],  forca: 82 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 83 },
+      { id: 'imanol-agirretxe-rs', nome: "Agirretxe",           posicoes: ["ATA"],       forca: 79 },
+      { id: 'gonzalo-castro-rs',   nome: "Castro (RS)",         posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'sergio-canales-rs',   nome: "Sergio Canales",      posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'markel-bergara-rs',   nome: "Bergara",             posicoes: ["VOL","MC"],  forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2013,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'vicente-guaita-val',  nome: "Guaita",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'joao-pereira-val',    nome: "João Pereira",        posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'adil-rami-val',       nome: "Rami",                posicoes: ["ZAG"],       forca: 81 },
+      { id: 'ricardo-costa-val',   nome: "Ricardo Costa",       posicoes: ["ZAG"],       forca: 79 },
+      { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["LE","ZAG"],  forca: 81 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'tino-costa-val',      nome: "Tino Costa",          posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'daniel-parejo-get',   nome: "Parejo",              posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'sofiane-feghouli-val', nome: "Feghouli",           posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'roberto-soldado-get', nome: "Soldado",             posicoes: ["ATA"],       forca: 85 },
+      { id: 'jonas-goncalves-mll', nome: "Jonás",               posicoes: ["ATA"],       forca: 81 },
+      { id: 'pablo-piatti-val',    nome: "Piatti",              posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'andres-guardado-val', nome: "Guardado",            posicoes: ["ME","MEI"],  forca: 80 },
+      { id: 'fernando-gago-val',   nome: "Gago (VAL)",          posicoes: ["VOL","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2013,
+    clube: "Málaga",
+    jogadores: [
+      { id: 'willy-caballero-mal', nome: "Caballero",           posicoes: ["GOL"],       forca: 80 },
+      { id: 'jesus-gamez-mal',     nome: "Gámez",               posicoes: ["LD","LE"],   forca: 79 },
+      { id: 'martin-demichelis-mal', nome: "Demichelis",        posicoes: ["ZAG"],       forca: 81 },
+      { id: 'weligton-robson-mal', nome: "Weligton",            posicoes: ["ZAG"],       forca: 79 },
+      { id: 'sergio-sanchez-mal',  nome: "Sergio Sánchez",      posicoes: ["LD","ZAG"],  forca: 78 },
+      { id: 'jeremy-toulalan-mal', nome: "Toulalan",            posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'ignacio-camacho-mal', nome: "Camacho",             posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'francisco-portillo-mal', nome: "Portillo",         posicoes: ["MEI","PD"],  forca: 78 },
+      { id: 'joaquin-sanchez-mal', nome: "Joaquín (MAL)",       posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'javier-saviola-mal',  nome: "Saviola (MAL)",       posicoes: ["ATA"],       forca: 79 },
+      { id: 'roque-santa-cruz-mal', nome: "Santa Cruz",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'seba-fernandez-mal',  nome: "Seba",                posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'manuel-iturra-mal',   nome: "Iturra",              posicoes: ["VOL","MC"],  forca: 78 }
     ]
   }
 
