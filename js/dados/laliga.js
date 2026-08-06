@@ -3659,6 +3659,147 @@ const DADOS_LALIGA = [
       { id: 'denis-cheryshev-vil', nome: "Cheryshev",           posicoes: ["PE","MEI"],  forca: 79 },
       { id: 'gerard-moreno-vil',   nome: "Gerard Moreno",       posicoes: ["ATA"],       forca: 80 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2016 (temporada 2015-16) — o BARCELONA de Luis ENRIQUE BICAMPEÃO (91 pts), 24º
+  //  título, o trio MSN repetindo a dose numa disputa acirradíssima A TRÊS (Barça 91, Real
+  //  90, Atlético 88). Suárez Pichichi (40 gols), Oblak melhor goleiro. Título selado com
+  //  3-0 no Granada na última rodada. Top-6: Barcelona (91), Real Madrid (90), Atlético
+  //  (88), Villarreal (64), Athletic (62), Celta (60). Real de Zidane (assumiu em jan/2016)
+  //  ficou perto. Atlético foi de novo vice na Champions (perdeu p/ o Real nos pênaltis).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2016,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'marc-andre-ter-stegen', nome: "Ter Stegen",        posicoes: ["GOL"],       forca: 85 },
+      { id: 'daniel-alves',        nome: "Daniel Alves",        posicoes: ["LD","MD"],   forca: 85 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 87 },
+      { id: 'javier-mascherano',   nome: "Mascherano",          posicoes: ["VOL","ZAG"], forca: 83 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 85 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 85 },
+      { id: 'andres-iniesta',      nome: "Iniesta",             posicoes: ["MC","MEI"],  forca: 87 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 94 },
+      { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 91 },
+      { id: 'neymar-junior',       nome: "Neymar",              posicoes: ["PE","ATA"],  forca: 89 },
+      { id: 'arda-turan-atm',      nome: "Arda Turan",          posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'sergio-roberto-bcn',  nome: "Sergi Roberto",       posicoes: ["MC","LD"],   forca: 81 },
+      { id: 'jeremy-mathieu-val',  nome: "Mathieu",             posicoes: ["ZAG","LE"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2016,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'keylor-navas-rm',     nome: "Keylor Navas",        posicoes: ["GOL"],       forca: 84 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 88 },
+      { id: 'pepe-pereira',        nome: "Pepe",                posicoes: ["ZAG","VOL"], forca: 84 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 84 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 87 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'toni-kroos-rm',       nome: "Kroos",               posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'luka-modric',         nome: "Modrić",              posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'casemiro-rm',         nome: "Casemiro",            posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'gareth-bale-rm',      nome: "Bale",                posicoes: ["PD","ATA"],  forca: 88 },
+      { id: 'cristiano-ronaldo',   nome: "Cristiano Ronaldo",   posicoes: ["ATA","PE"],  forca: 92 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 87 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'james-rodriguez-rm',  nome: "James",               posicoes: ["MEI","PE"],  forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2016,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 85 },
+      { id: 'juanfran-torres-atm', nome: "Juanfran (ATM)",      posicoes: ["LD","MD"],   forca: 83 },
+      { id: 'joao-miranda-atm',    nome: "Miranda",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 86 },
+      { id: 'filipe-luis-atm',     nome: "Filipe Luís",         posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'gabi-fernandez-zar',  nome: "Gabi",                posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'augusto-fernandez-atm', nome: "Augusto",           posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'saul-niguez-atm',     nome: "Saúl",                posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 88 },
+      { id: 'fernando-torres-atm', nome: "Fernando Torres",     posicoes: ["ATA"],       forca: 82 },
+      { id: 'yannick-carrasco-atm', nome: "Carrasco",           posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'angel-correa-atm',    nome: "Correa",              posicoes: ["ATA","MEI"], forca: 79 },
+      { id: 'jackson-martinez-atm', nome: "Jackson",            posicoes: ["ATA"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2016,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'sergio-asenjo-atm',   nome: "Asenjo",              posicoes: ["GOL"],       forca: 83 },
+      { id: 'mario-gaspar-vil',    nome: "Mario",               posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'victor-ruiz-val',     nome: "Víctor Ruiz",         posicoes: ["ZAG"],       forca: 81 },
+      { id: 'eric-bailly-vil',     nome: "Bailly",              posicoes: ["ZAG"],       forca: 81 },
+      { id: 'jaume-costa-vil',     nome: "Jaume Costa",         posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'bruno-soriano-vil',   nome: "Bruno",               posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'manu-trigueros-vil',  nome: "Trigueros",           posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'denis-suarez-sev',    nome: "Denis Suárez",        posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'samu-castillejo-vil', nome: "Castillejo",          posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'cedric-bakambu-vil',  nome: "Bakambu",             posicoes: ["ATA"],       forca: 81 },
+      { id: 'roberto-soldado-get', nome: "Soldado",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'leo-baptistao-vil',   nome: "Baptistão",           posicoes: ["ATA","PE"],  forca: 78 },
+      { id: 'mateo-musacchio-vil', nome: "Musacchio",           posicoes: ["ZAG"],       forca: 80 },
+      { id: 'tomas-pina-mll',      nome: "Pina",                posicoes: ["VOL","MC"],  forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2016,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'gorka-iraizoz-ath',   nome: "Iraizoz",             posicoes: ["GOL"],       forca: 79 },
+      { id: 'oscar-de-marcos-ath', nome: "De Marcos",           posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'aymeric-laporte-ath', nome: "Laporte",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'xabier-etxeita-ath',  nome: "Etxeita",             posicoes: ["ZAG"],       forca: 78 },
+      { id: 'mikel-balenziaga-ath', nome: "Balenziaga",         posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'ander-iturraspe-ath', nome: "Iturraspe",           posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'mikel-san-jose-ath',  nome: "San José",            posicoes: ["VOL","ZAG"], forca: 80 },
+      { id: 'markel-susaeta-ath',  nome: "Susaeta",             posicoes: ["PD","MEI"],  forca: 80 },
+      { id: 'iker-muniain-ath',    nome: "Muniain",             posicoes: ["MEI","PE"],  forca: 81 },
+      { id: 'raul-garcia-ath',     nome: "Raúl García (ATH)",   posicoes: ["MC","ATA"],  forca: 81 },
+      { id: 'aritz-aduriz-mll',    nome: "Aduriz",              posicoes: ["ATA"],       forca: 84 },
+      { id: 'beñat-etxebarria-ath', nome: "Beñat",              posicoes: ["MC","MEI"],  forca: 79 },
+      { id: 'mikel-rico-ath',      nome: "Mikel Rico",          posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'inaki-williams-ath',  nome: "Williams",            posicoes: ["ATA","PD"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2016,
+    clube: "Celta Vigo",
+    jogadores: [
+      { id: 'sergio-alvarez-cel',  nome: "Sergio Álvarez",      posicoes: ["GOL"],       forca: 79 },
+      { id: 'hugo-mallo-cel',      nome: "Hugo Mallo",          posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'gustavo-cabral-cel',  nome: "Cabral",              posicoes: ["ZAG"],       forca: 78 },
+      { id: 'jonny-castro-cel',    nome: "Jonny",               posicoes: ["LE","LD"],   forca: 79 },
+      { id: 'sergi-gomez-cel',     nome: "Sergi Gómez",         posicoes: ["ZAG"],       forca: 78 },
+      { id: 'nemanja-radoja-cel',  nome: "Radoja",              posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'daniel-wass-cel',     nome: "Wass",                posicoes: ["MC","MD"],   forca: 80 },
+      { id: 'nolito-cel',          nome: "Nolito",              posicoes: ["PE","ATA"],  forca: 83 },
+      { id: 'fabian-orellana-cel', nome: "Orellana",            posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'iago-aspas-cel',      nome: "Iago Aspas",          posicoes: ["ATA","MEI"], forca: 83 },
+      { id: 'john-guidetti-cel',   nome: "Guidetti",            posicoes: ["ATA"],       forca: 79 },
+      { id: 'pape-cheikh-cel',     nome: "Pape Cheikh",         posicoes: ["VOL","MC"],  forca: 77 },
+      { id: 'marcelo-diaz-cel',    nome: "Marcelo Díaz",        posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'pione-sisto-cel',     nome: "Sisto",               posicoes: ["PE","MEI"],  forca: 78 }
+    ]
   }
 
 ];
