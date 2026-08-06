@@ -4082,6 +4082,147 @@ const DADOS_LALIGA = [
       { id: 'francis-guerrero-bet', nome: "Francis",            posicoes: ["LE","MD"],   forca: 77 },
       { id: 'ryad-boudebouz-bet',  nome: "Boudebouz",           posicoes: ["MEI","MC"],  forca: 79 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2019 (temporada 2018-19) — o BARCELONA de Valverde BICAMPEÃO (87 pts), 26º título
+  //  (2º seguido, 8º em 11 anos), selado com 1-0 no Levante 3 rodadas antes. Messi Pichichi
+  //  (36 gols) e 1º a chegar a 400 gols na liga. Top-6: Barcelona (87), Atlético (76), Real
+  //  Madrid (68), Valencia (61), Getafe (59, RECORDE do clube), Sevilla (59). Real de Zidane
+  //  (voltou em mar/2019) teve péssima temporada (3º, longe). Getafe de Bordalás surpreendeu.
+  //  Ano da virada histórica do Liverpool 4-0 sobre o Barça na Champions.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2019,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'marc-andre-ter-stegen', nome: "Ter Stegen",        posicoes: ["GOL"],       forca: 88 },
+      { id: 'nelson-semedo-bcn',   nome: "Semedo",              posicoes: ["LD","MD"],   forca: 82 },
+      { id: 'gerard-pique',        nome: "Piqué",               posicoes: ["ZAG"],       forca: 87 },
+      { id: 'clement-lenglet-bcn', nome: "Lenglet",             posicoes: ["ZAG"],       forca: 83 },
+      { id: 'jordi-alba-val',      nome: "Jordi Alba",          posicoes: ["LE","ME"],   forca: 87 },
+      { id: 'sergio-busquets',     nome: "Busquets",            posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'ivan-rakitic-sev',    nome: "Rakitić",             posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'arthur-melo-bcn',     nome: "Arthur",              posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'philippe-coutinho-bcn', nome: "Coutinho",          posicoes: ["MEI","PE"],  forca: 84 },
+      { id: 'lionel-messi',        nome: "Messi",               posicoes: ["PD","ATA"],  forca: 94 },
+      { id: 'luis-suarez-bcn',     nome: "Suárez",              posicoes: ["ATA"],       forca: 88 },
+      { id: 'ousmane-dembele-bcn', nome: "Dembélé",             posicoes: ["PE","PD"],   forca: 83 },
+      { id: 'arturo-vidal-bcn',    nome: "Arturo Vidal",        posicoes: ["MC","VOL"],  forca: 83 },
+      { id: 'sergi-roberto-bcn',   nome: "Sergi Roberto",       posicoes: ["LD","MC"],   forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2019,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 89 },
+      { id: 'santiago-arias-atm',  nome: "Arias",               posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'jose-gimenez-atm',    nome: "Giménez",             posicoes: ["ZAG"],       forca: 83 },
+      { id: 'diego-godin-vil',     nome: "Godín",               posicoes: ["ZAG"],       forca: 85 },
+      { id: 'filipe-luis-atm',     nome: "Filipe Luís",         posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'saul-niguez-atm',     nome: "Saúl",                posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'rodri-hernandez-vil', nome: "Rodri",               posicoes: ["VOL","MC"],  forca: 84 },
+      { id: 'thomas-partey-atm',   nome: "Thomas",              posicoes: ["VOL","MC"],  forca: 82 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 89 },
+      { id: 'diego-costa-atm',     nome: "Diego Costa",         posicoes: ["ATA"],       forca: 83 },
+      { id: 'angel-correa-atm',    nome: "Correa",              posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'thomas-lemar-atm',    nome: "Lemar",               posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'nikola-kalinic-atm',  nome: "Kalinić",             posicoes: ["ATA"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2019,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'thibaut-courtois-atm', nome: "Courtois",           posicoes: ["GOL"],       forca: 87 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'sergio-ramos',        nome: "Sergio Ramos",        posicoes: ["ZAG","LD"],  forca: 89 },
+      { id: 'raphael-varane-rm',   nome: "Varane",              posicoes: ["ZAG"],       forca: 85 },
+      { id: 'marcelo-vieira',      nome: "Marcelo",             posicoes: ["LE","MD"],   forca: 85 },
+      { id: 'toni-kroos-rm',       nome: "Kroos",               posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'luka-modric',         nome: "Modrić",              posicoes: ["MC","MEI"],  forca: 89 },
+      { id: 'casemiro-rm',         nome: "Casemiro",            posicoes: ["VOL","MC"],  forca: 87 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'karim-benzema',       nome: "Benzema",             posicoes: ["ATA"],       forca: 86 },
+      { id: 'gareth-bale-rm',      nome: "Bale",                posicoes: ["PD","ATA"],  forca: 85 },
+      { id: 'marco-asensio-rm',    nome: "Asensio",             posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'lucas-vazquez-rm',    nome: "Lucas Vázquez",       posicoes: ["PD","MD"],   forca: 81 },
+      { id: 'vinicius-junior-rm',  nome: "Vinícius Jr",         posicoes: ["PE","ATA"],  forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2019,
+    clube: "Valencia",
+    jogadores: [
+      { id: 'neto-murara-val',     nome: "Neto",                posicoes: ["GOL"],       forca: 82 },
+      { id: 'daniel-wass-cel',     nome: "Wass",                posicoes: ["LD","MC"],   forca: 80 },
+      { id: 'gabriel-paulista-vil', nome: "Gabriel",            posicoes: ["ZAG"],       forca: 82 },
+      { id: 'ezequiel-garay-rac',  nome: "Garay",               posicoes: ["ZAG"],       forca: 81 },
+      { id: 'jose-gaya-val',       nome: "Gayà",                posicoes: ["LE","MD"],   forca: 83 },
+      { id: 'daniel-parejo-get',   nome: "Parejo",              posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'geoffrey-kondogbia-val', nome: "Kondogbia",        posicoes: ["VOL","MC"],  forca: 83 },
+      { id: 'carlos-soler-val',    nome: "Soler",               posicoes: ["MC","MD"],   forca: 81 },
+      { id: 'goncalo-guedes-val',  nome: "Guedes",              posicoes: ["PE","MEI"],  forca: 82 },
+      { id: 'rodrigo-moreno-val',  nome: "Rodrigo",             posicoes: ["ATA"],       forca: 83 },
+      { id: 'kevin-gameiro-sev',   nome: "Gameiro",             posicoes: ["ATA"],       forca: 80 },
+      { id: 'santi-mina-val',      nome: "Santi Mina",          posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'denis-cheryshev-vil', nome: "Cheryshev",           posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'francis-coquelin-val', nome: "Coquelin",           posicoes: ["VOL","MC"],  forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2019,
+    clube: "Getafe",
+    jogadores: [
+      { id: 'david-soria-get',     nome: "David Soria",         posicoes: ["GOL"],       forca: 80 },
+      { id: 'damian-suarez-get',   nome: "Damián Suárez",       posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'djene-dakonam-get',   nome: "Djené",               posicoes: ["ZAG"],       forca: 81 },
+      { id: 'bruno-gonzalez-get',  nome: "Bruno González",      posicoes: ["ZAG"],       forca: 78 },
+      { id: 'antunes-manuel-get',  nome: "Antunes",             posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'nemanja-maksimovic-get', nome: "Maksimović",       posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'mauro-arambarri-get', nome: "Arambarri",           posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'francisco-portillo-mal', nome: "Portillo",         posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'amath-ndiaye-get',    nome: "Amath",               posicoes: ["PD","PE"],   forca: 77 },
+      { id: 'jaime-mata-get',      nome: "Jaime Mata",          posicoes: ["ATA"],       forca: 79 },
+      { id: 'jorge-molina-get',    nome: "Jorge Molina",        posicoes: ["ATA"],       forca: 79 },
+      { id: 'angel-rodriguez-get', nome: "Ángel (GET)",         posicoes: ["ATA"],       forca: 78 },
+      { id: 'faycal-fajr-get',     nome: "Fajr",                posicoes: ["MEI","MC"],  forca: 78 },
+      { id: 'leandro-cabrera-get', nome: "Cabrera",             posicoes: ["ZAG"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2019,
+    clube: "Sevilla",
+    jogadores: [
+      { id: 'tomas-vaclik-sev',    nome: "Vaclík",              posicoes: ["GOL"],       forca: 80 },
+      { id: 'jesus-navas',         nome: "Jesús Navas",         posicoes: ["LD","PD"],   forca: 81 },
+      { id: 'simon-kjaer-sev',     nome: "Kjær",                posicoes: ["ZAG"],       forca: 81 },
+      { id: 'gabriel-mercado-sev', nome: "Mercado",             posicoes: ["ZAG","LD"],  forca: 79 },
+      { id: 'sergio-escudero-sev', nome: "Escudero",            posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'ever-banega-val',     nome: "Banega",              posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'roque-mesa-sev',      nome: "Roque Mesa",          posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'pablo-sarabia-sev',   nome: "Sarabia",             posicoes: ["PD","MEI"],  forca: 82 },
+      { id: 'wissam-ben-yedder-sev', nome: "Ben Yedder",        posicoes: ["ATA"],       forca: 83 },
+      { id: 'andre-silva-sev',     nome: "André Silva",         posicoes: ["ATA"],       forca: 81 },
+      { id: 'munir-el-haddadi-sev', nome: "Munir",              posicoes: ["ATA","PE"],  forca: 79 },
+      { id: 'quincy-promes-sev',   nome: "Promes",              posicoes: ["PE","ATA"],  forca: 80 },
+      { id: 'franco-vazquez-sev',  nome: "Franco Vázquez",      posicoes: ["MEI","MC"],  forca: 80 },
+      { id: 'daniel-carrico-sev',  nome: "Carriço",             posicoes: ["ZAG","VOL"], forca: 78 }
+    ]
   }
 
 ];
