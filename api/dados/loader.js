@@ -11,8 +11,11 @@ let _jogadores = null;   // jogadores individuais com id numérico único
 function carregarEntradas() {
   if (_entradas) return _entradas;
 
+  // Reorganizado em subpastas por esporte (ago/2026). Estes são os arquivos de
+  // futebol com modo online no backend. Frontend tem mais competições (Premier,
+  // Serie A, La Liga), mas o online por elenco no backend usa só estas quatro.
   const arquivos = ['libertadores.js', 'champions.js', 'brasileirao.js', 'copa.js'];
-  const dadosDir = __dirname;
+  const dadosDir = path.join(__dirname, 'futebol');
 
   _entradas = [];
   for (const arq of arquivos) {
