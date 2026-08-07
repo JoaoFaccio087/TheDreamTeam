@@ -5212,4 +5212,38 @@ const DADOS_LALIGA = [
     ]
   }
 
+  ,
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  ★ EDIÇÃO ESPECIAL LENDÁRIA ★
+  //  Edição 1962 (temporada 1961-62) — o REAL MADRID de Miguel MUÑOZ campeão (8º título,
+  //  2º seguido), com o QUINTETO LENDÁRIO completo dos Galácticos originais: DI STÉFANO,
+  //  PUSKÁS (Pichichi da liga com 20 gols), GENTO, SANTAMARÍA e DEL SOL. Fez a dobradinha
+  //  (liga + Copa) e foi vice na Champions (perdeu para o Benfica de Eusébio na final).
+  //  O maior time da primeira era dourada do futebol europeu. Colado como edição especial
+  //  (Opção A: cada lendário no seu ano real, como clube único).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1962,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'jose-araquistain-rm', nome: "Araquistáin",         posicoes: ["GOL"],       forca: 82 },
+      { id: 'isidro-sanchez-rm',   nome: "Isidro",              posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'pachin-real-rm',      nome: "Pachín",              posicoes: ["ZAG","LD"],  forca: 82 },
+      { id: 'jose-santamaria-rm',  nome: "Santamaría",          posicoes: ["ZAG"],       forca: 87 },
+      { id: 'jose-maria-vidal-rm', nome: "Vidal (RM)",          posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'pedro-casado-rm',     nome: "Casado",              posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'luis-del-sol-rm',     nome: "Del Sol",             posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'felix-ruiz-rm',       nome: "Félix Ruiz",          posicoes: ["MC","MEI"],  forca: 80 },
+      { id: 'raymond-kopa-rm',     nome: "Kopa",                posicoes: ["PD","MEI"],  forca: 88 },
+      { id: 'alfredo-di-stefano-rm', nome: "Di Stéfano",        posicoes: ["ATA","MEI"], forca: 93 },
+      { id: 'ferenc-puskas-rm',    nome: "Puskás",              posicoes: ["ATA","MEI"], forca: 92 },
+      { id: 'francisco-gento-rm',  nome: "Gento",               posicoes: ["PE","ATA"],  forca: 89 },
+      { id: 'justo-tejada-rm',     nome: "Tejada",              posicoes: ["PD","ATA"],  forca: 81 },
+      { id: 'enrique-mateos-rm',   nome: "Mateos",              posicoes: ["ATA"],       forca: 79 }
+    ]
+  }
+
 ];
