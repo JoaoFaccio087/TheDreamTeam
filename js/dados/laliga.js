@@ -5246,4 +5246,38 @@ const DADOS_LALIGA = [
     ]
   }
 
+  ,
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  ★ EDIÇÃO ESPECIAL LENDÁRIA ★
+  //  Edição 1983 (temporada 1982-83) — o BARCELONA de César Luis MENOTTI, o time de
+  //  DIEGO MARADONA no auge do seu talento na Espanha, ao lado do alemão BERND SCHUSTER.
+  //  Não foi campeão da liga (4º), mas venceu Copa del Rey, Copa de la Liga e Supercopa
+  //  numa temporada de coleção. Maradona brilhou antes da hepatite e da lesão brutal de
+  //  Goikoetxea. Um dos elencos mais estelares da história do clube pré-Dream Team.
+  //  Colado como edição especial (Opção A: cada lendário no seu ano real, clube único).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1983,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'javier-urruti-bcn',   nome: "Urruti",              posicoes: ["GOL"],       forca: 83 },
+      { id: 'gerardo-miranda-bcn', nome: "Gerardo",             posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'jose-ramon-alexanco-bcn', nome: "Alexanco",        posicoes: ["ZAG"],       forca: 82 },
+      { id: 'migueli-bernardo-bcn', nome: "Migueli",            posicoes: ["ZAG"],       forca: 83 },
+      { id: 'julio-alberto-bcn',   nome: "Julio Alberto",       posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'victor-munoz-bcn',    nome: "Víctor Muñoz",        posicoes: ["MC","VOL"],  forca: 82 },
+      { id: 'periko-alonso-bcn',   nome: "Periko Alonso",       posicoes: ["VOL","MC"],  forca: 81 },
+      { id: 'bernd-schuster-bcn',  nome: "Schuster",            posicoes: ["MC","MEI"],  forca: 88 },
+      { id: 'diego-maradona-bcn',  nome: "Maradona",            posicoes: ["MEI","ATA"], forca: 93 },
+      { id: 'francisco-carrasco-bcn', nome: "Lobo Carrasco",     posicoes: ["PE","MEI"],  forca: 83 },
+      { id: 'quini-maria-bcn',     nome: "Quini",               posicoes: ["ATA"],       forca: 85 },
+      { id: 'marcos-alonso-pena-bcn', nome: "Marcos Alonso (Peña)", posicoes: ["ATA","PD"], forca: 82 },
+      { id: 'tente-sanchez-bcn',   nome: "Tente Sánchez",       posicoes: ["MD","LD"],   forca: 78 },
+      { id: 'esteban-vigo-bcn',    nome: "Esteban Vigo",        posicoes: ["MEI","MC"],  forca: 78 }
+    ]
+  }
+
 ];
