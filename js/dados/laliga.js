@@ -5280,4 +5280,38 @@ const DADOS_LALIGA = [
     ]
   }
 
+  ,
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  ★ EDIÇÃO ESPECIAL LENDÁRIA ★
+  //  Edição 1974 (temporada 1973-74) — o BARCELONA de Rinus MICHELS campeão (9º título),
+  //  o 1º desde 1960, comandado por JOHAN CRUYFF JOGADOR no auge (o melhor do mundo, chegou
+  //  em out/1973). Time do histórico 0-5 no Bernabéu. O meio-campo lendário Rexach-Asensi-
+  //  Cruyff-Sotil-Marcial (Marcial artilheiro do time com 28 gols; Quini foi Pichichi da
+  //  liga). Fim de 13 anos de seca do Barça. Colado como edição especial (Opção A: cada
+  //  lendário no seu ano real, como clube único). Cruyff JOGADOR (o técnico já está no 1991-94).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 1974,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'salvador-sadurni-bcn', nome: "Sadurní",            posicoes: ["GOL"],       forca: 82 },
+      { id: 'joaquim-rife-bcn',    nome: "Rifé",                posicoes: ["LD","MD"],   forca: 79 },
+      { id: 'antonio-torres-bcn',  nome: "Torres",              posicoes: ["ZAG"],       forca: 79 },
+      { id: 'francisco-de-la-cruz-bcn', nome: "De la Cruz",     posicoes: ["ZAG","VOL"], forca: 79 },
+      { id: 'antonio-costas-bcn',  nome: "Costas",              posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'juan-carlos-perez-bcn', nome: "Juan Carlos (BCN)", posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'juan-manuel-asensi-bcn', nome: "Asensi",           posicoes: ["MC","MEI"],  forca: 84 },
+      { id: 'carles-rexach-bcn',   nome: "Rexach",              posicoes: ["PD","MEI"],  forca: 84 },
+      { id: 'johan-cruyff-bcn',    nome: "Cruyff",              posicoes: ["ATA","MEI"], forca: 93 },
+      { id: 'hugo-sotil-bcn',      nome: "Sotil",               posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'marcial-pina-bcn',    nome: "Marcial",             posicoes: ["MEI","ATA"], forca: 84 },
+      { id: 'antonio-de-la-cruz-gallego-bcn', nome: "Gallego",  posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'jose-martinez-clares-bcn', nome: "Clares",         posicoes: ["ME","MEI"],  forca: 78 },
+      { id: 'migueli-bernardo-bcn', nome: "Migueli",            posicoes: ["ZAG"],       forca: 80 }
+    ]
+  }
+
 ];
