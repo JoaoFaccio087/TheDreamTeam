@@ -18,7 +18,7 @@ const COMPETICOES = {
   serie_a:      { dados: 'Serie A',        label: 'Serie A',          formato: 'liga' },
   // La Liga (ago/2026) — acervo híbrido: contínuo desde 1990 + edições especiais de
   // times lendários. `formato: 'liga'` reusa o motor de pontos corridos.
-  laliga:       { dados: 'La Liga',         label: 'La Liga',          formato: 'liga', beta: true }
+  laliga:       { dados: 'La Liga',         label: 'La Liga',          formato: 'liga' }
 };
 
 // Helper: a competição roda no formato de liga (pontos corridos)?

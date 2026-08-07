@@ -37,6 +37,7 @@ var btnModoOnlineChampions = document.getElementById('btn-modo-online-champions'
 var btnModoOnlineLibertadores = document.getElementById('btn-modo-online-libertadores');
 var btnModoOnlinePremier = document.getElementById('btn-modo-online-premier');
 var btnModoOnlineSerieA = document.getElementById('btn-modo-online-serie-a');
+var btnModoOnlineLaLiga = document.getElementById('btn-modo-online-laliga');
 
 // Define a competição do online e destaca a pílula escolhida.
 function escolherOnline(comp, pilula) {
@@ -49,6 +50,7 @@ function escolherOnline(comp, pilula) {
   if (btnModoOnlineLibertadores) btnModoOnlineLibertadores.classList.remove('pilula-ativa');
   if (btnModoOnlinePremier) btnModoOnlinePremier.classList.remove('pilula-ativa');
   if (btnModoOnlineSerieA) btnModoOnlineSerieA.classList.remove('pilula-ativa');
+  if (btnModoOnlineLaLiga) btnModoOnlineLaLiga.classList.remove('pilula-ativa');
   if (pilula) pilula.classList.add('pilula-ativa');
 }
 
@@ -69,6 +71,9 @@ if (btnModoOnlinePremier) {
 }
 if (btnModoOnlineSerieA) {
   btnModoOnlineSerieA.addEventListener('click', function () { escolherOnline('Serie A', btnModoOnlineSerieA); });
+}
+if (btnModoOnlineLaLiga) {
+  btnModoOnlineLaLiga.addEventListener('click', function () { escolherOnline('La Liga', btnModoOnlineLaLiga); });
 }
 
 // Seletor Um Jogador / Multijogador — alterna as abas de competições.
