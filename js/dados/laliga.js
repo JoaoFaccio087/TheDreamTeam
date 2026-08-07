@@ -4928,6 +4928,147 @@ const DADOS_LALIGA = [
       { id: 'ander-barrenetxea-rs', nome: "Barrenetxea",        posicoes: ["PE","MEI"],  forca: 79 },
       { id: 'jon-pacheco-rs',      nome: "Pacheco",             posicoes: ["ZAG"],       forca: 78 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  Edição 2025 (temporada 2024-25) — o BARCELONA de Hansi FLICK campeão (88 pts), 28º
+  //  título, selado no dérbi catalão contra o Espanyol. Barça fez 4-0 nos Clásicos e uma
+  //  temporada avassaladora (também Copa + Supercopa). RAPHINHA melhor jogador da liga;
+  //  MBAPPÉ (estreou no Real) Pichichi (31 gols); Oblak melhor goleiro. LAMINE YAMAL no auge
+  //  aos 17. Top-6: Barcelona (88), Real Madrid (84), Atlético (76), Athletic (70), Villarreal
+  //  (70), Betis (60). Athletic voltou à elite; Villarreal de volta à Champions.
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "La Liga",
+    edicao: 2025,
+    clube: "Barcelona",
+    jogadores: [
+      { id: 'wojciech-szczesny-bcn', nome: "Szczęsny",         posicoes: ["GOL"],       forca: 83 },
+      { id: 'jules-kounde-sev',    nome: "Koundé",              posicoes: ["ZAG","LD"],  forca: 85 },
+      { id: 'pau-cubarsi-bcn',     nome: "Cubarsí",             posicoes: ["ZAG"],       forca: 82 },
+      { id: 'inigo-martinez-rs',   nome: "Íñigo Martínez",      posicoes: ["ZAG"],       forca: 83 },
+      { id: 'alejandro-balde-bcn', nome: "Balde",               posicoes: ["LE","MD"],   forca: 82 },
+      { id: 'frenkie-de-jong-bcn', nome: "De Jong",             posicoes: ["MC","VOL"],  forca: 84 },
+      { id: 'pedri-gonzalez-bcn',  nome: "Pedri",               posicoes: ["MC","MEI"],  forca: 86 },
+      { id: 'dani-olmo-bcn',       nome: "Dani Olmo",           posicoes: ["MEI","MC"],  forca: 84 },
+      { id: 'lamine-yamal-bcn',    nome: "Lamine Yamal",        posicoes: ["PD","ATA"],  forca: 86 },
+      { id: 'robert-lewandowski-bcn', nome: "Lewandowski",      posicoes: ["ATA"],       forca: 87 },
+      { id: 'raphinha-dias-bcn',   nome: "Raphinha",            posicoes: ["PE","ATA"],  forca: 87 },
+      { id: 'fermin-lopez-bcn',    nome: "Fermín",              posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'gavi-paez-bcn',       nome: "Gavi",                posicoes: ["MC","MEI"],  forca: 82 },
+      { id: 'ferran-torres-bcn',   nome: "Ferran Torres",       posicoes: ["ATA","PD"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2025,
+    clube: "Real Madrid",
+    jogadores: [
+      { id: 'thibaut-courtois-atm', nome: "Courtois",           posicoes: ["GOL"],       forca: 88 },
+      { id: 'daniel-carvajal-rm',  nome: "Carvajal",            posicoes: ["LD","MD"],   forca: 84 },
+      { id: 'eder-militao-rm',     nome: "Militão",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'antonio-rudiger-rm',  nome: "Rüdiger",             posicoes: ["ZAG"],       forca: 85 },
+      { id: 'ferland-mendy-rm',    nome: "Mendy",               posicoes: ["LE","MD"],   forca: 81 },
+      { id: 'aurelien-tchouameni-rm', nome: "Tchouaméni",       posicoes: ["VOL","MC"],  forca: 85 },
+      { id: 'eduardo-camavinga-rm', nome: "Camavinga",          posicoes: ["VOL","LE"],  forca: 84 },
+      { id: 'fede-valverde-rm',    nome: "Fede Valverde",       posicoes: ["MC","VOL"],  forca: 87 },
+      { id: 'jude-bellingham-rm',  nome: "Bellingham",          posicoes: ["MEI","MC"],  forca: 88 },
+      { id: 'kylian-mbappe-rm',    nome: "Mbappé",              posicoes: ["ATA","PE"],  forca: 90 },
+      { id: 'vinicius-junior-rm',  nome: "Vinícius Jr",         posicoes: ["PE","ATA"],  forca: 89 },
+      { id: 'rodrygo-goes-rm',     nome: "Rodrygo",             posicoes: ["PD","ATA"],  forca: 85 },
+      { id: 'brahim-diaz-rm',      nome: "Brahim",              posicoes: ["MEI","PE"],  forca: 82 },
+      { id: 'lucas-vazquez-rm',    nome: "Lucas Vázquez",       posicoes: ["LD","MD"],   forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2025,
+    clube: "Atlético de Madrid",
+    jogadores: [
+      { id: 'jan-oblak-atm',       nome: "Oblak",               posicoes: ["GOL"],       forca: 87 },
+      { id: 'nahuel-molina-atm',   nome: "Nahuel Molina",       posicoes: ["LD","MD"],   forca: 81 },
+      { id: 'jose-gimenez-atm',    nome: "Giménez",             posicoes: ["ZAG"],       forca: 84 },
+      { id: 'robin-le-normand-rs', nome: "Le Normand",          posicoes: ["ZAG"],       forca: 83 },
+      { id: 'reinildo-mandava-atm', nome: "Reinildo",           posicoes: ["LE","ZAG"],  forca: 79 },
+      { id: 'koke-resurreccion',   nome: "Koke",                posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'rodrigo-de-paul-atm', nome: "De Paul",             posicoes: ["MC","MEI"],  forca: 83 },
+      { id: 'pablo-barrios-atm',   nome: "Pablo Barrios",       posicoes: ["MC","VOL"],  forca: 81 },
+      { id: 'antoine-griezmann-rs', nome: "Griezmann",          posicoes: ["ATA","PE"],  forca: 85 },
+      { id: 'julian-alvarez-atm',  nome: "Julián Álvarez",      posicoes: ["ATA"],       forca: 85 },
+      { id: 'alexander-sorloth-rs', nome: "Sørloth",            posicoes: ["ATA"],       forca: 81 },
+      { id: 'giuliano-simeone-atm', nome: "Giuliano",           posicoes: ["PD","MEI"],  forca: 79 },
+      { id: 'marcos-llorente-atm', nome: "Marcos Llorente",     posicoes: ["MC","LD"],   forca: 82 },
+      { id: 'conor-gallagher-atm', nome: "Gallagher",           posicoes: ["MC","VOL"],  forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2025,
+    clube: "Athletic Bilbao",
+    jogadores: [
+      { id: 'unai-simon-ath',      nome: "Unai Simón",          posicoes: ["GOL"],       forca: 84 },
+      { id: 'oscar-de-marcos-ath', nome: "De Marcos",           posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'daniel-vivian-ath',   nome: "Vivian",              posicoes: ["ZAG"],       forca: 82 },
+      { id: 'aitor-paredes-ath',   nome: "Paredes",             posicoes: ["ZAG"],       forca: 79 },
+      { id: 'yuri-berchiche-rs',   nome: "Yuri Berchiche",      posicoes: ["LE","MD"],   forca: 79 },
+      { id: 'mikel-jauregizar-ath', nome: "Jauregizar",         posicoes: ["VOL","MC"],  forca: 79 },
+      { id: 'oihan-sancet-ath',    nome: "Sancet",              posicoes: ["MEI","MC"],  forca: 82 },
+      { id: 'inigo-ruiz-de-galarreta-ath', nome: "Galarreta",   posicoes: ["MC","VOL"],  forca: 80 },
+      { id: 'nico-williams-ath',   nome: "Nico Williams",       posicoes: ["PE","PD"],   forca: 84 },
+      { id: 'inaki-williams-ath',  nome: "Williams",            posicoes: ["ATA","PD"],  forca: 81 },
+      { id: 'gorka-guruzeta-ath',  nome: "Guruzeta",            posicoes: ["ATA"],       forca: 79 },
+      { id: 'alex-berenguer-ath',  nome: "Berenguer",           posicoes: ["PE","ATA"],  forca: 80 },
+      { id: 'benat-prados-ath',    nome: "Prados",              posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'maroan-sannadi-ath',  nome: "Sannadi",             posicoes: ["ATA"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2025,
+    clube: "Villarreal",
+    jogadores: [
+      { id: 'diego-conde-vil',     nome: "Diego Conde",         posicoes: ["GOL"],       forca: 79 },
+      { id: 'kiko-femenia-vil',    nome: "Kiko Femenía",        posicoes: ["LD","MD"],   forca: 78 },
+      { id: 'rafa-marin-vil',      nome: "Rafa Marín",          posicoes: ["ZAG"],       forca: 79 },
+      { id: 'juan-foyth-vil',      nome: "Foyth",               posicoes: ["ZAG","LD"],  forca: 81 },
+      { id: 'sergi-cardona-vil',   nome: "Cardona",             posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'dani-parejo-vil',     nome: "Parejo (VIL)",        posicoes: ["MC","MEI"],  forca: 81 },
+      { id: 'santi-comesana-vil',  nome: "Comesaña",            posicoes: ["MC","VOL"],  forca: 79 },
+      { id: 'alex-baena-vil',      nome: "Baena",               posicoes: ["MEI","ME"],  forca: 82 },
+      { id: 'yeremy-pino-vil',     nome: "Yéremy Pino",         posicoes: ["PD","MEI"],  forca: 81 },
+      { id: 'ayoze-perez-bet',     nome: "Ayoze",               posicoes: ["ATA","MEI"], forca: 81 },
+      { id: 'thierno-barry-vil',   nome: "Barry",               posicoes: ["ATA"],       forca: 79 },
+      { id: 'nicolas-pepe-vil',    nome: "Pépé",                posicoes: ["PD","ATA"],  forca: 79 },
+      { id: 'pape-gueye-vil',      nome: "Gueye",               posicoes: ["VOL","MC"],  forca: 78 },
+      { id: 'logan-costa-vil',     nome: "Logan Costa",         posicoes: ["ZAG"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "La Liga",
+    edicao: 2025,
+    clube: "Real Betis",
+    jogadores: [
+      { id: 'adrian-san-miguel-bet', nome: "Adrián (BET)",      posicoes: ["GOL"],       forca: 79 },
+      { id: 'hector-bellerin-bet', nome: "Bellerín",            posicoes: ["LD","MD"],   forca: 80 },
+      { id: 'natan-bernardo-bet',  nome: "Natan",               posicoes: ["ZAG"],       forca: 79 },
+      { id: 'diego-llorente-rs',   nome: "Diego Llorente",      posicoes: ["ZAG"],       forca: 80 },
+      { id: 'romain-perraud-bet',  nome: "Perraud",             posicoes: ["LE","MD"],   forca: 78 },
+      { id: 'johnny-cardoso-bet',  nome: "Cardoso",             posicoes: ["VOL","MC"],  forca: 80 },
+      { id: 'sergi-altimira-bet',  nome: "Altimira",            posicoes: ["MC","VOL"],  forca: 78 },
+      { id: 'isco-alarcon-mal',    nome: "Isco",                posicoes: ["MEI","MC"],  forca: 83 },
+      { id: 'giovani-lo-celso-bet', nome: "Lo Celso",           posicoes: ["MEI","MC"],  forca: 81 },
+      { id: 'antony-santos-bet',   nome: "Antony",              posicoes: ["PD","ATA"],  forca: 82 },
+      { id: 'vitor-roque-bet',     nome: "Vitor Roque",         posicoes: ["ATA"],       forca: 79 },
+      { id: 'cedric-bakambu-vil',  nome: "Bakambu",             posicoes: ["ATA"],       forca: 78 },
+      { id: 'ez-abde-bet',         nome: "Abde",                posicoes: ["PE","MEI"],  forca: 79 },
+      { id: 'pablo-fornals-vil',   nome: "Fornals",             posicoes: ["MEI","MC"],  forca: 79 }
+    ]
   }
 
 ];
