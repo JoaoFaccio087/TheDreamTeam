@@ -88,6 +88,74 @@ const DADOS_VOLEI_M = [
       { id: 'jan-kozamernik',      nome: "Kozamernik",          posicoes: ["CEN"],       forca: 83 },
       { id: 'jani-kovacic',        nome: "Kovačič",             posicoes: ["LIB"],       forca: 82 }
     ]
+  },
+
+  // ══════════════════════════════════════════════════════════════════════════
+  //  ★ MUNDIAL MASCULINO 2018 (Itália/Bulgária) ★
+  //  A POLÔNIA de Vital Heynen BICAMPEÃ (3º título geral), batendo o Brasil por 3-0
+  //  na final (revanche de 2014). EUA levou o bronze sobre a Sérvia. Bartosz KUREK
+  //  foi o MVP e maior pontuador (171 pts). 5ª final seguida do Brasil no Mundial.
+  //  Seleções (4 semifinalistas, Brasil já incluído): Polônia (ouro), Brasil (prata),
+  //  EUA (bronze), Sérvia (4º).
+  //  Prêmios: MVP Kurek (POL); Melhor levantador Christenson (USA); Melhores ponteiros
+  //  Kubiak (POL) e Douglas (BRA); Melhores centrais Saatkamp (BRA) e Nowakowski (POL);
+  //  Melhor oposto Anderson (USA); Melhor líbero Zatorski (POL).
+  // ══════════════════════════════════════════════════════════════════════════
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2018,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'fabian-drzyzga',      nome: "Drzyzga",             posicoes: ["LEV"],       forca: 85 },
+      { id: 'bartosz-kurek',       nome: "Kurek",               posicoes: ["OPO"],       forca: 91 },
+      { id: 'michal-kubiak',       nome: "Kubiak",              posicoes: ["PON"],       forca: 87 },
+      { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 88 },
+      { id: 'piotr-nowakowski',    nome: "Nowakowski",          posicoes: ["CEN"],       forca: 84 },
+      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2018,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'bruno-rezende',       nome: "Bruninho",            posicoes: ["LEV"],       forca: 89 },
+      { id: 'wallace-de-souza',    nome: "Wallace",             posicoes: ["OPO"],       forca: 85 },
+      { id: 'douglas-souza',       nome: "Douglas",             posicoes: ["PON"],       forca: 85 },
+      { id: 'ricardo-lucarelli',   nome: "Lucarelli",           posicoes: ["PON"],       forca: 85 },
+      { id: 'lucas-saatkamp',      nome: "Lucão",               posicoes: ["CEN"],       forca: 84 },
+      { id: 'mauricio-borges',     nome: "Maurício Borges",     posicoes: ["LIB"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2018,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micah-christenson',   nome: "Christenson",         posicoes: ["LEV"],       forca: 86 },
+      { id: 'matt-anderson',       nome: "Anderson",            posicoes: ["OPO"],       forca: 87 },
+      { id: 'aaron-russell',       nome: "Russell",             posicoes: ["PON"],       forca: 84 },
+      { id: 'taylor-sander',       nome: "Sander",              posicoes: ["PON"],       forca: 83 },
+      { id: 'max-holt',            nome: "Holt",                posicoes: ["CEN"],       forca: 83 },
+      { id: 'erik-shoji',          nome: "Shoji",               posicoes: ["LIB"],       forca: 85 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2018,
+    clube: "Sérvia",
+    jogadores: [
+      { id: 'nikola-jovovic',      nome: "Jovović",             posicoes: ["LEV"],       forca: 82 },
+      { id: 'aleksandar-atanasijevic', nome: "Atanasijević",    posicoes: ["OPO"],       forca: 85 },
+      { id: 'uros-kovacevic',      nome: "Kovačević",           posicoes: ["PON"],       forca: 84 },
+      { id: 'marko-ivovic',        nome: "Ivović",              posicoes: ["PON"],       forca: 82 },
+      { id: 'marko-podrascanin',   nome: "Podrascanin",         posicoes: ["CEN"],       forca: 83 },
+      { id: 'nikola-rosic',        nome: "Rosić",               posicoes: ["LIB"],       forca: 81 }
+    ]
   }
 
 ];
