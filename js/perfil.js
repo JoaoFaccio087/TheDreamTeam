@@ -337,6 +337,7 @@
     renderSeletorEsportePerfil();
     carregarAcordeoes();
     if (typeof renderConquistasDestaque === 'function') renderConquistasDestaque();
+    renderHistoricoBloco();
   }
 
   // Grupos do acordeão: Geral + cada competição (match por palavra-chave no nome salvo).
@@ -879,6 +880,66 @@
   // Não confundir com o cache das Estatísticas: eram a MESMA variável (mesmo escopo),
   // então abrir o Histórico truncava em 20 os dados do mapa de escalados.
   var _histLista = [];
+  // ─────────── BLOCO: HISTÓRICO RECENTE (tela única) ───────────
+  // Mostra as 5 partidas mais recentes; "Ver todo" abre um modal com até 20.
+  function ligarResumos(container, lista) {
+    container.querySelectorAll('.hist-resumo-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var idx = +b.dataset.idx;
+        var item = lista[idx];
+        if (item && typeof mostrarResumoHistorico === 'function') mostrarResumoHistorico(item);
+      });
+    });
+  }
+
+  function renderHistoricoBloco() {
+    var cont = $('hist-destaque');
+    if (!cont) return;
+    cont.innerHTML = '<p class="perfil-carregando">Carregando histórico…</p>';
+    API.getHistorico().then(function (arr) {
+      arr = arr || [];
+      if (!arr.length) {
+        cont.innerHTML = '<p class="historico-vazio">Nenhuma campanha terminada ainda. Jogue uma temporada!</p>';
+        return;
+      }
+      var recentes = arr.slice(0, 5);
+      cont.innerHTML = recentes.map(itemHistorico).join('');
+      ligarResumos(cont, recentes);
+    }).catch(function () {
+      cont.innerHTML = '<p class="historico-vazio">Não foi possível carregar o histórico.</p>';
+    });
+  }
+
+  function abrirModalHistorico() {
+    var ov = document.createElement('div');
+    ov.className = 'modal-confirm mc-overlay';
+    ov.innerHTML =
+      '<div class="modal-confirm-box mc-conq-box" role="dialog" aria-modal="true">' +
+        '<button type="button" class="mc-conq-fechar" data-fechar aria-label="Fechar">&times;</button>' +
+        '<p class="modal-confirm-titulo">Histórico</p>' +
+        '<div class="historico-lista mc-hist-lista"></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    var alvo = ov.querySelector('.mc-hist-lista');
+    alvo.innerHTML = '<p class="perfil-carregando">Carregando histórico…</p>';
+    API.getHistorico().then(function (arr) {
+      arr = arr || [];
+      if (!arr.length) { alvo.innerHTML = '<p class="historico-vazio">Nenhuma campanha terminada ainda.</p>'; return; }
+      var lista = arr.slice(0, 20);
+      alvo.innerHTML = lista.map(itemHistorico).join('');
+      ligarResumos(alvo, lista);
+    }).catch(function () {
+      alvo.innerHTML = '<p class="historico-vazio">Não foi possível carregar o histórico.</p>';
+    });
+
+    function fechar() { document.removeEventListener('keydown', onKey); if (ov.parentNode) ov.parentNode.removeChild(ov); }
+    function onKey(e) { if (e.key === 'Escape') fechar(); }
+    ov.addEventListener('click', function (e) {
+      if (e.target === ov || (e.target && e.target.hasAttribute && e.target.hasAttribute('data-fechar'))) fechar();
+    });
+    document.addEventListener('keydown', onKey);
+  }
+
   function abrirHistorico() {
     if (!telaPerfil) return;
     var lista = $('historico-lista');
@@ -979,6 +1040,12 @@
     var verConq = document.querySelector('.perfil-ver-mais[data-ver="conquistas"]');
     if (verConq) verConq.addEventListener('click', function () {
       if (typeof abrirModalConquistas === 'function') abrirModalConquistas();
+    });
+
+    // "Ver todo" no bloco de histórico recente → abre o modal com até 20 partidas.
+    var verHist = document.querySelector('.perfil-ver-mais[data-ver="historico"]');
+    if (verHist) verHist.addEventListener('click', function () {
+      abrirModalHistorico();
     });
 
     var btnSalvar = $('editar-salvar');

@@ -30,12 +30,8 @@
 .perfil-editar-btn svg { width: 16px; height: 16px; }
 .perfil-editar-btn:hover { color: var(--accent, #2BD46A); }
 .perfil-email { font-size: var(--fs-sm); color: var(--txt-soft, #9aa6b2); word-break: break-all; }
-/* "Time dos sonhos: <nome>" — o rótulo vem via ::before, o nome fica dourado. */
+/* Nome do time do usuário — só o nome, em dourado, sem prefixo verboso. */
 .perfil-nome-time-txt { font-size: var(--fs-sm); color: var(--ouro, #D9B25A); font-weight: 600; margin-top: 0.15rem; }
-.perfil-nome-time-txt:not(:empty)::before {
-  content: 'Time dos sonhos: ';
-  color: var(--txt-soft); font-weight: 400;
-}
 
 /* Botão de sair (logout) ao lado das infos do usuário, empurrado para a direita. */
 .perfil-logout-btn {
@@ -321,7 +317,9 @@
 /* Grid das 8 conquistas em destaque */
 .conq-grid-destaque {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  align-items: stretch;   /* cards da mesma linha com altura igual */
 }
+.conq-grid-destaque .conq-card { height: 100%; }
 @media (max-width: 720px) { .conq-grid-destaque { grid-template-columns: repeat(2, 1fr); } }
 
 /* Modal "Ver todas as conquistas" */
@@ -518,6 +516,13 @@
 
 /* Painéis de aba */
 .perfil-painel { animation: perfilFade 0.2s ease; }
+
+/* Espaçamento vertical consistente entre os blocos da tela única de perfil
+   (KPIs, colunas de estatística, conquistas, histórico). */
+#perfil-painel-estatisticas > .perfil-kpis { margin-bottom: 1.6rem; }
+#perfil-painel-estatisticas > .perfil-cols { margin-bottom: 1.6rem; }
+#perfil-painel-estatisticas > .perfil-bloco { margin-bottom: 1.6rem; }
+#perfil-painel-estatisticas > .perfil-bloco:last-child { margin-bottom: 0; }
 @keyframes perfilFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
 /* Na tela cheia, a lista de estatísticas/histórico pode usar mais altura que no modal antigo */

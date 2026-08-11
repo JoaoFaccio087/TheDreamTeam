@@ -255,8 +255,8 @@
     });
   }
 
-  function desenharConquistas() {
-    var cont = $('conq-lista');
+  function desenharConquistas(contAlvo) {
+    var cont = contAlvo || $('conq-lista');
     if (!cont) return;
 
     var totalDesb = LISTA_CONQUISTAS.filter(function (c) { return c.desbloqueada; }).length;
@@ -324,7 +324,7 @@
     });
   }
 
-  // Modal "Ver todas as conquistas" — reusa desenharConquistas num overlay.
+  // Modal "Ver todas as conquistas" — desenha no PRÓPRIO container (sem id duplicado).
   function abrirModalConquistas() {
     var ov = document.createElement('div');
     ov.className = 'modal-confirm mc-overlay';
@@ -332,10 +332,31 @@
       '<div class="modal-confirm-box mc-conq-box" role="dialog" aria-modal="true">' +
         '<button type="button" class="mc-conq-fechar" data-fechar aria-label="Fechar">&times;</button>' +
         '<p class="modal-confirm-titulo">Conquistas</p>' +
-        '<div id="conq-lista" class="conq-lista"></div>' +
+        '<div class="conq-lista mc-conq-lista"></div>' +
       '</div>';
     document.body.appendChild(ov);
-    renderConquistas();   // preenche o #conq-lista (agora dentro do modal)
+
+    var alvo = ov.querySelector('.mc-conq-lista');
+    alvo.innerHTML = '<p class="perfil-carregando">Carregando conquistas…</p>';
+
+    // carrega o estado real e desenha DENTRO do container do modal
+    var fonte = (typeof API !== 'undefined' && API.getAchievements)
+      ? API.getAchievements() : Promise.resolve([]);
+    fonte.then(function (desbloqueadas) {
+      if (desbloqueadas === null) {
+        alvo.innerHTML = '<p class="perfil-vazio">Não foi possível carregar suas conquistas.</p>';
+        return;
+      }
+      var setDesb = {};
+      (desbloqueadas || []).forEach(function (d) {
+        var id = (typeof d === 'string') ? d : (d && d.achievement_id);
+        if (id) setDesb[id] = true;
+      });
+      LISTA_CONQUISTAS.forEach(function (c) { c.desbloqueada = !!setDesb[c.id]; });
+      desenharConquistas(alvo);
+    }).catch(function () {
+      alvo.innerHTML = '<p class="perfil-vazio">Não foi possível carregar suas conquistas.</p>';
+    });
 
     function fechar() { document.removeEventListener('keydown', onKey); if (ov.parentNode) ov.parentNode.removeChild(ov); }
     function onKey(e) { if (e.key === 'Escape') fechar(); }
