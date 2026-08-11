@@ -334,6 +334,7 @@
         pintarCabecalho(me.username || u.username);
       }).catch(function () {});
     }
+    renderSeletorEsportePerfil();
     carregarAcordeoes();
   }
 
@@ -362,6 +363,43 @@
   var _statsCache = null;   // resposta de /matches/stats (quando logado)
 
   var _histCache = null;   // histórico carregado (reusado por acordeão + time escalado)
+
+  // Renderiza o seletor de esporte do perfil. Só aparece com 2+ esportes habilitados
+  // (mesma regra da home). Nesta 1ª etapa é SÓ VISUAL: troca o botão ativo, mas ainda
+  // não filtra os dados — a filtragem por esporte virá numa etapa seguinte.
+  var _esportePerfil = 'futebol';
+  function renderSeletorEsportePerfil() {
+    if (typeof esportesVisiveis !== 'function') return;
+    var lista = esportesVisiveis();
+    if (!lista || lista.length < 2) return;   // só futebol → nada muda
+
+    var bloco = $('perfil-esporte');
+    var cont  = $('perfil-esporte-sel');
+    if (!bloco || !cont) return;
+
+    cont.innerHTML = lista.map(function (e) {
+      var ativa = (e.id === _esportePerfil) ? ' pilula-ativa' : '';
+      return '<button type="button" class="pilula' + ativa + '" data-perfil-esporte="' +
+             esc(e.id) + '">' + esc(e.nome) + '</button>';
+    }).join('');
+    bloco.classList.remove('escondida');
+
+    // troca visual do botão ativo (sem filtrar dados ainda)
+    if (!cont._ligado) {
+      cont.addEventListener('click', function (ev) {
+        var alvo = ev.target.closest ? ev.target.closest('.pilula') : null;
+        if (!alvo) return;
+        var id = alvo.getAttribute('data-perfil-esporte');
+        if (!id) return;
+        _esportePerfil = id;
+        cont.querySelectorAll('.pilula').forEach(function (b) {
+          b.classList.toggle('pilula-ativa', b.getAttribute('data-perfil-esporte') === id);
+        });
+        // (a filtragem dos dados por esporte entra aqui numa próxima etapa)
+      });
+      cont._ligado = true;
+    }
+  }
 
   function carregarAcordeoes() {
     var box = $('perfil-acordeoes');
