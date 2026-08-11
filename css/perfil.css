@@ -292,6 +292,18 @@
 .perfil-cols .acord-stats { grid-template-columns: repeat(4, 1fr); }
 
 /* Coluna do time mais escalado */
+/* ── Bloco/card genérico da tela de perfil (KPIs, barras, escalados, etc.) ── */
+.perfil-bloco {
+  background: var(--surface, #181B21);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-lg);
+  padding: 1.3rem;
+}
+.perfil-bloco-tit {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--txt-soft); font-weight: 700; margin: 0 0 1.1rem;
+}
+
 .perfil-col-escalados { position: sticky; top: 1rem; }
 .perfil-escalados-titulo {
   font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm);
