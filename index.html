@@ -318,7 +318,7 @@
         <!-- COLUNA ESQUERDA -->
         <div class="home-esquerda">
 
-          <h1 class="manchete">Sorteie.<br>Escale.<br>Goleie.</h1>
+          <h1 class="manchete">Sorteie.<br>Escale.<br>Domine.</h1>
 
           <p class="home-descricao">
             Escolha a competição, sorteie um clube e uma edição, e escale
@@ -331,6 +331,12 @@
           <!-- Seletor de modo -->
           <div class="home-modo">
             <span class="home-rotulo-campo">MODO DE JOGO</span>
+
+            <!-- Seletor de ESPORTE (Futebol/Vôlei). Só aparece quando há 2+ esportes
+                 habilitados (js/esportes.js). Renderizado por renderSeletorEsporte(). -->
+            <div id="home-esporte" class="home-esporte escondida">
+              <div class="modo-seletor" id="pilulas-esporte"></div>
+            </div>
 
             <!-- Seletor: Um Jogador / Multijogador -->
             <div class="modo-seletor" id="modo-seletor">
@@ -381,27 +387,7 @@
             <!-- Fichas geradas por js/estado.js (uma por titular do esporte ativo) -->
           </div><!-- /campo -->
 
-          <!-- Seletor de ESPORTE (Fase 5). Fica vazio e escondido enquanto só houver
-               um esporte habilitado em js/esportes.js — ou seja, hoje não aparece. -->
-          <div id="home-esporte" class="home-esporte escondida">
-            <span class="home-rotulo-campo">ESPORTE</span>
-            <div class="area-pilulas" id="pilulas-esporte"></div>
-          </div>
-
-          <div class="home-formacao">
-            <span class="home-rotulo-campo">FORMA&Ccedil;&Atilde;O</span>
-            <div class="area-pilulas" id="pilulas-formacao">
-              <button class="pilula pilula-ativa" data-formacao-amostra="4-3-3">4-3-3</button>
-              <button class="pilula" data-formacao-amostra="4-4-2">4-4-2</button>
-              <button class="pilula" data-formacao-amostra="4-2-3-1">4-2-3-1</button>
-              <button class="pilula" data-formacao-amostra="3-5-2">3-5-2</button>
-              <button class="pilula" data-formacao-amostra="4-3-2-1">4-3-2-1</button>
-              <button class="pilula" data-formacao-amostra="4-5-1">4-5-1</button>
-              <button class="pilula" data-formacao-amostra="3-4-3">3-4-3</button>
-              <button class="pilula" data-formacao-amostra="4-1-2-1-2">4-1-2-1-2</button>
-            </div>
-            <p class="home-legenda">Amostra &mdash; a formação você escolhe no jogo</p>
-          </div>
+          <p class="home-legenda" id="campo-legenda">Amostra &mdash; o mapa alterna entre os esportes</p>
 
         </div><!-- /home-direita -->
 
@@ -462,6 +448,8 @@
       <!-- RODAPÉ -->
       <footer class="home-footer">
         <div class="footer-linha">
+          <span id="stat-esportes">1 esporte</span>
+          <span class="footer-sep">&middot;</span>
           <span id="stat-competicoes">4 competições</span>
           <span class="footer-sep">&middot;</span>
           <span id="stat-edicoes">0 edições</span>

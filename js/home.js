@@ -82,6 +82,12 @@ function calcularEstatisticasFooter() {
     var nComps = Object.keys(COMPETICOES).length;
     spanComps.textContent = nComps === 1 ? '1 competição' : nComps + ' competições';
   }
+  // Nº de esportes habilitados (automático, via catálogo js/esportes.js).
+  var spanEsportes = document.getElementById('stat-esportes');
+  if (spanEsportes && typeof esportesVisiveis === 'function') {
+    var nEsp = esportesVisiveis().length;
+    spanEsportes.textContent = nEsp === 1 ? '1 esporte' : nEsp + ' esportes';
+  }
 }
 
 calcularEstatisticasFooter();
@@ -97,43 +103,95 @@ function renderSeletorEsporte() {
   if (!lista || lista.length < 2) return;   // ← nada muda enquanto só existir futebol
 
   var bloco = document.getElementById('home-esporte');
-  var pilulas = document.getElementById('pilulas-esporte');
-  if (!bloco || !pilulas) return;
+  var cont  = document.getElementById('pilulas-esporte');
+  if (!bloco || !cont) return;
 
-  pilulas.innerHTML = lista.map(function (e) {
-    var ativa = (e.id === esporteAtual) ? ' pilula-ativa' : '';
-    return '<button type="button" class="pilula' + ativa + '" data-esporte="' +
+  // Botões no estilo segmentado (modo-seg), iguais ao Um Jogador/Multijogador.
+  cont.innerHTML = lista.map(function (e) {
+    var ativa = (e.id === esporteAtual) ? ' modo-seg-ativa' : '';
+    return '<button type="button" class="modo-seg' + ativa + '" data-esporte="' +
            UI.esc(e.id) + '">' + UI.esc(e.nome) + '</button>';
   }).join('');
 
   bloco.classList.remove('escondida');
 }
 
-// Roda na carga: com um esporte só, é um no-op.
 renderSeletorEsporte();
 
-// Troca de esporte na home: ao clicar numa pílula de esporte, atualiza o esporte
-// ativo e mostra o bloco de competições correspondente (escondendo o do outro).
-// Enquanto só houver futebol habilitado, nada disto é acionável (o seletor nem
-// aparece), então o comportamento atual fica intocado.
-function selecionarEsporte(idEsporte) {
-  if (typeof esporteAtual !== 'undefined') esporteAtual = idEsporte;
+// ── MAPA-VITRINE ────────────────────────────────────────────────────────────
+// O mapa da home é uma vitrine viva: alterna sozinho entre uma formação de
+// futebol (aleatória) e a quadra de vôlei. O seletor de esporte também controla
+// (clicar troca o mapa e reinicia o timer). Só entra em ação com 2+ esportes.
+var _vitrineTimer = null;
+var FORMACOES_FUTEBOL_AMOSTRA = ['4-3-3','4-4-2','4-2-3-1','3-5-2','4-3-2-1','4-5-1','3-4-3','4-1-2-1-2'];
 
-  // marca a pílula de esporte ativa
-  var pilulasEsp = document.querySelectorAll('#pilulas-esporte .pilula');
-  pilulasEsp.forEach(function (p) {
-    p.classList.toggle('pilula-ativa', p.getAttribute('data-esporte') === idEsporte);
+function _formacaoFutebolAleatoria() {
+  return FORMACOES_FUTEBOL_AMOSTRA[Math.floor(Math.random() * FORMACOES_FUTEBOL_AMOSTRA.length)];
+}
+
+// Aplica o visual de um esporte ao mapa (fichas + classe da quadra).
+function pintarMapaVitrine(idEsporte) {
+  var campo = document.getElementById('campo');
+  if (!campo) return;
+  var ehVolei = (idEsporte === 'volei');
+
+  // troca a aparência da quadra (CSS): vôlei ganha .quadra-volei; futebol volta ao normal
+  campo.classList.toggle('quadra-volei', ehVolei);
+
+  // reconstrói as fichas conforme o nº de posições do esporte, e posiciona
+  var formacao = ehVolei ? 'volei' : _formacaoFutebolAleatoria();
+  if (typeof formacoes !== 'undefined' && formacoes[formacao] && typeof UI !== 'undefined') {
+    var coords = formacoes[formacao];
+    // ajusta a quantidade de fichas ao esporte (futebol 11, vôlei 6)
+    UI.montarCampo(campo, coords.length, { classe: 'ficha' });
+    var novasFichas = campo.querySelectorAll('.ficha');
+    UI.posicionarCampo(novasFichas, formacao);
+    Array.prototype.forEach.call(novasFichas, function (f, i) {
+      if (coords[i]) f.textContent = coords[i].grupo;
+    });
+  }
+}
+
+// Alterna a vitrine para o "próximo" esporte automaticamente, em loop.
+function _proximoEsporteVitrine() {
+  var lista = (typeof esportesVisiveis === 'function') ? esportesVisiveis() : [];
+  if (lista.length < 2) return;
+  var ids = lista.map(function (e) { return e.id; });
+  var atualIdx = ids.indexOf(esporteAtual);
+  var prox = ids[(atualIdx + 1) % ids.length];
+  aplicarEsporteVitrine(prox, false);   // false = não reinicia o timer (é o próprio loop)
+}
+
+// Inicia/reinicia o loop automático da vitrine (a cada ~5s).
+function iniciarVitrine() {
+  if (_vitrineTimer) clearInterval(_vitrineTimer);
+  var lista = (typeof esportesVisiveis === 'function') ? esportesVisiveis() : [];
+  if (lista.length < 2) return;         // com 1 esporte, mapa fixo (sem loop)
+  // pinta o estado atual imediatamente (não espera o 1º tick de 5s)
+  pintarMapaVitrine(esporteAtual);
+  _vitrineTimer = setInterval(_proximoEsporteVitrine, 5000);
+}
+
+// Aplica um esporte à vitrine + sincroniza o seletor. reiniciarTimer=true quando
+// a troca veio de um clique do usuário (para o loop não trocar logo em seguida).
+function aplicarEsporteVitrine(idEsporte, reiniciarTimer) {
+  if (typeof esporteAtual !== 'undefined') esporteAtual = idEsporte;
+  pintarMapaVitrine(idEsporte);
+
+  // sincroniza o botão ativo do seletor
+  var segs = document.querySelectorAll('#pilulas-esporte .modo-seg');
+  segs.forEach(function (s) {
+    s.classList.toggle('modo-seg-ativa', s.getAttribute('data-esporte') === idEsporte);
   });
 
-  // mostra o bloco de competições do esporte escolhido; esconde os demais.
-  // Convenção: futebol usa #modo-aba-solo; vôlei usa #modo-aba-solo-volei.
+  // troca o bloco de competições (futebol vs vôlei)
   var blocoFutebol = document.getElementById('modo-aba-solo');
   var blocoVolei   = document.getElementById('modo-aba-solo-volei');
   var ehVolei = (idEsporte === 'volei');
   if (blocoFutebol) blocoFutebol.classList.toggle('escondida', ehVolei);
   if (blocoVolei)   blocoVolei.classList.toggle('escondida', !ehVolei);
 
-  // seleciona a 1ª competição do esporte escolhido (ativa a pílula e o modo)
+  // ativa a 1ª competição do esporte
   var blocoAtivo = ehVolei ? blocoVolei : blocoFutebol;
   if (blocoAtivo) {
     var primeira = blocoAtivo.querySelector('.pilula[data-modo]');
@@ -141,20 +199,29 @@ function selecionarEsporte(idEsporte) {
       selecionarModo(primeira.getAttribute('data-modo'));
     }
   }
+
+  if (reiniciarTimer) iniciarVitrine();  // clique do usuário: reinicia o loop
 }
 
-// Liga os cliques nas pílulas de esporte (delegação simples no container).
+// Compat: mantém o nome antigo apontando para a nova função.
+function selecionarEsporte(idEsporte) { aplicarEsporteVitrine(idEsporte, true); }
+
+// Liga os cliques no seletor de esporte (delegação no container).
 (function ligarSeletorEsporte() {
   var cont = document.getElementById('pilulas-esporte');
   if (!cont) return;
   cont.addEventListener('click', function (ev) {
-    var alvo = ev.target.closest ? ev.target.closest('.pilula') : null;
+    var alvo = ev.target.closest ? ev.target.closest('.modo-seg') : null;
     if (!alvo) return;
     var id = alvo.getAttribute('data-esporte');
     if (id) selecionarEsporte(id);
   });
 })();
 
+// arranca o loop da vitrine na carga (no-op se só houver 1 esporte)
+iniciarVitrine();
+
 if (typeof window !== 'undefined') {
   window.selecionarEsporte = selecionarEsporte;
+  window.aplicarEsporteVitrine = aplicarEsporteVitrine;
 }

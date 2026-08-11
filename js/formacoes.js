@@ -124,6 +124,19 @@ const formacoes = {
     { left: 50, top: 32, grupo: 'ATA' },
     { left: 38, top: 14, grupo: 'ATA' },
     { left: 62, top: 14, grupo: 'ATA' }
+  ],
+
+  // Vôlei — 6 posições numa meia-quadra (o SEU lado da rede, que fica no TOPO).
+  // Fundo (perto da rede/topo): ponteiro, central, ponteiro (rede de ataque).
+  // Frente (fundo da quadra): levantador, líbero, oposto (recepção/defesa).
+  // Rótulos usam as posições do vôlei (LEV/OPO/PON/CEN/LIB) — só amostra visual.
+  'volei': [
+    { left: 25, top: 30, grupo: 'PON' },
+    { left: 50, top: 26, grupo: 'CEN' },
+    { left: 75, top: 30, grupo: 'PON' },
+    { left: 28, top: 62, grupo: 'LEV' },
+    { left: 50, top: 68, grupo: 'LIB' },
+    { left: 72, top: 62, grupo: 'OPO' }
   ]
 
 };
