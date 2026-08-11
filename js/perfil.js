@@ -14,8 +14,8 @@
 
   var _meCache = null;
 
-  // Mostra a tela de Perfil e ativa a aba pedida ('estatisticas' | 'historico' | 'conquistas').
-  function mostrarTelaPerfil(aba) {
+  // Mostra a tela de Perfil (tela única, sem abas — todo o conteúdo vive em blocos).
+  function mostrarTelaPerfil() {
     if (!telaPerfil) return;
     // guarda a tela visível atual (para voltar depois)
     var atual = document.querySelector('.tela:not(.escondida)');
@@ -23,19 +23,6 @@
     if (typeof mostrarTela === 'function') mostrarTela(telaPerfil);
     else { document.querySelectorAll('.tela').forEach(function (t) { t.classList.add('escondida'); }); telaPerfil.classList.remove('escondida'); }
     document.body.style.overflow = '';
-    trocarAbaPerfil(aba || 'estatisticas');
-  }
-
-  // Alterna a aba ativa e o painel correspondente.
-  function trocarAbaPerfil(aba) {
-    var abas = { estatisticas: 'perfil-painel-estatisticas', historico: 'perfil-painel-historico', conquistas: 'perfil-painel-conquistas' };
-    Object.keys(abas).forEach(function (k) {
-      var painel = $(abas[k]);
-      if (painel) painel.classList.toggle('escondida', k !== aba);
-    });
-    document.querySelectorAll('.perfil-aba').forEach(function (b) {
-      b.classList.toggle('perfil-aba-ativa', b.dataset.aba === aba);
-    });
   }
 
   function algumAberto() {
@@ -306,7 +293,7 @@
     // Escudo no lugar da inicial — mas SÓ se o usuário já salvou um. `escudo: null` no
     // banco = nunca editou = fica o círculo verde, aqui e no jogo. Opt-in de verdade.
     pintarCabecalho(u.username);
-    mostrarTelaPerfil('estatisticas');
+    mostrarTelaPerfil();
 
     if (typeof API !== 'undefined' && API.getMe) {
       API.getMe().then(function (me) {
@@ -940,34 +927,6 @@
     document.addEventListener('keydown', onKey);
   }
 
-  function abrirHistorico() {
-    if (!telaPerfil) return;
-    var lista = $('historico-lista');
-    if (lista) lista.innerHTML = '<p class="perfil-carregando">Carregando histórico…</p>';
-    mostrarTelaPerfil('historico');
-    API.getHistorico().then(function (arr) {
-      arr = arr || [];
-      if (!arr.length) {
-        if (lista) lista.innerHTML = '<p class="historico-vazio">Você ainda não terminou nenhuma campanha. Jogue uma temporada e ela aparece aqui!</p>';
-        return;
-      }
-      // Mostra no máximo as 20 partidas mais recentes.
-      _histLista = arr.slice(0, 20);
-      if (lista) {
-        lista.innerHTML = _histLista.map(itemHistorico).join('');
-        // Liga os botões "Ver resumo" pelo índice no cache.
-        lista.querySelectorAll('.hist-resumo-btn').forEach(function (b) {
-          b.addEventListener('click', function () {
-            var idx = +b.dataset.idx;
-            var item = _histLista[idx];
-            if (item && typeof mostrarResumoHistorico === 'function') mostrarResumoHistorico(item);
-          });
-        });
-      }
-    }).catch(function () {
-      if (lista) lista.innerHTML = '<p class="historico-vazio">Não foi possível carregar o histórico.</p>';
-    });
-  }
   function itemHistorico(m, idx) {
     var gf = +m.gf || 0, ga = +m.ga || 0, saldo = gf - ga;
     var modo = (m.modo === 'online') ? 'Online' : 'Solo';
@@ -1011,17 +970,6 @@
   window.abrirPerfil = abrirPerfil;
 
   (function init() {
-    // Abas da tela de Perfil (Estatísticas / Histórico / Conquistas)
-    document.querySelectorAll('.perfil-aba').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var aba = b.dataset.aba;
-        trocarAbaPerfil(aba);
-        // Popula sob demanda ao entrar na aba
-        if (aba === 'historico') abrirHistorico();
-        else if (aba === 'estatisticas') carregarAcordeoes();
-        else if (aba === 'conquistas' && typeof renderConquistas === 'function') renderConquistas();
-      });
-    });
 
     ligarSeletorEscalados();
 

@@ -502,21 +502,13 @@
         </button>
       </div>
 
-      <!-- Barra de abas -->
-      <div class="perfil-abas" role="tablist">
-        <button class="perfil-aba perfil-aba-ativa" data-aba="estatisticas" role="tab">Estat&iacute;sticas</button>
-        <button class="perfil-aba" data-aba="historico" role="tab">Hist&oacute;rico</button>
-        <button class="perfil-aba" data-aba="conquistas" role="tab">Conquistas</button>
-      </div>
-
-      <!-- Seletor de ESPORTE do perfil (filtra o conteúdo por esporte). Só aparece
-           quando há 2+ esportes habilitados (preenchido por js/perfil.js). Nesta
-           1ª etapa é só visual — a filtragem dos dados vem numa etapa seguinte. -->
+      <!-- Tela única de perfil: todo o conteúdo em blocos (sem abas). O seletor de
+           esporte filtra o conteúdo por esporte (só aparece com 2+ esportes). -->
       <div id="perfil-esporte" class="perfil-esporte escondida">
         <div class="area-pilulas" id="perfil-esporte-sel"></div>
       </div>
 
-      <!-- Painel: Estatísticas — 2 colunas: acordeão (esq) + time mais escalado (dir) -->
+      <!-- Conteúdo da tela única (KPIs, desempenho, time escalado, conquistas, histórico) -->
       <div id="perfil-painel-estatisticas" class="perfil-painel">
         <!-- Faixa de números-chave (preenchida por js/perfil.js a partir do "Geral") -->
         <div id="perfil-kpis" class="perfil-kpis"></div>
@@ -564,20 +556,6 @@
           </div>
           <div id="hist-destaque" class="historico-lista"></div>
         </div>
-      </div>
-
-      <!-- Painel: Histórico (mesmo ID historico-lista → a lógica continua funcionando) -->
-      <div id="perfil-painel-historico" class="perfil-painel escondida">
-        <div id="historico-lista" class="historico-lista"></div>
-      </div>
-
-      <!-- Painel: Conquistas (renderizado por conquistas.js) -->
-      <div id="perfil-painel-conquistas" class="perfil-painel escondida">
-        <div class="conq-cabecalho">
-          <span class="conq-cab-titulo">Conquistas</span>
-          <span id="conq-contador-total" class="conq-cab-total">0/0</span>
-        </div>
-        <div id="conq-lista" class="conq-lista"></div>
       </div>
 
     </div><!-- /perfil-tela-wrap -->
