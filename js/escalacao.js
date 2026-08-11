@@ -114,8 +114,11 @@ function atualizarHeaderInfo() {
 }
 
 function iniciarTelaJogo() {
-  formacaoJogo       = '4-3-3';
-  formacaoTravada    = false;
+  // Bifurca por esporte: vôlei usa a "formação" própria (posições fixas LEV/PON/CEN/
+  // LIB/OPO); futebol segue no 4-3-3 padrão. ehCompeticaoVolei() vem de regras.js.
+  var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+  formacaoJogo       = ehVolei ? 'volei' : '4-3-3';
+  formacaoTravada    = ehVolei;   // vôlei não troca de formação
   jogadorSelecionado = null;
   // SEMENTE do número de titulares: único ponto que consulta o catálogo de esportes.
   // Todo o resto do código deriva de `escalacao.length` — nada mais crava o 11.
@@ -126,23 +129,58 @@ function iniciarTelaJogo() {
   edicaoSorteada     = null;
   skipsRestantes     = 5;
 
+  // Remonta o campo de jogo se o nº de slots mudou (troca de esporte: 11 futebol ↔ 6 vôlei).
+  // slotsJogo é montado na carga com o esporte inicial; aqui garantimos que bate com escalacao.
+  if (typeof remontarCampoJogo === 'function' && slotsJogo.length !== escalacao.length) {
+    remontarCampoJogo(escalacao.length);
+  }
 
-  formacaoBloco.classList.remove('escondida');
+
+  // Vôlei não tem formação (posições fixas): esconde o bloco de pílulas de formação.
+  // Futebol mostra normalmente.
+  if (ehVolei) {
+    formacaoBloco.classList.add('escondida');
+  } else {
+    formacaoBloco.classList.remove('escondida');
+  }
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
+
+  // Aparência do campo de jogo: quadra de vôlei (azul/laranja) ou campo de futebol.
+  if (campoJogo) {
+    campoJogo.classList.toggle('quadra-volei', ehVolei);
+    // Elementos internos da quadra (piso/rede/linhas de ataque). Criados no vôlei,
+    // removidos no futebol. Mesma abordagem do mapa-vitrine da home.
+    var jaTemPiso = campoJogo.querySelector('.piso');
+    if (ehVolei && !jaTemPiso) {
+      ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'].forEach(function (cls) {
+        var el = document.createElement('div');
+        el.className = cls;
+        campoJogo.insertBefore(el, campoJogo.querySelector('.slot-jogo') || null);
+      });
+    } else if (!ehVolei && jaTemPiso) {
+      ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'].forEach(function (cls) {
+        var el = campoJogo.querySelector('.' + cls);
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      });
+    }
+  }
 
   // Reexibe o switch "Mostrar Força" e sincroniza com a preferência atual.
   if (jogoForcaBloco) jogoForcaBloco.classList.remove('escondida');
   var _swForca = document.getElementById('switch-forca');
   if (_swForca && typeof mostrarForca !== 'undefined') _swForca.checked = mostrarForca;
 
-  pilulasFormacaoJogo.forEach(function (p) {
-    p.disabled = false;
-    if (p.dataset.formacaoJogo === '4-3-3') {
-      p.classList.add('pilula-ativa');
-    } else {
-      p.classList.remove('pilula-ativa');
-    }
-  });
+  // Pílulas de formação: só no futebol (vôlei não troca de formação).
+  if (!ehVolei) {
+    pilulasFormacaoJogo.forEach(function (p) {
+      p.disabled = false;
+      if (p.dataset.formacaoJogo === '4-3-3') {
+        p.classList.add('pilula-ativa');
+      } else {
+        p.classList.remove('pilula-ativa');
+      }
+    });
+  }
 
   // A visibilidade dos botões é da tabela BOTAO_DO_ESTILO (draft.js) — mostrar o
   // btnRolar direto aqui furava a tabela e deixava dois botões visíveis ao voltar
@@ -168,7 +206,7 @@ function iniciarTelaJogo() {
     s.classList.add('sem-transicao');
     s.classList.remove('compativel', 'preenchido', 'movendo');
   });
-  posicionarSlotsJogo('4-3-3');
+  posicionarSlotsJogo(formacaoJogo);
 
   requestAnimationFrame(function () {
     requestAnimationFrame(function () {

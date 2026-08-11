@@ -157,7 +157,10 @@ const codigosFormacao = {
   '4-3-2-1': ['GOL', 'LE',  'ZAG', 'ZAG', 'LD',  'VOL', 'MC',  'MC',  'MEI', 'MEI', 'ATA'],
   '4-5-1':   ['GOL', 'LE',  'ZAG', 'ZAG', 'LD',  'VOL', 'MC',  'MC',  'ME',  'MD',  'ATA'],
   '3-4-3':   ['GOL', 'ZAG', 'ZAG', 'ZAG', 'VOL', 'MC',  'MC',  'MEI', 'PE',  'ATA', 'PD' ],
-  '4-1-2-1-2':['GOL','LE',  'ZAG', 'ZAG', 'LD',  'VOL', 'ME',  'MD',  'MEI', 'ATA', 'ATA']
+  '4-1-2-1-2':['GOL','LE',  'ZAG', 'ZAG', 'LD',  'VOL', 'ME',  'MD',  'MEI', 'ATA', 'ATA'],
+  // Vôlei — 6 códigos na MESMA ordem das coordenadas em formacoes['volei']
+  // (PON, CEN, PON, LEV, LIB, OPO). Usado pela tela de jogo para rotular os slots.
+  'volei':   ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO']
 };
 
 

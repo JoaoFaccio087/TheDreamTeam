@@ -44,3 +44,15 @@ function posicionarSlotsJogo(nomeFormacao) {
     if (!escalacao[i]) slot.textContent = codigos[i];
   });
 }
+
+// Remonta o campo do jogo com N slots e REATRIBUI a NodeList `slotsJogo`. Necessário
+// ao trocar de esporte: futebol tem 11 slots, vôlei tem 6. Como slotsJogo é montado
+// uma vez na carga (com o esporte inicial), a tela de jogo precisa remontar quando o
+// nº de titulares muda. Devolve a nova lista.
+function remontarCampoJogo(n) {
+  var campo = document.getElementById('campo-jogo');
+  if (!campo || typeof UI === 'undefined' || !UI.montarCampo) return slotsJogo;
+  UI.montarCampo(campo, n, { classe: 'slot-jogo' });
+  slotsJogo = document.querySelectorAll('.slot-jogo');   // reatribui (por isso virou let)
+  return slotsJogo;
+}
