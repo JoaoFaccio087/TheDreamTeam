@@ -313,6 +313,37 @@ body {
 .modal-confirm-acoes .btn-rolar { flex: 1; max-width: 150px; }
 /* (o visual do .btn-sec agora é global — ver acima) */
 
+/* ═══ Modal "Jogar" (3 blocos encadeados: modo → esporte → competição) ═══
+   Reusa o overlay .modal-confirm; a caixa é mais larga e alinhada à esquerda,
+   com blocos empilhados. Usa só tokens do design system. */
+.mj-box {
+  max-width: 460px;
+  text-align: left;
+  position: relative;
+}
+.mj-fechar {
+  position: absolute; top: 0.8rem; right: 0.9rem;
+  background: none; border: none; cursor: pointer;
+  color: var(--txt-soft); font-size: 1.6rem; line-height: 1;
+  padding: 0; width: 1.6rem; height: 1.6rem;
+}
+.mj-fechar:hover { color: var(--txt); }
+.mj-bloco { margin-bottom: 1.1rem; }
+.mj-rotulo {
+  display: block;
+  font-size: var(--fs-legenda);
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+.mj-opcoes { display: flex; flex-wrap: wrap; gap: 6px; }
+.mj-acoes {
+  display: flex; gap: var(--sp-4); justify-content: flex-end;
+  margin-top: 1.4rem;
+}
+.mj-acoes .btn-rolar { flex: 0 0 auto; min-width: 110px; }
+
 /* ═══ ROLAGEM FINA — classe reusável ═══
    Estava COPIADA em .lista-jogadores (escalacao.css) e .rodada-classif (online.css),
    e o modal do pote ia ser a terceira cópia. Agora é `class="scroll-fino"` em qualquer
@@ -358,3 +389,7 @@ body {
 }
 .acao-link:hover,
 .acao-link:focus-visible { color: #e0625e; }
+
+/* Blocos de competição da home ocultos: o modal "Jogar" é a interface visível
+   agora, mas os botões seguem no DOM (listeners do multiplayer intactos). */
+.mj-oculto { display: none !important; }

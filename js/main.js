@@ -91,6 +91,18 @@ if (btnModoOnlineLaLiga) {
       s.classList.toggle('modo-seg-ativa', s.dataset.aba === aba);
     });
 
+    // Seletor de esporte na home: Multijogador só tem Futebol, então o botão de
+    // Vôlei (e outros não-futebol) some no modo multi e reaparece no solo. Se o
+    // esporte ativo era vôlei ao entrar no multi, volta pro futebol.
+    var segsEsporte = document.querySelectorAll('#pilulas-esporte .modo-seg');
+    segsEsporte.forEach(function (s) {
+      var ehFutebol = (s.getAttribute('data-esporte') === 'futebol');
+      s.classList.toggle('escondida', multi && !ehFutebol);
+    });
+    if (multi && typeof esporteAtual !== 'undefined' && esporteAtual !== 'futebol') {
+      if (typeof selecionarEsporte === 'function') selecionarEsporte('futebol');
+    }
+
     if (multi) {
       // Multijogador: por padrão, seleciona a Libertadores online (1º da lista).
       escolherOnline('Libertadores', btnModoOnlineLibertadores);
@@ -117,7 +129,13 @@ pilulasFormacao.forEach(function (pilula) {
 });
 
 botaoJogar.addEventListener('click', function () {
-  // Modo online selecionado → abre o fluxo online (login + sala). Senão, joga normal.
+  // Abre o modal de "Jogar" (modo → esporte → competição), pré-selecionado com
+  // o estado da home. O modal delega o início do jogo para as funções existentes.
+  if (typeof window.abrirModalJogar === 'function') {
+    window.abrirModalJogar();
+    return;
+  }
+  // Fallback (se o modal não carregou): comportamento antigo.
   if (modoOnlineSelecionado) {
     if (typeof window.abrirModalOnline === 'function') window.abrirModalOnline();
     return;
