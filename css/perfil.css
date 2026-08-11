@@ -303,6 +303,41 @@
   font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px;
   color: var(--txt-soft); font-weight: 700; margin: 0 0 1.1rem;
 }
+/* Cabeçalho de bloco com ação à direita (ex.: "Ver todas") */
+.perfil-bloco-cab {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.1rem; gap: 1rem;
+}
+.perfil-bloco-cab .perfil-bloco-tit { margin: 0; }
+.perfil-bloco-contador { color: var(--txt-fraco, #6b7280); margin-left: 0.4rem; }
+.perfil-ver-mais {
+  background: none; border: none; cursor: pointer;
+  color: var(--accent, #2BD46A); font-family: 'Archivo', sans-serif;
+  font-weight: 700; font-size: var(--fs-sm); padding: 0.2rem 0.3rem;
+  transition: opacity 0.15s ease;
+}
+.perfil-ver-mais:hover { opacity: 0.75; text-decoration: underline; }
+
+/* Grid das 8 conquistas em destaque */
+.conq-grid-destaque {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+@media (max-width: 720px) { .conq-grid-destaque { grid-template-columns: repeat(2, 1fr); } }
+
+/* Modal "Ver todas as conquistas" */
+.mc-conq-box {
+  max-width: 720px; width: 92vw; max-height: 82vh; overflow-y: auto;
+  text-align: left; position: relative; padding: 1.75rem;
+}
+.mc-conq-box .modal-confirm-titulo { font-family: 'Archivo Black', sans-serif; font-size: var(--fs-lg); margin: 0 0 1.3rem; }
+.mc-conq-fechar {
+  position: absolute; top: 1.4rem; right: 1.5rem;
+  background: none; border: none; cursor: pointer;
+  color: var(--txt-soft); font-size: 1.4rem; line-height: 1;
+  width: 1.6rem; height: 1.6rem; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--raio-xs); transition: color 0.15s ease, background 0.15s ease;
+}
+.mc-conq-fechar:hover { color: var(--txt); background: var(--elev-1); }
 
 .perfil-col-escalados { position: sticky; top: 1rem; }
 .perfil-escalados-titulo {

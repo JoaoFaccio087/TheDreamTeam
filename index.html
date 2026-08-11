@@ -544,6 +544,16 @@
             </div>
           </div>
         </div>
+
+        <!-- Bloco: Conquistas em destaque (tela única). 8 conquistas priorizando as
+             desbloqueadas de maior raridade; "Ver todas" abre o modal completo. -->
+        <div class="perfil-bloco perfil-bloco-conq">
+          <div class="perfil-bloco-cab">
+            <p class="perfil-bloco-tit">Conquistas <span id="conq-destaque-total" class="perfil-bloco-contador">0/0</span></p>
+            <button type="button" class="perfil-ver-mais" data-ver="conquistas">Ver todas</button>
+          </div>
+          <div id="conq-destaque" class="conq-destaque"></div>
+        </div>
       </div>
 
       <!-- Painel: Histórico (mesmo ID historico-lista → a lógica continua funcionando) -->

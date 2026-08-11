@@ -336,6 +336,7 @@
     }
     renderSeletorEsportePerfil();
     carregarAcordeoes();
+    if (typeof renderConquistasDestaque === 'function') renderConquistasDestaque();
   }
 
   // Grupos do acordeão: Geral + cada competição (match por palavra-chave no nome salvo).
@@ -973,6 +974,12 @@
 
     var lapis = $('perfil-editar');
     if (lapis) lapis.addEventListener('click', abrirEditar);
+
+    // "Ver todas" no bloco de conquistas em destaque → abre o modal completo.
+    var verConq = document.querySelector('.perfil-ver-mais[data-ver="conquistas"]');
+    if (verConq) verConq.addEventListener('click', function () {
+      if (typeof abrirModalConquistas === 'function') abrirModalConquistas();
+    });
 
     var btnSalvar = $('editar-salvar');
     if (btnSalvar) btnSalvar.addEventListener('click', salvarEditar);

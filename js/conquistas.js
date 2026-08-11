@@ -279,6 +279,75 @@
     cont.innerHTML = html;
   }
 
+  // ─────────────── BLOCO DESTAQUE (tela única de perfil) ───────────────
+  // Mostra 8 conquistas em destaque: prioriza as DESBLOQUEADAS de maior raridade
+  // (lendário→comum); se faltarem, completa com BLOQUEADAS (também por raridade).
+  // "Ver todas" abre um modal com o conteúdo completo (igual à antiga aba).
+  var PESO_RARIDADE = { lendario: 4, epico: 3, raro: 2, comum: 1 };
+  function pesoDe(c) { return PESO_RARIDADE[raridadeDe(c.id)] || 1; }
+
+  function renderConquistasDestaque() {
+    var cont = $('conq-destaque');
+    if (!cont) return;
+    cont.innerHTML = '<p class="perfil-carregando">Carregando conquistas…</p>';
+
+    var fonte = (typeof API !== 'undefined' && API.getAchievements)
+      ? API.getAchievements() : Promise.resolve([]);
+
+    fonte.then(function (desbloqueadas) {
+      if (desbloqueadas === null) {
+        cont.innerHTML = '<p class="perfil-vazio">Não foi possível carregar suas conquistas.</p>';
+        return;
+      }
+      var setDesb = {};
+      (desbloqueadas || []).forEach(function (d) {
+        var id = (typeof d === 'string') ? d : (d && d.achievement_id);
+        if (id) setDesb[id] = true;
+      });
+      LISTA_CONQUISTAS.forEach(function (c) { c.desbloqueada = !!setDesb[c.id]; });
+
+      // ordena: desbloqueadas primeiro, e dentro de cada grupo por raridade desc
+      function ordena(a, b) { return pesoDe(b) - pesoDe(a); }
+      var desb = LISTA_CONQUISTAS.filter(function (c) { return c.desbloqueada; }).sort(ordena);
+      var bloq = LISTA_CONQUISTAS.filter(function (c) { return !c.desbloqueada; }).sort(ordena);
+      var destaque = desb.concat(bloq).slice(0, 8);
+
+      var totalDesb = desb.length, totalGeral = LISTA_CONQUISTAS.length;
+      var elTotal = $('conq-destaque-total');
+      if (elTotal) elTotal.textContent = totalDesb + '/' + totalGeral;
+
+      cont.innerHTML = '<div class="conq-grid conq-grid-destaque">' +
+                         destaque.map(cardConquista).join('') +
+                       '</div>';
+    }).catch(function () {
+      cont.innerHTML = '<p class="perfil-vazio">Não foi possível carregar suas conquistas.</p>';
+    });
+  }
+
+  // Modal "Ver todas as conquistas" — reusa desenharConquistas num overlay.
+  function abrirModalConquistas() {
+    var ov = document.createElement('div');
+    ov.className = 'modal-confirm mc-overlay';
+    ov.innerHTML =
+      '<div class="modal-confirm-box mc-conq-box" role="dialog" aria-modal="true">' +
+        '<button type="button" class="mc-conq-fechar" data-fechar aria-label="Fechar">&times;</button>' +
+        '<p class="modal-confirm-titulo">Conquistas</p>' +
+        '<div id="conq-lista" class="conq-lista"></div>' +
+      '</div>';
+    document.body.appendChild(ov);
+    renderConquistas();   // preenche o #conq-lista (agora dentro do modal)
+
+    function fechar() { document.removeEventListener('keydown', onKey); if (ov.parentNode) ov.parentNode.removeChild(ov); }
+    function onKey(e) { if (e.key === 'Escape') fechar(); }
+    ov.addEventListener('click', function (e) {
+      if (e.target === ov || (e.target && e.target.hasAttribute && e.target.hasAttribute('data-fechar'))) fechar();
+    });
+    document.addEventListener('keydown', onKey);
+  }
+
+  window.renderConquistasDestaque = renderConquistasDestaque;
+  window.abrirModalConquistas = abrirModalConquistas;
+
   // Exposto para o perfil.js chamar ao entrar na aba Conquistas.
   window.renderConquistas = renderConquistas;
 
