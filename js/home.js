@@ -111,3 +111,50 @@ function renderSeletorEsporte() {
 
 // Roda na carga: com um esporte só, é um no-op.
 renderSeletorEsporte();
+
+// Troca de esporte na home: ao clicar numa pílula de esporte, atualiza o esporte
+// ativo e mostra o bloco de competições correspondente (escondendo o do outro).
+// Enquanto só houver futebol habilitado, nada disto é acionável (o seletor nem
+// aparece), então o comportamento atual fica intocado.
+function selecionarEsporte(idEsporte) {
+  if (typeof esporteAtual !== 'undefined') esporteAtual = idEsporte;
+
+  // marca a pílula de esporte ativa
+  var pilulasEsp = document.querySelectorAll('#pilulas-esporte .pilula');
+  pilulasEsp.forEach(function (p) {
+    p.classList.toggle('pilula-ativa', p.getAttribute('data-esporte') === idEsporte);
+  });
+
+  // mostra o bloco de competições do esporte escolhido; esconde os demais.
+  // Convenção: futebol usa #modo-aba-solo; vôlei usa #modo-aba-solo-volei.
+  var blocoFutebol = document.getElementById('modo-aba-solo');
+  var blocoVolei   = document.getElementById('modo-aba-solo-volei');
+  var ehVolei = (idEsporte === 'volei');
+  if (blocoFutebol) blocoFutebol.classList.toggle('escondida', ehVolei);
+  if (blocoVolei)   blocoVolei.classList.toggle('escondida', !ehVolei);
+
+  // seleciona a 1ª competição do esporte escolhido (ativa a pílula e o modo)
+  var blocoAtivo = ehVolei ? blocoVolei : blocoFutebol;
+  if (blocoAtivo) {
+    var primeira = blocoAtivo.querySelector('.pilula[data-modo]');
+    if (primeira && typeof selecionarModo === 'function') {
+      selecionarModo(primeira.getAttribute('data-modo'));
+    }
+  }
+}
+
+// Liga os cliques nas pílulas de esporte (delegação simples no container).
+(function ligarSeletorEsporte() {
+  var cont = document.getElementById('pilulas-esporte');
+  if (!cont) return;
+  cont.addEventListener('click', function (ev) {
+    var alvo = ev.target.closest ? ev.target.closest('.pilula') : null;
+    if (!alvo) return;
+    var id = alvo.getAttribute('data-esporte');
+    if (id) selecionarEsporte(id);
+  });
+})();
+
+if (typeof window !== 'undefined') {
+  window.selecionarEsporte = selecionarEsporte;
+}

@@ -123,10 +123,24 @@
   function animar(opts) {
     var roteiro   = opts.roteiro;
     var elPlacar  = opts.elCard.querySelector('.pv-placar');
+    var elSetsCont= opts.elCard.querySelector('.pv-sets-contador');
     var elSets    = opts.elCard.querySelector('.pv-sets');
     var elStatus  = opts.elCard.querySelector('.pv-status');
     var elResumo  = opts.elCard.querySelector('.pv-resumo');
     var velFn     = opts.velocidade || function () { return 'normal'; };
+
+    // Sets ganhos até agora (contagem viva, sobe quando um set fecha)
+    var setsGanhosA = 0, setsGanhosB = 0;
+    function pintarContadorSets() {
+      if (elSetsCont) {
+        elSetsCont.innerHTML =
+          '<span class="pv-sc-nome">' + roteiro.nomeA + '</span>' +
+          '<span class="pv-sc-num">' + setsGanhosA + '</span>' +
+          '<span class="pv-sc-sep">sets</span>' +
+          '<span class="pv-sc-num">' + setsGanhosB + '</span>' +
+          '<span class="pv-sc-nome">' + roteiro.nomeB + '</span>';
+      }
+    }
 
     var cancelado = false;
     var timer = null;
@@ -162,6 +176,8 @@
       setIdx = roteiro.roteiroSets.length; setFechado = false;
       // marca todos os sets como exibidos no resumo
       setIdx = roteiro.roteiroSets.length - 1; setFechado = true;
+      setsGanhosA = roteiro.setsA; setsGanhosB = roteiro.setsB;
+      pintarContadorSets();
       pintarResumoSets();
       fim();
       return { cancel: function () {} };
@@ -174,6 +190,9 @@
       // fim do set atual?
       if (ptIdx >= set.eventos.length) {
         setFechado = true;
+        // incrementa o contador de sets vivo conforme quem venceu este set
+        if (set.pa > set.pb) setsGanhosA++; else setsGanhosB++;
+        pintarContadorSets();
         pintarResumoSets();
         setIdx++; ptIdx = 0; paAtual = 0; pbAtual = 0; setFechado = false;
 
@@ -203,6 +222,7 @@
     }
 
     // arranque
+    pintarContadorSets();
     if (elStatus) elStatus.textContent = 'Set 1';
     if (elPlacar) elPlacar.textContent = '0 – 0';
     timer = setTimeout(tick, cadenciaPonto(velFn()));

@@ -71,14 +71,14 @@ const ESPORTES = {
   volei: {
     id: 'volei',
     nome: 'Vôlei',
-    habilitado: false,
-    titulares: 7,                  // 6 em quadra + 1 líbero (vaga própria do elenco)
+    habilitado: true,              // ← LIGADO (ago/2026) — vôlei jogável
+    titulares: 6,                  // 5 de linha + 1 líbero (líbero FIXO, incluído nos 6 — decisão João)
     emCampo: 6,
     mapa: 'meia-quadra',           // só o SEU lado da rede
     posicoes: { LEV: 'LEVANTADOR', OPO: 'ATAQUE', PON: 'ATAQUE', CEN: 'BLOQUEIO', LIB: 'DEFESA' },
     formacoes: null,               // não há formação: há rodízio (zonas 1..6)
     estatisticas: ['pontos', 'bloqueios', 'aces'],
-    draft: { turnos: 7, picksPorTurno: 1, picksUltimoTurno: 0 },   // 1 pick por turno = 7
+    draft: { turnos: 6, picksPorTurno: 1, picksUltimoTurno: 0 },   // 1 pick por turno = 6
     competicoes: {
       // Masculino e feminino SEPARADOS: as escalas de força não são comparáveis entre si.
       mundial_m: { nome: 'Mundial de Seleções (M)', regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } },

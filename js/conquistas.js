@@ -95,6 +95,19 @@
     { id: 'penta_laliga',         categoria: 'Competições', nome: 'Dinastia espanhola', desc: 'Campeão da La Liga 5 vezes',         desbloqueada: false },
     { id: 'especialista_laliga',  categoria: 'Competições', nome: 'Veterano da Liga',   desc: 'Disputou 10 campanhas na La Liga',   desbloqueada: false },
     { id: 'matador_laliga',       categoria: 'Competições', nome: 'Matador da Liga',    desc: 'Marcou 100 gols na La Liga',         desbloqueada: false },
+    // Vôlei (ago/2026) — família própria: campeão/bi/tri mundial, especialista, sacador.
+    // Masculino:
+    { id: 'campeao_volei_m',      categoria: 'Competições', nome: 'Campeão Mundial (M)',   desc: 'Campeão do Mundial de Vôlei masculino',        desbloqueada: false },
+    { id: 'bi_volei_m',           categoria: 'Competições', nome: 'Bicampeão Mundial (M)', desc: 'Campeão do Mundial de Vôlei masculino 2 vezes', desbloqueada: false },
+    { id: 'tri_volei_m',          categoria: 'Competições', nome: 'Tricampeão Mundial (M)',desc: 'Campeão do Mundial de Vôlei masculino 3 vezes', desbloqueada: false },
+    { id: 'especialista_volei_m', categoria: 'Competições', nome: 'Veterano das Quadras (M)', desc: 'Disputou 10 campanhas no Mundial masculino',  desbloqueada: false },
+    { id: 'sacador_volei_m',      categoria: 'Competições', nome: 'Sacador de Elite (M)',  desc: 'Fez 100 sets no Mundial masculino',            desbloqueada: false },
+    // Feminino:
+    { id: 'campeao_volei_f',      categoria: 'Competições', nome: 'Campeã Mundial (F)',    desc: 'Campeã do Mundial de Vôlei feminino',          desbloqueada: false },
+    { id: 'bi_volei_f',           categoria: 'Competições', nome: 'Bicampeã Mundial (F)',  desc: 'Campeã do Mundial de Vôlei feminino 2 vezes',   desbloqueada: false },
+    { id: 'tri_volei_f',          categoria: 'Competições', nome: 'Tricampeã Mundial (F)', desc: 'Campeã do Mundial de Vôlei feminino 3 vezes',   desbloqueada: false },
+    { id: 'especialista_volei_f', categoria: 'Competições', nome: 'Veterana das Quadras (F)', desc: 'Disputou 10 campanhas no Mundial feminino',  desbloqueada: false },
+    { id: 'sacador_volei_f',      categoria: 'Competições', nome: 'Sacadora de Elite (F)', desc: 'Fez 100 sets no Mundial feminino',             desbloqueada: false },
     { id: 'matador_brasil',    categoria: 'Competições', nome: 'Matador nacional',    desc: 'Marcou 100 gols no Brasileirão',    desbloqueada: false },
     { id: 'matador_copa',      categoria: 'Competições', nome: 'Matador mundial',     desc: 'Marcou 100 gols na Copa do Mundo',  desbloqueada: false },
 
@@ -149,6 +162,10 @@
     penta_serie_a: 'lendario', especialista_serie_a: 'epico', matador_serie_a: 'epico',
     campeao_laliga: 'raro', bi_laliga: 'raro', tri_laliga: 'epico',
     penta_laliga: 'lendario', especialista_laliga: 'epico', matador_laliga: 'epico',
+    campeao_volei_m: 'raro', bi_volei_m: 'raro', tri_volei_m: 'epico',
+    especialista_volei_m: 'epico', sacador_volei_m: 'epico',
+    campeao_volei_f: 'raro', bi_volei_f: 'raro', tri_volei_f: 'epico',
+    especialista_volei_f: 'epico', sacador_volei_f: 'epico',
     // Épicas por competição (tri + matador)
     tri_champions: 'epico', tri_brasil: 'epico', tri_copa: 'epico',
     matador_liberta: 'epico', matador_champions: 'epico', matador_brasil: 'epico', matador_copa: 'epico',

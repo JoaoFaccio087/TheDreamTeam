@@ -338,7 +338,7 @@
               <button class="modo-seg" type="button" data-aba="multi">Multijogador</button>
             </div>
 
-            <!-- Competições — Um Jogador -->
+            <!-- Competições — Um Jogador (FUTEBOL) -->
             <div class="area-pilulas modo-aba" id="modo-aba-solo">
               <button class="pilula pilula-ativa" data-modo="libertadores">Libertadores</button>
               <button class="pilula" data-modo="champions">Champions League</button>
@@ -347,6 +347,13 @@
               <button class="pilula" data-modo="premier">Premier League</button>
               <button class="pilula" data-modo="serie_a">Serie A</button>
               <button class="pilula" data-modo="laliga">La Liga</button>
+            </div>
+
+            <!-- Competições — Um Jogador (VÔLEI). Escondido por padrão; aparece
+                 quando o esporte "Vôlei" é selecionado no seletor de esporte. -->
+            <div class="area-pilulas modo-aba modo-aba-volei escondida" id="modo-aba-solo-volei">
+              <button class="pilula pilula-ativa" data-modo="volei_m">Mundial (M)</button>
+              <button class="pilula" data-modo="volei_f">Mundial (F)</button>
             </div>
 
             <!-- Competições — Multijogador -->
@@ -1212,6 +1219,10 @@
   <script src="js/home.js"        defer></script>
   <script src="js/simulacao.js"   defer></script>
   <script src="js/penaltis.js"     defer></script>
+  <!-- Vôlei: núcleo, animação e campanha (carregados ANTES de campanha.js, que os usa) -->
+  <script src="js/simulacao-volei.js" defer></script>
+  <script src="js/animacao-volei.js"  defer></script>
+  <script src="js/campanha-volei.js"  defer></script>
   <script src="js/campanha.js"    defer></script>
   <script src="js/brasileirao.js" defer></script>
   <script src="js/resumo.js"      defer></script>

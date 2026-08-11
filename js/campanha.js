@@ -282,6 +282,15 @@ function concluirJogoGrupo(est) {
 function iniciarPartida() {
   if (timerPartida !== null) return; // já tem uma partida rodando
 
+  // ── Bifurcação multi-esporte (fatia 3) ──────────────────────────────
+  // Se a competição selecionada é de vôlei, desvia para o fluxo dedicado
+  // e RETORNA antes de tocar em qualquer lógica de futebol. O caminho do
+  // futebol abaixo fica 100% intocado — ele nunca atravessa este portão.
+  if (typeof ehCompeticaoVolei === 'function' && ehCompeticaoVolei(modoSelecionado)) {
+    iniciarPartidaVolei();
+    return;
+  }
+
   var stats = document.getElementById('stats-campanha');
   if (stats) stats.classList.remove('escondida'); // a 1ª partida revela as estatísticas
 
@@ -387,6 +396,191 @@ function iniciarPartida() {
   document.getElementById('btn-iniciar-jogo').disabled = true;
   timerPartida = setTimeout(function() { tickPartida(est); }, cadenciaAtual());
 }
+
+
+
+
+// ─────────────────────── VÔLEI: fluxo de partida (fatia 3) ───────────────────────
+// Estado da campanha de vôlei (separado do futebol para não colidir). Guarda a
+// estrutura de grupos/mata montada pelo CampanhaVolei e por onde a campanha vai.
+var campanhaVoleiAtual = null;
+
+// Força média de uma seleção (0-100), usada para resolver jogos neutros na chave.
+function forcaSelecaoVolei(sel) {
+  if (!sel || !sel.jogadores || !sel.jogadores.length) return 80;
+  var s = 0;
+  for (var i = 0; i < sel.jogadores.length; i++) s += sel.jogadores[i].forca;
+  return s / sel.jogadores.length;
+}
+
+// Retorna todas as seleções da competição de vôlei selecionada (via DADOS globais).
+function selecoesDaCompeticaoVolei() {
+  var filtro = COMPETICOES[modoSelecionado].dados;   // ex.: "Mundial de Vôlei (M)"
+  var fonte  = [];
+  if (typeof DADOS_VOLEI_M !== 'undefined') fonte = fonte.concat(DADOS_VOLEI_M);
+  if (typeof DADOS_VOLEI_F !== 'undefined') fonte = fonte.concat(DADOS_VOLEI_F);
+  return fonte.filter(function (c) { return c.competicao === filtro; });
+}
+
+// Inicia (ou continua) a campanha de vôlei e joga a próxima partida.
+function iniciarPartidaVolei() {
+  if (typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') {
+    console.warn('[volei] módulos do vôlei não carregados'); return;
+  }
+
+  // Monta a campanha na 1ª partida (escolhe uma edição e monta grupos+mata).
+  if (!campanhaVoleiAtual) {
+    var todas = selecoesDaCompeticaoVolei();
+    if (!todas.length) { console.warn('[volei] sem seleções para', modoSelecionado); return; }
+    var anos = [];
+    todas.forEach(function (c) { if (anos.indexOf(c.edicao) < 0) anos.push(c.edicao); });
+    var ano = anos[Math.floor(Math.random() * anos.length)];
+    var selecoes = todas.filter(function (c) { return c.edicao === ano; });
+
+    var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    campanhaVoleiAtual = CampanhaVolei.montarCampanhaVolei(selecoes, voceMonta, forcaSelecaoVolei);
+    campanhaVoleiAtual.edicaoAno = ano;
+    campanhaVoleiAtual.jogosGrupoFeitos = 0;
+  }
+
+  var camp = campanhaVoleiAtual;
+
+  // Fase de grupos: você enfrenta cada adversário do seu grupo, um por partida.
+  var advs = CampanhaVolei.adversariosDoSeuGrupo(camp);
+  var idx  = camp.jogosGrupoFeitos;
+  if (idx >= advs.length) {
+    console.log('[volei] fase de grupos concluída (mata-mata vem na fatia seguinte)');
+    return;
+  }
+  var adversarioTime = advs[idx];
+  var adversario     = adversarioTime.clubeRef;
+
+  // Monta o roteiro da partida com o motor de vôlei (núcleo + animação).
+  var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+  var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+  var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+
+  // Registra o resultado na tabela do grupo (sets do roteiro).
+  CampanhaVolei.registrarJogoGrupo(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+  camp.jogosGrupoFeitos++;
+
+  // Cria o card visual (reaproveita a casca do card de futebol) e anima ponto a ponto.
+  var faseLabel = 'Grupo ' + String.fromCharCode(65 + camp.seuGrupo) + ' \u00B7 ' +
+                  rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+  var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+  partidaIdVolei = idCard;
+  var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) btn.disabled = true;
+
+  // roda a animação usando a velocidade global já existente (mesma do futebol)
+  AnimacaoVolei.animar({
+    elCard: card,
+    roteiro: roteiro,
+    velocidade: function () { return velocidadeSimulacao; },
+    pular: (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico'),
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      // Se terminou os jogos do grupo, resolve a classificação nos bastidores
+      // e salva o resultado da campanha no banco (fatia 5).
+      if (camp.jogosGrupoFeitos >= advs.length) {
+        CampanhaVolei.simularJogosAdversariosGrupo(camp);
+        salvarCampanhaVolei(camp);
+      }
+      // encadeia próxima partida no modo automático
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico' &&
+          camp.jogosGrupoFeitos < advs.length) {
+        setTimeout(function () { iniciarPartidaVolei(); }, 800);
+      }
+    }
+  });
+}
+
+// Salva a campanha de vôlei no banco/histórico (fatia 5). Espelha o formato do
+// futebol (js/resumo.js), mas com esporte:'volei' e semântica de vôlei:
+//  - gf/ga = sets feitos/sofridos (reaproveita as colunas; ver migração 009)
+//  - empates = 0 (vôlei não empata)
+//  - detalhes = placar por sets, edição, e a classificação final do grupo
+function salvarCampanhaVolei(camp) {
+  if (typeof API === 'undefined' || !API.salvarPartida) return;
+
+  var cls = CampanhaVolei.classificacaoGrupo(camp);
+  var minhaLinha = cls.filter(function (l) { return l.time.voce; })[0] || { v: 0, d: 0, sp: 0, sc: 0 };
+  var posicao = 0;
+  cls.forEach(function (l, i) { if (l.time.voce) posicao = i + 1; });
+  var classificou = CampanhaVolei.voceClassificou(camp);
+
+  API.salvarPartida({
+    competicao: COMPETICOES[modoSelecionado].dados,   // "Mundial de Vôlei (M)" / "(F)"
+    esporte:    'volei',
+    modo:       'solo',
+    vitorias:   minhaLinha.v | 0,
+    empates:    0,                                     // vôlei não empata
+    derrotas:   minhaLinha.d | 0,
+    gf:         minhaLinha.sp | 0,                     // sets feitos
+    ga:         minhaLinha.sc | 0,                     // sets sofridos
+    posicao:    posicao || null,
+    campeao:    false,                                 // título só no fim do mata-mata (fatia futura)
+    detalhes: {
+      edicao:       camp.edicaoAno,
+      formato:      camp.formato.id,
+      grupo:        String.fromCharCode(65 + camp.seuGrupo),
+      classificado: !!classificou,
+      classificacao: cls.map(function (l) {
+        return { time: l.time.voce ? '(você)' : l.time.nome, pts: l.pts, sp: l.sp, sc: l.sc };
+      })
+    }
+  });
+}
+
+// Cria o card visual de uma partida de vôlei. REAPROVEITA as classes do card de
+// futebol (partida-card, partida-fase, partida-header, partida-adversario-bloco,
+// partida-escudo, partida-corpo) e adiciona só o miolo próprio do vôlei: o contador
+// de sets (pv-sets-contador) e o placar de pontos (pv-placar), além de status/resumo.
+// Os seletores que a animação usa (.pv-placar, .pv-sets-contador, .pv-status,
+// .pv-sets, .pv-resumo) ficam DENTRO deste card.
+function criarCardPartidaVolei(id, adversario, fase) {
+  // recolhe o card anterior (mesmo comportamento do futebol)
+  if (id > 1) {
+    var anterior = document.getElementById('partida-volei-' + (id - 1));
+    if (anterior) anterior.classList.remove('expandido');
+  }
+
+  var div = document.createElement('div');
+  div.className = 'partida-card partida-volei expandido';
+  div.id        = 'partida-volei-' + id;
+
+  var forcaAdv = Math.round(forcaSelecaoVolei(adversario));
+  var escudo = (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
+    ? (function () { var sName = Escudos.porNomeSeModo(adversario.clube, modoSelecionado); return sName ? '<span class="partida-escudo">' + sName + '</span>' : ''; })()
+    : '';
+
+  div.innerHTML =
+    '<div class="partida-fase">' + fase + '</div>' +
+    '<div class="partida-header">' +
+      '<div class="partida-adversario-bloco">' +
+        '<span class="partida-adversario-nome">' + escudo + adversario.clube + '</span>' +
+        '<span class="partida-adversario-ano">' + rotuloCompeticao(adversario.competicao) + ' \u00B7 ' + adversario.edicao + '</span>' +
+        '<span class="partida-adversario-forca">Força ' + forcaAdv + '</span>' +
+      '</div>' +
+      '<div class="partida-placar-bloco">' +
+        '<div class="pv-sets-contador"></div>' +
+        '<span class="pv-placar partida-placar">0 – 0</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="partida-corpo">' +
+      '<div class="pv-status"></div>' +
+      '<div class="pv-sets"></div>' +
+      '<div class="pv-resumo"></div>' +
+    '</div>';
+
+  var hist = document.getElementById('historico-jogos');
+  if (hist) hist.appendChild(div);
+  return div;
+}
+
+var partidaIdVolei = 0;
 
 
 

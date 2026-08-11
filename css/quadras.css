@@ -139,3 +139,79 @@
   gap: 0.5rem;
   align-items: center;
 }
+
+/* ============================================================
+   Card de partida do VÔLEI (fatia 4)
+   Reaproveita a casca .partida-card (ver css/simulacao.css) e
+   estiliza só o miolo próprio do vôlei. USA APENAS TOKENS do
+   design system (base.css) — nada de cores/tamanhos cravados.
+   ============================================================ */
+
+/* contador de sets ao vivo, em destaque dourado acima do placar de pontos */
+.partida-volei .pv-sets-contador {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.partida-volei .pv-sets-contador .pv-sc-nome {
+  font-size: var(--fs-legenda);
+  color: var(--txt-soft);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.partida-volei .pv-sets-contador .pv-sc-num {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--ouro);
+  font-variant-numeric: tabular-nums;
+  min-width: 18px;
+  text-align: center;
+}
+.partida-volei .pv-sets-contador .pv-sc-sep {
+  font-size: var(--fs-micro);
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* placar de pontos do set atual (reusa .partida-placar da casca) */
+.partida-volei .pv-placar { font-variant-numeric: tabular-nums; }
+
+/* status (saque / ace / trocando de lado) */
+.partida-volei .pv-status {
+  color: var(--ouro);
+  font-size: var(--fs-sm);
+  min-height: 1.1em;
+  margin-bottom: 6px;
+}
+
+/* linha-resumo dos sets já fechados */
+.partida-volei .pv-sets {
+  color: var(--txt-soft);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  min-height: 1.1em;
+  margin-bottom: 8px;
+}
+
+/* tabela de destaques (pontos/aces) ao fim da partida */
+.partida-volei .pv-resumo:not(:empty) {
+  border-top: 1px solid var(--linha, rgba(255,255,255,0.08));
+  padding-top: 8px;
+  margin-top: 4px;
+}
+.partida-volei .pv-resumo .pv-resumo-tit {
+  font-size: var(--fs-legenda);
+  color: var(--txt-soft);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 4px;
+}
+.partida-volei .pv-resumo .pv-stat {
+  font-size: var(--fs-sm);
+  padding: 1px 0;
+}
