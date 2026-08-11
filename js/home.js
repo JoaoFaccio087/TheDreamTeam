@@ -138,6 +138,29 @@ function pintarMapaVitrine(idEsporte) {
   // troca a aparência da quadra (CSS): vôlei ganha .quadra-volei; futebol volta ao normal
   campo.classList.toggle('quadra-volei', ehVolei);
 
+  // Elementos internos da QUADRA de vôlei (piso/rede/linha de ataque). São criados
+  // quando é vôlei e removidos ao voltar pro futebol. Os elementos do campo de futebol
+  // (.campo-linha-meio/.campo-circulo/.campo-area) já existem no HTML e são escondidos
+  // via CSS quando .quadra-volei está ativa — então não precisam ser removidos.
+  var piso = campo.querySelector('.piso');
+  if (ehVolei) {
+    if (!piso) {
+      // cria os 3 elementos da quadra (uma vez), na frente do fundo mas atrás das fichas
+      ['piso', 'rede', 'linha-ataque'].forEach(function (cls) {
+        var el = document.createElement('div');
+        el.className = cls;
+        // insere ANTES das fichas para não cobri-las
+        campo.insertBefore(el, campo.querySelector('.ficha') || null);
+      });
+    }
+  } else if (piso) {
+    // voltou pro futebol: remove os elementos da quadra de vôlei
+    ['piso', 'rede', 'linha-ataque'].forEach(function (cls) {
+      var el = campo.querySelector('.' + cls);
+      if (el && el.parentNode) el.parentNode.removeChild(el);
+    });
+  }
+
   // reconstrói as fichas conforme o nº de posições do esporte, e posiciona
   var formacao = ehVolei ? 'volei' : _formacaoFutebolAleatoria();
   if (typeof formacoes !== 'undefined' && formacoes[formacao] && typeof UI !== 'undefined') {

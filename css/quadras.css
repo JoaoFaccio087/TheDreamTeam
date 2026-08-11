@@ -93,9 +93,19 @@
 
 /* ─────────────────────────────── VÔLEI (só o seu lado da rede)
    Piso laranja, zona livre azul na borda; rede no topo, linha de ataque a 3 m. */
-.quadra-volei {
-  background: #17608F;               /* zona livre (fora da quadra) */
-  padding: 6%;                       /* margem que vira a zona livre */
+.quadra-volei,
+#campo.quadra-volei {          /* especificidade de ID p/ vencer o #campo verde da home */
+  background: #17608F !important;    /* zona livre (fora da quadra) = fundo azul */
+  /* SEM padding aqui: padding deslocaria as fichas (position:absolute com top/left %).
+     A margem laranja (piso) é feita com inset no .piso, que não afeta as fichas. */
+}
+
+/* Quando o mapa está em modo vôlei, esconde os elementos do campo de futebol
+   (linha do meio, círculo central, áreas) — eles não fazem sentido na quadra. */
+#campo.quadra-volei .campo-linha-meio,
+#campo.quadra-volei .campo-circulo,
+#campo.quadra-volei .campo-area {
+  display: none;
 }
 
 .quadra-volei .piso {
