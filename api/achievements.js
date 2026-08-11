@@ -21,6 +21,12 @@ function ehBrasil(c)    { return normComp(c).includes('brasileir'); }
 function ehCopa(c)      { return normComp(c).includes('copa'); }
 function ehPremier(c)   { return normComp(c).includes('premier'); }
 function ehSerieA(c)    { return normComp(c).includes('serie a') || normComp(c).includes('série a'); }
+function ehLaLiga(c)    { return normComp(c).includes('la liga') || normComp(c).includes('laliga'); }
+// Vôlei (ago/2026): Mundial de Vôlei masculino e feminino. São competições de OUTRO
+// esporte — geram uma família PRÓPRIA (não a de futebol, que fala em "gols").
+function ehVoleiM(c)    { return normComp(c).includes('mundial de volei (m)') || normComp(c).includes('mundial de vôlei (m)'); }
+function ehVoleiF(c)    { return normComp(c).includes('mundial de volei (f)') || normComp(c).includes('mundial de vôlei (f)'); }
+function ehVolei(c)     { return ehVoleiM(c) || ehVoleiF(c); }
 
 // FONTE DE VERDADE ÚNICA das competições conhecidas. Ao adicionar uma competição nova (ex.:
 // Premier League), inclua-a AQUI (id + matcher) e as conquistas "de todas as competições" e as
@@ -32,15 +38,21 @@ const GRUPOS_CONHECIDOS = [
   { id: 'copa',      eh: ehCopa },
   { id: 'premier',   eh: ehPremier },                // jul/2026 — coleta completa, fora do beta
   { id: 'serie_a',   eh: ehSerieA },                 // ago/2026 — coleta completa 1990-2026, fora do beta
+  { id: 'laliga',    eh: ehLaLiga },                 // ago/2026 — coleta completa 1990-2026, fora do beta
+  { id: 'volei_m',   eh: ehVoleiM, esporte: 'volei' }, // ago/2026 — vôlei masculino (família própria)
+  { id: 'volei_f',   eh: ehVoleiF, esporte: 'volei' }, // ago/2026 — vôlei feminino (família própria)
 ];
 // Ids que já existem escritos à mão (não gerar em cima deles).
 const GRUPOS_MANUAIS = ['liberta', 'champions', 'brasil', 'copa'];
-// Gera campeao/bi/tri/penta/especialista/matador para todo grupo NOVO. Assim, cada liga que
-// entrar em GRUPOS_CONHECIDOS já nasce com conquistas — sem escrever 6 entradas na mão.
+// Gera campeao/bi/tri/penta/especialista/matador para todo grupo NOVO de FUTEBOL. Assim, cada
+// liga que entrar em GRUPOS_CONHECIDOS já nasce com conquistas — sem escrever 6 entradas na mão.
+// (grupos de vôlei são PULADOS aqui; têm família própria em familiaVolei, pois "matador de gols"
+//  não faz sentido no vôlei.)
 function familiaDeGrupo() {
   const regras = [];
   for (const g of GRUPOS_CONHECIDOS) {
     if (GRUPOS_MANUAIS.includes(g.id)) continue;
+    if (g.esporte === 'volei') continue;   // vôlei tem família própria
     regras.push(
       { id: 'campeao_' + g.id,      check: ctx => [...ctx.competicoesVencidas].some(g.eh) },
       { id: 'bi_' + g.id,           check: ctx => (ctx.titulosPorGrupo[g.id]    || 0) >= 2 },
@@ -48,6 +60,24 @@ function familiaDeGrupo() {
       { id: 'penta_' + g.id,        check: ctx => (ctx.titulosPorGrupo[g.id]    || 0) >= 5 },
       { id: 'especialista_' + g.id, check: ctx => (ctx.campanhasPorGrupo[g.id]  || 0) >= 10 },
       { id: 'matador_' + g.id,      check: ctx => (ctx.golsPorGrupo[g.id]       || 0) >= 100 }
+    );
+  }
+  return regras;
+}
+
+// Família PRÓPRIA do vôlei: conceitos do esporte (mundial, sets), sem "gols".
+// campeão/bi/tri mundial + especialista (10 campanhas) + sacador (usa sets feitos = gf,
+// que no vôlei guardamos como sets pró — ver salvarCampanhaVolei). Gerada p/ cada grupo de vôlei.
+function familiaVolei() {
+  const regras = [];
+  for (const g of GRUPOS_CONHECIDOS) {
+    if (g.esporte !== 'volei') continue;
+    regras.push(
+      { id: 'campeao_' + g.id,      check: ctx => [...ctx.competicoesVencidas].some(g.eh) },
+      { id: 'bi_' + g.id,           check: ctx => (ctx.titulosPorGrupo[g.id]   || 0) >= 2 },
+      { id: 'tri_' + g.id,          check: ctx => (ctx.titulosPorGrupo[g.id]   || 0) >= 3 },
+      { id: 'especialista_' + g.id, check: ctx => (ctx.campanhasPorGrupo[g.id] || 0) >= 10 },
+      { id: 'sacador_' + g.id,      check: ctx => (ctx.setsPorGrupo[g.id]      || 0) >= 100 }
     );
   }
   return regras;
@@ -216,6 +246,7 @@ const CATALOGO = [
   // gravados no banco e têm irregularidades (não existe `tri_liberta` — é `rei_america`).
   // Competição NOVA ganha a família completa gerada logo abaixo, sem manutenção manual.
   ...familiaDeGrupo(),
+  ...familiaVolei(),   // vôlei: família própria (campeão/bi/tri mundial, especialista, sacador)
 
   // ── Feitos individuais (gols/assistências de um jogador numa campanha) ──
   { id: 'artilheiro_camp', check: ctx => algumJogador(ctx, p => (p.gols | 0) >= 15) },
@@ -258,7 +289,8 @@ function montarContexto(matches) {
     titulos: 0,
     competicoesVencidas: new Set(),
     titulosPorGrupo:   vazio(),  // títulos por competição
-    golsPorGrupo:      vazio(),  // gols marcados por competição
+    golsPorGrupo:      vazio(),  // gols marcados por competição (futebol)
+    setsPorGrupo:      vazio(),  // sets feitos por competição (vôlei — usa gf como sets pró)
     vitoriasPorGrupo:  vazio(),  // vitórias por competição
     campanhasPorGrupo: vazio(),  // campanhas disputadas por competição
   };
@@ -269,7 +301,11 @@ function montarContexto(matches) {
     const g = grupoDe(m.competicao);
     if (g) {
       ctx.campanhasPorGrupo[g]++;
-      ctx.golsPorGrupo[g]     += (m.gf || 0);
+      // gf guarda gols (futebol) OU sets feitos (vôlei). Separa pelo esporte da campanha
+      // para não misturar as contagens (matador de gols ≠ sacador de sets).
+      const ehVoleiCamp = (m.esporte === 'volei') || ehVolei(m.competicao);
+      if (ehVoleiCamp) ctx.setsPorGrupo[g] += (m.gf || 0);
+      else             ctx.golsPorGrupo[g] += (m.gf || 0);
       ctx.vitoriasPorGrupo[g] += (m.vitorias || 0);
     }
     if (m.campeao) {

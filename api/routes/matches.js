@@ -8,6 +8,9 @@ const router = express.Router();
 
 const matchSchema = z.object({
   competicao: z.string().max(50),
+  // esporte: default 'futebol' para compatibilidade — todo INSERT de futebol
+  // existente (que não envia o campo) continua válido e grava 'futebol'.
+  esporte:    z.string().max(20).default('futebol'),
   modo:       z.enum(['solo', 'online']).default('solo'),
   vitorias:   z.number().int().min(0),
   empates:    z.number().int().min(0),
@@ -29,10 +32,10 @@ router.post('/', requireAuth, async (req, res) => {
   try {
     const { rows } = await pool.query(
       `INSERT INTO matches
-         (user_id, competicao, modo, vitorias, empates, derrotas, gf, ga, posicao, campeao, detalhes)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+         (user_id, competicao, esporte, modo, vitorias, empates, derrotas, gf, ga, posicao, campeao, detalhes)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
        RETURNING *`,
-      [req.user.id, d.competicao, d.modo,
+      [req.user.id, d.competicao, d.esporte, d.modo,
        d.vitorias, d.empates, d.derrotas, d.gf, d.ga,
        d.posicao ?? null, d.campeao,
        d.detalhes ? JSON.stringify(d.detalhes) : null]
