@@ -446,11 +446,10 @@
         _histCache = null;                 // não precisamos do histórico completo aqui
         var geralServ = comAproveitamento(stats.grupos[GRUPOS[0].api] || STATS_ZERO);
         pintarKPIs(geralServ);
-        box.innerHTML = GRUPOS.map(function (g, idx) {
-          var s = comAproveitamento(stats.grupos[g.api] || STATS_ZERO);
-          return acordeaoHTML(g.nome, s, idx === 0);
-        }).join('');
-        ligarAcordeoes(box);
+        var linhasServ = GRUPOS.map(function (g) {
+          return { nome: g.nome, s: comAproveitamento(stats.grupos[g.api] || STATS_ZERO) };
+        });
+        box.innerHTML = barrasDesempenhoHTML(linhasServ);
         renderEscalados('geral');
         return;
       }
@@ -460,14 +459,13 @@
         _statsCache = null;
         _histCache = lista;
         pintarKPIs(agregaStats(lista.slice()));   // Geral = todas as campanhas
-        box.innerHTML = GRUPOS.map(function (g, idx) {
+        var linhasLoc = GRUPOS.map(function (g) {
           var ms = g.chave
             ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
             : lista.slice();
-          // A seção "Geral" (idx 0) já vem aberta; as competições, fechadas.
-          return acordeaoHTML(g.nome, agregaStats(ms), idx === 0);
-        }).join('');
-        ligarAcordeoes(box);
+          return { nome: g.nome, s: agregaStats(ms) };
+        });
+        box.innerHTML = barrasDesempenhoHTML(linhasLoc);
         renderEscalados('geral');   // campo à direita começa no "Geral"
       });
     }).catch(function (err) {
@@ -546,6 +544,39 @@
 
   // Seção expansível por categoria. `s` são as somas já agregadas (do servidor ou calculadas
   // localmente por agregaStats) — assim a montagem do HTML não depende da origem dos dados.
+  // ─────────────────────── BLOCO: DESEMPENHO POR COMPETIÇÃO (barras) ───────────────────────
+  // Substitui os acordeões: cada competição COM campanhas vira uma linha com barra de
+  // aproveitamento; os detalhes (V/E/D, gols, títulos) aparecem no tooltip ao passar o mouse.
+  // Recebe a lista [{nome, s}] já com os stats calculados de cada grupo.
+  function barrasDesempenhoHTML(linhas) {
+    // só competições com ao menos 1 campanha (não polui com ligas nunca jogadas)
+    var comDados = linhas.filter(function (l) { return l.nome !== 'Geral' && l.s.camp > 0; });
+    if (!comDados.length) {
+      return '<p class="perfil-vazio">Nenhuma campanha ainda. Jogue para ver seu desempenho aqui.</p>';
+    }
+    return comDados.map(function (l) {
+      var s = l.s;
+      var reg = s.v + 'V · ' + s.e + 'E · ' + s.d + 'D';
+      // tooltip com o detalhamento completo (o que os acordeões mostravam)
+      var tip = s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') +
+                ' · ' + s.tit + (s.tit === 1 ? ' título' : ' títulos') +
+                ' · ' + s.v + 'V ' + s.e + 'E ' + s.d + 'D' +
+                ' · ' + s.gf + ' pró / ' + s.ga + ' contra' +
+                ' · ' + s.aprov + '% aproveitamento';
+      var destaque = (s.tit > 0) ? ' barra-fill-ouro' : '';
+      return '<div class="perfil-barra-linha" title="' + esc(tip) + '" data-tip="' + esc(tip) + '">' +
+               '<div class="perfil-barra-topo">' +
+                 '<span class="perfil-barra-nome">' + esc(l.nome) +
+                   (s.tit > 0 ? ' <span class="perfil-barra-tit">★ ' + s.tit + '</span>' : '') +
+                 '</span>' +
+                 '<span class="perfil-barra-reg">' + reg + '</span>' +
+               '</div>' +
+               '<div class="perfil-barra"><div class="perfil-barra-fill' + destaque +
+                 '" style="width:' + Math.max(3, s.aprov) + '%"></div></div>' +
+             '</div>';
+    }).join('');
+  }
+
   function acordeaoHTML(nome, s, aberto) {
     var t = dicasDe(escopoDe(nome));
     var corpo = (s.camp === 0)
