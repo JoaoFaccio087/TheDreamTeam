@@ -106,10 +106,10 @@ function renderSeletorEsporte() {
   var cont  = document.getElementById('pilulas-esporte');
   if (!bloco || !cont) return;
 
-  // Botões no estilo segmentado (modo-seg), iguais ao Um Jogador/Multijogador.
+  // Botões no estilo PÍLULA (igual às competições de antes), não segmentado.
   cont.innerHTML = lista.map(function (e) {
-    var ativa = (e.id === esporteAtual) ? ' modo-seg-ativa' : '';
-    return '<button type="button" class="modo-seg' + ativa + '" data-esporte="' +
+    var ativa = (e.id === esporteAtual) ? ' pilula-ativa' : '';
+    return '<button type="button" class="pilula' + ativa + '" data-esporte="' +
            UI.esc(e.id) + '">' + UI.esc(e.nome) + '</button>';
   }).join('');
 
@@ -197,10 +197,10 @@ function aplicarEsporteVitrine(idEsporte) {
   if (typeof esporteAtual !== 'undefined') esporteAtual = idEsporte;
   pintarMapaVitrine(idEsporte);
 
-  // sincroniza o botão ativo do seletor
-  var segs = document.querySelectorAll('#pilulas-esporte .modo-seg');
+  // sincroniza o botão ativo do seletor (estilo pílula)
+  var segs = document.querySelectorAll('#pilulas-esporte .pilula');
   segs.forEach(function (s) {
-    s.classList.toggle('modo-seg-ativa', s.getAttribute('data-esporte') === idEsporte);
+    s.classList.toggle('pilula-ativa', s.getAttribute('data-esporte') === idEsporte);
   });
 
   // troca o bloco de competições (futebol vs vôlei)
@@ -228,7 +228,7 @@ function selecionarEsporte(idEsporte) { aplicarEsporteVitrine(idEsporte); }
   var cont = document.getElementById('pilulas-esporte');
   if (!cont) return;
   cont.addEventListener('click', function (ev) {
-    var alvo = ev.target.closest ? ev.target.closest('.modo-seg') : null;
+    var alvo = ev.target.closest ? ev.target.closest('.pilula') : null;
     if (!alvo) return;
     var id = alvo.getAttribute('data-esporte');
     if (id) selecionarEsporte(id);

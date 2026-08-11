@@ -332,16 +332,17 @@
           <div class="home-modo">
             <span class="home-rotulo-campo">MODO DE JOGO</span>
 
-            <!-- Seletor de ESPORTE (Futebol/Vôlei). Só aparece quando há 2+ esportes
-                 habilitados (js/esportes.js). Renderizado por renderSeletorEsporte(). -->
-            <div id="home-esporte" class="home-esporte escondida">
-              <div class="modo-seletor" id="pilulas-esporte"></div>
-            </div>
-
-            <!-- Seletor: Um Jogador / Multijogador -->
+            <!-- Seletor: Um Jogador / Multijogador (segmentado) -->
             <div class="modo-seletor" id="modo-seletor">
               <button class="modo-seg modo-seg-ativa" type="button" data-aba="solo">Um Jogador</button>
               <button class="modo-seg" type="button" data-aba="multi">Multijogador</button>
+            </div>
+
+            <!-- Seletor de ESPORTE (Futebol/Vôlei), estilo pílula, ABAIXO do modo.
+                 Só aparece quando há 2+ esportes habilitados (js/esportes.js).
+                 Renderizado por renderSeletorEsporte(). -->
+            <div id="home-esporte" class="home-esporte escondida">
+              <div class="area-pilulas" id="pilulas-esporte"></div>
             </div>
 
             <!-- Competições — Um Jogador (FUTEBOL) -->

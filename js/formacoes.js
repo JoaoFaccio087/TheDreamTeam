@@ -130,16 +130,17 @@ const formacoes = {
   // Fundo (perto da rede/topo): ponteiro, central, ponteiro (rede de ataque).
   // Vôlei — quadra INTEIRA com a rede no meio (~50%). O SEU time ocupa a metade
   // de BAIXO; o outro lado (metade de cima) recebe fichas espelhadas só de enfeite,
-  // criadas pelo JS (pintarMapaVitrine). Aqui ficam só as 6 posições reais do seu lado.
-  // Fundo do seu lado (perto da rede/meio): ponteiro, central, ponteiro (rede de ataque).
+  // criadas pelo JS (pintarMapaVitrine). Coords com margem p/ as fichas não vazarem
+  // do piso (o piso vai de ~10% a ~90%; fichas têm raio, então evitamos as bordas).
+  // Fundo do seu lado (perto da rede/meio): ponteiro, central, ponteiro.
   // Frente (fundo da quadra, embaixo): levantador, líbero, oposto.
   'volei': [
-    { left: 25, top: 62, grupo: 'PON' },
+    { left: 32, top: 61, grupo: 'PON' },
     { left: 50, top: 58, grupo: 'CEN' },
-    { left: 75, top: 62, grupo: 'PON' },
-    { left: 28, top: 84, grupo: 'LEV' },
-    { left: 50, top: 90, grupo: 'LIB' },
-    { left: 72, top: 84, grupo: 'OPO' }
+    { left: 68, top: 61, grupo: 'PON' },
+    { left: 34, top: 80, grupo: 'LEV' },
+    { left: 50, top: 85, grupo: 'LIB' },
+    { left: 66, top: 80, grupo: 'OPO' }
   ]
 
 };

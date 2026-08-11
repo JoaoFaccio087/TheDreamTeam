@@ -94,7 +94,7 @@ if (btnModoOnlineLaLiga) {
     // Seletor de esporte na home: Multijogador só tem Futebol, então o botão de
     // Vôlei (e outros não-futebol) some no modo multi e reaparece no solo. Se o
     // esporte ativo era vôlei ao entrar no multi, volta pro futebol.
-    var segsEsporte = document.querySelectorAll('#pilulas-esporte .modo-seg');
+    var segsEsporte = document.querySelectorAll('#pilulas-esporte .pilula');
     segsEsporte.forEach(function (s) {
       var ehFutebol = (s.getAttribute('data-esporte') === 'futebol');
       s.classList.toggle('escondida', multi && !ehFutebol);

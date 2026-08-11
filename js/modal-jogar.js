@@ -115,8 +115,7 @@
         '<div id="mj-slot-esporte"></div>' +
         '<div id="mj-slot-competicao"></div>' +
         '<div class="mj-acoes">' +
-          '<button type="button" class="btn-rolar btn-sec" data-mj="fechar">Cancelar</button>' +
-          '<button type="button" class="btn-rolar" data-mj="jogar">Jogar &rarr;</button>' +
+          '<button type="button" class="btn-rolar mj-jogar" data-mj="jogar">Jogar &rarr;</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -132,7 +131,7 @@
       var t = e.target;
       if (!t) return;
 
-      // fechar (X, Cancelar, clique fora)
+      // fechar (X, clique fora)
       if (t.getAttribute('data-mj') === 'fechar' || t === overlay) return fechar();
 
       // trocou o MODO → re-renderiza esporte+competição (multi filtra p/ futebol)
