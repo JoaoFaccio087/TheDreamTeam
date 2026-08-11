@@ -450,17 +450,21 @@
 .perfil-barra-fill-ouro {
   background: linear-gradient(90deg, #9C7A2E, var(--ouro, #D9B25A));
 }
-/* Tooltip do detalhamento (aparece ao passar o mouse na linha) */
-.perfil-barra-linha[data-tip]:hover::after {
-  content: attr(data-tip);
-  position: absolute; left: 0; top: 100%; z-index: 20;
-  margin-top: 2px;
+/* Tooltip estruturado do detalhamento (grade rótulo/valor). Elemento real
+   (.perfil-barra-tip), escondido por padrão, aparece no hover da linha. */
+.perfil-barra-tip {
+  display: none;
+  position: absolute; left: 0; top: calc(100% - 2px); z-index: 30;
   background: var(--surface-2, #14161C); color: var(--txt);
-  border: 1px solid var(--linha); border-radius: var(--raio-sm);
-  padding: 0.5rem 0.7rem; font-size: var(--fs-legenda); font-weight: 400;
-  white-space: normal; max-width: 320px; line-height: 1.5;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  border: 1px solid var(--linha); border-radius: var(--raio-md);
+  padding: 0.7rem 0.9rem;
+  grid-template-columns: auto auto; gap: 0.28rem 1.4rem;
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
+.perfil-barra-linha:hover .perfil-barra-tip { display: grid; }
+.ptip-rot { font-size: var(--fs-legenda); color: var(--txt-soft); }
+.ptip-val { font-size: var(--fs-legenda); color: var(--txt); font-weight: 700; text-align: right; }
 .perfil-aba {
   background: var(--elev-1);
   border: 1px solid var(--linha);

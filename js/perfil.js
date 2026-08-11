@@ -557,14 +557,21 @@
     return comDados.map(function (l) {
       var s = l.s;
       var reg = s.v + 'V · ' + s.e + 'E · ' + s.d + 'D';
-      // tooltip com o detalhamento completo (o que os acordeões mostravam)
-      var tip = s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') +
-                ' · ' + s.tit + (s.tit === 1 ? ' título' : ' títulos') +
-                ' · ' + s.v + 'V ' + s.e + 'E ' + s.d + 'D' +
-                ' · ' + s.gf + ' pró / ' + s.ga + ' contra' +
-                ' · ' + s.aprov + '% aproveitamento';
       var destaque = (s.tit > 0) ? ' barra-fill-ouro' : '';
-      return '<div class="perfil-barra-linha" title="' + esc(tip) + '" data-tip="' + esc(tip) + '">' +
+      // Tooltip estruturado (grade rótulo/valor, uma linha por dado) — sem `title`
+      // nativo (que causava tooltip duplo). É um elemento real, não ::after.
+      var tip =
+        '<div class="perfil-barra-tip">' +
+          linhaTip('Campanhas', s.camp) +
+          linhaTip('Títulos', s.tit) +
+          linhaTip('Vitórias', s.v) +
+          linhaTip('Empates', s.e) +
+          linhaTip('Derrotas', s.d) +
+          linhaTip('Gols pró', s.gf) +
+          linhaTip('Gols contra', s.ga) +
+          linhaTip('Aproveitamento', s.aprov + '%') +
+        '</div>';
+      return '<div class="perfil-barra-linha">' +
                '<div class="perfil-barra-topo">' +
                  '<span class="perfil-barra-nome">' + esc(l.nome) +
                    (s.tit > 0 ? ' <span class="perfil-barra-tit">★ ' + s.tit + '</span>' : '') +
@@ -573,8 +580,14 @@
                '</div>' +
                '<div class="perfil-barra"><div class="perfil-barra-fill' + destaque +
                  '" style="width:' + Math.max(3, s.aprov) + '%"></div></div>' +
+               tip +
              '</div>';
     }).join('');
+  }
+  // Uma linha do tooltip: rótulo à esquerda, valor à direita.
+  function linhaTip(rot, val) {
+    return '<span class="ptip-rot">' + esc(rot) + '</span>' +
+           '<span class="ptip-val">' + esc(val) + '</span>';
   }
 
   function acordeaoHTML(nome, s, aberto) {
