@@ -366,28 +366,49 @@
     var cont  = $('perfil-esporte-sel');
     if (!bloco || !cont) return;
 
+    // Botões no estilo SEGMENTADO (modo-seg), mais bonito que as pílulas.
     cont.innerHTML = lista.map(function (e) {
-      var ativa = (e.id === _esportePerfil) ? ' pilula-ativa' : '';
-      return '<button type="button" class="pilula' + ativa + '" data-perfil-esporte="' +
+      var ativa = (e.id === _esportePerfil) ? ' modo-seg-ativa' : '';
+      return '<button type="button" class="modo-seg' + ativa + '" data-perfil-esporte="' +
              esc(e.id) + '">' + esc(e.nome) + '</button>';
     }).join('');
     bloco.classList.remove('escondida');
 
-    // troca visual do botão ativo (sem filtrar dados ainda)
+    // Ao clicar, troca o esporte ativo e RE-RENDERIZA os blocos filtrados.
     if (!cont._ligado) {
       cont.addEventListener('click', function (ev) {
-        var alvo = ev.target.closest ? ev.target.closest('.pilula') : null;
+        var alvo = ev.target.closest ? ev.target.closest('.modo-seg') : null;
         if (!alvo) return;
         var id = alvo.getAttribute('data-perfil-esporte');
-        if (!id) return;
+        if (!id || id === _esportePerfil) return;
         _esportePerfil = id;
-        cont.querySelectorAll('.pilula').forEach(function (b) {
-          b.classList.toggle('pilula-ativa', b.getAttribute('data-perfil-esporte') === id);
+        cont.querySelectorAll('.modo-seg').forEach(function (b) {
+          b.classList.toggle('modo-seg-ativa', b.getAttribute('data-perfil-esporte') === id);
         });
-        // (a filtragem dos dados por esporte entra aqui numa próxima etapa)
+        aplicarFiltroEsporte();
       });
       cont._ligado = true;
     }
+  }
+
+  // Filtra GRUPOS pelo esporte ativo. Geral sempre entra; competições conforme o esporte.
+  function gruposDoEsporte() {
+    return GRUPOS.filter(function (g) {
+      if (g.api === 'geral') return true;
+      // acha o id da competição correspondente e checa o esporte
+      var compId = Object.keys(COMPETICOES).filter(function (id) {
+        return (COMPETICOES[id].label === g.nome);
+      })[0];
+      if (!compId) return true;  // sem match → mantém (não perde nada)
+      var esp = COMPETICOES[compId].esporte || 'futebol';
+      return esp === _esportePerfil;
+    });
+  }
+
+  // Re-renderiza os blocos que dependem do esporte (barras, KPIs, escalados, conquistas).
+  function aplicarFiltroEsporte() {
+    carregarAcordeoes();   // barras + KPIs (já leem GRUPOS; passam a filtrar via gruposDoEsporte)
+    if (typeof renderConquistasDestaque === 'function') renderConquistasDestaque(_esportePerfil);
   }
 
   // Faixa de KPIs (números-chave) do topo das Estatísticas. Recebe os totais já
@@ -435,7 +456,7 @@
         _histCache = null;                 // não precisamos do histórico completo aqui
         var geralServ = comAproveitamento(stats.grupos[GRUPOS[0].api] || STATS_ZERO);
         pintarKPIs(geralServ);
-        var linhasServ = GRUPOS.map(function (g) {
+        var linhasServ = gruposDoEsporte().map(function (g) {
           return { nome: g.nome, s: comAproveitamento(stats.grupos[g.api] || STATS_ZERO) };
         });
         box.innerHTML = barrasDesempenhoHTML(linhasServ);
@@ -448,7 +469,7 @@
         _statsCache = null;
         _histCache = lista;
         pintarKPIs(agregaStats(lista.slice()));   // Geral = todas as campanhas
-        var linhasLoc = GRUPOS.map(function (g) {
+        var linhasLoc = gruposDoEsporte().map(function (g) {
           var ms = g.chave
             ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
             : lista.slice();

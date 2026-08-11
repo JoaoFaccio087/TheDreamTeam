@@ -314,13 +314,17 @@
 }
 .perfil-ver-mais:hover { opacity: 0.75; text-decoration: underline; }
 
-/* Grid das 8 conquistas em destaque */
+/* Grid das 12 conquistas em destaque: 6 col × 2 linhas cheias (sem buracos).
+   Sobrepõe o .conq-grid base (auto-fill) para garantir linhas completas. */
 .conq-grid-destaque {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 12px;
   align-items: stretch;   /* cards da mesma linha com altura igual */
 }
 .conq-grid-destaque .conq-card { height: 100%; }
-@media (max-width: 720px) { .conq-grid-destaque { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) { .conq-grid-destaque { grid-template-columns: repeat(4, 1fr) !important; } }
+@media (max-width: 720px)  { .conq-grid-destaque { grid-template-columns: repeat(2, 1fr) !important; } }
 
 /* Modal "Ver todas as conquistas" */
 .mc-conq-box {
@@ -421,12 +425,22 @@
 /* Seletor de esporte do perfil — fica entre as abas e os painéis, alinhado à
    esquerda. Só aparece com 2+ esportes (js/perfil.js remove .escondida). */
 .perfil-esporte {
-  margin-top: -0.6rem;
-  margin-bottom: 1.4rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid var(--linha);
+  margin-bottom: 1.6rem;
 }
-.perfil-esporte .area-pilulas { display: flex; gap: 6px; flex-wrap: wrap; }
+/* Seletor de esporte no estilo segmentado (grupo de botões colados), como o
+   Um Jogador/Multijogador da home. Responsivo: acompanha a largura do conteúdo. */
+.perfil-esporte-sel {
+  display: inline-flex; gap: 4px;
+  background: var(--elev-1); border: 1px solid var(--linha);
+  border-radius: var(--raio-md); padding: 4px;
+}
+.perfil-esporte-sel .modo-seg {
+  border: none; background: transparent; cursor: pointer;
+  padding: 0.5rem 1.4rem; border-radius: var(--raio-sm);
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: var(--fs-sm);
+  color: var(--txt-soft); transition: background 0.15s ease, color 0.15s ease;
+}
+.perfil-esporte-sel .modo-seg-ativa { background: var(--accent); color: var(--btn-txt, #05230F); }
 
 /* Faixa de números-chave (KPIs) no topo das Estatísticas — 4 cartões. */
 .perfil-kpis {
@@ -459,7 +473,7 @@
 
 /* ── Bloco: desempenho por competição (barras) — substitui os acordeões ── */
 .perfil-barra-linha {
-  padding: 0.7rem 0;
+  padding: 0.95rem 0;
   border-bottom: 1px solid var(--linha);
   cursor: default;
   position: relative;
@@ -467,13 +481,13 @@
 .perfil-barra-linha:last-child { border-bottom: none; }
 .perfil-barra-topo {
   display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: 0.5rem; gap: 0.5rem;
+  margin-bottom: 0.6rem; gap: 0.5rem;
 }
-.perfil-barra-nome { font-size: var(--fs-sm); font-weight: 600; color: var(--txt); }
+.perfil-barra-nome { font-size: var(--fs-base); font-weight: 600; color: var(--txt); }
 .perfil-barra-tit { color: var(--ouro, #D9B25A); font-weight: 700; font-size: 0.8em; }
-.perfil-barra-reg { font-size: var(--fs-legenda); color: var(--txt-soft); white-space: nowrap; }
+.perfil-barra-reg { font-size: var(--fs-sm); color: var(--txt-soft); white-space: nowrap; }
 .perfil-barra {
-  height: 7px; background: var(--elev-1); border-radius: 4px; overflow: hidden;
+  height: 9px; background: var(--elev-1); border-radius: 5px; overflow: hidden;
 }
 .perfil-barra-fill {
   height: 100%; border-radius: 4px;

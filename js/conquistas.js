@@ -286,7 +286,10 @@
   var PESO_RARIDADE = { lendario: 4, epico: 3, raro: 2, comum: 1 };
   function pesoDe(c) { return PESO_RARIDADE[raridadeDe(c.id)] || 1; }
 
-  function renderConquistasDestaque() {
+  // Uma conquista é de vôlei se o id contém 'volei'; senão é de futebol.
+  function esporteDaConquista(c) { return /volei/.test(c.id) ? 'volei' : 'futebol'; }
+
+  function renderConquistasDestaque(esporteFiltro) {
     var cont = $('conq-destaque');
     if (!cont) return;
     cont.innerHTML = '<p class="perfil-carregando">Carregando conquistas…</p>';
@@ -306,13 +309,19 @@
       });
       LISTA_CONQUISTAS.forEach(function (c) { c.desbloqueada = !!setDesb[c.id]; });
 
+      // filtra pelo esporte (se informado); senão, todas
+      var universo = LISTA_CONQUISTAS;
+      if (esporteFiltro) {
+        universo = LISTA_CONQUISTAS.filter(function (c) { return esporteDaConquista(c) === esporteFiltro; });
+      }
+
       // ordena: desbloqueadas primeiro, e dentro de cada grupo por raridade desc
       function ordena(a, b) { return pesoDe(b) - pesoDe(a); }
-      var desb = LISTA_CONQUISTAS.filter(function (c) { return c.desbloqueada; }).sort(ordena);
-      var bloq = LISTA_CONQUISTAS.filter(function (c) { return !c.desbloqueada; }).sort(ordena);
-      var destaque = desb.concat(bloq).slice(0, 8);
+      var desb = universo.filter(function (c) { return c.desbloqueada; }).sort(ordena);
+      var bloq = universo.filter(function (c) { return !c.desbloqueada; }).sort(ordena);
+      var destaque = desb.concat(bloq).slice(0, 12);
 
-      var totalDesb = desb.length, totalGeral = LISTA_CONQUISTAS.length;
+      var totalDesb = desb.length, totalGeral = universo.length;
       var elTotal = $('conq-destaque-total');
       if (elTotal) elTotal.textContent = totalDesb + '/' + totalGeral;
 
