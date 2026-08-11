@@ -401,6 +401,27 @@
     }
   }
 
+  // Faixa de KPIs (números-chave) do topo das Estatísticas. Recebe os totais já
+  // agregados do "Geral" e pinta 4 cartões. Universais aos dois esportes (não usa
+  // "gols" — usa campanhas, títulos, vitórias e aproveitamento).
+  function pintarKPIs(s) {
+    var box = $('perfil-kpis');
+    if (!box) return;
+    s = s || { camp: 0, tit: 0, v: 0, aprov: 0 };
+    var itens = [
+      { num: s.camp | 0, rot: (s.camp === 1 ? 'Campanha' : 'Campanhas'), cls: '' },
+      { num: s.tit  | 0, rot: (s.tit  === 1 ? 'Título'   : 'Títulos'),   cls: 'verde' },
+      { num: s.v    | 0, rot: (s.v    === 1 ? 'Vitória'  : 'Vitórias'),  cls: '' },
+      { num: (s.aprov | 0) + '%', rot: 'Aproveitamento', cls: 'ouro' }
+    ];
+    box.innerHTML = itens.map(function (k) {
+      return '<div class="perfil-kpi">' +
+               '<div class="perfil-kpi-num ' + k.cls + '">' + k.num + '</div>' +
+               '<div class="perfil-kpi-rot">' + k.rot + '</div>' +
+             '</div>';
+    }).join('');
+  }
+
   function carregarAcordeoes() {
     var box = $('perfil-acordeoes');
     if (!box) return;
@@ -423,6 +444,8 @@
       if (stats && stats.grupos) {
         _statsCache = stats;
         _histCache = null;                 // não precisamos do histórico completo aqui
+        var geralServ = comAproveitamento(stats.grupos[GRUPOS[0].api] || STATS_ZERO);
+        pintarKPIs(geralServ);
         box.innerHTML = GRUPOS.map(function (g, idx) {
           var s = comAproveitamento(stats.grupos[g.api] || STATS_ZERO);
           return acordeaoHTML(g.nome, s, idx === 0);
@@ -436,6 +459,7 @@
         lista = lista || [];
         _statsCache = null;
         _histCache = lista;
+        pintarKPIs(agregaStats(lista.slice()));   // Geral = todas as campanhas
         box.innerHTML = GRUPOS.map(function (g, idx) {
           var ms = g.chave
             ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })

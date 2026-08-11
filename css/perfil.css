@@ -382,6 +382,35 @@
   border-bottom: 1px solid var(--linha);
 }
 .perfil-esporte .area-pilulas { display: flex; gap: 6px; flex-wrap: wrap; }
+
+/* Faixa de números-chave (KPIs) no topo das Estatísticas — 4 cartões. */
+.perfil-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 1.8rem;
+}
+.perfil-kpis:empty { display: none; }
+.perfil-kpi {
+  background: var(--surface, #181B21);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-lg);
+  padding: 18px 16px;
+}
+.perfil-kpi-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem; line-height: 1; letter-spacing: -1px;
+  color: var(--txt);
+}
+.perfil-kpi-num.verde { color: var(--accent, #2BD46A); }
+.perfil-kpi-num.ouro  { color: var(--ouro, #D9B25A); }
+.perfil-kpi-rot {
+  font-size: 0.68rem; color: var(--txt-soft);
+  text-transform: uppercase; letter-spacing: 1px; margin-top: 6px;
+}
+@media (max-width: 720px) {
+  .perfil-kpis { grid-template-columns: repeat(2, 1fr); }
+}
 .perfil-aba {
   background: var(--elev-1);
   border: 1px solid var(--linha);
