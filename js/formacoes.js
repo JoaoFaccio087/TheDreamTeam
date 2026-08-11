@@ -128,15 +128,18 @@ const formacoes = {
 
   // Vôlei — 6 posições numa meia-quadra (o SEU lado da rede, que fica no TOPO).
   // Fundo (perto da rede/topo): ponteiro, central, ponteiro (rede de ataque).
-  // Frente (fundo da quadra): levantador, líbero, oposto (recepção/defesa).
-  // Rótulos usam as posições do vôlei (LEV/OPO/PON/CEN/LIB) — só amostra visual.
+  // Vôlei — quadra INTEIRA com a rede no meio (~50%). O SEU time ocupa a metade
+  // de BAIXO; o outro lado (metade de cima) recebe fichas espelhadas só de enfeite,
+  // criadas pelo JS (pintarMapaVitrine). Aqui ficam só as 6 posições reais do seu lado.
+  // Fundo do seu lado (perto da rede/meio): ponteiro, central, ponteiro (rede de ataque).
+  // Frente (fundo da quadra, embaixo): levantador, líbero, oposto.
   'volei': [
-    { left: 25, top: 30, grupo: 'PON' },
-    { left: 50, top: 26, grupo: 'CEN' },
-    { left: 75, top: 30, grupo: 'PON' },
-    { left: 28, top: 62, grupo: 'LEV' },
-    { left: 50, top: 68, grupo: 'LIB' },
-    { left: 72, top: 62, grupo: 'OPO' }
+    { left: 25, top: 62, grupo: 'PON' },
+    { left: 50, top: 58, grupo: 'CEN' },
+    { left: 75, top: 62, grupo: 'PON' },
+    { left: 28, top: 84, grupo: 'LEV' },
+    { left: 50, top: 90, grupo: 'LIB' },
+    { left: 72, top: 84, grupo: 'OPO' }
   ]
 
 };

@@ -115,10 +115,10 @@
   border: 2px solid rgba(255, 255, 255, 0.9);
 }
 
-/* Rede: fica na borda de cima (o outro lado da quadra não é desenhado). */
+/* Rede: fica no MEIO da quadra inteira (separa os dois lados). */
 .quadra-volei .rede {
   position: absolute;
-  top: 6%;
+  top: 50%;
   left: 6%;
   right: 6%;
   height: 8px;
@@ -130,24 +130,42 @@
     rgba(255, 255, 255, 0.35);
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
+  z-index: 1;
 }
 
-/* Linha de ataque: 3 m da rede (≈ 1/3 do comprimento da meia-quadra). */
+/* Linhas de ataque: uma de cada lado da rede (3 m ≈ 1/6 da quadra inteira a partir do meio). */
 .quadra-volei .linha-ataque {
   position: absolute;
   left: 6%;
   right: 6%;
-  top: 37%;
+  top: 34%;
   border-top: 2px solid rgba(255, 255, 255, 0.9);
+}
+.quadra-volei .linha-ataque-baixo {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 66%;
+  border-top: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Fichas "fantasma" do outro lado (só enfeite visual, sem rótulo forte). */
+.quadra-volei .ficha-espelho {
+  position: absolute;
+  width: clamp(24px, 10cqw, 56px);
+  height: clamp(24px, 10cqw, 56px);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  z-index: 0;
 }
 
 /* Bloco do seletor de ESPORTE na home (Fase 5). Fica escondido enquanto só houver
    um esporte habilitado; o estilo espelha o de .home-formacao. */
 .home-esporte {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
+  display: block;         /* alinhado à esquerda, como os outros seletores do Modo de Jogo */
+  margin-bottom: 12px;    /* mesmo respiro do seletor Um Jogador/Multijogador */
 }
 
 /* ============================================================

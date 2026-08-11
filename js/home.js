@@ -119,10 +119,9 @@ function renderSeletorEsporte() {
 renderSeletorEsporte();
 
 // ── MAPA-VITRINE ────────────────────────────────────────────────────────────
-// O mapa da home é uma vitrine viva: alterna sozinho entre uma formação de
-// futebol (aleatória) e a quadra de vôlei. O seletor de esporte também controla
-// (clicar troca o mapa e reinicia o timer). Só entra em ação com 2+ esportes.
-var _vitrineTimer = null;
+// O mapa da home é uma vitrine: mostra uma formação de futebol (aleatória) ou a
+// quadra de vôlei. Troca só quando o usuário clica no seletor de esporte (sem
+// loop automático). Só entra em ação com 2+ esportes habilitados.
 var FORMACOES_FUTEBOL_AMOSTRA = ['4-3-3','4-4-2','4-2-3-1','3-5-2','4-3-2-1','4-5-1','3-4-3','4-1-2-1-2'];
 
 function _formacaoFutebolAleatoria() {
@@ -138,26 +137,28 @@ function pintarMapaVitrine(idEsporte) {
   // troca a aparência da quadra (CSS): vôlei ganha .quadra-volei; futebol volta ao normal
   campo.classList.toggle('quadra-volei', ehVolei);
 
-  // Elementos internos da QUADRA de vôlei (piso/rede/linha de ataque). São criados
-  // quando é vôlei e removidos ao voltar pro futebol. Os elementos do campo de futebol
-  // (.campo-linha-meio/.campo-circulo/.campo-area) já existem no HTML e são escondidos
-  // via CSS quando .quadra-volei está ativa — então não precisam ser removidos.
+  // Elementos internos da QUADRA de vôlei (piso, rede no meio, 2 linhas de ataque).
+  // Criados quando é vôlei, removidos ao voltar pro futebol. Os elementos do campo de
+  // futebol (.campo-linha-meio/.campo-circulo/.campo-area) já existem no HTML e são
+  // escondidos via CSS quando .quadra-volei está ativa.
+  var elementosQuadra = ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'];
   var piso = campo.querySelector('.piso');
   if (ehVolei) {
     if (!piso) {
-      // cria os 3 elementos da quadra (uma vez), na frente do fundo mas atrás das fichas
-      ['piso', 'rede', 'linha-ataque'].forEach(function (cls) {
+      elementosQuadra.forEach(function (cls) {
         var el = document.createElement('div');
         el.className = cls;
-        // insere ANTES das fichas para não cobri-las
         campo.insertBefore(el, campo.querySelector('.ficha') || null);
       });
     }
   } else if (piso) {
-    // voltou pro futebol: remove os elementos da quadra de vôlei
-    ['piso', 'rede', 'linha-ataque'].forEach(function (cls) {
+    // voltou pro futebol: remove os elementos da quadra + as fichas-fantasma
+    elementosQuadra.forEach(function (cls) {
       var el = campo.querySelector('.' + cls);
       if (el && el.parentNode) el.parentNode.removeChild(el);
+    });
+    Array.prototype.forEach.call(campo.querySelectorAll('.ficha-espelho'), function (el) {
+      if (el.parentNode) el.parentNode.removeChild(el);
     });
   }
 
@@ -165,39 +166,34 @@ function pintarMapaVitrine(idEsporte) {
   var formacao = ehVolei ? 'volei' : _formacaoFutebolAleatoria();
   if (typeof formacoes !== 'undefined' && formacoes[formacao] && typeof UI !== 'undefined') {
     var coords = formacoes[formacao];
-    // ajusta a quantidade de fichas ao esporte (futebol 11, vôlei 6)
     UI.montarCampo(campo, coords.length, { classe: 'ficha' });
     var novasFichas = campo.querySelectorAll('.ficha');
     UI.posicionarCampo(novasFichas, formacao);
     Array.prototype.forEach.call(novasFichas, function (f, i) {
       if (coords[i]) f.textContent = coords[i].grupo;
     });
+
+    // Fichas-fantasma do OUTRO lado (só enfeite): espelha cada posição em torno da
+    // rede (top' = 100 - top). Recriadas a cada pintura para acompanhar a formação.
+    Array.prototype.forEach.call(campo.querySelectorAll('.ficha-espelho'), function (el) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    });
+    if (ehVolei) {
+      coords.forEach(function (c) {
+        var g = document.createElement('div');
+        g.className = 'ficha-espelho';
+        g.style.left = c.left + '%';
+        g.style.top  = (100 - c.top) + '%';   // espelha verticalmente (rede no meio)
+        campo.insertBefore(g, campo.querySelector('.ficha') || null);
+      });
+    }
   }
 }
 
 // Alterna a vitrine para o "próximo" esporte automaticamente, em loop.
-function _proximoEsporteVitrine() {
-  var lista = (typeof esportesVisiveis === 'function') ? esportesVisiveis() : [];
-  if (lista.length < 2) return;
-  var ids = lista.map(function (e) { return e.id; });
-  var atualIdx = ids.indexOf(esporteAtual);
-  var prox = ids[(atualIdx + 1) % ids.length];
-  aplicarEsporteVitrine(prox, false);   // false = não reinicia o timer (é o próprio loop)
-}
-
-// Inicia/reinicia o loop automático da vitrine (a cada ~5s).
-function iniciarVitrine() {
-  if (_vitrineTimer) clearInterval(_vitrineTimer);
-  var lista = (typeof esportesVisiveis === 'function') ? esportesVisiveis() : [];
-  if (lista.length < 2) return;         // com 1 esporte, mapa fixo (sem loop)
-  // pinta o estado atual imediatamente (não espera o 1º tick de 5s)
-  pintarMapaVitrine(esporteAtual);
-  _vitrineTimer = setInterval(_proximoEsporteVitrine, 5000);
-}
-
-// Aplica um esporte à vitrine + sincroniza o seletor. reiniciarTimer=true quando
-// a troca veio de um clique do usuário (para o loop não trocar logo em seguida).
-function aplicarEsporteVitrine(idEsporte, reiniciarTimer) {
+// Aplica um esporte à vitrine + sincroniza o seletor. Chamado no clique do
+// seletor de esporte (não há mais loop automático — o mapa só troca no clique).
+function aplicarEsporteVitrine(idEsporte) {
   if (typeof esporteAtual !== 'undefined') esporteAtual = idEsporte;
   pintarMapaVitrine(idEsporte);
 
@@ -222,12 +218,10 @@ function aplicarEsporteVitrine(idEsporte, reiniciarTimer) {
       selecionarModo(primeira.getAttribute('data-modo'));
     }
   }
-
-  if (reiniciarTimer) iniciarVitrine();  // clique do usuário: reinicia o loop
 }
 
 // Compat: mantém o nome antigo apontando para a nova função.
-function selecionarEsporte(idEsporte) { aplicarEsporteVitrine(idEsporte, true); }
+function selecionarEsporte(idEsporte) { aplicarEsporteVitrine(idEsporte); }
 
 // Liga os cliques no seletor de esporte (delegação no container).
 (function ligarSeletorEsporte() {
@@ -241,8 +235,12 @@ function selecionarEsporte(idEsporte) { aplicarEsporteVitrine(idEsporte, true); 
   });
 })();
 
-// arranca o loop da vitrine na carga (no-op se só houver 1 esporte)
-iniciarVitrine();
+// Na carga, pinta o mapa no esporte inicial (sem loop). Com 1 esporte, o mapa
+// já é o de futebol montado pelo interface.js — não precisa repintar.
+(function pintarVitrineInicial() {
+  var lista = (typeof esportesVisiveis === 'function') ? esportesVisiveis() : [];
+  if (lista.length >= 2) pintarMapaVitrine(esporteAtual);
+})();
 
 if (typeof window !== 'undefined') {
   window.selecionarEsporte = selecionarEsporte;
