@@ -118,8 +118,14 @@ function iniciarTelaJogo() {
   // LIB/OPO); futebol segue no 4-3-3 padrão. ehCompeticaoVolei() vem de regras.js.
   var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
   formacaoJogo       = ehVolei ? 'volei' : '4-3-3';
-  formacaoTravada    = ehVolei;   // vôlei não troca de formação
+  // NÃO usar formacaoTravada aqui: ela significa "time já rolado" no resto do sistema
+  // (trava troca de ESTILO, salva sessão, etc.). As pílulas de formação já ficam
+  // escondidas no vôlei (mais abaixo), então não há o que travar.
   jogadorSelecionado = null;
+  // Estado de "time já rolado" começa limpo a cada nova partida (evita herdar true de
+  // uma partida anterior, o que travaria a troca de estilo e a rolagem).
+  formacaoTravada    = false;
+  if (typeof draftIniciado !== 'undefined') draftIniciado = false;
   // SEMENTE do número de titulares: único ponto que consulta o catálogo de esportes.
   // Todo o resto do código deriva de `escalacao.length` — nada mais crava o 11.
   escalacao          = Array(typeof titularesAtuais === 'function' ? titularesAtuais() : 11).fill(null);
