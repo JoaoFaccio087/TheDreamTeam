@@ -2,6 +2,16 @@
 
 var chaveCopa = null;   // chave (organograma) do mata-mata da Copa do Mundo
 
+// Ajusta os cabeçalhos da tabela de estatísticas do jogador conforme o esporte:
+// futebol usa G (gols) / A (assistências); vôlei usa PTS (pontos) / ACE (aces).
+function ajustarCabecalhosStats() {
+  var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+  var thG = document.getElementById('stats-th-g');
+  var thA = document.getElementById('stats-th-a');
+  if (thG) { thG.textContent = ehVolei ? 'PTS' : 'G'; thG.title = ehVolei ? 'Pontos' : 'Gols'; }
+  if (thA) { thA.textContent = ehVolei ? 'ACE' : 'A'; thA.title = ehVolei ? 'Aces' : 'Assistências'; }
+}
+
 // --- Zera a campanha: fases, adversários usados, estatísticas e histórico visual ---
 function reiniciarCampanha() {
   faseAtual         = 0;
@@ -293,6 +303,7 @@ function iniciarPartida() {
 
   var stats = document.getElementById('stats-campanha');
   if (stats) stats.classList.remove('escondida'); // a 1ª partida revela as estatísticas
+  ajustarCabecalhosStats();   // G/A (futebol) ou PTS/ACE (vôlei)
 
   var filtroComp = COMPETICOES[modoSelecionado].dados;
   var fase = fasesCampanha[faseAtual];
