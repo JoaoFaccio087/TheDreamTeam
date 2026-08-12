@@ -106,7 +106,13 @@ function atualizarHeaderInfo() {
       if (estiloJogo === 'draft') estilo = 'DRAFT';
       else if (estiloJogo === 'orcamento') estilo = 'ORÇAMENTO';
     }
-    var txt = formacaoJogo + ' · ' + COMPETICOES[modoSelecionado].label.toUpperCase() + ' · ' + estilo;
+    // No vôlei não há formação (posições fixas), então o cabeçalho não mostra
+    // 'volei' como se fosse uma — começa direto pela competição.
+    var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+    var comp = COMPETICOES[modoSelecionado].label.toUpperCase();
+    var txt = ehVolei
+      ? (comp + ' · ' + estilo)
+      : (formacaoJogo + ' · ' + comp + ' · ' + estilo);
     jogoHeaderInfo.textContent = txt;
   }
   // A barra de orçamento (acima do mapa) mostra o valor em destaque no modo Orçamento.

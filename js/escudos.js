@@ -963,10 +963,30 @@
     // Serie A entrou em jul/2026 (clubes italianos com cor real: Napoli/Parma/Torino/
     // Lazio/Udinese cadastrados; Milan/Juve/Inter/Samp/Roma/Fiorentina vêm da Champions).
     MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier', 'serie_a', 'laliga'],
-    ativoNoModo: function (modo) { return this.MODOS_ATIVOS.indexOf(modo) >= 0; },
+    // Modos de vôlei: geram escudo de seleção (por país), mas SEM estrelas — os títulos
+    // mundiais de vôlei são diferentes dos de futebol; por ora, zero estrelas em todos.
+    MODOS_VOLEI: ['volei_m', 'volei_f'],
+    ativoNoModo: function (modo) {
+      return this.MODOS_ATIVOS.indexOf(modo) >= 0 || this.MODOS_VOLEI.indexOf(modo) >= 0;
+    },
+    ehModoVolei: function (modo) { return this.MODOS_VOLEI.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
-      return this.ativoNoModo(modo) ? this.porNome(nome) : '';
+      if (!this.ativoNoModo(modo)) return '';
+      // No vôlei, gera o escudo da seleção zerando as estrelas (títulos de futebol
+      // não valem aqui). Reusa o gerador de seleção com estrelas: 0.
+      if (this.ehModoVolei(modo)) return this.porNomeVolei(nome);
+      return this.porNome(nome);
+    },
+    // Escudo de seleção de vôlei: mesmo gerador, mas com estrelas SEMPRE 0.
+    porNomeVolei: function (nome) {
+      if (typeof window === 'undefined' || !window.EscudosCores) return '';
+      var C = window.EscudosCores;
+      try {
+        var iso = C.isoSelecao(nome);
+        if (iso) return gerarSelecao({ pais: iso, seed: nome, estrelas: 0 });
+        return this.porNome(nome);   // fallback: nome sem ISO cai no fluxo normal
+      } catch (err) { return ''; }
     },
 
     // O escudo do USUÁRIO (o que ele montou no Perfil). `null` = nunca editou → sem escudo.
