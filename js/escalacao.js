@@ -226,6 +226,8 @@ function iniciarTelaJogo() {
 
 function selecionarFormacaoJogo(nome) {
   if (formacaoTravada) return;
+  // No vôlei não há troca de formação (posições fixas) — ignora qualquer clique.
+  if ((typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado)) return;
 
   formacaoJogo = nome;
 
