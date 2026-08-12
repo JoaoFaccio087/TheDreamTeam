@@ -281,8 +281,12 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
   gap: 2rem;
-  align-items: start;
+  align-items: stretch;   /* colunas com a mesma altura — some o vão embaixo das barras */
 }
+/* O bloco de desempenho (esquerda) estica para acompanhar a altura do time escalado. */
+.perfil-col-stats { display: flex; }
+.perfil-col-stats > .perfil-bloco { flex: 1; display: flex; flex-direction: column; }
+.perfil-col-stats > .perfil-bloco > .perfil-acordeoes { flex: 1; }
 /* Dentro da coluna esquerda (mais estreita que a tela toda), os stats cabem em 4 colunas. */
 .perfil-cols .perfil-tela-wrap .acord-stats,
 .perfil-cols .acord-stats { grid-template-columns: repeat(4, 1fr); }
@@ -472,6 +476,9 @@
 }
 
 /* ── Bloco: desempenho por competição (barras) — substitui os acordeões ── */
+.perfil-acordeoes {
+  display: flex; flex-direction: column; justify-content: space-between;
+}
 .perfil-barra-linha {
   padding: 0.95rem 0;
   border-bottom: 1px solid var(--linha);

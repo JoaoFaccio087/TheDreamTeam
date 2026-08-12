@@ -227,12 +227,13 @@
 
 #campo {
   position: relative;    /* necessário para as fichas (position:absolute) ficarem dentro */
-  width: 230px;
-  height: 344px;
+  width: 100%;           /* fluido: acompanha a coluna direita (antes era 230px fixo) */
+  max-width: 340px;      /* teto maior — preenche melhor o espaço que sobrou sem as formações */
+  aspect-ratio: 2 / 3;   /* mantém a proporção da quadra/campo sem altura fixa */
+  margin: 0 auto 20px;   /* centraliza na coluna */
   border-radius: var(--raio-sm);
   border: 2px solid rgba(255, 255, 255, 0.3);
   overflow: visible;     /* fichas nas bordas extremas não são cortadas */
-  margin-bottom: 20px;
 
   /* Listras horizontais simulando a grama (dois tons de verde alternados) */
   background: repeating-linear-gradient(

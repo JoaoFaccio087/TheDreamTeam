@@ -407,13 +407,44 @@
 
   // Re-renderiza os blocos que dependem do esporte (barras, KPIs, escalados, conquistas).
   function aplicarFiltroEsporte() {
-    carregarAcordeoes();   // barras + KPIs (já leem GRUPOS; passam a filtrar via gruposDoEsporte)
+    atualizarSeletorEscalados();   // mostra só as competições do esporte no seletor do mapa
+    carregarAcordeoes();           // barras + KPIs + renderEscalados('geral')
     if (typeof renderConquistasDestaque === 'function') renderConquistasDestaque(_esportePerfil);
+  }
+
+  // Ajusta o seletor de competições do "time mais escalado" para o esporte ativo:
+  // esconde as pílulas de competições do outro esporte e reativa a "Geral".
+  function atualizarSeletorEscalados() {
+    var sel = $('perfil-escalados-sel');
+    if (!sel) return;
+    var gruposEsp = gruposDoEsporte();
+    var nomesEsp = {};
+    gruposEsp.forEach(function (g) { nomesEsp[(g.chave || 'geral')] = true; });
+    Array.prototype.forEach.call(sel.querySelectorAll('.pilula'), function (p) {
+      var esc = p.getAttribute('data-esc') || 'geral';
+      var mostra = (esc === 'geral') || nomesEsp[esc];
+      p.classList.toggle('escondida', !mostra);
+      p.classList.toggle('pilula-ativa', esc === 'geral');   // volta pro Geral ao trocar
+    });
   }
 
   // Faixa de KPIs (números-chave) do topo das Estatísticas. Recebe os totais já
   // agregados do "Geral" e pinta 4 cartões. Universais aos dois esportes (não usa
   // "gols" — usa campanhas, títulos, vitórias e aproveitamento).
+  // Soma os stats das competições (exclui a linha 'Geral' p/ não duplicar) — para os
+  // KPIs refletirem só o esporte ativo (gruposDoEsporte já filtrou as linhas).
+  function somaKPIs(linhas) {
+    var acc = { camp: 0, tit: 0, v: 0, e: 0, d: 0, gf: 0, ga: 0 };
+    linhas.forEach(function (l) {
+      if (l.nome === 'Geral') return;
+      var s = l.s || {};
+      acc.camp += s.camp | 0; acc.tit += s.tit | 0;
+      acc.v += s.v | 0; acc.e += s.e | 0; acc.d += s.d | 0;
+      acc.gf += s.gf | 0; acc.ga += s.ga | 0;
+    });
+    return comAproveitamento(acc);
+  }
+
   function pintarKPIs(s) {
     var box = $('perfil-kpis');
     if (!box) return;
@@ -454,11 +485,11 @@
       if (stats && stats.grupos) {
         _statsCache = stats;
         _histCache = null;                 // não precisamos do histórico completo aqui
-        var geralServ = comAproveitamento(stats.grupos[GRUPOS[0].api] || STATS_ZERO);
-        pintarKPIs(geralServ);
         var linhasServ = gruposDoEsporte().map(function (g) {
           return { nome: g.nome, s: comAproveitamento(stats.grupos[g.api] || STATS_ZERO) };
         });
+        // KPIs: soma só as competições do esporte ativo (exclui o 'Geral' da soma).
+        pintarKPIs(somaKPIs(linhasServ));
         box.innerHTML = barrasDesempenhoHTML(linhasServ);
         renderEscalados('geral');
         return;
@@ -468,13 +499,14 @@
         lista = lista || [];
         _statsCache = null;
         _histCache = lista;
-        pintarKPIs(agregaStats(lista.slice()));   // Geral = todas as campanhas
         var linhasLoc = gruposDoEsporte().map(function (g) {
           var ms = g.chave
             ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
             : lista.slice();
           return { nome: g.nome, s: agregaStats(ms) };
         });
+        // KPIs: soma só as competições do esporte ativo (exclui o 'Geral' da soma).
+        pintarKPIs(somaKPIs(linhasLoc));
         box.innerHTML = barrasDesempenhoHTML(linhasLoc);
         renderEscalados('geral');   // campo à direita começa no "Geral"
       });
@@ -690,10 +722,11 @@
   function montarOnzeEscalado(grupos, formacao) {
     var coords = (typeof formacoes !== 'undefined' && formacoes[formacao]) ? formacoes[formacao] : [];
     var cods   = (typeof codigosFormacao !== 'undefined' && codigosFormacao[formacao]) ? codigosFormacao[formacao] : [];
-    var usados = { GOL: 0, DEF: 0, MEI: 0, ATA: 0 };
+    var usados = {};   // conta por grupo dinamicamente (futebol: GOL/DEF/MEI/ATA; vôlei: LEV/PON/CEN/LIB/OPO)
     return coords.map(function (c, i) {
       var g = c.grupo;
       var lista = grupos[g] || [];
+      if (usados[g] === undefined) usados[g] = 0;
       var jog = lista[usados[g]] || null;
       usados[g]++;
       return { left: c.left, top: c.top, grupo: g, cod: cods[i] || g, jog: jog };
@@ -717,18 +750,25 @@
       grupos = contarEscalados(ms);
     }
 
-    var temAlgum = ['GOL', 'DEF', 'MEI', 'ATA'].some(function (g) {
+    var temAlgum = ['GOL', 'DEF', 'MEI', 'ATA', 'LEV', 'OPO', 'PON', 'CEN', 'LIB'].some(function (g) {
       return (grupos[g] || []).length > 0;
     });
     if (!temAlgum) {
       campo.innerHTML = '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
+      campo.classList.remove('quadra-volei');
       return;
     }
 
-    var vagas = montarOnzeEscalado(grupos, FORMACAO_ESCALADOS);
-    var html =
-      '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
-      '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>';
+    // Escolhe a formação/aparência conforme o esporte ativo do perfil.
+    var ehVolei = (_esportePerfil === 'volei');
+    var formacao = ehVolei ? 'volei' : FORMACAO_ESCALADOS;
+    campo.classList.toggle('quadra-volei', ehVolei);
+
+    var vagas = montarOnzeEscalado(grupos, formacao);
+    var html = ehVolei
+      ? '<div class="piso"></div><div class="rede"></div><div class="linha-ataque"></div><div class="linha-ataque-baixo"></div>'
+      : '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
+        '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>';
     vagas.forEach(function (v) {
       var temJog = !!v.jog;
       var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';

@@ -95,7 +95,8 @@
    Piso laranja, zona livre azul na borda; rede no topo, linha de ataque a 3 m. */
 .quadra-volei,
 #campo.quadra-volei,
-#campo-jogo.quadra-volei {    /* especificidade de ID p/ vencer o verde do #campo e #campo-jogo */
+#campo-jogo.quadra-volei,
+.perfil-campo-escalados.quadra-volei {    /* especificidade p/ vencer o verde do #campo, #campo-jogo e escalados */
   background: #17608F !important;    /* zona livre (fora da quadra) = fundo azul */
   /* SEM padding aqui: padding deslocaria as fichas (position:absolute com top/left %).
      A margem laranja (piso) é feita com inset no .piso, que não afeta as fichas. */
@@ -108,7 +109,10 @@
 #campo.quadra-volei .campo-area,
 #campo-jogo.quadra-volei .campo-jogo-linha-meio,
 #campo-jogo.quadra-volei .campo-jogo-circulo,
-#campo-jogo.quadra-volei .campo-jogo-area {
+#campo-jogo.quadra-volei .campo-jogo-area,
+.perfil-campo-escalados.quadra-volei .pce-linha-meio,
+.perfil-campo-escalados.quadra-volei .pce-circulo,
+.perfil-campo-escalados.quadra-volei .pce-area {
   display: none;
 }
 
