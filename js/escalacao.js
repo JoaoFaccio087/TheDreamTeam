@@ -39,8 +39,10 @@ function atualizarBoxScore() {
 // MC conta em ambas as categorias (meio-campo misto)
 
 function atualizarForcas() {
-  var codigosAtaque = ['PE', 'PD', 'ATA', 'MD', 'ME', 'MEI', 'MC'];
-  var codigosDefesa = ['GOL', 'ZAG', 'LD', 'LE', 'VOL', 'MC'];
+  // Futebol: MC conta em ambas (meio-campo misto).
+  // Vôlei: PON/OPO/CEN atacam (pontuam); LEV (armador) e LIB (defensor puro) = defesa.
+  var codigosAtaque = ['PE', 'PD', 'ATA', 'MD', 'ME', 'MEI', 'MC', 'PON', 'OPO', 'CEN'];
+  var codigosDefesa = ['GOL', 'ZAG', 'LD', 'LE', 'VOL', 'MC', 'LEV', 'LIB'];
 
   var todos  = [];
   var ataque = [];

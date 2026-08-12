@@ -136,13 +136,13 @@ const formacoes = {
   // Frente (fundo da quadra, embaixo): levantador, líbero, oposto.
   'volei': [
     // Linha de frente (zona de ataque, ABAIXO da rede em 50%): sem tocar a rede.
-    { left: 26, top: 64, grupo: 'PON' },
-    { left: 50, top: 60, grupo: 'CEN' },
-    { left: 74, top: 64, grupo: 'PON' },
-    // Linha de fundo (defesa): levantador e oposto nas laterais, líbero recuado ao centro.
-    { left: 28, top: 86, grupo: 'LEV' },
-    { left: 50, top: 90, grupo: 'LIB' },
-    { left: 72, top: 86, grupo: 'OPO' }
+    { left: 26, top: 60, grupo: 'PON' },
+    { left: 50, top: 56, grupo: 'CEN' },
+    { left: 74, top: 60, grupo: 'PON' },
+    // Linha de fundo (defesa): sobe um pouco p/ as fichas + nomes não saírem da quadra.
+    { left: 28, top: 80, grupo: 'LEV' },
+    { left: 50, top: 84, grupo: 'LIB' },
+    { left: 72, top: 80, grupo: 'OPO' }
   ]
 
 };
