@@ -188,7 +188,15 @@ const DADOS_VOLEI_F = [
       { id: 'zhu-ting',            nome: "Zhu Ting",            posicoes: ["PON"],       forca: 90 },
       { id: 'zhang-changning',     nome: "Zhang Changning",     posicoes: ["PON"],       forca: 85 },
       { id: 'yan-ni',              nome: "Yan Ni",              posicoes: ["CEN"],       forca: 85 },
-      { id: 'wang-mengjie',        nome: "Wang Mengjie",        posicoes: ["LIB"],       forca: 83 }
+      { id: 'wang-mengjie',        nome: "Wang Mengjie",        posicoes: ["LIB"],       forca: 83 },
+      { id: 'diao-linyu',          nome: "Diao Linyu",          posicoes: ["LEV"],       forca: 79 },
+      { id: 'li-yingying',         nome: "Li Yingying",         posicoes: ["PON"],       forca: 83 },
+      { id: 'liu-xiaotong',        nome: "Liu Xiaotong",        posicoes: ["PON"],       forca: 82 },
+      { id: 'yuan-xinyue',         nome: "Yuan Xinyue",         posicoes: ["CEN"],       forca: 84 },
+      { id: 'hu-mingyuan',         nome: "Hu Mingyuan",         posicoes: ["CEN"],       forca: 78 },
+      { id: 'yang-hanyu',          nome: "Yang Hanyu",          posicoes: ["OPO"],       forca: 78 },
+      { id: 'gao-yi',              nome: "Gao Yi",              posicoes: ["CEN"],       forca: 77 },
+      { id: 'lin-li',              nome: "Lin Li",              posicoes: ["LIB"],       forca: 78 }
     ]
   },
 
@@ -202,7 +210,15 @@ const DADOS_VOLEI_F = [
       { id: 'lonneke-vandenberg',  nome: "Van Den Berg",        posicoes: ["PON"],       forca: 82 },
       { id: 'anne-buijs',          nome: "Buijs",               posicoes: ["PON"],       forca: 82 },
       { id: 'robin-de-kruijf',     nome: "De Kruijf",           posicoes: ["CEN"],       forca: 84 },
-      { id: 'myrthe-schoot',       nome: "Schoot",              posicoes: ["LIB"],       forca: 83 }
+      { id: 'myrthe-schoot',       nome: "Schoot",              posicoes: ["LIB"],       forca: 83 },
+      { id: 'britt-bongaerts',     nome: "Bongaerts",           posicoes: ["LEV"],       forca: 78 },
+      { id: 'nika-daalderop',      nome: "Daalderop",           posicoes: ["PON"],       forca: 80 },
+      { id: 'marrit-jasper',       nome: "Jasper",              posicoes: ["PON"],       forca: 78 },
+      { id: 'juliet-lohuis',       nome: "Lohuis",              posicoes: ["CEN"],       forca: 79 },
+      { id: 'yvon-belien',         nome: "Beliën",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'celeste-plak',        nome: "Plak",                posicoes: ["OPO"],       forca: 81 },
+      { id: 'maret-grothues',      nome: "Grothues",            posicoes: ["PON"],       forca: 77 },
+      { id: 'kristie-koolhaas',    nome: "Koolhaas",            posicoes: ["LIB"],       forca: 76 }
     ]
   },
 
@@ -216,7 +232,15 @@ const DADOS_VOLEI_F = [
       { id: 'gabriela-guimaraes',  nome: "Gabi",                posicoes: ["PON"],       forca: 87 },
       { id: 'natalia-pereira',     nome: "Natália",             posicoes: ["PON"],       forca: 84 },
       { id: 'thaisa-menezes',      nome: "Thaisa",              posicoes: ["CEN"],       forca: 85 },
-      { id: 'suelen-pinto',        nome: "Suelen",              posicoes: ["LIB"],       forca: 82 }
+      { id: 'suelen-pinto',        nome: "Suelen",              posicoes: ["LIB"],       forca: 82 },
+      { id: 'roberta-ratzke',      nome: "Roberta",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'rosamaria-montibeller', nome: "Rosamaria",         posicoes: ["OPO"],       forca: 82 },
+      { id: 'drussyla-costa',      nome: "Drussyla",            posicoes: ["PON"],       forca: 80 },
+      { id: 'ana-beatriz-correa',  nome: "Bia",                 posicoes: ["CEN"],       forca: 81 },
+      { id: 'carol-gattaz',        nome: "Carol Gattaz",        posicoes: ["CEN"],       forca: 82 },
+      { id: 'adenizia-silva',      nome: "Adenízia",            posicoes: ["CEN"],       forca: 80 },
+      { id: 'lorenne-teixeira',    nome: "Lorenne",             posicoes: ["OPO"],       forca: 78 },
+      { id: 'leia-henrique',       nome: "Léia",                posicoes: ["LIB"],       forca: 79 }
     ]
   }
 
