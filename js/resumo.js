@@ -124,7 +124,22 @@ function nomeCurto(nome) {
 function mostrarResumo() {
   if (!resumoOverlay) return;
 
-  // ---- Destaques: maior goleador e maior assistente da campanha ----
+  // Rótulos conforme o esporte: futebol usa gols/artilheiro/assistências; vôlei usa
+  // sets/pontos/aces. Assim o resumo não mostra termos de futebol numa campanha de vôlei.
+  var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+  var L = ehVolei ? {
+    placar: 'Sets', placarSub: 'Feitos \u00B7 Sofridos',
+    top1: 'Maior pontuador', top1un: 'pts', top1vazio: 'sem pontos',
+    top2: 'Mais aces', top2un: 'aces', top2vazio: 'sem aces',
+    colG: 'PTS', colA: 'ACE', emoji: '\uD83C\uDFD0\uD83C\uDFC6', unidadeShare: 'sets'
+  } : {
+    placar: 'Gols', placarSub: 'Feitos \u00B7 Sofridos',
+    top1: 'Artilheiro', top1un: 'gols', top1vazio: 'sem gols',
+    top2: 'Assistente', top2un: 'assist\u00EAncias', top2vazio: 'sem assist\u00EAncias',
+    colG: 'G', colA: 'A', emoji: '\u26BD\uD83C\uDFC6', unidadeShare: 'gols'
+  };
+
+  // ---- Destaques: maior goleador/pontuador e maior assistente/aces da campanha ----
   var artilheiro = null, assistente = null;
   Object.keys(statsJogadores).forEach(function (nome) {
     var s = statsJogadores[nome];
@@ -144,7 +159,7 @@ function mostrarResumo() {
   resumoShareTexto =
     (resumoCampeao ? 'Fui CAMPE\u00C3O' : 'Terminei minha campanha') +
     ' no The Dream Team \u2014 ' + COMPETICOES[modoSelecionado].label +
-    ', com ' + aprov + '% de aproveitamento e ' + campanhaGF + ' gols! \u26BD\uD83C\uDFC6';
+    ', com ' + aprov + '% de aproveitamento e ' + campanhaGF + ' ' + L.unidadeShare + '! ' + L.emoji;
 
   // ---- Troféu (SVG) — herda a cor de destaque do tema ----
   var trofeu =
@@ -171,21 +186,22 @@ function mostrarResumo() {
          '<b class="rec-e">' + campanhaEmpates  + '</b><i>\u00B7</i>' +
          '<b class="rec-d">' + campanhaDerrotas + '</b>',
          'V \u00B7 E \u00B7 D') +
-    card('Gols',
+    card(L.placar,
          '<b>' + campanhaGF + '</b><i>:</i><b>' + campanhaGA + '</b>',
-         'Feitos \u00B7 Sofridos  (' + (saldo >= 0 ? '+' : '') + saldo + ')') +
-    card('Artilheiro',
+         L.placarSub + '  (' + (saldo >= 0 ? '+' : '') + saldo + ')') +
+    card(L.top1,
          artilheiro ? nomeCurto(artilheiro.nome) : '\u2014',
-         artilheiro ? (artilheiro.v + ' gols') : 'sem gols') +
-    card('Assistente',
+         artilheiro ? (artilheiro.v + ' ' + L.top1un) : L.top1vazio) +
+    card(L.top2,
          assistente ? nomeCurto(assistente.nome) : '\u2014',
-         assistente ? (assistente.v + ' assist\u00EAncias') : 'sem assist\u00EAncias');
+         assistente ? (assistente.v + ' ' + L.top2un) : L.top2vazio);
 
-  // ---- MINI-CAMPO: titulares posicionados pela formação ----
+  // ---- MINI-CAMPO: titulares posicionados pela formação (ou quadra no vôlei) ----
   var coords = formacoes[formacaoJogo] || [];
-  var campoHtml =
-    '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
-    '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
+  var campoHtml = ehVolei
+    ? '<div class="rc-piso"></div><div class="rc-rede"></div>'
+    : '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
+      '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
   for (var i = 0; i < coords.length; i++) {
     var pos = coords[i];
     if (!pos) continue;
@@ -204,7 +220,7 @@ function mostrarResumo() {
   var listaHtml =
     '<div class="resumo-lista-head">' +
       '<span class="rl-nome">Jogador</span><span class="rl-num">F\u00E7a</span>' +
-      '<span class="rl-num">G</span><span class="rl-num">A</span>' +
+      '<span class="rl-num">' + L.colG + '</span><span class="rl-num">' + L.colA + '</span>' +
     '</div>';
   titulares.forEach(function (j) {
     var s = statsJogadores[j.nome] || { gols: 0, asis: 0 };
@@ -230,7 +246,7 @@ function mostrarResumo() {
         '<div class="resumo-grid">' +
           '<div class="resumo-col-campo">' +
             '<p class="resumo-bloco-rot">Mapa de Escala\u00E7\u00E3o</p>' +
-            '<div class="resumo-campo">' + campoHtml + '</div>' +
+            '<div class="resumo-campo' + (ehVolei ? ' resumo-campo-volei' : '') + '">' + campoHtml + '</div>' +
           '</div>' +
           '<div class="resumo-col-lista">' +
             '<p class="resumo-bloco-rot">Jogadores &amp; Estat\u00EDsticas</p>' +

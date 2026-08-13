@@ -160,6 +160,20 @@
   position: absolute; left: 0; right: 0; top: 50%;
   height: 2px; background: rgba(255,255,255,0.32);
 }
+
+/* Mini-quadra de vôlei no resumo (quando a campanha é de vôlei). */
+.resumo-campo-volei {
+  background: #17608F !important;   /* zona livre azul */
+}
+.resumo-campo-volei .rc-piso {
+  position: absolute; inset: 8%; background: #C87D46;   /* piso laranja */
+  border: 2px solid rgba(255,255,255,0.85); border-radius: 2px;
+}
+.resumo-campo-volei .rc-rede {
+  position: absolute; left: 6%; right: 6%; top: 50%;
+  height: 0; border-top: 3px dashed rgba(255,255,255,0.9);
+  transform: translateY(-50%); z-index: 2;
+}
 .rc-circulo {
   position: absolute; left: 50%; top: 50%;
   width: 78px; height: 78px;
