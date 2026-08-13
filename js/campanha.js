@@ -495,12 +495,13 @@ function iniciarPartidaVolei() {
       if (btn) btn.disabled = false;
       var acabaramJogosGrupo = (camp.jogosGrupoFeitos >= advs.length);
 
-      // Se terminou os jogos do grupo, resolve a classificação nos bastidores
-      // e salva o resultado da campanha no banco (fatia 5).
+      // Se terminou os jogos do grupo, resolve a classificação nos bastidores.
       if (acabaramJogosGrupo) {
         CampanhaVolei.simularJogosAdversariosGrupo(camp);
-        salvarCampanhaVolei(camp);
         mostrarTabelaGrupoVolei(camp);   // exibe o "grupinho" com a classificação final
+        // Só salva AGORA se você foi eliminado nos grupos. Se classificou, o save
+        // acontece no fim do mata-mata (com o resultado final, evitando duplicar).
+        if (!CampanhaVolei.voceClassificou(camp)) salvarCampanhaVolei(camp);
       }
 
       // Atualiza o BOTÃO conforme o estado.
@@ -564,15 +565,22 @@ function pularTudoVolei() {
   }
 
   CampanhaVolei.simularJogosAdversariosGrupo(camp);
-  salvarCampanhaVolei(camp);
   mostrarTabelaGrupoVolei(camp);   // mostra o "grupinho" também ao pular tudo
+  // Só salva agora se eliminado nos grupos; se classificou, salva no fim do mata.
+  if (!CampanhaVolei.voceClassificou(camp)) salvarCampanhaVolei(camp);
 
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) {
-    var classificou = CampanhaVolei.voceClassificou(camp);
-    btn.innerHTML = classificou ? 'Nova Campanha' : 'Montar Novo Time \u25BA';
+    if (CampanhaVolei.voceClassificou(camp)) {
+      // Classificou → monta o mata e leva ao mata-mata (igual ao fluxo jogo a jogo).
+      CampanhaVolei.montarMataVolei(camp);
+      btn.innerHTML = 'Ir ao Mata-Mata \u25BA';
+      acaoBotao = 'mata-volei';
+    } else {
+      btn.innerHTML = 'Montar Novo Time \u25BA';
+      acaoBotao = 'novo-time';
+    }
     btn.disabled = false;
-    acaoBotao = classificou ? 'nova-campanha' : 'novo-time';
   }
   var bp = document.getElementById('btn-pular-tudo');
   if (bp) bp.classList.add('escondida');
@@ -622,6 +630,16 @@ function iniciarPartidaMataVolei() {
           btn.innerHTML = 'Pr\u00f3xima Partida \u25BA';
           acaoBotao = 'mata-volei';
         }
+      }
+
+      // Quando a campanha ACABA no mata (título ou eliminação), salva o resultado final
+      // com o desfecho — isto alimenta o resumo e as conquistas (Campeão Mundial etc.).
+      if (res.campeao || res.eliminado) {
+        salvarCampanhaVolei(camp, {
+          campeao: res.campeao,
+          posicao: res.campeao ? 1 : null,
+          faseAlcancada: faseNome   // fase em que a campanha terminou
+        });
       }
 
       // encadeia no modo automático enquanto você seguir vivo
@@ -681,7 +699,9 @@ function mostrarTabelaGrupoVolei(camp) {
 //  - gf/ga = sets feitos/sofridos (reaproveita as colunas; ver migração 009)
 //  - empates = 0 (vôlei não empata)
 //  - detalhes = placar por sets, edição, e a classificação final do grupo
-function salvarCampanhaVolei(camp) {
+// Salva a campanha de vôlei. `resultadoMata` (opcional) traz o desfecho do mata-mata:
+//   { campeao, posicao, faseAlcancada } — quando ausente, salva o fim da fase de grupos.
+function salvarCampanhaVolei(camp, resultadoMata) {
   if (typeof API === 'undefined' || !API.salvarPartida) return;
 
   var cls = CampanhaVolei.classificacaoGrupo(camp);
@@ -690,22 +710,35 @@ function salvarCampanhaVolei(camp) {
   cls.forEach(function (l, i) { if (l.time.voce) posicao = i + 1; });
   var classificou = CampanhaVolei.voceClassificou(camp);
 
+  // Soma os jogos do mata-mata (se houver) às vitórias/derrotas e sets.
+  var vTot = minhaLinha.v | 0, dTot = minhaLinha.d | 0;
+  var spTot = minhaLinha.sp | 0, scTot = minhaLinha.sc | 0;
+  if (camp.mata && camp.mata.historico) {
+    camp.mata.historico.forEach(function (h) {
+      if (h.venceu) vTot++; else dTot++;
+      spTot += h.setsVoce | 0; scTot += h.setsAdv | 0;
+    });
+  }
+
+  var ehCampeao = !!(resultadoMata && resultadoMata.campeao);
+
   API.salvarPartida({
     competicao: COMPETICOES[modoSelecionado].dados,   // "Mundial de Vôlei (M)" / "(F)"
     esporte:    'volei',
     modo:       'solo',
-    vitorias:   minhaLinha.v | 0,
+    vitorias:   vTot,
     empates:    0,                                     // vôlei não empata
-    derrotas:   minhaLinha.d | 0,
-    gf:         minhaLinha.sp | 0,                     // sets feitos
-    ga:         minhaLinha.sc | 0,                     // sets sofridos
-    posicao:    posicao || null,
-    campeao:    false,                                 // título só no fim do mata-mata (fatia futura)
+    derrotas:   dTot,
+    gf:         spTot,                                 // sets feitos
+    ga:         scTot,                                 // sets sofridos
+    posicao:    (resultadoMata && resultadoMata.posicao) || posicao || null,
+    campeao:    ehCampeao,
     detalhes: {
       edicao:       camp.edicaoAno,
       formato:      camp.formato.id,
       grupo:        String.fromCharCode(65 + camp.seuGrupo),
       classificado: !!classificou,
+      faseAlcancada: (resultadoMata && resultadoMata.faseAlcancada) || (classificou ? 'MATA-MATA' : 'FASE DE GRUPOS'),
       classificacao: cls.map(function (l) {
         return { time: l.time.voce ? '(você)' : l.time.nome, pts: l.pts, sp: l.sp, sc: l.sc };
       })
