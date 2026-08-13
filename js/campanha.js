@@ -485,12 +485,14 @@ function iniciarPartidaVolei() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
-  // roda a animação usando a velocidade global já existente (mesma do futebol)
+  // roda a animação usando a velocidade global já existente (mesma do futebol).
+  // IMPORTANTE: o automático NÃO pula a animação — ele só encadeia a próxima partida
+  // sozinha (igual ao futebol). Só o "Pular tudo" pula de fato as simulações.
   AnimacaoVolei.animar({
     elCard: card,
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
-    pular: (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico'),
+    pular: false,
     onFim: function () {
       if (btn) btn.disabled = false;
       var acabaramJogosGrupo = (camp.jogosGrupoFeitos >= advs.length);
@@ -524,10 +526,15 @@ function iniciarPartidaVolei() {
         }
       }
 
-      // encadeia próxima partida no modo automático
-      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico' &&
-          camp.jogosGrupoFeitos < advs.length) {
-        setTimeout(function () { iniciarPartidaVolei(); }, 800);
+      // Encadeamento no modo automático:
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico') {
+        if (camp.jogosGrupoFeitos < advs.length) {
+          // ainda há jogos de grupo → próximo jogo de grupo
+          setTimeout(function () { iniciarPartidaVolei(); }, 800);
+        } else if (acabaramJogosGrupo && CampanhaVolei.voceClassificou(camp)) {
+          // grupos acabaram e você classificou → segue direto ao mata-mata
+          setTimeout(function () { iniciarPartidaMataVolei(); }, 900);
+        }
       }
     }
   });
@@ -612,7 +619,7 @@ function iniciarPartidaMataVolei() {
     elCard: card,
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
-    pular: (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico'),
+    pular: false,   // automático anima normalmente; só "Pular tudo" pula de fato
     onFim: function () {
       if (btn) btn.disabled = false;
       var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
@@ -663,11 +670,10 @@ function mostrarTabelaGrupoVolei(camp) {
     var saldo = (l.sp - l.sc >= 0 ? '+' : '') + (l.sp - l.sc);
     var classe = (t.voce ? 'grupo-voce' : '') + (i < avancam ? ' grupo-classifica' : '');
     var nome = t.voce ? nomeDoTime : t.nome;
-    // Escudo: seu do perfil; adversário do clubeRef (sem estrelas no vôlei).
-    var esc = '';
-    if (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo && t.clubeRef) {
-      esc = Escudos.porNomeSeModo(t.clubeRef.clube, modoSelecionado) || '';
-    }
+    // Escudo: usa porTime, que resolve o SEU escudo (t.voce → doUsuario) e o dos
+    // adversários (clubeRef). Antes só gerava p/ quem tinha clubeRef → seu time ficava sem.
+    var esc = (typeof Escudos !== 'undefined' && Escudos.porTime)
+      ? (Escudos.porTime(t, modoSelecionado) || '') : '';
     var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
     return '<tr class="' + classe + '">' +
              '<td class="grupo-pos">' + (i + 1) + '</td>' +
