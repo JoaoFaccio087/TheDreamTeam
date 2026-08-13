@@ -43,7 +43,15 @@ const DADOS_VOLEI_F = [
       { id: 'brankica-mihajlovic', nome: "Mihajlović",          posicoes: ["PON"],       forca: 86 },
       { id: 'bianka-busa',         nome: "Buša",                posicoes: ["PON"],       forca: 84 },
       { id: 'jovana-stevanovic',   nome: "Stevanović",          posicoes: ["CEN"],       forca: 84 },
-      { id: 'teodora-pusic',       nome: "Pušić",               posicoes: ["LIB"],       forca: 85 }
+      { id: 'teodora-pusic',       nome: "Pušić",               posicoes: ["LIB"],       forca: 85 },
+      { id: 'sladjana-mirkovic',   nome: "Mirković",            posicoes: ["LEV"],       forca: 79 },
+      { id: 'aleksandra-uzelac',   nome: "Uzelac",              posicoes: ["OPO"],       forca: 79 },
+      { id: 'katarina-lazovic',    nome: "Lazović",             posicoes: ["PON"],       forca: 82 },
+      { id: 'jelena-blagojevic',   nome: "Blagojević",          posicoes: ["PON"],       forca: 80 },
+      { id: 'ana-bjelica',         nome: "Bjelica",             posicoes: ["CEN"],       forca: 82 },
+      { id: 'jovana-kocic',        nome: "Kocić",               posicoes: ["CEN"],       forca: 79 },
+      { id: 'maja-aleksic',        nome: "Aleksić",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'aleksandra-jegdic',   nome: "Jegdić",              posicoes: ["LIB"],       forca: 77 }
     ]
   },
 
@@ -57,7 +65,15 @@ const DADOS_VOLEI_F = [
       { id: 'gabriela-guimaraes',  nome: "Gabi",                posicoes: ["PON"],       forca: 89 },
       { id: 'julia-bergmann',      nome: "Julia Bergmann",      posicoes: ["PON"],       forca: 83 },
       { id: 'ana-carolina-silva',  nome: "Ana Carolina",        posicoes: ["CEN"],       forca: 85 },
-      { id: 'nyeme-costa',         nome: "Nyeme",               posicoes: ["LIB"],       forca: 82 }
+      { id: 'nyeme-costa',         nome: "Nyeme",               posicoes: ["LIB"],       forca: 82 },
+      { id: 'roberta-ratzke',      nome: "Roberta",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'kisy-nascimento',     nome: "Kisy",                posicoes: ["OPO"],       forca: 82 },
+      { id: 'priscila-daroit',     nome: "Pri Daroit",          posicoes: ["PON"],       forca: 80 },
+      { id: 'ana-cristina-menezes', nome: "Ana Cristina",       posicoes: ["PON"],       forca: 80 },
+      { id: 'carol-gattaz',        nome: "Carol Gattaz",        posicoes: ["CEN"],       forca: 83 },
+      { id: 'lorenne-teixeira',    nome: "Lorenne",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'mara-leao',           nome: "Mara",                posicoes: ["OPO"],       forca: 78 },
+      { id: 'laisa-santos',        nome: "Laís",                posicoes: ["LIB"],       forca: 79 }
     ]
   },
 
