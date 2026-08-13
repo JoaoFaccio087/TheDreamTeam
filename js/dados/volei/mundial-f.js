@@ -87,7 +87,15 @@ const DADOS_VOLEI_F = [
       { id: 'miriam-sylla',        nome: "Sylla",               posicoes: ["PON"],       forca: 87 },
       { id: 'caterina-bosetti',    nome: "Bosetti",             posicoes: ["PON"],       forca: 84 },
       { id: 'anna-danesi',         nome: "Danesi",              posicoes: ["CEN"],       forca: 85 },
-      { id: 'monica-de-gennaro',   nome: "De Gennaro",          posicoes: ["LIB"],       forca: 87 }
+      { id: 'monica-de-gennaro',   nome: "De Gennaro",          posicoes: ["LIB"],       forca: 87 },
+      { id: 'ofelia-malinov',      nome: "Malinov",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'ekaterina-antropova', nome: "Antropova",           posicoes: ["OPO"],       forca: 82 },
+      { id: 'elena-pietrini',      nome: "Pietrini",            posicoes: ["PON"],       forca: 83 },
+      { id: 'loveth-omoruyi',      nome: "Omoruyi",             posicoes: ["PON"],       forca: 79 },
+      { id: 'cristina-chirichella', nome: "Chirichella",        posicoes: ["CEN"],       forca: 82 },
+      { id: 'sarah-fahr',          nome: "Fahr",                posicoes: ["CEN"],       forca: 81 },
+      { id: 'marina-lubian',       nome: "Lubian",              posicoes: ["CEN"],       forca: 79 },
+      { id: 'eleonora-fersino',    nome: "Fersino",             posicoes: ["LIB"],       forca: 78 }
     ]
   },
 
@@ -101,7 +109,15 @@ const DADOS_VOLEI_F = [
       { id: 'jordan-larson',       nome: "Larson",              posicoes: ["PON"],       forca: 87 },
       { id: 'michelle-bartsch',    nome: "Bartsch-Hackley",     posicoes: ["PON"],       forca: 85 },
       { id: 'chiaka-ogbogu',       nome: "Ogbogu",              posicoes: ["CEN"],       forca: 83 },
-      { id: 'justine-wong-orantes', nome: "Wong-Orantes",       posicoes: ["LIB"],       forca: 84 }
+      { id: 'justine-wong-orantes', nome: "Wong-Orantes",       posicoes: ["LIB"],       forca: 84 },
+      { id: 'lauren-carlini',      nome: "Carlini",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'kelsey-robinson',     nome: "Robinson",            posicoes: ["OPO"],       forca: 82 },
+      { id: 'avery-skinner',       nome: "Skinner",             posicoes: ["PON"],       forca: 81 },
+      { id: 'kathryn-plummer',     nome: "Plummer",             posicoes: ["PON"],       forca: 82 },
+      { id: 'haleigh-washington',  nome: "Washington",          posicoes: ["CEN"],       forca: 82 },
+      { id: 'dana-rettke',         nome: "Rettke",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'anna-hall',           nome: "Hall",                posicoes: ["CEN"],       forca: 77 },
+      { id: 'morgan-hentz',        nome: "Hentz",               posicoes: ["LIB"],       forca: 78 }
     ]
   },
 
