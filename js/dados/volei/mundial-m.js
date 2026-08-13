@@ -166,7 +166,15 @@ const DADOS_VOLEI_M = [
       { id: 'douglas-souza',       nome: "Douglas",             posicoes: ["PON"],       forca: 85 },
       { id: 'ricardo-lucarelli',   nome: "Lucarelli",           posicoes: ["PON"],       forca: 85 },
       { id: 'lucas-saatkamp',      nome: "Lucão",               posicoes: ["CEN"],       forca: 84 },
-      { id: 'mauricio-borges',     nome: "Maurício Borges",     posicoes: ["LIB"],       forca: 82 }
+      { id: 'mauricio-borges',     nome: "Maurício Borges",     posicoes: ["PON"],       forca: 82 },
+      { id: 'william-arjona',      nome: "William",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'evandro-guerra',      nome: "Evandro",             posicoes: ["OPO"],       forca: 80 },
+      { id: 'yoandy-leal',         nome: "Leal",                posicoes: ["PON"],       forca: 88 },
+      { id: 'isac-santos',         nome: "Isac",                posicoes: ["CEN"],       forca: 81 },
+      { id: 'mauricio-souza',      nome: "Maurício Souza",      posicoes: ["CEN"],       forca: 82 },
+      { id: 'flavio-gualberto',    nome: "Flávio",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'alan-souza',          nome: "Alan",                posicoes: ["OPO"],       forca: 82 },
+      { id: 'thales-hoss',         nome: "Thales",              posicoes: ["LIB"],       forca: 84 }
     ]
   },
 
@@ -180,7 +188,15 @@ const DADOS_VOLEI_M = [
       { id: 'aaron-russell',       nome: "Russell",             posicoes: ["PON"],       forca: 84 },
       { id: 'taylor-sander',       nome: "Sander",              posicoes: ["PON"],       forca: 83 },
       { id: 'max-holt',            nome: "Holt",                posicoes: ["CEN"],       forca: 83 },
-      { id: 'erik-shoji',          nome: "Shoji",               posicoes: ["LIB"],       forca: 85 }
+      { id: 'erik-shoji',          nome: "E. Shoji",            posicoes: ["LIB"],       forca: 85 },
+      { id: 'kawika-shoji',        nome: "K. Shoji",            posicoes: ["LEV"],       forca: 79 },
+      { id: 'ben-patch',           nome: "Patch",               posicoes: ["OPO"],       forca: 79 },
+      { id: 'tj-defalco',          nome: "DeFalco",             posicoes: ["PON"],       forca: 81 },
+      { id: 'garrett-muagututia',  nome: "Muagututia",          posicoes: ["PON"],       forca: 78 },
+      { id: 'david-smith',         nome: "Smith",               posicoes: ["CEN"],       forca: 81 },
+      { id: 'mitch-stahl',         nome: "Stahl",               posicoes: ["CEN"],       forca: 77 },
+      { id: 'jeffrey-jendryk',     nome: "Jendryk",             posicoes: ["CEN"],       forca: 77 },
+      { id: 'dustin-watten',       nome: "Watten",              posicoes: ["LIB"],       forca: 78 }
     ]
   },
 
@@ -194,7 +210,15 @@ const DADOS_VOLEI_M = [
       { id: 'uros-kovacevic',      nome: "Kovačević",           posicoes: ["PON"],       forca: 84 },
       { id: 'marko-ivovic',        nome: "Ivović",              posicoes: ["PON"],       forca: 82 },
       { id: 'marko-podrascanin',   nome: "Podrascanin",         posicoes: ["CEN"],       forca: 83 },
-      { id: 'nikola-rosic',        nome: "Rosić",               posicoes: ["LIB"],       forca: 81 }
+      { id: 'nikola-rosic',        nome: "Rosić",               posicoes: ["LIB"],       forca: 81 },
+      { id: 'nemanja-petric',      nome: "Petrić",              posicoes: ["PON"],       forca: 81 },
+      { id: 'drazen-luburic',      nome: "Luburić",             posicoes: ["OPO"],       forca: 80 },
+      { id: 'srecko-lisinac',      nome: "Lisinac",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'milan-katic',         nome: "Katić",               posicoes: ["CEN"],       forca: 77 },
+      { id: 'petar-krsmanovic',    nome: "Krsmanović",          posicoes: ["CEN"],       forca: 78 },
+      { id: 'aleksandar-okolic',   nome: "Okolić",              posicoes: ["PON"],       forca: 78 },
+      { id: 'mihajlo-mitic',       nome: "Mitić",               posicoes: ["LEV"],       forca: 76 },
+      { id: 'branislav-mitrovic',  nome: "Mitrović",            posicoes: ["LIB"],       forca: 76 }
     ]
   }
 
