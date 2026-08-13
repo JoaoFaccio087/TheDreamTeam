@@ -493,12 +493,30 @@ function iniciarPartidaVolei() {
     pular: (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico'),
     onFim: function () {
       if (btn) btn.disabled = false;
+      var acabaramJogosGrupo = (camp.jogosGrupoFeitos >= advs.length);
+
       // Se terminou os jogos do grupo, resolve a classificação nos bastidores
       // e salva o resultado da campanha no banco (fatia 5).
-      if (camp.jogosGrupoFeitos >= advs.length) {
+      if (acabaramJogosGrupo) {
         CampanhaVolei.simularJogosAdversariosGrupo(camp);
         salvarCampanhaVolei(camp);
       }
+
+      // Atualiza o BOTÃO conforme o estado (antes ficava sempre 'Iniciar Campanha').
+      if (btn) {
+        if (acabaramJogosGrupo) {
+          // Fim da campanha de vôlei (por ora encerra na fase de grupos): mostra o
+          // resultado e oferece montar um time novo.
+          var classificou = CampanhaVolei.voceClassificou(camp);
+          btn.innerHTML = classificou ? 'Nova Campanha' : 'Montar Novo Time \u25BA';
+          acaoBotao = classificou ? 'nova-campanha' : 'novo-time';
+        } else {
+          // Ainda há jogos no grupo: o botão vira "Próxima Partida".
+          btn.innerHTML = 'Pr\u00f3xima Partida \u25BA';
+          acaoBotao = 'proximo-volei';
+        }
+      }
+
       // encadeia próxima partida no modo automático
       if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico' &&
           camp.jogosGrupoFeitos < advs.length) {
@@ -506,6 +524,51 @@ function iniciarPartidaVolei() {
       }
     }
   });
+}
+
+// "Pular tudo" do vôlei: simula sem animação todos os jogos restantes do grupo,
+// registra na tabela, salva a campanha e mostra o resultado no botão. Evita cair
+// no pularTudoBrasileirao/pularTudoMata (que assumem futebol e travam).
+function pularTudoVolei() {
+  if (!campanhaVoleiAtual || typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') return;
+  var camp = campanhaVoleiAtual;
+  var advs = CampanhaVolei.adversariosDoSeuGrupo(camp);
+
+  while (camp.jogosGrupoFeitos < advs.length) {
+    var adversarioTime = advs[camp.jogosGrupoFeitos];
+    var adversario     = adversarioTime.clubeRef;
+    var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+    var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+    CampanhaVolei.registrarJogoGrupo(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+    var faseLabel = 'Grupo ' + String.fromCharCode(65 + camp.seuGrupo) + ' \u00B7 ' +
+                    rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+    var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+    partidaIdVolei = idCard;
+    var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+    // Usa a própria animação em modo "pular" (preenche o card com o resultado final
+    // instantaneamente, sem ponto a ponto).
+    AnimacaoVolei.animar({
+      elCard: card,
+      roteiro: roteiro,
+      velocidade: function () { return velocidadeSimulacao; },
+      pular: true
+    });
+    camp.jogosGrupoFeitos++;
+  }
+
+  CampanhaVolei.simularJogosAdversariosGrupo(camp);
+  salvarCampanhaVolei(camp);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) {
+    var classificou = CampanhaVolei.voceClassificou(camp);
+    btn.innerHTML = classificou ? 'Nova Campanha' : 'Montar Novo Time \u25BA';
+    btn.disabled = false;
+    acaoBotao = classificou ? 'nova-campanha' : 'novo-time';
+  }
+  var bp = document.getElementById('btn-pular-tudo');
+  if (bp) bp.classList.add('escondida');
 }
 
 // Salva a campanha de vôlei no banco/histórico (fatia 5). Espelha o formato do
