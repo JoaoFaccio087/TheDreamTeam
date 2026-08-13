@@ -186,6 +186,85 @@
     return top.some(function (l) { return l.time.voce; });
   }
 
+  // ── MATA-MATA ────────────────────────────────────────────────────
+  // Monta o chaveamento do mata a partir dos classificados do grupo. Com 1 grupo,
+  // os top-N avançam. Semeadura simples: 1º x último, 2º x penúltimo (evita você
+  // pegar o líder logo de cara se você passou em 1º). Guarda em camp.mata.
+  function montarMataVolei(camp) {
+    var cls = classificacaoGrupo(camp).slice(0, camp.avancamPorGrupo).map(function (l) { return l.time; });
+    // chaveamento: emparelha extremos
+    var confrontos = [];
+    var i = 0, j = cls.length - 1;
+    while (i < j) { confrontos.push([cls[i], cls[j]]); i++; j--; }
+    camp.mata = {
+      faseIdx: 0,
+      fases: camp.fasesMata,
+      vivos: cls,            // times ainda na disputa
+      confrontos: confrontos,
+      seuConfrontoIdx: confrontos.findIndex(function (par) {
+        return par[0].voce || par[1].voce;
+      }),
+      historico: []          // { fase, adversario, setsVoce, setsAdv, venceu }
+    };
+    return camp.mata;
+  }
+
+  // Seu adversário no confronto atual do mata (ou null se você não está mais vivo).
+  function seuAdversarioMata(camp) {
+    if (!camp.mata) return null;
+    var meu = camp.mata.confrontos[camp.mata.seuConfrontoIdx];
+    if (!meu) return null;
+    return meu[0].voce ? meu[1] : meu[0];
+  }
+
+  // Registra o resultado do SEU jogo do mata e resolve os outros confrontos da fase
+  // (bastidores). Monta a próxima fase com os vencedores. Retorna:
+  //   { venceu, campeao, eliminado, proximaFase }  para a UI decidir o texto.
+  function registrarJogoMata(camp, setsVoce, setsAdv, forcaDe) {
+    var m = camp.mata;
+    var venceu = setsVoce > setsAdv;
+    var faseNome = m.fases[m.faseIdx] ? m.fases[m.faseIdx].nome : 'MATA';
+    m.historico.push({ fase: faseNome, setsVoce: setsVoce, setsAdv: setsAdv, venceu: venceu });
+
+    // Vencedores da fase: o seu (se venceu) + os dos outros confrontos (por força+sorte).
+    var vencedores = [];
+    m.confrontos.forEach(function (par, idx) {
+      if (idx === m.seuConfrontoIdx) {
+        vencedores.push(venceu ? (par[0].voce ? par[0] : par[1]) : (par[0].voce ? par[1] : par[0]));
+      } else {
+        var a = par[0], b = par[1];
+        var pa = (a.forca || 70) + (Math.random() - 0.5) * 12;
+        var pb = (b.forca || 70) + (Math.random() - 0.5) * 12;
+        vencedores.push(pa >= pb ? a : b);
+      }
+    });
+
+    m.faseIdx++;
+    var acabou = (m.faseIdx >= m.fases.length) || vencedores.length < 2;
+    var voceVivo = venceu && vencedores.some(function (t) { return t.voce; });
+
+    if (acabou) {
+      // Última fase era a final: campeão = vencedor do seu confronto se você venceu.
+      return { venceu: venceu, campeao: venceu && voceVivo, eliminado: !venceu,
+               proximaFase: null };
+    }
+
+    if (!voceVivo) {
+      return { venceu: venceu, campeao: false, eliminado: true, proximaFase: null };
+    }
+
+    // Monta os confrontos da próxima fase com os vencedores.
+    var novos = [];
+    var i = 0, j = vencedores.length - 1;
+    while (i < j) { novos.push([vencedores[i], vencedores[j]]); i++; j--; }
+    m.confrontos = novos;
+    m.vivos = vencedores;
+    m.seuConfrontoIdx = novos.findIndex(function (par) { return par[0].voce || par[1].voce; });
+
+    return { venceu: venceu, campeao: false, eliminado: false,
+             proximaFase: m.fases[m.faseIdx] ? m.fases[m.faseIdx].nome : null };
+  }
+
   var API = {
     FORMATOS: FORMATOS,
     escolheFormato: escolheFormato,
@@ -195,7 +274,10 @@
     registrarJogoGrupo: registrarJogoGrupo,
     simularJogosAdversariosGrupo: simularJogosAdversariosGrupo,
     classificacaoGrupo: classificacaoGrupo,
-    voceClassificou: voceClassificou
+    voceClassificou: voceClassificou,
+    montarMataVolei: montarMataVolei,
+    seuAdversarioMata: seuAdversarioMata,
+    registrarJogoMata: registrarJogoMata
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = API;

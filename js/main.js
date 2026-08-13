@@ -212,6 +212,8 @@ UI.on('btn-iniciar-jogo', 'click', function () {
     iniciarPartida();
   } else if (acaoBotao === 'proximo-volei') {
     iniciarPartidaVolei();   // próxima partida da fase de grupos do vôlei
+  } else if (acaoBotao === 'mata-volei') {
+    iniciarPartidaMataVolei();   // confronto do mata-mata do vôlei
   } else {
     // 'iniciar' → monta a campanha (grupo + fases) e dispara o primeiro jogo
     montarCampanha();

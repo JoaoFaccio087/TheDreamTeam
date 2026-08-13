@@ -503,16 +503,21 @@ function iniciarPartidaVolei() {
         mostrarTabelaGrupoVolei(camp);   // exibe o "grupinho" com a classificação final
       }
 
-      // Atualiza o BOTÃO conforme o estado (antes ficava sempre 'Iniciar Campanha').
+      // Atualiza o BOTÃO conforme o estado.
       if (btn) {
         if (acabaramJogosGrupo) {
-          // Fim da campanha de vôlei (por ora encerra na fase de grupos): mostra o
-          // resultado e oferece montar um time novo.
           var classificou = CampanhaVolei.voceClassificou(camp);
-          btn.innerHTML = classificou ? 'Nova Campanha' : 'Montar Novo Time \u25BA';
-          acaoBotao = classificou ? 'nova-campanha' : 'novo-time';
+          if (classificou) {
+            // Classificou → monta o mata-mata e leva o jogador até ele.
+            CampanhaVolei.montarMataVolei(camp);
+            btn.innerHTML = 'Ir ao Mata-Mata \u25BA';
+            acaoBotao = 'mata-volei';
+          } else {
+            // Eliminado na fase de grupos → montar time novo.
+            btn.innerHTML = 'Montar Novo Time \u25BA';
+            acaoBotao = 'novo-time';
+          }
         } else {
-          // Ainda há jogos no grupo: o botão vira "Próxima Partida".
           btn.innerHTML = 'Pr\u00f3xima Partida \u25BA';
           acaoBotao = 'proximo-volei';
         }
@@ -571,6 +576,61 @@ function pularTudoVolei() {
   }
   var bp = document.getElementById('btn-pular-tudo');
   if (bp) bp.classList.add('escondida');
+}
+
+// Joga um confronto do MATA-MATA do vôlei (semi, final...). Espelha iniciarPartidaVolei
+// mas usa o adversário do chaveamento e resolve avanço/eliminação/título no fim.
+function iniciarPartidaMataVolei() {
+  var camp = campanhaVoleiAtual;
+  if (!camp || !camp.mata) return;
+  var adversarioTime = CampanhaVolei.seuAdversarioMata(camp);
+  if (!adversarioTime) return;
+  var adversario = adversarioTime.clubeRef;
+  var faseNome = camp.mata.fases[camp.mata.faseIdx] ? camp.mata.fases[camp.mata.faseIdx].nome : 'MATA-MATA';
+
+  var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+  var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+  var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+
+  var faseLabel = faseNome + ' \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+  var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+  partidaIdVolei = idCard;
+  var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) btn.disabled = true;
+
+  AnimacaoVolei.animar({
+    elCard: card,
+    roteiro: roteiro,
+    velocidade: function () { return velocidadeSimulacao; },
+    pular: (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico'),
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
+
+      if (btn) {
+        if (res.campeao) {
+          btn.innerHTML = 'Nova Campanha';
+          acaoBotao = 'nova-campanha';
+          if (typeof mostrarBotaoResumo === 'function') { resumoCampeao = true; mostrarBotaoResumo(true); }
+        } else if (res.eliminado) {
+          btn.innerHTML = 'Montar Novo Time \u25BA';
+          acaoBotao = 'novo-time';
+        } else {
+          // Avançou de fase: próximo confronto do mata.
+          btn.innerHTML = 'Pr\u00f3xima Partida \u25BA';
+          acaoBotao = 'mata-volei';
+        }
+      }
+
+      // encadeia no modo automático enquanto você seguir vivo
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico' &&
+          !res.campeao && !res.eliminado) {
+        setTimeout(function () { iniciarPartidaMataVolei(); }, 800);
+      }
+    }
+  });
 }
 
 // Mostra a tabela de classificação do grupo de vôlei (o "grupinho"), no mesmo lugar
