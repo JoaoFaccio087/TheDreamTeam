@@ -235,3 +235,17 @@ Object.assign(API, {
     return _req('GET', '/rooms/' + codigo);
   },
 });
+
+// ── WARM-UP DO BACKEND ──────────────────────────────────────────────────────
+// O backend no Render (plano free) hiberna após inatividade e leva ~30-50s para
+// acordar na 1ª chamada — é o que fazia as estatísticas do perfil demorarem tanto.
+// Aqui disparamos um "toque" leve no /health assim que o app carrega, em segundo
+// plano, para o servidor já estar acordado quando o usuário abrir o perfil/online.
+// Não bloqueia nada e falhas são ignoradas (offline/convidado seguem normais).
+(function aquecerBackend() {
+  if (_ehLocal) return;                       // local não hiberna
+  try {
+    fetch(BACKEND_URL + '/health', { method: 'GET', cache: 'no-store' })
+      .catch(function () { /* silencioso: se falhar, o fluxo normal cuida */ });
+  } catch (e) { /* ambiente sem fetch: ignora */ }
+})();
