@@ -350,6 +350,9 @@
   font-family: 'Archivo Black', sans-serif; font-size: var(--fs-sm);
   letter-spacing: 1.5px; color: var(--txt); text-align: center; margin: 0 0 0.8rem;
 }
+.perfil-campo-escalados.quadra-volei {
+  aspect-ratio: 2 / 3;   /* quadra de vôlei é mais alta — alinha as fichas com a rede (top 50%) */
+}
 .perfil-campo-escalados {
   position: relative; width: 100%; aspect-ratio: 3 / 4; margin: 0 auto;
   border-radius: var(--raio-md); overflow: hidden;
