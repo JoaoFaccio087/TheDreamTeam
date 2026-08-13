@@ -44,7 +44,15 @@ const DADOS_VOLEI_M = [
       { id: 'alessandro-michieletto', nome: "Michieletto",      posicoes: ["PON"],       forca: 88 },
       { id: 'daniele-lavia',       nome: "Lavia",               posicoes: ["PON"],       forca: 87 },
       { id: 'gianluca-galassi',    nome: "Galassi",             posicoes: ["CEN"],       forca: 85 },
-      { id: 'fabio-balaso',        nome: "Balaso",              posicoes: ["LIB"],       forca: 86 }
+      { id: 'fabio-balaso',        nome: "Balaso",              posicoes: ["LIB"],       forca: 86 },
+      { id: 'riccardo-sbertoli',   nome: "Sbertoli",            posicoes: ["LEV"],       forca: 80 },
+      { id: 'giulio-pinali',       nome: "Pinali",              posicoes: ["OPO"],       forca: 80 },
+      { id: 'mattia-bottolo',      nome: "Bottolo",             posicoes: ["PON"],       forca: 81 },
+      { id: 'tommaso-rinaldi',     nome: "Rinaldi",             posicoes: ["PON"],       forca: 78 },
+      { id: 'simone-anzani',       nome: "Anzani",              posicoes: ["CEN"],       forca: 83 },
+      { id: 'roberto-russo',       nome: "Russo",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'leandro-mosca',       nome: "Mosca",               posicoes: ["CEN"],       forca: 78 },
+      { id: 'leonardo-scanferla',  nome: "Scanferla",           posicoes: ["LIB"],       forca: 79 }
     ]
   },
 
@@ -58,7 +66,15 @@ const DADOS_VOLEI_M = [
       { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 91 },
       { id: 'kamil-semeniuk',      nome: "Semeniuk",            posicoes: ["PON"],       forca: 86 },
       { id: 'mateusz-bieniek',     nome: "Bieniek",             posicoes: ["CEN"],       forca: 85 },
-      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 85 }
+      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 85 },
+      { id: 'grzegorz-lomacz',     nome: "Łomacz",              posicoes: ["LEV"],       forca: 80 },
+      { id: 'lukasz-kaczmarek',    nome: "Kaczmarek",           posicoes: ["OPO"],       forca: 83 },
+      { id: 'tomasz-fornal',       nome: "Fornal",              posicoes: ["PON"],       forca: 85 },
+      { id: 'aleksander-sliwka',   nome: "Śliwka",              posicoes: ["PON"],       forca: 86 },
+      { id: 'jakub-kochanowski',   nome: "Kochanowski",         posicoes: ["CEN"],       forca: 84 },
+      { id: 'norbert-huber',       nome: "Huber",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'karol-klos',          nome: "Kłos",                posicoes: ["CEN"],       forca: 80 },
+      { id: 'jakub-popiwczak',     nome: "Popiwczak",           posicoes: ["LIB"],       forca: 80 }
     ]
   },
 
@@ -72,7 +88,15 @@ const DADOS_VOLEI_M = [
       { id: 'yoandy-leal',         nome: "Leal",                posicoes: ["PON"],       forca: 89 },
       { id: 'ricardo-lucarelli',   nome: "Lucarelli",           posicoes: ["PON"],       forca: 85 },
       { id: 'lucas-saatkamp',      nome: "Lucão",               posicoes: ["CEN"],       forca: 83 },
-      { id: 'thales-hoss',         nome: "Thales",              posicoes: ["LIB"],       forca: 84 }
+      { id: 'thales-hoss',         nome: "Thales",              posicoes: ["LIB"],       forca: 84 },
+      { id: 'fernando-cachopa',    nome: "Cachopa",             posicoes: ["LEV"],       forca: 79 },
+      { id: 'darlan-souza',        nome: "Darlan",              posicoes: ["OPO"],       forca: 84 },
+      { id: 'adriano-xavier',      nome: "Honorato",            posicoes: ["PON"],       forca: 81 },
+      { id: 'lukas-bergmann',      nome: "Lukas",               posicoes: ["PON"],       forca: 78 },
+      { id: 'isac-santos',         nome: "Isac",                posicoes: ["CEN"],       forca: 81 },
+      { id: 'flavio-gualberto',    nome: "Flávio",              posicoes: ["CEN"],       forca: 82 },
+      { id: 'otavio-pinto',        nome: "Otávio",              posicoes: ["OPO"],       forca: 78 },
+      { id: 'maique-reis',         nome: "Maique",              posicoes: ["LIB"],       forca: 79 }
     ]
   },
 
