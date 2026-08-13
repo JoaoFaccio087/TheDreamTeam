@@ -52,15 +52,12 @@
   // Alternador exposto (útil no console também).
   window.alternarTema = alternarTema;
 
-  // Liga o botão sol/lua do header ao alternador quando o DOM existir. O ícone em si
-  // é puro CSS (segue html.tema-claro), então não precisamos trocá-lo aqui.
-  function ligarBotaoTema() {
-    var btn = document.getElementById('btn-tema');
-    if (btn) btn.addEventListener('click', function () { alternarTema(); });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', ligarBotaoTema);
-  } else {
-    ligarBotaoTema();
-  }
+  // Liga o botão sol/lua do header ao alternador. Usa DELEGAÇÃO no document: assim
+  // funciona mesmo que o botão seja recriado, ou que a home volte de outra tela, ou
+  // que o timing de carga varie — o clique é capturado pelo ancestral estável.
+  document.addEventListener('click', function (ev) {
+    var alvo = ev.target;
+    var btn = alvo && alvo.closest ? alvo.closest('#btn-tema') : null;
+    if (btn) { ev.preventDefault(); alternarTema(); }
+  });
 })();
