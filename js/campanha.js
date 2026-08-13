@@ -500,6 +500,7 @@ function iniciarPartidaVolei() {
       if (acabaramJogosGrupo) {
         CampanhaVolei.simularJogosAdversariosGrupo(camp);
         salvarCampanhaVolei(camp);
+        mostrarTabelaGrupoVolei(camp);   // exibe o "grupinho" com a classificação final
       }
 
       // Atualiza o BOTÃO conforme o estado (antes ficava sempre 'Iniciar Campanha').
@@ -559,6 +560,7 @@ function pularTudoVolei() {
 
   CampanhaVolei.simularJogosAdversariosGrupo(camp);
   salvarCampanhaVolei(camp);
+  mostrarTabelaGrupoVolei(camp);   // mostra o "grupinho" também ao pular tudo
 
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) {
@@ -569,6 +571,49 @@ function pularTudoVolei() {
   }
   var bp = document.getElementById('btn-pular-tudo');
   if (bp) bp.classList.add('escondida');
+}
+
+// Mostra a tabela de classificação do grupo de vôlei (o "grupinho"), no mesmo lugar
+// dos cards de partida. Destaca você e os classificados ao mata-mata.
+function mostrarTabelaGrupoVolei(camp) {
+  var cls = CampanhaVolei.classificacaoGrupo(camp);
+  var avancam = camp.avancamPorGrupo | 0;
+  var nomeGrupo = 'Grupo ' + String.fromCharCode(65 + camp.seuGrupo);
+
+  var linhas = cls.map(function (l, i) {
+    var t = l.time;
+    var saldo = (l.sp - l.sc >= 0 ? '+' : '') + (l.sp - l.sc);
+    var classe = (t.voce ? 'grupo-voce' : '') + (i < avancam ? ' grupo-classifica' : '');
+    var nome = t.voce ? nomeDoTime : t.nome;
+    // Escudo: seu do perfil; adversário do clubeRef (sem estrelas no vôlei).
+    var esc = '';
+    if (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo && t.clubeRef) {
+      esc = Escudos.porNomeSeModo(t.clubeRef.clube, modoSelecionado) || '';
+    }
+    var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
+    return '<tr class="' + classe + '">' +
+             '<td class="grupo-pos">' + (i + 1) + '</td>' +
+             '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + nome + '</span></td>' +
+             '<td class="grupo-num">' + l.v + '</td>' +
+             '<td class="grupo-num">' + l.d + '</td>' +
+             '<td class="grupo-num">' + saldo + '</td>' +
+             '<td class="grupo-pts">' + l.pts + '</td>' +
+           '</tr>';
+  }).join('');
+
+  var wrap = document.createElement('div');
+  wrap.className = 'grupo-tabela partida-card expandido';
+  wrap.innerHTML =
+    '<p class="grupo-tabela-titulo">' + nomeGrupo + ' \u00B7 Classifica\u00E7\u00E3o final</p>' +
+    '<table class="fl-tabela">' +
+      '<thead><tr><th></th><th>Sele\u00E7\u00E3o</th><th>V</th><th>D</th><th>SS</th><th>Pts</th></tr></thead>' +
+      '<tbody>' + linhas + '</tbody>' +
+    '</table>' +
+    '<p class="fl-legenda">Top ' + avancam + ' avan\u00E7am ao mata-mata</p>';
+
+  // Insere no topo do histórico de jogos (acima dos cards de partida do grupo).
+  var hist = document.getElementById('historico-jogos');
+  if (hist) hist.insertBefore(wrap, hist.firstChild);
 }
 
 // Salva a campanha de vôlei no banco/histórico (fatia 5). Espelha o formato do
