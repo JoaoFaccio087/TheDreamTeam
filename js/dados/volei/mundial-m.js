@@ -110,7 +110,15 @@ const DADOS_VOLEI_M = [
       { id: 'tine-urnaut',         nome: "Urnaut",              posicoes: ["PON"],       forca: 85 },
       { id: 'rok-mozic',           nome: "Možič",               posicoes: ["PON"],       forca: 84 },
       { id: 'jan-kozamernik',      nome: "Kozamernik",          posicoes: ["CEN"],       forca: 83 },
-      { id: 'jani-kovacic',        nome: "Kovačič",             posicoes: ["LIB"],       forca: 82 }
+      { id: 'jani-kovacic',        nome: "Kovačič",             posicoes: ["LIB"],       forca: 82 },
+      { id: 'dejan-vincic',        nome: "Vinčić",              posicoes: ["LEV"],       forca: 78 },
+      { id: 'ziga-stern',          nome: "Ž. Štern",            posicoes: ["OPO"],       forca: 79 },
+      { id: 'klemen-cebulj',       nome: "Čebulj",              posicoes: ["PON"],       forca: 82 },
+      { id: 'gregor-pop',          nome: "Ropret G.",           posicoes: ["PON"],       forca: 76 },
+      { id: 'alen-pajenk',         nome: "Pajenk",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'jan-brozic',          nome: "Brožič",              posicoes: ["CEN"],       forca: 77 },
+      { id: 'danijel-koncnik',     nome: "Končnik",             posicoes: ["OPO"],       forca: 76 },
+      { id: 'matic-videcnik',      nome: "Videčnik",            posicoes: ["LIB"],       forca: 76 }
     ]
   },
 
@@ -136,7 +144,15 @@ const DADOS_VOLEI_M = [
       { id: 'michal-kubiak',       nome: "Kubiak",              posicoes: ["PON"],       forca: 87 },
       { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 88 },
       { id: 'piotr-nowakowski',    nome: "Nowakowski",          posicoes: ["CEN"],       forca: 84 },
-      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 85 }
+      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 85 },
+      { id: 'grzegorz-lomacz',     nome: "Łomacz",              posicoes: ["LEV"],       forca: 80 },
+      { id: 'lukasz-kaczmarek',    nome: "Kaczmarek",           posicoes: ["OPO"],       forca: 81 },
+      { id: 'aleksander-sliwka',   nome: "Śliwka",              posicoes: ["PON"],       forca: 84 },
+      { id: 'damian-schulz',       nome: "Schulz",              posicoes: ["PON"],       forca: 77 },
+      { id: 'mateusz-bieniek',     nome: "Bieniek",             posicoes: ["CEN"],       forca: 84 },
+      { id: 'karol-klos',          nome: "Kłos",                posicoes: ["CEN"],       forca: 80 },
+      { id: 'artur-szalpuk',       nome: "Szalpuk",             posicoes: ["PON"],       forca: 78 },
+      { id: 'damian-wojtaszek',    nome: "Wojtaszek",           posicoes: ["LIB"],       forca: 78 }
     ]
   },
 
