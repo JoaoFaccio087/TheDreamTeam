@@ -739,3 +739,70 @@ td.grupo-time { text-align: left; }
   text-align: center;
 }
 .ck-trofeu { color: var(--ouro); font-size: var(--fs-lg); }
+
+/* ═══════════════════════ CARD DE PARTIDA — VÔLEI ═══════════════════════ */
+/* As classes pv-* não tinham estilo próprio, deixando o placar/sets/destaques
+   como texto solto. Este bloco dá o mesmo capricho do card de futebol. */
+
+/* Contador de sets: "Faccio FC  3  sets  2  Eslovênia" — alinhado e legível */
+.pv-sets-contador {
+  display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap;
+}
+.pv-sc-nome {
+  font-family: 'Archivo', sans-serif; font-weight: 700;
+  font-size: var(--fs-sm); color: var(--txt-soft);
+}
+.pv-sc-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: var(--fs-lg); color: var(--ouro); line-height: 1;
+}
+.pv-sc-sep {
+  font-size: var(--fs-legenda); color: var(--txt-soft);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* Placar de sets (grande, como o futebol) */
+.pv-placar {
+  font-family: 'Archivo Black', sans-serif;
+  color: var(--txt);
+  white-space: nowrap;
+}
+.partida-card.expandido .pv-placar       { font-size: 1.75rem; line-height: 1; }
+.partida-card:not(.expandido) .pv-placar { font-size: var(--fs-lg); }
+.pv-placar.vitoria { color: var(--accent); }
+.pv-placar.derrota { color: var(--derrota); }
+
+/* Status durante a animação (ex: "Set 3 · saque: ...") */
+.pv-status {
+  font-size: var(--fs-sm); color: var(--ouro);
+  font-weight: 700; min-height: 1.2em; margin-bottom: 2px;
+}
+
+/* Linha dos sets detalhados (Set 1: 25-23 · Set 2: ...) */
+.pv-sets {
+  font-size: var(--fs-sm); color: var(--txt-soft);
+  letter-spacing: 0.2px; line-height: 1.6;
+  padding: 6px 0; border-top: 1px solid var(--linha);
+  margin-top: 8px;
+}
+
+/* Bloco de destaques (top pontuadores) */
+.pv-resumo { margin-top: 10px; }
+.pv-resumo-tit {
+  font-size: var(--fs-legenda); color: var(--txt-soft);
+  text-transform: uppercase; letter-spacing: 1.2px;
+  font-weight: 700; margin-bottom: 6px;
+}
+.pv-stat {
+  font-size: var(--fs-sm); color: var(--txt);
+  padding: 3px 0; line-height: 1.4;
+  display: flex; justify-content: space-between; gap: 10px;
+}
+.pv-stat-nome { color: var(--txt); }
+.pv-stat-num { color: var(--ouro); font-weight: 700; white-space: nowrap; }
+.pv-stat:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.04); }
+
+/* No card recolhido, esconde os detalhes internos (só header + placar) */
+.partida-card:not(.expandido) .pv-status,
+.partida-card:not(.expandido) .pv-sets,
+.partida-card:not(.expandido) .pv-resumo { display: none; }

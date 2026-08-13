@@ -161,8 +161,10 @@
         var stats = coletarEstatisticas(roteiro).slice(0, 5);
         elResumo.innerHTML = '<div class="pv-resumo-tit">Destaques</div>' +
           stats.map(function (s) {
-            return '<div class="pv-stat">' + s.nome + ' — ' + s.pontos + ' pts' +
-              (s.aces ? ' (' + s.aces + ' ace' + (s.aces > 1 ? 's' : '') + ')' : '') + '</div>';
+            var det = s.pontos + ' pts' +
+              (s.aces ? ' \u00B7 ' + s.aces + ' ace' + (s.aces > 1 ? 's' : '') : '');
+            return '<div class="pv-stat"><span class="pv-stat-nome">' + s.nome +
+                   '</span><span class="pv-stat-num">' + det + '</span></div>';
           }).join('');
       }
       if (opts.onFim) opts.onFim(roteiro);

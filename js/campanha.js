@@ -685,19 +685,29 @@ function mostrarTabelaGrupoVolei(camp) {
            '</tr>';
   }).join('');
 
-  var wrap = document.createElement('div');
-  wrap.className = 'grupo-tabela partida-card expandido';
-  wrap.innerHTML =
-    '<p class="grupo-tabela-titulo">' + nomeGrupo + ' \u00B7 Classifica\u00E7\u00E3o final</p>' +
-    '<table class="fl-tabela">' +
-      '<thead><tr><th></th><th>Sele\u00E7\u00E3o</th><th>V</th><th>D</th><th>SS</th><th>Pts</th></tr></thead>' +
-      '<tbody>' + linhas + '</tbody>' +
-    '</table>' +
-    '<p class="fl-legenda">Top ' + avancam + ' avan\u00E7am ao mata-mata</p>';
+  var tabelaHTML =
+    '<div class="grupo-tabela">' +
+      '<p class="grupo-tabela-titulo">' + nomeGrupo + ' \u00B7 Classifica\u00E7\u00E3o final</p>' +
+      '<table class="fl-tabela">' +
+        '<thead><tr><th></th><th>Sele\u00E7\u00E3o</th><th>V</th><th>D</th><th>SS</th><th>Pts</th></tr></thead>' +
+        '<tbody>' + linhas + '</tbody>' +
+      '</table>' +
+      '<p class="fl-legenda">Top ' + avancam + ' avan\u00E7am ao mata-mata</p>' +
+    '</div>';
 
-  // Insere no topo do histórico de jogos (acima dos cards de partida do grupo).
-  var hist = document.getElementById('historico-jogos');
-  if (hist) hist.insertBefore(wrap, hist.firstChild);
+  // Insere a tabela DENTRO do corpo do card da última partida (igual ao futebol),
+  // para ficar integrada ao card expansivo — não como um bloco solto no topo.
+  var ultimoCard = document.getElementById('partida-volei-' + partidaIdVolei);
+  var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
+  if (corpo) {
+    var div = document.createElement('div');
+    div.innerHTML = tabelaHTML;
+    corpo.appendChild(div.firstChild);
+  } else {
+    // fallback: se não achar o card, insere no histórico
+    var hist = document.getElementById('historico-jogos');
+    if (hist) { var w = document.createElement('div'); w.innerHTML = tabelaHTML; hist.appendChild(w.firstChild); }
+  }
 }
 
 // Salva a campanha de vôlei no banco/histórico (fatia 5). Espelha o formato do
