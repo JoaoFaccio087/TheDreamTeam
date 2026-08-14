@@ -422,6 +422,96 @@ const DADOS_VOLEI_F = [
       { id: 'juliann-faucette',    nome: "Faucette",            posicoes: ["PON"],       forca: 77 },
       { id: 'kristin-hildebrand',  nome: "Hildebrand",          posicoes: ["LIB"],       forca: 76 }
     ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2006 (Japão, sede)
+  // Campeã: Rússia (MVP Gamova). Vice: Brasil. 3º: Sérvia e Montenegro. 4º: Itália.
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2006,
+    clube: "Rússia",
+    jogadores: [
+      { id: 'marina-sheshenina',   nome: "Sheshenina",          posicoes: ["LEV"],       forca: 82 },
+      { id: 'ekaterina-gamova',    nome: "Gamova",              posicoes: ["OPO"],       forca: 91 },
+      { id: 'lyubov-sokolova',     nome: "Sokolova",            posicoes: ["PON"],       forca: 85 },
+      { id: 'yevgeniya-estes',     nome: "Estes",               posicoes: ["PON"],       forca: 82 },
+      { id: 'marina-akulova',      nome: "Akulova",             posicoes: ["CEN"],       forca: 81 },
+      { id: 'svetlana-kryuchkova', nome: "Kryuchkova",          posicoes: ["LIB"],       forca: 81 },
+      { id: 'natalia-safronova',   nome: "Safronova",           posicoes: ["PON"],       forca: 82 },
+      { id: 'olga-fateeva',        nome: "Fateeva",             posicoes: ["LEV"],       forca: 79 },
+      { id: 'yulia-merkulova',     nome: "Merkulova",           posicoes: ["CEN"],       forca: 81 },
+      { id: 'lioubov-shashkova',   nome: "Shashkova",           posicoes: ["PON"],       forca: 80 },
+      { id: 'elena-plotnikova',    nome: "Plotnikova",          posicoes: ["CEN"],       forca: 78 },
+      { id: 'yekaterina-krivets',  nome: "Krivets",             posicoes: ["OPO"],       forca: 78 },
+      { id: 'yulia-sedova',        nome: "Sedova",              posicoes: ["CEN"],       forca: 77 },
+      { id: 'olga-nikolaeva',      nome: "Nikolaeva",           posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2006,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'helia-souza',         nome: "Fofão",               posicoes: ["LEV"],       forca: 86 },
+      { id: 'sheilla-castro',      nome: "Sheilla",             posicoes: ["OPO"],       forca: 84 },
+      { id: 'paula-pequeno',       nome: "Paula Pequeno",       posicoes: ["PON"],       forca: 85 },
+      { id: 'marianne-steinbrecher', nome: "Mari",              posicoes: ["OPO"],       forca: 85 },
+      { id: 'walewska-oliveira',   nome: "Walewska",            posicoes: ["CEN"],       forca: 83 },
+      { id: 'arlene-xavier',       nome: "Arlene",              posicoes: ["LIB"],       forca: 82 },
+      { id: 'jaqueline-carvalho',  nome: "Jaqueline",           posicoes: ["PON"],       forca: 83 },
+      { id: 'fabiana-claudino',    nome: "Fabiana",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'valeskinha-menezes',  nome: "Valeskinha",          posicoes: ["LEV"],       forca: 80 },
+      { id: 'welissa-gonzaga',     nome: "Sassá",               posicoes: ["PON"],       forca: 81 },
+      { id: 'carol-albuquerque',   nome: "Carol",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'thaisa-menezes',      nome: "Thaisa",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'renata-colombo',      nome: "Renata",              posicoes: ["PON"],       forca: 78 },
+      { id: 'fabiana-oliveira',    nome: "Fabi",                posicoes: ["LIB"],       forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2006,
+    clube: "Sérvia e Montenegro",
+    jogadores: [
+      { id: 'maja-ognjenovic',     nome: "Ognjenović",          posicoes: ["LEV"],       forca: 82 },
+      { id: 'jelena-nikolic',      nome: "J. Nikolić",          posicoes: ["PON"],       forca: 83 },
+      { id: 'jovana-brakocevic',   nome: "Brakočević",          posicoes: ["OPO"],       forca: 84 },
+      { id: 'suzana-cebic',        nome: "Ćebić",               posicoes: ["PON"],       forca: 80 },
+      { id: 'natasa-krsmanovic',   nome: "Krsmanović",          posicoes: ["CEN"],       forca: 82 },
+      { id: 'suzana-lazovic',      nome: "Lazović",             posicoes: ["LIB"],       forca: 80 },
+      { id: 'stefana-veljkovic',   nome: "Veljković",           posicoes: ["CEN"],       forca: 80 },
+      { id: 'sanja-starovic',      nome: "Starović",            posicoes: ["OPO"],       forca: 80 },
+      { id: 'sanja-malagurski',    nome: "Malagurski",          posicoes: ["PON"],       forca: 79 },
+      { id: 'jelena-santic',       nome: "Šantić",              posicoes: ["LEV"],       forca: 77 },
+      { id: 'ivana-nesovic',       nome: "Nešović",             posicoes: ["CEN"],       forca: 78 },
+      { id: 'milena-rasic',        nome: "Rašić",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'brizitka-molnar',     nome: "Molnar",              posicoes: ["PON"],       forca: 77 },
+      { id: 'jovana-vesovic',      nome: "Vesović",             posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2006,
+    clube: "Itália",
+    jogadores: [
+      { id: 'eleonora-lo-bianco',  nome: "Lo Bianco",           posicoes: ["LEV"],       forca: 84 },
+      { id: 'simona-gioli',        nome: "Gioli",               posicoes: ["OPO"],       forca: 83 },
+      { id: 'elisa-togut',         nome: "Togut",               posicoes: ["PON"],       forca: 82 },
+      { id: 'francesca-piccinini', nome: "Piccinini",           posicoes: ["PON"],       forca: 85 },
+      { id: 'paola-cardullo',      nome: "Cardullo",            posicoes: ["LIB"],       forca: 82 },
+      { id: 'manuela-leggeri',     nome: "Leggeri",             posicoes: ["CEN"],       forca: 81 },
+      { id: 'martina-guiggi',      nome: "Guiggi",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'serena-ortolani',     nome: "Ortolani",            posicoes: ["OPO"],       forca: 80 },
+      { id: 'antonella-del-core',  nome: "Del Core",            posicoes: ["PON"],       forca: 81 },
+      { id: 'nadia-centoni',       nome: "Centoni",             posicoes: ["OPO"],       forca: 79 },
+      { id: 'jenny-barazza',       nome: "Barazza",             posicoes: ["CEN"],       forca: 79 },
+      { id: 'carolina-costagrande', nome: "Costagrande",        posicoes: ["PON"],       forca: 80 },
+      { id: 'valentina-fiorin',    nome: "Fiorin",              posicoes: ["PON"],       forca: 77 },
+      { id: 'imma-sirressi',       nome: "Sirressi",            posicoes: ["LIB"],       forca: 77 }
+    ]
   }
 
 ];
