@@ -220,6 +220,96 @@ const DADOS_VOLEI_M = [
       { id: 'mihajlo-mitic',       nome: "Mitić",               posicoes: ["LEV"],       forca: 76 },
       { id: 'branislav-mitrovic',  nome: "Mitrović",            posicoes: ["LIB"],       forca: 76 }
     ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2014 (Polônia, em casa)
+  // Campeã: Polônia (MVP Mariusz Wlazły). Vice: Brasil. 3º: Alemanha. 4º: França.
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2014,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'grzegorz-lomacz',     nome: "Łomacz",              posicoes: ["LEV"],       forca: 83 },
+      { id: 'mariusz-wlazly',      nome: "Wlazły",              posicoes: ["OPO"],       forca: 89 },
+      { id: 'michal-kubiak',       nome: "Kubiak",              posicoes: ["PON"],       forca: 86 },
+      { id: 'bartosz-kurek',       nome: "Kurek",               posicoes: ["OPO"],       forca: 87 },
+      { id: 'piotr-nowakowski',    nome: "Nowakowski",          posicoes: ["CEN"],       forca: 83 },
+      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 84 },
+      { id: 'fabian-drzyzga',      nome: "Drzyzga",             posicoes: ["LEV"],       forca: 83 },
+      { id: 'karol-klos',          nome: "Kłos",                posicoes: ["CEN"],       forca: 80 },
+      { id: 'andrzej-wrona',       nome: "Wrona",               posicoes: ["CEN"],       forca: 79 },
+      { id: 'rafal-buszek',        nome: "Buszek",              posicoes: ["PON"],       forca: 79 },
+      { id: 'michal-winiarski',    nome: "Winiarski",           posicoes: ["PON"],       forca: 81 },
+      { id: 'grzegorz-bociek',     nome: "Bociek",              posicoes: ["PON"],       forca: 76 },
+      { id: 'mateusz-mika',        nome: "Mika",                posicoes: ["PON"],       forca: 78 },
+      { id: 'krzysztof-ignaczak',  nome: "Ignaczak",            posicoes: ["LIB"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2014,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'bruno-rezende',       nome: "Bruninho",            posicoes: ["LEV"],       forca: 89 },
+      { id: 'wallace-de-souza',    nome: "Wallace",             posicoes: ["OPO"],       forca: 84 },
+      { id: 'ricardo-lucarelli',   nome: "Lucarelli",           posicoes: ["PON"],       forca: 83 },
+      { id: 'murilo-endres',       nome: "Murilo",              posicoes: ["PON"],       forca: 84 },
+      { id: 'lucas-saatkamp',      nome: "Lucão",               posicoes: ["CEN"],       forca: 83 },
+      { id: 'serginho-escadinha',  nome: "Serginho",            posicoes: ["LIB"],       forca: 88 },
+      { id: 'william-arjona',      nome: "William",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'evandro-guerra',      nome: "Evandro",             posicoes: ["OPO"],       forca: 81 },
+      { id: 'vissotto-neto',       nome: "Vissotto",            posicoes: ["OPO"],       forca: 83 },
+      { id: 'sidnei-santos',       nome: "Sidnei",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'eder-carbonera',      nome: "Éder",                posicoes: ["CEN"],       forca: 82 },
+      { id: 'mauricio-souza',      nome: "Maurício Souza",      posicoes: ["CEN"],       forca: 80 },
+      { id: 'douglas-souza',       nome: "Douglas",             posicoes: ["PON"],       forca: 80 },
+      { id: 'mario-junior',        nome: "Mário Jr.",           posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2014,
+    clube: "Alemanha",
+    jogadores: [
+      { id: 'lukas-kampa',         nome: "Kampa",               posicoes: ["LEV"],       forca: 82 },
+      { id: 'gyorgy-grozer',       nome: "Grozer",              posicoes: ["OPO"],       forca: 87 },
+      { id: 'denys-kaliberda',     nome: "Kaliberda",           posicoes: ["PON"],       forca: 82 },
+      { id: 'marcus-bohme',        nome: "Böhme",               posicoes: ["CEN"],       forca: 81 },
+      { id: 'ferdinand-tille',     nome: "Tille",               posicoes: ["LIB"],       forca: 81 },
+      { id: 'sebastian-kuhner',    nome: "Kühner",              posicoes: ["LEV"],       forca: 77 },
+      { id: 'christian-fromm',     nome: "Fromm",               posicoes: ["PON"],       forca: 80 },
+      { id: 'robert-kromm',        nome: "Kromm",               posicoes: ["PON"],       forca: 80 },
+      { id: 'jochen-schops',       nome: "Schöps",              posicoes: ["PON"],       forca: 81 },
+      { id: 'marcus-popp',         nome: "Popp",                posicoes: ["CEN"],       forca: 77 },
+      { id: 'sebastian-schwarz',   nome: "Schwarz",             posicoes: ["OPO"],       forca: 78 },
+      { id: 'patrick-steuerwald',  nome: "Steuerwald",          posicoes: ["CEN"],       forca: 76 },
+      { id: 'markus-steuerwald',   nome: "M. Steuerwald",       posicoes: ["LIB"],       forca: 76 },
+      { id: 'simon-hirsch',        nome: "Hirsch",              posicoes: ["PON"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2014,
+    clube: "França",
+    jogadores: [
+      { id: 'benjamin-toniutti',   nome: "Toniutti",            posicoes: ["LEV"],       forca: 85 },
+      { id: 'earvin-ngapeth',      nome: "Ngapeth",             posicoes: ["PON"],       forca: 88 },
+      { id: 'kevin-tillie',        nome: "Tillie",              posicoes: ["PON"],       forca: 82 },
+      { id: 'antonin-rouzier',     nome: "Rouzier",             posicoes: ["OPO"],       forca: 83 },
+      { id: 'nicolas-le-goff',     nome: "Le Goff",             posicoes: ["CEN"],       forca: 81 },
+      { id: 'jenia-grebennikov',   nome: "Grebennikov",         posicoes: ["LIB"],       forca: 86 },
+      { id: 'nicolas-marechal',    nome: "Maréchal",            posicoes: ["PON"],       forca: 81 },
+      { id: 'julien-lyneel',       nome: "Lyneel",              posicoes: ["PON"],       forca: 79 },
+      { id: 'kevin-le-roux',       nome: "Le Roux",             posicoes: ["CEN"],       forca: 81 },
+      { id: 'franck-lafitte',      nome: "Lafitte",             posicoes: ["CEN"],       forca: 78 },
+      { id: 'guillaume-samica',    nome: "Samica",              posicoes: ["CEN"],       forca: 76 },
+      { id: 'pierre-pujol',        nome: "Pujol",               posicoes: ["LEV"],       forca: 77 },
+      { id: 'baptiste-geiler',     nome: "Geiler",              posicoes: ["OPO"],       forca: 76 },
+      { id: 'jean-patry',          nome: "Patry",               posicoes: ["OPO"],       forca: 77 }
+    ]
   }
 
 ];
