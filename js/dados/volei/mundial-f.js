@@ -242,6 +242,96 @@ const DADOS_VOLEI_F = [
       { id: 'lorenne-teixeira',    nome: "Lorenne",             posicoes: ["OPO"],       forca: 78 },
       { id: 'leia-henrique',       nome: "Léia",                posicoes: ["LIB"],       forca: 79 }
     ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2014 (Itália, sede)
+  // Campeã: EUA (1º título, MVP Kimberly Hill). Vice: China. 3º: Brasil. 4º: Itália.
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2014,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'alisha-glass',        nome: "Glass",               posicoes: ["LEV"],       forca: 85 },
+      { id: 'karsta-lowe',         nome: "Lowe",                posicoes: ["OPO"],       forca: 84 },
+      { id: 'kimberly-hill',       nome: "Hill",                posicoes: ["PON"],       forca: 87 },
+      { id: 'jordan-larson',       nome: "Larson",              posicoes: ["PON"],       forca: 88 },
+      { id: 'christa-dietzen',     nome: "Dietzen",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'kayla-banwarth',      nome: "Banwarth",            posicoes: ["LIB"],       forca: 83 },
+      { id: 'lauren-carlini',      nome: "Carlini",             posicoes: ["LEV"],       forca: 78 },
+      { id: 'kelsey-robinson',     nome: "Robinson",            posicoes: ["PON"],       forca: 82 },
+      { id: 'kelly-murphy',        nome: "Murphy",              posicoes: ["OPO"],       forca: 81 },
+      { id: 'foluke-akinradewo',   nome: "Akinradewo",          posicoes: ["CEN"],       forca: 85 },
+      { id: 'rachael-adams',       nome: "Adams",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'nicole-fawcett',      nome: "Fawcett",             posicoes: ["OPO"],       forca: 79 },
+      { id: 'cursty-jackson',      nome: "Jackson",             posicoes: ["PON"],       forca: 77 },
+      { id: 'nicole-davis',        nome: "Davis",               posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2014,
+    clube: "China",
+    jogadores: [
+      { id: 'wei-qiuyue',          nome: "Wei Qiuyue",          posicoes: ["LEV"],       forca: 84 },
+      { id: 'zhu-ting',            nome: "Zhu Ting",            posicoes: ["PON"],       forca: 88 },
+      { id: 'hui-ruoqi',           nome: "Hui Ruoqi",           posicoes: ["PON"],       forca: 84 },
+      { id: 'zeng-chunlei',        nome: "Zeng Chunlei",        posicoes: ["OPO"],       forca: 82 },
+      { id: 'yang-junjing',        nome: "Yang Junjing",        posicoes: ["CEN"],       forca: 81 },
+      { id: 'chen-zhanhui',        nome: "Chen Zhanhui",        posicoes: ["LIB"],       forca: 81 },
+      { id: 'shen-jingsi',         nome: "Shen Jingsi",         posicoes: ["LEV"],       forca: 78 },
+      { id: 'liu-yanhan',          nome: "Liu Yanhan",          posicoes: ["PON"],       forca: 80 },
+      { id: 'zhang-changning',     nome: "Zhang Changning",     posicoes: ["PON"],       forca: 82 },
+      { id: 'yuan-xinyue',         nome: "Yuan Xinyue",         posicoes: ["CEN"],       forca: 81 },
+      { id: 'xu-yunli',            nome: "Xu Yunli",            posicoes: ["CEN"],       forca: 80 },
+      { id: 'yang-fangxu',         nome: "Yang Fangxu",         posicoes: ["OPO"],       forca: 77 },
+      { id: 'shan-danna',          nome: "Shan Danna",          posicoes: ["PON"],       forca: 77 },
+      { id: 'wang-mengjie',        nome: "Wang Mengjie",        posicoes: ["LIB"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2014,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'dani-lins',           nome: "Dani Lins",           posicoes: ["LEV"],       forca: 84 },
+      { id: 'sheilla-castro',      nome: "Sheilla",             posicoes: ["OPO"],       forca: 86 },
+      { id: 'natalia-pereira',     nome: "Natália",             posicoes: ["PON"],       forca: 84 },
+      { id: 'gabriela-guimaraes',  nome: "Gabi",                posicoes: ["PON"],       forca: 84 },
+      { id: 'thaisa-menezes',      nome: "Thaisa",              posicoes: ["CEN"],       forca: 86 },
+      { id: 'fabiana-claudino',    nome: "Fabiana",             posicoes: ["CEN"],       forca: 85 },
+      { id: 'fabiola-almeida',     nome: "Fabíola",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'monique-pavao',       nome: "Monique",             posicoes: ["OPO"],       forca: 80 },
+      { id: 'juciely-barreto',     nome: "Juciely",             posicoes: ["PON"],       forca: 80 },
+      { id: 'adenizia-silva',      nome: "Adenízia",            posicoes: ["CEN"],       forca: 82 },
+      { id: 'carol-gattaz',        nome: "Carol Gattaz",        posicoes: ["CEN"],       forca: 81 },
+      { id: 'tandara-caixeta',     nome: "Tandara",             posicoes: ["OPO"],       forca: 82 },
+      { id: 'natasha-farinea',     nome: "Natasha",             posicoes: ["PON"],       forca: 77 },
+      { id: 'camila-brait',        nome: "Camila Brait",        posicoes: ["LIB"],       forca: 83 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2014,
+    clube: "Itália",
+    jogadores: [
+      { id: 'ofelia-malinov',      nome: "Malinov",             posicoes: ["LEV"],       forca: 82 },
+      { id: 'valentina-diouf',     nome: "Diouf",               posicoes: ["OPO"],       forca: 84 },
+      { id: 'caterina-bosetti',    nome: "Bosetti",             posicoes: ["PON"],       forca: 82 },
+      { id: 'lucia-bosetti',       nome: "Lucia Bosetti",       posicoes: ["PON"],       forca: 82 },
+      { id: 'cristina-chirichella', nome: "Chirichella",        posicoes: ["CEN"],       forca: 81 },
+      { id: 'monica-de-gennaro',   nome: "De Gennaro",          posicoes: ["LIB"],       forca: 85 },
+      { id: 'noemi-signorile',     nome: "Signorile",           posicoes: ["LEV"],       forca: 78 },
+      { id: 'serena-ortolani',     nome: "Ortolani",            posicoes: ["OPO"],       forca: 80 },
+      { id: 'valentina-fiorin',    nome: "Fiorin",              posicoes: ["PON"],       forca: 78 },
+      { id: 'antonella-del-core',  nome: "Del Core",            posicoes: ["PON"],       forca: 80 },
+      { id: 'raphaela-folie',      nome: "Folie",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'valentina-arrighetti', nome: "Arrighetti",         posicoes: ["CEN"],       forca: 78 },
+      { id: 'lucia-bonifacio',     nome: "Bonifacio",           posicoes: ["OPO"],       forca: 76 },
+      { id: 'sara-anzanello',      nome: "Anzanello",           posicoes: ["LIB"],       forca: 77 }
+    ]
   }
 
 ];
