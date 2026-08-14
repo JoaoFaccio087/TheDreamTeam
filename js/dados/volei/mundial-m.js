@@ -310,6 +310,96 @@ const DADOS_VOLEI_M = [
       { id: 'baptiste-geiler',     nome: "Geiler",              posicoes: ["OPO"],       forca: 76 },
       { id: 'jean-patry',          nome: "Patry",               posicoes: ["OPO"],       forca: 77 }
     ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2010 (Itália, sede)
+  // Campeão: Brasil (MVP Murilo). Vice: Cuba. 3º: Sérvia. 4º: Itália.
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2010,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'bruno-rezende',       nome: "Bruninho",            posicoes: ["LEV"],       forca: 86 },
+      { id: 'murilo-endres',       nome: "Murilo",              posicoes: ["PON"],       forca: 86 },
+      { id: 'dante-amaral',        nome: "Dante",               posicoes: ["PON"],       forca: 84 },
+      { id: 'leandro-vissotto',    nome: "Vissotto",            posicoes: ["OPO"],       forca: 85 },
+      { id: 'gustavo-endres',      nome: "Gustavo",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'serginho-escadinha',  nome: "Serginho",            posicoes: ["LIB"],       forca: 89 },
+      { id: 'ricardinho-garcia',   nome: "Ricardinho",          posicoes: ["LEV"],       forca: 82 },
+      { id: 'giba-godoy',          nome: "Giba",                posicoes: ["PON"],       forca: 87 },
+      { id: 'rodrigo-santana',     nome: "Rodrigão",            posicoes: ["CEN"],       forca: 82 },
+      { id: 'sidnei-santos',       nome: "Sidnei",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'eder-carbonera',      nome: "Éder",                posicoes: ["CEN"],       forca: 81 },
+      { id: 'wallace-de-souza',    nome: "Wallace",             posicoes: ["OPO"],       forca: 81 },
+      { id: 'thiago-alves',        nome: "Thiago",              posicoes: ["PON"],       forca: 79 },
+      { id: 'mario-junior',        nome: "Mário Jr.",           posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2010,
+    clube: "Cuba",
+    jogadores: [
+      { id: 'raydel-hierrezuelo',  nome: "Hierrezuelo",         posicoes: ["LEV"],       forca: 82 },
+      { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 86 },
+      { id: 'rolando-cepeda',      nome: "Cepeda",              posicoes: ["PON"],       forca: 82 },
+      { id: 'fernando-hernandez',  nome: "Hernández",           posicoes: ["OPO"],       forca: 84 },
+      { id: 'robertlandy-simon',   nome: "Simón",               posicoes: ["CEN"],       forca: 87 },
+      { id: 'keibir-gutierrez',    nome: "Gutiérrez",           posicoes: ["LIB"],       forca: 80 },
+      { id: 'oreol-camejo',        nome: "Camejo",              posicoes: ["OPO"],       forca: 83 },
+      { id: 'yoandry-leal-cuba',   nome: "Leal",                posicoes: ["PON"],       forca: 83 },
+      { id: 'javier-jimenez',      nome: "Jiménez",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'yosvany-hernandez',   nome: "Y. Hernández",        posicoes: ["CEN"],       forca: 79 },
+      { id: 'yosvany-munoz',       nome: "Muñoz",               posicoes: ["PON"],       forca: 79 },
+      { id: 'henry-bell',          nome: "Bell",                posicoes: ["CEN"],       forca: 78 },
+      { id: 'isbel-mesa',          nome: "Mesa",                posicoes: ["LEV"],       forca: 77 },
+      { id: 'yordanis-hernandez',  nome: "Yordanis",            posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2010,
+    clube: "Sérvia",
+    jogadores: [
+      { id: 'nikola-grbic',        nome: "Grbić",               posicoes: ["LEV"],       forca: 85 },
+      { id: 'ivan-miljkovic',      nome: "Miljković",           posicoes: ["OPO"],       forca: 87 },
+      { id: 'milos-nikic',         nome: "Nikić",               posicoes: ["PON"],       forca: 81 },
+      { id: 'dragan-stankovic',    nome: "Stanković",           posicoes: ["CEN"],       forca: 82 },
+      { id: 'marko-podrascanin',   nome: "Podrascanin",         posicoes: ["CEN"],       forca: 81 },
+      { id: 'nikola-rosic',        nome: "Rosić",               posicoes: ["LIB"],       forca: 82 },
+      { id: 'sasa-starovic',       nome: "Starović",            posicoes: ["OPO"],       forca: 81 },
+      { id: 'milan-rasic',         nome: "M. Rašić",            posicoes: ["PON"],       forca: 80 },
+      { id: 'bojan-janic',         nome: "Janić",               posicoes: ["PON"],       forca: 81 },
+      { id: 'marko-samardzic',     nome: "Samardžić",           posicoes: ["LEV"],       forca: 77 },
+      { id: 'nikola-kovacevic',    nome: "N. Kovačević",        posicoes: ["PON"],       forca: 79 },
+      { id: 'goran-maric',         nome: "Marić",               posicoes: ["CEN"],       forca: 78 },
+      { id: 'vlado-petkovic',      nome: "Petković",            posicoes: ["OPO"],       forca: 76 },
+      { id: 'nikola-jovovic',      nome: "Jovović",             posicoes: ["LEV"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2010,
+    clube: "Itália",
+    jogadores: [
+      { id: 'valerio-vermiglio',   nome: "Vermiglio",           posicoes: ["LEV"],       forca: 82 },
+      { id: 'cristian-savani',     nome: "Savani",              posicoes: ["PON"],       forca: 82 },
+      { id: 'michal-lasko',        nome: "Lasko",               posicoes: ["OPO"],       forca: 82 },
+      { id: 'emanuele-birarelli',  nome: "Birarelli",           posicoes: ["CEN"],       forca: 81 },
+      { id: 'luigi-mastrangelo',   nome: "Mastrangelo",         posicoes: ["CEN"],       forca: 83 },
+      { id: 'andrea-bari',         nome: "Bari",                posicoes: ["LIB"],       forca: 81 },
+      { id: 'dragan-travica',      nome: "Travica",             posicoes: ["LEV"],       forca: 79 },
+      { id: 'alessandro-fei',      nome: "Fei",                 posicoes: ["OPO"],       forca: 83 },
+      { id: 'samuele-papi',        nome: "Papi",                posicoes: ["PON"],       forca: 82 },
+      { id: 'michele-baranowicz',  nome: "Baranowicz",          posicoes: ["LEV"],       forca: 77 },
+      { id: 'simone-parodi',       nome: "Parodi",              posicoes: ["PON"],       forca: 79 },
+      { id: 'andrea-giovi',        nome: "Giovi",               posicoes: ["LIB"],       forca: 78 },
+      { id: 'jiri-kovar',          nome: "Kovář",               posicoes: ["PON"],       forca: 78 },
+      { id: 'matteo-piano',        nome: "Piano",               posicoes: ["CEN"],       forca: 77 }
+    ]
   }
 
 ];
