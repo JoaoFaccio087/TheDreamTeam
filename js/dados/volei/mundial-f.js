@@ -332,6 +332,96 @@ const DADOS_VOLEI_F = [
       { id: 'lucia-bonifacio',     nome: "Bonifacio",           posicoes: ["OPO"],       forca: 76 },
       { id: 'sara-anzanello',      nome: "Anzanello",           posicoes: ["LIB"],       forca: 77 }
     ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2010 (Japão, sede)
+  // Campeã: Rússia (MVP Gamova). Vice: Brasil. 3º: Japão. 4º: EUA.
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2010,
+    clube: "Rússia",
+    jogadores: [
+      { id: 'alexandra-korukovets', nome: "Korukovets",         posicoes: ["LEV"],       forca: 83 },
+      { id: 'ekaterina-gamova',    nome: "Gamova",              posicoes: ["OPO"],       forca: 91 },
+      { id: 'tatiana-kosheleva',   nome: "Kosheleva",           posicoes: ["PON"],       forca: 85 },
+      { id: 'lyubov-sokolova',     nome: "Sokolova",            posicoes: ["PON"],       forca: 85 },
+      { id: 'maria-borodakova',    nome: "Borodakova",          posicoes: ["CEN"],       forca: 82 },
+      { id: 'svetlana-kryuchkova', nome: "Kryuchkova",          posicoes: ["LIB"],       forca: 81 },
+      { id: 'evgeniya-startseva',  nome: "Startseva",           posicoes: ["LEV"],       forca: 80 },
+      { id: 'natalia-obmochaeva',  nome: "Goncharova",          posicoes: ["OPO"],       forca: 84 },
+      { id: 'yulia-morozova',      nome: "Morozova",            posicoes: ["CEN"],       forca: 81 },
+      { id: 'ekaterina-orlova',    nome: "Orlova",              posicoes: ["PON"],       forca: 80 },
+      { id: 'yevgeniya-estes',     nome: "Estes",               posicoes: ["PON"],       forca: 80 },
+      { id: 'irina-zaryazhko',     nome: "Zaryazhko",           posicoes: ["CEN"],       forca: 79 },
+      { id: 'yekaterina-uliakina', nome: "Uliakina",            posicoes: ["OPO"],       forca: 77 },
+      { id: 'svetlana-kolosova',   nome: "Kolosova",            posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2010,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'dani-lins',           nome: "Dani Lins",           posicoes: ["LEV"],       forca: 83 },
+      { id: 'sheilla-castro',      nome: "Sheilla",             posicoes: ["OPO"],       forca: 86 },
+      { id: 'paula-pequeno',       nome: "Paula Pequeno",       posicoes: ["PON"],       forca: 85 },
+      { id: 'jaqueline-carvalho',  nome: "Jaqueline",           posicoes: ["PON"],       forca: 85 },
+      { id: 'thaisa-menezes',      nome: "Thaisa",              posicoes: ["CEN"],       forca: 85 },
+      { id: 'fabiana-claudino',    nome: "Fabiana",             posicoes: ["CEN"],       forca: 85 },
+      { id: 'fabiola-almeida',     nome: "Fabíola",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'welissa-gonzaga',     nome: "Sassá",               posicoes: ["OPO"],       forca: 80 },
+      { id: 'natalia-pereira',     nome: "Natália",             posicoes: ["PON"],       forca: 81 },
+      { id: 'fernanda-garay',      nome: "Fernanda Garay",      posicoes: ["PON"],       forca: 83 },
+      { id: 'adenizia-silva',      nome: "Adenízia",            posicoes: ["CEN"],       forca: 81 },
+      { id: 'carol-albuquerque',   nome: "Carol",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'juciely-barreto',     nome: "Juciely",             posicoes: ["OPO"],       forca: 79 },
+      { id: 'fabiana-oliveira',    nome: "Fabi",                posicoes: ["LIB"],       forca: 86 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2010,
+    clube: "Japão",
+    jogadores: [
+      { id: 'yoshie-takeshita',    nome: "Takeshita",           posicoes: ["LEV"],       forca: 84 },
+      { id: 'yuko-sano',           nome: "Sano",                posicoes: ["LIB"],       forca: 85 },
+      { id: 'saori-kimura',        nome: "Kimura",              posicoes: ["PON"],       forca: 84 },
+      { id: 'yuki-kimura',         nome: "Y. Kimura",           posicoes: ["PON"],       forca: 80 },
+      { id: 'erika-araki',         nome: "Araki",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'yukiko-ebata',        nome: "Ebata",               posicoes: ["PON"],       forca: 81 },
+      { id: 'kaori-inoue',         nome: "Inoue",               posicoes: ["OPO"],       forca: 80 },
+      { id: 'maiko-kano',          nome: "Kano",                posicoes: ["CEN"],       forca: 79 },
+      { id: 'mai-yamaguchi',       nome: "Yamaguchi",           posicoes: ["CEN"],       forca: 78 },
+      { id: 'nana-iwasaka',        nome: "Iwasaka",             posicoes: ["CEN"],       forca: 78 },
+      { id: 'risa-shinnabe',       nome: "Shinnabe",            posicoes: ["PON"],       forca: 78 },
+      { id: 'hitomi-nakamichi',    nome: "Nakamichi",           posicoes: ["LEV"],       forca: 78 },
+      { id: 'mizuho-ishida',       nome: "Ishida",              posicoes: ["OPO"],       forca: 77 },
+      { id: 'yoshie-miyamoto',     nome: "Miyamoto",            posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (F)",
+    edicao: 2010,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'lindsey-berg',        nome: "Berg",                posicoes: ["LEV"],       forca: 83 },
+      { id: 'destinee-hooker',     nome: "Hooker",              posicoes: ["OPO"],       forca: 86 },
+      { id: 'megan-hodge',         nome: "Hodge",               posicoes: ["PON"],       forca: 83 },
+      { id: 'jordan-larson',       nome: "Larson",              posicoes: ["PON"],       forca: 84 },
+      { id: 'foluke-akinradewo',   nome: "Akinradewo",          posicoes: ["CEN"],       forca: 84 },
+      { id: 'nicole-davis',        nome: "Davis",               posicoes: ["LIB"],       forca: 82 },
+      { id: 'courtney-thompson',   nome: "Thompson",            posicoes: ["LEV"],       forca: 79 },
+      { id: 'kim-glass',           nome: "Glass",               posicoes: ["PON"],       forca: 80 },
+      { id: 'tayyiba-haneef',      nome: "Haneef-Park",         posicoes: ["OPO"],       forca: 81 },
+      { id: 'christa-harmotto',    nome: "Harmotto",            posicoes: ["CEN"],       forca: 81 },
+      { id: 'megan-easy',          nome: "Easy",                posicoes: ["CEN"],       forca: 78 },
+      { id: 'cassidy-lichtman',    nome: "Lichtman",            posicoes: ["PON"],       forca: 77 },
+      { id: 'juliann-faucette',    nome: "Faucette",            posicoes: ["PON"],       forca: 77 },
+      { id: 'kristin-hildebrand',  nome: "Hildebrand",          posicoes: ["LIB"],       forca: 76 }
+    ]
   }
 
 ];
