@@ -426,10 +426,12 @@ function forcaSelecaoVolei(sel) {
 
 // Retorna todas as seleções da competição de vôlei selecionada (via DADOS globais).
 function selecoesDaCompeticaoVolei() {
-  var filtro = COMPETICOES[modoSelecionado].dados;   // ex.: "Mundial de Vôlei (M)"
+  var filtro = COMPETICOES[modoSelecionado].dados;   // ex.: "Mundial de Vôlei (M)" / "VNL (M)"
   var fonte  = [];
   if (typeof DADOS_VOLEI_M !== 'undefined') fonte = fonte.concat(DADOS_VOLEI_M);
   if (typeof DADOS_VOLEI_F !== 'undefined') fonte = fonte.concat(DADOS_VOLEI_F);
+  if (typeof DADOS_VNL_M !== 'undefined') fonte = fonte.concat(DADOS_VNL_M);
+  if (typeof DADOS_VNL_F !== 'undefined') fonte = fonte.concat(DADOS_VNL_F);
   return fonte.filter(function (c) { return c.competicao === filtro; });
 }
 

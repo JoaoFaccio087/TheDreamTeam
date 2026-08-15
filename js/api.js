@@ -14,10 +14,13 @@ const API = {
     // futebol nunca receber entrada de vôlei por engano. O filtro por `competicao`
     // (string única por competição) garante que nada se mistura.
     var universo = DADOS;
-    if (typeof DADOS_VOLEI_M !== 'undefined' || typeof DADOS_VOLEI_F !== 'undefined') {
+    if (typeof DADOS_VOLEI_M !== 'undefined' || typeof DADOS_VOLEI_F !== 'undefined' ||
+        typeof DADOS_VNL_M !== 'undefined' || typeof DADOS_VNL_F !== 'undefined') {
       universo = DADOS.concat(
         (typeof DADOS_VOLEI_M !== 'undefined') ? DADOS_VOLEI_M : [],
-        (typeof DADOS_VOLEI_F !== 'undefined') ? DADOS_VOLEI_F : []
+        (typeof DADOS_VOLEI_F !== 'undefined') ? DADOS_VOLEI_F : [],
+        (typeof DADOS_VNL_M !== 'undefined') ? DADOS_VNL_M : [],
+        (typeof DADOS_VNL_F !== 'undefined') ? DADOS_VNL_F : []
       );
     }
     return universo.filter(function (d) { return d.competicao === comp; });
