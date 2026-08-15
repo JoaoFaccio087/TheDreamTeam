@@ -105,6 +105,186 @@ var DADOS_VNL_M = [
       { id: 'luka-marovt',         nome: "Marovt",              posicoes: ["CEN"],       forca: 77 },
       { id: 'matic-videcnik',      nome: "Videčnik",            posicoes: ["LIB"],       forca: 76 }
     ]
+  },
+
+  // Seleções adicionais da VNL 2025 (participaram da fase preliminar; expandem a
+  // edição para 8 → ativa a Final Eight no jogo).
+  {
+    competicao: "VNL (M)",
+    edicao: 2025,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micah-ma-a',          nome: "Ma'a",                posicoes: ["LEV"],       forca: 83 },
+      { id: 'kyle-ensing',         nome: "Ensing",              posicoes: ["OPO"],       forca: 84 },
+      { id: 'tj-defalco',          nome: "DeFalco",             posicoes: ["PON"],       forca: 85 },
+      { id: 'ethan-champlin',      nome: "Champlin",            posicoes: ["PON"],       forca: 82 },
+      { id: 'taylor-averill',      nome: "Averill",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'erik-shoji',          nome: "Shoji",               posicoes: ["LIB"],       forca: 86 },
+      { id: 'micah-christenson',   nome: "Christenson",         posicoes: ["LEV"],       forca: 84 },
+      { id: 'matt-anderson',       nome: "Anderson",            posicoes: ["PON"],       forca: 85 },
+      { id: 'jeff-jendryk',        nome: "Jendryk",             posicoes: ["CEN"],       forca: 82 },
+      { id: 'merrick-mchenry',     nome: "McHenry",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'gabi-garcia',         nome: "Garcia",              posicoes: ["OPO"],       forca: 82 },
+      { id: 'cooper-robinson',     nome: "Robinson",            posicoes: ["PON"],       forca: 80 },
+      { id: 'jordan-ewert',        nome: "Ewert",               posicoes: ["PON"],       forca: 79 },
+      { id: 'mason-briggs',        nome: "Briggs",              posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2025,
+    clube: "França",
+    jogadores: [
+      { id: 'antoine-brizard',     nome: "Brizard",             posicoes: ["LEV"],       forca: 87 },
+      { id: 'theo-faure',          nome: "Faure",               posicoes: ["OPO"],       forca: 83 },
+      { id: 'trevor-clevenot',     nome: "Clévenot",            posicoes: ["PON"],       forca: 84 },
+      { id: 'timothee-carle',      nome: "Carle",               posicoes: ["PON"],       forca: 81 },
+      { id: 'barthelemy-chinenyeze', nome: "Chinenyeze",        posicoes: ["CEN"],       forca: 85 },
+      { id: 'jenia-grebennikov',   nome: "Grebennikov",         posicoes: ["LIB"],       forca: 86 },
+      { id: 'quentin-jouffroy',    nome: "Jouffroy",            posicoes: ["CEN"],       forca: 80 },
+      { id: 'nicolas-le-goff',     nome: "Le Goff",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'jean-patry',          nome: "Patry",               posicoes: ["OPO"],       forca: 85 },
+      { id: 'yacine-louati',       nome: "Louati",              posicoes: ["PON"],       forca: 80 },
+      { id: 'nathan-mole',         nome: "Molé",                posicoes: ["LEV"],       forca: 79 },
+      { id: 'melvin-lawani',       nome: "Lawani",              posicoes: ["OPO"],       forca: 79 },
+      { id: 'jordan-thelusma',     nome: "Thélusma",            posicoes: ["PON"],       forca: 78 },
+      { id: 'benjamin-diez',       nome: "Diez",                posicoes: ["LIB"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2025,
+    clube: "Japão",
+    jogadores: [
+      { id: 'masahiro-sekita',     nome: "Sekita",              posicoes: ["LEV"],       forca: 83 },
+      { id: 'yuji-nishida',        nome: "Nishida",             posicoes: ["OPO"],       forca: 87 },
+      { id: 'yuki-ishikawa',       nome: "Ishikawa",            posicoes: ["PON"],       forca: 87 },
+      { id: 'ran-takahashi',       nome: "Takahashi",           posicoes: ["PON"],       forca: 86 },
+      { id: 'akihiro-yamauchi',    nome: "Yamauchi",            posicoes: ["CEN"],       forca: 82 },
+      { id: 'tomohiro-yamamoto',   nome: "Yamamoto",            posicoes: ["LIB"],       forca: 85 },
+      { id: 'kento-miyaura',       nome: "Miyaura",             posicoes: ["OPO"],       forca: 84 },
+      { id: 'tatsunori-otsuka',    nome: "Otsuka",              posicoes: ["PON"],       forca: 83 },
+      { id: 'masaki-oya',          nome: "Ōya",                 posicoes: ["LEV"],       forca: 80 },
+      { id: 'kentaro-takahashi',   nome: "K. Takahashi",        posicoes: ["CEN"],       forca: 81 },
+      { id: 'taishi-onodera',      nome: "Onodera",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'shoma-tomita',        nome: "Tomita",              posicoes: ["PON"],       forca: 79 },
+      { id: 'haruto-obata',        nome: "Obata",               posicoes: ["PON"],       forca: 78 },
+      { id: 'tomohiro-ogawa',      nome: "Ogawa",               posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2025,
+    clube: "Argentina",
+    jogadores: [
+      { id: 'luciano-de-cecco',    nome: "De Cecco",            posicoes: ["LEV"],       forca: 85 },
+      { id: 'pablo-kukartsev',     nome: "Kukartsev",           posicoes: ["OPO"],       forca: 82 },
+      { id: 'luciano-vicentin',    nome: "Vicentin",            posicoes: ["PON"],       forca: 82 },
+      { id: 'ezequiel-palacios',   nome: "Palacios",            posicoes: ["PON"],       forca: 82 },
+      { id: 'agustin-loser',       nome: "Loser",               posicoes: ["CEN"],       forca: 84 },
+      { id: 'santiago-danani',     nome: "Danani",              posicoes: ["LIB"],       forca: 84 },
+      { id: 'matias-sanchez',      nome: "Sánchez",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'bruno-lima',          nome: "Lima",                posicoes: ["OPO"],       forca: 83 },
+      { id: 'nicolas-mendez',      nome: "Méndez",              posicoes: ["PON"],       forca: 80 },
+      { id: 'martin-ramos',        nome: "Ramos",               posicoes: ["CEN"],       forca: 81 },
+      { id: 'joaquin-gallego',     nome: "Gallego",             posicoes: ["CEN"],       forca: 79 },
+      { id: 'manuel-armoa',        nome: "Armoa",               posicoes: ["PON"],       forca: 79 },
+      { id: 'jan-martinez',        nome: "Martínez",            posicoes: ["PON"],       forca: 78 },
+      { id: 'tomas-aguilera',      nome: "Aguilera",            posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  // ─────────────────────────────────────────── VNL 2024 (Final: Łódź, Polônia)
+  // Campeã: França (2º título, MVP Brizard). Vice: Japão. 3º: Polônia. 4º: Eslovênia.
+  {
+    competicao: "VNL (M)",
+    edicao: 2024,
+    clube: "França",
+    jogadores: [
+      { id: 'antoine-brizard',     nome: "Brizard",             posicoes: ["LEV"],       forca: 88 },
+      { id: 'jean-patry',          nome: "Patry",               posicoes: ["OPO"],       forca: 86 },
+      { id: 'earvin-ngapeth',      nome: "N'Gapeth",            posicoes: ["PON"],       forca: 87 },
+      { id: 'trevor-clevenot',     nome: "Clévenot",            posicoes: ["PON"],       forca: 84 },
+      { id: 'nicolas-le-goff',     nome: "Le Goff",             posicoes: ["CEN"],       forca: 84 },
+      { id: 'jenia-grebennikov',   nome: "Grebennikov",         posicoes: ["LIB"],       forca: 87 },
+      { id: 'benjamin-toniutti',   nome: "Toniutti",            posicoes: ["LEV"],       forca: 84 },
+      { id: 'kevin-tillie',        nome: "Tillie",              posicoes: ["PON"],       forca: 82 },
+      { id: 'barthelemy-chinenyeze', nome: "Chinenyeze",        posicoes: ["CEN"],       forca: 85 },
+      { id: 'theo-faure',          nome: "Faure",               posicoes: ["OPO"],       forca: 81 },
+      { id: 'yacine-louati',       nome: "Louati",              posicoes: ["PON"],       forca: 81 },
+      { id: 'timothee-carle',      nome: "Carle",               posicoes: ["PON"],       forca: 80 },
+      { id: 'quentin-jouffroy',    nome: "Jouffroy",            posicoes: ["CEN"],       forca: 79 },
+      { id: 'benjamin-diez',       nome: "Diez",                posicoes: ["LIB"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2024,
+    clube: "Japão",
+    jogadores: [
+      { id: 'masahiro-sekita',     nome: "Sekita",              posicoes: ["LEV"],       forca: 83 },
+      { id: 'kento-miyaura',       nome: "Miyaura",             posicoes: ["OPO"],       forca: 85 },
+      { id: 'yuki-ishikawa',       nome: "Ishikawa",            posicoes: ["PON"],       forca: 87 },
+      { id: 'ran-takahashi',       nome: "Takahashi",           posicoes: ["PON"],       forca: 86 },
+      { id: 'akihiro-yamauchi',    nome: "Yamauchi",            posicoes: ["CEN"],       forca: 82 },
+      { id: 'tomohiro-yamamoto',   nome: "Yamamoto",            posicoes: ["LIB"],       forca: 86 },
+      { id: 'yuji-nishida',        nome: "Nishida",             posicoes: ["OPO"],       forca: 87 },
+      { id: 'masaki-oya',          nome: "Ōya",                 posicoes: ["LEV"],       forca: 80 },
+      { id: 'tatsunori-otsuka',    nome: "Otsuka",              posicoes: ["PON"],       forca: 83 },
+      { id: 'kentaro-takahashi',   nome: "K. Takahashi",        posicoes: ["CEN"],       forca: 81 },
+      { id: 'taishi-onodera',      nome: "Onodera",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'shoma-tomita',        nome: "Tomita",              posicoes: ["PON"],       forca: 79 },
+      { id: 'takumi-fujinaka',     nome: "Fujinaka",            posicoes: ["PON"],       forca: 78 },
+      { id: 'tomohiro-ogawa',      nome: "Ogawa",               posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2024,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'marcin-komenda',      nome: "Komenda",             posicoes: ["LEV"],       forca: 83 },
+      { id: 'bartosz-kurek',       nome: "Kurek",               posicoes: ["OPO"],       forca: 87 },
+      { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 89 },
+      { id: 'tomasz-fornal',       nome: "Fornal",              posicoes: ["PON"],       forca: 85 },
+      { id: 'jakub-kochanowski',   nome: "Kochanowski",         posicoes: ["CEN"],       forca: 86 },
+      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 84 },
+      { id: 'aleksander-sliwka',   nome: "Śliwka",              posicoes: ["PON"],       forca: 85 },
+      { id: 'kamil-semeniuk',      nome: "Semeniuk",            posicoes: ["PON"],       forca: 85 },
+      { id: 'mateusz-bieniek',     nome: "Bieniek",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'norbert-huber',       nome: "Huber",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'grzegorz-lomacz',     nome: "Łomacz",              posicoes: ["LEV"],       forca: 80 },
+      { id: 'artur-szalpuk',       nome: "Szalpuk",             posicoes: ["PON"],       forca: 80 },
+      { id: 'lukasz-kaczmarek',    nome: "Kaczmarek",           posicoes: ["OPO"],       forca: 82 },
+      { id: 'jakub-popiwczak',     nome: "Popiwczak",           posicoes: ["LIB"],       forca: 81 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2024,
+    clube: "Eslovênia",
+    jogadores: [
+      { id: 'gregor-ropret',       nome: "Ropret",              posicoes: ["LEV"],       forca: 82 },
+      { id: 'toncek-stern',        nome: "T. Štern",            posicoes: ["OPO"],       forca: 85 },
+      { id: 'klemen-cebulj',       nome: "Čebulj",              posicoes: ["PON"],       forca: 83 },
+      { id: 'rok-mozic',           nome: "Možič",               posicoes: ["PON"],       forca: 85 },
+      { id: 'jan-kozamernik',      nome: "Kozamernik",          posicoes: ["CEN"],       forca: 85 },
+      { id: 'jani-kovacic',        nome: "Kovačič",             posicoes: ["LIB"],       forca: 82 },
+      { id: 'tine-urnaut',         nome: "Urnaut",              posicoes: ["PON"],       forca: 83 },
+      { id: 'alen-pajenk',         nome: "Pajenk",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'ziga-stern',          nome: "Ž. Štern",            posicoes: ["PON"],       forca: 80 },
+      { id: 'jan-brozic',          nome: "Brožič",              posicoes: ["LEV"],       forca: 78 },
+      { id: 'saso-stalekar',       nome: "Štalekar",            posicoes: ["CEN"],       forca: 79 },
+      { id: 'nik-mujanovic',       nome: "Mujanović",           posicoes: ["OPO"],       forca: 80 },
+      { id: 'rok-bracko',          nome: "Bračko",              posicoes: ["PON"],       forca: 77 },
+      { id: 'matic-videcnik',      nome: "Videčnik",            posicoes: ["LIB"],       forca: 76 }
+    ]
   }
 
 ];

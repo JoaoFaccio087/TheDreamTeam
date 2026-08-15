@@ -64,6 +64,8 @@
   var FORMATOS_VNL = {
     // usável HOJE com poucos dados: 6 na tabela, você joga 3, top-4 à "Final Four"
     vnl_mini:  { id: 'vnl_mini',  preliminar: 'liga', totalSel: 6,  jogosVoce: 3, classificam: 4 },
+    // 9 na tabela (8 seleções + você), você joga 4, top-8 à Final Eight (elimina 1)
+    vnl_small: { id: 'vnl_small', preliminar: 'liga', totalSel: 9,  jogosVoce: 4, classificam: 8 },
     // meio-termo: 12 na tabela, você joga 5, top-8 à Final Eight
     vnl_med:   { id: 'vnl_med',   preliminar: 'liga', totalSel: 12, jogosVoce: 5, classificam: 8 },
     // escala real: 18 na tabela, você joga 5, top-8 à Final Eight
@@ -73,7 +75,7 @@
   // Escolhe o maior formato VNL cujo total de seleções cabe no disponível.
   function escolheFormatoVNL(disponivel) {
     var total = disponivel + 1; // você ocupa uma vaga
-    var ordem = ['vnl_full', 'vnl_med', 'vnl_mini'];
+    var ordem = ['vnl_full', 'vnl_med', 'vnl_small', 'vnl_mini'];
     for (var i = 0; i < ordem.length; i++) {
       var f = FORMATOS_VNL[ordem[i]];
       if (f.totalSel <= total) return f;
