@@ -965,7 +965,7 @@
     MODOS_ATIVOS: ['brasileirao', 'copa', 'libertadores', 'champions', 'premier', 'serie_a', 'laliga'],
     // Modos de vôlei: geram escudo de seleção (por país), mas SEM estrelas — os títulos
     // mundiais de vôlei são diferentes dos de futebol; por ora, zero estrelas em todos.
-    MODOS_VOLEI: ['volei_m', 'volei_f'],
+    MODOS_VOLEI: ['volei_m', 'volei_f', 'volei_vnl_m', 'volei_vnl_f'],
     ativoNoModo: function (modo) {
       return this.MODOS_ATIVOS.indexOf(modo) >= 0 || this.MODOS_VOLEI.indexOf(modo) >= 0;
     },
