@@ -464,6 +464,185 @@ var DADOS_VNL_M = [
       { id: 'giovanni-sanguinetti', nome: "Sanguinetti",        posicoes: ["CEN"],       forca: 79 },
       { id: 'alessandro-bovolenta', nome: "Bovolenta",          posicoes: ["OPO"],       forca: 80 }
     ]
+  },
+
+  // Seleções adicionais da VNL 2023 (expandem a edição para 8 → Final Eight).
+  {
+    competicao: "VNL (M)",
+    edicao: 2023,
+    clube: "França",
+    jogadores: [
+      { id: 'antoine-brizard',     nome: "Brizard",             posicoes: ["LEV"],       forca: 87 },
+      { id: 'jean-patry',          nome: "Patry",               posicoes: ["OPO"],       forca: 85 },
+      { id: 'earvin-ngapeth',      nome: "N'Gapeth",            posicoes: ["PON"],       forca: 87 },
+      { id: 'trevor-clevenot',     nome: "Clévenot",            posicoes: ["PON"],       forca: 84 },
+      { id: 'barthelemy-chinenyeze', nome: "Chinenyeze",        posicoes: ["CEN"],       forca: 85 },
+      { id: 'jenia-grebennikov',   nome: "Grebennikov",         posicoes: ["LIB"],       forca: 87 },
+      { id: 'benjamin-toniutti',   nome: "Toniutti",            posicoes: ["LEV"],       forca: 83 },
+      { id: 'nicolas-le-goff',     nome: "Le Goff",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'theo-faure',          nome: "Faure",               posicoes: ["OPO"],       forca: 81 },
+      { id: 'yacine-louati',       nome: "Louati",              posicoes: ["PON"],       forca: 81 },
+      { id: 'timothee-carle',      nome: "Carle",               posicoes: ["PON"],       forca: 80 },
+      { id: 'quentin-jouffroy',    nome: "Jouffroy",            posicoes: ["CEN"],       forca: 79 },
+      { id: 'kevin-tillie',        nome: "Tillie",              posicoes: ["PON"],       forca: 80 },
+      { id: 'benjamin-diez',       nome: "Diez",                posicoes: ["LIB"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2023,
+    clube: "Eslovênia",
+    jogadores: [
+      { id: 'gregor-ropret',       nome: "Ropret",              posicoes: ["LEV"],       forca: 82 },
+      { id: 'toncek-stern',        nome: "T. Štern",            posicoes: ["OPO"],       forca: 85 },
+      { id: 'klemen-cebulj',       nome: "Čebulj",              posicoes: ["PON"],       forca: 83 },
+      { id: 'rok-mozic',           nome: "Možič",               posicoes: ["PON"],       forca: 85 },
+      { id: 'jan-kozamernik',      nome: "Kozamernik",          posicoes: ["CEN"],       forca: 85 },
+      { id: 'jani-kovacic',        nome: "Kovačič",             posicoes: ["LIB"],       forca: 82 },
+      { id: 'tine-urnaut',         nome: "Urnaut",              posicoes: ["PON"],       forca: 83 },
+      { id: 'alen-pajenk',         nome: "Pajenk",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'ziga-stern',          nome: "Ž. Štern",            posicoes: ["PON"],       forca: 80 },
+      { id: 'jan-brozic',          nome: "Brožič",              posicoes: ["LEV"],       forca: 78 },
+      { id: 'saso-stalekar',       nome: "Štalekar",            posicoes: ["CEN"],       forca: 79 },
+      { id: 'nik-mujanovic',       nome: "Mujanović",           posicoes: ["OPO"],       forca: 80 },
+      { id: 'rok-bracko',          nome: "Bračko",              posicoes: ["PON"],       forca: 77 },
+      { id: 'matic-videcnik',      nome: "Videčnik",            posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2023,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'fernando-cachopa',    nome: "Cachopa",             posicoes: ["LEV"],       forca: 82 },
+      { id: 'alan-souza',          nome: "Alan",                posicoes: ["OPO"],       forca: 84 },
+      { id: 'ricardo-lucarelli',   nome: "Lucarelli",           posicoes: ["PON"],       forca: 85 },
+      { id: 'yoandy-leal',         nome: "Leal",                posicoes: ["PON"],       forca: 85 },
+      { id: 'flavio-gualberto',    nome: "Flávio",              posicoes: ["CEN"],       forca: 83 },
+      { id: 'thales-hoss',         nome: "Thales",              posicoes: ["LIB"],       forca: 82 },
+      { id: 'bruninho-rezende',    nome: "Bruninho",            posicoes: ["LEV"],       forca: 85 },
+      { id: 'darlan-souza',        nome: "Darlan",              posicoes: ["OPO"],       forca: 84 },
+      { id: 'lucas-saatkamp',      nome: "Saatkamp",            posicoes: ["CEN"],       forca: 82 },
+      { id: 'isac-santos',         nome: "Isac",                posicoes: ["CEN"],       forca: 81 },
+      { id: 'adriano-xavier',      nome: "Adriano",             posicoes: ["PON"],       forca: 80 },
+      { id: 'honorato-sales',      nome: "Honorato",            posicoes: ["PON"],       forca: 81 },
+      { id: 'otavio-pinto',        nome: "Otávio",              posicoes: ["LEV"],       forca: 78 },
+      { id: 'maique-nascimento',   nome: "Maique",              posicoes: ["LIB"],       forca: 84 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2023,
+    clube: "Argentina",
+    jogadores: [
+      { id: 'luciano-de-cecco',    nome: "De Cecco",            posicoes: ["LEV"],       forca: 85 },
+      { id: 'bruno-lima',          nome: "Lima",                posicoes: ["OPO"],       forca: 83 },
+      { id: 'luciano-vicentin',    nome: "Vicentin",            posicoes: ["PON"],       forca: 81 },
+      { id: 'ezequiel-palacios',   nome: "Palacios",            posicoes: ["PON"],       forca: 82 },
+      { id: 'agustin-loser',       nome: "Loser",               posicoes: ["CEN"],       forca: 83 },
+      { id: 'santiago-danani',     nome: "Danani",              posicoes: ["LIB"],       forca: 84 },
+      { id: 'matias-sanchez',      nome: "Sánchez",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'pablo-kukartsev',     nome: "Kukartsev",           posicoes: ["OPO"],       forca: 80 },
+      { id: 'martin-ramos',        nome: "Ramos",               posicoes: ["CEN"],       forca: 81 },
+      { id: 'joaquin-gallego',     nome: "Gallego",             posicoes: ["CEN"],       forca: 79 },
+      { id: 'nicolas-mendez',      nome: "Méndez",              posicoes: ["PON"],       forca: 80 },
+      { id: 'manuel-armoa',        nome: "Armoa",               posicoes: ["PON"],       forca: 78 },
+      { id: 'jan-martinez',        nome: "Martínez",            posicoes: ["PON"],       forca: 78 },
+      { id: 'tomas-aguilera',      nome: "Aguilera",            posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  // ─────────────────────────────────────────── VNL 2022 (Final: Bolonha, Itália)
+  // Campeã: França (1º título, MVP N'Gapeth). Vice: EUA. 3º: Polônia. 4º: Itália.
+  {
+    competicao: "VNL (M)",
+    edicao: 2022,
+    clube: "França",
+    jogadores: [
+      { id: 'antoine-brizard',     nome: "Brizard",             posicoes: ["LEV"],       forca: 87 },
+      { id: 'jean-patry',          nome: "Patry",               posicoes: ["OPO"],       forca: 85 },
+      { id: 'earvin-ngapeth',      nome: "N'Gapeth",            posicoes: ["PON"],       forca: 88 },
+      { id: 'trevor-clevenot',     nome: "Clévenot",            posicoes: ["PON"],       forca: 85 },
+      { id: 'nicolas-le-goff',     nome: "Le Goff",             posicoes: ["CEN"],       forca: 84 },
+      { id: 'jenia-grebennikov',   nome: "Grebennikov",         posicoes: ["LIB"],       forca: 88 },
+      { id: 'benjamin-toniutti',   nome: "Toniutti",            posicoes: ["LEV"],       forca: 84 },
+      { id: 'barthelemy-chinenyeze', nome: "Chinenyeze",        posicoes: ["CEN"],       forca: 84 },
+      { id: 'kevin-tillie',        nome: "Tillie",              posicoes: ["PON"],       forca: 82 },
+      { id: 'yacine-louati',       nome: "Louati",              posicoes: ["PON"],       forca: 81 },
+      { id: 'theo-faure',          nome: "Faure",               posicoes: ["OPO"],       forca: 80 },
+      { id: 'quentin-jouffroy',    nome: "Jouffroy",            posicoes: ["CEN"],       forca: 79 },
+      { id: 'timothee-carle',      nome: "Carle",               posicoes: ["PON"],       forca: 80 },
+      { id: 'benjamin-diez',       nome: "Diez",                posicoes: ["LIB"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2022,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micah-christenson',   nome: "Christenson",         posicoes: ["LEV"],       forca: 86 },
+      { id: 'matt-anderson',       nome: "Anderson",            posicoes: ["OPO"],       forca: 86 },
+      { id: 'aaron-russell',       nome: "Russell",             posicoes: ["PON"],       forca: 85 },
+      { id: 'tj-defalco',          nome: "DeFalco",             posicoes: ["PON"],       forca: 84 },
+      { id: 'david-smith',         nome: "Smith",               posicoes: ["CEN"],       forca: 83 },
+      { id: 'erik-shoji',          nome: "Shoji",               posicoes: ["LIB"],       forca: 86 },
+      { id: 'micah-ma-a',          nome: "Ma'a",                posicoes: ["LEV"],       forca: 82 },
+      { id: 'taylor-averill',      nome: "Averill",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'kyle-ensing',         nome: "Ensing",              posicoes: ["OPO"],       forca: 82 },
+      { id: 'garrett-muagututia',  nome: "Muagututia",          posicoes: ["PON"],       forca: 80 },
+      { id: 'jeff-jendryk',        nome: "Jendryk",             posicoes: ["CEN"],       forca: 82 },
+      { id: 'kyle-dagostino',      nome: "D'Agostino",          posicoes: ["LIB"],       forca: 79 },
+      { id: 'cody-kessel',         nome: "Kessel",              posicoes: ["PON"],       forca: 79 },
+      { id: 'patrick-gasman',      nome: "Gasman",              posicoes: ["CEN"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2022,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'grzegorz-lomacz',     nome: "Łomacz",              posicoes: ["LEV"],       forca: 82 },
+      { id: 'bartosz-kurek',       nome: "Kurek",               posicoes: ["OPO"],       forca: 87 },
+      { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 89 },
+      { id: 'aleksander-sliwka',   nome: "Śliwka",              posicoes: ["PON"],       forca: 85 },
+      { id: 'mateusz-bieniek',     nome: "Bieniek",             posicoes: ["CEN"],       forca: 84 },
+      { id: 'pawel-zatorski',      nome: "Zatorski",            posicoes: ["LIB"],       forca: 85 },
+      { id: 'marcin-komenda',      nome: "Komenda",             posicoes: ["LEV"],       forca: 82 },
+      { id: 'kamil-semeniuk',      nome: "Semeniuk",            posicoes: ["PON"],       forca: 84 },
+      { id: 'jakub-kochanowski',   nome: "Kochanowski",         posicoes: ["CEN"],       forca: 85 },
+      { id: 'norbert-huber',       nome: "Huber",               posicoes: ["CEN"],       forca: 81 },
+      { id: 'bartlomiej-boladz',   nome: "Bołądź",              posicoes: ["OPO"],       forca: 82 },
+      { id: 'tomasz-fornal',       nome: "Fornal",              posicoes: ["PON"],       forca: 84 },
+      { id: 'jakub-popiwczak',     nome: "Popiwczak",           posicoes: ["LIB"],       forca: 81 },
+      { id: 'artur-szalpuk',       nome: "Szalpuk",             posicoes: ["PON"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (M)",
+    edicao: 2022,
+    clube: "Itália",
+    jogadores: [
+      { id: 'simone-giannelli',    nome: "Giannelli",           posicoes: ["LEV"],       forca: 89 },
+      { id: 'yuri-romano',         nome: "Romanò",              posicoes: ["OPO"],       forca: 85 },
+      { id: 'alessandro-michieletto', nome: "Michieletto",      posicoes: ["PON"],       forca: 88 },
+      { id: 'daniele-lavia',       nome: "Lavia",               posicoes: ["PON"],       forca: 85 },
+      { id: 'gianluca-galassi',    nome: "Galassi",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'fabio-balaso',        nome: "Balaso",              posicoes: ["LIB"],       forca: 86 },
+      { id: 'riccardo-sbertoli',   nome: "Sbertoli",            posicoes: ["LEV"],       forca: 81 },
+      { id: 'simone-anzani',       nome: "Anzani",              posicoes: ["CEN"],       forca: 83 },
+      { id: 'lorenzo-cortesia',    nome: "Mosca",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'mattia-bottolo',      nome: "Bottolo",             posicoes: ["PON"],       forca: 82 },
+      { id: 'francesco-recine',    nome: "Recine",              posicoes: ["PON"],       forca: 79 },
+      { id: 'leonardo-scanferla',  nome: "Scanferla",           posicoes: ["LIB"],       forca: 80 },
+      { id: 'giulio-pinali',       nome: "Pinali",              posicoes: ["OPO"],       forca: 80 },
+      { id: 'nicola-cianciotta',   nome: "Cianciotta",          posicoes: ["CEN"],       forca: 78 }
+    ]
   }
 
 ];

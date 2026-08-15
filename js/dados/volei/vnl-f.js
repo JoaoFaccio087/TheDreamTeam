@@ -460,6 +460,185 @@ var DADOS_VNL_F = [
       { id: 'sarah-franklin',      nome: "Franklin",            posicoes: ["PON"],       forca: 79 },
       { id: 'morgan-hentz',        nome: "Hentz",               posicoes: ["LIB"],       forca: 80 }
     ]
+  },
+
+  // Seleções adicionais da VNL 2023 feminina (expandem a edição para 8 → Final Eight).
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'roberta-ratzke',      nome: "Roberta",             posicoes: ["LEV"],       forca: 84 },
+      { id: 'kisy-nascimento',     nome: "Kisy",                posicoes: ["OPO"],       forca: 83 },
+      { id: 'gabriela-guimaraes',  nome: "Gabi",                posicoes: ["PON"],       forca: 88 },
+      { id: 'ana-cristina-menezes', nome: "Ana Cristina",       posicoes: ["PON"],       forca: 83 },
+      { id: 'carol-gattaz',        nome: "Carol Gattaz",        posicoes: ["CEN"],       forca: 82 },
+      { id: 'nyeme-costa',         nome: "Nyeme",               posicoes: ["LIB"],       forca: 82 },
+      { id: 'macris-carneiro',     nome: "Macris",              posicoes: ["LEV"],       forca: 84 },
+      { id: 'julia-bergmann',      nome: "Julia Bergmann",      posicoes: ["PON"],       forca: 83 },
+      { id: 'lorenne-teixeira',    nome: "Lorenne",             posicoes: ["OPO"],       forca: 81 },
+      { id: 'diana-duarte',        nome: "Diana",               posicoes: ["CEN"],       forca: 81 },
+      { id: 'mara-leao',           nome: "Mara",                posicoes: ["CEN"],       forca: 80 },
+      { id: 'julia-kudiess',       nome: "Julia Kudiess",       posicoes: ["CEN"],       forca: 82 },
+      { id: 'tainara-santos',      nome: "Tainara",             posicoes: ["PON"],       forca: 81 },
+      { id: 'laisa-santos',        nome: "Laís",                posicoes: ["LIB"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Japão",
+    jogadores: [
+      { id: 'nanami-seki',         nome: "Seki",                posicoes: ["LEV"],       forca: 83 },
+      { id: 'sarina-koga',         nome: "Koga",                posicoes: ["PON"],       forca: 85 },
+      { id: 'mayu-ishikawa',       nome: "Ishikawa",            posicoes: ["PON"],       forca: 84 },
+      { id: 'yoshino-sato',        nome: "Sato",                posicoes: ["OPO"],       forca: 82 },
+      { id: 'yukiko-araki',        nome: "Araki",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'manami-kojima',       nome: "Kojima",              posicoes: ["LIB"],       forca: 85 },
+      { id: 'tsukasa-nakagawa',    nome: "Nakagawa",            posicoes: ["LEV"],       forca: 79 },
+      { id: 'sarina-wada',         nome: "Wada",                posicoes: ["PON"],       forca: 81 },
+      { id: 'airi-kitamado',       nome: "Kitamado",            posicoes: ["PON"],       forca: 80 },
+      { id: 'kotoka-shimamura',    nome: "Shimamura",           posicoes: ["CEN"],       forca: 81 },
+      { id: 'aki-momii',           nome: "Momii",               posicoes: ["CEN"],       forca: 79 },
+      { id: 'mami-yokota',         nome: "Yokota",              posicoes: ["OPO"],       forca: 79 },
+      { id: 'yuki-nakamura',       nome: "Nakamura",            posicoes: ["PON"],       forca: 78 },
+      { id: 'wakana-fukudome',     nome: "Fukudome",            posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Itália",
+    jogadores: [
+      { id: 'alessia-orro',        nome: "Orro",                posicoes: ["LEV"],       forca: 88 },
+      { id: 'ekaterina-antropova', nome: "Antropova",           posicoes: ["OPO"],       forca: 84 },
+      { id: 'miriam-sylla',        nome: "Sylla",               posicoes: ["PON"],       forca: 86 },
+      { id: 'caterina-bosetti',    nome: "Bosetti",             posicoes: ["PON"],       forca: 83 },
+      { id: 'anna-danesi',         nome: "Danesi",              posicoes: ["CEN"],       forca: 85 },
+      { id: 'monica-de-gennaro',   nome: "De Gennaro",          posicoes: ["LIB"],       forca: 87 },
+      { id: 'alice-degradi',       nome: "Degradi",             posicoes: ["PON"],       forca: 81 },
+      { id: 'sarah-fahr',          nome: "Fahr",                posicoes: ["CEN"],       forca: 83 },
+      { id: 'marina-lubian',       nome: "Lubian",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'gaia-giovannini',     nome: "Giovannini",          posicoes: ["PON"],       forca: 80 },
+      { id: 'francesca-bosio',     nome: "Bosio",               posicoes: ["LEV"],       forca: 79 },
+      { id: 'loveth-omoruyi',      nome: "Omoruyi",             posicoes: ["PON"],       forca: 80 },
+      { id: 'linda-nwakalor',      nome: "Nwakalor",            posicoes: ["OPO"],       forca: 79 },
+      { id: 'eleonora-fersino',    nome: "Fersino",             posicoes: ["LIB"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Alemanha",
+    jogadores: [
+      { id: 'pia-kaesehage',       nome: "Kästehage",           posicoes: ["LEV"],       forca: 79 },
+      { id: 'lena-stigrot',        nome: "Stigrot",             posicoes: ["PON"],       forca: 81 },
+      { id: 'hanna-orthmann',      nome: "Orthmann",            posicoes: ["PON"],       forca: 82 },
+      { id: 'antonia-stautz',      nome: "Stautz",              posicoes: ["OPO"],       forca: 80 },
+      { id: 'camilla-weitzel',     nome: "Weitzel",             posicoes: ["CEN"],       forca: 81 },
+      { id: 'anna-pogany',         nome: "Pogany",              posicoes: ["LIB"],       forca: 82 },
+      { id: 'lina-alsmeier',       nome: "Alsmeier",            posicoes: ["PON"],       forca: 80 },
+      { id: 'sarah-straube',       nome: "Straube",             posicoes: ["LEV"],       forca: 78 },
+      { id: 'monique-strubbe',     nome: "Strubbe",             posicoes: ["CEN"],       forca: 79 },
+      { id: 'marie-schoelzel',     nome: "Schölzel",            posicoes: ["CEN"],       forca: 78 },
+      { id: 'corina-glaab',        nome: "Glaab",               posicoes: ["PON"],       forca: 78 },
+      { id: 'emilia-weske',        nome: "Weske",               posicoes: ["OPO"],       forca: 78 },
+      { id: 'juliana-nogueira',    nome: "Nogueira",            posicoes: ["PON"],       forca: 77 },
+      { id: 'anna-hoelzig',        nome: "Hölzig",              posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  // ─────────────────────────────────────────── VNL 2022 (Final: Ancara, Turquia)
+  // Campeã: Itália (1º título, MVP Egonu). Vice: Brasil. 3º: Sérvia. 4º: Turquia.
+  {
+    competicao: "VNL (F)",
+    edicao: 2022,
+    clube: "Itália",
+    jogadores: [
+      { id: 'alessia-orro',        nome: "Orro",                posicoes: ["LEV"],       forca: 87 },
+      { id: 'paola-egonu',         nome: "Egonu",               posicoes: ["OPO"],       forca: 92 },
+      { id: 'miriam-sylla',        nome: "Sylla",               posicoes: ["PON"],       forca: 86 },
+      { id: 'caterina-bosetti',    nome: "Bosetti",             posicoes: ["PON"],       forca: 83 },
+      { id: 'anna-danesi',         nome: "Danesi",              posicoes: ["CEN"],       forca: 85 },
+      { id: 'monica-de-gennaro',   nome: "De Gennaro",          posicoes: ["LIB"],       forca: 87 },
+      { id: 'ofelia-malinov',      nome: "Malinov",             posicoes: ["LEV"],       forca: 82 },
+      { id: 'elena-pietrini',      nome: "Pietrini",            posicoes: ["PON"],       forca: 82 },
+      { id: 'sarah-fahr',          nome: "Fahr",                posicoes: ["CEN"],       forca: 83 },
+      { id: 'marina-lubian',       nome: "Lubian",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'sylvia-nwakalor',     nome: "S. Nwakalor",         posicoes: ["OPO"],       forca: 80 },
+      { id: 'alice-degradi',       nome: "Degradi",             posicoes: ["PON"],       forca: 80 },
+      { id: 'rachele-morello',     nome: "Morello",             posicoes: ["LEV"],       forca: 78 },
+      { id: 'ilaria-spirito',      nome: "Spirito",             posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2022,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'macris-carneiro',     nome: "Macris",              posicoes: ["LEV"],       forca: 84 },
+      { id: 'gabriela-guimaraes',  nome: "Gabi",                posicoes: ["PON"],       forca: 88 },
+      { id: 'kisy-nascimento',     nome: "Kisy",                posicoes: ["OPO"],       forca: 83 },
+      { id: 'julia-bergmann',      nome: "Julia Bergmann",      posicoes: ["PON"],       forca: 83 },
+      { id: 'carol-gattaz',        nome: "Carol Gattaz",        posicoes: ["CEN"],       forca: 83 },
+      { id: 'nyeme-costa',         nome: "Nyeme",               posicoes: ["LIB"],       forca: 82 },
+      { id: 'roberta-ratzke',      nome: "Roberta",             posicoes: ["LEV"],       forca: 82 },
+      { id: 'ana-cristina-menezes', nome: "Ana Cristina",       posicoes: ["PON"],       forca: 83 },
+      { id: 'lorenne-teixeira',    nome: "Lorenne",             posicoes: ["OPO"],       forca: 81 },
+      { id: 'ana-carolina-silva',  nome: "Ana Carolina",        posicoes: ["CEN"],       forca: 83 },
+      { id: 'diana-duarte',        nome: "Diana",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'pri-daroit',          nome: "Pri Daroit",          posicoes: ["PON"],       forca: 80 },
+      { id: 'julia-kudiess',       nome: "Julia Kudiess",       posicoes: ["CEN"],       forca: 80 },
+      { id: 'laisa-santos',        nome: "Laís",                posicoes: ["LIB"],       forca: 79 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2022,
+    clube: "Sérvia",
+    jogadores: [
+      { id: 'nikoleta-perovic',    nome: "Perović",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'tijana-boskovic',     nome: "Bošković",            posicoes: ["OPO"],       forca: 90 },
+      { id: 'bianka-busa',         nome: "Buša",                posicoes: ["PON"],       forca: 83 },
+      { id: 'jelena-nikolic-srb',  nome: "Nikolić",             posicoes: ["PON"],       forca: 80 },
+      { id: 'jovana-stevanovic',   nome: "Stevanović",          posicoes: ["CEN"],       forca: 82 },
+      { id: 'teodora-pusic',       nome: "Pušić",               posicoes: ["LIB"],       forca: 82 },
+      { id: 'bojana-drca',         nome: "Drča",                posicoes: ["LEV"],       forca: 81 },
+      { id: 'maja-aleksic',        nome: "Aleksić",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'katarina-lazovic',    nome: "Lazović",             posicoes: ["PON"],       forca: 81 },
+      { id: 'sara-lozo',           nome: "Lozo",                posicoes: ["OPO"],       forca: 79 },
+      { id: 'stefana-veljkovic',   nome: "Veljković",           posicoes: ["CEN"],       forca: 80 },
+      { id: 'bojana-milenkovic',   nome: "Milenković",          posicoes: ["PON"],       forca: 79 },
+      { id: 'jovana-cvijic',       nome: "Cvijić",              posicoes: ["CEN"],       forca: 78 },
+      { id: 'aleksandra-uzelac',   nome: "Uzelac",              posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2022,
+    clube: "Turquia",
+    jogadores: [
+      { id: 'cansu-ozbay',         nome: "Özbay",               posicoes: ["LEV"],       forca: 84 },
+      { id: 'melissa-vargas',      nome: "Vargas",              posicoes: ["OPO"],       forca: 90 },
+      { id: 'ebrar-karakurt',      nome: "Karakurt",            posicoes: ["PON"],       forca: 85 },
+      { id: 'hande-baladin',       nome: "Baladın",             posicoes: ["PON"],       forca: 82 },
+      { id: 'zehra-gunes',         nome: "Güneş",               posicoes: ["CEN"],       forca: 85 },
+      { id: 'gizem-orge',          nome: "Örge",                posicoes: ["LIB"],       forca: 84 },
+      { id: 'ilkin-aydin',         nome: "Aydın",               posicoes: ["PON"],       forca: 82 },
+      { id: 'eda-erdem',           nome: "Eda Erdem",           posicoes: ["CEN"],       forca: 84 },
+      { id: 'elif-sahin',          nome: "E. Şahin",            posicoes: ["LEV"],       forca: 80 },
+      { id: 'meryem-boz',          nome: "Boz",                 posicoes: ["PON"],       forca: 80 },
+      { id: 'asli-kalac',          nome: "Kalaç",               posicoes: ["CEN"],       forca: 79 },
+      { id: 'saliha-sahin',        nome: "Şahin",               posicoes: ["OPO"],       forca: 79 },
+      { id: 'derya-cebecioglu',    nome: "Cebecioğlu",          posicoes: ["PON"],       forca: 79 },
+      { id: 'simge-akoz',          nome: "Aköz",                posicoes: ["LIB"],       forca: 80 }
+    ]
   }
 
 ];
