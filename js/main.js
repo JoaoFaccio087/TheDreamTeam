@@ -214,6 +214,10 @@ UI.on('btn-iniciar-jogo', 'click', function () {
     iniciarPartidaVolei();   // próxima partida da fase de grupos do vôlei
   } else if (acaoBotao === 'mata-volei') {
     iniciarPartidaMataVolei();   // confronto do mata-mata do vôlei
+  } else if (acaoBotao === 'proximo-vnl') {
+    iniciarPartidaVNL();     // próxima rodada da preliminar da VNL
+  } else if (acaoBotao === 'final-eight-vnl') {
+    iniciarPartidaFinalEightVNL();   // confronto da Final Eight da VNL
   } else {
     // 'iniciar' → monta a campanha (grupo + fases) e dispara o primeiro jogo
     montarCampanha();
@@ -256,7 +260,9 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
     confirmar: 'Confirmar',
     cancelar: 'Cancelar',
     onConfirmar: function () {
-      if (typeof ehCompeticaoVolei === 'function' && ehCompeticaoVolei(modoSelecionado)) {
+      if (typeof ehCompeticaoVNL === 'function' && ehCompeticaoVNL(modoSelecionado)) {
+        pularTudoVNL();
+      } else if (typeof ehCompeticaoVolei === 'function' && ehCompeticaoVolei(modoSelecionado)) {
         pularTudoVolei();
       } else if (ehFormatoLiga(modoSelecionado)) {
         pularTudoBrasileirao();

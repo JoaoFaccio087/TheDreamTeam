@@ -439,6 +439,15 @@ function iniciarPartidaVolei() {
     console.warn('[volei] módulos do vôlei não carregados'); return;
   }
 
+  // ── Bifurcação VNL vs Mundial ───────────────────────────────────────
+  // A VNL tem estrutura própria (preliminar em liga + Final Eight). Se a
+  // competição é a VNL, desvia para o fluxo dedicado e RETORNA. O caminho
+  // do Mundial abaixo (grupos + mata) fica intocado.
+  if (typeof ehCompeticaoVNL === 'function' && ehCompeticaoVNL(modoSelecionado)) {
+    iniciarPartidaVNL();
+    return;
+  }
+
   // Monta a campanha na 1ª partida (escolhe uma edição e monta grupos+mata).
   if (!campanhaVoleiAtual) {
     var todas = selecoesDaCompeticaoVolei();
@@ -593,6 +602,197 @@ function pularTudoVolei() {
   if (bp) bp.classList.add('escondida');
 }
 
+// ════════════════════════════════════════════════════════════════════
+//  VNL / LIGA DAS NAÇÕES — fluxo da campanha (preliminar em liga + Final Eight).
+//  Espelha iniciarPartidaVolei/pularTudoVolei/iniciarPartidaMataVolei, mas usa
+//  a estrutura própria da VNL (camp.vnl, tabela única, seusJogos, Final Eight).
+// ════════════════════════════════════════════════════════════════════
+
+// Joga uma rodada da FASE PRELIMINAR da VNL (você enfrenta um adversário sorteado).
+function iniciarPartidaVNL() {
+  if (typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') {
+    console.warn('[vnl] módulos do vôlei não carregados'); return;
+  }
+
+  // Monta a campanha VNL na 1ª partida (escolhe edição e monta preliminar+Final Eight).
+  if (!campanhaVoleiAtual) {
+    var todas = selecoesDaCompeticaoVolei();
+    if (!todas.length) { console.warn('[vnl] sem seleções para', modoSelecionado); return; }
+    var anos = [];
+    todas.forEach(function (c) { if (anos.indexOf(c.edicao) < 0) anos.push(c.edicao); });
+    var ano = anos[Math.floor(Math.random() * anos.length)];
+    var selecoes = todas.filter(function (c) { return c.edicao === ano; });
+
+    var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    campanhaVoleiAtual = CampanhaVolei.montarCampanhaVNL(selecoes, voceMonta, forcaSelecaoVolei);
+    campanhaVoleiAtual.edicaoAno = ano;
+  }
+
+  var camp = campanhaVoleiAtual;
+  var adversarioTime = CampanhaVolei.adversarioVNLRodada(camp);
+  if (!adversarioTime) {
+    console.log('[vnl] fase preliminar concluída');
+    return;
+  }
+  var adversario = adversarioTime.clubeRef;
+
+  var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+  var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+  var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+
+  CampanhaVolei.registrarJogoVNL(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+
+  var faseLabel = 'Fase Preliminar \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+  var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+  partidaIdVolei = idCard;
+  var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) btn.disabled = true;
+
+  AnimacaoVolei.animar({
+    elCard: card,
+    roteiro: roteiro,
+    velocidade: function () { return velocidadeSimulacao; },
+    pular: false,
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      var acabouPreliminar = (camp.jogosFeitos >= camp.seusJogos.length);
+
+      if (acabouPreliminar) {
+        // Bastidores preenchem a preliminar e geram a classificação.
+        CampanhaVolei.simularPreliminarVNL(camp, camp.formato.jogosVoce);
+        mostrarTabelaVNL(camp);
+        if (!CampanhaVolei.voceClassificouVNL(camp)) salvarCampanhaVolei(camp);
+      }
+
+      if (btn) {
+        if (acabouPreliminar) {
+          if (CampanhaVolei.voceClassificouVNL(camp)) {
+            CampanhaVolei.montarFinalEightVNL(camp);
+            btn.innerHTML = 'Ir \u00e0 Final Eight \u25BA';
+            acaoBotao = 'final-eight-vnl';
+          } else {
+            btn.innerHTML = 'Montar Novo Time \u25BA';
+            acaoBotao = 'novo-time';
+          }
+        } else {
+          btn.innerHTML = 'Pr\u00f3xima Partida \u25BA';
+          acaoBotao = 'proximo-vnl';
+        }
+      }
+
+      // Encadeamento automático
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico') {
+        if (camp.jogosFeitos < camp.seusJogos.length) {
+          setTimeout(function () { iniciarPartidaVNL(); }, 800);
+        } else if (acabouPreliminar && CampanhaVolei.voceClassificouVNL(camp)) {
+          setTimeout(function () { iniciarPartidaFinalEightVNL(); }, 900);
+        }
+      }
+    }
+  });
+}
+
+// "Pular tudo" da VNL: simula suas rodadas restantes da preliminar sem animação.
+function pularTudoVNL() {
+  if (!campanhaVoleiAtual || typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') return;
+  var camp = campanhaVoleiAtual;
+
+  while (camp.jogosFeitos < camp.seusJogos.length) {
+    var adversarioTime = CampanhaVolei.adversarioVNLRodada(camp);
+    if (!adversarioTime) break;
+    var adversario = adversarioTime.clubeRef;
+    var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+    var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+    CampanhaVolei.registrarJogoVNL(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+    var faseLabel = 'Fase Preliminar \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+    var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+    partidaIdVolei = idCard;
+    var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+    AnimacaoVolei.animar({ elCard: card, roteiro: roteiro, velocidade: function () { return velocidadeSimulacao; }, pular: true });
+  }
+
+  CampanhaVolei.simularPreliminarVNL(camp, camp.formato.jogosVoce);
+  mostrarTabelaVNL(camp);
+  if (!CampanhaVolei.voceClassificouVNL(camp)) salvarCampanhaVolei(camp);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) {
+    if (CampanhaVolei.voceClassificouVNL(camp)) {
+      CampanhaVolei.montarFinalEightVNL(camp);
+      btn.innerHTML = 'Ir \u00e0 Final Eight \u25BA';
+      acaoBotao = 'final-eight-vnl';
+    } else {
+      btn.innerHTML = 'Montar Novo Time \u25BA';
+      acaoBotao = 'novo-time';
+    }
+    btn.disabled = false;
+  }
+  var bp = document.getElementById('btn-pular-tudo');
+  if (bp) bp.classList.add('escondida');
+}
+
+// Joga um confronto da FINAL EIGHT da VNL (quartas, semi, final). Reusa o motor de
+// mata do vôlei (registrarJogoMata) — idêntico ao Mundial, só muda o rótulo/desfecho.
+function iniciarPartidaFinalEightVNL() {
+  var camp = campanhaVoleiAtual;
+  if (!camp || !camp.mata) return;
+  var adversarioTime = CampanhaVolei.seuAdversarioMata(camp);
+  if (!adversarioTime) return;
+  var adversario = adversarioTime.clubeRef;
+  var faseNome = camp.mata.fases[camp.mata.faseIdx] ? camp.mata.fases[camp.mata.faseIdx].nome : 'FINAL EIGHT';
+
+  var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+  var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+  var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+
+  var faseLabel = faseNome + ' \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+  var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+  partidaIdVolei = idCard;
+  var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) btn.disabled = true;
+
+  AnimacaoVolei.animar({
+    elCard: card,
+    roteiro: roteiro,
+    velocidade: function () { return velocidadeSimulacao; },
+    pular: false,
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
+
+      if (btn) {
+        if (res.campeao) {
+          btn.innerHTML = 'Nova Campanha';
+          acaoBotao = 'nova-campanha';
+          if (typeof mostrarBotaoResumo === 'function') { resumoCampeao = true; mostrarBotaoResumo(true); }
+        } else if (res.eliminado) {
+          btn.innerHTML = 'Montar Novo Time \u25BA';
+          acaoBotao = 'novo-time';
+        } else {
+          btn.innerHTML = 'Pr\u00f3xima Partida \u25BA';
+          acaoBotao = 'final-eight-vnl';
+        }
+      }
+
+      if (res.campeao || res.eliminado) {
+        salvarCampanhaVolei(camp, {
+          campeao: res.campeao,
+          faseAlcancada: faseNome
+        });
+      }
+
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico' && !res.campeao && !res.eliminado) {
+        setTimeout(function () { iniciarPartidaFinalEightVNL(); }, 900);
+      }
+    }
+  });
+}
+
 // Joga um confronto do MATA-MATA do vôlei (semi, final...). Espelha iniciarPartidaVolei
 // mas usa o adversário do chaveamento e resolve avanço/eliminação/título no fim.
 function iniciarPartidaMataVolei() {
@@ -710,6 +910,52 @@ function mostrarTabelaGrupoVolei(camp) {
   }
 }
 
+// Mostra a tabela da FASE PRELIMINAR da VNL (liga única). Espelha mostrarTabelaGrupoVolei,
+// mas é uma tabela só (não grupos) e destaca o top-`classificam` (Final Eight).
+function mostrarTabelaVNL(camp) {
+  var cls = CampanhaVolei.classificacaoVNL(camp);
+  var classificam = camp.classificam | 0;
+
+  var linhas = cls.map(function (l, i) {
+    var t = l.time;
+    var saldo = (l.sp - l.sc >= 0 ? '+' : '') + (l.sp - l.sc);
+    var classe = (t.voce ? 'grupo-voce' : '') + (i < classificam ? ' grupo-classifica' : '');
+    var nome = t.voce ? nomeDoTime : t.nome;
+    var esc = (typeof Escudos !== 'undefined' && Escudos.porTime)
+      ? (Escudos.porTime(t, modoSelecionado) || '') : '';
+    var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
+    return '<tr class="' + classe + '">' +
+             '<td class="grupo-pos">' + (i + 1) + '</td>' +
+             '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + nome + '</span></td>' +
+             '<td class="grupo-num">' + l.v + '</td>' +
+             '<td class="grupo-num">' + l.d + '</td>' +
+             '<td class="grupo-num">' + saldo + '</td>' +
+             '<td class="grupo-pts">' + l.pts + '</td>' +
+           '</tr>';
+  }).join('');
+
+  var tabelaHTML =
+    '<div class="grupo-tabela">' +
+      '<p class="grupo-tabela-titulo">Fase Preliminar \u00B7 Classifica\u00E7\u00E3o</p>' +
+      '<table class="fl-tabela">' +
+        '<thead><tr><th></th><th>Sele\u00E7\u00E3o</th><th>V</th><th>D</th><th>SS</th><th>Pts</th></tr></thead>' +
+        '<tbody>' + linhas + '</tbody>' +
+      '</table>' +
+      '<p class="fl-legenda">Top ' + classificam + ' avan\u00E7am \u00E0 Final Eight</p>' +
+    '</div>';
+
+  var ultimoCard = document.getElementById('partida-volei-' + partidaIdVolei);
+  var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
+  if (corpo) {
+    var div = document.createElement('div');
+    div.innerHTML = tabelaHTML;
+    corpo.appendChild(div.firstChild);
+  } else {
+    var hist = document.getElementById('historico-jogos');
+    if (hist) { var w = document.createElement('div'); w.innerHTML = tabelaHTML; hist.appendChild(w.firstChild); }
+  }
+}
+
 // Salva a campanha de vôlei no banco/histórico (fatia 5). Espelha o formato do
 // futebol (js/resumo.js), mas com esporte:'volei' e semântica de vôlei:
 //  - gf/ga = sets feitos/sofridos (reaproveita as colunas; ver migração 009)
@@ -720,11 +966,13 @@ function mostrarTabelaGrupoVolei(camp) {
 function salvarCampanhaVolei(camp, resultadoMata) {
   if (typeof API === 'undefined' || !API.salvarPartida) return;
 
-  var cls = CampanhaVolei.classificacaoGrupo(camp);
+  // ── VNL: usa a classificação da preliminar (liga única), não grupos ──
+  var ehVNL = !!camp.vnl;
+  var cls = ehVNL ? CampanhaVolei.classificacaoVNL(camp) : CampanhaVolei.classificacaoGrupo(camp);
   var minhaLinha = cls.filter(function (l) { return l.time.voce; })[0] || { v: 0, d: 0, sp: 0, sc: 0 };
   var posicao = 0;
   cls.forEach(function (l, i) { if (l.time.voce) posicao = i + 1; });
-  var classificou = CampanhaVolei.voceClassificou(camp);
+  var classificou = ehVNL ? CampanhaVolei.voceClassificouVNL(camp) : CampanhaVolei.voceClassificou(camp);
 
   // Soma os jogos do mata-mata (se houver) às vitórias/derrotas e sets.
   var vTot = minhaLinha.v | 0, dTot = minhaLinha.d | 0;
@@ -752,9 +1000,11 @@ function salvarCampanhaVolei(camp, resultadoMata) {
     detalhes: {
       edicao:       camp.edicaoAno,
       formato:      camp.formato.id,
-      grupo:        String.fromCharCode(65 + camp.seuGrupo),
+      grupo:        ehVNL ? 'Preliminar' : String.fromCharCode(65 + camp.seuGrupo),
       classificado: !!classificou,
-      faseAlcancada: (resultadoMata && resultadoMata.faseAlcancada) || (classificou ? 'MATA-MATA' : 'FASE DE GRUPOS'),
+      faseAlcancada: (resultadoMata && resultadoMata.faseAlcancada) ||
+                     (ehVNL ? (classificou ? 'FINAL EIGHT' : 'FASE PRELIMINAR')
+                            : (classificou ? 'MATA-MATA' : 'FASE DE GRUPOS')),
       classificacao: cls.map(function (l) {
         return { time: l.time.voce ? '(você)' : l.time.nome, pts: l.pts, sp: l.sp, sc: l.sc };
       })

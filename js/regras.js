@@ -27,7 +27,13 @@ const COMPETICOES = {
   // js/dados/volei/*.js. Enquanto o vôlei estiver habilitado:false no catálogo de
   // esportes, estas entradas ficam registradas mas inacessíveis pela interface.
   volei_m:      { dados: 'Mundial de Vôlei (M)', label: 'Mundial de Vôlei (M)', formato: 'mata-mata-volei', esporte: 'volei' },
-  volei_f:      { dados: 'Mundial de Vôlei (F)', label: 'Mundial de Vôlei (F)', formato: 'mata-mata-volei', esporte: 'volei' }
+  volei_f:      { dados: 'Mundial de Vôlei (F)', label: 'Mundial de Vôlei (F)', formato: 'mata-mata-volei', esporte: 'volei' },
+  // ─── VNL / Liga das Nações (ago/2026) — 2º modo do vôlei. ───
+  // `formato: 'vnl'` é PRÓPRIO (fase preliminar em liga + Final Eight), distinto do
+  // 'mata-mata-volei' do Mundial. `esporte: 'volei'` mantém a bifurcação do motor.
+  // `dados` casa com o campo "competicao" de js/dados/volei/vnl-*.js.
+  volei_vnl_m:  { dados: 'VNL (M)', label: 'Liga das Nações (M)', formato: 'vnl', esporte: 'volei' },
+  volei_vnl_f:  { dados: 'VNL (F)', label: 'Liga das Nações (F)', formato: 'vnl', esporte: 'volei' }
 };
 
 // Helper: a competição roda no formato de liga (pontos corridos)?
@@ -40,6 +46,13 @@ function ehFormatoLiga(id) {
 // retorna false para todas as competições de futebol.
 function ehCompeticaoVolei(id) {
   return !!(COMPETICOES[id] && COMPETICOES[id].esporte === 'volei');
+}
+
+// Helper: a competição é a VNL / Liga das Nações? (formato 'vnl', dentro do vôlei).
+// Usado para bifurcar entre o fluxo do Mundial (grupos+mata) e o da VNL
+// (preliminar em liga + Final Eight). Mundial retorna false aqui.
+function ehCompeticaoVNL(id) {
+  return !!(COMPETICOES[id] && COMPETICOES[id].formato === 'vnl');
 }
 
 // Converte o valor de "competicao" dos dados no rótulo exibido (ex.: "Champions" → "Champions League").

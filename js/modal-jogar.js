@@ -35,7 +35,9 @@
     ],
     volei: [
       { id: 'volei_m', nome: 'Mundial Masculino' },
-      { id: 'volei_f', nome: 'Mundial Feminino' }
+      { id: 'volei_f', nome: 'Mundial Feminino' },
+      { id: 'volei_vnl_m', nome: 'Liga das Nações (M)' },
+      { id: 'volei_vnl_f', nome: 'Liga das Nações (F)' }
     ]
   };
 
@@ -110,12 +112,12 @@
     overlay.innerHTML =
       '<div class="modal-confirm-box mj-box" role="dialog" aria-modal="true">' +
         '<button type="button" class="mj-fechar" data-mj="fechar" aria-label="Fechar">&times;</button>' +
-        '<p class="modal-confirm-titulo">Jogar</p>' +
+        '<p class="modal-confirm-titulo">Nova partida</p>' +
         blocoHtml('Modo', [{ id: 'solo', nome: 'Um Jogador' }, { id: 'multi', nome: 'Multijogador' }], estado.modo, 'data-mj-modo') +
         '<div id="mj-slot-esporte"></div>' +
         '<div id="mj-slot-competicao"></div>' +
         '<div class="mj-acoes">' +
-          '<button type="button" class="btn-rolar mj-jogar" data-mj="jogar">Jogar &rarr;</button>' +
+          '<button type="button" class="mj-jogar" data-mj="jogar">Come&ccedil;ar &rarr;</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
