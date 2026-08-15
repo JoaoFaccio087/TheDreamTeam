@@ -281,6 +281,185 @@ var DADOS_VNL_F = [
       { id: 'tainara-santos',      nome: "Tainara",             posicoes: ["PON"],       forca: 82 },
       { id: 'laisa-santos',        nome: "Laís",                posicoes: ["LIB"],       forca: 79 }
     ]
+  },
+
+  // Seleções adicionais da VNL 2024 feminina (expandem a edição para 8 → Final Eight).
+  {
+    competicao: "VNL (F)",
+    edicao: 2024,
+    clube: "Turquia",
+    jogadores: [
+      { id: 'cansu-ozbay',         nome: "Özbay",               posicoes: ["LEV"],       forca: 85 },
+      { id: 'melissa-vargas',      nome: "Vargas",              posicoes: ["OPO"],       forca: 92 },
+      { id: 'ebrar-karakurt',      nome: "Karakurt",            posicoes: ["PON"],       forca: 87 },
+      { id: 'hande-baladin',       nome: "Baladın",             posicoes: ["PON"],       forca: 83 },
+      { id: 'zehra-gunes',         nome: "Güneş",               posicoes: ["CEN"],       forca: 86 },
+      { id: 'gizem-orge',          nome: "Örge",                posicoes: ["LIB"],       forca: 84 },
+      { id: 'ilkin-aydin',         nome: "Aydın",               posicoes: ["PON"],       forca: 83 },
+      { id: 'eda-erdem',           nome: "Eda Erdem",           posicoes: ["CEN"],       forca: 84 },
+      { id: 'derya-cebecioglu',    nome: "Cebecioğlu",          posicoes: ["PON"],       forca: 80 },
+      { id: 'asli-kalac',          nome: "Kalaç",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'elif-sahin',          nome: "E. Şahin",            posicoes: ["LEV"],       forca: 80 },
+      { id: 'tugba-senoglu',       nome: "Şenoğlu",             posicoes: ["PON"],       forca: 79 },
+      { id: 'kubra-akman',         nome: "Akman",               posicoes: ["CEN"],       forca: 79 },
+      { id: 'simge-akoz',          nome: "Aköz",                posicoes: ["LIB"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2024,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'jordyn-poulter',      nome: "Poulter",             posicoes: ["LEV"],       forca: 85 },
+      { id: 'annie-drews',         nome: "Drews",               posicoes: ["OPO"],       forca: 84 },
+      { id: 'avery-skinner',       nome: "A. Skinner",          posicoes: ["PON"],       forca: 84 },
+      { id: 'kathryn-plummer',     nome: "Plummer",             posicoes: ["PON"],       forca: 84 },
+      { id: 'chiaka-ogbogu',       nome: "Ogbogu",              posicoes: ["CEN"],       forca: 83 },
+      { id: 'justine-wong-orantes', nome: "Wong-Orantes",       posicoes: ["LIB"],       forca: 84 },
+      { id: 'micha-hancock',       nome: "Hancock",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'jordan-larson',       nome: "Larson",              posicoes: ["PON"],       forca: 84 },
+      { id: 'haleigh-washington',  nome: "Washington",          posicoes: ["CEN"],       forca: 83 },
+      { id: 'dana-rettke',         nome: "Rettke",              posicoes: ["CEN"],       forca: 82 },
+      { id: 'ali-frantti',         nome: "Frantti",             posicoes: ["PON"],       forca: 82 },
+      { id: 'madisen-skinner',     nome: "M. Skinner",          posicoes: ["PON"],       forca: 81 },
+      { id: 'lauren-carlini',      nome: "Carlini",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'morgan-hentz',        nome: "Hentz",               posicoes: ["LIB"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2024,
+    clube: "China",
+    jogadores: [
+      { id: 'diao-linyu',          nome: "Diao Linyu",          posicoes: ["LEV"],       forca: 82 },
+      { id: 'gong-xiangyu',        nome: "Gong Xiangyu",        posicoes: ["OPO"],       forca: 86 },
+      { id: 'li-yingying',         nome: "Li Yingying",         posicoes: ["PON"],       forca: 87 },
+      { id: 'wu-mengjie',          nome: "Wu Mengjie",          posicoes: ["PON"],       forca: 82 },
+      { id: 'yuan-xinyue',         nome: "Yuan Xinyue",         posicoes: ["CEN"],       forca: 85 },
+      { id: 'wang-mengjie',        nome: "Wang Mengjie",        posicoes: ["LIB"],       forca: 83 },
+      { id: 'diao-yanni',          nome: "Diao Yanni",          posicoes: ["LEV"],       forca: 79 },
+      { id: 'wang-yuanyuan',       nome: "Wang Yuanyuan",       posicoes: ["CEN"],       forca: 84 },
+      { id: 'gao-yi',              nome: "Gao Yi",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'zhuang-yushan',       nome: "Zhuang Yushan",       posicoes: ["LEV"],       forca: 79 },
+      { id: 'zheng-yixin',         nome: "Zheng Yixin",         posicoes: ["PON"],       forca: 80 },
+      { id: 'wang-wei-china',      nome: "Wang Wei",            posicoes: ["OPO"],       forca: 79 },
+      { id: 'tang-xin',            nome: "Tang Xin",            posicoes: ["PON"],       forca: 78 },
+      { id: 'xu-jiade',            nome: "Xu Jiade",            posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2024,
+    clube: "Sérvia",
+    jogadores: [
+      { id: 'nikoleta-perovic',    nome: "Perović",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'tijana-boskovic',     nome: "Bošković",            posicoes: ["OPO"],       forca: 90 },
+      { id: 'bianka-busa',         nome: "Buša",                posicoes: ["PON"],       forca: 83 },
+      { id: 'jovana-cvijic',       nome: "Cvijić",              posicoes: ["PON"],       forca: 80 },
+      { id: 'jovana-stevanovic',   nome: "Stevanović",          posicoes: ["CEN"],       forca: 82 },
+      { id: 'teodora-pusic',       nome: "Pušić",               posicoes: ["LIB"],       forca: 81 },
+      { id: 'aleksandra-jegdic',   nome: "Jegdić",              posicoes: ["LEV"],       forca: 78 },
+      { id: 'maja-aleksic',        nome: "Aleksić",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'katarina-lazovic',    nome: "Lazović",             posicoes: ["PON"],       forca: 81 },
+      { id: 'vukasin-vrana',       nome: "Vrana",               posicoes: ["CEN"],       forca: 78 },
+      { id: 'sara-lozo',           nome: "Lozo",                posicoes: ["OPO"],       forca: 79 },
+      { id: 'bojana-milenkovic',   nome: "Milenković",          posicoes: ["PON"],       forca: 79 },
+      { id: 'jelena-blagojevic',   nome: "Blagojević",          posicoes: ["PON"],       forca: 78 },
+      { id: 'aleksandra-uzelac',   nome: "Uzelac",              posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  // ─────────────────────────────────────────── VNL 2023 (Final: Arlington, EUA)
+  // Campeã: Turquia (1º título, MVP Vargas). Vice: China. 3º: Polônia. 4º: EUA.
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Turquia",
+    jogadores: [
+      { id: 'cansu-ozbay',         nome: "Özbay",               posicoes: ["LEV"],       forca: 84 },
+      { id: 'melissa-vargas',      nome: "Vargas",              posicoes: ["OPO"],       forca: 91 },
+      { id: 'ebrar-karakurt',      nome: "Karakurt",            posicoes: ["PON"],       forca: 86 },
+      { id: 'hande-baladin',       nome: "Baladın",             posicoes: ["PON"],       forca: 83 },
+      { id: 'zehra-gunes',         nome: "Güneş",               posicoes: ["CEN"],       forca: 86 },
+      { id: 'gizem-orge',          nome: "Örge",                posicoes: ["LIB"],       forca: 85 },
+      { id: 'ilkin-aydin',         nome: "Aydın",               posicoes: ["PON"],       forca: 83 },
+      { id: 'eda-erdem',           nome: "Eda Erdem",           posicoes: ["CEN"],       forca: 85 },
+      { id: 'elif-sahin',          nome: "E. Şahin",            posicoes: ["LEV"],       forca: 80 },
+      { id: 'asli-kalac',          nome: "Kalaç",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'derya-cebecioglu',    nome: "Cebecioğlu",          posicoes: ["PON"],       forca: 80 },
+      { id: 'meliha-diken',        nome: "Diken",               posicoes: ["PON"],       forca: 79 },
+      { id: 'saliha-sahin',        nome: "Şahin",               posicoes: ["OPO"],       forca: 79 },
+      { id: 'simge-akoz',          nome: "Aköz",                posicoes: ["LIB"],       forca: 80 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "China",
+    jogadores: [
+      { id: 'diao-linyu',          nome: "Diao Linyu",          posicoes: ["LEV"],       forca: 83 },
+      { id: 'gong-xiangyu',        nome: "Gong Xiangyu",        posicoes: ["OPO"],       forca: 86 },
+      { id: 'li-yingying',         nome: "Li Yingying",         posicoes: ["PON"],       forca: 87 },
+      { id: 'wu-mengjie',          nome: "Wu Mengjie",          posicoes: ["PON"],       forca: 82 },
+      { id: 'yuan-xinyue',         nome: "Yuan Xinyue",         posicoes: ["CEN"],       forca: 85 },
+      { id: 'wang-mengjie',        nome: "Wang Mengjie",        posicoes: ["LIB"],       forca: 83 },
+      { id: 'ding-xia',            nome: "Ding Xia",            posicoes: ["LEV"],       forca: 82 },
+      { id: 'wang-yuanyuan',       nome: "Wang Yuanyuan",       posicoes: ["CEN"],       forca: 84 },
+      { id: 'gao-yi',              nome: "Gao Yi",              posicoes: ["CEN"],       forca: 81 },
+      { id: 'zhuang-yushan',       nome: "Zhuang Yushan",       posicoes: ["LEV"],       forca: 79 },
+      { id: 'zheng-yixin',         nome: "Zheng Yixin",         posicoes: ["PON"],       forca: 80 },
+      { id: 'jin-ye',              nome: "Jin Ye",              posicoes: ["OPO"],       forca: 79 },
+      { id: 'miao-yiwen',          nome: "Miao Yiwen",          posicoes: ["PON"],       forca: 78 },
+      { id: 'xu-jiade',            nome: "Xu Jiade",            posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'katarzyna-wenerska',  nome: "Wenerska",            posicoes: ["LEV"],       forca: 82 },
+      { id: 'magdalena-stysiak',   nome: "Stysiak",             posicoes: ["OPO"],       forca: 84 },
+      { id: 'martyna-lukasik',     nome: "Łukasik",             posicoes: ["PON"],       forca: 83 },
+      { id: 'olivia-rozanski',     nome: "Różański",            posicoes: ["PON"],       forca: 80 },
+      { id: 'agnieszka-korneluk',  nome: "Korneluk",            posicoes: ["CEN"],       forca: 84 },
+      { id: 'maria-stenzel',       nome: "Stenzel",             posicoes: ["LIB"],       forca: 82 },
+      { id: 'martyna-czyrnianska', nome: "Czyrniańska",         posicoes: ["PON"],       forca: 80 },
+      { id: 'magdalena-jurczyk',   nome: "Jurczyk",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'weronika-centka',     nome: "Centka",              posicoes: ["CEN"],       forca: 79 },
+      { id: 'julita-piasecka',     nome: "Piasecka",            posicoes: ["LEV"],       forca: 79 },
+      { id: 'monika-galkowska',    nome: "Gałkowska",           posicoes: ["PON"],       forca: 79 },
+      { id: 'zuzanna-gorecka',     nome: "Górecka",             posicoes: ["PON"],       forca: 79 },
+      { id: 'paulina-damaske',     nome: "Damaske",             posicoes: ["OPO"],       forca: 78 },
+      { id: 'aleksandra-szczyglowska', nome: "Szczygłowska",    posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "VNL (F)",
+    edicao: 2023,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'jordyn-poulter',      nome: "Poulter",             posicoes: ["LEV"],       forca: 85 },
+      { id: 'annie-drews',         nome: "Drews",               posicoes: ["OPO"],       forca: 84 },
+      { id: 'jordan-larson',       nome: "Larson",              posicoes: ["PON"],       forca: 85 },
+      { id: 'avery-skinner',       nome: "A. Skinner",          posicoes: ["PON"],       forca: 83 },
+      { id: 'haleigh-washington',  nome: "Washington",          posicoes: ["CEN"],       forca: 83 },
+      { id: 'justine-wong-orantes', nome: "Wong-Orantes",       posicoes: ["LIB"],       forca: 84 },
+      { id: 'micha-hancock',       nome: "Hancock",             posicoes: ["LEV"],       forca: 81 },
+      { id: 'kathryn-plummer',     nome: "Plummer",             posicoes: ["PON"],       forca: 84 },
+      { id: 'chiaka-ogbogu',       nome: "Ogbogu",              posicoes: ["CEN"],       forca: 83 },
+      { id: 'dana-rettke',         nome: "Rettke",              posicoes: ["CEN"],       forca: 82 },
+      { id: 'ali-frantti',         nome: "Frantti",             posicoes: ["PON"],       forca: 82 },
+      { id: 'lauren-carlini',      nome: "Carlini",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'sarah-franklin',      nome: "Franklin",            posicoes: ["PON"],       forca: 79 },
+      { id: 'morgan-hentz',        nome: "Hentz",               posicoes: ["LIB"],       forca: 80 }
+    ]
   }
 
 ];
