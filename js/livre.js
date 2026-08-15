@@ -97,7 +97,11 @@
   function pintar(el) {
     if (el.dataset.pronto) return;
     el.dataset.pronto = '1';
-    if (typeof Escudos !== 'undefined' && Escudos.porNome) {
+    // Usa porNomeSeModo (não porNome) para respeitar o modo: no vôlei gera o escudo da
+    // seleção SEM estrelas (títulos de futebol não valem aqui); no futebol, com estrelas.
+    if (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo) {
+      el.innerHTML = Escudos.porNomeSeModo(el.dataset.escudo, modoSelecionado) || '';
+    } else if (typeof Escudos !== 'undefined' && Escudos.porNome) {
       el.innerHTML = Escudos.porNome(el.dataset.escudo) || '';
     }
   }

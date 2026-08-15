@@ -685,7 +685,9 @@
     GOL: 'GOL',
     LE: 'DEF', LD: 'DEF', ZAG: 'DEF', LB: 'DEF', RB: 'DEF', ZE: 'DEF', ZD: 'DEF',
     VOL: 'MEI', MC: 'MEI', MEI: 'MEI', ME: 'MEI', MD: 'MEI', MEIA: 'MEI',
-    PE: 'ATA', PD: 'ATA', ATA: 'ATA', CA: 'ATA', SA: 'ATA'
+    PE: 'ATA', PD: 'ATA', ATA: 'ATA', CA: 'ATA', SA: 'ATA',
+    // Vôlei: cada posição é seu próprio grupo (a quadra usa LEV/OPO/PON/CEN/LIB direto).
+    LEV: 'LEV', OPO: 'OPO', PON: 'PON', CEN: 'CEN', LIB: 'LIB'
   };
   function grupoDaPosicao(codigo) { return POSICAO_GRUPO[String(codigo || '').toUpperCase()] || null; }
 
@@ -706,7 +708,7 @@
         if ((p.forca | 0) > porNome[k].forca) porNome[k].forca = p.forca | 0;
       });
     });
-    var grupos = { GOL: [], DEF: [], MEI: [], ATA: [] };
+    var grupos = { GOL: [], DEF: [], MEI: [], ATA: [], LEV: [], OPO: [], PON: [], CEN: [], LIB: [] };
     Object.keys(porNome).forEach(function (k) {
       var j = porNome[k];
       if (grupos[j.grupo]) grupos[j.grupo].push(j);

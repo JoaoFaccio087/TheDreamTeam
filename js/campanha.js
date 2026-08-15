@@ -435,6 +435,33 @@ function selecoesDaCompeticaoVolei() {
   return fonte.filter(function (c) { return c.competicao === filtro; });
 }
 
+// Acumula as estatísticas de UMA partida de vôlei nas MESMAS variáveis globais que o
+// resumo da campanha lê (statsJogadores, campanhaVitorias/…/GF/GA/Partidas). Assim o
+// resumo do vôlei mostra sets, maior pontuador e mais aces — sem reescrever o resumo.
+// `roteiro` vem de AnimacaoVolei.prepararPartida; `setsVoce`/`setsAdv` são o placar.
+// O vôlei não tem empate, então campanhaEmpates nunca cresce.
+function acumularStatsVolei(roteiro, setsVoce, setsAdv) {
+  if (typeof campanhaPartidas === 'undefined') return;
+  campanhaPartidas++;
+  campanhaGF += setsVoce;   // no vôlei, "GF/GA" do resumo = sets feitos/sofridos
+  campanhaGA += setsAdv;
+  if (setsVoce > setsAdv) campanhaVitorias++; else campanhaDerrotas++;
+
+  // Pontos/aces por jogador — só do MEU time (a lista de estatísticas do resumo é a
+  // minha escalação). O autor do ponto é o nome do jogador; filtramos pelos meus.
+  var meusNomes = {};
+  escalacao.forEach(function (j) { if (j) meusNomes[j.nome] = true; });
+  var stats = AnimacaoVolei.coletarEstatisticas(roteiro);
+  stats.forEach(function (s) {
+    if (!meusNomes[s.nome]) return;   // ignora pontos do adversário
+    if (!statsJogadores[s.nome]) statsJogadores[s.nome] = { gols: 0, asis: 0 };
+    // Reusa os campos gols/asis: no vôlei, gols=pontos e asis=aces (o resumo já rotula
+    // como PTS/ACE via ehVolei). Mantém uma estrutura só para os dois esportes.
+    statsJogadores[s.nome].gols += s.pontos;
+    statsJogadores[s.nome].asis += s.aces;
+  });
+}
+
 // Inicia (ou continua) a campanha de vôlei e joga a próxima partida.
 function iniciarPartidaVolei() {
   if (typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') {
@@ -484,6 +511,7 @@ function iniciarPartidaVolei() {
 
   // Registra o resultado na tabela do grupo (sets do roteiro).
   CampanhaVolei.registrarJogoGrupo(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+  acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
   camp.jogosGrupoFeitos++;
 
   // Cria o card visual (reaproveita a casca do card de futebol) e anima ponto a ponto.
@@ -566,6 +594,7 @@ function pularTudoVolei() {
     var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
     var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
     CampanhaVolei.registrarJogoGrupo(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+    acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
     var faseLabel = 'Grupo ' + String.fromCharCode(65 + camp.seuGrupo) + ' \u00B7 ' +
                     rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
     var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
@@ -588,20 +617,73 @@ function pularTudoVolei() {
   if (!CampanhaVolei.voceClassificou(camp)) salvarCampanhaVolei(camp);
 
   var btn = document.getElementById('btn-iniciar-jogo');
+  var bp = document.getElementById('btn-pular-tudo');
+  if (bp) bp.classList.add('escondida');
+
+  if (!CampanhaVolei.voceClassificou(camp)) {
+    // Eliminado nos grupos → fim da campanha.
+    if (btn) {
+      btn.innerHTML = 'Montar Novo Time \u25BA';
+      acaoBotao = 'novo-time';
+      btn.disabled = false;
+    }
+    if (typeof mostrarBotaoResumo === 'function') mostrarBotaoResumo(false);
+    return;
+  }
+
+  // Classificou → "Pular tudo" deve simular TODO o mata-mata até o fim (campeão ou
+  // eliminação), sem parar no "Ir ao Mata-Mata". Monta o mata e resolve cada fase.
+  CampanhaVolei.montarMataVolei(camp);
+  var resultado = pularMataVolei(camp);
+
   if (btn) {
-    if (CampanhaVolei.voceClassificou(camp)) {
-      // Classificou → monta o mata e leva ao mata-mata (igual ao fluxo jogo a jogo).
-      CampanhaVolei.montarMataVolei(camp);
-      btn.innerHTML = 'Ir ao Mata-Mata \u25BA';
-      acaoBotao = 'mata-volei';
+    if (resultado.campeao) {
+      btn.innerHTML = 'Nova Campanha';
+      acaoBotao = 'nova-campanha';
     } else {
       btn.innerHTML = 'Montar Novo Time \u25BA';
       acaoBotao = 'novo-time';
     }
     btn.disabled = false;
   }
-  var bp = document.getElementById('btn-pular-tudo');
-  if (bp) bp.classList.add('escondida');
+  if (typeof mostrarBotaoResumo === 'function') {
+    resumoCampeao = !!resultado.campeao;
+    mostrarBotaoResumo(!!resultado.campeao);
+  }
+}
+
+// Simula (sem animação) todos os confrontos do mata-mata do vôlei a partir do estado
+// atual de camp.mata, até você ser campeão ou eliminado. Registra cada card e salva a
+// campanha com o desfecho final. Retorna { campeao, faseAlcancada }.
+function pularMataVolei(camp) {
+  var ultimaFase = camp.mata.fases[camp.mata.faseIdx] ? camp.mata.fases[camp.mata.faseIdx].nome : 'MATA-MATA';
+  var res = { campeao: false, eliminado: false, proximaFase: null };
+
+  while (true) {
+    var adversarioTime = CampanhaVolei.seuAdversarioMata(camp);
+    if (!adversarioTime) break;
+    var adversario = adversarioTime.clubeRef;
+    var faseNome = camp.mata.fases[camp.mata.faseIdx] ? camp.mata.fases[camp.mata.faseIdx].nome : 'MATA-MATA';
+    ultimaFase = faseNome;
+
+    var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+    var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+
+    var faseLabel = faseNome + ' \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+    var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+    partidaIdVolei = idCard;
+    var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+    AnimacaoVolei.animar({ elCard: card, roteiro: roteiro, velocidade: function () { return velocidadeSimulacao; }, pular: true });
+
+    res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
+    acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+    if (res.campeao || res.eliminado) break;
+  }
+
+  // Salva o resultado final da campanha com o desfecho (alimenta resumo e conquistas).
+  salvarCampanhaVolei(camp, { campeao: res.campeao, faseAlcancada: ultimaFase });
+  return { campeao: res.campeao, faseAlcancada: ultimaFase };
 }
 
 // ════════════════════════════════════════════════════════════════════
@@ -643,6 +725,7 @@ function iniciarPartidaVNL() {
   var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
 
   CampanhaVolei.registrarJogoVNL(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+  acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
 
   var faseLabel = 'Fase Preliminar \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
   var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
@@ -709,6 +792,7 @@ function pularTudoVNL() {
     var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
     var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
     CampanhaVolei.registrarJogoVNL(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+    acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
     var faseLabel = 'Fase Preliminar \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
     var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
     partidaIdVolei = idCard;
@@ -721,19 +805,69 @@ function pularTudoVNL() {
   if (!CampanhaVolei.voceClassificouVNL(camp)) salvarCampanhaVolei(camp);
 
   var btn = document.getElementById('btn-iniciar-jogo');
+  var bp = document.getElementById('btn-pular-tudo');
+  if (bp) bp.classList.add('escondida');
+
+  if (!CampanhaVolei.voceClassificouVNL(camp)) {
+    if (btn) {
+      btn.innerHTML = 'Montar Novo Time \u25BA';
+      acaoBotao = 'novo-time';
+      btn.disabled = false;
+    }
+    if (typeof mostrarBotaoResumo === 'function') mostrarBotaoResumo(false);
+    return;
+  }
+
+  // Classificou → "Pular tudo" simula TODA a Final Eight até o fim.
+  CampanhaVolei.montarFinalEightVNL(camp);
+  var resultado = pularFinalEightVNL(camp);
+
   if (btn) {
-    if (CampanhaVolei.voceClassificouVNL(camp)) {
-      CampanhaVolei.montarFinalEightVNL(camp);
-      btn.innerHTML = 'Ir \u00e0 Final Eight \u25BA';
-      acaoBotao = 'final-eight-vnl';
+    if (resultado.campeao) {
+      btn.innerHTML = 'Nova Campanha';
+      acaoBotao = 'nova-campanha';
     } else {
       btn.innerHTML = 'Montar Novo Time \u25BA';
       acaoBotao = 'novo-time';
     }
     btn.disabled = false;
   }
-  var bp = document.getElementById('btn-pular-tudo');
-  if (bp) bp.classList.add('escondida');
+  if (typeof mostrarBotaoResumo === 'function') {
+    resumoCampeao = !!resultado.campeao;
+    mostrarBotaoResumo(!!resultado.campeao);
+  }
+}
+
+// Simula (sem animação) toda a Final Eight da VNL a partir do estado atual de camp.mata,
+// até campeão ou eliminação. Espelha pularMataVolei. Retorna { campeao, faseAlcancada }.
+function pularFinalEightVNL(camp) {
+  var ultimaFase = camp.mata.fases[camp.mata.faseIdx] ? camp.mata.fases[camp.mata.faseIdx].nome : 'FINAL EIGHT';
+  var res = { campeao: false, eliminado: false, proximaFase: null };
+
+  while (true) {
+    var adversarioTime = CampanhaVolei.seuAdversarioMata(camp);
+    if (!adversarioTime) break;
+    var adversario = adversarioTime.clubeRef;
+    var faseNome = camp.mata.fases[camp.mata.faseIdx] ? camp.mata.fases[camp.mata.faseIdx].nome : 'FINAL EIGHT';
+    ultimaFase = faseNome;
+
+    var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+    var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
+
+    var faseLabel = faseNome + ' \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
+    var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
+    partidaIdVolei = idCard;
+    var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
+    AnimacaoVolei.animar({ elCard: card, roteiro: roteiro, velocidade: function () { return velocidadeSimulacao; }, pular: true });
+
+    res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
+    acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+    if (res.campeao || res.eliminado) break;
+  }
+
+  salvarCampanhaVolei(camp, { campeao: res.campeao, faseAlcancada: ultimaFase });
+  return { campeao: res.campeao, faseAlcancada: ultimaFase };
 }
 
 // Joga um confronto da FINAL EIGHT da VNL (quartas, semi, final). Reusa o motor de
@@ -766,6 +900,7 @@ function iniciarPartidaFinalEightVNL() {
     onFim: function () {
       if (btn) btn.disabled = false;
       var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
+      acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
 
       if (btn) {
         if (res.campeao) {
@@ -825,6 +960,7 @@ function iniciarPartidaMataVolei() {
     onFim: function () {
       if (btn) btn.disabled = false;
       var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
+      acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
 
       if (btn) {
         if (res.campeao) {

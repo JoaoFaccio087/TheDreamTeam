@@ -480,7 +480,7 @@
 
 /* ── Bloco: desempenho por competição (barras) — substitui os acordeões ── */
 .perfil-acordeoes {
-  display: flex; flex-direction: column; justify-content: space-between;
+  display: flex; flex-direction: column; justify-content: flex-start;
 }
 .perfil-barra-linha {
   padding: 0.95rem 0;
