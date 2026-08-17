@@ -138,19 +138,32 @@ function pintarMapaVitrine(idEsporte) {
   var campo = document.getElementById('campo');
   if (!campo) return;
   var ehVolei = (idEsporte === 'volei');
+  var ehBasquete = (idEsporte === 'basquete');
 
-  // troca a aparência da quadra (CSS): vôlei ganha .quadra-volei; futebol volta ao normal
+  // troca a aparência da quadra (CSS): vôlei ganha .quadra-volei; basquete .quadra-basquete;
+  // futebol volta ao normal.
   campo.classList.toggle('quadra-volei', ehVolei);
+  campo.classList.toggle('quadra-basquete', ehBasquete);
 
   // Elementos internos da QUADRA de vôlei (piso, rede no meio, 2 linhas de ataque).
   // Criados quando é vôlei, removidos ao voltar pro futebol. Os elementos do campo de
   // futebol (.campo-linha-meio/.campo-circulo/.campo-area) já existem no HTML e são
   // escondidos via CSS quando .quadra-volei está ativa.
   var elementosQuadra = ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'];
+  var elementosBasq = ['bq-piso', 'bq-garrafao', 'bq-linha3'];
   var piso = campo.querySelector('.piso');
+  var bqPiso = campo.querySelector('.bq-piso');
   if (ehVolei) {
     if (!piso) {
       elementosQuadra.forEach(function (cls) {
+        var el = document.createElement('div');
+        el.className = cls;
+        campo.insertBefore(el, campo.querySelector('.ficha') || null);
+      });
+    }
+  } else if (ehBasquete) {
+    if (!bqPiso) {
+      elementosBasq.forEach(function (cls) {
         var el = document.createElement('div');
         el.className = cls;
         campo.insertBefore(el, campo.querySelector('.ficha') || null);
@@ -166,9 +179,26 @@ function pintarMapaVitrine(idEsporte) {
       if (el.parentNode) el.parentNode.removeChild(el);
     });
   }
+  // limpa elementos de basquete ao sair do basquete
+  if (!ehBasquete && bqPiso) {
+    elementosBasq.forEach(function (cls) {
+      var el = campo.querySelector('.' + cls);
+      if (el && el.parentNode) el.parentNode.removeChild(el);
+    });
+  }
+  // limpa elementos de vôlei ao entrar no basquete
+  if (ehBasquete && piso) {
+    elementosQuadra.forEach(function (cls) {
+      var el = campo.querySelector('.' + cls);
+      if (el && el.parentNode) el.parentNode.removeChild(el);
+    });
+    Array.prototype.forEach.call(campo.querySelectorAll('.ficha-espelho'), function (el) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    });
+  }
 
   // reconstrói as fichas conforme o nº de posições do esporte, e posiciona
-  var formacao = ehVolei ? 'volei' : _formacaoFutebolAleatoria();
+  var formacao = ehVolei ? 'volei' : (ehBasquete ? 'basquete' : _formacaoFutebolAleatoria());
   if (typeof formacoes !== 'undefined' && formacoes[formacao] && typeof UI !== 'undefined') {
     var coords = formacoes[formacao];
     UI.montarCampo(campo, coords.length, { classe: 'ficha' });
@@ -208,15 +238,18 @@ function aplicarEsporteVitrine(idEsporte) {
     s.classList.toggle('pilula-ativa', s.getAttribute('data-esporte') === idEsporte);
   });
 
-  // troca o bloco de competições (futebol vs vôlei)
+  // troca o bloco de competições (futebol vs vôlei vs basquete)
   var blocoFutebol = document.getElementById('modo-aba-solo');
   var blocoVolei   = document.getElementById('modo-aba-solo-volei');
+  var blocoBasquete = document.getElementById('modo-aba-solo-basquete');
   var ehVolei = (idEsporte === 'volei');
-  if (blocoFutebol) blocoFutebol.classList.toggle('escondida', ehVolei);
-  if (blocoVolei)   blocoVolei.classList.toggle('escondida', !ehVolei);
+  var ehBasquete = (idEsporte === 'basquete');
+  if (blocoFutebol)  blocoFutebol.classList.toggle('escondida', ehVolei || ehBasquete);
+  if (blocoVolei)    blocoVolei.classList.toggle('escondida', !ehVolei);
+  if (blocoBasquete) blocoBasquete.classList.toggle('escondida', !ehBasquete);
 
   // ativa a 1ª competição do esporte
-  var blocoAtivo = ehVolei ? blocoVolei : blocoFutebol;
+  var blocoAtivo = ehVolei ? blocoVolei : (ehBasquete ? blocoBasquete : blocoFutebol);
   if (blocoAtivo) {
     var primeira = blocoAtivo.querySelector('.pilula[data-modo]');
     if (primeira && typeof selecionarModo === 'function') {

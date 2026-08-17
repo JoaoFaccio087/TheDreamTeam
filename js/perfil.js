@@ -739,8 +739,14 @@
     var campo = $('perfil-campo-escalados');
     if (!campo) return;
 
+    var ehVolei = (_esportePerfil === 'volei');
+    var ehBasquete = (_esportePerfil === 'basquete');
+
     var grupos;
-    if (_statsCache && _statsCache.escalados) {
+    // O servidor só conta escalações de FUTEBOL (grupos GOL/DEF/MEI/ATA). Para vôlei e
+    // basquete, a contagem do servidor viria vazia — então usamos a contagem LOCAL
+    // (contarEscalados), que reconhece as posições dos três esportes via POSICAO_GRUPO.
+    if (_statsCache && _statsCache.escalados && !ehVolei && !ehBasquete) {
       // Servidor já contou as escalações: recebe {GOL,DEF,MEI,ATA} ordenados por vezes.
       var apiKey = ESC_PARA_API[chave || 'geral'] || 'geral';
       grupos = _statsCache.escalados[apiKey] || { GOL: [], DEF: [], MEI: [], ATA: [] };
@@ -752,25 +758,28 @@
       grupos = contarEscalados(ms);
     }
 
-    var temAlgum = ['GOL', 'DEF', 'MEI', 'ATA', 'LEV', 'OPO', 'PON', 'CEN', 'LIB'].some(function (g) {
+    var temAlgum = ['GOL', 'DEF', 'MEI', 'ATA', 'LEV', 'OPO', 'PON', 'CEN', 'LIB', 'PG', 'SG', 'SF', 'PF', 'C'].some(function (g) {
       return (grupos[g] || []).length > 0;
     });
     if (!temAlgum) {
       campo.innerHTML = '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
       campo.classList.remove('quadra-volei');
+      campo.classList.remove('quadra-basquete');
       return;
     }
 
     // Escolhe a formação/aparência conforme o esporte ativo do perfil.
-    var ehVolei = (_esportePerfil === 'volei');
-    var formacao = ehVolei ? 'volei' : FORMACAO_ESCALADOS;
+    var formacao = ehVolei ? 'volei' : (ehBasquete ? 'basquete' : FORMACAO_ESCALADOS);
     campo.classList.toggle('quadra-volei', ehVolei);
+    campo.classList.toggle('quadra-basquete', ehBasquete);
 
     var vagas = montarOnzeEscalado(grupos, formacao);
     var html = ehVolei
       ? '<div class="piso"></div><div class="rede"></div><div class="linha-ataque"></div><div class="linha-ataque-baixo"></div>'
-      : '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
-        '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>';
+      : (ehBasquete
+        ? '<div class="bq-piso"></div><div class="bq-garrafao"></div><div class="bq-linha3"></div>'
+        : '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
+          '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>');
     vagas.forEach(function (v) {
       var temJog = !!v.jog;
       var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';

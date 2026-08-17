@@ -108,11 +108,13 @@ function atualizarHeaderInfo() {
       if (estiloJogo === 'draft') estilo = 'DRAFT';
       else if (estiloJogo === 'orcamento') estilo = 'ORÇAMENTO';
     }
-    // No vôlei não há formação (posições fixas), então o cabeçalho não mostra
-    // 'volei' como se fosse uma — começa direto pela competição.
+    // No vôlei/basquete não há formação (posições fixas), então o cabeçalho não mostra
+    // 'volei'/'basquete' como se fosse uma — começa direto pela competição.
     var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+    var ehBasquete = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
+    var semFormacao = ehVolei || ehBasquete;
     var comp = COMPETICOES[modoSelecionado].label.toUpperCase();
-    var txt = ehVolei
+    var txt = semFormacao
       ? (comp + ' · ' + estilo)
       : (formacaoJogo + ' · ' + comp + ' · ' + estilo);
     jogoHeaderInfo.textContent = txt;
@@ -122,10 +124,11 @@ function atualizarHeaderInfo() {
 }
 
 function iniciarTelaJogo() {
-  // Bifurca por esporte: vôlei usa a "formação" própria (posições fixas LEV/PON/CEN/
-  // LIB/OPO); futebol segue no 4-3-3 padrão. ehCompeticaoVolei() vem de regras.js.
+  // Bifurca por esporte: vôlei usa a "formação" própria (LEV/PON/CEN/LIB/OPO);
+  // basquete usa a sua (PG/SG/SF/PF/C); futebol segue no 4-3-3 padrão.
   var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
-  formacaoJogo       = ehVolei ? 'volei' : '4-3-3';
+  var ehBasquete = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
+  formacaoJogo       = ehVolei ? 'volei' : (ehBasquete ? 'basquete' : '4-3-3');
   // NÃO usar formacaoTravada aqui: ela significa "time já rolado" no resto do sistema
   // (trava troca de ESTILO, salva sessão, etc.). As pílulas de formação já ficam
   // escondidas no vôlei (mais abaixo), então não há o que travar.
@@ -159,22 +162,29 @@ function iniciarTelaJogo() {
   }
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 
-  // Aparência do campo de jogo: quadra de vôlei (azul/laranja) ou campo de futebol.
+  // Aparência do campo de jogo: quadra de vôlei/basquete ou campo de futebol.
   if (campoJogo) {
     campoJogo.classList.toggle('quadra-volei', ehVolei);
-    // Elementos internos da quadra (piso/rede/linhas de ataque). Criados no vôlei,
-    // removidos no futebol. Mesma abordagem do mapa-vitrine da home.
+    campoJogo.classList.toggle('quadra-basquete', ehBasquete);
+    // Elementos internos da quadra. Vôlei: piso/rede/linhas. Basquete: piso/garrafão/
+    // linha de 3. Removidos ao trocar de esporte. Mesma abordagem do mapa-vitrine.
+    var elsVolei = ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'];
+    var elsBasq = ['bq-piso', 'bq-garrafao', 'bq-linha3'];
     var jaTemPiso = campoJogo.querySelector('.piso');
+    var jaTemBqPiso = campoJogo.querySelector('.bq-piso');
+    // limpa o que não for do esporte atual
+    if (!ehVolei && jaTemPiso) elsVolei.forEach(function (cls) { var el = campoJogo.querySelector('.' + cls); if (el && el.parentNode) el.parentNode.removeChild(el); });
+    if (!ehBasquete && jaTemBqPiso) elsBasq.forEach(function (cls) { var el = campoJogo.querySelector('.' + cls); if (el && el.parentNode) el.parentNode.removeChild(el); });
+    // cria os do esporte atual
     if (ehVolei && !jaTemPiso) {
-      ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'].forEach(function (cls) {
-        var el = document.createElement('div');
-        el.className = cls;
+      elsVolei.forEach(function (cls) {
+        var el = document.createElement('div'); el.className = cls;
         campoJogo.insertBefore(el, campoJogo.querySelector('.slot-jogo') || null);
       });
-    } else if (!ehVolei && jaTemPiso) {
-      ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'].forEach(function (cls) {
-        var el = campoJogo.querySelector('.' + cls);
-        if (el && el.parentNode) el.parentNode.removeChild(el);
+    } else if (ehBasquete && !jaTemBqPiso) {
+      elsBasq.forEach(function (cls) {
+        var el = document.createElement('div'); el.className = cls;
+        campoJogo.insertBefore(el, campoJogo.querySelector('.slot-jogo') || null);
       });
     }
   }

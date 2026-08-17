@@ -143,6 +143,17 @@ const formacoes = {
     { left: 28, top: 80, grupo: 'LEV' },
     { left: 50, top: 84, grupo: 'LIB' },
     { left: 72, top: 80, grupo: 'OPO' }
+  ],
+
+  // Basquete — 5 posições numa MEIA-QUADRA (a cesta fica no TOPO). Disposição típica
+  // de ataque: pivô e ala-pivô perto da cesta (topo), alas nas laterais (meio), armador
+  // na frente (embaixo, comandando). Coords com margem p/ fichas + nomes não vazarem.
+  'basquete': [
+    { left: 34, top: 30, grupo: 'PF' },   // ala-pivô (garrafão, esquerda)
+    { left: 66, top: 30, grupo: 'C'  },   // pivô (garrafão, direita)
+    { left: 20, top: 55, grupo: 'SF' },   // ala (lateral esquerda)
+    { left: 80, top: 55, grupo: 'SG' },   // ala-armador (lateral direita)
+    { left: 50, top: 78, grupo: 'PG' }    // armador (frente/comando)
   ]
 
 };
@@ -162,7 +173,9 @@ const codigosFormacao = {
   '4-1-2-1-2':['GOL','LE',  'ZAG', 'ZAG', 'LD',  'VOL', 'ME',  'MD',  'MEI', 'ATA', 'ATA'],
   // Vôlei — 6 códigos na MESMA ordem das coordenadas em formacoes['volei']
   // (PON, CEN, PON, LEV, LIB, OPO). Usado pela tela de jogo para rotular os slots.
-  'volei':   ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO']
+  'volei':   ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO'],
+  // Basquete — 5 códigos na MESMA ordem das coordenadas em formacoes['basquete'].
+  'basquete': ['PF', 'C', 'SF', 'SG', 'PG']
 };
 
 

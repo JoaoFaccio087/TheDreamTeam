@@ -169,6 +169,50 @@
   z-index: 0;
 }
 
+/* ── Quadra de BASQUETE (meia-quadra, cesta no topo) ── */
+.quadra-basquete,
+#campo.quadra-basquete,
+#campo-jogo.quadra-basquete,
+.perfil-campo-escalados.quadra-basquete {
+  background: #7A4A24 !important;   /* zona fora da quadra: madeira escura */
+}
+/* Esconde os elementos do campo de futebol quando em modo basquete */
+#campo.quadra-basquete .campo-linha-meio,
+#campo.quadra-basquete .campo-circulo,
+#campo.quadra-basquete .campo-area,
+#campo-jogo.quadra-basquete .campo-jogo-linha-meio,
+#campo-jogo.quadra-basquete .campo-jogo-circulo,
+#campo-jogo.quadra-basquete .campo-jogo-area,
+.perfil-campo-escalados.quadra-basquete .pce-linha-meio,
+.perfil-campo-escalados.quadra-basquete .pce-circulo,
+.perfil-campo-escalados.quadra-basquete .pce-area { display: none; }
+
+/* Piso de madeira clara (o "parquet") */
+.quadra-basquete .piso,
+.quadra-basquete .bq-piso {
+  position: absolute; inset: 6%;
+  background: #D9954E;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+/* Garrafão (área pintada) encostado na cesta do topo */
+.quadra-basquete .bq-garrafao {
+  position: absolute;
+  top: 6%; left: 34%; right: 34%; height: 30%;
+  background: rgba(255, 255, 255, 0.10);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-top: none;
+  z-index: 1;
+}
+/* Semicírculo de 3 pontos (arco no topo, em torno da cesta) */
+.quadra-basquete .bq-linha3 {
+  position: absolute;
+  top: 6%; left: 14%; right: 14%; height: 46%;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-top: none;
+  border-radius: 0 0 60% 60% / 0 0 100% 100%;
+  z-index: 1;
+}
+
 /* Bloco do seletor de ESPORTE na home (Fase 5). Fica escondido enquanto só houver
    um esporte habilitado; o estilo espelha o de .home-formacao. */
 .home-esporte {
