@@ -300,6 +300,11 @@ function iniciarPartida() {
     iniciarPartidaVolei();
     return;
   }
+  // Basquete (NBA): fluxo próprio (temporada → playoffs → Finais NBA).
+  if (typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado)) {
+    iniciarPartidaBasquete();
+    return;
+  }
 
   var stats = document.getElementById('stats-campanha');
   if (stats) stats.classList.remove('escondida'); // a 1ª partida revela as estatísticas
@@ -415,6 +420,351 @@ function iniciarPartida() {
 // Estado da campanha de vôlei (separado do futebol para não colidir). Guarda a
 // estrutura de grupos/mata montada pelo CampanhaVolei e por onde a campanha vai.
 var campanhaVoleiAtual = null;
+
+// ════════════════════════════════════════════════════════════════════
+//  BASQUETE / NBA — fluxo da campanha (temporada regular → playoffs →
+//  Finais da NBA). Espelha o vôlei/VNL, mas usa CampanhaBasquete e
+//  AnimacaoBasquete. Estado próprio (campanhaBasqueteAtual). Não toca
+//  no futebol nem no vôlei.
+// ════════════════════════════════════════════════════════════════════
+var campanhaBasqueteAtual = null;
+var partidaIdBasquete = 0;
+
+// Força média de um time de basquete (0-100), média das forças dos jogadores.
+function forcaTimeBasquete(t) {
+  if (!t || !t.jogadores || !t.jogadores.length) return 80;
+  var s = 0;
+  for (var i = 0; i < t.jogadores.length; i++) s += t.jogadores[i].forca;
+  return s / t.jogadores.length;
+}
+
+// Times da competição de basquete atual (filtra os dados pela "competicao" = 'NBA').
+function timesDaCompeticaoBasquete() {
+  var filtro = COMPETICOES[modoSelecionado].dados;   // 'NBA'
+  var fonte = [];
+  if (typeof DADOS_NBA !== 'undefined') fonte = fonte.concat(DADOS_NBA);
+  return fonte.filter(function (c) { return c.competicao === filtro; });
+}
+
+// Acumula as estatísticas de UMA partida de basquete nas variáveis globais do resumo.
+// Basquete tem 3 estatísticas (pontos/rebotes/assistências); guardamos pontos em `gols`
+// e assistências em `asis` (compat com o resumo do vôlei/futebol), e rebotes num mapa
+// dedicado (statsRebotesBasquete) que o resumo do basquete lê à parte.
+var statsRebotesBasquete = {};
+function acumularStatsBasquete(roteiro, pontosVoce, pontosAdv) {
+  if (typeof campanhaPartidas === 'undefined') return;
+  campanhaPartidas++;
+  campanhaGF += pontosVoce;   // "GF/GA" do resumo = pontos feitos/sofridos
+  campanhaGA += pontosAdv;
+  if (pontosVoce > pontosAdv) campanhaVitorias++; else campanhaDerrotas++;
+
+  var meusNomes = {};
+  escalacao.forEach(function (j) { if (j) meusNomes[j.nome] = true; });
+  var stats = AnimacaoBasquete.coletarEstatisticas(roteiro);
+  stats.forEach(function (s) {
+    if (!meusNomes[s.nome]) return;   // só o meu time
+    if (!statsJogadores[s.nome]) statsJogadores[s.nome] = { gols: 0, asis: 0 };
+    statsJogadores[s.nome].gols += s.pontos;         // pontos
+    statsJogadores[s.nome].asis += s.assistencias;   // assistências
+    if (!statsRebotesBasquete[s.nome]) statsRebotesBasquete[s.nome] = 0;
+    statsRebotesBasquete[s.nome] += s.rebotes;       // rebotes (à parte)
+  });
+}
+
+// Cria o card visual de uma partida de basquete (casca reaproveitada do futebol/vôlei).
+function criarCardPartidaBasquete(id, adversario, fase) {
+  if (id > 1) {
+    var anterior = document.getElementById('partida-basquete-' + (id - 1));
+    if (anterior) anterior.classList.remove('expandido');
+  }
+  var div = document.createElement('div');
+  div.className = 'partida-card partida-basquete expandido';
+  div.id = 'partida-basquete-' + id;
+
+  var forcaAdv = Math.round(forcaTimeBasquete(adversario));
+  var escudo = (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
+    ? (function () { var s = Escudos.porNomeSeModo(adversario.clube, modoSelecionado); return s ? '<span class="partida-escudo">' + s + '</span>' : ''; })()
+    : '';
+
+  div.innerHTML =
+    '<div class="partida-fase">' + fase + '</div>' +
+    '<div class="partida-header">' +
+      '<div class="partida-adversario-bloco">' +
+        '<span class="partida-adversario-nome">' + escudo + adversario.clube + '</span>' +
+        '<span class="partida-adversario-ano">NBA \u00B7 ' + (adversario.temporada || '') + '</span>' +
+        '<span class="partida-adversario-forca">Força ' + forcaAdv + '</span>' +
+      '</div>' +
+      '<div class="partida-placar-bloco">' +
+        '<span class="pb-placar partida-placar">0 \u2013 0</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="partida-corpo">' +
+      '<div class="pb-status"></div>' +
+      '<div class="pb-quartos"></div>' +
+      '<div class="pb-resumo"></div>' +
+    '</div>';
+
+  var hist = document.getElementById('historico-jogos');
+  if (hist) hist.appendChild(div);
+  return div;
+}
+
+// Mostra a classificação da SUA conferência (tabela V/D/saldo), integrada no card.
+function mostrarClassificacaoConf(camp) {
+  var cls = CampanhaBasquete.classificacaoConf(camp, camp.suaConf);
+  var classificam = camp.classificamConf | 0;
+  var nomeConf = camp.conferencias[camp.suaConf].nome;
+
+  var linhas = cls.map(function (l, i) {
+    var t = l.time;
+    var saldo = (l.pf - l.pa >= 0 ? '+' : '') + (l.pf - l.pa);
+    var classe = (t.voce ? 'grupo-voce' : '') + (i < classificam ? ' grupo-classifica' : '');
+    var nome = t.voce ? nomeDoTime : t.nome;
+    var esc = (typeof Escudos !== 'undefined' && Escudos.porTime) ? (Escudos.porTime(t, modoSelecionado) || '') : '';
+    var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
+    return '<tr class="' + classe + '">' +
+             '<td class="grupo-pos">' + (i + 1) + '</td>' +
+             '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + nome + '</span></td>' +
+             '<td class="grupo-num">' + l.v + '</td>' +
+             '<td class="grupo-num">' + l.d + '</td>' +
+             '<td class="grupo-num">' + saldo + '</td>' +
+           '</tr>';
+  }).join('');
+
+  var html =
+    '<div class="grupo-tabela">' +
+      '<p class="grupo-tabela-titulo">Conferência ' + nomeConf + ' \u00B7 Classificação</p>' +
+      '<table class="fl-tabela">' +
+        '<thead><tr><th></th><th>Time</th><th>V</th><th>D</th><th>Saldo</th></tr></thead>' +
+        '<tbody>' + linhas + '</tbody>' +
+      '</table>' +
+      '<p class="fl-legenda">Top ' + classificam + ' avançam aos playoffs</p>' +
+    '</div>';
+
+  var ultimoCard = document.getElementById('partida-basquete-' + partidaIdBasquete);
+  var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
+  if (corpo) { var d = document.createElement('div'); d.innerHTML = html; corpo.appendChild(d.firstChild); }
+}
+
+// Inicia (ou continua) a campanha da NBA e joga a próxima partida.
+function iniciarPartidaBasquete() {
+  if (typeof CampanhaBasquete === 'undefined' || typeof AnimacaoBasquete === 'undefined') {
+    console.warn('[nba] módulos do basquete não carregados'); return;
+  }
+
+  // Monta a campanha na 1ª partida (escolhe uma temporada e monta conferências).
+  if (!campanhaBasqueteAtual) {
+    var todos = timesDaCompeticaoBasquete();
+    if (!todos.length) { console.warn('[nba] sem times para', modoSelecionado); return; }
+    var temps = [];
+    todos.forEach(function (c) { if (temps.indexOf(c.temporada) < 0) temps.push(c.temporada); });
+    var temp = temps[Math.floor(Math.random() * temps.length)];
+    var times = todos.filter(function (c) { return c.temporada === temp; });
+
+    var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    campanhaBasqueteAtual = CampanhaBasquete.montarCampanhaNBA(times, voceMonta, forcaTimeBasquete);
+    campanhaBasqueteAtual.temporada = temp;
+  }
+
+  var camp = campanhaBasqueteAtual;
+  var adversarioTime = CampanhaBasquete.adversarioTemporada(camp);
+  if (!adversarioTime) { return; }
+  var adversario = adversarioTime.clubeRef;
+
+  var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+  var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+  var roteiro = AnimacaoBasquete.prepararPartida(meuTime, advTime);
+
+  CampanhaBasquete.registrarJogoTemporada(camp, adversarioTime, roteiro.pontosA, roteiro.pontosB);
+  acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
+
+  var faseLabel = 'Temporada Regular \u00B7 NBA ' + camp.temporada;
+  var idCard = partidaIdBasquete + 1;
+  partidaIdBasquete = idCard;
+  var card = criarCardPartidaBasquete(idCard, adversario, faseLabel);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) btn.disabled = true;
+
+  AnimacaoBasquete.animar({
+    elCard: card, roteiro: roteiro,
+    velocidade: function () { return velocidadeSimulacao; },
+    pular: false,
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      var acabou = (camp.jogosFeitos >= camp.seusJogos.length);
+      if (acabou) {
+        CampanhaBasquete.simularTemporada(camp, camp.formato.jogosVoce);
+        mostrarClassificacaoConf(camp);
+        if (!CampanhaBasquete.voceClassificouNBA(camp)) salvarCampanhaBasquete(camp);
+      }
+      if (btn) {
+        if (acabou) {
+          if (CampanhaBasquete.voceClassificouNBA(camp)) {
+            CampanhaBasquete.montarPlayoffsNBA(camp);
+            btn.innerHTML = 'Ir aos Playoffs \u25BA';
+            acaoBotao = 'playoffs-nba';
+          } else {
+            btn.innerHTML = 'Montar Novo Time \u25BA';
+            acaoBotao = 'novo-time';
+          }
+        } else {
+          btn.innerHTML = 'Próximo Jogo \u25BA';
+          acaoBotao = 'proximo-nba';
+        }
+      }
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico') {
+        if (camp.jogosFeitos < camp.seusJogos.length) setTimeout(function () { iniciarPartidaBasquete(); }, 700);
+        else if (acabou && CampanhaBasquete.voceClassificouNBA(camp)) setTimeout(function () { iniciarPartidaPlayoffNBA(); }, 800);
+      }
+    }
+  });
+}
+
+// Joga um confronto de PLAYOFF (primeira rodada → semi conf → final conf → Finais NBA).
+function iniciarPartidaPlayoffNBA() {
+  var camp = campanhaBasqueteAtual;
+  if (!camp || !camp.playoff) return;
+  var adversarioTime = CampanhaBasquete.seuAdversarioPlayoff(camp);
+  if (!adversarioTime) return;
+  var adversario = adversarioTime.clubeRef;
+  var fase = camp.playoff.fases[camp.playoff.faseIdx];
+  var faseNome = fase ? fase.nome : 'PLAYOFFS';
+
+  var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+  var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+  var roteiro = AnimacaoBasquete.prepararPartida(meuTime, advTime);
+
+  var faseLabel = faseNome + ' \u00B7 NBA ' + camp.temporada;
+  var idCard = partidaIdBasquete + 1;
+  partidaIdBasquete = idCard;
+  var card = criarCardPartidaBasquete(idCard, adversario, faseLabel);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  if (btn) btn.disabled = true;
+
+  AnimacaoBasquete.animar({
+    elCard: card, roteiro: roteiro,
+    velocidade: function () { return velocidadeSimulacao; },
+    pular: false,
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      var res = CampanhaBasquete.registrarJogoPlayoff(camp, roteiro.pontosA, roteiro.pontosB, forcaTimeBasquete);
+      acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
+
+      if (btn) {
+        if (res.campeaoNBA) {
+          btn.innerHTML = 'Nova Campanha'; acaoBotao = 'nova-campanha';
+          if (typeof mostrarBotaoResumo === 'function') { resumoCampeao = true; mostrarBotaoResumo(true); }
+        } else if (res.eliminado) {
+          btn.innerHTML = 'Montar Novo Time \u25BA'; acaoBotao = 'novo-time';
+        } else {
+          btn.innerHTML = 'Próximo Jogo \u25BA'; acaoBotao = 'playoffs-nba';
+        }
+      }
+      if (res.campeaoNBA || res.eliminado) {
+        salvarCampanhaBasquete(camp, { campeaoNBA: res.campeaoNBA, faseAlcancada: faseNome });
+      }
+      if (typeof modoSimulacao !== 'undefined' && modoSimulacao === 'automatico' && !res.campeaoNBA && !res.eliminado) {
+        setTimeout(function () { iniciarPartidaPlayoffNBA(); }, 800);
+      }
+    }
+  });
+}
+
+// "Pular tudo" do basquete: simula sua temporada restante e, se classificar, todo o playoff.
+function pularTudoBasquete() {
+  if (!campanhaBasqueteAtual) return;
+  var camp = campanhaBasqueteAtual;
+
+  while (camp.jogosFeitos < camp.seusJogos.length) {
+    var adversarioTime = CampanhaBasquete.adversarioTemporada(camp);
+    if (!adversarioTime) break;
+    var adversario = adversarioTime.clubeRef;
+    var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+    var roteiro = AnimacaoBasquete.prepararPartida(meuTime, advTime);
+    CampanhaBasquete.registrarJogoTemporada(camp, adversarioTime, roteiro.pontosA, roteiro.pontosB);
+    acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
+    var idCard = partidaIdBasquete + 1; partidaIdBasquete = idCard;
+    var card = criarCardPartidaBasquete(idCard, adversario, 'Temporada Regular \u00B7 NBA ' + camp.temporada);
+    AnimacaoBasquete.animar({ elCard: card, roteiro: roteiro, velocidade: function () { return velocidadeSimulacao; }, pular: true });
+  }
+  CampanhaBasquete.simularTemporada(camp, camp.formato.jogosVoce);
+  mostrarClassificacaoConf(camp);
+
+  var btn = document.getElementById('btn-iniciar-jogo');
+  var bp = document.getElementById('btn-pular-tudo');
+  if (bp) bp.classList.add('escondida');
+
+  if (!CampanhaBasquete.voceClassificouNBA(camp)) {
+    salvarCampanhaBasquete(camp);
+    if (btn) { btn.innerHTML = 'Montar Novo Time \u25BA'; acaoBotao = 'novo-time'; btn.disabled = false; }
+    if (typeof mostrarBotaoResumo === 'function') mostrarBotaoResumo(false);
+    return;
+  }
+
+  CampanhaBasquete.montarPlayoffsNBA(camp);
+  var resultado = pularPlayoffNBA(camp);
+  if (btn) {
+    if (resultado.campeaoNBA) { btn.innerHTML = 'Nova Campanha'; acaoBotao = 'nova-campanha'; }
+    else { btn.innerHTML = 'Montar Novo Time \u25BA'; acaoBotao = 'novo-time'; }
+    btn.disabled = false;
+  }
+  if (typeof mostrarBotaoResumo === 'function') { resumoCampeao = !!resultado.campeaoNBA; mostrarBotaoResumo(!!resultado.campeaoNBA); }
+}
+
+// Simula (sem animação) todo o playoff a partir do estado atual, até campeão/eliminação.
+function pularPlayoffNBA(camp) {
+  var ultimaFase = camp.playoff.fases[camp.playoff.faseIdx] ? camp.playoff.fases[camp.playoff.faseIdx].nome : 'PLAYOFFS';
+  var res = { campeaoNBA: false, eliminado: false };
+  while (true) {
+    var adversarioTime = CampanhaBasquete.seuAdversarioPlayoff(camp);
+    if (!adversarioTime) break;
+    var adversario = adversarioTime.clubeRef;
+    var fase = camp.playoff.fases[camp.playoff.faseIdx];
+    ultimaFase = fase ? fase.nome : 'PLAYOFFS';
+    var meuTime = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+    var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
+    var roteiro = AnimacaoBasquete.prepararPartida(meuTime, advTime);
+    var idCard = partidaIdBasquete + 1; partidaIdBasquete = idCard;
+    var card = criarCardPartidaBasquete(idCard, adversario, ultimaFase + ' \u00B7 NBA ' + camp.temporada);
+    AnimacaoBasquete.animar({ elCard: card, roteiro: roteiro, velocidade: function () { return velocidadeSimulacao; }, pular: true });
+    res = CampanhaBasquete.registrarJogoPlayoff(camp, roteiro.pontosA, roteiro.pontosB, forcaTimeBasquete);
+    acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
+    if (res.campeaoNBA || res.eliminado) break;
+  }
+  salvarCampanhaBasquete(camp, { campeaoNBA: res.campeaoNBA, faseAlcancada: ultimaFase });
+  return { campeaoNBA: res.campeaoNBA, faseAlcancada: ultimaFase };
+}
+
+// Salva a campanha de basquete (espelha salvarCampanhaVolei; usa classificação da conf).
+function salvarCampanhaBasquete(camp, resultadoPlayoff) {
+  if (typeof API === 'undefined' || !API.salvarPartida) return;
+  var cls = CampanhaBasquete.classificacaoConf(camp, camp.suaConf);
+  var minha = cls.filter(function (l) { return l.time.voce; })[0] || { v: 0, d: 0, pf: 0, pa: 0 };
+  var posicao = 0;
+  cls.forEach(function (l, i) { if (l.time.voce) posicao = i + 1; });
+  var classificou = CampanhaBasquete.voceClassificouNBA(camp);
+  var campeao = !!(resultadoPlayoff && resultadoPlayoff.campeaoNBA);
+
+  API.salvarPartida({
+    modo: modoSelecionado,
+    esporte: 'basquete',
+    campeao: campeao,
+    vitorias: minha.v, empates: 0, derrotas: minha.d,
+    golsPro: minha.pf, golsContra: minha.pa,
+    detalhes: {
+      temporada: camp.temporada,
+      formato: camp.formato.id,
+      conferencia: camp.conferencias[camp.suaConf].nome,
+      classificado: !!classificou,
+      faseAlcancada: (resultadoPlayoff && resultadoPlayoff.faseAlcancada) ||
+                     (classificou ? 'PLAYOFFS' : 'TEMPORADA REGULAR'),
+      posicao: posicao
+    }
+  });
+}
 
 // Força média de uma seleção (0-100), usada para resolver jogos neutros na chave.
 function forcaSelecaoVolei(sel) {

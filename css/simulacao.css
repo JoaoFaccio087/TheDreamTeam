@@ -806,3 +806,48 @@ td.grupo-time { text-align: left; }
 .partida-card:not(.expandido) .pv-status,
 .partida-card:not(.expandido) .pv-sets,
 .partida-card:not(.expandido) .pv-resumo { display: none; }
+
+/* ── Basquete (pb-*) — espelha o vôlei (pv-*), mas placar por quarto ── */
+.pb-placar {
+  font-family: 'Archivo Black', sans-serif;
+  color: var(--txt);
+  white-space: nowrap;
+}
+.partida-card.expandido .pb-placar       { font-size: 1.75rem; line-height: 1; }
+.partida-card:not(.expandido) .pb-placar { font-size: var(--fs-lg); }
+.pb-placar.vitoria { color: var(--accent); }
+.pb-placar.derrota { color: var(--derrota); }
+
+/* Status durante a animação (ex: "3º quarto") */
+.pb-status {
+  font-size: var(--fs-sm); color: var(--ouro);
+  font-weight: 700; min-height: 1.2em; margin-bottom: 2px;
+}
+
+/* Linha dos quartos (Q1: 25-23 · Q2: ...) */
+.pb-quartos {
+  font-size: var(--fs-sm); color: var(--txt-soft);
+  letter-spacing: 0.2px; line-height: 1.6;
+  padding: 6px 0; border-top: 1px solid var(--linha);
+  margin-top: 8px;
+}
+
+/* Bloco de destaques (pts/reb/ast) */
+.pb-resumo { margin-top: 10px; }
+.pb-resumo-tit {
+  font-size: var(--fs-legenda); color: var(--txt-soft);
+  text-transform: uppercase; letter-spacing: 1.2px;
+  font-weight: 700; margin-bottom: 6px;
+}
+.pb-stat {
+  font-size: var(--fs-sm); color: var(--txt);
+  padding: 3px 0; line-height: 1.4;
+  display: flex; justify-content: space-between; gap: 10px;
+}
+.pb-stat-nome { color: var(--txt); }
+.pb-stat-num { color: var(--ouro); font-weight: 700; white-space: nowrap; }
+.pb-stat:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.04); }
+
+.partida-card:not(.expandido) .pb-status,
+.partida-card:not(.expandido) .pb-quartos,
+.partida-card:not(.expandido) .pb-resumo { display: none; }

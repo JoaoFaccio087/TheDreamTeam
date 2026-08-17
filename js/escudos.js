@@ -966,17 +966,34 @@
     // Modos de vôlei: geram escudo de seleção (por país), mas SEM estrelas — os títulos
     // mundiais de vôlei são diferentes dos de futebol; por ora, zero estrelas em todos.
     MODOS_VOLEI: ['volei_m', 'volei_f', 'volei_vnl_m', 'volei_vnl_f'],
+    MODOS_BASQUETE: ['nba'],
     ativoNoModo: function (modo) {
-      return this.MODOS_ATIVOS.indexOf(modo) >= 0 || this.MODOS_VOLEI.indexOf(modo) >= 0;
+      return this.MODOS_ATIVOS.indexOf(modo) >= 0 || this.MODOS_VOLEI.indexOf(modo) >= 0 ||
+             this.MODOS_BASQUETE.indexOf(modo) >= 0;
     },
     ehModoVolei: function (modo) { return this.MODOS_VOLEI.indexOf(modo) >= 0; },
+    ehModoBasquete: function (modo) { return this.MODOS_BASQUETE.indexOf(modo) >= 0; },
     // porNome só se o modo permitir — usada pelos pontos de integração.
     porNomeSeModo: function (nome, modo) {
       if (!this.ativoNoModo(modo)) return '';
       // No vôlei, gera o escudo da seleção zerando as estrelas (títulos de futebol
       // não valem aqui). Reusa o gerador de seleção com estrelas: 0.
       if (this.ehModoVolei(modo)) return this.porNomeVolei(nome);
+      // No basquete, os times são CLUBES (Lakers, Celtics...) — gera escudo de clube.
+      if (this.ehModoBasquete(modo)) return this.porNomeBasquete(nome);
       return this.porNome(nome);
+    },
+    // Escudo de clube da NBA: gerador de clube com cores derivadas do nome, sem estrelas.
+    porNomeBasquete: function (nome) {
+      if (typeof window === 'undefined' || !window.EscudosCores) {
+        // Em Node (validação) não há EscudosCores; devolve vazio sem quebrar.
+        return '';
+      }
+      try {
+        var C = window.EscudosCores;
+        var cores = (C.coresClubeNBA && C.coresClubeNBA(nome)) || ['#1D428A', '#C8102E'];
+        return gerarClube({ tipo: 'clube', nome: nome, cores: cores, seed: nome, estrelas: 0 });
+      } catch (err) { return ''; }
     },
     // Escudo de seleção de vôlei: mesmo gerador, mas com estrelas SEMPRE 0.
     porNomeVolei: function (nome) {

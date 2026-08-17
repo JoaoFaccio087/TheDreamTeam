@@ -218,6 +218,10 @@ UI.on('btn-iniciar-jogo', 'click', function () {
     iniciarPartidaVNL();     // próxima rodada da preliminar da VNL
   } else if (acaoBotao === 'final-eight-vnl') {
     iniciarPartidaFinalEightVNL();   // confronto da Final Eight da VNL
+  } else if (acaoBotao === 'proximo-nba') {
+    iniciarPartidaBasquete();   // próximo jogo da temporada regular da NBA
+  } else if (acaoBotao === 'playoffs-nba') {
+    iniciarPartidaPlayoffNBA();   // confronto de playoff da NBA
   } else {
     // 'iniciar' → monta a campanha (grupo + fases) e dispara o primeiro jogo
     montarCampanha();
@@ -262,6 +266,8 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
     onConfirmar: function () {
       if (typeof ehCompeticaoVNL === 'function' && ehCompeticaoVNL(modoSelecionado)) {
         pularTudoVNL();
+      } else if (typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado)) {
+        pularTudoBasquete();
       } else if (typeof ehCompeticaoVolei === 'function' && ehCompeticaoVolei(modoSelecionado)) {
         pularTudoVolei();
       } else if (ehFormatoLiga(modoSelecionado)) {
