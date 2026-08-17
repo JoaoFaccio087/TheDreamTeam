@@ -38,6 +38,9 @@
       { id: 'volei_f', nome: 'Mundial Feminino' },
       { id: 'volei_vnl_m', nome: 'Liga das Nações (M)' },
       { id: 'volei_vnl_f', nome: 'Liga das Nações (F)' }
+    ],
+    basquete: [
+      { id: 'nba', nome: 'NBA' }
     ]
   };
 

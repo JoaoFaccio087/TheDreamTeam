@@ -33,7 +33,11 @@ const COMPETICOES = {
   // 'mata-mata-volei' do Mundial. `esporte: 'volei'` mantém a bifurcação do motor.
   // `dados` casa com o campo "competicao" de js/dados/volei/vnl-*.js.
   volei_vnl_m:  { dados: 'VNL (M)', label: 'Liga das Nações (M)', formato: 'vnl', esporte: 'volei' },
-  volei_vnl_f:  { dados: 'VNL (F)', label: 'Liga das Nações (F)', formato: 'vnl', esporte: 'volei' }
+  volei_vnl_f:  { dados: 'VNL (F)', label: 'Liga das Nações (F)', formato: 'vnl', esporte: 'volei' },
+  // ─── NBA (ago/2026) — 3º esporte (basquete). ───
+  // `formato: 'nba'` é PRÓPRIO (conferências + temporada regular + playoffs). `esporte:
+  // 'basquete'` bifurca o motor. `dados` casa com "competicao" de js/dados/basquete/nba.js.
+  nba:          { dados: 'NBA', label: 'NBA', formato: 'nba', esporte: 'basquete' }
 };
 
 // Helper: a competição roda no formato de liga (pontos corridos)?
@@ -46,6 +50,11 @@ function ehFormatoLiga(id) {
 // retorna false para todas as competições de futebol.
 function ehCompeticaoVolei(id) {
   return !!(COMPETICOES[id] && COMPETICOES[id].esporte === 'volei');
+}
+
+// Helper: a competição é de basquete? (bifurca o motor da campanha para a NBA).
+function ehCompeticaoBasquete(id) {
+  return !!(COMPETICOES[id] && COMPETICOES[id].esporte === 'basquete');
 }
 
 // Helper: a competição é a VNL / Liga das Nações? (formato 'vnl', dentro do vôlei).

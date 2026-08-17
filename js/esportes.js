@@ -42,11 +42,11 @@ const ESPORTES = {
     }
   },
 
-  // ─────────────────────────────────────────── BASQUETE (planejado)
+  // ─────────────────────────────────────────── BASQUETE (ago/2026 — LIGADO)
   basquete: {
     id: 'basquete',
     nome: 'Basquete',
-    habilitado: false,
+    habilitado: true,              // ← LIGADO (ago/2026) — NBA jogável
     titulares: 5,
     emCampo: 5,
     mapa: 'meia-quadra',           // as 5 posições são desenhadas em meia-quadra
