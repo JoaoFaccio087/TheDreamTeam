@@ -509,6 +509,84 @@ function criarCardPartidaBasquete(id, adversario, fase) {
   return div;
 }
 
+// Mostra o CHAVEAMENTO (bracket) dos playoffs da sua conferência + as Finais da NBA,
+// em colunas por fase. Cada confronto é um par de times; destaca você e os vencedores.
+// Lê camp.playoff.bracketConf (preenchido pelo motor). Recria a cada avanço de fase.
+function mostrarBracketPlayoffs(camp) {
+  if (!camp.playoff || !camp.playoff.bracketConf) return;
+  var po = camp.playoff;
+
+  function nomeT(t) {
+    if (!t) return '<span class="bkt-vazio">A definir</span>';
+    return t.voce ? nomeDoTime : t.nome;
+  }
+  function celula(t, ehVenc) {
+    var cls = 'bkt-time' + (t && t.voce ? ' bkt-voce' : '') + (ehVenc ? ' bkt-venc' : '');
+    var esc = (t && typeof Escudos !== 'undefined' && Escudos.porTime) ? (Escudos.porTime(t, modoSelecionado) || '') : '';
+    var escHTML = esc ? '<span class="bkt-escudo">' + esc + '</span>' : '';
+    return '<div class="' + cls + '">' + escHTML + '<span class="bkt-nome">' + nomeT(t) + '</span></div>';
+  }
+  function jogoHTML(j) {
+    var vencA = j.vencedor && j.a && (j.vencedor === j.a);
+    var vencB = j.vencedor && j.b && (j.vencedor === j.b);
+    return '<div class="bkt-jogo' + (j.seuJogo ? ' bkt-seujogo' : '') + '">' +
+             celula(j.a, vencA) + celula(j.b, vencB) +
+           '</div>';
+  }
+
+  // Colunas: uma por rodada registrada da sua conferência.
+  var nomesFase = po.fases.map(function (f) { return f.nome; });
+  var colunas = po.bracketConf.map(function (rodada, ri) {
+    var titulo = nomesFase[ri] || ('Rodada ' + (ri + 1));
+    return '<div class="bkt-coluna">' +
+             '<div class="bkt-coluna-tit">' + tituloCurto(titulo) + '</div>' +
+             rodada.map(jogoHTML).join('') +
+           '</div>';
+  });
+
+  // Coluna extra: Finais da NBA (você — se campeão de conf — vs campeão da outra conf).
+  var euCampeaoConf = po.faseIdx >= 0 && po.fases[po.faseIdx] && po.fases[po.faseIdx].finalNBA;
+  if (euCampeaoConf || (po.finalistaOutraConf)) {
+    var meuLado = { voce: true };
+    var outro = po.finalistaOutraConf;
+    var vencFinal = null;
+    // se já houve jogo de final NBA no histórico, marca o vencedor
+    var finalHist = (po.historico || []).filter(function (h) { return h.fase === 'FINAIS DA NBA'; })[0];
+    if (finalHist) vencFinal = finalHist.venceu ? meuLado : outro;
+    colunas.push(
+      '<div class="bkt-coluna bkt-coluna-final">' +
+        '<div class="bkt-coluna-tit">Finais NBA</div>' +
+        '<div class="bkt-jogo bkt-seujogo">' +
+          celula(meuLado, vencFinal === meuLado) +
+          celula(outro, vencFinal === outro) +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  var html = '<div class="bkt-wrap"><div class="bkt-titulo">Chaveamento \u00B7 Conferência ' +
+             camp.conferencias[camp.suaConf].nome + '</div><div class="bkt-colunas">' +
+             colunas.join('') + '</div></div>';
+
+  var ultimoCard = document.getElementById('partida-basquete-' + partidaIdBasquete);
+  var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
+  if (corpo) {
+    // remove um bracket anterior no mesmo card (recria atualizado)
+    var velho = corpo.querySelector('.bkt-wrap');
+    if (velho) velho.remove();
+    var d = document.createElement('div'); d.innerHTML = html; corpo.appendChild(d.firstChild);
+  }
+}
+
+// Encurta o nome da fase para caber na coluna do bracket.
+function tituloCurto(nome) {
+  return nome
+    .replace('PRIMEIRA RODADA', '1ª Rodada')
+    .replace('SEMIFINAL DE CONFERÊNCIA', 'Semifinal')
+    .replace('FINAL DE CONFERÊNCIA', 'Final Conf.')
+    .replace('FINAIS DA NBA', 'Finais NBA');
+}
+
 // Mostra a classificação da SUA conferência (tabela V/D/saldo), integrada no card.
 function mostrarClassificacaoConf(camp) {
   var cls = CampanhaBasquete.classificacaoConf(camp, camp.suaConf);
@@ -602,6 +680,7 @@ function iniciarPartidaBasquete() {
         if (acabou) {
           if (CampanhaBasquete.voceClassificouNBA(camp)) {
             CampanhaBasquete.montarPlayoffsNBA(camp);
+            mostrarBracketPlayoffs(camp);   // chaveamento inicial
             btn.innerHTML = 'Ir aos Playoffs \u25BA';
             acaoBotao = 'playoffs-nba';
           } else {
@@ -651,6 +730,7 @@ function iniciarPartidaPlayoffNBA() {
       if (btn) btn.disabled = false;
       var res = CampanhaBasquete.registrarJogoPlayoff(camp, roteiro.pontosA, roteiro.pontosB, forcaTimeBasquete);
       acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
+      mostrarBracketPlayoffs(camp);   // atualiza o chaveamento visual
 
       if (btn) {
         if (res.campeaoNBA) {

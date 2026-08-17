@@ -206,7 +206,15 @@
       seuConfrontoIdx: confrontos.findIndex(function (par) { return par[0].voce || par[1].voce; }),
       historico: [],
       // Campeão da OUTRA conferência (resolvido por força/sorte quando você chega às Finais).
-      finalistaOutraConf: null
+      finalistaOutraConf: null,
+      // Semeadura inicial (times 1..N da sua conferência) — para desenhar o bracket.
+      seeds: cls.slice(),
+      // Registro do bracket por rodada: cada item é a lista de confrontos daquela fase,
+      // com o vencedor de cada um (preenchido conforme as fases são resolvidas). A
+      // renderização do chaveamento (mostrarBracketPlayoffs) lê isto.
+      bracketConf: [confrontos.map(function (par) {
+        return { a: par[0], b: par[1], vencedor: null, seuJogo: (par[0].voce || par[1].voce) };
+      })]
     };
     return camp.playoff;
   }
@@ -277,6 +285,13 @@
       vencedores.push(pa >= pb ? a : b);
     });
 
+    // Grava os vencedores desta rodada no bracket (para o chaveamento visual).
+    if (po.bracketConf && po.bracketConf[po.faseIdx]) {
+      po.bracketConf[po.faseIdx].forEach(function (jogo, idx) {
+        jogo.vencedor = vencedores[idx] || null;
+      });
+    }
+
     po.faseIdx++;
     var proxFase = po.fases[po.faseIdx];
 
@@ -294,6 +309,13 @@
     po.confrontos = novos;
     po.vivos = vencedores;
     po.seuConfrontoIdx = novos.findIndex(function (par) { return par[0].voce || par[1].voce; });
+
+    // Registra a nova rodada no bracket (vencedores a definir).
+    if (po.bracketConf) {
+      po.bracketConf.push(novos.map(function (par) {
+        return { a: par[0], b: par[1], vencedor: null, seuJogo: (par[0].voce || par[1].voce) };
+      }));
+    }
 
     return { venceu: true, campeaoNBA: false, campeaoConf: false, eliminado: false, proximaFase: proxFase ? proxFase.nome : null };
   }

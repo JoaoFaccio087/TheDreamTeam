@@ -851,3 +851,36 @@ td.grupo-time { text-align: left; }
 .partida-card:not(.expandido) .pb-status,
 .partida-card:not(.expandido) .pb-quartos,
 .partida-card:not(.expandido) .pb-resumo { display: none; }
+
+/* ── Chaveamento (bracket) dos playoffs da NBA ── */
+.bkt-wrap { margin-top: 12px; border-top: 1px solid var(--linha); padding-top: 10px; }
+.bkt-titulo {
+  font-size: var(--fs-legenda); color: var(--txt-soft);
+  text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin-bottom: 10px;
+}
+.bkt-colunas { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.bkt-coluna { display: flex; flex-direction: column; justify-content: space-around; gap: 10px; min-width: 130px; }
+.bkt-coluna-tit {
+  font-size: var(--fs-legenda); color: var(--ouro);
+  text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700;
+  margin-bottom: 4px; text-align: center;
+}
+.bkt-coluna-final { justify-content: center; }
+.bkt-jogo {
+  background: var(--elev-1); border: 1px solid var(--linha);
+  border-radius: var(--raio-sm, 8px); overflow: hidden;
+}
+.bkt-jogo.bkt-seujogo { border-color: var(--accent); }
+.bkt-time {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 8px; font-size: var(--fs-sm); color: var(--txt-soft);
+}
+.bkt-time:not(:last-child) { border-bottom: 1px solid var(--linha); }
+.bkt-voce .bkt-nome { color: var(--accent); font-weight: 700; }
+.bkt-venc { color: var(--txt); font-weight: 700; background: rgba(43,212,106,0.06); }
+.bkt-venc .bkt-nome { color: var(--txt); }
+.bkt-nome { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bkt-vazio { color: var(--txt-soft); font-style: italic; }
+.bkt-escudo { width: 16px; height: 16px; display: inline-flex; flex-shrink: 0; }
+.bkt-escudo svg { width: 100%; height: 100%; }
+.partida-card:not(.expandido) .bkt-wrap { display: none; }
