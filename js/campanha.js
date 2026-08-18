@@ -27,6 +27,10 @@ function reiniciarCampanha() {
   campanhaEmpates   = 0;
   campanhaDerrotas  = 0;
   resumoCampeao     = false;
+  // Estado do basquete (não vaza entre campanhas): rebotes e a campanha da NBA.
+  if (typeof statsRebotesBasquete !== 'undefined') statsRebotesBasquete = {};
+  campanhaBasqueteAtual = null;
+  partidaIdBasquete = 0;
   campanhaFlags     = {
     hatTrick: false, poker: false, showDeBola: false,
     maiorSaldoJogo: 0, finalNosPenaltis: false, matasNosPenaltis: 0
@@ -471,6 +475,33 @@ function acumularStatsBasquete(roteiro, pontosVoce, pontosAdv) {
   });
 }
 
+// Monta a mini meia-quadra com os 5 titulares do MEU time posicionados (para exibir
+// dentro do card durante o jogo). Espelha o mapa de escalação da home/perfil: usa as
+// coordenadas de formacoes['basquete'] na MESMA ordem de escalacao/codigosFormacao.
+function montarMiniQuadraBasquete() {
+  var coords = (typeof formacoes !== 'undefined' && formacoes['basquete']) ? formacoes['basquete'] : [];
+  var cods = (typeof codigosFormacao !== 'undefined' && codigosFormacao['basquete']) ? codigosFormacao['basquete'] : [];
+  if (!coords.length) return '';
+
+  var fichas = coords.map(function (c, i) {
+    var jog = escalacao[i] || null;
+    var cod = (jog && jog.codigo) || cods[i] || c.grupo;
+    var nome = jog ? jog.nome : '\u2014';
+    var vazio = jog ? '' : ' pbq-ficha-vazia';
+    return '<div class="pbq-ficha' + vazio + '" style="left:' + c.left + '%;top:' + c.top + '%">' +
+             '<span class="pbq-cod">' + cod + '</span>' +
+             '<span class="pbq-nome">' + nome + '</span>' +
+           '</div>';
+  }).join('');
+
+  return '<div class="pbq-mapa">' +
+           '<div class="pbq-quadra quadra-basquete">' +
+             '<div class="bq-piso"></div><div class="bq-garrafao"></div><div class="bq-linha3"></div>' +
+             fichas +
+           '</div>' +
+         '</div>';
+}
+
 // Cria o card visual de uma partida de basquete (casca reaproveitada do futebol/vôlei).
 function criarCardPartidaBasquete(id, adversario, fase) {
   if (id > 1) {
@@ -500,6 +531,7 @@ function criarCardPartidaBasquete(id, adversario, fase) {
     '</div>' +
     '<div class="partida-corpo">' +
       '<div class="pb-status"></div>' +
+      montarMiniQuadraBasquete() +
       '<div class="pb-quartos"></div>' +
       '<div class="pb-resumo"></div>' +
     '</div>';
