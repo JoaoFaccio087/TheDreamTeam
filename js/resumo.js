@@ -125,9 +125,15 @@ function mostrarResumo() {
   if (!resumoOverlay) return;
 
   // Rótulos conforme o esporte: futebol usa gols/artilheiro/assistências; vôlei usa
-  // sets/pontos/aces. Assim o resumo não mostra termos de futebol numa campanha de vôlei.
+  // sets/pontos/aces; basquete usa pontos/rebotes/assistências.
   var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
-  var L = ehVolei ? {
+  var ehBasquete = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
+  var L = ehBasquete ? {
+    placar: 'Pontos', placarSub: 'Feitos \u00B7 Sofridos',
+    top1: 'Maior pontuador', top1un: 'pts', top1vazio: 'sem pontos',
+    top2: 'Mais rebotes', top2un: 'reb', top2vazio: 'sem rebotes',
+    colG: 'PTS', colA: 'AST', colR: 'REB', emoji: '\uD83C\uDFC0\uD83C\uDFC6', unidadeShare: 'pontos'
+  } : ehVolei ? {
     placar: 'Sets', placarSub: 'Feitos \u00B7 Sofridos',
     top1: 'Maior pontuador', top1un: 'pts', top1vazio: 'sem pontos',
     top2: 'Mais aces', top2un: 'aces', top2vazio: 'sem aces',
@@ -139,13 +145,20 @@ function mostrarResumo() {
     colG: 'G', colA: 'A', emoji: '\u26BD\uD83C\uDFC6', unidadeShare: 'gols'
   };
 
-  // ---- Destaques: maior goleador/pontuador e maior assistente/aces da campanha ----
-  var artilheiro = null, assistente = null;
+  // ---- Destaques: maior pontuador e (vôlei/futebol) assistente/aces ou (basquete) rebotes ----
+  var artilheiro = null, assistente = null, reboteiro = null;
   Object.keys(statsJogadores).forEach(function (nome) {
     var s = statsJogadores[nome];
     if (s.gols > 0 && (!artilheiro || s.gols > artilheiro.v)) artilheiro = { nome: nome, v: s.gols };
     if (s.asis > 0 && (!assistente || s.asis > assistente.v)) assistente = { nome: nome, v: s.asis };
   });
+  // No basquete, o 2º destaque (top2) é o maior reboteiro (statsRebotesBasquete).
+  if (ehBasquete && typeof statsRebotesBasquete !== 'undefined') {
+    Object.keys(statsRebotesBasquete).forEach(function (nome) {
+      var r = statsRebotesBasquete[nome];
+      if (r > 0 && (!reboteiro || r > reboteiro.v)) reboteiro = { nome: nome, v: r };
+    });
+  }
 
   var saldo  = campanhaGF - campanhaGA;
   var comp   = COMPETICOES[modoSelecionado].label.toUpperCase();
@@ -193,15 +206,19 @@ function mostrarResumo() {
          artilheiro ? nomeCurto(artilheiro.nome) : '\u2014',
          artilheiro ? (artilheiro.v + ' ' + L.top1un) : L.top1vazio) +
     card(L.top2,
-         assistente ? nomeCurto(assistente.nome) : '\u2014',
-         assistente ? (assistente.v + ' ' + L.top2un) : L.top2vazio);
+         (ehBasquete ? (reboteiro ? nomeCurto(reboteiro.nome) : '\u2014')
+                     : (assistente ? nomeCurto(assistente.nome) : '\u2014')),
+         (ehBasquete ? (reboteiro ? (reboteiro.v + ' ' + L.top2un) : L.top2vazio)
+                     : (assistente ? (assistente.v + ' ' + L.top2un) : L.top2vazio)));
 
   // ---- MINI-CAMPO: titulares posicionados pela formação (ou quadra no vôlei) ----
   var coords = formacoes[formacaoJogo] || [];
   var campoHtml = ehVolei
     ? '<div class="rc-piso"></div><div class="rc-rede"></div>'
-    : '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
-      '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>';
+    : (ehBasquete
+      ? '<div class="rc-bq-piso"></div><div class="rc-bq-garrafao"></div><div class="rc-bq-linha3"></div>'
+      : '<div class="rc-linha-meio"></div><div class="rc-circulo"></div>' +
+        '<div class="rc-area rc-area-cima"></div><div class="rc-area rc-area-baixo"></div>');
   for (var i = 0; i < coords.length; i++) {
     var pos = coords[i];
     if (!pos) continue;
@@ -218,17 +235,21 @@ function mostrarResumo() {
   for (var k = 0; k < escalacao.length; k++) { if (escalacao[k]) titulares.push(escalacao[k]); }
 
   var listaHtml =
-    '<div class="resumo-lista-head">' +
+    '<div class="resumo-lista-head' + (ehBasquete ? ' resumo-lista-head-bq' : '') + '">' +
       '<span class="rl-nome">Jogador</span><span class="rl-num">F\u00E7a</span>' +
-      '<span class="rl-num">' + L.colG + '</span><span class="rl-num">' + L.colA + '</span>' +
+      '<span class="rl-num">' + L.colG + '</span>' +
+      (ehBasquete ? '<span class="rl-num">' + L.colR + '</span>' : '') +
+      '<span class="rl-num">' + L.colA + '</span>' +
     '</div>';
   titulares.forEach(function (j) {
     var s = statsJogadores[j.nome] || { gols: 0, asis: 0 };
+    var reb = (ehBasquete && typeof statsRebotesBasquete !== 'undefined') ? (statsRebotesBasquete[j.nome] || 0) : null;
     listaHtml +=
-      '<div class="resumo-lista-linha">' +
+      '<div class="resumo-lista-linha' + (ehBasquete ? ' resumo-lista-linha-bq' : '') + '">' +
         '<span class="rl-nome"><i class="rl-cod">' + j.codigo + '</i>' + nomeCurto(j.nome) + '</span>' +
         '<span class="rl-num rl-forca">' + j.forca + '</span>' +
         '<span class="rl-num">' + s.gols + '</span>' +
+        (ehBasquete ? '<span class="rl-num">' + reb + '</span>' : '') +
         '<span class="rl-num">' + s.asis + '</span>' +
       '</div>';
   });
@@ -246,7 +267,7 @@ function mostrarResumo() {
         '<div class="resumo-grid">' +
           '<div class="resumo-col-campo">' +
             '<p class="resumo-bloco-rot">Mapa de Escala\u00E7\u00E3o</p>' +
-            '<div class="resumo-campo' + (ehVolei ? ' resumo-campo-volei' : '') + '">' + campoHtml + '</div>' +
+            '<div class="resumo-campo' + (ehVolei ? ' resumo-campo-volei' : (ehBasquete ? ' resumo-campo-basquete' : '')) + '">' + campoHtml + '</div>' +
           '</div>' +
           '<div class="resumo-col-lista">' +
             '<p class="resumo-bloco-rot">Jogadores &amp; Estat\u00EDsticas</p>' +
