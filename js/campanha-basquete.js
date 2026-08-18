@@ -48,14 +48,17 @@
     nba_mini:  { id: 'nba_mini',  totalTimes: 6,  jogosVoce: 4, classificamConf: 2, melhorDe: 1 },
     // meio-termo: 12 no total (6 por conf.), você joga 6, top-4 → melhor de 3
     nba_med:   { id: 'nba_med',   totalTimes: 12, jogosVoce: 6, classificamConf: 4, melhorDe: 3 },
-    // escala cheia: 16 por conf. (32 total ~ NBA), você joga 8, top-8 → melhor de 3 (offline)
+    // 16 no total (8 por conf.), você joga 7, top-8 → playoffs de 8 por conferência (o
+    // formato REAL da NBA: primeira rodada com 8 de cada lado). É o que a base tem hoje.
+    nba_grande:{ id: 'nba_grande',totalTimes: 16, jogosVoce: 7, classificamConf: 8, melhorDe: 3 },
+    // escala cheia: 30 no total (~NBA completa), você joga 8, top-8 por conferência
     nba_full:  { id: 'nba_full',  totalTimes: 30, jogosVoce: 8, classificamConf: 8, melhorDe: 3 }
   };
 
   // Escolhe o maior formato NBA cujo total de times cabe no disponível (+1 = você).
   function escolheFormatoNBA(disponivel) {
     var total = disponivel + 1;
-    var ordem = ['nba_full', 'nba_med', 'nba_mini'];
+    var ordem = ['nba_full', 'nba_grande', 'nba_med', 'nba_mini'];
     for (var i = 0; i < ordem.length; i++) {
       if (FORMATOS_NBA[ordem[i]].totalTimes <= total) return FORMATOS_NBA[ordem[i]];
     }
