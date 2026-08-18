@@ -565,45 +565,59 @@ function mostrarBracketPlayoffs(camp) {
              celula(j.a, vencA) + celula(j.b, vencB) +
            '</div>';
   }
-
-  // Colunas: uma por rodada registrada da sua conferência.
   var nomesFase = po.fases.map(function (f) { return f.nome; });
-  var colunas = po.bracketConf.map(function (rodada, ri) {
-    var titulo = nomesFase[ri] || ('Rodada ' + (ri + 1));
-    return '<div class="bkt-coluna">' +
-             '<div class="bkt-coluna-tit">' + tituloCurto(titulo) + '</div>' +
-             rodada.map(jogoHTML).join('') +
-           '</div>';
-  });
 
-  // Coluna extra: Finais da NBA (você — se campeão de conf — vs campeão da outra conf).
+  // Colunas de uma conferência. `espelhado` inverte a ordem (a outra conf cresce da
+  // direita para o centro), para o layout ficar simétrico em torno das Finais.
+  function colunasDe(bracket, espelhado) {
+    var cols = bracket.map(function (rodada, ri) {
+      var titulo = tituloCurto(nomesFase[ri] || ('Rodada ' + (ri + 1)));
+      return '<div class="bkt-coluna">' +
+               '<div class="bkt-coluna-tit">' + titulo + '</div>' +
+               rodada.map(jogoHTML).join('') +
+             '</div>';
+    });
+    return (espelhado ? cols.reverse() : cols).join('');
+  }
+
+  // Finais da NBA no centro (você — se campeão de conf — vs campeão da outra conf).
+  var meuLado = { voce: true };
+  var outro = po.finalistaOutraConf;
   var euCampeaoConf = po.faseIdx >= 0 && po.fases[po.faseIdx] && po.fases[po.faseIdx].finalNBA;
-  if (euCampeaoConf || (po.finalistaOutraConf)) {
-    var meuLado = { voce: true };
-    var outro = po.finalistaOutraConf;
+  var finalHTML = '';
+  if (euCampeaoConf || outro) {
     var vencFinal = null;
-    // se já houve jogo de final NBA no histórico, marca o vencedor
     var finalHist = (po.historico || []).filter(function (h) { return h.fase === 'FINAIS DA NBA'; })[0];
     if (finalHist) vencFinal = finalHist.venceu ? meuLado : outro;
-    colunas.push(
+    finalHTML =
       '<div class="bkt-coluna bkt-coluna-final">' +
         '<div class="bkt-coluna-tit">Finais NBA</div>' +
-        '<div class="bkt-jogo bkt-seujogo">' +
+        '<div class="bkt-jogo bkt-seujogo bkt-jogo-final">' +
           celula(meuLado, vencFinal === meuLado) +
           celula(outro, vencFinal === outro) +
         '</div>' +
-      '</div>'
-    );
+      '</div>';
   }
 
-  var html = '<div class="bkt-wrap"><div class="bkt-titulo">Chaveamento \u00B7 Conferência ' +
-             camp.conferencias[camp.suaConf].nome + '</div><div class="bkt-colunas">' +
-             colunas.join('') + '</div></div>';
+  var nomeSua = camp.conferencias[camp.suaConf].nome;
+  var nomeOutra = camp.conferencias[po.outraConf].nome;
+
+  var html = '<div class="bkt-wrap">' +
+    '<div class="bkt-titulo">Chaveamento dos Playoffs</div>' +
+    '<div class="bkt-conf-rotulos">' +
+      '<span class="bkt-rot bkt-rot-sua">Conf. ' + nomeSua + ' (você)</span>' +
+      '<span class="bkt-rot">Conf. ' + nomeOutra + '</span>' +
+    '</div>' +
+    '<div class="bkt-colunas">' +
+      colunasDe(po.bracketConf, false) +
+      finalHTML +
+      colunasDe(po.bracketOutra || [], true) +
+    '</div>' +
+  '</div>';
 
   var ultimoCard = document.getElementById('partida-basquete-' + partidaIdBasquete);
   var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
   if (corpo) {
-    // remove um bracket anterior no mesmo card (recria atualizado)
     var velho = corpo.querySelector('.bkt-wrap');
     if (velho) velho.remove();
     var d = document.createElement('div'); d.innerHTML = html; corpo.appendChild(d.firstChild);

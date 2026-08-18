@@ -891,7 +891,19 @@ td.grupo-time { text-align: left; }
   font-size: var(--fs-legenda); color: var(--txt-soft);
   text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin-bottom: 10px;
 }
-.bkt-colunas { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; }
+.bkt-colunas { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; align-items: center; }
+/* Rótulos das duas conferências acima do chaveamento */
+.bkt-conf-rotulos {
+  display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px;
+}
+.bkt-rot {
+  font-size: var(--fs-legenda); color: var(--txt-soft);
+  text-transform: uppercase; letter-spacing: 0.6px; font-weight: 700;
+}
+.bkt-rot-sua { color: var(--accent); }
+/* Confronto das Finais NBA: destaque dourado no centro */
+.bkt-jogo-final { border-color: var(--ouro) !important; box-shadow: 0 0 0 1px var(--ouro); }
+.bkt-coluna-final .bkt-coluna-tit { color: var(--ouro); }
 .bkt-coluna { display: flex; flex-direction: column; justify-content: space-around; gap: 10px; min-width: 130px; }
 .bkt-coluna-tit {
   font-size: var(--fs-legenda); color: var(--ouro);

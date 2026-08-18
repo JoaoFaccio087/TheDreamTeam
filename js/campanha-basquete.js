@@ -198,6 +198,14 @@
     var confrontos = [];
     var i = 0, j = cls.length - 1;
     while (i < j) { confrontos.push([cls[i], cls[j]]); i++; j--; }
+
+    // Bracket da OUTRA conferência (mesma semeadura 1×N), simulado em sincronia com o seu.
+    var outraConf = camp.suaConf === 'LESTE' ? 'OESTE' : 'LESTE';
+    var clsOutra = classificacaoConf(camp, outraConf).slice(0, camp.classificamConf).map(function (l) { return l.time; });
+    var confrontosOutra = [];
+    var oi = 0, oj = clsOutra.length - 1;
+    while (oi < oj) { confrontosOutra.push([clsOutra[oi], clsOutra[oj]]); oi++; oj--; }
+
     camp.playoff = {
       faseIdx: 0,
       fases: camp.fasesPlayoff,
@@ -205,7 +213,7 @@
       confrontos: confrontos,
       seuConfrontoIdx: confrontos.findIndex(function (par) { return par[0].voce || par[1].voce; }),
       historico: [],
-      // Campeão da OUTRA conferência (resolvido por força/sorte quando você chega às Finais).
+      // Campeão da OUTRA conferência (definido quando o bracket dela chega ao fim).
       finalistaOutraConf: null,
       // Semeadura inicial (times 1..N da sua conferência) — para desenhar o bracket.
       seeds: cls.slice(),
@@ -214,17 +222,56 @@
       // renderização do chaveamento (mostrarBracketPlayoffs) lê isto.
       bracketConf: [confrontos.map(function (par) {
         return { a: par[0], b: par[1], vencedor: null, seuJogo: (par[0].voce || par[1].voce) };
+      })],
+      // Bracket da outra conferência (todos por força/sorte), avança junto com o seu.
+      outraConf: outraConf,
+      confrontosOutra: confrontosOutra,
+      bracketOutra: [confrontosOutra.map(function (par) {
+        return { a: par[0], b: par[1], vencedor: null, seuJogo: false };
       })]
     };
     return camp.playoff;
   }
+
+  // Avança UMA rodada do bracket da outra conferência (resolve por força/sorte) e
+  // registra os vencedores. Chamado em sincronia toda vez que você avança no seu lado.
+  function avancarOutraConf(camp, forcaDe) {
+    var po = camp.playoff;
+    if (!po.confrontosOutra || !po.confrontosOutra.length) return;
+    var rodadaIdx = po.bracketOutra.length - 1;
+    var vencedores = po.confrontosOutra.map(function (par) {
+      var a = par[0], b = par[1];
+      var fa = (forcaDe ? forcaDe(a.clubeRef || a) : a.forca) + (Math.random() - 0.5) * 14;
+      var fb = (forcaDe ? forcaDe(b.clubeRef || b) : b.forca) + (Math.random() - 0.5) * 14;
+      return fa >= fb ? a : b;
+    });
+    // grava vencedores na rodada corrente do bracket da outra conf
+    if (po.bracketOutra[rodadaIdx]) {
+      po.bracketOutra[rodadaIdx].forEach(function (jogo, idx) { jogo.vencedor = vencedores[idx] || null; });
+    }
+    // monta a próxima rodada (se ainda houver mais de um vivo)
+    if (vencedores.length > 1) {
+      var novos = [];
+      var i = 0, j = vencedores.length - 1;
+      while (i < j) { novos.push([vencedores[i], vencedores[j]]); i++; j--; }
+      po.confrontosOutra = novos;
+      po.bracketOutra.push(novos.map(function (par) {
+        return { a: par[0], b: par[1], vencedor: null, seuJogo: false };
+      }));
+    } else {
+      po.confrontosOutra = [];
+      po.finalistaOutraConf = vencedores[0] || null;   // campeão da outra conferência
+    }
+  }
+
 
   // Seu adversário no confronto atual do playoff (ou null).
   function seuAdversarioPlayoff(camp) {
     if (!camp.playoff) return null;
     var fase = camp.playoff.fases[camp.playoff.faseIdx];
     if (fase && fase.finalNBA) {
-      // Nas Finais da NBA, seu adversário é o campeão da outra conferência.
+      // Nas Finais da NBA, seu adversário é o campeão da outra conferência — já resolvido
+      // pelo bracket sincronizado (avancarOutraConf). Fallback: resolve na hora.
       if (!camp.playoff.finalistaOutraConf) camp.playoff.finalistaOutraConf = campeaoOutraConf(camp);
       return camp.playoff.finalistaOutraConf;
     }
@@ -294,6 +341,10 @@
 
     po.faseIdx++;
     var proxFase = po.fases[po.faseIdx];
+
+    // Avança a OUTRA conferência uma rodada, em sincronia com o seu avanço (sem spoiler:
+    // ela caminha no mesmo ritmo). Quando o bracket dela termina, define o finalista.
+    avancarOutraConf(camp, forcaDe);
 
     // Se a próxima fase são as Finais da NBA, você é campeão da CONFERÊNCIA.
     if (proxFase && proxFase.finalNBA) {
