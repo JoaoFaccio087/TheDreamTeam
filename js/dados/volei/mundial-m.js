@@ -400,6 +400,187 @@ const DADOS_VOLEI_M = [
       { id: 'jiri-kovar',          nome: "Kovář",               posicoes: ["PON"],       forca: 78 },
       { id: 'matteo-piano',        nome: "Piano",               posicoes: ["CEN"],       forca: 77 }
     ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2006 (Japão, sede)
+  // Campeão: Brasil (MVP Giba). Vice: Polônia. 3º: Bulgária. 4º: Sérvia e Montenegro.
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2006,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'ricardinho-garcia',   nome: "Ricardinho",          posicoes: ["LEV"],       forca: 84 },
+      { id: 'giba-godoy',          nome: "Giba",                posicoes: ["PON"],       forca: 89 },
+      { id: 'andre-heller',        nome: "André Heller",        posicoes: ["CEN"],       forca: 83 },
+      { id: 'andre-nascimento',    nome: "André Nascimento",    posicoes: ["OPO"],       forca: 84 },
+      { id: 'gustavo-endres',      nome: "Gustavo",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'sergio-santos',       nome: "Serginho",            posicoes: ["LIB"],       forca: 88 },
+      { id: 'marcelo-elgarten',    nome: "Marcelinho",          posicoes: ["LEV"],       forca: 82 },
+      { id: 'dante-amaral',        nome: "Dante",               posicoes: ["PON"],       forca: 85 },
+      { id: 'marcio-araujo',       nome: "Márcio",              posicoes: ["PON"],       forca: 80 },
+      { id: 'rodrigo-santana',     nome: "Rodrigão",            posicoes: ["CEN"],       forca: 82 },
+      { id: 'anderson-rodrigues',  nome: "Anderson",            posicoes: ["OPO"],       forca: 82 },
+      { id: 'murilo-endres',       nome: "Murilo",              posicoes: ["PON"],       forca: 83 },
+      { id: 'samuel-fuchs',        nome: "Samuel",              posicoes: ["OPO"],       forca: 79 },
+      { id: 'escadinha-lima',      nome: "Escadinha",           posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2006,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'pawel-zagumny',       nome: "Zagumny",             posicoes: ["LEV"],       forca: 84 },
+      { id: 'mariusz-wlazly',      nome: "Wlazły",              posicoes: ["OPO"],       forca: 85 },
+      { id: 'sebastian-swiderski',  nome: "Świderski",          posicoes: ["OPO"],       forca: 84 },
+      { id: 'michal-winiarski',    nome: "Winiarski",           posicoes: ["PON"],       forca: 82 },
+      { id: 'piotr-gruszka',       nome: "Gruszka",             posicoes: ["PON"],       forca: 82 },
+      { id: 'krzysztof-ignaczak',  nome: "Ignaczak",            posicoes: ["LIB"],       forca: 82 },
+      { id: 'lukasz-kadziewicz',   nome: "Kadziewicz",          posicoes: ["PON"],       forca: 80 },
+      { id: 'grzegorz-szymanski',  nome: "Szymański",           posicoes: ["CEN"],       forca: 81 },
+      { id: 'marcin-nowak',        nome: "Nowak",               posicoes: ["PON"],       forca: 79 },
+      { id: 'daniel-plinski',      nome: "Pliński",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'lukasz-zygadlo',      nome: "Żygadło",             posicoes: ["LEV"],       forca: 80 },
+      { id: 'wojciech-grzyb',      nome: "Grzyb",               posicoes: ["PON"],       forca: 78 },
+      { id: 'marcin-mozdzonek',    nome: "Możdżonek",           posicoes: ["CEN"],       forca: 79 },
+      { id: 'krzysztof-gierczynski', nome: "Gierczyński",       posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2006,
+    clube: "Bulgária",
+    jogadores: [
+      { id: 'nikolay-zhelyazkov',  nome: "Zhelyazkov",          posicoes: ["LEV"],       forca: 82 },
+      { id: 'matey-kaziyski',      nome: "Kaziyski",            posicoes: ["PON"],       forca: 86 },
+      { id: 'vladimir-nikolov',    nome: "Nikolov",             posicoes: ["PON"],       forca: 85 },
+      { id: 'boyan-yordanov',      nome: "Yordanov",            posicoes: ["OPO"],       forca: 83 },
+      { id: 'plamen-konstantinov', nome: "Konstantinov",        posicoes: ["CEN"],       forca: 81 },
+      { id: 'teodor-salparov',     nome: "Salparov",            posicoes: ["LIB"],       forca: 83 },
+      { id: 'andrey-zhekov',       nome: "Zhekov",              posicoes: ["CEN"],       forca: 80 },
+      { id: 'hristo-tsvetanov',    nome: "Tsvetanov",           posicoes: ["LEV"],       forca: 79 },
+      { id: 'vladimir-garkov',     nome: "Garkov",              posicoes: ["OPO"],       forca: 79 },
+      { id: 'todor-aleksiev',      nome: "Aleksiev",            posicoes: ["PON"],       forca: 80 },
+      { id: 'vladimir-ivanov-bul', nome: "Ivanov",              posicoes: ["CEN"],       forca: 77 },
+      { id: 'georgi-bratoev',      nome: "Bratoev",             posicoes: ["LEV"],       forca: 77 },
+      { id: 'nikolay-nikolov',     nome: "N. Nikolov",          posicoes: ["PON"],       forca: 77 },
+      { id: 'danail-milushev',     nome: "Milushev",            posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2006,
+    clube: "Sérvia e Montenegro",
+    jogadores: [
+      { id: 'nikola-grbic',        nome: "Grbić",               posicoes: ["LEV"],       forca: 85 },
+      { id: 'ivan-miljkovic',      nome: "Miljković",           posicoes: ["OPO"],       forca: 88 },
+      { id: 'vladimir-grbic',      nome: "V. Grbić",            posicoes: ["PON"],       forca: 84 },
+      { id: 'andrija-geric',       nome: "Gerić",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'goran-vujevic',       nome: "Vujević",             posicoes: ["CEN"],       forca: 80 },
+      { id: 'nikola-rosic',        nome: "Rosić",               posicoes: ["LIB"],       forca: 81 },
+      { id: 'bojan-janic',         nome: "Janić",               posicoes: ["PON"],       forca: 81 },
+      { id: 'sasa-starovic',       nome: "Starović",            posicoes: ["OPO"],       forca: 79 },
+      { id: 'marko-samardzic',     nome: "Samardžić",           posicoes: ["LEV"],       forca: 78 },
+      { id: 'dejan-bojovic',       nome: "Bojović",             posicoes: ["PON"],       forca: 79 },
+      { id: 'ratko-pavlicevic',    nome: "Pavličević",          posicoes: ["CEN"],       forca: 78 },
+      { id: 'milan-gojkovic',      nome: "Gojković",            posicoes: ["OPO"],       forca: 77 },
+      { id: 'marko-petkovic',      nome: "Petković",            posicoes: ["PON"],       forca: 77 },
+      { id: 'igor-nesic',          nome: "Nešić",               posicoes: ["LIB"],       forca: 76 }
+    ]
+  },
+
+  // ─────────────────────────────────────────── MUNDIAL 2025 (Filipinas)
+  // Campeã: Itália (5º título, MVP Michieletto). Vice: Bulgária. 3º: Polônia. 4º: Chéquia.
+  // Elencos dos 14 confirmados por fontes oficiais (FIPAV, Lega Volley, federações).
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2025,
+    clube: "Itália",
+    jogadores: [
+      { id: 'simone-giannelli',    nome: "Giannelli",           posicoes: ["LEV"],       forca: 92 },
+      { id: 'yuri-romano',         nome: "Romanò",              posicoes: ["OPO"],       forca: 88 },
+      { id: 'alessandro-michieletto', nome: "Michieletto",      posicoes: ["PON"],       forca: 90 },
+      { id: 'mattia-bottolo',      nome: "Bottolo",             posicoes: ["PON"],       forca: 85 },
+      { id: 'gianluca-galassi',    nome: "Galassi",             posicoes: ["CEN"],       forca: 85 },
+      { id: 'fabio-balaso',        nome: "Balaso",              posicoes: ["LIB"],       forca: 87 },
+      { id: 'riccardo-sbertoli',   nome: "Sbertoli",            posicoes: ["LEV"],       forca: 82 },
+      { id: 'kamil-rychlicki',     nome: "Rychlicki",           posicoes: ["OPO"],       forca: 84 },
+      { id: 'daniele-lavia',       nome: "Lavia",               posicoes: ["PON"],       forca: 86 },
+      { id: 'luca-porro',          nome: "Luca Porro",          posicoes: ["PON"],       forca: 80 },
+      { id: 'francesco-sani',      nome: "Sani",                posicoes: ["PON"],       forca: 79 },
+      { id: 'simone-anzani',       nome: "Anzani",              posicoes: ["CEN"],       forca: 83 },
+      { id: 'giovanni-gargiulo',   nome: "Gargiulo",            posicoes: ["CEN"],       forca: 81 },
+      { id: 'roberto-russo',       nome: "Russo",               posicoes: ["CEN"],       forca: 82 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2025,
+    clube: "Bulgária",
+    jogadores: [
+      { id: 'simeon-nikolov',      nome: "S. Nikolov",          posicoes: ["LEV"],       forca: 85 },
+      { id: 'aleksandar-nikolov',  nome: "A. Nikolov",          posicoes: ["PON"],       forca: 90 },
+      { id: 'martin-atanasov',     nome: "Atanasov",            posicoes: ["PON"],       forca: 83 },
+      { id: 'venislav-antov',      nome: "Antov",               posicoes: ["OPO"],       forca: 83 },
+      { id: 'aleks-grozdanov',     nome: "Grozdanov",           posicoes: ["CEN"],       forca: 84 },
+      { id: 'damyan-kolev',        nome: "D. Kolev",            posicoes: ["LIB"],       forca: 83 },
+      { id: 'stoil-palev',         nome: "Palev",               posicoes: ["LEV"],       forca: 79 },
+      { id: 'asparuh-asparuhov',   nome: "Asparuhov",           posicoes: ["PON"],       forca: 82 },
+      { id: 'georgi-tatarov',      nome: "Tatarov",             posicoes: ["PON"],       forca: 80 },
+      { id: 'denislav-bardarov',   nome: "Bardarov",            posicoes: ["PON"],       forca: 79 },
+      { id: 'iliya-petkov',        nome: "I. Petkov",           posicoes: ["CEN"],       forca: 81 },
+      { id: 'boris-nachev',        nome: "Nachev",              posicoes: ["CEN"],       forca: 79 },
+      { id: 'preslav-petkov',      nome: "P. Petkov",           posicoes: ["CEN"],       forca: 78 },
+      { id: 'rusi-zhelev',         nome: "Zhelev",              posicoes: ["LIB"],       forca: 77 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2025,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'marcin-komenda',      nome: "Komenda",             posicoes: ["LEV"],       forca: 84 },
+      { id: 'bartosz-kurek',       nome: "Kurek",               posicoes: ["OPO"],       forca: 87 },
+      { id: 'wilfredo-leon',       nome: "Leon",                posicoes: ["PON"],       forca: 89 },
+      { id: 'kamil-semeniuk',      nome: "Semeniuk",            posicoes: ["PON"],       forca: 86 },
+      { id: 'jakub-kochanowski',   nome: "Kochanowski",         posicoes: ["CEN"],       forca: 86 },
+      { id: 'mateusz-bieniek',     nome: "Bieniek",             posicoes: ["CEN"],       forca: 83 },
+      { id: 'tomasz-fornal',       nome: "Fornal",              posicoes: ["PON"],       forca: 85 },
+      { id: 'artur-szalpuk',       nome: "Szalpuk",             posicoes: ["PON"],       forca: 81 },
+      { id: 'kewin-sasak',         nome: "Sasak",               posicoes: ["OPO"],       forca: 84 },
+      { id: 'szymon-jakubiszak',   nome: "Jakubiszak",          posicoes: ["CEN"],       forca: 80 },
+      { id: 'norbert-huber',       nome: "Huber",               posicoes: ["CEN"],       forca: 82 },
+      { id: 'jan-firlej',          nome: "Firlej",              posicoes: ["LEV"],       forca: 79 },
+      { id: 'jakub-popiwczak',     nome: "Popiwczak",           posicoes: ["LIB"],       forca: 81 },
+      { id: 'maksymilian-granieczny', nome: "Granieczny",       posicoes: ["LIB"],       forca: 78 }
+    ]
+  },
+
+  {
+    competicao: "Mundial de Vôlei (M)",
+    edicao: 2025,
+    clube: "Chéquia",
+    jogadores: [
+      { id: 'lubos-bartunek',      nome: "Bartůněk",            posicoes: ["LEV"],       forca: 81 },
+      { id: 'patrik-indra',        nome: "Indra",               posicoes: ["OPO"],       forca: 85 },
+      { id: 'lukas-vasina',        nome: "Vašina",              posicoes: ["PON"],       forca: 84 },
+      { id: 'jan-galabov',         nome: "Galabov",             posicoes: ["PON"],       forca: 81 },
+      { id: 'adam-zajicek',        nome: "Zajíček",             posicoes: ["CEN"],       forca: 82 },
+      { id: 'michael-kovarik',     nome: "Kovařík",             posicoes: ["LIB"],       forca: 81 },
+      { id: 'jiri-srb',            nome: "Srb",                 posicoes: ["LEV"],       forca: 78 },
+      { id: 'marek-sotola',        nome: "Šotola",              posicoes: ["OPO"],       forca: 82 },
+      { id: 'matous-drahonovsky',  nome: "Drahoňovský",         posicoes: ["PON"],       forca: 80 },
+      { id: 'martin-licek',        nome: "Licek",               posicoes: ["PON"],       forca: 79 },
+      { id: 'jiri-benda',          nome: "Benda",               posicoes: ["PON"],       forca: 78 },
+      { id: 'josef-polak',         nome: "Polák",               posicoes: ["CEN"],       forca: 80 },
+      { id: 'antonin-klimes',      nome: "Klimeš",              posicoes: ["CEN"],       forca: 79 },
+      { id: 'milan-monik',         nome: "Moník",               posicoes: ["LIB"],       forca: 77 }
+    ]
   }
 
 ];
