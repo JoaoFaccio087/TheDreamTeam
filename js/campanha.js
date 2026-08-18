@@ -27,6 +27,10 @@ function reiniciarCampanha() {
   campanhaEmpates   = 0;
   campanhaDerrotas  = 0;
   resumoCampeao     = false;
+  // Estado do basquete (não vaza entre campanhas): rebotes e a campanha da NBA.
+  if (typeof statsRebotesBasquete !== 'undefined') statsRebotesBasquete = {};
+  campanhaBasqueteAtual = null;
+  partidaIdBasquete = 0;
   campanhaFlags     = {
     hatTrick: false, poker: false, showDeBola: false,
     maiorSaldoJogo: 0, finalNosPenaltis: false, matasNosPenaltis: 0
