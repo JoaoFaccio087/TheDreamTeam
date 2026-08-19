@@ -104,6 +104,15 @@ function mostrarFalencia() {
 }
 
 // Preenche o escudo/bandeira no card do sorteio, usando a API única (decide clube/seleção).
+// Rótulo do "ano" de um registro: vôlei/futebol usam `edicao` (ano da edição), basquete
+// usa `temporada` (ex.: "2024-25"). Evita exibir "undefined" quando o campo não existe.
+function rotuloAnoEdicao(reg) {
+  if (!reg) return '';
+  if (reg.temporada != null) return reg.temporada;   // basquete
+  if (reg.edicao != null) return reg.edicao;          // vôlei/futebol
+  return '';
+}
+
 function preencherEscudoCard(edicao) {
   if (typeof clubeEscudo === 'undefined' || !clubeEscudo) return;
   clubeEscudo.innerHTML = (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo)
@@ -125,14 +134,14 @@ function animarSorteio(opcoes, sorteado, onFim) {
   var temporizador = setInterval(function () {
     var temp = opcoes[Math.floor(Math.random() * opcoes.length)];
     clubeNome.textContent   = temp.clube;
-    clubeEdicao.textContent = rotuloCompeticao(temp.competicao) + ' · ' + temp.edicao;
+    clubeEdicao.textContent = rotuloCompeticao(temp.competicao) + ' · ' + rotuloAnoEdicao(temp);
 
     decorrido += intervaloMs;
 
     if (decorrido >= duracaoMs) {
       clearInterval(temporizador);
       clubeNome.textContent   = sorteado.clube;
-      clubeEdicao.textContent = rotuloCompeticao(sorteado.competicao) + ' · ' + sorteado.edicao;
+      clubeEdicao.textContent = rotuloCompeticao(sorteado.competicao) + ' · ' + rotuloAnoEdicao(sorteado);
       clubeStatus.textContent = 'SAIU';
       clubeStatus.classList.add('revelado');
       preencherEscudoCard(sorteado);

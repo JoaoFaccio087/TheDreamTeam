@@ -19,6 +19,14 @@ function sincronizarPilulaOrcamento() {
 function selecionarModo(novoModo) {
   modoSelecionado = novoModo;
 
+  // Mantém o esporteAtual coerente com a competição escolhida. Sem isso, entrar numa
+  // competição de vôlei/basquete por certos caminhos deixaria o esporteAtual em 'futebol',
+  // e a escalação seria dimensionada com o nº de titulares errado (11 em vez de 5/6).
+  if (typeof esporteAtual !== 'undefined' && typeof COMPETICOES !== 'undefined' &&
+      COMPETICOES[novoModo]) {
+    esporteAtual = COMPETICOES[novoModo].esporte || 'futebol';
+  }
+
   pilulasModo.forEach(function (p) {
     if (p.dataset.modo === novoModo) {
       p.classList.add('pilula-ativa');

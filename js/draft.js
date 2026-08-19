@@ -137,9 +137,10 @@ function aplicarVisibilidadeEstilo() {
 
   // Com o campo vazio, garante a escolha de formação (pode ter sido travada por um
   // sorteio Clássico anterior). Vale para Draft e Livre: os dois começam do zero.
-  // EXCETO no vôlei, que não tem formação (posições fixas) — não reexibe o bloco.
+  // EXCETO no vôlei/basquete, que não têm formação (posições fixas) — não reexibe o bloco.
   var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
-  if (!ehVolei && (estiloJogo === 'draft' || estiloJogo === 'livre') && slotsPreenchidos === 0) {
+  var ehBasquete = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
+  if (!ehVolei && !ehBasquete && (estiloJogo === 'draft' || estiloJogo === 'livre') && slotsPreenchidos === 0) {
     formacaoTravada = false;
     formacaoBloco.classList.remove('escondida');
     pilulasFormacaoJogo.forEach(function (p) { p.disabled = false; });

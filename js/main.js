@@ -439,8 +439,12 @@ function restaurarSessaoOffline() {
     mostrarTela(telaJogo);
 
     // 3) Blocos de escolha: se o sorteio já rolou, ficam escondidos (como em rolar()).
+    // Vôlei e basquete NÃO têm formação (posições fixas) — o bloco fica sempre escondido.
+    var ehVoleiT = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+    var ehBasqueteT = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
+    var semFormacaoT = ehVoleiT || ehBasqueteT;
     var travou = formacaoTravada;
-    formacaoBloco.classList.toggle('escondida', travou);
+    formacaoBloco.classList.toggle('escondida', travou || semFormacaoT);
     if (estiloBloco)    estiloBloco.classList.toggle('escondida', travou);
     if (jogoNomeBloco)  jogoNomeBloco.classList.toggle('escondida', travou);
     if (jogoForcaBloco) jogoForcaBloco.classList.toggle('escondida', travou);
