@@ -304,6 +304,84 @@
     'Tenerife':        ['#FFFFFF', '#005BAC'],   // branco, detalhe azul (chicharreros)
     'Zaragoza':        ['#FFFFFF', '#0A2C6B'],   // branco, detalhe azul (blanquillos)
   }
+
+  // ─── NBA (basquete) — cores oficiais das 30 franquias (+ nomes históricos) ───
+  // Cada entrada: [cor primária, cor secundária, (3ª opcional)]. Os nomes cobrem as
+  // grafias que aparecem nos dados (2009-10 → 2025-26), inclusive franquias que mudaram
+  // de nome (Bobcats→Hornets, NO Hornets→Pelicans) e variações (LA/Los Angeles Clippers).
+  var CORES_NBA = {
+    'Atlanta Hawks':          ['#E03A3E', '#26282A', '#C1D32F'],
+    'Boston Celtics':         ['#007A33', '#FFFFFF', '#BA9653'],
+    'Brooklyn Nets':          ['#000000', '#FFFFFF'],
+    'Charlotte Hornets':      ['#1D1160', '#00788C', '#A1A1A4'],
+    'Charlotte Bobcats':      ['#F26432', '#2A5B84', '#B8B8B8'],   // identidade antiga (até 2014)
+    'Chicago Bulls':          ['#CE1141', '#000000'],
+    'Cleveland Cavaliers':    ['#860038', '#041E42', '#FDBB30'],
+    'Dallas Mavericks':       ['#00538C', '#002B5E', '#B8C4CA'],
+    'Denver Nuggets':         ['#0E2240', '#FEC524', '#8B2131'],
+    'Detroit Pistons':        ['#C8102E', '#1D42BA', '#FFFFFF'],
+    'Golden State Warriors':  ['#1D428A', '#FFC72C'],
+    'Houston Rockets':        ['#CE1141', '#000000', '#C4CED4'],
+    'Indiana Pacers':         ['#002D62', '#FDBB30'],
+    'Los Angeles Clippers':   ['#C8102E', '#1D428A', '#FFFFFF'],
+    'LA Clippers':            ['#C8102E', '#1D428A', '#FFFFFF'],   // mesma franquia (grafia nova)
+    'Los Angeles Lakers':     ['#552583', '#FDB927'],
+    'Memphis Grizzlies':      ['#5D76A9', '#12173F', '#F5B112'],
+    'Miami Heat':             ['#98002E', '#F9A01B', '#000000'],
+    'Milwaukee Bucks':        ['#00471B', '#EEE1C6', '#0077C0'],
+    'Minnesota Timberwolves': ['#0C2340', '#236192', '#78BE20'],
+    'New Orleans Pelicans':   ['#0C2340', '#C8102E', '#85714D'],
+    'New Orleans Hornets':    ['#1D1160', '#00788C', '#A1A1A4'],  // identidade antiga (até 2013)
+    'New York Knicks':        ['#006BB6', '#F58426', '#BEC0C2'],
+    'Oklahoma City Thunder':  ['#007AC1', '#EF3B24', '#002D62'],
+    'Orlando Magic':          ['#0077C0', '#000000', '#C4CED4'],
+    'Philadelphia 76ers':     ['#006BB6', '#ED174C', '#002B5C'],
+    'Phoenix Suns':           ['#1D1160', '#E56020', '#63727A'],
+    'Portland Trail Blazers': ['#E03A3E', '#000000'],
+    'Sacramento Kings':       ['#5A2D81', '#63727A', '#000000'],
+    'San Antonio Spurs':      ['#C4CED4', '#000000'],
+    'Toronto Raptors':        ['#CE1141', '#000000', '#B4975A'],
+    'Utah Jazz':              ['#002B5C', '#00471B', '#F9A01B'],
+    'Washington Wizards':     ['#002B5C', '#E31837', '#C4CED4']
+  };
+
+  // Estilo (padrão de desenho) por franquia — dá identidade sem precisar do logo real.
+  var ESTILO_NBA = {
+    'Atlanta Hawks':          { padrao: 'faixa-h' },
+    'Boston Celtics':         { padrao: 'solido' },
+    'Brooklyn Nets':          { padrao: 'solido' },
+    'Charlotte Hornets':      { padrao: 'diagonal' },
+    'Charlotte Bobcats':      { padrao: 'metade' },
+    'Chicago Bulls':          { padrao: 'solido' },
+    'Cleveland Cavaliers':    { padrao: 'faixa-h' },
+    'Dallas Mavericks':       { padrao: 'solido' },
+    'Denver Nuggets':         { padrao: 'faixa-h' },
+    'Detroit Pistons':        { padrao: 'metade' },
+    'Golden State Warriors':  { padrao: 'faixa-h' },
+    'Houston Rockets':        { padrao: 'solido' },
+    'Indiana Pacers':         { padrao: 'faixa-h' },
+    'Los Angeles Clippers':   { padrao: 'metade' },
+    'LA Clippers':            { padrao: 'metade' },
+    'Los Angeles Lakers':     { padrao: 'solido' },
+    'Memphis Grizzlies':      { padrao: 'faixa-h' },
+    'Miami Heat':             { padrao: 'solido' },
+    'Milwaukee Bucks':        { padrao: 'solido' },
+    'Minnesota Timberwolves': { padrao: 'diagonal' },
+    'New Orleans Pelicans':   { padrao: 'faixa-h' },
+    'New Orleans Hornets':    { padrao: 'diagonal' },
+    'New York Knicks':        { padrao: 'faixa-h' },
+    'Oklahoma City Thunder':  { padrao: 'faixa-h' },
+    'Orlando Magic':          { padrao: 'solido' },
+    'Philadelphia 76ers':     { padrao: 'faixa-h' },
+    'Phoenix Suns':           { padrao: 'faixa-v' },
+    'Portland Trail Blazers': { padrao: 'diagonal' },
+    'Sacramento Kings':       { padrao: 'solido' },
+    'San Antonio Spurs':      { padrao: 'solido' },
+    'Toronto Raptors':        { padrao: 'solido' },
+    'Utah Jazz':              { padrao: 'faixa-h' },
+    'Washington Wizards':     { padrao: 'metade' }
+  };
+
   var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS, CORES_LALIGA);
 
   // Brasileiros que TAMBÉM disputam a Libertadores. As cores deles moram em CORES_BRASILEIRAO
@@ -644,6 +722,14 @@
     },
     // Só a cor CATALOGADA (null se não houver) — útil para saber se temos a cor oficial.
     corOficialClube: function (nome) { return CORES_CLUBES[resolveAlias(nome)] || null; },
+    // NBA: cor oficial da franquia (fallback estável se faltar). Os nomes dos times da NBA
+    // vêm exatos dos dados (ex.: 'Los Angeles Lakers'), então não passam por resolveAlias.
+    coresClubeNBA: function (nome) {
+      return CORES_NBA[nome] || PALETA_RESERVA[hashNome(String(nome)) % PALETA_RESERVA.length];
+    },
+    // NBA: estilo (padrão de desenho) da franquia, se houver.
+    estiloClubeNBA: function (nome) { return ESTILO_NBA[nome] || null; },
+    todosClubesNBA: function () { return Object.keys(CORES_NBA); },
     // Estilo fixo (padrão) de um clube, se houver.
     estiloClube: function (nome) { return ESTILO_CLUBES[resolveAlias(nome)] || null; },
     isoSelecao: function (nome) { return PAIS_SELECAO[resolveAlias(nome)] || null; },

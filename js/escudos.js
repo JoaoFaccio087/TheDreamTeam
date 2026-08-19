@@ -992,7 +992,13 @@
       try {
         var C = window.EscudosCores;
         var cores = (C.coresClubeNBA && C.coresClubeNBA(nome)) || ['#1D428A', '#C8102E'];
-        return gerarClube({ tipo: 'clube', nome: nome, cores: cores, seed: nome, estrelas: 0 });
+        var estilo = (C.estiloClubeNBA && C.estiloClubeNBA(nome)) || {};
+        var opts = { tipo: 'clube', nome: nome, cores: cores, seed: nome, estrelas: 0 };
+        // aplica o padrão/inversão da franquia (identidade visual), se catalogado
+        if (estilo.padrao) opts.padrao = estilo.padrao;
+        if (estilo.inverter != null) opts.inverter = estilo.inverter;
+        if (estilo.listras != null) opts.listras = estilo.listras;
+        return gerarClube(opts);
       } catch (err) { return ''; }
     },
     // Escudo de seleção de vôlei: mesmo gerador, mas com estrelas SEMPRE 0.
