@@ -14,20 +14,37 @@
   var _busca = '';
   var _decada = '';
 
-  function chave(d) { return d.clube + '|' + d.edicao; }
+  function chave(d) { return d.clube + '|' + anoDe(d); }
+
+  // "Ano" de um registro para EXIBIÇÃO: vôlei/futebol usam `edicao` (número), basquete usa
+  // `temporada` (string "2024-25"). Evita mostrar "undefined" quando o campo não existe.
+  function anoDe(d) {
+    if (!d) return '';
+    if (d.temporada != null) return d.temporada;   // basquete
+    if (d.edicao != null) return d.edicao;          // vôlei/futebol
+    return '';
+  }
+  // "Ano" NUMÉRICO (para ordenar e agrupar por década): extrai o 1º ano de "2024-25" → 2024,
+  // ou usa a edição direto. Retorna 0 se não houver.
+  function anoNum(d) {
+    if (!d) return 0;
+    if (d.temporada != null) { var m = String(d.temporada).match(/\d{4}/); return m ? +m[0] : 0; }
+    if (d.edicao != null) return +d.edicao || 0;
+    return 0;
+  }
 
   // Todas as edições da competição escolhida, ordenadas por clube e ano.
   function edicoes() {
     var comp = COMPETICOES[modoSelecionado] && COMPETICOES[modoSelecionado].dados;
     if (!comp) return [];
     return API.getClubesPorCompeticao(comp).slice().sort(function (a, b) {
-      return a.clube === b.clube ? a.edicao - b.edicao : a.clube.localeCompare(b.clube, 'pt-BR');
+      return a.clube === b.clube ? anoNum(a) - anoNum(b) : a.clube.localeCompare(b.clube, 'pt-BR');
     });
   }
 
   function decadasDe(lista) {
     var set = {};
-    lista.forEach(function (d) { set[Math.floor(d.edicao / 10) * 10] = 1; });
+    lista.forEach(function (d) { set[Math.floor(anoNum(d) / 10) * 10] = 1; });
     return Object.keys(set).map(Number).sort(function (a, b) { return a - b; });
   }
 
@@ -39,8 +56,8 @@
   function filtradas() {
     var b = norm(_busca);
     return edicoes().filter(function (d) {
-      if (_decada && Math.floor(d.edicao / 10) * 10 !== +_decada) return false;
-      if (b && norm(d.clube).indexOf(b) < 0 && String(d.edicao).indexOf(b) < 0) return false;
+      if (_decada && Math.floor(anoNum(d) / 10) * 10 !== +_decada) return false;
+      if (b && norm(d.clube).indexOf(b) < 0 && String(anoDe(d)).indexOf(b) < 0) return false;
       return true;
     });
   }
@@ -94,16 +111,29 @@
     raiz.querySelectorAll('[data-escudo]').forEach(function (el) { _obs.observe(el); });
   }
 
+  // Cache de escudos por (modo + nome do clube): no basquete, os mesmos ~33 clubes se
+  // repetem em centenas de registros (43 temporadas). Gerar o SVG do zero a cada card
+  // trava. Aqui geramos uma vez por clube e reusamos a string.
+  var _cacheEscudo = {};
+  function escudoDe(nome) {
+    var k = modoSelecionado + '|' + nome;
+    if (_cacheEscudo[k] != null) return _cacheEscudo[k];
+    var svg = '';
+    if (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo) {
+      svg = Escudos.porNomeSeModo(nome, modoSelecionado) || '';
+    } else if (typeof Escudos !== 'undefined' && Escudos.porNome) {
+      svg = Escudos.porNome(nome) || '';
+    }
+    _cacheEscudo[k] = svg;
+    return svg;
+  }
+
   function pintar(el) {
     if (el.dataset.pronto) return;
     el.dataset.pronto = '1';
-    // Usa porNomeSeModo (não porNome) para respeitar o modo: no vôlei gera o escudo da
-    // seleção SEM estrelas (títulos de futebol não valem aqui); no futebol, com estrelas.
-    if (typeof Escudos !== 'undefined' && Escudos.porNomeSeModo) {
-      el.innerHTML = Escudos.porNomeSeModo(el.dataset.escudo, modoSelecionado) || '';
-    } else if (typeof Escudos !== 'undefined' && Escudos.porNome) {
-      el.innerHTML = Escudos.porNome(el.dataset.escudo) || '';
-    }
+    // Usa o cache por clube (porNomeSeModo respeita o modo: vôlei = seleção sem estrelas;
+    // futebol = com estrelas; basquete = clube com cores da franquia).
+    el.innerHTML = escudoDe(el.dataset.escudo);
   }
 
   function render() {
@@ -122,7 +152,7 @@
              UI.esc(k) + '" aria-pressed="' + on + '">' +
                '<span class="pote-escudo" data-escudo="' + UI.esc(d.clube) + '"></span>' +
                '<span class="pote-nome">' + UI.esc(d.clube) + '</span>' +
-               '<span class="pote-ano">' + d.edicao + '</span>' +
+               '<span class="pote-ano">' + anoDe(d) + '</span>' +
              '</button>';
     }).join('');
 

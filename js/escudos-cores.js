@@ -342,7 +342,15 @@
     'San Antonio Spurs':      ['#C4CED4', '#000000'],
     'Toronto Raptors':        ['#CE1141', '#000000', '#B4975A'],
     'Utah Jazz':              ['#002B5C', '#00471B', '#F9A01B'],
-    'Washington Wizards':     ['#002B5C', '#E31837', '#C4CED4']
+    'Washington Wizards':     ['#002B5C', '#E31837', '#C4CED4'],
+    // Franquias históricas (nomes antigos que aparecem nas temporadas 1983-84+)
+    'Kansas City Kings':      ['#5A2D81', '#C4CED4', '#000000'],   // → Sacramento Kings
+    'New Jersey Nets':        ['#12264B', '#C4CED4', '#CE1141'],   // → Brooklyn Nets
+    'Seattle SuperSonics':    ['#00653A', '#FFC200', '#002A5C'],   // → OKC Thunder (verde/ouro clássico)
+    'Washington Bullets':     ['#002B5C', '#E31837', '#FFFFFF'],   // → Washington Wizards
+    'San Diego Clippers':     ['#C8102E', '#1D428A', '#FFFFFF'],   // → LA Clippers
+    'Vancouver Grizzlies':    ['#00655B', '#C4CED4', '#1D2B5C'],   // → Memphis Grizzlies
+    'Charlotte Hornets ':     ['#1D1160', '#00788C', '#A1A1A4']    // grafia com espaço (defensivo)
   };
 
   // Estilo (padrão de desenho) por franquia — dá identidade sem precisar do logo real.
@@ -379,7 +387,13 @@
     'San Antonio Spurs':      { padrao: 'solido' },
     'Toronto Raptors':        { padrao: 'solido' },
     'Utah Jazz':              { padrao: 'faixa-h' },
-    'Washington Wizards':     { padrao: 'metade' }
+    'Washington Wizards':     { padrao: 'metade' },
+    'Kansas City Kings':      { padrao: 'solido' },
+    'New Jersey Nets':        { padrao: 'faixa-h' },
+    'Seattle SuperSonics':    { padrao: 'faixa-h' },
+    'Washington Bullets':     { padrao: 'metade' },
+    'San Diego Clippers':     { padrao: 'metade' },
+    'Vancouver Grizzlies':    { padrao: 'faixa-h' }
   };
 
   var CORES_CLUBES = Object.assign({}, CORES_BRASILEIRAO, CORES_LIBERTADORES, CORES_CHAMPIONS, CORES_LALIGA);
@@ -675,7 +689,8 @@
     'Senegal': 'SN', 'Escócia': 'SCO', 'Paraguai': 'PY',
     'Turquia': 'TR', 'Grécia': 'GR', 'Noruega': 'NO', 'Hungria': 'HU',
     'Romênia': 'RO', 'Bulgária': 'BG', 'Costa Rica': 'CR', 'Coreia do Sul': 'KR',
-    'Irlanda': 'IE', 'Ucrânia': 'UA', 'Tchéquia': 'CZ', 'Eslováquia': 'SK',
+    'Irlanda': 'IE', 'Ucrânia': 'UA', 'Tchéquia': 'CZ', 'Chéquia': 'CZ',
+    'República Tcheca': 'CZ', 'Tcheca': 'CZ', 'Eslováquia': 'SK',
     'Eslovênia': 'SI', 'Islândia': 'IS', 'Argélia': 'DZ', 'Austrália': 'AU',
     'Tunísia': 'TN', 'Egito': 'EG', 'África do Sul': 'ZA', 'Canadá': 'CA',
     'China': 'CN', 'Arábia Saudita': 'SA', 'Catar': 'QA', 'Irã': 'IR',
