@@ -421,15 +421,18 @@
   function atualizarSeletorEscalados() {
     var sel = $('perfil-escalados-sel');
     if (!sel) return;
+    // Gera os botões do seletor do mapa DINAMICAMENTE a partir das competições do esporte
+    // ativo. Antes eram fixos no HTML (só futebol), então vôlei/basquete só mostravam
+    // 'Geral'. Cada botão usa data-esc = a `chave` da competição (casa com m.competicao).
     var gruposEsp = gruposDoEsporte();
-    var nomesEsp = {};
-    gruposEsp.forEach(function (g) { nomesEsp[(g.chave || 'geral')] = true; });
-    Array.prototype.forEach.call(sel.querySelectorAll('.pilula'), function (p) {
-      var esc = p.getAttribute('data-esc') || 'geral';
-      var mostra = (esc === 'geral') || nomesEsp[esc];
-      p.classList.toggle('escondida', !mostra);
-      p.classList.toggle('pilula-ativa', esc === 'geral');   // volta pro Geral ao trocar
+    var html = '<button class="pilula pilula-ativa" type="button" data-esc="geral">Geral</button>';
+    gruposEsp.forEach(function (g) {
+      if (g.api === 'geral') return;   // 'Geral' já está acima
+      var escVal = g.chave || 'geral';
+      html += '<button class="pilula" type="button" data-esc="' + esc(escVal) + '">' +
+                esc(g.nome) + '</button>';
     });
+    sel.innerHTML = html;
   }
 
   // Faixa de KPIs (números-chave) do topo das Estatísticas. Recebe os totais já
@@ -486,7 +489,13 @@
     }
 
     Promise.resolve(pedirStats).then(function (stats) {
-      if (stats && stats.grupos) {
+      // O SERVIDOR só calcula estatísticas de FUTEBOL (grupos por competição de futebol).
+      // Para vôlei e basquete, as somas do servidor viriam zeradas — então, nesses esportes,
+      // ignoramos o stats do servidor e caímos no cálculo LOCAL do histórico (que conhece as
+      // competições de todos os esportes via a `chave` derivada de COMPETICOES[id].dados).
+      var esporteUsaLocal = (_esportePerfil === 'volei' || _esportePerfil === 'basquete');
+
+      if (stats && stats.grupos && !esporteUsaLocal) {
         _statsCache = stats;
         _histCache = null;                 // não precisamos do histórico completo aqui
         var linhasServ = gruposDoEsporte().map(function (g) {
@@ -498,10 +507,13 @@
         renderEscalados('geral');
         return;
       }
-      // Fallback: calcula a partir do histórico (convidado/offline).
+      // Fallback (convidado/offline) OU vôlei/basquete: calcula a partir do histórico.
       return API.getHistorico().then(function (lista) {
         lista = lista || [];
-        _statsCache = null;
+        // Preserva o stats do servidor no cache SE ele existir (o mapa de futebol ainda o
+        // usa quando o esporte ativo é futebol); mas guarda também o histórico para o
+        // cálculo local de vôlei/basquete.
+        _statsCache = (stats && stats.grupos && !esporteUsaLocal) ? stats : null;
         _histCache = lista;
         var linhasLoc = gruposDoEsporte().map(function (g) {
           var ms = g.chave
@@ -766,9 +778,17 @@
       return (grupos[g] || []).length > 0;
     });
     if (!temAlgum) {
-      campo.innerHTML = '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
-      campo.classList.remove('quadra-volei');
-      campo.classList.remove('quadra-basquete');
+      // Mantém a aparência da quadra do ESPORTE ATIVO mesmo vazio (senão o fundo cai no
+      // verde de futebol num perfil de vôlei/basquete). Só a mensagem muda.
+      campo.classList.toggle('quadra-volei', ehVolei);
+      campo.classList.toggle('quadra-basquete', ehBasquete);
+      var vazioHtml = ehVolei
+        ? '<div class="piso"></div><div class="rede"></div><div class="linha-ataque"></div><div class="linha-ataque-baixo"></div>'
+        : (ehBasquete
+          ? '<div class="bq-piso"></div><div class="bq-garrafao"></div><div class="bq-linha3"></div>'
+          : '');
+      campo.innerHTML = vazioHtml +
+        '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
       return;
     }
 
