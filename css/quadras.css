@@ -193,6 +193,7 @@
   position: absolute; inset: 6%;
   background: #D9954E;
   border: 2px solid rgba(255, 255, 255, 0.9);
+  pointer-events: none;   /* decoração: não intercepta cliques nos slots */
 }
 /* Garrafão (área pintada) encostado na cesta do topo */
 .quadra-basquete .bq-garrafao {
@@ -202,6 +203,7 @@
   border: 2px solid rgba(255, 255, 255, 0.85);
   border-top: none;
   z-index: 1;
+  pointer-events: none;   /* ← ESSENCIAL: sem isto, cobre os slots PF e C (topo) e o clique não passa */
 }
 /* Semicírculo de 3 pontos (arco no topo, em torno da cesta) */
 .quadra-basquete .bq-linha3 {
@@ -211,6 +213,20 @@
   border-top: none;
   border-radius: 0 0 60% 60% / 0 0 100% 100%;
   z-index: 1;
+  pointer-events: none;   /* ← idem: decoração não deve capturar cliques */
+}
+
+/* ── Vôlei MEIA-QUADRA (só no perfil "time mais escalado"): rede no TOPO, mostra só o
+   lado do usuário. As classes .rede/.linha-ataque são reposicionadas. ── */
+.perfil-campo-escalados.quadra-volei-meia .rede {
+  top: 12%;                 /* rede no topo (frente da meia-quadra) */
+  transform: none;
+}
+.perfil-campo-escalados.quadra-volei-meia .linha-ataque {
+  top: 34%;                 /* linha de ataque (3m) abaixo da rede */
+}
+.perfil-campo-escalados.quadra-volei-meia .linha-ataque-baixo {
+  display: none;            /* não há segundo lado na meia-quadra */
 }
 
 /* Bloco do seletor de ESPORTE na home (Fase 5). Fica escondido enquanto só houver

@@ -499,6 +499,7 @@
   text-align: center;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  z-index: 3;   /* acima das decorações da quadra (piso/garrafão/arco em z-index:1) p/ serem clicáveis */
   transition: left 0.45s ease, top 0.45s ease, background 0.15s ease, border-color 0.15s ease;
 }
 

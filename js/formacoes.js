@@ -145,6 +145,18 @@ const formacoes = {
     { left: 72, top: 80, grupo: 'OPO' }
   ],
 
+  // Vôlei — meia-quadra (usado no PERFIL "time mais escalado"): mostra só o lado do
+  // usuário, com os 6 jogadores espalhados na quadra inteira (não comprimidos embaixo).
+  // A rede fica no topo. Mesma ordem/grupos da formação 'volei'.
+  'volei_meia': [
+    { left: 26, top: 30, grupo: 'PON' },   // rede (frente) no topo
+    { left: 50, top: 24, grupo: 'CEN' },
+    { left: 74, top: 30, grupo: 'PON' },
+    { left: 28, top: 66, grupo: 'LEV' },   // fundo
+    { left: 50, top: 74, grupo: 'LIB' },
+    { left: 72, top: 66, grupo: 'OPO' }
+  ],
+
   // Basquete — 5 posições numa MEIA-QUADRA (a cesta fica no TOPO). Disposição típica
   // de ataque: pivô e ala-pivô perto da cesta (topo), alas nas laterais (meio), armador
   // na frente (embaixo, comandando). Coords com margem p/ fichas + nomes não vazarem.
@@ -174,6 +186,7 @@ const codigosFormacao = {
   // Vôlei — 6 códigos na MESMA ordem das coordenadas em formacoes['volei']
   // (PON, CEN, PON, LEV, LIB, OPO). Usado pela tela de jogo para rotular os slots.
   'volei':   ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO'],
+  'volei_meia': ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO'],
   // Basquete — 5 códigos na MESMA ordem das coordenadas em formacoes['basquete'].
   'basquete': ['PF', 'C', 'SF', 'SG', 'PG']
 };

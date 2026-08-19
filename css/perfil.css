@@ -409,10 +409,25 @@
   background: rgba(0,0,0,0.55); text-shadow: 0 1px 2px rgba(0,0,0,0.9);
   max-width: 104px; overflow: hidden; text-overflow: ellipsis;
 }
-.perfil-escalados-sel { justify-content: center; margin-top: 0.9rem; }
+.perfil-escalados-sel {
+  justify-content: center; margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* 2 colunas uniformes, mais limpo que o wrap irregular */
+  gap: 8px;
+}
+.perfil-escalados-sel .pilula {
+  width: 100%; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: var(--fs-sm);
+}
+/* Quando há poucas competições (ex.: basquete só tem Geral + NBA), ainda fica bem em 2 col.
+   'Geral' sozinho na 1ª linha ocupa as 2 colunas para centralizar. */
+.perfil-escalados-sel .pilula[data-esc="geral"] { grid-column: 1 / -1; }
 .perfil-escalados-vazio {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 1.4rem; color: rgba(255,255,255,0.85); font-size: var(--fs-sm); line-height: 1.5;
+  text-align: center; padding: 1.4rem; color: rgba(255,255,255,0.95); font-size: var(--fs-sm); line-height: 1.5;
+  z-index: 4;   /* acima das decorações da quadra (piso/garrafão/arco em z-index:1) senão fica invisível */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);   /* legível sobre a quadra colorida */
 }
 
 /* Empilha as 2 colunas em telas médias/estreitas */

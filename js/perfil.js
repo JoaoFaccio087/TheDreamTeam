@@ -792,9 +792,11 @@
       return;
     }
 
-    // Escolhe a formação/aparência conforme o esporte ativo do perfil.
-    var formacao = ehVolei ? 'volei' : (ehBasquete ? 'basquete' : FORMACAO_ESCALADOS);
+    // Escolhe a formação/aparência conforme o esporte ativo do perfil. No vôlei, o perfil
+    // usa a MEIA-QUADRA (volei_meia): mostra só o lado do usuário, jogadores espalhados.
+    var formacao = ehVolei ? 'volei_meia' : (ehBasquete ? 'basquete' : FORMACAO_ESCALADOS);
     campo.classList.toggle('quadra-volei', ehVolei);
+    campo.classList.toggle('quadra-volei-meia', ehVolei);
     campo.classList.toggle('quadra-basquete', ehBasquete);
 
     var vagas = montarOnzeEscalado(grupos, formacao);
