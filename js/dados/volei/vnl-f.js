@@ -639,6 +639,258 @@ var DADOS_VNL_F = [
       { id: 'derya-cebecioglu',    nome: "Cebecioğlu",          posicoes: ["PON"],       forca: 79 },
       { id: 'simge-akoz',          nome: "Aköz",                posicoes: ["LIB"],       forca: 80 }
     ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2021,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micha-hancock', nome: "Hancock", posicoes: ["LEV"], forca: 85 },
+      { id: 'jordyn-poulter', nome: "Poulter", posicoes: ["LEV"], forca: 89 },
+      { id: 'annie-drews', nome: "Drews", posicoes: ["OPO"], forca: 90 },
+      { id: 'jordan-thompson', nome: "Thompson", posicoes: ["OPO"], forca: 88 },
+      { id: 'kathryn-plummer', nome: "Plummer", posicoes: ["PON"], forca: 86 },
+      { id: 'jordan-larson', nome: "Larson", posicoes: ["PON"], forca: 90 },
+      { id: 'michelle-bartsch', nome: "Bartsch-Hackley", posicoes: ["PON"], forca: 92 },
+      { id: 'kimberly-hill', nome: "Hill", posicoes: ["PON"], forca: 88 },
+      { id: 'tetori-dixon', nome: "Dixon", posicoes: ["CEN"], forca: 86 },
+      { id: 'haleigh-washington', nome: "Washington", posicoes: ["CEN"], forca: 89 },
+      { id: 'foluke-akinradewo', nome: "Akinradewo", posicoes: ["CEN"], forca: 88 },
+      { id: 'chiaka-ogbogu', nome: "Ogbogu", posicoes: ["CEN"], forca: 87 },
+      { id: 'justine-wong-orantes', nome: "Wong-Orantes", posicoes: ["LIB"], forca: 89 },
+      { id: 'megan-courtney', nome: "Courtney", posicoes: ["LIB"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2021,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'macris-carneiro', nome: "Macris", posicoes: ["LEV"], forca: 89 },
+      { id: 'roberta-ratzke', nome: "Roberta", posicoes: ["LEV"], forca: 87 },
+      { id: 'tandara-caixeta', nome: "Tandara", posicoes: ["OPO"], forca: 90 },
+      { id: 'rosamaria-montibeller', nome: "Rosamaria", posicoes: ["OPO"], forca: 85 },
+      { id: 'gabriela-guimaraes', nome: "Gabi", posicoes: ["PON"], forca: 92 },
+      { id: 'natalia-pereira', nome: "Natália", posicoes: ["PON"], forca: 88 },
+      { id: 'fernanda-garay', nome: "Fê Garay", posicoes: ["PON"], forca: 88 },
+      { id: 'ana-cristina-menezes', nome: "Ana Cristina", posicoes: ["PON"], forca: 84 },
+      { id: 'ana-carolina-silva', nome: "Carol", posicoes: ["CEN"], forca: 88 },
+      { id: 'carol-gattaz', nome: "Gattaz", posicoes: ["CEN"], forca: 89 },
+      { id: 'ana-beatriz-correa', nome: "Bia", posicoes: ["CEN"], forca: 86 },
+      { id: 'adenizia-silva', nome: "Adenízia", posicoes: ["CEN"], forca: 84 },
+      { id: 'camila-brait', nome: "Brait", posicoes: ["LIB"], forca: 88 },
+      { id: 'nyeme-costa', nome: "Nyeme", posicoes: ["LIB"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2021,
+    clube: "Turquia",
+    jogadores: [
+      { id: 'cansu-ozbay', nome: "Cansu", posicoes: ["LEV"], forca: 88 },
+      { id: 'naz-aydemir', nome: "Naz", posicoes: ["LEV"], forca: 86 },
+      { id: 'meryem-boz', nome: "Boz", posicoes: ["OPO"], forca: 88 },
+      { id: 'ebrar-karakurt', nome: "Karakurt", posicoes: ["OPO"], forca: 90 },
+      { id: 'tugba-senoglu', nome: "Şenoğlu", posicoes: ["PON"], forca: 84 },
+      { id: 'seyma-ercan', nome: "Ercan", posicoes: ["PON"], forca: 81 },
+      { id: 'hande-baladin', nome: "Baladın", posicoes: ["PON"], forca: 87 },
+      { id: 'meliha-ismailoglu', nome: "Meliha", posicoes: ["PON"], forca: 84 },
+      { id: 'eda-erdem', nome: "Eda Erdem", posicoes: ["CEN"], forca: 91 },
+      { id: 'zehra-gunes', nome: "Güneş", posicoes: ["CEN"], forca: 89 },
+      { id: 'kubra-akman', nome: "Akman", posicoes: ["CEN"], forca: 85 },
+      { id: 'yasemin-guveli', nome: "Güveli", posicoes: ["CEN"], forca: 82 },
+      { id: 'simge-akoz', nome: "Simge", posicoes: ["LIB"], forca: 87 },
+      { id: 'ayca-aykac', nome: "Aykaç", posicoes: ["LIB"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2021,
+    clube: "Japão",
+    jogadores: [
+      { id: 'kanami-tashiro', nome: "Tashiro", posicoes: ["LEV"], forca: 84 },
+      { id: 'nanami-seki', nome: "Seki", posicoes: ["LEV"], forca: 83 },
+      { id: 'ai-kurogo', nome: "Kurogo", posicoes: ["OPO"], forca: 86 },
+      { id: 'miyu-nagaoka', nome: "Nagaoka", posicoes: ["OPO"], forca: 85 },
+      { id: 'sarina-koga', nome: "Koga", posicoes: ["PON"], forca: 91 },
+      { id: 'yuki-ishii', nome: "Ishii", posicoes: ["PON"], forca: 86 },
+      { id: 'mayu-ishikawa', nome: "M. Ishikawa", posicoes: ["PON"], forca: 85 },
+      { id: 'kotona-hayashi', nome: "Hayashi", posicoes: ["PON"], forca: 82 },
+      { id: 'erika-araki', nome: "Araki", posicoes: ["CEN"], forca: 87 },
+      { id: 'haruyo-shimamura', nome: "Shimamura", posicoes: ["CEN"], forca: 84 },
+      { id: 'aika-akutagawa', nome: "Akutagawa", posicoes: ["CEN"], forca: 83 },
+      { id: 'nichika-yamada', nome: "Yamada", posicoes: ["CEN"], forca: 80 },
+      { id: 'mako-kobata', nome: "Kobata", posicoes: ["LIB"], forca: 85 },
+      { id: 'kotoe-inoue', nome: "Inoue", posicoes: ["LIB"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2019,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micha-hancock', nome: "Hancock", posicoes: ["LEV"], forca: 85 },
+      { id: 'jordyn-poulter', nome: "Poulter", posicoes: ["LEV"], forca: 88 },
+      { id: 'annie-drews', nome: "Drews", posicoes: ["OPO"], forca: 92 },
+      { id: 'jordan-thompson', nome: "Thompson", posicoes: ["OPO"], forca: 85 },
+      { id: 'jordan-larson', nome: "Larson", posicoes: ["PON"], forca: 90 },
+      { id: 'michelle-bartsch', nome: "Bartsch-Hackley", posicoes: ["PON"], forca: 89 },
+      { id: 'kimberly-hill', nome: "Hill", posicoes: ["PON"], forca: 88 },
+      { id: 'madison-kingdon', nome: "Kingdon", posicoes: ["PON"], forca: 84 },
+      { id: 'tetori-dixon', nome: "Dixon", posicoes: ["CEN"], forca: 86 },
+      { id: 'rachael-adams', nome: "Adams", posicoes: ["CEN"], forca: 85 },
+      { id: 'haleigh-washington', nome: "Washington", posicoes: ["CEN"], forca: 86 },
+      { id: 'chiaka-ogbogu', nome: "Ogbogu", posicoes: ["CEN"], forca: 85 },
+      { id: 'megan-courtney', nome: "Courtney", posicoes: ["LIB"], forca: 85 },
+      { id: 'mary-lake', nome: "Lake", posicoes: ["LIB"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2019,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'macris-carneiro', nome: "Macris", posicoes: ["LEV"], forca: 89 },
+      { id: 'roberta-ratzke', nome: "Roberta", posicoes: ["LEV"], forca: 86 },
+      { id: 'tandara-caixeta', nome: "Tandara", posicoes: ["OPO"], forca: 90 },
+      { id: 'lorenne-teixeira', nome: "Lorenne", posicoes: ["OPO"], forca: 84 },
+      { id: 'gabriela-guimaraes', nome: "Gabi", posicoes: ["PON"], forca: 91 },
+      { id: 'natalia-pereira', nome: "Natália", posicoes: ["PON"], forca: 88 },
+      { id: 'amanda-francisco', nome: "Amanda", posicoes: ["PON"], forca: 82 },
+      { id: 'julia-bergmann', nome: "Bergmann", posicoes: ["PON"], forca: 80 },
+      { id: 'ana-carolina-silva', nome: "Carol", posicoes: ["CEN"], forca: 88 },
+      { id: 'ana-beatriz-correa', nome: "Bia", posicoes: ["CEN"], forca: 86 },
+      { id: 'mara-leao', nome: "Mara", posicoes: ["CEN"], forca: 83 },
+      { id: 'mayany-de-souza', nome: "Mayany", posicoes: ["CEN"], forca: 81 },
+      { id: 'suelen-pinto', nome: "Suelen", posicoes: ["LIB"], forca: 84 },
+      { id: 'leia-silva', nome: "Léia", posicoes: ["LIB"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2019,
+    clube: "China",
+    jogadores: [
+      { id: 'ding-xia', nome: "Ding Xia", posicoes: ["LEV"], forca: 89 },
+      { id: 'yao-di', nome: "Yao Di", posicoes: ["LEV"], forca: 84 },
+      { id: 'gong-xiangyu', nome: "Gong", posicoes: ["OPO"], forca: 88 },
+      { id: 'zeng-chunlei', nome: "Zeng", posicoes: ["OPO"], forca: 84 },
+      { id: 'zhu-ting', nome: "Zhu Ting", posicoes: ["PON"], forca: 95 },
+      { id: 'zhang-changning', nome: "Zhang", posicoes: ["PON"], forca: 90 },
+      { id: 'liu-xiaotong', nome: "Liu Xiaotong", posicoes: ["PON"], forca: 85 },
+      { id: 'li-yingying', nome: "Li Yingying", posicoes: ["PON"], forca: 89 },
+      { id: 'yuan-xinyue', nome: "Yuan", posicoes: ["CEN"], forca: 89 },
+      { id: 'wang-yuanyuan', nome: "Wang Yuanyuan", posicoes: ["CEN"], forca: 86 },
+      { id: 'yan-ni', nome: "Yan Ni", posicoes: ["CEN"], forca: 88 },
+      { id: 'yang-hanyu', nome: "Yang Hanyu", posicoes: ["CEN"], forca: 82 },
+      { id: 'lin-li', nome: "Lin Li", posicoes: ["LIB"], forca: 87 },
+      { id: 'wang-mengjie', nome: "Wang Mengjie", posicoes: ["LIB"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2019,
+    clube: "Turquia",
+    jogadores: [
+      { id: 'cansu-ozbay', nome: "Cansu", posicoes: ["LEV"], forca: 87 },
+      { id: 'naz-aydemir', nome: "Naz", posicoes: ["LEV"], forca: 86 },
+      { id: 'ebrar-karakurt', nome: "Karakurt", posicoes: ["OPO"], forca: 89 },
+      { id: 'gozde-yilmaz', nome: "Yılmaz", posicoes: ["OPO"], forca: 82 },
+      { id: 'hande-baladin', nome: "Baladın", posicoes: ["PON"], forca: 87 },
+      { id: 'meliha-ismailoglu', nome: "Meliha", posicoes: ["PON"], forca: 84 },
+      { id: 'seyma-ercan', nome: "Ercan", posicoes: ["PON"], forca: 82 },
+      { id: 'neriman-ozsoy', nome: "Özsoy", posicoes: ["PON"], forca: 84 },
+      { id: 'eda-erdem', nome: "Eda Erdem", posicoes: ["CEN"], forca: 90 },
+      { id: 'zehra-gunes', nome: "Güneş", posicoes: ["CEN"], forca: 88 },
+      { id: 'kubra-akman', nome: "Akman", posicoes: ["CEN"], forca: 85 },
+      { id: 'yasemin-guveli', nome: "Güveli", posicoes: ["CEN"], forca: 82 },
+      { id: 'gizem-orge', nome: "Gizem Örge", posicoes: ["LIB"], forca: 87 },
+      { id: 'simge-akoz', nome: "Simge", posicoes: ["LIB"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2018,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micha-hancock', nome: "Hancock", posicoes: ["LEV"], forca: 85 },
+      { id: 'lauren-carlini', nome: "Carlini", posicoes: ["LEV"], forca: 86 },
+      { id: 'annie-drews', nome: "Drews", posicoes: ["OPO"], forca: 88 },
+      { id: 'kelly-murphy', nome: "Murphy", posicoes: ["OPO"], forca: 86 },
+      { id: 'jordan-larson', nome: "Larson", posicoes: ["PON"], forca: 90 },
+      { id: 'michelle-bartsch', nome: "Bartsch-Hackley", posicoes: ["PON"], forca: 92 },
+      { id: 'kimberly-hill', nome: "Hill", posicoes: ["PON"], forca: 89 },
+      { id: 'madison-kingdon', nome: "Kingdon", posicoes: ["PON"], forca: 84 },
+      { id: 'rachael-adams', nome: "Adams", posicoes: ["CEN"], forca: 86 },
+      { id: 'tetori-dixon', nome: "Dixon", posicoes: ["CEN"], forca: 86 },
+      { id: 'lauren-gibbemeyer', nome: "Gibbemeyer", posicoes: ["CEN"], forca: 84 },
+      { id: 'foluke-akinradewo', nome: "Akinradewo", posicoes: ["CEN"], forca: 89 },
+      { id: 'justine-wong-orantes', nome: "Wong-Orantes", posicoes: ["LIB"], forca: 87 },
+      { id: 'amanda-benson', nome: "Benson", posicoes: ["LIB"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2018,
+    clube: "Turquia",
+    jogadores: [
+      { id: 'cansu-ozbay', nome: "Cansu", posicoes: ["LEV"], forca: 87 },
+      { id: 'gamze-alikaya', nome: "Alikaya", posicoes: ["LEV"], forca: 82 },
+      { id: 'meryem-boz', nome: "Boz", posicoes: ["OPO"], forca: 86 },
+      { id: 'ebrar-karakurt', nome: "Karakurt", posicoes: ["OPO"], forca: 85 },
+      { id: 'hande-baladin', nome: "Baladın", posicoes: ["PON"], forca: 86 },
+      { id: 'meliha-ismailoglu', nome: "Meliha", posicoes: ["PON"], forca: 84 },
+      { id: 'seyma-ercan', nome: "Ercan", posicoes: ["PON"], forca: 82 },
+      { id: 'fulden-ural', nome: "Ural", posicoes: ["PON"], forca: 80 },
+      { id: 'eda-erdem', nome: "Eda Erdem", posicoes: ["CEN"], forca: 90 },
+      { id: 'zehra-gunes', nome: "Güneş", posicoes: ["CEN"], forca: 87 },
+      { id: 'kubra-akman', nome: "Akman", posicoes: ["CEN"], forca: 85 },
+      { id: 'yasemin-guveli', nome: "Güveli", posicoes: ["CEN"], forca: 81 },
+      { id: 'gizem-orge', nome: "Gizem Örge", posicoes: ["LIB"], forca: 87 },
+      { id: 'simge-akoz', nome: "Simge", posicoes: ["LIB"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2018,
+    clube: "China",
+    jogadores: [
+      { id: 'ding-xia', nome: "Ding Xia", posicoes: ["LEV"], forca: 89 },
+      { id: 'diao-linyu', nome: "Diao", posicoes: ["LEV"], forca: 83 },
+      { id: 'gong-xiangyu', nome: "Gong", posicoes: ["OPO"], forca: 88 },
+      { id: 'yang-fangxu', nome: "Yang Fangxu", posicoes: ["OPO"], forca: 83 },
+      { id: 'zhu-ting', nome: "Zhu Ting", posicoes: ["PON"], forca: 96 },
+      { id: 'liu-xiaotong', nome: "Liu Xiaotong", posicoes: ["PON"], forca: 85 },
+      { id: 'li-yingying', nome: "Li Yingying", posicoes: ["PON"], forca: 87 },
+      { id: 'liu-yanhan', nome: "Liu Yanhan", posicoes: ["PON"], forca: 84 },
+      { id: 'yuan-xinyue', nome: "Yuan", posicoes: ["CEN"], forca: 89 },
+      { id: 'wang-yuanyuan', nome: "Wang Yuanyuan", posicoes: ["CEN"], forca: 85 },
+      { id: 'yan-ni', nome: "Yan Ni", posicoes: ["CEN"], forca: 88 },
+      { id: 'yang-hanyu', nome: "Yang Hanyu", posicoes: ["CEN"], forca: 81 },
+      { id: 'lin-li', nome: "Lin Li", posicoes: ["LIB"], forca: 87 },
+      { id: 'wang-mengjie', nome: "Wang Mengjie", posicoes: ["LIB"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "VNL (F)",
+    edicao: 2018,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'macris-carneiro', nome: "Macris", posicoes: ["LEV"], forca: 88 },
+      { id: 'roberta-ratzke', nome: "Roberta", posicoes: ["LEV"], forca: 86 },
+      { id: 'tandara-caixeta', nome: "Tandara", posicoes: ["OPO"], forca: 91 },
+      { id: 'rosamaria-montibeller', nome: "Rosamaria", posicoes: ["OPO"], forca: 84 },
+      { id: 'gabriela-guimaraes', nome: "Gabi", posicoes: ["PON"], forca: 90 },
+      { id: 'amanda-francisco', nome: "Amanda", posicoes: ["PON"], forca: 82 },
+      { id: 'drussyla-costa', nome: "Drussyla", posicoes: ["PON"], forca: 84 },
+      { id: 'priscila-daroit', nome: "Daroit", posicoes: ["PON"], forca: 82 },
+      { id: 'ana-carolina-silva', nome: "Carol", posicoes: ["CEN"], forca: 87 },
+      { id: 'adenizia-silva', nome: "Adenízia", posicoes: ["CEN"], forca: 85 },
+      { id: 'thaisa-menezes', nome: "Thaísa", posicoes: ["CEN"], forca: 88 },
+      { id: 'ana-beatriz-correa', nome: "Bia", posicoes: ["CEN"], forca: 85 },
+      { id: 'suelen-pinto', nome: "Suelen", posicoes: ["LIB"], forca: 84 },
+      { id: 'jaqueline-carvalho', nome: "Jaqueline", posicoes: ["LIB"], forca: 84 }
+    ]
   }
 
 ];

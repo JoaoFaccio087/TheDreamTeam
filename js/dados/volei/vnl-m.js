@@ -643,6 +643,258 @@ var DADOS_VNL_M = [
       { id: 'giulio-pinali',       nome: "Pinali",              posicoes: ["OPO"],       forca: 80 },
       { id: 'nicola-cianciotta',   nome: "Cianciotta",          posicoes: ["CEN"],       forca: 78 }
     ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2021,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'bruno-rezende', nome: "Bruninho", posicoes: ["LEV"], forca: 88 },
+      { id: 'fernando-cachopa', nome: "Cachopa", posicoes: ["LEV"], forca: 82 },
+      { id: 'wallace-de-souza', nome: "Wallace", posicoes: ["OPO"], forca: 91 },
+      { id: 'alan-souza', nome: "Alan", posicoes: ["OPO"], forca: 85 },
+      { id: 'yoandy-leal', nome: "Leal", posicoes: ["PON"], forca: 90 },
+      { id: 'ricardo-lucarelli', nome: "Lucarelli", posicoes: ["PON"], forca: 88 },
+      { id: 'douglas-souza', nome: "Douglas", posicoes: ["PON"], forca: 85 },
+      { id: 'mauricio-borges', nome: "Maurício Borges", posicoes: ["PON"], forca: 83 },
+      { id: 'lucas-saatkamp', nome: "Lucão", posicoes: ["CEN"], forca: 87 },
+      { id: 'isac-santos', nome: "Isac", posicoes: ["CEN"], forca: 84 },
+      { id: 'mauricio-souza', nome: "Maurício Souza", posicoes: ["CEN"], forca: 84 },
+      { id: 'flavio-gualberto', nome: "Flávio", posicoes: ["CEN"], forca: 83 },
+      { id: 'thales-hoss', nome: "Thales", posicoes: ["LIB"], forca: 85 },
+      { id: 'maique-nascimento', nome: "Maique", posicoes: ["LIB"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2021,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'fabian-drzyzga', nome: "Drzyzga", posicoes: ["LEV"], forca: 87 },
+      { id: 'grzegorz-lomacz', nome: "Łomacz", posicoes: ["LEV"], forca: 83 },
+      { id: 'bartosz-kurek', nome: "Kurek", posicoes: ["OPO"], forca: 93 },
+      { id: 'lukasz-kaczmarek', nome: "Kaczmarek", posicoes: ["OPO"], forca: 87 },
+      { id: 'wilfredo-leon', nome: "Leon", posicoes: ["PON"], forca: 94 },
+      { id: 'michal-kubiak', nome: "Kubiak", posicoes: ["PON"], forca: 88 },
+      { id: 'aleksander-sliwka', nome: "Śliwka", posicoes: ["PON"], forca: 86 },
+      { id: 'kamil-semeniuk', nome: "Semeniuk", posicoes: ["PON"], forca: 85 },
+      { id: 'jakub-kochanowski', nome: "Kochanowski", posicoes: ["CEN"], forca: 87 },
+      { id: 'mateusz-bieniek', nome: "Bieniek", posicoes: ["CEN"], forca: 86 },
+      { id: 'piotr-nowakowski', nome: "Nowakowski", posicoes: ["CEN"], forca: 86 },
+      { id: 'norbert-huber', nome: "Huber", posicoes: ["CEN"], forca: 83 },
+      { id: 'pawel-zatorski', nome: "Zatorski", posicoes: ["LIB"], forca: 88 },
+      { id: 'damian-wojtaszek', nome: "Wojtaszek", posicoes: ["LIB"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2021,
+    clube: "França",
+    jogadores: [
+      { id: 'benjamin-toniutti', nome: "Toniutti", posicoes: ["LEV"], forca: 88 },
+      { id: 'antoine-brizard', nome: "Brizard", posicoes: ["LEV"], forca: 88 },
+      { id: 'jean-patry', nome: "Patry", posicoes: ["OPO"], forca: 87 },
+      { id: 'stephen-boyer', nome: "Boyer", posicoes: ["OPO"], forca: 85 },
+      { id: 'earvin-ngapeth', nome: "N'Gapeth", posicoes: ["PON"], forca: 92 },
+      { id: 'trevor-clevenot', nome: "Clévenot", posicoes: ["PON"], forca: 86 },
+      { id: 'kevin-tillie', nome: "Tillie", posicoes: ["PON"], forca: 84 },
+      { id: 'thibault-rossard', nome: "Rossard", posicoes: ["PON"], forca: 83 },
+      { id: 'barthelemy-chinenyeze', nome: "Chinenyeze", posicoes: ["CEN"], forca: 87 },
+      { id: 'nicolas-le-goff', nome: "Le Goff", posicoes: ["CEN"], forca: 86 },
+      { id: 'daryl-bultor', nome: "Bultor", posicoes: ["CEN"], forca: 82 },
+      { id: 'mousse-gueye', nome: "Gueye", posicoes: ["CEN"], forca: 78 },
+      { id: 'jenia-grebennikov', nome: "Grebennikov", posicoes: ["LIB"], forca: 90 },
+      { id: 'benjamin-diez', nome: "Diez", posicoes: ["LIB"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2021,
+    clube: "Eslovênia",
+    jogadores: [
+      { id: 'dejan-vincic', nome: "Vinčić", posicoes: ["LEV"], forca: 85 },
+      { id: 'gregor-ropret', nome: "Ropret", posicoes: ["LEV"], forca: 85 },
+      { id: 'toncek-stern', nome: "T. Štern", posicoes: ["OPO"], forca: 87 },
+      { id: 'alen-sket', nome: "Šket", posicoes: ["OPO"], forca: 82 },
+      { id: 'tine-urnaut', nome: "Urnaut", posicoes: ["PON"], forca: 87 },
+      { id: 'klemen-cebulj', nome: "Čebulj", posicoes: ["PON"], forca: 88 },
+      { id: 'rok-mozic', nome: "Možič", posicoes: ["PON"], forca: 84 },
+      { id: 'ziga-stern', nome: "Ž. Štern", posicoes: ["PON"], forca: 80 },
+      { id: 'alen-pajenk', nome: "Pajenk", posicoes: ["CEN"], forca: 83 },
+      { id: 'jan-kozamernik', nome: "Kozamernik", posicoes: ["CEN"], forca: 86 },
+      { id: 'saso-stalekar', nome: "Štalekar", posicoes: ["CEN"], forca: 82 },
+      { id: 'matic-videcnik', nome: "Videčnik", posicoes: ["CEN"], forca: 78 },
+      { id: 'jani-kovacic', nome: "Kovačič", posicoes: ["LIB"], forca: 85 },
+      { id: 'jan-klobucar', nome: "Klobučar", posicoes: ["LIB"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2019,
+    clube: "Rússia",
+    jogadores: [
+      { id: 'pavel-pankov', nome: "Pankov", posicoes: ["LEV"], forca: 86 },
+      { id: 'igor-kobzar', nome: "Kobzar", posicoes: ["LEV"], forca: 85 },
+      { id: 'maxim-mikhaylov', nome: "Mikhaylov", posicoes: ["OPO"], forca: 91 },
+      { id: 'viktor-poletaev', nome: "Poletaev", posicoes: ["OPO"], forca: 89 },
+      { id: 'dmitry-volkov', nome: "Volkov", posicoes: ["PON"], forca: 89 },
+      { id: 'egor-kliuka', nome: "Kliuka", posicoes: ["PON"], forca: 88 },
+      { id: 'yaroslav-podlesnykh', nome: "Podlesnykh", posicoes: ["PON"], forca: 83 },
+      { id: 'anton-karpukhov', nome: "Karpukhov", posicoes: ["PON"], forca: 81 },
+      { id: 'ivan-iakovlev', nome: "Iakovlev", posicoes: ["CEN"], forca: 88 },
+      { id: 'ilyas-kurkaev', nome: "Kurkaev", posicoes: ["CEN"], forca: 85 },
+      { id: 'igor-filippov', nome: "Filippov", posicoes: ["CEN"], forca: 82 },
+      { id: 'ilya-vlasov', nome: "Vlasov", posicoes: ["CEN"], forca: 83 },
+      { id: 'valentin-golubev', nome: "Golubev", posicoes: ["LIB"], forca: 84 },
+      { id: 'roman-martynyuk', nome: "Martynyuk", posicoes: ["LIB"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2019,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micah-christenson', nome: "Christenson", posicoes: ["LEV"], forca: 90 },
+      { id: 'kawika-shoji', nome: "K. Shoji", posicoes: ["LEV"], forca: 82 },
+      { id: 'matt-anderson', nome: "Anderson", posicoes: ["OPO"], forca: 92 },
+      { id: 'ben-patch', nome: "Patch", posicoes: ["OPO"], forca: 82 },
+      { id: 'aaron-russell', nome: "Russell", posicoes: ["PON"], forca: 88 },
+      { id: 'taylor-sander', nome: "Sander", posicoes: ["PON"], forca: 89 },
+      { id: 'tj-defalco', nome: "DeFalco", posicoes: ["PON"], forca: 84 },
+      { id: 'thomas-jaeschke', nome: "Jaeschke", posicoes: ["PON"], forca: 84 },
+      { id: 'max-holt', nome: "Holt", posicoes: ["CEN"], forca: 87 },
+      { id: 'david-smith', nome: "Smith", posicoes: ["CEN"], forca: 85 },
+      { id: 'taylor-averill', nome: "Averill", posicoes: ["CEN"], forca: 84 },
+      { id: 'jeff-jendryk', nome: "Jendryk", posicoes: ["CEN"], forca: 82 },
+      { id: 'erik-shoji', nome: "E. Shoji", posicoes: ["LIB"], forca: 88 },
+      { id: 'dustin-watten', nome: "Watten", posicoes: ["LIB"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2019,
+    clube: "Polônia",
+    jogadores: [
+      { id: 'fabian-drzyzga', nome: "Drzyzga", posicoes: ["LEV"], forca: 87 },
+      { id: 'grzegorz-lomacz', nome: "Łomacz", posicoes: ["LEV"], forca: 83 },
+      { id: 'maciej-muzaj', nome: "Muzaj", posicoes: ["OPO"], forca: 86 },
+      { id: 'lukasz-kaczmarek', nome: "Kaczmarek", posicoes: ["OPO"], forca: 85 },
+      { id: 'michal-kubiak', nome: "Kubiak", posicoes: ["PON"], forca: 88 },
+      { id: 'aleksander-sliwka', nome: "Śliwka", posicoes: ["PON"], forca: 85 },
+      { id: 'bartosz-bednorz', nome: "Bednorz", posicoes: ["PON"], forca: 88 },
+      { id: 'tomasz-fornal', nome: "Fornal", posicoes: ["PON"], forca: 82 },
+      { id: 'piotr-nowakowski', nome: "Nowakowski", posicoes: ["CEN"], forca: 86 },
+      { id: 'jakub-kochanowski', nome: "Kochanowski", posicoes: ["CEN"], forca: 86 },
+      { id: 'mateusz-bieniek', nome: "Bieniek", posicoes: ["CEN"], forca: 85 },
+      { id: 'karol-klos', nome: "Kłos", posicoes: ["CEN"], forca: 84 },
+      { id: 'pawel-zatorski', nome: "Zatorski", posicoes: ["LIB"], forca: 88 },
+      { id: 'damian-wojtaszek', nome: "Wojtaszek", posicoes: ["LIB"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2019,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'bruno-rezende', nome: "Bruninho", posicoes: ["LEV"], forca: 88 },
+      { id: 'fernando-cachopa', nome: "Cachopa", posicoes: ["LEV"], forca: 82 },
+      { id: 'wallace-de-souza', nome: "Wallace", posicoes: ["OPO"], forca: 91 },
+      { id: 'alan-souza', nome: "Alan", posicoes: ["OPO"], forca: 85 },
+      { id: 'yoandy-leal', nome: "Leal", posicoes: ["PON"], forca: 90 },
+      { id: 'ricardo-lucarelli', nome: "Lucarelli", posicoes: ["PON"], forca: 88 },
+      { id: 'douglas-souza', nome: "Douglas", posicoes: ["PON"], forca: 85 },
+      { id: 'mauricio-borges', nome: "Maurício Borges", posicoes: ["PON"], forca: 83 },
+      { id: 'lucas-saatkamp', nome: "Lucão", posicoes: ["CEN"], forca: 87 },
+      { id: 'isac-santos', nome: "Isac", posicoes: ["CEN"], forca: 84 },
+      { id: 'mauricio-souza', nome: "Maurício Souza", posicoes: ["CEN"], forca: 84 },
+      { id: 'flavio-gualberto', nome: "Flávio", posicoes: ["CEN"], forca: 83 },
+      { id: 'thales-hoss', nome: "Thales", posicoes: ["LIB"], forca: 85 },
+      { id: 'maique-nascimento', nome: "Maique", posicoes: ["LIB"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2018,
+    clube: "Rússia",
+    jogadores: [
+      { id: 'pavel-pankov', nome: "Pankov", posicoes: ["LEV"], forca: 85 },
+      { id: 'igor-kobzar', nome: "Kobzar", posicoes: ["LEV"], forca: 85 },
+      { id: 'maxim-mikhaylov', nome: "Mikhaylov", posicoes: ["OPO"], forca: 93 },
+      { id: 'viktor-poletaev', nome: "Poletaev", posicoes: ["OPO"], forca: 88 },
+      { id: 'dmitry-volkov', nome: "Volkov", posicoes: ["PON"], forca: 89 },
+      { id: 'egor-kliuka', nome: "Kliuka", posicoes: ["PON"], forca: 88 },
+      { id: 'yaroslav-podlesnykh', nome: "Podlesnykh", posicoes: ["PON"], forca: 82 },
+      { id: 'sergey-savin', nome: "Savin", posicoes: ["PON"], forca: 83 },
+      { id: 'dmitry-muserskiy', nome: "Muserskiy", posicoes: ["CEN"], forca: 91 },
+      { id: 'artem-volvich', nome: "Volvich", posicoes: ["CEN"], forca: 86 },
+      { id: 'ilya-vlasov', nome: "Vlasov", posicoes: ["CEN"], forca: 83 },
+      { id: 'igor-filippov', nome: "Filippov", posicoes: ["CEN"], forca: 82 },
+      { id: 'aleksandr-sokolov', nome: "Sokolov", posicoes: ["LIB"], forca: 82 },
+      { id: 'roman-martynyuk', nome: "Martynyuk", posicoes: ["LIB"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2018,
+    clube: "França",
+    jogadores: [
+      { id: 'benjamin-toniutti', nome: "Toniutti", posicoes: ["LEV"], forca: 89 },
+      { id: 'antoine-brizard', nome: "Brizard", posicoes: ["LEV"], forca: 86 },
+      { id: 'jean-patry', nome: "Patry", posicoes: ["OPO"], forca: 84 },
+      { id: 'stephen-boyer', nome: "Boyer", posicoes: ["OPO"], forca: 88 },
+      { id: 'earvin-ngapeth', nome: "N'Gapeth", posicoes: ["PON"], forca: 92 },
+      { id: 'kevin-tillie', nome: "Tillie", posicoes: ["PON"], forca: 85 },
+      { id: 'julien-lyneel', nome: "Lyneel", posicoes: ["PON"], forca: 86 },
+      { id: 'trevor-clevenot', nome: "Clévenot", posicoes: ["PON"], forca: 84 },
+      { id: 'kevin-le-roux', nome: "Le Roux", posicoes: ["CEN"], forca: 87 },
+      { id: 'nicolas-le-goff', nome: "Le Goff", posicoes: ["CEN"], forca: 86 },
+      { id: 'barthelemy-chinenyeze', nome: "Chinenyeze", posicoes: ["CEN"], forca: 83 },
+      { id: 'daryl-bultor', nome: "Bultor", posicoes: ["CEN"], forca: 81 },
+      { id: 'jenia-grebennikov', nome: "Grebennikov", posicoes: ["LIB"], forca: 90 },
+      { id: 'nicolas-rossard', nome: "N. Rossard", posicoes: ["LIB"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2018,
+    clube: "Estados Unidos",
+    jogadores: [
+      { id: 'micah-christenson', nome: "Christenson", posicoes: ["LEV"], forca: 90 },
+      { id: 'kawika-shoji', nome: "K. Shoji", posicoes: ["LEV"], forca: 82 },
+      { id: 'matt-anderson', nome: "Anderson", posicoes: ["OPO"], forca: 92 },
+      { id: 'ben-patch', nome: "Patch", posicoes: ["OPO"], forca: 82 },
+      { id: 'aaron-russell', nome: "Russell", posicoes: ["PON"], forca: 88 },
+      { id: 'taylor-sander', nome: "Sander", posicoes: ["PON"], forca: 90 },
+      { id: 'tj-defalco', nome: "DeFalco", posicoes: ["PON"], forca: 82 },
+      { id: 'thomas-jaeschke', nome: "Jaeschke", posicoes: ["PON"], forca: 84 },
+      { id: 'max-holt', nome: "Holt", posicoes: ["CEN"], forca: 87 },
+      { id: 'david-smith', nome: "Smith", posicoes: ["CEN"], forca: 85 },
+      { id: 'taylor-averill', nome: "Averill", posicoes: ["CEN"], forca: 84 },
+      { id: 'jeff-jendryk', nome: "Jendryk", posicoes: ["CEN"], forca: 81 },
+      { id: 'erik-shoji', nome: "E. Shoji", posicoes: ["LIB"], forca: 88 },
+      { id: 'dustin-watten', nome: "Watten", posicoes: ["LIB"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "VNL (M)",
+    edicao: 2018,
+    clube: "Brasil",
+    jogadores: [
+      { id: 'bruno-rezende', nome: "Bruninho", posicoes: ["LEV"], forca: 89 },
+      { id: 'william-arjona', nome: "William", posicoes: ["LEV"], forca: 82 },
+      { id: 'wallace-de-souza', nome: "Wallace", posicoes: ["OPO"], forca: 91 },
+      { id: 'evandro-guerra', nome: "Evandro", posicoes: ["OPO"], forca: 85 },
+      { id: 'douglas-souza', nome: "Douglas", posicoes: ["PON"], forca: 85 },
+      { id: 'mauricio-borges', nome: "Maurício Borges", posicoes: ["PON"], forca: 84 },
+      { id: 'lucas-loh', nome: "Lucas Lóh", posicoes: ["PON"], forca: 82 },
+      { id: 'luiz-felipe-fonteles', nome: "Lipe", posicoes: ["PON"], forca: 84 },
+      { id: 'lucas-saatkamp', nome: "Lucão", posicoes: ["CEN"], forca: 87 },
+      { id: 'isac-santos', nome: "Isac", posicoes: ["CEN"], forca: 83 },
+      { id: 'mauricio-souza', nome: "Maurício Souza", posicoes: ["CEN"], forca: 85 },
+      { id: 'otavio-pinto', nome: "Otávio", posicoes: ["CEN"], forca: 83 },
+      { id: 'thales-hoss', nome: "Thales", posicoes: ["LIB"], forca: 84 },
+      { id: 'tiago-brendle', nome: "Brendle", posicoes: ["LIB"], forca: 80 }
+    ]
   }
 
 ];

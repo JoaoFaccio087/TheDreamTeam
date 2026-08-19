@@ -682,10 +682,10 @@ var DADOS_NBA = [
       { id: 'jalen-suggs', nome: "Suggs", posicoes: ["PG"], forca: 87 },
       { id: 'gary-harris', nome: "Harris", posicoes: ["SG"], forca: 79 },
       { id: 'paolo-banchero', nome: "Banchero", posicoes: ["PF"], forca: 98 },
-      { id: 'franz-wagner', nome: "Wagner", posicoes: ["SF"], forca: 92 },
+      { id: 'franz-wagner', nome: "F. Wagner", posicoes: ["SF"], forca: 92 },
       { id: 'wendell-carter-jr', nome: "Carter", posicoes: ["C"], forca: 81 },
       { id: 'jonathan-isaac', nome: "Isaac", posicoes: ["C"], forca: 81 },
-      { id: 'moritz-wagner', nome: "Wagner", posicoes: ["C"], forca: 79 },
+      { id: 'moritz-wagner', nome: "M. Wagner", posicoes: ["C"], forca: 79 },
       { id: 'cole-anthony', nome: "Anthony", posicoes: ["SG"], forca: 76 }
     ]
   },
@@ -745,8 +745,8 @@ var DADOS_NBA = [
       { id: 'jaylen-brown', nome: "Brown", posicoes: ["SF"], forca: 89 },
       { id: 'al-horford', nome: "Horford", posicoes: ["C"], forca: 81 },
       { id: 'malcolm-brogdon', nome: "Brogdon", posicoes: ["SG"], forca: 81 },
-      { id: 'robert-williams-iii', nome: "Williams", posicoes: ["C"], forca: 79 },
-      { id: 'grant-williams', nome: "Williams", posicoes: ["SF"], forca: 76 }
+      { id: 'robert-williams-iii', nome: "R. Williams", posicoes: ["C"], forca: 79 },
+      { id: 'grant-williams', nome: "G. Williams", posicoes: ["SF"], forca: 76 }
     ]
   },
   {
@@ -983,8 +983,8 @@ var DADOS_NBA = [
       { id: 'marcus-smart', nome: "Smart", posicoes: ["PG"], forca: 85 },
       { id: 'jayson-tatum', nome: "Tatum", posicoes: ["PF"], forca: 93 },
       { id: 'al-horford', nome: "Horford", posicoes: ["PF"], forca: 84 },
-      { id: 'robert-williams-iii', nome: "Williams", posicoes: ["C"], forca: 80 },
-      { id: 'grant-williams', nome: "Williams", posicoes: ["SF"], forca: 79 },
+      { id: 'robert-williams-iii', nome: "R. Williams", posicoes: ["C"], forca: 80 },
+      { id: 'grant-williams', nome: "G. Williams", posicoes: ["SF"], forca: 79 },
       { id: 'derrick-white', nome: "White", posicoes: ["SG"], forca: 80 },
       { id: 'payton-pritchard', nome: "Pritchard", posicoes: ["SG"], forca: 74 }
     ]
@@ -1522,9 +1522,9 @@ var DADOS_NBA = [
       { id: 'malcolm-brogdon', nome: "Brogdon", posicoes: ["PG"], forca: 90 },
       { id: 'victor-oladipo', nome: "Oladipo", posicoes: ["SG"], forca: 86 },
       { id: 't-j-warren', nome: "Warren", posicoes: ["PF"], forca: 88 },
-      { id: 'justin-holiday', nome: "Holiday", posicoes: ["SF"], forca: 79 },
+      { id: 'justin-holiday', nome: "J. Holiday", posicoes: ["SF"], forca: 79 },
       { id: 'myles-turner', nome: "Turner", posicoes: ["C"], forca: 87 },
-      { id: 'aaron-holiday', nome: "Holiday", posicoes: ["SF"], forca: 78 },
+      { id: 'aaron-holiday', nome: "A. Holiday", posicoes: ["SF"], forca: 78 },
       { id: 'doug-mcdermott', nome: "McDermott", posicoes: ["SF"], forca: 72 },
       { id: 'jakarr-sampson', nome: "Sampson", posicoes: ["SF"], forca: 75 }
     ]
@@ -2001,12 +2001,12 @@ var DADOS_NBA = [
     jogadores: [
       { id: 'goran-dragic', nome: "Dragic", posicoes: ["PG"], forca: 86 },
       { id: 'dwyane-wade', nome: "Wade", posicoes: ["SG"], forca: 85 },
-      { id: 'james-johnson', nome: "Johnson", posicoes: ["PF"], forca: 84 },
+      { id: 'james-johnson', nome: "J. Johnson", posicoes: ["PF"], forca: 84 },
       { id: 'josh-richardson', nome: "Richardson", posicoes: ["SF"], forca: 81 },
       { id: 'kelly-olynyk', nome: "Olynyk", posicoes: ["C"], forca: 84 },
       { id: 'justise-winslow', nome: "Winslow", posicoes: ["SG"], forca: 81 },
       { id: 'wayne-ellington', nome: "Ellington", posicoes: ["SG"], forca: 77 },
-      { id: 'tyler-johnson', nome: "Johnson", posicoes: ["SG"], forca: 77 }
+      { id: 'tyler-johnson', nome: "T. Johnson", posicoes: ["SG"], forca: 77 }
     ]
   },
   {
@@ -2524,10 +2524,10 @@ var DADOS_NBA = [
     temporada: "2015-16",
     clube: "Indiana Pacers",
     jogadores: [
-      { id: 'george-hill', nome: "Hill", posicoes: ["SG"], forca: 82 },
+      { id: 'george-hill', nome: "G. Hill", posicoes: ["SG"], forca: 82 },
       { id: 'monta-ellis', nome: "Ellis", posicoes: ["PG"], forca: 83 },
       { id: 'paul-george', nome: "George", posicoes: ["PF"], forca: 94 },
-      { id: 'solomon-hill', nome: "Hill", posicoes: ["SF"], forca: 78 },
+      { id: 'solomon-hill', nome: "S. Hill", posicoes: ["SF"], forca: 78 },
       { id: 'ian-mahinmi', nome: "Mahinmi", posicoes: ["C"], forca: 80 },
       { id: 'myles-turner', nome: "Turner", posicoes: ["PF"], forca: 82 },
       { id: 'rodney-stuckey', nome: "Stuckey", posicoes: ["SG"], forca: 77 },
@@ -3545,13 +3545,13 @@ var DADOS_NBA = [
     clube: "Orlando Magic",
     jogadores: [
       { id: 'jameer-nelson', nome: "Nelson", posicoes: ["PG"], forca: 85 },
-      { id: 'jason-richardson', nome: "Richardson", posicoes: ["SG"], forca: 81 },
+      { id: 'jason-richardson', nome: "J. Richardson", posicoes: ["SG"], forca: 81 },
       { id: 'ryan-anderson', nome: "Anderson", posicoes: ["PF"], forca: 80 },
       { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["PF"], forca: 80 },
       { id: 'glen-davis', nome: "Davis", posicoes: ["C"], forca: 87 },
       { id: 'jj-redick', nome: "Redick", posicoes: ["SG"], forca: 80 },
       { id: 'earl-clark', nome: "Clark", posicoes: ["PF"], forca: 76 },
-      { id: 'quentin-richardson', nome: "Richardson", posicoes: ["SF"], forca: 73 }
+      { id: 'quentin-richardson', nome: "Q. Richardson", posicoes: ["SF"], forca: 73 }
     ]
   },
   {
@@ -3785,13 +3785,13 @@ var DADOS_NBA = [
     clube: "Orlando Magic",
     jogadores: [
       { id: 'jameer-nelson', nome: "Nelson", posicoes: ["PG"], forca: 84 },
-      { id: 'jason-richardson', nome: "Richardson", posicoes: ["SG"], forca: 80 },
+      { id: 'jason-richardson', nome: "J. Richardson", posicoes: ["SG"], forca: 80 },
       { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["PF"], forca: 81 },
       { id: 'ryan-anderson', nome: "Anderson", posicoes: ["PF"], forca: 77 },
       { id: 'dwight-howard', nome: "Howard", posicoes: ["C"], forca: 94 },
       { id: 'brandon-bass', nome: "Bass", posicoes: ["SF"], forca: 78 },
       { id: 'jj-redick', nome: "Redick", posicoes: ["SG"], forca: 76 },
-      { id: 'quentin-richardson', nome: "Richardson", posicoes: ["SG"], forca: 74 }
+      { id: 'quentin-richardson', nome: "Q. Richardson", posicoes: ["SG"], forca: 74 }
     ]
   },
   {
@@ -3860,13 +3860,13 @@ var DADOS_NBA = [
     clube: "Boston Celtics",
     jogadores: [
       { id: 'rajon-rondo', nome: "Rondo", posicoes: ["PG"], forca: 87 },
-      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 84 },
+      { id: 'ray-allen', nome: "R. Allen", posicoes: ["SG"], forca: 84 },
       { id: 'paul-pierce', nome: "Pierce", posicoes: ["SF"], forca: 87 },
       { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 85 },
       { id: 'kendrick-perkins', nome: "Perkins", posicoes: ["C"], forca: 78 },
       { id: 'glen-davis', nome: "Davis", posicoes: ["C"], forca: 77 },
       { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["C"], forca: 76 },
-      { id: 'tony-allen', nome: "Allen", posicoes: ["SG"], forca: 76 }
+      { id: 'tony-allen', nome: "T. Allen", posicoes: ["SG"], forca: 76 }
     ]
   },
   {
@@ -4077,6 +4077,6246 @@ var DADOS_NBA = [
       { id: 'cj-miles', nome: "Miles", posicoes: ["SG"], forca: 83 },
       { id: 'kyle-korver', nome: "Korver", posicoes: ["SG"], forca: 77 },
       { id: 'ronnie-price', nome: "Price", posicoes: ["SG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 84 },
+      { id: 'joe-johnson', nome: "Johnson", posicoes: ["SG"], forca: 86 },
+      { id: 'maurice-evans', nome: "Evans", posicoes: ["SF"], forca: 77 },
+      { id: 'josh-smith', nome: "Smith", posicoes: ["PF"], forca: 85 },
+      { id: 'zaza-pachulia', nome: "Pachulia", posicoes: ["C"], forca: 76 },
+      { id: 'flip-murray', nome: "Murray", posicoes: ["PG"], forca: 85 },
+      { id: 'al-horford', nome: "Horford", posicoes: ["C"], forca: 84 },
+      { id: 'marvin-williams', nome: "Williams", posicoes: ["SF"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'rajon-rondo', nome: "Rondo", posicoes: ["PG"], forca: 87 },
+      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 88 },
+      { id: 'paul-pierce', nome: "Pierce", posicoes: ["SF"], forca: 87 },
+      { id: 'leon-powe', nome: "Powe", posicoes: ["PF"], forca: 80 },
+      { id: 'kendrick-perkins', nome: "Perkins", posicoes: ["C"], forca: 80 },
+      { id: 'glen-davis', nome: "Davis", posicoes: ["C"], forca: 74 },
+      { id: 'brian-scalabrine', nome: "Scalabrine", posicoes: ["C"], forca: 71 },
+      { id: 'eddie-house', nome: "House", posicoes: ["PG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'derrick-rose', nome: "Rose", posicoes: ["PG"], forca: 82 },
+      { id: 'ben-gordon', nome: "Gordon", posicoes: ["SG"], forca: 85 },
+      { id: 'john-salmons', nome: "Salmons", posicoes: ["SF"], forca: 84 },
+      { id: 'tyrus-thomas', nome: "Thomas", posicoes: ["PF"], forca: 81 },
+      { id: 'joakim-noah', nome: "Noah", posicoes: ["C"], forca: 82 },
+      { id: 'kirk-hinrich', nome: "Hinrich", posicoes: ["SG"], forca: 81 },
+      { id: 'brad-miller', nome: "Miller", posicoes: ["C"], forca: 85 },
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mo-williams', nome: "Williams", posicoes: ["PG"], forca: 86 },
+      { id: 'delonte-west', nome: "West", posicoes: ["SG"], forca: 82 },
+      { id: 'lebron-james', nome: "James", posicoes: ["SF"], forca: 99 },
+      { id: 'anderson-varejao', nome: "Varejao", posicoes: ["PF"], forca: 81 },
+      { id: 'zydrunas-ilgauskas', nome: "Ilgauskas", posicoes: ["C"], forca: 83 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["C"], forca: 79 },
+      { id: 'ben-wallace', nome: "Wallace", posicoes: ["PF"], forca: 80 },
+      { id: 'daniel-gibson', nome: "Gibson", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 85 },
+      { id: 'jason-terry', nome: "Terry", posicoes: ["SG"], forca: 88 },
+      { id: 'josh-howard', nome: "Howard", posicoes: ["SF"], forca: 83 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 92 },
+      { id: 'erick-dampier', nome: "Dampier", posicoes: ["C"], forca: 81 },
+      { id: 'j-j-barea', nome: "Barea", posicoes: ["SG"], forca: 77 },
+      { id: 'brandon-bass', nome: "Bass", posicoes: ["C"], forca: 78 },
+      { id: 'antoine-wright', nome: "Wright", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 88 },
+      { id: 'dahntay-jones', nome: "Jones", posicoes: ["SG"], forca: 72 },
+      { id: 'carmelo-anthony', nome: "Anthony", posicoes: ["SF"], forca: 86 },
+      { id: 'kenyon-martin', nome: "Martin", posicoes: ["PF"], forca: 81 },
+      { id: 'nene', nome: "Nene", posicoes: ["C"], forca: 86 },
+      { id: 'jr-smith', nome: "Smith", posicoes: ["PG"], forca: 87 },
+      { id: 'chris-andersen', nome: "Andersen", posicoes: ["C"], forca: 83 },
+      { id: 'anthony-carter', nome: "Carter", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'rodney-stuckey', nome: "Stuckey", posicoes: ["PG"], forca: 81 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 83 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 83 },
+      { id: 'antonio-mcdyess', nome: "McDyess", posicoes: ["PF"], forca: 82 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["C"], forca: 83 },
+      { id: 'will-bynum', nome: "Bynum", posicoes: ["PG"], forca: 79 },
+      { id: 'arron-afflalo', nome: "Afflalo", posicoes: ["SG"], forca: 72 },
+      { id: 'jason-maxiell', nome: "Maxiell", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'aaron-brooks', nome: "Brooks", posicoes: ["PG"], forca: 79 },
+      { id: 'shane-battier', nome: "Battier", posicoes: ["SG"], forca: 80 },
+      { id: 'metta-world-peace', nome: "Peace", posicoes: ["SF"], forca: 84 },
+      { id: 'luis-scola', nome: "Scola", posicoes: ["PF"], forca: 83 },
+      { id: 'yao-ming', nome: "Ming", posicoes: ["C"], forca: 90 },
+      { id: 'kyle-lowry', nome: "Lowry", posicoes: ["PG"], forca: 81 },
+      { id: 'carl-landry', nome: "Landry", posicoes: ["PF"], forca: 81 },
+      { id: 'von-wafer', nome: "Wafer", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 79 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 95 },
+      { id: 'trevor-ariza', nome: "Ariza", posicoes: ["SF"], forca: 83 },
+      { id: 'lamar-odom', nome: "Odom", posicoes: ["PF"], forca: 84 },
+      { id: 'pau-gasol', nome: "Gasol", posicoes: ["C"], forca: 91 },
+      { id: 'andrew-bynum', nome: "Bynum", posicoes: ["C"], forca: 85 },
+      { id: 'luke-walton', nome: "Walton", posicoes: ["SF"], forca: 75 },
+      { id: 'shannon-brown', nome: "Brown", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'mario-chalmers', nome: "Chalmers", posicoes: ["PG"], forca: 79 },
+      { id: 'dwyane-wade', nome: "Wade", posicoes: ["SG"], forca: 99 },
+      { id: 'james-jones', nome: "Jones", posicoes: ["SF"], forca: 72 },
+      { id: 'udonis-haslem', nome: "Haslem", posicoes: ["PF"], forca: 78 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["C"], forca: 80 },
+      { id: 'michael-beasley', nome: "Beasley", posicoes: ["PF"], forca: 81 },
+      { id: 'daequan-cook', nome: "Cook", posicoes: ["SF"], forca: 76 },
+      { id: 'joel-anthony', nome: "Anthony", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "New Orleans Hornets",
+    jogadores: [
+      { id: 'chris-paul', nome: "Paul", posicoes: ["PG"], forca: 99 },
+      { id: 'james-posey', nome: "Posey", posicoes: ["SG"], forca: 77 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 79 },
+      { id: 'david-west', nome: "West", posicoes: ["PF"], forca: 86 },
+      { id: 'tyson-chandler', nome: "Chandler", posicoes: ["C"], forca: 77 },
+      { id: 'rasual-butler', nome: "Butler", posicoes: ["SF"], forca: 79 },
+      { id: 'sean-marks', nome: "Marks", posicoes: ["C"], forca: 70 },
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["PG"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'rafer-alston', nome: "Alston", posicoes: ["PG"], forca: 83 },
+      { id: 'mickael-pietrus', nome: "Pietrus", posicoes: ["SG"], forca: 79 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 83 },
+      { id: 'rashard-lewis', nome: "Lewis", posicoes: ["PF"], forca: 87 },
+      { id: 'dwight-howard', nome: "Howard", posicoes: ["C"], forca: 93 },
+      { id: 'courtney-lee', nome: "Lee", posicoes: ["SG"], forca: 78 },
+      { id: 'jj-redick', nome: "Redick", posicoes: ["SG"], forca: 75 },
+      { id: 'anthony-johnson', nome: "Johnson", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'andre-miller', nome: "Miller", posicoes: ["PG"], forca: 86 },
+      { id: 'lou-williams', nome: "Williams", posicoes: ["SG"], forca: 83 },
+      { id: 'andre-iguodala', nome: "Iguodala", posicoes: ["SF"], forca: 87 },
+      { id: 'thaddeus-young', nome: "Young", posicoes: ["PF"], forca: 82 },
+      { id: 'samuel-dalembert', nome: "Dalembert", posicoes: ["C"], forca: 77 },
+      { id: 'willie-green', nome: "Green", posicoes: ["SG"], forca: 76 },
+      { id: 'theo-ratliff', nome: "Ratliff", posicoes: ["C"], forca: 74 },
+      { id: 'donyell-marshall', nome: "Marshall", posicoes: ["PF"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'steve-blake', nome: "Blake", posicoes: ["PG"], forca: 82 },
+      { id: 'brandon-roy', nome: "Roy", posicoes: ["SG"], forca: 94 },
+      { id: 'travis-outlaw', nome: "Outlaw", posicoes: ["SF"], forca: 82 },
+      { id: 'lamarcus-aldridge', nome: "Aldridge", posicoes: ["PF"], forca: 86 },
+      { id: 'joel-przybilla', nome: "Przybilla", posicoes: ["C"], forca: 81 },
+      { id: 'rudy-fernandez', nome: "Fernandez", posicoes: ["SG"], forca: 84 },
+      { id: 'greg-oden', nome: "Oden", posicoes: ["C"], forca: 80 },
+      { id: 'nicolas-batum', nome: "Batum", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 91 },
+      { id: 'roger-mason-jr', nome: "Mason", posicoes: ["SG"], forca: 79 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SF"], forca: 78 },
+      { id: 'matt-bonner', nome: "Bonner", posicoes: ["PF"], forca: 83 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["C"], forca: 93 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 70 },
+      { id: 'ime-udoka', nome: "Udoka", posicoes: ["SF"], forca: 74 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2008-09",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'deron-williams', nome: "Williams", posicoes: ["PG"], forca: 90 },
+      { id: 'matt-harpring', nome: "Harpring", posicoes: ["SG"], forca: 73 },
+      { id: 'ronnie-brewer', nome: "Brewer", posicoes: ["SF"], forca: 84 },
+      { id: 'carlos-boozer', nome: "Boozer", posicoes: ["PF"], forca: 83 },
+      { id: 'mehmet-okur', nome: "Okur", posicoes: ["C"], forca: 85 },
+      { id: 'paul-millsap', nome: "Millsap", posicoes: ["PF"], forca: 85 },
+      { id: 'andrei-kirilenko', nome: "Kirilenko", posicoes: ["PF"], forca: 85 },
+      { id: 'kyle-korver', nome: "Korver", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 80 },
+      { id: 'joe-johnson', nome: "Johnson", posicoes: ["SG"], forca: 85 },
+      { id: 'josh-childress', nome: "Childress", posicoes: ["SF"], forca: 85 },
+      { id: 'josh-smith', nome: "Smith", posicoes: ["PF"], forca: 87 },
+      { id: 'al-horford', nome: "Horford", posicoes: ["C"], forca: 79 },
+      { id: 'marvin-williams', nome: "Williams", posicoes: ["SF"], forca: 80 },
+      { id: 'zaza-pachulia', nome: "Pachulia", posicoes: ["C"], forca: 71 },
+      { id: 'acie-law', nome: "Law", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'rajon-rondo', nome: "Rondo", posicoes: ["PG"], forca: 83 },
+      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 86 },
+      { id: 'paul-pierce', nome: "Pierce", posicoes: ["SF"], forca: 90 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 96 },
+      { id: 'kendrick-perkins', nome: "Perkins", posicoes: ["C"], forca: 80 },
+      { id: 'james-posey', nome: "Posey", posicoes: ["PF"], forca: 81 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 71 },
+      { id: 'leon-powe', nome: "Powe", posicoes: ["C"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'delonte-west', nome: "West", posicoes: ["PG"], forca: 81 },
+      { id: 'sasha-pavlovic', nome: "Pavlovic", posicoes: ["SG"], forca: 71 },
+      { id: 'lebron-james', nome: "James", posicoes: ["SF"], forca: 99 },
+      { id: 'ben-wallace', nome: "Wallace", posicoes: ["PF"], forca: 78 },
+      { id: 'zydrunas-ilgauskas', nome: "Ilgauskas", posicoes: ["C"], forca: 83 },
+      { id: 'wally-szczerbiak', nome: "Szczerbiak", posicoes: ["SF"], forca: 75 },
+      { id: 'daniel-gibson', nome: "Gibson", posicoes: ["PG"], forca: 79 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 87 },
+      { id: 'jason-terry', nome: "Terry", posicoes: ["SG"], forca: 86 },
+      { id: 'josh-howard', nome: "Howard", posicoes: ["SF"], forca: 86 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 95 },
+      { id: 'brandon-bass', nome: "Bass", posicoes: ["C"], forca: 79 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SG"], forca: 79 },
+      { id: 'erick-dampier', nome: "Dampier", posicoes: ["C"], forca: 81 },
+      { id: 'devean-george', nome: "George", posicoes: ["SF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'jr-smith', nome: "Smith", posicoes: ["PG"], forca: 88 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 90 },
+      { id: 'carmelo-anthony', nome: "Anthony", posicoes: ["SF"], forca: 89 },
+      { id: 'kenyon-martin', nome: "Martin", posicoes: ["PF"], forca: 80 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 85 },
+      { id: 'linas-kleiza', nome: "Kleiza", posicoes: ["SF"], forca: 80 },
+      { id: 'eduardo-najera', nome: "Najera", posicoes: ["PF"], forca: 77 },
+      { id: 'anthony-carter', nome: "Carter", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 94 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 86 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 83 },
+      { id: 'antonio-mcdyess', nome: "McDyess", posicoes: ["PF"], forca: 80 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["C"], forca: 87 },
+      { id: 'rodney-stuckey', nome: "Stuckey", posicoes: ["PG"], forca: 77 },
+      { id: 'jason-maxiell', nome: "Maxiell", posicoes: ["C"], forca: 80 },
+      { id: 'theo-ratliff', nome: "Ratliff", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'bobby-jackson', nome: "Jackson", posicoes: ["PG"], forca: 80 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SG"], forca: 88 },
+      { id: 'shane-battier', nome: "Battier", posicoes: ["SF"], forca: 81 },
+      { id: 'luis-scola', nome: "Scola", posicoes: ["PF"], forca: 81 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 79 },
+      { id: 'rafer-alston', nome: "Alston", posicoes: ["PG"], forca: 81 },
+      { id: 'chuck-hayes', nome: "Hayes", posicoes: ["PF"], forca: 77 },
+      { id: 'carl-landry', nome: "Landry", posicoes: ["PF"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 80 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 95 },
+      { id: 'vladimir-radmanovic', nome: "Radmanovic", posicoes: ["SF"], forca: 79 },
+      { id: 'lamar-odom', nome: "Odom", posicoes: ["PF"], forca: 85 },
+      { id: 'pau-gasol', nome: "Gasol", posicoes: ["C"], forca: 93 },
+      { id: 'sasha-vujacic', nome: "Vujacic", posicoes: ["SG"], forca: 80 },
+      { id: 'jordan-farmar', nome: "Farmar", posicoes: ["PG"], forca: 81 },
+      { id: 'luke-walton', nome: "Walton", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "New Orleans Hornets",
+    jogadores: [
+      { id: 'chris-paul', nome: "Paul", posicoes: ["PG"], forca: 99 },
+      { id: 'morris-peterson', nome: "Peterson", posicoes: ["SG"], forca: 78 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 84 },
+      { id: 'david-west', nome: "West", posicoes: ["PF"], forca: 87 },
+      { id: 'tyson-chandler', nome: "Chandler", posicoes: ["C"], forca: 83 },
+      { id: 'jannero-pargo', nome: "Pargo", posicoes: ["SG"], forca: 75 },
+      { id: 'bonzi-wells', nome: "Wells", posicoes: ["SG"], forca: 79 },
+      { id: 'julian-wright', nome: "Wright", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'jameer-nelson', nome: "Nelson", posicoes: ["PG"], forca: 82 },
+      { id: 'keith-bogans', nome: "Bogans", posicoes: ["SG"], forca: 79 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 87 },
+      { id: 'rashard-lewis', nome: "Lewis", posicoes: ["PF"], forca: 86 },
+      { id: 'dwight-howard', nome: "Howard", posicoes: ["C"], forca: 90 },
+      { id: 'maurice-evans', nome: "Evans", posicoes: ["SG"], forca: 81 },
+      { id: 'keyon-dooling', nome: "Dooling", posicoes: ["PG"], forca: 78 },
+      { id: 'marcin-gortat', nome: "Gortat", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'andre-miller', nome: "Miller", posicoes: ["PG"], forca: 86 },
+      { id: 'willie-green', nome: "Green", posicoes: ["SG"], forca: 78 },
+      { id: 'andre-iguodala', nome: "Iguodala", posicoes: ["SF"], forca: 89 },
+      { id: 'thaddeus-young', nome: "Young", posicoes: ["PF"], forca: 80 },
+      { id: 'samuel-dalembert', nome: "Dalembert", posicoes: ["C"], forca: 80 },
+      { id: 'reggie-evans', nome: "Evans", posicoes: ["PF"], forca: 75 },
+      { id: 'lou-williams', nome: "Williams", posicoes: ["PG"], forca: 83 },
+      { id: 'rodney-carney', nome: "Carney", posicoes: ["SF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 89 },
+      { id: 'raja-bell', nome: "Bell", posicoes: ["SG"], forca: 78 },
+      { id: 'grant-hill', nome: "Hill", posicoes: ["SF"], forca: 83 },
+      { id: 'boris-diaw', nome: "Diaw", posicoes: ["PF"], forca: 78 },
+      { id: 'amare-stoudemire', nome: "Stoudemire", posicoes: ["C"], forca: 95 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 82 },
+      { id: 'leandro-barbosa', nome: "Barbosa", posicoes: ["SG"], forca: 82 },
+      { id: 'gordan-giricek', nome: "Giricek", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 88 },
+      { id: 'manu-ginobili', nome: "Ginobili", posicoes: ["SG"], forca: 96 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 74 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 75 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["C"], forca: 93 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SG"], forca: 78 },
+      { id: 'fabricio-oberto', nome: "Oberto", posicoes: ["C"], forca: 78 },
+      { id: 'ime-udoka', nome: "Udoka", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Toronto Raptors",
+    jogadores: [
+      { id: 't-j-ford', nome: "Ford", posicoes: ["PG"], forca: 87 },
+      { id: 'anthony-parker', nome: "Parker", posicoes: ["SG"], forca: 82 },
+      { id: 'jason-kapono', nome: "Kapono", posicoes: ["SF"], forca: 74 },
+      { id: 'andrea-bargnani', nome: "Bargnani", posicoes: ["PF"], forca: 75 },
+      { id: 'chris-bosh', nome: "Bosh", posicoes: ["C"], forca: 92 },
+      { id: 'carlos-delfino', nome: "Delfino", posicoes: ["SG"], forca: 80 },
+      { id: 'jose-calderon', nome: "Calderon", posicoes: ["PG"], forca: 89 },
+      { id: 'jamario-moon', nome: "Moon", posicoes: ["SF"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'deron-williams', nome: "Williams", posicoes: ["PG"], forca: 89 },
+      { id: 'ronnie-brewer', nome: "Brewer", posicoes: ["SG"], forca: 87 },
+      { id: 'andrei-kirilenko', nome: "Kirilenko", posicoes: ["SF"], forca: 87 },
+      { id: 'carlos-boozer', nome: "Boozer", posicoes: ["PF"], forca: 89 },
+      { id: 'mehmet-okur', nome: "Okur", posicoes: ["C"], forca: 83 },
+      { id: 'kyle-korver', nome: "Korver", posicoes: ["SG"], forca: 80 },
+      { id: 'paul-millsap', nome: "Millsap", posicoes: ["PF"], forca: 79 },
+      { id: 'matt-harpring', nome: "Harpring", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2007-08",
+    clube: "Washington Wizards",
+    jogadores: [
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["PG"], forca: 79 },
+      { id: 'deshawn-stevenson', nome: "Stevenson", posicoes: ["SG"], forca: 79 },
+      { id: 'caron-butler', nome: "Butler", posicoes: ["SF"], forca: 90 },
+      { id: 'antawn-jamison', nome: "Jamison", posicoes: ["PF"], forca: 87 },
+      { id: 'brendan-haywood', nome: "Haywood", posicoes: ["C"], forca: 83 },
+      { id: 'roger-mason-jr', nome: "Mason", posicoes: ["PG"], forca: 78 },
+      { id: 'gilbert-arenas', nome: "Arenas", posicoes: ["PG"], forca: 87 },
+      { id: 'andray-blatche', nome: "Blatche", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'kirk-hinrich', nome: "Hinrich", posicoes: ["PG"], forca: 86 },
+      { id: 'ben-gordon', nome: "Gordon", posicoes: ["SG"], forca: 87 },
+      { id: 'luol-deng', nome: "Deng", posicoes: ["SF"], forca: 87 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 72 },
+      { id: 'ben-wallace', nome: "Wallace", posicoes: ["C"], forca: 83 },
+      { id: 'andres-nocioni', nome: "Nocioni", posicoes: ["PF"], forca: 83 },
+      { id: 'chris-duhon', nome: "Duhon", posicoes: ["PG"], forca: 79 },
+      { id: 'tyrus-thomas', nome: "Thomas", posicoes: ["PF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'daniel-gibson', nome: "Gibson", posicoes: ["PG"], forca: 75 },
+      { id: 'larry-hughes', nome: "Hughes", posicoes: ["SG"], forca: 79 },
+      { id: 'lebron-james', nome: "James", posicoes: ["SF"], forca: 97 },
+      { id: 'drew-gooden', nome: "Gooden", posicoes: ["PF"], forca: 82 },
+      { id: 'zydrunas-ilgauskas', nome: "Ilgauskas", posicoes: ["C"], forca: 83 },
+      { id: 'sasha-pavlovic', nome: "Pavlovic", posicoes: ["SG"], forca: 78 },
+      { id: 'anderson-varejao', nome: "Varejao", posicoes: ["C"], forca: 80 },
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'devin-harris', nome: "Harris", posicoes: ["PG"], forca: 83 },
+      { id: 'jason-terry', nome: "Terry", posicoes: ["SG"], forca: 88 },
+      { id: 'josh-howard', nome: "Howard", posicoes: ["SF"], forca: 88 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 99 },
+      { id: 'desagana-diop', nome: "Diop", posicoes: ["C"], forca: 75 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SF"], forca: 83 },
+      { id: 'devean-george', nome: "George", posicoes: ["SF"], forca: 74 },
+      { id: 'greg-buckner', nome: "Buckner", posicoes: ["SG"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'steve-blake', nome: "Blake", posicoes: ["PG"], forca: 77 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 86 },
+      { id: 'carmelo-anthony', nome: "Anthony", posicoes: ["SF"], forca: 90 },
+      { id: 'eduardo-najera', nome: "Najera", posicoes: ["PF"], forca: 80 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 88 },
+      { id: 'nene', nome: "Nene", posicoes: ["C"], forca: 83 },
+      { id: 'linas-kleiza', nome: "Kleiza", posicoes: ["PF"], forca: 74 },
+      { id: 'jr-smith', nome: "Smith", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 90 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 85 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 84 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 84 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["C"], forca: 84 },
+      { id: 'antonio-mcdyess', nome: "McDyess", posicoes: ["PF"], forca: 81 },
+      { id: 'jason-maxiell', nome: "Maxiell", posicoes: ["C"], forca: 75 },
+      { id: 'flip-murray', nome: "Murray", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Golden State Warriors",
+    jogadores: [
+      { id: 'baron-davis', nome: "Davis", posicoes: ["PG"], forca: 90 },
+      { id: 'jason-richardson', nome: "Richardson", posicoes: ["SG"], forca: 83 },
+      { id: 'stephen-jackson', nome: "Jackson", posicoes: ["SF"], forca: 82 },
+      { id: 'matt-barnes', nome: "Barnes", posicoes: ["PF"], forca: 81 },
+      { id: 'andris-biedrins', nome: "Biedrins", posicoes: ["C"], forca: 81 },
+      { id: 'al-harrington', nome: "Harrington", posicoes: ["PF"], forca: 82 },
+      { id: 'monta-ellis', nome: "Ellis", posicoes: ["SG"], forca: 81 },
+      { id: 'mickael-pietrus', nome: "Pietrus", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'rafer-alston', nome: "Alston", posicoes: ["PG"], forca: 81 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SG"], forca: 94 },
+      { id: 'shane-battier', nome: "Battier", posicoes: ["SF"], forca: 81 },
+      { id: 'chuck-hayes', nome: "Hayes", posicoes: ["PF"], forca: 79 },
+      { id: 'yao-ming', nome: "Ming", posicoes: ["C"], forca: 95 },
+      { id: 'juwan-howard', nome: "Howard", posicoes: ["PF"], forca: 78 },
+      { id: 'luther-head', nome: "Head", posicoes: ["SG"], forca: 82 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'jordan-farmar', nome: "Farmar", posicoes: ["PG"], forca: 74 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 97 },
+      { id: 'luke-walton', nome: "Walton", posicoes: ["SF"], forca: 81 },
+      { id: 'lamar-odom', nome: "Odom", posicoes: ["PF"], forca: 84 },
+      { id: 'kwame-brown', nome: "Brown", posicoes: ["C"], forca: 79 },
+      { id: 'maurice-evans', nome: "Evans", posicoes: ["SG"], forca: 77 },
+      { id: 'shammond-williams', nome: "Williams", posicoes: ["PG"], forca: 73 },
+      { id: 'smush-parker', nome: "Parker", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 81 },
+      { id: 'dwyane-wade', nome: "Wade", posicoes: ["SG"], forca: 99 },
+      { id: 'james-posey', nome: "Posey", posicoes: ["SF"], forca: 80 },
+      { id: 'udonis-haslem', nome: "Haslem", posicoes: ["PF"], forca: 78 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 87 },
+      { id: 'antoine-walker', nome: "Walker", posicoes: ["PF"], forca: 74 },
+      { id: 'jason-kapono', nome: "Kapono", posicoes: ["SF"], forca: 80 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 88 },
+      { id: 'vince-carter', nome: "Carter", posicoes: ["SG"], forca: 91 },
+      { id: 'richard-jefferson', nome: "Jefferson", posicoes: ["SF"], forca: 80 },
+      { id: 'jason-collins', nome: "Collins", posicoes: ["PF"], forca: 70 },
+      { id: 'mikki-moore', nome: "Moore", posicoes: ["C"], forca: 79 },
+      { id: 'bostjan-nachbar', nome: "Nachbar", posicoes: ["SF"], forca: 79 },
+      { id: 'antoine-wright', nome: "Wright", posicoes: ["SG"], forca: 71 },
+      { id: 'josh-boone', nome: "Boone", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'jameer-nelson', nome: "Nelson", posicoes: ["PG"], forca: 80 },
+      { id: 'grant-hill', nome: "Hill", posicoes: ["SG"], forca: 83 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 81 },
+      { id: 'darko-milicic', nome: "Milicic", posicoes: ["PF"], forca: 79 },
+      { id: 'dwight-howard', nome: "Howard", posicoes: ["C"], forca: 88 },
+      { id: 'tony-battie', nome: "Battie", posicoes: ["PF"], forca: 75 },
+      { id: 'keyon-dooling', nome: "Dooling", posicoes: ["SG"], forca: 75 },
+      { id: 'trevor-ariza', nome: "Ariza", posicoes: ["SG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 93 },
+      { id: 'raja-bell', nome: "Bell", posicoes: ["SG"], forca: 80 },
+      { id: 'shawn-marion', nome: "Marion", posicoes: ["SF"], forca: 90 },
+      { id: 'boris-diaw', nome: "Diaw", posicoes: ["PF"], forca: 80 },
+      { id: 'amare-stoudemire', nome: "Stoudemire", posicoes: ["C"], forca: 89 },
+      { id: 'leandro-barbosa', nome: "Barbosa", posicoes: ["SG"], forca: 87 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["C"], forca: 75 },
+      { id: 'james-jones', nome: "Jones", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 89 },
+      { id: 'manu-ginobili', nome: "Ginobili", posicoes: ["SG"], forca: 95 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 75 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 79 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["C"], forca: 96 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SF"], forca: 81 },
+      { id: 'fabricio-oberto', nome: "Oberto", posicoes: ["C"], forca: 75 },
+      { id: 'francisco-elson', nome: "Elson", posicoes: ["C"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Toronto Raptors",
+    jogadores: [
+      { id: 'jose-calderon', nome: "Calderon", posicoes: ["PG"], forca: 83 },
+      { id: 'anthony-parker', nome: "Parker", posicoes: ["SG"], forca: 82 },
+      { id: 'morris-peterson', nome: "Peterson", posicoes: ["SF"], forca: 78 },
+      { id: 'andrea-bargnani', nome: "Bargnani", posicoes: ["PF"], forca: 78 },
+      { id: 'chris-bosh', nome: "Bosh", posicoes: ["C"], forca: 90 },
+      { id: 't-j-ford', nome: "Ford", posicoes: ["PG"], forca: 84 },
+      { id: 'joey-graham', nome: "Graham", posicoes: ["SF"], forca: 76 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'deron-williams', nome: "Williams", posicoes: ["PG"], forca: 84 },
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["SG"], forca: 77 },
+      { id: 'andrei-kirilenko', nome: "Kirilenko", posicoes: ["SF"], forca: 84 },
+      { id: 'carlos-boozer', nome: "Boozer", posicoes: ["PF"], forca: 92 },
+      { id: 'mehmet-okur', nome: "Okur", posicoes: ["C"], forca: 86 },
+      { id: 'matt-harpring', nome: "Harpring", posicoes: ["SF"], forca: 80 },
+      { id: 'gordan-giricek', nome: "Giricek", posicoes: ["SG"], forca: 75 },
+      { id: 'paul-millsap', nome: "Millsap", posicoes: ["PF"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2006-07",
+    clube: "Washington Wizards",
+    jogadores: [
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["SG"], forca: 80 },
+      { id: 'jarvis-hayes', nome: "Hayes", posicoes: ["SF"], forca: 74 },
+      { id: 'antawn-jamison', nome: "Jamison", posicoes: ["PF"], forca: 86 },
+      { id: 'etan-thomas', nome: "Thomas", posicoes: ["C"], forca: 78 },
+      { id: 'deshawn-stevenson', nome: "Stevenson", posicoes: ["SG"], forca: 79 },
+      { id: 'darius-songaila', nome: "Songaila", posicoes: ["PF"], forca: 75 },
+      { id: 'roger-mason-jr', nome: "Mason", posicoes: ["SG"], forca: 70 },
+      { id: 'gilbert-arenas', nome: "Arenas", posicoes: ["PG"], forca: 94 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'kirk-hinrich', nome: "Hinrich", posicoes: ["PG"], forca: 84 },
+      { id: 'ben-gordon', nome: "Gordon", posicoes: ["SG"], forca: 82 },
+      { id: 'luol-deng', nome: "Deng", posicoes: ["SF"], forca: 84 },
+      { id: 'andres-nocioni', nome: "Nocioni", posicoes: ["PF"], forca: 84 },
+      { id: 'tyson-chandler', nome: "Chandler", posicoes: ["C"], forca: 78 },
+      { id: 'chris-duhon', nome: "Duhon", posicoes: ["PG"], forca: 80 },
+      { id: 'michael-sweetney', nome: "Sweetney", posicoes: ["SF"], forca: 81 },
+      { id: 'malik-allen', nome: "Allen", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 73 },
+      { id: 'larry-hughes', nome: "Hughes", posicoes: ["SG"], forca: 80 },
+      { id: 'lebron-james', nome: "James", posicoes: ["SF"], forca: 99 },
+      { id: 'donyell-marshall', nome: "Marshall", posicoes: ["PF"], forca: 80 },
+      { id: 'zydrunas-ilgauskas', nome: "Ilgauskas", posicoes: ["C"], forca: 87 },
+      { id: 'flip-murray', nome: "Murray", posicoes: ["PG"], forca: 82 },
+      { id: 'drew-gooden', nome: "Gooden", posicoes: ["PF"], forca: 82 },
+      { id: 'anderson-varejao', nome: "Varejao", posicoes: ["C"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'jason-terry', nome: "Terry", posicoes: ["PG"], forca: 87 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SG"], forca: 80 },
+      { id: 'josh-howard', nome: "Howard", posicoes: ["SF"], forca: 86 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 99 },
+      { id: 'erick-dampier', nome: "Dampier", posicoes: ["C"], forca: 78 },
+      { id: 'devin-harris', nome: "Harris", posicoes: ["PG"], forca: 84 },
+      { id: 'desagana-diop', nome: "Diop", posicoes: ["C"], forca: 76 },
+      { id: 'adrian-griffin', nome: "Griffin", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'andre-miller', nome: "Miller", posicoes: ["PG"], forca: 82 },
+      { id: 'greg-buckner', nome: "Buckner", posicoes: ["SG"], forca: 79 },
+      { id: 'carmelo-anthony', nome: "Anthony", posicoes: ["SF"], forca: 90 },
+      { id: 'eduardo-najera', nome: "Najera", posicoes: ["PF"], forca: 76 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 87 },
+      { id: 'earl-boykins', nome: "Boykins", posicoes: ["PG"], forca: 82 },
+      { id: 'francisco-elson', nome: "Elson", posicoes: ["C"], forca: 73 },
+      { id: 'reggie-evans', nome: "Evans", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 93 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 85 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 82 },
+      { id: 'rasheed-wallace', nome: "R. Wallace", posicoes: ["PF"], forca: 87 },
+      { id: 'ben-wallace', nome: "B. Wallace", posicoes: ["C"], forca: 85 },
+      { id: 'antonio-mcdyess', nome: "McDyess", posicoes: ["PF"], forca: 78 },
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 72 },
+      { id: 'tony-delk', nome: "Delk", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'anthony-johnson', nome: "Johnson", posicoes: ["PG"], forca: 81 },
+      { id: 'stephen-jackson', nome: "Jackson", posicoes: ["SG"], forca: 81 },
+      { id: 'danny-granger', nome: "Granger", posicoes: ["SF"], forca: 81 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["PF"], forca: 88 },
+      { id: 'jeff-foster', nome: "Foster", posicoes: ["C"], forca: 80 },
+      { id: 'austin-croshere', nome: "Croshere", posicoes: ["PF"], forca: 83 },
+      { id: 'fred-jones', nome: "Jones", posicoes: ["SG"], forca: 78 },
+      { id: 'sarunas-jasikevicius', nome: "Jasikevicius", posicoes: ["PG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Los Angeles Clippers",
+    jogadores: [
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 86 },
+      { id: 'cuttino-mobley', nome: "Mobley", posicoes: ["SG"], forca: 80 },
+      { id: 'quinton-ross', nome: "Ross", posicoes: ["SF"], forca: 73 },
+      { id: 'elton-brand', nome: "Brand", posicoes: ["PF"], forca: 96 },
+      { id: 'chris-kaman', nome: "Kaman", posicoes: ["C"], forca: 80 },
+      { id: 'shaun-livingston', nome: "Livingston", posicoes: ["PG"], forca: 76 },
+      { id: 'corey-maggette', nome: "Maggette", posicoes: ["SF"], forca: 85 },
+      { id: 'vladimir-radmanovic', nome: "Radmanovic", posicoes: ["PF"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'smush-parker', nome: "Parker", posicoes: ["PG"], forca: 80 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 99 },
+      { id: 'luke-walton', nome: "Walton", posicoes: ["SF"], forca: 75 },
+      { id: 'lamar-odom', nome: "Odom", posicoes: ["PF"], forca: 85 },
+      { id: 'kwame-brown', nome: "Brown", posicoes: ["C"], forca: 76 },
+      { id: 'sasha-vujacic', nome: "Vujacic", posicoes: ["PG"], forca: 72 },
+      { id: 'devean-george', nome: "George", posicoes: ["SF"], forca: 76 },
+      { id: 'brian-cook', nome: "Cook", posicoes: ["PF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Memphis Grizzlies",
+    jogadores: [
+      { id: 'chucky-atkins', nome: "Atkins", posicoes: ["PG"], forca: 80 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 83 },
+      { id: 'shane-battier', nome: "Battier", posicoes: ["SF"], forca: 83 },
+      { id: 'pau-gasol', nome: "Gasol", posicoes: ["PF"], forca: 92 },
+      { id: 'lorenzen-wright', nome: "Wright", posicoes: ["C"], forca: 75 },
+      { id: 'mike-miller', nome: "Miller", posicoes: ["SG"], forca: 86 },
+      { id: 'bobby-jackson', nome: "Jackson", posicoes: ["PG"], forca: 81 },
+      { id: 'jake-tsakalidis', nome: "Tsakalidis", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 82 },
+      { id: 'dwyane-wade', nome: "Wade", posicoes: ["SG"], forca: 99 },
+      { id: 'james-posey', nome: "Posey", posicoes: ["SF"], forca: 78 },
+      { id: 'antoine-walker', nome: "Walker", posicoes: ["PF"], forca: 81 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 90 },
+      { id: 'udonis-haslem', nome: "Haslem", posicoes: ["PF"], forca: 79 },
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 77 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 't-j-ford', nome: "Ford", posicoes: ["PG"], forca: 79 },
+      { id: 'michael-redd', nome: "Redd", posicoes: ["SG"], forca: 91 },
+      { id: 'bobby-simmons', nome: "Simmons", posicoes: ["SF"], forca: 81 },
+      { id: 'andrew-bogut', nome: "Bogut", posicoes: ["PF"], forca: 81 },
+      { id: 'jamaal-magloire', nome: "Magloire", posicoes: ["C"], forca: 74 },
+      { id: 'charlie-bell', nome: "Bell", posicoes: ["SG"], forca: 80 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["PF"], forca: 78 },
+      { id: 'mo-williams', nome: "Williams", posicoes: ["PG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 89 },
+      { id: 'vince-carter', nome: "Carter", posicoes: ["SG"], forca: 92 },
+      { id: 'richard-jefferson', nome: "Jefferson", posicoes: ["SF"], forca: 88 },
+      { id: 'nenad-krstic', nome: "Krstic", posicoes: ["PF"], forca: 79 },
+      { id: 'jason-collins', nome: "Collins", posicoes: ["C"], forca: 71 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 75 },
+      { id: 'lamond-murray', nome: "Murray", posicoes: ["SF"], forca: 71 },
+      { id: 'jacque-vaughn', nome: "Vaughn", posicoes: ["SG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 92 },
+      { id: 'raja-bell', nome: "Bell", posicoes: ["SG"], forca: 81 },
+      { id: 'james-jones', nome: "Jones", posicoes: ["SF"], forca: 80 },
+      { id: 'shawn-marion', nome: "Marion", posicoes: ["PF"], forca: 92 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["C"], forca: 70 },
+      { id: 'boris-diaw', nome: "Diaw", posicoes: ["PF"], forca: 85 },
+      { id: 'tim-thomas', nome: "Thomas", posicoes: ["PF"], forca: 76 },
+      { id: 'leandro-barbosa', nome: "Barbosa", posicoes: ["SG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 86 },
+      { id: 'bonzi-wells', nome: "Wells", posicoes: ["SG"], forca: 83 },
+      { id: 'metta-world-peace', nome: "Peace", posicoes: ["SF"], forca: 82 },
+      { id: 'kenny-thomas', nome: "Thomas", posicoes: ["PF"], forca: 81 },
+      { id: 'brad-miller', nome: "Miller", posicoes: ["C"], forca: 86 },
+      { id: 'kevin-martin', nome: "Martin", posicoes: ["SG"], forca: 81 },
+      { id: 'shareef-abdur-rahim', nome: "Abdur-Rahim", posicoes: ["PF"], forca: 83 },
+      { id: 'jason-hart', nome: "Hart", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 88 },
+      { id: 'manu-ginobili', nome: "Ginobili", posicoes: ["SG"], forca: 93 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 77 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 92 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 75 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SG"], forca: 80 },
+      { id: 'brent-barry', nome: "Barry", posicoes: ["SG"], forca: 82 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2005-06",
+    clube: "Washington Wizards",
+    jogadores: [
+      { id: 'gilbert-arenas', nome: "Arenas", posicoes: ["PG"], forca: 95 },
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["SG"], forca: 79 },
+      { id: 'caron-butler', nome: "Butler", posicoes: ["SF"], forca: 84 },
+      { id: 'jared-jeffries', nome: "Jeffries", posicoes: ["PF"], forca: 77 },
+      { id: 'brendan-haywood', nome: "Haywood", posicoes: ["C"], forca: 78 },
+      { id: 'antawn-jamison', nome: "Jamison", posicoes: ["SF"], forca: 85 },
+      { id: 'michael-ruffin', nome: "Ruffin", posicoes: ["C"], forca: 70 },
+      { id: 'etan-thomas', nome: "Thomas", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 81 },
+      { id: 'ricky-davis', nome: "Davis", posicoes: ["SG"], forca: 81 },
+      { id: 'paul-pierce', nome: "Pierce", posicoes: ["SF"], forca: 91 },
+      { id: 'antoine-walker', nome: "Walker", posicoes: ["PF"], forca: 81 },
+      { id: 'mark-blount', nome: "Blount", posicoes: ["C"], forca: 77 },
+      { id: 'raef-lafrentz', nome: "LaFrentz", posicoes: ["PF"], forca: 84 },
+      { id: 'al-jefferson', nome: "Jefferson", posicoes: ["PF"], forca: 76 },
+      { id: 'delonte-west', nome: "West", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'kirk-hinrich', nome: "Hinrich", posicoes: ["PG"], forca: 84 },
+      { id: 'ben-gordon', nome: "Gordon", posicoes: ["SG"], forca: 82 },
+      { id: 'andres-nocioni', nome: "Nocioni", posicoes: ["SF"], forca: 76 },
+      { id: 'antonio-davis', nome: "Davis", posicoes: ["PF"], forca: 77 },
+      { id: 'tyson-chandler', nome: "Chandler", posicoes: ["C"], forca: 83 },
+      { id: 'chris-duhon', nome: "Duhon", posicoes: ["PG"], forca: 77 },
+      { id: 'othella-harrington', nome: "Harrington", posicoes: ["PF"], forca: 77 },
+      { id: 'adrian-griffin', nome: "Griffin", posicoes: ["SF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'jason-terry', nome: "Terry", posicoes: ["PG"], forca: 86 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SG"], forca: 82 },
+      { id: 'josh-howard', nome: "Howard", posicoes: ["SF"], forca: 83 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 97 },
+      { id: 'erick-dampier', nome: "Dampier", posicoes: ["C"], forca: 80 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SG"], forca: 82 },
+      { id: 'marquis-daniels', nome: "Daniels", posicoes: ["SG"], forca: 81 },
+      { id: 'alan-henderson', nome: "Henderson", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'andre-miller', nome: "Miller", posicoes: ["PG"], forca: 83 },
+      { id: 'greg-buckner', nome: "Buckner", posicoes: ["SG"], forca: 79 },
+      { id: 'carmelo-anthony', nome: "Anthony", posicoes: ["SF"], forca: 82 },
+      { id: 'kenyon-martin', nome: "Martin", posicoes: ["PF"], forca: 84 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 86 },
+      { id: 'earl-boykins', nome: "Boykins", posicoes: ["PG"], forca: 84 },
+      { id: 'nene', nome: "Nene", posicoes: ["C"], forca: 81 },
+      { id: 'dermarr-johnson', nome: "Johnson", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 88 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 83 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 84 },
+      { id: 'rasheed-wallace', nome: "R. Wallace", posicoes: ["PF"], forca: 84 },
+      { id: 'ben-wallace', nome: "B. Wallace", posicoes: ["C"], forca: 85 },
+      { id: 'antonio-mcdyess', nome: "McDyess", posicoes: ["PF"], forca: 82 },
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["SG"], forca: 74 },
+      { id: 'carlos-arroyo', nome: "Arroyo", posicoes: ["PG"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'bob-sura', nome: "Sura", posicoes: ["PG"], forca: 82 },
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["SG"], forca: 79 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SF"], forca: 95 },
+      { id: 'scott-padgett', nome: "Padgett", posicoes: ["PF"], forca: 76 },
+      { id: 'yao-ming', nome: "Ming", posicoes: ["C"], forca: 89 },
+      { id: 'jon-barry', nome: "Barry", posicoes: ["SG"], forca: 82 },
+      { id: 'mike-james', nome: "James", posicoes: ["PG"], forca: 85 },
+      { id: 'ryan-bowen', nome: "Bowen", posicoes: ["SF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'anthony-johnson', nome: "Johnson", posicoes: ["PG"], forca: 81 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 84 },
+      { id: 'stephen-jackson', nome: "Jackson", posicoes: ["SF"], forca: 83 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["PF"], forca: 90 },
+      { id: 'dale-davis', nome: "Davis", posicoes: ["C"], forca: 82 },
+      { id: 'jamaal-tinsley', nome: "Tinsley", posicoes: ["PG"], forca: 87 },
+      { id: 'jeff-foster', nome: "Foster", posicoes: ["C"], forca: 80 },
+      { id: 'fred-jones', nome: "Jones", posicoes: ["SG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Memphis Grizzlies",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 82 },
+      { id: 'shane-battier', nome: "Battier", posicoes: ["SG"], forca: 83 },
+      { id: 'mike-miller', nome: "Miller", posicoes: ["SF"], forca: 85 },
+      { id: 'pau-gasol', nome: "Gasol", posicoes: ["PF"], forca: 90 },
+      { id: 'lorenzen-wright', nome: "Wright", posicoes: ["C"], forca: 79 },
+      { id: 'james-posey', nome: "Posey", posicoes: ["SF"], forca: 77 },
+      { id: 'brian-cardinal', nome: "Cardinal", posicoes: ["PF"], forca: 81 },
+      { id: 'earl-watson', nome: "Watson", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'damon-jones', nome: "D. Jones", posicoes: ["PG"], forca: 84 },
+      { id: 'dwyane-wade', nome: "Wade", posicoes: ["SG"], forca: 92 },
+      { id: 'eddie-jones', nome: "E. Jones", posicoes: ["SF"], forca: 82 },
+      { id: 'udonis-haslem', nome: "Haslem", posicoes: ["PF"], forca: 82 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 95 },
+      { id: 'keyon-dooling', nome: "Dooling", posicoes: ["PG"], forca: 73 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 82 },
+      { id: 'rasual-butler', nome: "Butler", posicoes: ["SF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 89 },
+      { id: 'vince-carter', nome: "Carter", posicoes: ["SF"], forca: 96 },
+      { id: 'nenad-krstic', nome: "Krstic", posicoes: ["PF"], forca: 77 },
+      { id: 'jason-collins', nome: "Collins", posicoes: ["C"], forca: 74 },
+      { id: 'richard-jefferson', nome: "Jefferson", posicoes: ["SF"], forca: 85 },
+      { id: 'travis-best', nome: "Best", posicoes: ["PG"], forca: 76 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 72 },
+      { id: 'jacque-vaughn', nome: "Vaughn", posicoes: ["SG"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["PG"], forca: 93 },
+      { id: 'andre-iguodala', nome: "Iguodala", posicoes: ["SG"], forca: 81 },
+      { id: 'kyle-korver', nome: "Korver", posicoes: ["SF"], forca: 81 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 77 },
+      { id: 'samuel-dalembert', nome: "Dalembert", posicoes: ["C"], forca: 78 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 74 },
+      { id: 'willie-green', nome: "Green", posicoes: ["SG"], forca: 72 },
+      { id: 'marc-jackson', nome: "Jackson", posicoes: ["C"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 90 },
+      { id: 'quentin-richardson', nome: "Richardson", posicoes: ["SG"], forca: 81 },
+      { id: 'jim-jackson', nome: "Jackson", posicoes: ["SF"], forca: 77 },
+      { id: 'shawn-marion', nome: "Marion", posicoes: ["PF"], forca: 91 },
+      { id: 'amare-stoudemire', nome: "Stoudemire", posicoes: ["C"], forca: 94 },
+      { id: 'joe-johnson', nome: "Johnson", posicoes: ["SF"], forca: 83 },
+      { id: 'steven-hunter', nome: "Hunter", posicoes: ["C"], forca: 76 },
+      { id: 'leandro-barbosa', nome: "Barbosa", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 87 },
+      { id: 'cuttino-mobley', nome: "Mobley", posicoes: ["SG"], forca: 82 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 85 },
+      { id: 'kenny-thomas', nome: "Thomas", posicoes: ["PF"], forca: 84 },
+      { id: 'brad-miller', nome: "Miller", posicoes: ["C"], forca: 89 },
+      { id: 'bobby-jackson', nome: "Jackson", posicoes: ["SG"], forca: 83 },
+      { id: 'darius-songaila', nome: "Songaila", posicoes: ["PF"], forca: 78 },
+      { id: 'maurice-evans', nome: "Evans", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 86 },
+      { id: 'manu-ginobili', nome: "Ginobili", posicoes: ["SG"], forca: 93 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 77 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 97 },
+      { id: 'nazr-mohammed', nome: "Mohammed", posicoes: ["C"], forca: 73 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 82 },
+      { id: 'brent-barry', nome: "Barry", posicoes: ["SG"], forca: 81 },
+      { id: 'beno-udrih', nome: "Udrih", posicoes: ["PG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'luke-ridnour', nome: "Ridnour", posicoes: ["PG"], forca: 81 },
+      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 91 },
+      { id: 'rashard-lewis', nome: "Lewis", posicoes: ["SF"], forca: 89 },
+      { id: 'reggie-evans', nome: "Evans", posicoes: ["PF"], forca: 78 },
+      { id: 'jerome-james', nome: "James", posicoes: ["C"], forca: 72 },
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["PG"], forca: 85 },
+      { id: 'nick-collison', nome: "Collison", posicoes: ["C"], forca: 77 },
+      { id: 'damien-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2004-05",
+    clube: "Washington Wizards",
+    jogadores: [
+      { id: 'gilbert-arenas', nome: "Arenas", posicoes: ["PG"], forca: 91 },
+      { id: 'larry-hughes', nome: "Hughes", posicoes: ["SG"], forca: 91 },
+      { id: 'jared-jeffries', nome: "Jeffries", posicoes: ["SF"], forca: 77 },
+      { id: 'antawn-jamison', nome: "Jamison", posicoes: ["PF"], forca: 83 },
+      { id: 'brendan-haywood', nome: "Haywood", posicoes: ["C"], forca: 81 },
+      { id: 'juan-dixon', nome: "Dixon", posicoes: ["SG"], forca: 78 },
+      { id: 'michael-ruffin', nome: "Ruffin", posicoes: ["C"], forca: 72 },
+      { id: 'etan-thomas', nome: "Thomas", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'chucky-atkins', nome: "Atkins", posicoes: ["PG"], forca: 80 },
+      { id: 'paul-pierce', nome: "Pierce", posicoes: ["SG"], forca: 88 },
+      { id: 'ricky-davis', nome: "Davis", posicoes: ["SF"], forca: 83 },
+      { id: 'walter-mccarty', nome: "McCarty", posicoes: ["PF"], forca: 78 },
+      { id: 'mark-blount', nome: "Blount", posicoes: ["C"], forca: 81 },
+      { id: 'jiri-welsch', nome: "Welsch", posicoes: ["SG"], forca: 78 },
+      { id: 'chris-mihm', nome: "Mihm", posicoes: ["C"], forca: 74 },
+      { id: 'marcus-banks', nome: "Banks", posicoes: ["PG"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 87 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SG"], forca: 86 },
+      { id: 'antawn-jamison', nome: "Jamison", posicoes: ["SF"], forca: 87 },
+      { id: 'antoine-walker', nome: "Walker", posicoes: ["PF"], forca: 82 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["C"], forca: 91 },
+      { id: 'marquis-daniels', nome: "Daniels", posicoes: ["SG"], forca: 84 },
+      { id: 'josh-howard', nome: "Howard", posicoes: ["SF"], forca: 81 },
+      { id: 'eduardo-najera', nome: "Najera", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'andre-miller', nome: "Miller", posicoes: ["PG"], forca: 86 },
+      { id: 'voshon-lenard', nome: "Lenard", posicoes: ["SG"], forca: 79 },
+      { id: 'carmelo-anthony', nome: "Anthony", posicoes: ["SF"], forca: 84 },
+      { id: 'nene', nome: "Nene", posicoes: ["PF"], forca: 81 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 85 },
+      { id: 'earl-boykins', nome: "Boykins", posicoes: ["SG"], forca: 82 },
+      { id: 'jon-barry', nome: "Barry", posicoes: ["SG"], forca: 80 },
+      { id: 'francisco-elson', nome: "Elson", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 88 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 84 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 82 },
+      { id: 'rasheed-wallace', nome: "R. Wallace", posicoes: ["PF"], forca: 88 },
+      { id: 'ben-wallace', nome: "B. Wallace", posicoes: ["C"], forca: 85 },
+      { id: 'corliss-williamson', nome: "Williamson", posicoes: ["PF"], forca: 77 },
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["SG"], forca: 75 },
+      { id: 'mehmet-okur', nome: "Okur", posicoes: ["PF"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'steve-francis', nome: "Francis", posicoes: ["PG"], forca: 84 },
+      { id: 'cuttino-mobley', nome: "Mobley", posicoes: ["SG"], forca: 83 },
+      { id: 'jim-jackson', nome: "J. Jackson", posicoes: ["SF"], forca: 80 },
+      { id: 'kelvin-cato', nome: "Cato", posicoes: ["PF"], forca: 80 },
+      { id: 'yao-ming', nome: "Ming", posicoes: ["C"], forca: 89 },
+      { id: 'maurice-taylor', nome: "Taylor", posicoes: ["PF"], forca: 78 },
+      { id: 'bostjan-nachbar', nome: "Nachbar", posicoes: ["SF"], forca: 72 },
+      { id: 'mark-jackson', nome: "M. Jackson", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'jamaal-tinsley', nome: "Tinsley", posicoes: ["PG"], forca: 85 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 85 },
+      { id: 'metta-world-peace', nome: "Peace", posicoes: ["SF"], forca: 88 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["PF"], forca: 88 },
+      { id: 'jeff-foster', nome: "Foster", posicoes: ["C"], forca: 82 },
+      { id: 'al-harrington', nome: "Harrington", posicoes: ["PF"], forca: 81 },
+      { id: 'anthony-johnson', nome: "Johnson", posicoes: ["PG"], forca: 76 },
+      { id: 'fred-jones', nome: "Jones", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 85 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 94 },
+      { id: 'devean-george', nome: "George", posicoes: ["SF"], forca: 78 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 86 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 93 },
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["SG"], forca: 76 },
+      { id: 'kareem-rush', nome: "Rush", posicoes: ["SG"], forca: 74 },
+      { id: 'slava-medvedenko', nome: "Medvedenko", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Memphis Grizzlies",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 84 },
+      { id: 'james-posey', nome: "Posey", posicoes: ["SG"], forca: 87 },
+      { id: 'mike-miller', nome: "Miller", posicoes: ["SF"], forca: 82 },
+      { id: 'pau-gasol', nome: "Gasol", posicoes: ["PF"], forca: 89 },
+      { id: 'lorenzen-wright', nome: "Wright", posicoes: ["C"], forca: 78 },
+      { id: 'bonzi-wells', nome: "Wells", posicoes: ["SG"], forca: 78 },
+      { id: 'stromile-swift', nome: "Swift", posicoes: ["PF"], forca: 82 },
+      { id: 'shane-battier', nome: "Battier", posicoes: ["SF"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'dwyane-wade', nome: "Wade", posicoes: ["PG"], forca: 85 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 86 },
+      { id: 'caron-butler', nome: "Butler", posicoes: ["SF"], forca: 75 },
+      { id: 'lamar-odom', nome: "Odom", posicoes: ["PF"], forca: 87 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["C"], forca: 77 },
+      { id: 'rafer-alston', nome: "Alston", posicoes: ["PG"], forca: 81 },
+      { id: 'udonis-haslem', nome: "Haslem", posicoes: ["PF"], forca: 78 },
+      { id: 'malik-allen', nome: "Allen", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'damon-jones', nome: "Jones", posicoes: ["PG"], forca: 80 },
+      { id: 'michael-redd', nome: "Redd", posicoes: ["SG"], forca: 88 },
+      { id: 'desmond-mason', nome: "Mason", posicoes: ["SF"], forca: 82 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["PF"], forca: 81 },
+      { id: 'brian-skinner', nome: "Skinner", posicoes: ["C"], forca: 79 },
+      { id: 'keith-van-horn', nome: "Van Horn", posicoes: ["SF"], forca: 86 },
+      { id: 'toni-kukoc', nome: "Kukoc", posicoes: ["PF"], forca: 82 },
+      { id: 'brevin-knight', nome: "Knight", posicoes: ["PG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 91 },
+      { id: 'trenton-hassell', nome: "Hassell", posicoes: ["SG"], forca: 75 },
+      { id: 'latrell-sprewell', nome: "Sprewell", posicoes: ["SF"], forca: 82 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 99 },
+      { id: 'ervin-johnson', nome: "Johnson", posicoes: ["C"], forca: 71 },
+      { id: 'fred-hoiberg', nome: "Hoiberg", posicoes: ["SG"], forca: 81 },
+      { id: 'wally-szczerbiak', nome: "Szczerbiak", posicoes: ["SF"], forca: 82 },
+      { id: 'mark-madsen', nome: "Madsen", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 89 },
+      { id: 'kerry-kittles', nome: "Kittles", posicoes: ["SG"], forca: 83 },
+      { id: 'richard-jefferson', nome: "Jefferson", posicoes: ["SF"], forca: 86 },
+      { id: 'kenyon-martin', nome: "Martin", posicoes: ["PF"], forca: 86 },
+      { id: 'jason-collins', nome: "Collins", posicoes: ["C"], forca: 76 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["PF"], forca: 78 },
+      { id: 'lucious-harris', nome: "Harris", posicoes: ["PG"], forca: 74 },
+      { id: 'aaron-williams', nome: "Williams", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "New Orleans Hornets",
+    jogadores: [
+      { id: 'baron-davis', nome: "Davis", posicoes: ["PG"], forca: 91 },
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["SG"], forca: 79 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SF"], forca: 73 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 82 },
+      { id: 'jamaal-magloire', nome: "Magloire", posicoes: ["C"], forca: 81 },
+      { id: 'darrell-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 84 },
+      { id: 'george-lynch', nome: "Lynch", posicoes: ["SF"], forca: 74 },
+      { id: 'david-west', nome: "West", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'stephon-marbury', nome: "Marbury", posicoes: ["PG"], forca: 89 },
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["SG"], forca: 76 },
+      { id: 'michael-sweetney', nome: "Sweetney", posicoes: ["SF"], forca: 76 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 80 },
+      { id: 'nazr-mohammed', nome: "Mohammed", posicoes: ["C"], forca: 83 },
+      { id: 'shandon-anderson', nome: "Anderson", posicoes: ["SG"], forca: 75 },
+      { id: 'frank-williams', nome: "Williams", posicoes: ["PG"], forca: 71 },
+      { id: 'vin-baker', nome: "Baker", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 87 },
+      { id: 'doug-christie', nome: "Christie", posicoes: ["SG"], forca: 81 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 91 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 83 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 83 },
+      { id: 'brad-miller', nome: "Miller", posicoes: ["PF"], forca: 87 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 76 },
+      { id: 'darius-songaila', nome: "Songaila", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2003-04",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 83 },
+      { id: 'manu-ginobili', nome: "Ginobili", posicoes: ["SG"], forca: 88 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 76 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 98 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 82 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 83 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 81 },
+      { id: 'devin-brown', nome: "Brown", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'tony-delk', nome: "Delk", posicoes: ["PG"], forca: 81 },
+      { id: 'paul-pierce', nome: "Pierce", posicoes: ["SG"], forca: 93 },
+      { id: 'walter-mccarty', nome: "McCarty", posicoes: ["SF"], forca: 77 },
+      { id: 'antoine-walker', nome: "Walker", posicoes: ["PF"], forca: 82 },
+      { id: 'tony-battie', nome: "Battie", posicoes: ["C"], forca: 80 },
+      { id: 'eric-williams', nome: "Williams", posicoes: ["SF"], forca: 79 },
+      { id: 'j-r-bremer', nome: "Bremer", posicoes: ["PG"], forca: 79 },
+      { id: 'mark-blount', nome: "Blount", posicoes: ["C"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 91 },
+      { id: 'nick-van-exel', nome: "Van Exel", posicoes: ["SG"], forca: 82 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SF"], forca: 86 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 97 },
+      { id: 'raef-lafrentz', nome: "LaFrentz", posicoes: ["C"], forca: 82 },
+      { id: 'eduardo-najera', nome: "Najera", posicoes: ["SF"], forca: 81 },
+      { id: 'raja-bell', nome: "Bell", posicoes: ["SG"], forca: 72 },
+      { id: 'shawn-bradley', nome: "Bradley", posicoes: ["C"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 89 },
+      { id: 'richard-hamilton', nome: "Hamilton", posicoes: ["SG"], forca: 85 },
+      { id: 'tayshaun-prince', nome: "Prince", posicoes: ["SF"], forca: 75 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 80 },
+      { id: 'ben-wallace', nome: "Wallace", posicoes: ["C"], forca: 85 },
+      { id: 'mehmet-okur', nome: "Okur", posicoes: ["PF"], forca: 78 },
+      { id: 'chucky-atkins', nome: "Atkins", posicoes: ["PG"], forca: 74 },
+      { id: 'michael-curry', nome: "Curry", posicoes: ["SF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'jamaal-tinsley', nome: "Tinsley", posicoes: ["PG"], forca: 80 },
+      { id: 'reggie-miller', nome: "R. Miller", posicoes: ["SG"], forca: 84 },
+      { id: 'metta-world-peace', nome: "Peace", posicoes: ["SF"], forca: 86 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["PF"], forca: 89 },
+      { id: 'brad-miller', nome: "B. Miller", posicoes: ["C"], forca: 87 },
+      { id: 'ron-mercer', nome: "Mercer", posicoes: ["SG"], forca: 74 },
+      { id: 'al-harrington', nome: "Harrington", posicoes: ["SF"], forca: 77 },
+      { id: 'austin-croshere', nome: "Croshere", posicoes: ["PF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 78 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 98 },
+      { id: 'devean-george', nome: "George", posicoes: ["SF"], forca: 77 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 79 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 98 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["PG"], forca: 73 },
+      { id: 'mark-madsen', nome: "Madsen", posicoes: ["PF"], forca: 70 },
+      { id: 'jannero-pargo', nome: "Pargo", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 87 },
+      { id: 'michael-redd', nome: "Redd", posicoes: ["SG"], forca: 89 },
+      { id: 'desmond-mason', nome: "D. Mason", posicoes: ["SF"], forca: 82 },
+      { id: 'toni-kukoc', nome: "Kukoc", posicoes: ["PF"], forca: 86 },
+      { id: 'anthony-mason', nome: "A. Mason", posicoes: ["C"], forca: 77 },
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 89 },
+      { id: 'tim-thomas', nome: "Thomas", posicoes: ["SF"], forca: 79 },
+      { id: 'ervin-johnson', nome: "Johnson", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'troy-hudson', nome: "Hudson", posicoes: ["PG"], forca: 81 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 78 },
+      { id: 'wally-szczerbiak', nome: "Szczerbiak", posicoes: ["SF"], forca: 84 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 98 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 81 },
+      { id: 'kendall-gill', nome: "Gill", posicoes: ["SG"], forca: 75 },
+      { id: 'marc-jackson', nome: "Jackson", posicoes: ["C"], forca: 73 },
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 93 },
+      { id: 'kerry-kittles', nome: "Kittles", posicoes: ["SG"], forca: 88 },
+      { id: 'richard-jefferson', nome: "Jefferson", posicoes: ["SF"], forca: 84 },
+      { id: 'kenyon-martin', nome: "Martin", posicoes: ["PF"], forca: 84 },
+      { id: 'jason-collins', nome: "Collins", posicoes: ["C"], forca: 75 },
+      { id: 'lucious-harris', nome: "Harris", posicoes: ["SG"], forca: 80 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["PF"], forca: 76 },
+      { id: 'aaron-williams', nome: "Williams", posicoes: ["C"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "New Orleans Hornets",
+    jogadores: [
+      { id: 'baron-davis', nome: "Davis", posicoes: ["PG"], forca: 86 },
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["SG"], forca: 83 },
+      { id: 'jamal-mashburn', nome: "Mashburn", posicoes: ["SF"], forca: 87 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 85 },
+      { id: 'jamaal-magloire', nome: "Magloire", posicoes: ["C"], forca: 80 },
+      { id: 'george-lynch', nome: "Lynch", posicoes: ["SG"], forca: 78 },
+      { id: 'robert-traylor', nome: "Traylor", posicoes: ["C"], forca: 76 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'darrell-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 81 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SG"], forca: 99 },
+      { id: 'gordan-giricek', nome: "Giricek", posicoes: ["SF"], forca: 80 },
+      { id: 'drew-gooden', nome: "Gooden", posicoes: ["PF"], forca: 81 },
+      { id: 'andrew-declercq', nome: "DeClercq", posicoes: ["C"], forca: 73 },
+      { id: 'pat-garrity', nome: "Garrity", posicoes: ["PF"], forca: 78 },
+      { id: 'jacque-vaughn', nome: "Vaughn", posicoes: ["PG"], forca: 73 },
+      { id: 'chris-whitney', nome: "Whitney", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 82 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 91 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SF"], forca: 81 },
+      { id: 'keith-van-horn', nome: "Van Horn", posicoes: ["PF"], forca: 83 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["C"], forca: 81 },
+      { id: 'kenny-thomas', nome: "Thomas", posicoes: ["PF"], forca: 81 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 71 },
+      { id: 'greg-buckner', nome: "Buckner", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'stephon-marbury', nome: "Marbury", posicoes: ["PG"], forca: 89 },
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["SG"], forca: 80 },
+      { id: 'shawn-marion', nome: "Marion", posicoes: ["SF"], forca: 92 },
+      { id: 'amare-stoudemire', nome: "Stoudemire", posicoes: ["PF"], forca: 81 },
+      { id: 'jake-voskuhl', nome: "Voskuhl", posicoes: ["C"], forca: 73 },
+      { id: 'joe-johnson', nome: "Johnson", posicoes: ["SG"], forca: 77 },
+      { id: 'scott-williams', nome: "Williams", posicoes: ["C"], forca: 70 },
+      { id: 'bo-outlaw', nome: "Outlaw", posicoes: ["C"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'damon-stoudamire', nome: "Stoudamire", posicoes: ["PG"], forca: 78 },
+      { id: 'bonzi-wells', nome: "Wells", posicoes: ["SG"], forca: 82 },
+      { id: 'ruben-patterson', nome: "Patterson", posicoes: ["SF"], forca: 78 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 87 },
+      { id: 'dale-davis', nome: "Davis", posicoes: ["C"], forca: 81 },
+      { id: 'zach-randolph', nome: "Randolph", posicoes: ["PF"], forca: 82 },
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["SG"], forca: 77 },
+      { id: 'jeff-mcinnis', nome: "McInnis", posicoes: ["PG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 85 },
+      { id: 'doug-christie', nome: "Christie", posicoes: ["SG"], forca: 84 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 88 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 90 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 83 },
+      { id: 'bobby-jackson', nome: "B. Jackson", posicoes: ["PG"], forca: 87 },
+      { id: 'jim-jackson', nome: "J. Jackson", posicoes: ["SF"], forca: 76 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 83 },
+      { id: 'stephen-jackson', nome: "Jackson", posicoes: ["SG"], forca: 82 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 77 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 97 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 84 },
+      { id: 'manu-ginobili', nome: "Ginobili", posicoes: ["SG"], forca: 81 },
+      { id: 'malik-rose', nome: "Rose", posicoes: ["PF"], forca: 81 },
+      { id: 'speedy-claxton', nome: "Claxton", posicoes: ["PG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2002-03",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 89 },
+      { id: 'calbert-cheaney', nome: "Cheaney", posicoes: ["SG"], forca: 75 },
+      { id: 'matt-harpring', nome: "Harpring", posicoes: ["SF"], forca: 86 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 91 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 77 },
+      { id: 'andrei-kirilenko', nome: "Kirilenko", posicoes: ["SF"], forca: 90 },
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 75 },
+      { id: 'tony-massenburg', nome: "Massenburg", posicoes: ["C"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'kenny-anderson', nome: "Anderson", posicoes: ["PG"], forca: 80 },
+      { id: 'paul-pierce', nome: "Pierce", posicoes: ["SG"], forca: 94 },
+      { id: 'eric-williams', nome: "Williams", posicoes: ["SF"], forca: 74 },
+      { id: 'antoine-walker', nome: "Walker", posicoes: ["PF"], forca: 86 },
+      { id: 'tony-battie', nome: "Battie", posicoes: ["C"], forca: 79 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["SF"], forca: 82 },
+      { id: 'tony-delk', nome: "Delk", posicoes: ["SG"], forca: 76 },
+      { id: 'walter-mccarty', nome: "McCarty", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'baron-davis', nome: "Davis", posicoes: ["PG"], forca: 88 },
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["SG"], forca: 77 },
+      { id: 'george-lynch', nome: "Lynch", posicoes: ["SF"], forca: 73 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["PF"], forca: 86 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["C"], forca: 81 },
+      { id: 'jamaal-magloire', nome: "Magloire", posicoes: ["C"], forca: 81 },
+      { id: 'lee-nailon', nome: "Nailon", posicoes: ["SF"], forca: 79 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 88 },
+      { id: 'nick-van-exel', nome: "Van Exel", posicoes: ["SG"], forca: 83 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SF"], forca: 85 },
+      { id: 'eduardo-najera', nome: "Najera", posicoes: ["PF"], forca: 79 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["C"], forca: 94 },
+      { id: 'raef-lafrentz', nome: "LaFrentz", posicoes: ["C"], forca: 82 },
+      { id: 'greg-buckner', nome: "Buckner", posicoes: ["SG"], forca: 78 },
+      { id: 'adrian-griffin', nome: "Griffin", posicoes: ["SG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'chucky-atkins', nome: "Atkins", posicoes: ["PG"], forca: 81 },
+      { id: 'michael-curry', nome: "Curry", posicoes: ["SG"], forca: 71 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SF"], forca: 87 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 80 },
+      { id: 'ben-wallace', nome: "Wallace", posicoes: ["C"], forca: 87 },
+      { id: 'corliss-williamson', nome: "Williamson", posicoes: ["SF"], forca: 82 },
+      { id: 'damon-jones', nome: "Jones", posicoes: ["PG"], forca: 75 },
+      { id: 'jon-barry', nome: "Barry", posicoes: ["SG"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'kevin-ollie', nome: "Ollie", posicoes: ["PG"], forca: 79 },
+      { id: 'reggie-miller', nome: "R. Miller", posicoes: ["SG"], forca: 85 },
+      { id: 'metta-world-peace', nome: "Peace", posicoes: ["SF"], forca: 81 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["PF"], forca: 84 },
+      { id: 'brad-miller', nome: "B. Miller", posicoes: ["C"], forca: 89 },
+      { id: 'ron-mercer', nome: "Mercer", posicoes: ["SG"], forca: 70 },
+      { id: 'jamaal-tinsley', nome: "Tinsley", posicoes: ["PG"], forca: 79 },
+      { id: 'jeff-foster', nome: "Foster", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 82 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 93 },
+      { id: 'rick-fox', nome: "Fox", posicoes: ["SF"], forca: 78 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 83 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 99 },
+      { id: 'devean-george', nome: "George", posicoes: ["SF"], forca: 78 },
+      { id: 'samaki-walker', nome: "Walker", posicoes: ["PF"], forca: 80 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'chauncey-billups', nome: "Billups", posicoes: ["PG"], forca: 85 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 79 },
+      { id: 'wally-szczerbiak', nome: "Szczerbiak", posicoes: ["SF"], forca: 85 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 94 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 78 },
+      { id: 'gary-trent', nome: "Trent", posicoes: ["PF"], forca: 77 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["C"], forca: 81 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 88 },
+      { id: 'kerry-kittles', nome: "Kittles", posicoes: ["SG"], forca: 85 },
+      { id: 'keith-van-horn', nome: "Van Horn", posicoes: ["SF"], forca: 83 },
+      { id: 'kenyon-martin', nome: "Martin", posicoes: ["PF"], forca: 82 },
+      { id: 'todd-macculloch', nome: "MacCulloch", posicoes: ["C"], forca: 83 },
+      { id: 'richard-jefferson', nome: "Jefferson", posicoes: ["SF"], forca: 79 },
+      { id: 'aaron-williams', nome: "Williams", posicoes: ["PF"], forca: 79 },
+      { id: 'lucious-harris', nome: "Harris", posicoes: ["SG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'darrell-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 85 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SG"], forca: 96 },
+      { id: 'monty-williams', nome: "Williams", posicoes: ["SF"], forca: 78 },
+      { id: 'pat-garrity', nome: "Garrity", posicoes: ["PF"], forca: 79 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["C"], forca: 80 },
+      { id: 'troy-hudson', nome: "Hudson", posicoes: ["PG"], forca: 79 },
+      { id: 'mike-miller', nome: "Miller", posicoes: ["SF"], forca: 82 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 81 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 93 },
+      { id: 'matt-harpring', nome: "Harpring", posicoes: ["SF"], forca: 80 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["PF"], forca: 83 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 82 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 84 },
+      { id: 'corie-blount', nome: "Blount", posicoes: ["PF"], forca: 74 },
+      { id: 'speedy-claxton', nome: "Claxton", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'damon-stoudamire', nome: "Stoudamire", posicoes: ["PG"], forca: 82 },
+      { id: 'bonzi-wells', nome: "Wells", posicoes: ["SG"], forca: 86 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 83 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 88 },
+      { id: 'dale-davis', nome: "Davis", posicoes: ["C"], forca: 83 },
+      { id: 'derek-anderson', nome: "Anderson", posicoes: ["SG"], forca: 83 },
+      { id: 'ruben-patterson', nome: "Patterson", posicoes: ["SF"], forca: 85 },
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'mike-bibby', nome: "Bibby", posicoes: ["PG"], forca: 82 },
+      { id: 'doug-christie', nome: "Christie", posicoes: ["SG"], forca: 84 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 81 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 94 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 85 },
+      { id: 'bobby-jackson', nome: "Jackson", posicoes: ["PG"], forca: 83 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 88 },
+      { id: 'scot-pollard', nome: "Pollard", posicoes: ["C"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'tony-parker', nome: "Parker", posicoes: ["PG"], forca: 78 },
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["SG"], forca: 80 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 75 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 98 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 88 },
+      { id: 'steven-smith', nome: "Smith", posicoes: ["SF"], forca: 84 },
+      { id: 'malik-rose', nome: "Rose", posicoes: ["PF"], forca: 79 },
+      { id: 'danny-ferry', nome: "Ferry", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 92 },
+      { id: 'brent-barry', nome: "Barry", posicoes: ["SG"], forca: 89 },
+      { id: 'desmond-mason', nome: "Mason", posicoes: ["SF"], forca: 79 },
+      { id: 'vladimir-radmanovic', nome: "Radmanovic", posicoes: ["PF"], forca: 78 },
+      { id: 'vin-baker', nome: "Baker", posicoes: ["C"], forca: 77 },
+      { id: 'randy-livingston', nome: "Livingston", posicoes: ["PG"], forca: 74 },
+      { id: 'rashard-lewis', nome: "Lewis", posicoes: ["SF"], forca: 87 },
+      { id: 'jerome-james', nome: "James", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Toronto Raptors",
+    jogadores: [
+      { id: 'alvin-williams', nome: "A. Williams", posicoes: ["PG"], forca: 81 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 76 },
+      { id: 'morris-peterson', nome: "Peterson", posicoes: ["SF"], forca: 82 },
+      { id: 'antonio-davis', nome: "Davis", posicoes: ["PF"], forca: 81 },
+      { id: 'keon-clark', nome: "Clark", posicoes: ["C"], forca: 81 },
+      { id: 'chris-childs', nome: "Childs", posicoes: ["PG"], forca: 72 },
+      { id: 'jerome-williams', nome: "J. Williams", posicoes: ["PF"], forca: 81 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2001-02",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 91 },
+      { id: 'bryon-russell', nome: "Russell", posicoes: ["SG"], forca: 75 },
+      { id: 'donyell-marshall', nome: "Marshall", posicoes: ["SF"], forca: 86 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 90 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 76 },
+      { id: 'andrei-kirilenko', nome: "Kirilenko", posicoes: ["SF"], forca: 87 },
+      { id: 'quincy-lewis', nome: "Lewis", posicoes: ["SG"], forca: 70 },
+      { id: 'rusty-larue', nome: "LaRue", posicoes: ["PG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'baron-davis', nome: "Davis", posicoes: ["PG"], forca: 85 },
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["SG"], forca: 83 },
+      { id: 'jamal-mashburn', nome: "Mashburn", posicoes: ["SF"], forca: 86 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["PF"], forca: 82 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["C"], forca: 79 },
+      { id: 'eddie-robinson', nome: "Robinson", posicoes: ["SF"], forca: 83 },
+      { id: 'jamaal-magloire', nome: "Magloire", posicoes: ["C"], forca: 74 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'steve-nash', nome: "Nash", posicoes: ["PG"], forca: 87 },
+      { id: 'howard-eisley', nome: "Eisley", posicoes: ["SG"], forca: 79 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SF"], forca: 87 },
+      { id: 'dirk-nowitzki', nome: "Nowitzki", posicoes: ["PF"], forca: 93 },
+      { id: 'shawn-bradley', nome: "Bradley", posicoes: ["C"], forca: 83 },
+      { id: 'juwan-howard', nome: "Howard", posicoes: ["PF"], forca: 82 },
+      { id: 'calvin-booth', nome: "Booth", posicoes: ["C"], forca: 84 },
+      { id: 'greg-buckner', nome: "Buckner", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'travis-best', nome: "Best", posicoes: ["PG"], forca: 83 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 86 },
+      { id: 'jalen-rose', nome: "Rose", posicoes: ["SF"], forca: 86 },
+      { id: 'austin-croshere', nome: "Croshere", posicoes: ["PF"], forca: 79 },
+      { id: 'jermaine-oneal', nome: "O'Neal", posicoes: ["C"], forca: 83 },
+      { id: 'jeff-foster', nome: "Foster", posicoes: ["C"], forca: 75 },
+      { id: 'al-harrington', nome: "Harrington", posicoes: ["PF"], forca: 74 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 81 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 94 },
+      { id: 'rick-fox', nome: "Fox", posicoes: ["SF"], forca: 81 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 80 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 99 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 76 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["SG"], forca: 77 },
+      { id: 'tyronn-lue', nome: "Lue", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'anthony-carter', nome: "Carter", posicoes: ["PG"], forca: 76 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 89 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 75 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 85 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 90 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["C"], forca: 83 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 77 },
+      { id: 'eddie-house', nome: "House", posicoes: ["PG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 86 },
+      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 93 },
+      { id: 'glenn-robinson', nome: "Robinson", posicoes: ["SF"], forca: 87 },
+      { id: 'tim-thomas', nome: "Thomas", posicoes: ["PF"], forca: 84 },
+      { id: 'ervin-johnson', nome: "Johnson", posicoes: ["C"], forca: 77 },
+      { id: 'scott-williams', nome: "Williams", posicoes: ["C"], forca: 76 },
+      { id: 'jason-caffey', nome: "Caffey", posicoes: ["PF"], forca: 76 },
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 88 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 79 },
+      { id: 'wally-szczerbiak', nome: "Szczerbiak", posicoes: ["SF"], forca: 82 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 94 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 72 },
+      { id: 'laphonso-ellis', nome: "Ellis", posicoes: ["PF"], forca: 80 },
+      { id: 'felipe-lopez', nome: "Lopez", posicoes: ["PG"], forca: 78 },
+      { id: 'reggie-slater', nome: "Slater", posicoes: ["PF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 78 },
+      { id: 'allan-houston', nome: "Houston", posicoes: ["SG"], forca: 84 },
+      { id: 'latrell-sprewell', nome: "Sprewell", posicoes: ["SF"], forca: 83 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 83 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 89 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 81 },
+      { id: 'charlie-ward', nome: "Ward", posicoes: ["PG"], forca: 82 },
+      { id: 'othella-harrington', nome: "Harrington", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'darrell-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 87 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SG"], forca: 96 },
+      { id: 'pat-garrity', nome: "Garrity", posicoes: ["SF"], forca: 73 },
+      { id: 'bo-outlaw', nome: "Outlaw", posicoes: ["PF"], forca: 84 },
+      { id: 'andrew-declercq', nome: "DeClercq", posicoes: ["C"], forca: 73 },
+      { id: 'mike-miller', nome: "Miller", posicoes: ["SF"], forca: 80 },
+      { id: 'troy-hudson', nome: "Hudson", posicoes: ["PG"], forca: 70 },
+      { id: 'dee-brown', nome: "Brown", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 80 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 96 },
+      { id: 'jumaine-jones', nome: "Jones", posicoes: ["SF"], forca: 77 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 77 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 86 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 83 },
+      { id: 'george-lynch', nome: "Lynch", posicoes: ["SF"], forca: 80 },
+      { id: 'raja-bell', nome: "Bell", posicoes: ["SG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 89 },
+      { id: 'tony-delk', nome: "Delk", posicoes: ["SG"], forca: 80 },
+      { id: 'shawn-marion', nome: "Marion", posicoes: ["SF"], forca: 90 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 83 },
+      { id: 'jake-tsakalidis', nome: "Tsakalidis", posicoes: ["C"], forca: 71 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SG"], forca: 76 },
+      { id: 'tom-gugliotta', nome: "Gugliotta", posicoes: ["PF"], forca: 74 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["SF"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'damon-stoudamire', nome: "Stoudamire", posicoes: ["PG"], forca: 83 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 77 },
+      { id: 'steven-smith', nome: "Smith", posicoes: ["SF"], forca: 88 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 90 },
+      { id: 'arvydas-sabonis', nome: "Sabonis", posicoes: ["C"], forca: 82 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 83 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 72 },
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 79 },
+      { id: 'doug-christie', nome: "Christie", posicoes: ["SG"], forca: 83 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 87 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 95 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 85 },
+      { id: 'bobby-jackson', nome: "Jackson", posicoes: ["PG"], forca: 78 },
+      { id: 'scot-pollard', nome: "Pollard", posicoes: ["C"], forca: 78 },
+      { id: 'hedo-turkoglu', nome: "Turkoglu", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["PG"], forca: 83 },
+      { id: 'derek-anderson', nome: "Anderson", posicoes: ["SG"], forca: 85 },
+      { id: 'danny-ferry', nome: "Ferry", posicoes: ["SF"], forca: 76 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 93 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 92 },
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 82 },
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 77 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Toronto Raptors",
+    jogadores: [
+      { id: 'chris-childs', nome: "Childs", posicoes: ["PG"], forca: 71 },
+      { id: 'alvin-williams', nome: "A. Williams", posicoes: ["SG"], forca: 82 },
+      { id: 'vince-carter', nome: "Carter", posicoes: ["SF"], forca: 97 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 77 },
+      { id: 'antonio-davis', nome: "Davis", posicoes: ["C"], forca: 81 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 77 },
+      { id: 'jerome-williams', nome: "J. Williams", posicoes: ["PF"], forca: 78 },
+      { id: 'morris-peterson', nome: "Peterson", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "2000-01",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 92 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 75 },
+      { id: 'bryon-russell', nome: "Russell", posicoes: ["SF"], forca: 82 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 95 },
+      { id: 'olden-polynice', nome: "Polynice", posicoes: ["C"], forca: 72 },
+      { id: 'donyell-marshall', nome: "Marshall", posicoes: ["SF"], forca: 88 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 77 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["PG"], forca: 82 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 90 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["SF"], forca: 82 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["PF"], forca: 86 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["C"], forca: 80 },
+      { id: 'brad-miller', nome: "Miller", posicoes: ["C"], forca: 81 },
+      { id: 'baron-davis', nome: "Davis", posicoes: ["PG"], forca: 77 },
+      { id: 'eddie-robinson', nome: "Robinson", posicoes: ["SF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 81 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SG"], forca: 86 },
+      { id: 'grant-hill', nome: "Hill", posicoes: ["SF"], forca: 94 },
+      { id: 'terry-mills', nome: "Mills", posicoes: ["PF"], forca: 78 },
+      { id: 'christian-laettner', nome: "Laettner", posicoes: ["C"], forca: 80 },
+      { id: 'michael-curry', nome: "Curry", posicoes: ["SG"], forca: 71 },
+      { id: 'jerome-williams', nome: "Williams", posicoes: ["PF"], forca: 83 },
+      { id: 'john-crotty', nome: "Crotty", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 85 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 86 },
+      { id: 'jalen-rose', nome: "Rose", posicoes: ["SF"], forca: 85 },
+      { id: 'austin-croshere', nome: "Croshere", posicoes: ["PF"], forca: 82 },
+      { id: 'dale-davis', nome: "Davis", posicoes: ["C"], forca: 83 },
+      { id: 'travis-best', nome: "Best", posicoes: ["PG"], forca: 81 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 81 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'ron-harper', nome: "Harper", posicoes: ["PG"], forca: 79 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 92 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 83 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 83 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 99 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 78 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["SG"], forca: 75 },
+      { id: 'rick-fox', nome: "Fox", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'anthony-carter', nome: "Carter", posicoes: ["PG"], forca: 75 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 80 },
+      { id: 'jamal-mashburn', nome: "Mashburn", posicoes: ["SF"], forca: 83 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 81 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 94 },
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 84 },
+      { id: 'clar-weatherspoon', nome: "Weatherspoon", posicoes: ["SF"], forca: 80 },
+      { id: 'bruce-bowen', nome: "Bowen", posicoes: ["SF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 88 },
+      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 90 },
+      { id: 'glenn-robinson', nome: "Robinson", posicoes: ["SF"], forca: 84 },
+      { id: 'mirsad-turkcan', nome: "Turkcan", posicoes: ["PF"], forca: 70 },
+      { id: 'ervin-johnson', nome: "Johnson", posicoes: ["C"], forca: 78 },
+      { id: 'darvin-ham', nome: "Ham", posicoes: ["SF"], forca: 79 },
+      { id: 'tim-thomas', nome: "Thomas", posicoes: ["SF"], forca: 80 },
+      { id: 'scott-williams', nome: "Williams", posicoes: ["C"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 90 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 79 },
+      { id: 'malik-sealy', nome: "Sealy", posicoes: ["SF"], forca: 80 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 94 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 74 },
+      { id: 'wally-szczerbiak', nome: "Szczerbiak", posicoes: ["SF"], forca: 82 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["C"], forca: 78 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'charlie-ward', nome: "Ward", posicoes: ["PG"], forca: 82 },
+      { id: 'allan-houston', nome: "Houston", posicoes: ["SG"], forca: 85 },
+      { id: 'latrell-sprewell', nome: "Sprewell", posicoes: ["SF"], forca: 84 },
+      { id: 'larry-johnson', nome: "Johnson", posicoes: ["PF"], forca: 80 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 83 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 85 },
+      { id: 'chris-childs', nome: "Childs", posicoes: ["PG"], forca: 74 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 79 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 90 },
+      { id: 'george-lynch', nome: "Lynch", posicoes: ["SF"], forca: 81 },
+      { id: 'theo-ratliff', nome: "Ratliff", posicoes: ["PF"], forca: 83 },
+      { id: 'matt-geiger', nome: "Geiger", posicoes: ["C"], forca: 75 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 80 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 81 },
+      { id: 'toni-kukoc', nome: "Kukoc", posicoes: ["SF"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 88 },
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["SG"], forca: 87 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["SF"], forca: 86 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["PF"], forca: 85 },
+      { id: 'luc-longley', nome: "Longley", posicoes: ["C"], forca: 71 },
+      { id: 'shawn-marion', nome: "Marion", posicoes: ["SF"], forca: 83 },
+      { id: 'corie-blount', nome: "Blount", posicoes: ["PF"], forca: 70 },
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'damon-stoudamire', nome: "Stoudamire", posicoes: ["PG"], forca: 82 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 75 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 86 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 86 },
+      { id: 'arvydas-sabonis', nome: "Sabonis", posicoes: ["C"], forca: 88 },
+      { id: 'steven-smith', nome: "Smith", posicoes: ["SF"], forca: 88 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["PF"], forca: 77 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 77 },
+      { id: 'nick-anderson', nome: "Anderson", posicoes: ["SG"], forca: 79 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 83 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 94 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 86 },
+      { id: 'jon-barry', nome: "Barry", posicoes: ["SG"], forca: 82 },
+      { id: 'tony-delk', nome: "Delk", posicoes: ["PG"], forca: 76 },
+      { id: 'corliss-williamson', nome: "Williamson", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 81 },
+      { id: 'antonio-daniels', nome: "Daniels", posicoes: ["SG"], forca: 80 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 73 },
+      { id: 'samaki-walker', nome: "Walker", posicoes: ["PF"], forca: 73 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 93 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 78 },
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 85 },
+      { id: 'malik-rose', nome: "Rose", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 94 },
+      { id: 'brent-barry', nome: "Barry", posicoes: ["SG"], forca: 83 },
+      { id: 'rashard-lewis', nome: "Lewis", posicoes: ["SF"], forca: 80 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 78 },
+      { id: 'vin-baker', nome: "Baker", posicoes: ["C"], forca: 78 },
+      { id: 'shammond-williams', nome: "Williams", posicoes: ["PG"], forca: 73 },
+      { id: 'ruben-patterson', nome: "Patterson", posicoes: ["SF"], forca: 85 },
+      { id: 'greg-foster', nome: "Foster", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Toronto Raptors",
+    jogadores: [
+      { id: 'muggsy-bogues', nome: "Bogues", posicoes: ["PG"], forca: 75 },
+      { id: 'doug-christie', nome: "Christie", posicoes: ["SG"], forca: 83 },
+      { id: 'vince-carter', nome: "Carter", posicoes: ["SF"], forca: 94 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 75 },
+      { id: 'antonio-davis', nome: "Davis", posicoes: ["C"], forca: 79 },
+      { id: 'tracy-mcgrady', nome: "McGrady", posicoes: ["SF"], forca: 88 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 72 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1999-00",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 92 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 84 },
+      { id: 'bryon-russell', nome: "Russell", posicoes: ["SF"], forca: 83 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 98 },
+      { id: 'olden-polynice', nome: "Polynice", posicoes: ["C"], forca: 75 },
+      { id: 'howard-eisley', nome: "Eisley", posicoes: ["PG"], forca: 77 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 77 },
+      { id: 'armen-gilliam', nome: "Gilliam", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 86 },
+      { id: 'ed-gray', nome: "Gray", posicoes: ["SG"], forca: 70 },
+      { id: 'steven-smith', nome: "Smith", posicoes: ["SF"], forca: 89 },
+      { id: 'grant-long', nome: "Long", posicoes: ["PF"], forca: 83 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 87 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 78 },
+      { id: 'chris-crawford', nome: "Crawford", posicoes: ["PF"], forca: 73 },
+      { id: 'anthony-johnson', nome: "Johnson", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 82 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 83 },
+      { id: 'grant-hill', nome: "Hill", posicoes: ["SF"], forca: 94 },
+      { id: 'jerome-williams', nome: "Williams", posicoes: ["PF"], forca: 84 },
+      { id: 'bison-dele', nome: "Dele", posicoes: ["C"], forca: 80 },
+      { id: 'jerry-stackhouse', nome: "Stackhouse", posicoes: ["SG"], forca: 81 },
+      { id: 'christian-laettner', nome: "Laettner", posicoes: ["PF"], forca: 79 },
+      { id: 'jud-buechler', nome: "Buechler", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'brent-price', nome: "Price", posicoes: ["PG"], forca: 79 },
+      { id: 'michael-dickerson', nome: "Dickerson", posicoes: ["SG"], forca: 77 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 85 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 91 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 90 },
+      { id: 'sam-mack', nome: "Mack", posicoes: ["SF"], forca: 84 },
+      { id: 'cuttino-mobley', nome: "Mobley", posicoes: ["PG"], forca: 78 },
+      { id: 'othella-harrington', nome: "Harrington", posicoes: ["PF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 85 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 88 },
+      { id: 'jalen-rose', nome: "Rose", posicoes: ["SF"], forca: 79 },
+      { id: 'dale-davis', nome: "D. Davis", posicoes: ["PF"], forca: 82 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 85 },
+      { id: 'antonio-davis', nome: "A. Davis", posicoes: ["PF"], forca: 82 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SF"], forca: 87 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 78 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SG"], forca: 87 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 82 },
+      { id: 'j-r-reid', nome: "Reid", posicoes: ["PF"], forca: 71 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 99 },
+      { id: 'rick-fox', nome: "Fox", posicoes: ["SF"], forca: 77 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 79 },
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 88 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 79 },
+      { id: 'jamal-mashburn', nome: "Mashburn", posicoes: ["SF"], forca: 82 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 82 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 93 },
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 85 },
+      { id: 'clar-weatherspoon', nome: "Weatherspoon", posicoes: ["SF"], forca: 81 },
+      { id: 'voshon-lenard', nome: "Lenard", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 89 },
+      { id: 'ray-allen', nome: "Allen", posicoes: ["SG"], forca: 87 },
+      { id: 'glenn-robinson', nome: "Robinson", posicoes: ["SF"], forca: 87 },
+      { id: 'armen-gilliam', nome: "Gilliam", posicoes: ["PF"], forca: 79 },
+      { id: 'ervin-johnson', nome: "Johnson", posicoes: ["C"], forca: 77 },
+      { id: 'tim-thomas', nome: "Thomas", posicoes: ["SF"], forca: 81 },
+      { id: 'michael-curry', nome: "Curry", posicoes: ["SF"], forca: 74 },
+      { id: 'haywoode-workman', nome: "Workman", posicoes: ["PG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 89 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 78 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 80 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 92 },
+      { id: 'joe-smith', nome: "Smith", posicoes: ["C"], forca: 82 },
+      { id: 'dean-garrett', nome: "Garrett", posicoes: ["C"], forca: 77 },
+      { id: 'malik-sealy', nome: "Sealy", posicoes: ["SF"], forca: 76 },
+      { id: 'rasho-nesterovic', nome: "Nesterovic", posicoes: ["C"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'charlie-ward', nome: "Ward", posicoes: ["PG"], forca: 81 },
+      { id: 'allan-houston', nome: "Houston", posicoes: ["SG"], forca: 80 },
+      { id: 'latrell-sprewell', nome: "Sprewell", posicoes: ["SF"], forca: 84 },
+      { id: 'larry-johnson', nome: "Johnson", posicoes: ["PF"], forca: 82 },
+      { id: 'marcus-camby', nome: "Camby", posicoes: ["C"], forca: 82 },
+      { id: 'chris-childs', nome: "Childs", posicoes: ["PG"], forca: 78 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 79 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'darrell-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 92 },
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["SG"], forca: 86 },
+      { id: 'nick-anderson', nome: "Anderson", posicoes: ["SF"], forca: 84 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 80 },
+      { id: 'ike-austin', nome: "Austin", posicoes: ["C"], forca: 82 },
+      { id: 'bo-outlaw', nome: "Outlaw", posicoes: ["PF"], forca: 80 },
+      { id: 'matt-harpring', nome: "Harpring", posicoes: ["SF"], forca: 78 },
+      { id: 'michael-doleac', nome: "Doleac", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 79 },
+      { id: 'allen-iverson', nome: "Iverson", posicoes: ["SG"], forca: 93 },
+      { id: 'george-lynch', nome: "Lynch", posicoes: ["SF"], forca: 80 },
+      { id: 'theo-ratliff', nome: "Ratliff", posicoes: ["PF"], forca: 83 },
+      { id: 'matt-geiger', nome: "Geiger", posicoes: ["C"], forca: 83 },
+      { id: 'larry-hughes', nome: "Hughes", posicoes: ["PG"], forca: 82 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 77 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 92 },
+      { id: 'rex-chapman', nome: "Chapman", posicoes: ["SG"], forca: 77 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["SF"], forca: 87 },
+      { id: 'tom-gugliotta', nome: "Gugliotta", posicoes: ["PF"], forca: 87 },
+      { id: 'luc-longley', nome: "Longley", posicoes: ["C"], forca: 77 },
+      { id: 'george-mccloud', nome: "McCloud", posicoes: ["SF"], forca: 80 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 81 },
+      { id: 'pat-garrity', nome: "Garrity", posicoes: ["PF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'damon-stoudamire', nome: "Stoudamire", posicoes: ["PG"], forca: 81 },
+      { id: 'isaiah-rider', nome: "Rider", posicoes: ["SG"], forca: 79 },
+      { id: 'walt-williams', nome: "Williams", posicoes: ["SF"], forca: 83 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["PF"], forca: 83 },
+      { id: 'arvydas-sabonis', nome: "Sabonis", posicoes: ["C"], forca: 88 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 84 },
+      { id: 'jim-jackson', nome: "Jackson", posicoes: ["SG"], forca: 79 },
+      { id: 'greg-anthony', nome: "Anthony", posicoes: ["PG"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'jason-williams', nome: "Williams", posicoes: ["PG"], forca: 79 },
+      { id: 'vernon-maxwell', nome: "Maxwell", posicoes: ["SG"], forca: 77 },
+      { id: 'corliss-williamson', nome: "Williamson", posicoes: ["SF"], forca: 79 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 87 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 85 },
+      { id: 'jon-barry', nome: "Barry", posicoes: ["SG"], forca: 82 },
+      { id: 'peja-stojakovic', nome: "Stojakovic", posicoes: ["SF"], forca: 78 },
+      { id: 'tariq-abdul-wahad', nome: "Abdul-Wahad", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 80 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SG"], forca: 83 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 79 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 92 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 94 },
+      { id: 'jaren-jackson', nome: "Jackson", posicoes: ["SG"], forca: 78 },
+      { id: 'malik-rose', nome: "Rose", posicoes: ["PF"], forca: 80 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1998-99",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 91 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 86 },
+      { id: 'bryon-russell', nome: "Russell", posicoes: ["SF"], forca: 82 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 96 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 80 },
+      { id: 'shandon-anderson', nome: "Anderson", posicoes: ["SG"], forca: 77 },
+      { id: 'howard-eisley', nome: "Eisley", posicoes: ["PG"], forca: 75 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 85 },
+      { id: 'eldridge-recasner', nome: "Recasner", posicoes: ["SG"], forca: 79 },
+      { id: 'steven-smith', nome: "Smith", posicoes: ["SF"], forca: 92 },
+      { id: 'alan-henderson', nome: "Henderson", posicoes: ["PF"], forca: 83 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 87 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 79 },
+      { id: 'christian-laettner', nome: "Laettner", posicoes: ["PF"], forca: 86 },
+      { id: 'chucky-brown', nome: "Brown", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["PG"], forca: 82 },
+      { id: 'bobby-phills', nome: "Phills", posicoes: ["SG"], forca: 79 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 85 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 84 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 87 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 79 },
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 77 },
+      { id: 'j-r-reid', nome: "Reid", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'ron-harper', nome: "Harper", posicoes: ["PG"], forca: 82 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 97 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 90 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["PF"], forca: 78 },
+      { id: 'luc-longley', nome: "Longley", posicoes: ["C"], forca: 79 },
+      { id: 'toni-kukoc', nome: "Kukoc", posicoes: ["SF"], forca: 86 },
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 80 },
+      { id: 'scott-burrell', nome: "Burrell", posicoes: ["SF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'brevin-knight', nome: "Knight", posicoes: ["PG"], forca: 85 },
+      { id: 'wesley-person', nome: "Person", posicoes: ["SG"], forca: 86 },
+      { id: 'cedric-henderson', nome: "Henderson", posicoes: ["SF"], forca: 77 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 84 },
+      { id: 'zydrunas-ilgauskas', nome: "Ilgauskas", posicoes: ["C"], forca: 85 },
+      { id: 'derek-anderson', nome: "Anderson", posicoes: ["SF"], forca: 83 },
+      { id: 'vitaly-potapenko', nome: "Potapenko", posicoes: ["C"], forca: 72 },
+      { id: 'bob-sura', nome: "Sura", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'matt-maloney', nome: "Maloney", posicoes: ["PG"], forca: 76 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 88 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 79 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 82 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 88 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SF"], forca: 76 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 88 },
+      { id: 'brent-price', nome: "Price", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 85 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 90 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SF"], forca: 86 },
+      { id: 'antonio-davis', nome: "A. Davis", posicoes: ["PF"], forca: 81 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 86 },
+      { id: 'dale-davis', nome: "D. Davis", posicoes: ["C"], forca: 82 },
+      { id: 'jalen-rose', nome: "Rose", posicoes: ["SF"], forca: 78 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'nick-van-exel', nome: "Van Exel", posicoes: ["PG"], forca: 86 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 88 },
+      { id: 'rick-fox', nome: "Fox", posicoes: ["SF"], forca: 79 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 83 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 97 },
+      { id: 'derek-fisher', nome: "Fisher", posicoes: ["PG"], forca: 77 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SF"], forca: 85 },
+      { id: 'corie-blount', nome: "Blount", posicoes: ["PF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 91 },
+      { id: 'voshon-lenard', nome: "Lenard", posicoes: ["SG"], forca: 81 },
+      { id: 'jamal-mashburn', nome: "Mashburn", posicoes: ["SF"], forca: 81 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 82 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 89 },
+      { id: 'eric-murdock', nome: "Murdock", posicoes: ["PG"], forca: 81 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 81 },
+      { id: 'keith-askins', nome: "Askins", posicoes: ["SF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'stephon-marbury', nome: "Marbury", posicoes: ["PG"], forca: 83 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 82 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 81 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["PF"], forca: 90 },
+      { id: 'stanley-roberts', nome: "Roberts", posicoes: ["C"], forca: 73 },
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 83 },
+      { id: 'tom-hammonds', nome: "Hammonds", posicoes: ["PF"], forca: 74 },
+      { id: 'micheal-williams', nome: "Williams", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'sherman-douglas', nome: "Douglas", posicoes: ["PG"], forca: 80 },
+      { id: 'kerry-kittles', nome: "Kittles", posicoes: ["SG"], forca: 87 },
+      { id: 'kendall-gill', nome: "Gill", posicoes: ["SF"], forca: 83 },
+      { id: 'chris-gatling', nome: "Gatling", posicoes: ["PF"], forca: 80 },
+      { id: 'jayson-williams', nome: "Williams", posicoes: ["C"], forca: 84 },
+      { id: 'keith-van-horn', nome: "Van Horn", posicoes: ["PF"], forca: 82 },
+      { id: 'lucious-harris', nome: "Harris", posicoes: ["SG"], forca: 73 },
+      { id: 'rony-seikaly', nome: "Seikaly", posicoes: ["C"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'charlie-ward', nome: "Ward", posicoes: ["PG"], forca: 85 },
+      { id: 'allan-houston', nome: "Houston", posicoes: ["SG"], forca: 83 },
+      { id: 'larry-johnson', nome: "Johnson", posicoes: ["SF"], forca: 83 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 81 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 92 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 82 },
+      { id: 'chris-childs', nome: "Childs", posicoes: ["PG"], forca: 78 },
+      { id: 'chris-mills', nome: "Mills", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 85 },
+      { id: 'rex-chapman', nome: "Chapman", posicoes: ["SG"], forca: 82 },
+      { id: 'george-mccloud', nome: "McCloud", posicoes: ["SF"], forca: 77 },
+      { id: 'antonio-mcdyess', nome: "McDyess", posicoes: ["PF"], forca: 87 },
+      { id: 'mark-bryant', nome: "Bryant", posicoes: ["C"], forca: 73 },
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 82 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["SF"], forca: 84 },
+      { id: 'dennis-scott', nome: "Scott", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'damon-stoudamire', nome: "Stoudamire", posicoes: ["PG"], forca: 81 },
+      { id: 'isaiah-rider', nome: "Rider", posicoes: ["SG"], forca: 83 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["SF"], forca: 83 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 83 },
+      { id: 'arvydas-sabonis', nome: "Sabonis", posicoes: ["C"], forca: 90 },
+      { id: 'walt-williams', nome: "Williams", posicoes: ["SF"], forca: 79 },
+      { id: 'kelvin-cato', nome: "Cato", posicoes: ["C"], forca: 75 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 81 },
+      { id: 'jaren-jackson', nome: "Jackson", posicoes: ["SG"], forca: 76 },
+      { id: 'monty-williams', nome: "Williams", posicoes: ["SF"], forca: 75 },
+      { id: 'tim-duncan', nome: "Duncan", posicoes: ["PF"], forca: 92 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 98 },
+      { id: 'vinny-del-negro', nome: "Del Negro", posicoes: ["SG"], forca: 77 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["PF"], forca: 75 },
+      { id: 'will-perdue', nome: "Perdue", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 91 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 84 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 87 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 79 },
+      { id: 'vin-baker', nome: "Baker", posicoes: ["C"], forca: 86 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 75 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SF"], forca: 84 },
+      { id: 'greg-anthony', nome: "Anthony", posicoes: ["PG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1997-98",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 90 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 88 },
+      { id: 'bryon-russell', nome: "Russell", posicoes: ["SF"], forca: 80 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 98 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 76 },
+      { id: 'shandon-anderson', nome: "Anderson", posicoes: ["SG"], forca: 80 },
+      { id: 'howard-eisley', nome: "Eisley", posicoes: ["PG"], forca: 78 },
+      { id: 'greg-foster', nome: "Foster", posicoes: ["C"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 92 },
+      { id: 'eldridge-recasner', nome: "Recasner", posicoes: ["SG"], forca: 76 },
+      { id: 'steven-smith', nome: "Smith", posicoes: ["SF"], forca: 88 },
+      { id: 'christian-laettner', nome: "Laettner", posicoes: ["PF"], forca: 87 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 86 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 78 },
+      { id: 'alan-henderson', nome: "Henderson", posicoes: ["PF"], forca: 76 },
+      { id: 'henry-james', nome: "James", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'tony-delk', nome: "Delk", posicoes: ["PG"], forca: 77 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 83 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 88 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 88 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 85 },
+      { id: 'muggsy-bogues', nome: "Bogues", posicoes: ["PG"], forca: 82 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 82 },
+      { id: 'matt-geiger', nome: "Geiger", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'ron-harper', nome: "Harper", posicoes: ["PG"], forca: 82 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 92 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["PF"], forca: 80 },
+      { id: 'luc-longley', nome: "Longley", posicoes: ["C"], forca: 78 },
+      { id: 'toni-kukoc', nome: "Kukoc", posicoes: ["SF"], forca: 89 },
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 84 },
+      { id: 'bison-dele', nome: "Dele", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 81 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 84 },
+      { id: 'grant-hill', nome: "Hill", posicoes: ["SF"], forca: 97 },
+      { id: 'terry-mills', nome: "Mills", posicoes: ["PF"], forca: 84 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["C"], forca: 81 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 80 },
+      { id: 'grant-long', nome: "Long", posicoes: ["PF"], forca: 76 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["C"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'matt-maloney', nome: "Maloney", posicoes: ["PG"], forca: 79 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 90 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 82 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 93 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 91 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 77 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SF"], forca: 80 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["SG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Los Angeles Clippers",
+    jogadores: [
+      { id: 'darrick-martin', nome: "Martin", posicoes: ["PG"], forca: 83 },
+      { id: 'brent-barry', nome: "Barry", posicoes: ["SG"], forca: 79 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["SF"], forca: 80 },
+      { id: 'loy-vaught', nome: "Vaught", posicoes: ["PF"], forca: 81 },
+      { id: 'lorenzen-wright', nome: "Wright", posicoes: ["C"], forca: 76 },
+      { id: 'malik-sealy', nome: "Sealy", posicoes: ["SG"], forca: 80 },
+      { id: 'bo-outlaw', nome: "Outlaw", posicoes: ["PF"], forca: 84 },
+      { id: 'lamond-murray', nome: "Murray", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'nick-van-exel', nome: "Van Exel", posicoes: ["PG"], forca: 83 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 87 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["SF"], forca: 84 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["PF"], forca: 82 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 97 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 79 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 79 },
+      { id: 'kobe-bryant', nome: "Bryant", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 92 },
+      { id: 'voshon-lenard', nome: "Lenard", posicoes: ["SG"], forca: 84 },
+      { id: 'jamal-mashburn', nome: "Mashburn", posicoes: ["SF"], forca: 81 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["PF"], forca: 80 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 89 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SF"], forca: 83 },
+      { id: 'ike-austin', nome: "Austin", posicoes: ["C"], forca: 80 },
+      { id: 'keith-askins', nome: "Askins", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Minnesota Timberwolves",
+    jogadores: [
+      { id: 'stephon-marbury', nome: "Marbury", posicoes: ["PG"], forca: 82 },
+      { id: 'doug-west', nome: "West", posicoes: ["SG"], forca: 73 },
+      { id: 'kevin-garnett', nome: "Garnett", posicoes: ["SF"], forca: 86 },
+      { id: 'tom-gugliotta', nome: "Gugliotta", posicoes: ["PF"], forca: 87 },
+      { id: 'dean-garrett', nome: "Garrett", posicoes: ["C"], forca: 83 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 75 },
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 78 },
+      { id: 'james-robinson', nome: "Robinson", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'chris-childs', nome: "Childs", posicoes: ["PG"], forca: 78 },
+      { id: 'allan-houston', nome: "Houston", posicoes: ["SG"], forca: 79 },
+      { id: 'larry-johnson', nome: "Johnson", posicoes: ["SF"], forca: 82 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 82 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 89 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 85 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 78 },
+      { id: 'charlie-ward', nome: "Ward", posicoes: ["PG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 91 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 76 },
+      { id: 'dennis-scott', nome: "Scott", posicoes: ["SF"], forca: 80 },
+      { id: 'derek-strong', nome: "Strong", posicoes: ["PF"], forca: 77 },
+      { id: 'dan-schayes', nome: "Schayes", posicoes: ["C"], forca: 78 },
+      { id: 'darrell-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 80 },
+      { id: 'nick-anderson', nome: "Anderson", posicoes: ["SG"], forca: 82 },
+      { id: 'rony-seikaly', nome: "Seikaly", posicoes: ["C"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 92 },
+      { id: 'rex-chapman', nome: "Chapman", posicoes: ["SG"], forca: 82 },
+      { id: 'cedric-ceballos', nome: "Ceballos", posicoes: ["SF"], forca: 81 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 84 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["C"], forca: 80 },
+      { id: 'jason-kidd', nome: "Kidd", posicoes: ["PG"], forca: 86 },
+      { id: 'wesley-person', nome: "Person", posicoes: ["SG"], forca: 84 },
+      { id: 'wayman-tisdale', nome: "Tisdale", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'kenny-anderson', nome: "Anderson", posicoes: ["PG"], forca: 89 },
+      { id: 'isaiah-rider', nome: "Rider", posicoes: ["SG"], forca: 81 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["SF"], forca: 81 },
+      { id: 'rasheed-wallace', nome: "Wallace", posicoes: ["PF"], forca: 85 },
+      { id: 'arvydas-sabonis', nome: "Sabonis", posicoes: ["C"], forca: 90 },
+      { id: 'chris-dudley', nome: "Dudley", posicoes: ["C"], forca: 75 },
+      { id: 'gary-trent', nome: "Trent", posicoes: ["PF"], forca: 82 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 92 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 87 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 87 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 86 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["C"], forca: 85 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 77 },
+      { id: 'david-wingate', nome: "Wingate", posicoes: ["SG"], forca: 72 },
+      { id: 'eric-snow', nome: "Snow", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 92 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 88 },
+      { id: 'bryon-russell', nome: "Russell", posicoes: ["SF"], forca: 82 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 99 },
+      { id: 'greg-ostertag', nome: "Ostertag", posicoes: ["C"], forca: 80 },
+      { id: 'greg-foster', nome: "Foster", posicoes: ["C"], forca: 70 },
+      { id: 'shandon-anderson', nome: "Anderson", posicoes: ["SG"], forca: 72 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1996-97",
+    clube: "Washington Bullets",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 87 },
+      { id: 'calbert-cheaney', nome: "Cheaney", posicoes: ["SG"], forca: 76 },
+      { id: 'juwan-howard', nome: "Howard", posicoes: ["SF"], forca: 83 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["PF"], forca: 92 },
+      { id: 'gheorghe-muresan', nome: "Muresan", posicoes: ["C"], forca: 81 },
+      { id: 'tracy-murray', nome: "Murray", posicoes: ["SF"], forca: 81 },
+      { id: 'harvey-grant', nome: "Grant", posicoes: ["PF"], forca: 74 },
+      { id: 'chris-whitney', nome: "Whitney", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 89 },
+      { id: 'steve-smith', nome: "Smith", posicoes: ["SG"], forca: 84 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SF"], forca: 82 },
+      { id: 'grant-long', nome: "Long", posicoes: ["PF"], forca: 83 },
+      { id: 'christian-laettner', nome: "Laettner", posicoes: ["C"], forca: 82 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 80 },
+      { id: 'alan-henderson', nome: "Henderson", posicoes: ["PF"], forca: 73 },
+      { id: 'ken-norman', nome: "Norman", posicoes: ["SF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 84 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 92 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["PF"], forca: 79 },
+      { id: 'luc-longley', nome: "Longley", posicoes: ["C"], forca: 77 },
+      { id: 'toni-kukoc', nome: "Kukoč", posicoes: ["SF"], forca: 90 },
+      { id: 'ron-harper', nome: "Harper", posicoes: ["PG"], forca: 83 },
+      { id: 'bill-wennington', nome: "Wennington", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 96 },
+      { id: 'bobby-phills', nome: "Phills", posicoes: ["SG"], forca: 84 },
+      { id: 'chris-mills', nome: "Mills", posicoes: ["SF"], forca: 82 },
+      { id: 'danny-ferry', nome: "Ferry", posicoes: ["PF"], forca: 81 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["C"], forca: 79 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SF"], forca: 83 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 74 },
+      { id: 'bob-sura', nome: "Sura", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["PG"], forca: 82 },
+      { id: 'allan-houston', nome: "Houston", posicoes: ["SG"], forca: 84 },
+      { id: 'grant-hill', nome: "Hill", posicoes: ["SF"], forca: 91 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 82 },
+      { id: 'theo-ratliff', nome: "Ratliff", posicoes: ["C"], forca: 78 },
+      { id: 'lindsey-hunter', nome: "Hunter", posicoes: ["PG"], forca: 79 },
+      { id: 'terry-mills', nome: "Mills", posicoes: ["PF"], forca: 79 },
+      { id: 'don-reid', nome: "Reid", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 83 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 89 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["SF"], forca: 83 },
+      { id: 'chucky-brown', nome: "Brown", posicoes: ["PF"], forca: 78 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 95 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 82 },
+      { id: 'kenny-smith', nome: "Smith", posicoes: ["PG"], forca: 78 },
+      { id: 'mark-bryant', nome: "Bryant", posicoes: ["PF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 84 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 90 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 83 },
+      { id: 'dale-davis', nome: "D. Davis", posicoes: ["PF"], forca: 81 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 85 },
+      { id: 'antonio-davis', nome: "A. Davis", posicoes: ["PF"], forca: 79 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 79 },
+      { id: 'haywoode-workman', nome: "Workman", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'nick-van-exel', nome: "Van Exel", posicoes: ["PG"], forca: 83 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 86 },
+      { id: 'cedric-ceballos', nome: "Ceballos", posicoes: ["SF"], forca: 89 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["PF"], forca: 85 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 84 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 80 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 77 },
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PF"], forca: 90 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 88 },
+      { id: 'rex-chapman', nome: "Chapman", posicoes: ["SG"], forca: 81 },
+      { id: 'keith-askins', nome: "Askins", posicoes: ["SF"], forca: 78 },
+      { id: 'kurt-thomas', nome: "Thomas", posicoes: ["PF"], forca: 78 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 92 },
+      { id: 'walt-williams', nome: "Williams", posicoes: ["SF"], forca: 84 },
+      { id: 'sasha-danilovic', nome: "Danilović", posicoes: ["SG"], forca: 81 },
+      { id: 'chris-gatling', nome: "Gatling", posicoes: ["PF"], forca: 90 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 81 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 82 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["SF"], forca: 84 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 82 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 88 },
+      { id: 'hubert-davis', nome: "Davis", posicoes: ["SG"], forca: 83 },
+      { id: 'j-r-reid', nome: "Reid", posicoes: ["PF"], forca: 75 },
+      { id: 'charlie-ward', nome: "Ward", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 95 },
+      { id: 'nick-anderson', nome: "Anderson", posicoes: ["SG"], forca: 85 },
+      { id: 'dennis-scott', nome: "Scott", posicoes: ["SF"], forca: 85 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 85 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 94 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["PG"], forca: 74 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 70 },
+      { id: 'joe-wolf', nome: "Wolf", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 91 },
+      { id: 'wesley-person', nome: "Person", posicoes: ["SG"], forca: 79 },
+      { id: 'michael-finley', nome: "Finley", posicoes: ["SF"], forca: 81 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 94 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["C"], forca: 77 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["SF"], forca: 78 },
+      { id: 'elliot-perry', nome: "Perry", posicoes: ["PG"], forca: 80 },
+      { id: 'wayman-tisdale', nome: "Tisdale", posicoes: ["PF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 88 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 80 },
+      { id: 'clifford-robinson', nome: "C. Robinson", posicoes: ["SF"], forca: 86 },
+      { id: 'harvey-grant', nome: "Grant", posicoes: ["PF"], forca: 77 },
+      { id: 'chris-dudley', nome: "Dudley", posicoes: ["C"], forca: 77 },
+      { id: 'arvydas-sabonis', nome: "Sabonis", posicoes: ["C"], forca: 94 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 77 },
+      { id: 'james-robinson', nome: "J. Robinson", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'tyus-edney', nome: "Edney", posicoes: ["PG"], forca: 78 },
+      { id: 'mitch-richmond', nome: "Richmond", posicoes: ["SG"], forca: 89 },
+      { id: 'billy-owens', nome: "Owens", posicoes: ["SF"], forca: 79 },
+      { id: 'brian-grant', nome: "Grant", posicoes: ["PF"], forca: 81 },
+      { id: 'olden-polynice', nome: "Polynice", posicoes: ["C"], forca: 80 },
+      { id: 'michael-smith', nome: "Smith", posicoes: ["PF"], forca: 79 },
+      { id: 'sarunas-marciulionis', nome: "Marčiulionis", posicoes: ["SG"], forca: 82 },
+      { id: 'bobby-hurley', nome: "Hurley", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 84 },
+      { id: 'vinny-del-negro', nome: "Del Negro", posicoes: ["SG"], forca: 83 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 85 },
+      { id: 'charles-smith', nome: "Smith", posicoes: ["PF"], forca: 78 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 99 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["SF"], forca: 82 },
+      { id: 'will-perdue', nome: "Perdue", posicoes: ["C"], forca: 76 },
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 90 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 85 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 86 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 90 },
+      { id: 'ervin-johnson', nome: "Johnson", posicoes: ["C"], forca: 76 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 83 },
+      { id: 'vincent-askew', nome: "Askew", posicoes: ["SG"], forca: 79 },
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1995-96",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 92 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 88 },
+      { id: 'david-benoit', nome: "Benoit", posicoes: ["SF"], forca: 79 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 97 },
+      { id: 'felton-spencer', nome: "Spencer", posicoes: ["C"], forca: 71 },
+      { id: 'adam-keefe', nome: "Keefe", posicoes: ["PF"], forca: 77 },
+      { id: 'chris-morris', nome: "Morris", posicoes: ["SG"], forca: 81 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 90 },
+      { id: 'steve-smith', nome: "Smith", posicoes: ["SG"], forca: 84 },
+      { id: 'ken-norman', nome: "Norman", posicoes: ["SF"], forca: 80 },
+      { id: 'grant-long', nome: "Long", posicoes: ["PF"], forca: 80 },
+      { id: 'andrew-lang', nome: "Lang", posicoes: ["C"], forca: 78 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 83 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 80 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'sherman-douglas', nome: "Douglas", posicoes: ["PG"], forca: 84 },
+      { id: 'dee-brown', nome: "Brown", posicoes: ["SG"], forca: 84 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 83 },
+      { id: 'dino-radja', nome: "Radja", posicoes: ["PF"], forca: 84 },
+      { id: 'eric-montross', nome: "Montross", posicoes: ["C"], forca: 76 },
+      { id: 'david-wesley', nome: "Wesley", posicoes: ["PG"], forca: 80 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["SF"], forca: 76 },
+      { id: 'derek-strong', nome: "Strong", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'muggsy-bogues', nome: "Bogues", posicoes: ["PG"], forca: 84 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 85 },
+      { id: 'scott-burrell', nome: "Burrell", posicoes: ["SF"], forca: 83 },
+      { id: 'larry-johnson', nome: "Johnson", posicoes: ["PF"], forca: 86 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 87 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 83 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 72 },
+      { id: 'greg-sutton', nome: "Sutton", posicoes: ["PG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 83 },
+      { id: 'ron-harper', nome: "Harper", posicoes: ["SG"], forca: 77 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 95 },
+      { id: 'corie-blount', nome: "Blount", posicoes: ["PF"], forca: 72 },
+      { id: 'will-perdue', nome: "Perdue", posicoes: ["C"], forca: 78 },
+      { id: 'toni-kukoc', nome: "Kukoč", posicoes: ["SF"], forca: 89 },
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 81 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 92 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 87 },
+      { id: 'bobby-phills', nome: "Phills", posicoes: ["SG"], forca: 78 },
+      { id: 'chris-mills', nome: "Mills", posicoes: ["SF"], forca: 78 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["PF"], forca: 82 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["C"], forca: 81 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["C"], forca: 79 },
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 90 },
+      { id: 'danny-ferry', nome: "Ferry", posicoes: ["PF"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'mahmoud-abdul-rauf', nome: "Abdul-Rauf", posicoes: ["PG"], forca: 85 },
+      { id: 'bryant-stith', nome: "Stith", posicoes: ["SG"], forca: 81 },
+      { id: 'reggie-williams', nome: "Williams", posicoes: ["SF"], forca: 85 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["PF"], forca: 81 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 84 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SF"], forca: 78 },
+      { id: 'jalen-rose', nome: "Rose", posicoes: ["SF"], forca: 81 },
+      { id: 'robert-pack', nome: "Pack", posicoes: ["PG"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'kenny-smith', nome: "Smith", posicoes: ["PG"], forca: 84 },
+      { id: 'vernon-maxwell', nome: "Maxwell", posicoes: ["SG"], forca: 78 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 80 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["PF"], forca: 82 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 95 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 92 },
+      { id: 'sam-cassell', nome: "Cassell", posicoes: ["PG"], forca: 82 },
+      { id: 'carl-herrera', nome: "Herrera", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 81 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 91 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 84 },
+      { id: 'dale-davis', nome: "D. Davis", posicoes: ["PF"], forca: 82 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 85 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["PG"], forca: 81 },
+      { id: 'antonio-davis', nome: "A. Davis", posicoes: ["PF"], forca: 76 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'nick-van-exel', nome: "Van Exel", posicoes: ["PG"], forca: 83 },
+      { id: 'eddie-jones', nome: "Jones", posicoes: ["SG"], forca: 85 },
+      { id: 'cedric-ceballos', nome: "Ceballos", posicoes: ["SF"], forca: 87 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["PF"], forca: 80 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 89 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 77 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 82 },
+      { id: 'sam-bowie', nome: "Bowie", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 80 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 82 },
+      { id: 'charles-smith', nome: "Smith", posicoes: ["SF"], forca: 80 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 83 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 91 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 81 },
+      { id: 'hubert-davis', nome: "Davis", posicoes: ["SG"], forca: 81 },
+      { id: 'anthony-bonner', nome: "Bonner", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 90 },
+      { id: 'nick-anderson', nome: "Anderson", posicoes: ["SG"], forca: 87 },
+      { id: 'donald-royal', nome: "Royal", posicoes: ["SF"], forca: 77 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 84 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 98 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["PG"], forca: 75 },
+      { id: 'dennis-scott', nome: "Scott", posicoes: ["SF"], forca: 85 },
+      { id: 'anthony-bowie', nome: "Bowie", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'elliot-perry', nome: "Perry", posicoes: ["PG"], forca: 84 },
+      { id: 'wesley-person', nome: "Person", posicoes: ["SG"], forca: 80 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SF"], forca: 84 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 95 },
+      { id: 'joe-kleine', nome: "Kleine", posicoes: ["C"], forca: 70 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["SF"], forca: 80 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 85 },
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 89 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 91 },
+      { id: 'aaron-mckie', nome: "McKie", posicoes: ["SG"], forca: 78 },
+      { id: 'clifford-robinson', nome: "C. Robinson", posicoes: ["SF"], forca: 88 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 79 },
+      { id: 'chris-dudley', nome: "Dudley", posicoes: ["C"], forca: 75 },
+      { id: 'harvey-grant', nome: "Grant", posicoes: ["PF"], forca: 79 },
+      { id: 'james-robinson', nome: "J. Robinson", posicoes: ["PG"], forca: 74 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 83 },
+      { id: 'vinny-del-negro', nome: "Del Negro", posicoes: ["SG"], forca: 81 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 85 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["PF"], forca: 83 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 99 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["SF"], forca: 79 },
+      { id: 'j-r-reid', nome: "Reid", posicoes: ["PF"], forca: 76 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 91 },
+      { id: 'kendall-gill', nome: "Gill", posicoes: ["SG"], forca: 82 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 90 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 88 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["C"], forca: 85 },
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 82 },
+      { id: 'vincent-askew', nome: "Askew", posicoes: ["SG"], forca: 80 },
+      { id: 'sarunas-marciulionis', nome: "Marčiulionis", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1994-95",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 95 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 88 },
+      { id: 'david-benoit', nome: "Benoit", posicoes: ["SF"], forca: 80 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 95 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["C"], forca: 77 },
+      { id: 'felton-spencer', nome: "Spencer", posicoes: ["C"], forca: 76 },
+      { id: 'adam-keefe', nome: "Keefe", posicoes: ["SF"], forca: 78 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 90 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 86 },
+      { id: 'duane-ferrell', nome: "Ferrell", posicoes: ["SF"], forca: 78 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 85 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 76 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 83 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 81 },
+      { id: 'andrew-lang', nome: "Lang", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 81 },
+      { id: 'pete-myers', nome: "Myers", posicoes: ["SG"], forca: 76 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 95 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 88 },
+      { id: 'bill-wennington', nome: "Wennington", posicoes: ["C"], forca: 76 },
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 81 },
+      { id: 'toni-kukoc', nome: "Kukoč", posicoes: ["SF"], forca: 82 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 93 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 83 },
+      { id: 'chris-mills', nome: "Mills", posicoes: ["SF"], forca: 78 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["PF"], forca: 84 },
+      { id: 'brad-daugherty', nome: "Daugherty", posicoes: ["C"], forca: 86 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 83 },
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 79 },
+      { id: 'bobby-phills', nome: "Phills", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'mahmoud-abdul-rauf', nome: "Abdul-Rauf", posicoes: ["PG"], forca: 84 },
+      { id: 'bryant-stith', nome: "Stith", posicoes: ["SG"], forca: 80 },
+      { id: 'reggie-williams', nome: "Williams", posicoes: ["SF"], forca: 81 },
+      { id: 'laphonso-ellis', nome: "Ellis", posicoes: ["PF"], forca: 83 },
+      { id: 'dikembe-mutombo', nome: "Mutombo", posicoes: ["C"], forca: 86 },
+      { id: 'robert-pack', nome: "Pack", posicoes: ["PG"], forca: 79 },
+      { id: 'bison-dele', nome: "Dele", posicoes: ["C"], forca: 80 },
+      { id: 'rodney-rogers', nome: "Rogers", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Golden State Warriors",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 79 },
+      { id: 'latrell-sprewell', nome: "Sprewell", posicoes: ["SG"], forca: 85 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SF"], forca: 84 },
+      { id: 'billy-owens', nome: "Owens", posicoes: ["PF"], forca: 82 },
+      { id: 'chris-webber', nome: "Webber", posicoes: ["C"], forca: 90 },
+      { id: 'victor-alexander', nome: "Alexander", posicoes: ["C"], forca: 76 },
+      { id: 'chris-gatling', nome: "Gatling", posicoes: ["C"], forca: 81 },
+      { id: 'jeff-grayer', nome: "Grayer", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'kenny-smith', nome: "Smith", posicoes: ["PG"], forca: 81 },
+      { id: 'vernon-maxwell', nome: "Maxwell", posicoes: ["SG"], forca: 80 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["SF"], forca: 83 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 82 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 96 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 80 },
+      { id: 'carl-herrera', nome: "Herrera", posicoes: ["PF"], forca: 72 },
+      { id: 'scott-brooks', nome: "Brooks", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'haywoode-workman', nome: "Workman", posicoes: ["PG"], forca: 79 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 90 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 81 },
+      { id: 'dale-davis', nome: "D. Davis", posicoes: ["PF"], forca: 83 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 87 },
+      { id: 'antonio-davis', nome: "A. Davis", posicoes: ["PF"], forca: 79 },
+      { id: 'pooh-richardson', nome: "Richardson", posicoes: ["PG"], forca: 79 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'bimbo-coles', nome: "Coles", posicoes: ["PG"], forca: 79 },
+      { id: 'steve-smith', nome: "Smith", posicoes: ["SG"], forca: 86 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 87 },
+      { id: 'grant-long', nome: "Long", posicoes: ["PF"], forca: 81 },
+      { id: 'rony-seikaly', nome: "Seikaly", posicoes: ["C"], forca: 83 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["SG"], forca: 81 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["PF"], forca: 80 },
+      { id: 'harold-miner', nome: "Miner", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'kenny-anderson', nome: "Anderson", posicoes: ["PG"], forca: 87 },
+      { id: 'kevin-edwards', nome: "Edwards", posicoes: ["SG"], forca: 81 },
+      { id: 'chris-morris', nome: "Morris", posicoes: ["SF"], forca: 83 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["PF"], forca: 90 },
+      { id: 'p-j-brown', nome: "Brown", posicoes: ["C"], forca: 79 },
+      { id: 'armen-gilliam', nome: "Gilliam", posicoes: ["PF"], forca: 84 },
+      { id: 'benoit-benjamin', nome: "Benjamin", posicoes: ["C"], forca: 78 },
+      { id: 'johnny-newman', nome: "Newman", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'greg-anthony', nome: "Anthony", posicoes: ["PG"], forca: 81 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 86 },
+      { id: 'charles-smith', nome: "Smith", posicoes: ["SF"], forca: 77 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 83 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 93 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 77 },
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 82 },
+      { id: 'hubert-davis', nome: "Davis", posicoes: ["SG"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Orlando Magic",
+    jogadores: [
+      { id: 'anfernee-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 86 },
+      { id: 'nick-anderson', nome: "Anderson", posicoes: ["SG"], forca: 85 },
+      { id: 'dennis-scott', nome: "Scott", posicoes: ["SF"], forca: 82 },
+      { id: 'jeff-turner', nome: "Turner", posicoes: ["PF"], forca: 71 },
+      { id: 'shaquille-oneal', nome: "O'Neal", posicoes: ["C"], forca: 98 },
+      { id: 'scott-skiles', nome: "Skiles", posicoes: ["PG"], forca: 78 },
+      { id: 'donald-royal', nome: "Royal", posicoes: ["SF"], forca: 78 },
+      { id: 'larry-krystkowiak', nome: "Krystkowiak", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 89 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 82 },
+      { id: 'cedric-ceballos', nome: "Ceballos", posicoes: ["SF"], forca: 88 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 83 },
+      { id: 'oliver-miller', nome: "Miller", posicoes: ["C"], forca: 87 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 92 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 78 },
+      { id: 'mark-west', nome: "West", posicoes: ["C"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 88 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 87 },
+      { id: 'harvey-grant', nome: "Grant", posicoes: ["SF"], forca: 78 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 80 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["C"], forca: 85 },
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 84 },
+      { id: 'mark-bryant', nome: "Bryant", posicoes: ["C"], forca: 72 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'negele-knight', nome: "Knight", posicoes: ["PG"], forca: 79 },
+      { id: 'willie-anderson', nome: "Anderson", posicoes: ["SG"], forca: 81 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SF"], forca: 82 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["PF"], forca: 80 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 99 },
+      { id: 'vinny-del-negro', nome: "Del Negro", posicoes: ["SG"], forca: 81 },
+      { id: 'j-r-reid', nome: "Reid", posicoes: ["PF"], forca: 77 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 87 },
+      { id: 'kendall-gill', nome: "Gill", posicoes: ["SG"], forca: 83 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 82 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 91 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["C"], forca: 76 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 82 },
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 86 },
+      { id: 'vincent-askew', nome: "Askew", posicoes: ["SG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1993-94",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 94 },
+      { id: 'jay-humphries', nome: "Humphries", posicoes: ["SG"], forca: 75 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 78 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 93 },
+      { id: 'felton-spencer', nome: "Spencer", posicoes: ["C"], forca: 76 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 78 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 86 },
+      { id: 'david-benoit', nome: "Benoit", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 86 },
+      { id: 'stacey-augmon', nome: "Augmon", posicoes: ["SG"], forca: 81 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 95 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 82 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 76 },
+      { id: 'duane-ferrell', nome: "Ferrell", posicoes: ["SF"], forca: 77 },
+      { id: 'adam-keefe', nome: "Keefe", posicoes: ["PF"], forca: 76 },
+      { id: 'paul-graham', nome: "Graham", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dee-brown', nome: "Brown", posicoes: ["PG"], forca: 85 },
+      { id: 'reggie-lewis', nome: "Lewis", posicoes: ["SG"], forca: 86 },
+      { id: 'kevin-gamble', nome: "Gamble", posicoes: ["SF"], forca: 83 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["PF"], forca: 82 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 85 },
+      { id: 'sherman-douglas', nome: "Douglas", posicoes: ["PG"], forca: 78 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 79 },
+      { id: 'alaa-abdelnaby', nome: "Abdelnaby", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Charlotte Hornets",
+    jogadores: [
+      { id: 'muggsy-bogues', nome: "Bogues", posicoes: ["PG"], forca: 81 },
+      { id: 'kendall-gill', nome: "Gill", posicoes: ["SG"], forca: 81 },
+      { id: 'johnny-newman', nome: "Newman", posicoes: ["SF"], forca: 81 },
+      { id: 'larry-johnson', nome: "Johnson", posicoes: ["PF"], forca: 87 },
+      { id: 'alonzo-mourning', nome: "Mourning", posicoes: ["C"], forca: 87 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 83 },
+      { id: 'david-wingate', nome: "Wingate", posicoes: ["SF"], forca: 76 },
+      { id: 'kenny-gattison', nome: "Gattison", posicoes: ["PF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 81 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 89 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 85 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 70 },
+      { id: 'scott-williams', nome: "Williams", posicoes: ["PF"], forca: 77 },
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 72 },
+      { id: 'rodney-mccray', nome: "McCray", posicoes: ["SF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 91 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 82 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 78 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 88 },
+      { id: 'brad-daugherty', nome: "Daugherty", posicoes: ["C"], forca: 91 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["C"], forca: 80 },
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 81 },
+      { id: 'danny-ferry', nome: "Ferry", posicoes: ["PF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'kenny-smith', nome: "Smith", posicoes: ["PG"], forca: 85 },
+      { id: 'vernon-maxwell', nome: "Maxwell", posicoes: ["SG"], forca: 81 },
+      { id: 'robert-horry', nome: "Horry", posicoes: ["SF"], forca: 79 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 80 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 98 },
+      { id: 'carl-herrera', nome: "Herrera", posicoes: ["PF"], forca: 78 },
+      { id: 'scott-brooks', nome: "Brooks", posicoes: ["PG"], forca: 79 },
+      { id: 'matt-bullard', nome: "Bullard", posicoes: ["PF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'pooh-richardson', nome: "Richardson", posicoes: ["PG"], forca: 81 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 90 },
+      { id: 'george-mccloud', nome: "McCloud", posicoes: ["SF"], forca: 75 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["PF"], forca: 88 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 79 },
+      { id: 'dale-davis', nome: "Davis", posicoes: ["PF"], forca: 82 },
+      { id: 'vern-fleming', nome: "Fleming", posicoes: ["PG"], forca: 80 },
+      { id: 'sam-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Los Angeles Clippers",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 84 },
+      { id: 'ron-harper', nome: "Harper", posicoes: ["SG"], forca: 85 },
+      { id: 'ken-norman', nome: "Norman", posicoes: ["SF"], forca: 82 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 88 },
+      { id: 'stanley-roberts', nome: "Roberts", posicoes: ["C"], forca: 78 },
+      { id: 'john-williams', nome: "Williams", posicoes: ["SF"], forca: 76 },
+      { id: 'gary-grant', nome: "Grant", posicoes: ["PG"], forca: 75 },
+      { id: 'loy-vaught', nome: "Vaught", posicoes: ["PF"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 83 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 80 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 82 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 83 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 84 },
+      { id: 'anthony-peeler', nome: "Peeler", posicoes: ["SG"], forca: 78 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["PF"], forca: 77 },
+      { id: 'tony-smith', nome: "Smith", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'kenny-anderson', nome: "Anderson", posicoes: ["PG"], forca: 85 },
+      { id: 'drazen-petrovic', nome: "Petrović", posicoes: ["SG"], forca: 86 },
+      { id: 'chris-morris', nome: "Morris", posicoes: ["SF"], forca: 86 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["PF"], forca: 90 },
+      { id: 'sam-bowie', nome: "Bowie", posicoes: ["C"], forca: 79 },
+      { id: 'rumeal-robinson', nome: "Robinson", posicoes: ["PG"], forca: 77 },
+      { id: 'chris-dudley', nome: "Dudley", posicoes: ["C"], forca: 72 },
+      { id: 'rafael-addison', nome: "Addison", posicoes: ["SF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 83 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 86 },
+      { id: 'charles-smith', nome: "Smith", posicoes: ["SF"], forca: 82 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 80 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 90 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 80 },
+      { id: 'greg-anthony', nome: "Anthony", posicoes: ["PG"], forca: 82 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 86 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 85 },
+      { id: 'richard-dumas', nome: "Dumas", posicoes: ["SF"], forca: 85 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 97 },
+      { id: 'mark-west', nome: "West", posicoes: ["C"], forca: 74 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 82 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 79 },
+      { id: 'cedric-ceballos', nome: "Ceballos", posicoes: ["SF"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 86 },
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["SG"], forca: 86 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 80 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 87 },
+      { id: 'kevin-duckworth', nome: "Duckworth", posicoes: ["C"], forca: 76 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 78 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 91 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'avery-johnson', nome: "Johnson", posicoes: ["PG"], forca: 83 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SG"], forca: 83 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 83 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["PF"], forca: 82 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 95 },
+      { id: 'j-r-reid', nome: "Reid", posicoes: ["PF"], forca: 77 },
+      { id: 'lloyd-daniels', nome: "Daniels", posicoes: ["SG"], forca: 77 },
+      { id: 'vinny-del-negro', nome: "Del Negro", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 85 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 87 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 83 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 87 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["C"], forca: 80 },
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 85 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SF"], forca: 82 },
+      { id: 'dana-barros', nome: "Barros", posicoes: ["PG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1992-93",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 92 },
+      { id: 'jeff-malone', nome: "J. Malone", posicoes: ["SG"], forca: 78 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 81 },
+      { id: 'karl-malone', nome: "K. Malone", posicoes: ["PF"], forca: 97 },
+      { id: 'mike-brown', nome: "Brown", posicoes: ["C"], forca: 71 },
+      { id: 'jay-humphries', nome: "Humphries", posicoes: ["SG"], forca: 76 },
+      { id: 'david-benoit', nome: "Benoit", posicoes: ["SF"], forca: 74 },
+      { id: 'larry-krystkowiak', nome: "Krystkowiak", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'john-bagley', nome: "Bagley", posicoes: ["PG"], forca: 78 },
+      { id: 'reggie-lewis', nome: "Lewis", posicoes: ["SG"], forca: 87 },
+      { id: 'kevin-gamble', nome: "Gamble", posicoes: ["SF"], forca: 82 },
+      { id: 'ed-pinckney', nome: "Pinckney", posicoes: ["PF"], forca: 83 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 85 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 91 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 85 },
+      { id: 'rick-fox', nome: "Fox", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 77 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 92 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 90 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 75 },
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 80 },
+      { id: 'stacey-king', nome: "King", posicoes: ["PF"], forca: 76 },
+      { id: 'will-perdue', nome: "Perdue", posicoes: ["C"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 92 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 81 },
+      { id: 'mike-sanders', nome: "Sanders", posicoes: ["SF"], forca: 80 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 91 },
+      { id: 'brad-daugherty', nome: "Daugherty", posicoes: ["C"], forca: 92 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["C"], forca: 87 },
+      { id: 'john-battle', nome: "Battle", posicoes: ["SG"], forca: 74 },
+      { id: 'terrell-brandon', nome: "Brandon", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 84 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 84 },
+      { id: 'orlando-woolridge', nome: "Woolridge", posicoes: ["SF"], forca: 81 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["PF"], forca: 85 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 79 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["PF"], forca: 82 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 77 },
+      { id: 'darrell-walker', nome: "Walker", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Golden State Warriors",
+    jogadores: [
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 88 },
+      { id: 'sarunas-marciulionis', nome: "Marčiulionis", posicoes: ["SG"], forca: 86 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SF"], forca: 90 },
+      { id: 'billy-owens', nome: "Owens", posicoes: ["PF"], forca: 82 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["C"], forca: 77 },
+      { id: 'mario-elie', nome: "Elie", posicoes: ["SG"], forca: 79 },
+      { id: 'vincent-askew', nome: "Askew", posicoes: ["SG"], forca: 78 },
+      { id: 'victor-alexander', nome: "Alexander", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'micheal-williams', nome: "Williams", posicoes: ["PG"], forca: 87 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 87 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["SF"], forca: 82 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["PF"], forca: 88 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 81 },
+      { id: 'vern-fleming', nome: "Fleming", posicoes: ["PG"], forca: 76 },
+      { id: 'dale-davis', nome: "Davis", posicoes: ["PF"], forca: 76 },
+      { id: 'lasalle-thompson', nome: "Thompson", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Los Angeles Clippers",
+    jogadores: [
+      { id: 'gary-grant', nome: "Grant", posicoes: ["PG"], forca: 80 },
+      { id: 'ron-harper', nome: "Harper", posicoes: ["SG"], forca: 84 },
+      { id: 'ken-norman', nome: "Norman", posicoes: ["SF"], forca: 81 },
+      { id: 'danny-manning', nome: "Manning", posicoes: ["PF"], forca: 89 },
+      { id: 'olden-polynice', nome: "Polynice", posicoes: ["C"], forca: 78 },
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 81 },
+      { id: 'loy-vaught', nome: "Vaught", posicoes: ["PF"], forca: 77 },
+      { id: 'charles-smith', nome: "Smith", posicoes: ["SF"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 84 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 83 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 85 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 83 },
+      { id: 'elden-campbell', nome: "Campbell", posicoes: ["C"], forca: 78 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 85 },
+      { id: 'terry-teagle', nome: "Teagle", posicoes: ["SG"], forca: 77 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Miami Heat",
+    jogadores: [
+      { id: 'bimbo-coles', nome: "Coles", posicoes: ["PG"], forca: 79 },
+      { id: 'steve-smith', nome: "Smith", posicoes: ["SG"], forca: 78 },
+      { id: 'glen-rice', nome: "Rice", posicoes: ["SF"], forca: 86 },
+      { id: 'grant-long', nome: "Long", posicoes: ["PF"], forca: 83 },
+      { id: 'rony-seikaly', nome: "Seikaly", posicoes: ["C"], forca: 82 },
+      { id: 'kevin-edwards', nome: "Edwards", posicoes: ["PG"], forca: 79 },
+      { id: 'willie-burton', nome: "Burton", posicoes: ["SF"], forca: 78 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'mookie-blaylock', nome: "Blaylock", posicoes: ["PG"], forca: 83 },
+      { id: 'drazen-petrovic', nome: "Petrović", posicoes: ["SG"], forca: 84 },
+      { id: 'chris-morris', nome: "Morris", posicoes: ["SF"], forca: 82 },
+      { id: 'derrick-coleman', nome: "Coleman", posicoes: ["PF"], forca: 87 },
+      { id: 'sam-bowie', nome: "Bowie", posicoes: ["C"], forca: 82 },
+      { id: 'chris-dudley', nome: "Dudley", posicoes: ["C"], forca: 77 },
+      { id: 'terry-mills', nome: "Mills", posicoes: ["PF"], forca: 77 },
+      { id: 'kenny-anderson', nome: "Anderson", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 86 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 79 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["SF"], forca: 80 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 78 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 93 },
+      { id: 'anthony-mason', nome: "Mason", posicoes: ["PF"], forca: 77 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 85 },
+      { id: 'greg-anthony', nome: "Anthony", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 89 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 89 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SF"], forca: 87 },
+      { id: 'tim-perry', nome: "Perry", posicoes: ["PF"], forca: 80 },
+      { id: 'andrew-lang', nome: "Lang", posicoes: ["C"], forca: 80 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 81 },
+      { id: 'mark-west', nome: "West", posicoes: ["C"], forca: 75 },
+      { id: 'negele-knight', nome: "Knight", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 88 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 97 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 83 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 82 },
+      { id: 'kevin-duckworth', nome: "Duckworth", posicoes: ["C"], forca: 75 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["SF"], forca: 81 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 81 },
+      { id: 'alaa-abdelnaby', nome: "Abdelnaby", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 85 },
+      { id: 'willie-anderson', nome: "Anderson", posicoes: ["SG"], forca: 82 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 82 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 84 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 99 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["PF"], forca: 78 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 76 },
+      { id: 'sidney-green', nome: "Green", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 80 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 86 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SF"], forca: 82 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["PF"], forca: 82 },
+      { id: 'benoit-benjamin', nome: "Benjamin", posicoes: ["C"], forca: 79 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 82 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 87 },
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1991-92",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 95 },
+      { id: 'jeff-malone', nome: "J. Malone", posicoes: ["SG"], forca: 81 },
+      { id: 'blue-edwards', nome: "Edwards", posicoes: ["SF"], forca: 81 },
+      { id: 'karl-malone', nome: "K. Malone", posicoes: ["PF"], forca: 95 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 76 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 80 },
+      { id: 'mike-brown', nome: "Brown", posicoes: ["C"], forca: 75 },
+      { id: 'david-benoit', nome: "Benoit", posicoes: ["SF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 84 },
+      { id: 'john-battle', nome: "Battle", posicoes: ["SG"], forca: 81 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 93 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 80 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 75 },
+      { id: 'spud-webb', nome: "Webb", posicoes: ["PG"], forca: 83 },
+      { id: 'moses-malone', nome: "Malone", posicoes: ["C"], forca: 82 },
+      { id: 'duane-ferrell', nome: "Ferrell", posicoes: ["SF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["PG"], forca: 83 },
+      { id: 'reggie-lewis', nome: "Lewis", posicoes: ["SG"], forca: 84 },
+      { id: 'kevin-gamble', nome: "Gamble", posicoes: ["SF"], forca: 84 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 89 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 87 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 90 },
+      { id: 'dee-brown', nome: "Brown", posicoes: ["PG"], forca: 79 },
+      { id: 'ed-pinckney', nome: "Pinckney", posicoes: ["PF"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 80 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 91 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 85 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 76 },
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 78 },
+      { id: 'stacey-king', nome: "King", posicoes: ["PF"], forca: 72 },
+      { id: 'cliff-levingston', nome: "Levingston", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 86 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 87 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["SF"], forca: 80 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["PF"], forca: 81 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 82 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 80 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 84 },
+      { id: 'james-edwards', nome: "Edwards", posicoes: ["C"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Golden State Warriors",
+    jogadores: [
+      { id: 'tim-hardaway', nome: "Hardaway", posicoes: ["PG"], forca: 91 },
+      { id: 'mitch-richmond', nome: "Richmond", posicoes: ["SG"], forca: 86 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SF"], forca: 92 },
+      { id: 'tom-tolbert', nome: "Tolbert", posicoes: ["PF"], forca: 74 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["C"], forca: 73 },
+      { id: 'rod-higgins', nome: "Higgins", posicoes: ["SF"], forca: 81 },
+      { id: 'sarunas-marciulionis', nome: "Marčiulionis", posicoes: ["SG"], forca: 80 },
+      { id: 'tyrone-hill', nome: "Hill", posicoes: ["PF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'kenny-smith', nome: "K. Smith", posicoes: ["PG"], forca: 87 },
+      { id: 'vernon-maxwell', nome: "Maxwell", posicoes: ["SG"], forca: 82 },
+      { id: 'buck-johnson', nome: "Johnson", posicoes: ["SF"], forca: 79 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 85 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 94 },
+      { id: 'larry-smith', nome: "L. Smith", posicoes: ["PF"], forca: 76 },
+      { id: 'sleepy-floyd', nome: "Floyd", posicoes: ["PG"], forca: 83 },
+      { id: 'david-wood', nome: "Wood", posicoes: ["SF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'vern-fleming', nome: "Fleming", posicoes: ["PG"], forca: 84 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 91 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["SF"], forca: 82 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["PF"], forca: 86 },
+      { id: 'lasalle-thompson', nome: "Thompson", posicoes: ["C"], forca: 76 },
+      { id: 'micheal-williams', nome: "Williams", posicoes: ["PG"], forca: 87 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 79 },
+      { id: 'mike-sanders', nome: "Sanders", posicoes: ["SF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 97 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 82 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 87 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 82 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 85 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 80 },
+      { id: 'terry-teagle', nome: "Teagle", posicoes: ["SG"], forca: 74 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'jay-humphries', nome: "Humphries", posicoes: ["PG"], forca: 85 },
+      { id: 'alvin-robertson', nome: "Robertson", posicoes: ["SG"], forca: 88 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 71 },
+      { id: 'fred-roberts', nome: "Roberts", posicoes: ["PF"], forca: 79 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["C"], forca: 80 },
+      { id: 'jack-sikma', nome: "Sikma", posicoes: ["C"], forca: 80 },
+      { id: 'frank-brickowski', nome: "Brickowski", posicoes: ["PF"], forca: 82 },
+      { id: 'jeff-grayer', nome: "Grayer", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 81 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 80 },
+      { id: 'kiki-vandeweghe', nome: "Vandeweghe", posicoes: ["SF"], forca: 81 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 79 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 93 },
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 85 },
+      { id: 'john-starks', nome: "Starks", posicoes: ["SG"], forca: 79 },
+      { id: 'trent-tucker', nome: "Tucker", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'rickey-green', nome: "Green", posicoes: ["PG"], forca: 78 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 89 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["SF"], forca: 99 },
+      { id: 'armen-gilliam', nome: "Gilliam", posicoes: ["PF"], forca: 79 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["C"], forca: 77 },
+      { id: 'ron-anderson', nome: "Anderson", posicoes: ["SF"], forca: 80 },
+      { id: 'manute-bol', nome: "Bol", posicoes: ["C"], forca: 73 },
+      { id: 'andre-turner', nome: "Turner", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "Johnson", posicoes: ["PG"], forca: 94 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 87 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SF"], forca: 85 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 82 },
+      { id: 'mark-west', nome: "West", posicoes: ["C"], forca: 81 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["SF"], forca: 81 },
+      { id: 'andrew-lang', nome: "Lang", posicoes: ["C"], forca: 79 },
+      { id: 'kurt-rambis', nome: "Rambis", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 93 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 94 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 84 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 81 },
+      { id: 'kevin-duckworth', nome: "Duckworth", posicoes: ["C"], forca: 77 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 80 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 84 },
+      { id: 'mark-bryant', nome: "Bryant", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 85 },
+      { id: 'willie-anderson', nome: "Anderson", posicoes: ["SG"], forca: 81 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 82 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 83 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 99 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SG"], forca: 78 },
+      { id: 'sidney-green', nome: "Green", posicoes: ["PF"], forca: 74 },
+      { id: 'dave-greenwood', nome: "Greenwood", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gary-payton', nome: "Payton", posicoes: ["PG"], forca: 80 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 84 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 83 },
+      { id: 'shawn-kemp', nome: "Kemp", posicoes: ["PF"], forca: 83 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["C"], forca: 78 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 82 },
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["SG"], forca: 80 },
+      { id: 'benoit-benjamin', nome: "Benjamin", posicoes: ["C"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1990-91",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 95 },
+      { id: 'jeff-malone', nome: "J. Malone", posicoes: ["SG"], forca: 80 },
+      { id: 'blue-edwards', nome: "Edwards", posicoes: ["SF"], forca: 76 },
+      { id: 'karl-malone', nome: "K. Malone", posicoes: ["PF"], forca: 95 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 76 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["PF"], forca: 78 },
+      { id: 'mike-brown', nome: "Brown", posicoes: ["C"], forca: 72 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["PG"], forca: 79 },
+      { id: 'reggie-lewis', nome: "Lewis", posicoes: ["SG"], forca: 84 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 92 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 90 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 85 },
+      { id: 'joe-kleine', nome: "Kleine", posicoes: ["C"], forca: 72 },
+      { id: 'jim-paxson', nome: "Paxson", posicoes: ["PG"], forca: 72 },
+      { id: 'john-bagley', nome: "Bagley", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 78 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 84 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 83 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 77 },
+      { id: 'stacey-king', nome: "King", posicoes: ["PF"], forca: 75 },
+      { id: 'b-j-armstrong', nome: "Armstrong", posicoes: ["PG"], forca: 74 },
+      { id: 'craig-hodges', nome: "Hodges", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 91 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 82 },
+      { id: 'chucky-brown', nome: "Brown", posicoes: ["SF"], forca: 74 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["PF"], forca: 86 },
+      { id: 'brad-daugherty', nome: "Daugherty", posicoes: ["C"], forca: 82 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 87 },
+      { id: 'steve-kerr', nome: "Kerr", posicoes: ["PG"], forca: 76 },
+      { id: 'winston-bennett', nome: "Bennett", posicoes: ["SF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 90 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 84 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["SF"], forca: 85 },
+      { id: 'roy-tarpley', nome: "Tarpley", posicoes: ["PF"], forca: 83 },
+      { id: 'james-donaldson', nome: "Donaldson", posicoes: ["C"], forca: 78 },
+      { id: 'herb-williams', nome: "Williams", posicoes: ["C"], forca: 76 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 81 },
+      { id: 'brad-davis', nome: "Davis", posicoes: ["PG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'michael-adams', nome: "Adams", posicoes: ["PG"], forca: 84 },
+      { id: 'fat-lever', nome: "Lever", posicoes: ["SG"], forca: 90 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 85 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["PF"], forca: 75 },
+      { id: 'blair-rasmussen', nome: "Rasmussen", posicoes: ["C"], forca: 81 },
+      { id: 'walter-davis', nome: "Davis", posicoes: ["SG"], forca: 85 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["C"], forca: 82 },
+      { id: 'todd-lichti', nome: "Lichti", posicoes: ["SG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 86 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 86 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["SF"], forca: 82 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["PF"], forca: 81 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 85 },
+      { id: 'james-edwards', nome: "Edwards", posicoes: ["C"], forca: 79 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 83 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'sleepy-floyd', nome: "Floyd", posicoes: ["PG"], forca: 81 },
+      { id: 'mitchell-wiggins', nome: "Wiggins", posicoes: ["SG"], forca: 83 },
+      { id: 'buck-johnson', nome: "Johnson", posicoes: ["SF"], forca: 80 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 83 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 94 },
+      { id: 'vernon-maxwell', nome: "Maxwell", posicoes: ["SG"], forca: 79 },
+      { id: 'larry-smith', nome: "Smith", posicoes: ["PF"], forca: 73 },
+      { id: 'john-lucas', nome: "Lucas", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'vern-fleming', nome: "Fleming", posicoes: ["PG"], forca: 83 },
+      { id: 'reggie-miller', nome: "Miller", posicoes: ["SG"], forca: 91 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["SF"], forca: 83 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["PF"], forca: 85 },
+      { id: 'rik-smits', nome: "Smits", posicoes: ["C"], forca: 84 },
+      { id: 'lasalle-thompson', nome: "Thompson", posicoes: ["C"], forca: 75 },
+      { id: 'mike-sanders', nome: "Sanders", posicoes: ["SF"], forca: 72 },
+      { id: 'rickey-green', nome: "Green", posicoes: ["PG"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 99 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 82 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 89 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 81 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["C"], forca: 78 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 76 },
+      { id: 'orlando-woolridge', nome: "Woolridge", posicoes: ["SF"], forca: 84 },
+      { id: 'vlade-divac', nome: "Divac", posicoes: ["C"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'jay-humphries', nome: "Humphries", posicoes: ["PG"], forca: 84 },
+      { id: 'alvin-robertson', nome: "Robertson", posicoes: ["SG"], forca: 87 },
+      { id: 'jeff-grayer', nome: "Grayer", posicoes: ["SF"], forca: 74 },
+      { id: 'fred-roberts', nome: "Roberts", posicoes: ["PF"], forca: 77 },
+      { id: 'jack-sikma', nome: "Sikma", posicoes: ["C"], forca: 82 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 90 },
+      { id: 'brad-lohaus', nome: "Lohaus", posicoes: ["PF"], forca: 82 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 81 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 81 },
+      { id: 'johnny-newman', nome: "Newman", posicoes: ["SF"], forca: 79 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 82 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 96 },
+      { id: 'kenny-walker', nome: "Walker", posicoes: ["PF"], forca: 78 },
+      { id: 'trent-tucker', nome: "Tucker", posicoes: ["SG"], forca: 77 },
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'johnny-dawkins', nome: "Dawkins", posicoes: ["PG"], forca: 83 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 85 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["SF"], forca: 98 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 80 },
+      { id: 'mike-gminski', nome: "Gminski", posicoes: ["C"], forca: 82 },
+      { id: 'ron-anderson', nome: "Anderson", posicoes: ["SF"], forca: 79 },
+      { id: 'derek-smith', nome: "Smith", posicoes: ["SF"], forca: 77 },
+      { id: 'scott-brooks', nome: "Brooks", posicoes: ["PG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "K. Johnson", posicoes: ["PG"], forca: 92 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 89 },
+      { id: 'eddie-johnson', nome: "E. Johnson", posicoes: ["SF"], forca: 81 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 89 },
+      { id: 'mark-west', nome: "West", posicoes: ["C"], forca: 83 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 81 },
+      { id: 'kurt-rambis', nome: "Rambis", posicoes: ["PF"], forca: 79 },
+      { id: 'andrew-lang', nome: "Lang", posicoes: ["C"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 91 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 94 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 84 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 82 },
+      { id: 'kevin-duckworth', nome: "Duckworth", posicoes: ["C"], forca: 79 },
+      { id: 'clifford-robinson', nome: "Robinson", posicoes: ["PF"], forca: 71 },
+      { id: 'danny-young', nome: "Young", posicoes: ["PG"], forca: 77 },
+      { id: 'wayne-cooper', nome: "Cooper", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 83 },
+      { id: 'willie-anderson', nome: "Anderson", posicoes: ["SG"], forca: 83 },
+      { id: 'sean-elliott', nome: "Elliott", posicoes: ["SF"], forca: 78 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 87 },
+      { id: 'david-robinson', nome: "Robinson", posicoes: ["C"], forca: 96 },
+      { id: 'david-wingate', nome: "Wingate", posicoes: ["SG"], forca: 75 },
+      { id: 'frank-brickowski', nome: "Brickowski", posicoes: ["C"], forca: 78 },
+      { id: 'caldwell-jones', nome: "Jones", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1989-90",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 96 },
+      { id: 'bob-hansen', nome: "Hansen", posicoes: ["SG"], forca: 75 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["SF"], forca: 79 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 98 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 78 },
+      { id: 'blue-edwards', nome: "Edwards", posicoes: ["SF"], forca: 76 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 78 },
+      { id: 'mike-brown', nome: "Brown", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 88 },
+      { id: 'reggie-theus', nome: "Theus", posicoes: ["SG"], forca: 83 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 91 },
+      { id: 'cliff-levingston', nome: "Levingston", posicoes: ["PF"], forca: 80 },
+      { id: 'moses-malone', nome: "Malone", posicoes: ["C"], forca: 88 },
+      { id: 'john-battle', nome: "Battle", posicoes: ["SG"], forca: 77 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 77 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["PG"], forca: 77 },
+      { id: 'brian-shaw', nome: "Shaw", posicoes: ["SG"], forca: 78 },
+      { id: 'reggie-lewis', nome: "Lewis", posicoes: ["SF"], forca: 85 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 88 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 89 },
+      { id: 'jim-paxson', nome: "Paxson", posicoes: ["PG"], forca: 74 },
+      { id: 'ed-pinckney', nome: "Pinckney", posicoes: ["PF"], forca: 85 },
+      { id: 'kelvin-upshaw', nome: "Upshaw", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'sam-vincent', nome: "Vincent", posicoes: ["PG"], forca: 79 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 82 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 80 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 74 },
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 77 },
+      { id: 'brad-sellers', nome: "Sellers", posicoes: ["PF"], forca: 75 },
+      { id: 'dave-corzine', nome: "Corzine", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 90 },
+      { id: 'ron-harper', nome: "Harper", posicoes: ["SG"], forca: 90 },
+      { id: 'mike-sanders', nome: "Sanders", posicoes: ["SF"], forca: 76 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 89 },
+      { id: 'brad-daugherty', nome: "Daugherty", posicoes: ["C"], forca: 86 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["PF"], forca: 85 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 82 },
+      { id: 'darnell-valentine', nome: "Valentine", posicoes: ["SG"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'michael-adams', nome: "Adams", posicoes: ["PG"], forca: 87 },
+      { id: 'fat-lever', nome: "Lever", posicoes: ["SG"], forca: 91 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 87 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["PF"], forca: 72 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["C"], forca: 80 },
+      { id: 'wayne-cooper', nome: "Cooper", posicoes: ["C"], forca: 79 },
+      { id: 'walter-davis', nome: "Davis", posicoes: ["SG"], forca: 82 },
+      { id: 'elston-turner', nome: "Turner", posicoes: ["SF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 86 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 85 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["SF"], forca: 84 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 79 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 86 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 85 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["PF"], forca: 78 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Golden State Warriors",
+    jogadores: [
+      { id: 'winston-garland', nome: "Garland", posicoes: ["PG"], forca: 81 },
+      { id: 'mitch-richmond', nome: "Richmond", posicoes: ["SG"], forca: 84 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SF"], forca: 92 },
+      { id: 'larry-smith', nome: "L. Smith", posicoes: ["PF"], forca: 77 },
+      { id: 'manute-bol', nome: "Bol", posicoes: ["C"], forca: 76 },
+      { id: 'rod-higgins', nome: "Higgins", posicoes: ["PF"], forca: 82 },
+      { id: 'terry-teagle', nome: "Teagle", posicoes: ["SF"], forca: 81 },
+      { id: 'otis-smith', nome: "O. Smith", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'sleepy-floyd', nome: "Floyd", posicoes: ["PG"], forca: 85 },
+      { id: 'mike-woodson', nome: "Woodson", posicoes: ["SG"], forca: 78 },
+      { id: 'buck-johnson', nome: "Johnson", posicoes: ["SF"], forca: 78 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 83 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 95 },
+      { id: 'derrick-chievous', nome: "Chievous", posicoes: ["SF"], forca: 74 },
+      { id: 'purvis-short', nome: "Short", posicoes: ["SF"], forca: 75 },
+      { id: 'tim-mccormick', nome: "McCormick", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 99 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 84 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 88 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 85 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["C"], forca: 79 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 80 },
+      { id: 'kareem-abdul-jabbar', nome: "Abdul-Jabbar", posicoes: ["C"], forca: 78 },
+      { id: 'orlando-woolridge', nome: "Woolridge", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'jay-humphries', nome: "Humphries", posicoes: ["PG"], forca: 82 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SG"], forca: 83 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["SF"], forca: 87 },
+      { id: 'larry-krystkowiak', nome: "Krystkowiak", posicoes: ["PF"], forca: 80 },
+      { id: 'jack-sikma', nome: "Sikma", posicoes: ["C"], forca: 85 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 86 },
+      { id: 'sidney-moncrief', nome: "Moncrief", posicoes: ["PG"], forca: 85 },
+      { id: 'fred-roberts', nome: "Roberts", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 87 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 81 },
+      { id: 'johnny-newman', nome: "Newman", posicoes: ["SF"], forca: 83 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 81 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 91 },
+      { id: 'trent-tucker', nome: "Tucker", posicoes: ["SG"], forca: 80 },
+      { id: 'rod-strickland', nome: "Strickland", posicoes: ["PG"], forca: 83 },
+      { id: 'sidney-green', nome: "Green", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 84 },
+      { id: 'hersey-hawkins', nome: "Hawkins", posicoes: ["SG"], forca: 81 },
+      { id: 'ron-anderson', nome: "Anderson", posicoes: ["SF"], forca: 81 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 98 },
+      { id: 'mike-gminski', nome: "Gminski", posicoes: ["C"], forca: 84 },
+      { id: 'scott-brooks', nome: "Brooks", posicoes: ["PG"], forca: 79 },
+      { id: 'gerald-henderson', nome: "Henderson", posicoes: ["PG"], forca: 75 },
+      { id: 'derek-smith', nome: "Smith", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kevin-johnson', nome: "K. Johnson", posicoes: ["PG"], forca: 90 },
+      { id: 'jeff-hornacek', nome: "Hornacek", posicoes: ["SG"], forca: 85 },
+      { id: 'eddie-johnson', nome: "E. Johnson", posicoes: ["SF"], forca: 87 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 87 },
+      { id: 'mark-west', nome: "West", posicoes: ["C"], forca: 80 },
+      { id: 'armen-gilliam', nome: "Gilliam", posicoes: ["PF"], forca: 81 },
+      { id: 'tyrone-corbin', nome: "Corbin", posicoes: ["SF"], forca: 80 },
+      { id: 'dan-majerle', nome: "Majerle", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 86 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 95 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 84 },
+      { id: 'caldwell-jones', nome: "Jones", posicoes: ["PF"], forca: 70 },
+      { id: 'kevin-duckworth', nome: "Duckworth", posicoes: ["C"], forca: 78 },
+      { id: 'steve-johnson', nome: "Johnson", posicoes: ["C"], forca: 74 },
+      { id: 'danny-young', nome: "Young", posicoes: ["PG"], forca: 77 },
+      { id: 'richard-anderson', nome: "Anderson", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 82 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SG"], forca: 89 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 83 },
+      { id: 'michael-cage', nome: "Cage", posicoes: ["PF"], forca: 81 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["C"], forca: 78 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["SF"], forca: 84 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 81 },
+      { id: 'jerry-reynolds', nome: "Reynolds", posicoes: ["SG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1988-89",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 95 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 78 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["SF"], forca: 83 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 95 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 78 },
+      { id: 'bob-hansen', nome: "Hansen", posicoes: ["SG"], forca: 74 },
+      { id: 'mike-brown', nome: "Brown", posicoes: ["C"], forca: 70 },
+      { id: 'marc-iavaroni', nome: "Iavaroni", posicoes: ["PF"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 89 },
+      { id: 'randy-wittman', nome: "Wittman", posicoes: ["SG"], forca: 78 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 94 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 78 },
+      { id: 'tree-rollins', nome: "Rollins", posicoes: ["C"], forca: 77 },
+      { id: 'cliff-levingston', nome: "Levingston", posicoes: ["PF"], forca: 82 },
+      { id: 'antoine-carr', nome: "Carr", posicoes: ["PF"], forca: 80 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["PG"], forca: 81 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 85 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 99 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 90 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 84 },
+      { id: 'mark-acres', nome: "Acres", posicoes: ["C"], forca: 71 },
+      { id: 'fred-roberts', nome: "Roberts", posicoes: ["PF"], forca: 73 },
+      { id: 'dirk-minniefield', nome: "Minniefield", posicoes: ["PG"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 78 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'brad-sellers', nome: "Sellers", posicoes: ["SF"], forca: 76 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 81 },
+      { id: 'dave-corzine', nome: "Corzine", posicoes: ["C"], forca: 80 },
+      { id: 'horace-grant', nome: "Grant", posicoes: ["PF"], forca: 78 },
+      { id: 'scottie-pippen', nome: "Pippen", posicoes: ["SF"], forca: 77 },
+      { id: 'sam-vincent', nome: "Vincent", posicoes: ["PG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'mark-price', nome: "Price", posicoes: ["PG"], forca: 86 },
+      { id: 'ron-harper', nome: "Harper", posicoes: ["SG"], forca: 85 },
+      { id: 'phil-hubbard', nome: "Hubbard", posicoes: ["SF"], forca: 75 },
+      { id: 'hot-rod-williams', nome: "Williams", posicoes: ["PF"], forca: 82 },
+      { id: 'brad-daugherty', nome: "Daugherty", posicoes: ["C"], forca: 84 },
+      { id: 'craig-ehlo', nome: "Ehlo", posicoes: ["SG"], forca: 78 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 89 },
+      { id: 'dell-curry', nome: "Curry", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 87 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 83 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 91 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 81 },
+      { id: 'james-donaldson', nome: "Donaldson", posicoes: ["C"], forca: 79 },
+      { id: 'roy-tarpley', nome: "Tarpley", posicoes: ["PF"], forca: 84 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 78 },
+      { id: 'brad-davis', nome: "Davis", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'michael-adams', nome: "Adams", posicoes: ["PG"], forca: 84 },
+      { id: 'fat-lever', nome: "Lever", posicoes: ["SG"], forca: 91 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 88 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["PF"], forca: 84 },
+      { id: 'blair-rasmussen', nome: "Rasmussen", posicoes: ["C"], forca: 80 },
+      { id: 'jay-vincent', nome: "Vincent", posicoes: ["SF"], forca: 80 },
+      { id: 't-r-dunn', nome: "Dunn", posicoes: ["SG"], forca: 75 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["SF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 87 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 81 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 89 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 80 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 84 },
+      { id: 'dennis-rodman', nome: "Rodman", posicoes: ["SF"], forca: 84 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["C"], forca: 82 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'sleepy-floyd', nome: "Floyd", posicoes: ["PG"], forca: 80 },
+      { id: 'allen-leavell', nome: "Leavell", posicoes: ["SG"], forca: 81 },
+      { id: 'rodney-mccray', nome: "McCray", posicoes: ["SF"], forca: 83 },
+      { id: 'jim-petersen', nome: "Petersen", posicoes: ["PF"], forca: 77 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 92 },
+      { id: 'purvis-short', nome: "Short", posicoes: ["SG"], forca: 81 },
+      { id: 'joe-barry-carroll', nome: "Carroll", posicoes: ["C"], forca: 79 },
+      { id: 'robert-reid', nome: "Reid", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 93 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 89 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 87 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 81 },
+      { id: 'kareem-abdul-jabbar', nome: "Abdul-Jabbar", posicoes: ["C"], forca: 82 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 79 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["C"], forca: 78 },
+      { id: 'kurt-rambis', nome: "Rambis", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'john-lucas', nome: "Lucas", posicoes: ["PG"], forca: 82 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SG"], forca: 85 },
+      { id: 'jerry-reynolds', nome: "Reynolds", posicoes: ["SF"], forca: 78 },
+      { id: 'jack-sikma', nome: "Sikma", posicoes: ["PF"], forca: 86 },
+      { id: 'randy-breuer', nome: "Breuer", posicoes: ["C"], forca: 81 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 84 },
+      { id: 'sidney-moncrief', nome: "Moncrief", posicoes: ["SG"], forca: 82 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'mark-jackson', nome: "Jackson", posicoes: ["PG"], forca: 85 },
+      { id: 'gerald-wilkins', nome: "Wilkins", posicoes: ["SG"], forca: 81 },
+      { id: 'kenny-walker', nome: "Walker", posicoes: ["SF"], forca: 79 },
+      { id: 'sidney-green', nome: "Green", posicoes: ["PF"], forca: 75 },
+      { id: 'patrick-ewing', nome: "Ewing", posicoes: ["C"], forca: 91 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 83 },
+      { id: 'johnny-newman', nome: "Newman", posicoes: ["SF"], forca: 76 },
+      { id: 'trent-tucker', nome: "Tucker", posicoes: ["SG"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 87 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 96 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 86 },
+      { id: 'richard-anderson', nome: "Anderson", posicoes: ["PF"], forca: 75 },
+      { id: 'kevin-duckworth', nome: "Duckworth", posicoes: ["C"], forca: 79 },
+      { id: 'caldwell-jones', nome: "Jones", posicoes: ["C"], forca: 74 },
+      { id: 'kiki-vandeweghe', nome: "Vandeweghe", posicoes: ["SF"], forca: 87 },
+      { id: 'steve-johnson', nome: "Johnson", posicoes: ["C"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'johnny-dawkins', nome: "Dawkins", posicoes: ["PG"], forca: 83 },
+      { id: 'alvin-robertson', nome: "Robertson", posicoes: ["SG"], forca: 88 },
+      { id: 'walter-berry', nome: "Berry", posicoes: ["SF"], forca: 84 },
+      { id: 'greg-anderson', nome: "Anderson", posicoes: ["PF"], forca: 78 },
+      { id: 'frank-brickowski', nome: "Brickowski", posicoes: ["C"], forca: 82 },
+      { id: 'dave-greenwood', nome: "Greenwood", posicoes: ["PF"], forca: 75 },
+      { id: 'mike-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 79 },
+      { id: 'jon-sundvold', nome: "Sundvold", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 84 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SG"], forca: 89 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["SF"], forca: 86 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 84 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["C"], forca: 77 },
+      { id: 'derrick-mckey', nome: "McKey", posicoes: ["SF"], forca: 79 },
+      { id: 'kevin-williams', nome: "Williams", posicoes: ["SG"], forca: 73 },
+      { id: 'olden-polynice', nome: "Polynice", posicoes: ["C"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 95 },
+      { id: 'bob-hansen', nome: "Hansen", posicoes: ["SG"], forca: 79 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["SF"], forca: 83 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 89 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 75 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 76 },
+      { id: 'kelly-tripucka', nome: "Tripucka", posicoes: ["SF"], forca: 76 },
+      { id: 'marc-iavaroni', nome: "Iavaroni", posicoes: ["PF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1987-88",
+    clube: "Washington Bullets",
+    jogadores: [
+      { id: 'muggsy-bogues', nome: "Bogues", posicoes: ["PG"], forca: 78 },
+      { id: 'jeff-malone', nome: "J. Malone", posicoes: ["SG"], forca: 83 },
+      { id: 'john-williams', nome: "Williams", posicoes: ["SF"], forca: 83 },
+      { id: 'terry-catledge', nome: "Catledge", posicoes: ["PF"], forca: 79 },
+      { id: 'moses-malone', nome: "M. Malone", posicoes: ["C"], forca: 88 },
+      { id: 'bernard-king', nome: "King", posicoes: ["SF"], forca: 81 },
+      { id: 'steve-colter', nome: "Colter", posicoes: ["PG"], forca: 80 },
+      { id: 'charles-jones', nome: "Jones", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 90 },
+      { id: 'randy-wittman', nome: "Wittman", posicoes: ["SG"], forca: 80 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 94 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 84 },
+      { id: 'tree-rollins', nome: "Rollins", posicoes: ["C"], forca: 79 },
+      { id: 'cliff-levingston', nome: "Levingston", posicoes: ["PF"], forca: 80 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 75 },
+      { id: 'mike-mcgee', nome: "McGee", posicoes: ["SF"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["PG"], forca: 80 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 83 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 99 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 94 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 85 },
+      { id: 'jerry-sichting', nome: "Sichting", posicoes: ["PG"], forca: 73 },
+      { id: 'fred-roberts', nome: "Roberts", posicoes: ["PF"], forca: 71 },
+      { id: 'darren-daye', nome: "Daye", posicoes: ["SF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 78 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 99 },
+      { id: 'gene-banks', nome: "Banks", posicoes: ["SF"], forca: 78 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 79 },
+      { id: 'dave-corzine', nome: "Corzine", posicoes: ["C"], forca: 79 },
+      { id: 'brad-sellers', nome: "Sellers", posicoes: ["PF"], forca: 76 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 80 },
+      { id: 'elston-turner', nome: "Turner", posicoes: ["SF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 90 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 85 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 91 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 83 },
+      { id: 'james-donaldson', nome: "Donaldson", posicoes: ["C"], forca: 83 },
+      { id: 'detlef-schrempf', nome: "Schrempf", posicoes: ["SF"], forca: 78 },
+      { id: 'brad-davis', nome: "Davis", posicoes: ["PG"], forca: 79 },
+      { id: 'roy-tarpley', nome: "Tarpley", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'fat-lever', nome: "Lever", posicoes: ["PG"], forca: 91 },
+      { id: 't-r-dunn', nome: "Dunn", posicoes: ["SG"], forca: 74 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 89 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["PF"], forca: 80 },
+      { id: 'wayne-cooper', nome: "Cooper", posicoes: ["C"], forca: 74 },
+      { id: 'darrell-walker', nome: "Walker", posicoes: ["PG"], forca: 82 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["C"], forca: 76 },
+      { id: 'mike-evans', nome: "Evans", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 88 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 78 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 87 },
+      { id: 'sidney-green', nome: "Green", posicoes: ["PF"], forca: 78 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 85 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 85 },
+      { id: 'john-salley', nome: "Salley", posicoes: ["C"], forca: 78 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Golden State Warriors",
+    jogadores: [
+      { id: 'sleepy-floyd', nome: "Floyd", posicoes: ["PG"], forca: 90 },
+      { id: 'chris-mullin', nome: "Mullin", posicoes: ["SG"], forca: 83 },
+      { id: 'rod-higgins', nome: "Higgins", posicoes: ["SF"], forca: 78 },
+      { id: 'larry-smith', nome: "Smith", posicoes: ["PF"], forca: 79 },
+      { id: 'joe-barry-carroll', nome: "Carroll", posicoes: ["C"], forca: 85 },
+      { id: 'terry-teagle', nome: "Teagle", posicoes: ["SG"], forca: 75 },
+      { id: 'greg-ballard', nome: "Ballard", posicoes: ["SF"], forca: 75 },
+      { id: 'purvis-short', nome: "Short", posicoes: ["SF"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'dirk-minniefield', nome: "Minniefield", posicoes: ["PG"], forca: 76 },
+      { id: 'robert-reid', nome: "Reid", posicoes: ["SG"], forca: 78 },
+      { id: 'rodney-mccray', nome: "McCray", posicoes: ["SF"], forca: 85 },
+      { id: 'jim-petersen', nome: "Petersen", posicoes: ["PF"], forca: 78 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 94 },
+      { id: 'ralph-sampson', nome: "Sampson", posicoes: ["PF"], forca: 82 },
+      { id: 'allen-leavell', nome: "Leavell", posicoes: ["PG"], forca: 78 },
+      { id: 'mitchell-wiggins', nome: "Wiggins", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Indiana Pacers",
+    jogadores: [
+      { id: 'vern-fleming', nome: "Fleming", posicoes: ["PG"], forca: 84 },
+      { id: 'john-long', nome: "Long", posicoes: ["SG"], forca: 79 },
+      { id: 'chuck-person', nome: "Person", posicoes: ["SF"], forca: 83 },
+      { id: 'herb-williams', nome: "Williams", posicoes: ["PF"], forca: 81 },
+      { id: 'steve-stipanovich', nome: "Stipanovich", posicoes: ["C"], forca: 84 },
+      { id: 'wayman-tisdale', nome: "Tisdale", posicoes: ["PF"], forca: 82 },
+      { id: 'clint-richardson', nome: "Richardson", posicoes: ["SG"], forca: 77 },
+      { id: 'kyle-macy', nome: "Macy", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 99 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 84 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 87 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 82 },
+      { id: 'kareem-abdul-jabbar', nome: "Abdul-Jabbar", posicoes: ["C"], forca: 85 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 82 },
+      { id: 'kurt-rambis', nome: "Rambis", posicoes: ["PF"], forca: 77 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'craig-hodges', nome: "Hodges", posicoes: ["PG"], forca: 79 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 86 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SF"], forca: 86 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 89 },
+      { id: 'jack-sikma', nome: "Sikma", posicoes: ["C"], forca: 83 },
+      { id: 'john-lucas', nome: "Lucas", posicoes: ["PG"], forca: 88 },
+      { id: 'randy-breuer', nome: "Breuer", posicoes: ["C"], forca: 75 },
+      { id: 'sidney-moncrief', nome: "Moncrief", posicoes: ["SG"], forca: 83 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 87 },
+      { id: 'julius-erving', nome: "Erving", posicoes: ["SG"], forca: 85 },
+      { id: 'roy-hinson', nome: "Hinson", posicoes: ["SF"], forca: 78 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 95 },
+      { id: 'tim-mccormick', nome: "McCormick", posicoes: ["C"], forca: 78 },
+      { id: 'cliff-robinson', nome: "Robinson", posicoes: ["PF"], forca: 80 },
+      { id: 'david-wingate', nome: "Wingate", posicoes: ["SG"], forca: 75 },
+      { id: 'andrew-toney', nome: "Toney", posicoes: ["SG"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'terry-porter', nome: "Porter", posicoes: ["PG"], forca: 84 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 91 },
+      { id: 'kiki-vandeweghe', nome: "Vandeweghe", posicoes: ["SF"], forca: 88 },
+      { id: 'kenny-carr', nome: "Carr", posicoes: ["PF"], forca: 79 },
+      { id: 'steve-johnson', nome: "Johnson", posicoes: ["C"], forca: 81 },
+      { id: 'jerome-kersey', nome: "Kersey", posicoes: ["SF"], forca: 84 },
+      { id: 'jim-paxson', nome: "Paxson", posicoes: ["SG"], forca: 80 },
+      { id: 'caldwell-jones', nome: "Jones", posicoes: ["PF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'nate-mcmillan', nome: "McMillan", posicoes: ["PG"], forca: 82 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SG"], forca: 88 },
+      { id: 'xavier-mcdaniel', nome: "McDaniel", posicoes: ["SF"], forca: 86 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 84 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["C"], forca: 80 },
+      { id: 'danny-young', nome: "Young", posicoes: ["PG"], forca: 78 },
+      { id: 'maurice-lucas', nome: "Lucas", posicoes: ["PF"], forca: 77 },
+      { id: 'clemon-johnson', nome: "Johnson", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'rickey-green', nome: "Green", posicoes: ["PG"], forca: 83 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 82 },
+      { id: 'kelly-tripucka', nome: "Tripucka", posicoes: ["SF"], forca: 79 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 85 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 78 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["PF"], forca: 80 },
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 88 },
+      { id: 'bob-hansen', nome: "Hansen", posicoes: ["SG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1986-87",
+    clube: "Washington Bullets",
+    jogadores: [
+      { id: 'ennis-whatley', nome: "Whatley", posicoes: ["PG"], forca: 79 },
+      { id: 'jeff-malone', nome: "J. Malone", posicoes: ["SG"], forca: 84 },
+      { id: 'john-williams', nome: "Williams", posicoes: ["SF"], forca: 83 },
+      { id: 'terry-catledge', nome: "Catledge", posicoes: ["PF"], forca: 78 },
+      { id: 'moses-malone', nome: "M. Malone", posicoes: ["C"], forca: 91 },
+      { id: 'jay-vincent', nome: "Vincent", posicoes: ["SF"], forca: 78 },
+      { id: 'charles-jones', nome: "Jones", posicoes: ["PF"], forca: 76 },
+      { id: 'manute-bol', nome: "Bol", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 86 },
+      { id: 'randy-wittman', nome: "Wittman", posicoes: ["SG"], forca: 81 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 93 },
+      { id: 'kevin-willis', nome: "Willis", posicoes: ["PF"], forca: 79 },
+      { id: 'tree-rollins', nome: "Rollins", posicoes: ["C"], forca: 78 },
+      { id: 'cliff-levingston', nome: "Levingston", posicoes: ["PF"], forca: 81 },
+      { id: 'jon-koncak', nome: "Koncak", posicoes: ["C"], forca: 76 },
+      { id: 'spud-webb', nome: "Webb", posicoes: ["PG"], forca: 84 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["PG"], forca: 82 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 81 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 98 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 91 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 86 },
+      { id: 'jerry-sichting', nome: "Sichting", posicoes: ["PG"], forca: 77 },
+      { id: 'bill-walton', nome: "Walton", posicoes: ["C"], forca: 83 },
+      { id: 'scott-wedman', nome: "Wedman", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'kyle-macy', nome: "Macy", posicoes: ["PG"], forca: 79 },
+      { id: 'george-gervin', nome: "Gervin", posicoes: ["SG"], forca: 80 },
+      { id: 'orlando-woolridge', nome: "Woolridge", posicoes: ["SF"], forca: 87 },
+      { id: 'sidney-green', nome: "Green", posicoes: ["PF"], forca: 78 },
+      { id: 'dave-corzine', nome: "Corzine", posicoes: ["C"], forca: 81 },
+      { id: 'gene-banks', nome: "Banks", posicoes: ["SF"], forca: 82 },
+      { id: 'charles-oakley', nome: "Oakley", posicoes: ["PF"], forca: 81 },
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 87 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 86 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 86 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 84 },
+      { id: 'james-donaldson', nome: "Donaldson", posicoes: ["C"], forca: 80 },
+      { id: 'jay-vincent', nome: "Vincent", posicoes: ["PF"], forca: 81 },
+      { id: 'brad-davis', nome: "Davis", posicoes: ["PG"], forca: 83 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'fat-lever', nome: "Lever", posicoes: ["PG"], forca: 83 },
+      { id: 't-r-dunn', nome: "Dunn", posicoes: ["SG"], forca: 77 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 91 },
+      { id: 'calvin-natt', nome: "Natt", posicoes: ["PF"], forca: 85 },
+      { id: 'wayne-cooper', nome: "Cooper", posicoes: ["C"], forca: 82 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["SF"], forca: 82 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["C"], forca: 76 },
+      { id: 'elston-turner', nome: "Turner", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 91 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 84 },
+      { id: 'kelly-tripucka', nome: "Tripucka", posicoes: ["SF"], forca: 86 },
+      { id: 'earl-cureton', nome: "Cureton", posicoes: ["PF"], forca: 77 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 84 },
+      { id: 'joe-dumars', nome: "Dumars", posicoes: ["SG"], forca: 78 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 71 },
+      { id: 'kent-benson', nome: "Benson", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'john-lucas', nome: "Lucas", posicoes: ["PG"], forca: 85 },
+      { id: 'lewis-lloyd', nome: "Lloyd", posicoes: ["SG"], forca: 85 },
+      { id: 'rodney-mccray', nome: "McCray", posicoes: ["SF"], forca: 81 },
+      { id: 'ralph-sampson', nome: "Sampson", posicoes: ["PF"], forca: 84 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 92 },
+      { id: 'robert-reid', nome: "Reid", posicoes: ["SF"], forca: 79 },
+      { id: 'jim-petersen', nome: "Petersen", posicoes: ["PF"], forca: 74 },
+      { id: 'allen-leavell', nome: "Leavell", posicoes: ["PG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 94 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 81 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 89 },
+      { id: 'maurice-lucas', nome: "Lucas", posicoes: ["PF"], forca: 78 },
+      { id: 'kareem-abdul-jabbar', nome: "Abdul-Jabbar", posicoes: ["C"], forca: 93 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 82 },
+      { id: 'kurt-rambis', nome: "Rambis", posicoes: ["PF"], forca: 78 },
+      { id: 'a-c-green', nome: "Green", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'sidney-moncrief', nome: "Moncrief", posicoes: ["PG"], forca: 90 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 84 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SF"], forca: 89 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 85 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["C"], forca: 83 },
+      { id: 'craig-hodges', nome: "Hodges", posicoes: ["SG"], forca: 82 },
+      { id: 'randy-breuer', nome: "Breuer", posicoes: ["C"], forca: 79 },
+      { id: 'kenny-fields', nome: "Fields", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'michael-ray-richardson', nome: "Richardson", posicoes: ["PG"], forca: 86 },
+      { id: 'otis-birdsong', nome: "Birdsong", posicoes: ["SG"], forca: 80 },
+      { id: 'albert-king', nome: "King", posicoes: ["SF"], forca: 78 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 81 },
+      { id: 'mike-gminski', nome: "Gminski", posicoes: ["C"], forca: 87 },
+      { id: 'darwin-cook', nome: "Cook", posicoes: ["PG"], forca: 80 },
+      { id: 'mickey-johnson', nome: "Johnson", posicoes: ["PF"], forca: 76 },
+      { id: 'darryl-dawkins', nome: "Dawkins", posicoes: ["C"], forca: 86 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 87 },
+      { id: 'julius-erving', nome: "Erving", posicoes: ["SG"], forca: 86 },
+      { id: 'paul-thompson', nome: "Thompson", posicoes: ["SF"], forca: 72 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 92 },
+      { id: 'moses-malone', nome: "Malone", posicoes: ["C"], forca: 86 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["SG"], forca: 76 },
+      { id: 'bobby-jones', nome: "Jones", posicoes: ["PF"], forca: 77 },
+      { id: 'terry-catledge', nome: "Catledge", posicoes: ["PF"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'steve-colter', nome: "Colter", posicoes: ["PG"], forca: 79 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 89 },
+      { id: 'kiki-vandeweghe', nome: "Vandeweghe", posicoes: ["SF"], forca: 87 },
+      { id: 'kenny-carr', nome: "Carr", posicoes: ["PF"], forca: 78 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["C"], forca: 79 },
+      { id: 'jim-paxson', nome: "Paxson", posicoes: ["SG"], forca: 82 },
+      { id: 'sam-bowie', nome: "Bowie", posicoes: ["C"], forca: 82 },
+      { id: 'caldwell-jones', nome: "Jones", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Sacramento Kings",
+    jogadores: [
+      { id: 'larry-drew', nome: "Drew", posicoes: ["PG"], forca: 79 },
+      { id: 'reggie-theus', nome: "Theus", posicoes: ["SG"], forca: 85 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SF"], forca: 82 },
+      { id: 'mark-olberding', nome: "Olberding", posicoes: ["PF"], forca: 78 },
+      { id: 'lasalle-thompson', nome: "Thompson", posicoes: ["C"], forca: 83 },
+      { id: 'mike-woodson', nome: "Woodson", posicoes: ["SG"], forca: 81 },
+      { id: 'terry-tyler', nome: "Tyler", posicoes: ["SF"], forca: 79 },
+      { id: 'otis-thorpe', nome: "Thorpe", posicoes: ["PF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'wes-matthews', nome: "Matthews", posicoes: ["PG"], forca: 81 },
+      { id: 'alvin-robertson', nome: "Robertson", posicoes: ["SG"], forca: 89 },
+      { id: 'mike-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 81 },
+      { id: 'dave-greenwood', nome: "Greenwood", posicoes: ["PF"], forca: 77 },
+      { id: 'artis-gilmore', nome: "Gilmore", posicoes: ["C"], forca: 84 },
+      { id: 'steve-johnson', nome: "Johnson", posicoes: ["C"], forca: 82 },
+      { id: 'johnny-moore', nome: "Moore", posicoes: ["PG"], forca: 87 },
+      { id: 'jon-sundvold', nome: "Sundvold", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'rickey-green', nome: "Green", posicoes: ["PG"], forca: 83 },
+      { id: 'bob-hansen', nome: "Hansen", posicoes: ["SG"], forca: 75 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 95 },
+      { id: 'karl-malone', nome: "Malone", posicoes: ["PF"], forca: 79 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 79 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["PF"], forca: 81 },
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 84 },
+      { id: 'carey-scurry', nome: "Scurry", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1985-86",
+    clube: "Washington Bullets",
+    jogadores: [
+      { id: 'gus-williams', nome: "Williams", posicoes: ["PG"], forca: 81 },
+      { id: 'jeff-malone', nome: "Malone", posicoes: ["SG"], forca: 83 },
+      { id: 'cliff-robinson', nome: "Robinson", posicoes: ["SF"], forca: 85 },
+      { id: 'dan-roundfield', nome: "Roundfield", posicoes: ["PF"], forca: 80 },
+      { id: 'manute-bol', nome: "Bol", posicoes: ["C"], forca: 78 },
+      { id: 'jeff-ruland', nome: "Ruland", posicoes: ["PF"], forca: 89 },
+      { id: 'charles-jones', nome: "Jones", posicoes: ["C"], forca: 76 },
+      { id: 'darren-daye', nome: "Daye", posicoes: ["SF"], forca: 80 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["PG"], forca: 82 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 82 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["SF"], forca: 99 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 88 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 84 },
+      { id: 'cedric-maxwell', nome: "Maxwell", posicoes: ["SF"], forca: 81 },
+      { id: 'scott-wedman', nome: "Wedman", posicoes: ["SF"], forca: 75 },
+      { id: 'quinn-buckner', nome: "Buckner", posicoes: ["PG"], forca: 70 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Chicago Bulls",
+    jogadores: [
+      { id: 'wes-matthews', nome: "Matthews", posicoes: ["PG"], forca: 76 },
+      { id: 'michael-jordan', nome: "Jordan", posicoes: ["SG"], forca: 97 },
+      { id: 'orlando-woolridge', nome: "Woolridge", posicoes: ["SF"], forca: 87 },
+      { id: 'dave-greenwood', nome: "Greenwood", posicoes: ["PF"], forca: 75 },
+      { id: 'dave-corzine', nome: "Corzine", posicoes: ["C"], forca: 77 },
+      { id: 'quintin-dailey', nome: "Dailey", posicoes: ["SG"], forca: 80 },
+      { id: 'steve-johnson', nome: "Johnson", posicoes: ["C"], forca: 78 },
+      { id: 'ennis-whatley', nome: "Whatley", posicoes: ["PG"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Cleveland Cavaliers",
+    jogadores: [
+      { id: 'john-bagley', nome: "Bagley", posicoes: ["PG"], forca: 83 },
+      { id: 'world-b-free', nome: "Free", posicoes: ["SG"], forca: 89 },
+      { id: 'phil-hubbard', nome: "Hubbard", posicoes: ["SF"], forca: 82 },
+      { id: 'roy-hinson', nome: "Hinson", posicoes: ["PF"], forca: 82 },
+      { id: 'melvin-turpin', nome: "Turpin", posicoes: ["C"], forca: 78 },
+      { id: 'johnny-davis', nome: "Davis", posicoes: ["PG"], forca: 80 },
+      { id: 'ben-poquette', nome: "Poquette", posicoes: ["PF"], forca: 77 },
+      { id: 'lonnie-shelton', nome: "Shelton", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'brad-davis', nome: "Davis", posicoes: ["PG"], forca: 82 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 85 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 89 },
+      { id: 'jay-vincent', nome: "Vincent", posicoes: ["PF"], forca: 84 },
+      { id: 'kurt-nimphius', nome: "Nimphius", posicoes: ["C"], forca: 78 },
+      { id: 'sam-perkins', nome: "Perkins", posicoes: ["PF"], forca: 81 },
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 83 },
+      { id: 'dale-ellis', nome: "Ellis", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'fat-lever', nome: "Lever", posicoes: ["PG"], forca: 84 },
+      { id: 't-r-dunn', nome: "Dunn", posicoes: ["SG"], forca: 77 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 90 },
+      { id: 'calvin-natt', nome: "Natt", posicoes: ["PF"], forca: 90 },
+      { id: 'wayne-cooper', nome: "Cooper", posicoes: ["C"], forca: 79 },
+      { id: 'dan-issel', nome: "Issel", posicoes: ["C"], forca: 81 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["SF"], forca: 74 },
+      { id: 'elston-turner', nome: "Turner", posicoes: ["SF"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 93 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 82 },
+      { id: 'kelly-tripucka', nome: "Tripucka", posicoes: ["SF"], forca: 84 },
+      { id: 'dan-roundfield', nome: "Roundfield", posicoes: ["PF"], forca: 80 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 85 },
+      { id: 'john-long', nome: "Long", posicoes: ["SG"], forca: 80 },
+      { id: 'terry-tyler', nome: "Tyler", posicoes: ["SF"], forca: 81 },
+      { id: 'earl-cureton', nome: "Cureton", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Houston Rockets",
+    jogadores: [
+      { id: 'lionel-hollins', nome: "Hollins", posicoes: ["PG"], forca: 76 },
+      { id: 'lewis-lloyd', nome: "Lloyd", posicoes: ["SG"], forca: 82 },
+      { id: 'rodney-mccray', nome: "McCray", posicoes: ["SF"], forca: 85 },
+      { id: 'ralph-sampson', nome: "Sampson", posicoes: ["PF"], forca: 85 },
+      { id: 'hakeem-olajuwon', nome: "Olajuwon", posicoes: ["C"], forca: 88 },
+      { id: 'robert-reid', nome: "Reid", posicoes: ["SF"], forca: 76 },
+      { id: 'mitchell-wiggins', nome: "Wiggins", posicoes: ["SG"], forca: 78 },
+      { id: 'john-lucas', nome: "Lucas", posicoes: ["PG"], forca: 85 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 94 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 84 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["SF"], forca: 85 },
+      { id: 'kurt-rambis', nome: "Rambis", posicoes: ["PF"], forca: 77 },
+      { id: 'kareem-abdul-jabbar', nome: "Abdul-Jabbar", posicoes: ["C"], forca: 92 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 81 },
+      { id: 'bob-mcadoo', nome: "McAdoo", posicoes: ["C"], forca: 78 },
+      { id: 'larry-spriggs', nome: "Spriggs", posicoes: ["PF"], forca: 75 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'sidney-moncrief', nome: "Moncrief", posicoes: ["PG"], forca: 91 },
+      { id: 'craig-hodges', nome: "Hodges", posicoes: ["SG"], forca: 79 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SF"], forca: 88 },
+      { id: 'terry-cummings', nome: "Cummings", posicoes: ["PF"], forca: 91 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["C"], forca: 82 },
+      { id: 'paul-mokeski', nome: "Mokeski", posicoes: ["C"], forca: 74 },
+      { id: 'kevin-grevey', nome: "Grevey", posicoes: ["SF"], forca: 74 },
+      { id: 'ricky-pierce', nome: "Pierce", posicoes: ["SG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'michael-ray-richardson', nome: "Richardson", posicoes: ["PG"], forca: 89 },
+      { id: 'otis-birdsong', nome: "Birdsong", posicoes: ["SG"], forca: 86 },
+      { id: 'mike-okoren', nome: "O'Koren", posicoes: ["SF"], forca: 79 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 83 },
+      { id: 'mike-gminski', nome: "Gminski", posicoes: ["C"], forca: 82 },
+      { id: 'kelvin-ransey', nome: "Ransey", posicoes: ["PG"], forca: 80 },
+      { id: 'jeff-turner', nome: "Turner", posicoes: ["PF"], forca: 70 },
+      { id: 'darryl-dawkins', nome: "Dawkins", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 86 },
+      { id: 'andrew-toney', nome: "Toney", posicoes: ["SG"], forca: 83 },
+      { id: 'julius-erving', nome: "Erving", posicoes: ["SF"], forca: 89 },
+      { id: 'charles-barkley', nome: "Barkley", posicoes: ["PF"], forca: 85 },
+      { id: 'moses-malone', nome: "Malone", posicoes: ["C"], forca: 89 },
+      { id: 'bobby-jones', nome: "Jones", posicoes: ["PF"], forca: 82 },
+      { id: 'clint-richardson', nome: "Richardson", posicoes: ["SG"], forca: 73 },
+      { id: 'sedale-threatt', nome: "Threatt", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kyle-macy', nome: "Macy", posicoes: ["PG"], forca: 81 },
+      { id: 'jay-humphries', nome: "Humphries", posicoes: ["SG"], forca: 76 },
+      { id: 'alvin-scott', nome: "Scott", posicoes: ["SF"], forca: 72 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 90 },
+      { id: 'james-edwards', nome: "Edwards", posicoes: ["C"], forca: 81 },
+      { id: 'alvan-adams', nome: "Adams", posicoes: ["PF"], forca: 88 },
+      { id: 'maurice-lucas', nome: "Lucas", posicoes: ["PF"], forca: 80 },
+      { id: 'michael-holton', nome: "Holton", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'darnell-valentine', nome: "Valentine", posicoes: ["PG"], forca: 82 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 89 },
+      { id: 'kiki-vandeweghe', nome: "Vandeweghe", posicoes: ["SF"], forca: 85 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["PF"], forca: 84 },
+      { id: 'sam-bowie', nome: "Bowie", posicoes: ["C"], forca: 83 },
+      { id: 'jim-paxson', nome: "Paxson", posicoes: ["SG"], forca: 85 },
+      { id: 'steve-colter', nome: "Colter", posicoes: ["PG"], forca: 77 },
+      { id: 'kenny-carr', nome: "Carr", posicoes: ["PF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "San Antonio Spurs",
+    jogadores: [
+      { id: 'johnny-moore', nome: "Moore", posicoes: ["PG"], forca: 87 },
+      { id: 'george-gervin', nome: "Gervin", posicoes: ["SG"], forca: 84 },
+      { id: 'mike-mitchell', nome: "Mitchell", posicoes: ["SF"], forca: 83 },
+      { id: 'marc-iavaroni', nome: "Iavaroni", posicoes: ["PF"], forca: 73 },
+      { id: 'artis-gilmore', nome: "Gilmore", posicoes: ["C"], forca: 88 },
+      { id: 'gene-banks', nome: "Banks", posicoes: ["SF"], forca: 82 },
+      { id: 'alvin-robertson', nome: "Robertson", posicoes: ["SG"], forca: 80 },
+      { id: 'john-paxson', nome: "Paxson", posicoes: ["PG"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'rickey-green', nome: "Green", posicoes: ["PG"], forca: 84 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 83 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 91 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["PF"], forca: 81 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 81 },
+      { id: 'jeff-wilkins', nome: "Wilkins", posicoes: ["C"], forca: 74 },
+      { id: 'john-stockton', nome: "Stockton", posicoes: ["PG"], forca: 77 },
+      { id: 'rich-kelley', nome: "Kelley", posicoes: ["C"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1984-85",
+    clube: "Washington Bullets",
+    jogadores: [
+      { id: 'gus-williams', nome: "Williams", posicoes: ["PG"], forca: 86 },
+      { id: 'jeff-malone', nome: "Malone", posicoes: ["SG"], forca: 82 },
+      { id: 'greg-ballard', nome: "Ballard", posicoes: ["SF"], forca: 82 },
+      { id: 'cliff-robinson', nome: "Robinson", posicoes: ["PF"], forca: 82 },
+      { id: 'jeff-ruland', nome: "Ruland", posicoes: ["C"], forca: 85 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 76 },
+      { id: 'tom-mcmillen', nome: "McMillen", posicoes: ["C"], forca: 74 },
+      { id: 'darren-daye', nome: "Daye", posicoes: ["SF"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Atlanta Hawks",
+    jogadores: [
+      { id: 'johnny-davis', nome: "Davis", posicoes: ["PG"], forca: 80 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 80 },
+      { id: 'dominique-wilkins', nome: "Wilkins", posicoes: ["SF"], forca: 87 },
+      { id: 'dan-roundfield', nome: "Roundfield", posicoes: ["PF"], forca: 86 },
+      { id: 'tree-rollins', nome: "Rollins", posicoes: ["C"], forca: 81 },
+      { id: 'doc-rivers', nome: "Rivers", posicoes: ["PG"], forca: 82 },
+      { id: 'mike-glenn', nome: "Glenn", posicoes: ["SG"], forca: 80 },
+      { id: 'scott-hastings', nome: "Hastings", posicoes: ["PF"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Boston Celtics",
+    jogadores: [
+      { id: 'gerald-henderson', nome: "Henderson", posicoes: ["PG"], forca: 82 },
+      { id: 'dennis-johnson', nome: "Johnson", posicoes: ["SG"], forca: 80 },
+      { id: 'cedric-maxwell', nome: "Maxwell", posicoes: ["SF"], forca: 81 },
+      { id: 'larry-bird', nome: "Bird", posicoes: ["PF"], forca: 96 },
+      { id: 'robert-parish', nome: "Parish", posicoes: ["C"], forca: 87 },
+      { id: 'kevin-mchale', nome: "McHale", posicoes: ["PF"], forca: 87 },
+      { id: 'quinn-buckner', nome: "Buckner", posicoes: ["PG"], forca: 73 },
+      { id: 'danny-ainge', nome: "Ainge", posicoes: ["SG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Dallas Mavericks",
+    jogadores: [
+      { id: 'brad-davis', nome: "Davis", posicoes: ["PG"], forca: 80 },
+      { id: 'rolando-blackman', nome: "Blackman", posicoes: ["SG"], forca: 88 },
+      { id: 'mark-aguirre', nome: "Aguirre", posicoes: ["SF"], forca: 93 },
+      { id: 'pat-cummings', nome: "Cummings", posicoes: ["PF"], forca: 79 },
+      { id: 'kurt-nimphius', nome: "Nimphius", posicoes: ["C"], forca: 80 },
+      { id: 'derek-harper', nome: "Harper", posicoes: ["PG"], forca: 75 },
+      { id: 'jay-vincent', nome: "Vincent", posicoes: ["SF"], forca: 75 },
+      { id: 'bill-garnett', nome: "Garnett", posicoes: ["PF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Denver Nuggets",
+    jogadores: [
+      { id: 'rob-williams', nome: "Williams", posicoes: ["PG"], forca: 78 },
+      { id: 't-r-dunn', nome: "Dunn", posicoes: ["SG"], forca: 78 },
+      { id: 'alex-english', nome: "English", posicoes: ["SF"], forca: 91 },
+      { id: 'kiki-vandeweghe', nome: "Vandeweghe", posicoes: ["PF"], forca: 93 },
+      { id: 'dan-issel', nome: "Issel", posicoes: ["C"], forca: 87 },
+      { id: 'mike-evans', nome: "Evans", posicoes: ["PG"], forca: 73 },
+      { id: 'bill-hanzlik', nome: "Hanzlik", posicoes: ["SF"], forca: 74 },
+      { id: 'danny-schayes', nome: "Schayes", posicoes: ["C"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Detroit Pistons",
+    jogadores: [
+      { id: 'isiah-thomas', nome: "Thomas", posicoes: ["PG"], forca: 91 },
+      { id: 'john-long', nome: "Long", posicoes: ["SG"], forca: 81 },
+      { id: 'kelly-tripucka', nome: "Tripucka", posicoes: ["SF"], forca: 84 },
+      { id: 'cliff-levingston', nome: "Levingston", posicoes: ["PF"], forca: 79 },
+      { id: 'bill-laimbeer', nome: "Laimbeer", posicoes: ["C"], forca: 86 },
+      { id: 'vinnie-johnson', nome: "Johnson", posicoes: ["SG"], forca: 82 },
+      { id: 'kent-benson', nome: "Benson", posicoes: ["C"], forca: 80 },
+      { id: 'terry-tyler', nome: "Tyler", posicoes: ["SF"], forca: 77 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Kansas City Kings",
+    jogadores: [
+      { id: 'larry-drew', nome: "Drew", posicoes: ["PG"], forca: 84 },
+      { id: 'mike-woodson', nome: "Woodson", posicoes: ["SG"], forca: 83 },
+      { id: 'eddie-johnson', nome: "Johnson", posicoes: ["SF"], forca: 84 },
+      { id: 'mark-olberding', nome: "Olberding", posicoes: ["PF"], forca: 77 },
+      { id: 'lasalle-thompson', nome: "Thompson", posicoes: ["C"], forca: 82 },
+      { id: 'billy-knight', nome: "Knight", posicoes: ["SF"], forca: 80 },
+      { id: 'joe-meriweather', nome: "Meriweather", posicoes: ["C"], forca: 74 },
+      { id: 'reggie-theus', nome: "Theus", posicoes: ["PG"], forca: 82 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Los Angeles Lakers",
+    jogadores: [
+      { id: 'magic-johnson', nome: "Johnson", posicoes: ["PG"], forca: 93 },
+      { id: 'michael-cooper', nome: "Cooper", posicoes: ["SG"], forca: 83 },
+      { id: 'jamaal-wilkes', nome: "Wilkes", posicoes: ["SF"], forca: 82 },
+      { id: 'james-worthy', nome: "Worthy", posicoes: ["PF"], forca: 83 },
+      { id: 'kareem-abdul-jabbar', nome: "Abdul-Jabbar", posicoes: ["C"], forca: 89 },
+      { id: 'byron-scott', nome: "Scott", posicoes: ["SG"], forca: 79 },
+      { id: 'bob-mcadoo', nome: "McAdoo", posicoes: ["C"], forca: 78 },
+      { id: 'mike-mcgee', nome: "McGee", posicoes: ["SF"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Milwaukee Bucks",
+    jogadores: [
+      { id: 'tiny-archibald', nome: "Archibald", posicoes: ["PG"], forca: 76 },
+      { id: 'sidney-moncrief', nome: "Moncrief", posicoes: ["SG"], forca: 90 },
+      { id: 'marques-johnson', nome: "Johnson", posicoes: ["SF"], forca: 89 },
+      { id: 'alton-lister', nome: "Lister", posicoes: ["PF"], forca: 78 },
+      { id: 'bob-lanier', nome: "Lanier", posicoes: ["C"], forca: 86 },
+      { id: 'junior-bridgeman', nome: "Bridgeman", posicoes: ["SF"], forca: 81 },
+      { id: 'paul-pressey', nome: "Pressey", posicoes: ["SG"], forca: 81 },
+      { id: 'harvey-catchings', nome: "Catchings", posicoes: ["PF"], forca: 71 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "New Jersey Nets",
+    jogadores: [
+      { id: 'kelvin-ransey', nome: "Ransey", posicoes: ["PG"], forca: 80 },
+      { id: 'otis-birdsong', nome: "Birdsong", posicoes: ["SG"], forca: 84 },
+      { id: 'albert-king', nome: "King", posicoes: ["SF"], forca: 82 },
+      { id: 'buck-williams', nome: "Williams", posicoes: ["PF"], forca: 82 },
+      { id: 'darryl-dawkins', nome: "Dawkins", posicoes: ["C"], forca: 85 },
+      { id: 'darwin-cook', nome: "Cook", posicoes: ["PG"], forca: 82 },
+      { id: 'michael-ray-richardson', nome: "Richardson", posicoes: ["PG"], forca: 83 },
+      { id: 'mike-gminski', nome: "Gminski", posicoes: ["C"], forca: 78 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "New York Knicks",
+    jogadores: [
+      { id: 'rory-sparrow', nome: "Sparrow", posicoes: ["PG"], forca: 79 },
+      { id: 'ray-williams', nome: "Williams", posicoes: ["SG"], forca: 86 },
+      { id: 'bernard-king', nome: "King", posicoes: ["SF"], forca: 92 },
+      { id: 'truck-robinson', nome: "Robinson", posicoes: ["PF"], forca: 76 },
+      { id: 'bill-cartwright', nome: "Cartwright", posicoes: ["C"], forca: 86 },
+      { id: 'louis-orr', nome: "Orr", posicoes: ["SF"], forca: 77 },
+      { id: 'trent-tucker', nome: "Tucker", posicoes: ["SG"], forca: 79 },
+      { id: 'marvin-webster', nome: "Webster", posicoes: ["C"], forca: 76 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Philadelphia 76ers",
+    jogadores: [
+      { id: 'maurice-cheeks', nome: "Cheeks", posicoes: ["PG"], forca: 84 },
+      { id: 'andrew-toney', nome: "Toney", posicoes: ["SG"], forca: 84 },
+      { id: 'julius-erving', nome: "Erving", posicoes: ["SF"], forca: 93 },
+      { id: 'bobby-jones', nome: "Jones", posicoes: ["PF"], forca: 86 },
+      { id: 'moses-malone', nome: "Malone", posicoes: ["C"], forca: 88 },
+      { id: 'clemon-johnson', nome: "Johnson", posicoes: ["C"], forca: 72 },
+      { id: 'clint-richardson', nome: "Richardson", posicoes: ["SG"], forca: 75 },
+      { id: 'marc-iavaroni', nome: "Iavaroni", posicoes: ["PF"], forca: 72 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Phoenix Suns",
+    jogadores: [
+      { id: 'kyle-macy', nome: "Macy", posicoes: ["PG"], forca: 80 },
+      { id: 'walter-davis', nome: "Davis", posicoes: ["SG"], forca: 86 },
+      { id: 'alvin-scott', nome: "Scott", posicoes: ["SF"], forca: 70 },
+      { id: 'larry-nance', nome: "Nance", posicoes: ["PF"], forca: 88 },
+      { id: 'james-edwards', nome: "Edwards", posicoes: ["C"], forca: 82 },
+      { id: 'maurice-lucas', nome: "Lucas", posicoes: ["PF"], forca: 84 },
+      { id: 'alvan-adams', nome: "Adams", posicoes: ["C"], forca: 82 },
+      { id: 'rod-foster', nome: "Foster", posicoes: ["PG"], forca: 74 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Portland Trail Blazers",
+    jogadores: [
+      { id: 'darnell-valentine', nome: "Valentine", posicoes: ["PG"], forca: 80 },
+      { id: 'jim-paxson', nome: "Paxson", posicoes: ["SG"], forca: 88 },
+      { id: 'calvin-natt', nome: "Natt", posicoes: ["SF"], forca: 84 },
+      { id: 'kenny-carr', nome: "Carr", posicoes: ["PF"], forca: 83 },
+      { id: 'mychal-thompson', nome: "Thompson", posicoes: ["C"], forca: 86 },
+      { id: 'fat-lever', nome: "Lever", posicoes: ["PG"], forca: 83 },
+      { id: 'wayne-cooper', nome: "Cooper", posicoes: ["C"], forca: 78 },
+      { id: 'clyde-drexler', nome: "Drexler", posicoes: ["SG"], forca: 79 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Seattle SuperSonics",
+    jogadores: [
+      { id: 'gus-williams', nome: "Williams", posicoes: ["PG"], forca: 87 },
+      { id: 'al-wood', nome: "Wood", posicoes: ["SG"], forca: 81 },
+      { id: 'danny-vranes', nome: "Vranes", posicoes: ["SF"], forca: 76 },
+      { id: 'tom-chambers', nome: "Chambers", posicoes: ["PF"], forca: 82 },
+      { id: 'jack-sikma', nome: "Sikma", posicoes: ["C"], forca: 88 },
+      { id: 'reggie-king', nome: "King", posicoes: ["SF"], forca: 78 },
+      { id: 'jon-sundvold', nome: "Sundvold", posicoes: ["PG"], forca: 74 },
+      { id: 'fred-brown', nome: "Brown", posicoes: ["SG"], forca: 81 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Utah Jazz",
+    jogadores: [
+      { id: 'rickey-green', nome: "Green", posicoes: ["PG"], forca: 86 },
+      { id: 'darrell-griffith', nome: "Griffith", posicoes: ["SG"], forca: 83 },
+      { id: 'adrian-dantley', nome: "Dantley", posicoes: ["SF"], forca: 94 },
+      { id: 'thurl-bailey', nome: "Bailey", posicoes: ["PF"], forca: 79 },
+      { id: 'mark-eaton', nome: "Eaton", posicoes: ["C"], forca: 80 },
+      { id: 'john-drew', nome: "Drew", posicoes: ["SF"], forca: 85 },
+      { id: 'rich-kelley', nome: "Kelley", posicoes: ["C"], forca: 75 },
+      { id: 'jeff-wilkins', nome: "Wilkins", posicoes: ["C"], forca: 73 }
+    ]
+  },
+  {
+    competicao: "NBA",
+    temporada: "1983-84",
+    clube: "Washington Bullets",
+    jogadores: [
+      { id: 'frank-johnson', nome: "Johnson", posicoes: ["PG"], forca: 80 },
+      { id: 'ricky-sobers', nome: "Sobers", posicoes: ["SG"], forca: 79 },
+      { id: 'greg-ballard', nome: "Ballard", posicoes: ["SF"], forca: 83 },
+      { id: 'rick-mahorn', nome: "Mahorn", posicoes: ["PF"], forca: 77 },
+      { id: 'jeff-ruland', nome: "Ruland", posicoes: ["C"], forca: 88 },
+      { id: 'jeff-malone', nome: "Malone", posicoes: ["SG"], forca: 76 },
+      { id: 'tom-mcmillen', nome: "McMillen", posicoes: ["C"], forca: 75 },
+      { id: 'darren-daye', nome: "Daye", posicoes: ["SF"], forca: 76 }
     ]
   }
 ];
