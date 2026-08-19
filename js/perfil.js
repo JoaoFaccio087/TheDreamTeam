@@ -340,14 +340,18 @@
     { nome: 'Geral', chave: null, api: 'geral' }
   ].concat(Object.keys(COMPETICOES).map(function (id) {
     // Derivado de COMPETICOES: competição nova aparece aqui sozinha.
-    // `chave` casa com o texto salvo na partida; `api` é o id do backend.
-    return { nome: COMPETICOES[id].label, chave: CHAVE_PARTIDA[id] || id, api: API_POR_COMP[id] || id };
+    // `chave` casa com o texto salvo na partida (m.competicao = COMPETICOES[id].dados),
+    // então derivamos a chave do próprio `dados` (minúsculo) — assim VNL/NBA e futuras
+    // competições casam sem precisar de entrada manual em CHAVE_PARTIDA.
+    var chaveDados = (COMPETICOES[id].dados || id).toLowerCase();
+    return { nome: COMPETICOES[id].label, chave: CHAVE_PARTIDA[id] || chaveDados, api: API_POR_COMP[id] || id };
   }));
 
   // Tradução da chave do seletor do mapa (data-esc) para o id do backend.
   var ESC_PARA_API  = { geral: 'geral' };
   Object.keys(COMPETICOES).forEach(function (id) {
-    ESC_PARA_API[CHAVE_PARTIDA[id] || id] = API_POR_COMP[id] || id;
+    var chaveDados = (COMPETICOES[id].dados || id).toLowerCase();
+    ESC_PARA_API[CHAVE_PARTIDA[id] || chaveDados] = API_POR_COMP[id] || id;
   });
   var _statsCache = null;   // resposta de /matches/stats (quando logado)
 
