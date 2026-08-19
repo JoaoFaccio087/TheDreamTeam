@@ -67,15 +67,19 @@ function voltarHome() {
 // Conta as edições distintas e o total de jogadores (futebol + vôlei) para o rodapé.
 function calcularEstatisticasFooter() {
   var todos = API.getTodosClubes().slice();
-  // Soma também os atletas de vôlei (Mundial + VNL), que ficam em arrays próprios.
+  // Soma também os atletas de vôlei (Mundial + VNL) e basquete (NBA), que ficam em
+  // arrays próprios de cada esporte.
   if (typeof DADOS_VOLEI_M !== 'undefined') todos = todos.concat(DADOS_VOLEI_M);
   if (typeof DADOS_VOLEI_F !== 'undefined') todos = todos.concat(DADOS_VOLEI_F);
   if (typeof DADOS_VNL_M !== 'undefined') todos = todos.concat(DADOS_VNL_M);
   if (typeof DADOS_VNL_F !== 'undefined') todos = todos.concat(DADOS_VNL_F);
+  if (typeof DADOS_NBA !== 'undefined') todos = todos.concat(DADOS_NBA);
   var edicoes = [];
   todos.forEach(function (d) {
-    if (edicoes.indexOf(d.edicao) < 0) {
-      edicoes.push(d.edicao);
+    // futebol/vôlei usam `edicao`; basquete usa `temporada` — conta os dois sem misturar.
+    var ano = (d.temporada != null) ? ('t:' + d.temporada) : ('e:' + d.edicao);
+    if (edicoes.indexOf(ano) < 0) {
+      edicoes.push(ano);
     }
   });
 

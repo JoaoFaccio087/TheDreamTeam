@@ -194,8 +194,9 @@ function iniciarTelaJogo() {
   var _swForca = document.getElementById('switch-forca');
   if (_swForca && typeof mostrarForca !== 'undefined') _swForca.checked = mostrarForca;
 
-  // Pílulas de formação: só no futebol (vôlei não troca de formação).
-  if (!ehVolei) {
+  // Pílulas de formação: só no futebol (vôlei e basquete não trocam de formação —
+  // posições fixas). Antes checava só !ehVolei, deixando o basquete habilitar as pílulas.
+  if (!ehVolei && !ehBasquete) {
     pilulasFormacaoJogo.forEach(function (p) {
       p.disabled = false;
       if (p.dataset.formacaoJogo === '4-3-3') {
@@ -244,8 +245,9 @@ function iniciarTelaJogo() {
 
 function selecionarFormacaoJogo(nome) {
   if (formacaoTravada) return;
-  // No vôlei não há troca de formação (posições fixas) — ignora qualquer clique.
+  // Vôlei e basquete não trocam de formação (posições fixas) — ignora qualquer clique.
   if ((typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado)) return;
+  if ((typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado)) return;
 
   formacaoJogo = nome;
 
