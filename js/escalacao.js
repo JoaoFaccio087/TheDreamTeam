@@ -153,9 +153,9 @@ function iniciarTelaJogo() {
   }
 
 
-  // Vôlei não tem formação (posições fixas): esconde o bloco de pílulas de formação.
-  // Futebol mostra normalmente.
-  if (ehVolei) {
+  // Vôlei e basquete não têm formação (posições fixas): esconde o bloco de pílulas de
+  // formação. Futebol mostra normalmente.
+  if (ehVolei || ehBasquete) {
     formacaoBloco.classList.add('escondida');
   } else {
     formacaoBloco.classList.remove('escondida');

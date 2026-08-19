@@ -10,17 +10,20 @@ const API = {
 
   getClubesPorCompeticao: function (comp) {
     // Busca no array do esporte certo. Os dados de cada esporte ficam PROPOSITALMENTE
-    // separados (DADOS = futebol; DADOS_VOLEI_M/F = vôlei) para o código legado de
-    // futebol nunca receber entrada de vôlei por engano. O filtro por `competicao`
-    // (string única por competição) garante que nada se mistura.
+    // separados (DADOS = futebol; DADOS_VOLEI_M/F e DADOS_VNL_M/F = vôlei; DADOS_NBA =
+    // basquete) para o código legado de futebol nunca receber entrada de outro esporte
+    // por engano. O filtro por `competicao` (string única por competição) garante que
+    // nada se mistura.
     var universo = DADOS;
     if (typeof DADOS_VOLEI_M !== 'undefined' || typeof DADOS_VOLEI_F !== 'undefined' ||
-        typeof DADOS_VNL_M !== 'undefined' || typeof DADOS_VNL_F !== 'undefined') {
+        typeof DADOS_VNL_M !== 'undefined' || typeof DADOS_VNL_F !== 'undefined' ||
+        typeof DADOS_NBA !== 'undefined') {
       universo = DADOS.concat(
         (typeof DADOS_VOLEI_M !== 'undefined') ? DADOS_VOLEI_M : [],
         (typeof DADOS_VOLEI_F !== 'undefined') ? DADOS_VOLEI_F : [],
         (typeof DADOS_VNL_M !== 'undefined') ? DADOS_VNL_M : [],
-        (typeof DADOS_VNL_F !== 'undefined') ? DADOS_VNL_F : []
+        (typeof DADOS_VNL_F !== 'undefined') ? DADOS_VNL_F : [],
+        (typeof DADOS_NBA !== 'undefined') ? DADOS_NBA : []
       );
     }
     return universo.filter(function (d) { return d.competicao === comp; });
