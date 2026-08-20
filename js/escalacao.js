@@ -160,6 +160,12 @@ function iniciarTelaJogo() {
   } else {
     formacaoBloco.classList.remove('escondida');
   }
+
+  // Tamanho da temporada: SÓ no basquete (reduzida/regular/completa).
+  var tamanhoBloco = document.getElementById('jogo-tamanho-bloco');
+  if (tamanhoBloco) {
+    tamanhoBloco.classList.toggle('escondida', !ehBasquete);
+  }
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 
   // Aparência do campo de jogo: quadra de vôlei/basquete ou campo de futebol.

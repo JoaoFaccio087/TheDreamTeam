@@ -55,6 +55,20 @@
     nba_full:  { id: 'nba_full',  totalTimes: 30, jogosVoce: 8, classificamConf: 8, melhorDe: 3 }
   };
 
+  // ── TAMANHOS DE TEMPORADA (escolhidos pelo usuário ao montar o time) ──
+  // Todos usam 16 times (8 por conf.) e top-8 nos playoffs — o que muda é quantos jogos
+  // VOCÊ joga na temporada regular (todos animados) e o tamanho das SÉRIES de playoff.
+  // A final da NBA pode ter série maior que as demais fases (melhorDeFinal).
+  var TAMANHOS_TEMPORADA = {
+    reduzida: { id: 'reduzida', nome: 'Reduzida', jogosVoce: 7,  melhorDe: 3, melhorDeFinal: 3,
+                desc: '7 jogos · playoffs melhor de 3' },
+    regular:  { id: 'regular',  nome: 'Regular',  jogosVoce: 14, melhorDe: 5, melhorDeFinal: 5,
+                desc: '14 jogos · playoffs melhor de 5' },
+    completa: { id: 'completa', nome: 'Completa', jogosVoce: 24, melhorDe: 7, melhorDeFinal: 7,
+                desc: '24 jogos · playoffs melhor de 7' }
+  };
+  var TAMANHO_PADRAO = 'regular';
+
   // Escolhe o maior formato NBA cujo total de times cabe no disponível (+1 = você).
   function escolheFormatoNBA(disponivel) {
     var total = disponivel + 1;
@@ -85,8 +99,18 @@
   //  Params iguais aos do vôlei. Retorna { formato, conferencias, suaConf,
   //  tabela, seusJogos, ... }. camp.basquete = true marca a bifurcação.
   // ============================================================
-  function montarCampanhaNBA(times, voce, forcaDe, formatoForcado) {
+  function montarCampanhaNBA(times, voce, forcaDe, formatoForcado, tamanhoId) {
     var fmt = formatoForcado ? FORMATOS_NBA[formatoForcado] : escolheFormatoNBA(times.length);
+
+    // Tamanho da temporada escolhido pelo usuário (reduzida/regular/completa). Sobrescreve
+    // jogosVoce e o tamanho das séries de playoff. Se não vier, usa o padrão.
+    var tam = TAMANHOS_TEMPORADA[tamanhoId] || TAMANHOS_TEMPORADA[TAMANHO_PADRAO];
+    // Só aplica o tamanho quando há times suficientes p/ o formato real (16). Com poucos
+    // times (fallback mini/med), mantém o jogosVoce do formato p/ não quebrar.
+    var usaTamanho = (fmt.classificamConf >= 8);
+    var jogosVoce = usaTamanho ? tam.jogosVoce : fmt.jogosVoce;
+    var melhorDe = usaTamanho ? tam.melhorDe : fmt.melhorDe;
+    var melhorDeFinal = usaTamanho ? tam.melhorDeFinal : fmt.melhorDe;
 
     // Participantes: você + (totalTimes-1) times sorteados.
     var pool = shuffle(times).slice(0, fmt.totalTimes - 1);
@@ -111,16 +135,25 @@
       OESTE: { nome: 'Oeste', tabela: tabelaDe(oeste) }
     };
 
-    // Seus adversários da temporada regular (offline reduzido): sorteia jogosVoce times
-    // distintos (de qualquer conferência, como na NBA real que cruza conferências).
-    var outros = shuffle(participantes.filter(function (t) { return !t.voce; }));
-    var seusJogos = outros.slice(0, Math.min(fmt.jogosVoce, outros.length));
+    // Seus adversários da temporada regular. Sorteia jogosVoce adversários; se o tamanho
+    // pede mais jogos que times disponíveis (ex.: 24 jogos, 15 adversários), REPETE
+    // adversários (como na NBA real, que joga várias vezes contra o mesmo time).
+    var outros = participantes.filter(function (t) { return !t.voce; });
+    var seusJogos = [];
+    var baralho = [];
+    for (var g = 0; g < jogosVoce; g++) {
+      if (baralho.length === 0) baralho = shuffle(outros.slice());
+      seusJogos.push(baralho.pop());
+    }
 
     var fasesPlayoff = fasesPlayoffDe(fmt.classificamConf);
 
     return {
       basquete: true,
       formato: fmt,
+      tamanho: tam,
+      melhorDe: melhorDe,
+      melhorDeFinal: melhorDeFinal,
       conferencias: conferencias,
       suaConf: suaConf,
       seusJogos: seusJogos,
@@ -376,6 +409,8 @@
 
   var API = {
     FORMATOS_NBA: FORMATOS_NBA,
+    TAMANHOS_TEMPORADA: TAMANHOS_TEMPORADA,
+    TAMANHO_PADRAO: TAMANHO_PADRAO,
     escolheFormatoNBA: escolheFormatoNBA,
     fasesPlayoffDe: fasesPlayoffDe,
     montarCampanhaNBA: montarCampanhaNBA,

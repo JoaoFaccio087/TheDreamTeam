@@ -247,6 +247,24 @@ simPilulasVel.forEach(function (btn) {
   });
 });
 
+// Pílulas de TAMANHO DA TEMPORADA (basquete): reduzida / regular / completa.
+(function () {
+  var pilulasTam = document.querySelectorAll('#jogo-pilulas-tamanho .pilula');
+  var desc = document.getElementById('jogo-tamanho-desc');
+  pilulasTam.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      tamanhoTemporadaNBA = this.dataset.tamanho || 'regular';
+      pilulasTam.forEach(function (b) { b.classList.remove('pilula-ativa'); });
+      this.classList.add('pilula-ativa');
+      // atualiza a descrição a partir do preset do motor
+      if (desc && typeof CampanhaBasquete !== 'undefined' && CampanhaBasquete.TAMANHOS_TEMPORADA) {
+        var t = CampanhaBasquete.TAMANHOS_TEMPORADA[tamanhoTemporadaNBA];
+        if (t) desc.textContent = t.desc;
+      }
+    });
+  });
+})();
+
 // Tela de simulação: voltar para a escalação
 UI.on('btn-voltar-escalacao', 'click', function () {
   mostrarTela(telaJogo);

@@ -151,6 +151,7 @@ function setMostrarForca(v) {
 
 let modoSimulacao       = 'jogo-a-jogo'; // 'jogo-a-jogo' | 'automatico'
 let velocidadeSimulacao = 'normal';      // 'lento' | 'normal' | 'rapida'
+let tamanhoTemporadaNBA = 'regular';     // basquete: 'reduzida' | 'regular' | 'completa'
 
 var statsJogadores   = {};   // gols e assistências por jogador: { nome: { gols, asis } }
 var contadorPartidas = 0;    // gera IDs únicos para os cards de partida

@@ -434,6 +434,17 @@ var campanhaVoleiAtual = null;
 var campanhaBasqueteAtual = null;
 var partidaIdBasquete = 0;
 
+// Handle da animação de partida em curso (basquete ou vôlei). Guardado para poder
+// CANCELAR uma animação ainda rodando quando o usuário clica "Pular Tudo" — senão a
+// partida que estava animando continua no seu timer e "fica simulando" por cima do pulo.
+var animacaoEmCurso = null;
+function cancelarAnimacaoEmCurso() {
+  if (animacaoEmCurso && typeof animacaoEmCurso.cancel === 'function') {
+    try { animacaoEmCurso.cancel(); } catch (e) {}
+  }
+  animacaoEmCurso = null;
+}
+
 // Força média de um time de basquete (0-100), média das forças dos jogadores.
 function forcaTimeBasquete(t) {
   if (!t || !t.jogadores || !t.jogadores.length) return 80;
@@ -686,7 +697,9 @@ function iniciarPartidaBasquete() {
     var times = todos.filter(function (c) { return c.temporada === temp; });
 
     var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
-    campanhaBasqueteAtual = CampanhaBasquete.montarCampanhaNBA(times, voceMonta, forcaTimeBasquete);
+    // Tamanho da temporada escolhido na tela de montar time (reduzida/regular/completa).
+    var tamNBA = (typeof tamanhoTemporadaNBA !== 'undefined' && tamanhoTemporadaNBA) ? tamanhoTemporadaNBA : null;
+    campanhaBasqueteAtual = CampanhaBasquete.montarCampanhaNBA(times, voceMonta, forcaTimeBasquete, null, tamNBA);
     campanhaBasqueteAtual.temporada = temp;
   }
 
@@ -710,7 +723,7 @@ function iniciarPartidaBasquete() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
-  AnimacaoBasquete.animar({
+  animacaoEmCurso = AnimacaoBasquete.animar({
     elCard: card, roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
     pular: false,
@@ -768,7 +781,7 @@ function iniciarPartidaPlayoffNBA() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
-  AnimacaoBasquete.animar({
+  animacaoEmCurso = AnimacaoBasquete.animar({
     elCard: card, roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
     pular: false,
@@ -800,6 +813,7 @@ function iniciarPartidaPlayoffNBA() {
 
 // "Pular tudo" do basquete: simula sua temporada restante e, se classificar, todo o playoff.
 function pularTudoBasquete() {
+  cancelarAnimacaoEmCurso();   // para qualquer partida ainda animando antes de pular
   if (!campanhaBasqueteAtual) return;
   var camp = campanhaBasqueteAtual;
 
@@ -1003,7 +1017,7 @@ function iniciarPartidaVolei() {
   // roda a animação usando a velocidade global já existente (mesma do futebol).
   // IMPORTANTE: o automático NÃO pula a animação — ele só encadeia a próxima partida
   // sozinha (igual ao futebol). Só o "Pular tudo" pula de fato as simulações.
-  AnimacaoVolei.animar({
+  animacaoEmCurso = AnimacaoVolei.animar({
     elCard: card,
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
@@ -1059,6 +1073,7 @@ function iniciarPartidaVolei() {
 // registra na tabela, salva a campanha e mostra o resultado no botão. Evita cair
 // no pularTudoBrasileirao/pularTudoMata (que assumem futebol e travam).
 function pularTudoVolei() {
+  cancelarAnimacaoEmCurso();   // para qualquer partida ainda animando antes de pular
   if (!campanhaVoleiAtual || typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') return;
   var camp = campanhaVoleiAtual;
   var advs = CampanhaVolei.adversariosDoSeuGrupo(camp);
@@ -1078,7 +1093,7 @@ function pularTudoVolei() {
     var card = criarCardPartidaVolei(idCard, adversario, faseLabel);
     // Usa a própria animação em modo "pular" (preenche o card com o resultado final
     // instantaneamente, sem ponto a ponto).
-    AnimacaoVolei.animar({
+    animacaoEmCurso = AnimacaoVolei.animar({
       elCard: card,
       roteiro: roteiro,
       velocidade: function () { return velocidadeSimulacao; },
@@ -1211,7 +1226,7 @@ function iniciarPartidaVNL() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
-  AnimacaoVolei.animar({
+  animacaoEmCurso = AnimacaoVolei.animar({
     elCard: card,
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
@@ -1257,6 +1272,7 @@ function iniciarPartidaVNL() {
 
 // "Pular tudo" da VNL: simula suas rodadas restantes da preliminar sem animação.
 function pularTudoVNL() {
+  cancelarAnimacaoEmCurso();   // para qualquer partida ainda animando antes de pular
   if (!campanhaVoleiAtual || typeof CampanhaVolei === 'undefined' || typeof AnimacaoVolei === 'undefined') return;
   var camp = campanhaVoleiAtual;
 
@@ -1368,7 +1384,7 @@ function iniciarPartidaFinalEightVNL() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
-  AnimacaoVolei.animar({
+  animacaoEmCurso = AnimacaoVolei.animar({
     elCard: card,
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
@@ -1428,7 +1444,7 @@ function iniciarPartidaMataVolei() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
-  AnimacaoVolei.animar({
+  animacaoEmCurso = AnimacaoVolei.animar({
     elCard: card,
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
@@ -1849,6 +1865,7 @@ function ptAcumular(gMeus, gAdv, golsMeus) {
 }
 
 function pularTudoMata() {
+  cancelarAnimacaoEmCurso();   // para qualquer partida ainda animando antes de pular
   if (ehFormatoLiga(modoSelecionado)) return;      // liga tem o seu próprio pular tudo
   if (!COMPETICOES[modoSelecionado]) return;        // só nos modos de campanha
 
