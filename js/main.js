@@ -147,9 +147,23 @@ if (btnVoltarMobile) btnVoltarMobile.addEventListener('click', voltarHome);
 
 // Abas da tela de simulação (Copa): Simulação / Mata-a-Mata
 var simTabJogos = document.getElementById('sim-tab-jogos');
+var simTabClassif = document.getElementById('sim-tab-classif');
 var simTabChave = document.getElementById('sim-tab-chave');
-if (simTabJogos) simTabJogos.addEventListener('click', function () { selecionarAbaSim('jogos'); });
-if (simTabChave) simTabChave.addEventListener('click', function () { selecionarAbaSim('chave'); });
+// As abas servem tanto ao modo Copa (jogos/chave) quanto ao Basquete (jogos/classif/playoff).
+// No basquete usamos selecionarAbaBasquete; caso contrário, selecionarAbaSim.
+function ehBasqueteNaTela() {
+  return (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado) &&
+         typeof campanhaBasqueteAtual !== 'undefined' && campanhaBasqueteAtual;
+}
+if (simTabJogos) simTabJogos.addEventListener('click', function () {
+  if (ehBasqueteNaTela()) selecionarAbaBasquete('jogos'); else selecionarAbaSim('jogos');
+});
+if (simTabClassif) simTabClassif.addEventListener('click', function () {
+  if (ehBasqueteNaTela()) selecionarAbaBasquete('classif');
+});
+if (simTabChave) simTabChave.addEventListener('click', function () {
+  if (ehBasqueteNaTela()) selecionarAbaBasquete('chave'); else selecionarAbaSim('chave');
+});
 
 pilulasFormacaoJogo.forEach(function (pilula) {
   pilula.addEventListener('click', function () {

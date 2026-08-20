@@ -645,50 +645,102 @@ function tituloCurto(nome) {
 }
 
 // Mostra a classificação da SUA conferência (tabela V/D/saldo), integrada no card.
+// Renderiza a classificação das DUAS conferências no painel dedicado (aba Classificação).
 function mostrarClassificacaoConf(camp) {
-  // Nova estrutura de LIGA: classificação vem de classificacaoDaConf (tabela de pontos
-  // corridos). Mantém compatibilidade com a estrutura antiga se ela existir.
-  var cls, nomeConf;
-  if (camp.liga && CampanhaBasquete.classificacaoDaConf) {
-    cls = CampanhaBasquete.classificacaoDaConf(camp, camp.suaConf);
-    nomeConf = (camp.suaConf === 'LESTE') ? 'Leste' : 'Oeste';
-  } else {
-    var clsAntigo = CampanhaBasquete.classificacaoConf(camp, camp.suaConf);
-    cls = clsAntigo.map(function (l) { return l.time; });   // normaliza p/ time direto
-    nomeConf = camp.conferencias[camp.suaConf].nome;
+  var alvo = document.getElementById('nba-classificacao');
+  if (!alvo) return;   // painel ainda não criado (montado em prepararAbasBasquete)
+
+  function tabelaConf(confId, nomeConf) {
+    var cls;
+    if (camp.liga && CampanhaBasquete.classificacaoDaConf) {
+      cls = CampanhaBasquete.classificacaoDaConf(camp, confId);
+    } else {
+      cls = CampanhaBasquete.classificacaoConf(camp, confId).map(function (l) { return l.time; });
+    }
+    var classificam = camp.classificamConf | 0;
+    var linhas = cls.map(function (t, i) {
+      var saldo = (t.pf - t.pa >= 0 ? '+' : '') + (t.pf - t.pa);
+      var classe = (t.voce ? 'grupo-voce' : '') + (i < classificam ? ' grupo-classifica' : '');
+      var nome = t.voce ? nomeDoTime : t.nome;
+      var esc = (typeof Escudos !== 'undefined' && Escudos.porTime) ? (Escudos.porTime(t, modoSelecionado) || '') : '';
+      var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
+      return '<tr class="' + classe + '">' +
+               '<td class="grupo-pos">' + (i + 1) + '</td>' +
+               '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + nome + '</span></td>' +
+               '<td class="grupo-num">' + t.j + '</td>' +
+               '<td class="grupo-num">' + t.v + '</td>' +
+               '<td class="grupo-num">' + t.d + '</td>' +
+               '<td class="grupo-num">' + saldo + '</td>' +
+             '</tr>';
+    }).join('');
+    return '<div class="grupo-tabela">' +
+             '<p class="grupo-tabela-titulo">Conferência ' + nomeConf + '</p>' +
+             '<table class="fl-tabela">' +
+               '<thead><tr><th></th><th>Time</th><th>J</th><th>V</th><th>D</th><th>Saldo</th></tr></thead>' +
+               '<tbody>' + linhas + '</tbody>' +
+             '</table>' +
+           '</div>';
   }
-  var classificam = camp.classificamConf | 0;
 
-  var linhas = cls.map(function (t, i) {
-    var saldo = (t.pf - t.pa >= 0 ? '+' : '') + (t.pf - t.pa);
-    var classe = (t.voce ? 'grupo-voce' : '') + (i < classificam ? ' grupo-classifica' : '');
-    var nome = t.voce ? nomeDoTime : t.nome;
-    var esc = (typeof Escudos !== 'undefined' && Escudos.porTime) ? (Escudos.porTime(t, modoSelecionado) || '') : '';
-    var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
-    return '<tr class="' + classe + '">' +
-             '<td class="grupo-pos">' + (i + 1) + '</td>' +
-             '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + nome + '</span></td>' +
-             '<td class="grupo-num">' + t.v + '</td>' +
-             '<td class="grupo-num">' + t.d + '</td>' +
-             '<td class="grupo-num">' + saldo + '</td>' +
-           '</tr>';
-  }).join('');
-
-  var html =
-    '<div class="grupo-tabela">' +
-      '<p class="grupo-tabela-titulo">Conferência ' + nomeConf + ' \u00B7 Classificação</p>' +
-      '<table class="fl-tabela">' +
-        '<thead><tr><th></th><th>Time</th><th>V</th><th>D</th><th>Saldo</th></tr></thead>' +
-        '<tbody>' + linhas + '</tbody>' +
-      '</table>' +
-      '<p class="fl-legenda">Top ' + classificam + ' avançam aos playoffs</p>' +
-    '</div>';
-
-  var ultimoCard = document.getElementById('partida-basquete-' + partidaIdBasquete);
-  var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
-  if (corpo) { var d = document.createElement('div'); d.innerHTML = html; corpo.appendChild(d.firstChild); }
+  var suaPrimeiro = (camp.suaConf === 'LESTE');
+  var htmlL = tabelaConf('LESTE', 'Leste');
+  var htmlO = tabelaConf('OESTE', 'Oeste');
+  alvo.innerHTML =
+    '<p class="nba-classif-legenda">Top ' + (camp.classificamConf | 0) + ' de cada conferência avançam aos playoffs</p>' +
+    '<div class="nba-classif-grid">' + (suaPrimeiro ? htmlL + htmlO : htmlO + htmlL) + '</div>';
 }
 
+// Prepara/exibe as abas do basquete: Simulação, Classificação, Playoff.
+function prepararAbasBasquete() {
+  var simTabs = document.getElementById('sim-tabs');
+  var tabClassif = document.getElementById('sim-tab-classif');
+  var tabChave = document.getElementById('sim-tab-chave');
+  if (simTabs) simTabs.classList.remove('escondida');
+  if (tabClassif) tabClassif.classList.remove('escondida');
+  if (tabChave) tabChave.textContent = 'Playoff';
+
+  // Cria o painel de classificação (dentro de sim-painel-jogos, escondido por padrão) se
+  // ainda não existir.
+  var painelJogos = document.getElementById('sim-painel-jogos');
+  if (painelJogos && !document.getElementById('nba-classif-painel')) {
+    var d = document.createElement('div');
+    d.id = 'nba-classif-painel';
+    d.className = 'nba-classif-painel escondida';
+    d.innerHTML = '<div id="nba-classificacao"></div>';
+    painelJogos.appendChild(d);
+  }
+  selecionarAbaBasquete('jogos');
+}
+
+// Alterna entre as 3 abas do basquete (Simulação / Classificação / Playoff).
+function selecionarAbaBasquete(qual) {
+  var histJogos   = document.getElementById('historico-jogos');
+  var painelClass = document.getElementById('nba-classif-painel');
+  var painelChave = document.getElementById('chave-copa');
+  var tabJogos    = document.getElementById('sim-tab-jogos');
+  var tabClassif  = document.getElementById('sim-tab-classif');
+  var tabChave    = document.getElementById('sim-tab-chave');
+  var tabelaBras  = document.getElementById('tabela-brasileirao');
+
+  if (tabelaBras) tabelaBras.classList.add('escondida');   // a tabela do brasileirão não é usada aqui
+
+  var mostraJogos  = (qual === 'jogos');
+  var mostraClass  = (qual === 'classif');
+  var mostraChave  = (qual === 'chave');
+
+  if (histJogos)   histJogos.classList.toggle('escondida', !mostraJogos);
+  if (painelClass) painelClass.classList.toggle('escondida', !mostraClass);
+  if (painelChave) painelChave.classList.toggle('escondida', !mostraChave);
+
+  if (tabJogos)   tabJogos.classList.toggle('sim-tab-ativa', mostraJogos);
+  if (tabClassif) tabClassif.classList.toggle('sim-tab-ativa', mostraClass);
+  if (tabChave)   tabChave.classList.toggle('sim-tab-ativa', mostraChave);
+
+  if (mostraClass && campanhaBasqueteAtual) mostrarClassificacaoConf(campanhaBasqueteAtual);
+  if (mostraChave && campanhaBasqueteAtual && campanhaBasqueteAtual.playoff) mostrarBracketPlayoffs(campanhaBasqueteAtual);
+}
+
+// Inicia (ou continua) a campanha da NBA e joga a próxima partida.
 // Inicia (ou continua) a campanha da NBA e joga a próxima partida.
 function iniciarPartidaBasquete() {
   if (typeof CampanhaBasquete === 'undefined' || typeof AnimacaoBasquete === 'undefined') {
@@ -704,6 +756,7 @@ function iniciarPartidaBasquete() {
     var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
     var tamNBA = (typeof tamanhoTemporadaNBA !== 'undefined' && tamanhoTemporadaNBA) ? tamanhoTemporadaNBA : 'regular';
     campanhaBasqueteAtual = CampanhaBasquete.montarLigaNBA(todos, voceMonta, forcaTimeBasquete, tamNBA);
+    prepararAbasBasquete();
     mostrarClassificacaoConf(campanhaBasqueteAtual);
   }
 

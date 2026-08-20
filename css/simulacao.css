@@ -929,3 +929,16 @@ td.grupo-time { text-align: left; }
 .bkt-escudo { width: 16px; height: 16px; display: inline-flex; flex-shrink: 0; }
 .bkt-escudo svg { width: 100%; height: 100%; }
 .partida-card:not(.expandido) .bkt-wrap { display: none; }
+
+/* ── NBA: painel de classificação (aba Classificação) com as 2 conferências ── */
+.nba-classif-painel { padding: 4px 0; }
+.nba-classif-legenda {
+  font-size: var(--fs-sm, 0.8rem); color: var(--txt-soft, #9aa6b2);
+  margin: 0 0 10px; text-align: center;
+}
+.nba-classif-grid {
+  display: grid; grid-template-columns: 1fr; gap: 16px;
+}
+@media (min-width: 720px) {
+  .nba-classif-grid { grid-template-columns: 1fr 1fr; }
+}
