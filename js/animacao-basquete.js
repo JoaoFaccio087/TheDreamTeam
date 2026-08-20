@@ -7,8 +7,10 @@
 //  acumulador de stats sem retrabalho.
 //
 //  Decisões de UX (alinhar com João):
-//   - O placar sobe por QUARTO (não lance a lance): a cada tick, avança
-//     um quarto e mostra o placar acumulado + linha-resumo do quarto.
+//   - O placar sobe CESTA A CESTA (de 1, 2 ou 3 pontos), como num jogo real:
+//     cada quarto é decomposto numa sequência de cestas e revelado aos poucos,
+//     intercalando os dois times. O resumo por quarto (Q1: x-y) aparece ao
+//     fechar cada quarto. (Antes subia o quarto inteiro de uma vez.)
 //   - Ao fechar os 4 quartos: placar final; se houve prorrogação, indica.
 //   - Destaques ao fim: pts/reb/ast dos maiores pontuadores.
 //   - Velocidade (lento/normal/rápida) e "pular tudo" reaproveitados.
@@ -165,9 +167,13 @@
       return todos;
     }
 
-    // Cadência de cada CESTA (bem mais curta que a de quarto, senão o jogo fica longo).
+    // Cadência de cada CESTA. Um jogo tem ~100 cestas; alvos de duração:
+    // normal ~13s (130ms), lento ~21s (210ms), rápida ~7s (70ms). Rápido o bastante
+    // para não arrastar, lento o bastante para o placar ser legível subindo de 1/2/3.
     function cadenciaCesta(velocidade) {
-      return Math.max(60, Math.round(cadenciaQuarto(velocidade) / 12));
+      if (velocidade === 'lento')  return 210;
+      if (velocidade === 'rapida') return 70;
+      return 130; // normal
     }
 
     // Estado: avança CESTA a CESTA dentro de cada quarto, acumulando o placar.
