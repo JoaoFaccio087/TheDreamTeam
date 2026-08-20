@@ -24,6 +24,7 @@ function obterPoolDraft() {
         forca:      j.forca,
         clube:      entrada.clube,
         edicao:     entrada.edicao,
+        temporada:  entrada.temporada,   // basquete usa temporada ("2024-25"); preserva p/ o card
         competicao: entrada.competicao
       });
     });
@@ -35,7 +36,9 @@ function obterPoolDraft() {
 
 // Índice do pool por CÓDIGO DE VAGA (cacheado por competição). Sem ele, sortearCartas
 // filtraria os 5504 atletas da NBA a cada clique. Aqui pré-agrupamos: para cada código
-// de vaga que o campo pode ter, guardamos só os jogadores que podem ocupá-lo.
+// de vaga que o campo pode ter, guardamos os jogadores agrupados POR NOME (um mesmo
+// jogador aparece em várias edições) — isso evita refazer o filtro E o agrupamento a
+// cada sorteio.
 var _draftIdxCache = {};
 function indicePorVaga(codigo) {
   var chave = modoSelecionado;
@@ -43,7 +46,14 @@ function indicePorVaga(codigo) {
   var idx = _draftIdxCache[chave];
   if (idx[codigo]) return idx[codigo];
   var pool = obterPoolDraft();
-  idx[codigo] = pool.filter(function (j) { return podeOcupar(j, codigo); });
+  var porNome = {};
+  var nomes = [];
+  pool.forEach(function (j) {
+    if (!podeOcupar(j, codigo)) return;
+    if (!porNome[j.nome]) { porNome[j.nome] = []; nomes.push(j.nome); }
+    porNome[j.nome].push(j);
+  });
+  idx[codigo] = { porNome: porNome, nomes: nomes };
   return idx[codigo];
 }
 
@@ -58,23 +68,14 @@ function nomeJaEscalado(nome) {
 function sortearCartas(indice) {
   var codigo = slotsJogo[indice].dataset.codigo;
 
-  // Usa o índice pré-agrupado por vaga (cacheado) em vez de filtrar o pool inteiro
-  // (5504 atletas na NBA) a cada sorteio. Só resta excluir quem já está escalado.
-  var elegiveis = indicePorVaga(codigo).filter(function (j) {
-    return !nomeJaEscalado(j.nome);
-  });
+  // Usa o índice pré-agrupado por vaga (filtro + agrupamento por nome já cacheados).
+  // Só resta excluir quem já está escalado e embaralhar os nomes disponíveis.
+  var idx = indicePorVaga(codigo);
+  var nomesLivres = idx.nomes.filter(function (nome) { return !nomeJaEscalado(nome); });
 
-  // Agrupa as edições por nome de jogador
-  var porNome = {};
-  var nomes = [];
-  elegiveis.forEach(function (j) {
-    if (!porNome[j.nome]) { porNome[j.nome] = []; nomes.push(j.nome); }
-    porNome[j.nome].push(j);
-  });
-
-  // Embaralha os nomes e pega até 5 distintos
-  return UI.shuffle(nomes).slice(0, 5).map(function (nome) {
-    var opcoes = porNome[nome];
+  // Embaralha os nomes e pega até 5 distintos; para cada nome, uma edição ao acaso.
+  return UI.shuffle(nomesLivres).slice(0, 5).map(function (nome) {
+    var opcoes = idx.porNome[nome];
     return opcoes[Math.floor(Math.random() * opcoes.length)];
   });
 }
@@ -255,7 +256,7 @@ function renderizarCartas() {
       '<span class="carta-brilho" style="animation-delay:' + (atraso + 0.26).toFixed(2) + 's"></span>' +
       '<span class="carta-nome' + (window.UI ? UI.classeNomeCarta(j.nome) : '') + '" title="' + j.nome + '">' + j.nome + '</span>' +
       '<span class="carta-time">' + j.clube + '</span>' +
-      '<span class="carta-ano">' + j.edicao + '</span>' +
+      '<span class="carta-ano">' + (j.temporada != null ? j.temporada : (j.edicao != null ? j.edicao : '')) + '</span>' +
       '<span class="carta-posicoes">' + j.posicoes.join('/') + '</span>' +
       '<span class="carta-forca">' + (revela ? j.forca : '?') + '</span>';
 

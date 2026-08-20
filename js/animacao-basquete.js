@@ -117,37 +117,102 @@
       return { cancel: function () {} };
     }
 
-    // Estado: avança quarto a quarto, acumulando o placar.
-    var qIdx = 0, paAtual = 0, pbAtual = 0;
-
-    function tick() {
-      if (cancelado) return;
-      if (qIdx >= roteiro.quartos.length) { fim(); return; }
-
-      var q = roteiro.quartos[qIdx];
-      paAtual += q[0]; pbAtual += q[1];
-      qIdx++;
-
-      if (elPlacar) elPlacar.textContent = paAtual + ' \u2013 ' + pbAtual;
-      if (elStatus) elStatus.textContent = qIdx + 'º quarto';
-      pintarResumoQuartos(qIdx);
-
-      if (qIdx >= roteiro.quartos.length) {
-        // último quarto exibido → fecha
-        timer = setTimeout(fim, cadenciaQuarto(velFn()));
-        return;
+    // Decompõe um total de pontos de um quarto numa sequência realista de cestas:
+    // predominam cestas de 2 e 3 pontos, com lances livres de 1 ocasionais. Retorna um
+    // array de incrementos (ex.: [2,3,2,2,1,3,...]) cuja soma é exatamente o total.
+    function cestasDoQuarto(total, r) {
+      r = r || Math.random;
+      var out = [];
+      var resto = total;
+      while (resto > 0) {
+        var v;
+        if (resto === 1) { v = 1; }
+        else if (resto === 2) { v = (r() < 0.5) ? 2 : 1; }
+        else {
+          var d = r();
+          // ~50% cestas de 2pts, ~35% de 3pts, ~15% lance livre de 1pt
+          v = (d < 0.50) ? 2 : (d < 0.85 ? 3 : 1);
+          if (v > resto) v = resto;
+        }
+        out.push(v);
+        resto -= v;
       }
-      timer = setTimeout(tick, cadenciaQuarto(velFn()));
+      return out;
     }
 
-    // arranque
+    // Monta a sequência de "lances" do jogo inteiro: para cada quarto, intercala as cestas
+    // dos dois times de forma alternada/aleatória, marcando de qual lado é cada cesta.
+    // Assim o placar sobe de 1/2/3 por vez, como num jogo real.
+    function montarLances() {
+      var todos = [];
+      for (var i = 0; i < roteiro.quartos.length; i++) {
+        var q = roteiro.quartos[i];
+        var ca = cestasDoQuarto(q[0]);
+        var cb = cestasDoQuarto(q[1]);
+        // intercala as cestas de A e B do quarto preservando a ordem de cada um
+        var ia = 0, ib = 0;
+        var lancesQ = [];
+        while (ia < ca.length || ib < cb.length) {
+          var pegaA;
+          if (ia >= ca.length) pegaA = false;
+          else if (ib >= cb.length) pegaA = true;
+          else pegaA = Math.random() < 0.5;
+          if (pegaA) { lancesQ.push({ lado: 'a', v: ca[ia] }); ia++; }
+          else { lancesQ.push({ lado: 'b', v: cb[ib] }); ib++; }
+        }
+        todos.push({ quarto: i, lances: lancesQ });
+      }
+      return todos;
+    }
+
+    // Cadência de cada CESTA (bem mais curta que a de quarto, senão o jogo fica longo).
+    function cadenciaCesta(velocidade) {
+      return Math.max(60, Math.round(cadenciaQuarto(velocidade) / 12));
+    }
+
+    // Estado: avança CESTA a CESTA dentro de cada quarto, acumulando o placar.
+    var qIdx = 0, paAtual = 0, pbAtual = 0;
+    var _plano = montarLances();
+    var _qAtual = 0, _lanceIdx = 0;
+
+    function tickCesta() {
+      if (cancelado) return;
+      if (_qAtual >= _plano.length) { fim(); return; }
+
+      var bloco = _plano[_qAtual];
+      // terminou as cestas deste quarto → fecha o quarto e passa ao próximo
+      if (_lanceIdx >= bloco.lances.length) {
+        qIdx = _qAtual + 1;
+        pintarResumoQuartos(qIdx);
+        _qAtual++; _lanceIdx = 0;
+        if (elStatus) {
+          elStatus.textContent = (_qAtual >= _plano.length) ? '' : (_qAtual + 1) + 'º quarto';
+        }
+        if (_qAtual >= _plano.length) { timer = setTimeout(fim, cadenciaQuarto(velFn())); return; }
+        // pequena pausa entre quartos
+        timer = setTimeout(tickCesta, cadenciaQuarto(velFn()));
+        return;
+      }
+
+      var lance = bloco.lances[_lanceIdx];
+      if (lance.lado === 'a') paAtual += lance.v; else pbAtual += lance.v;
+      _lanceIdx++;
+
+      if (elPlacar) elPlacar.textContent = paAtual + ' \u2013 ' + pbAtual;
+      if (elStatus) elStatus.textContent = (_qAtual + 1) + 'º quarto';
+      timer = setTimeout(tickCesta, cadenciaCesta(velFn()));
+    }
+
+    // arranque (cesta a cesta)
     if (elStatus) elStatus.textContent = '1º quarto';
     if (elPlacar) elPlacar.textContent = '0 \u2013 0';
-    timer = setTimeout(tick, cadenciaQuarto(velFn()));
+    timer = setTimeout(tickCesta, cadenciaCesta(velFn()));
 
     return { cancel: function () { cancelado = true; if (timer) clearTimeout(timer); } };
   }
 
+
+  
   var API = {
     prepararPartida: prepararPartida,
     coletarEstatisticas: coletarEstatisticas,
