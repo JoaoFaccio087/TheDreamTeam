@@ -33,6 +33,20 @@ function obterPoolDraft() {
   return pool;
 }
 
+// Índice do pool por CÓDIGO DE VAGA (cacheado por competição). Sem ele, sortearCartas
+// filtraria os 5504 atletas da NBA a cada clique. Aqui pré-agrupamos: para cada código
+// de vaga que o campo pode ter, guardamos só os jogadores que podem ocupá-lo.
+var _draftIdxCache = {};
+function indicePorVaga(codigo) {
+  var chave = modoSelecionado;
+  if (!_draftIdxCache[chave]) _draftIdxCache[chave] = {};
+  var idx = _draftIdxCache[chave];
+  if (idx[codigo]) return idx[codigo];
+  var pool = obterPoolDraft();
+  idx[codigo] = pool.filter(function (j) { return podeOcupar(j, codigo); });
+  return idx[codigo];
+}
+
 // Já está em campo pelo NOME? (o mesmo jogador pode existir em várias edições,
 // mas só pode entrar uma vez na escalação)
 function nomeJaEscalado(nome) {
@@ -43,10 +57,11 @@ function nomeJaEscalado(nome) {
 // presente em várias edições, escolhe uma edição ao acaso.
 function sortearCartas(indice) {
   var codigo = slotsJogo[indice].dataset.codigo;
-  var pool   = obterPoolDraft();
 
-  var elegiveis = pool.filter(function (j) {
-    return podeOcupar(j, codigo) && !nomeJaEscalado(j.nome);
+  // Usa o índice pré-agrupado por vaga (cacheado) em vez de filtrar o pool inteiro
+  // (5504 atletas na NBA) a cada sorteio. Só resta excluir quem já está escalado.
+  var elegiveis = indicePorVaga(codigo).filter(function (j) {
+    return !nomeJaEscalado(j.nome);
   });
 
   // Agrupa as edições por nome de jogador

@@ -136,30 +136,84 @@
     el.innerHTML = escudoDe(el.dataset.escudo);
   }
 
+  var _LOTE = 80;              // cards renderizados por vez
+  var _renderList = [];        // lista filtrada atual
+  var _renderQtd = 0;          // quantos já foram para o DOM
+
+  function cardHTML(d) {
+    var k = chave(d);
+    var on = poteLivre.indexOf(k) >= 0;
+    return '<button class="pote-card' + (on ? ' pote-card-on' : '') + '" type="button" data-k="' +
+           UI.esc(k) + '" aria-pressed="' + on + '">' +
+             '<span class="pote-escudo" data-escudo="' + UI.esc(d.clube) + '"></span>' +
+             '<span class="pote-nome">' + UI.esc(d.clube) + '</span>' +
+             '<span class="pote-ano">' + anoDe(d) + '</span>' +
+           '</button>';
+  }
+
+  // Renderiza o próximo lote no fim da grade (append, sem recriar os anteriores).
+  function renderProximoLote() {
+    var grade = $('pote-grade');
+    if (!grade) return;
+    var fim = Math.min(_renderQtd + _LOTE, _renderList.length);
+    if (fim <= _renderQtd) return;
+    var html = '';
+    for (var i = _renderQtd; i < fim; i++) html += cardHTML(_renderList[i]);
+    // insere antes da "sentinela" de scroll (se houver), senão no fim
+    var sentinela = grade.querySelector('.pote-sentinela');
+    if (sentinela) sentinela.insertAdjacentHTML('beforebegin', html);
+    else grade.insertAdjacentHTML('beforeend', html);
+    _renderQtd = fim;
+    observarEscudos(grade);
+    // se acabou, remove a sentinela e para de observar; senão, garante que segue observada
+    if (_renderQtd >= _renderList.length) {
+      if (sentinela) sentinela.remove();
+      if (grade._scrollObs) grade._scrollObs.disconnect();
+    } else if (grade._scrollObs && sentinela) {
+      grade._scrollObs.observe(sentinela);   // continua observando p/ o próximo lote
+    }
+  }
+
   function render() {
     var grade = $('pote-grade');
     if (!grade) return;
-    var lista = filtradas();
+    _renderList = filtradas();
+    _renderQtd = 0;
 
-    if (!lista.length) {
+    if (!_renderList.length) {
       grade.innerHTML = '<p class="pote-vazio">Nenhum clube encontrado. Tente outro nome ou década.</p>';
+      atualizarRodape();
       return;
     }
-    grade.innerHTML = lista.map(function (d) {
-      var k = chave(d);
-      var on = poteLivre.indexOf(k) >= 0;
-      return '<button class="pote-card' + (on ? ' pote-card-on' : '') + '" type="button" data-k="' +
-             UI.esc(k) + '" aria-pressed="' + on + '">' +
-               '<span class="pote-escudo" data-escudo="' + UI.esc(d.clube) + '"></span>' +
-               '<span class="pote-nome">' + UI.esc(d.clube) + '</span>' +
-               '<span class="pote-ano">' + anoDe(d) + '</span>' +
-             '</button>';
-    }).join('');
 
-    grade.querySelectorAll('.pote-card').forEach(function (b) {
-      b.onclick = function () { alternar(b.dataset.k); };
-    });
-    observarEscudos(grade);
+    // Só o 1º lote vai para o DOM agora; o resto entra conforme o scroll (evita travar
+    // com 688 cards da NBA de uma vez). Uma sentinela no fim dispara o próximo lote.
+    grade.innerHTML = '';
+    if (_renderList.length > _LOTE) {
+      grade.insertAdjacentHTML('beforeend', '<span class="pote-sentinela" aria-hidden="true"></span>');
+    }
+    renderProximoLote();
+
+    // Delegação: UM listener no container em vez de um onclick por card.
+    if (!grade._delegado) {
+      grade.addEventListener('click', function (ev) {
+        var card = ev.target.closest ? ev.target.closest('.pote-card') : null;
+        if (!card || !grade.contains(card)) return;
+        alternar(card.dataset.k);
+      });
+      grade._delegado = true;
+    }
+    // Observer de scroll: quando a sentinela entra na viewport, carrega o próximo lote.
+    if (!grade._scrollObs && typeof IntersectionObserver !== 'undefined') {
+      grade._scrollObs = new IntersectionObserver(function (ents) {
+        if (ents.some(function (e) { return e.isIntersecting; })) renderProximoLote();
+      }, { root: null, rootMargin: '400px' });
+    }
+    if (grade._scrollObs) {
+      grade._scrollObs.disconnect();   // solta sentinelas antigas (de um render anterior)
+      var sent = grade.querySelector('.pote-sentinela');
+      if (sent) grade._scrollObs.observe(sent);
+    }
     atualizarRodape();
   }
 
