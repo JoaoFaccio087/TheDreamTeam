@@ -60,14 +60,216 @@
   // VOCÊ joga na temporada regular (todos animados) e o tamanho das SÉRIES de playoff.
   // A final da NBA pode ter série maior que as demais fases (melhorDeFinal).
   var TAMANHOS_TEMPORADA = {
-    reduzida: { id: 'reduzida', nome: 'Reduzida', jogosVoce: 7,  melhorDe: 3, melhorDeFinal: 3,
-                desc: '7 jogos · playoffs melhor de 3' },
-    regular:  { id: 'regular',  nome: 'Regular',  jogosVoce: 14, melhorDe: 5, melhorDeFinal: 5,
-                desc: '14 jogos · playoffs melhor de 5' },
-    completa: { id: 'completa', nome: 'Completa', jogosVoce: 24, melhorDe: 7, melhorDeFinal: 7,
-                desc: '24 jogos · playoffs melhor de 7' }
+    reduzida: { id: 'reduzida', nome: 'Reduzida', jogosVoce: 20, melhorDe: 3, melhorDeFinal: 3,
+                desc: '20 jogos · playoffs melhor de 3' },
+    regular:  { id: 'regular',  nome: 'Regular',  jogosVoce: 40, melhorDe: 5, melhorDeFinal: 5,
+                desc: '40 jogos · playoffs melhor de 5' },
+    completa: { id: 'completa', nome: 'Completa', jogosVoce: 82, melhorDe: 7, melhorDeFinal: 7,
+                desc: '82 jogos (temporada real) · playoffs melhor de 7' }
   };
   var TAMANHO_PADRAO = 'regular';
+
+  // ═══════════════════════════════════════════════════════════════════
+  //  TEMPORADA REGULAR — LIGA DE PONTOS CORRIDOS (como o Brasileirão)
+  //  Espelha a NBA real: 2 conferências, muitos jogos, classificação por
+  //  conferência. Os times vêm de VÁRIAS edições misturadas (você pode
+  //  enfrentar o time de 2026, de 1992, de 1989...), igual ao futebol.
+  // ═══════════════════════════════════════════════════════════════════
+
+  // Nº de jogos da temporada regular por tamanho (offline, todos animados/simulados):
+  //   completa = 82 (real), regular = 40, reduzida = 20.
+  var JOGOS_TEMPORADA = { reduzida: 20, regular: 40, completa: 82 };
+
+  // Gera o calendário de returno duplo (método do círculo): cada time joga contra
+  // todos, ida e volta. n times → (n-1)*2 rodadas. Índice 0 = você.
+  function gerarCalendarioNBA(n) {
+    if (n % 2 !== 0) n = n + 1;   // com nº ímpar, adiciona um "bye" (folga)
+    var ids = [];
+    for (var i = 0; i < n; i++) ids.push(i);
+    var turno = [];
+    for (var r = 0; r < n - 1; r++) {
+      var rodada = [];
+      for (var k = 0; k < n / 2; k++) {
+        var a = ids[k], b = ids[n - 1 - k];
+        if (a !== n - 1 && b !== n - 1) {   // ignora o "bye" fictício (índice n-1 extra)
+          rodada.push(r % 2 === 0 ? [a, b] : [b, a]);
+        }
+      }
+      // rotação (mantém o índice 0 fixo)
+      ids.splice(1, 0, ids.pop());
+      turno.push(rodada);
+    }
+    var returno = turno.map(function (rodada) {
+      return rodada.map(function (par) { return [par[1], par[0]]; });
+    });
+    return turno.concat(returno);
+  }
+
+  // Monta a temporada regular: você + N times sorteados de VÁRIAS EDIÇÕES misturadas,
+  // divididos em 2 conferências. `todosOsTimes` = todos os registros da NBA (todas as
+  // temporadas). `nAlvo` = quantos jogos você quer (define o tamanho da liga).
+  function montarLigaNBA(todosOsTimes, voce, forcaDe, tamanhoId) {
+    var tam = TAMANHOS_TEMPORADA[tamanhoId] || TAMANHOS_TEMPORADA[TAMANHO_PADRAO];
+    var jogosAlvo = JOGOS_TEMPORADA[tam.id] || JOGOS_TEMPORADA.regular;
+
+    // Quantos times no total para gerar ~jogosAlvo jogos (returno duplo → cada time
+    // joga (n-1)*2 jogos). Então n = jogosAlvo/2 + 1. Mas limitamos ao nº real de
+    // conferências: mantemos par e com pelo menos 8 por conferência quando possível.
+    var nTimes = Math.round(jogosAlvo / 2) + 1;
+    if (nTimes % 2 !== 0) nTimes++;               // par (returno duplo limpo)
+    if (nTimes < 4) nTimes = 4;
+
+    // Sorteia (nTimes-1) times de TODAS as edições misturadas, sem repetir a mesma
+    // dupla (clube+temporada). Mistura como no Brasileirão.
+    var pool = shuffle(todosOsTimes.slice()).slice(0, nTimes - 1);
+    var eu = {
+      nome: voce.nome, voce: true, forca: voce.forca, clubeRef: null, jogadores: voce.jogadores,
+      confId: null, pts: 0, j: 0, v: 0, d: 0, pf: 0, pa: 0
+    };
+    var tabela = [eu].concat(pool.map(function (t) {
+      return {
+        nome: t.clube + ' ' + t.temporada,   // mostra o ANO (mistura de edições visível)
+        voce: false, forca: forcaDe(t), clubeRef: t, confId: null,
+        pts: 0, j: 0, v: 0, d: 0, pf: 0, pa: 0
+      };
+    }));
+
+    // Divide em 2 conferências (metade/metade). Você cai na primeira.
+    var metade = Math.ceil(tabela.length / 2);
+    tabela.forEach(function (t, i) { t.confId = (i < metade) ? 'LESTE' : 'OESTE'; });
+    var suaConf = tabela[0].confId;
+
+    return {
+      basquete: true,
+      liga: true,                 // marca que é temporada de pontos corridos
+      tamanho: tam,
+      melhorDe: tam.melhorDe,
+      melhorDeFinal: tam.melhorDeFinal,
+      classificamConf: 8,         // top-8 por conferência vão aos playoffs
+      tabela: tabela,
+      calendario: gerarCalendarioNBA(tabela.length),
+      rodadaAtual: 0,
+      suaConf: suaConf,
+      playoff: null
+    };
+  }
+
+  // Registra o resultado de um jogo na tabela (sem empate: quem fez mais pontos vence).
+  function registrarResultadoNBA(A, B, pontosA, pontosB) {
+    A.j++; B.j++;
+    A.pf += pontosA; A.pa += pontosB;
+    B.pf += pontosB; B.pa += pontosA;
+    if (pontosA > pontosB) { A.v++; B.d++; A.pts += 2; }   // vitória vale 2 (ranking simples)
+    else                   { B.v++; A.d++; B.pts += 2; }
+  }
+
+  // Ordena a conferência: vitórias → saldo de pontos → pontos feitos.
+  function ordenarNBA(a, b) {
+    if (b.v !== a.v) return b.v - a.v;
+    var sa = a.pf - a.pa, sb = b.pf - b.pa;
+    if (sb !== sa) return sb - sa;
+    return b.pf - a.pf;
+  }
+
+  // Classificação de uma conferência (lista ordenada dos times daquela conf).
+  function classificacaoDaConf(camp, confId) {
+    return camp.tabela.filter(function (t) { return t.confId === confId; }).sort(ordenarNBA);
+  }
+
+  // Índice do seu adversário na rodada (ou null se você folga nesta rodada).
+  function seuConfrontoNaRodada(camp, rIdx) {
+    var rodada = camp.calendario[rIdx];
+    for (var i = 0; i < rodada.length; i++) {
+      if (rodada[i][0] === 0) return { advIdx: rodada[i][1], mando: 'casa' };
+      if (rodada[i][1] === 0) return { advIdx: rodada[i][0], mando: 'fora' };
+    }
+    return null;
+  }
+
+  // Resolve (placar instantâneo) os demais jogos da rodada — os que não são seus.
+  function resolverDemaisJogosNBA(camp, rIdx, simularPlacar) {
+    var rodada = camp.calendario[rIdx];
+    rodada.forEach(function (par) {
+      if (par[0] === 0 || par[1] === 0) return;   // seu jogo é tratado à parte
+      var A = camp.tabela[par[0]], B = camp.tabela[par[1]];
+      var p = simularPlacar(A, B);
+      registrarResultadoNBA(A, B, p.a, p.b);
+    });
+  }
+
+  // Sua posição (1..N) dentro da SUA conferência.
+  function suaPosicaoConf(camp) {
+    var cls = classificacaoDaConf(camp, camp.suaConf);
+    for (var i = 0; i < cls.length; i++) if (cls[i].voce) return i + 1;
+    return cls.length;
+  }
+
+  // Você se classificou aos playoffs? (top-N da sua conferência na temporada de liga)
+  function voceClassificouLigaNBA(camp) {
+    var top = classificacaoDaConf(camp, camp.suaConf).slice(0, camp.classificamConf);
+    return top.some(function (t) { return t.voce; });
+  }
+
+  // Monta os playoffs a partir da CLASSIFICAÇÃO da liga: top-N de cada conferência,
+  // semeados (1º x 8º, 2º x 7º, ...). Reaproveita fasesPlayoffDe e a estrutura de bracket
+  // dos 2 lados (bracketConf = sua conf; bracketOutra = outra, resolvida em sincronia).
+  function montarPlayoffsLigaNBA(camp) {
+    var n = camp.classificamConf;
+    var outraConfId = (camp.suaConf === 'LESTE') ? 'OESTE' : 'LESTE';
+    var suaCls = classificacaoDaConf(camp, camp.suaConf).slice(0, n);
+    var outraCls = classificacaoDaConf(camp, outraConfId).slice(0, n);
+
+    // Confrontos semeados: 1x8, 2x7, 3x6, 4x5 (para n=8).
+    function semear(cls) {
+      var pares = [];
+      for (var i = 0; i < Math.floor(cls.length / 2); i++) {
+        pares.push([cls[i], cls[cls.length - 1 - i]]);
+      }
+      return pares;
+    }
+    var seusConfrontos = semear(suaCls);
+    var outrosConfrontos = semear(outraCls);
+
+    // índice do SEU confronto (onde você está semeado)
+    var seuIdx = 0;
+    seusConfrontos.forEach(function (par, i) {
+      if (par[0].voce || par[1].voce) seuIdx = i;
+    });
+
+    var fases = fasesPlayoffDe(n);
+
+    // bracket visual: rodada 0 com os confrontos, próximas rodadas vazias (preenchidas ao avançar)
+    function bracketVazio(pares) {
+      var rodadas = [];
+      var atual = pares.map(function (p) { return { a: p[0], b: p[1], vencedor: null }; });
+      rodadas.push(atual);
+      var tam = pares.length;
+      while (tam > 1) {
+        tam = Math.floor(tam / 2);
+        var r = [];
+        for (var k = 0; k < tam; k++) r.push({ a: null, b: null, vencedor: null });
+        rodadas.push(r);
+      }
+      return rodadas;
+    }
+
+    camp.playoff = {
+      fases: fases,
+      faseIdx: 0,
+      suaConf: camp.suaConf,
+      outraConf: outraConfId,
+      confrontos: seusConfrontos,
+      seuConfrontoIdx: seuIdx,
+      bracketConf: bracketVazio(seusConfrontos),
+      bracketOutra: bracketVazio(outrosConfrontos),
+      historico: [],
+      serie: { vMeu: 0, vAdv: 0 },   // placar da série atual (melhor de N)
+      campeaoConf: null,
+      campeaoOutra: null
+    };
+    return camp.playoff;
+  }
+
 
   // Escolhe o maior formato NBA cujo total de times cabe no disponível (+1 = você).
   function escolheFormatoNBA(disponivel) {
@@ -411,6 +613,18 @@
     FORMATOS_NBA: FORMATOS_NBA,
     TAMANHOS_TEMPORADA: TAMANHOS_TEMPORADA,
     TAMANHO_PADRAO: TAMANHO_PADRAO,
+    JOGOS_TEMPORADA: JOGOS_TEMPORADA,
+    // — temporada regular (liga de pontos corridos, mistura de edições) —
+    montarLigaNBA: montarLigaNBA,
+    gerarCalendarioNBA: gerarCalendarioNBA,
+    registrarResultadoNBA: registrarResultadoNBA,
+    ordenarNBA: ordenarNBA,
+    classificacaoDaConf: classificacaoDaConf,
+    seuConfrontoNaRodada: seuConfrontoNaRodada,
+    resolverDemaisJogosNBA: resolverDemaisJogosNBA,
+    suaPosicaoConf: suaPosicaoConf,
+    voceClassificouLigaNBA: voceClassificouLigaNBA,
+    montarPlayoffsLigaNBA: montarPlayoffsLigaNBA,
     escolheFormatoNBA: escolheFormatoNBA,
     fasesPlayoffDe: fasesPlayoffDe,
     montarCampanhaNBA: montarCampanhaNBA,
