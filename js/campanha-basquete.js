@@ -204,20 +204,165 @@
     return cls.length;
   }
 
-  // Você se classificou aos playoffs? (top-N da sua conferência na temporada de liga)
+  // Você se classificou aos playoffs? Usa o MESMO critério de vagas do bracket (maior
+  // potência de 2 que cabe nas duas conferências), para não "classificar" a uma vaga
+  // que o bracket não teria.
   function voceClassificouLigaNBA(camp) {
-    var top = classificacaoDaConf(camp, camp.suaConf).slice(0, camp.classificamConf);
-    return top.some(function (t) { return t.voce; });
+    var outraConfId = (camp.suaConf === 'LESTE') ? 'OESTE' : 'LESTE';
+    var suaCls = classificacaoDaConf(camp, camp.suaConf);
+    var outraCls = classificacaoDaConf(camp, outraConfId);
+    function maiorPot2(x) { var p = 1; while (p * 2 <= x) p *= 2; return p; }
+    var limite = Math.min(camp.classificamConf, suaCls.length, outraCls.length);
+    var n = maiorPot2(limite); if (n < 2) n = 2;
+    return suaCls.slice(0, n).some(function (t) { return t.voce; });
+  }
+
+  // ── PLAYOFF EM SÉRIES (melhor-de-N) ──────────────────────────────────
+  // Vitórias necessárias para fechar uma série de melhor-de-N (ex.: melhor de 7 → 4).
+  function vitoriasParaFechar(melhorDe) { return Math.floor(melhorDe / 2) + 1; }
+
+  // Seu adversário no confronto atual do playoff (o time que NÃO é você no seu confronto).
+  function seuAdversarioLigaPlayoff(camp) {
+    var po = camp.playoff;
+    if (!po) return null;
+    var par = po.confrontos[po.seuConfrontoIdx];
+    if (!par) return null;
+    var adv = par[0].voce ? par[1] : par[0];
+    return adv || null;
+  }
+
+  // melhor-de-N desta fase (a final da NBA pode ser maior).
+  function melhorDeDaFase(camp) {
+    var po = camp.playoff;
+    var fase = po.fases[po.faseIdx];
+    if (fase && fase.finalNBA) return camp.melhorDeFinal || camp.melhorDe;
+    return camp.melhorDe;
+  }
+
+  // Registra UM jogo da série de playoff. Retorna o estado: se a série fechou, se você
+  // avançou/foi eliminado, se virou campeão, e a próxima fase.
+  function registrarJogoSerieNBA(camp, pontosVoce, pontosAdv, forcaDe) {
+    var po = camp.playoff;
+    var fase = po.fases[po.faseIdx];
+    var venceuJogo = pontosVoce > pontosAdv;
+    if (venceuJogo) po.serie.vMeu++; else po.serie.vAdv++;
+    po.historico.push({ fase: fase.nome, pf: pontosVoce, pa: pontosAdv, venceu: venceuJogo });
+
+    var alvo = vitoriasParaFechar(melhorDeDaFase(camp));
+    var serieAcabou = (po.serie.vMeu >= alvo || po.serie.vAdv >= alvo);
+
+    if (!serieAcabou) {
+      return { serieAcabou: false, jogoVenceu: venceuJogo,
+               placarSerie: po.serie.vMeu + '-' + po.serie.vAdv,
+               campeaoNBA: false, eliminado: false, proximaFase: null };
+    }
+
+    // Série fechou:
+    var voceVenceuSerie = (po.serie.vMeu >= alvo);
+    if (!voceVenceuSerie) {
+      return { serieAcabou: true, venceuSerie: false, campeaoNBA: false, eliminado: true,
+               placarSerie: po.serie.vMeu + '-' + po.serie.vAdv, proximaFase: null };
+    }
+
+    // Você venceu a série: resolve os OUTROS confrontos da sua conf (bastidores) e avança.
+    var vencedores = [];
+    po.confrontos.forEach(function (par, idx) {
+      if (idx === po.seuConfrontoIdx) { vencedores.push(par[0].voce ? par[0] : par[1]); return; }
+      var a = par[0], b = par[1];
+      var fa = (forcaDe ? forcaDe(a.clubeRef || a) : a.forca) + (Math.random() - 0.5) * 14;
+      var fb = (forcaDe ? forcaDe(b.clubeRef || b) : b.forca) + (Math.random() - 0.5) * 14;
+      vencedores.push(fa >= fb ? a : b);
+    });
+    // grava vencedores no bracket visual
+    if (po.bracketConf && po.bracketConf[po.faseIdx]) {
+      po.bracketConf[po.faseIdx].forEach(function (jogo, idx) { jogo.vencedor = vencedores[idx] || null; });
+    }
+    // avança a outra conferência uma rodada (em sincronia)
+    avancarOutraConfLiga(camp, forcaDe);
+
+    po.faseIdx++;
+    po.serie = { vMeu: 0, vAdv: 0 };   // zera para a próxima série
+
+    var proxFase = po.fases[po.faseIdx];
+    // É a final da NBA? (você é campeão da conf; enfrenta o campeão da outra)
+    if (proxFase && proxFase.finalNBA) {
+      var campOutra = po.campeaoOutra || vencedores[0];
+      po.confrontos = [[ vencedores[0], campOutra ]];   // você x campeão da outra conf
+      po.seuConfrontoIdx = 0;
+      montarBracketFinal(po, vencedores[0], campOutra);
+      return { serieAcabou: true, venceuSerie: true, campeaoNBA: false, campeaoConf: true,
+               eliminado: false, proximaFase: proxFase.nome, placarSerie: alvo + '-' + po.serie.vAdv };
+    }
+
+    if (!proxFase) {
+      // não havia próxima fase (fim) — campeão
+      return { serieAcabou: true, venceuSerie: true, campeaoNBA: true, eliminado: false, proximaFase: null };
+    }
+
+    // Monta os confrontos da próxima rodada da sua conf a partir dos vencedores.
+    var novos = [];
+    for (var i = 0; i < vencedores.length; i += 2) {
+      if (vencedores[i + 1]) novos.push([vencedores[i], vencedores[i + 1]]);
+    }
+    po.confrontos = novos;
+    po.seuConfrontoIdx = 0;
+    novos.forEach(function (par, i) { if (par[0].voce || par[1].voce) po.seuConfrontoIdx = i; });
+
+    return { serieAcabou: true, venceuSerie: true, campeaoNBA: false, campeaoConf: false,
+             eliminado: false, proximaFase: proxFase.nome, placarSerie: alvo + '-' + po.serie.vAdv };
+  }
+
+  // Avança a OUTRA conferência uma rodada (bastidores, por força+sorte) e guarda o campeão.
+  function avancarOutraConfLiga(camp, forcaDe) {
+    var po = camp.playoff;
+    if (!po.bracketOutra) return;
+    var idx = po.faseIdx;
+    var rodada = po.bracketOutra[idx];
+    if (!rodada) return;
+    rodada.forEach(function (jogo) {
+      if (!jogo.a || !jogo.b) return;
+      var fa = (forcaDe ? forcaDe(jogo.a.clubeRef || jogo.a) : jogo.a.forca) + (Math.random() - 0.5) * 14;
+      var fb = (forcaDe ? forcaDe(jogo.b.clubeRef || jogo.b) : jogo.b.forca) + (Math.random() - 0.5) * 14;
+      jogo.vencedor = (fa >= fb) ? jogo.a : jogo.b;
+    });
+    // propaga vencedores para a próxima rodada da outra conf
+    var prox = po.bracketOutra[idx + 1];
+    if (prox) {
+      var vencs = rodada.map(function (j) { return j.vencedor; }).filter(Boolean);
+      for (var i = 0; i < prox.length; i++) {
+        prox[i].a = vencs[i * 2] || null;
+        prox[i].b = vencs[i * 2 + 1] || null;
+      }
+    } else {
+      // última rodada da outra conf → campeão da outra conferência
+      var v = rodada.map(function (j) { return j.vencedor; }).filter(Boolean);
+      if (v.length === 1) po.campeaoOutra = v[0];
+    }
+  }
+
+  // Monta o bracket visual da final (você x campeão da outra conf).
+  function montarBracketFinal(po, voceTime, campOutra) {
+    po.bracketFinal = [{ a: voceTime, b: campOutra, vencedor: null }];
   }
 
   // Monta os playoffs a partir da CLASSIFICAÇÃO da liga: top-N de cada conferência,
   // semeados (1º x 8º, 2º x 7º, ...). Reaproveita fasesPlayoffDe e a estrutura de bracket
   // dos 2 lados (bracketConf = sua conf; bracketOutra = outra, resolvida em sincronia).
   function montarPlayoffsLigaNBA(camp) {
-    var n = camp.classificamConf;
     var outraConfId = (camp.suaConf === 'LESTE') ? 'OESTE' : 'LESTE';
-    var suaCls = classificacaoDaConf(camp, camp.suaConf).slice(0, n);
-    var outraCls = classificacaoDaConf(camp, outraConfId).slice(0, n);
+    var suaClsFull = classificacaoDaConf(camp, camp.suaConf);
+    var outraClsFull = classificacaoDaConf(camp, outraConfId);
+
+    // Nº de classificados = maior potência de 2 que cabe nas DUAS conferências (para o
+    // bracket fechar certinho). Ex.: conf com 6 times → top-4; com 10 → top-8.
+    function maiorPot2(x) { var p = 1; while (p * 2 <= x) p *= 2; return p; }
+    var limite = Math.min(camp.classificamConf, suaClsFull.length, outraClsFull.length);
+    var n = maiorPot2(limite);
+    if (n < 2) n = 2;
+    camp.classificamConf = n;   // ajusta para o valor real usado
+
+    var suaCls = suaClsFull.slice(0, n);
+    var outraCls = outraClsFull.slice(0, n);
 
     // Confrontos semeados: 1x8, 2x7, 3x6, 4x5 (para n=8).
     function semear(cls) {
@@ -625,6 +770,10 @@
     suaPosicaoConf: suaPosicaoConf,
     voceClassificouLigaNBA: voceClassificouLigaNBA,
     montarPlayoffsLigaNBA: montarPlayoffsLigaNBA,
+    seuAdversarioLigaPlayoff: seuAdversarioLigaPlayoff,
+    registrarJogoSerieNBA: registrarJogoSerieNBA,
+    vitoriasParaFechar: vitoriasParaFechar,
+    melhorDeDaFase: melhorDeDaFase,
     escolheFormatoNBA: escolheFormatoNBA,
     fasesPlayoffDe: fasesPlayoffDe,
     montarCampanhaNBA: montarCampanhaNBA,

@@ -276,6 +276,34 @@ btnSkip.addEventListener('click', fazerSkip);
 // "Pular tudo": confirma via UI.modalConfirm (componente do UIKit) e roteia por modo —
 // Brasileirão pula a temporada; Liberta/Champions/Copa pulam a campanha até o desfecho.
 if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
+  // Basquete (liga): oferece 3 opções — pular só os pontos corridos, cancelar, ou pular
+  // tudo (pontos corridos + playoffs).
+  if (typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado) &&
+      campanhaBasqueteAtual && campanhaBasqueteAtual.liga) {
+    UI.modalConfirm({
+      titulo: 'Pular jogos?',
+      html: 'Escolha o que pular:<br><br>' +
+            '<button type="button" id="mp-so-corridos" class="btn-rolar btn-sec" style="width:100%;margin-bottom:8px;">Pular só os pontos corridos</button>' +
+            '<button type="button" id="mp-tudo" class="btn-rolar" style="width:100%;">Pular tudo (pontos corridos + playoffs)</button>',
+      confirmar: '',
+      cancelar: 'Cancelar'
+    });
+    // liga os botões customizados do modal
+    setTimeout(function () {
+      var bSo = document.getElementById('mp-so-corridos');
+      var bTudo = document.getElementById('mp-tudo');
+      function fecharModal() {
+        var ov = document.querySelector('.modal-confirm');
+        if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+      }
+      // esconde o botão "confirmar" vazio
+      var btnConfVazio = document.querySelector('.modal-confirm [data-acao="confirmar"]');
+      if (btnConfVazio) btnConfVazio.style.display = 'none';
+      if (bSo) bSo.addEventListener('click', function () { fecharModal(); pularTudoBasquete(true); });
+      if (bTudo) bTudo.addEventListener('click', function () { fecharModal(); pularTudoBasquete(false); });
+    }, 20);
+    return;
+  }
   UI.modalConfirm({
     titulo: 'Pular tudo?',
     texto: 'Todos os jogos restantes serão simulados de uma vez e você irá direto para o resultado final da campanha.',
