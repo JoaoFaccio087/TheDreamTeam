@@ -1774,7 +1774,17 @@ function salvarCampanhaVolei(camp, resultadoMata) {
                             : (classificou ? 'MATA-MATA' : 'FASE DE GRUPOS')),
       classificacao: cls.map(function (l) {
         return { time: l.time.voce ? '(você)' : l.time.nome, pts: l.pts, sp: l.sp, sc: l.sc };
-      })
+      }),
+      // Snapshot da SUA escalação → alimenta o "time mais escalado" no perfil. Sem isto o
+      // mapa do perfil de vôlei fica vazio (mesmo bug que o basquete tinha).
+      snapshot: {
+        formacao: 'volei',
+        picks: (typeof escalacao !== 'undefined' ? escalacao : [])
+          .filter(function (j) { return j; })
+          .map(function (j) {
+            return { id: j.id, codigo: j.codigo, nome: j.nome, forca: j.forca | 0, gols: 0, asis: 0 };
+          })
+      }
     }
   });
 }

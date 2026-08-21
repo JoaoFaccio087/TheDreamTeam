@@ -14,19 +14,29 @@ const API = {
     // basquete) para o código legado de futebol nunca receber entrada de outro esporte
     // por engano. O filtro por `competicao` (string única por competição) garante que
     // nada se mistura.
-    var universo = DADOS;
-    if (typeof DADOS_VOLEI_M !== 'undefined' || typeof DADOS_VOLEI_F !== 'undefined' ||
-        typeof DADOS_VNL_M !== 'undefined' || typeof DADOS_VNL_F !== 'undefined' ||
-        typeof DADOS_NBA !== 'undefined') {
-      universo = DADOS.concat(
-        (typeof DADOS_VOLEI_M !== 'undefined') ? DADOS_VOLEI_M : [],
-        (typeof DADOS_VOLEI_F !== 'undefined') ? DADOS_VOLEI_F : [],
-        (typeof DADOS_VNL_M !== 'undefined') ? DADOS_VNL_M : [],
-        (typeof DADOS_VNL_F !== 'undefined') ? DADOS_VNL_F : [],
-        (typeof DADOS_NBA !== 'undefined') ? DADOS_NBA : []
-      );
+    // CACHE: concatenar todos os esportes (centenas de milhares de itens com a NBA) a
+    // cada chamada travava o Jogo Livre/Draft. Montamos o universo UMA vez e reusamos;
+    // além disso, indexamos por competição para o filtro não varrer tudo toda vez.
+    if (!API._universoCache) {
+      var universo = DADOS;
+      if (typeof DADOS_VOLEI_M !== 'undefined' || typeof DADOS_VOLEI_F !== 'undefined' ||
+          typeof DADOS_VNL_M !== 'undefined' || typeof DADOS_VNL_F !== 'undefined' ||
+          typeof DADOS_NBA !== 'undefined') {
+        universo = DADOS.concat(
+          (typeof DADOS_VOLEI_M !== 'undefined') ? DADOS_VOLEI_M : [],
+          (typeof DADOS_VOLEI_F !== 'undefined') ? DADOS_VOLEI_F : [],
+          (typeof DADOS_VNL_M !== 'undefined') ? DADOS_VNL_M : [],
+          (typeof DADOS_VNL_F !== 'undefined') ? DADOS_VNL_F : [],
+          (typeof DADOS_NBA !== 'undefined') ? DADOS_NBA : []
+        );
+      }
+      API._universoCache = universo;
+      API._porCompCache = {};
+      universo.forEach(function (d) {
+        (API._porCompCache[d.competicao] || (API._porCompCache[d.competicao] = [])).push(d);
+      });
     }
-    return universo.filter(function (d) { return d.competicao === comp; });
+    return API._porCompCache[comp] || [];
   },
 
   getClubesDoModo: function (modoId) {

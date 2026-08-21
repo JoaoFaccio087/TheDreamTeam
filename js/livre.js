@@ -34,12 +34,15 @@
   }
 
   // Todas as edições da competição escolhida, ordenadas por clube e ano.
+  var _edicoesCache = null;   // cacheia a lista ordenada enquanto o modal está aberto
   function edicoes() {
+    if (_edicoesCache) return _edicoesCache;
     var comp = COMPETICOES[modoSelecionado] && COMPETICOES[modoSelecionado].dados;
     if (!comp) return [];
-    return API.getClubesPorCompeticao(comp).slice().sort(function (a, b) {
+    _edicoesCache = API.getClubesPorCompeticao(comp).slice().sort(function (a, b) {
       return a.clube === b.clube ? anoNum(a) - anoNum(b) : a.clube.localeCompare(b.clube, 'pt-BR');
     });
+    return _edicoesCache;
   }
 
   function decadasDe(lista) {
@@ -253,6 +256,7 @@
   function abrir() {
     var ov = $('modal-pote') || montar();
     _busca = ''; _decada = '';
+    _edicoesCache = null;   // recalcula p/ a competição atual (ao reabrir o modal)
 
     var t = $('pote-titulo');
     if (t) t.textContent = 'Monte seu pote · ' + (COMPETICOES[modoSelecionado].label || '');
