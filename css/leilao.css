@@ -1,0 +1,260 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MODO LEILÃO (futebol) — UI do overlay de disputa.
+   Segue os tokens do design system (base.css). Linguagem visual próxima
+   do Draft (card único de jogador + ações), com um painel lateral de
+   participantes e o componente de lance.
+   ═══════════════════════════════════════════════════════════════════ */
+
+.leilao-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+}
+.leilao-overlay.escondida { display: none; }
+
+.leilao-caixa {
+  width: 100%;
+  max-width: 900px;
+  background: var(--bg);
+  border: 1px solid var(--linha);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Cabeçalho ── */
+.leilao-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--linha);
+}
+.leilao-fechar {
+  background: none;
+  border: none;
+  color: var(--txt-soft);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.leilao-fechar:hover { color: var(--txt); background: var(--elev-1); }
+.leilao-titulo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.4rem;
+  margin: 0;
+  color: var(--txt);
+  flex: 1;
+  text-align: center;
+}
+.leilao-restantes {
+  font-size: 0.82rem;
+  color: var(--accent);
+  background: rgba(43, 212, 106, 0.12);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+/* ── Corpo: centro (card + lance) + lateral (orçamento + participantes) ── */
+.leilao-corpo {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 680px) {
+  .leilao-corpo { grid-template-columns: 1fr; }
+}
+
+/* ── Card do jogador em disputa (estilo Draft, sozinho e centralizado) ── */
+.leilao-jogador {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  min-height: 220px;
+}
+.leilao-card {
+  width: 180px;
+  border-radius: 14px;
+  padding: 18px 14px;
+  background: linear-gradient(160deg, var(--elev-2), var(--elev-1));
+  border: 1px solid var(--linha);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+.leilao-card-nome {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.05rem;
+  color: var(--txt);
+  line-height: 1.15;
+}
+.leilao-card-time { font-size: 0.8rem; color: var(--txt-soft); }
+.leilao-card-ano  { font-size: 0.72rem; color: var(--txt-dim); }
+.leilao-card-posicoes {
+  font-size: 0.75rem; color: var(--accent);
+  letter-spacing: 0.04em; margin-top: 2px;
+}
+.leilao-card-forca {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.8rem;
+  color: var(--ouro);
+  margin-top: 6px;
+}
+
+/* ── Timer ── */
+.leilao-timer {
+  height: 6px;
+  background: var(--elev-1);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.leilao-timer-barra {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.25s linear;
+}
+
+/* ── Componente de lance ── */
+.leilao-lance { text-align: center; }
+.leilao-lance-rotulo {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--txt-soft);
+  margin: 0 0 10px;
+}
+.leilao-lance-controle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+.leilao-btn-mais-menos {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--linha);
+  background: var(--elev-1);
+  color: var(--txt);
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.leilao-btn-mais-menos:hover:not(:disabled) { background: var(--elev-2); }
+.leilao-btn-mais-menos:disabled { opacity: 0.35; cursor: not-allowed; }
+.leilao-lance-valor {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2rem;
+  color: var(--txt);
+  min-width: 70px;
+}
+.leilao-lance-acoes {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.leilao-btn-pular,
+.leilao-btn-lance {
+  padding: 11px 22px;
+  border-radius: 10px;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--linha);
+}
+.leilao-btn-pular {
+  background: var(--elev-1);
+  color: var(--txt-soft);
+}
+.leilao-btn-pular:hover { background: var(--elev-2); color: var(--txt); }
+.leilao-btn-lance {
+  background: var(--accent);
+  color: #0E0F13;
+  border-color: transparent;
+  font-weight: 700;
+}
+.leilao-btn-lance:hover:not(:disabled) { background: #3ee07d; }
+.leilao-btn-lance:disabled { opacity: 0.4; cursor: not-allowed; }
+.leilao-lance-atual {
+  font-size: 0.8rem;
+  color: var(--txt-soft);
+  margin: 12px 0 0;
+  min-height: 1em;
+}
+.leilao-lance-atual strong { color: var(--ouro); }
+
+/* ── Lateral: orçamento + participantes ── */
+.leilao-orcamento {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--elev-1);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+}
+.leilao-orcamento-rotulo { font-size: 0.8rem; color: var(--txt-soft); }
+.leilao-orcamento-valor {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.3rem;
+  color: var(--ouro);
+}
+.leilao-lateral-titulo {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--txt-soft);
+  margin: 0 0 10px;
+}
+.leilao-participantes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.leilao-part {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--elev-1);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.leilao-part:hover { border-color: var(--linha); background: var(--elev-2); }
+.leilao-part.leilao-part-voce { border-color: var(--accent); }
+.leilao-part-nome { font-size: 0.85rem; color: var(--txt); }
+.leilao-part-nome .leilao-part-tag {
+  font-size: 0.68rem; color: var(--accent); margin-left: 6px;
+}
+.leilao-part-info {
+  font-size: 0.75rem; color: var(--txt-soft);
+  display: flex; gap: 10px;
+}
+.leilao-part-moedas { color: var(--ouro); }
+
+/* Pílula do estilo Leilão (aparece só no futebol, como a de Orçamento) */
+.pilula-leilao.escondida { display: none; }

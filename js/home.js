@@ -14,6 +14,18 @@ function sincronizarPilulaOrcamento() {
       && typeof selecionarEstilo === 'function') {
     selecionarEstilo('classico');
   }
+
+  // Leilão: só no futebol (mesma regra da pílula de Orçamento, mas restrito ao futebol).
+  var pilulaLeilao = document.querySelector('#jogo-pilulas-estilo .pilula-leilao');
+  if (pilulaLeilao) {
+    var ehFutebol = !(typeof COMPETICOES !== 'undefined' && COMPETICOES[modoSelecionado] &&
+                      COMPETICOES[modoSelecionado].esporte && COMPETICOES[modoSelecionado].esporte !== 'futebol');
+    pilulaLeilao.classList.toggle('escondida', !ehFutebol);
+    if (!ehFutebol && typeof estiloJogo !== 'undefined' && estiloJogo === 'leilao'
+        && typeof selecionarEstilo === 'function') {
+      selecionarEstilo('classico');
+    }
+  }
 }
 
 function selecionarModo(novoModo) {

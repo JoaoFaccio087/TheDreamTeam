@@ -235,6 +235,9 @@ UI.on('btn-iniciar-jogo', 'click', function () {
   } else if (acaoBotao === 'proximo-nba') {
     iniciarPartidaBasquete();   // próximo jogo da temporada regular da NBA
   } else if (acaoBotao === 'playoffs-nba') {
+    // A partida do playoff é ANIMADA na aba Simulação (onde ficam os cards); o bracket
+    // fica disponível na aba Playoff.
+    if (typeof selecionarAbaBasquete === 'function') selecionarAbaBasquete('jogos');
     iniciarPartidaPlayoffNBA();   // confronto de playoff da NBA
   } else {
     // 'iniciar' → monta a campanha (grupo + fases) e dispara o primeiro jogo
@@ -279,6 +282,37 @@ simPilulasVel.forEach(function (btn) {
   });
 })();
 
+// Pílulas do MODO LEILÃO: orçamento (30/50/100) e formação (Normal/Ofensivo) + botão iniciar.
+(function () {
+  var pilulasOrc = document.querySelectorAll('#jogo-pilulas-leilao-orcamento .pilula');
+  pilulasOrc.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      pilulasOrc.forEach(function (b) { b.classList.remove('pilula-ativa'); });
+      this.classList.add('pilula-ativa');
+      if (typeof Leilao !== 'undefined') Leilao.setOrcamento(this.dataset.leilaoOrcamento);
+    });
+  });
+
+  var pilulasForm = document.querySelectorAll('#jogo-pilulas-leilao-formacao .pilula');
+  var descForm = document.getElementById('jogo-leilao-formacao-desc');
+  pilulasForm.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      pilulasForm.forEach(function (b) { b.classList.remove('pilula-ativa'); });
+      this.classList.add('pilula-ativa');
+      var f = this.dataset.leilaoFormacao || 'normal';
+      if (typeof Leilao !== 'undefined') {
+        Leilao.setFormacao(f);
+        if (descForm) descForm.textContent = Leilao.descFormacao(f);
+      }
+    });
+  });
+
+  var btnIniciarLeilao = document.getElementById('btn-iniciar-leilao');
+  if (btnIniciarLeilao) btnIniciarLeilao.addEventListener('click', function () {
+    if (typeof Leilao !== 'undefined') Leilao.abrir();
+  });
+})();
+
 // Tela de simulação: voltar para a escalação
 UI.on('btn-voltar-escalacao', 'click', function () {
   mostrarTela(telaJogo);
@@ -295,10 +329,12 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
   if (typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado) &&
       campanhaBasqueteAtual && campanhaBasqueteAtual.liga) {
     UI.modalConfirm({
-      titulo: 'Pular jogos?',
-      html: 'Escolha o que pular:<br><br>' +
-            '<button type="button" id="mp-so-corridos" class="btn-rolar btn-sec" style="width:100%;margin-bottom:8px;">Pular só os pontos corridos</button>' +
-            '<button type="button" id="mp-tudo" class="btn-rolar" style="width:100%;">Pular tudo (pontos corridos + playoffs)</button>',
+      titulo: 'Tem certeza?',
+      html: '<p class="mp-sub">Escolha até onde deseja pular. Os jogos pulados serão simulados automaticamente.</p>' +
+            '<div class="mp-opcoes">' +
+              '<button type="button" id="mp-so-corridos" class="mp-btn">Pular só os pontos corridos</button>' +
+              '<button type="button" id="mp-tudo" class="mp-btn mp-btn-forte">Pular tudo (pontos corridos + playoffs)</button>' +
+            '</div>',
       confirmar: '',
       cancelar: 'Cancelar'
     });
@@ -310,7 +346,6 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
         var ov = document.querySelector('.modal-confirm');
         if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
       }
-      // esconde o botão "confirmar" vazio
       var btnConfVazio = document.querySelector('.modal-confirm [data-acao="confirmar"]');
       if (btnConfVazio) btnConfVazio.style.display = 'none';
       if (bSo) bSo.addEventListener('click', function () { fecharModal(); pularTudoBasquete(true); });

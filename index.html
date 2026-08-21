@@ -67,6 +67,7 @@
   <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/escalacao.css" />
   <link rel="stylesheet" href="css/draft.css" />
+  <link rel="stylesheet" href="css/leilao.css" />
   <link rel="stylesheet" href="css/simulacao.css" />
   <link rel="stylesheet" href="css/resumo.css" />
   <link rel="stylesheet" href="css/auth.css" />
@@ -598,6 +599,7 @@
             <button class="pilula" data-estilo="draft">Draft</button>
             <button class="pilula pilula-orcamento escondida" data-estilo="orcamento">Or&ccedil;amento</button>
             <button class="pilula" data-estilo="livre">Jogo Livre</button>
+            <button class="pilula pilula-leilao escondida" data-estilo="leilao">Leil&atilde;o</button>
           </div>
         </div><!-- /jogo-estilo-bloco -->
 
@@ -630,6 +632,26 @@
           <p class="jogo-tamanho-desc" id="jogo-tamanho-desc">14 jogos &middot; playoffs melhor de 5</p>
         </div><!-- /jogo-tamanho-bloco -->
 
+        <!-- Leilão: orçamento (dificuldade) — SÓ quando estilo = leilão -->
+        <div id="jogo-leilao-orcamento-bloco" class="escondida">
+          <p class="jogo-rotulo">OR&Ccedil;AMENTO (MOEDAS)</p>
+          <div class="area-pilulas" id="jogo-pilulas-leilao-orcamento">
+            <button class="pilula" data-leilao-orcamento="30">30</button>
+            <button class="pilula pilula-ativa" data-leilao-orcamento="50">50</button>
+            <button class="pilula" data-leilao-orcamento="100">100</button>
+          </div>
+        </div>
+
+        <!-- Leilão: formação (Normal / Ofensivo) — SÓ quando estilo = leilão -->
+        <div id="jogo-leilao-formacao-bloco" class="escondida">
+          <p class="jogo-rotulo">FORMA&Ccedil;&Atilde;O</p>
+          <div class="area-pilulas" id="jogo-pilulas-leilao-formacao">
+            <button class="pilula pilula-ativa" data-leilao-formacao="normal">Normal</button>
+            <button class="pilula" data-leilao-formacao="ofensivo">Ofensivo</button>
+          </div>
+          <p class="jogo-tamanho-desc" id="jogo-leilao-formacao-desc">GOL + ZAG + 2 MEIO + 1 ATA</p>
+        </div>
+
         <!-- Switch: Mostrar Força -->
         <div id="jogo-forca-bloco" class="dt-switch-bloco">
           <span class="jogo-rotulo dt-switch-rotulo">MOSTRAR FOR&Ccedil;A</span>
@@ -645,6 +667,7 @@
           <button id="btn-rolar" class="btn-rolar">Rolar &#8635;</button>
           <button id="btn-comecar-draft" class="btn-rolar escondida">Come&ccedil;ar &rarr;</button>
           <button id="btn-proximo-livre" class="btn-rolar escondida">Pr&oacute;ximo &rarr;</button>
+          <button id="btn-iniciar-leilao" class="btn-rolar escondida">Iniciar Leil&atilde;o &rarr;</button>
         </div>
 
         <!-- Card do clube sorteado -->
@@ -745,6 +768,59 @@
         <button id="btn-selecionar-draft" class="btn-rolar" disabled>Selecionar</button>
       </div>
     </div><!-- /draft-overlay -->
+
+    <!-- ══════════ MODO LEILÃO (UI — só futebol) ══════════ -->
+    <div id="leilao-overlay" class="leilao-overlay escondida">
+      <div class="leilao-caixa">
+        <!-- Cabeçalho: título + contador de jogadores restantes -->
+        <div class="leilao-topo">
+          <button class="leilao-fechar" id="leilao-fechar" type="button" aria-label="Voltar">&larr; Voltar</button>
+          <p class="leilao-titulo">Leil&atilde;o</p>
+          <span class="leilao-restantes" id="leilao-restantes">50 jogadores restantes</span>
+        </div>
+
+        <div class="leilao-corpo">
+          <!-- Coluna esquerda: card do jogador em disputa + lance -->
+          <div class="leilao-centro">
+            <div class="leilao-jogador" id="leilao-jogador">
+              <!-- card único do jogador em disputa (preenchido via JS) -->
+            </div>
+
+            <!-- Timer da disputa -->
+            <div class="leilao-timer" id="leilao-timer">
+              <div class="leilao-timer-barra" id="leilao-timer-barra"></div>
+            </div>
+
+            <!-- Componente de lance -->
+            <div class="leilao-lance">
+              <p class="leilao-lance-rotulo">Seu lance</p>
+              <div class="leilao-lance-controle">
+                <button class="leilao-btn-mais-menos" id="leilao-menos" type="button" disabled>&minus;</button>
+                <span class="leilao-lance-valor" id="leilao-lance-valor">0</span>
+                <button class="leilao-btn-mais-menos" id="leilao-mais" type="button">+</button>
+              </div>
+              <div class="leilao-lance-acoes">
+                <button class="leilao-btn-pular" id="leilao-pular" type="button">Pular</button>
+                <button class="leilao-btn-lance" id="leilao-dar-lance" type="button" disabled>Dar lance</button>
+              </div>
+              <p class="leilao-lance-atual" id="leilao-lance-atual"></p>
+            </div>
+          </div>
+
+          <!-- Coluna direita: seu orçamento + participantes -->
+          <div class="leilao-lateral">
+            <div class="leilao-orcamento">
+              <span class="leilao-orcamento-rotulo">Suas moedas</span>
+              <span class="leilao-orcamento-valor" id="leilao-orcamento-valor">50</span>
+            </div>
+            <p class="leilao-lateral-titulo">Participantes</p>
+            <div class="leilao-participantes" id="leilao-participantes">
+              <!-- lista dos participantes (preenchida via JS); clicar mostra o time -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /leilao-overlay -->
 
   </div><!-- /tela-jogo -->
 
@@ -1235,6 +1311,7 @@
   <script src="js/escalacao.js"   defer></script>
   <script src="js/draft.js"       defer></script>
   <script src="js/livre.js"       defer></script>
+  <script src="js/leilao.js"      defer></script>
   <script src="js/home.js"        defer></script>
   <script src="js/simulacao.js"   defer></script>
   <script src="js/penaltis.js"     defer></script>

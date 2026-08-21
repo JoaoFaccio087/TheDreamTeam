@@ -127,6 +127,7 @@ var BOTAO_DO_ESTILO = {
   orcamento: 'btn-rolar',
   draft:     'btn-comecar-draft',
   livre:     'btn-proximo-livre',
+  leilao:    'btn-iniciar-leilao',
 };
 
 // Mostra/esconde os controles conforme o estilo escolhido.
@@ -140,6 +141,23 @@ function aplicarVisibilidadeEstilo() {
    ['btn-proximo-livre', btnProximoLivre]].forEach(function (par) {
     if (par[1]) par[1].classList.toggle('escondida', par[0] !== alvo);
   });
+
+  // Modo Leilão: mostra os blocos de orçamento e formação do leilão (só no futebol),
+  // e esconde a formação normal + a lista de jogadores (o leilão não sorteia elenco aqui).
+  var ehLeilao = (estiloJogo === 'leilao');
+  var blocoLeilaoOrc = document.getElementById('jogo-leilao-orcamento-bloco');
+  var blocoLeilaoForm = document.getElementById('jogo-leilao-formacao-bloco');
+  var btnIniciarLeilao = document.getElementById('btn-iniciar-leilao');
+  if (blocoLeilaoOrc) blocoLeilaoOrc.classList.toggle('escondida', !ehLeilao);
+  if (blocoLeilaoForm) blocoLeilaoForm.classList.toggle('escondida', !ehLeilao);
+  if (btnIniciarLeilao) btnIniciarLeilao.classList.toggle('escondida', !ehLeilao);
+  if (ehLeilao) {
+    // esconde a formação normal, o card de clube e a lista (não se aplicam ao leilão)
+    if (formacaoBloco) formacaoBloco.classList.add('escondida');
+    if (clubeCard) clubeCard.classList.add('escondida');
+    if (blocoSkips) blocoSkips.classList.add('escondida');
+    if (listaJogadores) listaJogadores.classList.add('escondida');
+  }
 
   // O resumo do pote só existe no Jogo Livre — trocar de estilo tem de sumir com ele.
   if (typeof renderResumoPote === 'function') renderResumoPote();
