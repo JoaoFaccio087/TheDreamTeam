@@ -172,14 +172,19 @@ Object.assign(API, {
   },
 
   salvarPartida: function (partida) {
+    // SEMPRE guarda uma cópia local. O backend pode não persistir campos ricos como
+    // detalhes.snapshot.picks (usados pelo mapa "time mais escalado" do perfil,
+    // especialmente p/ vôlei e basquete). Guardando local, o mapa funciona mesmo logado.
+    try {
+      var hist = JSON.parse(localStorage.getItem('dreamteam_historico') || '[]');
+      var copia = JSON.parse(JSON.stringify(partida));
+      copia.played_at = copia.played_at || new Date().toISOString();
+      hist.unshift(copia);
+      if (hist.length > 40) hist = hist.slice(0, 40);
+      localStorage.setItem('dreamteam_historico', JSON.stringify(hist));
+    } catch (e) { /* silent */ }
+
     if (!_temLoginReal()) {
-      try {
-        var hist = JSON.parse(localStorage.getItem('dreamteam_historico') || '[]');
-        partida.played_at = new Date().toISOString();
-        hist.unshift(partida);
-        if (hist.length > 20) hist = hist.slice(0, 20);
-        localStorage.setItem('dreamteam_historico', JSON.stringify(hist));
-      } catch (e) { /* silent */ }
       return Promise.resolve({ ok: true, local: true });
     }
     return _req('POST', '/matches', partida);

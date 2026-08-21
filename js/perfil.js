@@ -489,32 +489,29 @@
     }
 
     Promise.resolve(pedirStats).then(function (stats) {
-      // O SERVIDOR só calcula estatísticas de FUTEBOL (grupos por competição de futebol).
-      // Para vôlei e basquete, as somas do servidor viriam zeradas — então, nesses esportes,
-      // ignoramos o stats do servidor e caímos no cálculo LOCAL do histórico (que conhece as
-      // competições de todos os esportes via a `chave` derivada de COMPETICOES[id].dados).
+      // O SERVIDOR só calcula estatísticas (barras de desempenho) de FUTEBOL. Para as
+      // BARRAS usamos o stats do servidor quando disponível (futebol); mas o MAPA de "time
+      // mais escalado" SEMPRE usa o histórico local (contarEscalados), que é uniforme para
+      // os 3 esportes e todas as competições. Por isso carregamos o histórico sempre.
       var esporteUsaLocal = (_esportePerfil === 'volei' || _esportePerfil === 'basquete');
 
-      if (stats && stats.grupos && !esporteUsaLocal) {
-        _statsCache = stats;
-        _histCache = null;                 // não precisamos do histórico completo aqui
-        var linhasServ = gruposDoEsporte().map(function (g) {
-          return { nome: g.nome, s: comAproveitamento(stats.grupos[g.api] || STATS_ZERO) };
-        });
-        // KPIs: soma só as competições do esporte ativo (exclui o 'Geral' da soma).
-        pintarKPIs(somaKPIs(linhasServ));
-        box.innerHTML = barrasDesempenhoHTML(linhasServ);
-        renderEscalados('geral');
-        return;
-      }
-      // Fallback (convidado/offline) OU vôlei/basquete: calcula a partir do histórico.
       return API.getHistorico().then(function (lista) {
         lista = lista || [];
-        // Preserva o stats do servidor no cache SE ele existir (o mapa de futebol ainda o
-        // usa quando o esporte ativo é futebol); mas guarda também o histórico para o
-        // cálculo local de vôlei/basquete.
-        _statsCache = (stats && stats.grupos && !esporteUsaLocal) ? stats : null;
-        _histCache = lista;
+        _histCache = lista;   // SEMPRE disponível para o mapa de escalados (todos os esportes)
+
+        if (stats && stats.grupos && !esporteUsaLocal) {
+          // Futebol logado: barras vêm do servidor; mapa usa o histórico local.
+          _statsCache = stats;
+          var linhasServ = gruposDoEsporte().map(function (g) {
+            return { nome: g.nome, s: comAproveitamento(stats.grupos[g.api] || STATS_ZERO) };
+          });
+          pintarKPIs(somaKPIs(linhasServ));
+          box.innerHTML = barrasDesempenhoHTML(linhasServ);
+          renderEscalados('geral');
+          return;
+        }
+        // Fallback (convidado/offline) OU vôlei/basquete: barras e mapa do histórico.
+        _statsCache = null;
         var linhasLoc = gruposDoEsporte().map(function (g) {
           var ms = g.chave
             ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(g.chave) >= 0; })
@@ -703,7 +700,9 @@
     VOL: 'MEI', MC: 'MEI', MEI: 'MEI', ME: 'MEI', MD: 'MEI', MEIA: 'MEI',
     PE: 'ATA', PD: 'ATA', ATA: 'ATA', CA: 'ATA', SA: 'ATA',
     // Vôlei: cada posição é seu próprio grupo (a quadra usa LEV/OPO/PON/CEN/LIB direto).
-    LEV: 'LEV', OPO: 'OPO', PON: 'PON', CEN: 'CEN', LIB: 'LIB'
+    LEV: 'LEV', OPO: 'OPO', PON: 'PON', CEN: 'CEN', LIB: 'LIB',
+    // Basquete: idem, cada posição é seu grupo (PG/SG/SF/PF/C).
+    PG: 'PG', SG: 'SG', SF: 'SF', PF: 'PF', C: 'C'
   };
   function grupoDaPosicao(codigo) { return POSICAO_GRUPO[String(codigo || '').toUpperCase()] || null; }
 
@@ -724,7 +723,8 @@
         if ((p.forca | 0) > porNome[k].forca) porNome[k].forca = p.forca | 0;
       });
     });
-    var grupos = { GOL: [], DEF: [], MEI: [], ATA: [], LEV: [], OPO: [], PON: [], CEN: [], LIB: [] };
+    var grupos = { GOL: [], DEF: [], MEI: [], ATA: [], LEV: [], OPO: [], PON: [], CEN: [], LIB: [],
+                   PG: [], SG: [], SF: [], PF: [], C: [] };   // +grupos do basquete (senão os jogadores somem)
     Object.keys(porNome).forEach(function (k) {
       var j = porNome[k];
       if (grupos[j.grupo]) grupos[j.grupo].push(j);
@@ -759,20 +759,16 @@
     var ehBasquete = (_esportePerfil === 'basquete');
 
     var grupos;
-    // O servidor só conta escalações de FUTEBOL (grupos GOL/DEF/MEI/ATA). Para vôlei e
-    // basquete, a contagem do servidor viria vazia — então usamos a contagem LOCAL
-    // (contarEscalados), que reconhece as posições dos três esportes via POSICAO_GRUPO.
-    if (_statsCache && _statsCache.escalados && !ehVolei && !ehBasquete) {
-      // Servidor já contou as escalações: recebe {GOL,DEF,MEI,ATA} ordenados por vezes.
-      var apiKey = ESC_PARA_API[chave || 'geral'] || 'geral';
-      grupos = _statsCache.escalados[apiKey] || { GOL: [], DEF: [], MEI: [], ATA: [] };
-    } else {
-      var lista = _histCache || [];
-      var ms = (chave && chave !== 'geral')
-        ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(chave) >= 0; })
-        : lista.slice();
-      grupos = contarEscalados(ms);
-    }
+    // SEMPRE conta localmente (contarEscalados) a partir do histórico. O cache do servidor
+    // (_statsCache.escalados) só cobre ALGUMAS competições de futebol e os grupos GOL/DEF/
+    // MEI/ATA — para as demais competições ele volta vazio ou repete o 'geral', o que
+    // travava as últimas competições no mesmo time. O cálculo local reconhece as posições
+    // dos três esportes (POSICAO_GRUPO) e filtra por competição de forma uniforme.
+    var lista = _histCache || [];
+    var ms = (chave && chave !== 'geral')
+      ? lista.filter(function (m) { return (m.competicao || '').toLowerCase().indexOf(chave) >= 0; })
+      : lista.slice();
+    grupos = contarEscalados(ms);
 
     var temAlgum = ['GOL', 'DEF', 'MEI', 'ATA', 'LEV', 'OPO', 'PON', 'CEN', 'LIB', 'PG', 'SG', 'SF', 'PF', 'C'].some(function (g) {
       return (grupos[g] || []).length > 0;
@@ -799,27 +795,37 @@
     campo.classList.toggle('quadra-volei-meia', ehVolei);
     campo.classList.toggle('quadra-basquete', ehBasquete);
 
-    var vagas = montarOnzeEscalado(grupos, formacao);
-    var html = ehVolei
-      ? '<div class="piso"></div><div class="rede"></div><div class="linha-ataque"></div><div class="linha-ataque-baixo"></div>'
-      : (ehBasquete
-        ? '<div class="bq-piso"></div><div class="bq-garrafao"></div><div class="bq-linha3"></div>'
-        : '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
-          '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>');
-    vagas.forEach(function (v) {
-      var temJog = !!v.jog;
-      var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';
-      // Ancoragem do tooltip: nas bordas ele alinha pelo lado; no topo do campo, abre p/ baixo
-      // (o campo tem overflow:hidden, então acima do jogador do topo seria cortado).
-      var ancora = v.left <= 25 ? ' tip-esq' : (v.left >= 75 ? ' tip-dir' : '');
-      if (v.top <= 20) ancora += ' tip-baixo';
-      html +=
-        '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + ancora + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '" data-tip="' + esc(titulo) + '">' +
-          '<span class="pce-marca">' + esc(v.cod) + '</span>' +
-          '<span class="pce-nome">' + (temJog ? esc(nomeCurtoEsc(v.jog.nome)) : '—') + '</span>' +
-        '</div>';
-    });
-    campo.innerHTML = html;
+    try {
+      var vagas = montarOnzeEscalado(grupos, formacao);
+      var html = ehVolei
+        ? '<div class="piso"></div><div class="rede"></div><div class="linha-ataque"></div><div class="linha-ataque-baixo"></div>'
+        : (ehBasquete
+          ? '<div class="bq-piso"></div><div class="bq-garrafao"></div><div class="bq-linha3"></div>'
+          : '<div class="pce-linha-meio"></div><div class="pce-circulo"></div>' +
+            '<div class="pce-area pce-area-cima"></div><div class="pce-area pce-area-baixo"></div>');
+      vagas.forEach(function (v) {
+        var temJog = !!v.jog;
+        var titulo = temJog ? (v.jog.nome + ' — escalado ' + v.jog.vezes + (v.jog.vezes === 1 ? ' vez' : ' vezes')) : 'Vaga sem dados';
+        var ancora = v.left <= 25 ? ' tip-esq' : (v.left >= 75 ? ' tip-dir' : '');
+        if (v.top <= 20) ancora += ' tip-baixo';
+        html +=
+          '<div class="pce-jogador' + (temJog ? '' : ' pce-vazio') + ancora + '" style="left:' + v.left + '%;top:' + v.top + '%" title="' + esc(titulo) + '" data-tip="' + esc(titulo) + '">' +
+            '<span class="pce-marca">' + esc(v.cod) + '</span>' +
+            '<span class="pce-nome">' + (temJog ? esc(nomeCurtoEsc(v.jog.nome)) : '—') + '</span>' +
+          '</div>';
+      });
+      campo.innerHTML = html;
+    } catch (err) {
+      // Se algo falhar ao montar o mapa (ex.: formação ausente), não deixa a tela em
+      // branco: mostra a quadra do esporte + a mensagem de vazio.
+      var vazio = ehVolei
+        ? '<div class="piso"></div><div class="rede"></div><div class="linha-ataque"></div><div class="linha-ataque-baixo"></div>'
+        : (ehBasquete
+          ? '<div class="bq-piso"></div><div class="bq-garrafao"></div><div class="bq-linha3"></div>'
+          : '');
+      campo.innerHTML = vazio +
+        '<p class="perfil-escalados-vazio">Nenhuma campanha nesta competição ainda. Jogue para ver seu time mais escalado aqui.</p>';
+    }
   }
 
   // "Marcos Acuña" → "Acuña"; uma palavra fica igual.

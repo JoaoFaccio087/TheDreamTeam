@@ -128,7 +128,11 @@ function iniciarTelaJogo() {
   // basquete usa a sua (PG/SG/SF/PF/C); futebol segue no 4-3-3 padrão.
   var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
   var ehBasquete = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
-  formacaoJogo       = ehVolei ? 'volei' : (ehBasquete ? 'basquete' : '4-3-3');
+  // Modo Leilão (futebol reduzido, 5 jogadores): usa a formação de leilão escolhida.
+  var ehLeilao = (typeof estiloJogo !== 'undefined' && estiloJogo === 'leilao');
+  var formLeilao = (typeof Leilao !== 'undefined' && Leilao.formacao && Leilao.formacao() === 'ofensivo')
+    ? 'leilao_ofensivo' : 'leilao_normal';
+  formacaoJogo       = ehVolei ? 'volei' : (ehBasquete ? 'basquete' : (ehLeilao ? formLeilao : '4-3-3'));
   // NÃO usar formacaoTravada aqui: ela significa "time já rolado" no resto do sistema
   // (trava troca de ESTILO, salva sessão, etc.). As pílulas de formação já ficam
   // escondidas no vôlei (mais abaixo), então não há o que travar.
@@ -139,7 +143,9 @@ function iniciarTelaJogo() {
   if (typeof draftIniciado !== 'undefined') draftIniciado = false;
   // SEMENTE do número de titulares: único ponto que consulta o catálogo de esportes.
   // Todo o resto do código deriva de `escalacao.length` — nada mais crava o 11.
-  escalacao          = Array(typeof titularesAtuais === 'function' ? titularesAtuais() : 11).fill(null);
+  // Exceção: modo Leilão é reduzido (5 jogadores), independente do esporte base (futebol).
+  var nTitulares = ehLeilao ? 5 : (typeof titularesAtuais === 'function' ? titularesAtuais() : 11);
+  escalacao          = Array(nTitulares).fill(null);
   slotsPreenchidos   = 0;
   slotMovendo        = null;
   clubeSorteado      = '';
@@ -165,6 +171,11 @@ function iniciarTelaJogo() {
   var tamanhoBloco = document.getElementById('jogo-tamanho-bloco');
   if (tamanhoBloco) {
     tamanhoBloco.classList.toggle('escondida', !ehBasquete);
+    // Trava a escolha depois que a campanha já começou (não dá para mudar no meio).
+    var campanhaEmAndamento = (typeof campanhaBasqueteAtual !== 'undefined' && campanhaBasqueteAtual);
+    tamanhoBloco.classList.toggle('jogo-tamanho-travado', !!campanhaEmAndamento);
+    var pilulasTam = tamanhoBloco.querySelectorAll('.pilula');
+    pilulasTam.forEach(function (b) { b.disabled = !!campanhaEmAndamento; });
   }
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 

@@ -112,6 +112,8 @@ function selecionarEstilo(novoEstilo) {
   });
 
   aplicarVisibilidadeEstilo();
+  // Leilão muda o nº de vagas (5) e a formação do campo — remonta a tela de escalação.
+  if (typeof iniciarTelaJogo === 'function') iniciarTelaJogo();
   atualizarHeaderInfo();
 }
 

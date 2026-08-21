@@ -157,6 +157,23 @@ const formacoes = {
     { left: 72, top: 66, grupo: 'OPO' }
   ],
 
+  // ── MODO LEILÃO (futebol reduzido: 5 jogadores) ──
+  // Campo de futebol normal (GOL embaixo ~88%, ATA em cima). Só 5 vagas.
+  'leilao_normal': [
+    { left: 50, top: 88, grupo: 'GOL' },   // goleiro
+    { left: 50, top: 68, grupo: 'ZAG' },   // zagueiro
+    { left: 32, top: 46, grupo: 'MEIO' },  // 2 meios
+    { left: 68, top: 46, grupo: 'MEIO' },
+    { left: 50, top: 22, grupo: 'ATA' }    // 1 atacante
+  ],
+  'leilao_ofensivo': [
+    { left: 50, top: 88, grupo: 'GOL' },   // goleiro
+    { left: 50, top: 68, grupo: 'ZAG' },   // zagueiro
+    { left: 50, top: 46, grupo: 'MEIO' },  // 1 meio
+    { left: 32, top: 24, grupo: 'ATA' },   // 2 atacantes
+    { left: 68, top: 24, grupo: 'ATA' }
+  ],
+
   // Basquete — 5 posições numa MEIA-QUADRA (a cesta fica no TOPO). Disposição típica
   // de ataque: pivô e ala-pivô perto da cesta (topo), alas nas laterais (meio), armador
   // na frente (embaixo, comandando). Coords com margem p/ fichas + nomes não vazarem.
@@ -188,7 +205,9 @@ const codigosFormacao = {
   'volei':   ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO'],
   'volei_meia': ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO'],
   // Basquete — 5 códigos na MESMA ordem das coordenadas em formacoes['basquete'].
-  'basquete': ['PF', 'C', 'SF', 'SG', 'PG']
+  'basquete': ['PF', 'C', 'SF', 'SG', 'PG'],
+  'leilao_normal': ['GOL', 'ZAG', 'MEIO', 'MEIO', 'ATA'],
+  'leilao_ofensivo': ['GOL', 'ZAG', 'MEIO', 'ATA', 'ATA']
 };
 
 

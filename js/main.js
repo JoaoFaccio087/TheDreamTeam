@@ -294,15 +294,15 @@ simPilulasVel.forEach(function (btn) {
   });
 
   var pilulasForm = document.querySelectorAll('#jogo-pilulas-leilao-formacao .pilula');
-  var descForm = document.getElementById('jogo-leilao-formacao-desc');
   pilulasForm.forEach(function (btn) {
     btn.addEventListener('click', function () {
       pilulasForm.forEach(function (b) { b.classList.remove('pilula-ativa'); });
       this.classList.add('pilula-ativa');
       var f = this.dataset.leilaoFormacao || 'normal';
-      if (typeof Leilao !== 'undefined') {
-        Leilao.setFormacao(f);
-        if (descForm) descForm.textContent = Leilao.descFormacao(f);
+      if (typeof Leilao !== 'undefined') Leilao.setFormacao(f);
+      // Atualiza o campo de escalação para a nova formação de leilão (Normal/Ofensivo).
+      if (typeof estiloJogo !== 'undefined' && estiloJogo === 'leilao' && typeof iniciarTelaJogo === 'function') {
+        iniciarTelaJogo();
       }
     });
   });
