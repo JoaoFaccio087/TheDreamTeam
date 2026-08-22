@@ -291,3 +291,41 @@
   font-weight: 700;
 }
 .leilao-lance-atual strong { font-size: 1.1em; }
+
+/* Participante que passou/está fora da disputa deste jogador — opaco */
+.leilao-part-fora { opacity: 0.4; }
+.leilao-part-passou {
+  font-size: 0.66rem; color: var(--txt-dim, #6b7280);
+  font-style: italic; margin-left: 4px;
+}
+.leilao-part { cursor: pointer; }
+
+/* Painel de elenco (seu time / adversário) na tela do leilão */
+.leilao-elenco-painel {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--linha);
+}
+.leilao-elenco-titulo {
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--txt-soft); margin: 0 0 12px;
+}
+.leilao-elenco {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+.leilao-vaga {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; border-radius: 8px;
+  background: var(--elev-1); border: 1px solid var(--linha);
+}
+.leilao-vaga-vazia { opacity: 0.5; border-style: dashed; }
+.leilao-vaga-pos {
+  font-size: 0.68rem; font-weight: 700; color: var(--accent);
+  min-width: 34px;
+}
+.leilao-vaga-nome { flex: 1; font-size: 0.85rem; color: var(--txt); }
+.leilao-vaga-forca {
+  font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; color: var(--ouro);
+}

@@ -108,15 +108,22 @@ var Leilao = (function () {
     var el = $('leilao-participantes'); if (!el || !S) return;
     el.innerHTML = S.participantes.map(function (p, i) {
       var daVez = (S.vezDe === i), lidera = (S.quemLidera === i);
-      return '<div class="leilao-part' + (p.voce ? ' leilao-part-voce' : '') + (daVez ? ' leilao-part-vez' : '') + '">' +
+      var passou = S.passaram.indexOf(i) >= 0 && !lidera;   // fora da disputa deste jogador
+      return '<div class="leilao-part' + (p.voce ? ' leilao-part-voce' : '') + (daVez ? ' leilao-part-vez' : '') + (passou ? ' leilao-part-fora' : '') + '"' +
+               ' data-part="' + i + '">' +
         '<span class="leilao-part-nome">' + p.nome +
           (p.voce ? '<span class="leilao-part-tag">(você)</span>' : '') +
-          (lidera ? ' <span class="leilao-part-lidera">▲ lance</span>' : '') + '</span>' +
+          (lidera ? ' <span class="leilao-part-lidera">▲ lance</span>' : '') +
+          (passou ? ' <span class="leilao-part-passou">passou</span>' : '') + '</span>' +
         '<span class="leilao-part-info">' +
           '<span class="leilao-part-moedas">' + p.moedas + '💰</span>' +
           '<span>' + escaladosDe(p) + '/' + p.vagas.length + '</span>' +
         '</span></div>';
     }).join('');
+    // Clicar num participante mostra o elenco dele (função do futebol: ver time do adversário).
+    Array.prototype.forEach.call(el.querySelectorAll('.leilao-part'), function (row) {
+      row.onclick = function () { mostrarElencoDe(+row.getAttribute('data-part')); };
+    });
   }
   function renderRestantes() {
     var el = $('leilao-restantes'); if (el && S) el.textContent = S.pool.length + (S.pool.length === 1 ? ' jogador restante' : ' jogadores restantes');
@@ -174,9 +181,12 @@ var Leilao = (function () {
 
   function proximoJogador() {
     if (!S || S.encerrado) return;
+    S.resolvendo = false;
     if (S.pool.length === 0 || S.participantes.every(elencoCompleto)) { encerrar(); return; }
     S.jogadorAtual = S.pool.shift();
     S.lanceAtual = 0; S.quemLidera = -1; S.passaram = []; S.restante = TIMER_BASE; _lance = 0;
+    S.interesse = {}; S.tetoBot = {};   // decisões dos bots são por-jogador (recomeçam)
+    S.geracao = (S.geracao || 0) + 1;   // id do jogador atual: callbacks velhos são ignorados
     S.giro = (S.giro + 1) % S.participantes.length;
     S.ordem = S.ordemBase.slice(S.giro).concat(S.ordemBase.slice(0, S.giro));
     S.posOrdem = 0; S.vezDe = S.ordem[0];
@@ -199,7 +209,17 @@ var Leilao = (function () {
           _lance = Math.min(tetoVoce(), minimoParaCobrir());
           atualizarLance();
         }
-        else { (function (i) { setTimeout(function () { jogadaBot(i); }, 600 + Math.random() * 900); })(idx); }
+        else {
+          // Callback do bot leva a "geração" (id do jogador atual). Se quando ele disparar
+          // o jogador já tiver mudado (timer resolveu antes), o callback é ignorado — evita
+          // que um lance atrasado bagunce o próximo jogador (bug "passa direto").
+          (function (i, ger) {
+            setTimeout(function () {
+              if (!S || S.encerrado || S.geracao !== ger) return;
+              jogadaBot(i);
+            }, 600 + Math.random() * 900);
+          })(idx, S.geracao);
+        }
         return;
       }
       S.posOrdem++; tentativas++;
@@ -225,30 +245,43 @@ var Leilao = (function () {
     var part = S.participantes[idx], j = S.jogadorAtual;
     var min = minimoParaCobrir();
 
-    // Teto que o bot topa pagar por ESTE jogador: proporcional à força e ao orçamento.
-    // Um craque de 95+ vale quase tudo; um de 86 vale pouco. Cada bot tem uma variação
-    // aleatória de apreço (±15%), então nem todos disputam o mesmo jogador.
-    var valorBase = (j.forca - FORCA_MIN) / (100 - FORCA_MIN);   // 0..1 conforme a força
-    var apreco = 0.35 + valorBase * 0.65;                        // 35%..100% do orçamento
-    var variacao = 0.85 + Math.random() * 0.30;                  // ±15% de gosto pessoal
-    var teto = Math.floor(part.moedas * apreco * variacao);
-
-    // Guarda quantas vagas ainda faltam: se faltam muitas, é mais econômico (não gasta tudo
-    // num jogador só); se falta pouca, pode arriscar mais.
-    var vagasLivres = part.vagas.filter(function (v) { return v.jog === null; }).length;
-    if (vagasLivres >= 4) teto = Math.floor(teto * 0.7);   // começo do leilão: cauteloso
-
-    // Só dá lance se: cobre o mínimo, cabe no teto que ele topa, e tem moedas. Se o preço
-    // já passou do teto dele, PASSA (não entra em guerra de lance sem sentido).
-    if (min <= teto && min <= part.moedas) {
-      // Lance: normalmente o mínimo para cobrir; às vezes sobe um pouco para intimidar,
-      // mas nunca acima do próprio teto.
-      var salto = Math.random() < 0.25 ? (1 + Math.floor(Math.random() * 2)) : 0;
-      var valor = Math.min(part.moedas, teto, min + salto);
-      registrarLance(idx, valor);
-    } else {
-      S.passaram.push(idx);
+    // INTERESSE: cada bot decide, para ESTE jogador, se quer disputar (nem todo jogador
+    // interessa a todo bot — senão vira guerra de lance em cima de cada um). Jogadores
+    // fortes atraem mais; fracos, menos. Guarda a decisão na sessão p/ ser consistente
+    // durante toda a disputa deste jogador.
+    if (!S.interesse) S.interesse = {};
+    if (S.interesse[idx] === undefined) {
+      var valorBase = (j.forca - FORCA_MIN) / (100 - FORCA_MIN);   // 0..1
+      // chance de se interessar: 30% (fraco) a ~85% (craque). Bot sem vaga nunca entra.
+      var chance = temVagaPara(part, j) ? (0.30 + valorBase * 0.55) : 0;
+      S.interesse[idx] = (Math.random() < chance);
+      // teto que topa pagar: apreço proporcional à força, com gosto pessoal (±15%)
+      var apreco = 0.30 + valorBase * 0.60;
+      var variacao = 0.85 + Math.random() * 0.30;
+      var vagasLivres = part.vagas.filter(function (v) { return v.jog === null; }).length;
+      var t = Math.floor(part.moedas * apreco * variacao);
+      if (vagasLivres >= 4) t = Math.floor(t * 0.75);   // começo: guarda moedas p/ outras vagas
+      S.tetoBot = S.tetoBot || {};
+      S.tetoBot[idx] = Math.max(1, t);
     }
+
+    var teto = S.tetoBot[idx];
+    var interessado = S.interesse[idx];
+
+    // Passa se: não se interessou, não tem vaga, ou o preço já passou do teto dele.
+    if (!interessado || !temVagaPara(part, j) || min > teto || min > part.moedas) {
+      S.passaram.push(idx);
+      avancarVez();
+      return;
+    }
+
+    // Dá um lance com SALTO (não de 1 em 1 — senão a disputa vira 50 rodadas): salta uma
+    // fração do caminho entre o mínimo e o teto dele. Isso encerra disputas em poucos lances.
+    var espaco = teto - min;
+    var salto = Math.round(espaco * (0.15 + Math.random() * 0.35));   // 15%..50% do espaço
+    var valor = Math.min(part.moedas, teto, min + salto);
+    if (valor < min) valor = min;
+    registrarLance(idx, valor);
     avancarVez();
   }
 
@@ -263,10 +296,17 @@ var Leilao = (function () {
     renderParticipantes(); renderLanceAtual(); renderTimer();
   }
   function resolverJogador() {
-    if (!S) return; pararTimer();
+    if (!S || S.resolvendo) return;   // evita dupla resolução (timer + todos passaram)
+    S.resolvendo = true;
+    pararTimer();
     if (S.quemLidera >= 0) { var venc = S.participantes[S.quemLidera]; venc.moedas -= S.lanceAtual; encaixar(venc, S.jogadorAtual); }
-    renderParticipantes(); renderOrcamento();
-    setTimeout(proximoJogador, 700);
+    renderParticipantes(); renderOrcamento(); renderMeuElenco();
+    var ger = S.geracao;
+    setTimeout(function () {
+      if (!S || S.encerrado || S.geracao !== ger) return;
+      S.resolvendo = false;
+      proximoJogador();
+    }, 900);
   }
 
   function iniciarTimer() {
@@ -299,9 +339,45 @@ var Leilao = (function () {
     var elAtual = $('leilao-lance-atual'); if (elAtual) elAtual.textContent = 'Leilão encerrado! Confira os elencos.';
   }
 
+  // ── Painel de elenco: mostra as 5 vagas de um participante (seu time por padrão;
+  //    clicar num adversário mostra o dele — função "ver time do adversário").
+  var _elencoVendo = 0;
+  function renderElenco(idx) {
+    var el = $('leilao-elenco'); if (!el || !S) return;
+    var part = S.participantes[idx]; if (!part) return;
+    var tit = $('leilao-elenco-titulo');
+    if (tit) tit.textContent = part.voce ? 'Seu elenco' : ('Elenco: ' + part.nome);
+    el.innerHTML = part.vagas.map(function (v) {
+      if (v.jog) {
+        return '<div class="leilao-vaga leilao-vaga-cheia">' +
+                 '<span class="leilao-vaga-pos">' + v.pos + '</span>' +
+                 '<span class="leilao-vaga-nome">' + v.jog.nome + '</span>' +
+                 '<span class="leilao-vaga-forca">' + v.jog.forca + '</span>' +
+               '</div>';
+      }
+      return '<div class="leilao-vaga leilao-vaga-vazia">' +
+               '<span class="leilao-vaga-pos">' + v.pos + '</span>' +
+               '<span class="leilao-vaga-nome">—</span>' +
+             '</div>';
+    }).join('');
+  }
+  function renderMeuElenco() { renderElenco(_elencoVendo); }
+  function mostrarElencoDe(idx) { _elencoVendo = idx; renderElenco(idx); }
+
+  // Força do elenco de um participante para as SIMULAÇÕES. Vagas VAZIAS contam como 0 —
+  // ou seja, terminar o leilão com o time incompleto REDUZ a força (decisão do João). A
+  // média é sobre TODAS as vagas (não só as preenchidas), penalizando quem não completou.
+  function forcaElenco(part) {
+    if (!part || !part.vagas.length) return 0;
+    var soma = 0;
+    part.vagas.forEach(function (v) { soma += (v.jog ? v.jog.forca : 0); });
+    return Math.round(soma / part.vagas.length);
+  }
+
   function abrir() {
     var ov = $('leilao-overlay'); if (!ov) return;
     novaSessao(); renderOrcamento(); ligarControles();
+    _elencoVendo = 0; renderMeuElenco();
     ov.classList.remove('escondida'); proximoJogador();
   }
   function fechar() { pararTimer(); var ov = $('leilao-overlay'); if (ov) ov.classList.add('escondida'); }
