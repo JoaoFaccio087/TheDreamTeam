@@ -166,13 +166,11 @@ function aplicarVisibilidadeEstilo() {
     if (btnRolar) btnRolar.classList.add('escondida');
     if (btnComecarDraft) btnComecarDraft.classList.add('escondida');
     if (btnProximoLivre) btnProximoLivre.classList.add('escondida');
-  } else {
-    // Saindo do leilão: reexibe a formação normal e a lista (que o leilão havia escondido),
-    // exceto no vôlei/basquete que não têm bloco de formação.
-    if (!ehVoleiL && !ehBasqueteL && formacaoBloco) formacaoBloco.classList.remove('escondida');
-    if (clubeCard) clubeCard.classList.remove('escondida');
-    if (blocoSkips) blocoSkips.classList.remove('escondida');
-    if (listaJogadores) listaJogadores.classList.remove('escondida');
+  } else if (!ehVoleiL && !ehBasqueteL) {
+    // Saindo do leilão para futebol: reexibe SÓ o bloco de formação (4-3-3 etc.).
+    // NÃO reexibe clubeCard/blocoSkips/listaJogadores aqui — eles só aparecem DEPOIS de
+    // rolar (senão vazam para o estado inicial do Clássico, antes do sorteio).
+    if (formacaoBloco) formacaoBloco.classList.remove('escondida');
   }
 
   // O resumo do pote só existe no Jogo Livre — trocar de estilo tem de sumir com ele.

@@ -10,22 +10,23 @@
   inset: 0;
   z-index: 60;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  padding: 24px;
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(4px);
+  padding: 0;
+  background: var(--bg);   /* fundo SÓLIDO — é uma tela do jogo, não um modal sobreposto */
+  overflow-y: auto;
 }
 .leilao-overlay.escondida { display: none; }
 
 .leilao-caixa {
   width: 100%;
-  max-width: 900px;
-  background: var(--bg);
-  border: 1px solid var(--linha);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  max-width: 1000px;
+  background: transparent;   /* sem cara de card flutuante — é a tela toda */
+  border: none;
+  border-radius: 0;
+  padding: 32px 24px;
+  box-shadow: none;
+  align-self: flex-start;
 }
 
 /* ── Cabeçalho ── */
@@ -128,7 +129,7 @@
   width: 100%;
   background: var(--accent);
   border-radius: 999px;
-  transition: width 0.25s linear;
+  transition: width 0.12s linear, background 0.2s ease;
 }
 
 /* ── Componente de lance ── */
@@ -279,3 +280,14 @@
   align-items: center; justify-content: center;
   color: var(--txt-soft); font-size: 0.95rem; min-height: 180px;
 }
+
+/* Aviso de lance mais alto (destaque) */
+.leilao-lance-atual.lance-outro {
+  color: var(--ouro);
+  font-weight: 600;
+}
+.leilao-lance-atual.lance-eu {
+  color: var(--accent);
+  font-weight: 700;
+}
+.leilao-lance-atual strong { font-size: 1.1em; }

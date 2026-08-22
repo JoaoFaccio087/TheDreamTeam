@@ -301,8 +301,9 @@ simPilulasVel.forEach(function (btn) {
       var f = this.dataset.leilaoFormacao || 'normal';
       if (typeof Leilao !== 'undefined') Leilao.setFormacao(f);
       // Atualiza o campo de escalação para a nova formação de leilão (Normal/Ofensivo).
+      // preservarEstilo=true: NÃO reseta o estilo (senão volta pro Clássico).
       if (typeof estiloJogo !== 'undefined' && estiloJogo === 'leilao' && typeof iniciarTelaJogo === 'function') {
-        iniciarTelaJogo();
+        iniciarTelaJogo(true);
       }
     });
   });

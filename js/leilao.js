@@ -126,12 +126,25 @@ var Leilao = (function () {
     var el = $('leilao-orcamento-valor'); if (el) el.textContent = voce ? voce.moedas : _orcamento;
   }
   function renderTimer() {
-    var barra = $('leilao-timer-barra'); if (barra && S) barra.style.width = Math.max(0, (S.restante / TIMER_BASE) * 100) + '%';
+    var barra = $('leilao-timer-barra'); if (!barra || !S) return;
+    var escala = S.duracaoAtual || TIMER_BASE;
+    barra.style.width = Math.max(0, Math.min(100, (S.restante / escala) * 100)) + '%';
+    // Fica vermelha nos segundos finais (aviso visual).
+    barra.style.background = (S.restante <= JANELA_ACRESCIMO) ? 'var(--vermelho, #e5484d)' : 'var(--accent)';
   }
   function renderLanceAtual() {
     var el = $('leilao-lance-atual'); if (!el || !S) return;
-    if (S.quemLidera >= 0) { var p = S.participantes[S.quemLidera]; el.innerHTML = 'Maior lance: <strong>' + S.lanceAtual + '</strong> — ' + p.nome; }
-    else el.textContent = 'Nenhum lance ainda.';
+    if (S.quemLidera >= 0) {
+      var p = S.participantes[S.quemLidera];
+      var euLidero = p.voce;
+      el.className = 'leilao-lance-atual ' + (euLidero ? 'lance-eu' : 'lance-outro');
+      el.innerHTML = (euLidero ? '✓ Você lidera com ' : '🔨 Maior lance: ') +
+                     '<strong>' + S.lanceAtual + '</strong>' +
+                     (euLidero ? ' moedas' : ' — ' + p.nome);
+    } else {
+      el.className = 'leilao-lance-atual';
+      el.textContent = 'Sem lances — dê o primeiro ou passe.';
+    }
   }
 
   function minimoParaCobrir() { return S ? (S.lanceAtual + 1) : 1; }
@@ -141,7 +154,7 @@ var Leilao = (function () {
     if (elValor) elValor.textContent = _lance;
     var min = minimoParaCobrir();
     var voceDaVez = S && S.vezDe != null && S.participantes[S.vezDe] && S.participantes[S.vezDe].voce;
-    if (elMenos) elMenos.disabled = (_lance <= 0);
+    if (elMenos) elMenos.disabled = (_lance <= min);
     if (elMais) elMais.disabled = (_lance >= tetoVoce());
     if (elDar) elDar.disabled = !(voceDaVez && _lance >= min && _lance <= tetoVoce());
     var elPular = $('leilao-pular'); if (elPular) elPular.disabled = !voceDaVez;
@@ -149,7 +162,11 @@ var Leilao = (function () {
   function ligarControles() {
     var elMais = $('leilao-mais'), elMenos = $('leilao-menos'), elDar = $('leilao-dar-lance'), elPular = $('leilao-pular'), elFechar = $('leilao-fechar');
     if (elMais) elMais.onclick = function () { if (_lance < tetoVoce()) { _lance++; atualizarLance(); } };
-    if (elMenos) elMenos.onclick = function () { if (_lance > 0) { _lance--; atualizarLance(); } };
+    if (elMenos) elMenos.onclick = function () {
+      // não desce abaixo do mínimo necessário para cobrir o lance atual
+      var min = minimoParaCobrir();
+      if (_lance > min) { _lance--; atualizarLance(); }
+    };
     if (elDar) elDar.onclick = darLanceVoce;
     if (elPular) elPular.onclick = passarVoce;
     if (elFechar) elFechar.onclick = fechar;
@@ -175,7 +192,13 @@ var Leilao = (function () {
       var pode = S.passaram.indexOf(idx) < 0 && temVagaPara(part, S.jogadorAtual) && part.moedas >= minimoParaCobrir() && idx !== S.quemLidera;
       if (pode) {
         S.vezDe = idx; renderParticipantes();
-        if (part.voce) atualizarLance();
+        if (part.voce) {
+          // Auto-ajusta seu lance para o MÍNIMO que cobre o lance atual (senão você teria
+          // que clicar '+' várias vezes até alcançar o valor da outra pessoa). Você ainda
+          // pode subir com '+' ou descer com '-' (respeitando o mínimo).
+          _lance = Math.min(tetoVoce(), minimoParaCobrir());
+          atualizarLance();
+        }
         else { (function (i) { setTimeout(function () { jogadaBot(i); }, 600 + Math.random() * 900); })(idx); }
         return;
       }
@@ -200,19 +223,43 @@ var Leilao = (function () {
   function jogadaBot(idx) {
     if (!S || S.encerrado || S.vezDe !== idx) return;
     var part = S.participantes[idx], j = S.jogadorAtual;
-    var fator = Math.min(1, Math.max(0.2, (j.forca - 80) / 19));
-    var teto = Math.floor(part.moedas * fator), min = minimoParaCobrir();
-    if (teto >= min && Math.random() < 0.85) {
-      var extra = Math.random() < 0.3 ? (1 + Math.floor(Math.random() * 2)) : 0;
-      var valor = Math.min(part.moedas, teto, min + extra);
+    var min = minimoParaCobrir();
+
+    // Teto que o bot topa pagar por ESTE jogador: proporcional à força e ao orçamento.
+    // Um craque de 95+ vale quase tudo; um de 86 vale pouco. Cada bot tem uma variação
+    // aleatória de apreço (±15%), então nem todos disputam o mesmo jogador.
+    var valorBase = (j.forca - FORCA_MIN) / (100 - FORCA_MIN);   // 0..1 conforme a força
+    var apreco = 0.35 + valorBase * 0.65;                        // 35%..100% do orçamento
+    var variacao = 0.85 + Math.random() * 0.30;                  // ±15% de gosto pessoal
+    var teto = Math.floor(part.moedas * apreco * variacao);
+
+    // Guarda quantas vagas ainda faltam: se faltam muitas, é mais econômico (não gasta tudo
+    // num jogador só); se falta pouca, pode arriscar mais.
+    var vagasLivres = part.vagas.filter(function (v) { return v.jog === null; }).length;
+    if (vagasLivres >= 4) teto = Math.floor(teto * 0.7);   // começo do leilão: cauteloso
+
+    // Só dá lance se: cobre o mínimo, cabe no teto que ele topa, e tem moedas. Se o preço
+    // já passou do teto dele, PASSA (não entra em guerra de lance sem sentido).
+    if (min <= teto && min <= part.moedas) {
+      // Lance: normalmente o mínimo para cobrir; às vezes sobe um pouco para intimidar,
+      // mas nunca acima do próprio teto.
+      var salto = Math.random() < 0.25 ? (1 + Math.floor(Math.random() * 2)) : 0;
+      var valor = Math.min(part.moedas, teto, min + salto);
       registrarLance(idx, valor);
-    } else { S.passaram.push(idx); }
+    } else {
+      S.passaram.push(idx);
+    }
     avancarVez();
   }
 
   function registrarLance(idx, valor) {
-    S.lanceAtual = valor; S.quemLidera = idx; S.passaram = [idx];
-    if (S.restante <= JANELA_ACRESCIMO) S.restante += ACRESCIMO;
+    S.lanceAtual = valor; S.quemLidera = idx;
+    // NÃO reseta S.passaram: quem passou saiu da disputa DESTE jogador de vez (decisão do
+    // João). A disputa segue só entre quem ainda não passou. Garante que quem lidera não
+    // esteja marcado como "passou" (ele obviamente está participando).
+    var p = S.passaram.indexOf(idx);
+    if (p >= 0) S.passaram.splice(p, 1);
+    if (S.restante <= JANELA_ACRESCIMO) estenderTimer(ACRESCIMO);
     renderParticipantes(); renderLanceAtual(); renderTimer();
   }
   function resolverJogador() {
@@ -223,12 +270,26 @@ var Leilao = (function () {
   }
 
   function iniciarTimer() {
-    pararTimer(); renderTimer();
+    pararTimer();
+    S.restante = S.restante || TIMER_BASE;
+    S.fimEm = Date.now() + S.restante * 1000;
+    S.duracaoAtual = S.restante;   // para a barra saber a escala
+    renderTimer();
+    // Atualiza a cada 100ms para a barra descer suave (não aos pulos de 1s).
     S.timerId = setInterval(function () {
       if (!S || S.encerrado) { pararTimer(); return; }
-      S.restante--; renderTimer();
-      if (S.restante <= 0) { pararTimer(); resolverJogador(); }
-    }, 1000);
+      var msRestante = S.fimEm - Date.now();
+      S.restante = Math.max(0, msRestante / 1000);
+      renderTimer();
+      if (msRestante <= 0) { pararTimer(); resolverJogador(); }
+    }, 100);
+  }
+  function estenderTimer(seg) {
+    // usado pelo acréscimo: soma tempo ao alvo, sem reiniciar o intervalo
+    if (!S) return;
+    S.fimEm = (S.fimEm || Date.now()) + seg * 1000;
+    S.duracaoAtual = (S.duracaoAtual || TIMER_BASE) + seg;
+    renderTimer();
   }
   function pararTimer() { if (S && S.timerId) { clearInterval(S.timerId); S.timerId = null; } }
 
