@@ -107,23 +107,37 @@ function atualizarHeaderInfo() {
     if (typeof estiloJogo !== 'undefined') {
       if (estiloJogo === 'draft') estilo = 'DRAFT';
       else if (estiloJogo === 'orcamento') estilo = 'ORÇAMENTO';
+      else if (estiloJogo === 'livre') estilo = 'JOGO LIVRE';
+      else if (estiloJogo === 'leilao') estilo = 'LEILÃO';
     }
     // No vôlei/basquete não há formação (posições fixas), então o cabeçalho não mostra
-    // 'volei'/'basquete' como se fosse uma — começa direto pela competição.
+    // 'volei'/'basquete' como se fosse uma — começa direto pela competição. O Leilão também
+    // não mostra o nome interno da formação (leilao_normal); mostra a formação amigável.
     var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
     var ehBasquete = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
-    var semFormacao = ehVolei || ehBasquete;
+    var ehLeilao = (typeof estiloJogo !== 'undefined' && estiloJogo === 'leilao');
+    var semFormacao = ehVolei || ehBasquete || ehLeilao;
     var comp = COMPETICOES[modoSelecionado].label.toUpperCase();
-    var txt = semFormacao
-      ? (comp + ' · ' + estilo)
-      : (formacaoJogo + ' · ' + comp + ' · ' + estilo);
+    var txt;
+    if (ehLeilao) {
+      var formNome = (typeof Leilao !== 'undefined' && Leilao.formacao && Leilao.formacao() === 'ofensivo') ? 'OFENSIVO' : 'NORMAL';
+      txt = formNome + ' · ' + comp + ' · ' + estilo;
+    } else {
+      txt = semFormacao ? (comp + ' · ' + estilo) : (formacaoJogo + ' · ' + comp + ' · ' + estilo);
+    }
     jogoHeaderInfo.textContent = txt;
   }
   // A barra de orçamento (acima do mapa) mostra o valor em destaque no modo Orçamento.
   if (typeof atualizarBarraOrcamento === 'function') atualizarBarraOrcamento();
 }
 
-function iniciarTelaJogo() {
+function iniciarTelaJogo(preservarEstilo) {
+  // Reset do estilo/estado de partida acontece ANTES de decidir a formação/nº de vagas —
+  // senão, ao (re)entrar na tela vindo de uma sessão de Leilão, o estiloJogo antigo ('leilao')
+  // ainda valeria e o campo montava com 5 vagas no Clássico (vazamento). Quando chamado por
+  // uma TROCA de estilo (selecionarEstilo), preservarEstilo=true mantém a escolha recém-feita.
+  if (!preservarEstilo && typeof resetEstiloDraft === 'function') resetEstiloDraft();
+
   // Bifurca por esporte: vôlei usa a "formação" própria (LEV/PON/CEN/LIB/OPO);
   // basquete usa a sua (PG/SG/SF/PF/C); futebol segue no 4-3-3 padrão.
   var ehVolei = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
@@ -234,8 +248,9 @@ function iniciarTelaJogo() {
   btnSimular.classList.add('escondida');
   skipContador.textContent = '5'; // restaura o contador visual
 
-  // Volta ao estilo Clássico e desfaz qualquer estado de Draft
-  if (typeof resetEstiloDraft === 'function') resetEstiloDraft();
+  // Volta ao estilo Clássico e desfaz qualquer estado de Draft (só quando NÃO preservando
+  // o estilo — o reset já rodou no início de iniciarTelaJogo nesse caso).
+  if (!preservarEstilo && typeof resetEstiloDraft === 'function') resetEstiloDraft();
   // Mostra/esconde a pílula "Orçamento" conforme a competição (fase 1: só Libertadores).
   if (typeof sincronizarPilulaOrcamento === 'function') sincronizarPilulaOrcamento();
 

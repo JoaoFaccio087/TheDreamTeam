@@ -113,7 +113,8 @@ function selecionarEstilo(novoEstilo) {
 
   aplicarVisibilidadeEstilo();
   // Leilão muda o nº de vagas (5) e a formação do campo — remonta a tela de escalação.
-  if (typeof iniciarTelaJogo === 'function') iniciarTelaJogo();
+  // preservarEstilo=true: mantém o estilo recém-escolhido (senão o reset o zeraria).
+  if (typeof iniciarTelaJogo === 'function') iniciarTelaJogo(true);
   atualizarHeaderInfo();
 }
 
@@ -153,12 +154,25 @@ function aplicarVisibilidadeEstilo() {
   if (blocoLeilaoOrc) blocoLeilaoOrc.classList.toggle('escondida', !ehLeilao);
   if (blocoLeilaoForm) blocoLeilaoForm.classList.toggle('escondida', !ehLeilao);
   if (btnIniciarLeilao) btnIniciarLeilao.classList.toggle('escondida', !ehLeilao);
+  var ehVoleiL = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+  var ehBasqueteL = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
   if (ehLeilao) {
     // esconde a formação normal, o card de clube e a lista (não se aplicam ao leilão)
     if (formacaoBloco) formacaoBloco.classList.add('escondida');
     if (clubeCard) clubeCard.classList.add('escondida');
     if (blocoSkips) blocoSkips.classList.add('escondida');
     if (listaJogadores) listaJogadores.classList.add('escondida');
+    // Garante que SÓ o botão do leilão apareça (esconde os demais botões de ação).
+    if (btnRolar) btnRolar.classList.add('escondida');
+    if (btnComecarDraft) btnComecarDraft.classList.add('escondida');
+    if (btnProximoLivre) btnProximoLivre.classList.add('escondida');
+  } else {
+    // Saindo do leilão: reexibe a formação normal e a lista (que o leilão havia escondido),
+    // exceto no vôlei/basquete que não têm bloco de formação.
+    if (!ehVoleiL && !ehBasqueteL && formacaoBloco) formacaoBloco.classList.remove('escondida');
+    if (clubeCard) clubeCard.classList.remove('escondida');
+    if (blocoSkips) blocoSkips.classList.remove('escondida');
+    if (listaJogadores) listaJogadores.classList.remove('escondida');
   }
 
   // O resumo do pote só existe no Jogo Livre — trocar de estilo tem de sumir com ele.
