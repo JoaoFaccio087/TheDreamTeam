@@ -467,24 +467,35 @@ var Leilao = (function () {
   function animarJogo(g, res, aoFim) {
     var el = $('leilao-partidas-jogos'); if (!el) { aoFim(); return; }
     var btn = $('leilao-btn-proximo-jogo'); if (btn) btn.classList.add('escondida');
-    // monta a fila de gols por minuto
+    // fila de gols por minuto
     var eventos = [];
     for (var i = 0; i < res.a; i++) eventos.push({ lado: 'a', minuto: 1 + Math.floor(Math.random() * 90) });
     for (var j = 0; j < res.b; j++) eventos.push({ lado: 'b', minuto: 1 + Math.floor(Math.random() * 90) });
     eventos.sort(function (x, y) { return x.minuto - y.minuto; });
 
+    // Usa a MESMA estética dos cards de partida do resto do jogo (.partida-card).
     var card = document.createElement('div');
-    card.className = 'leilao-jogo-anim';
+    card.className = 'partida-card expandido leilao-partida-card';
     el.insertBefore(card, el.firstChild);
+    var fa = forcaElenco(S.participantes[g.a]), fb = forcaElenco(S.participantes[g.b]);
     var pa = 0, pb = 0, minuto = 0, ev = 0;
     function pintar() {
       card.innerHTML =
-        '<div class="leilao-anim-times">' +
-          '<span>' + nomeP(g.a) + '</span>' +
-          '<span class="leilao-anim-placar">' + pa + ' — ' + pb + '</span>' +
-          '<span>' + nomeP(g.b) + '</span>' +
-        '</div>' +
-        '<div class="leilao-anim-minuto">' + Math.min(90, minuto) + '\'</div>';
+        '<div class="partida-fase">' + nomeP(g.a) + ' vs ' + nomeP(g.b) + '</div>' +
+        '<div class="partida-header">' +
+          '<div class="partida-adversario-bloco">' +
+            '<span class="partida-adversario-nome">' + nomeP(g.a) + '</span>' +
+            '<span class="partida-adversario-forca">Força ' + fa + '</span>' +
+          '</div>' +
+          '<div class="partida-placar-bloco">' +
+            '<span class="pb-placar partida-placar">' + pa + ' \u2013 ' + pb + '</span>' +
+            '<span class="pb-status">' + Math.min(90, minuto) + '\'</span>' +
+          '</div>' +
+          '<div class="partida-adversario-bloco partida-adversario-dir">' +
+            '<span class="partida-adversario-nome">' + nomeP(g.b) + '</span>' +
+            '<span class="partida-adversario-forca">Força ' + fb + '</span>' +
+          '</div>' +
+        '</div>';
     }
     pintar();
     var timer = setInterval(function () {
@@ -496,7 +507,6 @@ var Leilao = (function () {
       pintar();
       if (minuto >= 90) {
         clearInterval(timer);
-        card.classList.add('leilao-jogo-anim-fim');
         setTimeout(function () { card.remove(); aoFim(); }, 700);
       }
     }, 90);

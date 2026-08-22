@@ -377,7 +377,9 @@
 }
 
 /* ── Tela de PARTIDAS do leilão (todos contra todos + classificação) ── */
-.leilao-btn-partidas { margin-top: 16px; width: 100%; }
+.leilao-btn-partidas {
+  margin: 16px auto 0; display: block; width: auto; padding: 12px 28px;
+}
 .leilao-partidas { margin-top: 8px; }
 .leilao-partidas-tabs {
   display: flex; gap: 8px; margin-bottom: 16px;
@@ -403,21 +405,14 @@
   min-width: 60px; text-align: center;
 }
 /* card de animação da partida */
-.leilao-jogo-anim {
-  padding: 20px; border-radius: 10px; background: var(--elev-2);
-  border: 1px solid var(--accent); margin-bottom: 8px;
+
+
+
+
+
+.leilao-btn-proximo-jogo {
+  margin: 16px auto 0; display: block; width: auto; padding: 12px 28px;
 }
-.leilao-anim-times {
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
-  font-size: 0.95rem; color: var(--txt);
-}
-.leilao-anim-placar {
-  font-family: 'Archivo Black', sans-serif; font-size: 1.6rem; color: var(--accent);
-  text-align: center; min-width: 80px;
-}
-.leilao-anim-minuto { text-align: center; color: var(--txt-soft); font-size: 0.85rem; margin-top: 8px; }
-.leilao-jogo-anim-fim { border-color: var(--ouro); }
-.leilao-btn-proximo-jogo { margin-top: 16px; width: 100%; }
 /* classificação */
 .leilao-tabela { width: 100%; border-collapse: collapse; }
 .leilao-tabela th {
@@ -434,3 +429,12 @@
   padding: 16px; margin-bottom: 16px; background: rgba(217,178,90,0.12);
   border-radius: 10px; border: 1px solid var(--ouro);
 }
+
+/* Card de partida do leilão: usa a estética padrão (.partida-card); só ajusta o layout
+   do header para caber os DOIS times lado a lado com o placar no meio. */
+.leilao-partida-card .partida-header {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px;
+}
+.leilao-partida-card .partida-adversario-dir { text-align: right; }
+.leilao-partida-card .partida-adversario-dir .partida-adversario-nome,
+.leilao-partida-card .partida-adversario-dir .partida-adversario-forca { text-align: right; }
