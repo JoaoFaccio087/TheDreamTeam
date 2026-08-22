@@ -366,3 +366,71 @@
   margin-top: 8px; font-size: 0.68rem; color: var(--txt-dim, #8b95a1);
   background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 999px;
 }
+
+/* Força do elenco (título do painel e lista de participantes) */
+.leilao-elenco-forca {
+  font-size: 0.72rem; color: var(--ouro); font-weight: 700;
+  margin-left: 8px; text-transform: none; letter-spacing: 0;
+}
+.leilao-part-forca {
+  color: var(--accent); font-weight: 600; font-size: 0.72rem;
+}
+
+/* ── Tela de PARTIDAS do leilão (todos contra todos + classificação) ── */
+.leilao-btn-partidas { margin-top: 16px; width: 100%; }
+.leilao-partidas { margin-top: 8px; }
+.leilao-partidas-tabs {
+  display: flex; gap: 8px; margin-bottom: 16px;
+  border-bottom: 1px solid var(--linha); padding-bottom: 12px;
+}
+.leilao-ptab {
+  flex: 1; padding: 10px; border-radius: 8px;
+  background: var(--elev-1); border: 1px solid var(--linha);
+  color: var(--txt-soft); font-weight: 600; cursor: pointer;
+}
+.leilao-ptab-ativa { background: var(--accent); color: #0E0F13; border-color: transparent; }
+.leilao-partidas-jogos { display: flex; flex-direction: column; gap: 8px; }
+.leilao-jogo {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 8px; background: var(--elev-1); border: 1px solid var(--linha);
+}
+.leilao-jogo-atual { border-color: var(--ouro); }
+.leilao-jogo-feito { opacity: 0.7; }
+.leilao-jogo-time { font-size: 0.9rem; color: var(--txt); }
+.leilao-jogo-time-dir { text-align: right; }
+.leilao-jogo-placar {
+  font-family: 'Archivo Black', sans-serif; font-size: 1rem; color: var(--ouro);
+  min-width: 60px; text-align: center;
+}
+/* card de animação da partida */
+.leilao-jogo-anim {
+  padding: 20px; border-radius: 10px; background: var(--elev-2);
+  border: 1px solid var(--accent); margin-bottom: 8px;
+}
+.leilao-anim-times {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  font-size: 0.95rem; color: var(--txt);
+}
+.leilao-anim-placar {
+  font-family: 'Archivo Black', sans-serif; font-size: 1.6rem; color: var(--accent);
+  text-align: center; min-width: 80px;
+}
+.leilao-anim-minuto { text-align: center; color: var(--txt-soft); font-size: 0.85rem; margin-top: 8px; }
+.leilao-jogo-anim-fim { border-color: var(--ouro); }
+.leilao-btn-proximo-jogo { margin-top: 16px; width: 100%; }
+/* classificação */
+.leilao-tabela { width: 100%; border-collapse: collapse; }
+.leilao-tabela th {
+  font-size: 0.68rem; text-transform: uppercase; color: var(--txt-soft);
+  padding: 8px 6px; text-align: center; border-bottom: 1px solid var(--linha);
+}
+.leilao-tabela th:nth-child(2) { text-align: left; }
+.leilao-tabela td { padding: 10px 6px; text-align: center; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.leilao-tabela td:nth-child(2) { text-align: left; }
+.leilao-tab-voce td { background: rgba(43,212,106,0.10); color: var(--accent); }
+.leilao-tab-lider td:first-child { color: var(--ouro); font-weight: 700; }
+.leilao-campeao {
+  text-align: center; font-size: 1.1rem; color: var(--ouro);
+  padding: 16px; margin-bottom: 16px; background: rgba(217,178,90,0.12);
+  border-radius: 10px; border: 1px solid var(--ouro);
+}

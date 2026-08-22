@@ -825,6 +825,19 @@
           <div class="leilao-campo-mini" id="leilao-elenco">
             <!-- bolinhas posicionadas via JS (mapa de escalação) -->
           </div>
+          <!-- Botão para iniciar as partidas (aparece quando o leilão encerra) -->
+          <button class="btn-rolar leilao-btn-partidas escondida" id="leilao-btn-partidas" type="button">Iniciar Partidas &rarr;</button>
+        </div>
+
+        <!-- Tela de PARTIDAS (todos contra todos + classificação) -->
+        <div class="leilao-partidas escondida" id="leilao-partidas">
+          <div class="leilao-partidas-tabs">
+            <button class="leilao-ptab leilao-ptab-ativa" id="leilao-ptab-jogos" type="button">Jogos</button>
+            <button class="leilao-ptab" id="leilao-ptab-classif" type="button">Classifica&ccedil;&atilde;o</button>
+          </div>
+          <div class="leilao-partidas-jogos" id="leilao-partidas-jogos"></div>
+          <div class="leilao-partidas-classif escondida" id="leilao-partidas-classif"></div>
+          <button class="btn-rolar leilao-btn-proximo-jogo escondida" id="leilao-btn-proximo-jogo" type="button">Pr&oacute;ximo Jogo &rarr;</button>
         </div>
       </div>
     </div><!-- /leilao-overlay -->

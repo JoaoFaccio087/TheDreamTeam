@@ -123,6 +123,7 @@ var Leilao = (function () {
           (passou ? ' <span class="leilao-part-passou">passou</span>' : '') +
           (semVaga && !passou ? ' <span class="leilao-part-semvaga-tag">sem vaga</span>' : '') + '</span>' +
         '<span class="leilao-part-info">' +
+          '<span class="leilao-part-forca" title="Força do elenco">F ' + forcaElenco(p) + '</span>' +
           '<span class="leilao-part-moedas">' + p.moedas + '💰</span>' +
           '<span>' + escaladosDe(p) + '/' + p.vagas.length + '</span>' +
         '</span></div>';
@@ -343,8 +344,228 @@ var Leilao = (function () {
   function encerrar() {
     if (!S) return; S.encerrado = true; pararTimer();
     renderJogador(null); renderParticipantes();
-    var elAtual = $('leilao-lance-atual'); if (elAtual) elAtual.textContent = 'Leilão encerrado! Confira os elencos.';
+    var elAtual = $('leilao-lance-atual'); if (elAtual) elAtual.textContent = 'Leilão encerrado! Veja seu elenco e inicie as partidas.';
+    // revela o botão de iniciar as partidas
+    var btnP = $('leilao-btn-partidas');
+    if (btnP) { btnP.classList.remove('escondida'); btnP.onclick = iniciarPartidas; }
   }
+
+  // ═══════════════ PARTIDAS (todos contra todos, turno único) ═══════════════
+  var P = null;   // estado das partidas
+
+  function forcaAtaque(part) {
+    // média das forças de ATA + MEI (setor ofensivo)
+    var offs = part.vagas.filter(function (v) { return v.jog && (v.pos === 'ATA' || v.pos === 'MEIO'); });
+    if (!offs.length) return 0;
+    var s = 0; offs.forEach(function (v) { s += v.jog.forca; }); return s / offs.length;
+  }
+  function forcaDefesa(part) {
+    // média das forças de GOL + ZAG (setor defensivo)
+    var defs = part.vagas.filter(function (v) { return v.jog && (v.pos === 'GOL' || v.pos === 'ZAG'); });
+    if (!defs.length) return 0;
+    var s = 0; defs.forEach(function (v) { s += v.jog.forca; }); return s / defs.length;
+  }
+
+  // Gera o calendário todos-contra-todos (turno único). 4 participantes → 6 jogos.
+  function gerarCalendario(n) {
+    var jogos = [];
+    for (var i = 0; i < n; i++) for (var j = i + 1; j < n; j++) jogos.push({ a: i, b: j, placarA: null, placarB: null });
+    // embaralha a ordem dos jogos para não ficar sempre você primeiro
+    return embaralhar(jogos);
+  }
+
+  // Simula um placar com base nas forças (ataque de um vs defesa do outro). Vagas vazias já
+  // reduzem a força (forcaElenco/forcaAtaque/forcaDefesa contam 0), penalizando times incompletos.
+  function simularPlacar(a, b) {
+    var atkA = forcaAtaque(a), defA = forcaDefesa(a);
+    var atkB = forcaAtaque(b), defB = forcaDefesa(b);
+    function golsDe(atk, def) {
+      var base = (atk - def) / 12 + 1.3;            // diferença de setor vira expectativa de gols
+      var lambda = Math.max(0.15, base + (Math.random() - 0.5) * 1.4);
+      // amostra ~Poisson simplificada
+      var g = 0, p = Math.exp(-lambda), acc = p, u = Math.random();
+      while (u > acc && g < 7) { g++; p *= lambda / g; acc += p; }
+      return g;
+    }
+    return { a: golsDe(atkA, defB), b: golsDe(atkB, defA) };
+  }
+
+  function iniciarPartidas() {
+    if (!S) return;
+    var n = S.participantes.length;
+    P = { jogos: gerarCalendario(n), idx: 0, tabela: S.participantes.map(function (p, i) {
+      return { i: i, nome: p.nome, voce: p.voce, pts: 0, v: 0, e: 0, d: 0, gp: 0, gc: 0 };
+    }) };
+    // esconde a área de leilão, mostra a de partidas
+    var corpo = document.querySelector('.leilao-corpo'); if (corpo) corpo.classList.add('escondida');
+    var elencoP = document.querySelector('.leilao-elenco-painel'); if (elencoP) elencoP.classList.add('escondida');
+    var tela = $('leilao-partidas'); if (tela) tela.classList.remove('escondida');
+    var tit = $('leilao-restantes'); if (tit) tit.textContent = '6 jogos';
+    ligarTabsPartidas();
+    renderJogosLista();
+    mostrarProximoJogo();
+  }
+
+  function ligarTabsPartidas() {
+    var tj = $('leilao-ptab-jogos'), tc = $('leilao-ptab-classif');
+    var pj = $('leilao-partidas-jogos'), pc = $('leilao-partidas-classif');
+    if (tj) tj.onclick = function () {
+      tj.classList.add('leilao-ptab-ativa'); if (tc) tc.classList.remove('leilao-ptab-ativa');
+      if (pj) pj.classList.remove('escondida'); if (pc) pc.classList.add('escondida');
+    };
+    if (tc) tc.onclick = function () {
+      tc.classList.add('leilao-ptab-ativa'); if (tj) tj.classList.remove('leilao-ptab-ativa');
+      if (pc) pc.classList.remove('escondida'); if (pj) pj.classList.add('escondida');
+      renderClassificacao();
+    };
+  }
+
+  function nomeP(i) { return P.tabela[i].nome; }
+
+  function renderJogosLista() {
+    var el = $('leilao-partidas-jogos'); if (!el || !P) return;
+    el.innerHTML = P.jogos.map(function (g, k) {
+      var jogado = g.placarA !== null;
+      var atual = (k === P.idx);
+      var placar = jogado ? (g.placarA + ' — ' + g.placarB) : 'vs';
+      return '<div class="leilao-jogo' + (atual ? ' leilao-jogo-atual' : '') + (jogado ? ' leilao-jogo-feito' : '') + '">' +
+               '<span class="leilao-jogo-time">' + nomeP(g.a) + '</span>' +
+               '<span class="leilao-jogo-placar">' + placar + '</span>' +
+               '<span class="leilao-jogo-time leilao-jogo-time-dir">' + nomeP(g.b) + '</span>' +
+             '</div>';
+    }).join('');
+  }
+
+  function mostrarProximoJogo() {
+    var btn = $('leilao-btn-proximo-jogo'); if (!btn) return;
+    if (P.idx >= P.jogos.length) {
+      // acabou: mostra classificação e campeão
+      btn.classList.add('escondida');
+      finalizarPartidas();
+      return;
+    }
+    var g = P.jogos[P.idx];
+    btn.classList.remove('escondida');
+    btn.textContent = 'Jogar: ' + nomeP(g.a) + ' vs ' + nomeP(g.b) + ' \u25B6';
+    btn.onclick = jogarProximo;
+  }
+
+  function jogarProximo() {
+    if (!P || P.idx >= P.jogos.length) return;
+    var g = P.jogos[P.idx];
+    var res = simularPlacar(S.participantes[g.a], S.participantes[g.b]);
+    animarJogo(g, res, function () {
+      g.placarA = res.a; g.placarB = res.b;
+      registrarResultado(g);
+      P.idx++;
+      renderJogosLista();
+      mostrarProximoJogo();
+    });
+  }
+
+  // Animação simples: placar sobe gol a gol ao longo de "minutos".
+  function animarJogo(g, res, aoFim) {
+    var el = $('leilao-partidas-jogos'); if (!el) { aoFim(); return; }
+    var btn = $('leilao-btn-proximo-jogo'); if (btn) btn.classList.add('escondida');
+    // monta a fila de gols por minuto
+    var eventos = [];
+    for (var i = 0; i < res.a; i++) eventos.push({ lado: 'a', minuto: 1 + Math.floor(Math.random() * 90) });
+    for (var j = 0; j < res.b; j++) eventos.push({ lado: 'b', minuto: 1 + Math.floor(Math.random() * 90) });
+    eventos.sort(function (x, y) { return x.minuto - y.minuto; });
+
+    var card = document.createElement('div');
+    card.className = 'leilao-jogo-anim';
+    el.insertBefore(card, el.firstChild);
+    var pa = 0, pb = 0, minuto = 0, ev = 0;
+    function pintar() {
+      card.innerHTML =
+        '<div class="leilao-anim-times">' +
+          '<span>' + nomeP(g.a) + '</span>' +
+          '<span class="leilao-anim-placar">' + pa + ' — ' + pb + '</span>' +
+          '<span>' + nomeP(g.b) + '</span>' +
+        '</div>' +
+        '<div class="leilao-anim-minuto">' + Math.min(90, minuto) + '\'</div>';
+    }
+    pintar();
+    var timer = setInterval(function () {
+      minuto += 3;
+      while (ev < eventos.length && eventos[ev].minuto <= minuto) {
+        if (eventos[ev].lado === 'a') pa++; else pb++;
+        ev++;
+      }
+      pintar();
+      if (minuto >= 90) {
+        clearInterval(timer);
+        card.classList.add('leilao-jogo-anim-fim');
+        setTimeout(function () { card.remove(); aoFim(); }, 700);
+      }
+    }, 90);
+  }
+
+  function registrarResultado(g) {
+    var ta = P.tabela[g.a], tb = P.tabela[g.b];
+    ta.gp += g.placarA; ta.gc += g.placarB; tb.gp += g.placarB; tb.gc += g.placarA;
+    if (g.placarA > g.placarB) { ta.pts += 3; ta.v++; tb.d++; }
+    else if (g.placarA < g.placarB) { tb.pts += 3; tb.v++; ta.d++; }
+    else { ta.pts++; tb.pts++; ta.e++; tb.e++; }
+  }
+
+  function ordenarTabela() {
+    return P.tabela.slice().sort(function (a, b) {
+      if (b.pts !== a.pts) return b.pts - a.pts;
+      var sa = a.gp - a.gc, sb = b.gp - b.gc;
+      if (sb !== sa) return sb - sa;
+      return b.gp - a.gp;
+    });
+  }
+
+  function renderClassificacao() {
+    var el = $('leilao-partidas-classif'); if (!el || !P) return;
+    var ord = ordenarTabela();
+    el.innerHTML = '<table class="leilao-tabela">' +
+      '<thead><tr><th></th><th>Time</th><th>P</th><th>V</th><th>E</th><th>D</th><th>SG</th></tr></thead><tbody>' +
+      ord.map(function (t, i) {
+        var sg = (t.gp - t.gc >= 0 ? '+' : '') + (t.gp - t.gc);
+        return '<tr class="' + (t.voce ? 'leilao-tab-voce' : '') + (i === 0 ? ' leilao-tab-lider' : '') + '">' +
+          '<td>' + (i + 1) + '</td><td>' + t.nome + (t.voce ? ' (você)' : '') + '</td>' +
+          '<td><strong>' + t.pts + '</strong></td><td>' + t.v + '</td><td>' + t.e + '</td><td>' + t.d + '</td><td>' + sg + '</td>' +
+        '</tr>';
+      }).join('') + '</tbody></table>';
+  }
+
+  function finalizarPartidas() {
+    var ord = ordenarTabela();
+    var campeao = ord[0];
+    // vai direto para a aba de classificação e coroa o campeão
+    var tc = $('leilao-ptab-classif'); if (tc) tc.click();
+    var el = $('leilao-partidas-classif');
+    if (el) {
+      var faixa = document.createElement('div');
+      faixa.className = 'leilao-campeao';
+      faixa.innerHTML = '🏆 Campeão: <strong>' + campeao.nome + (campeao.voce ? ' (você)' : '') + '</strong>';
+      el.insertBefore(faixa, el.firstChild);
+    }
+    // salva no perfil (usa o snapshot do seu elenco do leilão)
+    salvarCampanhaLeilao(campeao);
+  }
+
+  function salvarCampanhaLeilao(campeao) {
+    if (typeof API === 'undefined' || !API.salvarPartida) return;
+    var voce = P.tabela.filter(function (t) { return t.voce; })[0];
+    var suaPart = S.participantes.filter(function (p) { return p.voce; })[0];
+    var picks = suaPart.vagas.filter(function (v) { return v.jog; }).map(function (v) {
+      return { id: v.jog.id, codigo: v.pos === 'MEIO' ? 'MEI' : v.pos, nome: v.jog.nome, forca: v.jog.forca | 0, gols: 0, asis: 0 };
+    });
+    API.salvarPartida({
+      modo: modoSelecionado, esporte: 'futebol', estilo: 'leilao',
+      campeao: !!(voce && campeao && voce.i === campeao.i),
+      vitorias: voce ? voce.v : 0, empates: voce ? voce.e : 0, derrotas: voce ? voce.d : 0,
+      golsPro: voce ? voce.gp : 0, golsContra: voce ? voce.gc : 0,
+      detalhes: { competicao: (COMPETICOES[modoSelecionado] && COMPETICOES[modoSelecionado].dados) || 'Leilão',
+        estilo: 'leilao', snapshot: { formacao: 'leilao', picks: picks } }
+    });
+  }
+
 
   // ── Painel de elenco: MINI-CAMPO com as 5 posições (bolinhas), preenchendo conforme o
   //    leilão. Clicar num participante mostra o campo DELE (ver time do adversário).
@@ -358,7 +579,9 @@ var Leilao = (function () {
     var el = $('leilao-elenco'); if (!el || !S) return;
     var part = S.participantes[idx]; if (!part) return;
     var tit = $('leilao-elenco-titulo');
-    if (tit) tit.textContent = part.voce ? 'Seu elenco' : ('Elenco de ' + part.nome);
+    var fca = forcaElenco(part);
+    if (tit) tit.innerHTML = (part.voce ? 'Seu elenco' : ('Elenco de ' + part.nome)) +
+      ' <span class="leilao-elenco-forca">Força ' + fca + '</span>';
 
     var coords = coordsFormacao();
     // fundo do campo (gramado) + bolinhas nas posições
