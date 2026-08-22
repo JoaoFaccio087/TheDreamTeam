@@ -206,8 +206,8 @@ const codigosFormacao = {
   'volei_meia': ['PON', 'CEN', 'PON', 'LEV', 'LIB', 'OPO'],
   // Basquete — 5 códigos na MESMA ordem das coordenadas em formacoes['basquete'].
   'basquete': ['PF', 'C', 'SF', 'SG', 'PG'],
-  'leilao_normal': ['GOL', 'ZAG', 'MEIO', 'MEIO', 'ATA'],
-  'leilao_ofensivo': ['GOL', 'ZAG', 'MEIO', 'ATA', 'ATA']
+  'leilao_normal': ['GOL', 'ZAG', 'MEI', 'MEI', 'ATA'],
+  'leilao_ofensivo': ['GOL', 'ZAG', 'MEI', 'ATA', 'ATA']
 };
 
 

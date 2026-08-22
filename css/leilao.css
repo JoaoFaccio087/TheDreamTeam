@@ -261,8 +261,10 @@
 .pilula-leilao.escondida { display: none; }
 
 /* Campo de escalação REDUZIDO no modo Leilão (5 jogadores, não 11 — não precisa ser grande) */
+/* No leilão o campo mantém o tamanho padrão (as bolinhas ficam no tamanho normal).
+   São só 5 jogadores, mas o campo cheio deixa as posições bem distribuídas. */
 #campo-jogo.campo-leilao {
-  max-width: 380px;
+  max-width: 500px;
 }
 
 /* Estados da disputa (motor) */
@@ -300,7 +302,7 @@
 }
 .leilao-part { cursor: pointer; }
 
-/* Painel de elenco (seu time / adversário) na tela do leilão */
+/* ── Mini-campo de escalação na tela do leilão (seu time / adversário) ── */
 .leilao-elenco-painel {
   margin-top: 24px;
   padding-top: 20px;
@@ -308,24 +310,59 @@
 }
 .leilao-elenco-titulo {
   font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
-  color: var(--txt-soft); margin: 0 0 12px;
+  color: var(--txt-soft); margin: 0 0 12px; text-align: center;
 }
-.leilao-elenco {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 10px;
+.leilao-campo-mini {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 2 / 3;      /* vertical: combina com as coords (GOL embaixo, ATA em cima) */
+  margin: 0 auto;
+  border-radius: var(--raio-sm, 8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  overflow: hidden;
 }
-.leilao-vaga {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 8px;
-  background: var(--elev-1); border: 1px solid var(--linha);
+.leilao-campo-fundo {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, #2f7d3a 0 12.5%, #2b743540 12.5% 25%);
+  opacity: 0.5;
 }
-.leilao-vaga-vazia { opacity: 0.5; border-style: dashed; }
-.leilao-vaga-pos {
-  font-size: 0.68rem; font-weight: 700; color: var(--accent);
-  min-width: 34px;
+.leilao-bolinha {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: 2px dashed rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.25);
+  text-align: center;
 }
-.leilao-vaga-nome { flex: 1; font-size: 0.85rem; color: var(--txt); }
-.leilao-vaga-forca {
-  font-family: 'Archivo Black', sans-serif; font-size: 0.9rem; color: var(--ouro);
+.leilao-bolinha-cheia {
+  border-style: solid;
+  border-color: var(--accent);
+  background: rgba(43,212,106,0.18);
+}
+.leilao-bolinha-pos {
+  font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.7);
+  letter-spacing: 0.03em;
+}
+.leilao-bolinha-cheia .leilao-bolinha-pos { color: var(--accent); }
+.leilao-bolinha-nome {
+  font-size: 0.58rem; color: var(--txt); line-height: 1.1; margin-top: 1px;
+  max-width: 52px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.leilao-bolinha-forca {
+  font-family: 'Archivo Black', sans-serif; font-size: 0.62rem; color: var(--ouro);
+}
+
+/* Indicativo: você/participante já não precisa da posição do jogador em disputa */
+.leilao-part-semvaga { opacity: 0.55; }
+.leilao-part-semvaga-tag {
+  font-size: 0.64rem; color: var(--txt-dim, #6b7280);
+  margin-left: 4px; font-style: italic;
+}
+.leilao-card-naoprecisa { opacity: 0.7; }
+.leilao-card-aviso {
+  margin-top: 8px; font-size: 0.68rem; color: var(--txt-dim, #8b95a1);
+  background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 999px;
 }

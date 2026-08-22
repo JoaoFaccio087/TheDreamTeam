@@ -96,12 +96,15 @@ var Leilao = (function () {
   function renderJogador(j) {
     var el = $('leilao-jogador'); if (!el) return;
     if (!j) { el.innerHTML = '<div class="leilao-card leilao-card-vazio">Leilão encerrado</div>'; return; }
-    el.innerHTML = '<div class="leilao-card">' +
+    var voce = S && S.participantes.filter(function (p) { return p.voce; })[0];
+    var voceNaoPrecisa = voce && !temVagaPara(voce, j);
+    el.innerHTML = '<div class="leilao-card' + (voceNaoPrecisa ? ' leilao-card-naoprecisa' : '') + '">' +
       '<span class="leilao-card-nome">' + j.nome + '</span>' +
       '<span class="leilao-card-time">' + j.clube + '</span>' +
       '<span class="leilao-card-ano">' + j.ano + '</span>' +
       '<span class="leilao-card-posicoes">' + (j.posicoes || []).join('/') + '</span>' +
       '<span class="leilao-card-forca">' + j.forca + '</span>' +
+      (voceNaoPrecisa ? '<span class="leilao-card-aviso">Você já tem esta posição</span>' : '') +
       '</div>';
   }
   function renderParticipantes() {
@@ -109,12 +112,16 @@ var Leilao = (function () {
     el.innerHTML = S.participantes.map(function (p, i) {
       var daVez = (S.vezDe === i), lidera = (S.quemLidera === i);
       var passou = S.passaram.indexOf(i) >= 0 && !lidera;   // fora da disputa deste jogador
-      return '<div class="leilao-part' + (p.voce ? ' leilao-part-voce' : '') + (daVez ? ' leilao-part-vez' : '') + (passou ? ' leilao-part-fora' : '') + '"' +
+      // Não precisa deste jogador? (sem vaga compatível para a posição em disputa)
+      var semVaga = S.jogadorAtual && !temVagaPara(p, S.jogadorAtual);
+      return '<div class="leilao-part' + (p.voce ? ' leilao-part-voce' : '') + (daVez ? ' leilao-part-vez' : '') +
+               (passou ? ' leilao-part-fora' : '') + (semVaga ? ' leilao-part-semvaga' : '') + '"' +
                ' data-part="' + i + '">' +
         '<span class="leilao-part-nome">' + p.nome +
           (p.voce ? '<span class="leilao-part-tag">(você)</span>' : '') +
           (lidera ? ' <span class="leilao-part-lidera">▲ lance</span>' : '') +
-          (passou ? ' <span class="leilao-part-passou">passou</span>' : '') + '</span>' +
+          (passou ? ' <span class="leilao-part-passou">passou</span>' : '') +
+          (semVaga && !passou ? ' <span class="leilao-part-semvaga-tag">sem vaga</span>' : '') + '</span>' +
         '<span class="leilao-part-info">' +
           '<span class="leilao-part-moedas">' + p.moedas + '💰</span>' +
           '<span>' + escaladosDe(p) + '/' + p.vagas.length + '</span>' +
@@ -339,27 +346,40 @@ var Leilao = (function () {
     var elAtual = $('leilao-lance-atual'); if (elAtual) elAtual.textContent = 'Leilão encerrado! Confira os elencos.';
   }
 
-  // ── Painel de elenco: mostra as 5 vagas de um participante (seu time por padrão;
-  //    clicar num adversário mostra o dele — função "ver time do adversário").
+  // ── Painel de elenco: MINI-CAMPO com as 5 posições (bolinhas), preenchendo conforme o
+  //    leilão. Clicar num participante mostra o campo DELE (ver time do adversário).
   var _elencoVendo = 0;
+  function coordsFormacao() {
+    // Coordenadas das 5 vagas da formação atual (mesmo mapa do campo de montar time).
+    var chave = (_formacao === 'ofensivo') ? 'leilao_ofensivo' : 'leilao_normal';
+    return (typeof formacoes !== 'undefined' && formacoes[chave]) ? formacoes[chave] : [];
+  }
   function renderElenco(idx) {
     var el = $('leilao-elenco'); if (!el || !S) return;
     var part = S.participantes[idx]; if (!part) return;
     var tit = $('leilao-elenco-titulo');
-    if (tit) tit.textContent = part.voce ? 'Seu elenco' : ('Elenco: ' + part.nome);
-    el.innerHTML = part.vagas.map(function (v) {
-      if (v.jog) {
-        return '<div class="leilao-vaga leilao-vaga-cheia">' +
-                 '<span class="leilao-vaga-pos">' + v.pos + '</span>' +
-                 '<span class="leilao-vaga-nome">' + v.jog.nome + '</span>' +
-                 '<span class="leilao-vaga-forca">' + v.jog.forca + '</span>' +
-               '</div>';
-      }
-      return '<div class="leilao-vaga leilao-vaga-vazia">' +
-               '<span class="leilao-vaga-pos">' + v.pos + '</span>' +
-               '<span class="leilao-vaga-nome">—</span>' +
-             '</div>';
-    }).join('');
+    if (tit) tit.textContent = part.voce ? 'Seu elenco' : ('Elenco de ' + part.nome);
+
+    var coords = coordsFormacao();
+    // fundo do campo (gramado) + bolinhas nas posições
+    var html = '<div class="leilao-campo-fundo"></div>';
+    part.vagas.forEach(function (v, i) {
+      var c = coords[i] || { left: 50, top: 50 };
+      var temJog = !!v.jog;
+      var cod = (typeof codigosFormacao !== 'undefined' && codigosFormacao[(_formacao === 'ofensivo') ? 'leilao_ofensivo' : 'leilao_normal'])
+        ? codigosFormacao[(_formacao === 'ofensivo') ? 'leilao_ofensivo' : 'leilao_normal'][i] : v.pos;
+      html += '<div class="leilao-bolinha' + (temJog ? ' leilao-bolinha-cheia' : '') + '" style="left:' + c.left + '%;top:' + c.top + '%">' +
+                '<span class="leilao-bolinha-pos">' + cod + '</span>' +
+                (temJog ? '<span class="leilao-bolinha-nome">' + nomeCurto(v.jog.nome) + '</span>' +
+                          '<span class="leilao-bolinha-forca">' + v.jog.forca + '</span>' : '') +
+              '</div>';
+    });
+    el.innerHTML = html;
+  }
+  function nomeCurto(nome) {
+    if (!nome) return '';
+    var partes = String(nome).trim().split(/\s+/);
+    return partes.length > 1 ? partes[partes.length - 1] : partes[0];
   }
   function renderMeuElenco() { renderElenco(_elencoVendo); }
   function mostrarElencoDe(idx) { _elencoVendo = idx; renderElenco(idx); }
