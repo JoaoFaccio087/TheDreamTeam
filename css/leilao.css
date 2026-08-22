@@ -263,3 +263,19 @@
 #campo-jogo.campo-leilao {
   max-width: 380px;
 }
+
+/* Estados da disputa (motor) */
+.leilao-part-vez {
+  border-color: var(--ouro) !important;
+  box-shadow: 0 0 0 1px var(--ouro);
+}
+.leilao-part-vez .leilao-part-nome::before {
+  content: '▶ '; color: var(--ouro); font-size: 0.7rem;
+}
+.leilao-part-lidera {
+  font-size: 0.68rem; color: var(--accent); font-weight: 600;
+}
+.leilao-card-vazio {
+  align-items: center; justify-content: center;
+  color: var(--txt-soft); font-size: 0.95rem; min-height: 180px;
+}
