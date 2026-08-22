@@ -258,3 +258,8 @@
 
 /* Pílula do estilo Leilão (aparece só no futebol, como a de Orçamento) */
 .pilula-leilao.escondida { display: none; }
+
+/* Campo de escalação REDUZIDO no modo Leilão (5 jogadores, não 11 — não precisa ser grande) */
+#campo-jogo.campo-leilao {
+  max-width: 380px;
+}

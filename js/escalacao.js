@@ -174,8 +174,9 @@ function iniciarTelaJogo(preservarEstilo) {
 
 
   // Vôlei e basquete não têm formação (posições fixas): esconde o bloco de pílulas de
-  // formação. Futebol mostra normalmente.
-  if (ehVolei || ehBasquete) {
+  // formação. O LEILÃO também não usa as formações de futebol (tem as suas: Normal/Ofensivo).
+  // Futebol clássico/draft/etc. mostra normalmente.
+  if (ehVolei || ehBasquete || ehLeilao) {
     formacaoBloco.classList.add('escondida');
   } else {
     formacaoBloco.classList.remove('escondida');
@@ -197,6 +198,7 @@ function iniciarTelaJogo(preservarEstilo) {
   if (campoJogo) {
     campoJogo.classList.toggle('quadra-volei', ehVolei);
     campoJogo.classList.toggle('quadra-basquete', ehBasquete);
+    campoJogo.classList.toggle('campo-leilao', ehLeilao);   // campo reduzido no leilão
     // Elementos internos da quadra. Vôlei: piso/rede/linhas. Basquete: piso/garrafão/
     // linha de 3. Removidos ao trocar de esporte. Mesma abordagem do mapa-vitrine.
     var elsVolei = ['piso', 'rede', 'linha-ataque', 'linha-ataque-baixo'];
@@ -238,10 +240,9 @@ function iniciarTelaJogo(preservarEstilo) {
     });
   }
 
-  // A visibilidade dos botões é da tabela BOTAO_DO_ESTILO (draft.js) — mostrar o
-  // btnRolar direto aqui furava a tabela e deixava dois botões visíveis ao voltar
-  // de um Jogo Livre. Um lugar decide qual botão aparece.
-  btnRolar.classList.remove('escondida');
+  // A visibilidade dos botões é decidida SÓ por aplicarVisibilidadeEstilo (tabela
+  // BOTAO_DO_ESTILO) — mostrar o btnRolar direto aqui furava a tabela e deixava DOIS
+  // botões visíveis (ex.: Rolar + Iniciar Leilão). Não mexe no btnRolar aqui.
   clubeCard.classList.add('escondida');
   listaJogadores.classList.add('escondida');
   blocoSkips.classList.add('escondida');
@@ -253,6 +254,9 @@ function iniciarTelaJogo(preservarEstilo) {
   if (!preservarEstilo && typeof resetEstiloDraft === 'function') resetEstiloDraft();
   // Mostra/esconde a pílula "Orçamento" conforme a competição (fase 1: só Libertadores).
   if (typeof sincronizarPilulaOrcamento === 'function') sincronizarPilulaOrcamento();
+  // DECIDE qual botão de ação aparece (Rolar/Começar/Próximo/Iniciar Leilão) — um único
+  // lugar decide, evitando dois botões visíveis ao mesmo tempo.
+  if (typeof aplicarVisibilidadeEstilo === 'function') aplicarVisibilidadeEstilo();
 
   campoJogo.classList.remove('tem-selecao');
 
