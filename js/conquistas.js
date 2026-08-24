@@ -108,6 +108,12 @@
     { id: 'tri_volei_f',          categoria: 'Competições', nome: 'Tricampeã Mundial (F)', desc: 'Campeã do Mundial de Vôlei feminino 3 vezes',   desbloqueada: false },
     { id: 'especialista_volei_f', categoria: 'Competições', nome: 'Veterana das Quadras (F)', desc: 'Disputou 10 campanhas no Mundial feminino',  desbloqueada: false },
     { id: 'sacador_volei_f',      categoria: 'Competições', nome: 'Sacadora de Elite (F)', desc: 'Fez 100 sets no Mundial feminino',             desbloqueada: false },
+    // ── Basquete (NBA) ──
+    { id: 'campeao_nba',      categoria: 'Competições', nome: 'Campeão da NBA',      desc: 'Venceu o título da NBA',              desbloqueada: false },
+    { id: 'bi_nba',           categoria: 'Competições', nome: 'Bicampeão da NBA',    desc: 'Venceu o título da NBA 2 vezes',      desbloqueada: false },
+    { id: 'tri_nba',          categoria: 'Competições', nome: 'Tricampeão da NBA',   desc: 'Venceu o título da NBA 3 vezes',      desbloqueada: false },
+    { id: 'especialista_nba', categoria: 'Competições', nome: 'Veterano das Quadras (NBA)', desc: 'Disputou 10 temporadas na NBA',  desbloqueada: false },
+    { id: 'cestinha_nba',     categoria: 'Competições', nome: 'Cestinha da Liga',    desc: 'Marcou 2000 pontos na NBA',           desbloqueada: false },
     { id: 'matador_brasil',    categoria: 'Competições', nome: 'Matador nacional',    desc: 'Marcou 100 gols no Brasileirão',    desbloqueada: false },
     { id: 'matador_copa',      categoria: 'Competições', nome: 'Matador mundial',     desc: 'Marcou 100 gols na Copa do Mundo',  desbloqueada: false },
 
@@ -166,6 +172,8 @@
     especialista_volei_m: 'epico', sacador_volei_m: 'epico',
     campeao_volei_f: 'raro', bi_volei_f: 'raro', tri_volei_f: 'epico',
     especialista_volei_f: 'epico', sacador_volei_f: 'epico',
+    campeao_nba: 'raro', bi_nba: 'raro', tri_nba: 'epico',
+    especialista_nba: 'epico', cestinha_nba: 'epico',
     // Épicas por competição (tri + matador)
     tri_champions: 'epico', tri_brasil: 'epico', tri_copa: 'epico',
     matador_liberta: 'epico', matador_champions: 'epico', matador_brasil: 'epico', matador_copa: 'epico',

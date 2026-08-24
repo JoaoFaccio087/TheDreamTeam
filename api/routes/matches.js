@@ -61,7 +61,7 @@ router.post('/', requireAuth, async (req, res) => {
 // Retorna a lista de IDs que acabaram de desbloquear (para o cliente exibir o toast).
 async function atualizarConquistas(userId) {
   const { rows: matches } = await pool.query(
-    `SELECT competicao, vitorias, empates, derrotas, gf, ga, posicao, campeao, detalhes
+    `SELECT competicao, esporte, vitorias, empates, derrotas, gf, ga, posicao, campeao, detalhes
        FROM matches WHERE user_id = $1`,
     [userId]
   );

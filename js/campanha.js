@@ -1026,6 +1026,7 @@ function salvarCampanhaBasquete(camp, resultadoPlayoff) {
 
   API.salvarPartida({
     modo: modoSelecionado,
+    competicao: (COMPETICOES[modoSelecionado] && COMPETICOES[modoSelecionado].dados) || 'NBA',
     esporte: 'basquete',
     campeao: campeao,
     vitorias: minha.v, empates: 0, derrotas: minha.d,
