@@ -211,9 +211,10 @@ var Leilao = (function () {
       if (pode) {
         S.vezDe = idx; renderParticipantes();
         if (part.voce) {
-          // Auto-ajusta seu lance para o MÍNIMO que cobre o lance atual (senão você teria
-          // que clicar '+' várias vezes até alcançar o valor da outra pessoa). Você ainda
-          // pode subir com '+' ou descer com '-' (respeitando o mínimo).
+          // É a SUA vez: PAUSA o timer (você tem tempo para decidir; o jogador não vai
+          // "passar sozinho" enquanto você pensa). O timer volta a correr quando você
+          // dá lance ou passa (avancarVez → religa).
+          pararTimer();
           _lance = Math.min(tetoVoce(), minimoParaCobrir());
           atualizarLance();
         }
@@ -223,7 +224,7 @@ var Leilao = (function () {
           // que um lance atrasado bagunce o próximo jogador (bug "passa direto").
           (function (i, ger) {
             setTimeout(function () {
-              if (!S || S.encerrado || S.geracao !== ger) return;
+              if (!S || S.encerrado || S.geracao !== ger || S.vezDe !== i) return;
               jogadaBot(i);
             }, 600 + Math.random() * 900);
           })(idx, S.geracao);
@@ -240,12 +241,16 @@ var Leilao = (function () {
     if (!S || S.vezDe == null) return;
     var part = S.participantes[S.vezDe]; if (!part.voce) return;
     if (_lance < minimoParaCobrir() || _lance > part.moedas) return;
-    registrarLance(S.vezDe, _lance); _lance = 0; avancarVez();
+    registrarLance(S.vezDe, _lance); _lance = 0;
+    iniciarTimer();   // religa o timer (estava pausado na sua vez)
+    avancarVez();
   }
   function passarVoce() {
     if (!S || S.vezDe == null) return;
     if (!S.participantes[S.vezDe].voce) return;
-    S.passaram.push(S.vezDe); avancarVez();
+    S.passaram.push(S.vezDe);
+    iniciarTimer();   // religa o timer (estava pausado na sua vez)
+    avancarVez();
   }
 
   function jogadaBot(idx) {

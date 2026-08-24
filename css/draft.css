@@ -202,23 +202,11 @@
 .draft-carta.tier-oculto .carta-forca { color: #8b929c; text-shadow: none; }
 
 /* Elite e Diamante pulsam de leve para chamar atenção (pausa no hover). O "deal"
-   de entrada vem da .carta-entrando; aqui fica só o pulso infinito (que não some). */
-.draft-carta.tier-elite { animation: carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
-.draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-elite-pulso 1.8s ease-in-out 0.9s infinite; }
-.draft-carta.tier-elite:hover { animation-play-state: paused; }
-
-.draft-carta.tier-diamante { animation: carta-diamante-pulso 1.8s ease-in-out 0.9s infinite; }
-.draft-carta.tier-diamante.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards, carta-diamante-pulso 1.8s ease-in-out 0.9s infinite; }
-.draft-carta.tier-diamante:hover { animation-play-state: paused; }
-
-@keyframes carta-elite-pulso {
-  0%, 100% { box-shadow: 0 0 22px rgba(255, 216, 107, 0.55), 5px 5px 0 rgba(0,0,0,0.5); }
-  50%      { box-shadow: 0 0 30px rgba(255, 216, 107, 0.85), 5px 5px 0 rgba(0,0,0,0.5); }
-}
-@keyframes carta-diamante-pulso {
-  0%, 100% { box-shadow: 0 0 24px rgba(120, 230, 255, 0.6), 5px 5px 0 rgba(0,0,0,0.5); }
-  50%      { box-shadow: 0 0 36px rgba(150, 240, 255, 0.95), 5px 5px 0 rgba(0,0,0,0.5); }
-}
+   de entrada vem da .carta-entrando; o glow estático dos tiers (acima) já dá a sensação
+   de raridade. O pulso INFINITO de box-shadow foi removido: animar box-shadow com blur
+   grande força repaint constante e derrubava o FPS ao abrir o modal com várias cartas. */
+.draft-carta.tier-elite.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
+.draft-carta.tier-diamante.carta-entrando { animation: carta-deal 0.46s cubic-bezier(0.2,0.85,0.3,1.25) backwards; }
 
 /* A carta escolhida mantém o destaque de seleção acima da raridade */
 .draft-carta.tier-diamante.escolhida,
