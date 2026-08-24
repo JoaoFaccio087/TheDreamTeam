@@ -110,7 +110,7 @@ function salvarCampanhaNoHistorico(campeao) {
   }).then(function (resp) {
     // Toast das conquistas recém-desbloqueadas (o backend retorna novasConquistas).
     if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
-      mostrarToastConquistas(resp.novasConquistas);
+      mostrarToastConquistas(resp.novasConquistas, (typeof esporteDoModo === 'function' ? esporteDoModo(modoSelecionado) : 'futebol'));
     }
   }).catch(function () {});
 }

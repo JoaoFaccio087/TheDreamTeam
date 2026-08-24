@@ -57,6 +57,15 @@ function ehCompeticaoBasquete(id) {
   return !!(COMPETICOES[id] && COMPETICOES[id].esporte === 'basquete');
 }
 
+// Helper: retorna o ESPORTE de uma competição ('futebol' | 'volei' | 'basquete').
+// Futebol não marca `esporte` na entrada, então é o padrão. Usado, entre outros,
+// para filtrar as conquistas por esporte (evitar que conquista de um esporte apareça
+// ao terminar uma campanha de outro).
+function esporteDoModo(id) {
+  var e = COMPETICOES[id] && COMPETICOES[id].esporte;
+  return (e === 'volei' || e === 'basquete') ? e : 'futebol';
+}
+
 // Helper: a competição é a VNL / Liga das Nações? (formato 'vnl', dentro do vôlei).
 // Usado para bifurcar entre o fluxo do Mundial (grupos+mata) e o da VNL
 // (preliminar em liga + Final Eight). Mundial retorna false aqui.

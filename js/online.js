@@ -2125,7 +2125,7 @@
           detalhes:   { online: true }
         }).then(function (resp) {
           if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
-            mostrarToastConquistas(resp.novasConquistas);
+            mostrarToastConquistas(resp.novasConquistas, 'futebol');   // online é sempre futebol
           }
         }).catch(function () {});
       } catch (e) {}

@@ -286,8 +286,21 @@
   var PESO_RARIDADE = { lendario: 4, epico: 3, raro: 2, comum: 1 };
   function pesoDe(c) { return PESO_RARIDADE[raridadeDe(c.id)] || 1; }
 
-  // Uma conquista é de vôlei se o id contém 'volei'; senão é de futebol.
-  function esporteDaConquista(c) { return /volei/.test(c.id) ? 'volei' : 'futebol'; }
+  // Esporte de uma conquista pelo id: contém 'volei' → vôlei; contém 'basquete'/'nba' →
+  // basquete; senão futebol. (As conquistas gerais de progressão — 'veterano', 'centuriao'
+  // etc. — não têm esporte no id e caem em 'futebol'; o filtro do toast trata isso à parte.)
+  function esporteDaConquista(c) {
+    var id = (c && c.id) || '';
+    if (/volei/.test(id)) return 'volei';
+    if (/basquete|nba|_bq/.test(id)) return 'basquete';
+    return 'futebol';
+  }
+  // Conquistas GERAIS (sem esporte específico) — valem para qualquer esporte, então nunca
+  // devem ser barradas pelo filtro por esporte. São as de progressão/gerais.
+  var CONQUISTAS_GERAIS = {
+    primeira_vez: 1, primeira_vitoria: 1, primeiro_titulo: 1, veterano: 1, centuriao: 1,
+    lenda_viva: 1, centenario: 1, dinastico: 1, imperador: 1, maquina_de_gols: 1, artilheiro_mor: 1
+  };
 
   function renderConquistasDestaque(esporteFiltro) {
     var cont = $('conq-destaque');
@@ -408,11 +421,22 @@
 
   // Enfileira e dispara os toasts das conquistas recém-desbloqueadas.
   // Aceita array de IDs (strings) ou de objetos { achievement_id }.
-  function mostrarToastConquistas(novas) {
+  // Mostra os toasts das conquistas recém-desbloqueadas.
+  // `esporteCampanha` (opcional): esporte da campanha que acabou de ser jogada ('futebol' |
+  // 'volei' | 'basquete'). Quando informado, conquistas ESPECÍFICAS de OUTRO esporte são
+  // barradas — evita o bug de terminar um vôlei e vir uma conquista de futebol. Conquistas
+  // gerais (progressão) passam sempre.
+  function mostrarToastConquistas(novas, esporteCampanha) {
     if (!novas || !novas.length) return;
     novas.forEach(function (n) {
       var id = (typeof n === 'string') ? n : (n && n.achievement_id);
-      if (id) _filaToast.push(id);
+      if (!id) return;
+      if (esporteCampanha) {
+        var espConq = esporteDaConquista({ id: id });
+        var geral = !!CONQUISTAS_GERAIS[id];
+        if (!geral && espConq !== esporteCampanha) return;   // barra esporte diferente
+      }
+      _filaToast.push(id);
     });
     if (!_toastAtivo) proximoToast();
   }

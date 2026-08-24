@@ -1040,7 +1040,12 @@ function salvarCampanhaBasquete(camp, resultadoPlayoff) {
       posicao: posicao,
       snapshot: { formacao: 'basquete', picks: picks }
     }
-  });
+  }).then(function (resp) {
+    // Toast das conquistas recém-desbloqueadas, FILTRADO para basquete (não vaza futebol/vôlei).
+    if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
+      mostrarToastConquistas(resp.novasConquistas, 'basquete');
+    }
+  }).catch(function () {});
 }
 
 // Força média de uma seleção (0-100), usada para resolver jogos neutros na chave.
@@ -1786,7 +1791,12 @@ function salvarCampanhaVolei(camp, resultadoMata) {
           })
       }
     }
-  });
+  }).then(function (resp) {
+    // Toast das conquistas recém-desbloqueadas, FILTRADO para vôlei (não vaza futebol/basquete).
+    if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
+      mostrarToastConquistas(resp.novasConquistas, 'volei');
+    }
+  }).catch(function () {});
 }
 
 // Cria o card visual de uma partida de vôlei. REAPROVEITA as classes do card de
