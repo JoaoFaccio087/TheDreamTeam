@@ -829,13 +829,16 @@
           <button class="btn-rolar leilao-btn-partidas escondida" id="leilao-btn-partidas" type="button">Iniciar Partidas &rarr;</button>
         </div>
 
-        <!-- Tela de PARTIDAS (todos contra todos + classificação) -->
+        <!-- Tela de PARTIDAS do leilão — reaproveita as classes da tela de simulação real
+             (sim-tabs, sim-tab, historico-jogos, partida-card) para ficar idêntica ao padrão. -->
         <div class="leilao-partidas escondida" id="leilao-partidas">
-          <div class="leilao-partidas-tabs">
-            <button class="leilao-ptab leilao-ptab-ativa" id="leilao-ptab-jogos" type="button">Jogos</button>
-            <button class="leilao-ptab" id="leilao-ptab-classif" type="button">Classifica&ccedil;&atilde;o</button>
+          <div class="sim-tabs" id="leilao-sim-tabs">
+            <button class="sim-tab sim-tab-ativa" id="leilao-ptab-jogos" type="button">Simula&ccedil;&atilde;o</button>
+            <button class="sim-tab" id="leilao-ptab-classif" type="button">Classifica&ccedil;&atilde;o</button>
           </div>
-          <div class="leilao-partidas-jogos" id="leilao-partidas-jogos"></div>
+          <div id="leilao-sim-painel-jogos">
+            <div class="historico-jogos" id="leilao-partidas-jogos"></div>
+          </div>
           <div class="leilao-partidas-classif escondida" id="leilao-partidas-classif"></div>
           <button class="btn-rolar leilao-btn-proximo-jogo escondida" id="leilao-btn-proximo-jogo" type="button">Pr&oacute;ximo Jogo &rarr;</button>
         </div>

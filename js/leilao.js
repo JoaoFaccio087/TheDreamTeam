@@ -413,13 +413,13 @@ var Leilao = (function () {
 
   function ligarTabsPartidas() {
     var tj = $('leilao-ptab-jogos'), tc = $('leilao-ptab-classif');
-    var pj = $('leilao-partidas-jogos'), pc = $('leilao-partidas-classif');
+    var pj = $('leilao-sim-painel-jogos'), pc = $('leilao-partidas-classif');
     if (tj) tj.onclick = function () {
-      tj.classList.add('leilao-ptab-ativa'); if (tc) tc.classList.remove('leilao-ptab-ativa');
+      tj.classList.add('sim-tab-ativa'); if (tc) tc.classList.remove('sim-tab-ativa');
       if (pj) pj.classList.remove('escondida'); if (pc) pc.classList.add('escondida');
     };
     if (tc) tc.onclick = function () {
-      tc.classList.add('leilao-ptab-ativa'); if (tj) tj.classList.remove('leilao-ptab-ativa');
+      tc.classList.add('sim-tab-ativa'); if (tj) tj.classList.remove('sim-tab-ativa');
       if (pc) pc.classList.remove('escondida'); if (pj) pj.classList.add('escondida');
       renderClassificacao();
     };
