@@ -20,7 +20,7 @@ var ICONE_COMPARTILHAR =
 
 function mostrarBotaoResumo(campeao) {
   resumoCampeao = campeao;
-  try { salvarCampanhaNoHistorico(campeao); } catch (e) {}
+  try { salvarCampanhaNoHistorico(campeao); } catch (e) { console.warn('[resumo] falha ao salvar campanha no histórico:', e); }
   if (!btnResumo) return;
   btnResumo.textContent = campeao ? '\u2605 Ver Resumo da Campanha' : 'Ver Resumo da Campanha';
   btnResumo.classList.remove('escondida');
@@ -40,7 +40,7 @@ function salvarCampanhaNoHistorico(campeao) {
   var pos = null;
   if (typeof modoSelecionado !== 'undefined' && modoSelecionado === 'brasileirao' &&
       typeof posicaoNaTabela === 'function') {
-    try { pos = posicaoNaTabela(); } catch (e) {}
+    try { pos = posicaoNaTabela(); } catch (e) { console.warn('[resumo] falha ao obter posição na tabela:', e); }
   }
 
   var v  = campanhaVitorias | 0, e = campanhaEmpates | 0, d = campanhaDerrotas | 0;

@@ -2127,8 +2127,8 @@
           if (resp && resp.novasConquistas && typeof mostrarToastConquistas === 'function') {
             mostrarToastConquistas(resp.novasConquistas, 'futebol');   // online é sempre futebol
           }
-        }).catch(function () {});
-      } catch (e) {}
+        }).catch(function (e) { console.warn('[online] POST de partida falhou:', e); });
+      } catch (e) { console.warn('[online] falha ao salvar partida/conquistas:', e); }
     }
     if (animacaoAtiva) {
       var _prevFim = aoFimDaAnimacao;

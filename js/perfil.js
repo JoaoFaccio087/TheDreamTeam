@@ -901,7 +901,7 @@
         user.nomeDoTime = res.nome_do_time || nometime;
         localStorage.setItem('dreamteam_user', JSON.stringify(user));
         if (typeof atualizarDropdown === 'function') atualizarDropdown(user);
-      } catch (e) {}
+      } catch (e) { console.warn('[perfil] falha ao atualizar dados locais do usuário:', e); }
       _meCache = { username: res.username || username, email: res.email || email, nome_do_time: res.nome_do_time || nometime };
       msgEditar('Informações atualizadas!', false);
       setTimeout(function () { fechar(modalEditar); abrirPerfil(); }, 750);
