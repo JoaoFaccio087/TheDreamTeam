@@ -41,8 +41,8 @@ function selecionarModo(novoModo) {
           typeof esporteAtual !== 'undefined') {
         pintarMapaVitrine(esporteAtual);
       }
-      // rodapé conta jogadores de DADOS (que cresceu) → recalcula
-      if (typeof calcularEstatisticasFooter === 'function') calcularEstatisticasFooter();
+      // rodapé NÃO recalcula aqui: usa o manifesto DADOS_TOTAIS (total fixo e correto),
+      // então não precisa contar de novo quando novos dados chegam (evita número oscilando).
     }).catch(function () { /* falha de rede: acessos a DADOS seguem com o que houver */ });
   }
 
@@ -106,35 +106,41 @@ function voltarHome() {
 }
 
 
-// Conta as edições distintas e o total de jogadores (todos os esportes) para o rodapé.
+// Preenche o rodapé com os totais de jogadores/edições. Usa o MANIFESTO (DADOS_TOTAIS,
+// gerado por scripts/gerar-totais.js) em vez de contar ao vivo — com o lazy-load, contar
+// os dados carregados daria um número parcial que sobe aos poucos conforme você navega.
+// O manifesto é automático (não é digitado à mão): regenera-se rodando o script.
 function calcularEstatisticasFooter() {
-  // Sem .slice()/.concat(): copiar milhares de itens só para contar é desperdício no boot.
-  // Iteramos cada fonte diretamente, somando num único acumulador.
-  var fontes = [API.getTodosClubes()];
-  if (typeof DADOS_VOLEI_M !== 'undefined') fontes.push(DADOS_VOLEI_M);
-  if (typeof DADOS_VOLEI_F !== 'undefined') fontes.push(DADOS_VOLEI_F);
-  if (typeof DADOS_VNL_M !== 'undefined') fontes.push(DADOS_VNL_M);
-  if (typeof DADOS_VNL_F !== 'undefined') fontes.push(DADOS_VNL_F);
-  if (typeof DADOS_NBA !== 'undefined') fontes.push(DADOS_NBA);
-
-  var edicoes = Object.create(null);   // Set-like: chave→true, busca O(1) (antes era
-  var totalJogadores = 0;              // indexOf em array crescente = O(n²) com ~6000 atletas).
-  fontes.forEach(function (arr) {
-    (arr || []).forEach(function (d) {
-      // futebol/vôlei usam `edicao`; basquete usa `temporada` — conta os dois sem misturar.
-      var ano = (d.temporada != null) ? ('t:' + d.temporada) : ('e:' + d.edicao);
-      edicoes[ano] = true;
-      totalJogadores += (d.jogadores ? d.jogadores.length : 0);
-    });
-  });
-  var nEdicoes = Object.keys(edicoes).length;
-
   var spanEdicoes   = document.getElementById('stat-edicoes');
   var spanJogadores = document.getElementById('stat-jogadores');
   var spanComps     = document.getElementById('stat-competicoes');
-  var textoEdicoes  = nEdicoes === 1 ? '1 edição' : nEdicoes + ' edições';
+
+  var totJog = (typeof DADOS_TOTAIS !== 'undefined' && DADOS_TOTAIS.jogadores) ? DADOS_TOTAIS.jogadores : null;
+  var totEd  = (typeof DADOS_TOTAIS !== 'undefined' && DADOS_TOTAIS.edicoes)   ? DADOS_TOTAIS.edicoes   : null;
+
+  // Fallback (se o manifesto não carregou): conta o que estiver disponível, para não ficar vazio.
+  if (totJog == null || totEd == null) {
+    var fontes = [API.getTodosClubes()];
+    if (typeof DADOS_VOLEI_M !== 'undefined') fontes.push(DADOS_VOLEI_M);
+    if (typeof DADOS_VOLEI_F !== 'undefined') fontes.push(DADOS_VOLEI_F);
+    if (typeof DADOS_VNL_M !== 'undefined') fontes.push(DADOS_VNL_M);
+    if (typeof DADOS_VNL_F !== 'undefined') fontes.push(DADOS_VNL_F);
+    if (typeof DADOS_NBA !== 'undefined') fontes.push(DADOS_NBA);
+    var edicoes = Object.create(null); var soma = 0;
+    fontes.forEach(function (arr) {
+      (arr || []).forEach(function (d) {
+        var ano = (d.temporada != null) ? ('t:' + d.temporada) : ('e:' + d.edicao);
+        edicoes[ano] = true;
+        soma += (d.jogadores ? d.jogadores.length : 0);
+      });
+    });
+    if (totJog == null) totJog = soma;
+    if (totEd == null)  totEd = Object.keys(edicoes).length;
+  }
+
+  var textoEdicoes = (totEd === 1) ? '1 edição' : totEd + ' edições';
   if (spanEdicoes)   spanEdicoes.textContent   = textoEdicoes;
-  if (spanJogadores) spanJogadores.textContent = totalJogadores + ' jogadores';
+  if (spanJogadores) spanJogadores.textContent = totJog + ' jogadores';
   // Nº de competições vem de COMPETICOES (fonte da verdade), então nunca defasa ao
   // adicionar uma nova (Premier, Serie A, etc.).
   if (spanComps && typeof COMPETICOES !== 'undefined') {
@@ -292,8 +298,7 @@ function aplicarEsporteVitrine(idEsporte) {
       if (typeof esporteAtual !== 'undefined' && esporteAtual === idEsporte) {
         pintarMapaVitrine(idEsporte);
       }
-      // o rodapé conta jogadores de todos os esportes; recalcula agora que há mais dados
-      if (typeof calcularEstatisticasFooter === 'function') calcularEstatisticasFooter();
+      // rodapé NÃO recalcula: usa o manifesto DADOS_TOTAIS (total fixo/correto no boot).
     }).catch(function () { /* falha de rede: acessos guardados por typeof não quebram */ });
   }
 
