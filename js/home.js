@@ -76,33 +76,33 @@ function voltarHome() {
 }
 
 
-// Conta as edições distintas e o total de jogadores (futebol + vôlei) para o rodapé.
+// Conta as edições distintas e o total de jogadores (todos os esportes) para o rodapé.
 function calcularEstatisticasFooter() {
-  var todos = API.getTodosClubes().slice();
-  // Soma também os atletas de vôlei (Mundial + VNL) e basquete (NBA), que ficam em
-  // arrays próprios de cada esporte.
-  if (typeof DADOS_VOLEI_M !== 'undefined') todos = todos.concat(DADOS_VOLEI_M);
-  if (typeof DADOS_VOLEI_F !== 'undefined') todos = todos.concat(DADOS_VOLEI_F);
-  if (typeof DADOS_VNL_M !== 'undefined') todos = todos.concat(DADOS_VNL_M);
-  if (typeof DADOS_VNL_F !== 'undefined') todos = todos.concat(DADOS_VNL_F);
-  if (typeof DADOS_NBA !== 'undefined') todos = todos.concat(DADOS_NBA);
-  var edicoes = [];
-  todos.forEach(function (d) {
-    // futebol/vôlei usam `edicao`; basquete usa `temporada` — conta os dois sem misturar.
-    var ano = (d.temporada != null) ? ('t:' + d.temporada) : ('e:' + d.edicao);
-    if (edicoes.indexOf(ano) < 0) {
-      edicoes.push(ano);
-    }
-  });
+  // Sem .slice()/.concat(): copiar milhares de itens só para contar é desperdício no boot.
+  // Iteramos cada fonte diretamente, somando num único acumulador.
+  var fontes = [API.getTodosClubes()];
+  if (typeof DADOS_VOLEI_M !== 'undefined') fontes.push(DADOS_VOLEI_M);
+  if (typeof DADOS_VOLEI_F !== 'undefined') fontes.push(DADOS_VOLEI_F);
+  if (typeof DADOS_VNL_M !== 'undefined') fontes.push(DADOS_VNL_M);
+  if (typeof DADOS_VNL_F !== 'undefined') fontes.push(DADOS_VNL_F);
+  if (typeof DADOS_NBA !== 'undefined') fontes.push(DADOS_NBA);
 
-  var totalJogadores = todos.reduce(function (soma, d) {
-    return soma + d.jogadores.length;
-  }, 0);
+  var edicoes = Object.create(null);   // Set-like: chave→true, busca O(1) (antes era
+  var totalJogadores = 0;              // indexOf em array crescente = O(n²) com ~6000 atletas).
+  fontes.forEach(function (arr) {
+    (arr || []).forEach(function (d) {
+      // futebol/vôlei usam `edicao`; basquete usa `temporada` — conta os dois sem misturar.
+      var ano = (d.temporada != null) ? ('t:' + d.temporada) : ('e:' + d.edicao);
+      edicoes[ano] = true;
+      totalJogadores += (d.jogadores ? d.jogadores.length : 0);
+    });
+  });
+  var nEdicoes = Object.keys(edicoes).length;
 
   var spanEdicoes   = document.getElementById('stat-edicoes');
   var spanJogadores = document.getElementById('stat-jogadores');
   var spanComps     = document.getElementById('stat-competicoes');
-  var textoEdicoes  = edicoes.length === 1 ? '1 edição' : edicoes.length + ' edições';
+  var textoEdicoes  = nEdicoes === 1 ? '1 edição' : nEdicoes + ' edições';
   if (spanEdicoes)   spanEdicoes.textContent   = textoEdicoes;
   if (spanJogadores) spanJogadores.textContent = totalJogadores + ' jogadores';
   // Nº de competições vem de COMPETICOES (fonte da verdade), então nunca defasa ao
