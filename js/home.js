@@ -65,9 +65,21 @@ function selecionarFormacaoAmostra(nomeFormacao) {
 }
 
 function jogarAgora() {
-  aplicarTema(modoSelecionado);
-  iniciarTelaJogo();
-  mostrarTela(telaJogo);
+  // LAZY-LOAD: se o usuário clicar em Jogar antes dos dados do esporte terminarem de
+  // carregar, espera aqui (garante que o motor da campanha encontre DADOS_VOLEI/NBA). Para
+  // futebol e dados já carregados, DadosLazy.garantir resolve na hora (sem atraso perceptível).
+  var esporte = (typeof esporteDoModo === 'function') ? esporteDoModo(modoSelecionado) : 'futebol';
+  var pronto = (typeof DadosLazy !== 'undefined') ? DadosLazy.garantir(esporte) : Promise.resolve();
+  pronto.then(function () {
+    aplicarTema(modoSelecionado);
+    iniciarTelaJogo();
+    mostrarTela(telaJogo);
+  }).catch(function () {
+    // falha de rede ao baixar os dados: segue mesmo assim (acessos guardados por typeof)
+    aplicarTema(modoSelecionado);
+    iniciarTelaJogo();
+    mostrarTela(telaJogo);
+  });
 }
 
 function voltarHome() {
@@ -253,6 +265,20 @@ function pintarMapaVitrine(idEsporte) {
 // Aplica um esporte à vitrine + sincroniza o seletor. Chamado no clique do
 // seletor de esporte (não há mais loop automático — o mapa só troca no clique).
 function aplicarEsporteVitrine(idEsporte) {
+  // LAZY-LOAD: garante que os dados do esporte estejam carregados (vôlei/basquete não vêm
+  // no boot). Dispara o download ao selecionar o esporte na vitrine — há tempo de sobra até
+  // o usuário escolher a competição e ir jogar. Futebol já vem no boot (resolve na hora).
+  if (typeof DadosLazy !== 'undefined') {
+    DadosLazy.garantir(idEsporte).then(function () {
+      // recarrega a vitrine do esporte agora que os dados existem (mapa, contadores)
+      if (typeof esporteAtual !== 'undefined' && esporteAtual === idEsporte) {
+        pintarMapaVitrine(idEsporte);
+      }
+      // o rodapé conta jogadores de todos os esportes; recalcula agora que há mais dados
+      if (typeof calcularEstatisticasFooter === 'function') calcularEstatisticasFooter();
+    }).catch(function () { /* falha de rede: acessos guardados por typeof não quebram */ });
+  }
+
   if (typeof esporteAtual !== 'undefined') esporteAtual = idEsporte;
   pintarMapaVitrine(idEsporte);
 

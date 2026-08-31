@@ -1302,13 +1302,12 @@
   <script src="js/dados/futebol/premier.js" defer></script>
   <script src="js/dados/futebol/serie-a.js" defer></script>
   <script src="js/dados/futebol/laliga.js" defer></script>
-  <!-- Vôlei -->
-  <script src="js/dados/volei/mundial-m.js" defer></script>
-  <script src="js/dados/volei/mundial-f.js" defer></script>
-  <script src="js/dados/volei/vnl-m.js" defer></script>
-  <script src="js/dados/volei/vnl-f.js" defer></script>
-  <!-- Agregador -->
+  <!-- Vôlei e basquete: carregados SOB DEMANDA por js/dados-lazy.js (não no boot),
+       para não pesar ~682 KB no carregamento inicial de quem só joga futebol. -->
+  <!-- Agregador (só futebol) -->
   <script src="js/dados/dados.js" defer></script>
+  <!-- Carregador sob demanda de vôlei/basquete -->
+  <script src="js/dados-lazy.js" defer></script>
 
   <!-- Socket.IO — servido pelo backend via nginx proxy.
        async (não defer): o backend no Render (free) hiberna, e como scripts defer
@@ -1345,7 +1344,7 @@
   <script src="js/simulacao-basquete.js" defer></script>
   <script src="js/animacao-basquete.js"  defer></script>
   <script src="js/campanha-basquete.js"  defer></script>
-  <script src="js/dados/basquete/nba.js" defer></script>
+  <!-- js/dados/basquete/nba.js agora carrega SOB DEMANDA (js/dados-lazy.js) -->
   <script src="js/campanha.js"    defer></script>
   <script src="js/brasileirao.js" defer></script>
   <script src="js/resumo.js"      defer></script>

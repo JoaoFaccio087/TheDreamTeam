@@ -39,6 +39,12 @@ const API = {
     return API._porCompCache[comp] || [];
   },
 
+  // Invalida o universo cacheado — chamado quando dados de um esporte são carregados sob
+  // demanda (DadosLazy), para que a próxima leitura reconstrua o índice já com o novo esporte.
+  _universoCache: null,
+  _porCompCache: null,
+  _invalidarUniverso: function () { API._universoCache = null; API._porCompCache = null; },
+
   getClubesDoModo: function (modoId) {
     var cfg = COMPETICOES[modoId];
     return cfg ? API.getClubesPorCompeticao(cfg.dados) : [];
