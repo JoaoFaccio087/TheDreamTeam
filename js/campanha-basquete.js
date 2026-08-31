@@ -129,6 +129,7 @@
     var tabela = [eu].concat(pool.map(function (t) {
       return {
         nome: t.clube + ' ' + t.temporada,   // mostra o ANO (mistura de edições visível)
+        clube: t.clube, temporada: t.temporada,   // separados: a tabela exibe o ano entre ()
         voce: false, forca: forcaDe(t), clubeRef: t, confId: null,
         pts: 0, j: 0, v: 0, d: 0, pf: 0, pa: 0
       };

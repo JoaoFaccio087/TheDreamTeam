@@ -565,7 +565,33 @@ function criarCardPartidaBasquete(id, adversario, fase) {
 // em colunas por fase. Cada confronto é um par de times; destaca você e os vencedores.
 // Lê camp.playoff.bracketConf (preenchido pelo motor). Recria a cada avanço de fase.
 function mostrarBracketPlayoffs(camp) {
-  if (!camp.playoff || !camp.playoff.bracketConf) return;
+  // Sem playoff ainda (você não chegou lá): mostra um AVISO em vez de deixar a aba vazia —
+  // igual ao aviso da aba Mata-a-Mata do vôlei.
+  if (!camp || !camp.playoff || !camp.playoff.bracketConf) {
+    var painelVazio = document.getElementById('chave-copa');
+    if (painelVazio) {
+      // Se a temporada regular já acabou e você não classificou, avisa que foi eliminado.
+      var acabouRegular = camp && camp.rodadaAtual >= (camp.calendario ? camp.calendario.length : 0);
+      var classificou = camp && (typeof CampanhaBasquete !== 'undefined') &&
+                         CampanhaBasquete.voceClassificouLigaNBA && CampanhaBasquete.voceClassificouLigaNBA(camp);
+      if (acabouRegular && !classificou) {
+        painelVazio.innerHTML =
+          '<div class="mata-bloqueada">' +
+            '<div class="mata-bloqueada-icone">✕</div>' +
+            '<p class="mata-bloqueada-titulo">Você não avançou aos playoffs</p>' +
+            '<p class="mata-bloqueada-sub">Terminou a temporada regular fora do top 8 da conferência. Confira a classificação na aba anterior.</p>' +
+          '</div>';
+      } else {
+        painelVazio.innerHTML =
+          '<div class="mata-bloqueada">' +
+            '<div class="mata-bloqueada-icone">🔒</div>' +
+            '<p class="mata-bloqueada-titulo">Playoffs ainda não liberados</p>' +
+            '<p class="mata-bloqueada-sub">Termine a temporada regular no top 8 da sua conferência para disputar os playoffs.</p>' +
+          '</div>';
+      }
+    }
+    return;
+  }
   var po = camp.playoff;
 
   function nomeT(t) {
@@ -674,11 +700,20 @@ function mostrarClassificacaoConf(camp) {
       var saldo = (t.pf - t.pa >= 0 ? '+' : '') + (t.pf - t.pa);
       var classe = (t.voce ? 'grupo-voce' : '') + (i < classificam ? ' grupo-classifica' : '');
       var nome = t.voce ? nomeDoTime : t.nome;
+      // Clube + ano separados: o ano fica entre parênteses numa fonte menor/apagada, para o
+      // nome não ficar tão longo e a tabela não ficar apertada (feedback do João).
+      var nomeHTML;
+      if (!t.voce && t.clube && t.temporada) {
+        nomeHTML = '<span class="grupo-nome">' + t.clube +
+                   ' <span class="grupo-ano">(' + t.temporada + ')</span></span>';
+      } else {
+        nomeHTML = '<span class="grupo-nome">' + nome + '</span>';
+      }
       var esc = (typeof Escudos !== 'undefined' && Escudos.porTime) ? (Escudos.porTime(t, modoSelecionado) || '') : '';
       var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
       return '<tr class="' + classe + '">' +
                '<td class="grupo-pos">' + (i + 1) + '</td>' +
-               '<td class="grupo-time">' + escHTML + '<span class="grupo-nome">' + nome + '</span></td>' +
+               '<td class="grupo-time">' + escHTML + nomeHTML + '</td>' +
                '<td class="grupo-num">' + t.j + '</td>' +
                '<td class="grupo-num">' + t.v + '</td>' +
                '<td class="grupo-num">' + t.d + '</td>' +
@@ -749,7 +784,9 @@ function selecionarAbaBasquete(qual) {
   if (tabChave)   tabChave.classList.toggle('sim-tab-ativa', mostraChave);
 
   if (mostraClass && campanhaBasqueteAtual) mostrarClassificacaoConf(campanhaBasqueteAtual);
-  if (mostraChave && campanhaBasqueteAtual && campanhaBasqueteAtual.playoff) mostrarBracketPlayoffs(campanhaBasqueteAtual);
+  // Sempre chama (mesmo sem playoff): a função mostra o AVISO de bloqueio/eliminação quando
+  // ainda não há chave, em vez de deixar a aba vazia.
+  if (mostraChave && campanhaBasqueteAtual) mostrarBracketPlayoffs(campanhaBasqueteAtual);
 
   // Amplia a largura da tela na aba de classificação (2 conferências lado a lado).
   var telaSim = document.getElementById('tela-simulacao');

@@ -1013,3 +1013,15 @@ td.grupo-time { text-align: left; }
 .mata-perdeu { opacity: 0.7; }
 .mata-atual { border-color: var(--ouro); justify-content: center; color: var(--ouro); }
 .mata-futuro { opacity: 0.5; justify-content: center; }
+
+/* Ano do time (basquete) entre parênteses — fonte menor e apagada, separada do nome do clube */
+.grupo-ano {
+  font-size: 0.78em;
+  color: var(--txt-dim, #8b95a1);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+/* Classificação do basquete (2 conferências): mais respiro nas linhas para não ficar apertado */
+.nba-classif-painel .grupo-nome { line-height: 1.25; }
+.nba-classif-painel .fl-tabela td { padding-top: 9px; padding-bottom: 9px; }
+.nba-classif-painel .grupo-time { min-width: 0; }
