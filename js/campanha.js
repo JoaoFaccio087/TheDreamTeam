@@ -1131,7 +1131,6 @@ function iniciarPartidaVolei() {
   var advs = CampanhaVolei.adversariosDoSeuGrupo(camp);
   var idx  = camp.jogosGrupoFeitos;
   if (idx >= advs.length) {
-    console.log('[volei] fase de grupos concluída (mata-mata vem na fatia seguinte)');
     return;
   }
   var adversarioTime = advs[idx];
@@ -1349,7 +1348,6 @@ function iniciarPartidaVNL() {
   var camp = campanhaVoleiAtual;
   var adversarioTime = CampanhaVolei.adversarioVNLRodada(camp);
   if (!adversarioTime) {
-    console.log('[vnl] fase preliminar concluída');
     return;
   }
   var adversario = adversarioTime.clubeRef;
