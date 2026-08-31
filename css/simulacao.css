@@ -931,14 +931,85 @@ td.grupo-time { text-align: left; }
 .partida-card:not(.expandido) .bkt-wrap { display: none; }
 
 /* ── NBA: painel de classificação (aba Classificação) com as 2 conferências ── */
+/* Na aba de Classificação do basquete, o painel usa a largura toda (2 conferências
+   lado a lado precisam de espaço — senão ficam espremidas). */
+.nba-classif-painel:not(.escondida) { width: 100%; }
+.tela-simulacao.nba-classif-ampla .sim-wrapper { max-width: 1280px; }
+
 .nba-classif-painel { padding: 4px 0; }
 .nba-classif-legenda {
   font-size: var(--fs-sm, 0.8rem); color: var(--txt-soft, #9aa6b2);
-  margin: 0 0 10px; text-align: center;
+  margin: 0 0 14px; text-align: center;
 }
 .nba-classif-grid {
-  display: grid; grid-template-columns: 1fr; gap: 16px;
+  display: grid; grid-template-columns: 1fr; gap: 22px;
 }
 @media (min-width: 720px) {
-  .nba-classif-grid { grid-template-columns: 1fr 1fr; }
+  .nba-classif-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
 }
+/* Tabelas de classificação da NBA: mais respiro, cabeçalho claro, números alinhados */
+.nba-classif-grid .grupo-tabela { margin-top: 0; }
+.nba-classif-grid .grupo-tabela-titulo {
+  font-family: 'Archivo Black', sans-serif; font-size: 0.82rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--accent, #2BD46A);
+  margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--linha, rgba(255,255,255,0.08));
+}
+.nba-classif-grid .fl-tabela { width: 100%; border-collapse: collapse; }
+.nba-classif-grid .fl-tabela thead th {
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--txt-soft, #8b95a1); font-weight: 600;
+  padding: 6px 8px; text-align: center; border-bottom: 1px solid var(--linha, rgba(255,255,255,0.06));
+}
+.nba-classif-grid .fl-tabela thead th:nth-child(2) { text-align: left; }
+.nba-classif-grid .fl-tabela td {
+  padding: 9px 8px; font-size: 0.86rem; text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nba-classif-grid .fl-tabela .grupo-pos { width: 26px; color: var(--txt-soft, #8b95a1); font-variant-numeric: tabular-nums; }
+.nba-classif-grid .fl-tabela .grupo-time { text-align: left; white-space: nowrap; }
+.nba-classif-grid .fl-tabela .grupo-num { font-variant-numeric: tabular-nums; }
+.nba-classif-grid .grupo-escudo { display: inline-flex; vertical-align: middle; margin-right: 7px; }
+.nba-classif-grid .grupo-escudo svg { width: 18px; height: 18px; }
+.nba-classif-grid .grupo-nome { vertical-align: middle; }
+/* linha do seu time em destaque */
+.nba-classif-grid tr.grupo-voce td { background: rgba(43,212,106,0.10); }
+.nba-classif-grid tr.grupo-voce .grupo-nome { color: var(--accent, #2BD46A); font-weight: 700; }
+/* faixa dos classificados aos playoffs */
+.nba-classif-grid tr.grupo-classifica .grupo-pos { color: var(--accent, #2BD46A); font-weight: 700; }
+
+/* ── Aba Mata-a-Mata do vôlei: aviso de bloqueio + bracket ── */
+.mata-bloqueada {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--txt-soft);
+}
+.mata-bloqueada-icone { font-size: 2.4rem; margin-bottom: 12px; opacity: 0.8; }
+.mata-bloqueada-titulo {
+  font-size: 1.05rem; font-weight: 700; color: var(--txt); margin: 0 0 6px;
+}
+.mata-bloqueada-sub { font-size: 0.88rem; margin: 0; max-width: 360px; margin-inline: auto; }
+
+.mata-volei {
+  display: flex; gap: 16px; padding: 16px; overflow-x: auto; justify-content: center;
+}
+.mata-fase-col { min-width: 200px; display: flex; flex-direction: column; gap: 10px; }
+.mata-fase-titulo {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--txt-soft); text-align: center; padding-bottom: 6px;
+  border-bottom: 1px solid var(--linha);
+}
+.mata-jogo {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
+  padding: 10px 12px; border-radius: 8px;
+  background: var(--elev-1); border: 1px solid var(--linha);
+  font-size: 0.82rem;
+}
+.mata-jogo-time { color: var(--txt); }
+.mata-jogo-time:last-child { text-align: right; }
+.mata-jogo-placar {
+  font-family: 'Archivo Black', sans-serif; color: var(--ouro); font-size: 0.9rem;
+}
+.mata-venceu { border-color: var(--accent); }
+.mata-perdeu { opacity: 0.7; }
+.mata-atual { border-color: var(--ouro); justify-content: center; color: var(--ouro); }
+.mata-futuro { opacity: 0.5; justify-content: center; }

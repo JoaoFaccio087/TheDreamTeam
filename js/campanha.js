@@ -1159,6 +1159,7 @@ function iniciarPartidaVolei() {
     campanhaVoleiAtual = CampanhaVolei.montarCampanhaVolei(selecoes, voceMonta, forcaSelecaoVolei);
     campanhaVoleiAtual.edicaoAno = ano;
     campanhaVoleiAtual.jogosGrupoFeitos = 0;
+    prepararAbasVolei();
   }
 
   var camp = campanhaVoleiAtual;
@@ -1667,7 +1668,130 @@ function iniciarPartidaMataVolei() {
 
 // Mostra a tabela de classificação do grupo de vôlei (o "grupinho"), no mesmo lugar
 // dos cards de partida. Destaca você e os classificados ao mata-mata.
-function mostrarTabelaGrupoVolei(camp) {
+// ─────────────────── ABAS DO VÔLEI (Simulação / Classificação / Mata-a-Mata) ───────────────────
+// Reaproveita as sim-tabs compartilhadas (mesma estrutura do basquete). A aba Mata-a-Mata é
+// SEMPRE acessível, mas só mostra confrontos quando você chega ao mata (ou cai antes); enquanto
+// está nos grupos, exibe um AVISO de que ainda não foi liberada (como o futebol).
+function prepararAbasVolei() {
+  var simTabs = document.getElementById('sim-tabs');
+  var tabClassif = document.getElementById('sim-tab-classif');
+  var tabChave = document.getElementById('sim-tab-chave');
+  if (simTabs) simTabs.classList.remove('escondida');
+  if (tabClassif) tabClassif.classList.remove('escondida');
+  if (tabChave) tabChave.textContent = 'Mata-a-Mata';
+
+  // Painel de classificação do grupo (dentro de sim-painel-jogos), criado uma vez.
+  var painelJogos = document.getElementById('sim-painel-jogos');
+  if (painelJogos && !document.getElementById('volei-classif-painel')) {
+    var d = document.createElement('div');
+    d.id = 'volei-classif-painel';
+    d.className = 'volei-classif-painel escondida';
+    d.innerHTML = '<div id="volei-classificacao"></div>';
+    painelJogos.appendChild(d);
+  }
+  // liga os cliques das abas para o roteador do vôlei
+  var tabJogos = document.getElementById('sim-tab-jogos');
+  if (tabJogos)   tabJogos.onclick   = function () { selecionarAbaVolei('jogos'); };
+  if (tabClassif) tabClassif.onclick = function () { selecionarAbaVolei('classif'); };
+  if (tabChave)   tabChave.onclick   = function () { selecionarAbaVolei('chave'); };
+
+  selecionarAbaVolei('jogos');
+}
+
+function selecionarAbaVolei(qual) {
+  var histJogos   = document.getElementById('historico-jogos');
+  var painelClass = document.getElementById('volei-classif-painel');
+  var painelChave = document.getElementById('chave-copa');
+  var tabJogos    = document.getElementById('sim-tab-jogos');
+  var tabClassif  = document.getElementById('sim-tab-classif');
+  var tabChave    = document.getElementById('sim-tab-chave');
+  var tabelaBras  = document.getElementById('tabela-brasileirao');
+  if (tabelaBras) tabelaBras.classList.add('escondida');
+
+  var mostraJogos = (qual === 'jogos');
+  var mostraClass = (qual === 'classif');
+  var mostraChave = (qual === 'chave');
+
+  if (histJogos)   histJogos.classList.toggle('escondida', !mostraJogos);
+  if (painelClass) painelClass.classList.toggle('escondida', !mostraClass);
+  if (painelChave) painelChave.classList.toggle('escondida', !mostraChave);
+
+  if (tabJogos)   tabJogos.classList.toggle('sim-tab-ativa', mostraJogos);
+  if (tabClassif) tabClassif.classList.toggle('sim-tab-ativa', mostraClass);
+  if (tabChave)   tabChave.classList.toggle('sim-tab-ativa', mostraChave);
+
+  if (mostraClass && campanhaVoleiAtual) renderClassificacaoVoleiAba(campanhaVoleiAtual);
+  if (mostraChave) renderMataVolei(campanhaVoleiAtual);
+}
+
+// Renderiza a classificação do grupo na aba (reusa mostrarTabelaGrupoVolei, que já popula
+// o painel do grupo — aqui garantimos que o alvo é o painel da aba).
+function renderClassificacaoVoleiAba(camp) {
+  var alvo = document.getElementById('volei-classificacao');
+  if (!alvo || !camp) return;
+  alvo.innerHTML = montarTabelaGrupoVoleiHTML(camp);
+}
+
+// Aba Mata-a-Mata do vôlei: aviso enquanto nos grupos; confrontos quando chega (ou caiu antes).
+function renderMataVolei(camp) {
+  var alvo = document.getElementById('chave-copa');
+  if (!alvo) return;
+
+  // Ainda não há mata montado E você ainda não foi eliminado nos grupos → aviso de bloqueio.
+  var temMata = camp && camp.mata;
+  var caiuNosGrupos = camp && !temMata && (typeof CampanhaVolei !== 'undefined') &&
+                      camp.jogosGrupoFeitos >= (CampanhaVolei.adversariosDoSeuGrupo(camp) || []).length &&
+                      !CampanhaVolei.voceClassificou(camp);
+
+  if (!temMata && !caiuNosGrupos) {
+    alvo.innerHTML =
+      '<div class="mata-bloqueada">' +
+        '<div class="mata-bloqueada-icone">🔒</div>' +
+        '<p class="mata-bloqueada-titulo">Mata-a-Mata ainda não liberado</p>' +
+        '<p class="mata-bloqueada-sub">Termine a fase de grupos e classifique-se para ver os confrontos aqui.</p>' +
+      '</div>';
+    return;
+  }
+
+  if (!temMata && caiuNosGrupos) {
+    alvo.innerHTML =
+      '<div class="mata-bloqueada">' +
+        '<div class="mata-bloqueada-icone">✕</div>' +
+        '<p class="mata-bloqueada-titulo">Você não avançou ao mata-a-mata</p>' +
+        '<p class="mata-bloqueada-sub">Foi eliminado na fase de grupos. Confira a classificação na aba anterior.</p>' +
+      '</div>';
+    return;
+  }
+
+  // Tem mata: mostra os confrontos por fase + seus resultados (do histórico).
+  var m = camp.mata;
+  var html = '<div class="mata-volei">';
+  (m.fases || []).forEach(function (fase, idx) {
+    var reg = (m.historico || []).filter(function (h) { return h.faseIdx === idx || h.fase === fase.nome; });
+    html += '<div class="mata-fase-col">';
+    html += '<div class="mata-fase-titulo">' + fase.nome + '</div>';
+    if (reg.length) {
+      reg.forEach(function (h) {
+        var venc = h.venceu;
+        html += '<div class="mata-jogo' + (venc ? ' mata-venceu' : ' mata-perdeu') + '">' +
+                  '<span class="mata-jogo-time">' + nomeDoTime + '</span>' +
+                  '<span class="mata-jogo-placar">' + h.setsVoce + ' – ' + h.setsAdv + '</span>' +
+                  '<span class="mata-jogo-time">' + (h.adversario || '—') + '</span>' +
+                '</div>';
+      });
+    } else if (idx === (m.faseIdx | 0)) {
+      html += '<div class="mata-jogo mata-atual"><span class="mata-jogo-time">Em disputa…</span></div>';
+    } else {
+      html += '<div class="mata-jogo mata-futuro"><span class="mata-jogo-time">A definir</span></div>';
+    }
+    html += '</div>';
+  });
+  html += '</div>';
+  alvo.innerHTML = html;
+}
+
+// Gera o HTML da tabela de classificação do grupo (reutilizável: card e aba de classificação).
+function montarTabelaGrupoVoleiHTML(camp) {
   var cls = CampanhaVolei.classificacaoGrupo(camp);
   var avancam = camp.avancamPorGrupo | 0;
   var nomeGrupo = 'Grupo ' + String.fromCharCode(65 + camp.seuGrupo);
@@ -1677,8 +1801,6 @@ function mostrarTabelaGrupoVolei(camp) {
     var saldo = (l.sp - l.sc >= 0 ? '+' : '') + (l.sp - l.sc);
     var classe = (t.voce ? 'grupo-voce' : '') + (i < avancam ? ' grupo-classifica' : '');
     var nome = t.voce ? nomeDoTime : t.nome;
-    // Escudo: usa porTime, que resolve o SEU escudo (t.voce → doUsuario) e o dos
-    // adversários (clubeRef). Antes só gerava p/ quem tinha clubeRef → seu time ficava sem.
     var esc = (typeof Escudos !== 'undefined' && Escudos.porTime)
       ? (Escudos.porTime(t, modoSelecionado) || '') : '';
     var escHTML = esc ? '<span class="grupo-escudo">' + esc + '</span>' : '';
@@ -1692,8 +1814,7 @@ function mostrarTabelaGrupoVolei(camp) {
            '</tr>';
   }).join('');
 
-  var tabelaHTML =
-    '<div class="grupo-tabela">' +
+  return '<div class="grupo-tabela">' +
       '<p class="grupo-tabela-titulo">' + nomeGrupo + ' \u00B7 Classifica\u00E7\u00E3o final</p>' +
       '<table class="fl-tabela">' +
         '<thead><tr><th></th><th>Sele\u00E7\u00E3o</th><th>V</th><th>D</th><th>SS</th><th>Pts</th></tr></thead>' +
@@ -1701,6 +1822,10 @@ function mostrarTabelaGrupoVolei(camp) {
       '</table>' +
       '<p class="fl-legenda">Top ' + avancam + ' avan\u00E7am ao mata-mata</p>' +
     '</div>';
+}
+
+function mostrarTabelaGrupoVolei(camp) {
+  var tabelaHTML = montarTabelaGrupoVoleiHTML(camp);
 
   // Insere a tabela DENTRO do corpo do card da última partida (igual ao futebol),
   // para ficar integrada ao card expansivo — não como um bloco solto no topo.
@@ -1715,6 +1840,9 @@ function mostrarTabelaGrupoVolei(camp) {
     var hist = document.getElementById('historico-jogos');
     if (hist) { var w = document.createElement('div'); w.innerHTML = tabelaHTML; hist.appendChild(w.firstChild); }
   }
+  // atualiza também a aba de classificação, se já existir
+  var alvoAba = document.getElementById('volei-classificacao');
+  if (alvoAba) alvoAba.innerHTML = tabelaHTML;
 }
 
 // Mostra a tabela da FASE PRELIMINAR da VNL (liga única). Espelha mostrarTabelaGrupoVolei,

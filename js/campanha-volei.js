@@ -376,7 +376,11 @@
     var m = camp.mata;
     var venceu = setsVoce > setsAdv;
     var faseNome = m.fases[m.faseIdx] ? m.fases[m.faseIdx].nome : 'MATA';
-    m.historico.push({ fase: faseNome, setsVoce: setsVoce, setsAdv: setsAdv, venceu: venceu });
+    // guarda também o nome do adversário e o índice da fase (a aba Mata-a-Mata usa para exibir)
+    var advAtual = seuAdversarioMata(camp);
+    var advNome = advAtual ? (advAtual.nome || (advAtual.clubeRef && advAtual.clubeRef.clube) || '—') : '—';
+    m.historico.push({ fase: faseNome, faseIdx: m.faseIdx, adversario: advNome,
+                       setsVoce: setsVoce, setsAdv: setsAdv, venceu: venceu });
 
     // Vencedores da fase: o seu (se venceu) + os dos outros confrontos (por força+sorte).
     var vencedores = [];
