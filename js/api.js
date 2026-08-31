@@ -184,6 +184,9 @@ Object.assign(API, {
       localStorage.setItem('dreamteam_historico', JSON.stringify(hist));
     } catch (e) { /* silent */ }
 
+    // Nova partida → o histórico mudou: invalida o cache curto para o perfil refletir na hora.
+    API._invalidarHistorico();
+
     if (!_temLoginReal()) {
       return Promise.resolve({ ok: true, local: true });
     }
@@ -203,11 +206,20 @@ Object.assign(API, {
     if (!_temLoginReal()) {
       return Promise.resolve(locais);
     }
+    // Cache curto (in-flight + resultado): ao abrir o perfil, getHistorico é chamado em
+    // vários blocos (barras/mapa, histórico em destaque, modal). Sem cache, cada um dispara
+    // um GET /matches idêntico — 3+ requisições para o mesmo dado, deixando o perfil lento.
+    // Guarda a Promise em voo (chamadas simultâneas compartilham) e o resultado por alguns
+    // segundos. Invalidado ao salvar uma partida (ver salvarPartida) para não servir dado velho.
+    var agora = Date.now();
+    if (API._histCachePromise && (agora - API._histCacheEm) < API._HIST_CACHE_MS) {
+      return API._histCachePromise;
+    }
     // Logado: junta o histórico do backend com as partidas offline (conjuntos
     // distintos, sem duplicação) e ordena por data (mais recentes primeiro).
-    return _req('GET', '/matches').then(function (remotas) {
+    var p = _req('GET', '/matches').then(function (remotas) {
       remotas = Array.isArray(remotas) ? remotas : [];
-      var tudo = remotas.concat(locais);
+      var tudo = remotas.concat(API._historicoLocal());
       tudo.sort(function (a, b) {
         var ta = a && a.played_at ? new Date(a.played_at).getTime() : 0;
         var tb = b && b.played_at ? new Date(b.played_at).getTime() : 0;
@@ -215,9 +227,21 @@ Object.assign(API, {
       });
       return tudo;
     }).catch(function () {
-      // Backend indisponível: ao menos mostra o que está salvo localmente.
-      return locais;
+      // Backend indisponível: ao menos mostra o que está salvo localmente, e não cacheia o erro.
+      API._histCachePromise = null;
+      return API._historicoLocal();
     });
+    API._histCachePromise = p;
+    API._histCacheEm = agora;
+    return p;
+  },
+  _histCachePromise: null,
+  _histCacheEm: 0,
+  _HIST_CACHE_MS: 8000,   // 8s: cobre a abertura do perfil sem servir dado velho por muito tempo
+  // Invalida o cache do histórico (chamado ao salvar uma partida, para o perfil refletir na hora).
+  _invalidarHistorico: function () {
+    API._histCachePromise = null; API._histCacheEm = 0;
+    API._achCachePromise = null; API._achCacheEm = 0;   // conquistas também mudam ao salvar
   },
   getRanking: function () {
     return _req('GET', '/ranking');
@@ -226,12 +250,23 @@ Object.assign(API, {
   // Conquistas desbloqueadas do usuário (só logado; convidado não tem persistência).
   getAchievements: function () {
     if (!_temLoginReal()) return Promise.resolve([]);
-    return _req('GET', '/matches/achievements')
+    // Mesmo padrão do getHistorico: o perfil chama isto em vários blocos (conquistas em
+    // destaque, KPIs, modal). Cache curto evita GETs /matches/achievements duplicados.
+    var agora = Date.now();
+    if (API._achCachePromise && (agora - API._achCacheEm) < API._HIST_CACHE_MS) {
+      return API._achCachePromise;
+    }
+    var p = _req('GET', '/matches/achievements')
       .then(function (arr) { return Array.isArray(arr) ? arr : []; })
       // Falha aqui NÃO é "zero conquistas" — é "não sei". Devolve null para a tela
       // poder dizer a verdade em vez de desenhar 0/76 com o token vencido.
-      .catch(function (e) { if (e && e.sessaoExpirada) throw e; return null; });
+      .catch(function (e) { API._achCachePromise = null; if (e && e.sessaoExpirada) throw e; return null; });
+    API._achCachePromise = p;
+    API._achCacheEm = agora;
+    return p;
   },
+  _achCachePromise: null,
+  _achCacheEm: 0,
 
   // Estatísticas agregadas no servidor (somas em SQL + time mais escalado). Payload pequeno e
   // constante, independente do número de campanhas. Devolve null p/ convidado ou se a rota falhar
