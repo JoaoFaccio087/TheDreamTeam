@@ -330,10 +330,14 @@
       });
       LISTA_CONQUISTAS.forEach(function (c) { c.desbloqueada = !!setDesb[c.id]; });
 
-      // filtra pelo esporte (se informado); senão, todas
+      // filtra pelo esporte (se informado); senão, todas. As conquistas GERAIS de
+      // progressão (veterano, primeira vitória, etc.) valem para qualquer esporte, então
+      // aparecem em todos os filtros — não somem ao trocar para vôlei/basquete.
       var universo = LISTA_CONQUISTAS;
       if (esporteFiltro) {
-        universo = LISTA_CONQUISTAS.filter(function (c) { return esporteDaConquista(c) === esporteFiltro; });
+        universo = LISTA_CONQUISTAS.filter(function (c) {
+          return esporteDaConquista(c) === esporteFiltro || !!CONQUISTAS_GERAIS[c.id];
+        });
       }
 
       // ordena: desbloqueadas primeiro, e dentro de cada grupo por raridade desc
