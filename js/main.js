@@ -149,21 +149,26 @@ if (btnVoltarMobile) btnVoltarMobile.addEventListener('click', voltarHome);
 var simTabJogos = document.getElementById('sim-tab-jogos');
 var simTabClassif = document.getElementById('sim-tab-classif');
 var simTabChave = document.getElementById('sim-tab-chave');
-// As abas servem tanto ao modo Copa (jogos/chave) quanto ao Basquete (jogos/classif/playoff).
-// No basquete usamos selecionarAbaBasquete; caso contrário, selecionarAbaSim.
+// As abas (jogos/classif/chave) são COMPARTILHADAS entre Copa (jogos/chave), Basquete e Vôlei.
+// Um ÚNICO roteador decide para qual esporte encaminhar, pelo esporte ativo na tela — antes o
+// vôlei ligava .onclick por cima disto, e jogar vôlei→basquete sem reload disparava a lógica
+// errada (bug da auditoria). Agora o vôlei entra aqui também.
 function ehBasqueteNaTela() {
   return (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado) &&
          typeof campanhaBasqueteAtual !== 'undefined' && campanhaBasqueteAtual;
 }
-if (simTabJogos) simTabJogos.addEventListener('click', function () {
-  if (ehBasqueteNaTela()) selecionarAbaBasquete('jogos'); else selecionarAbaSim('jogos');
-});
-if (simTabClassif) simTabClassif.addEventListener('click', function () {
-  if (ehBasqueteNaTela()) selecionarAbaBasquete('classif');
-});
-if (simTabChave) simTabChave.addEventListener('click', function () {
-  if (ehBasqueteNaTela()) selecionarAbaBasquete('chave'); else selecionarAbaSim('chave');
-});
+function ehVoleiNaTela() {
+  return (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado) &&
+         typeof campanhaVoleiAtual !== 'undefined' && campanhaVoleiAtual;
+}
+function rotearAba(qual) {
+  if (ehBasqueteNaTela() && typeof selecionarAbaBasquete === 'function') return selecionarAbaBasquete(qual);
+  if (ehVoleiNaTela() && typeof selecionarAbaVolei === 'function') return selecionarAbaVolei(qual);
+  if (typeof selecionarAbaSim === 'function') return selecionarAbaSim(qual);
+}
+if (simTabJogos)   simTabJogos.addEventListener('click', function () { rotearAba('jogos'); });
+if (simTabClassif) simTabClassif.addEventListener('click', function () { rotearAba('classif'); });
+if (simTabChave)   simTabChave.addEventListener('click', function () { rotearAba('chave'); });
 
 pilulasFormacaoJogo.forEach(function (pilula) {
   pilula.addEventListener('click', function () {

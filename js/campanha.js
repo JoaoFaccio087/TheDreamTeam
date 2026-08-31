@@ -455,7 +455,7 @@ function cancelarAnimacaoEmCurso() {
 function forcaTimeBasquete(t) {
   if (!t || !t.jogadores || !t.jogadores.length) return 80;
   var s = 0;
-  for (var i = 0; i < t.jogadores.length; i++) s += t.jogadores[i].forca;
+  for (var i = 0; i < t.jogadores.length; i++) s += (+t.jogadores[i].forca || 0);
   return s / t.jogadores.length;
 }
 
@@ -1126,7 +1126,7 @@ function salvarCampanhaBasquete(camp, resultadoPlayoff) {
 function forcaSelecaoVolei(sel) {
   if (!sel || !sel.jogadores || !sel.jogadores.length) return 80;
   var s = 0;
-  for (var i = 0; i < sel.jogadores.length; i++) s += sel.jogadores[i].forca;
+  for (var i = 0; i < sel.jogadores.length; i++) s += (+sel.jogadores[i].forca || 0);
   return s / sel.jogadores.length;
 }
 
@@ -1727,11 +1727,9 @@ function prepararAbasVolei() {
     painelJogos.appendChild(d);
   }
   // liga os cliques das abas para o roteador do vôlei
-  var tabJogos = document.getElementById('sim-tab-jogos');
-  if (tabJogos)   tabJogos.onclick   = function () { selecionarAbaVolei('jogos'); };
-  if (tabClassif) tabClassif.onclick = function () { selecionarAbaVolei('classif'); };
-  if (tabChave)   tabChave.onclick   = function () { selecionarAbaVolei('chave'); };
-
+  // NOTA: o roteamento de cliques das sim-tabs é UNIFICADO em main.js (rotearAba), que
+  // detecta o esporte ativo e chama selecionarAbaVolei/Basquete/Sim. NÃO ligamos .onclick
+  // aqui — fazer isso sobrescrevia o roteador e causava o conflito vôlei×basquete.
   selecionarAbaVolei('jogos');
 }
 
