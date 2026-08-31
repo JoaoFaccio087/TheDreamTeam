@@ -774,6 +774,9 @@ function iniciarPartidaBasquete() {
     campanhaBasqueteAtual = CampanhaBasquete.montarLigaNBA(todos, voceMonta, forcaTimeBasquete, tamNBA);
     prepararAbasBasquete();
     mostrarClassificacaoConf(campanhaBasqueteAtual);
+    // Estado inicial do botão "Pular tudo" (limpa escopo de playoffs de campanha anterior).
+    var bpIni = document.getElementById('btn-pular-tudo');
+    if (bpIni) { bpIni.textContent = 'Pular tudo'; delete bpIni.dataset.escopo; bpIni.classList.remove('escondida'); }
   }
 
   var camp = campanhaBasqueteAtual;
@@ -923,12 +926,30 @@ function pularTudoBasquete(soTemporada) {
   if (!camp.liga) return;   // só o novo formato de liga
 
   // 1) Simula (rápido, sem animar) todas as rodadas restantes da temporada regular.
+  //    Para CADA jogo SEU, gera um card já preenchido (histórico) — antes o pular só
+  //    atualizava a tabela e nenhum card aparecia dos jogos pulados.
   while (camp.rodadaAtual < camp.calendario.length) {
     var conf = CampanhaBasquete.seuConfrontoNaRodada(camp, camp.rodadaAtual);
     if (conf) {
-      var adv = camp.tabela[conf.advIdx];
-      var p = placarBastidoresBasquete(camp.tabela[0], adv);
-      CampanhaBasquete.registrarResultadoNBA(camp.tabela[0], adv, p.a, p.b);
+      var advRegistroP = camp.tabela[conf.advIdx];
+      var adversarioP = advRegistroP.clubeRef;
+      var meuTimeP = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+      var advTimeP = { nome: adversarioP.clube, jogadores: adversarioP.jogadores };
+      var roteiroP = AnimacaoBasquete.prepararPartida(meuTimeP, advTimeP);
+      acumularStatsBasquete(roteiroP, roteiroP.pontosA, roteiroP.pontosB);
+
+      var rodadaNumP = camp.rodadaAtual + 1;
+      var faseLabelP = 'Rodada ' + rodadaNumP + '/' + camp.calendario.length + ' \u00B7 NBA';
+      var idCardP = partidaIdBasquete + 1;
+      partidaIdBasquete = idCardP;
+      var cardP = criarCardPartidaBasquete(idCardP, adversarioP, faseLabelP, adversarioP.clube + ' ' + adversarioP.temporada);
+      // preenche o card com o resultado final, sem ticks (modo pular)
+      AnimacaoBasquete.animar({
+        elCard: cardP, roteiro: roteiroP,
+        velocidade: function () { return velocidadeSimulacao; },
+        pular: true
+      });
+      CampanhaBasquete.registrarResultadoNBA(camp.tabela[0], advRegistroP, roteiroP.pontosA, roteiroP.pontosB);
     }
     CampanhaBasquete.resolverDemaisJogosNBA(camp, camp.rodadaAtual, placarBastidoresBasquete);
     camp.rodadaAtual++;
@@ -947,7 +968,13 @@ function pularTudoBasquete(soTemporada) {
       mostrarBracketPlayoffs(camp);
       selecionarAbaBasquete('classif');   // mostra a classificação final
       if (btn) { btn.innerHTML = 'Iniciar Mata-a-Mata \u25BA'; acaoBotao = 'playoffs-nba'; btn.disabled = false; }
-      if (bp) bp.classList.add('escondida');   // não faz sentido "pular tudo" agora; use o botão do playoff
+      // O "Pular tudo" continua disponível, agora só para o PLAYOFF (os pontos corridos já
+      // foram). Vira "Pular Playoffs" — antes o botão sumia e não havia como pular o mata.
+      if (bp) {
+        bp.textContent = 'Pular Playoffs';
+        bp.dataset.escopo = 'playoffs';   // main.js lê isto para pular direto o mata
+        bp.classList.remove('escondida');
+      }
     } else {
       salvarCampanhaBasquete(camp);
       if (btn) { btn.innerHTML = 'Montar Novo Time \u25BA'; acaoBotao = 'novo-time'; btn.disabled = false; }

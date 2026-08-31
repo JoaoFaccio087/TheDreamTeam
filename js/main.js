@@ -325,6 +325,19 @@ btnSkip.addEventListener('click', fazerSkip);
 // "Pular tudo": confirma via UI.modalConfirm (componente do UIKit) e roteia por modo —
 // Brasileirão pula a temporada; Liberta/Champions/Copa pulam a campanha até o desfecho.
 if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
+  // Basquete: se os pontos corridos JÁ foram pulados, o botão vira "Pular Playoffs" e pula
+  // direto o mata-a-mata (sem o modal de 3 opções, que não faz mais sentido).
+  if (this.dataset && this.dataset.escopo === 'playoffs' &&
+      typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado)) {
+    UI.modalConfirm({
+      titulo: 'Pular Playoffs?',
+      texto: 'As séries restantes do mata-a-mata serão simuladas de uma vez, até o campeão ou sua eliminação.',
+      confirmar: 'Confirmar',
+      cancelar: 'Cancelar',
+      onConfirmar: function () { pularTudoBasquete(false); }
+    });
+    return;
+  }
   // Basquete (liga): oferece 3 opções — pular só os pontos corridos, cancelar, ou pular
   // tudo (pontos corridos + playoffs).
   if (typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado) &&
