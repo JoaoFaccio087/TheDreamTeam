@@ -439,8 +439,14 @@ var partidaIdBasquete = 0;
 // partida que estava animando continua no seu timer e "fica simulando" por cima do pulo.
 var animacaoEmCurso = null;
 function cancelarAnimacaoEmCurso() {
-  if (animacaoEmCurso && typeof animacaoEmCurso.cancel === 'function') {
-    try { animacaoEmCurso.cancel(); } catch (e) {}
+  if (animacaoEmCurso) {
+    // Prefere FINALIZAR (preenche o resultado final no card) a só cancelar — assim a partida
+    // que estava animando ao clicar "Pular tudo" não fica congelada em 0-0/placar parcial.
+    if (typeof animacaoEmCurso.finalizar === 'function') {
+      try { animacaoEmCurso.finalizar(); } catch (e) {}
+    } else if (typeof animacaoEmCurso.cancel === 'function') {
+      try { animacaoEmCurso.cancel(); } catch (e) {}
+    }
   }
   animacaoEmCurso = null;
 }
@@ -549,6 +555,9 @@ function criarCardPartidaBasquete(id, adversario, fase) {
 
   var hist = document.getElementById('historico-jogos');
   if (hist) hist.appendChild(div);
+  // Clicar no cabeçalho expande/recolhe (ver detalhes de um jogo passado) — igual ao futebol.
+  var hdrB = div.querySelector('.partida-header');
+  if (hdrB) hdrB.addEventListener('click', function () { div.classList.toggle('expandido'); });
   return div;
 }
 
@@ -1841,6 +1850,10 @@ function criarCardPartidaVolei(id, adversario, fase) {
 
   var hist = document.getElementById('historico-jogos');
   if (hist) hist.appendChild(div);
+  // Clicar no cabeçalho expande/recolhe o card (ver detalhes de uma partida passada) —
+  // mesmo comportamento do futebol. Sem isto, os cards de vôlei não abriam.
+  var hdr = div.querySelector('.partida-header');
+  if (hdr) hdr.addEventListener('click', function () { div.classList.toggle('expandido'); });
   return div;
 }
 

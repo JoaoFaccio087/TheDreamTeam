@@ -229,7 +229,17 @@
     if (elPlacar) elPlacar.textContent = '0 – 0';
     timer = setTimeout(tick, cadenciaPonto(velFn()));
 
-    return { cancel: function () { cancelado = true; if (timer) clearTimeout(timer); } };
+    return { cancel: function () { cancelado = true; if (timer) clearTimeout(timer); },
+             // Finaliza IMEDIATAMENTE: para os ticks e preenche o resultado final no card
+             // (usado quando o usuário clica "Pular tudo" no meio de uma partida animando —
+             // sem isso o card ficava congelado no placar parcial / 0-0).
+             finalizar: function () {
+               cancelado = true; if (timer) clearTimeout(timer);
+               setsGanhosA = roteiro.setsA; setsGanhosB = roteiro.setsB;
+               pintarContadorSets();
+               pintarResumoSets();
+               fim();
+             } };
   }
 
   var API = {
