@@ -343,11 +343,23 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
   if (typeof ehCompeticaoBasquete === 'function' && ehCompeticaoBasquete(modoSelecionado) &&
       campanhaBasqueteAtual && campanhaBasqueteAtual.liga) {
     UI.modalConfirm({
-      titulo: 'Tem certeza?',
-      html: '<p class="mp-sub">Escolha até onde deseja pular. Os jogos pulados serão simulados automaticamente.</p>' +
+      titulo: 'Pular simulação',
+      html: '<p class="mp-sub">Escolha até onde deseja pular. Os jogos pulados são simulados automaticamente.</p>' +
             '<div class="mp-opcoes">' +
-              '<button type="button" id="mp-so-corridos" class="mp-btn">Pular só os pontos corridos</button>' +
-              '<button type="button" id="mp-tudo" class="mp-btn mp-btn-forte">Pular tudo (pontos corridos + playoffs)</button>' +
+              '<button type="button" id="mp-so-corridos" class="mp-card">' +
+                '<span class="mp-card-icone">⏩</span>' +
+                '<span class="mp-card-texto">' +
+                  '<span class="mp-card-titulo">Só a temporada regular</span>' +
+                  '<span class="mp-card-desc">Simula os pontos corridos restantes e para nos playoffs, para você jogá-los.</span>' +
+                '</span>' +
+              '</button>' +
+              '<button type="button" id="mp-tudo" class="mp-card mp-card-forte">' +
+                '<span class="mp-card-icone">⏭️</span>' +
+                '<span class="mp-card-texto">' +
+                  '<span class="mp-card-titulo">Tudo até o fim</span>' +
+                  '<span class="mp-card-desc">Simula a temporada e os playoffs de uma vez, direto ao resultado final.</span>' +
+                '</span>' +
+              '</button>' +
             '</div>',
       confirmar: '',
       cancelar: 'Cancelar'
@@ -360,8 +372,6 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
         var ov = document.querySelector('.modal-confirm');
         if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
       }
-      var btnConfVazio = document.querySelector('.modal-confirm [data-acao="confirmar"]');
-      if (btnConfVazio) btnConfVazio.style.display = 'none';
       if (bSo) bSo.addEventListener('click', function () { fecharModal(); pularTudoBasquete(true); });
       if (bTudo) bTudo.addEventListener('click', function () { fecharModal(); pularTudoBasquete(false); });
     }, 20);

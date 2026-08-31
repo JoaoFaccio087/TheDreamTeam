@@ -172,7 +172,9 @@
         '<p class="modal-confirm-texto">' + corpo + '</p>' +
         '<div class="modal-confirm-acoes">' +
           '<button type="button" class="btn-rolar btn-sec" data-acao="cancelar">' + esc(rotCanc) + '</button>' +
-          '<button type="button" class="' + classeConf + '" data-acao="confirmar">' + esc(rotConf) + '</button>' +
+          // Só renderiza o botão confirmar quando há rótulo — modais com opções próprias
+          // (ex.: o "pular" do basquete) passam confirmar:'' e não querem esse botão.
+          (rotConf ? '<button type="button" class="' + classeConf + '" data-acao="confirmar">' + esc(rotConf) + '</button>' : '') +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
