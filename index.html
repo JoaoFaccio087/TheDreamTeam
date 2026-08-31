@@ -1294,14 +1294,10 @@
   </script>
 
   <!-- Dados estáticos: carregados antes de tudo -->
-  <!-- Futebol -->
+  <!-- Futebol: SÓ a Libertadores (padrão) no boot. As demais competições carregam
+       SOB DEMANDA por js/dados-lazy.js e se agregam em DADOS (economia de ~3.2 MB no boot,
+       sendo a Copa 1.3 MB sozinha). -->
   <script src="js/dados/futebol/libertadores.js" defer></script>
-  <script src="js/dados/futebol/champions.js" defer></script>
-  <script src="js/dados/futebol/brasileirao.js" defer></script>
-  <script src="js/dados/futebol/copa.js" defer></script>
-  <script src="js/dados/futebol/premier.js" defer></script>
-  <script src="js/dados/futebol/serie-a.js" defer></script>
-  <script src="js/dados/futebol/laliga.js" defer></script>
   <!-- Vôlei e basquete: carregados SOB DEMANDA por js/dados-lazy.js (não no boot),
        para não pesar ~682 KB no carregamento inicial de quem só joga futebol. -->
   <!-- Agregador (só futebol) -->

@@ -31,6 +31,21 @@ function sincronizarPilulaOrcamento() {
 function selecionarModo(novoModo) {
   modoSelecionado = novoModo;
 
+  // LAZY-LOAD: dispara o carregamento dos dados da competição de futebol escolhida (as que
+  // não são a Libertadores não vêm no boot). Há tempo até o usuário clicar em Jogar; e o
+  // jogarAgora também espera, como rede de segurança.
+  if (typeof DadosLazy !== 'undefined' && typeof DadosLazy.garantirCompeticao === 'function') {
+    DadosLazy.garantirCompeticao(novoModo).then(function () {
+      // se ainda estamos nesta competição, repinta a vitrine (mapa/contadores) já com os dados
+      if (modoSelecionado === novoModo && typeof pintarMapaVitrine === 'function' &&
+          typeof esporteAtual !== 'undefined') {
+        pintarMapaVitrine(esporteAtual);
+      }
+      // rodapé conta jogadores de DADOS (que cresceu) → recalcula
+      if (typeof calcularEstatisticasFooter === 'function') calcularEstatisticasFooter();
+    }).catch(function () { /* falha de rede: acessos a DADOS seguem com o que houver */ });
+  }
+
   // Mantém o esporteAtual coerente com a competição escolhida. Sem isso, entrar numa
   // competição de vôlei/basquete por certos caminhos deixaria o esporteAtual em 'futebol',
   // e a escalação seria dimensionada com o nº de titulares errado (11 em vez de 5/6).
@@ -65,21 +80,24 @@ function selecionarFormacaoAmostra(nomeFormacao) {
 }
 
 function jogarAgora() {
-  // LAZY-LOAD: se o usuário clicar em Jogar antes dos dados do esporte terminarem de
-  // carregar, espera aqui (garante que o motor da campanha encontre DADOS_VOLEI/NBA). Para
-  // futebol e dados já carregados, DadosLazy.garantir resolve na hora (sem atraso perceptível).
+  // LAZY-LOAD: garante os dados necessários antes de entrar na tela de jogo:
+  //  - o ESPORTE (vôlei/basquete não vêm no boot);
+  //  - a COMPETIÇÃO de futebol escolhida (só a Libertadores vem no boot).
+  // Para dados já carregados, ambas as promises resolvem na hora (sem atraso perceptível).
   var esporte = (typeof esporteDoModo === 'function') ? esporteDoModo(modoSelecionado) : 'futebol';
-  var pronto = (typeof DadosLazy !== 'undefined') ? DadosLazy.garantir(esporte) : Promise.resolve();
-  pronto.then(function () {
+  var promessas = [];
+  if (typeof DadosLazy !== 'undefined') {
+    if (typeof DadosLazy.garantir === 'function') promessas.push(DadosLazy.garantir(esporte));
+    if (esporte === 'futebol' && typeof DadosLazy.garantirCompeticao === 'function') {
+      promessas.push(DadosLazy.garantirCompeticao(modoSelecionado));
+    }
+  }
+  function entrar() {
     aplicarTema(modoSelecionado);
     iniciarTelaJogo();
     mostrarTela(telaJogo);
-  }).catch(function () {
-    // falha de rede ao baixar os dados: segue mesmo assim (acessos guardados por typeof)
-    aplicarTema(modoSelecionado);
-    iniciarTelaJogo();
-    mostrarTela(telaJogo);
-  });
+  }
+  Promise.all(promessas).then(entrar).catch(entrar);   // falha de rede: entra mesmo assim
 }
 
 function voltarHome() {
