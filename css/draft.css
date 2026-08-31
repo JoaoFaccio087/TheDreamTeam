@@ -59,15 +59,16 @@
   justify-content: center;
   gap: 20px;
   padding: 24px;
-  background: var(--scrim);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
+  /* Fundo escuro sólido em vez de backdrop-filter: blur — o blur re-desfoca TODO o fundo a
+     cada repaint, e com as cartas animadas isso derrubava o FPS (mesmo motivo pelo qual o
+     modal de draft do online já tinha removido o blur). O scrim mais opaco dá o mesmo foco. */
+  background: var(--scrim-forte, rgba(6, 8, 12, 0.88));
   animation: draft-overlay-surge 0.28s ease both;
 }
 
-/* Surgimento do overlay (fade + leve zoom do fundo) */
+/* Surgimento do overlay (fade simples — sem animar backdrop-filter, que travava). */
 @keyframes draft-overlay-surge {
-  from { opacity: 0; -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); }
+  from { opacity: 0; }
   to   { opacity: 1; }
 }
 

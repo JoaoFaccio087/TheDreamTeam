@@ -42,6 +42,7 @@ html {
   --elev-2:     rgba(255, 255, 255, 0.12);  /* hover mais forte (pílula) */
   --surface-2:  #14161C;                    /* superfície secundária (card do modal de sala) */
   --scrim:      rgba(0, 0, 0, 0.66);        /* fundo escurecido atrás de modais */
+  --scrim-forte: rgba(6, 8, 12, 0.88);      /* scrim mais opaco p/ modais SEM blur (draft/livre) */
   --ouro:       #D9B25A;                    /* dourado (conquistas, destaques do online) */
   --ouro-claro: #E7C77A;                    /* dourado claro (realce sobre o dourado) */
   --txt-dim:    #666666;                    /* cinza apagado de texto (listas/legendas do online) */
@@ -423,3 +424,23 @@ body {
 /* Blocos de competição da home ocultos: o modal "Jogar" é a interface visível
    agora, mas os botões seguem no DOM (listeners do multiplayer intactos). */
 .mj-oculto { display: none !important; }
+
+/* ── Modal de "pular" do basquete: subtítulo + opções em botões padrão ── */
+.mp-sub {
+  font-size: var(--fs-sm, 0.85rem); color: var(--txt-soft, #9aa6b2);
+  margin: 0 0 18px; line-height: 1.5; text-align: center;
+}
+.mp-opcoes { display: flex; flex-direction: column; gap: 10px; }
+.mp-btn {
+  width: 100%; padding: 12px 16px; border-radius: 10px;
+  font-family: 'Archivo', sans-serif; font-size: 0.92rem; font-weight: 600;
+  background: var(--elev-1, #1a1c22); color: var(--txt, #e8ecf0);
+  border: 1px solid var(--linha, rgba(255,255,255,0.12)); cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.mp-btn:hover { background: var(--elev-2, #22252c); border-color: rgba(255,255,255,0.22); }
+.mp-btn:active { transform: translateY(1px); }
+.mp-btn-forte {
+  background: var(--accent, #2BD46A); color: #0E0F13; border-color: transparent; font-weight: 700;
+}
+.mp-btn-forte:hover { background: #3ee07d; }
