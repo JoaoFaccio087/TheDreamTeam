@@ -511,15 +511,24 @@ function iniciarPartidaPlayoffNBA() {
   var btn = document.getElementById('btn-iniciar-jogo');
   if (btn) btn.disabled = true;
 
+  var resSerie = null;   // preenchido no onResultado, lido no onFim
+
   animacaoEmCurso = AnimacaoBasquete.animar({
     elCard: card, roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
     pular: false,
-    onFim: function () {
-      if (btn) btn.disabled = false;
-      var res = CampanhaBasquete.registrarJogoSerieNBA(camp, roteiro.pontosA, roteiro.pontosB, forcaTimeBasquete);
+    // COMMIT do jogo da série (ver o padrão em iniciarPartidaBasquete). Dispara SEMPRE,
+    // inclusive quando o "Pular Playoffs" finaliza esta partida — antes, pular no meio de
+    // um jogo do playoff fazia esse jogo simplesmente não contar na série.
+    onResultado: function () {
+      resSerie = CampanhaBasquete.registrarJogoSerieNBA(camp, roteiro.pontosA, roteiro.pontosB, forcaTimeBasquete);
       acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
       mostrarBracketPlayoffs(camp);
+    },
+    onFim: function () {
+      if (btn) btn.disabled = false;
+      var res = resSerie;
+      if (!res) return;
 
       var virouCampeao = false, foiEliminado = false;
       if (res.serieAcabou) {
@@ -644,12 +653,35 @@ function pularPlayoffLigaNBA(camp) {
     var adv = CampanhaBasquete.seuAdversarioLigaPlayoff(camp);
     if (!adv) break;
     var advTime = adv.clubeRef || adv;
-    // joga a série inteira de uma vez
+    var po = camp.playoff;
+    // joga a série inteira de uma vez, gerando UM CARD por jogo — igual ao pulo da
+    // temporada regular. Antes o playoff era simulado só na estrutura de dados e NENHUM
+    // card aparecia, o que dava a impressão de que "não simulou os jogos".
     var r;
     do {
-      var meu = { forca: forcaDoTime() }, out = { forca: (advTime.jogadores ? forcaTimeBasquete(advTime) : adv.forca) };
-      var p = placarBastidoresBasquete(meu, out);
-      r = CampanhaBasquete.registrarJogoSerieNBA(camp, p.a, p.b, forcaTimeBasquete);
+      var faseAtual = po.fases[po.faseIdx];
+      var faseNomeP = faseAtual ? faseAtual.nome : 'PLAYOFFS';
+      var melhorDeP = CampanhaBasquete.melhorDeDaFase(camp);
+      var jogoSerieP = (po.serie.vMeu + po.serie.vAdv + 1);
+
+      var meuTimeP = { nome: nomeDoTime, jogadores: escalacao.filter(function (j) { return j !== null; }) };
+      var advTimeP = { nome: advTime.clube, jogadores: advTime.jogadores };
+      var roteiroP = AnimacaoBasquete.prepararPartida(meuTimeP, advTimeP);
+      acumularStatsBasquete(roteiroP, roteiroP.pontosA, roteiroP.pontosB);
+
+      var faseLabelP = faseNomeP + ' \u00B7 Jogo ' + jogoSerieP + ' (melhor de ' + melhorDeP +
+                       ') \u00B7 s\u00E9rie ' + po.serie.vMeu + '-' + po.serie.vAdv;
+      var idCardP2 = partidaIdBasquete + 1;
+      partidaIdBasquete = idCardP2;
+      var cardP2 = criarCardPartidaBasquete(idCardP2, advTime, faseLabelP);
+      // preenche o card com o resultado final, sem ticks (modo pular)
+      AnimacaoBasquete.animar({
+        elCard: cardP2, roteiro: roteiroP,
+        velocidade: function () { return velocidadeSimulacao; },
+        pular: true
+      });
+
+      r = CampanhaBasquete.registrarJogoSerieNBA(camp, roteiroP.pontosA, roteiroP.pontosB, forcaTimeBasquete);
     } while (!r.serieAcabou);
     if (r.eliminado) { res.eliminado = true; break; }
     if (r.campeaoNBA || !r.proximaFase) { res.campeaoNBA = true; break; }
