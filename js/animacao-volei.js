@@ -153,7 +153,11 @@
       if (elSets) elSets.textContent = txt;
     }
 
-    function fim() {
+    // `silencioso: true` preenche o card com o resultado final MAS não chama onFim.
+    // Isso existe por causa do "Pular tudo": o onFim da partida em curso é quem agenda
+    // a próxima partida no modo automático — se ele disparasse durante o pulo, o
+    // encadeamento continuava rodando por cima e as partidas "seguiam simulando".
+    function fim(silencioso) {
       if (elStatus) elStatus.textContent = '';
       if (elPlacar) elPlacar.textContent = roteiro.setsA + ' – ' + roteiro.setsB + ' (sets)';
       // Resumo de estatísticas (top pontuadores)
@@ -167,7 +171,13 @@
                    '</span><span class="pv-stat-num">' + det + '</span></div>';
           }).join('');
       }
-      if (opts.onFim) opts.onFim(roteiro);
+      // onResultado = COMMIT do placar na tabela/estatísticas. Dispara SEMPRE, inclusive
+      // no modo silencioso, porque o resultado precisa ser contabilizado mesmo quando o
+      // "Pular tudo" interrompe a partida. Fica separado do onFim (que é UI/encadeamento)
+      // para a classificação só passar a contar a partida QUANDO ELA ACABA — antes, o
+      // registro era feito antes de animar e a tabela já mostrava a vitória no Set 1.
+      if (opts.onResultado) opts.onResultado(roteiro);
+      if (opts.onFim && !silencioso) opts.onFim(roteiro);
     }
 
     // Estado da animação
@@ -233,12 +243,14 @@
              // Finaliza IMEDIATAMENTE: para os ticks e preenche o resultado final no card
              // (usado quando o usuário clica "Pular tudo" no meio de uma partida animando —
              // sem isso o card ficava congelado no placar parcial / 0-0).
-             finalizar: function () {
+             // finalizar(true) = silencioso: pinta o resultado final mas NÃO chama onFim
+             // (usado pelo "Pular tudo", para não reagendar a próxima partida).
+             finalizar: function (silencioso) {
                cancelado = true; if (timer) clearTimeout(timer);
                setsGanhosA = roteiro.setsA; setsGanhosB = roteiro.setsB;
                pintarContadorSets();
                pintarResumoSets();
-               fim();
+               fim(!!silencioso);
              } };
   }
 

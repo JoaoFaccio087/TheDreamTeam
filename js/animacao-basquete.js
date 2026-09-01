@@ -113,6 +113,11 @@
                    '</span><span class="pb-stat-num">' + det + '</span></div>';
           }).join('');
       }
+      // onResultado = COMMIT do placar (tabela/estatísticas). Dispara SEMPRE, inclusive no
+      // modo silencioso, porque o resultado precisa ser contabilizado mesmo quando o
+      // "Pular tudo" interrompe a partida. Separado do onFim (UI/encadeamento) para a
+      // classificação e as estatísticas só contarem a partida QUANDO ELA ACABA.
+      if (opts.onResultado) opts.onResultado(roteiro);
       if (opts.onFim && !silencioso) opts.onFim(roteiro);
     }
 

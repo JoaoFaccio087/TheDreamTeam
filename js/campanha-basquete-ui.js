@@ -380,13 +380,21 @@ function iniciarPartidaBasquete() {
   }
 
   var camp = campanhaBasqueteAtual;
-  if (camp.rodadaAtual >= camp.calendario.length) { return; }
+  if (camp.rodadaAtual >= camp.calendario.length) {
+    // Acabou o calendário com rodadas ainda na fila (você não jogava nas últimas):
+    // resolve agora, senão esses jogos nunca entrariam na tabela.
+    drenarRodadasPendentesNBA(camp);
+    mostrarClassificacaoConf(camp);
+    return;
+  }
 
   var conf = CampanhaBasquete.seuConfrontoNaRodada(camp, camp.rodadaAtual);
   if (!conf) {
-    CampanhaBasquete.resolverDemaisJogosNBA(camp, camp.rodadaAtual, placarBastidoresBasquete);
+    // Rodada sem jogo SEU: NÃO resolve os bastidores agora — enfileira. Eles entram na
+    // tabela junto com o resultado da sua próxima partida (ver drenarRodadasPendentesNBA).
+    if (!camp.rodadasPendentes) camp.rodadasPendentes = [];
+    camp.rodadasPendentes.push(camp.rodadaAtual);
     camp.rodadaAtual++;
-    mostrarClassificacaoConf(camp);
     return iniciarPartidaBasquete();
   }
   var advRegistro = camp.tabela[conf.advIdx];
@@ -396,7 +404,8 @@ function iniciarPartidaBasquete() {
   var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
   var roteiro = AnimacaoBasquete.prepararPartida(meuTime, advTime);
 
-  acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
+  // As estatísticas NÃO são acumuladas aqui: o commit acontece no onResultado, quando a
+  // partida acaba. Antes, a tabela de estatísticas já mostrava os pontos no 1º quarto.
 
   var rodadaNum = camp.rodadaAtual + 1;
   var faseLabel = 'Rodada ' + rodadaNum + '/' + camp.calendario.length + ' \u00B7 NBA';
@@ -412,12 +421,20 @@ function iniciarPartidaBasquete() {
     elCard: card, roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
     pular: false,
-    onFim: function () {
-      if (btn) btn.disabled = false;
+    // COMMIT: a partida só entra na tabela e nas estatísticas AGORA, no fim da animação.
+    // Junto entram os bastidores: as rodadas pendentes (em que você não jogou) e os demais
+    // jogos DESTA rodada. Assim os outros times nunca aparecem à frente do seu jogo.
+    // Dispara também quando o "Pular tudo" finaliza esta partida — nada deixa de contar.
+    onResultado: function () {
+      acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
       CampanhaBasquete.registrarResultadoNBA(camp.tabela[0], advRegistro, roteiro.pontosA, roteiro.pontosB);
+      drenarRodadasPendentesNBA(camp);
       CampanhaBasquete.resolverDemaisJogosNBA(camp, camp.rodadaAtual, placarBastidoresBasquete);
       camp.rodadaAtual++;
       mostrarClassificacaoConf(camp);
+    },
+    onFim: function () {
+      if (btn) btn.disabled = false;
 
       var acabou = (camp.rodadaAtual >= camp.calendario.length);
       if (btn) {
@@ -445,6 +462,19 @@ function iniciarPartidaBasquete() {
 }
 
 // Placar de bastidores para jogos que não são seus (instantâneo, por força + sorte).
+// Resolve os bastidores das rodadas que ficaram PENDENTES — aquelas em que VOCÊ não
+// tinha jogo. Elas não são mais resolvidas na hora em que são puladas: ficam na fila e
+// só entram na tabela junto com o resultado da sua partida seguinte. Sem isso, os
+// adversários apareciam permanentemente uma rodada à frente de você na classificação
+// (bug do feedback: "os outros times já aparecem com o jogo seguinte").
+function drenarRodadasPendentesNBA(camp) {
+  if (!camp || !camp.rodadasPendentes || !camp.rodadasPendentes.length) return;
+  camp.rodadasPendentes.forEach(function (r) {
+    CampanhaBasquete.resolverDemaisJogosNBA(camp, r, placarBastidoresBasquete);
+  });
+  camp.rodadasPendentes = [];
+}
+
 function placarBastidoresBasquete(A, B) {
   var fa = A.forca + (Math.random() - 0.5) * 16;
   var fb = B.forca + (Math.random() - 0.5) * 16;
@@ -524,6 +554,7 @@ function pularTudoBasquete(soTemporada) {
   if (!campanhaBasqueteAtual) return;
   var camp = campanhaBasqueteAtual;
   if (!camp.liga) return;   // só o novo formato de liga
+  drenarRodadasPendentesNBA(camp);   // rodadas em que você não jogou e ficaram na fila
 
   // 1) Simula (rápido, sem animar) todas as rodadas restantes da temporada regular.
   //    Para CADA jogo SEU, gera um card já preenchido (histórico) — antes o pular só
