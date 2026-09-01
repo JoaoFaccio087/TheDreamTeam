@@ -309,6 +309,7 @@ function iniciarPartidaVNL() {
     var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
     campanhaVoleiAtual = CampanhaVolei.montarCampanhaVNL(selecoes, voceMonta, forcaSelecaoVolei);
     campanhaVoleiAtual.edicaoAno = ano;
+    prepararAbasVolei();
   }
 
   var camp = campanhaVoleiAtual;

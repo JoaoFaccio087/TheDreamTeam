@@ -397,6 +397,13 @@ function configurarTelaSimulacao() {
     renderTabelaBrasileirao();
   }
 
+  // Vôlei e basquete preparam as PRÓPRIAS abas (prepararAbasVolei/Basquete) no início da
+  // campanha — aqui não mexemos nas sim-tabs nem chamamos selecionarAbaSim (do futebol),
+  // senão o VNL/vôlei ficava sem as abas e a tela não iniciava direito.
+  var ehVoleiC    = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
+  var ehBasqueteC = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
+  if (ehVoleiC || ehBasqueteC) return;
+
   // Copa do Mundo: mostra as abas "Simulação" / "Mata-a-Mata"
   var ehCopa  = (modoSelecionado === 'copa');
   var simTabs = document.getElementById('sim-tabs');
