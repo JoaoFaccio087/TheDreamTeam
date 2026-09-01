@@ -442,8 +442,12 @@ function cancelarAnimacaoEmCurso() {
   if (animacaoEmCurso) {
     // Prefere FINALIZAR (preenche o resultado final no card) a só cancelar — assim a partida
     // que estava animando ao clicar "Pular tudo" não fica congelada em 0-0/placar parcial.
+    // finalizar(true) = SILENCIOSO: pinta o resultado final no card mas NÃO dispara o
+    // onFim da animação. Isto é o coração da correção do "Pular tudo": o onFim é quem
+    // agenda a próxima partida no modo automático — finalizar sem a flag reacendia o
+    // encadeamento e as partidas seguiam simulando por cima do pulo.
     if (typeof animacaoEmCurso.finalizar === 'function') {
-      try { animacaoEmCurso.finalizar(); } catch (e) {}
+      try { animacaoEmCurso.finalizar(true); } catch (e) {}
     } else if (typeof animacaoEmCurso.cancel === 'function') {
       try { animacaoEmCurso.cancel(); } catch (e) {}
     }

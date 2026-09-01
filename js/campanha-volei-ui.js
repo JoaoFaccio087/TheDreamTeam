@@ -107,10 +107,9 @@ function iniciarPartidaVolei() {
   var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
   var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
 
-  // Registra o resultado na tabela do grupo (sets do roteiro).
-  CampanhaVolei.registrarJogoGrupo(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
-  acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
-  camp.jogosGrupoFeitos++;
+  // O resultado NÃO é registrado aqui: o commit acontece no onResultado, quando a
+  // animação termina. Antes, registrar antes de animar fazia a aba Classificação já
+  // mostrar a vitória enquanto a partida ainda rodava ponto a ponto.
 
   // Cria o card visual (reaproveita a casca do card de futebol) e anima ponto a ponto.
   var faseLabel = 'Grupo ' + String.fromCharCode(65 + camp.seuGrupo) + ' \u00B7 ' +
@@ -130,6 +129,13 @@ function iniciarPartidaVolei() {
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
     pular: false,
+    // COMMIT: só agora a partida entra na tabela e nas estatísticas. Dispara também
+    // quando o "Pular tudo" finaliza esta partida, então nada deixa de ser contado.
+    onResultado: function () {
+      CampanhaVolei.registrarJogoGrupo(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+      acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+      camp.jogosGrupoFeitos++;
+    },
     onFim: function () {
       if (btn) btn.disabled = false;
       var acabaramJogosGrupo = (camp.jogosGrupoFeitos >= advs.length);
@@ -323,8 +329,8 @@ function iniciarPartidaVNL() {
   var advTime = { nome: adversario.clube, jogadores: adversario.jogadores };
   var roteiro = AnimacaoVolei.prepararPartida(meuTime, advTime);
 
-  CampanhaVolei.registrarJogoVNL(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
-  acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+  // O resultado é registrado no onResultado (fim da animação), não aqui — senão a
+  // tabela da preliminar já mostrava a vitória com a partida ainda rodando.
 
   var faseLabel = 'Fase Preliminar \u00B7 ' + rotuloCompeticao(adversario.competicao) + ' ' + camp.edicaoAno;
   var idCard = (typeof partidaIdVolei === 'undefined') ? 1 : (partidaIdVolei + 1);
@@ -339,6 +345,11 @@ function iniciarPartidaVNL() {
     roteiro: roteiro,
     velocidade: function () { return velocidadeSimulacao; },
     pular: false,
+    // COMMIT do jogo da preliminar — ver a nota em iniciarPartidaVolei.
+    onResultado: function () {
+      CampanhaVolei.registrarJogoVNL(camp, adversarioTime, roteiro.setsA, roteiro.setsB);
+      acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+    },
     onFim: function () {
       if (btn) btn.disabled = false;
       var acabouPreliminar = (camp.jogosFeitos >= camp.seusJogos.length);

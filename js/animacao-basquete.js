@@ -96,7 +96,10 @@
       elQuartos.textContent = txt;
     }
 
-    function fim() {
+    // `silencioso: true` preenche o card com o resultado final MAS não chama onFim
+    // (mesma razão do vôlei: o onFim é quem encadeia a próxima partida no automático,
+    // e durante o "Pular tudo" isso faria as partidas seguirem simulando por cima).
+    function fim(silencioso) {
       if (elStatus) elStatus.textContent = '';
       if (elPlacar) elPlacar.textContent = roteiro.pontosA + ' \u2013 ' + roteiro.pontosB +
         (roteiro.prorrogacao ? '  (PRO)' : '');
@@ -110,7 +113,7 @@
                    '</span><span class="pb-stat-num">' + det + '</span></div>';
           }).join('');
       }
-      if (opts.onFim) opts.onFim(roteiro);
+      if (opts.onFim && !silencioso) opts.onFim(roteiro);
     }
 
     // Modo "pular tudo": direto ao resultado.
@@ -214,7 +217,15 @@
     if (elPlacar) elPlacar.textContent = '0 \u2013 0';
     timer = setTimeout(tickCesta, cadenciaCesta(velFn()));
 
-    return { cancel: function () { cancelado = true; if (timer) clearTimeout(timer); } };
+    return { cancel: function () { cancelado = true; if (timer) clearTimeout(timer); },
+             // finalizar(true) = silencioso: para os ticks e preenche o resultado final no
+             // card, sem chamar onFim. Sem isso, o "Pular tudo" clicado no meio de um jogo
+             // deixava o card congelado no placar parcial.
+             finalizar: function (silencioso) {
+               cancelado = true; if (timer) clearTimeout(timer);
+               paAtual = roteiro.pontosA; pbAtual = roteiro.pontosB;
+               fim(!!silencioso);
+             } };
   }
 
 
