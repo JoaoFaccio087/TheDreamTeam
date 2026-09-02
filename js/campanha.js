@@ -839,7 +839,7 @@ function criarCardMataInstantaneo(faseNome, adversario, gMeus, gAdv, golsMeus, g
 
   div.querySelector('.partida-header').addEventListener('click', function () { toggleCard(id); });
   var hist = document.getElementById('historico-jogos');
-  if (hist) hist.appendChild(div);   // mata-mata: cronológico (mais recente embaixo)
+  if (hist) UI.histInserir(hist, div);   // topo + limite de página (ver nota em simulacao.js)
 }
 
 // Card de encerramento da campanha de mata-mata (campeão ou eliminado na fase X).
@@ -872,7 +872,7 @@ function criarCardFinalMata(campeao, faseQueCaiu) {
     '</div>';
 
   var hist = document.getElementById('historico-jogos');
-  if (hist) hist.appendChild(div);
+  if (hist) UI.histInserir(hist, div);   // topo + limite de página
 }
 
 // Desfecho comum: card final, trava a fase no fim, ajusta o botão e revela o resumo.

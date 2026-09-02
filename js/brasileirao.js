@@ -343,7 +343,7 @@ function criarCardLigaInstantaneo(rodadaNum, adversario, gMeus, gAdv, golsTime, 
 
   div.querySelector('.partida-header').addEventListener('click', function () { toggleCard(id); });
   var hist = document.getElementById('historico-jogos');
-  if (hist) hist.insertBefore(div, hist.firstChild); // mais recente no topo
+  if (hist) UI.histInserir(hist, div);   // topo + limite de página (ver nota em simulacao.js)
 }
 
 // Card de encerramento da temporada (usado pelo "Pular tudo").
@@ -371,7 +371,7 @@ function criarCardFinalBrasileirao(pos, campeao) {
     '</div>';
 
   var hist = document.getElementById('historico-jogos');
-  if (hist) hist.insertBefore(div, hist.firstChild); // mais recente no topo
+  if (hist) UI.histInserir(hist, div);   // topo + limite de página
 }
 
 

@@ -807,7 +807,12 @@ function mostrarTabelaGrupoVolei(camp) {
   } else {
     // fallback: se não achar o card, insere no histórico
     var hist = document.getElementById('historico-jogos');
-    if (hist) { var w = document.createElement('div'); w.innerHTML = tabelaHTML; hist.appendChild(w.firstChild); }
+    // Fallback (card não encontrado): a tabela entra ANTES do botão "Ver mais", senão
+    // ficaria abaixo dele — o botão tem de ser sempre o último elemento do histórico.
+    if (hist) {
+      var w = document.createElement('div'); w.innerHTML = tabelaHTML;
+      hist.insertBefore(w.firstChild, hist.querySelector('.hist-ver-mais'));
+    }
   }
   // atualiza também a aba de classificação, se já existir
   var alvoAba = document.getElementById('volei-classificacao');
@@ -856,7 +861,12 @@ function mostrarTabelaVNL(camp) {
     corpo.appendChild(div.firstChild);
   } else {
     var hist = document.getElementById('historico-jogos');
-    if (hist) { var w = document.createElement('div'); w.innerHTML = tabelaHTML; hist.appendChild(w.firstChild); }
+    // Fallback (card não encontrado): a tabela entra ANTES do botão "Ver mais", senão
+    // ficaria abaixo dele — o botão tem de ser sempre o último elemento do histórico.
+    if (hist) {
+      var w = document.createElement('div'); w.innerHTML = tabelaHTML;
+      hist.insertBefore(w.firstChild, hist.querySelector('.hist-ver-mais'));
+    }
   }
 }
 

@@ -161,7 +161,7 @@ function toggleCard(id) {
   if (btn) btn.textContent = card.classList.contains('expandido') ? '▾' : '▴';
 }
 
-// --- Cria o card HTML de uma partida e adiciona ao FINAL do histórico ---
+// --- Cria o card HTML de uma partida e adiciona ao TOPO do histórico (UI.histInserir) ---
 function criarCardPartida(id, adversario, fase) {
   // Recolhe o card anterior antes de abrir o novo
   if (id > 1) {
@@ -206,12 +206,12 @@ function criarCardPartida(id, adversario, fase) {
     toggleCard(id);
   });
 
+  // Mais recente no TOPO + limite de página com "Ver mais" (UI.histInserir), igual ao
+  // vôlei e ao basquete. Antes o Brasileirão fazia o insertBefore na mão e o mata-mata
+  // usava appendChild — os 3 formatos divergiam entre si e nenhum tinha limite: uma
+  // temporada terminava com ~39 cards todos abertos na página.
   var hist = document.getElementById('historico-jogos');
-  if (modoSelecionado === 'brasileirao') {
-    hist.insertBefore(div, hist.firstChild); // Brasileirão: mais recente no topo
-  } else {
-    hist.appendChild(div);                   // mata-mata: cronológico (mais recente embaixo)
-  }
+  if (hist) UI.histInserir(hist, div);
 }
 
 // --- Adiciona uma linha de evento (gol, pênaltis) ao card ---
