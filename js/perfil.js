@@ -1093,7 +1093,9 @@
     // "Ver todas" no bloco de conquistas em destaque → abre o modal completo.
     var verConq = document.querySelector('.perfil-ver-mais[data-ver="conquistas"]');
     if (verConq) verConq.addEventListener('click', function () {
-      if (typeof abrirModalConquistas === 'function') abrirModalConquistas();
+      // passa o esporte do perfil: sem isso o "Ver todas" abria com o catálogo inteiro,
+      // mostrando conquistas de futebol ("gols", "hat-trick") num perfil de vôlei/basquete.
+      if (typeof abrirModalConquistas === 'function') abrirModalConquistas(_esportePerfil);
     });
 
     // "Ver todo" no bloco de histórico recente → abre o modal com até 20 partidas.
