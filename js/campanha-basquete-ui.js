@@ -117,7 +117,8 @@ function criarCardPartidaBasquete(id, adversario, fase) {
     '</div>';
 
   var hist = document.getElementById('historico-jogos');
-  if (hist) hist.appendChild(div);
+  // Mais recente no TOPO + limite com "Ver mais" (UI.histInserir) — ver nota no vôlei.
+  if (hist) UI.histInserir(hist, div);
   // Clicar no cabeçalho expande/recolhe (ver detalhes de um jogo passado) — igual ao futebol.
   var hdrB = div.querySelector('.partida-header');
   if (hdrB) hdrB.addEventListener('click', function () { div.classList.toggle('expandido'); });

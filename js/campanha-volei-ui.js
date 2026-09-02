@@ -943,7 +943,9 @@ function criarCardPartidaVolei(id, adversario, fase) {
     '</div>';
 
   var hist = document.getElementById('historico-jogos');
-  if (hist) hist.appendChild(div);
+  // Mais recente no TOPO + limite com "Ver mais" (UI.histInserir). Antes era appendChild:
+  // os cards desciam e era preciso rolar a tela inteira para ver a última partida.
+  if (hist) UI.histInserir(hist, div);
   // Clicar no cabeçalho expande/recolhe o card (ver detalhes de uma partida passada) —
   // mesmo comportamento do futebol. Sem isto, os cards de vôlei não abriam.
   var hdr = div.querySelector('.partida-header');

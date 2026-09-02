@@ -221,6 +221,75 @@
     return '';
   };
 
+  // Histórico de partidas: mais recente no TOPO + limite na página com "Ver mais".
+  //
+  // O Brasileirão já usava `insertBefore(hist.firstChild)` (mais recente no topo), mas cada
+  // tela repetia a regra na mão e vôlei/basquete usavam `appendChild` — os cards desciam e
+  // era preciso rolar a tela inteira para ver a última partida. Aqui a regra fica num lugar
+  // só, com o limite e o botão que faltavam.
+  //
+  //   UI.histInserir(hist, card);              // insere no topo e reaplica o limite
+  //   UI.histAplicarLimite(hist);              // só reaplica (ex.: após limpar o histórico)
+  //
+  // Conta como card qualquer filho com a classe `.partida-card`, então serve para os cards
+  // de partida e para os de encerramento (campeão/eliminado) sem configuração extra.
+  UI.HIST_LIMITE = 8;   // quantos cards ficam à mostra antes do "Ver mais"
+
+  function histCards(hist) {
+    return Array.prototype.filter.call(hist.children, function (el) {
+      return el.classList && el.classList.contains('partida-card');
+    });
+  }
+
+  UI.histAplicarLimite = function (hist, limite) {
+    if (!hist) return;
+    var lim = limite || UI.HIST_LIMITE;
+    var cards = histCards(hist);
+    var btn = hist.querySelector('.hist-ver-mais');
+
+    // Sem cards (histórico recém-limpo): tira o botão e zera o estado, senão a próxima
+    // campanha começaria já "expandida" por causa da flag da campanha anterior.
+    if (!cards.length) {
+      if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+      delete hist.dataset.histExpandido;
+      return;
+    }
+
+    var expandido = (hist.dataset.histExpandido === '1');
+    var ocultos = 0;
+    cards.forEach(function (el, i) {
+      var esconder = (!expandido && i >= lim);
+      el.classList.toggle('escondida', esconder);
+      if (esconder) ocultos++;
+    });
+
+    if (!ocultos && !expandido) {
+      if (btn && btn.parentNode) btn.parentNode.removeChild(btn);
+      return;
+    }
+
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ver-mais hist-ver-mais';
+      btn.addEventListener('click', function () {
+        hist.dataset.histExpandido = (hist.dataset.histExpandido === '1') ? '0' : '1';
+        UI.histAplicarLimite(hist, lim);
+      });
+    }
+    // Sempre por último: o botão fica no fim da lista, abaixo dos cards visíveis.
+    hist.appendChild(btn);
+    btn.textContent = expandido ? 'Ver menos' : ('Ver mais (' + ocultos + ')');
+  };
+
+  UI.histInserir = function (hist, card, limite) {
+    if (!hist || !card) return card;
+    var primeiro = histCards(hist)[0] || null;
+    hist.insertBefore(card, primeiro);   // mais recente no topo
+    UI.histAplicarLimite(hist, limite);
+    return card;
+  };
+
   window.UI = UI;
 
   // Cabeçalhos estáticos do single-player. O Voltar de cada tela é um link no corpo

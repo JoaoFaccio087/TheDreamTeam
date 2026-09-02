@@ -42,6 +42,8 @@ function reiniciarCampanha() {
   if (corpo) corpo.innerHTML = '';
   var hist  = document.getElementById('historico-jogos');
   if (hist)  hist.innerHTML  = '';
+  // zera o estado do "Ver mais" junto com os cards (senão a nova campanha começaria expandida)
+  if (hist && window.UI && UI.histAplicarLimite) UI.histAplicarLimite(hist);
   if (tabelaBrasileiraoCorpo) tabelaBrasileiraoCorpo.innerHTML = ''; // limpa a tabela da liga
 }
 

@@ -453,3 +453,21 @@ body {
 .mp-card-forte { border-color: rgba(43,212,106,0.5); background: rgba(43,212,106,0.06); }
 .mp-card-forte:hover { background: rgba(43,212,106,0.12); border-color: var(--accent, #2BD46A); }
 .mp-card-forte .mp-card-titulo { color: var(--accent, #2BD46A); }
+
+/* ── "Ver mais" — link de ação para revelar o resto de uma lista ─────────────────
+   Componente canônico. `.perfil-ver-mais` (css/perfil.css) é a versão antiga da mesma
+   coisa e deve ser consolidada aqui — ver DESIGN-SYSTEM.md §6. Não faça a terceira cópia. */
+.ver-mais {
+  background: none; border: none; cursor: pointer;
+  color: var(--accent, #2BD46A); font-family: 'Archivo', sans-serif;
+  font-weight: 700; font-size: var(--fs-sm); padding: 0.2rem 0.3rem;
+  transition: opacity 0.15s ease;
+}
+.ver-mais:hover { opacity: 0.75; text-decoration: underline; }
+
+/* No histórico de partidas o "Ver mais" é um bloco centrado, abaixo dos cards visíveis. */
+.hist-ver-mais {
+  display: block; width: 100%;
+  margin: 0.5rem 0 0.2rem; padding: 0.55rem 0.3rem;
+  text-align: center;
+}
