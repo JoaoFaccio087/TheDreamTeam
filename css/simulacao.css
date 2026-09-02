@@ -654,7 +654,11 @@
   padding: 0.4rem 0.2rem 1rem;
 }
 .chave-copa.escondida { display: none; }
-.chave-aviso { color: var(--txt-soft); font-size: var(--fs-sm); padding: 1.5rem 0.5rem; text-align: center; }
+/* Mesmo caso do .mata-bloqueada: aviso solto dentro do .chave-copa flex (Copa do futebol). */
+.chave-aviso {
+  flex: 1 0 100%; margin: auto;
+  color: var(--txt-soft); font-size: var(--fs-sm); padding: 1.5rem 0.5rem; text-align: center;
+}
 
 .ck-col {
   display: flex;
@@ -886,7 +890,13 @@ td.grupo-time { text-align: left; }
 .partida-card:not(.expandido) .pbq-mapa { display: none; }
 
 /* ── Chaveamento (bracket) dos playoffs da NBA ── */
-.bkt-wrap { margin-top: 12px; border-top: 1px solid var(--linha); padding-top: 10px; }
+/* Também é filho único do .chave-copa flex: sem o flex-basis encolhia até o conteúdo e o
+   chaveamento ficava encostado à esquerda em vez de ocupar o painel. min-width:0 mantém o
+   overflow-x interno do .bkt-colunas funcionando. */
+.bkt-wrap {
+  flex: 1 0 100%; min-width: 0;
+  margin-top: 12px; border-top: 1px solid var(--linha); padding-top: 10px;
+}
 .bkt-titulo {
   font-size: var(--fs-legenda); color: var(--txt-soft);
   text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; margin-bottom: 10px;
@@ -978,7 +988,14 @@ td.grupo-time { text-align: left; }
 .nba-classif-grid tr.grupo-classifica .grupo-pos { color: var(--accent, #2BD46A); font-weight: 700; }
 
 /* ── Aba Mata-a-Mata do vôlei: aviso de bloqueio + bracket ── */
+/* O container (#chave-copa / .chave-copa) é FLEX com align-items:stretch, pensado para as
+   colunas de fase do bracket. Um aviso solto vira um flex item e encolhe até a largura do
+   próprio texto, encostando à esquerda — era isso que deixava a mensagem "fora do centro"
+   nas abas Playoff (basquete) e Mata-a-Mata (vôlei). `flex: 1 0 100%` faz o aviso ocupar a
+   linha inteira e `margin: auto` o centra também na vertical (vence o stretch do container). */
 .mata-bloqueada {
+  flex: 1 0 100%;
+  margin: auto;
   text-align: center;
   padding: 48px 24px;
   color: var(--txt-soft);
@@ -989,7 +1006,10 @@ td.grupo-time { text-align: left; }
 }
 .mata-bloqueada-sub { font-size: 0.88rem; margin: 0; max-width: 360px; margin-inline: auto; }
 
+/* Idem: ocupa a linha inteira do .chave-copa para o justify-content:center abaixo ter
+   contra o que centralizar (antes centralizava dentro da própria largura do conteúdo). */
 .mata-volei {
+  flex: 1 0 100%; min-width: 0;
   display: flex; gap: 16px; padding: 16px; overflow-x: auto; justify-content: center;
 }
 .mata-fase-col { min-width: 200px; display: flex; flex-direction: column; gap: 10px; }
