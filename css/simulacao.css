@@ -1012,7 +1012,13 @@ td.grupo-time { text-align: left; }
   flex: 1 0 100%; min-width: 0;
   display: flex; gap: 16px; padding: 16px; overflow-x: auto; justify-content: center;
 }
-.mata-fase-col { min-width: 200px; display: flex; flex-direction: column; gap: 10px; }
+/* justify-content:center — cada coluna centraliza os seus confrontos na vertical, então a
+   FINAL (1 jogo) fica alinhada ao meio da SEMIFINAL (2 jogos), como na chave do futebol e
+   do basquete. Sem isso as colunas começavam todas no topo e a final ficava "subida". */
+.mata-fase-col {
+  min-width: 200px; display: flex; flex-direction: column;
+  justify-content: center; gap: 10px;
+}
 .mata-fase-titulo {
   font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;
   color: var(--txt-soft); text-align: center; padding-bottom: 6px;

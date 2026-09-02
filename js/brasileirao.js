@@ -403,6 +403,22 @@ function limparResiduosDeEsporte(esporte) {
   // Chave/bracket do esporte anterior não pode sobrar na aba.
   var chave = document.getElementById('chave-copa');
   if (chave) chave.innerHTML = '';
+
+  // A ABA ATIVA também vazava: saindo de um basquete que terminou na aba Playoff, a
+  // campanha seguinte abria já nessa aba (com o painel da chave visível e o histórico
+  // escondido). Toda campanha começa na aba Simulação.
+  var histJogos = document.getElementById('historico-jogos');
+  if (histJogos) histJogos.classList.remove('escondida');
+  if (chave) chave.classList.add('escondida');
+  ['volei-classif-painel', 'nba-classif-painel'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.add('escondida');
+  });
+  var tabs = { 'sim-tab-jogos': true, 'sim-tab-classif': false, 'sim-tab-chave': false };
+  Object.keys(tabs).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle('sim-tab-ativa', tabs[id]);
+  });
 }
 
 function configurarTelaSimulacao() {

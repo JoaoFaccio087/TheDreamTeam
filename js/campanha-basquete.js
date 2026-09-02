@@ -83,7 +83,15 @@
   // Gera o calendário de returno duplo (método do círculo): cada time joga contra
   // todos, ida e volta. n times → (n-1)*2 rodadas. Índice 0 = você.
   function gerarCalendarioNBA(n) {
-    if (n % 2 !== 0) n = n + 1;   // com nº ímpar, adiciona um "bye" (folga)
+    // ⚠️ BUG CORRIGIDO (set/2026): o filtro do "bye" era `a !== n-1 && b !== n-1` aplicado
+    // SEMPRE, mesmo quando n já era par e nenhum bye tinha sido adicionado. Nesse caso o
+    // índice n-1 é um TIME DE VERDADE, e ele era removido de todas as rodadas: ficava com
+    // 0 jogos na tabela (o João flagrou "Detroit Pistons 1990-91 · J=0" num print) e, de
+    // quebra, o adversário dele folgava naquela rodada — era isso que deixava você com
+    // menos jogos que os outros na classificação. O bye só existe se foi criado aqui.
+    var comBye = (n % 2 !== 0);
+    if (comBye) n = n + 1;
+    var byeId = comBye ? (n - 1) : -1;   // -1 = não há bye, todos os índices são reais
     var ids = [];
     for (var i = 0; i < n; i++) ids.push(i);
     var turno = [];
@@ -91,7 +99,7 @@
       var rodada = [];
       for (var k = 0; k < n / 2; k++) {
         var a = ids[k], b = ids[n - 1 - k];
-        if (a !== n - 1 && b !== n - 1) {   // ignora o "bye" fictício (índice n-1 extra)
+        if (a !== byeId && b !== byeId) {
           rodada.push(r % 2 === 0 ? [a, b] : [b, a]);
         }
       }
@@ -308,6 +316,18 @@
     po.confrontos = novos;
     po.seuConfrontoIdx = 0;
     novos.forEach(function (par, i) { if (par[0].voce || par[1].voce) po.seuConfrontoIdx = i; });
+
+    // Preenche os SLOTS da próxima rodada no bracket visual. `bracketVazio` cria as fases
+    // futuras com { a: null, b: null } e, até aqui, ninguém as preenchia: só o `vencedor` da
+    // fase CORRENTE era gravado. Resultado: a coluna SEMIFINAL da SUA conferência ficava em
+    // "A definir" para sempre, mesmo depois de você vencer a 1ª rodada — enquanto a outra
+    // conferência avançava normal (avancarOutraConfLiga já preenche a dela).
+    if (po.bracketConf && po.bracketConf[po.faseIdx]) {
+      novos.forEach(function (par, i) {
+        var slot = po.bracketConf[po.faseIdx][i];
+        if (slot) { slot.a = par[0]; slot.b = par[1]; slot.vencedor = null; }
+      });
+    }
 
     return { serieAcabou: true, venceuSerie: true, campeaoNBA: false, campeaoConf: false,
              eliminado: false, proximaFase: proxFase.nome, placarSerie: alvo + '-' + po.serie.vAdv };

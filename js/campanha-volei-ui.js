@@ -678,6 +678,11 @@ function selecionarAbaVolei(qual) {
 function renderClassificacaoVoleiAba(camp) {
   var alvo = document.getElementById('volei-classificacao');
   if (!alvo || !camp) return;
+  // A VNL é liga ÚNICA: não tem `camp.grupos`, então montarTabelaGrupoVoleiHTML voltava
+  // vazio e a aba Classificação ficava em branco a campanha inteira. O card da aba
+  // Simulação já mostrava a tabela certa porque usa mostrarTabelaVNL — aqui faltava a
+  // mesma bifurcação que o salvarCampanhaVolei já fazia.
+  if (camp.vnl) { mostrarTabelaVNL(camp); return; }
   alvo.innerHTML = montarTabelaGrupoVoleiHTML(camp);
 }
 
