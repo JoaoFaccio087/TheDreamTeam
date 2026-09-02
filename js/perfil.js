@@ -1005,7 +1005,9 @@
     var ov = document.createElement('div');
     ov.className = 'modal-confirm mc-overlay';
     ov.innerHTML =
-      '<div class="modal-confirm-box mc-conq-box" role="dialog" aria-modal="true">' +
+      // scroll-fino: padrão único de barra de rolagem do app (base.css). Sem ele o modal
+      // ficava com a scrollbar cheia do sistema, destoando do resto.
+      '<div class="modal-confirm-box mc-conq-box scroll-fino" role="dialog" aria-modal="true">' +
         '<button type="button" class="mc-conq-fechar" data-fechar aria-label="Fechar">&times;</button>' +
         '<p class="modal-confirm-titulo">Histórico</p>' +
         '<div class="historico-lista mc-hist-lista"></div>' +

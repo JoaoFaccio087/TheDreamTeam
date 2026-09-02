@@ -283,6 +283,7 @@ function pularMataVolei(camp) {
 
     res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
     acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+    renderMataVolei(camp);   // mantém a chave em dia também no "Pular tudo"
     if (res.campeao || res.eliminado) break;
   }
 
@@ -474,6 +475,7 @@ function pularFinalEightVNL(camp) {
 
     res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
     acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+    renderMataVolei(camp);   // mantém a chave em dia também no "Pular tudo"
     if (res.campeao || res.eliminado) break;
   }
 
@@ -512,6 +514,10 @@ function iniciarPartidaFinalEightVNL() {
       if (btn) btn.disabled = false;
       var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
       acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+      // Redesenha a chave AGORA. Antes o renderMataVolei só rodava ao TROCAR de aba, então
+      // quem ficava parado na aba Mata-a-Mata via o confronto congelado na fase antiga
+      // mesmo depois de vencer. O basquete já fazia isso (mostrarBracketPlayoffs no commit).
+      renderMataVolei(camp);
 
       if (btn) {
         if (res.campeao) {
@@ -572,6 +578,10 @@ function iniciarPartidaMataVolei() {
       if (btn) btn.disabled = false;
       var res = CampanhaVolei.registrarJogoMata(camp, roteiro.setsA, roteiro.setsB, forcaSelecaoVolei);
       acumularStatsVolei(roteiro, roteiro.setsA, roteiro.setsB);
+      // Redesenha a chave AGORA. Antes o renderMataVolei só rodava ao TROCAR de aba, então
+      // quem ficava parado na aba Mata-a-Mata via o confronto congelado na fase antiga
+      // mesmo depois de vencer. O basquete já fazia isso (mostrarBracketPlayoffs no commit).
+      renderMataVolei(camp);
 
       if (btn) {
         if (res.campeao) {

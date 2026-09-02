@@ -378,6 +378,33 @@ function criarCardFinalBrasileirao(pos, campeao) {
 // CONFIGURAÇÃO DA TELA / MODAL --------------------------------------------------
 
 // Mostra/esconde os elementos exclusivos do Brasileirão ao entrar na simulação.
+// As sim-tabs e os painéis de classificação são COMPARTILHADOS entre os esportes, mas cada
+// um só os configura quando a PRIMEIRA partida da campanha começa (prepararAbasVolei /
+// prepararAbasBasquete). Resultado: ao sair de uma campanha de basquete e entrar numa de
+// vôlei, a tela aparecia com os rótulos do basquete ("Playoff") e com o painel
+// #nba-classif-painel ainda pendurado, até a 1ª partida rodar. Só um F5 limpava.
+// Esta função roda ao ENTRAR na tela de simulação e apaga o resíduo do esporte anterior.
+function limparResiduosDeEsporte(esporte) {
+  // Painéis de classificação específicos: remove os que não são do esporte atual.
+  var paineis = { volei: 'volei-classif-painel', basquete: 'nba-classif-painel' };
+  Object.keys(paineis).forEach(function (k) {
+    if (k === esporte) return;
+    var el = document.getElementById(paineis[k]);
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+  });
+
+  // Rótulo da 3ª aba: cada esporte reescreve no prepararAbas*, mas só na 1ª partida.
+  // Aqui deixamos um rótulo coerente já na entrada da tela.
+  var tabChave = document.getElementById('sim-tab-chave');
+  if (tabChave) {
+    tabChave.textContent = (esporte === 'basquete') ? 'Playoff' : 'Mata-a-Mata';
+  }
+
+  // Chave/bracket do esporte anterior não pode sobrar na aba.
+  var chave = document.getElementById('chave-copa');
+  if (chave) chave.innerHTML = '';
+}
+
 function configurarTelaSimulacao() {
   var ehLiga = ehFormatoLiga(modoSelecionado);
   if (tabelaBrasileirao) tabelaBrasileirao.classList.toggle('escondida', !ehLiga);
@@ -402,7 +429,8 @@ function configurarTelaSimulacao() {
   // senão o VNL/vôlei ficava sem as abas e a tela não iniciava direito.
   var ehVoleiC    = (typeof ehCompeticaoVolei === 'function') && ehCompeticaoVolei(modoSelecionado);
   var ehBasqueteC = (typeof ehCompeticaoBasquete === 'function') && ehCompeticaoBasquete(modoSelecionado);
-  if (ehVoleiC || ehBasqueteC) return;
+  if (ehVoleiC || ehBasqueteC) { limparResiduosDeEsporte(ehVoleiC ? 'volei' : 'basquete'); return; }
+  limparResiduosDeEsporte('futebol');
 
   // Copa do Mundo: mostra as abas "Simulação" / "Mata-a-Mata"
   var ehCopa  = (modoSelecionado === 'copa');
