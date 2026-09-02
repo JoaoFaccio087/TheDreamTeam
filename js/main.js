@@ -344,21 +344,17 @@ if (btnPularTudo) btnPularTudo.addEventListener('click', function () {
       campanhaBasqueteAtual && campanhaBasqueteAtual.liga) {
     UI.modalConfirm({
       titulo: 'Pular simulação',
+      // Sem emoji: o marcador de cada opção é a seta em CSS (.mp-card::after). Emoji
+      // renderiza diferente em cada sistema e destoava do resto da interface.
       html: '<p class="mp-sub">Escolha até onde deseja pular. Os jogos pulados são simulados automaticamente.</p>' +
             '<div class="mp-opcoes">' +
               '<button type="button" id="mp-so-corridos" class="mp-card">' +
-                '<span class="mp-card-icone">⏩</span>' +
-                '<span class="mp-card-texto">' +
-                  '<span class="mp-card-titulo">Só a temporada regular</span>' +
-                  '<span class="mp-card-desc">Simula os pontos corridos restantes e para nos playoffs, para você jogá-los.</span>' +
-                '</span>' +
+                '<span class="mp-card-titulo">Só a temporada regular</span>' +
+                '<span class="mp-card-desc">Simula os pontos corridos restantes e para nos playoffs, para você jogá-los.</span>' +
               '</button>' +
               '<button type="button" id="mp-tudo" class="mp-card mp-card-forte">' +
-                '<span class="mp-card-icone">⏭️</span>' +
-                '<span class="mp-card-texto">' +
-                  '<span class="mp-card-titulo">Tudo até o fim</span>' +
-                  '<span class="mp-card-desc">Simula a temporada e os playoffs de uma vez, direto ao resultado final.</span>' +
-                '</span>' +
+                '<span class="mp-card-titulo">Tudo até o fim</span>' +
+                '<span class="mp-card-desc">Simula a temporada e os playoffs de uma vez, direto ao resultado final.</span>' +
               '</button>' +
             '</div>',
       confirmar: '',

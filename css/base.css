@@ -425,34 +425,49 @@ body {
    agora, mas os botões seguem no DOM (listeners do multiplayer intactos). */
 .mj-oculto { display: none !important; }
 
-/* ── Modal de "pular" do basquete: subtítulo + opções em botões padrão ── */
+/* ── Modal de "pular" do basquete: subtítulo + opções em cartões ──────────────
+   O conteúdo é injetado via UI.modalConfirm({html}), que renderiza o corpo num DIV
+   (não num <p>) — sem isso o parser expulsava estes blocos do container. */
 .mp-sub {
   font-size: var(--fs-sm, 0.85rem); color: var(--txt-soft, #9aa6b2);
-  margin: 0 0 18px; line-height: 1.5; text-align: center;
+  margin: 0 0 1rem; line-height: 1.5; text-align: center;
 }
-.mp-opcoes { display: flex; flex-direction: column; gap: 12px; }
-/* Cartões de opção: ícone + título + descrição do que cada escolha faz (redesign) */
+.mp-opcoes { display: flex; flex-direction: column; gap: 0.6rem; }
+/* Cartão de opção: título + descrição. Sem emoji — o marcador é a seta do ::after,
+   que herda a cor do tema e é igual em qualquer sistema. */
 .mp-card {
-  display: flex; align-items: flex-start; gap: 14px; text-align: left;
-  width: 100%; padding: 16px; border-radius: 12px;
-  background: var(--elev-1, #1a1c22); color: var(--txt, #e8ecf0);
+  position: relative;
+  display: flex; flex-direction: column; gap: 0.25rem;
+  text-align: left; width: 100%;
+  padding: 0.85rem 2.2rem 0.85rem 1rem;
+  border-radius: var(--raio-md);
+  background: transparent; color: var(--txt, #e8ecf0);
   border: 1px solid var(--linha, rgba(255,255,255,0.12)); cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
-.mp-card:hover { background: var(--elev-2, #22252c); border-color: var(--accent, #2BD46A); }
-.mp-card:active { transform: translateY(1px); }
-.mp-card-icone { font-size: 1.5rem; line-height: 1; flex-shrink: 0; margin-top: 2px; }
-.mp-card-texto { display: flex; flex-direction: column; gap: 4px; }
+.mp-card::after {
+  content: '›';
+  position: absolute; right: 0.95rem; top: 50%; transform: translateY(-50%);
+  font-size: 1.25rem; line-height: 1; color: var(--txt-soft, #9aa6b2);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.mp-card:hover { background: var(--elev-1, #1a1c22); border-color: var(--accent, #2BD46A); }
+.mp-card:hover::after { color: var(--accent, #2BD46A); transform: translateY(-50%) translateX(2px); }
+.mp-card:focus-visible { outline: 2px solid var(--accent, #2BD46A); outline-offset: 2px; }
 .mp-card-titulo {
-  font-family: 'Archivo', sans-serif; font-size: 0.98rem; font-weight: 700;
+  font-family: 'Archivo', sans-serif; font-size: var(--fs-base); font-weight: 700;
 }
 .mp-card-desc {
-  font-size: 0.82rem; color: var(--txt-soft, #9aa6b2); line-height: 1.45;
+  font-size: var(--fs-mini); color: var(--txt-soft, #9aa6b2); line-height: 1.4;
 }
-/* Opção "tudo até o fim": borda de destaque no tom do tema, sem virar botão sólido gritante */
-.mp-card-forte { border-color: rgba(43,212,106,0.5); background: rgba(43,212,106,0.06); }
-.mp-card-forte:hover { background: rgba(43,212,106,0.12); border-color: var(--accent, #2BD46A); }
+/* Opção "tudo até o fim": só a borda no tom do tema — sem preencher o fundo, para as
+   duas opções terem o mesmo peso visual e a escolha não parecer induzida. */
+.mp-card-forte { border-color: rgba(43,212,106,0.45); }
 .mp-card-forte .mp-card-titulo { color: var(--accent, #2BD46A); }
+.mp-card-forte::after { color: var(--accent, #2BD46A); }
+
+/* Só o Cancelar nas ações: encolhe para não virar uma barra larga sob os cartões. */
+.modal-confirm-acoes .btn-sec:only-child { flex: 0 0 auto; min-width: 120px; }
 
 /* ── "Ver mais" — link de ação para revelar o resto de uma lista ─────────────────
    Componente canônico. `.perfil-ver-mais` (css/perfil.css) é a versão antiga da mesma

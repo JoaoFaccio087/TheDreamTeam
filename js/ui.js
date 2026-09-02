@@ -169,7 +169,12 @@
     overlay.innerHTML =
       '<div class="modal-confirm-box" role="dialog" aria-modal="true">' +
         (opts.titulo ? '<p class="modal-confirm-titulo">' + esc(opts.titulo) + '</p>' : '') +
-        '<p class="modal-confirm-texto">' + corpo + '</p>' +
+        // DIV, não <p>: modais que passam `html` injetam <div>/<button> aqui, e <p> não
+        // pode conter conteúdo de bloco — o parser fechava o <p> na marra, cuspia o
+        // conteúdo como irmão do box e ainda deixava um <p> vazio + um <p> fantasma,
+        // cada um com sua margem. Era essa a bagunça de espaçamento do modal de "pular"
+        // do basquete. O CSS mira a CLASSE, então trocar a tag não muda a aparência.
+        '<div class="modal-confirm-texto">' + corpo + '</div>' +
         '<div class="modal-confirm-acoes">' +
           '<button type="button" class="btn-rolar btn-sec" data-acao="cancelar">' + esc(rotCanc) + '</button>' +
           // Só renderiza o botão confirmar quando há rótulo — modais com opções próprias
