@@ -702,29 +702,59 @@ function renderMataVolei(camp) {
     return;
   }
 
-  // Tem mata: mostra os confrontos por fase + seus resultados (do histórico).
+  // Tem mata: desenha a chave COMPLETA por fase — todos os confrontos, não só o seu.
+  // Antes esta aba lia só `m.historico` (que guarda apenas os SEUS jogos), então o
+  // jogador nunca via os outros confrontos da fase nem quem levou o título se caísse
+  // antes da final. Agora lê `m.bracket`, preenchido pelo motor a cada fase.
   var m = camp.mata;
+
+  function nomeTime(t) {
+    if (!t) return 'A definir';
+    return UI.esc(t.nome || (t.clubeRef && t.clubeRef.clube) || '—');
+  }
+
   var html = '<div class="mata-volei">';
   (m.fases || []).forEach(function (fase, idx) {
-    var reg = (m.historico || []).filter(function (h) { return h.faseIdx === idx || h.fase === fase.nome; });
+    var jogos = (m.bracket && m.bracket[idx]) || [];
     html += '<div class="mata-fase-col">';
-    html += '<div class="mata-fase-titulo">' + fase.nome + '</div>';
-    if (reg.length) {
-      reg.forEach(function (h) {
-        var venc = h.venceu;
-        html += '<div class="mata-jogo' + (venc ? ' mata-venceu' : ' mata-perdeu') + '">' +
-                  '<span class="mata-jogo-time">' + nomeDoTime + '</span>' +
-                  '<span class="mata-jogo-placar">' + h.setsVoce + ' – ' + h.setsAdv + '</span>' +
-                  '<span class="mata-jogo-time">' + (h.adversario || '—') + '</span>' +
+    html += '<div class="mata-fase-titulo">' + UI.esc(fase.nome) + '</div>';
+
+    if (!jogos.length) {
+      var emDisputa = (idx === (m.faseIdx | 0));
+      html += '<div class="mata-jogo ' + (emDisputa ? 'mata-atual' : 'mata-futuro') + '">' +
+                '<span class="mata-jogo-time">' + (emDisputa ? 'Em disputa…' : 'A definir') + '</span>' +
+              '</div>';
+    } else {
+      jogos.forEach(function (j) {
+        var resolvido = !!j.vencedor;
+        var cls = 'mata-jogo';
+        if (j.seu) cls += resolvido ? (j.vencedor && j.vencedor.voce ? ' mata-venceu' : ' mata-perdeu') : ' mata-atual';
+        if (!resolvido && !j.seu) cls += ' mata-futuro';
+        var placar = resolvido ? (j.setsA + ' – ' + j.setsB) : 'vs';
+        var aVenc = resolvido && j.vencedor === j.a;
+        var bVenc = resolvido && j.vencedor === j.b;
+        html += '<div class="' + cls + '">' +
+                  '<span class="mata-jogo-time' + (aVenc ? ' mata-time-venc' : '') + '">' + nomeTime(j.a) + '</span>' +
+                  '<span class="mata-jogo-placar">' + placar + '</span>' +
+                  '<span class="mata-jogo-time' + (bVenc ? ' mata-time-venc' : '') + '">' + nomeTime(j.b) + '</span>' +
                 '</div>';
       });
-    } else if (idx === (m.faseIdx | 0)) {
-      html += '<div class="mata-jogo mata-atual"><span class="mata-jogo-time">Em disputa…</span></div>';
-    } else {
-      html += '<div class="mata-jogo mata-futuro"><span class="mata-jogo-time">A definir</span></div>';
     }
     html += '</div>';
   });
+
+  // Coluna do campeão — igual à chave do futebol (renderChaveCopa).
+  var ultimaFase = (m.bracket || [])[(m.fases || []).length - 1] || [];
+  var campeao = m.campeaoTorneio || (ultimaFase[0] && ultimaFase[0].vencedor) || null;
+  if (campeao) {
+    html += '<div class="mata-fase-col mata-col-campeao">' +
+              '<div class="mata-fase-titulo">CAMPEÃO</div>' +
+              '<div class="mata-jogo mata-campeao' + (campeao.voce ? ' mata-venceu' : '') + '">' +
+                '<span class="mata-jogo-time">' + nomeTime(campeao) + '</span>' +
+              '</div>' +
+            '</div>';
+  }
+
   html += '</div>';
   alvo.innerHTML = html;
 }

@@ -276,8 +276,10 @@
       vivos: cls,
       confrontos: confrontos,
       seuConfrontoIdx: confrontos.findIndex(function (par) { return par[0].voce || par[1].voce; }),
-      historico: []
+      historico: [],
+      bracket: []            // chave COMPLETA por fase (ver montarMataVolei)
     };
+    camp.mata.bracket.push(faseParaBracket(confrontos, camp.mata.seuConfrontoIdx));
     return camp.mata;
   }
 
@@ -342,6 +344,60 @@
   // Monta o chaveamento do mata a partir dos classificados do grupo. Com 1 grupo,
   // os top-N avançam. Semeadura simples: 1º x último, 2º x penúltimo (evita você
   // pegar o líder logo de cara se você passou em 1º). Guarda em camp.mata.
+  // Placar em sets plausível para um confronto de BASTIDORES (sem você em quadra).
+  // O vencedor sempre fecha em 3; os sets do perdedor saem da diferença de força —
+  // jogo equilibrado tende a 3-2, jogo desigual a 3-0. Existe para a aba Mata-a-Mata
+  // poder mostrar os OUTROS confrontos com placar, não só "venceu/perdeu".
+  function setsBastidoresVolei(forcaVenc, forcaPerd) {
+    var dif = (forcaVenc || 70) - (forcaPerd || 70);
+    var r = Math.random();
+    if (dif > 6)  return r < 0.65 ? 0 : 1;
+    if (dif > 2)  return r < 0.45 ? 0 : (r < 0.85 ? 1 : 2);
+    return r < 0.25 ? 0 : (r < 0.6 ? 1 : 2);
+  }
+
+  // Cria a lista de confrontos de UMA fase para a chave persistente (camp.mata.bracket).
+  // `confrontos` é sobrescrito a cada fase pelo motor; o bracket guarda TODAS as fases,
+  // como o chaveCopa.rounds do futebol, para a aba Mata-a-Mata poder desenhar o histórico.
+  function faseParaBracket(confrontos, seuIdx) {
+    return confrontos.map(function (par, idx) {
+      return { a: par[0], b: par[1], vencedor: null, setsA: null, setsB: null,
+               seu: (idx === seuIdx) };
+    });
+  }
+
+  // Você caiu, mas o torneio continua: completa as fases restantes do bracket só na
+  // visualização (sem tocar em confrontos/seuConfrontoIdx, que o fluxo da UI usa).
+  // Espelha o simularRestoChave() do futebol — sem isso a aba Mata-a-Mata ficava com
+  // "A definir" nas fases seguintes e o jogador nunca via quem levou o título.
+  function completarBracketVolei(m, vencedores, faseIdx) {
+    var vivos = vencedores.slice();
+    var f = faseIdx;
+    while (vivos.length >= 2 && f < m.fases.length) {
+      var pares = [];
+      var i = 0, j = vivos.length - 1;
+      while (i < j) { pares.push([vivos[i], vivos[j]]); i++; j--; }
+      var slots = faseParaBracket(pares, -1);
+      var proximos = [];
+      pares.forEach(function (par, idx) {
+        var a = par[0], b = par[1];
+        var pa = (a.forca || 70) + (Math.random() - 0.5) * 12;
+        var pb = (b.forca || 70) + (Math.random() - 0.5) * 12;
+        var venc = pa >= pb ? a : b;
+        var perd = (venc === a) ? b : a;
+        var ps = setsBastidoresVolei(venc.forca, perd.forca);
+        slots[idx].vencedor = venc;
+        slots[idx].setsA = (venc === a) ? 3 : ps;
+        slots[idx].setsB = (venc === a) ? ps : 3;
+        proximos.push(venc);
+      });
+      m.bracket[f] = slots;
+      vivos = proximos;
+      f++;
+    }
+    m.campeaoTorneio = vivos[0] || null;
+  }
+
   function montarMataVolei(camp) {
     var cls = classificacaoGrupo(camp).slice(0, camp.avancamPorGrupo).map(function (l) { return l.time; });
     // chaveamento: emparelha extremos
@@ -356,8 +412,10 @@
       seuConfrontoIdx: confrontos.findIndex(function (par) {
         return par[0].voce || par[1].voce;
       }),
-      historico: []          // { fase, adversario, setsVoce, setsAdv, venceu }
+      historico: [],         // { fase, adversario, setsVoce, setsAdv, venceu }
+      bracket: []            // chave COMPLETA por fase (todos os confrontos, não só o seu)
     };
+    camp.mata.bracket.push(faseParaBracket(confrontos, camp.mata.seuConfrontoIdx));
     return camp.mata;
   }
 
@@ -384,15 +442,32 @@
 
     // Vencedores da fase: o seu (se venceu) + os dos outros confrontos (por força+sorte).
     var vencedores = [];
+    if (!m.bracket) m.bracket = [];                                   // campanhas antigas
+    if (!m.bracket[m.faseIdx]) m.bracket[m.faseIdx] = faseParaBracket(m.confrontos, m.seuConfrontoIdx);
+    var faseBracket = m.bracket[m.faseIdx];
+
     m.confrontos.forEach(function (par, idx) {
+      var slot = faseBracket[idx] || {};
+      var venc;
       if (idx === m.seuConfrontoIdx) {
-        vencedores.push(venceu ? (par[0].voce ? par[0] : par[1]) : (par[0].voce ? par[1] : par[0]));
+        venc = venceu ? (par[0].voce ? par[0] : par[1]) : (par[0].voce ? par[1] : par[0]);
+        // seu confronto: placar REAL da partida que você acabou de jogar
+        var euSouA = !!par[0].voce;
+        slot.setsA = euSouA ? setsVoce : setsAdv;
+        slot.setsB = euSouA ? setsAdv : setsVoce;
       } else {
         var a = par[0], b = par[1];
         var pa = (a.forca || 70) + (Math.random() - 0.5) * 12;
         var pb = (b.forca || 70) + (Math.random() - 0.5) * 12;
-        vencedores.push(pa >= pb ? a : b);
+        venc = pa >= pb ? a : b;
+        // bastidores: placar plausível em sets, para a chave não ficar sem números
+        var perd = (venc === a) ? b : a;
+        var perdedorSets = setsBastidoresVolei(venc.forca, perd.forca);
+        slot.setsA = (venc === a) ? 3 : perdedorSets;
+        slot.setsB = (venc === a) ? perdedorSets : 3;
       }
+      slot.vencedor = venc;
+      vencedores.push(venc);
     });
 
     m.faseIdx++;
@@ -406,6 +481,7 @@
     }
 
     if (!voceVivo) {
+      completarBracketVolei(m, vencedores, m.faseIdx);   // mostra quem levou o título
       return { venceu: venceu, campeao: false, eliminado: true, proximaFase: null };
     }
 
@@ -416,6 +492,7 @@
     m.confrontos = novos;
     m.vivos = vencedores;
     m.seuConfrontoIdx = novos.findIndex(function (par) { return par[0].voce || par[1].voce; });
+    m.bracket[m.faseIdx] = faseParaBracket(novos, m.seuConfrontoIdx);
 
     return { venceu: venceu, campeao: false, eliminado: false,
              proximaFase: m.fases[m.faseIdx] ? m.fases[m.faseIdx].nome : null };
