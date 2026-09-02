@@ -191,6 +191,12 @@ function iniciarTelaJogo(preservarEstilo) {
     tamanhoBloco.classList.toggle('jogo-tamanho-travado', !!campanhaEmAndamento);
     var pilulasTam = tamanhoBloco.querySelectorAll('.pilula');
     pilulasTam.forEach(function (b) { b.disabled = !!campanhaEmAndamento; });
+    // Sincroniza pílula ativa + descrição com o ESTADO (tamanhoTemporadaNBA). Antes, o
+    // texto vinha estático do index.html e só era atualizado no clique: ao abrir o
+    // basquete pela 1ª vez, "Regular" aparecia selecionado mas o texto era o de outro
+    // preset (e nem batia com nenhum — era resquício de uma versão antiga). Bastava
+    // trocar de tamanho e voltar para o texto se corrigir.
+    if (ehBasquete) sincronizarTamanhoTemporadaNBA();
   }
   if (jogoNomeBloco) jogoNomeBloco.classList.remove('escondida');
 

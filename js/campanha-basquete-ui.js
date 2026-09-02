@@ -476,6 +476,26 @@ function drenarRodadasPendentesNBA(camp) {
   camp.rodadasPendentes = [];
 }
 
+// Deixa as pílulas de TAMANHO DA TEMPORADA e o texto de descrição em sincronia com o
+// estado (`tamanhoTemporadaNBA`). Fonte da verdade = CampanhaBasquete.TAMANHOS_TEMPORADA,
+// nunca o texto estático do index.html — era esse hardcode que fazia o basquete abrir
+// mostrando "Regular" selecionado com a contagem de jogos de outro preset.
+function sincronizarTamanhoTemporadaNBA() {
+  var bloco = document.getElementById('jogo-tamanho-bloco');
+  if (!bloco || typeof CampanhaBasquete === 'undefined' || !CampanhaBasquete.TAMANHOS_TEMPORADA) return;
+
+  var id = (typeof tamanhoTemporadaNBA !== 'undefined' && tamanhoTemporadaNBA) ? tamanhoTemporadaNBA : 'regular';
+  var preset = CampanhaBasquete.TAMANHOS_TEMPORADA[id];
+  if (!preset) { id = 'regular'; preset = CampanhaBasquete.TAMANHOS_TEMPORADA.regular; }
+  if (!preset) return;
+
+  bloco.querySelectorAll('.pilula').forEach(function (b) {
+    b.classList.toggle('pilula-ativa', b.dataset.tamanho === id);
+  });
+  var desc = document.getElementById('jogo-tamanho-desc');
+  if (desc) desc.textContent = preset.desc;
+}
+
 function placarBastidoresBasquete(A, B) {
   var fa = A.forca + (Math.random() - 0.5) * 16;
   var fb = B.forca + (Math.random() - 0.5) * 16;
