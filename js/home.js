@@ -139,8 +139,10 @@ function calcularEstatisticasFooter() {
   }
 
   var textoEdicoes = (totEd === 1) ? '1 edição' : totEd + ' edições';
+  // separador de milhar no total de jogadores (ex.: 40.425), usando o padrão pt-BR.
+  var jogFmt = (typeof totJog === 'number') ? totJog.toLocaleString('pt-BR') : totJog;
   if (spanEdicoes)   spanEdicoes.textContent   = textoEdicoes;
-  if (spanJogadores) spanJogadores.textContent = totJog + ' jogadores';
+  if (spanJogadores) spanJogadores.textContent = jogFmt + ' jogadores';
   // Nº de competições vem de COMPETICOES (fonte da verdade), então nunca defasa ao
   // adicionar uma nova (Premier, Serie A, etc.).
   if (spanComps && typeof COMPETICOES !== 'undefined') {
