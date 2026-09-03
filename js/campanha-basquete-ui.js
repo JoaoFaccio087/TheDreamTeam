@@ -53,6 +53,31 @@ function acumularStatsBasquete(roteiro, pontosVoce, pontosAdv) {
     if (!statsRebotesBasquete[s.nome]) statsRebotesBasquete[s.nome] = 0;
     statsRebotesBasquete[s.nome] += s.rebotes;       // rebotes (à parte)
   });
+
+  registrarFlagsBasquete(roteiro, pontosVoce, pontosAdv, stats, meusNomes);
+}
+
+// Eventos finos da partida de basquete p/ as conquistas — ver a nota gêmea no vôlei.
+// Duplo/triplo-duplo com as 3 categorias que o motor produz (pts/reb/ast).
+function registrarFlagsBasquete(roteiro, pontosVoce, pontosAdv, stats, meusNomes) {
+  if (typeof campanhaFlags === 'undefined' || !campanhaFlags) return;
+  var f = campanhaFlags;
+
+  stats.forEach(function (s) {
+    if (!meusNomes[s.nome]) return;
+    if (s.pontos > f.bqMaxPontosJogo) f.bqMaxPontosJogo = s.pontos;
+    if (s.assistencias > f.bqMaxAssistJogo) f.bqMaxAssistJogo = s.assistencias;
+    var duplas = [s.pontos, s.rebotes, s.assistencias].filter(function (n) { return n >= 10; }).length;
+    if (duplas >= 2) f.bqDuploDuplo = true;
+    if (duplas >= 3) f.bqTriploDuplo = true;
+  });
+
+  if (pontosVoce > f.bqMaiorPontuacao) f.bqMaiorPontuacao = pontosVoce;
+
+  if (pontosVoce > pontosAdv) {
+    if ((pontosVoce - pontosAdv) > f.bqMaiorVantagem) f.bqMaiorVantagem = pontosVoce - pontosAdv;
+    if (roteiro && roteiro.prorrogacao) f.bqVenciProrrogacao = true;
+  }
 }
 
 // Monta a mini meia-quadra com os 5 titulares do MEU time posicionados (para exibir
@@ -543,6 +568,7 @@ function iniciarPartidaPlayoffNBA() {
     // um jogo do playoff fazia esse jogo simplesmente não contar na série.
     onResultado: function () {
       resSerie = CampanhaBasquete.registrarJogoSerieNBA(camp, roteiro.pontosA, roteiro.pontosB, forcaTimeBasquete);
+      registrarFlagsSerieNBA(camp, resSerie);
       acumularStatsBasquete(roteiro, roteiro.pontosA, roteiro.pontosB);
       mostrarBracketPlayoffs(camp);
     },
@@ -713,6 +739,31 @@ function pularPlayoffLigaNBA(camp) {
 }
 
 
+// Flags de SÉRIE do playoff (jogo 7, vassourada, playoff invicto). Rodam quando uma
+// série fecha; o placar da série vem do próprio motor (`po.serie`).
+function registrarFlagsSerieNBA(camp, res) {
+  if (!res || !res.serieAcabou) return;
+  if (typeof campanhaFlags === 'undefined' || !campanhaFlags) return;
+  var f = campanhaFlags, po = camp.playoff;
+  if (!po) return;
+
+  // O placar da série vem no retorno do motor ("v-d"): `po.serie` já pode ter sido
+  // ZERADO para a fase seguinte quando esta função roda.
+  if (!res.venceuSerie || !res.placarSerie) return;
+  var partes = String(res.placarSerie).split('-');
+  var vMeu = parseInt(partes[0], 10) | 0;
+  var vAdv = parseInt(partes[1], 10) | 0;
+
+  var melhorDe = CampanhaBasquete.melhorDeDaFase(camp);
+  if (vAdv === 0) f.bqVarridaSerie = true;                  // vassourada
+  if ((vMeu + vAdv) === melhorDe) f.bqJogo7 = true;         // foi ao último jogo possível
+  if (res.campeaoNBA) {
+    // Campeão sem perder NENHUM jogo de playoff em toda a campanha.
+    var derrotas = (po.historico || []).filter(function (h) { return !h.venceu; }).length;
+    if (derrotas === 0) f.bqPlayoffInvicto = true;
+  }
+}
+
 // Salva a campanha de basquete (espelha salvarCampanhaVolei; usa classificação da conf).
 function salvarCampanhaBasquete(camp, resultadoPlayoff) {
   if (typeof API === 'undefined' || !API.salvarPartida) return;
@@ -744,6 +795,8 @@ function salvarCampanhaBasquete(camp, resultadoPlayoff) {
       return { id: j.id, codigo: j.codigo, nome: j.nome, forca: j.forca | 0, gols: 0, asis: 0 };
     });
 
+  var fl = (typeof campanhaFlags !== 'undefined' && campanhaFlags) ? campanhaFlags : {};
+
   API.salvarPartida({
     modo: modoSelecionado,
     competicao: (COMPETICOES[modoSelecionado] && COMPETICOES[modoSelecionado].dados) || 'NBA',
@@ -752,6 +805,20 @@ function salvarCampanhaBasquete(camp, resultadoPlayoff) {
     vitorias: minha.v, empates: 0, derrotas: minha.d,
     golsPro: minha.pf, golsContra: minha.pa,
     detalhes: {
+      // Flags de evento fino — o backend lê daqui p/ desbloquear as conquistas de basquete.
+      bqMaxPontosJogo:  fl.bqMaxPontosJogo | 0,
+      bqMaxAssistJogo:  fl.bqMaxAssistJogo | 0,
+      bqDuploDuplo:     !!fl.bqDuploDuplo,
+      bqTriploDuplo:    !!fl.bqTriploDuplo,
+      bqMaiorVantagem:  fl.bqMaiorVantagem | 0,
+      bqMaiorPontuacao: fl.bqMaiorPontuacao | 0,
+      bqVenciProrrogacao: !!fl.bqVenciProrrogacao,
+      bqJogo7:          !!fl.bqJogo7,
+      bqVarridaSerie:   !!fl.bqVarridaSerie,
+      bqPlayoffInvicto: !!fl.bqPlayoffInvicto,
+      rebotesTotais:    Object.keys(statsRebotesBasquete).reduce(function (n, k) { return n + (statsRebotesBasquete[k] | 0); }, 0),
+      forcaElenco:      Math.round(forcaDoTime() || 0),
+
       temporada: camp.temporada,
       formato: (camp.formato && camp.formato.id) || (camp.tamanho && camp.tamanho.id) || 'liga',
       conferencia: nomeConf,

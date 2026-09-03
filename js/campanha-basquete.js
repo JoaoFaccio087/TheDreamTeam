@@ -305,7 +305,8 @@
 
     if (!proxFase) {
       // não havia próxima fase (fim) — campeão
-      return { serieAcabou: true, venceuSerie: true, campeaoNBA: true, eliminado: false, proximaFase: null };
+      return { serieAcabou: true, venceuSerie: true, campeaoNBA: true, eliminado: false,
+               placarSerie: po.serie.vMeu + '-' + po.serie.vAdv, proximaFase: null };
     }
 
     // Monta os confrontos da próxima rodada da sua conf a partir dos vencedores.

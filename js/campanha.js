@@ -31,10 +31,13 @@ function reiniciarCampanha() {
   if (typeof statsRebotesBasquete !== 'undefined') statsRebotesBasquete = {};
   campanhaBasqueteAtual = null;
   partidaIdBasquete = 0;
-  campanhaFlags     = {
-    hatTrick: false, poker: false, showDeBola: false,
-    maiorSaldoJogo: 0, finalNosPenaltis: false, matasNosPenaltis: 0
-  };
+  // Zera as flags de evento fino. O reset era LITERAL e listava só as do futebol: ao
+  // adicionar as de vôlei/basquete elas sobreviveriam de uma campanha para a outra
+  // (conquista desbloqueada por um jogo de duas campanhas atrás). Agora zera por tipo,
+  // então flag nova nunca mais precisa ser lembrada aqui.
+  Object.keys(campanhaFlags).forEach(function (k) {
+    campanhaFlags[k] = (typeof campanhaFlags[k] === 'number') ? 0 : false;
+  });
   if (btnResumo) btnResumo.classList.add('escondida'); // some até a próxima campanha terminar
   var stats = document.getElementById('stats-campanha');
   if (stats) stats.classList.add('escondida');          // só reaparece ao iniciar a 1ª partida

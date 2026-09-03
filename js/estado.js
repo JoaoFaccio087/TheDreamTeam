@@ -182,5 +182,30 @@ var campanhaFlags = {
   showDeBola:       false,  // venci de 7x0 com 5+ artilheiros diferentes num jogo
   maiorSaldoJogo:   0,      // maior saldo (gMeus - gAdv) num jogo vencido
   finalNosPenaltis: false,  // venci a FINAL nos pênaltis
-  matasNosPenaltis: 0       // nº de mata-matas que venci nos pênaltis nesta campanha
+  matasNosPenaltis: 0,      // nº de mata-matas que venci nos pênaltis nesta campanha
+
+  // ── VÔLEI ────────────────────────────────────────────────────────────
+  // Antes só o futebol alimentava flags: vôlei e basquete salvavam a campanha sem
+  // NENHUM evento fino, então as conquistas próprias desses esportes eram impossíveis
+  // de desbloquear (o backend decide o desbloqueio e não recebia o dado).
+  vlMaxPontosJogo:  0,      // maior nº de pontos de um jogador MEU numa partida
+  vlMaxAcesJogo:    0,      // maior nº de aces de um jogador MEU numa partida
+  vlVarrida:        false,  // venci por 3 a 0
+  vlMaiorVantagemSet: 0,    // maior diferença de pontos num set que venci
+  vlVenciTieBreak:  false,  // venci uma partida no 5º set (tie-break)
+  vlTieBreaksVencidos: 0,   // quantas partidas venci no tie-break nesta campanha
+  vlVirada:         false,  // venci por 3 a 2 estando 0 a 2 atrás
+  vlSemCederSet:    false,  // fui campeão sem perder um set
+
+  // ── BASQUETE ─────────────────────────────────────────────────────────
+  bqMaxPontosJogo:  0,      // maior pontuação de um jogador MEU numa partida
+  bqDuploDuplo:     false,  // algum jogador meu fez duplo-duplo
+  bqTriploDuplo:    false,  // algum jogador meu fez triplo-duplo
+  bqMaxAssistJogo:  0,      // maior nº de assistências de um jogador MEU
+  bqMaiorVantagem:  0,      // maior diferença de pontos numa partida que venci
+  bqMaiorPontuacao: 0,      // maior pontuação do MEU time numa partida
+  bqVenciProrrogacao: false,// venci um jogo na prorrogação
+  bqJogo7:          false,  // venci uma série levada ao último jogo possível
+  bqVarridaSerie:   false,  // venci uma série sem perder nenhum jogo
+  bqPlayoffInvicto: false   // fui campeão sem perder um jogo nos playoffs
 };

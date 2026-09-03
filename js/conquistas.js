@@ -160,8 +160,6 @@
 
     { id: 'vl_ponteiro',       categoria: 'Craques & Feitos', nome: 'Ponteiro implacável', desc: 'Um jogador seu marcou 30+ pontos numa partida', esporte: 'volei', desbloqueada: false },
     { id: 'vl_ace_show',       categoria: 'Craques & Feitos', nome: 'Chuva de aces',       desc: 'Um jogador seu fez 5+ aces numa partida',       esporte: 'volei', desbloqueada: false },
-    { id: 'vl_muralha_bloq',   categoria: 'Craques & Feitos', nome: 'Muralha de bloqueio', desc: 'Um jogador seu fez 8+ bloqueios numa partida',  esporte: 'volei', desbloqueada: false },
-    { id: 'vl_levantador',     categoria: 'Craques & Feitos', nome: 'Levantador de ouro',  desc: 'Um jogador seu deu 40+ assistências numa partida', esporte: 'volei', desbloqueada: false },
     { id: 'vl_selecao_ouro',   categoria: 'Craques & Feitos', nome: 'Seleção de ouro',     desc: 'Montou um sexteto com força média 90+',         esporte: 'volei', desbloqueada: false },
 
     // ══ BASQUETE — versões próprias das conquistas genéricas ══════════════════
@@ -236,8 +234,7 @@
     vl_maquina_pontos: 'raro', vl_pontuador_mor: 'epico', vl_mil_sets: 'lendario',
     vl_sem_ceder: 'lendario', vl_varridao: 'comum', vl_atropelo: 'raro', vl_virada: 'epico',
     vl_tie_break: 'raro', vl_nervos: 'epico',
-    vl_ponteiro: 'raro', vl_ace_show: 'epico', vl_muralha_bloq: 'epico',
-    vl_levantador: 'epico', vl_selecao_ouro: 'epico',
+    vl_ponteiro: 'raro', vl_ace_show: 'epico', vl_muralha_bloq: 'epico', vl_selecao_ouro: 'epico',
 
     // ── Basquete ──
     bq_maquina_pontos: 'raro', bq_pontuador_mor: 'epico', bq_mil_rebotes: 'epico',

@@ -69,6 +69,44 @@ function acumularStatsVolei(roteiro, setsVoce, setsAdv) {
     statsJogadores[s.nome].gols += s.pontos;
     statsJogadores[s.nome].asis += s.aces;
   });
+
+  registrarFlagsVolei(roteiro, setsVoce, setsAdv, stats, meusNomes);
+}
+
+// Eventos finos da partida de vôlei p/ as conquistas. O backend é quem desbloqueia, e
+// só enxerga o que vai em `detalhes` — sem isto, as conquistas de vôlei eram inatingíveis.
+// Só conta jogador MEU: pico do adversário não é feito seu.
+function registrarFlagsVolei(roteiro, setsVoce, setsAdv, stats, meusNomes) {
+  if (typeof campanhaFlags === 'undefined' || !campanhaFlags) return;
+  var f = campanhaFlags;
+
+  stats.forEach(function (s) {
+    if (!meusNomes[s.nome]) return;
+    if (s.pontos > f.vlMaxPontosJogo) f.vlMaxPontosJogo = s.pontos;
+    if (s.aces   > f.vlMaxAcesJogo)   f.vlMaxAcesJogo   = s.aces;
+  });
+
+  var venci = setsVoce > setsAdv;
+  if (!venci) return;
+
+  if (setsAdv === 0) f.vlVarrida = true;                       // 3 a 0
+  if (setsVoce === 3 && setsAdv === 2) {                       // decidido no 5º set
+    f.vlVenciTieBreak = true;
+    f.vlTieBreaksVencidos++;
+    // Virada: perdi os DOIS primeiros sets e ainda venci.
+    var sets = roteiro.roteiroSets || [];
+    var euSouA = true;   // prepararPartida sempre põe o meu time como A
+    if (sets.length >= 2) {
+      var perdi = function (st) { return euSouA ? (st.pa < st.pb) : (st.pb < st.pa); };
+      if (perdi(sets[0]) && perdi(sets[1])) f.vlVirada = true;
+    }
+  }
+
+  // Maior vantagem num set que venci (para "Atropelo").
+  (roteiro.roteiroSets || []).forEach(function (st) {
+    var meu = st.pa, adv = st.pb;
+    if (meu > adv && (meu - adv) > f.vlMaiorVantagemSet) f.vlMaiorVantagemSet = meu - adv;
+  });
 }
 
 // Inicia (ou continua) a campanha de vôlei e joga a próxima partida.
@@ -927,6 +965,11 @@ function salvarCampanhaVolei(camp, resultadoMata) {
   }
 
   var ehCampeao = !!(resultadoMata && resultadoMata.campeao);
+  if (ehCampeao && scTot === 0 && typeof campanhaFlags !== 'undefined' && campanhaFlags) {
+    campanhaFlags.vlSemCederSet = true;   // campeão sem perder UM set na campanha
+  }
+
+  var fl = (typeof campanhaFlags !== 'undefined' && campanhaFlags) ? campanhaFlags : {};
 
   API.salvarPartida({
     competicao: COMPETICOES[modoSelecionado].dados,   // "Mundial de Vôlei (M)" / "(F)"
@@ -940,6 +983,19 @@ function salvarCampanhaVolei(camp, resultadoMata) {
     posicao:    (resultadoMata && resultadoMata.posicao) || posicao || null,
     campeao:    ehCampeao,
     detalhes: {
+      // Flags de evento fino — o backend lê daqui p/ desbloquear as conquistas de vôlei.
+      vlMaxPontosJogo:    fl.vlMaxPontosJogo | 0,
+      vlMaxAcesJogo:      fl.vlMaxAcesJogo | 0,
+      vlVarrida:          !!fl.vlVarrida,
+      vlMaiorVantagemSet: fl.vlMaiorVantagemSet | 0,
+      vlVenciTieBreak:    !!fl.vlVenciTieBreak,
+      vlTieBreaksVencidos: fl.vlTieBreaksVencidos | 0,
+      vlVirada:           !!fl.vlVirada,
+      vlSemCederSet:      !!fl.vlSemCederSet,
+      // Totais da campanha (o backend soma entre campanhas p/ as de Progressão).
+      pontosTotais:       Object.keys(statsJogadores).reduce(function (n, k) { return n + (statsJogadores[k].gols | 0); }, 0),
+      forcaElenco:        Math.round(forcaDoTime() || 0),
+
       edicao:       camp.edicaoAno,
       formato:      camp.formato.id,
       grupo:        ehVNL ? 'Preliminar' : String.fromCharCode(65 + camp.seuGrupo),
