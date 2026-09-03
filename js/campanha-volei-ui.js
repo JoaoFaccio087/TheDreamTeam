@@ -23,6 +23,17 @@ function forcaSelecaoVolei(sel) {
 }
 
 // Retorna todas as seleções da competição de vôlei selecionada (via DADOS globais).
+// Rótulo da campanha quando as edições são MISTURADAS: "2006-2025" em vez de um ano só.
+// Os cards de partida mostram "Mundial de Vôlei (M) 2006-2025"; o adversário de cada jogo
+// já vem identificado com o próprio ano no nome ("Brasil 2010").
+function faixaDeEdicoes(selecoes) {
+  var anos = [];
+  (selecoes || []).forEach(function (c) { if (anos.indexOf(c.edicao) < 0) anos.push(c.edicao); });
+  if (!anos.length) return '';
+  anos.sort();
+  return (anos.length === 1) ? String(anos[0]) : (anos[0] + '-' + anos[anos.length - 1]);
+}
+
 function selecoesDaCompeticaoVolei() {
   var filtro = COMPETICOES[modoSelecionado].dados;   // ex.: "Mundial de Vôlei (M)" / "VNL (M)"
   var fonte  = [];
@@ -79,14 +90,18 @@ function iniciarPartidaVolei() {
   if (!campanhaVoleiAtual) {
     var todas = selecoesDaCompeticaoVolei();
     if (!todas.length) { console.warn('[volei] sem seleções para', modoSelecionado); return; }
-    var anos = [];
-    todas.forEach(function (c) { if (anos.indexOf(c.edicao) < 0) anos.push(c.edicao); });
-    var ano = anos[Math.floor(Math.random() * anos.length)];
-    var selecoes = todas.filter(function (c) { return c.edicao === ano; });
+
+    // TODAS as edições misturadas — é a mesma ideia do basquete (montarLigaNBA sorteia de
+    // todas as temporadas: Lakers 1995-96 e Lakers 2024-25 na mesma tabela) e é a premissa
+    // do jogo: cruzar gerações. Antes sorteávamos UMA edição e usávamos só as seleções
+    // dela; como cada edição tem 4-5 seleções, a campanha caía sempre no formato
+    // `reduzido`/`mini` e os formatos m16/m24/m32 nunca eram alcançados.
+    // O motor já nomeia cada seleção como "Clube ANO", então o cruzamento fica legível.
+    var selecoes = todas;
 
     var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
     campanhaVoleiAtual = CampanhaVolei.montarCampanhaVolei(selecoes, voceMonta, forcaSelecaoVolei);
-    campanhaVoleiAtual.edicaoAno = ano;
+    campanhaVoleiAtual.edicaoAno = faixaDeEdicoes(todas);
     campanhaVoleiAtual.jogosGrupoFeitos = 0;
     prepararAbasVolei();
   }
@@ -308,14 +323,12 @@ function iniciarPartidaVNL() {
   if (!campanhaVoleiAtual) {
     var todas = selecoesDaCompeticaoVolei();
     if (!todas.length) { console.warn('[vnl] sem seleções para', modoSelecionado); return; }
-    var anos = [];
-    todas.forEach(function (c) { if (anos.indexOf(c.edicao) < 0) anos.push(c.edicao); });
-    var ano = anos[Math.floor(Math.random() * anos.length)];
-    var selecoes = todas.filter(function (c) { return c.edicao === ano; });
+
+    var selecoes = todas;   // todas as edições misturadas — ver nota em iniciarPartidaVolei
 
     var voceMonta = { nome: nomeDoTime, forca: forcaDoTime(), jogadores: escalacao.filter(function (j) { return j !== null; }) };
     campanhaVoleiAtual = CampanhaVolei.montarCampanhaVNL(selecoes, voceMonta, forcaSelecaoVolei);
-    campanhaVoleiAtual.edicaoAno = ano;
+    campanhaVoleiAtual.edicaoAno = faixaDeEdicoes(todas);
     prepararAbasVolei();
   }
 

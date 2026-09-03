@@ -85,12 +85,23 @@
 
   // Escolhe o maior formato cujo total de seleções cabe no disponível.
   // disponivel = nº de seleções na edição (SEM contar você; você entra numa vaga).
+  // As fases do mata são DERIVADAS do nº de classificados, e essa derivação só fecha
+  // quando o número é potência de 2. O m24 classifica 12 (6 grupos × 2) e produzia
+  // fases sem sentido — "12 AVOS > 6 AVOS > 3 AVOS" —, o que só apareceu quando as
+  // edições passaram a ser misturadas e o formato virou alcançável. Enquanto a
+  // derivação não tratar byes, um formato com chave inválida é PULADO.
+  function chaveValida(f) {
+    var classificados = f.nGrupos * f.avancamPorGrupo;
+    return classificados >= 2 && (classificados & (classificados - 1)) === 0;
+  }
+
   function escolheFormato(disponivel) {
     // +1 porque você ocupa uma vaga do total
     var total = disponivel + 1;
     var ordem = ['m32', 'm24', 'm16', 'mini', 'reduzido'];
     for (var i = 0; i < ordem.length; i++) {
       var f = FORMATOS[ordem[i]];
+      if (!chaveValida(f)) continue;
       if (f.nGrupos * f.porGrupo <= total) return f;
     }
     return FORMATOS.reduzido;
@@ -306,8 +317,8 @@
 
   // Simula os jogos ENTRE ADVERSÁRIOS do seu grupo (bastidores) por força+sorte.
   // Preenche a tabela para dar uma classificação realista sem você ver cada jogo.
-  function simularJogosAdversariosGrupo(camp) {
-    var gr = camp.grupos[camp.seuGrupo];
+  // Resolve, nos bastidores, todos os jogos de UM grupo entre times que não são você.
+  function simularGrupoVolei(gr) {
     var times = gr.times.filter(function (t) { return !t.voce; });
     for (var i = 0; i < times.length; i++) {
       for (var j = i + 1; j < times.length; j++) {
@@ -318,10 +329,22 @@
         var setsB = pa >= pb ? (Math.random() < 0.5 ? 0 : 1) : 3;
         var la = gr.tabela.filter(function (l) { return l.time === a; })[0];
         var lb = gr.tabela.filter(function (l) { return l.time === b; })[0];
+        if (!la || !lb) continue;
         la.sp += setsA; la.sc += setsB; lb.sp += setsB; lb.sc += setsA;
         if (setsA > setsB) { la.v++; la.pts += 3; lb.d++; } else { lb.v++; lb.pts += 3; la.d++; }
       }
     }
+  }
+
+  // Bastidores da fase de grupos: resolve o SEU grupo e TODOS os outros.
+  // Antes só o seu grupo era simulado — de novo, funcionava por acidente enquanto os
+  // formatos alcançáveis tinham nGrupos=1. Com o m16, os outros 3 grupos terminavam com
+  // todo mundo em 0 jogos e os classificados saíam pela ordem da tabela, não por mérito.
+  function simularJogosAdversariosGrupo(camp) {
+    camp.grupos.forEach(function (gr, idx) {
+      if (idx === camp.seuGrupo) { simularGrupoVolei(gr); return; }   // menos os SEUS jogos
+      simularGrupoVolei(gr);
+    });
   }
 
   // Classificação final do grupo (ordena por pts, depois saldo de sets).
@@ -399,7 +422,24 @@
   }
 
   function montarMataVolei(camp) {
-    var cls = classificacaoGrupo(camp).slice(0, camp.avancamPorGrupo).map(function (l) { return l.time; });
+    // Classificados de TODOS os grupos, não só do seu. Antes esta função lia
+    // `classificacaoGrupo(camp)` (que devolve o SEU grupo) — funcionava por acidente
+    // porque os formatos alcançáveis, `reduzido`/`mini`, têm nGrupos=1 e "seu grupo" era
+    // o torneio inteiro. Ao misturar edições o formato virou m16 (4 grupos) e o mata saía
+    // com um único confronto: os classificados dos outros 3 grupos ficavam de fora.
+    //
+    // Semeadura: os 1ºs colocados de cada grupo primeiro, depois os 2ºs, etc. Emparelhando
+    // extremos (1º x último), o melhor 1º pega o pior classificado e ninguém reencontra o
+    // rival de grupo logo na 1ª fase — é o chaveamento clássico de copa.
+    var porPosicao = [];
+    for (var pos = 0; pos < camp.avancamPorGrupo; pos++) {
+      for (var g = 0; g < camp.grupos.length; g++) {
+        var linha = classificacaoGrupo(camp, g)[pos];
+        if (linha) porPosicao.push(linha.time);
+      }
+    }
+    var cls = porPosicao;
+
     // chaveamento: emparelha extremos
     var confrontos = [];
     var i = 0, j = cls.length - 1;
