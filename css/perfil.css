@@ -310,13 +310,9 @@
 }
 .perfil-bloco-cab .perfil-bloco-tit { margin: 0; }
 .perfil-bloco-contador { color: var(--txt-fraco, #6b7280); margin-left: 0.4rem; }
-.perfil-ver-mais {
-  background: none; border: none; cursor: pointer;
-  color: var(--accent, #2BD46A); font-family: 'Archivo', sans-serif;
-  font-weight: 700; font-size: var(--fs-sm); padding: 0.2rem 0.3rem;
-  transition: opacity 0.15s ease;
-}
-.perfil-ver-mais:hover { opacity: 0.75; text-decoration: underline; }
+/* `.perfil-ver-mais` foi CONSOLIDADA em `.ver-mais` (css/base.css) — as regras eram
+   idênticas byte a byte. Os botões do perfil usam `.ver-mais` + `.perfil-ver-mais`,
+   esta última mantida SÓ como gancho do seletor [data-ver] usado no perfil.js. */
 
 /* Grid das 12 conquistas em destaque: 6 col × 2 linhas cheias (sem buracos).
    Sobrepõe o .conq-grid base (auto-fill) para garantir linhas completas. */

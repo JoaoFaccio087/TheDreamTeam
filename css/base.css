@@ -470,8 +470,9 @@ body {
 .modal-confirm-acoes .btn-sec:only-child { flex: 0 0 auto; min-width: 120px; }
 
 /* ── "Ver mais" — link de ação para revelar o resto de uma lista ─────────────────
-   Componente canônico. `.perfil-ver-mais` (css/perfil.css) é a versão antiga da mesma
-   coisa e deve ser consolidada aqui — ver DESIGN-SYSTEM.md §6. Não faça a terceira cópia. */
+   Componente canônico, usado no histórico de partidas E no perfil. A antiga
+   `.perfil-ver-mais` foi consolidada aqui (set/2026) e sobrevive só como gancho de
+   seletor no perfil.js. Não faça outra cópia: use esta classe. */
 .ver-mais {
   background: none; border: none; cursor: pointer;
   color: var(--accent, #2BD46A); font-family: 'Archivo', sans-serif;

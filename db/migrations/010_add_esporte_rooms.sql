@@ -1,0 +1,21 @@
+-- 010_add_esporte_rooms.sql — marca de qual ESPORTE é cada sala online.
+--
+-- POR QUÊ: a 009 já adicionou `esporte` em `matches` (histórico de campanhas), mas
+-- `rooms` continuou sem. Hoje o esporte da sala é DERIVADO da competição a cada
+-- criação, em `salaState.criarSala` → `esporteDaCompeticao('NBA') = 'basquete'`.
+-- Isso funciona, mas amarra o dado a uma tabela de tradução em código: se uma
+-- competição for renomeada ('NBA' → 'NBA (EUA)'), toda sala já criada passa a
+-- resolver para o esporte errado, e o draft montaria com o nº de picks do futebol.
+-- Persistir o esporte no momento da criação congela a resposta certa.
+--
+-- POR QUÊ DEFAULT 'futebol': mesma razão da 009 — migração 100% aditiva e segura.
+-- Toda sala existente é de futebol, e todo INSERT que não informe o campo continua
+-- gravando 'futebol'. Nenhum código atual precisa mudar por causa desta coluna.
+--
+-- NOTA: `rooms` é uma tabela EFÊMERA (salas são descartadas ao fim da partida), então
+-- não há histórico a preservar aqui — ao contrário de `matches`. Por isso não há
+-- backfill: as salas antigas ou já acabaram ou são de futebol mesmo.
+--
+-- (idempotente: IF NOT EXISTS — cinto de segurança, além do controle do _migrations.)
+
+ALTER TABLE rooms ADD COLUMN IF NOT EXISTS esporte VARCHAR(20) NOT NULL DEFAULT 'futebol';

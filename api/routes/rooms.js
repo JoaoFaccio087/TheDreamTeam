@@ -3,6 +3,7 @@ const crypto      = require('crypto');
 const { z }       = require('zod');
 const pool        = require('../db');
 const requireAuth = require('../middleware/auth');
+const { esporteDaCompeticao } = require('../esportes-catalogo');
 
 const router = express.Router();
 router.use(requireAuth);
@@ -41,10 +42,14 @@ router.post('/', async (req, res) => {
       const codigo = gerarCodigo();
       try {
         const hostId = req.user.guest ? null : req.user.id;
+        // O esporte é resolvido AQUI, na criação, e PERSISTIDO — não derivado a cada
+        // leitura. Assim, se uma competição for renomeada no catálogo, as salas já
+        // criadas continuam com o esporte certo (e o draft com o nº de picks certo).
+        const esporte = esporteDaCompeticao(competicao) || 'futebol';
         const { rows } = await pool.query(
-          `INSERT INTO rooms (codigo, nome, host_user_id, competicao, velocidade, status)
-           VALUES ($1,$2,$3,$4,$5,'lobby') RETURNING *`,
-          [codigo, nome || `Sala ${codigo}`, hostId, competicao, velocidade]
+          `INSERT INTO rooms (codigo, nome, host_user_id, competicao, esporte, velocidade, status)
+           VALUES ($1,$2,$3,$4,$5,$6,'lobby') RETURNING *`,
+          [codigo, nome || `Sala ${codigo}`, hostId, competicao, esporte, velocidade]
         );
         sala = rows[0];
       } catch (err) {
