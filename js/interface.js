@@ -56,3 +56,21 @@ function remontarCampoJogo(n) {
   slotsJogo = document.querySelectorAll('.slot-jogo');   // reatribui (por isso virou let)
   return slotsJogo;
 }
+
+// Mesma necessidade do remontarCampoJogo, mas para os TRÊS campos do online (lobby,
+// draft e visualizar elencos). Eles são montados uma vez em estado.js com o
+// `N_TITULARES` da CARGA da página — um `const` calculado do esporte inicial. Numa sala
+// de NBA os campos continuariam com 11 slots e os 5 picks do basquete cairiam em três
+// buracos vazios. `online.js` consulta os slots por querySelectorAll a cada uso, então
+// basta remontar; não há cache a reatribuir.
+function remontarCamposOnline(n) {
+  if (typeof UI === 'undefined' || !UI.montarCampo) return;
+  var qtd = Math.max(0, parseInt(n, 10) || 0);
+  if (!qtd) return;
+  [['lobby-campo',   'slot-ol'],
+   ['draft-campo',   'slot-ol slot-draft'],
+   ['elencos-campo', 'slot-ol slot-elencos']].forEach(function (par) {
+    var campo = document.getElementById(par[0]);
+    if (campo) UI.montarCampo(campo, qtd, { classe: par[1], attr: 'ol' });
+  });
+}

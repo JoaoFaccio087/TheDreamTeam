@@ -430,9 +430,55 @@
     }
   }
 
+  // Esporte da sala (vem do servidor no room:state). Guardado num só lugar porque
+  // vários pontos da tela dependem dele: nº de slots do campo, seletor de formação
+  // e rótulos de placar.
+  var esporteSala   = 'futebol';
+  var titularesSala = 11;
+
+  // Aplica o esporte à tela do online. Idempotente: pode ser chamada a cada room:state.
+  function aplicarEsporteOnline(sala) {
+    var esp = sala.esporte || 'futebol';
+    var tit = sala.titulares || 11;
+    if (esp === esporteSala && tit === titularesSala) return;   // nada mudou
+    esporteSala   = esp;
+    titularesSala = tit;
+
+    // Os 3 campos do online são montados na CARGA da página com o esporte inicial
+    // (const N_TITULARES em estado.js). Numa sala de NBA continuariam com 11 slots.
+    if (typeof remontarCamposOnline === 'function') remontarCamposOnline(tit);
+
+    // Rótulo das listas de pontuadores nas duas abas (Classificação e Mata-a-Mata).
+    var r = rotulos();
+    Array.prototype.forEach.call(document.querySelectorAll('.jogo-rotulo'), function (el) {
+      if (/ARTILHARIA|CESTINHAS|PONTUADORES/.test(el.textContent)) {
+        el.innerHTML = r.pontuador + ' \u00B7 TOP 10';
+      }
+    });
+
+    // Formação só existe no futebol (catálogo: `formacoes: null` nos demais).
+    var temFormacao = (esp === 'futebol');
+    var blocoForm = document.getElementById('lobby-pilulas-formacao');
+    if (blocoForm) {
+      blocoForm.classList.toggle('escondida', !temFormacao);
+      var rot = blocoForm.previousElementSibling;
+      if (rot && rot.classList.contains('jogo-rotulo')) rot.classList.toggle('escondida', !temFormacao);
+    }
+  }
+
+  // Rótulos que mudam com o esporte. O basquete não tem "gols" nem "artilharia":
+  // tem pontos e cestinha. Fica num só lugar para não espalhar `if (esporte)` pela tela.
+  var ROTULOS = {
+    futebol:  { pontuador: 'ARTILHARIA', abrevPonto: 'G', semEventos: 'Sem gols na partida' },
+    basquete: { pontuador: 'CESTINHAS',  abrevPonto: 'P', semEventos: 'Sem pontos na partida' },
+    volei:    { pontuador: 'PONTUADORES', abrevPonto: 'P', semEventos: 'Sem pontos na partida' },
+  };
+  function rotulos() { return ROTULOS[esporteSala] || ROTULOS.futebol; }
+
   // room:state — lobby
   function onRoomState(sala) {
     codigoSala = sala.codigo;
+    aplicarEsporteOnline(sala);
     if (lobbyCodigo) lobbyCodigo.textContent = codigoSala || '----';
     hostUserId = sala.hostUserId;
     ehHost     = String(meuUserId) === String(hostUserId);
@@ -1226,7 +1272,7 @@
         eventos.forEach(function (ev) { golsEl.appendChild(linhaGol(ev, false)); });
       } else {
         golsEl.className = 'pg-gols pg-sem';
-        golsEl.textContent = 'Sem gols na partida';
+        golsEl.textContent = rotulos().semEventos;
       }
 
       var temPen = m.pen && m.pen.length === 2;
@@ -1377,9 +1423,10 @@
   // Renderiza artilharia + assistências nas DUAS cópias de uma vez: a da aba
   // Classificação e a da aba Mata-a-Mata (assim a pessoa acompanha sem trocar de aba).
   function renderStatsTodas(artilharia, assistencias) {
-    renderStatsLista(rodadaArtilharia,   artilharia,   'gols',    'G');
+    var ab = rotulos().abrevPonto;   // G no futebol, P no basquete/vôlei
+    renderStatsLista(rodadaArtilharia,   artilharia,   'gols',    ab);
     renderStatsLista(rodadaAssistencias, assistencias, 'assists', 'A');
-    renderStatsLista(chaveArtilharia,    artilharia,   'gols',    'G');
+    renderStatsLista(chaveArtilharia,    artilharia,   'gols',    ab);
     renderStatsLista(chaveAssistencias,  assistencias, 'assists', 'A');
   }
 

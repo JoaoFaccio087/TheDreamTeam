@@ -201,6 +201,11 @@ function buildRoomState(sala) {
     status:     sala.status,
     hostUserId: sala.hostUserId,
     competicao: sala.competicao,
+    // O FRONT precisa saber o esporte para montar a tela: nº de slots do campo,
+    // se existe seletor de formação e como rotular o placar. Sem isto o online
+    // montava sempre 11 slots e mostrava "gols" mesmo numa sala de NBA.
+    esporte:    sala.esporte || 'futebol',
+    titulares:  sala.totalPicksNecessarios || 11,
     prontos,
     total:      sala.jogadores.length,
     jogadores:  sala.jogadores.map(j => ({
