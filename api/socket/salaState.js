@@ -11,6 +11,10 @@ const FORMATO_POR_COMP = {
   'Copa do Mundo': 'mata',
   'Libertadores':  'mata',
   'Champions':     'champions',
+  // A NBA é temporada regular de todos contra todos: mesmo formato do Brasileirão.
+  // O que muda (5 titulares, 1 pick por turno, pontos no lugar de gols) vem do
+  // CATÁLOGO e do motor, não do formato.
+  'NBA':           'liga',
 };
 
 function criarSala(codigo, hostUserId, competicao) {

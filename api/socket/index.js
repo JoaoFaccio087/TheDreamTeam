@@ -5,7 +5,18 @@ const jwt          = require('jsonwebtoken');
 const db           = require('../db');
 const loader       = require('../dados/loader');
 const { criarSala, getSala, deleteSala } = require('./salaState');
-const { simularPartida } = require('./simulacao');
+const MOTORES = {
+  futebol:  require('./simulacao'),
+  basquete: require('./simulacao-basquete'),
+};
+
+// Motor da partida CONFORME O ESPORTE DA SALA. Os dois expõem o mesmo contrato
+// (`simularPartida(meu, adv, vantagem) → { gMeus, gAdv, fila }`), então todo o fluxo
+// de rodadas abaixo continua sem saber que esporte está rodando. `sala.esporte` vem
+// do catálogo em criarSala; sala antiga sem o campo cai no futebol.
+function motorDa(sala) {
+  return MOTORES[(sala && sala.esporte) || 'futebol'] || MOTORES.futebol;
+}
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -349,7 +360,7 @@ function simularUmaRodada(sala) {
 
     const homeElenco = (home.picks || []).filter(Boolean);
     const awayElenco = (away.picks || []).filter(Boolean);
-    const resultado  = simularPartida(homeElenco, { jogadores: awayElenco }, true);
+    const resultado  = motorDa(sala).simularPartida(homeElenco, { jogadores: awayElenco }, true);
     const gHome = resultado.gMeus, gAway = resultado.gAdv;
 
     const sh = sala.resultados[home.userId];
@@ -607,8 +618,8 @@ function montarCalendarioChampions(sala) {
 function resolverConfrontoDuasMaos(sala, alto, baixo) {
   const altoEl  = picksDe(sala, alto.userId);
   const baixoEl = picksDe(sala, baixo.userId);
-  const ida   = simularPartida(baixoEl, { jogadores: altoEl }, true);   // ida: casa do pior
-  const volta = simularPartida(altoEl,  { jogadores: baixoEl }, true);  // volta: casa do melhor
+  const ida   = motorDa(sala).simularPartida(baixoEl, { jogadores: altoEl }, true);   // ida: casa do pior
+  const volta = motorDa(sala).simularPartida(altoEl,  { jogadores: baixoEl }, true);  // volta: casa do melhor
   acumularStats(sala, ida.fila); acumularStats(sala, volta.fila);
   const aggAlto  = ida.gAdv  + volta.gMeus;
   const aggBaixo = ida.gMeus + volta.gAdv;
@@ -728,7 +739,7 @@ function simularPenaltisOnline(aEl, bEl) {
 function resolverConfronto(sala, node) {
   const aEl = picksDe(sala, node.a.userId);
   const bEl = picksDe(sala, node.b.userId);
-  const res = simularPartida(aEl, { jogadores: bEl }, false);   // campo neutro
+  const res = motorDa(sala).simularPartida(aEl, { jogadores: bEl }, false);   // campo neutro
   let gA = res.gMeus, gB = res.gAdv, pen = null, penSeq = null, vencedor;
   if (gA === gB) {
     const d = simularPenaltisOnline(aEl, bEl);

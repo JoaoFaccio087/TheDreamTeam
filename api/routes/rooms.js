@@ -17,7 +17,11 @@ function gerarCodigo() {
 
 const criarSchema = z.object({
   nome:       z.string().min(1).max(100).optional(),
-  competicao: z.enum(['Brasileirão', 'Copa do Mundo', 'Libertadores', 'Champions']).default('Brasileirão'),
+  // NBA (ago→set/2026): o online deixou de ser só futebol. O esporte NÃO vem daqui —
+  // é derivado da competição pelo catálogo (api/esportes-catalogo.js), que também dita
+  // quantos picks o draft tem. Competição fora desta lista é rejeitada na criação, então
+  // toda competição nova de online precisa ser adicionada AQUI também.
+  competicao: z.enum(['Brasileirão', 'Copa do Mundo', 'Libertadores', 'Champions', 'NBA']).default('Brasileirão'),
   velocidade: z.enum(['lento', 'normal', 'rapida']).default('normal'),
 });
 
