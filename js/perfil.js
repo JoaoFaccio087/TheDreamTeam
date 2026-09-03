@@ -396,6 +396,17 @@
   }
 
   // Filtra GRUPOS pelo esporte ativo. Geral sempre entra; competições conforme o esporte.
+  // Vocabulário por esporte. `gf`/`ga` na tabela `matches` guardam GOLS no futebol,
+  // SETS no vôlei e PONTOS no basquete (decisão da migração 009: reaproveitar as colunas
+  // em vez de migração destrutiva). O perfil rotulava tudo como "Gols pró / Gols contra",
+  // então uma campanha de NBA mostrava "Gols pró: 4231".
+  var VOCAB = {
+    futebol:  { pro: 'Gols pró',   contra: 'Gols contra',   feitos: 'Gols marcados pelo seu time',   sofridos: 'Gols que seu time sofreu' },
+    volei:    { pro: 'Sets pró',   contra: 'Sets contra',   feitos: 'Sets vencidos pelo seu time',   sofridos: 'Sets que seu time perdeu' },
+    basquete: { pro: 'Pontos pró', contra: 'Pontos contra', feitos: 'Pontos marcados pelo seu time', sofridos: 'Pontos que seu time sofreu' },
+  };
+  function vocab() { return VOCAB[_esportePerfil] || VOCAB.futebol; }
+
   function gruposDoEsporte() {
     return GRUPOS.filter(function (g) {
       if (g.api === 'geral') return true;
@@ -581,8 +592,8 @@
       v:     'Jogos vencidos somando todas as campanhas',
       e:     'Jogos empatados somando todas as campanhas',
       d:     'Jogos perdidos somando todas as campanhas',
-      gf:    'Gols marcados pelo seu time no total',
-      ga:    'Gols que seu time sofreu no total',
+      gf:    vocab().feitos + ' no total',
+      ga:    vocab().sofridos + ' no total',
       aprov: 'Aproveitamento: pontos ganhos ÷ pontos possíveis (vitória=3, empate=1)'
     };
     return {
@@ -591,8 +602,8 @@
       v:     'Jogos vencidos ' + escopo,
       e:     'Jogos empatados ' + escopo,
       d:     'Jogos perdidos ' + escopo,
-      gf:    'Gols marcados pelo seu time ' + escopo,
-      ga:    'Gols que seu time sofreu ' + escopo,
+      gf:    vocab().feitos + ' ' + escopo,
+      ga:    vocab().sofridos + ' ' + escopo,
       aprov: 'Aproveitamento ' + escopo + ': pontos ganhos ÷ pontos possíveis (vitória=3, empate=1)'
     };
   }
@@ -622,8 +633,8 @@
           linhaTip('Vitórias', s.v) +
           linhaTip('Empates', s.e) +
           linhaTip('Derrotas', s.d) +
-          linhaTip('Gols pró', s.gf) +
-          linhaTip('Gols contra', s.ga) +
+          linhaTip(vocab().pro, s.gf) +
+          linhaTip(vocab().contra, s.ga) +
           linhaTip('Aproveitamento', s.aprov + '%') +
         '</div>';
       return '<div class="perfil-barra-linha">' +
@@ -655,8 +666,8 @@
           stat(s.v, 'Vitórias', t.v) +
           stat(s.e, 'Empates', t.e) +
           stat(s.d, 'Derrotas', t.d) +
-          stat(s.gf, 'Gols pró', t.gf) +
-          stat(s.ga, 'Gols contra', t.ga) +
+          stat(s.gf, vocab().pro, t.gf) +
+          stat(s.ga, vocab().contra, t.ga) +
           stat(s.aprov + '%', 'Aproveit.', t.aprov) +
         '</div>';
     return '' +
@@ -1035,6 +1046,11 @@
 
   function itemHistorico(m, idx) {
     var gf = +m.gf || 0, ga = +m.ga || 0, saldo = gf - ga;
+    // O título do gf:ga sai do esporte DA PARTIDA (m.esporte), não do esporte ativo no
+    // perfil: o modal "Ver todo" mostra o histórico completo, e ali convivem campanhas
+    // de esportes diferentes na mesma lista.
+    var vLinha = VOCAB[m.esporte || 'futebol'] || VOCAB.futebol;
+    var tituloPlacar = vLinha.pro + ' : ' + vLinha.contra;
     var modo = (m.modo === 'online') ? 'Online' : 'Solo';
     var data = '';
     if (m.played_at) { try { data = new Date(m.played_at).toLocaleDateString('pt-BR'); } catch (e) {} }
@@ -1058,7 +1074,8 @@
             '<b class="hist-e">' + (+m.empates  || 0) + 'E</b> ' +
             '<b class="hist-d">' + (+m.derrotas || 0) + 'D</b>' +
           '</span>' +
-          '<span class="hist-gols">' + gf + ':' + ga + ' <i>(' + (saldo >= 0 ? '+' : '') + saldo + ')</i></span>' +
+          '<span class="hist-gols" title="' + esc(tituloPlacar) + '">' + gf + ':' + ga +
+            ' <i>(' + (saldo >= 0 ? '+' : '') + saldo + ')</i></span>' +
           coloc +
         '</div>' +
         '<button class="hist-resumo-btn" type="button" data-idx="' + idx + '">' + icoResumo + 'Ver resumo</button>' +
