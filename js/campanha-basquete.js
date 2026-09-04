@@ -269,8 +269,15 @@
     // Série fechou:
     var voceVenceuSerie = (po.serie.vMeu >= alvo);
     if (!voceVenceuSerie) {
+      // marca a derrota da SUA série no bracket antes de completar o resto
+      var meuJogo = (po.bracketConf && po.bracketConf[po.faseIdx]) ? po.bracketConf[po.faseIdx][po.seuConfrontoIdx] : null;
+      if (meuJogo && !meuJogo.vencedor) {
+        meuJogo.vencedor = (meuJogo.a && meuJogo.a.voce) ? meuJogo.b : meuJogo.a;
+      }
+      var placar = po.serie.vMeu + '-' + po.serie.vAdv;
+      completarBracketNBA(camp, forcaDe);   // mostra quem levou o título
       return { serieAcabou: true, venceuSerie: false, campeaoNBA: false, eliminado: true,
-               placarSerie: po.serie.vMeu + '-' + po.serie.vAdv, proximaFase: null };
+               placarSerie: placar, proximaFase: null };
     }
 
     // Você venceu a série: resolve os OUTROS confrontos da sua conf (bastidores) e avança.
@@ -335,6 +342,54 @@
   }
 
   // Avança a OUTRA conferência uma rodada (bastidores, por força+sorte) e guarda o campeão.
+  // Você caiu, mas os playoffs continuam: resolve TODAS as rodadas restantes das DUAS
+  // conferências e a final, só para a visualização. Sem isto, quem era eliminado via a
+  // chave congelada em "A definir" e nunca sabia quem foi campeão — a aba Playoff parecia
+  // TRAVADA. Espelha o completarBracketVolei (campanha-volei.js) e o simularRestoChave
+  // do futebol. Não toca em confrontos/serie: o fluxo da UI já encerrou.
+  function completarBracketNBA(camp, forcaDe) {
+    var po = camp.playoff;
+    if (!po) return;
+
+    function resolverLado(bracket) {
+      if (!bracket) return null;
+      for (var r = 0; r < bracket.length; r++) {
+        var rodada = bracket[r];
+        rodada.forEach(function (jogo) {
+          if (!jogo.a || !jogo.b || jogo.vencedor) return;
+          var fa = (forcaDe ? forcaDe(jogo.a.clubeRef || jogo.a) : jogo.a.forca) + (Math.random() - 0.5) * 14;
+          var fb = (forcaDe ? forcaDe(jogo.b.clubeRef || jogo.b) : jogo.b.forca) + (Math.random() - 0.5) * 14;
+          jogo.vencedor = (fa >= fb) ? jogo.a : jogo.b;
+        });
+        var vencs = rodada.map(function (j) { return j.vencedor; }).filter(Boolean);
+        var prox = bracket[r + 1];
+        if (prox) {
+          for (var i = 0; i < prox.length; i++) {
+            if (!prox[i].a) prox[i].a = vencs[i * 2] || null;
+            if (!prox[i].b) prox[i].b = vencs[i * 2 + 1] || null;
+          }
+        } else if (vencs.length === 1) {
+          return vencs[0];
+        }
+      }
+      return null;
+    }
+
+    var campSua   = resolverLado(po.bracketConf);
+    var campOutra = resolverLado(po.bracketOutra) || po.campeaoOutra || null;
+    if (campSua)   po.campeaoConfSua = campSua;
+    if (campOutra) po.campeaoOutra   = campOutra;
+
+    // Final entre os dois campeões de conferência.
+    if (campSua && campOutra) {
+      montarBracketFinal(po, campSua, campOutra);
+      var fa = (forcaDe ? forcaDe(campSua.clubeRef   || campSua)   : campSua.forca)   + (Math.random() - 0.5) * 14;
+      var fb = (forcaDe ? forcaDe(campOutra.clubeRef || campOutra) : campOutra.forca) + (Math.random() - 0.5) * 14;
+      po.bracketFinal[0].vencedor = (fa >= fb) ? campSua : campOutra;
+      po.campeaoTorneio = po.bracketFinal[0].vencedor;
+    }
+  }
+
   function avancarOutraConfLiga(camp, forcaDe) {
     var po = camp.playoff;
     if (!po.bracketOutra) return;

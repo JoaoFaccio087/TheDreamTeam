@@ -220,7 +220,25 @@ function mostrarBracketPlayoffs(camp) {
   var outro = po.finalistaOutraConf;
   var euCampeaoConf = po.faseIdx >= 0 && po.fases[po.faseIdx] && po.fases[po.faseIdx].finalNBA;
   var finalHTML = '';
-  if (euCampeaoConf || outro) {
+
+  // ELIMINADO: o motor completa o resto da chave (completarBracketNBA) e grava
+  // `po.campeaoTorneio`. Sem desenhar isto, a aba Playoff ficava parada na fase em que
+  // você caiu — parecia TRAVADA, sem dizer quem levou o título.
+  if (!euCampeaoConf && po.campeaoTorneio && po.bracketFinal && po.bracketFinal[0]) {
+    var f = po.bracketFinal[0];
+    finalHTML =
+      '<div class="bkt-coluna bkt-coluna-final">' +
+        '<div class="bkt-coluna-tit">Finais NBA</div>' +
+        '<div class="bkt-jogo bkt-jogo-final">' +
+          celula(f.a, f.vencedor === f.a) +
+          celula(f.b, f.vencedor === f.b) +
+        '</div>' +
+        '<div class="bkt-coluna-tit" style="margin-top:10px">Campeão</div>' +
+        '<div class="bkt-jogo bkt-jogo-final bkt-campeao">' +
+          celula(po.campeaoTorneio, true) +
+        '</div>' +
+      '</div>';
+  } else if (euCampeaoConf || outro) {
     var vencFinal = null;
     var finalHist = (po.historico || []).filter(function (h) { return h.fase === 'FINAIS DA NBA'; })[0];
     if (finalHist) vencFinal = finalHist.venceu ? meuLado : outro;

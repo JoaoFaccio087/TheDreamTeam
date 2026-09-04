@@ -733,8 +733,7 @@ function renderClassificacaoVoleiAba(camp) {
   // vazio e a aba Classificação ficava em branco a campanha inteira. O card da aba
   // Simulação já mostrava a tabela certa porque usa mostrarTabelaVNL — aqui faltava a
   // mesma bifurcação que o salvarCampanhaVolei já fazia.
-  if (camp.vnl) { mostrarTabelaVNL(camp); return; }
-  alvo.innerHTML = montarTabelaGrupoVoleiHTML(camp);
+  alvo.innerHTML = camp.vnl ? montarTabelaVNLHTML(camp) : montarTabelaGrupoVoleiHTML(camp);
 }
 
 // Aba Mata-a-Mata do vôlei: aviso enquanto nos grupos; confrontos quando chega (ou caiu antes).
@@ -744,9 +743,22 @@ function renderMataVolei(camp) {
 
   // Ainda não há mata montado E você ainda não foi eliminado nos grupos → aviso de bloqueio.
   var temMata = camp && camp.mata;
-  var caiuNosGrupos = camp && !temMata && (typeof CampanhaVolei !== 'undefined') &&
-                      camp.jogosGrupoFeitos >= (CampanhaVolei.adversariosDoSeuGrupo(camp) || []).length &&
-                      !CampanhaVolei.voceClassificou(camp);
+  // ⚠️ A VNL é LIGA ÚNICA e não tem `camp.grupos`. `adversariosDoSeuGrupo` lê
+  // `camp.grupos[camp.seuGrupo]` e LANÇAVA TypeError numa campanha de VNL, abortando o
+  // render inteiro — por isso a aba Mata-a-Mata ficava totalmente vazia, sem nem o aviso
+  // de bloqueio. Cada formato responde "acabou a 1ª fase?" do seu jeito.
+  var caiuNosGrupos = false;
+  if (camp && !temMata && typeof CampanhaVolei !== 'undefined') {
+    try {
+      if (camp.vnl) {
+        caiuNosGrupos = (camp.jogosFeitos >= (camp.seusJogos || []).length) &&
+                        !CampanhaVolei.voceClassificouVNL(camp);
+      } else {
+        caiuNosGrupos = (camp.jogosGrupoFeitos >= (CampanhaVolei.adversariosDoSeuGrupo(camp) || []).length) &&
+                        !CampanhaVolei.voceClassificou(camp);
+      }
+    } catch (e) { caiuNosGrupos = false; }
+  }
 
   if (!temMata && !caiuNosGrupos) {
     alvo.innerHTML =
@@ -867,6 +879,13 @@ function mostrarTabelaGrupoVolei(camp) {
   var ultimoCard = document.getElementById('partida-volei-' + partidaIdVolei);
   var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
   if (corpo) {
+    // Remove a tabela anterior DESTE card antes de inserir. `mostrarTabelaVNL` /
+    // `mostrarTabelaGrupoVolei` podem ser chamadas mais de uma vez para a mesma partida
+    // (ex.: ao trocar de aba e voltar), e sem isto o card acumulava uma cópia da
+    // classificação a cada chamada — foi o que deixou a aba Simulação "bugada" com a
+    // tabela repetida.
+    var antiga = corpo.querySelector('.grupo-tabela');
+    if (antiga && antiga.parentNode) antiga.parentNode.removeChild(antiga);
     var div = document.createElement('div');
     div.innerHTML = tabelaHTML;
     corpo.appendChild(div.firstChild);
@@ -887,7 +906,11 @@ function mostrarTabelaGrupoVolei(camp) {
 
 // Mostra a tabela da FASE PRELIMINAR da VNL (liga única). Espelha mostrarTabelaGrupoVolei,
 // mas é uma tabela só (não grupos) e destaca o top-`classificam` (Final Eight).
-function mostrarTabelaVNL(camp) {
+// Monta o HTML da tabela da preliminar da VNL. SEPARADO de quem insere: a mesma tabela
+// é usada no card da partida (mostrarTabelaVNL) e na aba Classificação
+// (renderClassificacaoVoleiAba). Antes só existia a versão que INSERIA no card — chamá-la
+// de dentro da aba deixava a aba vazia E duplicava a tabela no card a cada troca de aba.
+function montarTabelaVNLHTML(camp) {
   var cls = CampanhaVolei.classificacaoVNL(camp);
   var classificam = camp.classificam | 0;
 
@@ -919,9 +942,21 @@ function mostrarTabelaVNL(camp) {
       '<p class="fl-legenda">Top ' + classificam + ' avan\u00E7am \u00E0 Final Eight</p>' +
     '</div>';
 
+  return tabelaHTML;
+}
+
+function mostrarTabelaVNL(camp) {
+  var tabelaHTML = montarTabelaVNLHTML(camp);
   var ultimoCard = document.getElementById('partida-volei-' + partidaIdVolei);
   var corpo = ultimoCard ? ultimoCard.querySelector('.partida-corpo') : null;
   if (corpo) {
+    // Remove a tabela anterior DESTE card antes de inserir. `mostrarTabelaVNL` /
+    // `mostrarTabelaGrupoVolei` podem ser chamadas mais de uma vez para a mesma partida
+    // (ex.: ao trocar de aba e voltar), e sem isto o card acumulava uma cópia da
+    // classificação a cada chamada — foi o que deixou a aba Simulação "bugada" com a
+    // tabela repetida.
+    var antiga = corpo.querySelector('.grupo-tabela');
+    if (antiga && antiga.parentNode) antiga.parentNode.removeChild(antiga);
     var div = document.createElement('div');
     div.innerHTML = tabelaHTML;
     corpo.appendChild(div.firstChild);
