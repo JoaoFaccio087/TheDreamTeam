@@ -411,6 +411,16 @@ function encerrarPartida(est) {
 
 // --- Aplica o resultado final (vitória/derrota) e libera o botão da campanha ---
 // Separado de encerrarPartida para ser chamado também após a disputa de pênaltis
+// Só o MATA-MATA cria card de encerramento por aqui. No formato liga quem encerra é o
+// brasileirao.js (criarCardFinalBrasileirao), e no vôlei/basquete são os respectivos
+// campanha-*-ui.js — sem esta guarda, uma temporada poderia ganhar DOIS cards finais.
+function ehMataMata() {
+  if (typeof criarCardFinalMata !== 'function') return false;
+  if (typeof ehFormatoLiga === 'function' && ehFormatoLiga(modoSelecionado)) return false;
+  var f = (typeof fasesCampanha !== 'undefined') ? fasesCampanha[faseAtual] : null;
+  return !!(f && f.tipo === 'mata');
+}
+
 function aplicarResultado(est, ganhador) {
   var elPlacar    = document.getElementById('pplacar-'    + est.id);
   var elResultado = document.getElementById('presultado-' + est.id);
@@ -450,6 +460,10 @@ function aplicarResultado(est, ganhador) {
       btn.textContent = 'Nova Campanha';
       acaoBotao = 'nova-campanha';
       btn.disabled = false;
+      // Card de encerramento — só o "Pular tudo" o criava (via finalizarPularTudoMata),
+      // então quem JOGAVA a Libertadores/Champions até o fim virava campeão e o histórico
+      // acabava no card da final, sem desfecho. O Brasileirão sempre criou o dele.
+      if (ehMataMata()) criarCardFinalMata(true, null);
       mostrarBotaoResumo(true);   // campeão → botão de resumo (com troféu)
     }
   } else {
@@ -460,6 +474,14 @@ function aplicarResultado(est, ganhador) {
     btn.textContent = 'Montar Novo Time ►';
     acaoBotao = 'novo-time';
     btn.disabled = false;
+    // Idem: no mata, eliminação também ganha card de encerramento, com a fase em que caiu.
+    // No formato LIGA quem encerra é o brasileirao.js (criarCardFinalBrasileirao), então
+    // aqui só criamos para mata-mata — senão a temporada teria DOIS cards finais.
+    if (ehMataMata()) {
+      var fCaiu = (typeof fasesCampanha !== 'undefined' && fasesCampanha[faseAtual])
+        ? (fasesCampanha[faseAtual].nome || fasesCampanha[faseAtual]) : null;
+      criarCardFinalMata(false, fCaiu);
+    }
     mostrarBotaoResumo(false);  // derrota → botão de resumo da campanha
   }
 }

@@ -59,24 +59,12 @@
 /* ── Estatísticas por tópico (sem caixa) ── */
 .perfil-acordeoes {
   display: flex; flex-direction: column; gap: var(--sp-3);
-  flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem;
-  scrollbar-width: thin; scrollbar-color: var(--txt-fraco) transparent;
+  flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem; scrollbar-color: var(--txt-fraco) transparent;
+  /* Barra de rolagem: usa a classe canônica `.scroll-fino` (base.css). O bloco de
+     ::-webkit-scrollbar que ficava aqui era uma VARIANTE (8px / --txt-fraco) da mesma
+     coisa — padronizado em set/2026 a pedido do João. Não recrie: some `scroll-fino`
+     ao elemento no HTML/JS. */
 }
-/* Scrollbar discreto e semi-transparente (padrão do app) */
-.perfil-acordeoes::-webkit-scrollbar,
-.historico-lista::-webkit-scrollbar { width: 8px; }
-.perfil-acordeoes::-webkit-scrollbar-track,
-.historico-lista::-webkit-scrollbar-track { background: transparent; }
-.perfil-acordeoes::-webkit-scrollbar-thumb,
-.historico-lista::-webkit-scrollbar-thumb {
-  background: var(--txt-fraco);
-  border-radius: var(--raio-pill);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-.perfil-acordeoes::-webkit-scrollbar-thumb:hover,
-.historico-lista::-webkit-scrollbar-thumb:hover { background: var(--txt-soft); background-clip: padding-box; }
-
 /* Cada categoria é uma seção expansível: cabeçalho clicável + corpo que abre/fecha. */
 .perfil-acord { border-bottom: 1px solid var(--linha); }
 .acord-head {
@@ -156,8 +144,11 @@
 /* ── Histórico ── */
 .historico-lista {
   display: flex; flex-direction: column; gap: var(--sp-3);
-  flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem; margin-top: 0.3rem;
-  scrollbar-width: thin; scrollbar-color: var(--txt-fraco) transparent;
+  flex: 1; min-height: 0; overflow-y: auto; padding-right: 0.35rem; margin-top: 0.3rem; scrollbar-color: var(--txt-fraco) transparent;
+  /* Barra de rolagem: usa a classe canônica `.scroll-fino` (base.css). O bloco de
+     ::-webkit-scrollbar que ficava aqui era uma VARIANTE (8px / --txt-fraco) da mesma
+     coisa — padronizado em set/2026 a pedido do João. Não recrie: some `scroll-fino`
+     ao elemento no HTML/JS. */
 }
 .historico-vazio { color: var(--txt-soft, #9aa6b2); font-size: var(--fs-base); text-align: center; padding: 1.5rem 0.5rem; }
 .hist-item {

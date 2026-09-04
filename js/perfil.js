@@ -1021,7 +1021,7 @@
       '<div class="modal-confirm-box mc-conq-box scroll-fino" role="dialog" aria-modal="true">' +
         '<button type="button" class="mc-conq-fechar" data-fechar aria-label="Fechar">&times;</button>' +
         '<p class="modal-confirm-titulo">Histórico</p>' +
-        '<div class="historico-lista mc-hist-lista"></div>' +
+        '<div class="historico-lista mc-hist-lista scroll-fino"></div>' +
       '</div>';
     document.body.appendChild(ov);
     var alvo = ov.querySelector('.mc-hist-lista');

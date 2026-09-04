@@ -23,13 +23,11 @@
   max-height: 470px;
   overflow-y: auto;
   padding-right: 4px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--txt-fraco) transparent;
+  /* Barra de rolagem: usa a classe canônica `.scroll-fino` (base.css). O bloco de
+     ::-webkit-scrollbar que ficava aqui era uma VARIANTE (8px / --txt-fraco) da mesma
+     coisa — padronizado em set/2026 a pedido do João. Não recrie: some `scroll-fino`
+     ao elemento no HTML/JS. */
 }
-.draft-ordem-lista::-webkit-scrollbar { width: 6px; }
-.draft-ordem-lista::-webkit-scrollbar-track { background: transparent; }
-.draft-ordem-lista::-webkit-scrollbar-thumb { background: var(--elev-2); border-radius: var(--raio-xs); }
-.draft-ordem-lista::-webkit-scrollbar-thumb:hover { background: var(--elev-2); }
 
 /* Tag "BOT" pequena depois do nome do time */
 .draft-bot-tag {
@@ -234,17 +232,12 @@
      aprox. a coluna do campo. Scroll invisível (padrão das outras telas). */
   max-height: 62vh;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--txt-fraco) transparent;
   padding-right: 4px;
+  /* Barra de rolagem: usa a classe canônica `.scroll-fino` (base.css). O bloco de
+     ::-webkit-scrollbar que ficava aqui era uma VARIANTE (8px / --txt-fraco) da mesma
+     coisa — padronizado em set/2026 a pedido do João. Não recrie: some `scroll-fino`
+     ao elemento no HTML/JS. */
 }
-.elencos-users-lista::-webkit-scrollbar { width: 6px; }
-.elencos-users-lista::-webkit-scrollbar-track { background: transparent; }
-.elencos-users-lista::-webkit-scrollbar-thumb {
-  background: var(--elev-2);
-  border-radius: 3px;
-}
-.elencos-users-lista::-webkit-scrollbar-thumb:hover { background: var(--elev-2); }
 .elencos-user-row {
   display: flex;
   align-items: center;
