@@ -224,7 +224,16 @@ function mostrarBracketPlayoffs(camp) {
 
   // Finais da NBA no centro (você — se campeão de conf — vs campeão da outra conf).
   var meuLado = { voce: true };
-  var outro = po.finalistaOutraConf;
+  // ⚠️ `po.finalistaOutraConf` NUNCA foi gravado por ninguém — era lido só aqui e sempre
+  // vinha undefined, então as FINAIS NBA mostravam "A definir" mesmo com a outra
+  // conferência já decidida na tela ao lado. O campo real do motor é `campeaoOutra`
+  // (gravado por avancarOutraConfLiga / completarBracketNBA). O bracketFinal, quando
+  // existe, é a fonte mais direta: montarBracketFinal já guarda os dois lados.
+  var outro = po.campeaoOutra || po.finalistaOutraConf || null;
+  if (!outro && po.bracketFinal && po.bracketFinal[0]) {
+    var bf0 = po.bracketFinal[0];
+    outro = (bf0.a && bf0.a.voce) ? bf0.b : bf0.a;
+  }
   var euCampeaoConf = po.faseIdx >= 0 && po.fases[po.faseIdx] && po.fases[po.faseIdx].finalNBA;
   var finalHTML = '';
 
@@ -249,12 +258,18 @@ function mostrarBracketPlayoffs(camp) {
     var vencFinal = null;
     var finalHist = (po.historico || []).filter(function (h) { return h.fase === 'FINAIS DA NBA'; })[0];
     if (finalHist) vencFinal = finalHist.venceu ? meuLado : outro;
+    // placar da série da final: do bracketFinal se já gravado, senão do estado corrente
+    var bf = (po.bracketFinal && po.bracketFinal[0]) ? po.bracketFinal[0] : null;
+    var plMeu = bf && bf.placarA != null ? ((bf.a && bf.a.voce) ? bf.placarA : bf.placarB)
+              : (po.serie ? po.serie.vMeu : null);
+    var plOut = bf && bf.placarA != null ? ((bf.a && bf.a.voce) ? bf.placarB : bf.placarA)
+              : (po.serie ? po.serie.vAdv : null);
     finalHTML =
       '<div class="bkt-coluna bkt-coluna-final">' +
         '<div class="bkt-coluna-tit">Finais NBA</div>' +
         '<div class="bkt-jogo bkt-seujogo bkt-jogo-final">' +
-          celula(meuLado, vencFinal === meuLado) +
-          celula(outro, vencFinal === outro) +
+          celula(meuLado, vencFinal === meuLado, plMeu) +
+          celula(outro, vencFinal === outro, plOut) +
         '</div>' +
       '</div>';
   }

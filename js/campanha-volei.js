@@ -238,27 +238,43 @@
   // seleção "joga" `rodadas` partidas contra oponentes aleatórios da tabela.
   function simularPreliminarVNL(camp, rodadas) {
     rodadas = rodadas || 5;
-    var times = camp.tabelaVNL.map(function (l) { return l.time; });
+    // ⚠️ BUG CORRIGIDO (set/2026): a versão antiga percorria os times e, para cada um,
+    // completava `faltam = rodadas - jogosDele` partidas — mas cada partida também
+    // incrementava o ADVERSÁRIO. Um time sorteado muitas vezes como oponente terminava
+    // com MUITO mais jogos que o limite (o João viu "Brasil 2019 · 10 jogos" contra os
+    // 5 dele), e times processados no fim não jogavam nada. A tabela ficava sem sentido:
+    // não dá para comparar pontos entre quem jogou 5 e quem jogou 10.
+    //
+    // Agora é por RODADAS: a cada volta, sorteia os times que ainda têm jogos a fazer e
+    // os emparelha 2 a 2. Como cada partida consome uma vaga dos DOIS, todos convergem
+    // para o mesmo número de jogos — o mesmo que VOCÊ disputa.
+    var times = camp.tabelaVNL.map(function (l) { return l.time; })
+                              .filter(function (t) { return !t.voce; });
     function linha(t) { return camp.tabelaVNL.filter(function (l) { return l.time === t; })[0]; }
-    times.forEach(function (t) {
-      if (t.voce) return; // seus jogos são registrados de verdade
-      var la = linha(t);
-      var faltam = rodadas - (la.v + la.d);
-      for (var k = 0; k < faltam; k++) {
-        // sorteia um oponente distinto (que não seja você, para não falsear seus jogos)
-        var oponentes = times.filter(function (o) { return o !== t && !o.voce; });
-        var b = oponentes[Math.floor(Math.random() * oponentes.length)];
-        if (!b) break;
-        var lb = linha(b);
-        var pa = t.forca + (Math.random() - 0.5) * 12;
+    function jogosDe(t) { var l = linha(t); return l ? (l.v + l.d) : 0; }
+
+    var guarda = 0;
+    while (guarda++ < 500) {
+      var disp = times.filter(function (t) { return jogosDe(t) < rodadas; });
+      if (disp.length < 2) break;
+      for (var i = disp.length - 1; i > 0; i--) {          // embaralha
+        var r = Math.floor(Math.random() * (i + 1));
+        var tmp = disp[i]; disp[i] = disp[r]; disp[r] = tmp;
+      }
+      for (var p = 0; p + 1 < disp.length; p += 2) {
+        var a = disp[p], b = disp[p + 1];
+        var la = linha(a), lb = linha(b);
+        if (!la || !lb) continue;
+        var pa = a.forca + (Math.random() - 0.5) * 12;
         var pb = b.forca + (Math.random() - 0.5) * 12;
         var setsA = pa >= pb ? 3 : (Math.random() < 0.5 ? 0 : 1);
         var setsB = pa >= pb ? (Math.random() < 0.5 ? 0 : 1) : 3;
         la.sp += setsA; la.sc += setsB; lb.sp += setsB; lb.sc += setsA;
         if (setsA > setsB) { la.v++; la.pts += 3; lb.d++; } else { lb.v++; lb.pts += 3; la.d++; }
       }
-    });
+    }
   }
+
 
   // Classificação da preliminar VNL (ordena por pts, depois saldo de sets).
   function classificacaoVNL(camp) {

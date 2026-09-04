@@ -273,10 +273,15 @@
     var voceVenceuSerie = (po.serie.vMeu >= alvo);
     if (!voceVenceuSerie) {
       // marca a derrota da SUA série no bracket antes de completar o resto
-      var meuJogo = (po.bracketConf && po.bracketConf[po.faseIdx]) ? po.bracketConf[po.faseIdx][po.seuConfrontoIdx] : null;
+      // Perder a FINAL grava no bracketFinal; perder antes, no bracketConf da fase.
+      var faseAtualPO = po.fases[po.faseIdx];
+      var meuJogo = (faseAtualPO && faseAtualPO.finalNBA)
+        ? (po.bracketFinal ? po.bracketFinal[0] : null)
+        : ((po.bracketConf && po.bracketConf[po.faseIdx]) ? po.bracketConf[po.faseIdx][po.seuConfrontoIdx] : null);
       if (meuJogo && !meuJogo.vencedor) {
         meuJogo.vencedor = (meuJogo.a && meuJogo.a.voce) ? meuJogo.b : meuJogo.a;
         gravarPlacarSlot(meuJogo, meuJogo.vencedor, po.serie.vAdv, po.serie.vMeu);
+        if (faseAtualPO && faseAtualPO.finalNBA) po.campeaoTorneio = meuJogo.vencedor;
       }
       var placar = po.serie.vMeu + '-' + po.serie.vAdv;
       completarBracketNBA(camp, forcaDe);   // mostra quem levou o título
@@ -285,6 +290,9 @@
     }
 
     // Você venceu a série: registra o placar dela no bracket antes de avançar.
+    // ⚠️ `po.serie` é ZERADO mais abaixo (antes de ler `proxFase`), então o placar precisa
+    // ser capturado AQUI — foi por isso que a final vencida aparecia como "0 x 0".
+    var vMeuSerie = po.serie.vMeu, vAdvSerie = po.serie.vAdv;
     var slotMeu = (po.bracketConf && po.bracketConf[po.faseIdx]) ? po.bracketConf[po.faseIdx][po.seuConfrontoIdx] : null;
     if (slotMeu) gravarPlacarSlot(slotMeu, (slotMeu.a && slotMeu.a.voce) ? slotMeu.a : slotMeu.b, po.serie.vMeu, po.serie.vAdv);
 
@@ -330,9 +338,16 @@
     }
 
     if (!proxFase) {
-      // não havia próxima fase (fim) — campeão
+      // não havia próxima fase (fim) — campeão. Grava o placar da final no bracket para
+      // a chave mostrar "4 x 2" e não "0 x 0" (o `slotMeu` acima só cobre bracketConf).
+      if (po.bracketFinal && po.bracketFinal[0]) {
+        var bfin = po.bracketFinal[0];
+        bfin.vencedor = (bfin.a && bfin.a.voce) ? bfin.a : bfin.b;
+        gravarPlacarSlot(bfin, bfin.vencedor, vMeuSerie, vAdvSerie);
+        po.campeaoTorneio = bfin.vencedor;
+      }
       return { serieAcabou: true, venceuSerie: true, campeaoNBA: true, eliminado: false,
-               placarSerie: po.serie.vMeu + '-' + po.serie.vAdv, proximaFase: null };
+               placarSerie: vMeuSerie + '-' + vAdvSerie, proximaFase: null };
     }
 
     // Monta os confrontos da próxima rodada da sua conf a partir dos vencedores.
