@@ -299,7 +299,28 @@ function mostrarBracketPlayoffs(camp) {
   var painelChave = document.getElementById('chave-copa');
   if (painelChave) {
     painelChave.innerHTML = html;
+    centralizarBracket(painelChave);
   }
+}
+
+// O chaveamento tem 7 colunas (1ª rodada → Finais → 1ª rodada da outra conf) e quase
+// sempre é mais largo que o painel. Aberto no início, o usuário via só a 1ª rodada da
+// SUA conferência e precisava rolar às cegas para achar as Finais. Aqui a rolagem começa
+// CENTRADA na coluna das Finais, que é o miolo da chave e o ponto de referência natural.
+function centralizarBracket(painel) {
+  var colunas = painel.querySelector('.bkt-colunas');
+  if (!colunas) return;
+  var alvo = colunas.querySelector('.bkt-coluna-final') || colunas.querySelector('.bkt-seujogo');
+  // `scroll-behavior: smooth` está no CSS; desligamos no 1º posicionamento para a chave
+  // não "deslizar" toda vez que a aba é aberta — só ao rolar de verdade.
+  var antes = colunas.style.scrollBehavior;
+  colunas.style.scrollBehavior = 'auto';
+  if (alvo) {
+    colunas.scrollLeft = alvo.offsetLeft - (colunas.clientWidth - alvo.offsetWidth) / 2;
+  } else {
+    colunas.scrollLeft = (colunas.scrollWidth - colunas.clientWidth) / 2;
+  }
+  colunas.style.scrollBehavior = antes || '';
 }
 
 // Encurta o nome da fase para caber na coluna do bracket.
