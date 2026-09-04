@@ -400,9 +400,37 @@ function limparResiduosDeEsporte(esporte) {
     tabChave.textContent = (esporte === 'basquete') ? 'Playoff' : 'Mata-a-Mata';
   }
 
-  // Chave/bracket do esporte anterior não pode sobrar na aba.
+  // Prepara as abas do esporte ATUAL já na entrada da tela. Antes isso só acontecia na
+  // PRIMEIRA PARTIDA (prepararAbas* roda dentro do `if (!campanhaXAtual)`), então o
+  // painel `nba-classif-painel` nem existia e a aba Classificação não respondia ao
+  // clique enquanto a campanha não começasse.
+  if (esporte === 'basquete' && typeof prepararAbasBasquete === 'function') prepararAbasBasquete();
+  else if (esporte === 'volei' && typeof prepararAbasVolei === 'function') prepararAbasVolei();
+
+  // Chave/bracket do esporte anterior não pode sobrar na aba. E os painéis já entram
+  // com o AVISO padrão, não vazios: assim as abas Classificação e Playoff/Mata-a-Mata
+  // são clicáveis e explicam o que falta desde ANTES de a campanha começar. Antes elas
+  // ficavam em branco (ou com a chave da campanha ANTERIOR, que é o que o João viu ao
+  // montar um time novo e conferir as abas antes de iniciar).
   var chave = document.getElementById('chave-copa');
-  if (chave) chave.innerHTML = '';
+  if (chave) {
+    chave.innerHTML = (typeof UI !== 'undefined' && UI.avisoBloqueado)
+      ? UI.avisoBloqueado(
+          (esporte === 'basquete') ? 'Playoffs ainda não liberados' : 'Mata-a-Mata ainda não liberado',
+          (esporte === 'basquete')
+            ? 'Termine a temporada regular e classifique-se para ver o chaveamento aqui.'
+            : 'Termine a primeira fase e classifique-se para ver os confrontos aqui.')
+      : '';
+  }
+  ['volei-classificacao', 'nba-classificacao'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) {
+      el.innerHTML = (typeof UI !== 'undefined' && UI.avisoBloqueado)
+        ? UI.avisoBloqueado('Classificação ainda não disponível',
+                            'Ela aparece aqui assim que a primeira partida terminar.', '\uD83D\uDCCA')
+        : '';
+    }
+  });
 
   // A ABA ATIVA também vazava: saindo de um basquete que terminou na aba Playoff, a
   // campanha seguinte abria já nessa aba (com o painel da chave visível e o histórico
@@ -472,7 +500,9 @@ function selecionarAbaSim(qual) {
     if (typeof chaveCopa !== 'undefined' && chaveCopa && typeof renderChaveCopa === 'function') {
       renderChaveCopa();
     } else if (painelChave) {
-      painelChave.innerHTML = '<p class="chave-aviso">A chave do mata-mata aparece aqui quando a fase de grupos terminar.</p>';
+      painelChave.innerHTML = UI.avisoBloqueado(
+        'Mata-a-Mata ainda não liberado',
+        'Termine a fase de grupos e classifique-se para ver os confrontos aqui.');
     }
   }
 }

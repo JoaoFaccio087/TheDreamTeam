@@ -295,6 +295,18 @@
     return card;
   };
 
+  // Aviso de painel bloqueado/vazio — MESMA aparência nos 3 esportes. Antes cada tela
+  // tinha a sua: o vôlei usava `.mata-bloqueada` (ícone + título + subtítulo) e o
+  // basquete/futebol caíam num `<p class="chave-aviso">` de texto corrido. Use sempre
+  // este componente para painel sem conteúdo ainda.
+  UI.avisoBloqueado = function (titulo, sub, icone) {
+    return '<div class="mata-bloqueada">' +
+             '<div class="mata-bloqueada-icone">' + (icone || '\uD83D\uDD12') + '</div>' +
+             '<p class="mata-bloqueada-titulo">' + esc(titulo || '') + '</p>' +
+             (sub ? '<p class="mata-bloqueada-sub">' + esc(sub) + '</p>' : '') +
+           '</div>';
+  };
+
   window.UI = UI;
 
   // Cabeçalhos estáticos do single-player. O Voltar de cada tela é um link no corpo

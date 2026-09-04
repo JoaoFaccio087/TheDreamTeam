@@ -45,6 +45,12 @@ function reiniciarCampanha() {
   if (corpo) corpo.innerHTML = '';
   var hist  = document.getElementById('historico-jogos');
   if (hist)  hist.innerHTML  = '';
+  // Chave e painéis de classificação também: `reiniciarCampanha` limpava só o histórico
+  // e a tabela do Brasileirão, então ao montar um time novo as abas Classificação e
+  // Mata-a-Mata ainda mostravam a campanha ANTERIOR até a 1ª partida rodar.
+  if (typeof limparResiduosDeEsporte === 'function' && typeof esporteAtual !== 'undefined') {
+    limparResiduosDeEsporte(esporteAtual);
+  }
   // zera o estado do "Ver mais" junto com os cards (senão a nova campanha começaria expandida)
   if (hist && window.UI && UI.histAplicarLimite) UI.histAplicarLimite(hist);
   if (tabelaBrasileiraoCorpo) tabelaBrasileiraoCorpo.innerHTML = ''; // limpa a tabela da liga
