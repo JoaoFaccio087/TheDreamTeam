@@ -935,6 +935,19 @@ td.grupo-time { text-align: left; }
 .bkt-venc { color: var(--txt); font-weight: 700; background: rgba(43,212,106,0.06); }
 .bkt-venc .bkt-nome { color: var(--txt); }
 .bkt-nome { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Vitórias na série, à direita do nome. `margin-left:auto` empurra para a borda, então
+   os números das duas linhas do confronto ficam alinhados em coluna — é isso que deixa
+   ler "4 x 3" de relance, sem abrir card nenhum. `tabular-nums` mantém o alinhamento. */
+.bkt-placar {
+  margin-left: auto; flex-shrink: 0;
+  min-width: 1.25rem; text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700; color: var(--txt-soft);
+}
+.bkt-placar-venc { color: var(--accent); }
+/* O nome pode encolher para o placar nunca ser cortado. */
+.bkt-time .bkt-nome { min-width: 0; }
 .bkt-vazio { color: var(--txt-soft); font-style: italic; }
 .bkt-escudo { width: 16px; height: 16px; display: inline-flex; flex-shrink: 0; }
 .bkt-escudo svg { width: 100%; height: 100%; }

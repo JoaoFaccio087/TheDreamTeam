@@ -241,9 +241,12 @@
   }
 
   // melhor-de-N desta fase (a final da NBA pode ser maior).
-  function melhorDeDaFase(camp) {
+  // `idx` opcional: melhor-de de uma fase ESPECÍFICA. Sem ele usa a fase atual.
+  // O parâmetro existe porque completarBracketNBA resolve fases FUTURAS — usar sempre
+  // a fase atual daria "melhor de 5" numa final que é melhor de 7.
+  function melhorDeDaFase(camp, idx) {
     var po = camp.playoff;
-    var fase = po.fases[po.faseIdx];
+    var fase = po.fases[(idx == null) ? po.faseIdx : idx];
     if (fase && fase.finalNBA) return camp.melhorDeFinal || camp.melhorDe;
     return camp.melhorDe;
   }
@@ -273,6 +276,7 @@
       var meuJogo = (po.bracketConf && po.bracketConf[po.faseIdx]) ? po.bracketConf[po.faseIdx][po.seuConfrontoIdx] : null;
       if (meuJogo && !meuJogo.vencedor) {
         meuJogo.vencedor = (meuJogo.a && meuJogo.a.voce) ? meuJogo.b : meuJogo.a;
+        gravarPlacarSlot(meuJogo, meuJogo.vencedor, po.serie.vAdv, po.serie.vMeu);
       }
       var placar = po.serie.vMeu + '-' + po.serie.vAdv;
       completarBracketNBA(camp, forcaDe);   // mostra quem levou o título
@@ -280,7 +284,11 @@
                placarSerie: placar, proximaFase: null };
     }
 
-    // Você venceu a série: resolve os OUTROS confrontos da sua conf (bastidores) e avança.
+    // Você venceu a série: registra o placar dela no bracket antes de avançar.
+    var slotMeu = (po.bracketConf && po.bracketConf[po.faseIdx]) ? po.bracketConf[po.faseIdx][po.seuConfrontoIdx] : null;
+    if (slotMeu) gravarPlacarSlot(slotMeu, (slotMeu.a && slotMeu.a.voce) ? slotMeu.a : slotMeu.b, po.serie.vMeu, po.serie.vAdv);
+
+    // resolve os OUTROS confrontos da sua conf (bastidores) e avança.
     var vencedores = [];
     po.confrontos.forEach(function (par, idx) {
       if (idx === po.seuConfrontoIdx) { vencedores.push(par[0].voce ? par[0] : par[1]); return; }
@@ -289,9 +297,20 @@
       var fb = (forcaDe ? forcaDe(b.clubeRef || b) : b.forca) + (Math.random() - 0.5) * 14;
       vencedores.push(fa >= fb ? a : b);
     });
-    // grava vencedores no bracket visual
+    // grava vencedores E placares de série no bracket visual. O seu confronto já foi
+    // gravado acima com o placar REAL; os outros recebem um placar plausível — sem isto
+    // os confrontos de bastidores ficavam sem número na chave.
     if (po.bracketConf && po.bracketConf[po.faseIdx]) {
-      po.bracketConf[po.faseIdx].forEach(function (jogo, idx) { jogo.vencedor = vencedores[idx] || null; });
+      var mdFase = melhorDeDaFase(camp, po.faseIdx);
+      po.bracketConf[po.faseIdx].forEach(function (jogo, idx) {
+        jogo.vencedor = vencedores[idx] || null;
+        if (idx === po.seuConfrontoIdx || !jogo.vencedor || jogo.placarA != null) return;
+        var venc = jogo.vencedor, perd = (venc === jogo.a) ? jogo.b : jogo.a;
+        var fv = forcaDe ? forcaDe(venc.clubeRef || venc) : venc.forca;
+        var fp = perd ? (forcaDe ? forcaDe(perd.clubeRef || perd) : perd.forca) : 70;
+        var pl = placarSerieBastidores(mdFase, fv, fp);
+        gravarPlacarSlot(jogo, venc, pl.venc, pl.perd);
+      });
     }
     // avança a outra conferência uma rodada (em sincronia)
     avancarOutraConfLiga(camp, forcaDe);
@@ -347,6 +366,31 @@
   // chave congelada em "A definir" e nunca sabia quem foi campeão — a aba Playoff parecia
   // TRAVADA. Espelha o completarBracketVolei (campanha-volei.js) e o simularRestoChave
   // do futebol. Não toca em confrontos/serie: o fluxo da UI já encerrou.
+  // Placar de SÉRIE plausível para um confronto de bastidores (sem você em quadra).
+  // O vencedor sempre fecha em `necessarias`; as vitórias do perdedor saem da diferença
+  // de força — série equilibrada tende a ir ao último jogo, desigual vira varrida.
+  // Existe para a chave poder mostrar "4-2" em TODOS os confrontos, não só no seu.
+  function placarSerieBastidores(melhorDe, forcaVenc, forcaPerd) {
+    var necessarias = Math.ceil(melhorDe / 2);
+    var dif = (forcaVenc || 70) - (forcaPerd || 70);
+    var r = Math.random();
+    var perdedor;
+    if (dif > 6)      perdedor = (r < 0.55) ? 0 : 1;
+    else if (dif > 2) perdedor = (r < 0.30) ? 1 : (r < 0.75 ? 2 : necessarias - 1);
+    else              perdedor = (r < 0.25) ? 1 : (r < 0.60 ? 2 : necessarias - 1);
+    if (perdedor >= necessarias) perdedor = necessarias - 1;
+    if (perdedor < 0) perdedor = 0;
+    return { venc: necessarias, perd: perdedor };
+  }
+
+  // Grava o placar da série no slot do bracket, na ordem A-B do confronto.
+  function gravarPlacarSlot(slot, vencedor, vVenc, vPerd) {
+    if (!slot) return;
+    var aVenceu = (slot.a === vencedor);
+    slot.placarA = aVenceu ? vVenc : vPerd;
+    slot.placarB = aVenceu ? vPerd : vVenc;
+  }
+
   function completarBracketNBA(camp, forcaDe) {
     var po = camp.playoff;
     if (!po) return;
@@ -360,6 +404,8 @@
           var fa = (forcaDe ? forcaDe(jogo.a.clubeRef || jogo.a) : jogo.a.forca) + (Math.random() - 0.5) * 14;
           var fb = (forcaDe ? forcaDe(jogo.b.clubeRef || jogo.b) : jogo.b.forca) + (Math.random() - 0.5) * 14;
           jogo.vencedor = (fa >= fb) ? jogo.a : jogo.b;
+          var pl = placarSerieBastidores(melhorDeDaFase(camp, r), Math.max(fa, fb), Math.min(fa, fb));
+          gravarPlacarSlot(jogo, jogo.vencedor, pl.venc, pl.perd);
         });
         var vencs = rodada.map(function (j) { return j.vencedor; }).filter(Boolean);
         var prox = bracket[r + 1];
@@ -386,6 +432,8 @@
       var fa = (forcaDe ? forcaDe(campSua.clubeRef   || campSua)   : campSua.forca)   + (Math.random() - 0.5) * 14;
       var fb = (forcaDe ? forcaDe(campOutra.clubeRef || campOutra) : campOutra.forca) + (Math.random() - 0.5) * 14;
       po.bracketFinal[0].vencedor = (fa >= fb) ? campSua : campOutra;
+      var plF = placarSerieBastidores(camp.melhorDeFinal || camp.melhorDe || 7, Math.max(fa, fb), Math.min(fa, fb));
+      gravarPlacarSlot(po.bracketFinal[0], po.bracketFinal[0].vencedor, plF.venc, plF.perd);
       po.campeaoTorneio = po.bracketFinal[0].vencedor;
     }
   }
@@ -401,6 +449,8 @@
       var fa = (forcaDe ? forcaDe(jogo.a.clubeRef || jogo.a) : jogo.a.forca) + (Math.random() - 0.5) * 14;
       var fb = (forcaDe ? forcaDe(jogo.b.clubeRef || jogo.b) : jogo.b.forca) + (Math.random() - 0.5) * 14;
       jogo.vencedor = (fa >= fb) ? jogo.a : jogo.b;
+      var pl = placarSerieBastidores(melhorDeDaFase(camp, idx), Math.max(fa, fb), Math.min(fa, fb));
+      gravarPlacarSlot(jogo, jogo.vencedor, pl.venc, pl.perd);
     });
     // propaga vencedores para a próxima rodada da outra conf
     var prox = po.bracketOutra[idx + 1];

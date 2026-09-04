@@ -187,17 +187,24 @@ function mostrarBracketPlayoffs(camp) {
     if (!t) return '<span class="bkt-vazio">A definir</span>';
     return t.voce ? nomeDoTime : t.nome;
   }
-  function celula(t, ehVenc) {
+  // `placar` = vitórias do time NA SÉRIE (ex.: 4). Fica à direita do nome, destacado,
+  // como nas chaves de playoff de verdade: sem isso a chave dizia quem passou mas não
+  // COMO — o João precisava abrir os cards um a um para descobrir que a série foi 4-3.
+  function celula(t, ehVenc, placar) {
     var cls = 'bkt-time' + (t && t.voce ? ' bkt-voce' : '') + (ehVenc ? ' bkt-venc' : '');
     var esc = (t && typeof Escudos !== 'undefined' && Escudos.porTime) ? (Escudos.porTime(t, modoSelecionado) || '') : '';
     var escHTML = esc ? '<span class="bkt-escudo">' + esc + '</span>' : '';
-    return '<div class="' + cls + '">' + escHTML + '<span class="bkt-nome">' + nomeT(t) + '</span></div>';
+    var plHTML = (placar != null && t)
+      ? '<span class="bkt-placar' + (ehVenc ? ' bkt-placar-venc' : '') + '">' + placar + '</span>' : '';
+    return '<div class="' + cls + '">' + escHTML +
+             '<span class="bkt-nome">' + nomeT(t) + '</span>' + plHTML +
+           '</div>';
   }
   function jogoHTML(j) {
     var vencA = j.vencedor && j.a && (j.vencedor === j.a);
     var vencB = j.vencedor && j.b && (j.vencedor === j.b);
     return '<div class="bkt-jogo' + (j.seuJogo ? ' bkt-seujogo' : '') + '">' +
-             celula(j.a, vencA) + celula(j.b, vencB) +
+             celula(j.a, vencA, j.placarA) + celula(j.b, vencB, j.placarB) +
            '</div>';
   }
   var nomesFase = po.fases.map(function (f) { return f.nome; });
@@ -230,8 +237,8 @@ function mostrarBracketPlayoffs(camp) {
       '<div class="bkt-coluna bkt-coluna-final">' +
         '<div class="bkt-coluna-tit">Finais NBA</div>' +
         '<div class="bkt-jogo bkt-jogo-final">' +
-          celula(f.a, f.vencedor === f.a) +
-          celula(f.b, f.vencedor === f.b) +
+          celula(f.a, f.vencedor === f.a, f.placarA) +
+          celula(f.b, f.vencedor === f.b, f.placarB) +
         '</div>' +
         '<div class="bkt-coluna-tit" style="margin-top:10px">Campeão</div>' +
         '<div class="bkt-jogo bkt-jogo-final bkt-campeao">' +
