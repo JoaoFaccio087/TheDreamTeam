@@ -81,8 +81,16 @@ const ESPORTES = {
     draft: { turnos: 6, picksPorTurno: 1, picksUltimoTurno: 0 },   // 1 pick por turno = 6
     competicoes: {
       // Masculino e feminino SEPARADOS: as escalas de força não são comparáveis entre si.
-      mundial_m: { nome: 'Mundial de Seleções (M)', regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } },
-      mundial_f: { nome: 'Mundial de Seleções (F)', regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } }
+      // ⚠️ O `nome` PRECISA ser igual ao `COMPETICOES[...].dados` de js/regras.js — é ele
+      // que vai salvo em `matches.competicao` e é a chave que o backend usa para descobrir
+      // o esporte (api/esportes-catalogo.js indexa por id E por nome). Estava
+      // "Mundial de Seleções (M)" enquanto o front salvava "Mundial de Vôlei (M)":
+      // `esporteDaCompeticao` devolvia null e o draft de uma sala de vôlei cairia no
+      // padrão do FUTEBOL (11 picks para um time de 6). A VNL nem estava declarada.
+      mundial_m: { nome: 'Mundial de Vôlei (M)', regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } },
+      mundial_f: { nome: 'Mundial de Vôlei (F)', regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } },
+      vnl_m:     { nome: 'VNL (M)',              regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } },
+      vnl_f:     { nome: 'VNL (F)',              regras: { temEmpate: false, melhorDe: 5, pontosPorSet: 25, pontosTieBreak: 15 } }
     }
   },
 

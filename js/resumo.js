@@ -372,6 +372,15 @@ function mostrarResumoHistorico(item) {
 
   var snap   = (item.detalhes && item.detalhes.snapshot) || null;
   var comp   = String(item.competicao || 'Campanha').toUpperCase();
+  // Rótulos conforme o esporte DA PARTIDA (item.esporte), não do esporte ativo: este
+  // resumo abre pelo histórico do perfil, onde convivem campanhas de esportes diferentes.
+  // Antes era fixo em "Gols"/"Artilheiro"/"gols!" — campanha de NBA mostrava "Gols: 4231".
+  var espItem = item.esporte || 'futebol';
+  var LBL = (espItem === 'basquete')
+    ? { placar: 'Pontos', top1: 'Cestinha',   top1un: 'pts',  top1vazio: 'sem pontos', share: 'pontos' }
+    : (espItem === 'volei')
+    ? { placar: 'Sets',   top1: 'Pontuador',  top1un: 'pts',  top1vazio: 'sem pontos', share: 'sets' }
+    : { placar: 'Gols',   top1: 'Artilheiro', top1un: 'gols', top1vazio: 'sem gols',   share: 'gols' };
   var v      = +item.vitorias || 0, e = +item.empates || 0, d = +item.derrotas || 0;
   var gf     = +item.gf || 0, ga = +item.ga || 0, saldo = gf - ga;
   var jogos  = v + e + d;
@@ -412,9 +421,9 @@ function mostrarResumoHistorico(item) {
     card('Campanha',
          '<b class="rec-v">' + v + '</b><i>\u00B7</i><b class="rec-e">' + e + '</b><i>\u00B7</i><b class="rec-d">' + d + '</b>',
          'V \u00B7 E \u00B7 D') +
-    card('Gols', '<b>' + gf + '</b><i>:</i><b>' + ga + '</b>',
+    card(LBL.placar, '<b>' + gf + '</b><i>:</i><b>' + ga + '</b>',
          'Feitos \u00B7 Sofridos  (' + (saldo >= 0 ? '+' : '') + saldo + ')') +
-    card('Artilheiro', artilheiro ? nomeCurto(artilheiro.nome) : '\u2014', artilheiro ? (artilheiro.v + ' gols') : 'sem gols') +
+    card(LBL.top1, artilheiro ? nomeCurto(artilheiro.nome) : '\u2014', artilheiro ? (artilheiro.v + ' ' + LBL.top1un) : LBL.top1vazio) +
     card('Assistente', assistente ? nomeCurto(assistente.nome) : '\u2014', assistente ? (assistente.v + ' assist\u00EAncias') : 'sem assist\u00EAncias');
 
   // Mapa de escalação + lista (só quando há snapshot)
@@ -484,7 +493,7 @@ function mostrarResumoHistorico(item) {
   resumoShareTexto =
     (campeao ? 'Fui CAMPE\u00C3O' : 'Terminei minha campanha') +
     ' no The Dream Team \u2014 ' + (item.competicao || '') +
-    ', com ' + aprov + '% de aproveitamento e ' + gf + ' gols! \u26BD\uD83C\uDFC6';
+    ', com ' + aprov + '% de aproveitamento e ' + gf + ' ' + LBL.share + '! \uD83C\uDFC6';
 
   resumoOverlay.classList.remove('escondida');
   resumoOverlay.querySelector('.resumo-backdrop').addEventListener('click', fecharResumo);
