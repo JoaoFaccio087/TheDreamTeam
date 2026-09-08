@@ -91,16 +91,19 @@ if (btnModoOnlineLaLiga) {
       s.classList.toggle('modo-seg-ativa', s.dataset.aba === aba);
     });
 
-    // Seletor de esporte na home: Multijogador só tem Futebol, então o botão de
-    // Vôlei (e outros não-futebol) some no modo multi e reaparece no solo. Se o
-    // esporte ativo era vôlei ao entrar no multi, volta pro futebol.
+    // Seletor de esporte na home: no Multijogador aparecem só os esportes que TÊM
+    // modo online. Era "só futebol" cravado aqui — por isso o basquete, com o backend
+    // inteiro pronto (dados, motor, sala com 5 picks), não aparecia no seletor e não
+    // havia como sequer TESTAR o online de NBA. Agora a lista vem do modal-jogar.js,
+    // que deriva da tabela COMPETICOES_MODAL (campo `online`). Uma fonte só.
+    var esportesOnline = (typeof esportesComOnline === 'function') ? esportesComOnline() : ['futebol'];
     var segsEsporte = document.querySelectorAll('#pilulas-esporte .pilula');
     segsEsporte.forEach(function (s) {
-      var ehFutebol = (s.getAttribute('data-esporte') === 'futebol');
-      s.classList.toggle('escondida', multi && !ehFutebol);
+      var id = s.getAttribute('data-esporte');
+      s.classList.toggle('escondida', multi && esportesOnline.indexOf(id) < 0);
     });
-    if (multi && typeof esporteAtual !== 'undefined' && esporteAtual !== 'futebol') {
-      if (typeof selecionarEsporte === 'function') selecionarEsporte('futebol');
+    if (multi && typeof esporteAtual !== 'undefined' && esportesOnline.indexOf(esporteAtual) < 0) {
+      if (typeof selecionarEsporte === 'function') selecionarEsporte(esportesOnline[0] || 'futebol');
     }
 
     if (multi) {

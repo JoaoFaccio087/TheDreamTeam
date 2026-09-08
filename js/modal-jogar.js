@@ -29,9 +29,14 @@
       { id: 'champions',    nome: 'Champions League', online: 'Champions' },
       { id: 'brasileirao',  nome: 'Brasileirão',      online: 'Brasileirão' },
       { id: 'copa',         nome: 'Copa do Mundo',    online: 'Copa do Mundo' },
-      { id: 'premier',      nome: 'Premier League',   online: 'Premier League' },
-      { id: 'serie_a',      nome: 'Serie A',          online: 'Serie A' },
-      { id: 'laliga',       nome: 'La Liga',          online: 'La Liga' }
+      // ⚠️ SEM `online`: estas 3 não existem no servidor. Não há arquivo delas em
+      // api/dados/futebol/ (só libertadores, champions, brasileirao, copa) e o z.enum de
+      // api/routes/rooms.js as rejeita. Tinham `online` marcado, então apareciam no
+      // Multijogador e a criação da sala falharia. Para habilitá-las: copiar os dados
+      // para api/dados/, incluir no FONTES do loader e no z.enum — aí sim marcar aqui.
+      { id: 'premier',      nome: 'Premier League' },
+      { id: 'serie_a',      nome: 'Serie A' },
+      { id: 'laliga',       nome: 'La Liga' }
     ],
     volei: [
       { id: 'volei_m', nome: 'Mundial Masculino' },
@@ -40,7 +45,10 @@
       { id: 'volei_vnl_f', nome: 'Liga das Nações (F)' }
     ],
     basquete: [
-      { id: 'nba', nome: 'NBA' }
+      // `online: 'NBA'` — o backend está pronto: dados em api/dados/basquete/nba.js,
+      // motor em api/socket/simulacao-basquete.js, sala com 5 picks pelo catálogo e
+      // 'NBA' aceito no z.enum de rooms.js. Faltava só a ENTRADA aqui.
+      { id: 'nba', nome: 'NBA', online: 'NBA' }
     ]
   };
 
@@ -57,22 +65,39 @@
 
     // esporte: do catálogo (esporteAtual), mas multi só permite futebol
     estado.esporte = (typeof esporteAtual !== 'undefined') ? esporteAtual : 'futebol';
-    if (estado.modo === 'multi') estado.esporte = 'futebol';
+    if (estado.modo === 'multi') {
+      // se o esporte atual não tem online, cai no 1º que tiver (não mais em 'futebol' fixo)
+      var comOnline = esportesDoModo();
+      if (!comOnline.some(function (e) { return e.id === estado.esporte; })) {
+        estado.esporte = comOnline[0] ? comOnline[0].id : 'futebol';
+      }
+    }
 
     // competição: a selecionada (modoSelecionado p/ solo), senão a 1ª do esporte
-    var comps = COMPETICOES_MODAL[estado.esporte] || [];
+    var comps = compsDoModo(estado.esporte);
     var atual = (typeof modoSelecionado !== 'undefined') ? modoSelecionado : null;
     var existe = comps.some(function (c) { return c.id === atual; });
     estado.competicao = existe ? atual : (comps[0] ? comps[0].id : null);
   }
 
-  // Esportes disponíveis para o modo atual (multi = só futebol).
+  // Competições de um esporte, já filtradas pelo modo. No MULTI só entram as que têm
+  // `online` — antes o filtro era "só futebol" cravado no código, então nem o basquete
+  // (pronto no backend) aparecia, nem as 3 ligas de futebol sem dados no servidor eram
+  // barradas. Agora quem manda é a tabela.
+  function compsDoModo(esporte) {
+    var lista = COMPETICOES_MODAL[esporte] || [];
+    if (estado.modo !== 'multi') return lista;
+    return lista.filter(function (c) { return !!c.online; });
+  }
+
+  // Esportes disponíveis no modo atual: no multi, só os que têm ao menos uma competição
+  // online. Assim, habilitar um esporte novo no online é adicionar `online` na tabela.
   function esportesDoModo() {
     var todos = (typeof esportesVisiveis === 'function')
       ? esportesVisiveis().map(function (e) { return { id: e.id, nome: e.nome }; })
       : [{ id: 'futebol', nome: 'Futebol' }];
-    if (estado.modo === 'multi') return todos.filter(function (e) { return e.id === 'futebol'; });
-    return todos;
+    if (estado.modo !== 'multi') return todos;
+    return todos.filter(function (e) { return compsDoModo(e.id).length > 0; });
   }
 
   // Monta o HTML de um bloco de opções (botões segmentados/pílulas).
@@ -95,7 +120,7 @@
     if (!esportes.some(function (e) { return e.id === estado.esporte; })) {
       estado.esporte = esportes[0] ? esportes[0].id : 'futebol';
     }
-    var comps = COMPETICOES_MODAL[estado.esporte] || [];
+    var comps = compsDoModo(estado.esporte);
     if (!comps.some(function (c) { return c.id === estado.competicao; })) {
       estado.competicao = comps[0] ? comps[0].id : null;
     }
@@ -199,5 +224,14 @@
 
   // Exposto para o botão "Jogar agora" chamar.
   global.abrirModalJogar = abrir;
+
+  // Exposto para o main.js montar o seletor de esporte da home no modo Multijogador.
+  // FONTE ÚNICA: tem modo online quem tem `online` na COMPETICOES_MODAL. Antes o main.js
+  // cravava "só futebol", o que escondia o basquete mesmo com o backend pronto.
+  global.esportesComOnline = function () {
+    return Object.keys(COMPETICOES_MODAL).filter(function (esp) {
+      return (COMPETICOES_MODAL[esp] || []).some(function (c) { return !!c.online; });
+    });
+  };
 
 })(typeof window !== 'undefined' ? window : this);
