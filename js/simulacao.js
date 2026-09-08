@@ -7,13 +7,6 @@ function cadenciaAtual() {
   return 80; // normal
 }
 
-// Cadência das cobranças de pênalti (mais lenta que o relógio, p/ suspense). Lida a
-// cada cobrança, então mudar a velocidade no meio já vale na cobrança seguinte.
-function cadenciaPenalti() {
-  if (velocidadeSimulacao === 'lento')  return 1500;
-  if (velocidadeSimulacao === 'rapida') return 650;
-  return 1000; // normal
-}
 
 // --- Peso de gol de um jogador: atacantes > meias > volantes > defensores ---
 function pesoGol(jogador) {

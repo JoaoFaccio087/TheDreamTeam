@@ -2427,37 +2427,7 @@
     if (typeof codigosFormacao === 'undefined') return [];
     return codigosFormacao[form] || codigosFormacao['4-3-3'];
   }
-  function minhaFormacaoOnline() {
-    return (allPlayers[meuUserId] && allPlayers[meuUserId].formacao) || '4-3-3';
-  }
 
-  function renderCarousel(lista) {
-    draftCarousel.innerHTML = '';
-    var pool = (lista || poolLocal || []).slice();
-    if (!pool.length) {
-      draftCarousel.innerHTML = '<p style="color:#888;font-size:0.8rem;padding:0.6rem">Nenhum jogador disponível para esta posição.</p>';
-      return;
-    }
-
-    pool.forEach(function (jogador) {
-      var card = document.createElement('div');
-      card.className   = 'draft-card' + (selectedPlayer && jogador.id === selectedPlayer.id ? ' selecionado' : '');
-      card.dataset.id  = jogador.id;
-
-      var posStr = (jogador.posicoes || []).join('/') || '—';
-      var revelaF = (typeof mostrarForca === 'undefined') ? true : mostrarForca;
-      card.innerHTML =
-        '<div class="draft-card-pos">' + htmlEsc(posStr) + '</div>' +
-        '<div class="draft-card-nome">' + htmlEsc(jogador.nome || '—') + '</div>' +
-        '<div class="draft-card-forca">' + (revelaF ? (jogador.forca || '—') : '?') + '</div>' +
-        '<div class="draft-card-clube">' + htmlEsc(jogador.clube || '') + (jogador.edicao ? ' ' + jogador.edicao : '') + '</div>';
-
-      card.addEventListener('click', function () { selecionarCardOnline(jogador, card); });
-      draftCarousel.appendChild(card);
-    });
-
-    draftCarousel.scrollLeft = 0;
-  }
 
   // Clicou num card: marca o card e ACENDE só as vagas abertas onde ele pode jogar.
   // Clicou num jogador da lista: a POSIÇÃO já foi escolhida (selectedSlot) → libera confirmar.
@@ -2469,19 +2439,6 @@
     btnDraftSelecionar.disabled = false;
   }
 
-  // Acende as vagas ABERTAS e VÁLIDAS para um jogador (e apaga as demais).
-  function destacarVagasValidas(jogador) {
-    if (!draftCampo) return;
-    var meu     = allPlayers[meuUserId] || {};
-    var codigos = codigosOnline(meu.formacao || '4-3-3');
-    draftCampo.querySelectorAll('.slot-ol').forEach(function (slot, i) {
-      slot.classList.remove('vaga-valida', 'vaga-selecionada', 'vaga-origem');
-      var ocupado = meu.picks && meu.picks[i];
-      if (jogador && !ocupado && podeOcupar(jogador, codigos[i])) {
-        slot.classList.add('vaga-valida');
-      }
-    });
-  }
 
   function limparDestaquesVaga() {
     repositionFrom = null;
@@ -2663,11 +2620,6 @@
     if (modalDraftPick) modalDraftPick.classList.add('escondida');
   }
 
-  function marcarVagaSelecionada(i) {
-    draftCampo.querySelectorAll('.slot-ol').forEach(function (s, k) {
-      s.classList.toggle('vaga-selecionada', k === i);
-    });
-  }
 
   // Remanejar: acende as vagas onde o jogador movido pode ir (vazias válidas +
   // ocupadas onde caberia uma troca) e marca a vaga de origem.
@@ -2697,7 +2649,6 @@
     if (minhaVez) destacarVagasAbertas();
   }
 
-  function atualizarCarouselPos() { /* faixa agora rola nativamente; sem transform */ }
 
   // ── Campo online ──────────────────────────────────────────────────────────
 

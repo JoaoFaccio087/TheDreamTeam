@@ -365,7 +365,6 @@
     if (/^bq_|basquete|nba/.test(id)) return 'basquete';
     return 'futebol';
   }
-  function conquistaEhGeral(c) { return esporteDaConquista(c) === 'todos'; }
 
   // Mantido só para compatibilidade com o toast (que recebe um id solto do servidor).
   var CONQUISTAS_GERAIS = {};

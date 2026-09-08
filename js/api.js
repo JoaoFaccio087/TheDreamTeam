@@ -115,16 +115,6 @@ function _req(method, path, body) {
   });
 }
 
-function apiGet(rota, token) {
-  var headers = {};
-  if (token) headers['Authorization'] = 'Bearer ' + token;
-  return fetch(API_BASE + rota, { headers: headers }).then(function (r) {
-    return r.json().then(function (d) {
-      if (!r.ok) throw new Error(d.error || 'Erro ' + r.status);
-      return d;
-    });
-  });
-}
 
 function apiPost(rota, corpo) {
   return _req('POST', rota, corpo);

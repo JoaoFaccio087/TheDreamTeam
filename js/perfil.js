@@ -656,48 +656,12 @@
            '<span class="ptip-val">' + esc(val) + '</span>';
   }
 
-  function acordeaoHTML(nome, s, aberto) {
-    var t = dicasDe(escopoDe(nome));
-    var corpo = (s.camp === 0)
-      ? '<p class="acord-vazio">Nenhuma campanha ainda nesta categoria.</p>'
-      : '<div class="acord-stats">' +
-          stat(s.camp, 'Campanhas', t.camp) +
-          stat(s.tit, 'Títulos', t.tit) +
-          stat(s.v, 'Vitórias', t.v) +
-          stat(s.e, 'Empates', t.e) +
-          stat(s.d, 'Derrotas', t.d) +
-          stat(s.gf, vocab().pro, t.gf) +
-          stat(s.ga, vocab().contra, t.ga) +
-          stat(s.aprov + '%', 'Aproveit.', t.aprov) +
-        '</div>';
-    return '' +
-      '<section class="perfil-acord' + (aberto ? ' acord-aberta' : '') + '">' +
-        '<button type="button" class="acord-head" aria-expanded="' + (aberto ? 'true' : 'false') + '">' +
-          '<span class="acord-nome">' + esc(nome) + '</span>' +
-          '<span class="acord-tag">' + s.camp + (s.camp === 1 ? ' campanha' : ' campanhas') + '</span>' +
-          '<svg class="acord-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>' +
-        '</button>' +
-        '<div class="acord-corpo">' + corpo + '</div>' +
-      '</section>';
-  }
   function stat(num, lbl, dica) {
     var tip = dica ? ' title="' + esc(dica) + '" data-tip="' + esc(dica) + '"' : '';
     return '<div class="perfil-stat"' + tip + '><span class="perfil-stat-num">' + num +
            '</span><span class="perfil-stat-lbl">' + lbl + '</span></div>';
   }
 
-  // Liga o clique de cada cabeçalho: alterna a classe .acord-aberta e o aria-expanded.
-  function ligarAcordeoes(box) {
-    var heads = box.querySelectorAll('.acord-head');
-    Array.prototype.forEach.call(heads, function (head) {
-      head.addEventListener('click', function () {
-        var sec = head.parentNode;
-        var abrindo = !sec.classList.contains('acord-aberta');
-        sec.classList.toggle('acord-aberta', abrindo);
-        head.setAttribute('aria-expanded', abrindo ? 'true' : 'false');
-      });
-    });
-  }
 
   // ─────────────────────── TIME MAIS ESCALADO ───────────────────────
   // Formação fixa de exibição (1 GOL, 4 DEF, 3 MEI, 3 ATA) — as vagas vêm das coords 4-3-3.

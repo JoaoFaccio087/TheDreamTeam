@@ -883,10 +883,6 @@ function emitirFimDeMata(io, sala, code, campeaoFinal) {
   deleteSala(code);
 }
 
-function codigosAceitosServidor(codigo) {
-  const mapa = { 'ME': ['ME','PE','MC','MEI'], 'MD': ['MD','PD','MC','MEI'] };
-  return mapa[codigo] || [codigo];
-}
 
 // ── "Pular tudo" (fase de liga/grupos) ─────────────────────────────────────────
 // Executa o pulo se TODOS os humanos já votaram e não há rodada em andamento.

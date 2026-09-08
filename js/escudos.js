@@ -58,10 +58,6 @@
   function corContorno(fundo) {
     return contraste(fundo, BG_SITE) < 1.6 ? CONTORNO_CLARO : CONTORNO_ESCURO;
   }
-  // Cor de traço interno legível sobre um fundo dado.
-  function traçoSobre(fundo) {
-    return luminancia(fundo) > 0.4 ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.65)';
-  }
 
   // ---- PRNG determinístico --------------------------------------------------
   function cyrb128(str) {
@@ -398,13 +394,6 @@
       '</svg>';
   }
 
-  // Escurece/clareia levemente um hex (fator -1..1). Amplia a variedade sem descaracterizar a cor.
-  function ajustarTom(hex, fator) {
-    var c = rgb(hex);
-    function m(v) { return Math.max(0, Math.min(255, Math.round(v + fator * 255))); }
-    var s = [m(c.r), m(c.g), m(c.b)].map(function (v) { return ('0' + v.toString(16)).slice(-2); });
-    return '#' + s.join('');
-  }
 
   // ---- ESCUDO DE CLUBE ------------------------------------------------------
   function gerarClube(o) {
