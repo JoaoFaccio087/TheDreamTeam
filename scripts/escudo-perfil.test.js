@@ -3,9 +3,14 @@
 // O bug: existiam DUAS chamadas de setAvatar('perfil-avatar'). A segunda rodava no
 // callback assíncrono e sobrescrevia o SVG com a inicial — mas a classe que zera o
 // background ficava. Círculo sem fundo com o "J" solto.
+// Caminhos PORTÁVEIS. Antes este arquivo tinha `/home/claude/proj2/TheDreamTeam` e
+// `/home/claude/testenv/node_modules/jsdom` cravados — caminhos do contêiner onde o teste
+// foi escrito. Isso significa que ele NUNCA rodou na máquina do João nem em CI: quebrava
+// na primeira linha com "Cannot find module". Agora a raiz é derivada de __dirname e o
+// jsdom é resolvido pelo node_modules normal.
 const fs = require('fs'), path = require('path');
-const { JSDOM } = require('/home/claude/testenv/node_modules/jsdom');
-const RAIZ = '/home/claude/proj2/TheDreamTeam';
+const { JSDOM } = require('jsdom');
+const RAIZ = require('path').join(__dirname, '..');
 const html = fs.readFileSync(path.join(RAIZ, 'index.html'), 'utf8');
 const dom = new JSDOM(html, { runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://localhost/' });
 const W = dom.window;
@@ -37,7 +42,10 @@ ok(/#e30613/i.test(svg), 'usa a cor escolhida');
 ok(W.Escudos.porEstilo(null) === '', 'sem escudo \u2192 vazio (cai na inicial, sem quebrar)');
 
 console.log('\n\u2500\u2500 a ordem dos scripts permite o desenho \u2500\u2500');
-const idx = (f) => html.indexOf('js/' + f);
+// ⚠️ Procura a TAG <script>, não a string solta: o index.html cita "js/perfil.js" num
+// COMENTÁRIO na linha 518, muito antes das tags, e o indexOf cru achava o comentário
+// primeiro — o teste acusava ordem errada com a ordem certa (falso positivo).
+const idx = (f) => html.indexOf('src="js/' + f + '"');
 ok(idx('escudos.js') < idx('perfil.js'), 'escudos.js carrega antes de perfil.js');
 ok(idx('escudos-cores.js') < idx('perfil.js'), 'escudos-cores.js antes de perfil.js');
 

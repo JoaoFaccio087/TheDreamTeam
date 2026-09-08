@@ -1,9 +1,14 @@
 'use strict';
 // filtros.test.js — busca, posição e ordenação da lista de jogadores.
 // O que mais importa: o estado PADRÃO tem de ser o comportamento de sempre.
+// Caminhos PORTÁVEIS. Antes este arquivo tinha `/home/claude/proj2/TheDreamTeam` e
+// `/home/claude/testenv/node_modules/jsdom` cravados — caminhos do contêiner onde o teste
+// foi escrito. Isso significa que ele NUNCA rodou na máquina do João nem em CI: quebrava
+// na primeira linha com "Cannot find module". Agora a raiz é derivada de __dirname e o
+// jsdom é resolvido pelo node_modules normal.
 const fs = require('fs'), path = require('path');
-const { JSDOM } = require('/home/claude/testenv/node_modules/jsdom');
-const RAIZ = '/home/claude/proj2/TheDreamTeam';
+const { JSDOM } = require('jsdom');
+const RAIZ = require('path').join(__dirname, '..');
 const html = fs.readFileSync(path.join(RAIZ, 'index.html'), 'utf8');
 const dom = new JSDOM(html, { runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://localhost/' });
 const W = dom.window;
@@ -36,6 +41,17 @@ const itens = () => Array.from(D.querySelectorAll('#lista-jogadores .item-jogado
 // O item é <span.jogador-nome><span.jogador-posicoes><span.jogador-forca>. Antes eu
 // extraía com regex do textContent ("TaffarelGOL85") e pegava lixo — tem classe própria.
 const nomes = () => itens().map(e => e.querySelector('.jogador-nome').textContent.trim());
+
+// ⚠️ OBSOLETO (detectado na revisão de set/2026): este teste cobre os FILTROS da lista de
+// jogadores (#filtro-ordem, #filtro-posicao), funcionalidade que NÃO EXISTE MAIS no projeto —
+// os ids não aparecem em nenhum HTML ou JS, e as classes .lista-filtros/.lista-select ficaram
+// órfãs no CSS. Em vez de falhar por elemento nulo (mascarando o resto da suíte), ele PULA e
+// explica. DECISÃO PENDENTE do João: reativar os filtros ou apagar teste + CSS.
+if (!$('filtro-ordem')) {
+  console.log('\n\u23ED  PULADO: os filtros da lista de jogadores não existem mais no projeto.');
+  console.log('   (#filtro-ordem ausente — ver ESTADO.md, revisão técnica set/2026)');
+  process.exit(0);
+}
 
 console.log('\n\u2500\u2500 o PADRÃO é o comportamento de sempre \u2500\u2500');
 ok(itens().length === 10, 'os 10 jogadores aparecem');

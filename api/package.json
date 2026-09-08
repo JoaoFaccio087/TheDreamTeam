@@ -4,7 +4,9 @@
   "description": "The Dream Team — backend API + WebSocket",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node ../scripts/run-tests.js",
+    "test:api": "node ../scripts/run-tests.js api"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -14,5 +16,8 @@
     "pg": "^8.21.0",
     "socket.io": "^4.8.3",
     "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
   }
 }

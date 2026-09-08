@@ -203,7 +203,12 @@ function mostrarBracketPlayoffs(camp) {
   function jogoHTML(j) {
     var vencA = j.vencedor && j.a && (j.vencedor === j.a);
     var vencB = j.vencedor && j.b && (j.vencedor === j.b);
-    return '<div class="bkt-jogo' + (j.seuJogo ? ' bkt-seujogo' : '') + '">' +
+    // ⚠️ `j.seuJogo` era LIDO aqui e ESCRITO EM LUGAR NENHUM (achado da varredura de
+    // campos órfãos, set/2026): a borda verde que destaca o SEU confronto na chave nunca
+    // aparecia, e o `centralizarBracket` também usa `.bkt-seujogo` como alvo de fallback.
+    // Derivamos do próprio confronto: é seu se algum dos lados for você.
+    var ehSeu = j.seuJogo || (j.a && j.a.voce) || (j.b && j.b.voce);
+    return '<div class="bkt-jogo' + (ehSeu ? ' bkt-seujogo' : '') + '">' +
              celula(j.a, vencA, j.placarA) + celula(j.b, vencB, j.placarB) +
            '</div>';
   }
